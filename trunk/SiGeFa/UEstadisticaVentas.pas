@@ -235,7 +235,6 @@ type
     ZQ_Consultas: TZQuery;
     ZQ_ConsultasID_CONSULTA: TIntegerField;
     ZQ_ConsultasDESCRIPCION: TStringField;
-    ZQ_ConsultasSQL: TStringField;
     ZQ_EstadVarias: TZQuery;
     ZQ_EstadVariasDESCRIPCION: TStringField;
     ZQ_EstadVariasSUMAVENTA: TFloatField;
@@ -253,7 +252,7 @@ type
     ReporteEstadVarias_Subtitulo: TQRLabel;
     ReporteEstadVarias_Titulo: TQRLabel;
     QRBand5: TQRBand;
-    QRDBText3: TQRDBText;
+    QRDBImporte: TQRDBText;
     QRDBText5: TQRDBText;
     QRDBText6: TQRDBText;
     QRBand7: TQRBand;
@@ -267,7 +266,7 @@ type
     QRLabel10: TQRLabel;
     QRLabel14: TQRLabel;
     QRBand10: TQRBand;
-    QRExpr1: TQRExpr;
+    QRExprImporte: TQRExpr;
     QRExpr2: TQRExpr;
     EKVistaPreviaVarias: TEKVistaPreviaQR;
     QRLabel4: TQRLabel;
@@ -278,6 +277,8 @@ type
     Label4: TLabel;
     ZQ_EstadVariasSUMACOSTO: TFloatField;
     ZQ_EstadVariasGANANCIA: TFloatField;
+    ZQ_EstadVariasSUMANIF: TFloatField;
+    ZQ_ConsultasSQL: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -299,8 +300,8 @@ type
     procedure PageControlChange(Sender: TObject);
     procedure EKDbSumaProdsVendidosSumListChanged(Sender: TObject);
     procedure EKDbSumaTotalesSumListChanged(Sender: TObject);
-    procedure EKDbSumaVariasSumListChanged(Sender: TObject);
     procedure ZQ_EstadVariasAfterScroll(DataSet: TDataSet);
+    procedure EKDbSumaVariasSumListChanged(Sender: TObject);
   private
     { Private declarations }
   public
@@ -310,7 +311,7 @@ type
 var
   FEstadisticaVentas: TFEstadisticaVentas;
   where:String;
-
+  Fiscal:String;
 implementation
 
 uses UDM, UPrincipal, UUtilidades, DateUtils;
@@ -347,6 +348,7 @@ begin
   TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
   TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
   TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TEKCriterioBA(EKBusquedaVarias.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
 
   //busqueda por horario
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
@@ -375,6 +377,10 @@ begin
   //Visibilidad de los paneles de filtro
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
   PanelFiltroV.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
+  if dm.EKUsrLogin.PermisoAccion('NO_FISCAL') then
+    Fiscal:='T'
+  else
+    Fiscal:='N';
 
   //Caption de los botones de Filtro
   dm.ZQ_Configuracion_Variables.Open;
@@ -448,24 +454,45 @@ begin
   begin
     where:= '';
     DBGridListadoProductos.Columns[GetIndexTitle(DBGridListadoProductos, 'Importe')].FieldName:= 'IMPORTE_VENTA';
-    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe')].FieldName:= 'SUMAVENTA';
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe Venta')].FieldName:= 'SUMAVENTA';
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe Costo')].Visible:=true;
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Ganancia')].Visible:=true;
+    Fiscal:='T';
+    QRDBImporte.DataField:='SUMAVENTA';
+    QRExprImporte.Expression:='SUM(ZQ_EstadVarias.SUMAVENTA)';
   end;
 
   if (TSpeedButton(Sender).Name = 'BtnFiltro_Fiscal')or(TSpeedButton(Sender).Name='BtnFiltro_FiscalV') then
   begin
     where:= Format(' and (tfp."IF" = %s)',[QuotedStr('S')]);
     DBGridListadoProductos.Columns[GetIndexTitle(DBGridListadoProductos, 'Importe')].FieldName:= 'IMPORTE_IF';
-    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe')].FieldName:= 'SUMAIF';
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe Venta')].FieldName:= 'SUMAIF';
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe Costo')].Visible:=false;
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Ganancia')].Visible:=false;
+    Fiscal:='S';
+    QRDBImporte.DataField:='SUMAIF';
+    QRExprImporte.Expression:='SUM(ZQ_EstadVarias.SUMAIF)';
   end;
 
   if (TSpeedButton(Sender).Name = 'BtnFiltro_NoFiscal')or(TSpeedButton(Sender).Name='BtnFiltro_NoFiscalV') then
   begin
     where:= Format(' and (tfp."IF" = %s)',[QuotedStr('N')]);
     DBGridListadoProductos.Columns[GetIndexTitle(DBGridListadoProductos, 'Importe')].FieldName:= 'IMPORTE_NOFISCAL';
-    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe')].FieldName:= 'SUMAVENTA';
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe Venta')].FieldName:= 'SUMANIF';
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Importe Costo')].Visible:=false;
+    gridVarias.Columns[GetIndexTitle(gridVarias, 'Ganancia')].Visible:=false;
+    Fiscal:='N';
+    QRDBImporte.DataField:='SUMANIF';
+    QRExprImporte.Expression:='SUM(ZQ_EstadVarias.SUMANIF)';
   end;
 
   btnBuscar.Click;
+  if (Fiscal='T') then
+  lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue)
+  else if (Fiscal='N') then
+   lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[3].SumValue)
+   else if (Fiscal='S') then
+     lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[2].SumValue);
 end;
 
 
@@ -630,7 +657,7 @@ begin
    dm.EKModelo.abrir(ZQ_Consultas);
 
    if EKBusquedaVarias.BuscarSinEjecutar then
-    begin
+   begin
         if (EKBusquedaVarias.ParametrosSeleccionados1[2] = '') or (EKBusquedaVarias.ParametrosSeleccionados1[3] = '') then
           begin
             Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
@@ -668,8 +695,7 @@ begin
           ZQ_EstadVarias.Filtered:=True;
          end;
         dm.EKModelo.abrir(ZQ_EstadVarias);
-
-    end;
+   end;
 
   end;
 end;
@@ -753,8 +779,12 @@ begin
     if not ZQ_EstadVarias.IsEmpty then
      begin
       ZQ_EstadVariasSUMAVENTA.DisplayFormat:='';
+      ZQ_EstadVariasSUMAIF.DisplayFormat:='';
+      ZQ_EstadVariasSUMANIF.DisplayFormat:='';
       dm.ExportarEXCEL(gridVarias);
       ZQ_EstadVariasSUMAVENTA.DisplayFormat:='$ ##,###,##0.00';
+      ZQ_EstadVariasSUMAIF.DisplayFormat:='$ ##,###,##0.00';
+      ZQ_EstadVariasSUMANIF.DisplayFormat:='$ ##,###,##0.00';
      end
   end;
 end;
@@ -826,15 +856,21 @@ begin
   lblTotales.Caption:=FormatFloat('$ ##,###,##0.00 ', EKDbSumaTotales.SumCollection[0].SumValue);
 end;
 
+procedure TFEstadisticaVentas.ZQ_EstadVariasAfterScroll(DataSet: TDataSet);
+begin
+ 
+// lblTotVarias.Caption := lblTotVarias.Caption + FormatFloat('/ Total Ganancia: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[1].SumValue);
+end;
+
 procedure TFEstadisticaVentas.EKDbSumaVariasSumListChanged(
   Sender: TObject);
 begin
- lblTotVarias.Caption:=FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue);
-end;
-
-procedure TFEstadisticaVentas.ZQ_EstadVariasAfterScroll(DataSet: TDataSet);
-begin
- lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue);
+// if (Fiscal='T') then
+//  lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue)
+//  else if (Fiscal='N') then
+//   lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[3].SumValue)
+//   else if (Fiscal='S') then
+//     lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[2].SumValue);
 end;
 
 end.
