@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 171
-  Top = 69
+  Left = 223
+  Top = 110
   Width = 1194
   Height = 673
   Caption = 'Estadisticas Ventas'
@@ -174,7 +174,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               FontSize = 12
             end
             object RepDetalleMov_Subtitulo: TQRLabel
-              Left = -77
+              Left = 438
               Top = 26
               Width = 170
               Height = 20
@@ -1987,10 +1987,117 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Transparent = False
           Layout = tlCenter
         end
+        object gridVarias: TDBGrid
+          Left = 0
+          Top = 33
+          Width = 1178
+          Height = 512
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_EstadVarias
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Title.Caption = 'Descripci'#243'n'
+              Width = 511
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUMAVENTA'
+              Title.Caption = 'Importe Venta'
+              Width = 94
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SUMACOSTO'
+              Title.Caption = 'Importe Costo'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Caption = 'Cantidad'
+              Width = 75
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'GANANCIA'
+              Title.Caption = 'Ganancia'
+              Visible = True
+            end>
+        end
+        object PanelFiltroV: TPanel
+          Left = 0
+          Top = 0
+          Width = 1178
+          Height = 33
+          Align = alTop
+          BevelOuter = bvNone
+          ParentShowHint = False
+          ShowHint = False
+          TabOrder = 2
+          object BtnFiltro_TodosV: TSpeedButton
+            Left = 55
+            Top = 7
+            Width = 94
+            Height = 18
+            GroupIndex = 1
+            Down = True
+            Caption = 'Todos'
+            Layout = blGlyphBottom
+            OnClick = AplicarFiltro
+          end
+          object BtnFiltro_FiscalV: TSpeedButton
+            Left = 151
+            Top = 7
+            Width = 94
+            Height = 18
+            GroupIndex = 1
+            Caption = 'Fiscal'
+            Layout = blGlyphBottom
+            OnClick = AplicarFiltro
+          end
+          object BtnFiltro_NoFiscalV: TSpeedButton
+            Left = 247
+            Top = 7
+            Width = 94
+            Height = 18
+            GroupIndex = 1
+            Caption = 'No Fiscal'
+            Layout = blGlyphBottom
+            OnClick = AplicarFiltro
+          end
+          object Label4: TLabel
+            Left = 19
+            Top = 9
+            Width = 25
+            Height = 13
+            Caption = 'Filtro:'
+          end
+        end
         object ReporteEstadVarias: TQuickRep
           Tag = 99
           Left = 166
-          Top = 65
+          Top = 73
           Width = 794
           Height = 1123
           Frame.Color = clBlack
@@ -2101,7 +2208,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 50.270833333333330000
-                701.145833333333200000
+                701.145833333333400000
                 124.354166666666700000
                 494.770833333333400000)
               Alignment = taCenter
@@ -2214,7 +2321,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
             BandType = rbDetail
-            object QRDBText3: TQRDBText
+            object QRDBImporte: TQRDBText
               Left = 592
               Top = 0
               Width = 124
@@ -2609,7 +2716,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
             BandType = rbSummary
-            object QRExpr1: TQRExpr
+            object QRExprImporte: TQRExpr
               Left = 584
               Top = 0
               Width = 129
@@ -2708,113 +2815,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
               ExportAs = exptText
               FontSize = 8
             end
-          end
-        end
-        object gridVarias: TDBGrid
-          Left = 0
-          Top = 33
-          Width = 1178
-          Height = 512
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_EstadVarias
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnDrawColumnCell = DrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'DESCRIPCION'
-              Title.Caption = 'Descripci'#243'n'
-              Width = 511
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SUMAVENTA'
-              Title.Caption = 'Importe Venta'
-              Width = 94
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SUMACOSTO'
-              Title.Caption = 'Importe Costo'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CANTIDAD'
-              Title.Caption = 'Cantidad'
-              Width = 75
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'GANANCIA'
-              Title.Caption = 'Ganancia'
-              Visible = True
-            end>
-        end
-        object PanelFiltroV: TPanel
-          Left = 0
-          Top = 0
-          Width = 1178
-          Height = 33
-          Align = alTop
-          BevelOuter = bvNone
-          ParentShowHint = False
-          ShowHint = False
-          TabOrder = 2
-          object BtnFiltro_TodosV: TSpeedButton
-            Left = 55
-            Top = 7
-            Width = 94
-            Height = 18
-            GroupIndex = 1
-            Down = True
-            Caption = 'Todos'
-            Layout = blGlyphBottom
-            OnClick = AplicarFiltro
-          end
-          object BtnFiltro_FiscalV: TSpeedButton
-            Left = 151
-            Top = 7
-            Width = 94
-            Height = 18
-            GroupIndex = 1
-            Caption = 'Fiscal'
-            Layout = blGlyphBottom
-            OnClick = AplicarFiltro
-          end
-          object BtnFiltro_NoFiscalV: TSpeedButton
-            Left = 247
-            Top = 7
-            Width = 94
-            Height = 18
-            GroupIndex = 1
-            Caption = 'No Fiscal'
-            Layout = blGlyphBottom
-            OnClick = AplicarFiltro
-          end
-          object Label4: TLabel
-            Left = 19
-            Top = 9
-            Width = 25
-            Height = 13
-            Caption = 'Filtro:'
           end
         end
       end
@@ -4748,13 +4748,13 @@ object FEstadisticaVentas: TFEstadisticaVentas
       FieldName = 'DESCRIPCION'
       Size = 100
     end
-    object ZQ_ConsultasSQL: TStringField
-      FieldName = 'SQL'
-      Size = 1500
-    end
     object ZQ_ConsultasSQL_TABLA_FILTRO: TStringField
       FieldName = 'SQL_TABLA_FILTRO'
       Size = 1000
+    end
+    object ZQ_ConsultasSQL: TStringField
+      FieldName = 'SQL'
+      Size = 2000
     end
   end
   object ZQ_EstadVarias: TZQuery
@@ -4762,12 +4762,26 @@ object FEstadisticaVentas: TFEstadisticaVentas
     AfterScroll = ZQ_EstadVariasAfterScroll
     SQL.Strings = (
       'select'
-      '       cast(a.id_articulo as varchar(50)) as agrupam,'
-      '       a.descripcion,'
+      '       cast(ta.id_tipo_articulo as varchar(50)) as agrupam,'
+      '       ta.descripcion,'
       '       sum(cd.importe_venta) as sumaVenta,'
       '       sum(cd.importe_if) as sumaIF,'
-      '       sum(cd.importe_costo) as sumaCosto,'
-      '       sum(cd.importe_venta-cd.importe_costo) as ganancia,'
+      '       sum(cd.importe_venta-cd.importe_if) as sumaNIF,'
+      '       case'
+      '        when (sum(cd.importe_costo) is null) then 0'
+      
+        '        when (sum(cd.importe_costo) is not null) then sum(cd.imp' +
+        'orte_costo)'
+      '       END as sumaCosto,'
+      '       case'
+      
+        '        when (sum(cd.importe_costo) is null) then sum(cd.importe' +
+        '_venta)'
+      
+        '        when (sum(cd.importe_costo) is not null) then sum(cd.imp' +
+        'orte_venta-cd.importe_costo)'
+      '       END'
+      '       as ganancia,'
       '       count(cd.id_producto) as cantidad'
       'from comprobante_detalle cd'
       'join comprobante c on (cd.id_comprobante = c.id_comprobante)'
@@ -4790,7 +4804,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
       '  and (cast(c.fecha_cobrada as date) between :f1 and :f2)'
       '  and ((c.id_sucursal = :id_sucursal) or (:id_sucursal = -1))'
       'group by 1, 2'
-      'order by 5 desc, 3 desc, 4 desc')
+      'order by 5 desc, 3 desc, 8 desc'
+      '')
     Params = <
       item
         DataType = ftUnknown
@@ -4851,10 +4866,17 @@ object FEstadisticaVentas: TFEstadisticaVentas
     object ZQ_EstadVariasSUMACOSTO: TFloatField
       FieldName = 'SUMACOSTO'
       ReadOnly = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
     object ZQ_EstadVariasGANANCIA: TFloatField
       FieldName = 'GANANCIA'
       ReadOnly = True
+      DisplayFormat = '$ ##,###,##0.00'
+    end
+    object ZQ_EstadVariasSUMANIF: TFloatField
+      FieldName = 'SUMANIF'
+      ReadOnly = True
+      DisplayFormat = '$ ##,###,##0.00'
     end
   end
   object DS_EstadVarias: TDataSource
@@ -4870,11 +4892,19 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Visible = True
       end
       item
-        TituloColumna = 'Importe'
+        TituloColumna = 'Importe Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Costo'
         Visible = True
       end
       item
         TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Ganancia'
         Visible = True
       end>
     NombreGuardar = 'EKOrdenarGrillaVarias'
@@ -4891,6 +4921,18 @@ object FEstadisticaVentas: TFEstadisticaVentas
       item
         Operacion = goSum
         NombreCampo = 'SUMAVENTA'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'ganancia'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'SUMAIF'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'SUMANIF'
       end>
     DataSet = ZQ_EstadVarias
     SumListChanged = EKDbSumaVariasSumListChanged
@@ -4900,7 +4942,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object EKVistaPreviaVarias: TEKVistaPreviaQR
     Reporte = ReporteEstadVarias
     ShowModal = False
-    Left = 506
-    Top = 465
+    Left = 330
+    Top = 385
   end
 end
