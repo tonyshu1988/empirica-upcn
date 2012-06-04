@@ -605,6 +605,9 @@ type
     DS_ComprobPreventa: TDataSource;
     DS_PreventaFP: TDataSource;
     CD_Fpago_esSenia: TStringField;
+    CD_DetalleFacturaIMPORTE_COSTO: TFloatField;
+    ZQ_ComprobanteDetalleIMPORTE_COSTO: TFloatField;
+    ZQ_PreventaProductosIMPORTE_COSTO: TFloatField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -1317,7 +1320,7 @@ begin
     CD_DetalleFacturaIMPORTE_IVA.AsFloat:= CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
     CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_ProductosID_STOCK_PRODUCTO.AsInteger;
     CD_DetalleFacturaimporte_original.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
-
+    CD_DetalleFacturaIMPORTE_COSTO.AsFloat:= ZQ_ProductosPRECIO_COSTO.AsFloat;
     // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio=0 toma el PRECIO_VENTA)
     ZQ_ColsPrecios.Close;
     ZQ_ColsPrecios.Open;
@@ -1779,7 +1782,8 @@ begin
     ZQ_ComprobanteDetalleIMPORTE_IVA.AsFloat:= CD_DetalleFacturaIMPORTE_IVA.AsFloat;
     ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
     ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat:= CD_DetalleFacturaIMPORTE_IF.AsFloat;
-
+    ZQ_ComprobanteDetalleIMPORTE_COSTO.AsFloat:= CD_DetalleFacturaIMPORTE_COSTO.AsFloat;
+    
     ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat / (1 + ZQ_ComprobantePORC_IVA.AsFloat);
 
     ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= RoundTo(ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat, -2);
@@ -2045,15 +2049,20 @@ begin
   begin
     ZQ_Comprobante_FormaPago.Append;
     ZQ_Comprobante_FormaPagoID_COMPROBANTE.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-    if CD_Fpago_esSenia.AsString = 'S' then //si es una seña cambio la fecha de pago a la fecha de la seña por las estadisticas
+
+    if CD_Fpago_esSenia.AsString = 'S' then
+      //si es una seña cambio la fecha de pago a la fecha de la seña por las estadisticas
       ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime:= ZQ_PreventaFPFECHA_FP.AsDateTime
-    else //si no es una seña la fecha de pago es la misma del comprobante
+    else
+      //si no es una seña la fecha de pago es la misma del comprobante
       ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
+
     ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger:= CD_FpagoID_TIPO_FORMAPAG.AsInteger;
     if CD_FpagoMDCP_FECHA.IsNull then
       ZQ_Comprobante_FormaPagoMDCP_FECHA.Clear
     else
       ZQ_Comprobante_FormaPagoMDCP_FECHA.AsDateTime:= CD_FpagoMDCP_FECHA.AsDateTime;
+
     ZQ_Comprobante_FormaPagoMDCP_BANCO.AsString:= CD_FpagoMDCP_BANCO.AsString;
     ZQ_Comprobante_FormaPagoMDCP_CHEQUE.AsString:= CD_FpagoMDCP_CHEQUE.AsString;
     ZQ_Comprobante_FormaPagoIMPORTE.AsFloat:= CD_FpagoIMPORTE.AsFloat - (CD_FpagoIMPORTE.AsFloat * CD_ComprobantePORC_DESCUENTO.AsFloat / 100);
@@ -2286,7 +2295,7 @@ begin
       CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_PreventaProductosID_STOCK_PRODUCTO.AsInteger;
       CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= ZQ_PreventaProductosIMPORTE_VENTA.AsFloat;
       CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_PreventaProductosID_STOCK_PRODUCTO.AsInteger;
-
+      CD_DetalleFacturaIMPORTE_COSTO.AsFloat:= ZQ_PreventaProductosIMPORTE_COSTO.AsFloat;
       // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio)
       ZQ_ColsPrecios.Close;
       ZQ_ColsPrecios.Open;
