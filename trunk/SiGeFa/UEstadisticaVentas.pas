@@ -279,6 +279,37 @@ type
     ZQ_EstadVariasGANANCIA: TFloatField;
     ZQ_EstadVariasSUMANIF: TFloatField;
     ZQ_ConsultasSQL: TStringField;
+    ReporteEstadVariasCostos: TQuickRep;
+    QRBand11: TQRBand;
+    QRDBImage2: TQRDBImage;
+    qrTipoEstad2: TQRLabel;
+    ReporteEstadVariasCostos_Subtitulo: TQRLabel;
+    ReporteEstadVariasCostos_Titulo: TQRLabel;
+    QRBand12: TQRBand;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRBand13: TQRBand;
+    critbusqueda2: TQRLabel;
+    QRBand14: TQRBand;
+    ReporteEstadVariasCostos_piedePagina: TQRLabel;
+    QRLabel11: TQRLabel;
+    QRSysData3: TQRSysData;
+    QRBand15: TQRBand;
+    QRLabel12: TQRLabel;
+    QRLabel13: TQRLabel;
+    QRLabel15: TQRLabel;
+    QRBand16: TQRBand;
+    QRExpr1: TQRExpr;
+    QRExpr3: TQRExpr;
+    QRLabel16: TQRLabel;
+    EKVistaPreviaVariasCostos: TEKVistaPreviaQR;
+    QRLabel17: TQRLabel;
+    QRLabel19: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRDBText8: TQRDBText;
+    QRExpr4: TQRExpr;
+    QRExpr5: TQRExpr;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -486,13 +517,18 @@ begin
     QRExprImporte.Expression:='SUM(ZQ_EstadVarias.SUMANIF)';
   end;
 
-  btnBuscar.Click;
   if (Fiscal='T') then
-  lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue)
+  begin
+  lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue);
+  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Costo: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[4].SumValue);
+  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ganancia: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[1].SumValue);
+  end
   else if (Fiscal='N') then
-   lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[3].SumValue)
+   lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[3].SumValue)
    else if (Fiscal='S') then
-     lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[2].SumValue);
+     lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[2].SumValue);
+
+  btnBuscar.Click;
 end;
 
 
@@ -736,15 +772,31 @@ begin
   begin
     if ZQ_EstadVarias.IsEmpty then
       exit;
-    DM.VariablesReportes(ReporteEstadVarias);
 
-    CritBusqueda.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
+    if (Fiscal='T') then
+     begin
+      DM.VariablesReportes(ReporteEstadVariasCostos);
+
+      critbusqueda2.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
                             EKBusquedaVarias.ParametrosSeleccionados1[3],EKBusquedaVarias.ParametrosSeleccionados1[4]]);
 
-    qrTipoEstad.Caption:='Estadística según '+EKBusquedaVarias.ParametrosSelecReales1[1];
+      qrTipoEstad2.Caption:='Estadística según '+EKBusquedaVarias.ParametrosSelecReales1[1];
 
-    ReporteEstadVarias_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-    EKVistaPreviaVarias.VistaPrevia;
+      ReporteEstadVariasCostos_piedePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+      EKVistaPreviaVariasCostos.VistaPrevia;
+     end
+    else
+     begin
+      DM.VariablesReportes(ReporteEstadVarias);
+
+      CritBusqueda.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
+                            EKBusquedaVarias.ParametrosSeleccionados1[3],EKBusquedaVarias.ParametrosSeleccionados1[4]]);
+
+      qrTipoEstad.Caption:='Estadística según '+EKBusquedaVarias.ParametrosSelecReales1[1];
+
+      ReporteEstadVarias_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+      EKVistaPreviaVarias.VistaPrevia;
+     end;
   end;
 
 end;
@@ -781,10 +833,14 @@ begin
       ZQ_EstadVariasSUMAVENTA.DisplayFormat:='';
       ZQ_EstadVariasSUMAIF.DisplayFormat:='';
       ZQ_EstadVariasSUMANIF.DisplayFormat:='';
+      ZQ_EstadVariasSUMACOSTO.DisplayFormat:='';
+      ZQ_EstadVariasGANANCIA.DisplayFormat:='';
       dm.ExportarEXCEL(gridVarias);
       ZQ_EstadVariasSUMAVENTA.DisplayFormat:='$ ##,###,##0.00';
       ZQ_EstadVariasSUMAIF.DisplayFormat:='$ ##,###,##0.00';
       ZQ_EstadVariasSUMANIF.DisplayFormat:='$ ##,###,##0.00';
+      ZQ_EstadVariasSUMACOSTO.DisplayFormat:='$ ##,###,##0.00';
+      ZQ_EstadVariasGANANCIA.DisplayFormat:='$ ##,###,##0.00';
      end
   end;
 end;
@@ -865,12 +921,16 @@ end;
 procedure TFEstadisticaVentas.EKDbSumaVariasSumListChanged(
   Sender: TObject);
 begin
-// if (Fiscal='T') then
-//  lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue)
-//  else if (Fiscal='N') then
-//   lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[3].SumValue)
-//   else if (Fiscal='S') then
-//     lblTotVarias.Caption := FormatFloat('Total Vendido: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[2].SumValue);
+  if (Fiscal='T') then
+  begin
+  lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue);
+  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Costo: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[4].SumValue);
+  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ganancia: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[1].SumValue);
+  end
+  else if (Fiscal='N') then
+   lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[3].SumValue)
+   else if (Fiscal='S') then
+     lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[2].SumValue);
 end;
 
 end.
