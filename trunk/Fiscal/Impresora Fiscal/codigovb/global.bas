@@ -35,15 +35,17 @@ Dim objFP As New FiscalPrinter
 Dim lote As Long
 Dim impresora As String
 Dim comando As String
+Dim fechaDesde As String
+Dim fechaHasta As String
 
     On Error GoTo ErrorHandler
 
     a_strArgs = Split(Command$, " ")
     For i = LBound(a_strArgs) To UBound(a_strArgs)
         Select Case LCase(a_strArgs(i))
-            Case "-i", "/i"
+            Case "-i", "/i" 'De esta forma "-i" o "/i" se pasa como parametro sobre que impresora se quiere trabajar.
                 impresora = a_strArgs(i + 1)
-                'De esta forma "-i" o "/i" se pasa como parametro sobre que impresora se quiere trabajar.
+                
             Case "-c", "/c"
                 'De esta forma "-c" o "/c" se pasa como parametro que comando se quiere ejecutar sobre la impresora.
                 comando = a_strArgs(i + 1)

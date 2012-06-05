@@ -15,6 +15,7 @@ Attribute VB_Ext_KEY = "SavedWithClassBuilder6" ,"Yes"
 Attribute VB_Ext_KEY = "Top_Level" ,"Yes"
 '----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Const cDefaultTimeOut = 90
+
 'Definición de propiedades como variables publicas
 Public pServidor As String
 Public pBase As String
@@ -30,7 +31,6 @@ Public pTimeOut As Integer      'Indica la cantidad de segundos que se especific
 Public pLimiteDeAccesos         'Límite de accesos para cerrar una conexión
 
 'Variables locales para almacenar los valores de las propiedades
-
 Private mvarpCadenaConexión As String       'Copia local
 Private mvarpConexion As ADODB.Connection   'Copia local
 Private vEnTransaccion As Boolean
@@ -286,9 +286,6 @@ Dim Params As Variant
     Set TraerComando = vComando
 
 End Function
-
-
-
 
 Private Sub CargarParametros(prmComando As ADODB.Command, ParamArray prmArg() As Variant)
 Dim i As Integer

@@ -39,8 +39,8 @@ Dim BienDeUso As String 'FixedAssert (B o N)
 Dim DomicilioComprador1 As String 'BuyerAdress1
 Dim DomicilioComprador2 As String 'BuyerAdress2
 Dim DomicilioComprador3 As String 'BuyerAdress3
-Dim LineaReminto1 As String 'Remit1
-Dim LineaReminto2 As String 'Remit2
+Dim LineaRemito1 As String 'Remit1
+Dim LineaRemito2 As String 'Remit2
 Dim TipoTablaBien As String 'StorageDataType (G o C)
 'Varibles de Lineas  de T/F---------------------------
 Dim DescripcionArticulo As String 'Description
@@ -102,8 +102,8 @@ Dim vCuotas As Integer, vIVA As Integer
         End If
     End If
 
-    LineaReminto1 = "."
-    LineaReminto2 = "."
+    LineaRemito1 = "."
+    LineaRemito2 = "."
     
     TipoFormulario = "P"
     TipoFuente = "17 CPI"
@@ -112,7 +112,7 @@ Dim vCuotas As Integer, vIVA As Integer
         
     If Not frmMain.EPSON_Printer_Fiscal.OpenInvoice("T", TipoPapel, TipoLetra, CantCopias, TipoFormulario, TipoFuente, _
         IVA_Vendedor, TipoIVAComprador, NombreComprador1, NombreComprador2, TpoDocComprador, NroDocComprador, BienDeUso, _
-        DomicilioComprador1, DomicilioComprador2, DomicilioComprador3, LineaReminto1, LineaReminto2, TipoTablaBien) Then
+        DomicilioComprador1, DomicilioComprador2, DomicilioComprador3, LineaRemito1, LineaRemito2, TipoTablaBien) Then
         MsgBox "Error al imprimir el ticket", vbCritical
         Exit Sub
     End If
