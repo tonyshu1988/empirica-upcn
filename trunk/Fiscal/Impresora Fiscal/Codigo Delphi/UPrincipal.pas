@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, EKIni, ZConnection, EKModelo, StdCtrls, ExtCtrls, OleCtrls, StrUtils,
-  DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, OCXFISLib_TLB;
+  DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, OCXFISLib_TLB,
+  Buttons;
 
 type
   TFPrincipal = class(TForm)
@@ -44,12 +45,14 @@ type
     ZQ_ItemsNOMBRE_MEDIDA: TStringField;
     ZQ_FormaPagoFORMA_PAGO_NOMBRE: TStringField;
     ZQ_FormaPagoFORMA_PAGO_IMPORTE: TFloatField;
-    lblError: TLabel;
     btnCierreZ: TButton;
     btnCierreX: TButton;
     btnAuditoria: TButton;
     editNumeroComprobante: TEdit;
     btnFactura: TButton;
+    lblErrorDriver: TLabel;
+    btnAbrirPuerto: TBitBtn;
+    btnCerrarPuerto: TBitBtn;
     procedure FormCreate(Sender: TObject);
     procedure leerParametros();
     procedure leerArchivoIni();
@@ -63,6 +66,11 @@ type
     function abrirImpresora: integer;
     function cerrarImpresora: integer;
     procedure btnFacturaClick(Sender: TObject);
+    procedure btnAbrirPuertoClick(Sender: TObject);
+    procedure btnCerrarPuertoClick(Sender: TObject);
+    procedure DriverFiscalFiscalError(ASender: TObject; PrinterCode, FiscalCode: Integer);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure DriverFiscalDriverError(ASender: TObject; DriverError: Smallint);
   private
     db_name, db_host, db_pass, db_user: string;
     if_puerto: string;
@@ -70,6 +78,7 @@ type
     preview: boolean;
     id_cpb, comando, impresora, audTipo, audFDesde, audFHasta: string;
     errorFiscal: integer;
+    errorDriver, errorImpresora: integer;
   public
     { Public declarations }
   end;
@@ -78,14 +87,14 @@ var
   FPrincipal: TFPrincipal;
 
 const
-  PuertoIF = 1;  
+  PuertoIF = 1;
 
 implementation
 
-uses IniFiles;
+uses IniFiles, UUtilidades;
 
 {$R *.dfm}
- 
+
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
   ZQ_Factura.Close;
@@ -96,7 +105,9 @@ begin
 
   leerArchivoIni;
 
-  //leerParametros;
+  abrirImpresora();
+
+  leerParametros;
 end;
 
 
@@ -109,7 +120,7 @@ begin
   db_user:= EKIni.Ini.ReadString('DB', 'db_user', 'SYSDBA');
   db_pass:= EKIni.Ini.ReadString('DB', 'db_pass', 'masterkey');
 
-  if_puerto:= EKIni.Ini.ReadString('IF', 'if_puerto', 'COM1');
+  if_puerto:= EKIni.Ini.ReadString('IF', 'if_puerto', 'COM2');
   if_velocidad:= EKIni.Ini.ReadInteger('IF', 'if_velocidad', 9600);
 
   conexion.Database:= db_name;
@@ -139,54 +150,61 @@ begin
     editParametros.Text:= ParamStr(i);
 
     if LeftStr(ParamStr(i), 2) = '-i' then //-i = Impresora
-      impresora:= RightStr(ParamStr(i), length(ParamStr(i))-2)
+      impresora:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
     else
-    if LeftStr(ParamStr(i), 2) = '-c' then //-c = Comando. Z(Cierre Z), X(Cierre X), A(Auditoria Z), F(Impresion de Factura)
-      comando:= RightStr(ParamStr(i), length(ParamStr(i))-2)
-    else
-    if LeftStr(ParamStr(i), 2) = '-l' then //-l = Nro de comprobante a imprimir. Solo con comando F
-      id_cpb:= RightStr(ParamStr(i), length(ParamStr(i))-2)
-    else
-    if LeftStr(ParamStr(i), 2) = '-t' then //-t = Tipo de auditoria Z (T=Total general; D=Detallado). Solo con comando A
-      audTipo:= RightStr(ParamStr(i), length(ParamStr(i))-2)
-    else
-    if LeftStr(ParamStr(i), 2) = '-d' then //-d = Fecha desde de la auditoria Z. Solo con comando A
-      audFDesde:= RightStr(ParamStr(i), length(ParamStr(i))-2)
-    else
-    if LeftStr(ParamStr(i), 2) = '-h' then //-h = Fecha hasta de la auditoria Z. Solo con comando A
-      audFHasta:= RightStr(ParamStr(i), length(ParamStr(i))-2)
-    else
-    if LeftStr(ParamStr(i), 2) = '-p' then //-p = si se muestra el panel principal
-      preview:=true;
+      if LeftStr(ParamStr(i), 2) = '-c' then //-c = Comando. Z(Cierre Z), X(Cierre X), A(Auditoria Z), F(Impresion de Factura)
+        comando:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+      else
+        if LeftStr(ParamStr(i), 2) = '-l' then //-l = Nro de comprobante a imprimir. Solo con comando F
+          id_cpb:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+        else
+          if LeftStr(ParamStr(i), 2) = '-t' then //-t = Tipo de auditoria Z (T=Total general; D=Detallado). Solo con comando A
+            audTipo:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+          else
+            if LeftStr(ParamStr(i), 2) = '-d' then //-d = Fecha desde de la auditoria Z. Solo con comando A
+              audFDesde:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+            else
+              if LeftStr(ParamStr(i), 2) = '-h' then //-h = Fecha hasta de la auditoria Z. Solo con comando A
+                audFHasta:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+              else
+                if LeftStr(ParamStr(i), 2) = '-p' then //-p = si se muestra el panel principal
+                  preview:= true;
   end;
 
-  if comando <> '' then
-  begin
-    if comando = 'Z' then
-      cierreZ()
-    else
-    if comando = 'X' then
-      cierreX()
-    else
-    if comando = 'F' then
-      facturar()
-    else
-    if comando = 'A' then
-      auditoria()
-    else
-      ShowMessage('comando incorrecto');
+  if impresora = '' then
+    impresora:= 'TM-U220AF';
+
+  try
+    if comando <> '' then
+    begin
+      if comando = 'Z' then
+        cierreZ()
+      else
+        if comando = 'X' then
+          cierreX()
+        else
+          if comando = 'F' then
+            facturar()
+          else
+            if comando = 'A' then
+              auditoria();
     end;
+  except
+    ShowMessage('Comando Incorrecto');
+  end;
 end;
 
 
 function TFPrincipal.abrirImpresora: integer;
 begin
+  lblErrorDriver.Caption:= '';
   Result:= DriverFiscal.IF_OPEN(if_puerto, if_velocidad);
 end;
 
 
 function TFPrincipal.cerrarImpresora: integer;
 begin
+  lblErrorDriver.Caption:= '';
   Result:= DriverFiscal.IF_CLOSE();
 end;
 
@@ -194,19 +212,16 @@ end;
 ///////////////////////////////////////////
 //              CIERRE Z
 ///////////////////////////////////////////
+
 procedure TFPrincipal.cierreZ;
-var
-  err: integer;
 begin
   if impresora = '' then
     exit;
 
   if (impresora = 'TM-U220AF') or (impresora = 'TM-2000AF') then
   begin
-    err:= abrirImpresora;
     errorFiscal:= DriverFiscal.EpsonForm.CIERRE('Z', 'P');
-    lblError.Caption:= inttostr(errorFiscal);
-    err:= cerrarImpresora;
+    DriverFiscal.EpsonForm.ESTADO('N');
   end;
 end;
 
@@ -214,19 +229,16 @@ end;
 ///////////////////////////////////////////
 //              CIERRE X
 ///////////////////////////////////////////
+
 procedure TFPrincipal.cierreX;
-var
-  err: integer;
 begin
   if impresora = '' then
     exit;
 
   if (impresora = 'TM-U220AF') or (impresora = 'TM-2000AF') then
   begin
-    err:= abrirImpresora;
     errorFiscal:= DriverFiscal.EpsonForm.CIERRE('X', 'P');
-    lblError.Caption:= inttostr(errorFiscal);
-    err:= cerrarImpresora;
+    DriverFiscal.EpsonForm.ESTADO('N');
   end;
 end;
 
@@ -234,19 +246,17 @@ end;
 ///////////////////////////////////////////
 //              AUDITORIA
 ///////////////////////////////////////////
+
 procedure TFPrincipal.auditoria;
-var
-  err: integer;
 begin
   if impresora = '' then
     exit;
 
   if (impresora = 'TM-U220AF') or (impresora = 'TM-2000AF') then
   begin
-    err:= abrirImpresora;
+    //AAMMDD
     errorFiscal:= DriverFiscal.EpsonForm.AUDITORIAF(audFDesde, audFHasta, audTipo);
-    lblError.Caption:= inttostr(errorFiscal);
-    err:= cerrarImpresora;
+    DriverFiscal.EpsonForm.ESTADO('N');
   end;
 end;
 
@@ -254,41 +264,43 @@ end;
 ///////////////////////////////////////////
 //              FACTURA
 ///////////////////////////////////////////
+
 procedure TFPrincipal.facturar;
 var
-  err: integer;
-    TipoFormulario: String;            // 'FormType
-    TipoLetra : String  ;             // 'InvoiceLetter
-    TipoFuente : String ;             // 'FontType
-    TipoIVAComprador : String   ;     // 'Iva_buyer
-    NombreComprador1 : String    ;    // 'BuyerName1
-    NombreComprador2 : String     ;   // 'BuyerName2
-    TpoDocComprador : String       ;  //  'BuyerDocumentType
-    NroDocComprador : String        ; //  'BuyerDocumentNumber
-    BienDeUso : String         ;      //  'Fixed:sert (B o N)
-    DomicilioComprador1 : String;     //  'BuyerAdress1
-    DomicilioComprador2 : String ;    //  'BuyerAdress2
-    DomicilioComprador3 : String  ;   //  'BuyerAdress3
-    LineaRemito1 : String          ;  // 'Remit1
-    LineaRemito2 : String;            // 'Remit2
-    TipoTablaBien : String;           //  'StorageDataType (G o C)
-    DescripcionArticulo : String ;    //  'Description
-    Cantidad : String          ;      //  'Quantity
-    PrecioUnitario : String  ;        //  'UnitPrice
-    TasaIva : String          ;       //  'Iva_tax
-    CalificadorDeItem : String ;      //  'Qualifier M,m,R,r
-    CantidadDeBultos : String   ;     //  'Bundle
-    ImpuestosInternos : String   ;    //  'PorcentualInternalTaxes
-    Impuestosfijos : String       ;   //  '
-    LineaDescExtra1 : String       ;  //  'Extraline1
-    LineaDescExtra2 : String   ;      //  'Extraline2
-    LineaDescExtra3 : String    ;     // 'Extraline3
-    TasaAcrecentamiento : String ;    //  'Incre:eTax
-    ImpuestosIntFijos : String ;      //  'FixesIntTaxes
-    TipoIvaEmisor : String    ;  //
-    vBonifXItem : String; //
-    DescuentoGlobal : String; //
-    vLeyendaBonif : String ;//
+  //VARIABLES PARA ABRIR FACTURA
+  TipoDocumento: string;          // Tipo de documento fiscal a realizar. F=Ticket-factura; M=Nota de crédito; T=Ticket-factura
+  TipoPapel: string;              // Tipo de salida impresa para factura fiscal o recibo. C=Formulario continuo; S=Hoja suelta o slip
+  TipoLetra: string;              // Letra del documento fiscal (A,B o C)
+  CantidadCopias: string;         // Cantidad de copias que se deben imprimir (1 a 5)
+  TipoFormulario: string;         // Tipo de formulario que se utiliza para la factura emitidas en hoja suelta o formulario continuo. A=Autoimpreso; F=Formulario pre-impreso; P=La impresora fiscal debe dibujar las líneas
+  TipoFuente: string;             // Tamaño de los caracteres que se van a utilizar en toda la factura en CPI (10, 12, 17)
+  TipoIVAEmisor: string;          // Responsabilidad frente al IVA del EMISOR (I, R, N, E, M)
+  TipoIVAComprador: string;       // Responsabilidad frente al IVA del COMPROADOR (I, R, N, E, M, F, S)
+  NombreComprador1: string;       // Nombre comercial del comprador línea 1 (max 40 bytes)
+  NombreComprador2: string;       // Nombre comercial del comprador línea 2 (max 40 bytes)
+  TpoDocComprador: string;        // Tipo de documento del comprador (CUIT, CUIL, DNI) (max 6 bytes)
+  NroDocComprador: string;        // CUIT o Numero documento del comprador (max 11 bytes)
+  BienDeUso: string;              // Bien de uso (B o N)
+  DomicilioComprador1: string;    // Domicilio del comprador, línea 1 (max 40 bytes)
+  DomicilioComprador2: string;    // Domicilio del comprador, línea 2 (max 40 bytes)
+  DomicilioComprador3: string;    // Domicilio del comprador, línea 3 (max 40 bytes)
+  LineaVariable1: string;         // Línea 1 de texto variable (max 40 bytes)
+  LineaVariable2: string;         // Línea 1 de texto variable (max 40 bytes)
+  TipoTablaBien: string;          // Formato para almacenar los datos (C o G)
+  //VARIABLES PARA ENVIAR ITEMS
+  DescripcionProducto: string;    // Descripción del producto (max 20 bytes)
+  Cantidad: string;               // Cantidad vendida
+  PrecioUnitario: string;         // Precio Unitario
+  TasaIva: string;                // Tasa del iva
+  CalificadorDeItem: string;      // Calificador de la operación. M = Monto agregado mercadería (SUMA); m = Anula el item vendido (RESTA); R = Bonificacion (RESTA); r = anula una bonificacion (SUMA)
+  CantidadDeBultos: string;       // Canidad de bultos
+  ImpuestosInternos: string;      // Impuestos internos porcentuales
+  LineaDescExtra1: string;        // Linea 1 descripcion complementaria del item (max 30 bytes)
+  LineaDescExtra2: string;        // Linea 2 descripcion complementaria del item (max 30 bytes)
+  LineaDescExtra3: string;        // Linea 3 descripcion complementaria del item (max 30 bytes)
+  TasaAcrecentamiento: string;    // Tasa Acrecentamiento
+  ImpuestosIntFijos: string;      // Impuestos Internos Fijos
+
 begin
   if impresora = '' then
     exit;
@@ -310,36 +322,97 @@ begin
 
   if (impresora = 'TM-U220AF') or (impresora = 'TM-2000AF') then
   begin
-    err:= abrirImpresora;
+    //VARIABLES PARA ABRIR FACTURA
+    TipoDocumento:= 'T';  // T = Ticket-factura
 
-    TipoIvaEmisor:= 'I'
+    TipoPapel:= 'C';  //C = Formulario continuo
 
-    errorFiscal:= DriverFiscal.EpsonForm.AUDITORIAF(audFDesde, audFHasta, audTipo);
-    lblError.Caption:= inttostr(errorFiscal);
+    if (ZQ_FacturaTIPO_FACTURA.IsNull) or (ZQ_FacturaTIPO_FACTURA.AsString = '') then
+      TipoLetra:= 'B'
+    else
+      TipoLetra:= ZQ_FacturaTIPO_FACTURA.AsString;
 
+    CantidadCopias:= '1';
 
-    err:= cerrarImpresora;
+    TipoFormulario:= 'P'; //P = La impresora fiscal debe dibujar las líneas
+
+    TipoFuente:= '17';
+
+    TipoIVAEmisor:= 'I'; //I = Responsable Inscripto
+
+    if (ZQ_FacturaLETRA_FISCAL.IsNull) or (ZQ_FacturaLETRA_FISCAL.AsString = '') then
+      TipoIVAComprador:= 'F'
+    else
+      TipoIVAComprador:= ZQ_FacturaLETRA_FISCAL.AsString;
+
+    if (ZQ_FacturaNOMBRE.IsNull) or (ZQ_FacturaNOMBRE.AsString = '') then
+      NombreComprador1:= 'CONSUMIDOR FINAL'
+    else
+      NombreComprador1:= ZQ_FacturaNOMBRE.AsString;
+
+    NombreComprador2:= '';
+
+    if (ZQ_FacturaNOMBRE_TIPO_DOC.IsNull) or (ZQ_FacturaNOMBRE_TIPO_DOC.AsString = '') then
+      TpoDocComprador:= 'DNI'
+    else
+      TpoDocComprador:= 'DNI';// ZQ_FacturaNOMBRE_TIPO_DOC.AsString;
+
+    if (ZQ_FacturaNUMERO_DOC.IsNull) or (ZQ_FacturaNUMERO_DOC.AsString = '') then
+      NroDocComprador:= '11111111'
+    else
+      NroDocComprador:= ZQ_FacturaNUMERO_DOC.AsString;
+
+    if not ((ZQ_FacturaCUIT_CUIL.IsNull) or (ZQ_FacturaCUIT_CUIL.AsString = '')) then
+    begin
+      if (TipoLetra = 'A') or (TipoIVAComprador = 'M') or (TipoIVAComprador = 'E') then
+      begin
+        TpoDocComprador:= 'CUIT';
+        NroDocComprador:= ZQ_FacturaCUIT_CUIL.AsString;
+      end;
+    end;
+
+    BienDeUso:= 'N';
+
+    if (ZQ_FacturaDIRECCION.IsNull) or (ZQ_FacturaDIRECCION.AsString = '') then
+      DomicilioComprador1:= 'SANTA FE'
+    else
+      DomicilioComprador1:= ZQ_FacturaDIRECCION.AsString;
+
+    if (ZQ_FacturaLOCALIDAD.IsNull) or (ZQ_FacturaLOCALIDAD.AsString = '') then
+      DomicilioComprador2:= 'SANTA FE'
+    else
+      DomicilioComprador2:= ZQ_FacturaLOCALIDAD.AsString;
+
+    DomicilioComprador3:= char(127);
+
+    LineaVariable1:= char(127);
+
+    LineaVariable2:= char(127);
+
+    TipoTablaBien:= 'C';
+
+    DriverFiscal.EpsonForm.FACTABRE(TipoDocumento, TipoPapel, TipoLetra, CantidadCopias, TipoFormulario,
+                                    TipoFuente, TipoIVAEmisor, TipoIVAComprador, NombreComprador1, NombreComprador2,
+                                    TpoDocComprador, NroDocComprador, BienDeUso, DomicilioComprador1, DomicilioComprador2,
+                                    DomicilioComprador3, LineaVariable1, LineaVariable2, TipoTablaBien);
   end;
 end;
 
 
 procedure TFPrincipal.btnCierreZClick(Sender: TObject);
 begin
-  impresora:= 'TM-U220AF';
   cierreZ;
 end;
 
 
 procedure TFPrincipal.btnCierreXClick(Sender: TObject);
 begin
-  impresora:= 'TM-U220AF';
   cierreX;
 end;
 
 
 procedure TFPrincipal.btnAuditoriaClick(Sender: TObject);
 begin
-  impresora:= 'TM-U220AF';
   audFDesde:= '120101';
   audFHasta:= '121231';
   audTipo:= 'T';
@@ -349,9 +422,50 @@ end;
 
 procedure TFPrincipal.btnFacturaClick(Sender: TObject);
 begin
-  impresora:= 'TM-U220AF';
   id_cpb:= editNumeroComprobante.Text;
   facturar;
 end;
 
+
+procedure TFPrincipal.btnAbrirPuertoClick(Sender: TObject);
+begin
+  abrirImpresora();
+end;
+
+procedure TFPrincipal.btnCerrarPuertoClick(Sender: TObject);
+begin
+  cerrarImpresora();
+end;
+
+
+procedure TFPrincipal.DriverFiscalFiscalError(ASender: TObject; PrinterCode, FiscalCode: Integer);
+begin
+  if errorDriver = 5 then
+//    lblErrorDriver.Caption:= lblErrorDriver.Caption + Format(' PrinterCode: %d // FiscalCode: %d ', [PrinterCode, FiscalCode]);
+    ShowMessage(DecodificadorErrorFiscal(PrinterCode, 'PrinterCode'));
+    ShowMessage(DecodificadorErrorFiscal(FiscalCode, 'FiscalCode'));
+end;
+
+
+procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  cerrarImpresora();
+end;
+
+
+procedure TFPrincipal.DriverFiscalDriverError(ASender: TObject; DriverError: Smallint);
+begin
+  errorDriver:= DriverError;
+
+  case DriverError of
+    0..4: begin
+        lblErrorDriver.Caption:= 'Error COM/DLL';
+      end;
+    5: begin
+        lblErrorDriver.Caption:= 'Error Impresora: ';
+      end;
+  end;
+end;
+
 end.
+

@@ -2,7 +2,8 @@ program ImpresoraFiscal;
 
 uses
   Forms,
-  UPrincipal in 'UPrincipal.pas' {FPrincipal};
+  UPrincipal in 'UPrincipal.pas' {FPrincipal},
+  UUtilidades in 'UUtilidades.pas';
 
 {$R *.res}
 
