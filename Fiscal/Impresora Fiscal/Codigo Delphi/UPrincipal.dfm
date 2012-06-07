@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 415
-  Top = 135
+  Left = 438
+  Top = 177
   Width = 611
   Height = 493
   Caption = 'FPrincipal'
@@ -11,6 +11,8 @@ object FPrincipal: TFPrincipal
   Font.Name = 'Verdana'
   Font.Style = []
   OldCreateOrder = False
+  Visible = True
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -28,12 +30,20 @@ object FPrincipal: TFPrincipal
       Height = 13
       Caption = 'Parametros:'
     end
-    object lblError: TLabel
-      Left = 192
-      Top = 224
-      Width = 40
-      Height = 13
-      Caption = 'ERROR'
+    object lblErrorDriver: TLabel
+      Left = 1
+      Top = 447
+      Width = 601
+      Height = 18
+      Align = alBottom
+      Alignment = taCenter
+      Caption = 'lblErrorDriver'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -15
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
     end
     object Panel2: TPanel
       Left = 1
@@ -73,11 +83,13 @@ object FPrincipal: TFPrincipal
       Width = 34
       Height = 32
       TabOrder = 2
+      OnFiscalError = DriverFiscalFiscalError
+      OnDriverError = DriverFiscalDriverError
       ControlData = {00090000840300004F030000}
     end
     object btnCierreZ: TButton
       Left = 9
-      Top = 77
+      Top = 112
       Width = 113
       Height = 25
       Caption = 'Cierre Z'
@@ -86,7 +98,7 @@ object FPrincipal: TFPrincipal
     end
     object btnCierreX: TButton
       Left = 9
-      Top = 109
+      Top = 144
       Width = 113
       Height = 25
       Caption = 'Cierre X'
@@ -95,7 +107,7 @@ object FPrincipal: TFPrincipal
     end
     object btnAuditoria: TButton
       Left = 9
-      Top = 141
+      Top = 176
       Width = 113
       Height = 25
       Caption = 'Auditoria'
@@ -104,19 +116,38 @@ object FPrincipal: TFPrincipal
     end
     object editNumeroComprobante: TEdit
       Left = 128
-      Top = 176
-      Width = 97
+      Top = 210
+      Width = 121
       Height = 21
       TabOrder = 6
+      Text = '112729'
     end
     object btnFactura: TButton
       Left = 9
-      Top = 173
+      Top = 208
       Width = 113
       Height = 25
       Caption = 'Factura'
       TabOrder = 7
       OnClick = btnFacturaClick
+    end
+    object btnAbrirPuerto: TBitBtn
+      Left = 9
+      Top = 80
+      Width = 113
+      Height = 25
+      Caption = 'Abrir Puerto'
+      TabOrder = 8
+      OnClick = btnAbrirPuertoClick
+    end
+    object btnCerrarPuerto: TBitBtn
+      Left = 128
+      Top = 80
+      Width = 113
+      Height = 25
+      Caption = 'Cerrar Puerto'
+      TabOrder = 9
+      OnClick = btnCerrarPuertoClick
     end
   end
   object conexion: TZConnection
@@ -128,17 +159,17 @@ object FPrincipal: TFPrincipal
     AutoCommit = False
     Connected = True
     Left = 552
-    Top = 304
+    Top = 256
   end
   object EKIni: TEKIni
     Archivo = 'config.ini'
     Left = 552
-    Top = 408
+    Top = 360
   end
   object EKModelo: TEKModeloTransaccion
     Coneccion = conexion
     Left = 552
-    Top = 352
+    Top = 304
   end
   object ZQ_Factura: TZQuery
     Connection = conexion
@@ -165,7 +196,7 @@ object FPrincipal: TFPrincipal
         ParamType = ptUnknown
       end>
     Left = 472
-    Top = 304
+    Top = 248
     ParamData = <
       item
         DataType = ftUnknown
@@ -243,7 +274,7 @@ object FPrincipal: TFPrincipal
         ParamType = ptUnknown
       end>
     Left = 472
-    Top = 360
+    Top = 304
     ParamData = <
       item
         DataType = ftUnknown
@@ -306,7 +337,7 @@ object FPrincipal: TFPrincipal
         ParamType = ptUnknown
       end>
     Left = 472
-    Top = 416
+    Top = 360
     ParamData = <
       item
         DataType = ftUnknown
