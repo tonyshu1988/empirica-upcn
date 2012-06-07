@@ -91,7 +91,7 @@ const
 
 implementation
 
-uses IniFiles, UUtilidades;
+uses IniFiles, UUtilidades, Math;
 
 {$R *.dfm}
 
@@ -267,6 +267,7 @@ end;
 
 procedure TFPrincipal.facturar;
 var
+  resultado: integer;
   //VARIABLES PARA ABRIR FACTURA
   TipoDocumento: string;          // Tipo de documento fiscal a realizar. F=Ticket-factura; M=Nota de crédito; T=Ticket-factura
   TipoPapel: string;              // Tipo de salida impresa para factura fiscal o recibo. C=Formulario continuo; S=Hoja suelta o slip
@@ -289,18 +290,24 @@ var
   TipoTablaBien: string;          // Formato para almacenar los datos (C o G)
   //VARIABLES PARA ENVIAR ITEMS
   DescripcionProducto: string;    // Descripción del producto (max 20 bytes)
-  Cantidad: string;               // Cantidad vendida
-  PrecioUnitario: string;         // Precio Unitario
-  TasaIva: string;                // Tasa del iva
+  Cantidad: double;               // Cantidad vendida
+  PrecioUnitario: double;         // Precio Unitario
+  TasaIva: double;                // Tasa del iva
   CalificadorDeItem: string;      // Calificador de la operación. M = Monto agregado mercadería (SUMA); m = Anula el item vendido (RESTA); R = Bonificacion (RESTA); r = anula una bonificacion (SUMA)
-  CantidadDeBultos: string;       // Canidad de bultos
-  ImpuestosInternos: string;      // Impuestos internos porcentuales
+  CantidadDeBultos: integer;       // Canidad de bultos
+  ImpuestosInternos: double;      // Impuestos internos porcentuales
   LineaDescExtra1: string;        // Linea 1 descripcion complementaria del item (max 30 bytes)
   LineaDescExtra2: string;        // Linea 2 descripcion complementaria del item (max 30 bytes)
   LineaDescExtra3: string;        // Linea 3 descripcion complementaria del item (max 30 bytes)
-  TasaAcrecentamiento: string;    // Tasa Acrecentamiento
-  ImpuestosIntFijos: string;      // Impuestos Internos Fijos
-
+  TasaAcrecentamiento: double;    // Tasa Acrecentamiento
+  ImpuestosIntFijos: double;      // Impuestos Internos Fijos
+  //VARIABLES PARA ENVIAR FORMA PAGO
+  DescripcionFPago: string;       // Texto con descripcion del pago (max 25 bytes)
+  MontoFPago: double;             // monto
+  CalificadorFPago: string;       // Calificador del item de línea. C=Cancelar el comprobante, T=Suma al importe pagado, t=Anula un pago hecho con T, D=Realiza un DESCUENTO GLOBAL de monto fijo, R=Realiza un RECARGO GLOBAL de monto fijo
+  //VARIABLES PARA ACTUALIZAR COMPROBANTE
+  puntoVenta: string;
+  numeroCpb: string;
 begin
   if impresora = '' then
     exit;
@@ -322,7 +329,7 @@ begin
 
   if (impresora = 'TM-U220AF') or (impresora = 'TM-2000AF') then
   begin
-    //VARIABLES PARA ABRIR FACTURA
+//PASO 1: ABRIR FACTURA
     TipoDocumento:= 'T';  // T = Ticket-factura
 
     TipoPapel:= 'C';  //C = Formulario continuo
@@ -350,12 +357,12 @@ begin
     else
       NombreComprador1:= ZQ_FacturaNOMBRE.AsString;
 
-    NombreComprador2:= '';
+    NombreComprador2:= char(127);
 
     if (ZQ_FacturaNOMBRE_TIPO_DOC.IsNull) or (ZQ_FacturaNOMBRE_TIPO_DOC.AsString = '') then
       TpoDocComprador:= 'DNI'
     else
-      TpoDocComprador:= 'DNI';// ZQ_FacturaNOMBRE_TIPO_DOC.AsString;
+      TpoDocComprador:= ZQ_FacturaNOMBRE_TIPO_DOC.AsString;
 
     if (ZQ_FacturaNUMERO_DOC.IsNull) or (ZQ_FacturaNUMERO_DOC.AsString = '') then
       NroDocComprador:= '11111111'
@@ -391,10 +398,134 @@ begin
 
     TipoTablaBien:= 'C';
 
-    DriverFiscal.EpsonForm.FACTABRE(TipoDocumento, TipoPapel, TipoLetra, CantidadCopias, TipoFormulario,
+    resultado:= DriverFiscal.EpsonForm.FACTABRE(TipoDocumento, TipoPapel, TipoLetra, CantidadCopias, TipoFormulario,
                                     TipoFuente, TipoIVAEmisor, TipoIVAComprador, NombreComprador1, NombreComprador2,
                                     TpoDocComprador, NroDocComprador, BienDeUso, DomicilioComprador1, DomicilioComprador2,
                                     DomicilioComprador3, LineaVariable1, LineaVariable2, TipoTablaBien);
+    if resultado <> 0 then
+    begin
+      DriverFiscal.EpsonForm.FACTCANCEL;
+      exit;
+    end;
+
+//PASO 2: CARGAR ITEMS
+    ZQ_Items.First;
+    while not ZQ_Items.Eof do
+    begin
+      DescripcionProducto:= ZQ_ItemsNOMBRE_PRODUCTO.AsString;
+
+      Cantidad:= ZQ_ItemsCANTIDAD.AsFloat;
+
+      If (TipoLetra = 'A') and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) Then
+        PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat
+      else
+        PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
+
+      TasaIva:= 0.21;
+
+      CalificadorDeItem:= 'M';
+
+      CantidadDeBultos:= 1;
+
+      ImpuestosInternos:= 0;
+
+      LineaDescExtra1:= 'Matias sos groso';//char(127);
+      LineaDescExtra2:= char(127);
+      LineaDescExtra3:= char(127);
+
+      TasaAcrecentamiento:= 0;
+
+      If ZQ_ItemsIMPUESTO_INTERNO.IsNull Then
+        ImpuestosIntFijos:= 0
+      else
+        ImpuestosIntFijos:= ZQ_ItemsIMPUESTO_INTERNO.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
+
+      resultado:= DriverFiscal.EpsonForm.FACTITEM(DescripcionProducto, Cantidad, PrecioUnitario, TasaIva, CalificadorDeItem,
+                                                  CantidadDeBultos, ImpuestosInternos, LineaDescExtra1, LineaDescExtra2,
+                                                  LineaDescExtra3, TasaAcrecentamiento, ImpuestosIntFijos);
+      if resultado <> 0 then
+      begin
+        DriverFiscal.EpsonForm.FACTCANCEL;
+        exit;
+      end;
+
+      ZQ_Items.Next;
+    end;
+
+//PASO 3: SUBTOTAL
+    resultado:= DriverFiscal.EpsonForm.FACTSUBTOTAL('P', 'Subtotal');
+    if resultado <> 0 then
+    begin
+      DriverFiscal.EpsonForm.FACTCANCEL;
+      exit;
+    end;
+
+//PASO 4: CARGAR FORMA PAGO
+    ZQ_FormaPago.First;
+    while not ZQ_FormaPago.Eof do
+    begin
+      DescripcionFPago:= ZQ_FormaPagoFORMA_PAGO_NOMBRE.AsString;
+      MontoFPago:= ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat;
+      CalificadorFPago:= 'T';
+
+      resultado:= DriverFiscal.EpsonForm.FACTPAGO(DescripcionFPago, MontoFPago, CalificadorFPago);
+      if resultado <> 0 then
+      begin
+        DriverFiscal.EpsonForm.FACTCANCEL;
+        exit;
+      end;
+
+      ZQ_FormaPago.Next;
+    end;
+
+//PASO 5: DISCRIMINACION IVA  revisar esto
+    If TipoLetra = 'Alfajor' Then
+    begin
+      DescripcionFPago:= 'IVA 21 %';
+      MontoFPago:= 0;
+      CalificadorFPago:= 'T';
+      resultado:= DriverFiscal.EpsonForm.FACTPAGO(DescripcionFPago, MontoFPago, CalificadorFPago);
+      if resultado <> 0 then
+      begin
+        DriverFiscal.EpsonForm.FACTCANCEL;
+        exit;
+      end;
+
+      DescripcionFPago:= 'CONCEPTOS NO GRABADOS';
+      MontoFPago:= 0;
+      CalificadorFPago:= 'T';
+      resultado:= DriverFiscal.EpsonForm.FACTPAGO(DescripcionFPago, MontoFPago, CalificadorFPago);
+      if resultado <> 0 then
+      begin
+        DriverFiscal.EpsonForm.FACTCANCEL;
+        exit;
+      end;
+    end;
+
+//PASO 6: CERRAR FACTURA
+    resultado:= DriverFiscal.EpsonForm.FACTCIERRA(TipoDocumento, TipoLetra, 'TOTAL');
+    if resultado <> 0 then
+    begin
+      DriverFiscal.EpsonForm.FACTCANCEL;
+      exit;
+    end;
+
+//PASO 7: OBTENER NUMERO DE COMPROBANTE Y PUNTO DE VENTA
+    numeroCpb:= DriverFiscal.IF_READ(3);
+    //Cambio el status para poder obtener el numero de Punto Venta. C = Información sobre el contribuyente
+    DriverFiscal.EpsonForm.ESTADO('C');
+    puntoVenta:= DriverFiscal.IF_READ(4);
+    //Vuelvo al estado Normal
+    DriverFiscal.EpsonForm.ESTADO('N');
+    editParametros.Text:= puntoVenta+'-'+numeroCpb;
+
+//PASO 8: INSERTAR EL NUMERO DE COMPROBANTE, PUNTO DE VENTA Y FECHA EN COMPROBANTE IMPRESO
+//    If Not objComprobantes.UpdatePosTicket(vPOS, vNumTicket, pLote) Then
+//        MsgBox "Error al intentar grabar el punto de Vta y numero de ticket otorgado por la impresora fiscal."
+//    End If
+
+//PASO 9: CORTO EL TIQUET
+    DriverFiscal.EpsonForm.CORTAPAPEL;
   end;
 end;
 
