@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, EKIni, ZConnection, EKModelo, StdCtrls, ExtCtrls, OleCtrls, StrUtils,
   DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, OCXFISLib_TLB,
-  Buttons;
+  Buttons, ComCtrls;
 
 type
   TFPrincipal = class(TForm)
@@ -54,6 +54,19 @@ type
     btnAbrirPuerto: TBitBtn;
     btnCerrarPuerto: TBitBtn;
     ZQ_UpdateFactura: TZQuery;
+    ZQ_Config: TZQuery;
+    ZQ_ConfigCLAVE: TStringField;
+    ZQ_ConfigFECHA: TDateField;
+    ZQ_ConfigNUMERO: TFloatField;
+    ZQ_ConfigTEXTO: TStringField;
+    ZQ_ConfigNIVEL: TSmallintField;
+    ZQ_ConfigGRUPO: TStringField;
+    ZQ_ConfigDESCRIPCION: TStringField;
+    ZQ_ConfigGRAFICO: TBlobField;
+    lblFactura: TLabel;
+    DateTimeFechaDesde: TDateTimePicker;
+    DateTimeFechaHasta: TDateTimePicker;
+    ComboBoxTipoAuditoria: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure leerParametros();
     procedure leerArchivoIni();
@@ -78,7 +91,7 @@ type
     if_velocidad: integer;
     preview: boolean;
     id_cpb, comando, impresora, audTipo, audFDesde, audFHasta: string;
-    errorFiscal: integer;
+    resultado: integer;
     errorDriver, errorImpresora: integer;
   public
     { Public declarations }
@@ -92,23 +105,21 @@ const
 
 implementation
 
-uses IniFiles, UUtilidades, Math;
+uses IniFiles, UUtilidades, Math, DateUtils;
 
 {$R *.dfm}
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
+  DateTimeFechaDesde.Date:= StartOfTheMonth(EKModelo.Fecha);
+  DateTimeFechaHasta.Date:= EndOfTheMonth(EKModelo.Fecha);
 
   ZQ_Factura.Close;
   ZQ_Items.Close;
   ZQ_FormaPago.Close;
 
-  preview:= false;
-
   leerArchivoIni;
-
   abrirImpresora();
-
   leerParametros;
 end;
 
@@ -149,7 +160,7 @@ begin
 
   for i:= 1 to ParamCount do
   begin
-    editParametros.Text:= ParamStr(i);
+    editParametros.Text:= editParametros.Text+' '+ParamStr(i);
 
     if LeftStr(ParamStr(i), 2) = '-i' then //-i = Impresora
       impresora:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
@@ -176,6 +187,8 @@ begin
   if impresora = '' then
     impresora:= 'TM-U220AF';
 
+  Visible:= preview;
+
   try
     if comando <> '' then
     begin
@@ -192,8 +205,11 @@ begin
               auditoria();
     end;
   except
-    ShowMessage('Comando Incorrecto');
+    ShowMessage('Comando a ejecutar incorrecto, verifique. Z(Cierre Z), X(Cierre X), A(Auditoria), F(Factura)');
   end;
+
+  if not preview then
+    Application.Terminate;
 end;
 
 
@@ -222,8 +238,8 @@ begin
 
   if (impresora = 'TM-U220AF') or (impresora = 'TM-2000AF') then
   begin
-    errorFiscal:= DriverFiscal.EpsonForm.CIERRE('Z', 'P');
-    DriverFiscal.EpsonForm.ESTADO('N');
+    if DriverFiscal.EpsonForm.CIERRE('Z', 'P') = 0 then
+      DriverFiscal.EpsonForm.ESTADO('N');
   end;
 end;
 
@@ -239,8 +255,8 @@ begin
 
   if (impresora = 'TM-U220AF') or (impresora = 'TM-2000AF') then
   begin
-    errorFiscal:= DriverFiscal.EpsonForm.CIERRE('X', 'P');
-    DriverFiscal.EpsonForm.ESTADO('N');
+    if DriverFiscal.EpsonForm.CIERRE('X', 'P') = 0 then
+      DriverFiscal.EpsonForm.ESTADO('N');
   end;
 end;
 
@@ -256,9 +272,8 @@ begin
 
   if (impresora = 'TM-U220AF') or (impresora = 'TM-2000AF') then
   begin
-    //AAMMDD
-    errorFiscal:= DriverFiscal.EpsonForm.AUDITORIAF(audFDesde, audFHasta, audTipo);
-    DriverFiscal.EpsonForm.ESTADO('N');
+    if DriverFiscal.EpsonForm.AUDITORIAF(audFDesde, audFHasta, audTipo) = 0 then
+      DriverFiscal.EpsonForm.ESTADO('N');
   end;
 end;
 
@@ -269,7 +284,6 @@ end;
 
 procedure TFPrincipal.facturar;
 var
-  resultado: integer;
   //VARIABLES PARA ABRIR FACTURA
   TipoDocumento: string;          // Tipo de documento fiscal a realizar. F=Ticket-factura; M=Nota de crédito; T=Ticket-factura
   TipoPapel: string;              // Tipo de salida impresa para factura fiscal o recibo. C=Formulario continuo; S=Hoja suelta o slip
@@ -314,6 +328,9 @@ begin
   if impresora = '' then
     exit;
 
+  ZQ_Config.Close;
+  ZQ_Config.Open;
+
   ZQ_Factura.Close;
   ZQ_Factura.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
   ZQ_Factura.Open;
@@ -327,7 +344,10 @@ begin
   ZQ_FormaPago.Open;
 
   if ZQ_Factura.IsEmpty then
+  begin
+    ShowMessage('El Comprobante Código '+rellenar(id_cpb, '0', 8)+' es inexistente, verifique.');
     exit;
+  end;
 
   if (impresora = 'TM-U220AF') or (impresora = 'TM-2000AF') then
   begin
@@ -357,26 +377,26 @@ begin
     if (ZQ_FacturaNOMBRE.IsNull) or (ZQ_FacturaNOMBRE.AsString = '') then
       NombreComprador1:= 'CONSUMIDOR FINAL'
     else
-      NombreComprador1:= ZQ_FacturaNOMBRE.AsString;
+      NombreComprador1:= LeftStr(ZQ_FacturaNOMBRE.AsString, 40);
 
     NombreComprador2:= char(127);
 
     if (ZQ_FacturaNOMBRE_TIPO_DOC.IsNull) or (ZQ_FacturaNOMBRE_TIPO_DOC.AsString = '') then
       TpoDocComprador:= 'DNI'
     else
-      TpoDocComprador:= LeftStr(ZQ_FacturaNOMBRE_TIPO_DOC.AsString,6);
+      TpoDocComprador:= LeftStr(ZQ_FacturaNOMBRE_TIPO_DOC.AsString, 6);
 
     if (ZQ_FacturaNUMERO_DOC.IsNull) or (ZQ_FacturaNUMERO_DOC.AsString = '') then
       NroDocComprador:= '11111111'
     else
-      NroDocComprador:= ZQ_FacturaNUMERO_DOC.AsString;
+      NroDocComprador:= LeftStr(ZQ_FacturaNUMERO_DOC.AsString,  11);
 
     if not ((ZQ_FacturaCUIT_CUIL.IsNull) or (ZQ_FacturaCUIT_CUIL.AsString = '')) then
     begin
       if (TipoLetra = 'A') or (TipoIVAComprador = 'M') or (TipoIVAComprador = 'E') then
       begin
         TpoDocComprador:= 'CUIT';
-        NroDocComprador:= ZQ_FacturaCUIT_CUIL.AsString;
+        NroDocComprador:= LeftStr(ZQ_FacturaCUIT_CUIL.AsString, 11);
       end;
     end;
 
@@ -385,17 +405,16 @@ begin
     if (ZQ_FacturaDIRECCION.IsNull) or (ZQ_FacturaDIRECCION.AsString = '') then
       DomicilioComprador1:= 'SANTA FE'
     else
-      DomicilioComprador1:= ZQ_FacturaDIRECCION.AsString;
+      DomicilioComprador1:= LeftStr(ZQ_FacturaDIRECCION.AsString, 40);
 
     if (ZQ_FacturaLOCALIDAD.IsNull) or (ZQ_FacturaLOCALIDAD.AsString = '') then
       DomicilioComprador2:= 'SANTA FE'
     else
-      DomicilioComprador2:= ZQ_FacturaLOCALIDAD.AsString;
+      DomicilioComprador2:= LeftStr(ZQ_FacturaLOCALIDAD.AsString, 40);
 
     DomicilioComprador3:= char(127);
 
     LineaVariable1:= char(127);
-
     LineaVariable2:= char(127);
 
     TipoTablaBien:= 'C';
@@ -409,16 +428,13 @@ begin
       DriverFiscal.EpsonForm.FACTCANCEL;
       exit;
     end;
-     //FRULA CARIADA
-
-
 
 //PASO 2: CARGAR ITEMS
     ZQ_Items.First;
     while not ZQ_Items.Eof do
     begin
       //Max de 20 caracteres
-      DescripcionProducto:= LeftStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,20);
+      DescripcionProducto:= LeftStr(' '+ZQ_ItemsNOMBRE_PRODUCTO.AsString, 20);
 
       Cantidad:= ZQ_ItemsCANTIDAD.AsFloat;
 
@@ -435,9 +451,18 @@ begin
 
       ImpuestosInternos:= 0;
 
-      LineaDescExtra1:= char(127);//MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,21,51);
-      LineaDescExtra2:= char(127);//MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,51,81);
-      LineaDescExtra3:= char(127);//MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,81,121);
+      LineaDescExtra1:= char(127);
+      LineaDescExtra2:= char(127);
+      LineaDescExtra3:= char(127);
+
+      if ZQ_Config.Locate('CLAVE', vararrayof(['ticketFacturaDetallada']), []) then
+      begin
+        if ZQ_ConfigTEXTO.AsString = 'SI' then
+        begin
+          LineaDescExtra1:= LeftStr(' Marca: '+ZQ_ItemsNOMBRE_MARCA.AsString, 30);
+          LineaDescExtra2:= LeftStr(' C: '+ZQ_ItemsNOMBRE_COLOR.AsString+' / M: '+ZQ_ItemsNOMBRE_MEDIDA.AsString, 30);
+        end;
+      end;
 
       TasaAcrecentamiento:= 0;
 
@@ -459,7 +484,7 @@ begin
     end;
 
 //PASO 3: SUBTOTAL
-    resultado:= DriverFiscal.EpsonForm.FACTSUBTOTAL('P', 'Subtotal');
+    resultado:= DriverFiscal.EpsonForm.FACTSUBTOTAL('P', 'SUBTOTAL');
     if resultado <> 0 then
     begin
       DriverFiscal.EpsonForm.FACTCANCEL;
@@ -470,7 +495,7 @@ begin
     ZQ_FormaPago.First;
     while not ZQ_FormaPago.Eof do
     begin
-      DescripcionFPago:= LeftStr(ZQ_FormaPagoFORMA_PAGO_NOMBRE.AsString,25);
+      DescripcionFPago:= LeftStr(ZQ_FormaPagoFORMA_PAGO_NOMBRE.AsString, 25);
       MontoFPago:= ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat;
       CalificadorFPago:= 'T';
 
@@ -522,11 +547,10 @@ begin
     DriverFiscal.EpsonForm.ESTADO('C');
     puntoVenta:= DriverFiscal.IF_READ(4);
     //Vuelvo al estado Normal
-    resultado:=DriverFiscal.EpsonForm.ESTADO('N');
-    editParametros.Text:= puntoVenta+'-'+numeroCpb;
+    resultado:= DriverFiscal.EpsonForm.ESTADO('N');
+    lblFactura.Caption:= puntoVenta+'-'+numeroCpb;
 
 //PASO 8: INSERTAR EL NUMERO DE COMPROBANTE, PUNTO DE VENTA Y FECHA EN COMPROBANTE IMPRESO
-
    if (resultado = 0) then
    begin
     if EKModelo.iniciar_transaccion('UPDATE FACTURA',[]) then
@@ -544,7 +568,6 @@ begin
        end
      end
    end;
-
 
 //PASO 9: CORTO EL TIQUET
     DriverFiscal.EpsonForm.CORTAPAPEL;
@@ -565,10 +588,24 @@ end;
 
 
 procedure TFPrincipal.btnAuditoriaClick(Sender: TObject);
+var
+  anio, mes, dia: string;
 begin
-  audFDesde:= '120101';
-  audFHasta:= '121231';
-  audTipo:= 'T';
+  anio:= RightStr(IntToStr(YearOf(DateTimeFechaDesde.Date)), 2);
+  mes:= rellenar(IntToStr(MonthOf(DateTimeFechaDesde.Date)), '0', 2);
+  dia:= rellenar(IntToStr(DayOf(DateTimeFechaDesde.Date)), '0', 2);
+  audFDesde:= anio+mes+dia;
+
+  anio:= RightStr(IntToStr(YearOf(DateTimeFechaHasta.Date)), 2);
+  mes:= rellenar(IntToStr(MonthOf(DateTimeFechaHasta.Date)), '0', 2);
+  dia:= rellenar(IntToStr(DayOf(DateTimeFechaHasta.Date)), '0', 2);
+  audFHasta:= anio+mes+dia;
+
+  if ComboBoxTipoAuditoria.ItemIndex = 0 then
+    audTipo:= 'T'
+  else
+    audTipo:= 'D';
+
   auditoria;
 end;
 
@@ -585,6 +622,7 @@ begin
   abrirImpresora();
 end;
 
+
 procedure TFPrincipal.btnCerrarPuertoClick(Sender: TObject);
 begin
   cerrarImpresora();
@@ -594,9 +632,10 @@ end;
 procedure TFPrincipal.DriverFiscalFiscalError(ASender: TObject; PrinterCode, FiscalCode: Integer);
 begin
   if errorDriver = 5 then
-//    lblErrorDriver.Caption:= lblErrorDriver.Caption + Format(' PrinterCode: %d // FiscalCode: %d ', [PrinterCode, FiscalCode]);
+  begin
     ShowMessage(DecodificadorErrorFiscal(PrinterCode, 'PrinterCode'));
     ShowMessage(DecodificadorErrorFiscal(FiscalCode, 'FiscalCode'));
+  end
 end;
 
 
@@ -612,10 +651,10 @@ begin
 
   case DriverError of
     0..4: begin
-        lblErrorDriver.Caption:= 'Error COM/DLL';
+        lblErrorDriver.Caption:= 'Error Puerto COM / Libreria DLL';
       end;
     5: begin
-        lblErrorDriver.Caption:= 'Error Impresora: ';
+        lblErrorDriver.Caption:= 'Error Impresora';
       end;
   end;
 end;

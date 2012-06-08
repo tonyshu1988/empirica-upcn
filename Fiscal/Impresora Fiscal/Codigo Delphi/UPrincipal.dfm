@@ -1,9 +1,9 @@
 object FPrincipal: TFPrincipal
   Left = 444
-  Top = 169
+  Top = 150
   Width = 611
   Height = 493
-  Caption = 'FPrincipal'
+  Caption = 'Modulo Impresi'#243'n Fiscal'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,7 +11,7 @@ object FPrincipal: TFPrincipal
   Font.Name = 'Verdana'
   Font.Style = []
   OldCreateOrder = False
-  Visible = True
+  Position = poDesktopCenter
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -43,6 +43,19 @@ object FPrincipal: TFPrincipal
       Font.Height = -15
       Font.Name = 'Verdana'
       Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+    end
+    object lblFactura: TLabel
+      Left = 256
+      Top = 215
+      Width = 61
+      Height = 16
+      Caption = 'Factura:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
       ParentFont = False
     end
     object Panel2: TPanel
@@ -149,6 +162,37 @@ object FPrincipal: TFPrincipal
       TabOrder = 9
       OnClick = btnCerrarPuertoClick
     end
+    object DateTimeFechaDesde: TDateTimePicker
+      Left = 128
+      Top = 178
+      Width = 121
+      Height = 21
+      Date = 41068.667614293980000000
+      Time = 41068.667614293980000000
+      TabOrder = 10
+    end
+    object DateTimeFechaHasta: TDateTimePicker
+      Left = 253
+      Top = 178
+      Width = 121
+      Height = 21
+      Date = 41068.667614293980000000
+      Time = 41068.667614293980000000
+      TabOrder = 11
+    end
+    object ComboBoxTipoAuditoria: TComboBox
+      Left = 379
+      Top = 178
+      Width = 214
+      Height = 21
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 12
+      Text = 'T = Reporte total general'
+      Items.Strings = (
+        'T = Reporte total general'
+        'D = Reporte detallado')
+    end
   end
   object conexion: TZConnection
     Protocol = 'firebird-1.5'
@@ -157,7 +201,6 @@ object FPrincipal: TFPrincipal
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
-    Connected = True
     Left = 552
     Top = 256
   end
@@ -405,5 +448,42 @@ object FPrincipal: TFPrincipal
         Name = 'idcpb'
         ParamType = ptUnknown
       end>
+  end
+  object ZQ_Config: TZQuery
+    Connection = conexion
+    SQL.Strings = (
+      'select *'
+      'from configuracion_variables')
+    Params = <>
+    Left = 552
+    Top = 192
+    object ZQ_ConfigCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 50
+    end
+    object ZQ_ConfigFECHA: TDateField
+      FieldName = 'FECHA'
+    end
+    object ZQ_ConfigNUMERO: TFloatField
+      FieldName = 'NUMERO'
+    end
+    object ZQ_ConfigTEXTO: TStringField
+      FieldName = 'TEXTO'
+      Size = 100
+    end
+    object ZQ_ConfigNIVEL: TSmallintField
+      FieldName = 'NIVEL'
+    end
+    object ZQ_ConfigGRUPO: TStringField
+      FieldName = 'GRUPO'
+      Size = 50
+    end
+    object ZQ_ConfigDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
+    end
+    object ZQ_ConfigGRAFICO: TBlobField
+      FieldName = 'GRAFICO'
+    end
   end
 end
