@@ -202,7 +202,7 @@ object FPrincipal: TFPrincipal
     Password = 'masterkey'
     AutoCommit = False
     Left = 552
-    Top = 256
+    Top = 248
   end
   object EKIni: TEKIni
     Archivo = 'config.ini'
@@ -452,8 +452,8 @@ object FPrincipal: TFPrincipal
   object ZQ_Config: TZQuery
     Connection = conexion
     SQL.Strings = (
-      'select *'
-      'from configuracion_variables')
+      'select c.clave, c.fecha, c.numero, c.texto'
+      'from configuracion_variables  c')
     Params = <>
     Left = 552
     Top = 192
@@ -470,20 +470,6 @@ object FPrincipal: TFPrincipal
     object ZQ_ConfigTEXTO: TStringField
       FieldName = 'TEXTO'
       Size = 100
-    end
-    object ZQ_ConfigNIVEL: TSmallintField
-      FieldName = 'NIVEL'
-    end
-    object ZQ_ConfigGRUPO: TStringField
-      FieldName = 'GRUPO'
-      Size = 50
-    end
-    object ZQ_ConfigDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 1000
-    end
-    object ZQ_ConfigGRAFICO: TBlobField
-      FieldName = 'GRAFICO'
     end
   end
 end
