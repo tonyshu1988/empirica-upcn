@@ -860,9 +860,10 @@ begin
     EKSuma_Factura.RecalcAll;
     totalCancelarFacturas:= EKSuma_Factura.SumCollection[0].SumValue;
 
-    if totalCancelarFacturas <> totalFormaPago then
+    if totalFormaPago > totalCancelarFacturas then
     begin
-      Application.MessageBox(pchar('El monto total a cancelar de las facturas ('+FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas)+') es distinto al monto total de la forma de pago ('+FormatFloat('$ ###,###,###,##0.00', totalFormaPago)+'), por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+//      Application.MessageBox(pchar('El monto total a cancelar de las facturas ('+FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas)+') es distinto al monto total de la forma de pago ('+FormatFloat('$ ###,###,###,##0.00', totalFormaPago)+'), por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox(pchar('El monto de la forma de pago ('+FormatFloat('$ ###,###,###,##0.00', totalFormaPago)+') es superior al total a cancelar de las facturas ('+FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas)+'), por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
       DBGridEditar_Fpago.SetFocus;
       exit;
     end;
