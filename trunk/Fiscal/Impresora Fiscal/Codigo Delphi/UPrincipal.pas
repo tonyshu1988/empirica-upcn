@@ -53,6 +53,7 @@ type
     lblErrorDriver: TLabel;
     btnAbrirPuerto: TBitBtn;
     btnCerrarPuerto: TBitBtn;
+    ZQ_UpdateFactura: TZQuery;
     procedure FormCreate(Sender: TObject);
     procedure leerParametros();
     procedure leerArchivoIni();
@@ -120,7 +121,7 @@ begin
   db_user:= EKIni.Ini.ReadString('DB', 'db_user', 'SYSDBA');
   db_pass:= EKIni.Ini.ReadString('DB', 'db_pass', 'masterkey');
 
-  if_puerto:= EKIni.Ini.ReadString('IF', 'if_puerto', 'COM2');
+  if_puerto:= EKIni.Ini.ReadString('IF', 'if_puerto', 'COM1');
   if_velocidad:= EKIni.Ini.ReadInteger('IF', 'if_velocidad', 9600);
 
   conexion.Database:= db_name;
@@ -362,7 +363,7 @@ begin
     if (ZQ_FacturaNOMBRE_TIPO_DOC.IsNull) or (ZQ_FacturaNOMBRE_TIPO_DOC.AsString = '') then
       TpoDocComprador:= 'DNI'
     else
-      TpoDocComprador:= ZQ_FacturaNOMBRE_TIPO_DOC.AsString;
+      TpoDocComprador:= LeftStr(ZQ_FacturaNOMBRE_TIPO_DOC.AsString,6);
 
     if (ZQ_FacturaNUMERO_DOC.IsNull) or (ZQ_FacturaNUMERO_DOC.AsString = '') then
       NroDocComprador:= '11111111'
@@ -412,7 +413,8 @@ begin
     ZQ_Items.First;
     while not ZQ_Items.Eof do
     begin
-      DescripcionProducto:= ZQ_ItemsNOMBRE_PRODUCTO.AsString;
+      //Max de 20 caracteres
+      DescripcionProducto:= LeftStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,20);
 
       Cantidad:= ZQ_ItemsCANTIDAD.AsFloat;
 
@@ -429,9 +431,9 @@ begin
 
       ImpuestosInternos:= 0;
 
-      LineaDescExtra1:= 'Matias sos groso';//char(127);
-      LineaDescExtra2:= char(127);
-      LineaDescExtra3:= char(127);
+      LineaDescExtra1:= MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,21,51);
+      LineaDescExtra2:= MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,51,81);
+      LineaDescExtra3:= MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,81,121);
 
       TasaAcrecentamiento:= 0;
 
@@ -464,7 +466,7 @@ begin
     ZQ_FormaPago.First;
     while not ZQ_FormaPago.Eof do
     begin
-      DescripcionFPago:= ZQ_FormaPagoFORMA_PAGO_NOMBRE.AsString;
+      DescripcionFPago:= LeftStr(ZQ_FormaPagoFORMA_PAGO_NOMBRE.AsString,25);
       MontoFPago:= ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat;
       CalificadorFPago:= 'T';
 
@@ -523,6 +525,21 @@ begin
 //    If Not objComprobantes.UpdatePosTicket(vPOS, vNumTicket, pLote) Then
 //        MsgBox "Error al intentar grabar el punto de Vta y numero de ticket otorgado por la impresora fiscal."
 //    End If
+    if EKModelo.iniciar_transaccion('UPDATE FACTURA',[]) then
+     begin
+      ZQ_UpdateFactura.Close;
+      ZQ_UpdateFactura.ParamByName('numcpb').AsString:=numeroCpb;
+      ZQ_UpdateFactura.ParamByName('pventa').AsString:=puntoVenta;
+      ZQ_UpdateFactura.ParamByName('fimpresa').AsDateTime:=EKModelo.FechayHora();
+      ZQ_UpdateFactura.ParamByName('idcpb').AsString:=id_cpb;
+      ZQ_UpdateFactura.ExecSQL;
+
+      if not EKModelo.finalizar_transaccion('UPDATE FACTURA') then
+       begin
+          //errererrrorr
+       end
+     end;
+
 
 //PASO 9: CORTO EL TIQUET
     DriverFiscal.EpsonForm.CORTAPAPEL;
