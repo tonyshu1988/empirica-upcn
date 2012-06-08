@@ -1,12 +1,12 @@
 unit UPrincipal;
 
-interface
+interface             //4597417
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, EKIni, ZConnection, EKModelo, StdCtrls, ExtCtrls, OleCtrls, StrUtils,
   DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, OCXFISLib_TLB,
-  Buttons, ComCtrls;
+  Buttons, ComCtrls, Grids, DBGrids;
 
 type
   TFPrincipal = class(TForm)
@@ -55,18 +55,14 @@ type
     btnCerrarPuerto: TBitBtn;
     ZQ_UpdateFactura: TZQuery;
     ZQ_Config: TZQuery;
-    ZQ_ConfigCLAVE: TStringField;
-    ZQ_ConfigFECHA: TDateField;
-    ZQ_ConfigNUMERO: TFloatField;
-    ZQ_ConfigTEXTO: TStringField;
-    ZQ_ConfigNIVEL: TSmallintField;
-    ZQ_ConfigGRUPO: TStringField;
-    ZQ_ConfigDESCRIPCION: TStringField;
-    ZQ_ConfigGRAFICO: TBlobField;
     lblFactura: TLabel;
     DateTimeFechaDesde: TDateTimePicker;
     DateTimeFechaHasta: TDateTimePicker;
     ComboBoxTipoAuditoria: TComboBox;
+    ZQ_ConfigCLAVE: TStringField;
+    ZQ_ConfigFECHA: TDateField;
+    ZQ_ConfigNUMERO: TFloatField;
+    ZQ_ConfigTEXTO: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure leerParametros();
     procedure leerArchivoIni();
@@ -92,7 +88,8 @@ type
     preview: boolean;
     id_cpb, comando, impresora, audTipo, audFDesde, audFHasta: string;
     resultado: integer;
-    errorDriver, errorImpresora: integer;
+    errorDriver: integer;
+    productoDetallado: boolean;
   public
     { Public declarations }
   end;
@@ -111,14 +108,19 @@ uses IniFiles, UUtilidades, Math, DateUtils;
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
-  DateTimeFechaDesde.Date:= StartOfTheMonth(EKModelo.Fecha);
-  DateTimeFechaHasta.Date:= EndOfTheMonth(EKModelo.Fecha);
+  leerArchivoIni;
+
+  ZQ_Config.Close;
+  EKModelo.abrir(ZQ_Config);
+  configurarBoolean(ZQ_Config, 'clave', 'texto', 'ticketFacturaDetallada', 'SI', productoDetallado);
 
   ZQ_Factura.Close;
   ZQ_Items.Close;
   ZQ_FormaPago.Close;
 
-  leerArchivoIni;
+  DateTimeFechaDesde.Date:= StartOfTheMonth(EKModelo.Fecha);
+  DateTimeFechaHasta.Date:= EndOfTheMonth(EKModelo.Fecha);
+
   abrirImpresora();
   leerParametros;
 end;
@@ -328,9 +330,6 @@ begin
   if impresora = '' then
     exit;
 
-  ZQ_Config.Close;
-  ZQ_Config.Open;
-
   ZQ_Factura.Close;
   ZQ_Factura.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
   ZQ_Factura.Open;
@@ -455,13 +454,10 @@ begin
       LineaDescExtra2:= char(127);
       LineaDescExtra3:= char(127);
 
-      if ZQ_Config.Locate('CLAVE', vararrayof(['ticketFacturaDetallada']), []) then
+      if productoDetallado then
       begin
-        if ZQ_ConfigTEXTO.AsString = 'SI' then
-        begin
-          LineaDescExtra1:= LeftStr(' Marca: '+ZQ_ItemsNOMBRE_MARCA.AsString, 30);
-          LineaDescExtra2:= LeftStr(' C: '+ZQ_ItemsNOMBRE_COLOR.AsString+' / M: '+ZQ_ItemsNOMBRE_MEDIDA.AsString, 30);
-        end;
+        LineaDescExtra1:= LeftStr(' Marca: '+ZQ_ItemsNOMBRE_MARCA.AsString, 30);
+        LineaDescExtra2:= LeftStr(' C: '+ZQ_ItemsNOMBRE_COLOR.AsString+' / M: '+ZQ_ItemsNOMBRE_MEDIDA.AsString, 30);
       end;
 
       TasaAcrecentamiento:= 0;
