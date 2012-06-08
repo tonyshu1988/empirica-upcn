@@ -100,7 +100,7 @@ Conditionals=
 DebugSourceDirs=
 UsePackages=0
 [Parameters]
-RunParams=
+RunParams=-cZ -p
 HostApplication=
 Launcher=
 UseLauncher=0
@@ -134,5 +134,3 @@ OriginalFilename=
 ProductName=
 ProductVersion=1.0.0.0
 Comments=
-[Excluded Packages]
-c:\program files (x86)\borland\delphi7\Projects\Bpl\ComparerZeosD7.bpl=Database Comparer VCL ZEOS
