@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
   Left = 444
-  Top = 183
+  Top = 169
   Width = 611
   Height = 493
   Caption = 'FPrincipal'
@@ -382,8 +382,8 @@ object FPrincipal: TFPrincipal
         Name = 'idcpb'
         ParamType = ptUnknown
       end>
-    Left = 400
-    Top = 256
+    Left = 472
+    Top = 192
     ParamData = <
       item
         DataType = ftUnknown

@@ -98,6 +98,7 @@ uses IniFiles, UUtilidades, Math;
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
+
   ZQ_Factura.Close;
   ZQ_Items.Close;
   ZQ_FormaPago.Close;
@@ -408,6 +409,9 @@ begin
       DriverFiscal.EpsonForm.FACTCANCEL;
       exit;
     end;
+     //FRULA CARIADA
+
+
 
 //PASO 2: CARGAR ITEMS
     ZQ_Items.First;
@@ -431,9 +435,9 @@ begin
 
       ImpuestosInternos:= 0;
 
-      LineaDescExtra1:= MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,21,51);
-      LineaDescExtra2:= MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,51,81);
-      LineaDescExtra3:= MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,81,121);
+      LineaDescExtra1:= char(127);//MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,21,51);
+      LineaDescExtra2:= char(127);//MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,51,81);
+      LineaDescExtra3:= char(127);//MidStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString,81,121);
 
       TasaAcrecentamiento:= 0;
 
@@ -481,28 +485,28 @@ begin
     end;
 
 //PASO 5: DISCRIMINACION IVA  revisar esto
-    If TipoLetra = 'Alfajor' Then
-    begin
-      DescripcionFPago:= 'IVA 21 %';
-      MontoFPago:= 0;
-      CalificadorFPago:= 'T';
-      resultado:= DriverFiscal.EpsonForm.FACTPAGO(DescripcionFPago, MontoFPago, CalificadorFPago);
-      if resultado <> 0 then
-      begin
-        DriverFiscal.EpsonForm.FACTCANCEL;
-        exit;
-      end;
-
-      DescripcionFPago:= 'CONCEPTOS NO GRABADOS';
-      MontoFPago:= 0;
-      CalificadorFPago:= 'T';
-      resultado:= DriverFiscal.EpsonForm.FACTPAGO(DescripcionFPago, MontoFPago, CalificadorFPago);
-      if resultado <> 0 then
-      begin
-        DriverFiscal.EpsonForm.FACTCANCEL;
-        exit;
-      end;
-    end;
+//    If TipoLetra = 'Alfajor' Then
+//    begin
+//      DescripcionFPago:= 'IVA 21 %';
+//      MontoFPago:= 0;
+//      CalificadorFPago:= 'T';
+//      resultado:= DriverFiscal.EpsonForm.FACTPAGO(DescripcionFPago, MontoFPago, CalificadorFPago);
+//      if resultado <> 0 then
+//      begin
+//        DriverFiscal.EpsonForm.FACTCANCEL;
+//        exit;
+//      end;
+//
+//      DescripcionFPago:= 'CONCEPTOS NO GRABADOS';
+//      MontoFPago:= 0;
+//      CalificadorFPago:= 'T';
+//      resultado:= DriverFiscal.EpsonForm.FACTPAGO(DescripcionFPago, MontoFPago, CalificadorFPago);
+//      if resultado <> 0 then
+//      begin
+//        DriverFiscal.EpsonForm.FACTCANCEL;
+//        exit;
+//      end;
+//    end;
 
 //PASO 6: CERRAR FACTURA
     resultado:= DriverFiscal.EpsonForm.FACTCIERRA(TipoDocumento, TipoLetra, 'TOTAL');
@@ -518,13 +522,13 @@ begin
     DriverFiscal.EpsonForm.ESTADO('C');
     puntoVenta:= DriverFiscal.IF_READ(4);
     //Vuelvo al estado Normal
-    DriverFiscal.EpsonForm.ESTADO('N');
+    resultado:=DriverFiscal.EpsonForm.ESTADO('N');
     editParametros.Text:= puntoVenta+'-'+numeroCpb;
 
 //PASO 8: INSERTAR EL NUMERO DE COMPROBANTE, PUNTO DE VENTA Y FECHA EN COMPROBANTE IMPRESO
-//    If Not objComprobantes.UpdatePosTicket(vPOS, vNumTicket, pLote) Then
-//        MsgBox "Error al intentar grabar el punto de Vta y numero de ticket otorgado por la impresora fiscal."
-//    End If
+
+   if (resultado = 0) then
+   begin
     if EKModelo.iniciar_transaccion('UPDATE FACTURA',[]) then
      begin
       ZQ_UpdateFactura.Close;
@@ -538,7 +542,8 @@ begin
        begin
           //errererrrorr
        end
-     end;
+     end
+   end;
 
 
 //PASO 9: CORTO EL TIQUET
