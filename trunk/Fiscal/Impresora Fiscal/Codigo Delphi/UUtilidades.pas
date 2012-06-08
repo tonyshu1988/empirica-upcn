@@ -3,8 +3,7 @@ unit UUtilidades;
 interface
 
 uses SysUtils, Math, ZDataset, DateUtils, Messages, Variants, Classes, Dialogs,
-  StdCtrls, DB, strutils, Jpeg, Graphics, DBGrids;
-
+     StdCtrls, DB, strutils, Jpeg, Graphics, DBGrids;
 
 function SonTodasLetras(cad: string): Boolean;
 function sonTodosNumeros(cad: string): Boolean;
@@ -31,12 +30,33 @@ implementation
 const
   TablaMul: array[1..10] of Integer = (5, 4, 3, 2, 7, 6, 5, 4, 3, 2); {Tabla Arbitraria}
 
+//Delvuelve una cadena rellena de tantos caracteres como indique cantidad a la izquierda
+
+function rellenar(texto: string; caracter: Char; cantidad: integer): string;
+var
+  longitud, i: integer;
+  dev, con: string;
+begin
+  con:= '';
+  longitud:= length(texto);
+  if (cantidad > 0) and ((cantidad - longitud) > 0) then
+  begin
+    for i:= 1 to (cantidad - longitud) do
+      con:= con + caracter;
+
+    dev:= con + texto;
+  end
+  else
+    dev:= texto;
+
+  result:= dev;
+end;
+
 function DejarSoloNumeros(Cadena: string): string;
 var
   i, cant, aux: integer;
   cad, numero: string;
 begin
-
   cad:= Cadena;
   aux:= 0;
 
@@ -44,8 +64,6 @@ begin
   begin
     i:= 1;
     cant:= length(cad);
-
-
     while length(cad) >= aux do
     begin
       if (cad[i] in ['0'..'9']) then
@@ -54,7 +72,6 @@ begin
       i:= i + 1;
       aux:= aux + 1;
     end;
-
   end;
 
   Result:= numero;
@@ -65,10 +82,8 @@ function DecodificadorErrorFiscal(Codigo: integer; TipoError: string): string;
 var
   decimal, quociente, resto: integer;
   binario, strresto, strquociente, bit, TipoCodigo, Error: string;
-
   aux: integer;
 begin
-
   decimal:= Codigo;
   TipoCodigo:= TipoError; //'PrinterCode'// DriverCode
 
@@ -80,11 +95,15 @@ begin
     binario:= strquociente + binario;
     quociente:= quociente div 2;
   end;
+
   str(quociente, strquociente);
-  binario:= strquociente + binario;
+  binario:= rellenar((strquociente + binario), '0', 16);
+  error:= TipoError+': '+IntToStr(decimal);
+  error:= error+#13+'----------------------------------------------------------';
+  error:= error+#13+'Valor BINARIO: '+binario;
+  error:= error+#13+'----------------------------------------------------------';
 
   aux:= Length(binario);
-
   while aux >= 0 do
   begin
     aux:= aux - 1;
@@ -94,57 +113,49 @@ begin
     if (bit = '1') then
     begin
       codigo:= (aux - 16) * -1;
-
       if TipoCodigo = 'PrinterCode' then
       begin
-
         case codigo of
-          1: Error:= Error + '    -No se Usa-';
-          2: Error:= Error + '    -No se Usa-';
-          3: Error:= Error + '    -Error / falla de impresora-';
-          4: Error:= Error + '    -Impresora fuera de línea-';
-          5: Error:= Error + '    -Poco papel para la cinta de auditoria (solo impresoras de Ticket)-';
-          6: Error:= Error + '    -Poco papel para comprobantes o Tiques (solo impresoras de Ticket)-';
-          7: Error:= Error + '    -Buffer de impresora lleno-';
-          8: Error:= Error + '    -Buffer de impresora vacío-';
-          9: Error:= Error + '    -Toma de hojas sueltas frontal preparada-';
-          10: Error:= Error + '   -Hoja suelta frontal preparada-';
-          11: Error:= Error + '   -Toma de hojas para validación preparada-';
-          12: Error:= Error + '   -Papel para validación presente-';
-          13: Error:= Error + '   -Gaveta de dinero 1 o 2 abierto (solo impresoras de Ticket)-';
-          14: Error:= Error + '   -Sin uso-';
-          15: Error:= Error + '   -Impresora sin papel-';
-          16: Error:= Error + '   -OR lógico de los bits 1 al 7 y 15-';
+           1: error:= error+#13+'Bit  1: Sin Uso.';
+           2: error:= error+#13+'Bit  2: Sin Uso.';
+           3: error:= error+#13+'Bit  3: Error/falla de impresora.';
+           4: error:= error+#13+'Bit  4: Impresora fuera de línea.';
+           5: error:= error+#13+'Bit  5: Poco papel para la cinta de auditoria.';
+           6: error:= error+#13+'Bit  6: Poco papel para comprobantes o Tiques.';
+           7: error:= error+#13+'Bit  7: Buffer de impresora lleno.';
+           8: error:= error+#13+'Bit  8: Buffer de impresora vacío.';
+           9: error:= error+#13+'Bit  9: Toma de hojas sueltas frontal preparada.';
+          10: error:= error+#13+'Bit 10: Hoja suelta frontal preparada.';
+          11: error:= error+#13+'Bit 11: Toma de hojas para validación preparada.';
+          12: error:= error+#13+'Bit 12: Papel para validación presente.';
+          13: error:= error+#13+'Bit 13: Gaveta de dinero 1 o 2 abierto.';
+          14: error:= error+#13+'Bit 14: Sin uso.';
+          15: error:= error+#13+'Bit 15: Impresora sin papel.';
+          16: error:= error+#13+'Bit 16: OR lógico de los bits 1 al 7 y 15.';
         end;
-
       end
       else
       begin
-
         case codigo of
-          1: Error:= Error + '    -Error de comprobación de Memoria Fiscal. Junto con el Bit 8 indica que la memoria Fiscal está llena-';
-          2: Error:= Error + '    -Error de comprobación de la Memoria de Trabajo-';
-          3: Error:= Error + '    -Poca batería-';
-          4: Error:= Error + '    -Comando no reconocido-';
-          5: Error:= Error + '    -Campo de datos inválido-';
-          6: Error:= Error + '    -Comando no válido para estado fiscal-';
-          7: Error:= Error + '    -Desbordamiento de Totales-';
-          8: Error:= Error + '    -Memoria Fiscal llena-';
-          9: Error:= Error + '    -Memoria Fiscal casi llena-';
-          10: Error:= Error + '   -Impresor Fiscal Certificado-';
-          11: Error:= Error + '   -Impresor Fiscal está Fiscalizado. Si el Impresor fiscal no esta certificado Bit(10), la Impresora esta Bloqueada por Software-';
-          12: Error:= Error + '   -Necesita que se haga un cierre de la Jornada Fiscal o se han enviado el número máximo de ítems en un documento Fiscal y se necesita el cierre del Ticket-';
-          13: Error:= Error + '   -Documento Fiscal abierto-';
-          14: Error:= Error + '   -Documento Fiscal abierto o documento no fiscal abierto que se emite por el rollo de papel-';
-          15: Error:= Error + '   -Sin Uso-';
-          16: Error:= Error + '   -OR lógico de los bits 1 - 9-';
+           1: error:= error+#13+'Bit  1: Error de comprobación de Memoria Fiscal.';
+           2: error:= error+#13+'Bit  2: Error de comprobación de la Memoria de Trabajo.';
+           3: error:= error+#13+'Bit  3: Poca batería.';
+           4: error:= error+#13+'Bit  4: Comando no reconocido.';
+           5: error:= error+#13+'Bit  5: Campo de datos inválido.';
+           6: error:= error+#13+'Bit  6: Comando no válido para estado fiscal.';
+           7: error:= error+#13+'Bit  7: Desbordamiento de Totales.';
+           8: error:= error+#13+'Bit  8: Memoria Fiscal llena.';
+           9: error:= error+#13+'Bit  9: Memoria Fiscal casi llena.';
+          10: error:= error+#13+'Bit 10: Impresor Fiscal Certificado.';
+          11: error:= error+#13+'Bit 11: Impresor Fiscal Fiscalizado.';
+          12: error:= error+#13+'Bit 12: Hacer cierre Jornada Fiscal o Número máximo de ítems.';
+          13: error:= error+#13+'Bit 13: Documento Fiscal abierto.';
+          14: error:= error+#13+'Bit 14: Documento Fiscal abierto o Documento No Fiscal abierto.';
+          15: error:= error+#13+'Bit 15: Sin Uso.';
+          16: error:= error+#13+'Bit 16: OR lógico de los bits 1 - 9.';
         end;
-
-
       end;
-
     end;
-
   end;
 
   Result:= Error;
@@ -451,30 +462,6 @@ begin
   match:
   Result:= True;
 end;
-
-
-//Delvuelve una cadena rellena de tantos caracteres como indique cantidad a la izquierda
-
-function rellenar(texto: string; caracter: Char; cantidad: integer): string;
-var
-  longitud, i: integer;
-  dev, con: string;
-begin
-  con:= '';
-  longitud:= length(texto);
-  if (cantidad > 0) and ((cantidad - longitud) > 0) then
-  begin
-    for i:= 1 to (cantidad - longitud) do
-      con:= con + caracter;
-
-    dev:= con + texto;
-  end
-  else
-    dev:= texto;
-
-  result:= dev;
-end;
-
 
 //devuelve el indice en la grilla de la columna pasada como parametro
 
