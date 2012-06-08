@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 438
-  Top = 177
+  Left = 444
+  Top = 183
   Width = 611
   Height = 493
   Caption = 'FPrincipal'
@@ -153,7 +153,7 @@ object FPrincipal: TFPrincipal
   object conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = '127.0.0.1'
-    Database = 'C:\SISTEMAS\SiGeFa\Bases\SIGEFA LOPEZ.FDB'
+    Database = 'C:\SISTEMAS\SiGeFa\Bases\SiGeFa.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
@@ -351,5 +351,59 @@ object FPrincipal: TFPrincipal
     object ZQ_FormaPagoFORMA_PAGO_IMPORTE: TFloatField
       FieldName = 'FORMA_PAGO_IMPORTE'
     end
+  end
+  object ZQ_UpdateFactura: TZQuery
+    Connection = conexion
+    SQL.Strings = (
+      'update comprobante c'
+      
+        'set c.numero_cpb=:numcpb,c.punto_venta=:pventa,c.fecha_impresa=:' +
+        'fimpresa'
+      'where c.id_comprobante=:idcpb'
+      '')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'numcpb'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pventa'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fimpresa'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'idcpb'
+        ParamType = ptUnknown
+      end>
+    Left = 400
+    Top = 256
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'numcpb'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'pventa'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'fimpresa'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'idcpb'
+        ParamType = ptUnknown
+      end>
   end
 end
