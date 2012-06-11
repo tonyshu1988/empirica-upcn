@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 444
-  Top = 150
+  Left = 500
+  Top = 205
   Width = 611
   Height = 493
   Caption = 'Modulo Impresi'#243'n Fiscal'
@@ -12,6 +12,7 @@ object FPrincipal: TFPrincipal
   Font.Style = []
   OldCreateOrder = False
   Position = poDesktopCenter
+  Visible = True
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -201,6 +202,7 @@ object FPrincipal: TFPrincipal
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
+    Connected = True
     Left = 552
     Top = 248
   end
@@ -425,8 +427,8 @@ object FPrincipal: TFPrincipal
         Name = 'idcpb'
         ParamType = ptUnknown
       end>
-    Left = 472
-    Top = 192
+    Left = 384
+    Top = 248
     ParamData = <
       item
         DataType = ftUnknown
@@ -455,8 +457,8 @@ object FPrincipal: TFPrincipal
       'select c.clave, c.fecha, c.numero, c.texto'
       'from configuracion_variables  c')
     Params = <>
-    Left = 552
-    Top = 192
+    Left = 384
+    Top = 304
     object ZQ_ConfigCLAVE: TStringField
       FieldName = 'CLAVE'
       Size = 50
@@ -470,6 +472,39 @@ object FPrincipal: TFPrincipal
     object ZQ_ConfigTEXTO: TStringField
       FieldName = 'TEXTO'
       Size = 100
+    end
+  end
+  object ZQ_Config_Fiscal: TZQuery
+    Connection = conexion
+    SQL.Strings = (
+      'select c.*'
+      'from configuracion_fiscal  c'
+      'where c.predeterminada='#39'S'#39)
+    Params = <>
+    Left = 384
+    Top = 360
+    object ZQ_Config_FiscalID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object ZQ_Config_FiscalMARCA: TStringField
+      FieldName = 'MARCA'
+    end
+    object ZQ_Config_FiscalMODELO: TStringField
+      FieldName = 'MODELO'
+      Size = 50
+    end
+    object ZQ_Config_FiscalPUERTO: TStringField
+      FieldName = 'PUERTO'
+      Size = 10
+    end
+    object ZQ_Config_FiscalVELOCIDAD: TStringField
+      FieldName = 'VELOCIDAD'
+      Size = 10
+    end
+    object ZQ_Config_FiscalPREDETERMINADA: TStringField
+      FieldName = 'PREDETERMINADA'
+      Size = 1
     end
   end
 end
