@@ -202,7 +202,6 @@ object FPrincipal: TFPrincipal
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
-    Connected = True
     Left = 552
     Top = 248
   end
