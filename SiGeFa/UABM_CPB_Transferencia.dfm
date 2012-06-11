@@ -1055,6 +1055,13 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
             Title.Alignment = taCenter
             Title.Caption = 'Anulado'
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_COMPROBANTE'
+            Title.Alignment = taCenter
+            Title.Caption = 'ID CPB'
+            Visible = True
           end>
       end
       object PanelEdicion: TPanel
@@ -2394,6 +2401,10 @@ object FABM_CPB_Transferencia: TFABM_CPB_Transferencia
       end
       item
         TituloColumna = 'Anulado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID CPB'
         Visible = True
       end>
     AltoTituloColumna = 15
