@@ -403,7 +403,9 @@ object FPrincipal: TFPrincipal
       
         'set c.numero_cpb=:numcpb,c.punto_venta=:pventa,c.fecha_impresa=:' +
         'fimpresa'
-      'where c.id_comprobante=:idcpb'
+      
+        'where (c.id_comprobante=:idcpb)and(c.punto_venta is null)and(c.n' +
+        'umero_cpb is null)'
       '')
     Params = <
       item
