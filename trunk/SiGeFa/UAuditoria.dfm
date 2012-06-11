@@ -1,6 +1,6 @@
 object FAuditoria: TFAuditoria
-  Left = 299
-  Top = 173
+  Left = 282
+  Top = 126
   Width = 900
   Height = 629
   Caption = 'Auditoria'
@@ -20,15 +20,15 @@ object FAuditoria: TFAuditoria
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 892
-    Height = 550
+    Width = 884
+    Height = 539
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelGrilla: TPanel
       Left = 0
-      Top = 333
-      Width = 892
+      Top = 322
+      Width = 884
       Height = 217
       Align = alBottom
       BevelOuter = bvNone
@@ -43,7 +43,7 @@ object FAuditoria: TFAuditoria
       object DBGridAudDetallada: TDBGrid
         Left = 5
         Top = 5
-        Width = 882
+        Width = 874
         Height = 207
         Align = alClient
         Color = 16112578
@@ -105,8 +105,8 @@ object FAuditoria: TFAuditoria
     object Panel1: TPanel
       Left = 0
       Top = 32
-      Width = 892
-      Height = 301
+      Width = 884
+      Height = 290
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -115,8 +115,8 @@ object FAuditoria: TFAuditoria
       object DBGridAudGeneral: TDBGrid
         Left = 237
         Top = 5
-        Width = 650
-        Height = 195
+        Width = 642
+        Height = 184
         Align = alClient
         Color = 16112578
         DataSource = DS_AudGeneral
@@ -209,8 +209,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosTabla: TDBGrid
         Left = 5
-        Top = 216
-        Width = 882
+        Top = 205
+        Width = 874
         Height = 40
         Align = alBottom
         Color = 12779258
@@ -229,7 +229,7 @@ object FAuditoria: TFAuditoria
         Left = 5
         Top = 5
         Width = 232
-        Height = 195
+        Height = 184
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alLeft
         Color = 16112578
@@ -262,8 +262,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosProducto: TDBGrid
         Left = 5
-        Top = 256
-        Width = 882
+        Top = 245
+        Width = 874
         Height = 40
         Align = alBottom
         Color = 16112578
@@ -334,14 +334,14 @@ object FAuditoria: TFAuditoria
       end
       object Panel3: TPanel
         Left = 5
-        Top = 200
-        Width = 882
+        Top = 189
+        Width = 874
         Height = 16
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 4
         DesignSize = (
-          882
+          874
           16)
         object lblFiltro: TLabel
           Left = 235
@@ -366,7 +366,7 @@ object FAuditoria: TFAuditoria
     object Panel2: TPanel
       Left = 0
       Top = 0
-      Width = 892
+      Width = 884
       Height = 32
       Align = alTop
       BevelOuter = bvNone
@@ -475,7 +475,7 @@ object FAuditoria: TFAuditoria
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1097,12 +1097,10 @@ object FAuditoria: TFAuditoria
     Top = 64
   end
   object ZQ_ComboUsuario: TZQuery
+    Connection = DM.Conexion
     SQL.Strings = (
-      'select distinct u.usuario, u.nombre, u.db_usr'
-      'from usuarios u'
-      'left join permisos p on (u.usuario = p.usuario)'
-      'left join aplicaciones a on (p.clave_ap = a.clave)'
-      'where a.aplicacion = '#39'ADMINISTRATIVO'#39)
+      'select distinct z.user_name'
+      'from z_sinc_tabla z')
     Params = <>
     Left = 376
     Top = 120
@@ -1232,8 +1230,9 @@ object FAuditoria: TFAuditoria
   object EKLlenarCombo1: TEKLlenarCombo
     dataset = ZQ_ComboUsuario
     combo = cBoxUsuarios
-    CampoClave = 'db_usr'
-    CampoVer = 'nombre'
+    OnCambio = EKLlenarCombo1Cambio
+    CampoClave = 'user_name'
+    CampoVer = 'user_name'
     Left = 480
     Top = 120
   end

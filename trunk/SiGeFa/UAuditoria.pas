@@ -119,6 +119,7 @@ type
     procedure buscarProducto();
     procedure pUpItem_QuitarFiltroClick(Sender: TObject);
     procedure pUpItem_FiltrarClaveClick(Sender: TObject);
+    procedure EKLlenarCombo1Cambio(valor: String);
   private
     { Private declarations }
   public
@@ -156,7 +157,8 @@ begin
   DateTimeFecha.Date:= dm.ekModelo.Fecha();
 //  ZQ_User.Close;
 //  ZQ_User.Open;
-//  EKLlenarCombo1.CargarCombo;
+
+  EKLlenarCombo1.CargarCombo;
 
   CD_Tablas.Active := false;
   CD_Tablas.CreateDataSet;
@@ -332,8 +334,8 @@ begin
   end
   else
   begin
-//    ZQ_AudGeneral.ParamByName('todos_usuario').Clear;
-//    ZQ_AudGeneral.ParamByName('usuario').AsString:= UpperCase(ISLlenarCombo1.SelectClave);
+    ZQ_AudGeneral.ParamByName('todos_usuario').Clear;
+    ZQ_AudGeneral.ParamByName('usuario').AsString:= UpperCase(EKLlenarCombo1.SelectClave);
   end;
 
   //TABLA
@@ -428,6 +430,9 @@ end;
 
 procedure TFAuditoria.btnEliminarAuditoriaClick(Sender: TObject);
 begin
+  if (application.MessageBox(pchar('¿Desea eliminar la auditoria seleccionada?'), 'Auditoria', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+   exit;
+
   if dm.ekModelo.iniciar_transaccion(Transaccion_Audit, []) then
   begin
     try
@@ -453,8 +458,8 @@ begin
       end
       else
       begin
-//        ZQ_EliminarAuditoria.ParamByName('no_usuario').Clear;
-//        ZQ_EliminarAuditoria.ParamByName('usuario').AsString:= UpperCase(ISLlenarCombo1.SelectClave);
+        ZQ_EliminarAuditoria.ParamByName('no_usuario').Clear;
+        ZQ_EliminarAuditoria.ParamByName('usuario').AsString:= UpperCase(EKLlenarCombo1.SelectClave);
       end;
 
       //Parametro OPERACION
@@ -542,6 +547,14 @@ begin
   ZQ_AudGeneral.Filtered:= true;
   ZQ_AudGeneral.First;
   lblFiltro.Caption:= 'Filtro: '+ZQ_AudGeneralKEY_FIELD.AsString+' = '+clave;
+end;
+
+
+
+
+procedure TFAuditoria.EKLlenarCombo1Cambio(valor: String);
+begin
+  buscarAudotoria();
 end;
 
 end.
