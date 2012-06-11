@@ -63,7 +63,8 @@ uses
   UReimpresionComprobantes in 'UReimpresionComprobantes.pas' {FReimpresionComprobantes},
   UBuscarComprobante in 'UBuscarComprobante.pas' {FBuscarComprobante},
   UABM_PersonasPuntos in 'UABM_PersonasPuntos.pas' {FABM_PersonasPuntos},
-  UConsulta_Precios in 'UConsulta_Precios.pas' {FConsulta_Precios};
+  UConsulta_Precios in 'UConsulta_Precios.pas' {FConsulta_Precios},
+  UCompararStock in 'UCompararStock.pas' {FCompararStock};
 
 {$R *.res}
 
