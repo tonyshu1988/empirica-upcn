@@ -138,7 +138,7 @@ begin
   DateTimeFechaHasta.Date:= EndOfTheMonth(EKModelo.Fecha);
 
   abrirImpresora();
-  leerParametros();
+  //leerParametros();
 end;
 
 
