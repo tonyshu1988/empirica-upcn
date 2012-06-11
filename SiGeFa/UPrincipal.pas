@@ -252,7 +252,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria,
   UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging,
   UEstadisticaVentas, UReimpresionComprobantes, UABM_PersonasPuntos,
-  UConsulta_Precios, DateUtils;
+  UConsulta_Precios, DateUtils, UCompararStock;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -772,7 +772,8 @@ end;
 
 procedure TFPrincipal.AAuditoriaExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFAuditoria, FAuditoria);
+//  EKVentanas1.Abrir(Sender, TFAuditoria, FAuditoria);
+  EKVentanas1.Abrir(Sender, TFCompararStock, FCompararStock);
 end;
 
 

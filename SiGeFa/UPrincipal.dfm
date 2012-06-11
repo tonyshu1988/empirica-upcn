@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 913
-    Height = 502
+    Width = 921
+    Height = 514
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 531
-    Width = 913
+    Top = 543
+    Width = 921
     Height = 19
     Panels = <
       item
@@ -4719,13 +4719,13 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 913
+    Width = 921
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
-    ColorMap.HighlightColor = clWhite
+    ColorMap.HighlightColor = 14410210
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = clWhite
+    ColorMap.UnusedColor = 14410210
     ParentShowHint = False
     ShowHint = True
     Spacing = 0
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 913
-    Height = 502
+    Width = 921
+    Height = 514
     Align = alClient
     Caption = 'DEMO'
     Color = 16053492
@@ -17989,7 +17989,7 @@ object FPrincipal: TFPrincipal
     Left = 72
     Top = 138
     Bitmap = {
-      494C010157005900040020002000FFFFFFFFFF00FFFFFFFFFFFFFFFF424D3600
+      494C010157005900040020002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       000000000000360000002800000080000000E0020000010020000000000000C0
       0500000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -30137,7 +30137,8 @@ object FPrincipal: TFPrincipal
       E00001FFF00000FFE00003FFE00003FFE00003FFF00001FFE00003FFE00003FF
       F00007FFF80003FFF00007FFF00007FFFC000FFFFC0007FFFC001FFFFC001FFF
       FF003FFFFF803FFFFF007FFFFF007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
-      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000
+      000000000000}
   end
   object EKInformacion1: TEKInformacion
     StatusBar = StatusBar1
