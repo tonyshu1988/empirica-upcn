@@ -704,7 +704,7 @@ object FPrincipal: TFPrincipal
         Top = 17
         Width = 68
         Height = 21
-        Caption = 'Continuar'
+        Caption = 'Parar'
         TabOrder = 0
         OnClick = btnPararContinuarClick
       end

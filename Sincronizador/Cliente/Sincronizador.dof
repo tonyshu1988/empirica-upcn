@@ -139,3 +139,6 @@ c:\program files (x86)\borland\delphi7\Bin\dcldss70.bpl=Borland Decision Cube Co
 c:\program files (x86)\borland\delphi7\Projects\Bpl\InterSol.bpl=InterSol utilidades ver: 2006
 c:\program files (x86)\borland\delphi7\Projects\Bpl\InterSolQR.bpl=InterSol - Impresion
 c:\program files (x86)\borland\delphi7\Projects\Bpl\ComparerZeosD7.bpl=Database Comparer VCL ZEOS
+[HistoryLists\hlUnitAliases]
+Count=1
+Item0=WinTypes=Windows;WinProcs=Windows;DbiTypes=BDE;DbiProcs=BDE;DbiErrs=BDE;

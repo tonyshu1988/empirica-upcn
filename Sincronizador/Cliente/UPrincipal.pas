@@ -347,6 +347,7 @@ type
     error_sql: string;
     intentos_Conexion_FTP: integer;
     sincronizador_activado: boolean;
+    colorError, colorNormal: TColor;
   end;
 
 var
@@ -483,6 +484,9 @@ end;
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
+  colorNormal:= $0098FEC4;
+  colorError:= $008080FF;
+
   iconoSistema:= TIcon.Create;
   intentos_Conexion_FTP:= 3;
   estado_sincronizando:= false;
@@ -861,82 +865,94 @@ var
 begin
   GrupoEditando.Enabled:= false;
   DBGridUpload.BringToFront;
-  if modo = modo_cliente then
-  begin //-------------MODO CLIENTE
-    DBGridUpload.DataSource:= DS_NovedadesCliente;
-    memoLog.Lines.Add('--------------------------------------------------------------');
-    memoLog.Lines.Add('        INICIO SUBIR NOVEDADES CLIENTE                        ');
-    memoLog.Lines.Add('--------------------------------------------------------------');
-    salir:= false;
-    while not salir do
-    begin
-      ponerTodoEnCero;
-      posicion_PBar:= 0;
-      //obtengo la cantidad del novedades encontradas (todas las modif. mias, <> SINCRO, q no tiene lote asignado)
-      conectarDBLectura;
-      conectarDBEscritura;
-      ZQ_NovedadesClienteCant.Close;
-      ZQ_NovedadesClienteCant.ParamByName('RANGO_NOVEDADES').AsInteger:= rango_Novedades;
-      ZQ_NovedadesClienteCant.Open;
-      idMinNovedades:= ZQ_NovedadesClienteCantMIN.AsInteger;
-      idMaxNovedades:= ZQ_NovedadesClienteCantMAX.AsInteger;
-      cantidadNovedades:= ZQ_NovedadesClienteCantCOUNT.AsInteger;
-      //si se encontraron novedades las subo
-      if cantidadNovedades > 0 then
+
+  try
+    if modo = modo_cliente then
+    begin //-------------MODO CLIENTE
+      DBGridUpload.DataSource:= DS_NovedadesCliente;
+      memoLog.Lines.Add('--------------------------------------------------------------');
+      memoLog.Lines.Add('        INICIO SUBIR NOVEDADES CLIENTE                        ');
+      memoLog.Lines.Add('--------------------------------------------------------------');
+      salir:= false;
+      while not salir do
       begin
-        pBar_Novedades.Max:= cantidadNovedades;
-        subirNovedadesCliente;
-        //si se produjo un error en la subida salgo
-        if resultado_SubirNovedades = false then
+        ponerTodoEnCero;
+        posicion_PBar:= 0;
+        //obtengo la cantidad del novedades encontradas (todas las modif. mias, <> SINCRO, q no tiene lote asignado)
+        conectarDBLectura;
+        conectarDBEscritura;
+        ZQ_NovedadesClienteCant.Close;
+        ZQ_NovedadesClienteCant.ParamByName('RANGO_NOVEDADES').AsInteger:= rango_Novedades;
+        ZQ_NovedadesClienteCant.Open;
+        idMinNovedades:= ZQ_NovedadesClienteCantMIN.AsInteger;
+        idMaxNovedades:= ZQ_NovedadesClienteCantMAX.AsInteger;
+        cantidadNovedades:= ZQ_NovedadesClienteCantCOUNT.AsInteger;
+        //si se encontraron novedades las subo
+        if cantidadNovedades > 0 then
+        begin
+          pBar_Novedades.Max:= cantidadNovedades;
+          subirNovedadesCliente;
+          //si se produjo un error en la subida salgo
+          if resultado_SubirNovedades = false then
+            salir:= true;
+        end
+        else //si no hay mas novedades salgo
           salir:= true;
-      end
-      else //si no hay mas novedades salgo
-        salir:= true;
+      end;
+      memoLog.Lines.Add(getFechayHoraString + ' - No hay Novedades para Subir');
+      memoLog.Lines.Add('--------------------------------------------------------------');
+      memoLog.Lines.Add('        FIN SUBIR NOVEDADES CLIENTE                           ');
+      memoLog.Lines.Add('--------------------------------------------------------------');
+      memoLog.Lines.Add('');
+    end
+    else
+    begin //-------------MODO SERVIDOR
+      DBGridUpload.DataSource:= DS_NovedadesServer;
+      memoLog.Lines.Add('--------------------------------------------------------------');
+      memoLog.Lines.Add('        INICIO SUBIR NOVEDADES SERVER                         ');
+      memoLog.Lines.Add('--------------------------------------------------------------');
+      salir:= false;
+      while not salir do
+      begin
+        ponerTodoEnCero;
+        posicion_PBar:= 0;
+        //obtengo la cantidad del novedades encontradas (todas las modif. mias, <> SINCRO, q no tiene lote asignado)
+        conectarDBLectura;
+        conectarDBEscritura;
+        ZQ_NovedadesServerCant.Close;
+        ZQ_NovedadesServerCant.ParamByName('RANGO_NOVEDADES').AsInteger:= rango_Novedades;
+        ZQ_NovedadesServerCant.Open;
+        idMinNovedades:= ZQ_NovedadesServerCantMIN.AsInteger;
+        idMaxNovedades:= ZQ_NovedadesServerCantMAX.AsInteger;
+        cantidadNovedades:= ZQ_NovedadesServerCantCOUNT.AsInteger;
+        //si se encontraron novedades las subo
+        if cantidadNovedades > 0 then
+        begin
+          pBar_Novedades.Max:= cantidadNovedades;
+          subirNovedadesServer;
+          //si se produjo un error en la subida salgo
+          if resultado_SubirNovedades = false then
+            salir:= true;
+        end
+        else //si no hay mas novedades salgo
+          salir:= true;
+      end;
+      memoLog.Lines.Add(getFechayHoraString + ' - No hay Novedades para Subir');
+      memoLog.Lines.Add('--------------------------------------------------------------');
+      memoLog.Lines.Add('        FIN SUBIR NOVEDADES SERVER                            ');
+      memoLog.Lines.Add('--------------------------------------------------------------');
+      memoLog.Lines.Add('');
     end;
-    memoLog.Lines.Add(getFechayHoraString + ' - No hay Novedades para Subir');
+  except
+    memoLog.Color:= colorError;
+    memoLog.Lines.Add(getFechayHoraString + ' - Se produjo un error inesperado');
     memoLog.Lines.Add('--------------------------------------------------------------');
-    memoLog.Lines.Add('        FIN SUBIR NOVEDADES CLIENTE                           ');
+    memoLog.Lines.Add('        FIN SUBIR NOVEDADES                                   ');
     memoLog.Lines.Add('--------------------------------------------------------------');
     memoLog.Lines.Add('');
-  end
-  else
-  begin //-------------MODO SERVIDOR
-    DBGridUpload.DataSource:= DS_NovedadesServer;
-    memoLog.Lines.Add('--------------------------------------------------------------');
-    memoLog.Lines.Add('        INICIO SUBIR NOVEDADES SERVER                         ');
-    memoLog.Lines.Add('--------------------------------------------------------------');
-    salir:= false;
-    while not salir do
-    begin
-      ponerTodoEnCero;
-      posicion_PBar:= 0;
-      //obtengo la cantidad del novedades encontradas (todas las modif. mias, <> SINCRO, q no tiene lote asignado)
-      conectarDBLectura;
-      conectarDBEscritura;
-      ZQ_NovedadesServerCant.Close;
-      ZQ_NovedadesServerCant.ParamByName('RANGO_NOVEDADES').AsInteger:= rango_Novedades;
-      ZQ_NovedadesServerCant.Open;
-      idMinNovedades:= ZQ_NovedadesServerCantMIN.AsInteger;
-      idMaxNovedades:= ZQ_NovedadesServerCantMAX.AsInteger;
-      cantidadNovedades:= ZQ_NovedadesServerCantCOUNT.AsInteger;
-      //si se encontraron novedades las subo
-      if cantidadNovedades > 0 then
-      begin
-        pBar_Novedades.Max:= cantidadNovedades;
-        subirNovedadesServer;
-        //si se produjo un error en la subida salgo
-        if resultado_SubirNovedades = false then
-          salir:= true;
-      end
-      else //si no hay mas novedades salgo
-        salir:= true;
-    end;
-    memoLog.Lines.Add(getFechayHoraString + ' - No hay Novedades para Subir');
-    memoLog.Lines.Add('--------------------------------------------------------------');
-    memoLog.Lines.Add('        FIN SUBIR NOVEDADES SERVER                            ');
-    memoLog.Lines.Add('--------------------------------------------------------------');
-    memoLog.Lines.Add('');
+    GrupoEditando.Enabled:= true;
   end;
+
   GrupoEditando.Enabled:= true;
 end;
 
@@ -950,6 +966,9 @@ begin
   subirNovedades();
   Timer.Enabled:= true;
   dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Fin subir novedades.');
+
+  if dm.IdFTP.Connected then
+    FTP_desconectarse;
 end;
 
 
@@ -969,7 +988,10 @@ begin
   if resultado_BajarNovedades then
     dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'La descargadas de novedades finalizó correctamente.')
   else
-    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Se produjo un error en la descarga de las novedades.')
+    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Se produjo un error en la descarga de las novedades.');
+
+  if dm.IdFTP.Connected then
+    FTP_desconectarse;
 end;
 
 
@@ -992,7 +1014,10 @@ begin
   if resultado_ProcesarNovedades then
     dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'El proceso de las novedades descargadas finalizó correctamente.')
   else
-    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Se produjo un error en el proceso de las novedades descargadas.')
+    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Se produjo un error en el proceso de las novedades descargadas.');
+
+  if dm.IdFTP.Connected then
+    FTP_desconectarse;
 end;
 
 
@@ -1023,6 +1048,7 @@ begin
         intentos:= intentos + 1;
         if intentos = intentos_Conexion_FTP then //si llegue al maximo de intentos de conexion salgo;
         begin
+          DM.IdFTP.Disconnect;
           error_servidor_FTP:= e.Message;
           if E is EIdConnClosedGracefully then //manejo el error "Connection Closed Gracefully"
             Result:= FTP_ERROR_CCG;
@@ -1049,6 +1075,7 @@ begin
   except
     on E: Exception do
     begin
+      DM.IdFTP.Disconnect;
       error_servidor_FTP:= e.Message;
       if E is EIdConnClosedGracefully then //manejo el error "Connection Closed Gracefully"
         Result:= FTP_ERROR_CCG;
@@ -1095,6 +1122,7 @@ begin
   except
     on E: Exception do
     begin
+      DM.IdFTP.Disconnect;
       error_servidor_FTP:= e.Message;
       if not (E is EIdConnClosedGracefully) then //manejo el error "Connection Closed Gracefully"
         Result:= FTP_ERROR_CCG;
@@ -1137,6 +1165,7 @@ begin
   except
     on E: Exception do
     begin
+      DM.IdFTP.Disconnect;
       error_servidor_FTP:= e.Message;
       if FileExists(dirLocal + archivo) then
         DeleteFile(dirLocal + archivo);
@@ -1172,6 +1201,7 @@ begin
   except
     on E: Exception do
     begin
+      DM.IdFTP.Disconnect;
       error_servidor_FTP:= e.Message;
       if not (E is EIdConnClosedGracefully) then //manejo el error "Connection Closed Gracefully"
         Result:= FTP_ERROR_CCG;
@@ -1210,6 +1240,7 @@ begin
   except
     on E: Exception do
     begin
+      DM.IdFTP.Disconnect;
       error_servidor_FTP:= e.Message;
       if not (E is EIdConnClosedGracefully) then //manejo el error "Connection Closed Gracefully"
         Result:= FTP_ERROR_CCG;
@@ -1258,6 +1289,7 @@ begin
   except
     on E: Exception do
     begin
+      DM.IdFTP.Disconnect;
       error_servidor_FTP:= e.Message;
       if E is EIdConnClosedGracefully then //manejo el error "Connection Closed Gracefully"
         Result:= FTP_ERROR_CCG;
@@ -1613,13 +1645,13 @@ begin
         if CD_Tablas_Actualizar.IsEmpty then
         begin
           memoLog.Lines.Add(getFechayHoraString + ' - El archivo de de novedades ' + CD_ListaNovedades_NombreArchivo.AsString + ' no tiene datos de otras sucursales para actualizar');
-          memoLog.Lines.Add(getFechayHoraString + ' - ' + error_sql);
           CD_ListaNovedades.edit;
           CD_ListaNovedades_Estado.AsString:= ESTADO_PROCESADO;
           CD_ListaNovedades.Post;
         end
         else
         begin
+          memoLog.Color:= colorError;
           memoLog.Lines.Add(getFechayHoraString + ' - Se produjo un error mientras se procesaba el archivo de novedades ' + CD_ListaNovedades_NombreArchivo.AsString);
           memoLog.Lines.Add(getFechayHoraString + ' - ' + error_sql);
           memoLog.Lines.Add('--------------------------------------------------------------');
@@ -1665,7 +1697,6 @@ begin
   Result:= false;
 
   CD_ProcesarNovedades.DisableControls;
-
   try
     //inicio transaccion
     if dm.ModeloEscritura.iniciar_transaccion(transaccion_actualizar_base, []) then
@@ -1691,7 +1722,7 @@ begin
           //creo la query correspondiente y la ejecuto
           ZQ_ActualizarBase.SQL.Clear;
           ZQ_ActualizarBase.SQL.Add('select * from ' + CD_ProcesarNovedadesTABLE_NAME.AsString +
-            ' where ' + CD_ProcesarNovedadesKEY_FIELD.AsString + '=' + CD_ProcesarNovedadesKEY_VALUE.AsString);
+                                    ' where ' + CD_ProcesarNovedadesKEY_FIELD.AsString + '=' + CD_ProcesarNovedadesKEY_VALUE.AsString);
           ZQ_ActualizarBase.Open;
 
           //pregunto si la query esta vacia
@@ -1775,6 +1806,7 @@ begin
                 //PARA LOS CAMPOS BLOB
                 if not ((CD_ProcesarNovedadesFBLOB_NAME.IsNull) or (CD_ProcesarNovedadesFBLOB_NAME.AsString = '')) then
                   ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFBLOB_NAME.AsString).value:= CD_ProcesarNovedadesFBLOB_NEW_BLOB_VALUE.value;
+
                 CD_ProcesarNovedades.Next;
               end
             end;
@@ -1783,24 +1815,19 @@ begin
           //  si la query no esta vacia y no es una operacion de Insert
           //o si la query es vacia pero es una operacion de Insert aplico los cambios
           if ((es_query_vacia = false) and (operacion <> 'I')) or ((es_query_vacia = true) and (operacion = 'I')) then
-//          try
             ZQ_ActualizarBase.ApplyUpdates; //aplico los cambios
-//          except
-//            begin
-//              memoLog.Lines.Add(error_sql);
-//              memoLog.Lines.Add('');
-//              ZQ_ActualizarBase.RevertRecord; //aplico los cambios
-//            end
-//          end
         end;
+
+        //saco el filro
+        CD_ProcesarNovedades.Filtered:= false;
 
         //paso a la tabla siguiente
         CD_Tablas_Actualizar.next;
         Application.ProcessMessages;
         pBar_Novedades.Position:= pBar_Novedades.Position + 1;
       end;
-      //saco el filro
-      CD_ProcesarNovedades.Filtered:= false;
+//      //saco el filro
+//      CD_ProcesarNovedades.Filtered:= false;
 
       //grabo en la base de datos local el nombre del archivo procesado con fecha y hora actual
       ZQ_GrabarUltimoArchivoServer.Close;
@@ -1815,6 +1842,7 @@ begin
         Result:= true
       else
         dm.ModeloEscritura.cancelar_transaccion(transaccion_actualizar_base);
+
       CD_ProcesarNovedades.EnableControls;
     end;
   except //si se produce una excepcion en el proceso cancelo el mismo
