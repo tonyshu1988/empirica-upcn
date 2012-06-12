@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ZConnection, dxBar, dxBarExtItems, StdCtrls, ExtCtrls,
   dbcTableDataComparer, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  Grids, DBGrids;
+  Grids, DBGrids, ComCtrls;
 
 type
   TFCompararStock = class(TForm)
@@ -36,8 +36,6 @@ type
     ZQ_StockOrigenSTOCK_MAX: TFloatField;
     ZQ_StockOrigenSTOCK_REPEDIDO: TFloatField;
     ZQ_StockOrigenSTOCK_MIN_ALARMA: TStringField;
-    Edit1: TEdit;
-    Edit2: TEdit;
     ZQ_VerSiCambio: TZQuery;
     ZQ_VerSiCambioID_STOCK_PRODUCTO: TIntegerField;
     ZQ_VerSiCambioID_PRODUCTO: TIntegerField;
@@ -50,10 +48,18 @@ type
     ZQ_Update: TZQuery;
     DataSource1: TDataSource;
     DBGrid1: TDBGrid;
+    Panel3: TPanel;
+    Label1: TLabel;
+    ProgressBar1: TProgressBar;
+    Label2: TLabel;
+    lblTotal: TLabel;
+    Label4: TLabel;
+    lblActualizado: TLabel;
     procedure btnBuscarOrigenClick(Sender: TObject);
     procedure btnBuscarDestinoClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnCompararClick(Sender: TObject);
+    procedure btnSalirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -91,6 +97,11 @@ procedure TFCompararStock.FormCreate(Sender: TObject);
 begin
   lblOrigen.Caption:= '';
   lblDestino.Caption:= '';
+  lblTotal.Caption:= '';
+  lblActualizado.Caption:= '';
+
+  OpenFileOrigen.InitialDir:= ExtractFilePath(Application.ExeName);
+  OpenFileDestino.InitialDir:= ExtractFilePath(Application.ExeName);
 end;
 
 procedure TFCompararStock.btnCompararClick(Sender: TObject);
@@ -100,11 +111,21 @@ var
   total: integer;
   actual: integer;
 begin
+  GrupoEditando.Enabled:= false;
+
+  lblTotal.Caption:= '';
+  lblActualizado.Caption:= '';
+
   contador:= 0;
 
   ZQ_StockOrigen.Close;
   ZQ_StockOrigen.Open;
   ZQ_StockOrigen.DisableControls;
+
+  total:= ZQ_StockOrigen.RecordCount;
+  lblTotal.Caption:= IntToStr(total);
+  ProgressBar1.Min:= 0;
+  ProgressBar1.Max:= total;
 
   ZQ_StockOrigen.First;
   while not ZQ_StockOrigen.Eof do
@@ -128,25 +149,28 @@ begin
       ZQ_Update.ParamByName('stock_min').AsFloat:= ZQ_StockOrigenSTOCK_MIN.AsFloat;
       ZQ_Update.ParamByName('stock_max').AsFloat:= ZQ_StockOrigenSTOCK_MAX.AsFloat;
       ZQ_Update.ParamByName('stock_repedido').AsFloat:= ZQ_StockOrigenSTOCK_REPEDIDO.AsFloat;
-      ZQ_Update.ParamByName('stock_min_alarma').AsString:= ZQ_StockOrigenSTOCK_MIN_ALARMA.AsString;
+      ZQ_Update.ParamByName('stock_min_alarma').Value:= ZQ_StockOrigenSTOCK_MIN_ALARMA.Value;
       ZQ_Update.ExecSQL;
 
       Conexion_Destino.Commit;
-      
-      ZQ_StockOrigen.Next;
+
       contador:= contador + 1;
-      Edit1.Text:= IntToStr(contador);
-      Application.ProcessMessages;
-    end
-    else
-    begin
-      Edit2.Text:= IntToStr(ZQ_StockOrigen.RecNo);
-      Application.ProcessMessages;
-      ZQ_StockOrigen.Next;
-    end
+      lblActualizado.Caption:= IntToStr(contador);
+    end;
+
+    ZQ_StockOrigen.Next;
+    ProgressBar1.Position:= ZQ_StockOrigen.RecNo;
+    Application.ProcessMessages;
   end;
 
   ShowMessage(Format('Se actualizaron %d productos', [contador]));
+
+  GrupoEditando.Enabled:= true;  
+end;
+
+procedure TFCompararStock.btnSalirClick(Sender: TObject);
+begin
+  close;
 end;
 
 end.
