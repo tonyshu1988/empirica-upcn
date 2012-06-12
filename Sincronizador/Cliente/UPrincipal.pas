@@ -255,6 +255,7 @@ type
     CD_ProcesarNovedadesID: TIntegerField;
     EKImageListIcono: TEKImageList32;
     btnPararContinuar: TButton;
+    TimerError: TTimer;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridTablasActualizarDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridListaNovedadesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -320,10 +321,12 @@ type
     procedure subirNovedades();
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnPararContinuarClick(Sender: TObject);
+    procedure TimerErrorTimer(Sender: TObject);
   Private
     procedure InputBoxSetPasswordChar(var Msg: TMessage); Message InputBoxMessage;
   Public
-    iconoSistema: TIcon;
+    iconoSistema, iconoError: TIcon;
+    auxCambiarIcono: integer;
     modo: string;
     lunes, martes, miercoles, jueves, viernes, sabado, domingo,
       intervalo, dia_hoy, tiempo_restante: integer;
@@ -484,10 +487,15 @@ end;
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
+  auxCambiarIcono:= 0;
+
   colorNormal:= $0098FEC4;
   colorError:= $008080FF;
 
+  iconoError:= TIcon.Create;
+  EKImageListIcono.GetIcon(2, iconoError);
   iconoSistema:= TIcon.Create;
+
   intentos_Conexion_FTP:= 3;
   estado_sincronizando:= false;
   configGrillas(0); //cargo la config de las grillas
@@ -647,6 +655,27 @@ begin
 end;
 
 
+procedure TFPrincipal.TimerErrorTimer(Sender: TObject);
+begin
+  if memoLog.Color = colorError then
+  begin
+    if auxCambiarIcono = 0 then
+    begin
+      auxCambiarIcono:= 1;
+      dm.EKIconizar.Icon:= iconoError;
+    end
+    else
+    begin
+      auxCambiarIcono:= 0;
+      dm.EKIconizar.Icon:= iconoSistema;
+    end;
+  end
+  else
+    dm.EKIconizar.Icon:= iconoSistema;
+
+  Application.ProcessMessages;
+end;
+
 //Timer para que realice la sincronizacion automaticamente
 
 procedure TFPrincipal.TimerTimer(Sender: TObject);
@@ -725,7 +754,7 @@ end;
 procedure TFPrincipal.btnOcultarClick(Sender: TObject);
 begin
   Visible:= False;
-  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Doble click sobre el icono para maximizar.');
+//  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Doble click sobre el icono para maximizar.');
 end;
 
 
@@ -961,11 +990,11 @@ end;
 
 procedure TFPrincipal.btnSubirClick(Sender: TObject);
 begin
-  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Inicio subir novedades.');
+//  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Inicio subir novedades.');
   Timer.Enabled:= false;
   subirNovedades();
   Timer.Enabled:= true;
-  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Fin subir novedades.');
+//  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Fin subir novedades.');
 
   if dm.IdFTP.Connected then
     FTP_desconectarse;
@@ -976,19 +1005,19 @@ end;
 
 procedure TFPrincipal.btnBajarClick(Sender: TObject);
 begin
-  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Inicio descargar novedades.');
+//  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Inicio descargar novedades.');
   Timer.Enabled:= false;
   if modo = modo_cliente then
     bajarNovedadesServer
   else
     bajarNovedadesClientes;
   Timer.Enabled:= true;
-  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Fin descargar novedades.');
+//  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Fin descargar novedades.');
 
-  if resultado_BajarNovedades then
-    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'La descargadas de novedades finalizó correctamente.')
-  else
-    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Se produjo un error en la descarga de las novedades.');
+//  if resultado_BajarNovedades then
+//    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'La descargadas de novedades finalizó correctamente.')
+//  else
+//    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Se produjo un error en la descarga de las novedades.');
 
   if dm.IdFTP.Connected then
     FTP_desconectarse;
@@ -1003,7 +1032,7 @@ begin
   if not resultado_BajarNovedades then
     exit;
 
-  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Inicio procesar novedades.');
+//  dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Inicio procesar novedades.');
   Timer.Enabled:= false;
   if modo = modo_cliente then
     procesarNovedadesServer
@@ -1011,10 +1040,10 @@ begin
     procesarNovedadesClientes;
   Timer.Enabled:= true;
 
-  if resultado_ProcesarNovedades then
-    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'El proceso de las novedades descargadas finalizó correctamente.')
-  else
-    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Se produjo un error en el proceso de las novedades descargadas.');
+//  if resultado_ProcesarNovedades then
+//    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'El proceso de las novedades descargadas finalizó correctamente.')
+//  else
+//    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Se produjo un error en el proceso de las novedades descargadas.');
 
   if dm.IdFTP.Connected then
     FTP_desconectarse;
@@ -2275,6 +2304,8 @@ end;
 
 procedure TFPrincipal.btnPararContinuarClick(Sender: TObject);
 begin
+//  memoLog.Color:= colorError;
+
   if Timer.Enabled then
   begin
     Timer.Enabled:= false;
@@ -2287,5 +2318,8 @@ begin
   end
 end;
 
+
+
 end.
+
 
