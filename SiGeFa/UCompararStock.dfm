@@ -1,6 +1,6 @@
 object FCompararStock: TFCompararStock
-  Left = 348
-  Top = 196
+  Left = 301
+  Top = 130
   Width = 870
   Height = 581
   Caption = 'Comparar Stock'
@@ -14,21 +14,20 @@ object FCompararStock: TFCompararStock
   OldCreateOrder = False
   Position = poScreenCenter
   Visible = True
-  WindowState = wsMaximized
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 862
+    Width = 854
     Height = 30
     Align = alTop
-    TabOrder = 3
+    TabOrder = 1
     object lblOrigen: TLabel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 852
       Height = 28
       Align = alClient
       Caption = ' lblOrigen'
@@ -39,26 +38,18 @@ object FCompararStock: TFCompararStock
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Edit1: TEdit
-      Left = 808
-      Top = 5
-      Width = 49
-      Height = 21
-      TabOrder = 0
-      Text = 'Edit1'
-    end
   end
   object Panel2: TPanel
     Left = 0
     Top = 30
-    Width = 862
+    Width = 854
     Height = 30
     Align = alTop
-    TabOrder = 5
+    TabOrder = 4
     object lblDestino: TLabel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 852
       Height = 28
       Align = alClient
       Caption = ' lblDestino'
@@ -69,28 +60,116 @@ object FCompararStock: TFCompararStock
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Edit2: TEdit
-      Left = 808
-      Top = 5
-      Width = 49
-      Height = 21
-      TabOrder = 0
-      Text = 'Edit1'
-    end
   end
   object DBGrid1: TDBGrid
     Left = 0
     Top = 60
-    Width = 862
-    Height = 442
+    Width = 854
+    Height = 381
     Align = alClient
     DataSource = DataSource1
+    Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
     TabOrder = 6
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
     TitleFont.Name = 'Verdana'
     TitleFont.Style = []
+    Columns = <
+      item
+        Expanded = False
+        FieldName = 'ID_STOCK_PRODUCTO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_PRODUCTO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ID_POSICION_SUCURSAL'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'STOCK_ACTUAL'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'STOCK_MIN'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'STOCK_MAX'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'STOCK_REPEDIDO'
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'STOCK_MIN_ALARMA'
+        Visible = True
+      end>
+  end
+  object Panel3: TPanel
+    Left = 0
+    Top = 441
+    Width = 854
+    Height = 50
+    Align = alBottom
+    TabOrder = 7
+    DesignSize = (
+      854
+      50)
+    object Label1: TLabel
+      Left = 6
+      Top = 5
+      Width = 56
+      Height = 13
+      Caption = 'Progreso:'
+    end
+    object Label2: TLabel
+      Left = 29
+      Top = 28
+      Width = 33
+      Height = 13
+      Caption = 'Total:'
+    end
+    object lblTotal: TLabel
+      Left = 66
+      Top = 28
+      Width = 7
+      Height = 13
+      Caption = '0'
+    end
+    object Label4: TLabel
+      Left = 113
+      Top = 28
+      Width = 93
+      Height = 13
+      Caption = '/   Actualizados:'
+    end
+    object lblActualizado: TLabel
+      Left = 210
+      Top = 28
+      Width = 7
+      Height = 13
+      Caption = '0'
+    end
+    object ProgressBar1: TProgressBar
+      Left = 66
+      Top = 4
+      Width = 780
+      Height = 17
+      Anchors = [akLeft, akTop, akRight]
+      TabOrder = 0
+    end
   end
   object Conexion_Origen: TZConnection
     Protocol = 'firebird-1.5'
@@ -115,7 +194,7 @@ object FCompararStock: TFCompararStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -225,20 +304,11 @@ object FCompararStock: TFCompararStock
             Visible = True
           end
           item
-            BeginGroup = True
             Item = btnComparar
             Visible = True
           end
           item
             BeginGroup = True
-            Item = btnGuardar
-            Visible = True
-          end
-          item
-            Item = btnCancelar
-            Visible = True
-          end
-          item
             Item = btnSalir
             Visible = True
           end>
@@ -607,6 +677,7 @@ object FCompararStock: TFCompararStock
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
       ImageIndex = 6
+      OnClick = btnSalirClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
