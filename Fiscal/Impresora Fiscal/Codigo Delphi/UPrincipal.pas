@@ -127,6 +127,7 @@ end;
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
   tituloError:= 'ERROR MODULO FISCAL';
+
   EKIni.Path:= 'Fiscal\';
   leerArchivoIni;
 
@@ -162,7 +163,6 @@ begin
   DateTimeFechaHasta.Date:= EndOfTheMonth(EKModelo.Fecha);
 
   abrirImpresora();
-
   leerParametros();
 end;
 
