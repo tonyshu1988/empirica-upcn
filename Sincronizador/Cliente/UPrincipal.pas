@@ -322,6 +322,7 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnPararContinuarClick(Sender: TObject);
     procedure TimerErrorTimer(Sender: TObject);
+    procedure lblTituloSincroDblClick(Sender: TObject);
   Private
     procedure InputBoxSetPasswordChar(var Msg: TMessage); Message InputBoxMessage;
   Public
@@ -535,7 +536,7 @@ begin
   begin
     Visible:= False;
     Application.ShowMainForm:= False;
-    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Iniciando sincronizador, doble click para maximizar.');
+//    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Iniciando sincronizador, doble click para maximizar.');
   end;
   Application.Title:= 'Sincronizador ' + modo;
 end;
@@ -553,7 +554,8 @@ end;
 
 procedure TFPrincipal.FormActivate(Sender: TObject);
 begin
-  panelTitulo.SetFocus;
+  if panelTitulo.Enabled then
+    panelTitulo.SetFocus;
 end;
 
 
@@ -688,12 +690,14 @@ begin
       if modo = modo_cliente then
       begin
         bajarNovedadesServer;
-        procesarNovedadesServer;
+        if resultado_BajarNovedades then
+          procesarNovedadesServer;
       end
       else
       begin
         bajarNovedadesClientes;
-        procesarNovedadesClientes;
+        if resultado_BajarNovedades then
+          procesarNovedadesClientes;
       end;
       subirNovedades;
 
@@ -1123,8 +1127,9 @@ var
   intentos: integer;
 begin
   //si no me puedo conectar salgo
-  if FTP_conectarse <> FTP_OK then
-    exit;
+  if not dm.IdFTP.Connected then
+    if FTP_conectarse <> FTP_OK then
+      exit;
 
   //por defecto tira el error general
   Result:= FTP_ERROR_GRAL;
@@ -1167,8 +1172,9 @@ var
   size_archivo: integer;
 begin
   //si no me puedo conectar salgo
-  if FTP_conectarse <> FTP_OK then
-    exit;
+  if not dm.IdFTP.Connected then
+    if FTP_conectarse <> FTP_OK then
+      exit;
 
   //por defecto tira el error general
   Result:= FTP_ERROR_GRAL;
@@ -1188,8 +1194,8 @@ begin
     DM.IdFTP.BeginWork(wmRead, 0);
     DM.IdFTP.Get(archivo, dirLocal + archivo, False, False);
     DM.IdFTP.EndWork(wmRead);
-    Sleep(500);
-    DM.IdFTP.Disconnect;
+//    Sleep(500);
+//    DM.IdFTP.Disconnect;
     Result:= FTP_OK;
   except
     on E: Exception do
@@ -1211,8 +1217,9 @@ end;
 function TFPrincipal.FTP_BorrarArchivo(directorio, archivo: string): integer;
 begin
   //si no me puedo conectar salgo
-  if FTP_conectarse <> FTP_OK then
-    exit;
+  if not dm.IdFTP.Connected then
+    if FTP_conectarse <> FTP_OK then
+      exit;
 
   //por defecto tira el error general
   Result:= FTP_ERROR_GRAL;
@@ -1224,8 +1231,8 @@ begin
     DM.IdFTP.ChangeDir(directorio);
     DM.IdFTP.Delete(archivo);
     DM.IdFTP.EndWork(wmWrite);
-    Sleep(500);
-    DM.IdFTP.Disconnect;
+//    Sleep(500);
+//    DM.IdFTP.Disconnect;
     Result:= FTP_OK;
   except
     on E: Exception do
@@ -1247,9 +1254,9 @@ var
   auxLista: TStringList;
 begin
   //si no me puedo conectar salgo
-  result:= FTP_conectarse;
-  if result <> FTP_OK then
-    exit;
+  if not dm.IdFTP.Connected then
+    if FTP_conectarse <> FTP_OK then
+      exit;
 
   //por defecto tira el error general
   Result:= FTP_ERROR_GRAL;
@@ -1262,8 +1269,8 @@ begin
     DM.IdFTP.List(auxLista, archivo, False);
     //si la lista obtenida es mayor a cero es porque el archivo existe
     DM.IdFTP.EndWork(wmRead);
-    Sleep(500);
-    DM.IdFTP.Disconnect;
+//    Sleep(500);
+//    DM.IdFTP.Disconnect;
     if auxLista.Count > 0 then
       Result:= FTP_OK;
   except
@@ -1289,8 +1296,10 @@ begin
   result:= -1;
   cantidad:= 0;
 
-  if FTP_conectarse <> FTP_OK then
-    exit;
+  //si no me puedo conectar salgo
+  if not dm.IdFTP.Connected then
+    if FTP_conectarse <> FTP_OK then
+      exit;
 
   error_servidor_FTP:= '';
 
@@ -1580,6 +1589,7 @@ begin
   cantidad_archivos_encontrados:= FTP_BuscarListaArchivos(dirFTP_Server, archivo_server, ultimo_archivo, 'SERVIDOR');
   if cantidad_archivos_encontrados <= FTP_ERROR_GRAL then //si devuelve menor o igual a -1 es porque no me puedo conectar
   begin
+    memoLog.Color:= colorError;
     memoLog.Lines.Add(getFechayHoraString + ' - No se pudo conectar al servidor FTP');
     memoLog.Lines.Add(getFechayHoraString + ' - ' + error_servidor_FTP);
     memoLog.Lines.Add('--------------------------------------------------------------');
@@ -1608,6 +1618,7 @@ begin
         memoLog.Lines.Add(getFechayHoraString + ' - Archivo ' + CD_ListaNovedades_NombreArchivo.AsString + ' descargado con exito')
       else
       begin
+        memoLog.Color:= colorError;
         memoLog.Lines.Add(getFechayHoraString + ' - Error al descargar el archivo ' + CD_ListaNovedades_NombreArchivo.AsString + ' del Servidor FTP');
         memoLog.Lines.Add(getFechayHoraString + ' - ' + error_servidor_FTP);
         memoLog.Lines.Add('--------------------------------------------------------------');
@@ -1962,6 +1973,7 @@ begin
   memoLog.Lines.Add(getFechayHoraString + ' - Buscando Novedades de los Clientes en el Servidor FTP');
   if not buscarNovedadesClientes then //si devuelve falso es porque no me puedo conectar
   begin
+    memoLog.Color:= colorError;
     memoLog.Lines.Add(getFechayHoraString + ' - No se pudo conectar al servidor FTP');
     memoLog.Lines.Add(getFechayHoraString + ' - ' + error_servidor_FTP);
   end
@@ -2302,6 +2314,7 @@ begin
   end;
 end;
 
+
 procedure TFPrincipal.btnPararContinuarClick(Sender: TObject);
 begin
 //  memoLog.Color:= colorError;
@@ -2319,6 +2332,10 @@ begin
 end;
 
 
+procedure TFPrincipal.lblTituloSincroDblClick(Sender: TObject);
+begin
+  memoLog.Color:= colorNormal;
+end;
 
 end.
 

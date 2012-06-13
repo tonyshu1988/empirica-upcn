@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 458
-  Top = 291
+  Left = 460
+  Top = 293
   Height = 302
   Width = 232
   object ConexionLectura: TZConnection
