@@ -159,21 +159,11 @@ type
     BtAceptarPago: TdxBarLargeButton;
     BtCancelarPago: TdxBarLargeButton;
     BtVendedor: TdxBarLargeButton;
-    Bt_Cierre_Z: TdxBarLargeButton;
     btPreventa: TdxBarLargeButton;
     btsalir: TdxBarLargeButton;
-    bt_accion: TdxBarControlContainerItem;
-    bt_motivo_baja: TdxBarControlContainerItem;
-    bt_VerDetalle: TdxBarLargeButton;
     bt_BuscarCliente: TdxBarLargeButton;
-    Bt_Detalle: TdxBarLargeButton;
-    Bt_Imprimir_Arqueo: TdxBarLargeButton;
-    Bt_Imprimir_convenio: TdxBarLargeButton;
-    BtLeerCodigo: TdxBarLargeButton;
     btIVA: TdxBarLargeButton;
     btnFormaPago: TdxBarLargeButton;
-    Bt_imprimir_listadoFP: TdxBarLargeButton;
-    bt_cierre_X: TdxBarLargeButton;
     GrupoGuardarCancelar: TdxBarGroup;
     grupoVertical: TdxBarGroup;
     EKListadoProducto: TEKListadoSQL;
@@ -561,18 +551,6 @@ type
     ZQ_SaldoNotaCredito: TZQuery;
     ZQ_SaldoNotaCreditoSALDO: TFloatField;
     edDetalleMDP: TDBEdit;
-    dxBarStatic1: TdxBarStatic;
-    dxUltimoId: TdxBarEdit;
-    dxBarListItem1: TdxBarListItem;
-    dxBarContainerItem1: TdxBarContainerItem;
-    dxBarColorCombo1: TdxBarColorCombo;
-    dxBarTreeViewCombo1: TdxBarTreeViewCombo;
-    dxBarToolbarsListItem1: TdxBarToolbarsListItem;
-    dxBarProgressItem1: TdxBarProgressItem;
-    dxBarMRUListItem1: TdxBarMRUListItem;
-    dxBarLookupCombo1: TdxBarLookupCombo;
-    dxBarButton1: TdxBarButton;
-    CustomdxBarCombo1: TCustomdxBarCombo;
     ZQ_UltimoCPB: TZQuery;
     ZQ_UltimoCPBNUMERO_CPB: TIntegerField;
     ZQ_PreventaFP: TZQuery;
@@ -590,7 +568,6 @@ type
     ZQ_PreventaFPIMPORTE_REAL: TFloatField;
     ZQ_PreventaFPID_RECIBO_OP: TIntegerField;
     ZQ_PreventaFPINSERT_MANUAL: TStringField;
-    dxBarEdit1: TdxBarEdit;
     Panel1: TPanel;
     lblTotAPagar: TLabel;
     lblNroCPB: TLabel;
@@ -608,6 +585,17 @@ type
     CD_DetalleFacturaIMPORTE_COSTO: TFloatField;
     ZQ_ComprobanteDetalleIMPORTE_COSTO: TFloatField;
     ZQ_PreventaProductosIMPORTE_COSTO: TFloatField;
+    btnAuditoriaFiscal: TdxBarLargeButton;
+    PanelAuditoriaCierreZ: TPanel;
+    Label62: TLabel;
+    DateTimeFechaDesde: TDateTimePicker;
+    DateTimeFechaHasta: TDateTimePicker;
+    ComboBoxTipoAuditoria: TComboBox;
+    Label63: TLabel;
+    Label64: TLabel;
+    Label65: TLabel;
+    btnAuditoriaAceptar: TButton;
+    btnAuditoriaCancelar: TButton;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -706,6 +694,9 @@ type
     function verificarSaldoNotaCredito(query: TDataSet; id_cliente: integer): boolean;
     procedure ultimoIDPago();
     procedure panelPreventa(flag: boolean);
+    procedure btnAuditoriaFiscalClick(Sender: TObject);
+    procedure btnAuditoriaCancelarClick(Sender: TObject);
+    procedure btnAuditoriaAceptarClick(Sender: TObject);
   Private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -736,6 +727,7 @@ var
   Impresora: string;
   Ruta: string;
   id_cuenta_fpago: integer;
+  auditoriaFiscalDesde, auditoriaFiscalHasta, auditoriaFiscalTipo: string;
 const
   abmComprobante = 'ABM Factura-Cajero';
 
@@ -1015,11 +1007,13 @@ begin
   begin
     btCierreZ.Enabled:= True;
     BtCierreX.Enabled:= True;
+    btnAuditoriaFiscal.Enabled:= True;
   end
   else
   begin
     btCierreZ.Enabled:= False;
     BtCierreX.Enabled:= False;
+    btnAuditoriaFiscal.Enabled:= False;    
   end;
 
   ultimoIDPago();
@@ -2538,9 +2532,12 @@ begin
   leerSistemaIni;
 
   if tipoAccion = 'F' then
-    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l ' + IntToStr(comprob) + ' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL)
+    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-l'+IntToStr(comprob)+' -c'+tipoAccion), nil, SW_SHOWNORMAL)
   else
-    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL);
+    if tipoAccion = 'A' then
+      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-c'+tipoAccion+' -t'+auditoriaFiscalTipo+' -d'+auditoriaFiscalDesde+' -h'+auditoriaFiscalHasta), nil, SW_SHOWNORMAL)
+    else
+      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-c'+tipoAccion), nil, SW_SHOWNORMAL);
 
 
   //  if (acumulado<=0) then
@@ -2549,20 +2546,6 @@ begin
   //    result := false;
   //    exit;
   //  end;
-end;
-
-
-procedure TFCajero.btCierreZClick(Sender: TObject);
-begin
-  if (application.MessageBox(pchar('Desea Realizar el Cierre Z en la Impresora Fiscal ?'), 'Cierre Z', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    imprimirFiscal(0, 'Z');
-end;
-
-
-procedure TFCajero.BtCierreXClick(Sender: TObject);
-begin
-  if (application.MessageBox(pchar('Desea Realizar el Cierre X en la Impresora Fiscal ?'), 'Cierre X', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    imprimirFiscal(0, 'X');
 end;
 
 
@@ -2916,6 +2899,65 @@ begin
     PanelDetallePreventa.Visible:= false;
     PanelDetalles.Height:= 160 - PanelDetallePreventa.Height;
   end
+end;
+
+
+procedure TFCajero.btCierreZClick(Sender: TObject);
+begin
+  if (application.MessageBox(pchar('Desea Realizar el Cierre Z en la Impresora Fiscal?'), 'Cierre Z', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    imprimirFiscal(0, 'Z');
+end;
+
+
+procedure TFCajero.BtCierreXClick(Sender: TObject);
+begin
+  if (application.MessageBox(pchar('Desea Realizar el Cierre X en la Impresora Fiscal?'), 'Cierre X', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    imprimirFiscal(0, 'X');
+end;
+
+
+procedure TFCajero.btnAuditoriaFiscalClick(Sender: TObject);
+begin
+  PanelContenedorDerecha.Enabled:= false;
+  PanelAuditoriaCierreZ.Visible:= true;
+  PanelAuditoriaCierreZ.BringToFront;
+  dm.centrarPanel(FCajero, PanelAuditoriaCierreZ);
+  DateTimeFechaDesde.Date:= StartOfTheMonth(dm.EKModelo.Fecha);
+  DateTimeFechaHasta.Date:= EndOfTheMonth(dm.EKModelo.Fecha);
+end;
+
+
+procedure TFCajero.btnAuditoriaCancelarClick(Sender: TObject);
+begin
+  PanelContenedorDerecha.Enabled:= true;
+  PanelAuditoriaCierreZ.Visible:= false;
+end;
+
+
+procedure TFCajero.btnAuditoriaAceptarClick(Sender: TObject);
+var
+  anio, mes, dia: string;
+begin
+  anio:= RightStr(IntToStr(YearOf(DateTimeFechaDesde.Date)), 2);
+  mes:= rellenar(IntToStr(MonthOf(DateTimeFechaDesde.Date)), '0', 2);
+  dia:= rellenar(IntToStr(DayOf(DateTimeFechaDesde.Date)), '0', 2);
+  auditoriaFiscalDesde:= anio+mes+dia;
+
+  anio:= RightStr(IntToStr(YearOf(DateTimeFechaHasta.Date)), 2);
+  mes:= rellenar(IntToStr(MonthOf(DateTimeFechaHasta.Date)), '0', 2);
+  dia:= rellenar(IntToStr(DayOf(DateTimeFechaHasta.Date)), '0', 2);
+  auditoriaFiscalHasta:= anio+mes+dia;
+
+  if ComboBoxTipoAuditoria.ItemIndex = 0 then
+    auditoriaFiscalTipo:= 'T'
+  else
+    auditoriaFiscalTipo:= 'D';
+
+  if (application.MessageBox(pchar('Desea Realizar la Auditoria de Cierre Z en la Impresora Fiscal?'), 'Auditoria Cierre Z', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    imprimirFiscal(0, 'A');
+
+  PanelContenedorDerecha.Enabled:= true;
+  PanelAuditoriaCierreZ.Visible:= false;
 end;
 
 end.
