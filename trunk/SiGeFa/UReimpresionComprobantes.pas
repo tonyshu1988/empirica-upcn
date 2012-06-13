@@ -392,7 +392,7 @@ begin
 
   if (application.MessageBox(pchar('Desea Reimprimir el Comprobante Nro:' + ZQ_ComprobanteCODIGO.AsString + ' ?'), 'Reimpresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
   begin
-    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l ' + IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger) + ' -i ' + Impresora + ' -c ' + 'F'), nil, SW_SHOWNORMAL);
+    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-l'+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -cF'), nil, SW_SHOWNORMAL);
     ZQ_Comprobante.Refresh;
   end
 end;

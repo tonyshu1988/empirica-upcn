@@ -750,7 +750,7 @@ object FCajero: TFCajero
     BevelWidth = 2
     BorderWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 8
+    TabOrder = 7
     Visible = False
     object Label15: TLabel
       Left = 5
@@ -4894,6 +4894,105 @@ object FCajero: TFCajero
       OnKeyUp = buscarFormaPago
     end
   end
+  object PanelAuditoriaCierreZ: TPanel
+    Left = 376
+    Top = 280
+    Width = 318
+    Height = 143
+    BevelInner = bvLowered
+    TabOrder = 9
+    Visible = False
+    object Label62: TLabel
+      Left = 2
+      Top = 2
+      Width = 314
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Auditoria Cierre Z'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label63: TLabel
+      Left = 18
+      Top = 56
+      Width = 74
+      Height = 13
+      Caption = 'Fecha Hasta:'
+    end
+    object Label64: TLabel
+      Left = 14
+      Top = 32
+      Width = 78
+      Height = 13
+      Caption = 'Fecha Desde:'
+    end
+    object Label65: TLabel
+      Left = 8
+      Top = 80
+      Width = 84
+      Height = 13
+      Caption = 'Tipo Auditoria:'
+    end
+    object DateTimeFechaDesde: TDateTimePicker
+      Left = 95
+      Top = 28
+      Width = 121
+      Height = 21
+      Date = 41068.667614293980000000
+      Time = 41068.667614293980000000
+      TabOrder = 0
+    end
+    object DateTimeFechaHasta: TDateTimePicker
+      Left = 95
+      Top = 52
+      Width = 121
+      Height = 21
+      Date = 41068.667614293980000000
+      Time = 41068.667614293980000000
+      TabOrder = 1
+    end
+    object ComboBoxTipoAuditoria: TComboBox
+      Left = 95
+      Top = 76
+      Width = 214
+      Height = 21
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 2
+      Text = 'T = Reporte total general'
+      Items.Strings = (
+        'T = Reporte total general'
+        'D = Reporte detallado')
+    end
+    object btnAuditoriaAceptar: TButton
+      Left = 7
+      Top = 112
+      Width = 75
+      Height = 24
+      Caption = 'Imprimir'
+      TabOrder = 3
+      OnClick = btnAuditoriaAceptarClick
+    end
+    object btnAuditoriaCancelar: TButton
+      Left = 234
+      Top = 112
+      Width = 75
+      Height = 24
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 4
+      OnClick = btnAuditoriaCancelarClick
+    end
+  end
   object ZQ_Comprobante_FormaPago: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -5845,6 +5944,10 @@ object FCajero: TFCajero
           end
           item
             Item = BtCierreX
+            Visible = True
+          end
+          item
+            Item = btnAuditoriaFiscal
             Visible = True
           end>
         Name = 'vertical'
@@ -7560,26 +7663,6 @@ object FCajero: TFCajero
       0
       0
       52)
-    object BtBuscarProducto: TdxBarLargeButton
-      Caption = 'F2 B'#250'squeda'
-      Category = 0
-      Hint = 'F2 B'#250'squeda'
-      Visible = ivAlways
-      ImageIndex = 29
-      ShortCut = 113
-      OnClick = BtBuscarProductoClick
-      AutoGrayScale = False
-    end
-    object btnVentaRapida: TdxBarLargeButton
-      Caption = 'F9 Venta '#193'gil'
-      Category = 0
-      Hint = 'F9 Venta '#193'gil'
-      Visible = ivAlways
-      ImageIndex = 81
-      ShortCut = 120
-      OnClick = btnVentaRapidaClick
-      AutoGrayScale = False
-    end
     object btBuscProd: TdxBarLargeButton
       Caption = 'F1 Productos'
       Category = 0
@@ -7590,6 +7673,44 @@ object FCajero: TFCajero
       OnClick = btBuscProdClick
       AutoGrayScale = False
     end
+    object BtBuscarProducto: TdxBarLargeButton
+      Caption = 'F2 B'#250'squeda'
+      Category = 0
+      Hint = 'F2 B'#250'squeda'
+      Visible = ivAlways
+      ImageIndex = 29
+      ShortCut = 113
+      OnClick = BtBuscarProductoClick
+      AutoGrayScale = False
+    end
+    object bt_BuscarCliente: TdxBarLargeButton
+      Caption = 'F3 Clientes'
+      Category = 0
+      Hint = 'F3 Clientes'
+      Visible = ivAlways
+      ImageIndex = 56
+      OnClick = bt_BuscarClienteClick
+      AutoGrayScale = False
+    end
+    object btIVA: TdxBarLargeButton
+      Caption = 'F4 Tipo IVA'
+      Category = 0
+      Hint = 'F4 Tipo IVA'
+      Visible = ivAlways
+      ImageIndex = 17
+      OnClick = btIVAClick
+      AutoGrayScale = False
+    end
+    object BtVendedor: TdxBarLargeButton
+      Caption = 'F5 Vendedor'
+      Category = 0
+      Hint = 'F5 Vendedor'
+      Visible = ivAlways
+      ImageIndex = 3
+      ShortCut = 116
+      OnClick = btVendedorClick
+      AutoGrayScale = False
+    end
     object BtLeerCB: TdxBarLargeButton
       Caption = 'F6 Leer C'#243'digo Producto'
       Category = 0
@@ -7597,6 +7718,33 @@ object FCajero: TFCajero
       Visible = ivAlways
       ImageIndex = 85
       OnClick = BtLeerCBClick
+      AutoGrayScale = False
+    end
+    object btnFormaPago: TdxBarLargeButton
+      Caption = 'F7 Forma de Pago'
+      Category = 0
+      Visible = ivAlways
+      ImageIndex = 30
+      OnClick = btnFormaPagoClick
+      AutoGrayScale = False
+    end
+    object btPreventa: TdxBarLargeButton
+      Caption = 'F8 Preventa'
+      Category = 0
+      Hint = 'F8 Preventa'
+      Visible = ivAlways
+      ImageIndex = 79
+      OnClick = btPreventaClick
+      AutoGrayScale = False
+    end
+    object btnVentaRapida: TdxBarLargeButton
+      Caption = 'F9 Venta '#193'gil'
+      Category = 0
+      Hint = 'F9 Venta '#193'gil'
+      Visible = ivAlways
+      ImageIndex = 81
+      ShortCut = 120
+      OnClick = btnVentaRapidaClick
       AutoGrayScale = False
     end
     object BtAceptarPago: TdxBarLargeButton
@@ -7615,34 +7763,6 @@ object FCajero: TFCajero
       OnClick = BtCancelarPagoClick
       AutoGrayScale = False
     end
-    object BtVendedor: TdxBarLargeButton
-      Caption = 'F5 Vendedor'
-      Category = 0
-      Hint = 'F5 Vendedor'
-      Visible = ivAlways
-      ImageIndex = 3
-      ShortCut = 116
-      OnClick = btVendedorClick
-      AutoGrayScale = False
-    end
-    object Bt_Cierre_Z: TdxBarLargeButton
-      Align = iaRight
-      Caption = '(Ctrl+Z) Cierre Z'
-      Category = 0
-      Hint = 'Aplica el cierre Z de la impresora Fiscal'
-      Visible = ivAlways
-      ImageIndex = 70
-      AutoGrayScale = False
-    end
-    object btPreventa: TdxBarLargeButton
-      Caption = 'F8 Preventa'
-      Category = 0
-      Hint = 'F8 Preventa'
-      Visible = ivAlways
-      ImageIndex = 79
-      OnClick = btPreventaClick
-      AutoGrayScale = False
-    end
     object btsalir: TdxBarLargeButton
       Align = iaRight
       Caption = 'F12 Salir'
@@ -7651,104 +7771,6 @@ object FCajero: TFCajero
       Visible = ivAlways
       ImageIndex = 6
       OnClick = btsalirClick
-      AutoGrayScale = False
-    end
-    object bt_accion: TdxBarControlContainerItem
-      Caption = 'Acci'#243'n: '
-      Category = 0
-      Hint = 'Acci'#243'n: '
-      Visible = ivAlways
-    end
-    object bt_motivo_baja: TdxBarControlContainerItem
-      Caption = 'Motivo: '
-      Category = 0
-      Hint = 'Motivo de la Baja '
-      Visible = ivNever
-    end
-    object bt_VerDetalle: TdxBarLargeButton
-      Caption = 'Ver Detalle'
-      Category = 0
-      Enabled = False
-      Hint = 'Ver Detalle'
-      Visible = ivAlways
-      ImageIndex = 13
-      AutoGrayScale = False
-    end
-    object bt_BuscarCliente: TdxBarLargeButton
-      Caption = 'F3 Clientes'
-      Category = 0
-      Hint = 'F3 Clientes'
-      Visible = ivAlways
-      ImageIndex = 56
-      OnClick = bt_BuscarClienteClick
-      AutoGrayScale = False
-    end
-    object Bt_Detalle: TdxBarLargeButton
-      Caption = 'Detalle'
-      Category = 0
-      Enabled = False
-      Hint = 'Detalle'
-      Visible = ivAlways
-      ImageIndex = 31
-      AutoGrayScale = False
-    end
-    object Bt_Imprimir_Arqueo: TdxBarLargeButton
-      Caption = 'Imprimir Arqueo'
-      Category = 0
-      Hint = 'Imprimir Arqueo'
-      Visible = ivAlways
-      ImageIndex = 20
-      AutoGrayScale = False
-    end
-    object Bt_Imprimir_convenio: TdxBarLargeButton
-      Caption = 'Imprimir Convenio'
-      Category = 0
-      Enabled = False
-      Hint = 'Imprimir Convenio'
-      Visible = ivAlways
-      ImageIndex = 20
-      AutoGrayScale = False
-    end
-    object BtLeerCodigo: TdxBarLargeButton
-      Caption = 'F8 Leer C'#243'digo'
-      Category = 0
-      Hint = 'Leer Codigo'
-      Visible = ivAlways
-      ImageIndex = 1
-      AutoGrayScale = False
-    end
-    object btIVA: TdxBarLargeButton
-      Caption = 'F4 Tipo IVA'
-      Category = 0
-      Hint = 'F4 Tipo IVA'
-      Visible = ivAlways
-      ImageIndex = 17
-      OnClick = btIVAClick
-      AutoGrayScale = False
-    end
-    object btnFormaPago: TdxBarLargeButton
-      Caption = 'F7 Forma de Pago'
-      Category = 0
-      Visible = ivAlways
-      ImageIndex = 30
-      OnClick = btnFormaPagoClick
-      AutoGrayScale = False
-    end
-    object Bt_imprimir_listadoFP: TdxBarLargeButton
-      Caption = 'Imprimir Listado FP'
-      Category = 0
-      Enabled = False
-      Hint = 'Imprimir Listado FP'
-      Visible = ivNever
-      ImageIndex = 20
-      AutoGrayScale = False
-    end
-    object bt_cierre_X: TdxBarLargeButton
-      Caption = '(Ctrl+X) Cierre X'
-      Category = 0
-      Hint = '(Ctrl+X) Cierre X'
-      Visible = ivAlways
-      ImageIndex = 57
       AutoGrayScale = False
     end
     object btCierreZ: TdxBarLargeButton
@@ -7769,158 +7791,14 @@ object FCajero: TFCajero
       OnClick = BtCierreXClick
       AutoGrayScale = False
     end
-    object dxBarStatic1: TdxBarStatic
-      Caption = 'New Item'
+    object btnAuditoriaFiscal: TdxBarLargeButton
+      Caption = 'Auditoria Z'
       Category = 0
-      Hint = 'New Item'
+      Hint = 'Auditoria Z'
       Visible = ivAlways
-    end
-    object dxUltimoId: TdxBarEdit
-      Align = iaRight
-      Caption = 'New Item'
-      Category = 0
-      Hint = 'New Item'
-      Visible = ivAlways
-      Text = 'CPB: 122'
-      ReadOnly = True
-      Width = 100
-    end
-    object dxBarListItem1: TdxBarListItem
-      Caption = 'New Item'
-      Category = 0
-      Visible = ivAlways
-    end
-    object dxBarContainerItem1: TdxBarContainerItem
-      Caption = 'New Item'
-      Category = 0
-      Visible = ivAlways
-      ItemLinks = <>
-    end
-    object dxBarColorCombo1: TdxBarColorCombo
-      Caption = 'New Item'
-      Category = 0
-      Hint = 'New Item'
-      Visible = ivAlways
-      Glyph.Data = {
-        36050000424D3605000000000000360400002800000010000000100000000100
-        0800000000000001000000000000000000000001000000000000000000000000
-        80000080000000808000800000008000800080800000C0C0C000C0DCC000F0CA
-        A6000020400000206000002080000020A0000020C0000020E000004000000040
-        20000040400000406000004080000040A0000040C0000040E000006000000060
-        20000060400000606000006080000060A0000060C0000060E000008000000080
-        20000080400000806000008080000080A0000080C0000080E00000A0000000A0
-        200000A0400000A0600000A0800000A0A00000A0C00000A0E00000C0000000C0
-        200000C0400000C0600000C0800000C0A00000C0C00000C0E00000E0000000E0
-        200000E0400000E0600000E0800000E0A00000E0C00000E0E000400000004000
-        20004000400040006000400080004000A0004000C0004000E000402000004020
-        20004020400040206000402080004020A0004020C0004020E000404000004040
-        20004040400040406000404080004040A0004040C0004040E000406000004060
-        20004060400040606000406080004060A0004060C0004060E000408000004080
-        20004080400040806000408080004080A0004080C0004080E00040A0000040A0
-        200040A0400040A0600040A0800040A0A00040A0C00040A0E00040C0000040C0
-        200040C0400040C0600040C0800040C0A00040C0C00040C0E00040E0000040E0
-        200040E0400040E0600040E0800040E0A00040E0C00040E0E000800000008000
-        20008000400080006000800080008000A0008000C0008000E000802000008020
-        20008020400080206000802080008020A0008020C0008020E000804000008040
-        20008040400080406000804080008040A0008040C0008040E000806000008060
-        20008060400080606000806080008060A0008060C0008060E000808000008080
-        20008080400080806000808080008080A0008080C0008080E00080A0000080A0
-        200080A0400080A0600080A0800080A0A00080A0C00080A0E00080C0000080C0
-        200080C0400080C0600080C0800080C0A00080C0C00080C0E00080E0000080E0
-        200080E0400080E0600080E0800080E0A00080E0C00080E0E000C0000000C000
-        2000C0004000C0006000C0008000C000A000C000C000C000E000C0200000C020
-        2000C0204000C0206000C0208000C020A000C020C000C020E000C0400000C040
-        2000C0404000C0406000C0408000C040A000C040C000C040E000C0600000C060
-        2000C0604000C0606000C0608000C060A000C060C000C060E000C0800000C080
-        2000C0804000C0806000C0808000C080A000C080C000C080E000C0A00000C0A0
-        2000C0A04000C0A06000C0A08000C0A0A000C0A0C000C0A0E000C0C00000C0C0
-        2000C0C04000C0C06000C0C08000C0C0A000F0FBFF00A4A0A000808080000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFF000101A6
-        000202B4000404E4FFFFFFFF000101A6000202B4000404E4FFFFFFFF000EF9A7
-        0030FABC00C0FCE4FFFFFFFF0000F9A70000FABC0000FCE4FFFFFFFF000001A7
-        000002BC000004E4FFFFFFFF000001A7000002BC000004E4FFFFFFFF000001A7
-        000002BC000004E4FFFFFFFF000001A7000002BC000004E4FFFFFFFF000001A7
-        000002BC000004E4FFFFFFFF0000F9A70000FABC0000FCE4FFFFFFFF000EF9A7
-        0030FABC00C0FCE4FFFFFFFF000101A6000202B4000404E4FFFFFFFF000101A6
-        000202B4000404E4FFFFFFFF5201F9075202FA075204FC07FFFFFFFF070056FF
-        070072FF0700D2FFFFFFFFFFFF5207FFFF5207FFFF5207FFFFFF}
-      Width = 100
-      Color = clBlack
-    end
-    object dxBarTreeViewCombo1: TdxBarTreeViewCombo
-      Caption = 'New Item'
-      Category = 0
-      Hint = 'New Item'
-      Visible = ivAlways
-      Glyph.Data = {
-        F6000000424DF600000000000000760000002800000010000000100000000100
-        0400000000008000000000000000000000001000000000000000000000000000
-        8000008000000080800080000000800080008080000080808000C0C0C0000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00FFFFFFFFFFFF
-        FFFFFFFFFF000FFFFFFFF0000F0F0FFFFFFFF0FFFF000FFFFFFFF0FFFFFFFFFF
-        FFFFF0FFFFFFFFFF000FF0FFFFF0000F0F0FF0FFFFF0FFFF000FF0FFFFFFFFFF
-        FFFFF0FFFF000FFFFFFFF0000F0F0FFFFFFFF0FFFF000FFFFFFFFFFFFFFFFFFF
-        FFFF000FFFFFFFFFFFFF0F0FFFFFFFFFFFFF000FFFFFFFFFFFFF}
-      Width = 100
-      Indent = 19
-      ShowButtons = True
-      ShowLines = True
-      ShowRoot = True
-      SortType = stNone
-    end
-    object dxBarToolbarsListItem1: TdxBarToolbarsListItem
-      Caption = 'New Item'
-      Category = 0
-      Visible = ivAlways
-    end
-    object dxBarProgressItem1: TdxBarProgressItem
-      Caption = 'New Item'
-      Category = 0
-      Hint = 'New Item'
-      Visible = ivAlways
-    end
-    object dxBarMRUListItem1: TdxBarMRUListItem
-      Caption = 'New Item'
-      Category = 0
-      Visible = ivAlways
-    end
-    object dxBarLookupCombo1: TdxBarLookupCombo
-      Caption = 'New Item'
-      Category = 0
-      Hint = 'New Item'
-      Visible = ivAlways
-      Glyph.Data = {
-        F6000000424DF600000000000000760000002800000010000000100000000100
-        0400000000008000000000000000000000001000000000000000000000000000
-        8000008000000080800080000000800080008080000080808000C0C0C0000000
-        FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00DDDDDDDDDDDD
-        DDDD000000000000000D0FFFF0FFFFFFFF0D0F77F0F777777F0D0CCCC0CCCCCC
-        CC0D0C77C0C777777C0D0CCCC0CCCCCCCC0D0F77F0F777777F0D0FFFF0FFFFFF
-        FF0D0F77F0F777777F0D0FFFF0FFFFFFFF0D000000000000000D0FFFCCCCFFF0
-        DDDD0F777777FFF0DDDD0FFFCCCCFFF0DDDD000000000000DDDD}
-      Width = 100
-      RowCount = 7
-    end
-    object dxBarButton1: TdxBarButton
-      Caption = 'New Item'
-      Category = 0
-      Hint = 'New Item'
-      Visible = ivAlways
-    end
-    object CustomdxBarCombo1: TCustomdxBarCombo
-      Caption = 'New Item'
-      Category = 0
-      Hint = 'New Item'
-      Visible = ivAlways
-      Width = 100
-    end
-    object dxBarEdit1: TdxBarEdit
-      Align = iaCenter
-      Caption = 'New Item'
-      Category = 0
-      Hint = 'New Item'
-      Visible = ivAlways
-      Width = 100
+      ImageIndex = 63
+      OnClick = btnAuditoriaFiscalClick
+      AutoGrayScale = False
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Items = (
