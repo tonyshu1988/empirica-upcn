@@ -1,6 +1,6 @@
 unit UPrincipal;
 
-interface             //4597417
+interface             //fiscal\
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
@@ -88,6 +88,7 @@ type
     procedure DriverFiscalFiscalError(ASender: TObject; PrinterCode, FiscalCode: Integer);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DriverFiscalDriverError(ASender: TObject; DriverError: Smallint);
+    procedure mostrarError(mensaje, titulo : String);
   private
     db_name, db_host, db_pass, db_user: string;
     if_puerto,if_marca,if_modelo: string;
@@ -97,6 +98,7 @@ type
     resultado: integer;
     errorDriver: integer;
     productoDetallado: boolean;
+    mensajeError, tituloError: string;
   public
     { Public declarations }
   end;
@@ -113,22 +115,44 @@ uses IniFiles, UUtilidades, Math, DateUtils;
 
 {$R *.dfm}
 
+//mensaje de error, con el botón "Aceptar"
+procedure TFPrincipal.mostrarError(mensaje, titulo : String);
+begin
+  mensaje:= mensaje + #13 + #13 + 'Para mas información contacte al soporte tecnico.';
+
+  application.MessageBox(pchar(mensaje), pchar(titulo), (MB_OK + MB_ICONSTOP));
+end;
+
+
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
+  tituloError:= 'ERROR MODULO FISCAL';
+  EKIni.Path:= 'Fiscal\';
   leerArchivoIni;
 
-  ZQ_Config.Close;
-  EKModelo.abrir(ZQ_Config);
-  configurarBoolean(ZQ_Config, 'clave', 'texto', 'ticketFacturaDetallada', 'SI', productoDetallado);
+  try
+    ZQ_Config.Close;
+    EKModelo.abrir(ZQ_Config);
+    configurarBoolean(ZQ_Config, 'clave', 'texto', 'ticketFacturaDetallada', 'SI', productoDetallado);
 
+    ZQ_Config_Fiscal.Close;
+    EKModelo.abrir(ZQ_Config_Fiscal);
+    if_puerto:= ZQ_Config_FiscalPUERTO.AsString;
+    if_velocidad:= ZQ_Config_FiscalVELOCIDAD.AsInteger;
+    if_marca:= ZQ_Config_FiscalMARCA.AsString;
+    if_modelo:=ZQ_Config_FiscalMODELO.AsString;
+    ZQ_Config_Fiscal.Close;
+  except
+    on e: exception do
+    begin
+      mensajeError:= 'Error de Base de Datos '+db_host+':'+db_name+
+                     #13+'Descripción:'+
+                     #13+e.Message;
 
-  ZQ_Config_Fiscal.Close;
-  EKModelo.abrir(ZQ_Config_Fiscal);
-  if_puerto:= ZQ_Config_FiscalPUERTO.AsString;
-  if_velocidad:= ZQ_Config_FiscalVELOCIDAD.AsInteger;
-  if_marca:= ZQ_Config_FiscalMARCA.AsString;
-  if_modelo:=ZQ_Config_FiscalMODELO.AsString;
-  ZQ_Config_Fiscal.Close;
+      mostrarError(mensajeError, tituloError);
+      Application.Terminate;
+    end;
+  end;
 
   ZQ_Factura.Close;
   ZQ_Items.Close;
@@ -138,7 +162,8 @@ begin
   DateTimeFechaHasta.Date:= EndOfTheMonth(EKModelo.Fecha);
 
   abrirImpresora();
-  //leerParametros();
+
+  leerParametros();
 end;
 
 
@@ -150,11 +175,7 @@ begin
   db_host:= EKIni.Ini.ReadString('DB', 'db_host', '127.0.0.1');
   db_user:= EKIni.Ini.ReadString('DB', 'db_user', 'SYSDBA');
   db_pass:= EKIni.Ini.ReadString('DB', 'db_pass', 'masterkey');
-  // viene por tabla de config_fiscal del SIGEFA
-//  if_puerto:= EKIni.Ini.ReadString('IF', 'if_puerto', 'COM1');
-//  if_velocidad:= EKIni.Ini.ReadInteger('IF', 'if_velocidad', 9600);
-//  if_marca:= EKIni.Ini.ReadString('IF', 'if_marca', 'EPSON');
-//  if_modelo:=EKIni.Ini.ReadString('IF', 'if_modelo', 'TM-U220AF');
+
   conexion.Database:= db_name;
   conexion.HostName:= db_host;
   conexion.Password:= db_pass;
@@ -181,9 +202,6 @@ begin
   begin
     editParametros.Text:= editParametros.Text+' '+ParamStr(i);
 
-//    if LeftStr(ParamStr(i), 2) = '-i' then //-i = Impresora
-//      impresora:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-//    else
       if LeftStr(ParamStr(i), 2) = '-c' then //-c = Comando. Z(Cierre Z), X(Cierre X), A(Auditoria Z), F(Impresion de Factura)
         comando:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
       else
@@ -204,6 +222,8 @@ begin
   end;
 
   Visible:= preview;
+  Panel1.Enabled:= preview;
+  
   try
     if comando <> '' then
     begin
@@ -223,8 +243,8 @@ begin
     ShowMessage('Comando a ejecutar incorrecto, verifique. Z(Cierre Z), X(Cierre X), A(Auditoria), F(Factura)');
   end;
 
-//  if not preview then
-//    Application.Terminate;
+  if not visible then
+    Application.Terminate;
 end;
 
 
@@ -355,7 +375,6 @@ begin
   if if_modelo = '' then
     exit;
 
-
   ZQ_Factura.Close;
   ZQ_Factura.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
   ZQ_Factura.Open;
@@ -373,7 +392,6 @@ begin
     ShowMessage('El Comprobante Código '+rellenar(id_cpb, '0', 8)+' es inexistente, verifique.');
     exit;
   end;
-
 
   if (marca = 'EPSON') then
   begin
@@ -657,14 +675,17 @@ procedure TFPrincipal.DriverFiscalFiscalError(ASender: TObject; PrinterCode, Fis
 begin
   if errorDriver = 5 then
   begin
-    ShowMessage(DecodificadorErrorFiscal(PrinterCode, 'PrinterCode'));
-    ShowMessage(DecodificadorErrorFiscal(FiscalCode, 'FiscalCode'));
+    mensajeError:= DecodificadorErrorFiscal(PrinterCode, 'PrinterCode')
+                   +#13+#13+DecodificadorErrorFiscal(PrinterCode, 'FiscalCode');
+
+    mostrarError(mensajeError, tituloError);
   end
 end;
 
 
 procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  Application.ProcessMessages;
   cerrarImpresora();
 end;
 
@@ -676,6 +697,8 @@ begin
   case DriverError of
     0..4: begin
         lblErrorDriver.Caption:= 'Error Puerto COM / Libreria DLL';
+        mensajeError:= 'Se produjo un error con el puerto de comunicaciones '+if_puerto;
+        mostrarError(mensajeError, tituloError);
       end;
     5: begin
         lblErrorDriver.Caption:= 'Error Impresora';

@@ -1,8 +1,8 @@
 object FPrincipal: TFPrincipal
-  Left = 500
-  Top = 205
+  Left = 372
+  Top = 271
   Width = 611
-  Height = 493
+  Height = 286
   Caption = 'Modulo Impresi'#243'n Fiscal'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -11,8 +11,7 @@ object FPrincipal: TFPrincipal
   Font.Name = 'Verdana'
   Font.Style = []
   OldCreateOrder = False
-  Position = poDesktopCenter
-  Visible = True
+  Position = poScreenCenter
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -21,7 +20,7 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 0
     Width = 603
-    Height = 466
+    Height = 259
     Align = alClient
     TabOrder = 0
     object Label2: TLabel
@@ -33,7 +32,7 @@ object FPrincipal: TFPrincipal
     end
     object lblErrorDriver: TLabel
       Left = 1
-      Top = 447
+      Top = 240
       Width = 601
       Height = 18
       Align = alBottom
@@ -202,18 +201,18 @@ object FPrincipal: TFPrincipal
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
-    Left = 552
-    Top = 248
+    Left = 536
+    Top = 80
   end
   object EKIni: TEKIni
     Archivo = 'config.ini'
-    Left = 552
-    Top = 360
+    Left = 536
+    Top = 192
   end
   object EKModelo: TEKModeloTransaccion
     Coneccion = conexion
-    Left = 552
-    Top = 304
+    Left = 536
+    Top = 136
   end
   object ZQ_Factura: TZQuery
     Connection = conexion
@@ -239,8 +238,8 @@ object FPrincipal: TFPrincipal
         Name = 'id_Comprobante'
         ParamType = ptUnknown
       end>
-    Left = 472
-    Top = 248
+    Left = 456
+    Top = 80
     ParamData = <
       item
         DataType = ftUnknown
@@ -317,8 +316,8 @@ object FPrincipal: TFPrincipal
         Name = 'id_Comprobante'
         ParamType = ptUnknown
       end>
-    Left = 472
-    Top = 304
+    Left = 456
+    Top = 136
     ParamData = <
       item
         DataType = ftUnknown
@@ -380,8 +379,8 @@ object FPrincipal: TFPrincipal
         Name = 'id_Comprobante'
         ParamType = ptUnknown
       end>
-    Left = 472
-    Top = 360
+    Left = 456
+    Top = 192
     ParamData = <
       item
         DataType = ftUnknown
@@ -428,8 +427,8 @@ object FPrincipal: TFPrincipal
         Name = 'idcpb'
         ParamType = ptUnknown
       end>
-    Left = 384
-    Top = 248
+    Left = 368
+    Top = 80
     ParamData = <
       item
         DataType = ftUnknown
@@ -458,8 +457,8 @@ object FPrincipal: TFPrincipal
       'select c.clave, c.fecha, c.numero, c.texto'
       'from configuracion_variables  c')
     Params = <>
-    Left = 384
-    Top = 304
+    Left = 368
+    Top = 136
     object ZQ_ConfigCLAVE: TStringField
       FieldName = 'CLAVE'
       Size = 50
@@ -482,8 +481,8 @@ object FPrincipal: TFPrincipal
       'from configuracion_fiscal  c'
       'where c.predeterminada='#39'S'#39)
     Params = <>
-    Left = 384
-    Top = 360
+    Left = 368
+    Top = 192
     object ZQ_Config_FiscalID: TIntegerField
       FieldName = 'ID'
       Required = True
