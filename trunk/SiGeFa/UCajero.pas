@@ -1095,7 +1095,6 @@ begin
 
   //Cargo el último nro de comprobante (para que sepa cual sigue)
   ultimoIDPago();
-
 end;
 
 
@@ -1106,6 +1105,7 @@ begin
   Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
   IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
   ClienteIVA:= ZQ_PersonasCOEFIVA.AsFloat;
+  CD_Comprobante.Edit;
   CD_ComprobanteID_CLIENTE.AsInteger:= Cliente;
   CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
   CD_ComprobantePORC_IVA.AsFloat:= ClienteIVA;
@@ -1628,9 +1628,7 @@ end;
 function TFCajero.guardarComprobante(): Boolean;
 var
   comprobante, vendedor: integer;
-
 begin
-
   Result:= False;
   //Hacer las validaciones correspondientes
 
@@ -1720,6 +1718,7 @@ begin
         // Mantengo el vendedor dpes de una venta
         if not (borrarVendedor) then
           IdVendedor:= vendedor;
+        CD_Comprobante.Edit;
         CD_ComprobanteID_VENDEDOR.Value:= IdVendedor;
         Result:= True;
         panelPreventa(false);
