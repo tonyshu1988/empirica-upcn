@@ -1716,6 +1716,7 @@ var
   operacion: string;
   fechaDateTime: TDateTime;
   fechaString: string;
+  lineaCodigo: string;
 begin
   Result:= false;
 
@@ -1796,6 +1797,7 @@ begin
                       ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsString:= 'N'
                     else
                     begin
+                      application.ProcessMessages;
                       //pregunto si el campo esta definido como FLOAT
                       if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftFloat then
                         ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= CD_ProcesarNovedadesNEW_VALUE.AsFloat
