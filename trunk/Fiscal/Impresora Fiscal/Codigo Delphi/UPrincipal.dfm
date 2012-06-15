@@ -25,7 +25,7 @@ object FPrincipal: TFPrincipal
     TabOrder = 0
     object Label2: TLabel
       Left = 8
-      Top = 53
+      Top = 49
       Width = 71
       Height = 13
       Caption = 'Parametros:'
@@ -47,7 +47,7 @@ object FPrincipal: TFPrincipal
     end
     object lblFactura: TLabel
       Left = 256
-      Top = 215
+      Top = 211
       Width = 61
       Height = 16
       Caption = 'Factura:'
@@ -62,7 +62,7 @@ object FPrincipal: TFPrincipal
       Left = 1
       Top = 1
       Width = 601
-      Height = 36
+      Height = 30
       Align = alTop
       BevelOuter = bvLowered
       TabOrder = 0
@@ -70,7 +70,7 @@ object FPrincipal: TFPrincipal
         Left = 1
         Top = 1
         Width = 599
-        Height = 34
+        Height = 28
         Align = alClient
         Alignment = taCenter
         AutoSize = False
@@ -85,109 +85,99 @@ object FPrincipal: TFPrincipal
     end
     object editParametros: TEdit
       Left = 80
-      Top = 46
+      Top = 42
       Width = 505
       Height = 21
       TabOrder = 1
     end
-    object DriverFiscal: TDriverFiscal
-      Left = 4
-      Top = 3
-      Width = 34
-      Height = 32
-      TabOrder = 2
-      OnFiscalError = DriverFiscalFiscalError
-      OnDriverError = DriverFiscalDriverError
-      ControlData = {00090000840300004F030000}
-    end
     object btnCierreZ: TButton
       Left = 9
-      Top = 112
+      Top = 108
       Width = 113
       Height = 25
       Caption = 'Cierre Z'
-      TabOrder = 3
+      TabOrder = 2
       OnClick = btnCierreZClick
     end
     object btnCierreX: TButton
       Left = 9
-      Top = 144
+      Top = 140
       Width = 113
       Height = 25
       Caption = 'Cierre X'
-      TabOrder = 4
+      TabOrder = 3
       OnClick = btnCierreXClick
     end
     object btnAuditoria: TButton
       Left = 9
-      Top = 176
+      Top = 172
       Width = 113
       Height = 25
       Caption = 'Auditoria'
-      TabOrder = 5
+      TabOrder = 4
       OnClick = btnAuditoriaClick
     end
     object editNumeroComprobante: TEdit
       Left = 128
-      Top = 210
+      Top = 206
       Width = 121
       Height = 21
-      TabOrder = 6
+      TabOrder = 5
       Text = '112085'
     end
     object btnFactura: TButton
       Left = 9
-      Top = 208
+      Top = 204
       Width = 113
       Height = 25
       Caption = 'Factura'
-      TabOrder = 7
+      TabOrder = 6
       OnClick = btnFacturaClick
     end
     object btnAbrirPuerto: TBitBtn
       Left = 9
-      Top = 80
+      Top = 76
       Width = 113
       Height = 25
       Caption = 'Abrir Puerto'
-      TabOrder = 8
+      TabOrder = 7
       OnClick = btnAbrirPuertoClick
     end
     object btnCerrarPuerto: TBitBtn
       Left = 128
-      Top = 80
+      Top = 76
       Width = 113
       Height = 25
       Caption = 'Cerrar Puerto'
-      TabOrder = 9
+      TabOrder = 8
       OnClick = btnCerrarPuertoClick
     end
     object DateTimeFechaDesde: TDateTimePicker
       Left = 128
-      Top = 178
+      Top = 174
+      Width = 121
+      Height = 21
+      Date = 41068.667614293980000000
+      Time = 41068.667614293980000000
+      TabOrder = 9
+    end
+    object DateTimeFechaHasta: TDateTimePicker
+      Left = 253
+      Top = 174
       Width = 121
       Height = 21
       Date = 41068.667614293980000000
       Time = 41068.667614293980000000
       TabOrder = 10
     end
-    object DateTimeFechaHasta: TDateTimePicker
-      Left = 253
-      Top = 178
-      Width = 121
-      Height = 21
-      Date = 41068.667614293980000000
-      Time = 41068.667614293980000000
-      TabOrder = 11
-    end
     object ComboBoxTipoAuditoria: TComboBox
       Left = 379
-      Top = 178
+      Top = 174
       Width = 214
       Height = 21
       ItemHeight = 13
       ItemIndex = 0
-      TabOrder = 12
+      TabOrder = 11
       Text = 'T = Reporte total general'
       Items.Strings = (
         'T = Reporte total general'
