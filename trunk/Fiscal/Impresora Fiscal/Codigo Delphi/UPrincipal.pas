@@ -86,7 +86,7 @@ type
     procedure btnCerrarPuertoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure mostrarError(mensaje, titulo : String);
-    procedure EpsonCancelarTicket();
+    procedure cancelarTicket(marca: string);
   private
     PrinterFiscal_Epson: _PrinterFiscalDisp;
     db_name, db_host, db_pass, db_user: string;
@@ -199,53 +199,64 @@ begin
   audFDesde:= '';
   audFHasta:= '';
 
-  for i:= 1 to ParamCount do
+  if ParamCount > 0 then
   begin
-    editParametros.Text:= editParametros.Text+' '+ParamStr(i);
-
-      if LeftStr(ParamStr(i), 2) = '-c' then //-c = Comando. Z(Cierre Z), X(Cierre X), A(Auditoria Z), F(Impresion de Factura)
-        comando:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-      else
-        if LeftStr(ParamStr(i), 2) = '-l' then //-l = Nro de comprobante a imprimir. Solo con comando F
-          id_cpb:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-        else
-          if LeftStr(ParamStr(i), 2) = '-t' then //-t = Tipo de auditoria Z (T=Total general; D=Detallado). Solo con comando A
-            audModo:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-          else
-            if LeftStr(ParamStr(i), 2) = '-d' then //-d = Fecha desde de la auditoria Z. Solo con comando A
-              audFDesde:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-            else
-              if LeftStr(ParamStr(i), 2) = '-h' then //-h = Fecha hasta de la auditoria Z. Solo con comando A
-                audFHasta:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-              else
-                if LeftStr(ParamStr(i), 2) = '-p' then //-p = si se muestra el panel principal
-                  preview:= true;
-  end;
-
-  Visible:= preview;
-  Panel1.Enabled:= preview;
-  
-  try
-    if comando <> '' then
+    for i:= 1 to ParamCount do
     begin
-      if comando = 'Z' then
-        cierreZ()
-      else
-        if comando = 'X' then
-          cierreX()
-        else
-          if comando = 'F' then
-            facturar(if_marca)
-          else
-            if comando = 'A' then
-              auditoria();
-    end;
-  except
-    ShowMessage('Comando a ejecutar incorrecto, verifique. Z(Cierre Z), X(Cierre X), A(Auditoria), F(Factura)');
-  end;
+      editParametros.Text:= editParametros.Text+' '+ParamStr(i);
 
-  if not visible then
-    Application.Terminate;
+        if LeftStr(ParamStr(i), 2) = '-c' then //-c = Comando. Z(Cierre Z), X(Cierre X), A(Auditoria Z), F(Impresion de Factura)
+          comando:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+        else
+          if LeftStr(ParamStr(i), 2) = '-l' then //-l = Nro de comprobante a imprimir. Solo con comando F
+            id_cpb:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+          else
+            if LeftStr(ParamStr(i), 2) = '-t' then //-t = Tipo de auditoria Z (T=Total general; D=Detallado). Solo con comando A
+              audModo:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+            else
+              if LeftStr(ParamStr(i), 2) = '-d' then //-d = Fecha desde de la auditoria Z. Solo con comando A
+                audFDesde:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+              else
+                if LeftStr(ParamStr(i), 2) = '-h' then //-h = Fecha hasta de la auditoria Z. Solo con comando A
+                  audFHasta:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+                else
+                  if LeftStr(ParamStr(i), 2) = '-p' then //-p = si se muestra el panel principal
+                    preview:= true;
+    end;
+
+    Visible:= preview;
+    Panel1.Enabled:= preview;
+  
+    try
+      if comando <> '' then
+      begin
+        if comando = 'Z' then
+          cierreZ()
+        else
+          if comando = 'X' then
+            cierreX()
+          else
+            if comando = 'F' then
+              facturar(if_marca)
+            else
+              if comando = 'A' then
+                auditoria();
+      end;
+    except
+      begin
+        mensajeError:= 'Comando a ejecutar incorrecto, verifique. Z(Cierre Z), X(Cierre X), A(Auditoria), F(Factura)';
+        mostrarError(mensajeError, tituloError);
+      end
+    end;
+
+    if not visible then
+      Application.Terminate;
+  end
+  else
+  begin
+    Visible:= true;
+    Panel1.Enabled:= true;
+  end
 end;
 
 
@@ -419,7 +430,8 @@ begin
 
   if ZQ_Factura.IsEmpty then
   begin
-    ShowMessage('El Comprobante Código ' + rellenar(id_cpb, '0', 8) + ' es inexistente, verifique.');
+    mensajeError:= 'El Comprobante Código ' + rellenar(id_cpb, '0', 8) + ' es inexistente.';
+    mostrarError(mensajeError, tituloError);
     exit;
   end;
 
@@ -497,7 +509,7 @@ begin
       mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
                      DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
       mostrarError(mensajeError, tituloError);
-      EpsonCancelarTicket;
+      cancelarTicket(marca);
       exit;
     end;
 
@@ -553,7 +565,7 @@ begin
         mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
                        DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
         mostrarError(mensajeError, tituloError);
-        EpsonCancelarTicket;
+        cancelarTicket(marca);
         exit;
       end;
 
@@ -569,7 +581,7 @@ begin
       mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
                      DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
       mostrarError(mensajeError, tituloError);
-      EpsonCancelarTicket;
+      cancelarTicket(marca);
       exit;
     end;
 
@@ -588,7 +600,7 @@ begin
         mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
                        DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
         mostrarError(mensajeError, tituloError);
-        EpsonCancelarTicket;
+        cancelarTicket(marca);
         exit;
       end;
 
@@ -627,7 +639,7 @@ begin
       mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
                      DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
       mostrarError(mensajeError, tituloError);
-      EpsonCancelarTicket;
+      cancelarTicket(marca);
       exit;
     end;
 
@@ -664,18 +676,22 @@ begin
     //PASO 9: CORTO EL TIQUET
     PrinterFiscal_Epson.CutPaper;
   end
+  
 end;
 
 
-procedure TFPrincipal.EpsonCancelarTicket;
+procedure TFPrincipal.cancelarTicket(marca: string);
 var
   aux1, aux2, aux3: widestring;
 begin
-  aux1:= 'CANCELADO';
-  aux2:= '000000000000';
-  aux3:= 'C';
+  if marca = 'EPSON' then
+  begin
+    aux1:= 'CANCELADO';
+    aux2:= '000000000000';
+    aux3:= 'C';
 
-  PrinterFiscal_Epson.SendInvoicePayment(aux1, aux2, aux3);
+    PrinterFiscal_Epson.SendInvoicePayment(aux1, aux2, aux3);
+  end;
 end;
 
 
