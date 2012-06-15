@@ -69,6 +69,7 @@ type
     ZQ_Config_FiscalPUERTO: TStringField;
     ZQ_Config_FiscalVELOCIDAD: TStringField;
     ZQ_Config_FiscalPREDETERMINADA: TStringField;
+    btnCancelarFactura: TButton;
     procedure FormCreate(Sender: TObject);
     procedure leerParametros();
     procedure leerArchivoIni();
@@ -87,6 +88,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure mostrarError(mensaje, titulo : String);
     procedure cancelarTicket(marca: string);
+    procedure btnCancelarFacturaClick(Sender: TObject);
   private
     PrinterFiscal_Epson: _PrinterFiscalDisp;
     db_name, db_host, db_pass, db_user: string;
@@ -99,7 +101,6 @@ type
     productoDetallado: boolean;
     mensajeError, tituloError: string;
   public
-    { Public declarations }
   end;
 
 var
@@ -755,6 +756,11 @@ begin
   cerrarImpresora();
 end;
 
+
+procedure TFPrincipal.btnCancelarFacturaClick(Sender: TObject);
+begin
+  cancelarTicket(if_modelo);
+end;
 
 end.
 

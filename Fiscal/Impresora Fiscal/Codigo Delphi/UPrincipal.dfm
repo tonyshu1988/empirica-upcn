@@ -2,7 +2,7 @@ object FPrincipal: TFPrincipal
   Left = 372
   Top = 271
   Width = 611
-  Height = 286
+  Height = 309
   Caption = 'Modulo Impresi'#243'n Fiscal'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 0
     Width = 603
-    Height = 259
+    Height = 282
     Align = alClient
     TabOrder = 0
     object Label2: TLabel
@@ -32,7 +32,7 @@ object FPrincipal: TFPrincipal
     end
     object lblErrorDriver: TLabel
       Left = 1
-      Top = 240
+      Top = 263
       Width = 601
       Height = 18
       Align = alBottom
@@ -181,6 +181,16 @@ object FPrincipal: TFPrincipal
       Items.Strings = (
         'T = Reporte total general'
         'D = Reporte detallado')
+    end
+    object btnCancelarFactura: TButton
+      Left = 9
+      Top = 236
+      Width = 113
+      Height = 25
+      Caption = 'Cancelar Factura'
+      TabOrder = 12
+      Visible = False
+      OnClick = btnCancelarFacturaClick
     end
   end
   object conexion: TZConnection
