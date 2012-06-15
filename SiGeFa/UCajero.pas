@@ -2530,14 +2530,14 @@ begin
   Result:= True;
   leerSistemaIni;
 
-////////IMPRIMIR DE VISUAL
+//////IMPRIMIR DE VISUAL
   if tipoAccion = 'F' then
     ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l ' + IntToStr(comprob) + ' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL)
   else
     ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL);
 
 
-////////IMPRIMIR DE DELPHI
+//IMPRIMIR DE DELPHI
 //  if tipoAccion = 'F' then
 //    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-l'+IntToStr(comprob)+' -c'+tipoAccion), nil, SW_SHOWNORMAL)
 //  else
