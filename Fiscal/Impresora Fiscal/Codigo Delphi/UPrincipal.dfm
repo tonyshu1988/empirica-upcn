@@ -123,7 +123,6 @@ object FPrincipal: TFPrincipal
       Width = 121
       Height = 21
       TabOrder = 5
-      Text = '113089'
     end
     object btnFactura: TButton
       Left = 9
