@@ -1725,8 +1725,9 @@ begin
 
   //si lo que esta pagando en Nota de Credito es mayo al saldo que tiene devuelvo False
   //para que no lo deje cancelar
-  if totalNotaCredito > ZQ_SaldoNotaCreditoSALDO.AsFloat then
-    Result:= false;
+  if totalNotaCredito <> 0 then
+    if totalNotaCredito > ZQ_SaldoNotaCreditoSALDO.AsFloat then
+      Result:= false;
 end;
 
 procedure TFABM_CPB_Recibo.alta_recibo_cta_cte_desde_afuera(
