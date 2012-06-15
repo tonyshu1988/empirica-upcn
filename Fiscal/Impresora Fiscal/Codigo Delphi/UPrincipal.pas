@@ -163,8 +163,8 @@ begin
   DateTimeFechaHasta.Date:= EndOfTheMonth(EKModelo.Fecha);
 
   abrirImpresora();
-  Visible:=true;
-//  leerParametros();
+
+  leerParametros();
 end;
 
 
@@ -532,7 +532,7 @@ begin
       if productoDetallado then
       begin
         LineaDescExtra1:= LeftStr(' Marca: ' + ZQ_ItemsNOMBRE_MARCA.AsString, 30);
-        LineaDescExtra2:= LeftStr(' C: ' + ZQ_ItemsNOMBRE_COLOR.AsString + ' / M: ' + ZQ_ItemsNOMBRE_MEDIDA.AsString, 30);
+        LineaDescExtra2:= LeftStr(' Col.: ' + ZQ_ItemsNOMBRE_COLOR.AsString + ' / Med.: ' + ZQ_ItemsNOMBRE_MEDIDA.AsString, 30);
       end;
 
       TasaAcrecentamiento:= 0;

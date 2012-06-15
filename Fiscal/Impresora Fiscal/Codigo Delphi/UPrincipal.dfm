@@ -123,7 +123,7 @@ object FPrincipal: TFPrincipal
       Width = 121
       Height = 21
       TabOrder = 5
-      Text = '112085'
+      Text = '113089'
     end
     object btnFactura: TButton
       Left = 9
@@ -353,16 +353,19 @@ object FPrincipal: TFPrincipal
   object ZQ_FormaPago: TZQuery
     Connection = conexion
     SQL.Strings = (
+      'select CASE'
+      '        WHEN (tf.descripcion like '#39'%EFECTIVO%'#39') THEN '#39'EFECTIVO'#39
+      '        ELSE (tf.descripcion)'
       
-        'select tf.descripcion as forma_pago_nombre, sum(fp.importe_real)' +
-        ' as forma_pago_importe'
+        '       END as forma_pago_nombre, sum(fp.importe_real) as forma_p' +
+        'ago_importe'
       'from comprobante_forma_pago fp'
       
         'left join tipo_formapago tf on (fp.id_tipo_formapag = tf.id_tipo' +
         '_formapago)'
       'where fp.id_comprobante = :id_Comprobante'
       '  and tf."IF" = '#39'S'#39
-      'group by tf.descripcion')
+      'group by 1')
     Params = <
       item
         DataType = ftUnknown
