@@ -79,6 +79,8 @@ contains
   EKDBGrid in 'EKDBGrid.pas',
   EKFiltrarColumna in 'EKFiltrarColumna.pas',
   EKCodigoBarra in 'EKCodigoBarra.pas',
-  EKIconizacion in 'EKIconizacion.pas';
+  EKIconizacion in 'EKIconizacion.pas',
+  EKMensajeMasDatoForm in 'EKMensajeMasDatoForm.pas' {FMensajeMasDato},
+  EKMensajeMasDato in 'EKMensajeMasDato.pas';
 
 end.
