@@ -138,6 +138,7 @@ var
   monto_max_venta: double;
   confirmarNotaPedido: string;
   asociar_pto_salida: string;
+  aplicaImprimirFiscal: string;
   imprimirEtiqueta_opcionReporte: integer;
 
   precio1 : string;
@@ -205,6 +206,7 @@ uses UPrincipal, USeleccionarSucursal, UPanelNotificacion, IniFiles,
 
 procedure TDM.configVariables();
 begin
+  aplicaImprimirFiscal:= 'VISUAL';
   imprimirEtiqueta_opcionReporte:= 1;
 
   ZQ_Configuracion_Variables.Open;
@@ -220,6 +222,7 @@ begin
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'notaCredito_diasVencimiento', notaCredito_diasVencimiento);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'asociar_pto_salida', asociar_pto_salida);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'tipo_reporte_etiquetas', imprimirEtiqueta_opcionReporte);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'aplicaImprimirFiscal', aplicaImprimirFiscal);
 
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO1', precio1);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO2', precio2);

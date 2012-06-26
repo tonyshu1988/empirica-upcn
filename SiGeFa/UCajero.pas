@@ -2530,21 +2530,24 @@ begin
   Result:= True;
   leerSistemaIni;
 
-//////IMPRIMIR DE VISUAL
-  if tipoAccion = 'F' then
-    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l ' + IntToStr(comprob) + ' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL)
+  if aplicaImprimirFiscal = 'VISUAL' then //IMPRIMIR DESDE VISUAL
+  begin
+    if tipoAccion = 'F' then //si es una factura
+      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l ' + IntToStr(comprob) + ' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL)
+    else //si es cierre z o x
+      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL);
+  end
   else
-    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL);
-
-
-//IMPRIMIR DE DELPHI
-//  if tipoAccion = 'F' then
-//    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-l'+IntToStr(comprob)+' -c'+tipoAccion), nil, SW_SHOWNORMAL)
-//  else
-//    if tipoAccion = 'A' then
-//      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-c'+tipoAccion+' -t'+auditoriaFiscalTipo+' -d'+auditoriaFiscalDesde+' -h'+auditoriaFiscalHasta), nil, SW_SHOWNORMAL)
-//    else
-//      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-c'+tipoAccion), nil, SW_SHOWNORMAL);
+  if aplicaImprimirFiscal = 'DELPHI' then //IMPRIMIR DESDE ELPHI
+  begin
+    if tipoAccion = 'F' then  //si es una factura
+      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-l'+IntToStr(comprob)+' -c'+tipoAccion), nil, SW_SHOWNORMAL)
+    else
+      if tipoAccion = 'A' then //si es la auditoria
+        ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-c'+tipoAccion+' -t'+auditoriaFiscalTipo+' -d'+auditoriaFiscalDesde+' -h'+auditoriaFiscalHasta), nil, SW_SHOWNORMAL)
+      else //si es cierre z o x
+        ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-c'+tipoAccion), nil, SW_SHOWNORMAL);
+  end;
 
 
   //  if (acumulado<=0) then
