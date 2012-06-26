@@ -19,9 +19,9 @@ type
     ModeloEscritura: TEKModeloTransaccion;
     EKIconizar: TEKIconizacion;
     EKInicio: TEKIni;
-    procedure IdFTPWork(ASender: TObject; AWorkMode: TWorkMode;
-      AWorkCount: Int64);
+    procedure IdFTPWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int64);
     procedure EKIconizarDblClick(Sender: TObject);
+    procedure configFTP();
   private
     { Private declarations }
   public
@@ -62,6 +62,20 @@ begin
 
   FPrincipal.memoLog.SelStart:= Length(FPrincipal.memoLog.Lines.Text);
   FPrincipal.memoLog.SelLength := 0;
+end;
+
+
+procedure TDM.configFTP;
+begin
+  with idFTP do
+  begin
+    Host:= FPrincipal.ftp_host;
+    Username:= FPrincipal.ftp_user;
+    Password:= FPrincipal.ftp_pass;
+    NATKeepAlive.IdleTimeMS:= 20000;
+    NATKeepAlive.IntervalMS:= 20000;
+    NATKeepAlive.UseKeepAlive:= true;
+  end;
 end;
 
 end.
