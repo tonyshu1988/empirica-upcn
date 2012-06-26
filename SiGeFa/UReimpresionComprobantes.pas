@@ -392,6 +392,12 @@ begin
     Exit;
   end;
 
+  if not ((ZQ_ComprobantePUNTO_VENTA.IsNull) and (ZQ_ComprobanteNUMERO_CPB.IsNull)) then
+  begin
+    Application.MessageBox(PChar('El comprobante seleccionado ya esta impreso.'), 'Reimpresión de Comprobantes', MB_OK + MB_ICONINFORMATION);
+    Exit;
+  end;
+
   leerSistemaIni();
 
   if (application.MessageBox(pchar('Desea Reimprimir el Comprobante Nro:' + ZQ_ComprobanteCODIGO.AsString + ' ?'), 'Reimpresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
