@@ -37,7 +37,7 @@ uses
   ZStoredProcedure, dxBar, dxBarExtItems, EKIconizacion, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdExplicitTLSClientServerBase,
   IdFTP, DBClient, ComCtrls, Buttons, Provider, DBCtrls, EKOrdenarGrilla, SqlTimSt,
-  Menus, midas, IdException, ImgList, EKImageList32;
+  Menus, midas, IdException, ImgList, EKImageList32, IdStack;
 
 const
   InputBoxMessage = WM_USER + 200; //para que hacer el imputBox con password
@@ -546,7 +546,12 @@ end;
 
 procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-
+  try
+    if dm.IdFTP.Connected then
+      FTP_desconectarse;
+  except
+    exit;
+  end;
 end;
 
 
@@ -1162,42 +1167,70 @@ end;
 function TFPrincipal.FTP_BajarArchivo(directorio, archivo: string): integer;
 var
   size_archivo: integer;
+  intentos, maxIntentos: integer;
 begin
-  try
-    //si no me puedo conectar salgo
-    if not dm.IdFTP.Connected then
-      if FTP_conectarse <> FTP_OK then
-        exit;
+  maxIntentos:= 1;
+  intentos:= 0;
+  repeat
+    try
+      //si no me puedo conectar salgo
+      if not dm.IdFTP.Connected then
+        if FTP_conectarse <> FTP_OK then
+          exit;
 
-    //por defecto tira el error general
-    Result:= FTP_ERROR_GRAL;
-    error_servidor_FTP:= '';
+      //por defecto tira el error general
+      Result:= FTP_ERROR_GRAL;
+      error_servidor_FTP:= '';
 
-    //me ubico en el directorio correspondiente en el ftp
-    DM.IdFTP.ChangeDir(directorio);
-    //si el archivo que voy a bajar ya lo tengo en la pc, lo borro
-    if FileExists(dirLocal + archivo) then
-      DeleteFile(dirLocal + archivo);
-    //obtengo el tamaño del archivo para setear el progrees bar
-    size_archivo:= DM.IdFTP.Size(archivo) div 1024;
-    pBar_Ftp.max:= size_archivo;
-    Application.ProcessMessages;
-
-    DM.IdFTP.BeginWork(wmRead, 0);
-    DM.IdFTP.Get(archivo, dirLocal + archivo, False, False);
-    DM.IdFTP.EndWork(wmRead);
-    Result:= FTP_OK;
-  except
-    on E: Exception do
-    begin
-      error_servidor_FTP:= 'ERROR SERVER FTP: '+e.Message;
+      //me ubico en el directorio correspondiente en el ftp
+      DM.IdFTP.ChangeDir(directorio);
+      //si el archivo que voy a bajar ya lo tengo en la pc, lo borro
       if FileExists(dirLocal + archivo) then
         DeleteFile(dirLocal + archivo);
+      //obtengo el tamaño del archivo para setear el progrees bar
+      size_archivo:= DM.IdFTP.Size(archivo) div 1024;
+      pBar_Ftp.max:= size_archivo;
+      Application.ProcessMessages;
 
-      if not (E is EIdConnClosedGracefully) then //manejo el error "Connection Closed Gracefully"
-        Result:= FTP_ERROR_CCG;
-    end;
-  end;
+      DM.IdFTP.BeginWork(wmRead, 0);
+      DM.IdFTP.Get(archivo, dirLocal + archivo, False, False);
+      DM.IdFTP.EndWork(wmRead);
+      Result:= FTP_OK;
+    except
+      On E:EIdSocketError Do
+      Begin
+        inc(intentos); //si se produjo un socke error 10054 repito el proceso para solucionarlo
+        if intentos <= maxIntentos then
+        begin
+          if E.LastError = 10054 then
+          Begin
+            ShowMessage('MATIAS');
+            RemoveComponent(dm.IdFTP);
+            dm.IdFTP.Free;
+            dm.IdFTP:= Nil;
+            dm.IdFTP:= TIdFTP.Create(Self);
+            DM.configFTP;
+          End;
+        end
+        else
+        begin
+          error_servidor_FTP:= 'ERROR SERVER FTP: '+e.Message;
+          if FileExists(dirLocal + archivo) then
+            DeleteFile(dirLocal + archivo);
+        end;
+      End;
+      on E: Exception do  //si se produjo un error distinto a socke error 10054 salgo y no reintento nada
+      begin
+        intentos:= 2;
+        error_servidor_FTP:= 'ERROR SERVER FTP: '+e.Message;
+        if FileExists(dirLocal + archivo) then
+          DeleteFile(dirLocal + archivo);
+
+        if not (E is EIdConnClosedGracefully) then //manejo el error "Connection Closed Gracefully"
+          Result:= FTP_ERROR_CCG;
+      end;
+    end; //TRY
+  until (intentos > maxIntentos) or (Result = FTP_OK)
 end;
 
 

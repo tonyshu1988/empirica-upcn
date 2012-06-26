@@ -12034,9 +12034,9 @@ object DM: TDM
     Host = '174.132.76.2'
     Password = 'grupo78gua'
     Username = 'grupogua'
-    NATKeepAlive.UseKeepAlive = False
-    NATKeepAlive.IdleTimeMS = 0
-    NATKeepAlive.IntervalMS = 0
+    NATKeepAlive.UseKeepAlive = True
+    NATKeepAlive.IdleTimeMS = 20000
+    NATKeepAlive.IntervalMS = 20000
     ProxySettings.ProxyType = fpcmNone
     ProxySettings.Port = 0
     Left = 32
