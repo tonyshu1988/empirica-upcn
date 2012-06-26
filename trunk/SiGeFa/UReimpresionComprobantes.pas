@@ -148,6 +148,9 @@ type
     ZQ_CambiarCuenta: TZQuery;
     EKListadoCuenta: TEKListadoSQL;
     ZQ_ComprobanteFECHA_HORA: TDateTimeField;
+    PopUpItemCambiarFPago: TMenuItem;
+    EKListadoFPago: TEKListadoSQL;
+    ZQ_CambiarFPago: TZQuery;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
@@ -170,6 +173,7 @@ type
     procedure AVerDetalleExecute(Sender: TObject);
     procedure PopUpItemCambiarCliente1Click(Sender: TObject);
     procedure PopUpItemCambiarCuentaClick(Sender: TObject);
+    procedure PopUpItemCambiarFPagoClick(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -390,25 +394,20 @@ begin
 
   leerSistemaIni();
 
-//IMPRIMIR DE VISUAL
   if (application.MessageBox(pchar('Desea Reimprimir el Comprobante Nro:' + ZQ_ComprobanteCODIGO.AsString + ' ?'), 'Reimpresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
   begin
-    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l ' + IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger) + ' -i ' + Impresora + ' -c ' + 'F'), nil, SW_SHOWNORMAL);
-    ZQ_Comprobante.Refresh;
-  end
+    if aplicaImprimirFiscal = 'VISUAL' then //IMPRIMIR DESDE VISUAL
+      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l ' + IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger) + ' -i ' + Impresora + ' -c F'), nil, SW_SHOWNORMAL)
+    else
+      if aplicaImprimirFiscal = 'DELPHI' then //IMPRIMIR DESDE ELPHI
+        ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-l'+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -cF'), nil, SW_SHOWNORMAL);
 
-//IMPRIMIR DE DELPHI
-//  if (application.MessageBox(pchar('Desea Reimprimir el Comprobante Nro:' + ZQ_ComprobanteCODIGO.AsString + ' ?'), 'Reimpresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
-//  begin
-//    ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-l'+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -cF'), nil, SW_SHOWNORMAL);
-//    ZQ_Comprobante.Refresh;
-//  end
+    ZQ_Comprobante.Refresh;
+  end;
 end;
 
 
-procedure TFReimpresionComprobantes.DBGridComprobantesDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFReimpresionComprobantes.DBGridComprobantesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 var
   vencida: string;
 begin
@@ -468,11 +467,13 @@ begin
     btnBuscar.Click;
 end;
 
+
 procedure TFReimpresionComprobantes.AEliminarExecute(Sender: TObject);
 begin
   if (btnEliminarComprob.Enabled) and (btnEliminarComprob.Visible = ivAlways) then
     btnEliminarComprob.Click;
 end;
+
 
 procedure TFReimpresionComprobantes.AVerDetalleExecute(Sender: TObject);
 begin
@@ -483,6 +484,7 @@ end;
 
 procedure TFReimpresionComprobantes.PopUpItemCambiarCliente1Click(Sender: TObject);
 var
+  transaccion_temp: string;
   id_comprobante: integer;
 begin
   if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_CLIENT') then
@@ -491,8 +493,9 @@ begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
+  transaccion_temp:= 'CAMBIAR CLIENTE COMPROBANTE';
   if (application.MessageBox(pchar('¿Desea cambiar el Cliente del comprobante de venta Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Cambiar Clienta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.iniciar_transaccion('CAMBIAR CLIENTE COMPROBANTE', []) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_temp, []) then
     begin
       try
         begin
@@ -509,15 +512,15 @@ begin
             else
             begin
               Application.MessageBox(PChar('No se seleccionó ningún cliente'), 'Cambiar Clienta', MB_OK + MB_ICONINFORMATION);
-              dm.EKModelo.cancelar_transaccion('CAMBIAR CLIENTE COMPROBANTE');
+              dm.EKModelo.cancelar_transaccion(transaccion_temp);
               Exit;
             end
           end;
 
-          if dm.EKModelo.finalizar_transaccion('CAMBIAR CLIENTE COMPROBANTE') then
+          if dm.EKModelo.finalizar_transaccion(transaccion_temp) then
             Application.MessageBox(PChar('Se cambio el Cliente del comprobante Nº: ' + ZQ_ComprobanteCODIGO.AsString), 'Cambiar Clienta', MB_OK + MB_ICONINFORMATION)
           else
-            dm.EKModelo.cancelar_transaccion('CAMBIAR CLIENTE COMPROBANTE');
+            dm.EKModelo.cancelar_transaccion(transaccion_temp);
 
           ZQ_Comprobante.Refresh;
           ZQ_Comprobante.Locate('id_comprobante', id_comprobante, [])
@@ -525,7 +528,7 @@ begin
       except
         begin
           Application.MessageBox(PChar('No se pudo cambiar el Cliente del comprobante Nº:' + ZQ_ComprobanteCODIGO.AsString), 'Cambiar Clienta', MB_OK + MB_ICONINFORMATION);
-          dm.EKModelo.cancelar_transaccion('CAMBIAR CLIENTE COMPROBANTE');
+          dm.EKModelo.cancelar_transaccion(transaccion_temp);
           Exit;
         end
       end;
@@ -535,6 +538,7 @@ end;
 
 procedure TFReimpresionComprobantes.PopUpItemCambiarCuentaClick(Sender: TObject);
 var
+  transaccion_temp: string;
   id_comp_fpago: integer;
 begin
   if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_CUENTA') then
@@ -543,8 +547,9 @@ begin
   if ZQ_Comprobante_FormaPago.IsEmpty then
     exit;
 
+  transaccion_temp:= 'CAMBIAR CUENTA COMPROBANTE';
   if (application.MessageBox(pchar('¿Desea cambiar la Cuenta del comprobante de venta Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Cambiar Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.iniciar_transaccion('CAMBIAR CUENTA COMPROBANTE', []) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_temp, []) then
     begin
       try
         begin
@@ -561,15 +566,15 @@ begin
             else
             begin
               Application.MessageBox(PChar('No se seleccionó ningúna Cuenta'), 'Cambiar Cuenta', MB_OK + MB_ICONINFORMATION);
-              dm.EKModelo.cancelar_transaccion('CAMBIAR CUENTA COMPROBANTE');
+              dm.EKModelo.cancelar_transaccion(transaccion_temp);
               Exit;
             end
           end;
 
-          if dm.EKModelo.finalizar_transaccion('CAMBIAR CUENTA COMPROBANTE') then
+          if dm.EKModelo.finalizar_transaccion(transaccion_temp) then
             Application.MessageBox(PChar('Se cambio la Cuenta del comprobante Nº: ' + ZQ_ComprobanteCODIGO.AsString), 'Cambiar Clienta', MB_OK + MB_ICONINFORMATION)
           else
-            dm.EKModelo.cancelar_transaccion('CAMBIAR CUENTA COMPROBANTE');
+            dm.EKModelo.cancelar_transaccion(transaccion_temp);
 
           ZQ_Comprobante_FormaPago.Refresh;
           ZQ_Comprobante_FormaPago.Locate('id_comprobante', id_comp_fpago, [])
@@ -577,7 +582,65 @@ begin
       except
         begin
           Application.MessageBox(PChar('No se pudo cambiar la Cuenta del comprobante Nº:' + ZQ_ComprobanteCODIGO.AsString), 'Cambiar Cuenta', MB_OK + MB_ICONINFORMATION);
-          dm.EKModelo.cancelar_transaccion('CAMBIAR CUENTA COMPROBANTE');
+          dm.EKModelo.cancelar_transaccion(transaccion_temp);
+          Exit;
+        end
+      end;
+    end;
+end;
+
+
+procedure TFReimpresionComprobantes.PopUpItemCambiarFPagoClick(Sender: TObject);
+var
+  transaccion_temp: string;
+  id_comp_fpago: integer;
+begin
+  if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_FPAGO') then
+    exit;
+
+  if ZQ_Comprobante_FormaPago.IsEmpty then
+    exit;
+
+  transaccion_temp:= 'CAMBIAR FPAGO COMPROBANTE';
+  if (application.MessageBox(pchar('¿Desea cambiar la Forma de Pago del comprobante de venta Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Cambiar Forma Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_temp, []) then
+    begin
+      try
+        begin
+          EKListadoFPago.SQL[3]:= '';
+          if ZQ_Comprobante_FormaPagoIF.AsString = 'S' then
+            EKListadoFPago.SQL[3]:= format('and f."IF" = %s', [QuotedStr('S')]);
+
+          if EKListadoFPago.Buscar then
+          begin
+            if EKListadoFPago.Resultado <> '' then
+            begin
+              id_comp_fpago:= ZQ_Comprobante_FormaPagoID_COMPROB_FP.AsInteger;
+              ZQ_CambiarFPago.Close;
+              ZQ_CambiarFPago.ParamByName('id_tipo_fpago').AsInteger:= StrToInt(EKListadoFPago.Resultado);
+              ZQ_CambiarFPago.ParamByName('id_comp_fpago').AsInteger:= id_comp_fpago;
+              ZQ_CambiarFPago.ExecSQL;
+            end
+            else
+            begin
+              Application.MessageBox(PChar('No se seleccionó ningúna Forma de Pago'), 'Cambiar Forma Pago', MB_OK + MB_ICONINFORMATION);
+              dm.EKModelo.cancelar_transaccion(transaccion_temp);
+              Exit;
+            end
+          end;
+
+          if dm.EKModelo.finalizar_transaccion(transaccion_temp) then
+            Application.MessageBox(PChar('Se cambio la Forma de Pago del comprobante Nº: ' + ZQ_ComprobanteCODIGO.AsString), 'Cambiar Forma Pago', MB_OK + MB_ICONINFORMATION)
+          else
+            dm.EKModelo.cancelar_transaccion(transaccion_temp);
+
+          ZQ_Comprobante_FormaPago.Refresh;
+          ZQ_Comprobante_FormaPago.Locate('id_comprobante', id_comp_fpago, [])
+        end
+      except
+        begin
+          Application.MessageBox(PChar('No se pudo cambiar la Forma de Pago del comprobante Nº:' + ZQ_ComprobanteCODIGO.AsString), 'Cambiar Forma Pago', MB_OK + MB_ICONINFORMATION);
+          dm.EKModelo.cancelar_transaccion(transaccion_temp);
           Exit;
         end
       end;

@@ -1923,6 +1923,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       Caption = 'Cambiar Cuenta'
       OnClick = PopUpItemCambiarCuentaClick
     end
+    object PopUpItemCambiarFPago: TMenuItem
+      Caption = 'Cambiar Forma Pago'
+      OnClick = PopUpItemCambiarFPagoClick
+    end
   end
   object ZQ_CambiarCliente: TZQuery
     Connection = DM.Conexion
@@ -2009,5 +2013,49 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     TituloVentana = 'Buscar Cuenta'
     Left = 771
     Top = 258
+  end
+  object EKListadoFPago: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select f.id_tipo_formapago, f.descripcion'
+      'from tipo_formapago f'
+      'where f.baja = '#39'N'#39
+      '')
+    CampoBuscar = 'descripcion'
+    CampoClave = 'id_tipo_formapago'
+    TituloVentana = 'Buscar Forma Pago'
+    Left = 875
+    Top = 259
+  end
+  object ZQ_CambiarFPago: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'update comprobante_forma_pago'
+      'set comprobante_forma_pago.id_tipo_formapag = :id_tipo_fpago'
+      'where comprobante_forma_pago.id_comprob_fp = :id_comp_fpago')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_tipo_fpago'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_comp_fpago'
+        ParamType = ptUnknown
+      end>
+    Left = 875
+    Top = 202
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_tipo_fpago'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_comp_fpago'
+        ParamType = ptUnknown
+      end>
   end
 end
