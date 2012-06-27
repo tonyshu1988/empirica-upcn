@@ -389,10 +389,7 @@ type
     lblSeniaTotal: TLabel;
     btnCargarSenia: TBitBtn;
     ACargarSenia: TAction;
-    PanelHistorico: TPanel;
     btnHistorial: TdxBarLargeButton;
-    DBGridHistorial_Preventa: TDBGrid;
-    DBGridHistorial_Detalle: TDBGrid;
     procedure btBuscProdClick(Sender: TObject);
     procedure VerLectorCB(sino: Boolean);
     procedure IdentificarCodigo();
@@ -458,7 +455,6 @@ type
     procedure ACancelarExecute(Sender: TObject);
     procedure ASalirExecute(Sender: TObject);
     procedure ACargarSeniaExecute(Sender: TObject);
-    procedure btnHistorialClick(Sender: TObject);
   Private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -962,7 +958,10 @@ begin
     CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
     CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= (ZQ_ProductosCOEF_DESCUENTO.AsFloat * 100);
     CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
-    CD_DetalleFacturaPORC_IVA.AsFloat:= ZQ_ProductosIMPUESTO_IVA.AsFloat;
+    if ZQ_ProductosIMPUESTO_IVA.IsNull or (ZQ_ProductosIMPUESTO_IVA.AsFloat = 0) then
+      CD_DetalleFacturaPORC_IVA.AsFloat:= 0.21
+    else
+      CD_DetalleFacturaPORC_IVA.AsFloat:= ZQ_ProductosIMPUESTO_IVA.AsFloat;
     CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= (CD_DetalleFacturaCANTIDAD.AsInteger * CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
     CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
     CD_DetalleFacturaIMPORTE_IVA.AsFloat:= CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
@@ -1671,15 +1670,6 @@ begin
     btnCargarSenia.Click;
 end;
 
-procedure TFABM_Preventa.btnHistorialClick(Sender: TObject);
-begin
-  if (CD_DetalleFactura.State <> dsBrowse) then
-    exit;
-
-  PanelHistorico.Visible:= not PanelHistorico.Visible;
-  GrupoGuardarCancelar.Enabled:= not GrupoGuardarCancelar.Enabled;
-  grupoVertical.Enabled:= not grupoVertical.Enabled;
-end;
 
 end.
 
