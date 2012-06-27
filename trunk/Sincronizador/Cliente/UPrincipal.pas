@@ -1204,7 +1204,7 @@ begin
         begin
           if E.LastError = 10054 then
           Begin
-            ShowMessage('MATIAS');
+//            ShowMessage('MATIAS');
             RemoveComponent(dm.IdFTP);
             dm.IdFTP.Free;
             dm.IdFTP:= Nil;
