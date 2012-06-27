@@ -22,34 +22,34 @@ object FPrincipal: TFPrincipal
   object panelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1011
-    Height = 505
+    Width = 1019
+    Height = 516
     Align = alClient
     TabOrder = 0
     object Splitter1: TSplitter
       Left = 1
-      Top = 236
-      Width = 1009
+      Top = 247
+      Width = 1017
       Height = 6
       Cursor = crVSplit
       Align = alBottom
     end
     object panelAbajo: TPanel
       Left = 1
-      Top = 242
-      Width = 1009
+      Top = 253
+      Width = 1017
       Height = 262
       Align = alBottom
       TabOrder = 0
       object Splitter2: TSplitter
-        Left = 617
+        Left = 625
         Top = 1
         Width = 4
         Height = 260
         Align = alRight
       end
       object panelListaNovedades: TPanel
-        Left = 621
+        Left = 629
         Top = 1
         Width = 387
         Height = 260
@@ -128,7 +128,7 @@ object FPrincipal: TFPrincipal
       object PanelLog: TPanel
         Left = 1
         Top = 1
-        Width = 616
+        Width = 624
         Height = 260
         Align = alClient
         BevelOuter = bvNone
@@ -136,7 +136,7 @@ object FPrincipal: TFPrincipal
         object lblTituloLog: TLabel
           Left = 0
           Top = 0
-          Width = 616
+          Width = 624
           Height = 15
           Align = alTop
           Alignment = taCenter
@@ -154,7 +154,7 @@ object FPrincipal: TFPrincipal
         object memoLog: TMemo
           Left = 0
           Top = 15
-          Width = 616
+          Width = 624
           Height = 245
           Align = alClient
           Color = 10026692
@@ -169,22 +169,22 @@ object FPrincipal: TFPrincipal
     object panelDatos: TPanel
       Left = 1
       Top = 42
-      Width = 1009
-      Height = 194
+      Width = 1017
+      Height = 205
       Align = alClient
       TabOrder = 1
       object Splitter3: TSplitter
-        Left = 617
+        Left = 625
         Top = 1
         Width = 4
-        Height = 164
+        Height = 175
         Align = alRight
       end
       object PanelTablas: TPanel
-        Left = 621
+        Left = 629
         Top = 1
         Width = 387
-        Height = 164
+        Height = 175
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 0
@@ -210,7 +210,7 @@ object FPrincipal: TFPrincipal
           Left = 0
           Top = 15
           Width = 387
-          Height = 149
+          Height = 160
           Align = alClient
           Color = 13695997
           DataSource = DS_Tablas_Actualizar
@@ -281,8 +281,8 @@ object FPrincipal: TFPrincipal
       object PanelDatosXML: TPanel
         Left = 1
         Top = 1
-        Width = 616
-        Height = 164
+        Width = 624
+        Height = 175
         Align = alClient
         BevelOuter = bvNone
         Caption = 'PanelDatosXML'
@@ -290,7 +290,7 @@ object FPrincipal: TFPrincipal
         object Label5: TLabel
           Left = 0
           Top = 0
-          Width = 616
+          Width = 624
           Height = 15
           Align = alTop
           Alignment = taCenter
@@ -308,8 +308,8 @@ object FPrincipal: TFPrincipal
         object DBGridUpload: TDBGrid
           Left = 0
           Top = 15
-          Width = 616
-          Height = 149
+          Width = 624
+          Height = 160
           Align = alClient
           Color = 15915716
           DataSource = DS_NovedadesCliente
@@ -452,8 +452,8 @@ object FPrincipal: TFPrincipal
         object DBGridDownload: TDBGrid
           Left = 0
           Top = 15
-          Width = 616
-          Height = 149
+          Width = 624
+          Height = 160
           Align = alClient
           Color = 15915716
           DataSource = DS_ProcesarNovedades
@@ -595,8 +595,8 @@ object FPrincipal: TFPrincipal
       end
       object PanelpBar_Ftp: TPanel
         Left = 1
-        Top = 165
-        Width = 1007
+        Top = 176
+        Width = 1015
         Height = 14
         Align = alBottom
         BevelOuter = bvNone
@@ -614,7 +614,7 @@ object FPrincipal: TFPrincipal
           Tag = 99
           Left = 40
           Top = 0
-          Width = 967
+          Width = 975
           Height = 14
           Align = alClient
           TabOrder = 0
@@ -622,8 +622,8 @@ object FPrincipal: TFPrincipal
       end
       object PanelpBar_Novedades: TPanel
         Left = 1
-        Top = 179
-        Width = 1007
+        Top = 190
+        Width = 1015
         Height = 14
         Align = alBottom
         BevelOuter = bvNone
@@ -641,7 +641,7 @@ object FPrincipal: TFPrincipal
           Tag = 99
           Left = 40
           Top = 0
-          Width = 967
+          Width = 975
           Height = 14
           Align = alClient
           TabOrder = 0
@@ -651,7 +651,7 @@ object FPrincipal: TFPrincipal
     object panelTitulo: TPanel
       Left = 1
       Top = 1
-      Width = 1009
+      Width = 1017
       Height = 41
       Align = alTop
       BevelOuter = bvNone
@@ -685,7 +685,7 @@ object FPrincipal: TFPrincipal
       object lblTituloSincro: TLabel
         Left = 0
         Top = 0
-        Width = 1009
+        Width = 1017
         Height = 15
         Align = alTop
         Alignment = taCenter
@@ -713,8 +713,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 557
-    Width = 1011
+    Top = 568
+    Width = 1019
     Height = 19
     Panels = <
       item
@@ -757,7 +757,7 @@ object FPrincipal: TFPrincipal
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
