@@ -160,6 +160,11 @@ type
     N9: TMenuItem;
     AShutdown: TAction;
     Shutdown1: TMenuItem;
+    Optica1: TMenuItem;
+    ABMObraSocial1: TMenuItem;
+    ABMMedicos1: TMenuItem;
+    AOP_ABMMedico: TAction;
+    AOP_ABMObraSocial: TAction;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -216,6 +221,8 @@ type
     procedure AABM_PersonasPtosExecute(Sender: TObject);
     procedure AConsulta_PreciosExecute(Sender: TObject);
     procedure AShutdownExecute(Sender: TObject);
+    procedure AOP_ABMMedicoExecute(Sender: TObject);
+    procedure AOP_ABMObraSocialExecute(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -252,7 +259,8 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria,
   UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging,
   UEstadisticaVentas, UReimpresionComprobantes, UABM_PersonasPuntos,
-  UConsulta_Precios, DateUtils, UCompararStock;
+  UConsulta_Precios, DateUtils, UCompararStock, UOP_ABMMedico,
+  UOP_ABMObraSocial;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -841,6 +849,16 @@ begin
       ShellExecute(FPrincipal.Handle, nil, Pchar(Ruta) , PChar('-activar'), nil, SW_SHOWNORMAL);
     end;
 
+end;
+
+procedure TFPrincipal.AOP_ABMMedicoExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFOP_ABMMedico, FOP_ABMMedico);
+end;
+
+procedure TFPrincipal.AOP_ABMObraSocialExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFOP_ABMObraSocial, FOP_ABMObraSocial);
 end;
 
 end.

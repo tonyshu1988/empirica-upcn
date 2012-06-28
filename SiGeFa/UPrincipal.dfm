@@ -5139,6 +5139,14 @@ object FPrincipal: TFPrincipal
       ImageIndex = 8
       OnExecute = AShutdownExecute
     end
+    object AOP_ABMMedico: TAction
+      Caption = 'ABM Medico'
+      OnExecute = AOP_ABMMedicoExecute
+    end
+    object AOP_ABMObraSocial: TAction
+      Caption = 'ABM Obra Social'
+      OnExecute = AOP_ABMObraSocialExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -5396,6 +5404,18 @@ object FPrincipal: TFPrincipal
         Caption = '&Salir'
         ImageIndex = 8
         OnClick = SalirClick
+      end
+    end
+    object Optica1: TMenuItem
+      Caption = 'Optica'
+      object ABMObraSocial1: TMenuItem
+        Tag = 1
+        Action = AOP_ABMObraSocial
+      end
+      object ABMMedicos1: TMenuItem
+        Tag = 1
+        Action = AOP_ABMMedico
+        Caption = 'ABM Medicos'
       end
     end
   end
