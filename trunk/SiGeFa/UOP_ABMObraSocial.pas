@@ -13,7 +13,7 @@ type
   TFOP_ABMObraSocial = class(TForm)
     PanelFondo: TPanel;
     PanelGrilla: TPanel;
-    DBGridMarca: TDBGrid;
+    DBGridObraSocial: TDBGrid;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
     btnVerDetalle: TdxBarLargeButton;
@@ -27,11 +27,8 @@ type
     btnSalir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
-    ZQ_Marcas: TZQuery;
-    DS_Marcas: TDataSource;
-    ZQ_MarcasID_MARCA: TIntegerField;
-    ZQ_MarcasNOMBRE_MARCA: TStringField;
-    ZQ_MarcasBAJA: TStringField;
+    ZQ_OP_ObraSocial: TZQuery;
+    DS_OP_ObraSocial: TDataSource;
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
@@ -39,11 +36,7 @@ type
     Label1: TLabel;
     DBENombre: TDBEdit;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
-    ZQ_MarcasCODIGO_MARCA: TIntegerField;
     Label2: TLabel;
-    DBECodigo: TDBEdit;
-    ZQ_UltimoNro: TZQuery;
-    ZQ_UltimoNroCODIGO_MARCA: TIntegerField;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -54,12 +47,12 @@ type
     AGuardar: TAction;
     ACancelar: TAction;
     EKBuscar: TEKBusquedaAvanzada;
-    RepMarca: TQuickRep;
+    RepObraSocial: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
     QRLabel17: TQRLabel;
-    RepMarca_Subtitulo: TQRLabel;
-    RepMarca_Titulo: TQRLabel;
+    RepObraSocial_Subtitulo: TQRLabel;
+    RepObraSocial_Titulo: TQRLabel;
     QRBand10: TQRBand;
     QRDBText19: TQRDBText;
     QRDBText1: TQRDBText;
@@ -79,6 +72,24 @@ type
     QRLabel1: TQRLabel;
     EKVistaPrevia: TEKVistaPreviaQR;
     btnExcel: TdxBarLargeButton;
+    ZQ_OP_ObraSocialID_OS: TIntegerField;
+    ZQ_OP_ObraSocialCODIGO: TStringField;
+    ZQ_OP_ObraSocialNOMBRE: TStringField;
+    ZQ_OP_ObraSocialDIRECCION: TStringField;
+    ZQ_OP_ObraSocialTELEFONO: TStringField;
+    ZQ_OP_ObraSocialDESCRIPCION: TStringField;
+    ZQ_OP_ObraSocialBAJA: TStringField;
+    Label3: TLabel;
+    DBEdit1: TDBEdit;
+    Label4: TLabel;
+    DBEdit2: TDBEdit;
+    DBECodigo: TDBEdit;
+    GroupBox1: TGroupBox;
+    DBMemo1: TDBMemo;
+    QRLabel2: TQRLabel;
+    QRDBText3: TQRDBText;
+    QRLabel3: TQRLabel;
+    QRDBText4: TQRDBText;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -89,7 +100,7 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridMarcaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridObraSocialDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     //------TECLAS RAPIDAS
     procedure ANuevoExecute(Sender: TObject);
     procedure AModificarExecute(Sender: TObject);
@@ -132,26 +143,19 @@ end;
 procedure TFOP_ABMObraSocial.btnBuscarClick(Sender: TObject);
 begin
   if EKBuscar.Buscar then
-    dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
+    dm.mostrarCantidadRegistro(ZQ_OP_ObraSocial, lblCantidadRegistros);
 end;
 
 
 procedure TFOP_ABMObraSocial.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
   begin
-    DBGridMarca.Enabled := false;
+    DBGridObraSocial.Enabled := false;
     PanelEdicion.Visible:= true;
 
-    ZQ_UltimoNro.Close;
-    ZQ_UltimoNro.Open;
-
-    ZQ_Marcas.Append;
-    ZQ_MarcasBAJA.AsString:= 'N';
-    if ZQ_UltimoNro.IsEmpty then
-      ZQ_MarcasCODIGO_MARCA.AsInteger:= 1
-    else
-      ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
+    ZQ_OP_ObraSocial.Append;
+    ZQ_OP_ObraSocialBAJA.AsString:= 'N';
 
     DBECodigo.SetFocus;
     GrupoEditando.Enabled := false;
@@ -162,24 +166,15 @@ end;
 
 procedure TFOP_ABMObraSocial.btnModificarClick(Sender: TObject);
 begin
-  if (ZQ_Marcas.IsEmpty) or (ZQ_MarcasID_MARCA.AsInteger = 0) then
+  if (ZQ_OP_ObraSocial.IsEmpty) then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
   begin
-    DBGridMarca.Enabled := false;
+    DBGridObraSocial.Enabled := false;
     PanelEdicion.Visible:= true;
 
-    ZQ_Marcas.Edit;
-    if ZQ_MarcasCODIGO_MARCA.IsNull then
-    begin
-      ZQ_UltimoNro.Close;
-      ZQ_UltimoNro.Open;
-      if ZQ_UltimoNro.IsEmpty then
-        ZQ_MarcasCODIGO_MARCA.AsInteger:= 1
-      else
-        ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
-    end;
+    ZQ_OP_ObraSocial.Edit;
 
     DBECodigo.SetFocus;
     GrupoEditando.Enabled := false;
@@ -192,15 +187,15 @@ procedure TFOP_ABMObraSocial.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'N') or (ZQ_MarcasID_MARCA.AsInteger = 0)then
+  if (ZQ_OP_ObraSocial.IsEmpty) OR (ZQ_OP_ObraSocialBAJA.AsString <> 'N')then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea dar de baja la "Marca" seleccionada?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea dar de baja la "Obra Social" seleccionada?'), 'ABM Obra Social', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
     begin
-      ZQ_Marcas.Edit;
-      ZQ_MarcasBAJA.AsString:='S';
+      ZQ_OP_ObraSocial.Edit;
+      ZQ_OP_ObraSocialBAJA.AsString:='S';
     end
     else
       exit;
@@ -208,9 +203,9 @@ begin
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
 
-    recNo:= ZQ_Marcas.RecNo;
-    ZQ_Marcas.Refresh;
-    ZQ_Marcas.RecNo:= recNo;
+    recNo:= ZQ_OP_ObraSocial.RecNo;
+    ZQ_OP_ObraSocial.Refresh;
+    ZQ_OP_ObraSocial.RecNo:= recNo;
   end;
 end;
 
@@ -219,15 +214,15 @@ procedure TFOP_ABMObraSocial.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'S') or (ZQ_MarcasID_MARCA.AsInteger = 0) then
+  if (ZQ_OP_ObraSocial.IsEmpty) OR (ZQ_OP_ObraSocialBAJA.AsString <> 'S') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea reactivar la "Marca" seleccionada?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea reactivar la "Obra Social" seleccionada?'), 'ABM Obra Social', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
     begin
-      ZQ_Marcas.Edit;
-      ZQ_MarcasBAJA.AsString:='N';
+      ZQ_OP_ObraSocial.Edit;
+      ZQ_OP_ObraSocialBAJA.AsString:='N';
     end
     else
       exit;
@@ -235,9 +230,9 @@ begin
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
 
-    recNo:= ZQ_Marcas.RecNo;
-    ZQ_Marcas.Refresh;
-    ZQ_Marcas.RecNo:= recNo;
+    recNo:= ZQ_OP_ObraSocial.RecNo;
+    ZQ_OP_ObraSocial.Refresh;
+    ZQ_OP_ObraSocial.RecNo:= recNo;
   end;
 end;
 
@@ -265,14 +260,14 @@ begin
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
-      DBGridMarca.Enabled:= true;
-      DBGridMarca.SetFocus;
+      DBGridObraSocial.Enabled:= true;
+      DBGridObraSocial.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
       PanelEdicion.Visible := false;
-      recNo:= ZQ_Marcas.RecNo;
-      ZQ_Marcas.Refresh;
-      ZQ_Marcas.RecNo:= recNo;
+      recNo:= ZQ_OP_ObraSocial.RecNo;
+      ZQ_OP_ObraSocial.Refresh;
+      ZQ_OP_ObraSocial.RecNo:= recNo;
     end
   except
     begin
@@ -281,7 +276,7 @@ begin
     end
   end;
 
-  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);    
+  dm.mostrarCantidadRegistro(ZQ_OP_ObraSocial, lblCantidadRegistros);
 end;
 
 
@@ -289,8 +284,8 @@ procedure TFOP_ABMObraSocial.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
-    DBGridMarca.Enabled:=true;
-    DBGridMarca.SetFocus;
+    DBGridObraSocial.Enabled:=true;
+    DBGridObraSocial.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
     PanelEdicion.Visible := false;
@@ -304,15 +299,15 @@ begin
   StaticTxtBaja.Color:= FPrincipal.baja;
 
   EKBuscar.Abrir;
-  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
+  dm.mostrarCantidadRegistro(ZQ_OP_ObraSocial, lblCantidadRegistros);
 end;
 
 
-procedure TFOP_ABMObraSocial.DBGridMarcaDrawColumnCell(Sender: TObject;
+procedure TFOP_ABMObraSocial.DBGridObraSocialDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  FPrincipal.PintarFilasGrillasConBajas(DBGridMarca, ZQ_MarcasBAJA.AsString, Rect, DataCol, Column, State);
+  FPrincipal.PintarFilasGrillasConBajas(DBGridObraSocial, ZQ_OP_ObraSocialBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
 
@@ -370,10 +365,10 @@ end;
 
 procedure TFOP_ABMObraSocial.btnImprimirClick(Sender: TObject);
 begin
-  if ZQ_Marcas.IsEmpty then
+  if ZQ_OP_ObraSocial.IsEmpty then
     exit;
 
-  DM.VariablesReportes(RepMarca);
+  DM.VariablesReportes(RepObraSocial);
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
@@ -381,8 +376,8 @@ end;
 
 procedure TFOP_ABMObraSocial.btnExcelClick(Sender: TObject);
 begin
-  if not ZQ_Marcas.IsEmpty then
-    dm.ExportarEXCEL(DBGridMarca);
+  if not ZQ_OP_ObraSocial.IsEmpty then
+    dm.ExportarEXCEL(DBGridObraSocial);
 end;
 
 end.

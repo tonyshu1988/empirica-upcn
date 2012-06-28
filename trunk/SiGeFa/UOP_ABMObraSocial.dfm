@@ -1,8 +1,8 @@
 object FOP_ABMObraSocial: TFOP_ABMObraSocial
-  Left = 318
-  Top = 227
-  Width = 870
-  Height = 500
+  Left = 193
+  Top = 63
+  Width = 1024
+  Height = 768
   Caption = 'ABM Obra Social'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,12 +22,223 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 862
-    Height = 402
+    Width = 1016
+    Height = 670
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object RepMarca: TQuickRep
+    object PanelGrilla: TPanel
+      Left = 0
+      Top = 0
+      Width = 1016
+      Height = 670
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 5
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object DBGridObraSocial: TDBGrid
+        Left = 5
+        Top = 5
+        Width = 1006
+        Height = 447
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_OP_ObraSocial
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridObraSocialDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'CODIGO'
+            Title.Caption = 'C'#243'digo'
+            Width = 80
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE'
+            Title.Caption = 'Nombre'
+            Width = 376
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DIRECCION'
+            Title.Caption = 'Direcci'#243'n'
+            Width = 258
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TELEFONO'
+            Title.Caption = 'Tel'#233'fonos'
+            Width = 247
+            Visible = True
+          end>
+      end
+      object PanelEdicion: TPanel
+        Left = 5
+        Top = 452
+        Width = 1006
+        Height = 213
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 1
+        Visible = False
+        object Label1: TLabel
+          Left = 14
+          Top = 37
+          Width = 50
+          Height = 13
+          Caption = 'Nombre:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label2: TLabel
+          Left = 19
+          Top = 12
+          Width = 45
+          Height = 13
+          Caption = 'C'#243'digo:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label3: TLabel
+          Left = 6
+          Top = 61
+          Width = 58
+          Height = 13
+          Caption = 'Direcci'#243'n:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label4: TLabel
+          Left = 4
+          Top = 85
+          Width = 60
+          Height = 13
+          Caption = 'Tel'#233'fonos:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object DBENombre: TDBEdit
+          Left = 71
+          Top = 33
+          Width = 491
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'NOMBRE'
+          DataSource = DS_OP_ObraSocial
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+        end
+        object DBEdit1: TDBEdit
+          Left = 71
+          Top = 57
+          Width = 492
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'DIRECCION'
+          DataSource = DS_OP_ObraSocial
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+        end
+        object DBEdit2: TDBEdit
+          Left = 71
+          Top = 81
+          Width = 492
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'TELEFONO'
+          DataSource = DS_OP_ObraSocial
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 3
+        end
+        object DBECodigo: TDBEdit
+          Left = 71
+          Top = 9
+          Width = 97
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'CODIGO'
+          DataSource = DS_OP_ObraSocial
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+        end
+        object GroupBox1: TGroupBox
+          Left = 0
+          Top = 112
+          Width = 1006
+          Height = 101
+          Align = alBottom
+          Caption = '  Descripci'#243'n  '
+          TabOrder = 4
+          object DBMemo1: TDBMemo
+            Left = 2
+            Top = 15
+            Width = 1002
+            Height = 84
+            Align = alClient
+            DataField = 'DESCRIPCION'
+            DataSource = DS_OP_ObraSocial
+            TabOrder = 0
+          end
+        end
+      end
+    end
+    object RepObraSocial: TQuickRep
       Tag = 99
       Left = 60
       Top = 76
@@ -38,7 +249,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       Frame.DrawBottom = False
       Frame.DrawLeft = False
       Frame.DrawRight = False
-      DataSet = ZQ_Marcas
+      DataSet = ZQ_OP_ObraSocial
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -129,9 +340,9 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Stretch = True
         end
         object QRLabel17: TQRLabel
-          Left = 321
+          Left = 309
           Top = 47
-          Width = 76
+          Width = 100
           Height = 19
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -140,14 +351,14 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            849.312500000000000000
+            817.562500000000000000
             124.354166666666700000
-            201.083333333333300000)
+            264.583333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'MARCAS'
+          Caption = 'Obra Social'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -160,10 +371,10 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           ExportAs = exptText
           FontSize = 12
         end
-        object RepMarca_Subtitulo: TQRLabel
-          Left = 291
+        object RepObraSocial_Subtitulo: TQRLabel
+          Left = 276
           Top = 26
-          Width = 135
+          Width = 166
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -172,14 +383,14 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            769.937500000000000000
+            730.250000000000000000
             68.791666666666680000
-            357.187500000000000000)
+            439.208333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepMarca_Subtitulo'
+          Caption = 'RepObraSocial_Subtitulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -192,10 +403,10 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           ExportAs = exptText
           FontSize = 9
         end
-        object RepMarca_Titulo: TQRLabel
-          Left = 284
+        object RepObraSocial_Titulo: TQRLabel
+          Left = 264
           Top = 2
-          Width = 150
+          Width = 190
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -204,14 +415,14 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            751.416666666666800000
+            698.500000000000000000
             5.291666666666667000
-            396.875000000000000000)
+            502.708333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepMarca_Titulo'
+          Caption = 'RepObraSocial_Titulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -256,7 +467,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         object QRDBText19: TQRDBText
           Left = 5
           Top = 0
-          Width = 132
+          Width = 60
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -267,23 +478,23 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             37.041666666666670000
             13.229166666666670000
             0.000000000000000000
-            349.250000000000000000)
+            158.750000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Marcas
-          DataField = 'CODIGO_MARCA'
+          DataSet = ZQ_OP_ObraSocial
+          DataField = 'CODIGO'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
         object QRDBText1: TQRDBText
-          Left = 148
+          Left = 68
           Top = 0
-          Width = 525
+          Width = 253
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -292,16 +503,16 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            391.583333333333300000
+            179.916666666666700000
             0.000000000000000000
-            1389.062500000000000000)
+            669.395833333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Marcas
-          DataField = 'NOMBRE_MARCA'
+          DataSet = ZQ_OP_ObraSocial
+          DataField = 'NOMBRE'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -327,8 +538,62 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Marcas
+          DataSet = ZQ_OP_ObraSocial
           DataField = 'BAJA'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText3: TQRDBText
+          Left = 324
+          Top = 0
+          Width = 165
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            857.250000000000000000
+            0.000000000000000000
+            436.562499999999900000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_OP_ObraSocial
+          DataField = 'DIRECCION'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText4: TQRDBText
+          Left = 492
+          Top = 0
+          Width = 187
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1301.750000000000000000
+            0.000000000000000000
+            494.770833333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_OP_ObraSocial
+          DataField = 'TELEFONO'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -614,7 +879,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         object QRLabel29: TQRLabel
           Left = 4
           Top = 2
-          Width = 117
+          Width = 61
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -625,7 +890,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             37.041666666666670000
             10.583333333333330000
             5.291666666666667000
-            309.562500000000000000)
+            161.395833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -644,7 +909,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           FontSize = 8
         end
         object QRLabel30: TQRLabel
-          Left = 148
+          Left = 68
           Top = 2
           Width = 143
           Height = 14
@@ -655,7 +920,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            391.583333333333300000
+            179.916666666666700000
             5.291666666666667000
             378.354166666666700000)
           Alignment = taLeftJustify
@@ -707,126 +972,69 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           ExportAs = exptText
           FontSize = 8
         end
-      end
-    end
-    object PanelGrilla: TPanel
-      Left = 0
-      Top = 0
-      Width = 862
-      Height = 402
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 5
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      object DBGridMarca: TDBGrid
-        Left = 5
-        Top = 5
-        Width = 852
-        Height = 334
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_Marcas
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGridMarcaDrawColumnCell
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'CODIGO_MARCA'
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'digo'
-            Width = 90
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE_MARCA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Marca'
-            Width = 720
-            Visible = True
-          end>
-      end
-      object PanelEdicion: TPanel
-        Left = 5
-        Top = 339
-        Width = 852
-        Height = 58
-        Align = alBottom
-        BevelOuter = bvNone
-        TabOrder = 1
-        Visible = False
-        object Label1: TLabel
-          Left = 12
-          Top = 37
-          Width = 39
-          Height = 13
-          Caption = 'Marca:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label2: TLabel
-          Left = 6
-          Top = 12
-          Width = 45
-          Height = 13
-          Caption = 'C'#243'digo:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object DBENombre: TDBEdit
-          Left = 56
-          Top = 33
-          Width = 718
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'NOMBRE_MARCA'
-          DataSource = DS_Marcas
-          Font.Charset = DEFAULT_CHARSET
+        object QRLabel2: TQRLabel
+          Left = 324
+          Top = 2
+          Width = 143
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            857.250000000000000000
+            5.291666666666667000
+            378.354166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Direcci'#243'n'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 1
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
         end
-        object DBECodigo: TDBEdit
-          Left = 56
-          Top = 6
-          Width = 81
-          Height = 21
-          CharCase = ecUpperCase
-          Color = clMenuBar
-          DataField = 'CODIGO_MARCA'
-          DataSource = DS_Marcas
-          Font.Charset = DEFAULT_CHARSET
+        object QRLabel3: TQRLabel
+          Left = 493
+          Top = 2
+          Width = 143
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1304.395833333333000000
+            5.291666666666667000
+            378.354166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Tel'#233'fonos'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 0
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
         end
       end
     end
@@ -834,7 +1042,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 862
+    Width = 1016
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -856,7 +1064,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
-      Left = 752
+      Left = 906
       Top = 1
       Width = 109
       Height = 17
@@ -1450,38 +1658,50 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         'btnCancelar')
     end
   end
-  object ZQ_Marcas: TZQuery
+  object ZQ_OP_ObraSocial: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
-      'from marca'
-      'order by NOMBRE_MARCA')
+      'from OPTICA_OS os'
+      'order by os.nombre')
     Params = <>
     Left = 48
     Top = 64
-    object ZQ_MarcasID_MARCA: TIntegerField
-      FieldName = 'ID_MARCA'
+    object ZQ_OP_ObraSocialID_OS: TIntegerField
+      FieldName = 'ID_OS'
     end
-    object ZQ_MarcasCODIGO_MARCA: TIntegerField
-      FieldName = 'CODIGO_MARCA'
-      DisplayFormat = '0000'
+    object ZQ_OP_ObraSocialCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 100
     end
-    object ZQ_MarcasNOMBRE_MARCA: TStringField
-      FieldName = 'NOMBRE_MARCA'
-      Size = 50
+    object ZQ_OP_ObraSocialNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
     end
-    object ZQ_MarcasBAJA: TStringField
+    object ZQ_OP_ObraSocialDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 100
+    end
+    object ZQ_OP_ObraSocialTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_OP_ObraSocialDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
+    end
+    object ZQ_OP_ObraSocialBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
     end
   end
-  object DS_Marcas: TDataSource
-    DataSet = ZQ_Marcas
+  object DS_OP_ObraSocial: TDataSource
+    DataSet = ZQ_OP_ObraSocial
     Left = 48
     Top = 120
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridMarca
+    Grilla = DBGridObraSocial
     Filtros = <
       item
         TituloColumna = 'C'#243'digo'
@@ -1496,25 +1716,12 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     PermitirOrdenar = True
     PermitirMover = False
     PermitirFiltrar = False
-    Left = 48
-    Top = 179
-  end
-  object ZQ_UltimoNro: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select first 1 CODIGO_MARCA'
-      'from MARCA'
-      'order by CODIGO_MARCA desc')
-    Params = <>
-    Left = 48
-    Top = 235
-    object ZQ_UltimoNroCODIGO_MARCA: TIntegerField
-      FieldName = 'CODIGO_MARCA'
-    end
+    Left = 232
+    Top = 67
   end
   object ATeclasRapidas: TActionManager
-    Left = 48
-    Top = 290
+    Left = 336
+    Top = 66
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -1560,45 +1767,56 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     CriteriosBusqueda = <
       item
         Titulo = 'C'#243'digo'
-        Campo = 'CODIGO_MARCA'
-        Tabla = 'marca'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Marca'
-        Campo = 'NOMBRE_MARCA'
-        Tabla = 'marca'
+        Campo = 'codigo'
+        Tabla = 'OPTICA_OS'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Nombre'
+        Campo = 'nombre'
+        Tabla = 'OPTICA_OS'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Direcci'#243'n'
+        Campo = 'direccion'
+        Tabla = 'OPTICA_OS'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
-    DataSet = ZQ_Marcas
+    DataSet = ZQ_OP_ObraSocial
     SQL.Strings = (
       'select *'
-      'from marca'
-      'order by NOMBRE_MARCA')
+      'from OPTICA_OS os'
+      'order by os.nombre')
     SQL_Select.Strings = (
       'select *')
     SQL_From.Strings = (
-      'from marca')
+      'from OPTICA_OS os')
     SQL_Orden.Strings = (
-      'order by NOMBRE_MARCA')
-    UsarWhereOriginal = EK_Con_Where
+      'order by os.nombre')
+    UsarWhereOriginal = EK_Sin_Where
     PantallaReducida = True
     Left = 136
     Top = 67
   end
   object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = RepMarca
+    Reporte = RepObraSocial
     ShowModal = False
-    Left = 136
+    Left = 184
     Top = 176
   end
 end
