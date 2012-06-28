@@ -348,6 +348,7 @@ procedure TFABM_Personas.permisosUsuario();
 begin
   TabSheetCtaCte.TabVisible:= true;
   TabSheetDetalle.TabVisible:= true;
+  TabSheetObraSocial.TabVisible:= true;
 
   if not dm.EKUsrLogin.PermisoAccion('PERSONA_DETALLE') then
   begin
@@ -358,6 +359,12 @@ begin
   begin
     TabSheetCtaCte.TabVisible:= false;
   end;
+
+//  if not dm.EKUsrLogin.PermisoAccion('PERSONA_OBRA_SOCIAL') then
+//  begin
+//    TabSheetObraSocial.TabVisible:= false;
+//  end;
+
 end;
 
 
