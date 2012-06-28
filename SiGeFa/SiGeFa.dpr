@@ -64,7 +64,9 @@ uses
   UBuscarComprobante in 'UBuscarComprobante.pas' {FBuscarComprobante},
   UABM_PersonasPuntos in 'UABM_PersonasPuntos.pas' {FABM_PersonasPuntos},
   UConsulta_Precios in 'UConsulta_Precios.pas' {FConsulta_Precios},
-  UCompararStock in 'UCompararStock.pas' {FCompararStock};
+  UCompararStock in 'UCompararStock.pas' {FCompararStock},
+  UOP_ABMMedico in 'UOP_ABMMedico.pas' {FOP_ABMMedico},
+  UOP_ABMObraSocial in 'UOP_ABMObraSocial.pas' {FOP_ABMObraSocial};
 
 {$R *.res}
 
