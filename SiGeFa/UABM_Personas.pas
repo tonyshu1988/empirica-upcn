@@ -9,7 +9,7 @@ uses
   EKOrdenarGrilla, ZStoredProcedure, ComCtrls, EKDBDateTimePicker,
   StdCtrls, DBCtrls, Mask, ZSqlUpdate, EKFiltrarColumna, ActnList,
   XPStyleActnCtrls, ActnMan, EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons,
-  Menus, ShellAPI;
+  Menus, ShellAPI, EKListadoSQL;
 
 type
   TFABM_Personas = class(TForm)
@@ -264,6 +264,24 @@ type
     btnEMail: TdxBarLargeButton;
     btnSkype: TdxBarLargeButton;
     ZQ_PersonaCODIGO_BARRA: TStringField;
+    TabSheetObraSocial: TTabSheet;
+    DBGridObraSocial: TDBGrid;
+    ZQ_PersonaObraSocial: TZQuery;
+    ZQ_PersonaObraSocialID_PERSONA_OS: TIntegerField;
+    ZQ_PersonaObraSocialNRO_AFILIADO: TStringField;
+    ZQ_PersonaObraSocialID_OS: TIntegerField;
+    ZQ_PersonaObraSocialID_PERSONA: TIntegerField;
+    DS_PersonaObraSocial: TDataSource;
+    ZQ_ObraSocial: TZQuery;
+    ZQ_ObraSocialID_OS: TIntegerField;
+    ZQ_ObraSocialCODIGO: TStringField;
+    ZQ_ObraSocialNOMBRE: TStringField;
+    ZQ_PersonaObraSocialcodigo: TStringField;
+    ZQ_PersonaObraSocialobra_social: TStringField;
+    EKListadoObraSocial: TEKListadoSQL;
+    PopupMenuObraSocial: TPopupMenu;
+    AgregarObraSocial1: TMenuItem;
+    QuitarObraSocial1: TMenuItem;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -304,6 +322,8 @@ type
     procedure permisosUsuario();
     procedure btnEMailClick(Sender: TObject);
     procedure btnSkypeClick(Sender: TObject);
+    procedure AgregarObraSocial1Click(Sender: TObject);
+    procedure QuitarObraSocial1Click(Sender: TObject);
   private
     id_persona: integer;
   public
@@ -403,7 +423,7 @@ end;
 
 procedure TFABM_Personas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono, ZQ_PersonaObraSocial]) then
   begin
     existeRelacionCliente:= false;
     tieneCuentaCorriente:= false;
@@ -436,6 +456,7 @@ begin
     GrupoGuardarCancelar.Enabled := true;
 
     DBGridTelMail.PopupMenu:=PopupMenuTelmail;
+    DBGridObraSocial.PopupMenu:= PopupMenuObraSocial;
 
     RadioGroupRelacionCliente.ItemIndex:= 1;
     permisosUsuario;
@@ -448,7 +469,7 @@ begin
   if ZQ_Persona.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono, ZQ_PersonaObraSocial]) then
   begin
     DBGridClientes.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -474,6 +495,7 @@ begin
     GrupoGuardarCancelar.Enabled := true;
 
     DBGridTelMail.PopupMenu:= PopupMenuTelmail;
+    DBGridObraSocial.PopupMenu:= PopupMenuObraSocial;
   end;
 end;
 
@@ -603,6 +625,7 @@ begin
   end;
 
   DBGridTelMail.PopupMenu:=nil;
+  DBGridObraSocial.PopupMenu:=nil;
 end;
 
 
@@ -624,7 +647,8 @@ begin
     DBGridTelMail.Options := DBGridTelMail.Options + [dgRowSelect];
   end;
 
-  DBGridTelMail.PopupMenu:=nil;    
+  DBGridTelMail.PopupMenu:=nil;
+  DBGridObraSocial.PopupMenu:=nil;   
 end;
 
 
@@ -748,6 +772,12 @@ begin
   ZQ_EntidadTelefono.Close;
   ZQ_EntidadTelefono.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
   ZQ_EntidadTelefono.Open;
+
+  ZQ_PersonaObraSocial.Close;
+  ZQ_PersonaObraSocial.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
+  ZQ_PersonaObraSocial.Open;
+
+
 end;
 
 
@@ -1019,6 +1049,33 @@ begin
     if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
       Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
   end;
+end;
+
+procedure TFABM_Personas.AgregarObraSocial1Click(Sender: TObject);
+begin
+
+  if EKListadoObraSocial.Buscar then
+  begin
+    if (EKListadoObraSocial.Resultado<>'') then
+    begin
+        ZQ_PersonaObraSocial.Append;
+        ZQ_PersonaObraSocialID_OS.AsInteger := StrToInt(EKListadoObraSocial.Resultado);
+        ZQ_PersonaObraSocialID_PERSONA.AsInteger := ZQ_PersonaID_PERSONA.AsInteger;
+
+        ZQ_PersonaObraSocialNRO_AFILIADO.AsString := InputBox('Nro Afiliado', 'Ingrese un Nro de Afiliado', '');
+    end;
+  end;
+
+end;
+
+procedure TFABM_Personas.QuitarObraSocial1Click(Sender: TObject);
+begin
+  if ZQ_PersonaObraSocial.IsEmpty then
+  exit;
+
+  if Application.MessageBox('Esta seguro que desea borrar esta obra social?','Obra social', MB_YESNO+MB_ICONINFORMATION) = IDYES then
+    ZQ_PersonaObraSocial.Delete;
+
 end;
 
 end.
