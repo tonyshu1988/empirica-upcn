@@ -13,7 +13,7 @@ type
   TFOP_ABMMedico = class(TForm)
     PanelFondo: TPanel;
     PanelGrilla: TPanel;
-    DBGridMarca: TDBGrid;
+    DBGridMedico: TDBGrid;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
     btnVerDetalle: TdxBarLargeButton;
@@ -27,11 +27,8 @@ type
     btnSalir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
-    ZQ_Marcas: TZQuery;
-    DS_Marcas: TDataSource;
-    ZQ_MarcasID_MARCA: TIntegerField;
-    ZQ_MarcasNOMBRE_MARCA: TStringField;
-    ZQ_MarcasBAJA: TStringField;
+    ZQ_Medico: TZQuery;
+    DS_Medico: TDataSource;
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
@@ -39,11 +36,6 @@ type
     Label1: TLabel;
     DBENombre: TDBEdit;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
-    ZQ_MarcasCODIGO_MARCA: TIntegerField;
-    Label2: TLabel;
-    DBECodigo: TDBEdit;
-    ZQ_UltimoNro: TZQuery;
-    ZQ_UltimoNroCODIGO_MARCA: TIntegerField;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -54,14 +46,13 @@ type
     AGuardar: TAction;
     ACancelar: TAction;
     EKBuscar: TEKBusquedaAvanzada;
-    RepMarca: TQuickRep;
+    RepMedico: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
     QRLabel17: TQRLabel;
-    RepMarca_Subtitulo: TQRLabel;
-    RepMarca_Titulo: TQRLabel;
+    RepMedico_Subtitulo: TQRLabel;
+    RepMedico_Titulo: TQRLabel;
     QRBand10: TQRBand;
-    QRDBText19: TQRDBText;
     QRDBText1: TQRDBText;
     QRDBText2: TQRDBText;
     QRBand11: TQRBand;
@@ -74,11 +65,28 @@ type
     QRLabelCritBusqueda: TQRLabel;
     QRLabel48: TQRLabel;
     ColumnHeaderBand2: TQRBand;
-    QRLabel29: TQRLabel;
     QRLabel30: TQRLabel;
     QRLabel1: TQRLabel;
     EKVistaPrevia: TEKVistaPreviaQR;
     btnExcel: TdxBarLargeButton;
+    ZQ_MedicoID_MEDICO: TIntegerField;
+    ZQ_MedicoNOMBRE: TStringField;
+    ZQ_MedicoDIRECCION: TStringField;
+    ZQ_MedicoTELEFONO: TStringField;
+    ZQ_MedicoMATRICULA: TStringField;
+    ZQ_MedicoBAJA: TStringField;
+    Label2: TLabel;
+    DBEDireccion: TDBEdit;
+    Label3: TLabel;
+    DBETelefono: TDBEdit;
+    Label4: TLabel;
+    DBEMatricula: TDBEdit;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -89,7 +97,7 @@ type
     procedure btnGuardarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
-    procedure DBGridMarcaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridMedicoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     //------TECLAS RAPIDAS
     procedure ANuevoExecute(Sender: TObject);
     procedure AModificarExecute(Sender: TObject);
@@ -132,28 +140,21 @@ end;
 procedure TFOP_ABMMedico.btnBuscarClick(Sender: TObject);
 begin
   if EKBuscar.Buscar then
-    dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
+    dm.mostrarCantidadRegistro(ZQ_Medico, lblCantidadRegistros);
 end;
 
 
 procedure TFOP_ABMMedico.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
   begin
-    DBGridMarca.Enabled := false;
+    DBGridMedico.Enabled := false;
     PanelEdicion.Visible:= true;
 
-    ZQ_UltimoNro.Close;
-    ZQ_UltimoNro.Open;
+    ZQ_Medico.Append;
+    ZQ_MedicoBAJA.AsString:= 'N';
 
-    ZQ_Marcas.Append;
-    ZQ_MarcasBAJA.AsString:= 'N';
-    if ZQ_UltimoNro.IsEmpty then
-      ZQ_MarcasCODIGO_MARCA.AsInteger:= 1
-    else
-      ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
-
-    DBECodigo.SetFocus;
+    DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -162,26 +163,17 @@ end;
 
 procedure TFOP_ABMMedico.btnModificarClick(Sender: TObject);
 begin
-  if (ZQ_Marcas.IsEmpty) or (ZQ_MarcasID_MARCA.AsInteger = 0) then
+  if (ZQ_Medico.IsEmpty) then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
   begin
-    DBGridMarca.Enabled := false;
+    DBGridMedico.Enabled := false;
     PanelEdicion.Visible:= true;
 
-    ZQ_Marcas.Edit;
-    if ZQ_MarcasCODIGO_MARCA.IsNull then
-    begin
-      ZQ_UltimoNro.Close;
-      ZQ_UltimoNro.Open;
-      if ZQ_UltimoNro.IsEmpty then
-        ZQ_MarcasCODIGO_MARCA.AsInteger:= 1
-      else
-        ZQ_MarcasCODIGO_MARCA.AsInteger:= ZQ_UltimoNroCODIGO_MARCA.AsInteger + 1;
-    end;
+    ZQ_Medico.Edit;
 
-    DBECodigo.SetFocus;
+    DBENombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -192,15 +184,15 @@ procedure TFOP_ABMMedico.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'N') or (ZQ_MarcasID_MARCA.AsInteger = 0)then
+  if (ZQ_Medico.IsEmpty) OR (ZQ_MedicoBAJA.AsString <> 'N') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea dar de baja la "Marca" seleccionada?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea dar de baja el "Medico" seleccionado'), 'ABM Medico', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
     begin
-      ZQ_Marcas.Edit;
-      ZQ_MarcasBAJA.AsString:='S';
+      ZQ_Medico.Edit;
+      ZQ_MedicoBAJA.AsString:='S';
     end
     else
       exit;
@@ -208,9 +200,9 @@ begin
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
 
-    recNo:= ZQ_Marcas.RecNo;
-    ZQ_Marcas.Refresh;
-    ZQ_Marcas.RecNo:= recNo;
+    recNo:= ZQ_Medico.RecNo;
+    ZQ_Medico.Refresh;
+    ZQ_Medico.RecNo:= recNo;
   end;
 end;
 
@@ -219,15 +211,15 @@ procedure TFOP_ABMMedico.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_Marcas.IsEmpty) OR (ZQ_MarcasBAJA.AsString <> 'S') or (ZQ_MarcasID_MARCA.AsInteger = 0) then
+  if (ZQ_Medico.IsEmpty) OR (ZQ_MedicoBAJA.AsString <> 'S') then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea reactivar la "Marca" seleccionada?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea reactivar el "Medico" seleccionado?'), 'ABM Medico', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
     begin
-      ZQ_Marcas.Edit;
-      ZQ_MarcasBAJA.AsString:='N';
+      ZQ_Medico.Edit;
+      ZQ_MedicoBAJA.AsString:='N';
     end
     else
       exit;
@@ -235,9 +227,9 @@ begin
     if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.EKModelo.cancelar_transaccion(transaccion_ABM);
 
-    recNo:= ZQ_Marcas.RecNo;
-    ZQ_Marcas.Refresh;
-    ZQ_Marcas.RecNo:= recNo;
+    recNo:= ZQ_Medico.RecNo;
+    ZQ_Medico.Refresh;
+    ZQ_Medico.RecNo:= recNo;
   end;
 end;
 
@@ -248,16 +240,9 @@ var
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
-  if (trim(DBECodigo.Text) = '') then
-  begin
-    Application.MessageBox('El campo "Código" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
-    DBECodigo.SetFocus;
-    exit;
-  end;
-
   if (trim(DBENombre.Text) = '') then
   begin
-    Application.MessageBox('El campo "Marca" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('El campo "Nombre" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
     DBENombre.SetFocus;
     exit;
   end;
@@ -265,14 +250,14 @@ begin
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
-      DBGridMarca.Enabled:= true;
-      DBGridMarca.SetFocus;
+      DBGridMedico.Enabled:= true;
+      DBGridMedico.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
       PanelEdicion.Visible := false;
-      recNo:= ZQ_Marcas.RecNo;
-      ZQ_Marcas.Refresh;
-      ZQ_Marcas.RecNo:= recNo;
+      recNo:= ZQ_Medico.RecNo;
+      ZQ_Medico.Refresh;
+      ZQ_Medico.RecNo:= recNo;
     end
   except
     begin
@@ -281,7 +266,7 @@ begin
     end
   end;
 
-  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);    
+  dm.mostrarCantidadRegistro(ZQ_Medico, lblCantidadRegistros);
 end;
 
 
@@ -289,8 +274,8 @@ procedure TFOP_ABMMedico.btnCancelarClick(Sender: TObject);
 begin
   if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
   begin
-    DBGridMarca.Enabled:=true;
-    DBGridMarca.SetFocus;
+    DBGridMedico.Enabled:=true;
+    DBGridMedico.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
     PanelEdicion.Visible := false;
@@ -304,15 +289,13 @@ begin
   StaticTxtBaja.Color:= FPrincipal.baja;
 
   EKBuscar.Abrir;
-  dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
+  dm.mostrarCantidadRegistro(ZQ_Medico, lblCantidadRegistros);
 end;
 
 
-procedure TFOP_ABMMedico.DBGridMarcaDrawColumnCell(Sender: TObject;
-  const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFOP_ABMMedico.DBGridMedicoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  FPrincipal.PintarFilasGrillasConBajas(DBGridMarca, ZQ_MarcasBAJA.AsString, Rect, DataCol, Column, State);
+  FPrincipal.PintarFilasGrillasConBajas(DBGridMedico, ZQ_MedicoBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
 
@@ -370,10 +353,10 @@ end;
 
 procedure TFOP_ABMMedico.btnImprimirClick(Sender: TObject);
 begin
-  if ZQ_Marcas.IsEmpty then
+  if ZQ_Medico.IsEmpty then
     exit;
 
-  DM.VariablesReportes(RepMarca);
+  DM.VariablesReportes(RepMedico);
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPrevia.VistaPrevia;
@@ -381,8 +364,8 @@ end;
 
 procedure TFOP_ABMMedico.btnExcelClick(Sender: TObject);
 begin
-  if not ZQ_Marcas.IsEmpty then
-    dm.ExportarEXCEL(DBGridMarca);
+  if not ZQ_Medico.IsEmpty then
+    dm.ExportarEXCEL(DBGridMedico);
 end;
 
 end.
