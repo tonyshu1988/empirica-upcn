@@ -282,6 +282,15 @@ type
     PopupMenuObraSocial: TPopupMenu;
     AgregarObraSocial1: TMenuItem;
     QuitarObraSocial1: TMenuItem;
+    QRSubDetailObraSocial: TQRSubDetail;
+    QRLabel26: TQRLabel;
+    QRDBText25: TQRDBText;
+    QRDBText26: TQRDBText;
+    QRLabel27: TQRLabel;
+    QRDBText27: TQRDBText;
+    QRLabel28: TQRLabel;
+    ChildBandObraSocial: TQRChildBand;
+    QRLabel31: TQRLabel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -360,10 +369,12 @@ begin
     TabSheetCtaCte.TabVisible:= false;
   end;
 
-//  if not dm.EKUsrLogin.PermisoAccion('PERSONA_OBRA_SOCIAL') then
-//  begin
-//    TabSheetObraSocial.TabVisible:= false;
-//  end;
+  if not dm.EKUsrLogin.PermisoAccion('PERSONA_OBRA_SOCIAL') then
+  begin
+    TabSheetObraSocial.TabVisible:= false;
+    QRSubDetailObraSocial.Enabled := false;
+    ChildBandObraSocial.Enabled := false;
+  end;
 
 end;
 
