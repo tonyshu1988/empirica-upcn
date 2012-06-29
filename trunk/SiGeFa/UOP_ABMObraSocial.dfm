@@ -27,217 +27,6 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object PanelGrilla: TPanel
-      Left = 0
-      Top = 0
-      Width = 1016
-      Height = 670
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 5
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      object DBGridObraSocial: TDBGrid
-        Left = 5
-        Top = 5
-        Width = 1006
-        Height = 447
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_OP_ObraSocial
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGridObraSocialDrawColumnCell
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'CODIGO'
-            Title.Caption = 'C'#243'digo'
-            Width = 80
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE'
-            Title.Caption = 'Nombre'
-            Width = 376
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DIRECCION'
-            Title.Caption = 'Direcci'#243'n'
-            Width = 258
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'TELEFONO'
-            Title.Caption = 'Tel'#233'fonos'
-            Width = 247
-            Visible = True
-          end>
-      end
-      object PanelEdicion: TPanel
-        Left = 5
-        Top = 452
-        Width = 1006
-        Height = 213
-        Align = alBottom
-        BevelOuter = bvNone
-        TabOrder = 1
-        Visible = False
-        object Label1: TLabel
-          Left = 14
-          Top = 37
-          Width = 50
-          Height = 13
-          Caption = 'Nombre:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label2: TLabel
-          Left = 19
-          Top = 12
-          Width = 45
-          Height = 13
-          Caption = 'C'#243'digo:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label3: TLabel
-          Left = 6
-          Top = 61
-          Width = 58
-          Height = 13
-          Caption = 'Direcci'#243'n:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label4: TLabel
-          Left = 4
-          Top = 85
-          Width = 60
-          Height = 13
-          Caption = 'Tel'#233'fonos:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object DBENombre: TDBEdit
-          Left = 71
-          Top = 33
-          Width = 491
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'NOMBRE'
-          DataSource = DS_OP_ObraSocial
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 1
-        end
-        object DBEdit1: TDBEdit
-          Left = 71
-          Top = 57
-          Width = 492
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'DIRECCION'
-          DataSource = DS_OP_ObraSocial
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 2
-        end
-        object DBEdit2: TDBEdit
-          Left = 71
-          Top = 81
-          Width = 492
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'TELEFONO'
-          DataSource = DS_OP_ObraSocial
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 3
-        end
-        object DBECodigo: TDBEdit
-          Left = 71
-          Top = 9
-          Width = 97
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'CODIGO'
-          DataSource = DS_OP_ObraSocial
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 0
-        end
-        object GroupBox1: TGroupBox
-          Left = 0
-          Top = 112
-          Width = 1006
-          Height = 101
-          Align = alBottom
-          Caption = '  Descripci'#243'n  '
-          TabOrder = 4
-          object DBMemo1: TDBMemo
-            Left = 2
-            Top = 15
-            Width = 1002
-            Height = 84
-            Align = alClient
-            DataField = 'DESCRIPCION'
-            DataSource = DS_OP_ObraSocial
-            TabOrder = 0
-          end
-        end
-      end
-    end
     object RepObraSocial: TQuickRep
       Tag = 99
       Left = 60
@@ -742,7 +531,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         object QRExpr18: TQRExpr
           Left = 4
           Top = 4
-          Width = 179
+          Width = 224
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -753,7 +542,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            473.604166666666700000)
+            592.666666666666800000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -762,7 +551,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           ResetAfterPrint = False
           Transparent = False
           WordWrap = True
-          Expression = #39'Cantidad de Marcas: '#39'+COUNT'
+          Expression = #39'Cantidad de Obras Sociales: '#39'+COUNT'
           ExportAs = exptText
           FontSize = 8
         end
@@ -1035,6 +824,221 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           WordWrap = True
           ExportAs = exptText
           FontSize = 8
+        end
+      end
+    end
+    object PanelGrilla: TPanel
+      Left = 0
+      Top = 0
+      Width = 1016
+      Height = 670
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 5
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object DBGridObraSocial: TDBGrid
+        Left = 5
+        Top = 5
+        Width = 1006
+        Height = 447
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_OP_ObraSocial
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridObraSocialDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'CODIGO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'digo'
+            Width = 80
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nombre'
+            Width = 376
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DIRECCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Direcci'#243'n'
+            Width = 258
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TELEFONO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Tel'#233'fonos'
+            Width = 247
+            Visible = True
+          end>
+      end
+      object PanelEdicion: TPanel
+        Left = 5
+        Top = 452
+        Width = 1006
+        Height = 213
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 1
+        Visible = False
+        object Label1: TLabel
+          Left = 14
+          Top = 37
+          Width = 50
+          Height = 13
+          Caption = 'Nombre:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label2: TLabel
+          Left = 19
+          Top = 12
+          Width = 45
+          Height = 13
+          Caption = 'C'#243'digo:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label3: TLabel
+          Left = 6
+          Top = 61
+          Width = 58
+          Height = 13
+          Caption = 'Direcci'#243'n:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label4: TLabel
+          Left = 4
+          Top = 85
+          Width = 60
+          Height = 13
+          Caption = 'Tel'#233'fonos:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object DBENombre: TDBEdit
+          Left = 71
+          Top = 33
+          Width = 491
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'NOMBRE'
+          DataSource = DS_OP_ObraSocial
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+        end
+        object DBEdit1: TDBEdit
+          Left = 71
+          Top = 57
+          Width = 492
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'DIRECCION'
+          DataSource = DS_OP_ObraSocial
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+        end
+        object DBEdit2: TDBEdit
+          Left = 71
+          Top = 81
+          Width = 492
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'TELEFONO'
+          DataSource = DS_OP_ObraSocial
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 3
+        end
+        object DBECodigo: TDBEdit
+          Left = 71
+          Top = 9
+          Width = 97
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'CODIGO'
+          DataSource = DS_OP_ObraSocial
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+        end
+        object GroupBox1: TGroupBox
+          Left = 0
+          Top = 112
+          Width = 1006
+          Height = 101
+          Align = alBottom
+          Caption = '  Descripci'#243'n  '
+          TabOrder = 4
+          object DBMemo1: TDBMemo
+            Left = 2
+            Top = 15
+            Width = 1002
+            Height = 84
+            Align = alClient
+            DataField = 'DESCRIPCION'
+            DataSource = DS_OP_ObraSocial
+            TabOrder = 0
+          end
         end
       end
     end
@@ -1708,7 +1712,15 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         Visible = True
       end
       item
-        TituloColumna = 'Marca'
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tel'#233'fonos'
         Visible = True
       end>
     AltoTituloColumna = 15
