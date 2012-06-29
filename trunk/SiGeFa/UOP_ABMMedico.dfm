@@ -27,10 +27,10 @@ object FOP_ABMMedico: TFOP_ABMMedico
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
-    object RepMarca: TQuickRep
+    object RepMedico: TQuickRep
       Tag = 99
-      Left = 60
-      Top = 76
+      Left = 24
+      Top = 32
       Width = 794
       Height = 1123
       Frame.Color = clBlack
@@ -38,7 +38,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
       Frame.DrawBottom = False
       Frame.DrawLeft = False
       Frame.DrawRight = False
-      DataSet = ZQ_Marcas
+      DataSet = ZQ_Medico
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -129,9 +129,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Stretch = True
         end
         object QRLabel17: TQRLabel
-          Left = 321
+          Left = 316
           Top = 47
-          Width = 76
+          Width = 85
           Height = 19
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -140,14 +140,14 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            849.312500000000000000
+            836.083333333333400000
             124.354166666666700000
-            201.083333333333300000)
+            224.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'MARCAS'
+          Caption = 'MEDICOS'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -160,10 +160,10 @@ object FOP_ABMMedico: TFOP_ABMMedico
           ExportAs = exptText
           FontSize = 12
         end
-        object RepMarca_Subtitulo: TQRLabel
-          Left = 291
+        object RepMedico_Subtitulo: TQRLabel
+          Left = 288
           Top = 26
-          Width = 135
+          Width = 141
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -172,14 +172,14 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            769.937500000000000000
+            762.000000000000000000
             68.791666666666680000
-            357.187500000000000000)
+            373.062500000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepMarca_Subtitulo'
+          Caption = 'RepMedico_Subtitulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -192,10 +192,10 @@ object FOP_ABMMedico: TFOP_ABMMedico
           ExportAs = exptText
           FontSize = 9
         end
-        object RepMarca_Titulo: TQRLabel
-          Left = 284
+        object RepMedico_Titulo: TQRLabel
+          Left = 280
           Top = 2
-          Width = 150
+          Width = 157
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -204,14 +204,14 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            751.416666666666800000
+            740.833333333333400000
             5.291666666666667000
-            396.875000000000000000)
+            415.395833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepMarca_Titulo'
+          Caption = 'RepMedico_Titulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -253,10 +253,118 @@ object FOP_ABMMedico: TFOP_ABMMedico
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbDetail
-        object QRDBText19: TQRDBText
+        object QRDBText1: TQRDBText
+          Left = 79
+          Top = 0
+          Width = 197
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            209.020833333333300000
+            0.000000000000000000
+            521.229166666666800000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Medico
+          DataField = 'NOMBRE'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText2: TQRDBText
+          Left = 606
+          Top = 0
+          Width = 109
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1603.375000000000000000
+            0.000000000000000000
+            288.395833333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Medico
+          DataField = 'MATRICULA'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText3: TQRDBText
+          Left = 281
+          Top = 0
+          Width = 173
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            743.479166666666800000
+            0.000000000000000000
+            457.729166666666600000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Medico
+          DataField = 'DIRECCION'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText4: TQRDBText
+          Left = 460
+          Top = 0
+          Width = 141
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1217.083333333333000000
+            0.000000000000000000
+            373.062500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Medico
+          DataField = 'TELEFONO'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText5: TQRDBText
           Left = 5
           Top = 0
-          Width = 132
+          Width = 68
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -267,68 +375,14 @@ object FOP_ABMMedico: TFOP_ABMMedico
             37.041666666666670000
             13.229166666666670000
             0.000000000000000000
-            349.250000000000000000)
-          Alignment = taLeftJustify
+            179.916666666666700000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_Marcas
-          DataField = 'CODIGO_MARCA'
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-        object QRDBText1: TQRDBText
-          Left = 148
-          Top = 0
-          Width = 525
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            391.583333333333300000
-            0.000000000000000000
-            1389.062500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Marcas
-          DataField = 'NOMBRE_MARCA'
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-        object QRDBText2: TQRDBText
-          Left = 684
-          Top = 0
-          Width = 30
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1809.750000000000000000
-            0.000000000000000000
-            79.375000000000000000)
-          Alignment = taCenter
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Marcas
-          DataField = 'BAJA'
+          DataSet = ZQ_Medico
+          DataField = 'ID_MEDICO'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -477,7 +531,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
         object QRExpr18: TQRExpr
           Left = 4
           Top = 4
-          Width = 179
+          Width = 184
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -488,7 +542,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            473.604166666666700000)
+            486.833333333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -497,7 +551,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
           ResetAfterPrint = False
           Transparent = False
           WordWrap = True
-          Expression = #39'Cantidad de Marcas: '#39'+COUNT'
+          Expression = #39'Cantidad de Medicos: '#39'+COUNT'
           ExportAs = exptText
           FontSize = 8
         end
@@ -611,42 +665,10 @@ object FOP_ABMMedico: TFOP_ABMMedico
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbColumnHeader
-        object QRLabel29: TQRLabel
-          Left = 4
-          Top = 2
-          Width = 117
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            10.583333333333330000
-            5.291666666666667000
-            309.562500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'C'#243'digo'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 8
-        end
         object QRLabel30: TQRLabel
-          Left = 148
+          Left = 79
           Top = 2
-          Width = 143
+          Width = 197
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -655,14 +677,14 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            391.583333333333300000
+            209.020833333333300000
             5.291666666666667000
-            378.354166666666700000)
+            521.229166666666800000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Nombre'
+          Caption = 'Apellido y Nombre'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -676,9 +698,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           FontSize = 8
         end
         object QRLabel1: TQRLabel
-          Left = 684
+          Left = 606
           Top = 2
-          Width = 30
+          Width = 109
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -687,14 +709,110 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1809.750000000000000000
+            1603.375000000000000000
             5.291666666666667000
-            79.375000000000000000)
+            288.395833333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
-          AutoSize = True
+          AutoSize = False
           AutoStretch = False
-          Caption = 'Baja'
+          Caption = 'Matr'#237'cula'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel2: TQRLabel
+          Left = 281
+          Top = 2
+          Width = 173
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            743.479166666666800000
+            5.291666666666667000
+            457.729166666666600000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Direcci'#243'n'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel3: TQRLabel
+          Left = 460
+          Top = 2
+          Width = 141
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1217.083333333333000000
+            5.291666666666667000
+            373.062500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Tel'#233'fono'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel4: TQRLabel
+          Left = 5
+          Top = 2
+          Width = 68
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            13.229166666666670000
+            5.291666666666667000
+            179.916666666666700000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Id.'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -724,14 +842,14 @@ object FOP_ABMMedico: TFOP_ABMMedico
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      object DBGridMarca: TDBGrid
+      object DBGridMedico: TDBGrid
         Left = 5
         Top = 5
         Width = 852
-        Height = 334
+        Height = 286
         Align = alClient
         Color = 14606012
-        DataSource = DS_Marcas
+        DataSource = DS_Medico
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
@@ -739,40 +857,65 @@ object FOP_ABMMedico: TFOP_ABMMedico
         TitleFont.Height = -11
         TitleFont.Name = 'Verdana'
         TitleFont.Style = []
-        OnDrawColumnCell = DBGridMarcaDrawColumnCell
+        OnDrawColumnCell = DBGridMedicoDrawColumnCell
         Columns = <
           item
             Expanded = False
-            FieldName = 'CODIGO_MARCA'
+            FieldName = 'ID_MEDICO'
             Title.Alignment = taCenter
-            Title.Caption = 'C'#243'digo'
-            Width = 90
+            Title.Caption = 'Id.'
+            Width = 65
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'NOMBRE_MARCA'
+            FieldName = 'NOMBRE'
             Title.Alignment = taCenter
-            Title.Caption = 'Marca'
-            Width = 720
+            Title.Caption = 'Apellido y Nombre'
+            Width = 280
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DIRECCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Direcci'#243'n'
+            Width = 231
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TELEFONO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Telefono'
+            Width = 162
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MATRICULA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Matr'#237'cula'
+            Width = 100
             Visible = True
           end>
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 339
+        Top = 291
         Width = 852
-        Height = 58
+        Height = 106
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
         Visible = False
         object Label1: TLabel
           Left = 12
-          Top = 37
-          Width = 39
+          Top = 12
+          Width = 110
           Height = 13
-          Caption = 'Marca:'
+          Alignment = taRightJustify
+          Caption = 'Apellido y Nombre:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -782,11 +925,42 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Transparent = True
         end
         object Label2: TLabel
-          Left = 6
-          Top = 12
-          Width = 45
+          Left = 64
+          Top = 36
+          Width = 58
           Height = 13
-          Caption = 'C'#243'digo:'
+          Alignment = taRightJustify
+          Caption = 'Direcci'#243'n:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label3: TLabel
+          Left = 68
+          Top = 60
+          Width = 54
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Tel'#233'fono:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label4: TLabel
+          Left = 71
+          Top = 84
+          Width = 51
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Matr'#237'cula'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -796,13 +970,29 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Transparent = True
         end
         object DBENombre: TDBEdit
-          Left = 56
-          Top = 33
-          Width = 718
+          Left = 126
+          Top = 8
+          Width = 267
           Height = 21
           CharCase = ecUpperCase
-          DataField = 'NOMBRE_MARCA'
-          DataSource = DS_Marcas
+          DataField = 'NOMBRE'
+          DataSource = DS_Medico
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+        end
+        object DBEDireccion: TDBEdit
+          Left = 126
+          Top = 32
+          Width = 267
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'DIRECCION'
+          DataSource = DS_Medico
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -811,22 +1001,37 @@ object FOP_ABMMedico: TFOP_ABMMedico
           ParentFont = False
           TabOrder = 1
         end
-        object DBECodigo: TDBEdit
-          Left = 56
-          Top = 6
-          Width = 81
+        object DBETelefono: TDBEdit
+          Left = 126
+          Top = 56
+          Width = 203
           Height = 21
           CharCase = ecUpperCase
-          Color = clMenuBar
-          DataField = 'CODIGO_MARCA'
-          DataSource = DS_Marcas
+          DataField = 'TELEFONO'
+          DataSource = DS_Medico
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 0
+          TabOrder = 2
+        end
+        object DBEMatricula: TDBEdit
+          Left = 126
+          Top = 80
+          Width = 203
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'MATRICULA'
+          DataSource = DS_Medico
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 3
         end
       end
     end
@@ -1450,45 +1655,65 @@ object FOP_ABMMedico: TFOP_ABMMedico
         'btnCancelar')
     end
   end
-  object ZQ_Marcas: TZQuery
+  object ZQ_Medico: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select *'
-      'from marca'
-      'order by NOMBRE_MARCA')
+      'select m.*'
+      'from optica_medico m'
+      'order by m.nombre')
     Params = <>
     Left = 48
     Top = 64
-    object ZQ_MarcasID_MARCA: TIntegerField
-      FieldName = 'ID_MARCA'
+    object ZQ_MedicoID_MEDICO: TIntegerField
+      FieldName = 'ID_MEDICO'
     end
-    object ZQ_MarcasCODIGO_MARCA: TIntegerField
-      FieldName = 'CODIGO_MARCA'
-      DisplayFormat = '0000'
+    object ZQ_MedicoNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
     end
-    object ZQ_MarcasNOMBRE_MARCA: TStringField
-      FieldName = 'NOMBRE_MARCA'
+    object ZQ_MedicoDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 100
+    end
+    object ZQ_MedicoTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_MedicoMATRICULA: TStringField
+      FieldName = 'MATRICULA'
       Size = 50
     end
-    object ZQ_MarcasBAJA: TStringField
+    object ZQ_MedicoBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
     end
   end
-  object DS_Marcas: TDataSource
-    DataSet = ZQ_Marcas
+  object DS_Medico: TDataSource
+    DataSet = ZQ_Medico
     Left = 48
     Top = 120
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridMarca
+    Grilla = DBGridMedico
     Filtros = <
       item
-        TituloColumna = 'C'#243'digo'
+        TituloColumna = 'Id.'
         Visible = True
       end
       item
-        TituloColumna = 'Marca'
+        TituloColumna = 'Apellido y Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Telefono'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Matr'#237'cula'
         Visible = True
       end>
     AltoTituloColumna = 15
@@ -1499,22 +1724,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
     Left = 48
     Top = 179
   end
-  object ZQ_UltimoNro: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select first 1 CODIGO_MARCA'
-      'from MARCA'
-      'order by CODIGO_MARCA desc')
-    Params = <>
-    Left = 48
-    Top = 235
-    object ZQ_UltimoNroCODIGO_MARCA: TIntegerField
-      FieldName = 'CODIGO_MARCA'
-    end
-  end
   object ATeclasRapidas: TActionManager
     Left = 48
-    Top = 290
+    Top = 242
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -1559,19 +1771,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
   object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'C'#243'digo'
-        Campo = 'CODIGO_MARCA'
-        Tabla = 'marca'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-      end
-      item
-        Titulo = 'Marca'
-        Campo = 'NOMBRE_MARCA'
-        Tabla = 'marca'
+        Titulo = 'Nombre'
+        Campo = 'nombre'
+        Tabla = 'medico'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -1579,24 +1781,24 @@ object FOP_ABMMedico: TFOP_ABMMedico
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
-    DataSet = ZQ_Marcas
+    DataSet = ZQ_Medico
     SQL.Strings = (
-      'select *'
-      'from marca'
-      'order by NOMBRE_MARCA')
+      'select m.*'
+      'from optica_medico m'
+      'order by m.nombre')
     SQL_Select.Strings = (
-      'select *')
+      'select m.*')
     SQL_From.Strings = (
-      'from marca')
+      'from optica_medico m')
     SQL_Orden.Strings = (
-      'order by NOMBRE_MARCA')
+      'order by m.nombre')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 136
     Top = 67
   end
   object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = RepMarca
+    Reporte = RepMedico
     ShowModal = False
     Left = 136
     Top = 176
