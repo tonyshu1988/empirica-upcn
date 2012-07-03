@@ -327,10 +327,6 @@ type
     ZQ_ComprobanteIMPORTE_DESCUENTO: TFloatField;
     ZQ_ComprobanteENCABEZADO: TStringField;
     ZQ_ComprobantePIE: TStringField;
-    ZQ_ComprobanteFECHA_COBRADA: TDateField;
-    ZQ_ComprobanteFECHA_ENVIADA: TDateField;
-    ZQ_ComprobanteFECHA_IMPRESA: TDateField;
-    ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField;
     ZQ_Comprobantepers_nombre: TStringField;
     ZQ_Comprobantepers_direccion: TStringField;
     ZQ_Comprobantepers_cuit: TStringField;
@@ -596,6 +592,10 @@ type
     Label65: TLabel;
     btnAuditoriaAceptar: TButton;
     btnAuditoriaCancelar: TButton;
+    ZQ_ComprobanteFECHA_COBRADA: TDateTimeField;
+    ZQ_ComprobanteFECHA_ENVIADA: TDateField;
+    ZQ_ComprobanteFECHA_IMPRESA: TDateField;
+    ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;

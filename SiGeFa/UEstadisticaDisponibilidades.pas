@@ -411,7 +411,7 @@ type
     procedure ABuscarExecute(Sender: TObject);
     procedure ZP_Estadistica_Det_MovAfterScroll(DataSet: TDataSet);
     procedure btnExcelClick(Sender: TObject);
-    procedure abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer; id_cuenta: integer);
+    procedure abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer;  id_cuenta: integer = -1);
     procedure calcularResumenBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer; id_cuenta: integer);
     procedure ZQ_Detalle_CuentaAfterScroll(DataSet: TDataSet);
     procedure ZP_Detalle_Cuenta_FPagoCalcFields(DataSet: TDataSet);
@@ -448,10 +448,6 @@ begin
 
   PageControl.ActivePageIndex:= 0;
   dm.EKModelo.abrir(ZQ_Sucursal);
-  ZQ_Cuentas.Open;
-  ZQ_Cuentas.Append;
-  ZQ_CuentasID_CUENTA.AsInteger:= -1;
-  ZQ_CuentasNOMBRE_CUENTA.AsString:= 'TODAS';
 
   lblSaldo_Total.Caption:= '';
   lblSaldo_Encabezado1.Caption:= '';
@@ -822,7 +818,7 @@ begin
 end;
 
 
-procedure TFEstadisticaDisponibilidades.abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer; id_cuenta: integer);
+procedure TFEstadisticaDisponibilidades.abrirBalance(tipo: integer; fecha_desde: Tdate;  fecha_hasta: TDate; id_sucursal: integer; id_cuenta: integer = -1);
 begin
   ZS_Balance.Close;
   ZS_Balance.ParamByName('tipo_cpb').AsInteger:= tipo;

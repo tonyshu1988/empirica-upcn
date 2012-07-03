@@ -23,9 +23,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 1178
-    Height = 583
-    ActivePage = TabVarios
+    Width = 1186
+    Height = 594
+    ActivePage = TabFacturacion
     Align = alClient
     TabOrder = 4
     OnChange = PageControlChange
@@ -34,380 +34,11 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object PanelContenedor: TPanel
         Left = 0
         Top = 33
-        Width = 1170
-        Height = 522
+        Width = 1178
+        Height = 533
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
-        object PanelFacturacion: TPanel
-          Left = 0
-          Top = 0
-          Width = 1170
-          Height = 522
-          Align = alClient
-          BevelOuter = bvNone
-          BorderWidth = 2
-          TabOrder = 0
-          object Splitter1: TSplitter
-            Left = 2
-            Top = 392
-            Width = 1166
-            Height = 6
-            Cursor = crVSplit
-            Align = alBottom
-          end
-          object PanelComprobante: TPanel
-            Left = 2
-            Top = 2
-            Width = 1166
-            Height = 390
-            Align = alClient
-            BevelOuter = bvNone
-            TabOrder = 0
-            object lblTotalComprobantes: TLabel
-              Left = 0
-              Top = 369
-              Width = 1166
-              Height = 21
-              Align = alBottom
-              Alignment = taRightJustify
-              AutoSize = False
-              Caption = 'Total Comprobante: $ 0.00 '
-              Color = 16729670
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -15
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-              Transparent = False
-              Layout = tlCenter
-            end
-            object DBGridComprobantes: TDBGrid
-              Left = 0
-              Top = 0
-              Width = 1166
-              Height = 369
-              Align = alClient
-              Color = 14606012
-              DataSource = DS_Comprobante
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-              ParentFont = False
-              ReadOnly = True
-              TabOrder = 0
-              TitleFont.Charset = DEFAULT_CHARSET
-              TitleFont.Color = clWindowText
-              TitleFont.Height = -11
-              TitleFont.Name = 'Verdana'
-              TitleFont.Style = []
-              OnDrawColumnCell = DrawColumnCell
-              OnDblClick = DBGridComprobantesDblClick
-              Columns = <
-                item
-                  Expanded = False
-                  FieldName = 'CODIGO'
-                  Title.Alignment = taCenter
-                  Title.Caption = 'C'#243'digo'
-                  Width = 85
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = 'FECHA'
-                  Title.Alignment = taCenter
-                  Title.Caption = 'Fecha'
-                  Width = 72
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = 'TIPOCOMPR_'
-                  Title.Alignment = taCenter
-                  Title.Caption = 'Tipo'
-                  Width = 113
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = 'CLIENTE_'
-                  Title.Alignment = taCenter
-                  Title.Caption = 'Cliente'
-                  Width = 168
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = 'IMPORTEVENTA_'
-                  Title.Alignment = taCenter
-                  Title.Caption = 'Importe Venta'
-                  Width = 95
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = 'SUC_'
-                  Title.Alignment = taCenter
-                  Title.Caption = 'Sucursal'
-                  Width = 163
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = 'TIVA_'
-                  Title.Alignment = taCenter
-                  Title.Caption = 'Tipo IVA'
-                  Visible = True
-                end
-                item
-                  Expanded = False
-                  FieldName = 'VENDEDOR_'
-                  Title.Alignment = taCenter
-                  Title.Caption = 'Vendedor'
-                  Width = 193
-                  Visible = True
-                end>
-            end
-          end
-          object PanelFPagoYProd: TPanel
-            Left = 2
-            Top = 398
-            Width = 1166
-            Height = 122
-            Align = alBottom
-            BevelOuter = bvNone
-            TabOrder = 1
-            object Splitter2: TSplitter
-              Left = 607
-              Top = 0
-              Width = 6
-              Height = 122
-            end
-            object PanelProducto: TPanel
-              Left = 613
-              Top = 0
-              Width = 553
-              Height = 122
-              Align = alClient
-              BevelOuter = bvNone
-              Caption = 'PanelProducto'
-              TabOrder = 0
-              object lblTotalProducto: TLabel
-                Left = 0
-                Top = 101
-                Width = 553
-                Height = 21
-                Align = alBottom
-                Alignment = taRightJustify
-                AutoSize = False
-                Caption = 'Total Producto: $ 0.00 '
-                Color = 16729670
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clWhite
-                Font.Height = -15
-                Font.Name = 'Verdana'
-                Font.Style = [fsBold]
-                ParentColor = False
-                ParentFont = False
-                Transparent = False
-                Layout = tlCenter
-              end
-              object DBGridListadoProductos: TDBGrid
-                Left = 0
-                Top = 0
-                Width = 553
-                Height = 101
-                Align = alClient
-                Color = 14606012
-                DataSource = DS_ComprobanteDetalle
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Verdana'
-                Font.Style = []
-                Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-                ParentFont = False
-                TabOrder = 0
-                TitleFont.Charset = DEFAULT_CHARSET
-                TitleFont.Color = clWindowText
-                TitleFont.Height = -11
-                TitleFont.Name = 'Verdana'
-                TitleFont.Style = []
-                OnDrawColumnCell = DrawColumnCell
-                Columns = <
-                  item
-                    Expanded = False
-                    FieldName = 'ID_PRODUCTO'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'Id'
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'DETALLE_PROD'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'Producto'
-                    Width = 240
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'CANTIDAD'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'Cant.'
-                    Width = 53
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'IMPORTE_VENTA'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'Importe'
-                    Width = 101
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'CODIGO_BARRA'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'C'#243'd. Barra'
-                    Width = 80
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'COLOR'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'Color'
-                    Width = 67
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'MEDIDA'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'Medida'
-                    Width = 75
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'NOMBRE_MARCA'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'Marca'
-                    Visible = True
-                  end>
-              end
-            end
-            object PanelFpago: TPanel
-              Left = 0
-              Top = 0
-              Width = 607
-              Height = 122
-              Align = alLeft
-              BevelOuter = bvNone
-              Caption = 'PanelFpago'
-              TabOrder = 1
-              object lblTotalFPago: TLabel
-                Left = 0
-                Top = 101
-                Width = 607
-                Height = 21
-                Align = alBottom
-                Alignment = taRightJustify
-                AutoSize = False
-                Caption = 'Total Forma Pago: $ 0.00 '
-                Color = 16729670
-                Font.Charset = ANSI_CHARSET
-                Font.Color = clWhite
-                Font.Height = -15
-                Font.Name = 'Verdana'
-                Font.Style = [fsBold]
-                ParentColor = False
-                ParentFont = False
-                Transparent = False
-                Layout = tlCenter
-              end
-              object DBGridFormaPago: TDBGrid
-                Left = 0
-                Top = 0
-                Width = 607
-                Height = 101
-                Align = alClient
-                Color = 14606012
-                DataSource = DS_Comprobante_FormaPago
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Verdana'
-                Font.Style = []
-                Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-                ParentFont = False
-                TabOrder = 0
-                TitleFont.Charset = DEFAULT_CHARSET
-                TitleFont.Color = clWindowText
-                TitleFont.Height = -11
-                TitleFont.Name = 'Verdana'
-                TitleFont.Style = []
-                OnDrawColumnCell = DrawColumnCell
-                Columns = <
-                  item
-                    Expanded = False
-                    FieldName = 'NOMBRE_CUENTA'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'Cuenta'
-                    Width = 196
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'TFORMAPAGO_'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'Forma de Pago'
-                    Width = 149
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'IMPORTE_REAL'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'Importe'
-                    Width = 81
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'MDCP_FECHA'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'MDP Fecha'
-                    Width = 105
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'MDCP_BANCO'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'Banco'
-                    Width = 188
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'MDCP_CHEQUE'
-                    Title.Alignment = taCenter
-                    Title.Caption = 'N'#250'mero'
-                    Width = 113
-                    Visible = True
-                  end>
-              end
-            end
-          end
-        end
         object RepDetalleMov: TQuickRep
           Tag = 99
           Left = 38
@@ -555,7 +186,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Size.Values = (
                 52.916666666666670000
                 1158.875000000000000000
-                68.791666666666670000
+                68.791666666666680000
                 449.791666666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -630,7 +261,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewPage = False
             ParentFont = False
             Size.Values = (
-              42.333333333333330000
+              42.333333333333340000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -815,7 +446,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333330000
+              82.020833333333340000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -863,7 +494,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawLeft = False
               Frame.DrawRight = False
               Size.Values = (
-                34.395833333333330000
+                34.395833333333340000
                 13.229166666666670000
                 5.291666666666667000
                 333.375000000000000000)
@@ -1234,7 +865,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              68.791666666666670000
+              68.791666666666680000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -1273,11 +904,387 @@ object FEstadisticaVentas: TFEstadisticaVentas
             end
           end
         end
+        object PanelFacturacion: TPanel
+          Left = 0
+          Top = 0
+          Width = 1178
+          Height = 533
+          Align = alClient
+          BevelOuter = bvNone
+          BorderWidth = 2
+          TabOrder = 0
+          object Splitter1: TSplitter
+            Left = 2
+            Top = 403
+            Width = 1174
+            Height = 6
+            Cursor = crVSplit
+            Align = alBottom
+          end
+          object PanelComprobante: TPanel
+            Left = 2
+            Top = 2
+            Width = 1174
+            Height = 401
+            Align = alClient
+            BevelOuter = bvNone
+            TabOrder = 0
+            object lblTotalComprobantes: TLabel
+              Left = 0
+              Top = 380
+              Width = 1174
+              Height = 21
+              Align = alBottom
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = 'Total Comprobante: $ 0.00 '
+              Color = 16729670
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWhite
+              Font.Height = -15
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+              Transparent = False
+              Layout = tlCenter
+            end
+            object DBGridComprobantes: TDBGrid
+              Left = 0
+              Top = 0
+              Width = 1174
+              Height = 380
+              Align = alClient
+              Color = 14606012
+              DataSource = DS_Comprobante
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+              ParentFont = False
+              ReadOnly = True
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Verdana'
+              TitleFont.Style = []
+              OnDrawColumnCell = DrawColumnCell
+              OnDblClick = DBGridComprobantesDblClick
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'CODIGO'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'C'#243'digo'
+                  Width = 85
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'FECHA'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Fecha'
+                  Width = 72
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'HORA'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Hora'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'TIPOCOMPR_'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Tipo'
+                  Width = 113
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'CLIENTE_'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Cliente'
+                  Width = 168
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'IMPORTEVENTA_'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Importe Venta'
+                  Width = 95
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'SUC_'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Sucursal'
+                  Width = 163
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'TIVA_'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Tipo IVA'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'VENDEDOR_'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Vendedor'
+                  Width = 193
+                  Visible = True
+                end>
+            end
+          end
+          object PanelFPagoYProd: TPanel
+            Left = 2
+            Top = 409
+            Width = 1174
+            Height = 122
+            Align = alBottom
+            BevelOuter = bvNone
+            TabOrder = 1
+            object Splitter2: TSplitter
+              Left = 607
+              Top = 0
+              Width = 6
+              Height = 122
+            end
+            object PanelProducto: TPanel
+              Left = 613
+              Top = 0
+              Width = 561
+              Height = 122
+              Align = alClient
+              BevelOuter = bvNone
+              Caption = 'PanelProducto'
+              TabOrder = 0
+              object lblTotalProducto: TLabel
+                Left = 0
+                Top = 101
+                Width = 561
+                Height = 21
+                Align = alBottom
+                Alignment = taRightJustify
+                AutoSize = False
+                Caption = 'Total Producto: $ 0.00 '
+                Color = 16729670
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clWhite
+                Font.Height = -15
+                Font.Name = 'Verdana'
+                Font.Style = [fsBold]
+                ParentColor = False
+                ParentFont = False
+                Transparent = False
+                Layout = tlCenter
+              end
+              object DBGridListadoProductos: TDBGrid
+                Left = 0
+                Top = 0
+                Width = 561
+                Height = 101
+                Align = alClient
+                Color = 14606012
+                DataSource = DS_ComprobanteDetalle
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = []
+                Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+                ParentFont = False
+                TabOrder = 0
+                TitleFont.Charset = DEFAULT_CHARSET
+                TitleFont.Color = clWindowText
+                TitleFont.Height = -11
+                TitleFont.Name = 'Verdana'
+                TitleFont.Style = []
+                OnDrawColumnCell = DrawColumnCell
+                Columns = <
+                  item
+                    Expanded = False
+                    FieldName = 'ID_PRODUCTO'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Id'
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'DETALLE_PROD'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Producto'
+                    Width = 240
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CANTIDAD'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Cant.'
+                    Width = 53
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'IMPORTE_VENTA'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Importe'
+                    Width = 101
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'CODIGO_BARRA'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'C'#243'd. Barra'
+                    Width = 80
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'COLOR'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Color'
+                    Width = 67
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'MEDIDA'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Medida'
+                    Width = 75
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'NOMBRE_MARCA'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Marca'
+                    Visible = True
+                  end>
+              end
+            end
+            object PanelFpago: TPanel
+              Left = 0
+              Top = 0
+              Width = 607
+              Height = 122
+              Align = alLeft
+              BevelOuter = bvNone
+              Caption = 'PanelFpago'
+              TabOrder = 1
+              object lblTotalFPago: TLabel
+                Left = 0
+                Top = 101
+                Width = 607
+                Height = 21
+                Align = alBottom
+                Alignment = taRightJustify
+                AutoSize = False
+                Caption = 'Total Forma Pago: $ 0.00 '
+                Color = 16729670
+                Font.Charset = ANSI_CHARSET
+                Font.Color = clWhite
+                Font.Height = -15
+                Font.Name = 'Verdana'
+                Font.Style = [fsBold]
+                ParentColor = False
+                ParentFont = False
+                Transparent = False
+                Layout = tlCenter
+              end
+              object DBGridFormaPago: TDBGrid
+                Left = 0
+                Top = 0
+                Width = 607
+                Height = 101
+                Align = alClient
+                Color = 14606012
+                DataSource = DS_Comprobante_FormaPago
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = []
+                Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+                ParentFont = False
+                TabOrder = 0
+                TitleFont.Charset = DEFAULT_CHARSET
+                TitleFont.Color = clWindowText
+                TitleFont.Height = -11
+                TitleFont.Name = 'Verdana'
+                TitleFont.Style = []
+                OnDrawColumnCell = DrawColumnCell
+                Columns = <
+                  item
+                    Expanded = False
+                    FieldName = 'NOMBRE_CUENTA'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Cuenta'
+                    Width = 196
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'TFORMAPAGO_'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Forma de Pago'
+                    Width = 149
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'IMPORTE_REAL'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Importe'
+                    Width = 81
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'MDCP_FECHA'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'MDP Fecha'
+                    Width = 105
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'MDCP_BANCO'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Banco'
+                    Width = 188
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'MDCP_CHEQUE'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'N'#250'mero'
+                    Width = 113
+                    Visible = True
+                  end>
+              end
+            end
+          end
+        end
       end
       object PanelFiltro: TPanel
         Left = 0
         Top = 0
-        Width = 1170
+        Width = 1178
         Height = 33
         Align = alTop
         BevelOuter = bvNone
@@ -1962,15 +1969,15 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 1170
-        Height = 555
+        Width = 1178
+        Height = 566
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object lblTotVarias: TLabel
           Left = 0
-          Top = 534
-          Width = 1170
+          Top = 545
+          Width = 1178
           Height = 21
           Align = alBottom
           Alignment = taRightJustify
@@ -2101,9 +2108,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 50.270833333333330000
-                701.145833333333300000
+                701.145833333333200000
                 124.354166666666700000
-                494.770833333333300000)
+                494.770833333333400000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -2134,8 +2141,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Size.Values = (
                 52.916666666666670000
                 627.062500000000000000
-                68.791666666666670000
-                645.583333333333300000)
+                68.791666666666680000
+                645.583333333333400000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -2165,9 +2172,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                558.270833333333300000
+                558.270833333333400000
                 5.291666666666667000
-                783.166666666666700000)
+                783.166666666666800000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -2209,7 +2216,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewPage = False
             ParentFont = False
             Size.Values = (
-              42.333333333333330000
+              42.333333333333340000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -2255,7 +2262,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
                 37.041666666666670000
                 15.875000000000000000
                 0.000000000000000000
-                891.645833333333300000)
+                891.645833333333200000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = False
@@ -2307,7 +2314,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                910.166666666666700000
+                910.166666666666800000
                 0.000000000000000000
                 272.520833333333300000)
               Alignment = taRightJustify
@@ -2367,7 +2374,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333330000
+              82.020833333333340000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -2383,7 +2390,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawLeft = False
               Frame.DrawRight = False
               Size.Values = (
-                34.395833333333330000
+                34.395833333333340000
                 13.229166666666670000
                 5.291666666666667000
                 333.375000000000000000)
@@ -2722,7 +2729,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              68.791666666666670000
+              68.791666666666680000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -2806,7 +2813,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                703.791666666666700000
+                703.791666666666800000
                 0.000000000000000000
                 193.145833333333300000)
               Alignment = taRightJustify
@@ -2872,7 +2879,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 37.041666666666670000
-                918.104166666666700000
+                918.104166666666800000
                 0.000000000000000000
                 261.937500000000000000)
               Alignment = taRightJustify
@@ -3010,9 +3017,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 50.270833333333330000
-                701.145833333333300000
+                701.145833333333200000
                 124.354166666666700000
-                494.770833333333300000)
+                494.770833333333400000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -3042,8 +3049,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                685.270833333333300000
-                68.791666666666670000
+                685.270833333333400000
+                68.791666666666680000
                 529.166666666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -3118,7 +3125,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewPage = False
             ParentFont = False
             Size.Values = (
-              42.333333333333330000
+              42.333333333333340000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -3222,7 +3229,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333330000
+              82.020833333333340000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -3238,7 +3245,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawLeft = False
               Frame.DrawRight = False
               Size.Values = (
-                34.395833333333330000
+                34.395833333333340000
                 13.229166666666670000
                 5.291666666666667000
                 333.375000000000000000)
@@ -3513,7 +3520,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              68.791666666666670000
+              68.791666666666680000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -3622,8 +3629,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object gridVarias: TDBGrid
           Left = 0
           Top = 33
-          Width = 1170
-          Height = 501
+          Width = 1178
+          Height = 512
           Align = alClient
           Color = 14606012
           DataSource = DS_EstadVarias
@@ -3680,7 +3687,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object PanelFiltroV: TPanel
           Left = 0
           Top = 0
-          Width = 1170
+          Width = 1178
           Height = 33
           Align = alTop
           BevelOuter = bvNone
@@ -3973,7 +3980,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
-      '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
+      
+        '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,cast(c.fech' +
+        'a_cobrada as time) as Hora,'
       '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
       'from comprobante c'
       
@@ -4045,6 +4054,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
       FieldName = 'NOMBRE_TIPO_IVA'
       ReadOnly = True
       Size = 50
+    end
+    object ZQ_ComprobanteHORA: TTimeField
+      FieldName = 'HORA'
+      ReadOnly = True
     end
   end
   object DS_Comprobante_FormaPago: TDataSource
@@ -4170,8 +4183,11 @@ object FEstadisticaVentas: TFEstadisticaVentas
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
-      '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
+      
+        '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,cast(c.fech' +
+        'a_cobrada as time) as Hora,'
       '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
+      ''
       'from comprobante c'
       
         'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
@@ -4197,8 +4213,11 @@ object FEstadisticaVentas: TFEstadisticaVentas
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
-      '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
-      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_')
+      
+        '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,cast(c.fech' +
+        'a_cobrada as time) as Hora,'
+      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
+      '')
     SQL_From.Strings = (
       'from comprobante c'
       
@@ -4387,7 +4406,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
