@@ -310,6 +310,7 @@ type
     QRDBText8: TQRDBText;
     QRExpr4: TQRExpr;
     QRExpr5: TQRExpr;
+    ZQ_ComprobanteHORA: TTimeField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
