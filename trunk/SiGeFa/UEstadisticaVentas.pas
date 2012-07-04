@@ -311,6 +311,34 @@ type
     QRExpr4: TQRExpr;
     QRExpr5: TQRExpr;
     ZQ_ComprobanteHORA: TTimeField;
+    lblTotHorarios: TLabel;
+    EKDbSumaHorarios: TEKDbSuma;
+    ReporteRanking: TQuickRep;
+    QRBand17: TQRBand;
+    QRDBImage3: TQRDBImage;
+    qrTipoRanking: TQRLabel;
+    ReporteRanking_subtitulo: TQRLabel;
+    ReporteRanking_Titulo: TQRLabel;
+    QRBand18: TQRBand;
+    QRDBText9: TQRDBText;
+    QRDBText10: TQRDBText;
+    QRDBText11: TQRDBText;
+    QRBand19: TQRBand;
+    QRBand20: TQRBand;
+    qrpie: TQRLabel;
+    QRLabel20: TQRLabel;
+    QRSysData4: TQRSysData;
+    QRBand21: TQRBand;
+    QRLabel21: TQRLabel;
+    QRLabel24: TQRLabel;
+    QRLabel29: TQRLabel;
+    QRBand22: TQRBand;
+    QRExpr6: TQRExpr;
+    QRExpr7: TQRExpr;
+    QRLabel30: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRDBText12: TQRDBText;
+    EKVistaPreviaRanking: TEKVistaPreviaQR;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -334,6 +362,7 @@ type
     procedure EKDbSumaTotalesSumListChanged(Sender: TObject);
     procedure ZQ_EstadVariasAfterScroll(DataSet: TDataSet);
     procedure EKDbSumaVariasSumListChanged(Sender: TObject);
+    procedure EKDbSumaHorariosSumListChanged(Sender: TObject);
   private
     { Private declarations }
   public
@@ -740,6 +769,7 @@ end;
 
 procedure TFEstadisticaVentas.btImprimirClick(Sender: TObject);
 var i:integer;
+tipoRanking:string;
 begin
 //FACTURACION
   if PageControl.ActivePage = TabFacturacion then
@@ -752,22 +782,26 @@ begin
     QRlblImporteTotal.Caption:= lblTotalComprobantes.Caption;
     EKVistaPrevia.VistaPrevia;
   end;
- //Ventas Diarias
+ //Ranking Ventas Diarias
   if PageControl.ActivePage = TabRanking then
   begin
-//      if ZQ_ProductosVendidos.IsEmpty then
-//        exit;
-//      DM.VariablesReportes(RepVentasDiarias);
-//      QRlbRepVentasDiarias_CritBusqueda.Caption := EKBusquedaRanking.ParametrosBuscados;
-//      QRlblRepVentasDiarias_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-//      EKVistaPrevia2.VistaPrevia;
+ if ZQ_ProductosVendidos.IsEmpty then
+      exit;
+    DM.VariablesReportes(ReporteRanking);
+    if btRankingProds.Down then
+     tipoRanking:=btRankingProds.Caption
+     else
+      if btRankingClientes.Down then
+       tipoRanking:=btRankingClientes.Caption
+       else
+        if btRankingVended.Down then
+         tipoRanking:=btRankingVended.Caption;
+
+    qrTipoRanking.Caption:='Estadísticas de '+tipoRanking;
+    qrpie.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    EKVistaPreviaRanking.VistaPrevia;
   end;
 
-    //HORARIO VENTA
-  if PageControl.ActivePage = TabHorarioVentas then
-  begin
-
-  end;
 
   if PageControl.ActivePage=TabVarios then
   begin
@@ -851,11 +885,11 @@ procedure TFEstadisticaVentas.btRankingProdsClick(Sender: TObject);
 begin
   ZQ_ProductosVendidos.Close;
   ZQ_ProductosVendidos.SQL[1]:= Format('%s as agrupam, ', ['cd.id_producto']);
-  ZQ_ProductosVendidos.SQL[3]:= Format('%s, ', ['(ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')||'') as detalle_prod']);
+  ZQ_ProductosVendidos.SQL[3]:= Format('%s, ', ['(ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')) as DETALLE_PROD']);
 
   ZQ_Totales.Close;
   ZQ_Totales.SQL[1]:= Format('%s as agrupam, ', ['cd.id_producto']);
-  ZQ_Totales.SQL[2]:= Format('%s, ', ['(ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')||'') as detalle_prod']);
+  ZQ_Totales.SQL[2]:= Format('%s, ', ['(ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')) as DETALLE_PROD']);
 end;
 
 
@@ -899,39 +933,47 @@ end;
 procedure TFEstadisticaVentas.PageControlChange(Sender: TObject);
 begin
  btVer.Enabled:=PageControl.ActivePage = TabFacturacion;
+ btImprimir.Enabled:=(PageControl.ActivePage <> TabHorarioVentas)and(PageControl.ActivePage <> TabHorarioGrafico);
 end;
 
 
 procedure TFEstadisticaVentas.EKDbSumaProdsVendidosSumListChanged(Sender: TObject);
 begin
-  lblProdsVendidos.Caption:=FormatFloat('$ ##,###,##0.00 ', EKDbSumaProdsVendidos.SumCollection[0].SumValue);
+  lblProdsVendidos.Caption:=Format('Cantidad: %f ',[EKDbSumaProdsVendidos.SumCollection[1].SumValue])+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaProdsVendidos.SumCollection[0].SumValue);
 end;
 
 
 procedure TFEstadisticaVentas.EKDbSumaTotalesSumListChanged(Sender: TObject);
 begin
-  lblTotales.Caption:=FormatFloat('$ ##,###,##0.00 ', EKDbSumaTotales.SumCollection[0].SumValue);
+  lblTotales.Caption:=Format('Cantidad: %f ',[EKDbSumaProdsVendidos.SumCollection[1].SumValue])+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaTotales.SumCollection[0].SumValue);
 end;
 
 procedure TFEstadisticaVentas.ZQ_EstadVariasAfterScroll(DataSet: TDataSet);
 begin
- 
+
 // lblTotVarias.Caption := lblTotVarias.Caption + FormatFloat('/ Total Ganancia: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[1].SumValue);
 end;
 
 procedure TFEstadisticaVentas.EKDbSumaVariasSumListChanged(
   Sender: TObject);
 begin
+  lblTotVarias.Caption := Format('Cantidad: %f ',[EKDbSumaVarias.SumCollection[5].SumValue]);
   if (Fiscal='T') then
   begin
-  lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue);
+  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue);
   lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Costo: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[4].SumValue);
   lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ganancia: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[1].SumValue);
   end
   else if (Fiscal='N') then
-   lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[3].SumValue)
+   lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[3].SumValue)
    else if (Fiscal='S') then
-     lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[2].SumValue);
+     lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[2].SumValue);
+end;
+
+procedure TFEstadisticaVentas.EKDbSumaHorariosSumListChanged(
+  Sender: TObject);
+begin
+ lblTotHorarios.Caption:=Format('Cantidad: %f ',[EKDbSumaHorarios.SumCollection[1].SumValue])+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaHorarios.SumCollection[0].SumValue);
 end;
 
 end.
