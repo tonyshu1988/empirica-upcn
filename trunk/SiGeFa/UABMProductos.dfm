@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 159
-  Top = 7
+  Left = 242
+  Top = 75
   Width = 1024
   Height = 700
   Caption = 'FABMProductos'
@@ -24,7 +24,7 @@ object FABMProductos: TFABMProductos
     Left = 0
     Top = 0
     Width = 1016
-    Height = 616
+    Height = 621
     Align = alClient
     Caption = 'PContenedor'
     TabOrder = 4
@@ -1842,14 +1842,14 @@ object FABMProductos: TFABMProductos
       Left = 1
       Top = 315
       Width = 1014
-      Height = 300
+      Height = 305
       Align = alClient
       TabOrder = 1
       object grillaDetalle: TEKDBGrid
         Left = 1
         Top = 1
         Width = 1012
-        Height = 52
+        Height = 57
         Align = alClient
         Color = 14606012
         DataSource = DS_DetalleProducto
@@ -2022,7 +2022,7 @@ object FABMProductos: TFABMProductos
       end
       object PDatosdetalle: TPanel
         Left = 1
-        Top = 53
+        Top = 58
         Width = 1012
         Height = 246
         Align = alBottom
