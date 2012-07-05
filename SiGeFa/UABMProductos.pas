@@ -590,9 +590,14 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
     GrupoEditando.Enabled := true;
     GrupoVisualizando.Enabled := false;
 
-    LStockActual.Visible := true;
-    EditStockActual.Visible := true;
-    EditStockActual.Text := '0';
+    LStockActual.Visible := false;
+    EditStockActual.Visible := false;
+    if (asociar_pto_salida = 'SI') then
+    begin
+      LStockActual.Visible := true;
+      EditStockActual.Visible := true;
+      EditStockActual.Text := '0';
+    end;
 
     //Es medio obvio pero si o si hay q ponerlo aca, para el id q vá en detalle prod
      if (ZQ_ProductoCabecera.State=dsinsert) then
