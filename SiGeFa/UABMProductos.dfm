@@ -2398,9 +2398,9 @@ object FABMProductos: TFABMProductos
               object Label28: TLabel
                 Left = 137
                 Top = 22
-                Width = 105
+                Width = 115
                 Height = 13
-                Caption = 'Impuesto IVA (%)'
+                Caption = 'Coef. IVA (Ej: 0.21)'
                 FocusControl = DBEditImpuestoIva
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
