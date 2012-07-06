@@ -324,9 +324,9 @@ object FConsulta_Precios: TFConsulta_Precios
           89)
         object Label1: TLabel
           Left = 355
-          Top = 5
+          Top = 8
           Width = 259
-          Height = 32
+          Height = 27
           Alignment = taCenter
           Anchors = [akLeft, akRight, akBottom]
           Caption = 'C'#243'digo de Barras'
@@ -339,7 +339,7 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object codbarras: TEdit
           Left = 144
-          Top = 38
+          Top = 39
           Width = 697
           Height = 33
           Anchors = [akLeft, akRight, akBottom]
@@ -989,6 +989,7 @@ object FConsulta_Precios: TFConsulta_Precios
   end
   object ZQ_Productos: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_ProductosAfterScroll
     SQL.Strings = (
       
         'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
