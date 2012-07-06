@@ -345,6 +345,9 @@ end;
 
 procedure TFCuentaCorriente_Proveedor.btnVerCtaCteClick(Sender: TObject);
 begin
+ if ZQ_CtaCte_Gral.IsEmpty then exit;
+
+  ZQ_CtaCte_Gral.Refresh;
   if viendoResumen then
   begin
     PanelProveedor.BringToFront;

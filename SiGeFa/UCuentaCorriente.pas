@@ -857,7 +857,7 @@ begin
   else
   begin
     ActivarAfterScroll := true;
-
+    ZQ_CtaCte_Cliente.Refresh;
     viendoDetalleCpb:= true;
     //si el tipo de comprobante es saldo anterior o nota de credito
     if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0)
