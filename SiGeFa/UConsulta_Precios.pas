@@ -101,6 +101,7 @@ type
     procedure ACodBarraExecute(Sender: TObject);
     procedure btnCodBarraClick(Sender: TObject);
     procedure ASalirExecute(Sender: TObject);
+    procedure ZQ_ProductosAfterScroll(DataSet: TDataSet);
   private
     vsel: TFBuscarProductoStock;
     procedure IdentificarCodigo;
@@ -241,6 +242,7 @@ end;
 procedure TFConsulta_Precios.FormCreate(Sender: TObject);
 begin
 PCodBarraPrecio.BringToFront;
+edImagen.Visible:= not (ZQ_ProductosIMAGEN.IsNull);
 
 end;
 
@@ -281,6 +283,11 @@ procedure TFConsulta_Precios.ASalirExecute(Sender: TObject);
 begin
    if btnSalir.Enabled then
     btnSalir.Click;
+end;
+
+procedure TFConsulta_Precios.ZQ_ProductosAfterScroll(DataSet: TDataSet);
+begin
+edImagen.Visible:= not ((ZQ_ProductosIMAGEN.IsNull)or(ZQ_ProductosIMAGEN.AsString=''));
 end;
 
 end.
