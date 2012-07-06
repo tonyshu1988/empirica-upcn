@@ -1,6 +1,6 @@
 object FCuentaCorriente: TFCuentaCorriente
-  Left = 238
-  Top = 71
+  Left = 296
+  Top = 112
   Width = 1009
   Height = 698
   Caption = 'Cta. Cte. Cliente'
@@ -1857,236 +1857,6 @@ object FCuentaCorriente: TFCuentaCorriente
         end
       end
     end
-    object PanelCliente_CtaCte: TPanel
-      Left = 3
-      Top = 126
-      Width = 995
-      Height = 405
-      Align = alClient
-      BorderWidth = 3
-      TabOrder = 0
-      object DBGridCliente_CtaCte: TDBGrid
-        Left = 4
-        Top = 4
-        Width = 987
-        Height = 263
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_CtaCte_Cliente
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGridCliente_CtaCteDrawColumnCell
-        Columns = <
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'FECHA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Fecha'
-            Width = 134
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'TIPO_COMPROBANTE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Comprobante'
-            Width = 266
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DEBE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Debe'
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'HABER'
-            Title.Alignment = taCenter
-            Title.Caption = 'Haber'
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SALDO_CPB'
-            Title.Alignment = taCenter
-            Title.Caption = 'Saldo Cpb.'
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SALDO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Saldo Total'
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SUCURSAL'
-            Title.Alignment = taCenter
-            Title.Caption = 'Sucursal'
-            Width = 182
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'OBSERVACION'
-            Title.Alignment = taCenter
-            Title.Caption = 'Observacion Comprobante'
-            Width = 188
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ID_COMPROBANTE'
-            Width = 100
-            Visible = True
-          end>
-      end
-      object PanelDetalleMov: TPanel
-        Left = 4
-        Top = 267
-        Width = 987
-        Height = 134
-        Align = alBottom
-        BevelOuter = bvNone
-        BorderWidth = 2
-        TabOrder = 1
-        Visible = False
-        object lblTitulo_PanelDetalleMov: TLabel
-          Left = 2
-          Top = 2
-          Width = 983
-          Height = 13
-          Align = alTop
-          Alignment = taCenter
-          Color = clBlue
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-        end
-        object DBGridDetalle_Recibo: TDBGrid
-          Left = 2
-          Top = 15
-          Width = 983
-          Height = 117
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_ReciboDetalle
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'FECHA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Fecha'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DESCRIPCION'
-              Title.Alignment = taCenter
-              Title.Caption = 'Descripci'#243'n'
-              Width = 454
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Importe Pagado'
-              Width = 140
-              Visible = True
-            end>
-        end
-        object DBGridDetalle_Producto: TDBGrid
-          Left = 2
-          Top = 15
-          Width = 983
-          Height = 117
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_ComprobanteDetalle
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 1
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'CODIGO_BARRA'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Barra'
-              Width = 120
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DETALLE_PROD'
-              Title.Alignment = taCenter
-              Title.Caption = 'Producto'
-              Width = 273
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NOMBRE_MARCA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Marca'
-              Width = 151
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'COLOR'
-              Title.Alignment = taCenter
-              Title.Caption = 'Color'
-              Width = 138
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MEDIDA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Medida'
-              Width = 115
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CANTIDAD'
-              Title.Alignment = taCenter
-              Title.Caption = 'Cantidad'
-              Width = 69
-              Visible = True
-            end>
-        end
-      end
-    end
     object PanelCliente_Datos: TPanel
       Left = 3
       Top = 3
@@ -2800,6 +2570,236 @@ object FCuentaCorriente: TFCuentaCorriente
         Caption = 'Por Fecha'
         Layout = blGlyphBottom
         OnClick = AplicarFiltro
+      end
+    end
+    object PanelCliente_CtaCte: TPanel
+      Left = 3
+      Top = 126
+      Width = 995
+      Height = 405
+      Align = alClient
+      BorderWidth = 3
+      TabOrder = 0
+      object DBGridCliente_CtaCte: TDBGrid
+        Left = 4
+        Top = 4
+        Width = 987
+        Height = 263
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_CtaCte_Cliente
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridCliente_CtaCteDrawColumnCell
+        Columns = <
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'FECHA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Fecha'
+            Width = 134
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TIPO_COMPROBANTE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Comprobante'
+            Width = 266
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DEBE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Debe'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'HABER'
+            Title.Alignment = taCenter
+            Title.Caption = 'Haber'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SALDO_CPB'
+            Title.Alignment = taCenter
+            Title.Caption = 'Saldo Cpb.'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SALDO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Saldo Total'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SUCURSAL'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal'
+            Width = 182
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'OBSERVACION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Observacion Comprobante'
+            Width = 188
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_COMPROBANTE'
+            Width = 100
+            Visible = True
+          end>
+      end
+      object PanelDetalleMov: TPanel
+        Left = 4
+        Top = 267
+        Width = 987
+        Height = 134
+        Align = alBottom
+        BevelOuter = bvNone
+        BorderWidth = 2
+        TabOrder = 1
+        Visible = False
+        object lblTitulo_PanelDetalleMov: TLabel
+          Left = 2
+          Top = 2
+          Width = 983
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Color = clBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object DBGridDetalle_Recibo: TDBGrid
+          Left = 2
+          Top = 15
+          Width = 983
+          Height = 117
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_ReciboDetalle
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'FECHA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Title.Alignment = taCenter
+              Title.Caption = 'Descripci'#243'n'
+              Width = 454
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Importe Pagado'
+              Width = 140
+              Visible = True
+            end>
+        end
+        object DBGridDetalle_Producto: TDBGrid
+          Left = 2
+          Top = 15
+          Width = 983
+          Height = 117
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_ComprobanteDetalle
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 1
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'CODIGO_BARRA'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Barra'
+              Width = 120
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DETALLE_PROD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Producto'
+              Width = 273
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_MARCA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Marca'
+              Width = 151
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'COLOR'
+              Title.Alignment = taCenter
+              Title.Caption = 'Color'
+              Width = 138
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MEDIDA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
+              Width = 115
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cantidad'
+              Width = 69
+              Visible = True
+            end>
+        end
       end
     end
   end

@@ -89,6 +89,8 @@ type
     ABuscarProd: TAction;
     ACodBarra: TAction;
     ASalir: TAction;
+    Label14: TLabel;
+    DBEdit7: TDBEdit;
     procedure codbarrasKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormActivate(Sender: TObject);
@@ -239,6 +241,7 @@ end;
 procedure TFConsulta_Precios.FormCreate(Sender: TObject);
 begin
 PCodBarraPrecio.BringToFront;
+
 end;
 
 procedure TFConsulta_Precios.btnBuscarClick(Sender: TObject);

@@ -1,8 +1,8 @@
 object FConsulta_Precios: TFConsulta_Precios
-  Left = 207
-  Top = 96
+  Left = 313
+  Top = 50
   Width = 1024
-  Height = 620
+  Height = 874
   Caption = 'Consulta Precios'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,122 +22,132 @@ object FConsulta_Precios: TFConsulta_Precios
     Left = 0
     Top = 0
     Width = 1016
-    Height = 541
+    Height = 795
     Align = alClient
     TabOrder = 0
     object PCodBarraPrecio: TPanel
       Left = 1
       Top = 1
       Width = 1014
-      Height = 539
+      Height = 793
       Align = alClient
       TabOrder = 0
       object GB_Datos_Producto: TGroupBox
         Left = 1
-        Top = 221
+        Top = 218
         Width = 1012
-        Height = 317
+        Height = 574
         Align = alClient
-        Caption = 'Datos Producto'
+        Caption = ' Datos Producto '
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -24
         Font.Name = 'Verdana'
-        Font.Style = []
+        Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 0
-        DesignSize = (
-          1012
-          317)
         object Label2: TLabel
           Left = 306
-          Top = 19
-          Width = 84
-          Height = 23
+          Top = 35
+          Width = 76
+          Height = 18
           Caption = 'Nombre:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -19
+          Font.Height = -16
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
         end
         object Label3: TLabel
           Left = 306
-          Top = 76
-          Width = 83
-          Height = 23
-          Caption = 'Articulo:'
+          Top = 92
+          Width = 72
+          Height = 18
+          Caption = 'Art'#237'culo:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -19
+          Font.Height = -16
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
         end
         object Label4: TLabel
           Left = 306
-          Top = 132
-          Width = 65
-          Height = 23
+          Top = 148
+          Width = 60
+          Height = 18
           Caption = 'Marca:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -19
+          Font.Height = -16
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
         end
         object Label5: TLabel
           Left = 658
-          Top = 132
-          Width = 132
-          Height = 23
+          Top = 148
+          Width = 115
+          Height = 18
           Caption = 'Tipo Articulo:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -19
+          Font.Height = -16
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
         end
         object Label6: TLabel
           Left = 306
-          Top = 188
-          Width = 60
-          Height = 23
+          Top = 204
+          Width = 52
+          Height = 18
           Caption = 'Color:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -19
+          Font.Height = -16
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
         end
         object Label7: TLabel
           Left = 306
-          Top = 247
-          Width = 121
-          Height = 23
+          Top = 263
+          Width = 106
+          Height = 18
           Caption = 'Descripci'#243'n:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -19
+          Font.Height = -16
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
         end
         object Label8: TLabel
           Left = 16
-          Top = 242
-          Width = 93
-          Height = 32
+          Top = 251
+          Width = 94
+          Height = 29
           Caption = 'Precio:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -27
+          Font.Height = -24
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label14: TLabel
+          Left = 16
+          Top = 339
+          Width = 177
+          Height = 29
+          Caption = 'Stock Actual:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -24
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
           ParentFont = False
         end
         object edImagen: TDBImage
@@ -152,7 +162,7 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object DBEdit2: TDBEdit
           Left = 306
-          Top = 45
+          Top = 56
           Width = 679
           Height = 31
           BevelInner = bvNone
@@ -171,7 +181,7 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object DBEdit1: TDBEdit
           Left = 306
-          Top = 102
+          Top = 113
           Width = 679
           Height = 31
           BevelInner = bvNone
@@ -190,7 +200,7 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object DBEdit3: TDBEdit
           Left = 306
-          Top = 155
+          Top = 166
           Width = 327
           Height = 31
           BevelInner = bvNone
@@ -209,7 +219,7 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object DBEdit4: TDBEdit
           Left = 658
-          Top = 155
+          Top = 166
           Width = 327
           Height = 31
           BevelInner = bvNone
@@ -228,7 +238,7 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object DBEdit5: TDBEdit
           Left = 306
-          Top = 212
+          Top = 223
           Width = 327
           Height = 31
           BevelInner = bvNone
@@ -247,7 +257,7 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object DBEdit6: TDBEdit
           Left = 16
-          Top = 274
+          Top = 281
           Width = 249
           Height = 40
           BevelInner = bvNone
@@ -266,10 +276,9 @@ object FConsulta_Precios: TFConsulta_Precios
         end
         object DBMemo1: TDBMemo
           Left = 306
-          Top = 275
+          Top = 286
           Width = 679
-          Height = 33
-          Anchors = [akLeft, akTop, akBottom]
+          Height = 123
           Color = 16771302
           DataField = 'DESCRIPCION'
           DataSource = DS_Productos
@@ -279,23 +288,44 @@ object FConsulta_Precios: TFConsulta_Precios
           Font.Name = 'Verdana'
           Font.Style = []
           ParentFont = False
+          ReadOnly = True
+          ScrollBars = ssBoth
           TabOrder = 7
+        end
+        object DBEdit7: TDBEdit
+          Left = 16
+          Top = 369
+          Width = 249
+          Height = 40
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 13303807
+          DataField = 'STOCK_ACTUAL'
+          DataSource = DS_Productos
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -27
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 8
         end
       end
       object GB_Cod_Barra: TGroupBox
         Left = 1
         Top = 129
         Width = 1012
-        Height = 92
+        Height = 89
         Align = alTop
         TabOrder = 1
         DesignSize = (
           1012
-          92)
+          89)
         object Label1: TLabel
           Left = 355
-          Top = 15
-          Width = 234
+          Top = 5
+          Width = 259
           Height = 32
           Alignment = taCenter
           Anchors = [akLeft, akRight, akBottom]
@@ -304,14 +334,14 @@ object FConsulta_Precios: TFConsulta_Precios
           Font.Color = clWindowText
           Font.Height = -27
           Font.Name = 'Verdana'
-          Font.Style = []
+          Font.Style = [fsBold]
           ParentFont = False
         end
         object codbarras: TEdit
           Left = 144
-          Top = 48
+          Top = 38
           Width = 697
-          Height = 28
+          Height = 33
           Anchors = [akLeft, akRight, akBottom]
           Color = 11534037
           Font.Charset = ANSI_CHARSET
@@ -416,6 +446,7 @@ object FConsulta_Precios: TFConsulta_Precios
           AutoSize = True
           Color = 16771302
           DataField = 'NOMBRE'
+          DataSource = DM.DS_Sucursal
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -432,6 +463,7 @@ object FConsulta_Precios: TFConsulta_Precios
           AutoSize = True
           Color = 16771302
           DataField = 'DIRECCION'
+          DataSource = DM.DS_Sucursal
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -448,6 +480,7 @@ object FConsulta_Precios: TFConsulta_Precios
           AutoSize = True
           Color = 16771302
           DataField = 'EMAIL'
+          DataSource = DM.DS_Sucursal
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -464,6 +497,7 @@ object FConsulta_Precios: TFConsulta_Precios
           AutoSize = True
           Color = 16771302
           DataField = 'TELEFONO'
+          DataSource = DM.DS_Sucursal
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -16
@@ -478,6 +512,7 @@ object FConsulta_Precios: TFConsulta_Precios
           Width = 118
           Height = 90
           DataField = 'LOGO'
+          DataSource = DM.DS_Sucursal
           Stretch = True
           TabOrder = 0
         end
@@ -1094,6 +1129,7 @@ object FConsulta_Precios: TFConsulta_Precios
     end
     object ZQ_ProductosPRECIO_COSTO: TFloatField
       FieldName = 'PRECIO_COSTO'
+      currency = True
     end
     object ZQ_ProductosPRECIO_VENTA: TFloatField
       FieldName = 'PRECIO_VENTA'
@@ -1133,8 +1169,8 @@ object FConsulta_Precios: TFConsulta_Precios
     Top = 304
   end
   object BotonesRapidos: TActionManager
-    Left = 802
-    Top = 58
+    Left = 130
+    Top = 394
     StyleName = 'XP Style'
     object ABuscarProd: TAction
       Caption = 'ABuscarProd'
