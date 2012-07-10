@@ -513,6 +513,12 @@ type
     ZQ_VerCpb_EntregaCOD_PRODUCTO: TStringField;
     ZQ_VerCpb_EntregaCODIGO_BARRA: TStringField;
     ZQ_VerCpb_EntregaID_SUCURSAL: TIntegerField;
+    ZQ_ListadoMedioIF: TStringField;
+    ZQ_ListadoMedioDESC_REC: TFloatField;
+    ZQ_ListadoMedioCOD_CORTO: TIntegerField;
+    ZQ_ListadoMedioGENERA_VUELTO: TStringField;
+    ZQ_ListadoMedioCOLUMNA_PRECIO: TIntegerField;
+    ZQ_ListadoMedioMODIFICABLE: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -1332,6 +1338,8 @@ end;
 
 
 procedure TFABM_CPB_Devolucion.buscarCuenta(tipo: string);
+var
+  desc_recargo: double;
 begin
   //si es un ingreso y ya tiene cuenta cargada o si es un egreso y ya tiene cuenta cargada
   if ((tipo = 'I') and (not ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull)) or ((tipo = 'E') and (not ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull)) then
@@ -1357,6 +1365,17 @@ begin
       ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
       ZQ_ListadoMedio.Open;
 
+      desc_recargo:= 0;
+      if tipo = 'I' then
+        case ZQ_ListadoMedioCOLUMNA_PRECIO.AsInteger of
+          0: desc_recargo:= 0;
+          1: desc_recargo:= precio1_DescRecargo;
+          2: desc_recargo:= precio2_DescRecargo;
+          3: desc_recargo:= precio3_DescRecargo;
+          4: desc_recargo:= precio4_DescRecargo;
+          5: desc_recargo:= precio5_DescRecargo;
+        end;
+
       if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
         ZQ_CpbFormaPago.Append //pongo en modo edicion
       else
@@ -1368,7 +1387,7 @@ begin
         ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= ZQ_ListadoCuentaID_CUENTA.AsInteger;
       ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_ListadoCuentaMEDIO_DEFECTO.AsInteger;
       ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
-      ZQ_CpbFormaPagoIMPORTE.AsFloat:= restaPagar;
+      ZQ_CpbFormaPagoIMPORTE.AsFloat:= restaPagar + (restaPagar * desc_recargo);
       ZQ_CpbFormaPago.Post;
     end;
   end;
@@ -1452,6 +1471,8 @@ procedure TFABM_CPB_Devolucion.EKSuma_FPagoSumListChanged(Sender: TObject);
 begin
   editTotalFpago.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
   restaPagar:= abs(saldoFormaCobroPago) - EKSuma_FPago.SumCollection[0].SumValue;
+  if restaPagar < 0 then
+    restaPagar:= 0;
 end;
 
 
@@ -1823,6 +1844,8 @@ begin
     end;
 
   restaPagar:= abs(saldoFormaCobroPago) - EKSuma_FPago.SumCollection[0].SumValue;
+  if restaPagar < 0 then
+    restaPagar:= 0;  
 end;
 
 
@@ -1853,6 +1876,8 @@ begin
     end;
 
   restaPagar:= abs(saldoFormaCobroPago) - EKSuma_FPago.SumCollection[0].SumValue;
+  if restaPagar < 0 then
+    restaPagar:= 0;
 end;
 
 
