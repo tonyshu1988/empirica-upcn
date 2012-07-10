@@ -596,6 +596,8 @@ type
     ZQ_ComprobanteFECHA_ENVIADA: TDateField;
     ZQ_ComprobanteFECHA_IMPRESA: TDateField;
     ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField;
+    CD_ComprobanteID_PREVENTA: TIntegerField;
+    ZQ_ComprobanteID_PREVENTA: TIntegerField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -1064,6 +1066,7 @@ begin
   CD_ComprobanteID_TIPO_CPB.AsInteger:= 11; //Factura
   CD_ComprobanteID_VENDEDOR.AsInteger:= IdVendedor;
   CD_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
+  CD_ComprobanteID_PREVENTA.Clear;
 
   if CheckBoxCambiarFecha.Checked then
     CD_ComprobanteFECHA.AsDateTime:= DateTimePicker_FechaCarga.DateTime
@@ -1668,6 +1671,7 @@ begin
       ZQ_ComprobanteENCABEZADO.AsString:= CD_ComprobanteENCABEZADO.AsString;
       ZQ_ComprobantePIE.AsString:= CD_ComprobantePIE.AsString;
       ZQ_ComprobanteID_TIPO_IVA.AsInteger:= CD_ComprobanteID_TIPO_IVA.AsInteger;
+      ZQ_ComprobanteID_PREVENTA.AsInteger:= CD_ComprobanteID_PREVENTA.AsInteger;      
       ZQ_ComprobanteFECHA_ENVIADA.Clear;
       ZQ_ComprobanteFECHA_IMPRESA.Clear;
       ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
@@ -2255,7 +2259,7 @@ begin
     end
 end;
 
-
+//CARGAR LA PREVENTA
 procedure TFCajero.cargarPreventa;
 var
   i: Integer;
@@ -2322,6 +2326,7 @@ begin
     CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
     CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente;
     CD_ComprobanteOBSERVACION.AsString:= Format('Venta de Mostrador, comprobante Nro:%s', [vsel4.ZQ_ComprobanteCODIGO.AsString]);
+    CD_ComprobanteID_PREVENTA.AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
     CD_ComprobanteID_TIPO_IVA.AsInteger:= vsel4.ZQ_ComprobanteID_TIPO_IVA.AsInteger;
 
     CD_ComprobanteID_VENDEDOR.AsInteger:= vsel4.ZQ_ComprobanteID_VENDEDOR.AsInteger;
