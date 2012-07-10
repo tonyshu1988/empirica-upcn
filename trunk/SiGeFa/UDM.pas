@@ -141,12 +141,16 @@ var
   aplicaImprimirFiscal: string;
   imprimirEtiqueta_opcionReporte: integer;
 
-  precio1 : string;
-  precio2 : string;
-  precio3 : string;
-  precio4 : string;
-  precio5 : string;
-
+  precio1: string;
+  precio2: string;
+  precio3: string;
+  precio4: string;
+  precio5: string;
+  precio1_DescRecargo: double = 0;
+  precio2_DescRecargo: double = 0;
+  precio3_DescRecargo: double = 0;
+  precio4_DescRecargo: double = 0;
+  precio5_DescRecargo: double = 0;
 Const
 //  FORMA DE PAGO
   FP_CTA_CTE       = 1;
@@ -229,6 +233,13 @@ begin
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO3', precio3);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO4', precio4);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO5', precio5);
+
+  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'PRECIO1', precio1_DescRecargo);
+  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'PRECIO2', precio2_DescRecargo);
+  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'PRECIO3', precio3_DescRecargo);
+  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'PRECIO4', precio4_DescRecargo);
+  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'PRECIO5', precio5_DescRecargo);
+
   ZQ_Configuracion_Variables.Close;
 end;
 
