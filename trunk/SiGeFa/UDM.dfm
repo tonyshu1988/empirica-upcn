@@ -1467,8 +1467,6 @@ object DM: TDM
     Caption = 'SIGEFA'
     Modo = EKLoginAutomatico
     ModoPermiso = EKPermisoAction
-    Titulo_DBAplicacion = 'db_aplicacion'
-    Titulo_DBUsuario = 'db_usuarios'
     Left = 208
     Top = 16
   end

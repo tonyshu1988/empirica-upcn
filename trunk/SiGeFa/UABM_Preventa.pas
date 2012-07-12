@@ -1255,7 +1255,7 @@ begin
   ZQ_ComprobanteID_TIPO_IVA.AsInteger:= CD_ComprobanteID_TIPO_IVA.AsInteger;
   ZQ_ComprobanteFECHA_ENVIADA.Clear;
   ZQ_ComprobanteFECHA_IMPRESA.Clear;
-  ZQ_ComprobanteFECHA_VENCIMIENTO.AsDateTime:= IncDay(CD_ComprobanteFECHA.AsDateTime);
+  ZQ_ComprobanteFECHA_VENCIMIENTO.AsDateTime:= IncDay(CD_ComprobanteFECHA.AsDateTime, preventa_diasVencimiento);
   ZQ_Comprobante.Post;
 
   //si hay una seña cargada le seteo los datos faltantes
