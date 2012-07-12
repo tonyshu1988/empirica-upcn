@@ -1992,14 +1992,6 @@ begin
     exit;
   end;
 
-  //verifico si lo que me paga con Nota de credito es menor o igual al saldo disponible en Nota de credito
-  if (not verificarSaldoNotaCredito(CD_Fpago, CD_ComprobanteID_CLIENTE.AsInteger)) then
-  begin
-    Application.MessageBox(pchar('El total a abonar en Nota de Credito es superior al saldo disponible, por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-    result:= false;
-    exit;
-  end;
-
   //Saco las formas de pago que sean con importe=0 o sale si no tiene cuenta(al cuete)
   CD_Fpago.First;
   while not (CD_Fpago.Eof) do
@@ -2014,6 +2006,14 @@ begin
     end;
 
     CD_Fpago.Next;
+  end;
+
+  //verifico si lo que me paga con Nota de credito es menor o igual al saldo disponible en Nota de credito si el Cleinte no es Consum Final
+  if ((cliente<>0)and(not verificarSaldoNotaCredito(CD_Fpago, CD_ComprobanteID_CLIENTE.AsInteger))) then
+  begin
+    Application.MessageBox(pchar('El total a abonar en Nota de Credito es superior al saldo disponible, por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+    result:= false;
+    exit;
   end;
 end;
 
