@@ -339,6 +339,7 @@ type
     QRLabel1: TQRLabel;
     QRDBText12: TQRDBText;
     EKVistaPreviaRanking: TEKVistaPreviaQR;
+    ZQ_TotalesFECHAC: TDateField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
