@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 148
-  Top = 172
+  Left = 141
+  Top = 88
   Width = 1194
   Height = 673
   Caption = 'Estadisticas Ventas'
@@ -186,7 +186,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Size.Values = (
                 52.916666666666670000
                 1158.875000000000000000
-                68.791666666666670000
+                68.791666666666680000
                 449.791666666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -865,7 +865,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              68.791666666666670000
+              68.791666666666680000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -1426,7 +1426,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 1170
+            Width = 102
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1440,7 +1440,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 1170
+            Width = 120
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1454,7 +1454,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 1170
+            Width = 126
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -1667,7 +1667,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         Left = 123
         Top = 114
         Width = 794
-        Height = 279
+        Height = 1123
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
@@ -1809,7 +1809,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             Size.Values = (
               52.916666666666670000
               685.270833333333400000
-              68.791666666666670000
+              68.791666666666680000
               529.166666666666700000)
             Alignment = taCenter
             AlignToBand = True
@@ -2306,7 +2306,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            68.791666666666670000
+            68.791666666666680000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -2911,7 +2911,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Size.Values = (
                 52.916666666666670000
                 627.062500000000000000
-                68.791666666666670000
+                68.791666666666680000
                 645.583333333333400000)
               Alignment = taCenter
               AlignToBand = True
@@ -2944,7 +2944,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
                 52.916666666666670000
                 558.270833333333400000
                 5.291666666666667000
-                783.166666666666700000)
+                783.166666666666800000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -3499,7 +3499,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              68.791666666666670000
+              68.791666666666680000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -3785,7 +3785,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Left = 134
           Top = 65
           Width = 794
-          Height = 408
+          Height = 1123
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
@@ -3927,7 +3927,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Size.Values = (
                 52.916666666666670000
                 685.270833333333400000
-                68.791666666666670000
+                68.791666666666680000
                 529.166666666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -3947,7 +3947,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               FontSize = 9
             end
             object ReporteEstadVarias_Titulo: TQRLabel
-              Left = 240
+              Left = -111
               Top = 2
               Width = 237
               Height = 20
@@ -4397,7 +4397,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              68.791666666666670000
+              68.791666666666680000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -6148,6 +6148,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     SQL.Strings = (
       'select'
       '       cd.id_producto as agrupam,'
+      '       cast(c.fecha_cobrada as date) as fechaC,'
       
         '       ma.nombre_marca||'#39' '#39'||pc.nombre||'#39' ('#39'||coalesce(m.medida,' +
         ' '#39'S/M'#39')||coalesce('#39' - '#39'||co.nombre, '#39'S/C'#39')||'#39')'#39' as detalle_prod,'
@@ -6168,10 +6169,11 @@ object FEstadisticaVentas: TFEstadisticaVentas
       'left join color co on (pc.color = co.id_color)'
       'where (c.id_tipo_cpb = 11)'
       '  and (c.fecha_cobrada is not null)'
-      '  and (c.fecha_cobrada between :f1 and :f2)'
+      '  and (cast(c.fecha_cobrada as date) between :f1 and :f2)'
       '  and ((c.id_sucursal = :id_sucursal) or (:id_sucursal = -1))'
-      'group by 1, 2'
-      'order by 5 desc, 3, 2')
+      'group by 1, 2,3'
+      'order by 6 desc, 4, 2'
+      '')
     Params = <
       item
         DataType = ftUnknown
@@ -6228,6 +6230,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
       FieldName = 'DETALLE_PROD'
       ReadOnly = True
       Size = 186
+    end
+    object ZQ_TotalesFECHAC: TDateField
+      FieldName = 'FECHAC'
+      ReadOnly = True
     end
   end
   object DS_Top20: TDataSource
