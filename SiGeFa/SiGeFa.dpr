@@ -66,7 +66,8 @@ uses
   UConsulta_Precios in 'UConsulta_Precios.pas' {FConsulta_Precios},
   UCompararStock in 'UCompararStock.pas' {FCompararStock},
   UOP_ABMMedico in 'UOP_ABMMedico.pas' {FOP_ABMMedico},
-  UOP_ABMObraSocial in 'UOP_ABMObraSocial.pas' {FOP_ABMObraSocial};
+  UOP_ABMObraSocial in 'UOP_ABMObraSocial.pas' {FOP_ABMObraSocial},
+  UPreventa_Historico in 'UPreventa_Historico.pas' {FPreventa_Historico};
 
 {$R *.res}
 

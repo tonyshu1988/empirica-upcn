@@ -260,7 +260,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging,
   UEstadisticaVentas, UReimpresionComprobantes, UABM_PersonasPuntos,
   UConsulta_Precios, DateUtils, UCompararStock, UOP_ABMMedico,
-  UOP_ABMObraSocial;
+  UOP_ABMObraSocial, UPreventa_Historico;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -807,6 +807,7 @@ end;
 procedure TFPrincipal.AReimpresionComprobExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFReimpresionComprobantes, FReimpresionComprobantes);
+//  EKVentanas1.Abrir(Sender, TFPreventa_Historico, FPreventa_Historico);
 end;
 
 procedure TFPrincipal.AABM_PersonasPtosExecute(Sender: TObject);
@@ -848,7 +849,6 @@ begin
       Ruta := DM.EKIni.Ini.ReadString('SHUTDOWN', 'RUTA', '');
       ShellExecute(FPrincipal.Handle, nil, Pchar(Ruta) , PChar('-activar'), nil, SW_SHOWNORMAL);
     end;
-
 end;
 
 procedure TFPrincipal.AOP_ABMMedicoExecute(Sender: TObject);
