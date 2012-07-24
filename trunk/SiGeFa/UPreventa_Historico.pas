@@ -8,7 +8,7 @@ uses
   ZDataset, Buttons, ExtCtrls, Grids, DBGrids, StdCtrls, dxBar,
   dxBarExtItems, EKDbSuma, EKOrdenarGrilla, ComCtrls, IniFiles, ShellAPI,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, Menus,
-  EKListadoSQL;
+  EKListadoSQL, EKMensajeMasDato;
 
 type
   TFPreventa_Historico = class(TForm)
@@ -102,7 +102,7 @@ type
     ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
     btVer: TdxBarLargeButton;
     btnEliminarComprob: TdxBarLargeButton;
-    ZSP_EliminarComprob: TZStoredProc;
+    ZSP_EliminarPreventa: TZStoredProc;
     ZQ_Comprobante_FormaPagoNOMBRE_CUENTA: TStringField;
     ZQ_Comprobante_FormaPagoCODIGO: TStringField;
     ZQ_Comprobante_FormaPagoNRO_CTA_BANCARIA: TStringField;
@@ -132,6 +132,20 @@ type
     ZQ_ComprobanteVENDEDOR_: TStringField;
     ZQ_ComprobanteTIPOCOMPR_: TStringField;
     ZQ_ComprobanteCLIENTE_: TStringField;
+    PanelInfo: TPanel;
+    lblCantidadRegistros: TLabel;
+    StaticTxtVencida: TStaticText;
+    StaticTxtUtilizada: TStaticText;
+    ZQ_Comprobante_idFacturaAsociada: TIntegerField;
+    ZQ_CpbVenta: TZQuery;
+    ZQ_CpbVentaID_COMPROBANTE: TIntegerField;
+    ZQ_CpbVentaCODIGO: TStringField;
+    ZQ_CpbVentaFECHA: TDateTimeField;
+    ZQ_Comprobante_fechaFacturaAsociada: TDateTimeField;
+    ZQ_Comprobante_codigoFacturaAsociada: TStringField;
+    PopUpItemCambiarFechaVencimiento1: TMenuItem;
+    EKMensajeMasDato1: TEKMensajeMasDato;
+    ZQ_CambiarVencim: TZQuery;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -159,6 +173,8 @@ type
     procedure DBGridListadoProductosDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure ZQ_ComprobanteCalcFields(DataSet: TDataSet);
+    procedure PopUpItemCambiarFechaVencimiento1Click(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -186,7 +202,10 @@ begin
     btVer.Click;
 
   if EKBuscarComprobantes.Buscar then
+  begin
+    dm.mostrarCantidadRegistro(ZQ_Comprobante, lblCantidadRegistros);
     ZQ_Comprobante.First;
+  end;
 end;
 
 
@@ -210,8 +229,8 @@ begin
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
     TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
 
-//  btnEliminarComprob.Visible:= ivNever;
-//  if dm.EKUsrLogin.PermisoAccion('ELIMINAR_PREVENTA') then
+  btnEliminarComprob.Visible:= ivNever;
+  if dm.EKUsrLogin.PermisoAccion('ELIMINAR_PREVENTA') then
     btnEliminarComprob.Visible:= ivAlways;
 end;
 
@@ -261,7 +280,7 @@ begin
     lblTotalFPago.Caption:= FormatFloat('Total Seña: $ ##,###,##0.00 ', EKDbSumaFpago.SumCollection[0].SumValue);
     lblTotalProducto.Caption:= FormatFloat('Total Producto: $ ##,###,##0.00 ', EKDbSumaProducto.SumCollection[0].SumValue);
   end;
-  Application.ProcessMessages;
+//  Application.ProcessMessages;
 end;
 
 
@@ -290,20 +309,19 @@ end;
 
 
 procedure TFPreventa_Historico.DBGridComprobantesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-var
-  usada: string;
-  vencida: string;
 begin
-//  if ZQ_ComprobanteFECHA_VENC.AsDate < dm.EKModelo.Fecha then
-//    usada:= 'N'
-//  else
-//    usada:= 'S';
+//  if (ZQ_ComprobanteFECHA_VENC.AsDateTime < dm.EKModelo.Fecha) then //si esta vencida
+//    DBGridComprobantes.Canvas.Brush.Color:= StaticTxtVencida.Color;
 //
-//  if ZQ_ComprobanteFECHA_USADO.IsNull then
-//    usada:= 'N'
-//  else
-//    usada:= 'S';
-//  FPrincipal.PintarFilasGrillasConBajas(DBGridComprobantes, usada, Rect, DataCol, Column, State)
+//  if not (ZQ_ComprobanteFECHA_USADO.IsNull) then   //si esta usada
+//    DBGridComprobantes.Canvas.Brush.Color:= StaticTxtUtilizada.Color;
+//
+//  if (gdFocused in State) or (gdSelected in State) then
+//    DBGridComprobantes.Canvas.Font.Style:= DBGridComprobantes.Canvas.Font.Style + [fsBold];
+//  DBGridComprobantes.Canvas.Font.Color:= clBlack;
+//  DBGridComprobantes.DefaultDrawColumnCell(rect, datacol, column, state);
+
+  FPrincipal.PintarFilasGrillas(DBGridComprobantes, Rect, DataCol, Column, State);
 end;
 
 
@@ -326,29 +344,35 @@ begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-//  if (application.MessageBox(pchar('¿Desea eliminar el comprobante de venta Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Eliminación de Comprobante', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//    if dm.EKModelo.iniciar_transaccion('ELIMINAR COMPROBANTE', []) then
-//    begin
-//      try
-//        begin
-//          ZSP_EliminarComprob.Close;
-//          ZSP_EliminarComprob.ParamByName('ID_COMPROBANTE').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-//          ZSP_EliminarComprob.ExecProc;
-//          if dm.EKModelo.finalizar_transaccion('ELIMINAR COMPROBANTE') then
-//            Application.MessageBox(PChar('Se eliminó el comprobante Nº: ' + ZQ_ComprobanteCODIGO.AsString), 'Eliminación de Comprobantes', MB_OK + MB_ICONINFORMATION)
-//          else
-//            dm.EKModelo.cancelar_transaccion('ELIMINAR COMPROBANTE');
-//
-//          ZQ_Comprobante.Refresh;
-//        end
-//      except
-//        begin
-//          Application.MessageBox(PChar('No se pudo eliminar el comprobante Nº:' + ZQ_ComprobanteCODIGO.AsString), 'Eliminación de Comprobantes', MB_OK + MB_ICONINFORMATION);
-//          dm.EKModelo.cancelar_transaccion('ELIMINAR COMPROBANTE');
-//          Exit;
-//        end
-//      end;
-//    end;
+  if not ZQ_Comprobante_idFacturaAsociada.IsNull then
+  begin
+    Application.MessageBox(PChar('No se puede realizar la acción porque tiene un comprobante de venta asociado (Código CPB: '+ZQ_Comprobante_codigoFacturaAsociada.AsString+')'), 'Cambiar Cuenta', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
+
+  if (application.MessageBox(pchar('¿Desea eliminar la Preventa Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Eliminar Preventa', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion('ELIMINAR PREVENTA', []) then
+    begin
+      try
+        begin
+          ZSP_EliminarPreventa.Close;
+          ZSP_EliminarPreventa.ParamByName('ID_PREVENTA').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+          ZSP_EliminarPreventa.ExecProc;
+          if dm.EKModelo.finalizar_transaccion('ELIMINAR PREVENTA') then
+            Application.MessageBox(PChar('Se eliminó la Preventa Nº: ' + ZQ_ComprobanteCODIGO.AsString), 'Eliminar Preventa', MB_OK + MB_ICONINFORMATION)
+          else
+            dm.EKModelo.cancelar_transaccion('ELIMINAR PREVENTA');
+
+          ZQ_Comprobante.Refresh;
+        end
+      except
+        begin
+          Application.MessageBox(PChar('No se pudo eliminar la Preventa Nº:' + ZQ_ComprobanteCODIGO.AsString), 'Eliminar Preventa', MB_OK + MB_ICONINFORMATION);
+          dm.EKModelo.cancelar_transaccion('ELIMINAR PREVENTA');
+          Exit;
+        end
+      end;
+    end;
 end;
 
 
@@ -378,11 +402,20 @@ var
   transaccion_temp: string;
   id_comprobante: integer;
 begin
-  if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_CLIENT') then
+  if (ZQ_Comprobante.IsEmpty) then
     exit;
 
-  if ZQ_Comprobante.IsEmpty then
+  if not dm.EKUsrLogin.PermisoAccion('HISTPREV_CAMB_CLIENT') then
+  begin
+    Application.MessageBox(PChar('No tiene permisos para realizar esta acción'), 'Cambiar Cliente', MB_OK + MB_ICONINFORMATION);
     exit;
+  end;
+
+  if not ZQ_Comprobante_idFacturaAsociada.IsNull then
+  begin
+    Application.MessageBox(PChar('No se puede realizar la acción porque tiene un comprobante de venta asociado (Código CPB: '+ZQ_Comprobante_codigoFacturaAsociada.AsString+')'), 'Cambiar Cliente', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   transaccion_temp:= 'CAMBIAR CLIENTE PREVENTA';
   if (application.MessageBox(pchar('¿Desea cambiar el Cliente de la Preventa Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Cambiar Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -432,11 +465,20 @@ var
   transaccion_temp: string;
   id_comp_fpago: integer;
 begin
-  if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_CUENTA') then
-    exit;
-
   if ZQ_Comprobante_FormaPago.IsEmpty then
     exit;
+
+  if not dm.EKUsrLogin.PermisoAccion('HISTPREV_CAMB_CUENTA') then
+  begin
+    Application.MessageBox(PChar('No tiene permisos para realizar esta acción'), 'Cambiar Cuenta', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
+
+  if not ZQ_Comprobante_idFacturaAsociada.IsNull then
+  begin
+    Application.MessageBox(PChar('No se puede realizar la acción porque tiene un comprobante de venta asociado (Código CPB: '+ZQ_Comprobante_codigoFacturaAsociada.AsString+')'), 'Cambiar Cuenta', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   transaccion_temp:= 'CAMBIAR CUENTA PREVENTA';
   if (application.MessageBox(pchar('¿Desea cambiar la Cuenta de la Preventa Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Cambiar Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -486,11 +528,20 @@ var
   transaccion_temp: string;
   id_comp_fpago: integer;
 begin
-  if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_FPAGO') then
-    exit;
-
   if ZQ_Comprobante_FormaPago.IsEmpty then
     exit;
+
+  if not dm.EKUsrLogin.PermisoAccion('HISTPREV_CAMB_FPAGO') then
+  begin
+    Application.MessageBox(PChar('No tiene permisos para realizar esta acción'), 'Cambiar Forma Pago', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
+
+  if not ZQ_Comprobante_idFacturaAsociada.IsNull then
+  begin
+    Application.MessageBox(PChar('No se puede realizar la acción porque tiene un comprobante de venta asociado (Código CPB: '+ZQ_Comprobante_codigoFacturaAsociada.AsString+')'), 'Cambiar Forma Pago', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   transaccion_temp:= 'CAMBIAR FPAGO PREVENTA';
   if (application.MessageBox(pchar('¿Desea cambiar la Forma de Pago de la Preventa Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Cambiar Forma Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -548,6 +599,87 @@ end;
 procedure TFPreventa_Historico.DBGridListadoProductosDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridListadoProductos, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFPreventa_Historico.ZQ_ComprobanteCalcFields(DataSet: TDataSet);
+begin
+  ZQ_CpbVenta.Close;
+  ZQ_CpbVenta.ParamByName('id_preventa').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+  ZQ_CpbVenta.Open;
+
+  ZQ_Comprobante_idFacturaAsociada.Clear;
+  ZQ_Comprobante_fechaFacturaAsociada.Clear;
+  ZQ_Comprobante_codigoFacturaAsociada.Clear;
+  if not ZQ_CpbVenta.IsEmpty then
+  begin
+    ZQ_Comprobante_idFacturaAsociada.AsInteger:= ZQ_CpbVentaID_COMPROBANTE.AsInteger;
+    ZQ_Comprobante_fechaFacturaAsociada.AsDateTime:= ZQ_CpbVentaFECHA.AsDateTime;
+    ZQ_Comprobante_codigoFacturaAsociada.AsString:= ZQ_CpbVentaCODIGO.AsString;
+  end;
+end;
+
+
+procedure TFPreventa_Historico.PopUpItemCambiarFechaVencimiento1Click(Sender: TObject);
+var
+  transaccion_temp: string;
+  id_comprobante: integer;
+  fechaVen: TDate;
+begin
+  if (ZQ_Comprobante.IsEmpty) then
+    exit;
+
+  if not dm.EKUsrLogin.PermisoAccion('HISTPREV_CAMB_VENCIM') then
+  begin
+    Application.MessageBox(PChar('No tiene permisos para realizar esta acción'), 'Cambiar Fecha Vencimiento', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
+
+  if not ZQ_Comprobante_idFacturaAsociada.IsNull then
+  begin
+    Application.MessageBox(PChar('No se puede realizar la acción porque tiene un comprobante de venta asociado (Código CPB: '+ZQ_Comprobante_codigoFacturaAsociada.AsString+')'), 'Cambiar Cliente', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
+
+  transaccion_temp:= 'CAMBIAR VENCIMIENTO PREVENTA';
+  if (application.MessageBox(pchar('¿Desea cambiar el Vencimiento de la Preventa Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Cambiar Fecha Vencimiento', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_temp, []) then
+    begin
+      try
+        begin
+          EKMensajeMasDato1.setFecha(dm.EKModelo.Fecha);
+          if EKMensajeMasDato1.mostrarFormulario then
+          begin
+            fechaVen:= EncodeDate(YearOf(EKMensajeMasDato1.DatoFecha),MonthOf(EKMensajeMasDato1.DatoFecha),DayOf(EKMensajeMasDato1.DatoFecha));
+            id_comprobante:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+            ZQ_CambiarVencim.Close;
+            ZQ_CambiarVencim.ParamByName('fecha_vencim').AsDate:= fechaVen;
+            ZQ_CambiarVencim.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+            ZQ_CambiarVencim.ExecSQL;
+          end
+          else
+          begin
+            Application.MessageBox(PChar('No se seleccionó ninguna Fecha'), 'Cambiar Fecha Vencimiento', MB_OK + MB_ICONINFORMATION);
+            dm.EKModelo.cancelar_transaccion(transaccion_temp);
+            Exit;
+          end;
+
+          if dm.EKModelo.finalizar_transaccion(transaccion_temp) then
+            Application.MessageBox(PChar('Se cambio el Vencimiento de la Preventa Nº: ' + ZQ_ComprobanteCODIGO.AsString), 'Cambiar Fecha Vencimiento', MB_OK + MB_ICONINFORMATION)
+          else
+            dm.EKModelo.cancelar_transaccion(transaccion_temp);
+
+          ZQ_Comprobante.Refresh;
+          ZQ_Comprobante.Locate('id_comprobante', id_comprobante, [])
+        end
+      except
+        begin
+          Application.MessageBox(PChar('No se pudo cambiar el Vencimiento de la Preventa Nº:' + ZQ_ComprobanteCODIGO.AsString), 'Cambiar Fecha Vencimiento', MB_OK + MB_ICONINFORMATION);
+          dm.EKModelo.cancelar_transaccion(transaccion_temp);
+          Exit;
+        end
+      end;
+    end;
 end;
 
 end.

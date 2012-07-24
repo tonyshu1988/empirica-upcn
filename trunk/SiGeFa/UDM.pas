@@ -133,7 +133,8 @@ var
   imp_ad1_nombre: string;  //nombre del label para el impuesto adicional 1 de los productos
   imp_ad2_nombre: string;  //nombre del label para el impuesto adicional 2 de los productos
   notaCredito_diasVencimiento: integer;
-  preventa_diasVencimiento: integer;
+  preventa_diasVencimiento: integer = 10;
+  preventa_descontar_stock: string = 'NO';
   ctacte_diasVencimiento: integer;
   ctacte_credito: double;
   monto_max_venta: double;
@@ -141,6 +142,7 @@ var
   asociar_pto_salida: string;
   aplicaImprimirFiscal: string;
   imprimirEtiqueta_opcionReporte: integer;
+
 
   precio1: string;
   precio2: string;
@@ -229,6 +231,7 @@ begin
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'tipo_reporte_etiquetas', imprimirEtiqueta_opcionReporte);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'aplicaImprimirFiscal', aplicaImprimirFiscal);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'preventa_diasVencimiento', preventa_diasVencimiento);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'preventa_descontar_stock', preventa_descontar_stock);
 
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO1', precio1);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO2', precio2);

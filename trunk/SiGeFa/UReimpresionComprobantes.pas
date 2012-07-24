@@ -151,6 +151,7 @@ type
     PopUpItemCambiarFPago: TMenuItem;
     EKListadoFPago: TEKListadoSQL;
     ZQ_CambiarFPago: TZQuery;
+    ZQ_ComprobanteID_PREVENTA: TIntegerField;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
@@ -435,13 +436,22 @@ begin
 end;
 
 
-procedure TFReimpresionComprobantes.btnEliminarComprobClick(
-  Sender: TObject);
+procedure TFReimpresionComprobantes.btnEliminarComprobClick(Sender: TObject);
+var
+  pregunta: string;
+  codigo_preventa: string;
 begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  if (application.MessageBox(pchar('¿Desea eliminar el comprobante de venta Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Eliminación de Comprobante', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  pregunta:= '¿Desea eliminar el Comprobante Venta Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?';
+  if not ZQ_ComprobanteID_PREVENTA.IsNull then
+  begin
+    codigo_preventa:= ''+FormatFloat('00000000', ZQ_ComprobanteID_PREVENTA.AsInteger);
+    pregunta:= '¿Desea eliminar el Comprobante Venta Nº: ' + ZQ_ComprobanteCODIGO.AsString +#13+' con su correspondiente Preventa (Cód. Preventa: '+codigo_preventa+')?';
+  end;
+
+  if (application.MessageBox(pchar(pregunta), 'Eliminar Comprobante', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
     if dm.EKModelo.iniciar_transaccion('ELIMINAR COMPROBANTE', []) then
     begin
       try
@@ -450,7 +460,7 @@ begin
           ZSP_EliminarComprob.ParamByName('ID_COMPROBANTE').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
           ZSP_EliminarComprob.ExecProc;
           if dm.EKModelo.finalizar_transaccion('ELIMINAR COMPROBANTE') then
-            Application.MessageBox(PChar('Se eliminó el comprobante Nº: ' + ZQ_ComprobanteCODIGO.AsString), 'Eliminación de Comprobantes', MB_OK + MB_ICONINFORMATION)
+            Application.MessageBox(PChar('Se eliminó el comprobante Nº: ' + ZQ_ComprobanteCODIGO.AsString), 'Eliminar Comprobante', MB_OK + MB_ICONINFORMATION)
           else
             dm.EKModelo.cancelar_transaccion('ELIMINAR COMPROBANTE');
 
@@ -458,7 +468,7 @@ begin
         end
       except
         begin
-          Application.MessageBox(PChar('No se pudo eliminar el comprobante Nº:' + ZQ_ComprobanteCODIGO.AsString), 'Eliminación de Comprobantes', MB_OK + MB_ICONINFORMATION);
+          Application.MessageBox(PChar('No se pudo eliminar el comprobante Nº:' + ZQ_ComprobanteCODIGO.AsString), 'Eliminar Comprobante', MB_OK + MB_ICONINFORMATION);
           dm.EKModelo.cancelar_transaccion('ELIMINAR COMPROBANTE');
           Exit;
         end
@@ -492,12 +502,23 @@ procedure TFReimpresionComprobantes.PopUpItemCambiarCliente1Click(Sender: TObjec
 var
   transaccion_temp: string;
   id_comprobante: integer;
+  codigo_preventa: string;
 begin
-  if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_CLIENT') then
-    exit;
-
   if ZQ_Comprobante.IsEmpty then
     exit;
+
+  if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_CLIENT') then
+  begin
+    Application.MessageBox(PChar('No tiene permisos para realizar esta acción'), 'Cambiar Cliente', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
+
+  if not ZQ_ComprobanteID_PREVENTA.IsNull then
+  begin
+    codigo_preventa:= FormatFloat('00000000', ZQ_ComprobanteID_PREVENTA.AsInteger);
+    Application.MessageBox(PChar('No se puede realizar la acción porque tiene una Preventa asociada (Código Preventa: '+codigo_preventa+')'), 'Cambiar Cliente', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   transaccion_temp:= 'CAMBIAR CLIENTE COMPROBANTE';
   if (application.MessageBox(pchar('¿Desea cambiar el Cliente del comprobante de venta Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Cambiar Clienta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -547,11 +568,14 @@ var
   transaccion_temp: string;
   id_comp_fpago: integer;
 begin
-  if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_CUENTA') then
-    exit;
-
   if ZQ_Comprobante_FormaPago.IsEmpty then
     exit;
+
+  if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_CUENTA') then
+  begin
+    Application.MessageBox(PChar('No tiene permisos para realizar esta acción'), 'Cambiar Cuenta', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   transaccion_temp:= 'CAMBIAR CUENTA COMPROBANTE';
   if (application.MessageBox(pchar('¿Desea cambiar la Cuenta del comprobante de venta Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Cambiar Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -601,11 +625,14 @@ var
   transaccion_temp: string;
   id_comp_fpago: integer;
 begin
-  if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_FPAGO') then
-    exit;
-
   if ZQ_Comprobante_FormaPago.IsEmpty then
     exit;
+
+  if not dm.EKUsrLogin.PermisoAccion('REIMPCPB_CAMB_FPAGO') then
+  begin
+    Application.MessageBox(PChar('No tiene permisos para realizar esta acción'), 'Cambiar Forma Pago', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   transaccion_temp:= 'CAMBIAR FPAGO COMPROBANTE';
   if (application.MessageBox(pchar('¿Desea cambiar la Forma de Pago del comprobante de venta Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?'), 'Cambiar Forma Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then

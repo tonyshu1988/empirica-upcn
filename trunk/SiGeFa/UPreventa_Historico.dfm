@@ -12,7 +12,7 @@ object FPreventa_Historico: TFPreventa_Historico
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Visible = True
   WindowState = wsMaximized
   OnClose = FormClose
@@ -21,40 +21,40 @@ object FPreventa_Historico: TFPreventa_Historico
   TextHeight = 13
   object PanelContenedor: TPanel
     Left = 0
-    Top = 0
-    Width = 950
-    Height = 544
+    Top = 19
+    Width = 958
+    Height = 536
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 948
-      Height = 542
+      Width = 956
+      Height = 534
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 946
-        Height = 540
+        Width = 954
+        Height = 532
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object PanelComprobante: TPanel
           Left = 1
           Top = 1
-          Width = 944
-          Height = 416
+          Width = 952
+          Height = 408
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object lblTotalComprobantes: TLabel
             Left = 0
-            Top = 395
-            Width = 944
+            Top = 387
+            Width = 952
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -73,8 +73,8 @@ object FPreventa_Historico: TFPreventa_Historico
           end
           object Splitter1: TSplitter
             Left = 0
-            Top = 386
-            Width = 944
+            Top = 378
+            Width = 952
             Height = 9
             Cursor = crVSplit
             Align = alBottom
@@ -82,8 +82,8 @@ object FPreventa_Historico: TFPreventa_Historico
           object DBGridComprobantes: TDBGrid
             Left = 0
             Top = 0
-            Width = 944
-            Height = 386
+            Width = 952
+            Height = 378
             Align = alClient
             Color = 14606012
             DataSource = DS_Comprobante
@@ -171,13 +171,31 @@ object FPreventa_Historico: TFPreventa_Historico
                 Title.Caption = 'Vendedor'
                 Width = 193
                 Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = '_codigoFacturaAsociada'
+                Title.Alignment = taCenter
+                Title.Caption = 'C'#243'digo CPB Venta'
+                Width = 140
+                Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = '_fechaFacturaAsociada'
+                Title.Alignment = taCenter
+                Title.Caption = 'Fecha CPB Venta'
+                Width = 140
+                Visible = True
               end>
           end
         end
         object PanelFPagoYProd: TPanel
           Left = 1
-          Top = 417
-          Width = 944
+          Top = 409
+          Width = 952
           Height = 122
           Align = alBottom
           BevelOuter = bvNone
@@ -191,7 +209,7 @@ object FPreventa_Historico: TFPreventa_Historico
           object PanelProducto: TPanel
             Left = 612
             Top = 0
-            Width = 332
+            Width = 340
             Height = 122
             Align = alClient
             BevelOuter = bvNone
@@ -200,7 +218,7 @@ object FPreventa_Historico: TFPreventa_Historico
             object lblTotalProducto: TLabel
               Left = 0
               Top = 101
-              Width = 332
+              Width = 340
               Height = 21
               Align = alBottom
               Alignment = taRightJustify
@@ -220,7 +238,7 @@ object FPreventa_Historico: TFPreventa_Historico
             object DBGridListadoProductos: TDBGrid
               Left = 0
               Top = 0
-              Width = 332
+              Width = 340
               Height = 101
               Align = alClient
               Color = 14606012
@@ -329,7 +347,7 @@ object FPreventa_Historico: TFPreventa_Historico
               Align = alBottom
               Alignment = taRightJustify
               AutoSize = False
-              Caption = 'Total Forma Pago: $ 0.00 '
+              Caption = 'Total Se'#241'a: $ 0.00 '
               Color = 16729670
               Font.Charset = ANSI_CHARSET
               Font.Color = clWhite
@@ -418,10 +436,62 @@ object FPreventa_Historico: TFPreventa_Historico
       end
     end
   end
+  object PanelInfo: TPanel
+    Left = 0
+    Top = 0
+    Width = 958
+    Height = 19
+    Align = alTop
+    ParentShowHint = False
+    ShowHint = False
+    TabOrder = 5
+    object lblCantidadRegistros: TLabel
+      Left = 1
+      Top = 1
+      Width = 134
+      Height = 17
+      Align = alLeft
+      Caption = 'lblCantidadRegistros'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clNavy
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+    end
+    object StaticTxtVencida: TStaticText
+      Left = 848
+      Top = 1
+      Width = 109
+      Height = 17
+      Align = alRight
+      Alignment = taCenter
+      AutoSize = False
+      BorderStyle = sbsSunken
+      Caption = 'VENCIDA'
+      Color = 6974207
+      ParentColor = False
+      TabOrder = 0
+    end
+    object StaticTxtUtilizada: TStaticText
+      Left = 739
+      Top = 1
+      Width = 109
+      Height = 17
+      Align = alRight
+      Alignment = taCenter
+      AutoSize = False
+      BorderStyle = sbsSunken
+      Caption = 'UTILIZADA'
+      Color = 8454143
+      ParentColor = False
+      TabOrder = 1
+    end
+  end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -929,6 +999,7 @@ object FPreventa_Historico: TFPreventa_Historico
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
     AfterScroll = ZQ_ComprobanteAfterScroll
+    OnCalcFields = ZQ_ComprobanteCalcFields
     SQL.Strings = (
       'select distinct c.codigo, c.id_comprobante,'
       
@@ -985,6 +1056,22 @@ object FPreventa_Historico: TFPreventa_Historico
     object ZQ_ComprobanteCLIENTE_: TStringField
       FieldName = 'CLIENTE_'
       Size = 200
+    end
+    object ZQ_Comprobante_idFacturaAsociada: TIntegerField
+      FieldKind = fkCalculated
+      FieldName = '_idFacturaAsociada'
+      Calculated = True
+    end
+    object ZQ_Comprobante_fechaFacturaAsociada: TDateTimeField
+      FieldKind = fkCalculated
+      FieldName = '_fechaFacturaAsociada'
+      Calculated = True
+    end
+    object ZQ_Comprobante_codigoFacturaAsociada: TStringField
+      FieldKind = fkCalculated
+      FieldName = '_codigoFacturaAsociada'
+      Size = 10
+      Calculated = True
     end
   end
   object DS_Comprobante: TDataSource
@@ -1389,6 +1476,14 @@ object FPreventa_Historico: TFPreventa_Historico
       item
         TituloColumna = 'Vendedor'
         Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo CPB Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha CPB Venta'
+        Visible = True
       end>
     NombreGuardar = 'DBGridComprobantes'
     AltoTituloColumna = 15
@@ -1557,21 +1652,21 @@ object FPreventa_Historico: TFPreventa_Historico
       Size = 50
     end
   end
-  object ZSP_EliminarComprob: TZStoredProc
+  object ZSP_EliminarPreventa: TZStoredProc
     Connection = DM.Conexion
     Params = <
       item
         DataType = ftInteger
-        Name = 'ID_COMPROBANTE'
+        Name = 'ID_PREVENTA'
         ParamType = ptInput
       end>
-    StoredProcName = 'ELIMINAR_COMPROBANTE'
+    StoredProcName = 'ELIMINAR_PREVENTA'
     Left = 59
     Top = 139
     ParamData = <
       item
         DataType = ftInteger
-        Name = 'ID_COMPROBANTE'
+        Name = 'ID_PREVENTA'
         ParamType = ptInput
       end>
   end
@@ -1601,6 +1696,10 @@ object FPreventa_Historico: TFPreventa_Historico
     object PopUpItemCambiarCliente1: TMenuItem
       Caption = 'Cambiar Cliente'
       OnClick = PopUpItemCambiarCliente1Click
+    end
+    object PopUpItemCambiarFechaVencimiento1: TMenuItem
+      Caption = 'Cambiar Fecha Vencimiento'
+      OnClick = PopUpItemCambiarFechaVencimiento1Click
     end
   end
   object PopupMenuFPago: TPopupMenu
@@ -1742,6 +1841,78 @@ object FPreventa_Historico: TFPreventa_Historico
       item
         DataType = ftUnknown
         Name = 'id_comp_fpago'
+        ParamType = ptUnknown
+      end>
+  end
+  object ZQ_CpbVenta: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select c.id_comprobante, c.codigo, c.fecha'
+      'from comprobante c'
+      'where c.id_preventa = :id_preventa')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_preventa'
+        ParamType = ptUnknown
+      end>
+    Left = 195
+    Top = 310
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_preventa'
+        ParamType = ptUnknown
+      end>
+    object ZQ_CpbVentaID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_CpbVentaCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object ZQ_CpbVentaFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+  end
+  object EKMensajeMasDato1: TEKMensajeMasDato
+    TipoDato = FtDate
+    Mensaje = 'Ingrese la fecha de vencimiento de la Preventa'
+    TituloForm = 'Cambiar Fecha Vencimiento'
+    TituloCampo = 'Vencimiento:'
+    FormHeight = 123
+    FormWidth = 433
+    Left = 491
+    Top = 302
+  end
+  object ZQ_CambiarVencim: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'update comprobante'
+      'set comprobante.fecha_vencimiento = :fecha_vencim'
+      'where comprobante.id_comprobante = :id_comprobante')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'fecha_vencim'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    Left = 635
+    Top = 315
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'fecha_vencim'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
   end
