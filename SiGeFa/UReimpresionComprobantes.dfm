@@ -188,6 +188,15 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                 Title.Caption = 'Vendedor'
                 Width = 193
                 Visible = True
+              end
+              item
+                Alignment = taCenter
+                Expanded = False
+                FieldName = 'ID_PREVENTA'
+                Title.Alignment = taCenter
+                Title.Caption = 'C'#243'digo Preventa'
+                Width = 123
+                Visible = True
               end>
           end
         end
@@ -1006,7 +1015,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
         'c.punto_venta, c.numero_cpb,'
-      '       c.fecha as fecha_hora'
+      '       c.fecha as fecha_hora, c.id_preventa'
       'from comprobante c'
       
         'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
@@ -1030,7 +1039,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
         'unto_venta,'
-      '         c.numero_cpb, c.fecha'
+      '         c.numero_cpb, c.fecha, c.id_preventa'
       '')
     Params = <>
     IndexFieldNames = 'FECHA Desc;CODIGO Desc'
@@ -1093,6 +1102,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     end
     object ZQ_ComprobanteFECHA_HORA: TDateTimeField
       FieldName = 'FECHA_HORA'
+    end
+    object ZQ_ComprobanteID_PREVENTA: TIntegerField
+      FieldName = 'ID_PREVENTA'
+      DisplayFormat = '00000000'
     end
   end
   object DS_Comprobante: TDataSource
@@ -1473,7 +1486,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
         'c.punto_venta, c.numero_cpb,'
-      '       c.fecha as fecha_hora'
+      '       c.fecha as fecha_hora, c.id_preventa'
       'from comprobante c'
       
         'inner join comprobante_forma_pago cfp on (cfp.id_comprobante = c' +
@@ -1500,7 +1513,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
         'unto_venta,'
-      '         c.numero_cpb, c.fecha'
+      '         c.numero_cpb, c.fecha, c.id_preventa'
       '')
     SQL_Select.Strings = (
       
@@ -1513,7 +1526,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
         'c.punto_venta, c.numero_cpb,'
-      '       c.fecha as fecha_hora')
+      '       c.fecha as fecha_hora, c.id_preventa')
     SQL_From.Strings = (
       'from comprobante c'
       
@@ -1543,7 +1556,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
         'unto_venta,'
-      '         c.numero_cpb, c.fecha'
+      '         c.numero_cpb, c.fecha, c.id_preventa'
       '')
     UsarWhereOriginal = EK_Con_Where
     Left = 56

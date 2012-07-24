@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 913
-    Height = 502
+    Width = 921
+    Height = 514
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 531
-    Width = 913
+    Top = 543
+    Width = 921
     Height = 19
     Panels = <
       item
@@ -4719,13 +4719,13 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 913
+    Width = 921
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
-    ColorMap.HighlightColor = clWhite
+    ColorMap.HighlightColor = 14410210
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = clWhite
+    ColorMap.UnusedColor = 14410210
     ParentShowHint = False
     ShowHint = True
     Spacing = 0
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 913
-    Height = 502
+    Width = 921
+    Height = 514
     Align = alClient
     Caption = 'DEMO'
     Color = 16053492
@@ -5015,7 +5015,7 @@ object FPrincipal: TFPrincipal
       OnExecute = ACtaCte_ProveedorExecute
     end
     object AArqueo_Caja: TAction
-      Caption = 'Arqueo de Caja'
+      Caption = 'Arqueo Caja'
       Hint = 'Arqueo de Caja'
       ImageIndex = 31
       OnExecute = AArqueo_CajaExecute
@@ -5045,7 +5045,7 @@ object FPrincipal: TFPrincipal
       OnExecute = AEstad_StockExecute
     end
     object APreventa: TAction
-      Caption = 'Venta de Mostrador'
+      Caption = 'Venta Mostrador'
       Hint = 'Venta de Mostrador'
       ImageIndex = 50
       OnExecute = APreventaExecute
@@ -5099,7 +5099,7 @@ object FPrincipal: TFPrincipal
       OnExecute = AABM_CPB_TransferExecute
     end
     object AReimpresionComprob: TAction
-      Caption = 'Reimpresi'#243'n de Comprobantes'
+      Caption = 'Reimpresi'#243'n Comprobantes'
       Hint = 'Auditoria'
       ImageIndex = 4
       OnExecute = AReimpresionComprobExecute
@@ -5149,6 +5149,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 61
       OnExecute = AOP_ABMObraSocialExecute
     end
+    object APreventaHistorico: TAction
+      Caption = 'Historial Venta Mostrador'
+      ImageIndex = 60
+      OnExecute = APreventaHistoricoExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -5159,12 +5164,18 @@ object FPrincipal: TFPrincipal
       object Cajero1: TMenuItem
         Action = ACajero
       end
+      object ReimpresindeComprobantes1: TMenuItem
+        Action = AReimpresionComprob
+      end
+      object N10: TMenuItem
+        Caption = '-'
+        Hint = '---'
+      end
       object VentadeMostrador1: TMenuItem
         Action = APreventa
       end
-      object ReimpresindeComprobantes1: TMenuItem
-        Tag = 1
-        Action = AReimpresionComprob
+      object VentadeMostrador2: TMenuItem
+        Action = APreventaHistorico
       end
     end
     object Productos1: TMenuItem
@@ -5411,11 +5422,9 @@ object FPrincipal: TFPrincipal
     object Optica1: TMenuItem
       Caption = 'Optica'
       object ABMObraSocial1: TMenuItem
-        Tag = 1
         Action = AOP_ABMObraSocial
       end
       object ABMMedicos1: TMenuItem
-        Tag = 1
         Action = AOP_ABMMedico
         Caption = 'ABM Medicos'
       end

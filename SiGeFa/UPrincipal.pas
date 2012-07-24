@@ -165,6 +165,9 @@ type
     ABMMedicos1: TMenuItem;
     AOP_ABMMedico: TAction;
     AOP_ABMObraSocial: TAction;
+    APreventaHistorico: TAction;
+    VentadeMostrador2: TMenuItem;
+    N10: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -223,6 +226,7 @@ type
     procedure AShutdownExecute(Sender: TObject);
     procedure AOP_ABMMedicoExecute(Sender: TObject);
     procedure AOP_ABMObraSocialExecute(Sender: TObject);
+    procedure APreventaHistoricoExecute(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -780,8 +784,8 @@ end;
 
 procedure TFPrincipal.AAuditoriaExecute(Sender: TObject);
 begin
-//  EKVentanas1.Abrir(Sender, TFAuditoria, FAuditoria);
-  EKVentanas1.Abrir(Sender, TFCompararStock, FCompararStock);
+  EKVentanas1.Abrir(Sender, TFAuditoria, FAuditoria);
+//  EKVentanas1.Abrir(Sender, TFCompararStock, FCompararStock);
 end;
 
 
@@ -859,6 +863,11 @@ end;
 procedure TFPrincipal.AOP_ABMObraSocialExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFOP_ABMObraSocial, FOP_ABMObraSocial);
+end;
+
+procedure TFPrincipal.APreventaHistoricoExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFPreventa_Historico, FPreventa_Historico);
 end;
 
 end.
