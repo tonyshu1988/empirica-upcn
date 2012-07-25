@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 141
-  Top = 88
+  Left = 150
+  Top = 95
   Width = 1194
   Height = 673
   Caption = 'Estadisticas Ventas'
