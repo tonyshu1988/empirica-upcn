@@ -890,7 +890,7 @@ begin
 
   ZQ_Totales.Close;
   ZQ_Totales.SQL[1]:= Format('%s as agrupam, ', ['cd.id_producto']);
-  ZQ_Totales.SQL[2]:= Format('%s, ', ['(ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')) as DETALLE_PROD']);
+  ZQ_Totales.SQL[3]:= Format('%s, ', ['(ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')) as DETALLE_PROD']);
 end;
 
 
@@ -902,7 +902,7 @@ begin
 
   ZQ_Totales.Close;
   ZQ_Totales.SQL[1]:= Format('%s as agrupam, ', ['c.id_vendedor']);
-  ZQ_Totales.SQL[2]:= Format('%s, ', ['vend.nombre as DETALLE_PROD']);
+  ZQ_Totales.SQL[3]:= Format('%s, ', ['vend.nombre as DETALLE_PROD']);
 end;
 
 
@@ -914,7 +914,7 @@ begin
 
   ZQ_Totales.Close;
   ZQ_Totales.SQL[1]:= Format('%s as agrupam, ', ['c.id_cliente']);
-  ZQ_Totales.SQL[2]:= Format('%s, ', ['cli.nombre as DETALLE_PROD']);
+  ZQ_Totales.SQL[3]:= Format('%s, ', ['cli.nombre as DETALLE_PROD']);
 end;
 
 
