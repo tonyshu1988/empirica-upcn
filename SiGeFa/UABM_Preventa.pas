@@ -751,7 +751,7 @@ begin
   CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
   CD_ComprobanteID_TIPO_CPB.AsInteger:= 10; //PREVENTA
   CD_ComprobanteID_VENDEDOR.AsInteger:= IdVendedor;
-  CD_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
+  CD_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
   CD_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora();
   CD_ComprobanteOBSERVACION.AsString:= '';
   CD_ComprobanteBASE_IMPONIBLE.AsFloat:= 0;

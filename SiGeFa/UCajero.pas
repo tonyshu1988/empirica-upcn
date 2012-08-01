@@ -1681,7 +1681,7 @@ begin
       begin
         ZQ_ComprobPreventa.Edit;
         ZQ_ComprobPreventaFECHA_COBRADA.AsDateTime:= dm.EKModelo.FechayHora();
-        ZQ_ComprobPreventaID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
+        ZQ_ComprobPreventaID_COMP_ESTADO.AsInteger:= ESTADO_ALMACENADO;
         ZQ_ComprobPreventa.Post;
       end;
 

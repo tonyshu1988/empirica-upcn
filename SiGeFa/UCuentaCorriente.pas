@@ -344,6 +344,7 @@ type
     procedure btnVerDetalleFacturaClick(Sender: TObject);
     procedure btnAltaReciboClick(Sender: TObject);
     procedure AVerDetalleExecute(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   private
     viendoResumen: boolean;
     viendoDetalleCpb: boolean;
@@ -591,6 +592,8 @@ begin
 
   if tipo = 'CLIENTE' then
   begin
+    EKDbSumaCtaCte_Cliente.RecalcAll;
+
     debeFilro:= EKDbSumaCtaCte_Cliente.SumCollection.Items[0].SumValue;
     haberFiltro:= EKDbSumaCtaCte_Cliente.SumCollection.Items[1].SumValue;
     saldoFiltro:= debeFilro - haberFiltro;
@@ -600,7 +603,6 @@ begin
     haberTotal:= ZQ_CtaCte_GralHABER.AsFloat;
     saldoTotal:= ZQ_CtaCte_GralSALDO.AsFloat;
 
-    EKDbSumaCtaCte_Cliente.RecalcAll;
     EKEditCliente_CantidadFiltro.Text:= IntToStr(ZQ_CtaCte_Cliente.RecordCount);
     EKEditCliente_DebeFiltro.Text:= FormatFloat('$ ###,###,##0.00', debeFilro);
     EKEditCliente_HaberFiltro.Text:= FormatFloat('$ ###,###,##0.00', haberFiltro);
@@ -896,5 +898,26 @@ begin
     ShowMessage('Hay un alta de Recibo en curso, verifique');
 end;
                                    
+procedure TFCuentaCorriente.FormActivate(Sender: TObject);
+var
+  recNo_gral: integer;
+begin
+  if not ZQ_CtaCte_Gral.IsEmpty then
+  begin
+    recNo_gral:= ZQ_CtaCte_Gral.RecNo;
+    ZQ_CtaCte_Gral.Refresh;
+    ZQ_CtaCte_Gral.RecNo:= recNo_gral;
+    calcularTotales('GENERAL');
+  end;
+
+  if not ZQ_CtaCte_Cliente.IsEmpty then
+  begin
+    recNo_gral:= ZQ_CtaCte_Cliente.RecNo;
+    ZQ_CtaCte_Cliente.Refresh;
+    ZQ_CtaCte_Cliente.RecNo:= recNo_gral;
+    calcularTotales('CLIENTE');
+  end;
+end;
+
 end.
 

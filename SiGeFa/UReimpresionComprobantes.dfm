@@ -15,6 +15,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   Position = poDefault
   Visible = True
   WindowState = wsMaximized
+  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -434,6 +435,13 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                   Title.Alignment = taCenter
                   Title.Caption = 'N'#250'mero'
                   Width = 113
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'FECHA_FP'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Fecha'
                   Visible = True
                 end>
             end
@@ -1647,6 +1655,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       item
         TituloColumna = 'Vendedor'
         Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo Preventa'
+        Visible = True
       end>
     NombreGuardar = 'DBGridComprobantes'
     AltoTituloColumna = 15
@@ -1683,6 +1695,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       end
       item
         TituloColumna = 'N'#250'mero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
         Visible = True
       end>
     NombreGuardar = 'DBGridFormaPago'

@@ -175,6 +175,7 @@ type
     procedure PopUpItemCambiarCliente1Click(Sender: TObject);
     procedure PopUpItemCambiarCuentaClick(Sender: TObject);
     procedure PopUpItemCambiarFPagoClick(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -678,6 +679,12 @@ begin
         end
       end;
     end;
+end;
+
+procedure TFReimpresionComprobantes.FormActivate(Sender: TObject);
+begin
+  if not ZQ_Comprobante.IsEmpty then
+    ZQ_Comprobante.Refresh;
 end;
 
 end.

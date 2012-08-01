@@ -25,7 +25,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 1186
     Height = 594
-    ActivePage = TabRanking
+    ActivePage = TabFacturacion
     Align = alClient
     TabOrder = 4
     OnChange = PageControlChange
@@ -1274,6 +1274,13 @@ object FEstadisticaVentas: TFEstadisticaVentas
                     Title.Alignment = taCenter
                     Title.Caption = 'N'#250'mero'
                     Width = 113
+                    Visible = True
+                  end
+                  item
+                    Expanded = False
+                    FieldName = 'FECHA_FP'
+                    Title.Alignment = taCenter
+                    Title.Caption = 'Fecha'
                     Visible = True
                   end>
               end
@@ -5166,6 +5173,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
       end
       item
         TituloColumna = 'N'#250'mero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
         Visible = True
       end>
     NombreGuardar = 'DBGridFormaPago'
