@@ -15,6 +15,7 @@ object FPreventa_Historico: TFPreventa_Historico
   Position = poScreenCenter
   Visible = True
   WindowState = wsMaximized
+  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -428,6 +429,13 @@ object FPreventa_Historico: TFPreventa_Historico
                   Title.Alignment = taCenter
                   Title.Caption = 'N'#250'mero'
                   Width = 113
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'FECHA_FP'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Fecha'
                   Visible = True
                 end>
             end
@@ -1520,6 +1528,10 @@ object FPreventa_Historico: TFPreventa_Historico
       end
       item
         TituloColumna = 'N'#250'mero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
         Visible = True
       end>
     NombreGuardar = 'DBGridFormaPago'

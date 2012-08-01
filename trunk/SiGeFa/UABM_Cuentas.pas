@@ -246,12 +246,12 @@ begin
     exit;
   end;
 
-  if (trim(DBLookupComboBox1.Text) = '') then
-  begin
-    Application.MessageBox('El campo "Medio Cobro/Pago" se encuentra vacío, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-    DBLookupComboBox1.SetFocus;
-    exit;
-  end;
+//  if (trim(DBLookupComboBox1.Text) = '') then
+//  begin
+//    Application.MessageBox('El campo "Medio Cobro/Pago" se encuentra vacío, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+//    DBLookupComboBox1.SetFocus;
+//    exit;
+//  end;
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then

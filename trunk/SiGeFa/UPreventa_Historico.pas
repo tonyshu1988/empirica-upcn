@@ -175,6 +175,7 @@ type
       State: TGridDrawState);
     procedure ZQ_ComprobanteCalcFields(DataSet: TDataSet);
     procedure PopUpItemCambiarFechaVencimiento1Click(Sender: TObject);
+    procedure FormActivate(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -680,6 +681,12 @@ begin
         end
       end;
     end;
+end;
+
+procedure TFPreventa_Historico.FormActivate(Sender: TObject);
+begin
+  if not ZQ_Comprobante.IsEmpty then
+    ZQ_Comprobante.Refresh;
 end;
 
 end.
