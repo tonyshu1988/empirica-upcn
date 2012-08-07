@@ -568,6 +568,7 @@ end;
 
 procedure TFPrincipal.cargarIni();
 begin
+  dm.EKInicio.Path:= ExtractFilePath(Application.ExeName);
   dm.EKInicio.abrir;
   //Cargo la configuracion general
   ini_minimizar:= dm.EKInicio.Ini.ValueExists('GENERAL', 'INICIAR_MINIMIZADO');
@@ -704,7 +705,7 @@ begin
         if resultado_BajarNovedades then
           procesarNovedadesClientes;
       end;
-      subirNovedades;
+      subirNovedades();
 
       Timer.Enabled:= true;
       tiempo_restante:= intervalo;
@@ -901,6 +902,12 @@ procedure TFPrincipal.subirNovedades;
 var
   salir: boolean;
 begin
+  RemoveComponent(dm.IdFTP);
+  dm.IdFTP.Free;
+  dm.IdFTP:= Nil;
+  dm.IdFTP:= TIdFTP.Create(Self);
+  DM.configFTP;
+
   GrupoEditando.Enabled:= false;
   DBGridUpload.BringToFront;
 
@@ -1572,6 +1579,12 @@ var
   ultimo_archivo: string;
   cantidad_archivos_encontrados: integer;
 begin
+  RemoveComponent(dm.IdFTP);
+  dm.IdFTP.Free;
+  dm.IdFTP:= Nil;
+  dm.IdFTP:= TIdFTP.Create(Self);
+  DM.configFTP;
+
   resultado_BajarNovedades:= false;
   ponerTodoEnCero;
   GrupoEditando.Enabled:= false;
@@ -1833,7 +1846,7 @@ begin
                       application.ProcessMessages;
                       //pregunto si el campo esta definido como FLOAT
                       if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftFloat then
-                        ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= CD_ProcesarNovedadesNEW_VALUE.AsFloat
+                        ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= StrToFloat(FormatFloat('0.0000', CD_ProcesarNovedadesNEW_VALUE.AsFloat))
                       else {//pregunto si el campo esta definido como INTEGER}
                         if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftInteger then
                           ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsInteger:= CD_ProcesarNovedadesNEW_VALUE.AsInteger
@@ -1974,6 +1987,12 @@ procedure TFPrincipal.bajarNovedadesClientes;
 var
   cantidad_archivos_encontrados: integer;
 begin
+  RemoveComponent(dm.IdFTP);
+  dm.IdFTP.Free;
+  dm.IdFTP:= Nil;
+  dm.IdFTP:= TIdFTP.Create(Self);
+  DM.configFTP;
+
   resultado_BajarNovedades:= false;
   ponerTodoEnCero;
   GrupoEditando.Enabled:= false;
