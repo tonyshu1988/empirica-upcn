@@ -11,7 +11,7 @@ buscar: 'Z_SINC_CONFIGURACION_VARIABLES' reemplazar por: 'Z_SINC_CONFIG_VAR';
 
 En los siguientes triggers hay que poner lo siguiente al final:
 * Z_SINC_COMPROBANTE_AI
-* Z_SINC_COMPROBANTE_DETALLE_AI
+* Z_SINC_COMPROBANTE_DETALLE_AI 
 * Z_SINC_COMP_FORMA_PAGO_AI
 
   if (not (new.INSERT_MANUAL is null)) then
