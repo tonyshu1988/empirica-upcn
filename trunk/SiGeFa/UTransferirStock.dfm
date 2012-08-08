@@ -1644,7 +1644,9 @@ object FTransferirStock: TFTransferirStock
       
         'where ((cpb.id_tipo_cpb = :id_tipo_np)  or (cpb.id_tipo_cpb = :i' +
         'd_tipo_fc) )'
-      '    and (cpb.id_comp_estado = :id_estado)'
+      
+        '    and (cpb.id_comp_estado = :id_estado) and (cpb.id_sucursal =' +
+        ' :id_sucursal)'
       'order by cpb.fecha desc'
       '')
     Params = <
@@ -1661,6 +1663,11 @@ object FTransferirStock: TFTransferirStock
       item
         DataType = ftUnknown
         Name = 'id_estado'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     Left = 226
@@ -1679,6 +1686,11 @@ object FTransferirStock: TFTransferirStock
       item
         DataType = ftUnknown
         Name = 'id_estado'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
     object ZQ_VerCpbID_COMPROBANTE: TIntegerField
@@ -2718,5 +2730,50 @@ object FTransferirStock: TFTransferirStock
       FieldName = 'STOCK_MIN_ALARMA'
       Size = 1
     end
+  end
+  object ZQ_UpdateNotaPedido: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'update comprobante_detalle cd'
+      
+        'set cd.cantidad_almacenada = cd.cantidad_almacenada + :cantidad_' +
+        'almacenar'
+      
+        'where (cd.id_comprobante = :id_comprobante) and (cd.id_producto ' +
+        '= :id_producto);')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'cantidad_almacenar'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_producto'
+        ParamType = ptUnknown
+      end>
+    Left = 645
+    Top = 290
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'cantidad_almacenar'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_producto'
+        ParamType = ptUnknown
+      end>
   end
 end

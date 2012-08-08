@@ -730,16 +730,33 @@ end;
 procedure TFABM_ProductoStock.validarSucursal(Sender: TField);
 var
   i, suc_prod: integer;
+  permisos : boolean;
 begin
+  permisos := false;
+
   suc_prod:= ZQ_StockID_SUCURSAL.AsInteger; //sucursal a la que pertenece el stock del producto
+
+  if (suc_prod = SUCURSAL_LOGUEO) then
+  exit;
+
   for  i:= 0 to Length(sucursales) - 1 do //Recorro todas las sucursales del usuario seleccionado
   begin //si el prducto es de la sucursal en la que estoy loqueafo o el usuario tiene permiso en esa sucursal o si es administrador
-    if not ( (suc_prod = SUCURSAL_LOGUEO) or (suc_prod = StrToInt(sucursales[i].valor)) or (StrToInt(sucursales[i].valor) = 0) )  then
-    begin
-      ZQ_Stock.RevertRecord;
-      ShowMessage(pchar('El usuario no posee los permisos para modificar el stock de la sucursal '+ZQ_StockSUCURSAL.AsString+'.'));
-    end;
+    if (suc_prod = StrToInt(sucursales[i].valor)) or (StrToInt(sucursales[i].valor) = 0) then
+      permisos := true;
   end;
+
+  if not ((permisos) and (dm.EKUsrLogin.PermisoAccion('MODIFICAR_STOCK_AJEN'))) then
+  begin
+    ZQ_Stock.RevertRecord;
+    ShowMessage(pchar('El usuario no posee los permisos para modificar el stock de la sucursal '+ZQ_StockSUCURSAL.AsString+'.'));
+  end;
+
+//    if not ( (suc_prod = SUCURSAL_LOGUEO) or (suc_prod = StrToInt(sucursales[i].valor)) or (StrToInt(sucursales[i].valor) = 0) )  then
+//    begin
+//      ZQ_Stock.RevertRecord;
+//      ShowMessage(pchar('El usuario no posee los permisos para modificar el stock de la sucursal '+ZQ_StockSUCURSAL.AsString+'.'));
+//    end;
+//  end;
 end;
 
 //chequear si el usuario tiene permisos para modificar el stock o para asociar productos a una sucursal
