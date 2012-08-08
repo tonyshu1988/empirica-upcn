@@ -200,11 +200,11 @@ type
     procedure validarPermisosUsuario;
     procedure btnExcelClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
-  private
+  Private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
-    procedure onSelTodosProducto;    
-  public
+    procedure onSelTodosProducto;
+  Public
     { Public declarations }
   end;
 
@@ -258,13 +258,13 @@ begin
       GrupoEditando.Enabled:= true;
       GrupoGuardarCancelar.Enabled:= false;
       ZQ_Stock.Refresh;
-      DBGridStock.ReadOnly := true;
+      DBGridStock.ReadOnly:= true;
 
       EKOrdenarGrillaStock.PopUpGrilla:= PopUpDesasociar;
     end
   except
     begin
-      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención', MB_OK + MB_ICONINFORMATION);
       exit;
     end
   end
@@ -281,7 +281,7 @@ begin
     GrupoEditando.Enabled:= true;
     GrupoGuardarCancelar.Enabled:= false;
 
-    DBGridStock.ReadOnly := true;
+    DBGridStock.ReadOnly:= true;
 
     EKOrdenarGrillaStock.PopUpGrilla:= PopUpDesasociar;
   end;
@@ -327,27 +327,27 @@ procedure TFABM_ProductoStock.onSelProducto;
 begin
   if not vsel.ZQ_Producto.IsEmpty then
   begin
-    CD_Producto.Filter:= 'idProducto = ' +  vsel.ZQ_ProductoID_PRODUCTO.AsString;
-    CD_Producto.Filtered := true;
+    CD_Producto.Filter:= 'idProducto = ' + vsel.ZQ_ProductoID_PRODUCTO.AsString;
+    CD_Producto.Filtered:= true;
     if not CD_Producto.IsEmpty then
     begin
-      CD_Producto.Filtered := false;
-      Application.MessageBox('El Producto seleccionado ya fue cargado','Carga Producto',MB_OK+MB_ICONINFORMATION);
+      CD_Producto.Filtered:= false;
+      Application.MessageBox('El Producto seleccionado ya fue cargado', 'Carga Producto', MB_OK + MB_ICONINFORMATION);
       exit;
     end;
 
-    CD_Producto.Filtered := false;
+    CD_Producto.Filtered:= false;
     CD_Producto.Append;
-    CD_Producto_idProducto.AsInteger := vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
-    CD_Producto_producto.AsString := vsel.ZQ_ProductoNOMBRE.AsString;
-    CD_Producto_medida.AsString := vsel.ZQ_ProductoMEDIDA.AsString;
-    CD_Producto_color.AsString := vsel.ZQ_ProductoCOLOR.AsString;
-    CD_Producto_marca.AsString := vsel.ZQ_ProductoNOMBRE_MARCA.AsString;
-    CD_Producto_tipoArticulo.AsString := vsel.ZQ_ProductoTIPO_ARTICULO.AsString;
-    CD_Producto_articulo.AsString := vsel.ZQ_ProductoNOMBRE_ARTICULO.AsString;
-    CD_Producto_codigoBarra.AsString := vsel.ZQ_ProductoCODIGO_BARRA.AsString;
-    CD_Producto_codCabecera.AsString := vsel.ZQ_ProductoCOD_CORTO.AsString;
-    CD_Producto_codProducto.AsString := vsel.ZQ_ProductoCOD_CORTO_1.AsString;
+    CD_Producto_idProducto.AsInteger:= vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
+    CD_Producto_producto.AsString:= vsel.ZQ_ProductoNOMBRE.AsString;
+    CD_Producto_medida.AsString:= vsel.ZQ_ProductoMEDIDA.AsString;
+    CD_Producto_color.AsString:= vsel.ZQ_ProductoCOLOR.AsString;
+    CD_Producto_marca.AsString:= vsel.ZQ_ProductoNOMBRE_MARCA.AsString;
+    CD_Producto_tipoArticulo.AsString:= vsel.ZQ_ProductoTIPO_ARTICULO.AsString;
+    CD_Producto_articulo.AsString:= vsel.ZQ_ProductoNOMBRE_ARTICULO.AsString;
+    CD_Producto_codigoBarra.AsString:= vsel.ZQ_ProductoCODIGO_BARRA.AsString;
+    CD_Producto_codCabecera.AsString:= vsel.ZQ_ProductoCOD_CORTO.AsString;
+    CD_Producto_codProducto.AsString:= vsel.ZQ_ProductoCOD_CORTO_1.AsString;
   end;
 
   if vsel.SeleccionarYSalir then
@@ -362,26 +362,26 @@ begin
     vsel.ZQ_Producto.First;
     while not vsel.ZQ_Producto.Eof do
     begin
-      CD_Producto.Filter:= 'idProducto = ' +  vsel.ZQ_ProductoID_PRODUCTO.AsString;
-      CD_Producto.Filtered := true;
+      CD_Producto.Filter:= 'idProducto = ' + vsel.ZQ_ProductoID_PRODUCTO.AsString;
+      CD_Producto.Filtered:= true;
       if not CD_Producto.IsEmpty then //si el producto ya esta cargado, paso al proximo
       begin
-        CD_Producto.Filtered := false;
+        CD_Producto.Filtered:= false;
         vsel.ZQ_Producto.Next;
       end;
 
-      CD_Producto.Filtered := false;
+      CD_Producto.Filtered:= false;
       CD_Producto.Append;
-      CD_Producto_idProducto.AsInteger := vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
-      CD_Producto_producto.AsString := vsel.ZQ_ProductoNOMBRE.AsString;
-      CD_Producto_medida.AsString := vsel.ZQ_ProductoMEDIDA.AsString;
-      CD_Producto_color.AsString := vsel.ZQ_ProductoCOLOR.AsString;
-      CD_Producto_marca.AsString := vsel.ZQ_ProductoNOMBRE_MARCA.AsString;
-      CD_Producto_tipoArticulo.AsString := vsel.ZQ_ProductoTIPO_ARTICULO.AsString;
-      CD_Producto_articulo.AsString := vsel.ZQ_ProductoNOMBRE_ARTICULO.AsString;
-      CD_Producto_codigoBarra.AsString := vsel.ZQ_ProductoCODIGO_BARRA.AsString;
-      CD_Producto_codCabecera.AsString := vsel.ZQ_ProductoCOD_CORTO.AsString;
-      CD_Producto_codProducto.AsString := vsel.ZQ_ProductoCOD_CORTO_1.AsString;
+      CD_Producto_idProducto.AsInteger:= vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
+      CD_Producto_producto.AsString:= vsel.ZQ_ProductoNOMBRE.AsString;
+      CD_Producto_medida.AsString:= vsel.ZQ_ProductoMEDIDA.AsString;
+      CD_Producto_color.AsString:= vsel.ZQ_ProductoCOLOR.AsString;
+      CD_Producto_marca.AsString:= vsel.ZQ_ProductoNOMBRE_MARCA.AsString;
+      CD_Producto_tipoArticulo.AsString:= vsel.ZQ_ProductoTIPO_ARTICULO.AsString;
+      CD_Producto_articulo.AsString:= vsel.ZQ_ProductoNOMBRE_ARTICULO.AsString;
+      CD_Producto_codigoBarra.AsString:= vsel.ZQ_ProductoCODIGO_BARRA.AsString;
+      CD_Producto_codCabecera.AsString:= vsel.ZQ_ProductoCOD_CORTO.AsString;
+      CD_Producto_codProducto.AsString:= vsel.ZQ_ProductoCOD_CORTO_1.AsString;
 
       vsel.ZQ_Producto.Next;
     end;
@@ -394,8 +394,8 @@ procedure TFABM_ProductoStock.PopItemProducto_AgregarClick(Sender: TObject);
 begin
   if not Assigned(vsel) then
     vsel:= TFBuscarProducto.Create(nil);
-  vsel.OnSeleccionar := onSelProducto;
-  vsel.OnSeleccionarTodos := onSelTodosProducto;
+  vsel.OnSeleccionar:= onSelProducto;
+  vsel.OnSeleccionarTodos:= onSelTodosProducto;
   vsel.btnSeleccionarTodos.Visible:= ivAlways;
   vsel.SeleccionarYSalir:= false;
   vsel.ShowModal;
@@ -409,7 +409,7 @@ begin
 end;
 
 
-procedure TFABM_ProductoStock.PopItemProducto_QuitarTodosClick(  Sender: TObject);
+procedure TFABM_ProductoStock.PopItemProducto_QuitarTodosClick(Sender: TObject);
 begin
   if CD_Producto.IsEmpty then
     exit;
@@ -425,19 +425,19 @@ procedure TFABM_ProductoStock.PopItemSucursal_AgregarClick(Sender: TObject);
 begin
   if EKListado_Sucursal.Buscar then
   begin
-    CD_Sucursal.Filter:= 'idSucursal = '+EKListado_Sucursal.Resultado;
-    CD_Sucursal.Filtered := true;
+    CD_Sucursal.Filter:= 'idSucursal = ' + EKListado_Sucursal.Resultado;
+    CD_Sucursal.Filtered:= true;
     if not CD_Sucursal.IsEmpty then
     begin
-      CD_Sucursal.Filtered := false;
-      Application.MessageBox('La Sucursal seleccionada ya fue cargada','Carga Sucursal',MB_OK+MB_ICONINFORMATION);
+      CD_Sucursal.Filtered:= false;
+      Application.MessageBox('La Sucursal seleccionada ya fue cargada', 'Carga Sucursal', MB_OK + MB_ICONINFORMATION);
       exit;
     end;
 
-    CD_Sucursal.Filtered := false;
+    CD_Sucursal.Filtered:= false;
     CD_Sucursal.Append;
-    CD_Sucursal_idSucursal.AsString := EKListado_Sucursal.Resultado;
-    CD_Sucursal_nombre.AsString := EKListado_Sucursal.Seleccion;
+    CD_Sucursal_idSucursal.AsString:= EKListado_Sucursal.Resultado;
+    CD_Sucursal_nombre.AsString:= EKListado_Sucursal.Seleccion;
   end;
 end;
 
@@ -504,7 +504,7 @@ begin
 
       GrupoEditando.Enabled:= true;
       btnProcesar.Enabled:= false;
-      btnVolver.Enabled:=false;
+      btnVolver.Enabled:= false;
       PanelAsociar.Visible:= false;
       PanelCarga.Visible:= true;
     end
@@ -518,7 +518,7 @@ procedure TFABM_ProductoStock.btnAsociarClick(Sender: TObject);
 begin
   GrupoEditando.Enabled:= false;
   btnProcesar.Enabled:= true;
-  btnVolver.Enabled:=True;
+  btnVolver.Enabled:= True;
   PanelAsociar.Visible:= true;
   PanelCarga.Visible:= false;
 end;
@@ -533,6 +533,7 @@ end;
 //----------------------------------
 //  INICIO TECLAS RAPIDAS
 //----------------------------------
+
 procedure TFABM_ProductoStock.ABuscarExecute(Sender: TObject);
 begin
   if btnBuscar.Enabled and (btnBuscar.Visible = ivAlways) then
@@ -592,7 +593,7 @@ begin
 
   GrupoEditando.Enabled:= true;
   btnProcesar.Enabled:= false;
-  btnVolver.Enabled:=false;
+  btnVolver.Enabled:= false;
   PanelAsociar.Visible:= false;
   PanelCarga.Visible:= true;
 end;
@@ -614,7 +615,7 @@ begin
 
   if ZQ_StockSTOCK_ACTUAL.AsFloat <> 0 then
   begin
-    Application.MessageBox('No se puede desasociar el producto seleccionado porque actualmente tiene stock, por favor verifique.','Validación',MB_OK+MB_ICONINFORMATION);
+    Application.MessageBox('No se puede desasociar el producto seleccionado porque actualmente tiene stock, por favor verifique.', 'Validación', MB_OK + MB_ICONINFORMATION);
     exit;
   end;
 
@@ -628,7 +629,7 @@ begin
     if not ZQ_StockCOLUMNA.IsNull then
       sucursal:= sucursal + ' Columna: ' + ZQ_StockCOLUMNA.AsString;
 
-    if (application.MessageBox(pchar('¿Seguro que desea quitar el producto seleccionado de '+sucursal+'?'), 'ATENCION - ABM Producto Stock', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+    if (application.MessageBox(pchar('¿Seguro que desea quitar el producto seleccionado de ' + sucursal + '?'), 'ATENCION - ABM Producto Stock', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
       exit;
 
     ZQ_Stock.Delete;
@@ -659,7 +660,7 @@ begin
     if not ZQ_StockCOLUMNA.IsNull then
       sucursal:= sucursal + ' Columna: ' + ZQ_StockCOLUMNA.AsString;
 
-    if (application.MessageBox(pchar('¿Seguro que desea quitar todos los productos listados de '+sucursal+'?'), 'ATENCION - ABM Producto Stock', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
+    if (application.MessageBox(pchar('¿Seguro que desea quitar todos los productos listados de ' + sucursal + '?'), 'ATENCION - ABM Producto Stock', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
       exit;
 
     ZQ_Stock.First;
@@ -667,7 +668,7 @@ begin
     begin
       if ZQ_StockSTOCK_ACTUAL.AsFloat <> 0 then
       begin
-        Application.MessageBox('No se puede completar la acción porque un producto de la lista actualmente tiene stock, por favor verifique.','Validación',MB_OK+MB_ICONINFORMATION);
+        Application.MessageBox('No se puede completar la acción porque un producto de la lista actualmente tiene stock, por favor verifique.', 'Validación', MB_OK + MB_ICONINFORMATION);
         DM.EKModelo.cancelar_transaccion(transaccion_ABMStock);
         exit;
       end;
@@ -696,7 +697,7 @@ end;
 
 procedure TFABM_ProductoStock.EKDbSuma1SumListChanged(Sender: TObject);
 begin
-  lblResumen.Caption:= 'Total Stock: '+FloatToStr(EKDbSuma1.SumCollection.Items[0].SumValue);
+  lblResumen.Caption:= 'Total Stock: ' + FloatToStr(EKDbSuma1.SumCollection.Items[0].SumValue);
 end;
 
 procedure TFABM_ProductoStock.DBGridStockKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -710,9 +711,9 @@ begin
   cantidad:= ZQ_Stock.RecordCount;
   fila:= ZQ_Stock.RecNo + 1;
 
-  if (Key = 13) or (key = 9) then  { if it's an enter key }
+  if (Key = 13) or (key = 9) then { if it's an enter key }
   begin
-    Key := 0; {ignore}
+    Key:= 0; {ignore}
     if ((sender as tdbgrid).SelectedField.FullName = 'STOCK_ACTUAL') //si estoy en la columna almacenar
       or ((sender as tdbgrid).SelectedField.FullName = 'STOCK_MIN_ALARMA') then //o en alarma
     begin
@@ -727,30 +728,33 @@ begin
 end;
 
 //veo si el usuario tiene permiso para modificar el stock de otra sucursal
+
 procedure TFABM_ProductoStock.validarSucursal(Sender: TField);
 var
   i, suc_prod: integer;
-  permisos : boolean;
+  permisos: boolean;
 begin
-  permisos := false;
-
+  permisos:= false;
   suc_prod:= ZQ_StockID_SUCURSAL.AsInteger; //sucursal a la que pertenece el stock del producto
 
+  //si es un producto mi no hago nada
   if (suc_prod = SUCURSAL_LOGUEO) then
-  exit;
+    exit;
 
-  for  i:= 0 to Length(sucursales) - 1 do //Recorro todas las sucursales del usuario seleccionado
-  begin //si el prducto es de la sucursal en la que estoy loqueafo o el usuario tiene permiso en esa sucursal o si es administrador
+  for i:= 0 to Length(sucursales) - 1 do //Recorro todas las sucursales del usuario seleccionado
+  begin
+    //si el prducto es de una en la que el usuario tiene permiso o si es administrador
     if (suc_prod = StrToInt(sucursales[i].valor)) or (StrToInt(sucursales[i].valor) = 0) then
-      permisos := true;
+      permisos:= true;
   end;
 
-  if not ((permisos) and (dm.EKUsrLogin.PermisoAccion('MODIFICAR_STOCK_AJEN'))) then
+  if not ( permisos and dm.EKUsrLogin.PermisoAccion('MODIFICAR_STOCK_AJEN') ) then
   begin
     ZQ_Stock.RevertRecord;
-    ShowMessage(pchar('El usuario no posee los permisos para modificar el stock de la sucursal '+ZQ_StockSUCURSAL.AsString+'.'));
+    ShowMessage(pchar('El usuario no posee los permisos para modificar el stock de la sucursal ' + ZQ_StockSUCURSAL.AsString + '.'));
   end;
 
+//ANTES
 //    if not ( (suc_prod = SUCURSAL_LOGUEO) or (suc_prod = StrToInt(sucursales[i].valor)) or (StrToInt(sucursales[i].valor) = 0) )  then
 //    begin
 //      ZQ_Stock.RevertRecord;
@@ -760,6 +764,7 @@ begin
 end;
 
 //chequear si el usuario tiene permisos para modificar el stock o para asociar productos a una sucursal
+
 procedure TFABM_ProductoStock.validarPermisosUsuario;
 begin
   btnModificar.Visible:= ivNever;
@@ -794,12 +799,13 @@ end;
 procedure TFABM_ProductoStock.btnImprimirClick(Sender: TObject);
 begin
   if ZQ_Stock.IsEmpty then
-  exit;
+    exit;
 
 
-DM.VariablesReportes(RepProductoStock);
-QRLabelCritBusqueda.Caption := EKBuscarStock.ParametrosBuscados;
-EKVistaPreviaQR1.VistaPrevia;
+  DM.VariablesReportes(RepProductoStock);
+  QRLabelCritBusqueda.Caption:= EKBuscarStock.ParametrosBuscados;
+  EKVistaPreviaQR1.VistaPrevia;
 end;
 
 end.
+
