@@ -263,6 +263,7 @@ type
     ZQ_VerificarProductoSTOCK_MAX: TFloatField;
     ZQ_VerificarProductoSTOCK_REPEDIDO: TFloatField;
     ZQ_VerificarProductoSTOCK_MIN_ALARMA: TStringField;
+    ZQ_UpdateNotaPedido: TZQuery;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnTransferirClick(Sender: TObject);
@@ -443,10 +444,13 @@ begin
   ZQ_VerCpb.ParamByName('id_tipo_np').AsInteger:= CPB_NOTA_PEDIDO;
   ZQ_VerCpb.ParamByName('id_tipo_fc').AsInteger:= CPB_FACTURA_COMPRA;
   ZQ_VerCpb.ParamByName('id_estado').AsInteger:= ESTADO_CONFIRMADO;
+  ZQ_VerCpb.ParamByName('id_sucursal').AsInteger := SUCURSAL_LOGUEO;
   ZQ_VerCpb.Open;
 
   PanelContenedor.Visible:= true;
   PanelHistorico.Visible:= false;
+
+  DBGridNotaPedido.BringToFront;
 end;
 
 
@@ -487,7 +491,7 @@ begin
       CD_ListaProductos.First;
       while not CD_ListaProductos.Eof do
       begin
-        if (CD_ListaProductosid_comprobante.IsNull) or (CD_ListaProductoscantidad.AsFloat = 0) then
+        if (CD_ListaProductosid_comprobante.IsNull) or (CD_ListaProductosalmacenar.AsFloat = 0) then
           CD_ListaProductos.Delete
         else
           CD_ListaProductos.Next;
@@ -496,7 +500,7 @@ begin
       if CD_ListaProductos.IsEmpty then
         exit;
 
-      if dm.EKModelo.iniciar_transaccion(Transaccion_TransferirStock, []) then
+      if dm.EKModelo.iniciar_transaccion(Transaccion_TransferirStock, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_NumeroCpb]) then
       begin
         asociarNotaPedido();
 
@@ -508,28 +512,80 @@ end;
 
 
 procedure TFTransferirStock.asociarNotaPedido;
+var
+  id_comprobante: integer;
 begin
+  //obtengo el id_comprobante
+  ZP_CpbID.Active:= false;
+  ZP_CpbID.Active:= true;
+  id_comprobante:= ZP_CpbIDID.AsInteger;
+  ZP_CpbID.Active:= false;
+
+  //obtengo el ultimo numero de la transferencia de stock
+  ZQ_NumeroCpb.Close;
+  ZQ_NumeroCpb.ParamByName('id_tipo').AsInteger:= CPB_TRANSFERIR_STOCK;
+  ZQ_NumeroCpb.Open;
+
+  //doy de alta el comprobante
+  ZQ_Comprobante.Append;
+  ZQ_ComprobanteID_COMPROBANTE.AsInteger:= id_comprobante;
+  ZQ_ComprobanteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
+  ZQ_ComprobanteID_POSICION_SUC_DESTINO.AsInteger:= id_pos_sucursal;
+  ZQ_ComprobanteID_TIPO_CPB.AsInteger:= CPB_TRANSFERIR_STOCK;
+  ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
+  ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
+  ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
+  ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
+
   CD_ListaProductos.First;
   while not(CD_ListaProductos.Eof) do
   begin
-    ZQ_ProcesarStock.Close;
-    ZQ_ProcesarStock.ParamByName('id_stock_prod').Clear;
-    ZQ_ProcesarStock.ParamByName('id_producto').AsInteger:= CD_ListaProductosid_producto.AsInteger;
-    ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= id_pos_sucursal;
+    ZQ_CpbProducto.Append;
+    ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
+    ZQ_CpbProductoID_PRODUCTO.AsInteger:= CD_ListaProductosid_producto.AsInteger;
+    ZQ_CpbProductoID_STOCK_PRODUCTO.Clear;
+
 
     if CD_ListaProductoscantidad_a_almacenar.AsFloat >= 0 then
-      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductosalmacenar.AsFloat
+      ZQ_CpbProductoCANTIDAD.AsFloat:= CD_ListaProductosalmacenar.AsFloat
     else //si lo que deseo almacenar es mayor a lo que puedo almacenar, entonces cargo el resto
-      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductoscantidad_recibida.AsFloat - CD_ListaProductoscantidad_almacenada.AsFloat;
+      ZQ_CpbProductoCANTIDAD.AsFloat:= CD_ListaProductoscantidad_recibida.AsFloat - CD_ListaProductoscantidad_almacenada.AsFloat;
 
-    ZQ_ProcesarStock.ParamByName('stock_min').AsFloat:= CD_ListaProductosstock_min.AsFloat;
-    ZQ_ProcesarStock.ParamByName('stock_max').AsFloat:= CD_ListaProductosstock_max.AsFloat;
-    ZQ_ProcesarStock.ParamByName('stock_repedido').Clear;
-    ZQ_ProcesarStock.ParamByName('id_comprobante').AsInteger := CD_ListaProductosid_comprobante.AsInteger;
-    ZQ_ProcesarStock.ExecSQL;
+
+    ZQ_UpdateNotaPedido.Close;
+    ZQ_UpdateNotaPedido.ParamByName('cantidad_almacenar').AsFloat:= ZQ_CpbProductoCANTIDAD.AsFloat;
+    ZQ_UpdateNotaPedido.ParamByName('id_comprobante').AsInteger:= CD_ListaProductosid_comprobante.AsInteger;
+    ZQ_UpdateNotaPedido.ParamByName('id_producto').AsInteger:= CD_ListaProductosid_producto.AsInteger;
+    ZQ_UpdateNotaPedido.ExecSQL;
+
 
     CD_ListaProductos.Next;
   end;
+
+//  //actualizo el ultimo numero
+//  ZQ_NumeroCpb.Edit;
+//  ZQ_NumeroCpbULTIMO_NUMERO.AsInteger:= ZQ_ComprobanteNUMERO_CPB.AsInteger;
+//  CD_ListaProductos.First;
+//  while not(CD_ListaProductos.Eof) do
+//  begin
+//    ZQ_ProcesarStock.Close;
+//    ZQ_ProcesarStock.ParamByName('id_stock_prod').Clear;
+//    ZQ_ProcesarStock.ParamByName('id_producto').AsInteger:= CD_ListaProductosid_producto.AsInteger;
+//    ZQ_ProcesarStock.ParamByName('id_pos_suc').AsInteger:= id_pos_sucursal;
+//
+//    if CD_ListaProductoscantidad_a_almacenar.AsFloat >= 0 then
+//      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductosalmacenar.AsFloat
+//    else //si lo que deseo almacenar es mayor a lo que puedo almacenar, entonces cargo el resto
+//      ZQ_ProcesarStock.ParamByName('cantidad_almacenar').AsFloat:= CD_ListaProductoscantidad_recibida.AsFloat - CD_ListaProductoscantidad_almacenada.AsFloat;
+//
+//    ZQ_ProcesarStock.ParamByName('stock_min').AsFloat:= CD_ListaProductosstock_min.AsFloat;
+//    ZQ_ProcesarStock.ParamByName('stock_max').AsFloat:= CD_ListaProductosstock_max.AsFloat;
+//    ZQ_ProcesarStock.ParamByName('stock_repedido').Clear;
+//    ZQ_ProcesarStock.ParamByName('id_comprobante').AsInteger := CD_ListaProductosid_comprobante.AsInteger;
+//    ZQ_ProcesarStock.ExecSQL;
+//
+//    CD_ListaProductos.Next;
+//  end;
 end;
 
 
@@ -662,6 +718,12 @@ end;
 
 procedure TFTransferirStock.btnNotaPedidoClick(Sender: TObject);
 begin
+//  if SUCURSAL_LOGUEO <> ZQ_VerCpbID_SUCURSAL.AsInteger then
+//  begin
+//
+//    exit;
+//  end;
+
   if DBGridNotaPedido.Visible then //si estoy viendo las Notas de Pedidos
   begin
     if not ZQ_VerCpb.IsEmpty then
