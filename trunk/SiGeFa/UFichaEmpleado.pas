@@ -36,9 +36,8 @@ type
     ZQ_HistorialEMPLEADO: TStringField;
     ZQ_HistorialFECHA_INGRESO: TDateTimeField;
     ZQ_HistorialFECHA_EGRESO: TDateTimeField;
-    ZQ_HistorialDETALLE: TStringField;
     Panel1: TPanel;
-    DBMemoDetalle: TDBMemo;
+    DBMemoDetalleIngreso: TDBMemo;
     Label1: TLabel;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_VerificarIngresoEgreso: TZQuery;
@@ -57,7 +56,6 @@ type
     ZQ_VerificarIngresoEgresoEMPLEADO: TStringField;
     ZQ_VerificarIngresoEgresoFECHA_INGRESO: TDateTimeField;
     ZQ_VerificarIngresoEgresoFECHA_EGRESO: TDateTimeField;
-    ZQ_VerificarIngresoEgresoDETALLE: TStringField;
     ZQ_Historial_sucursal: TStringField;
     QuickRep1: TQuickRep;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
@@ -70,6 +68,12 @@ type
     QRlblPieDePagina: TQRLabel;
     QRLabel43: TQRLabel;
     QRSysData1: TQRSysData;
+    ZQ_HistorialDETALLE_INGRESO: TStringField;
+    ZQ_HistorialDETALLE_EGRESO: TStringField;
+    DBMemoDetalleEgreso: TDBMemo;
+    ZQ_VerificarIngresoEgresoDETALLE_INGRESO: TStringField;
+    ZQ_VerificarIngresoEgresoDETALLE_EGRESO: TStringField;
+    Panel2: TPanel;
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -104,7 +108,7 @@ begin
   tipoFicha:= '';
   fecha:= dm.EKModelo.Fecha;
   lblFecha.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  lblHora.Caption:= TimeToStr(dm.EKModelo.Hora);
+  lblHora.Caption:= FormatDateTime('hh:nn:ss', dm.EKModelo.Hora);
 
   FPrincipal.Iconos_Menu_32.GetBitmap(51, btnFicharIngreso.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(52, btnFicharEgreso.Glyph);
@@ -130,7 +134,7 @@ procedure TFFichaEmpleado.Timer1Timer(Sender: TObject);
 begin
   if fecha <> dm.EKModelo.Fecha then
     lblFecha.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  lblHora.Caption:= TimeToStr(dm.EKModelo.Hora);
+  lblHora.Caption:= FormatDateTime('hh:nn:ss', dm.EKModelo.Hora);
 end;
 
 
@@ -239,13 +243,15 @@ begin
           ZQ_HistorialEMPLEADO.AsString:= editRegistrarUsuario.Text;
           ZQ_HistorialFECHA_INGRESO.AsDateTime:= fechaGuardar;
           ZQ_HistorialFECHA_EGRESO.Clear;
-          ZQ_HistorialDETALLE.AsString:= memoRegistrarDetalle.Text;
+          ZQ_HistorialDETALLE_INGRESO.AsString:= memoRegistrarDetalle.Text;
+          ZQ_HistorialDETALLE_EGRESO.Clear;
         end
         else
           if tipoFicha = 'EGRESO' then
           begin
             ZQ_VerificarIngresoEgreso.Edit;
             ZQ_VerificarIngresoEgresoFECHA_EGRESO.AsDateTime:= fechaGuardar;
+            ZQ_VerificarIngresoEgresoDETALLE_EGRESO.AsString:= memoRegistrarDetalle.Text;            
           end;
 
         try
