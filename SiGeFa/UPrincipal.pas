@@ -168,6 +168,8 @@ type
     APreventaHistorico: TAction;
     VentadeMostrador2: TMenuItem;
     N10: TMenuItem;
+    AFichaEmpleado: TAction;
+    FichaEmpleado1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -227,6 +229,7 @@ type
     procedure AOP_ABMMedicoExecute(Sender: TObject);
     procedure AOP_ABMObraSocialExecute(Sender: TObject);
     procedure APreventaHistoricoExecute(Sender: TObject);
+    procedure AFichaEmpleadoExecute(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -264,7 +267,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging,
   UEstadisticaVentas, UReimpresionComprobantes, UABM_PersonasPuntos,
   UConsulta_Precios, DateUtils, UCompararStock, UOP_ABMMedico,
-  UOP_ABMObraSocial, UPreventa_Historico;
+  UOP_ABMObraSocial, UPreventa_Historico, UFichaEmpleado;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -368,6 +371,8 @@ begin
     ShowMessage('Atención, la DEMO del sistema a vencido. Para seguir utilizandolo contactese a "contacto.empirica@gmail.com"');
     Application.Terminate;
   end;
+
+
 
    //valido si DEBE o nó cerrarse por causas anormales (;-P)
 //  cerrarSistema:= 0;
@@ -868,6 +873,13 @@ end;
 procedure TFPrincipal.APreventaHistoricoExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFPreventa_Historico, FPreventa_Historico);
+end;
+
+procedure TFPrincipal.AFichaEmpleadoExecute(Sender: TObject);
+begin
+  Application.CreateForm(TFFichaEmpleado, FFichaEmpleado);
+  FFichaEmpleado.ShowModal;
+  FFichaEmpleado.Release;
 end;
 
 end.

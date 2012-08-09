@@ -711,9 +711,9 @@ begin
   DBImage1.DataField:= 'LOGO';
   modoLecturaProd();
   PConfirmarVenta.Visible:= False;
-  DM.ZQ_Sucursal.Close;
-  DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:= idSucursal;
-  DM.ZQ_Sucursal.Open;
+//  DM.ZQ_Sucursal.Close;
+//  DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:= idSucursal;
+//  DM.ZQ_Sucursal.Open;
   edImagen.Visible:= not (ZQ_ProductosIMAGEN.IsNull);
   DBImage1.Visible:= True;
   DBImage1.BringToFront;
