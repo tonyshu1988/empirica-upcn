@@ -276,26 +276,33 @@ object FConfiguracion: TFConfiguracion
     object Label12: TLabel
       Left = 12
       Top = 26
-      Width = 54
+      Width = 35
       Height = 13
-      Caption = 'File Cliente:'
+      Caption = 'Cliente:'
     end
     object Label13: TLabel
       Left = 5
       Top = 53
-      Width = 61
+      Width = 42
       Height = 13
-      Caption = 'File Servidor:'
+      Caption = 'Servidor:'
     end
     object Label14: TLabel
-      Left = 215
+      Left = 189
       Top = 26
-      Width = 63
+      Width = 66
       Height = 13
-      Caption = 'Tama'#241'o Lote'
+      Caption = 'Tama'#241'o Lote:'
+    end
+    object Label15: TLabel
+      Left = 198
+      Top = 53
+      Width = 57
+      Height = 13
+      Caption = 'Antiguedad:'
     end
     object editFILE_Upload: TEdit
-      Left = 68
+      Left = 48
       Top = 20
       Width = 132
       Height = 21
@@ -307,7 +314,7 @@ object FConfiguracion: TFConfiguracion
       Text = 'EDITFILE_UPLOAD'
     end
     object editFILE_Download: TEdit
-      Left = 68
+      Left = 48
       Top = 47
       Width = 132
       Height = 21
@@ -319,12 +326,20 @@ object FConfiguracion: TFConfiguracion
       Text = 'EDITFILE_DOWNLOAD'
     end
     object editTamanioLote: TEdit
-      Left = 215
-      Top = 39
-      Width = 63
+      Left = 259
+      Top = 20
+      Width = 32
       Height = 21
       TabOrder = 2
       Text = 'editTamanioLote'
+    end
+    object editAntiguedadArchivo: TEdit
+      Left = 259
+      Top = 47
+      Width = 32
+      Height = 21
+      TabOrder = 3
+      Text = 'editAntiguedadArchivo'
     end
   end
   object GroupBoxDias: TGroupBox

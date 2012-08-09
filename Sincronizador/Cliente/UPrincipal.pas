@@ -323,6 +323,8 @@ type
     procedure btnPararContinuarClick(Sender: TObject);
     procedure TimerErrorTimer(Sender: TObject);
     procedure lblTituloSincroDblClick(Sender: TObject);
+    function dameFloat(numero: string): double;
+    procedure borrarArchivosLocales();
   Private
     procedure InputBoxSetPasswordChar(var Msg: TMessage); Message InputBoxMessage;
   Public
@@ -352,6 +354,7 @@ type
     intentos_Conexion_FTP: integer;
     sincronizador_activado: boolean;
     colorError, colorNormal: TColor;
+    antiguedad_archivos: integer;  //tiene cuanto tiempo se guarda un archivo XML
   end;
 
 var
@@ -497,7 +500,7 @@ begin
   EKImageListIcono.GetIcon(2, iconoError);
   iconoSistema:= TIcon.Create;
 
-  intentos_Conexion_FTP:= 3;
+  intentos_Conexion_FTP:= 2;
   estado_sincronizando:= false;
   configGrillas(0); //cargo la config de las grillas
 
@@ -536,9 +539,10 @@ begin
   begin
     Visible:= False;
     Application.ShowMainForm:= False;
-//    dm.EKIconizar.mostrarGlobo('Sincronizador ' + modo, 'Iniciando sincronizador, doble click para maximizar.');
   end;
   Application.Title:= 'Sincronizador ' + modo;
+
+  borrarArchivosLocales;  
 end;
 
 
@@ -584,6 +588,7 @@ begin
   password_configuracion:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('SINCRONIZADOR', 'CONFIG_PASS', ''));
 
   rango_Novedades:= dm.EKInicio.Ini.ReadInteger('SINCRONIZADOR', 'TAMANIO_LOTE', 500);
+  antiguedad_archivos:= dm.EKInicio.Ini.ReadInteger('SINCRONIZADOR', 'ANTIGUEDAD_ARCHIVO', 60);  
 
   db_host:= dm.EKInicio.Ini.ReadString('BASE', 'DB_HOST', '');
   db_name:= dm.EKInicio.Ini.ReadString('BASE', 'DB_NAME', '');
@@ -902,6 +907,8 @@ procedure TFPrincipal.subirNovedades;
 var
   salir: boolean;
 begin
+  FTP_desconectarse;
+  memoLog.Color:= colorNormal;
   RemoveComponent(dm.IdFTP);
   dm.IdFTP.Free;
   dm.IdFTP:= Nil;
@@ -1178,7 +1185,7 @@ var
 begin
   maxIntentos:= 1;
   intentos:= 0;
-  repeat
+//  repeat
     try
       //si no me puedo conectar salgo
       if not dm.IdFTP.Connected then
@@ -1204,31 +1211,30 @@ begin
       DM.IdFTP.EndWork(wmRead);
       Result:= FTP_OK;
     except
-      On E:EIdSocketError Do
-      Begin
-        inc(intentos); //si se produjo un socke error 10054 repito el proceso para solucionarlo
-        if intentos <= maxIntentos then
-        begin
-          if E.LastError = 10054 then
-          Begin
-//            ShowMessage('MATIAS');
-            RemoveComponent(dm.IdFTP);
-            dm.IdFTP.Free;
-            dm.IdFTP:= Nil;
-            dm.IdFTP:= TIdFTP.Create(Self);
-            DM.configFTP;
-          End;
-        end
-        else
-        begin
-          error_servidor_FTP:= 'ERROR SERVER FTP: '+e.Message;
-          if FileExists(dirLocal + archivo) then
-            DeleteFile(dirLocal + archivo);
-        end;
-      End;
+//      On E:EIdSocketError Do
+//      Begin
+//        inc(intentos); //si se produjo un socke error 10054 repito el proceso para solucionarlo
+//        if intentos <= maxIntentos then
+//        begin
+//          if E.LastError = 10054 then
+//          Begin
+//            RemoveComponent(dm.IdFTP);
+//            dm.IdFTP.Free;
+//            dm.IdFTP:= Nil;
+//            dm.IdFTP:= TIdFTP.Create(Self);
+//            DM.configFTP;
+//          End;
+//        end
+//        else
+//        begin
+//          error_servidor_FTP:= 'ERROR SERVER FTP: '+e.Message;
+//          if FileExists(dirLocal + archivo) then
+//            DeleteFile(dirLocal + archivo);
+//        end;
+//      End;
       on E: Exception do  //si se produjo un error distinto a socke error 10054 salgo y no reintento nada
       begin
-        intentos:= 2;
+//        intentos:= 2;
         error_servidor_FTP:= 'ERROR SERVER FTP: '+e.Message;
         if FileExists(dirLocal + archivo) then
           DeleteFile(dirLocal + archivo);
@@ -1237,7 +1243,7 @@ begin
           Result:= FTP_ERROR_CCG;
       end;
     end; //TRY
-  until (intentos > maxIntentos) or (Result = FTP_OK)
+//  until (intentos > maxIntentos) or (Result = FTP_OK)
 end;
 
 
@@ -1579,6 +1585,8 @@ var
   ultimo_archivo: string;
   cantidad_archivos_encontrados: integer;
 begin
+  FTP_desconectarse;
+  memoLog.Color:= colorNormal;
   RemoveComponent(dm.IdFTP);
   dm.IdFTP.Free;
   dm.IdFTP:= Nil;
@@ -1813,6 +1821,7 @@ begin
             else if operacion = 'U' then //si la operacion es un update, pongo en modo edicion la query
               ZQ_ActualizarBase.Edit;
 
+//-----------------------------------
             CD_ProcesarNovedades.First;
             //si es un insert de un registro que ya existe entonces no hago nada
             if not ((es_query_vacia = false) and (operacion = 'I')) then
@@ -1846,7 +1855,7 @@ begin
                       application.ProcessMessages;
                       //pregunto si el campo esta definido como FLOAT
                       if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftFloat then
-                        ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= StrToFloat(FormatFloat('0.0000', CD_ProcesarNovedadesNEW_VALUE.AsFloat))
+                        ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsFloat:= dameFloat(CD_ProcesarNovedadesNEW_VALUE.AsString)
                       else {//pregunto si el campo esta definido como INTEGER}
                         if ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).DataType = ftInteger then
                           ZQ_ActualizarBase.FieldByName(CD_ProcesarNovedadesFIELD_NAME.AsString).AsInteger:= CD_ProcesarNovedadesNEW_VALUE.AsInteger
@@ -1881,6 +1890,7 @@ begin
                 CD_ProcesarNovedades.Next;
               end
             end;
+//---------------------------------------
           end;
 
           //  si la query no esta vacia y no es una operacion de Insert
@@ -1888,7 +1898,6 @@ begin
           if ((es_query_vacia = false) and (operacion <> 'I')) or ((es_query_vacia = true) and (operacion = 'I')) then
             ZQ_ActualizarBase.ApplyUpdates; //aplico los cambios
         end;
-
         //saco el filro
         CD_ProcesarNovedades.Filtered:= false;
 
@@ -1897,8 +1906,7 @@ begin
         Application.ProcessMessages;
         pBar_Novedades.Position:= pBar_Novedades.Position + 1;
       end;
-//      //saco el filro
-//      CD_ProcesarNovedades.Filtered:= false;
+
 
       //grabo en la base de datos local el nombre del archivo procesado con fecha y hora actual
       ZQ_GrabarUltimoArchivoServer.Close;
@@ -1987,6 +1995,8 @@ procedure TFPrincipal.bajarNovedadesClientes;
 var
   cantidad_archivos_encontrados: integer;
 begin
+  FTP_desconectarse;
+  memoLog.Color:= colorNormal;
   RemoveComponent(dm.IdFTP);
   dm.IdFTP.Free;
   dm.IdFTP:= Nil;
@@ -2354,8 +2364,6 @@ end;
 
 procedure TFPrincipal.btnPararContinuarClick(Sender: TObject);
 begin
-//  memoLog.Color:= colorError;
-
   if Timer.Enabled then
   begin
     Timer.Enabled:= false;
@@ -2364,7 +2372,7 @@ begin
   else
   begin
     Timer.Enabled:= true;
-    btnPararContinuar.Caption:= 'Parar';    
+    btnPararContinuar.Caption:= 'Parar';
   end
 end;
 
@@ -2372,6 +2380,51 @@ end;
 procedure TFPrincipal.lblTituloSincroDblClick(Sender: TObject);
 begin
   memoLog.Color:= colorNormal;
+end;
+
+
+function TFPrincipal.dameFloat(numero: string): double;
+begin
+  if DecimalSeparator = ',' then
+    Result:= StrToFloat(StringReplace(numero, '.', ',',[]))
+  else
+    Result:= StrToFloat(StringReplace(numero, ',', '.',[]));
+end;
+
+
+procedure TFPrincipal.borrarArchivosLocales();
+  //obtiene la fecha de modificacion del archivo
+  function GetFileDateTime(Nombre: string): TDateTime;
+  var
+    Hnd: integer;
+  begin
+    Hnd := FileOpen(Nombre, 0);
+    try
+      Result:= FileDateToDateTime(FileGetDate(Hnd));
+    finally
+      FileClose(Hnd);
+    end;
+  end;
+
+  var
+    SR: TSearchRec;
+    Ruta, Ext: string;
+    dt: TDateTime;
+    antiguedad: integer;
+begin
+  Ruta:= dirLocal;
+  Ext:= '*.XML';
+
+  if FindFirst(Ruta + Ext,  faArchive , SR) = 0 then
+  begin
+    repeat
+      dt:= GetFileDateTime(Ruta + SR.Name); // obtener fecha ultima modificación
+      antiguedad:= DaysBetween(dt, getFechayHora);
+      if (antiguedad > antiguedad_archivos) then // si tiene más de X días de Antiguedad
+       DeleteFile(Ruta + SR.Name);
+    until FindNext(SR) <> 0;
+    FindClose(SR);
+  end;
 end;
 
 end.
