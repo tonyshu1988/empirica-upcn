@@ -66,6 +66,8 @@ type
     CheckBoxWindows: TCheckBox;
     Label14: TLabel;
     editTamanioLote: TEdit;
+    Label15: TLabel;
+    editAntiguedadArchivo: TEdit;
     procedure btnCargarIniClick(Sender: TObject);
     procedure btnCancelarYSalirClick(Sender: TObject);
     procedure btnGuardarYSalirClick(Sender: TObject);
@@ -200,6 +202,8 @@ begin
 
   //Guardo el Tamaño del lote de sincronizacion
   dm.EKInicio.Ini.WriteInteger('SINCRONIZADOR', 'TAMANIO_LOTE', StrToInt(EditTamanioLote.Text));
+  //Guardo la antiguedad de los archivo que quiero borrar
+  dm.EKInicio.Ini.WriteInteger('SINCRONIZADOR', 'ANTIGUEDAD_ARCHIVO', StrToInt(editAntiguedadArchivo.Text));
 
   //Guardo la clave de ingreso a la pantalla de configuracion
   dm.EKInicio.Ini.WriteString('SINCRONIZADOR', 'CONFIG_PASS', dm.EKInicio.Encripta(editConfig_Pass.Text));
@@ -307,6 +311,7 @@ begin
   editConfig_Pass.Text:= dm.EKInicio.Desencripta(dm.EKInicio.Ini.ReadString('SINCRONIZADOR', 'CONFIG_PASS', ''));
 
   editTamanioLote.Text:= IntToStr(dm.EKInicio.Ini.ReadInteger('SINCRONIZADOR', 'TAMANIO_LOTE', 500));
+  editAntiguedadArchivo.Text:= IntToStr(dm.EKInicio.Ini.ReadInteger('SINCRONIZADOR', 'ANTIGUEDAD_ARCHIVO', 60));
 
   editDB_Host.Text:= dm.EKInicio.Ini.ReadString('BASE', 'DB_HOST', '');
   editDB_Name.Text:= dm.EKInicio.Ini.ReadString('BASE', 'DB_NAME', '');
