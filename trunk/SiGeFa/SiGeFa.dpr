@@ -67,7 +67,8 @@ uses
   UCompararStock in 'UCompararStock.pas' {FCompararStock},
   UOP_ABMMedico in 'UOP_ABMMedico.pas' {FOP_ABMMedico},
   UOP_ABMObraSocial in 'UOP_ABMObraSocial.pas' {FOP_ABMObraSocial},
-  UPreventa_Historico in 'UPreventa_Historico.pas' {FPreventa_Historico};
+  UPreventa_Historico in 'UPreventa_Historico.pas' {FPreventa_Historico},
+  UFichaEmpleado in 'UFichaEmpleado.pas' {FFichaEmpleado};
 
 {$R *.res}
 
