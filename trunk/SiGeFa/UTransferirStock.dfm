@@ -1,8 +1,8 @@
 object FTransferirStock: TFTransferirStock
-  Left = 298
-  Top = 163
-  Width = 870
-  Height = 558
+  Left = 260
+  Top = 117
+  Width = 958
+  Height = 718
   Caption = 'Transferir Stock'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,8 +22,8 @@ object FTransferirStock: TFTransferirStock
   object PanelHistorico: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 479
+    Width = 950
+    Height = 639
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
@@ -31,7 +31,7 @@ object FTransferirStock: TFTransferirStock
     object PanelHistorico_Cpb: TPanel
       Left = 2
       Top = 2
-      Width = 858
+      Width = 946
       Height = 184
       Align = alTop
       BevelOuter = bvNone
@@ -40,7 +40,7 @@ object FTransferirStock: TFTransferirStock
       object Label3: TLabel
         Left = 4
         Top = 4
-        Width = 850
+        Width = 938
         Height = 20
         Align = alTop
         Alignment = taCenter
@@ -60,7 +60,7 @@ object FTransferirStock: TFTransferirStock
       object DBGrid_Historico_Cpb: TDBGrid
         Left = 4
         Top = 24
-        Width = 850
+        Width = 938
         Height = 156
         Align = alClient
         Color = 14606012
@@ -118,8 +118,8 @@ object FTransferirStock: TFTransferirStock
     object PanelHistoric_Detalle: TPanel
       Left = 2
       Top = 186
-      Width = 858
-      Height = 291
+      Width = 946
+      Height = 451
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 4
@@ -127,7 +127,7 @@ object FTransferirStock: TFTransferirStock
       object Label4: TLabel
         Left = 4
         Top = 4
-        Width = 850
+        Width = 938
         Height = 20
         Align = alTop
         Alignment = taCenter
@@ -147,8 +147,8 @@ object FTransferirStock: TFTransferirStock
       object DBGrid_Historico_Detalle: TDBGrid
         Left = 4
         Top = 24
-        Width = 850
-        Height = 263
+        Width = 938
+        Height = 423
         Align = alClient
         Color = 14606012
         DataSource = DS_Historico_Detalle
@@ -223,16 +223,16 @@ object FTransferirStock: TFTransferirStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 479
+    Width = 950
+    Height = 639
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
-      Width = 860
-      Height = 444
-      ActivePage = TabSAsociarNotaPedido
+      Width = 948
+      Height = 604
+      ActivePage = TabSTransferirStock
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
@@ -242,8 +242,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 375
+          Width = 940
+          Height = 535
           Align = alClient
           Color = 14606012
           DataSource = DS_Producto
@@ -401,17 +401,17 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 375
-          Width = 852
+          Top = 535
+          Width = 940
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            852
+            940
             41)
           object Label25: TLabel
-            Left = 696
+            Left = 784
             Top = 7
             Width = 99
             Height = 13
@@ -434,7 +434,7 @@ object FTransferirStock: TFTransferirStock
             OnClick = btBorrarLineaClick
           end
           object editTotalProductos: TEdit
-            Left = 696
+            Left = 784
             Top = 21
             Width = 129
             Height = 19
@@ -462,8 +462,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedido: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 375
+          Width = 940
+          Height = 535
           Hint = 
             'Haga doble click en la nota de pedido que desea cargar al sistem' +
             'a'
@@ -540,8 +540,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedidoDetalle: TDBGrid
           Left = 0
           Top = 0
-          Width = 852
-          Height = 375
+          Width = 940
+          Height = 535
           Align = alClient
           Color = 14606012
           DataSource = DS_ListaProductos
@@ -687,17 +687,17 @@ object FTransferirStock: TFTransferirStock
         end
         object PanelNotaPedidoDetalle: TPanel
           Left = 0
-          Top = 375
-          Width = 852
+          Top = 535
+          Width = 940
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
-            852
+            940
             41)
           object Label2: TLabel
-            Left = 728
+            Left = 816
             Top = 7
             Width = 104
             Height = 13
@@ -711,7 +711,7 @@ object FTransferirStock: TFTransferirStock
             ParentFont = False
           end
           object editTotalAlmacenar: TEdit
-            Left = 712
+            Left = 800
             Top = 21
             Width = 129
             Height = 19
@@ -737,7 +737,7 @@ object FTransferirStock: TFTransferirStock
     object PanelSeleccionarDeposito: TPanel
       Left = 1
       Top = 1
-      Width = 860
+      Width = 948
       Height = 33
       Align = alTop
       TabOrder = 1
@@ -1310,9 +1310,16 @@ object FTransferirStock: TFTransferirStock
       Category = 0
       Hint = 'Ver/Ocultar Historial'
       Visible = ivAlways
+      ButtonStyle = bsChecked
       ImageIndex = 13
       OnClick = btnVerTransferenciasClick
       AutoGrayScale = False
+    end
+    object dxBarButton1: TdxBarButton
+      Caption = 'New Item'
+      Category = 0
+      Hint = 'New Item'
+      Visible = ivAlways
     end
     object GrupoEditando: TdxBarGroup
       Items = (
@@ -1321,8 +1328,7 @@ object FTransferirStock: TFTransferirStock
         'btnNuevo'
         'btnModificar'
         'btnImprimir'
-        'btnTransferir'
-        'btnVerTransferencias')
+        'btnTransferir')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False

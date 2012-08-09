@@ -264,6 +264,7 @@ type
     ZQ_VerificarProductoSTOCK_REPEDIDO: TFloatField;
     ZQ_VerificarProductoSTOCK_MIN_ALARMA: TStringField;
     ZQ_UpdateNotaPedido: TZQuery;
+    dxBarButton1: TdxBarButton;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnTransferirClick(Sender: TObject);
@@ -374,7 +375,6 @@ begin
     if not CD_Producto.IsEmpty then //si el client no esta vacio es porque ya esta cargado
     begin
       CD_Producto.Filtered := false;
-      vsel.ZQ_Stock.Next; //paso al proximo
     end
     else //si el client esta vacio entonces lo cargo
     begin
@@ -402,13 +402,13 @@ begin
       CD_Producto_sector.AsString := vsel.ZQ_StockSECTOR.AsString;
       CD_Producto_fila.AsString := vsel.ZQ_StockFILA.AsString;
       CD_Producto_columna.AsString := vsel.ZQ_StockCOLUMNA.AsString;
+      CD_Producto.Post;
 
-      vsel.ZQ_Stock.Next;
     end;
+     vsel.ZQ_Stock.Next; //paso al proximo
   end;
 
   vsel.Close;
-  CD_Producto.Post;
   DBGridProducto.SetFocus;
 end;
 
@@ -483,6 +483,7 @@ begin
         asociarStockProducto();
 
         GrupoEditando.Enabled := false;
+        btnVerTransferencias.Enabled:=false;
         GrupoGuardarCancelar.Enabled := true;
       end;
     end
@@ -504,6 +505,7 @@ begin
       begin
         asociarNotaPedido();
 
+        btnVerTransferencias.Enabled:=false;
         GrupoEditando.Enabled := false;
         GrupoGuardarCancelar.Enabled := true;
       end;
@@ -649,6 +651,7 @@ begin
     begin
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
+      btnVerTransferencias.Enabled:=true;
 
       if PageControlTransferir.ActivePage = TabSAsociarNotaPedido then
       begin
@@ -670,9 +673,11 @@ begin
         ZQ_VerCpb.Refresh;
         CD_ListaProductos.EmptyDataSet;
         EKSumaNotaPedido.RecalcAll;
+
       end;
 
       CD_Producto.EmptyDataSet;
+      EKSumaTransferir.RecalcAll;
     end;
   except
     begin
@@ -689,6 +694,7 @@ begin
   begin
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
+    btnVerTransferencias.Enabled:=true;
 
     if PageControlTransferir.ActivePage = TabSAsociarNotaPedido then
     begin
@@ -723,7 +729,7 @@ begin
 //
 //    exit;
 //  end;
-
+  
   if DBGridNotaPedido.Visible then //si estoy viendo las Notas de Pedidos
   begin
     if not ZQ_VerCpb.IsEmpty then
@@ -971,9 +977,8 @@ procedure TFTransferirStock.btnVerTransferenciasClick(Sender: TObject);
 begin
   if PanelContenedor.Visible then
   begin
-    PanelContenedor.Visible:= false;
     PanelHistorico.Visible:= true;
-
+    PanelContenedor.Visible:=false;
     ZQ_Historico_Cpb.Close;
     ZQ_Historico_Cpb.Open;
   end
@@ -983,7 +988,8 @@ begin
     PanelHistorico.Visible:= false;
 
     ZQ_Historico_Cpb.Close;
-  end
+  end;
+  GrupoEditando.Enabled:= not(PanelHistorico.Visible);
 end;
 
 procedure TFTransferirStock.ZQ_Historico_CpbAfterScroll(DataSet: TDataSet);
