@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB, DBClient, UBuscarProductoStock,
   EKLlenarCombo, ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls,
   EKListadoSQL, ComCtrls, ZSqlUpdate, ZStoredProcedure, EKOrdenarGrilla,
-  EKDbSuma, ActnList, XPStyleActnCtrls, ActnMan;
+  EKDbSuma, ActnList, XPStyleActnCtrls, ActnMan, Buttons;
 
 type
   TFTransferirStock = class(TForm)
@@ -265,6 +265,7 @@ type
     ZQ_VerificarProductoSTOCK_MIN_ALARMA: TStringField;
     ZQ_UpdateNotaPedido: TZQuery;
     dxBarButton1: TdxBarButton;
+    btDestino: TBitBtn;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnTransferirClick(Sender: TObject);
@@ -299,6 +300,7 @@ type
     procedure DBGrid_Historico_CpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGrid_Historico_DetalleDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     function  idStockProducto_pertenece_destino(idStock: integer):boolean;
+    procedure btDestinoClick(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
@@ -1027,6 +1029,15 @@ begin
 
   if ZQ_VerificarProducto.IsEmpty then
     Result:= false;
+end;
+
+procedure TFTransferirStock.btDestinoClick(Sender: TObject);
+begin
+  if EKListado_Sucursal.Buscar then
+  begin
+    id_pos_sucursal := StrToInt(EKListado_Sucursal.Resultado);
+    EditSucursal.Text := EKListado_Sucursal.Seleccion;
+  end;
 end;
 
 end.
