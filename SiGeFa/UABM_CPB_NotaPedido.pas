@@ -795,6 +795,16 @@ var
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
+  ZQ_CpbProducto.First;
+  while not ZQ_CpbProducto.Eof do
+  begin
+    if ZQ_CpbProductoID_PRODUCTO.IsNull then
+      ZQ_CpbProducto.Delete
+    else
+      ZQ_CpbProducto.Next;
+  end;
+
+
   if ZQ_ComprobanteID_PROVEEDOR.IsNull and ZQ_ComprobanteID_CLIENTE.IsNull then
   begin
     Application.MessageBox('Debe asociar una Persona o Empresa al Comprobante, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);

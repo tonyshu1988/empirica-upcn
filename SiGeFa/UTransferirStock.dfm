@@ -742,8 +742,8 @@ object FTransferirStock: TFTransferirStock
       Align = alTop
       TabOrder = 1
       object Label1: TLabel
-        Left = 508
-        Top = 7
+        Left = 655
+        Top = 6
         Width = 258
         Height = 16
         Caption = 'Presione F1 para seleccionar el destino'
@@ -761,6 +761,15 @@ object FTransferirStock: TFTransferirStock
         Height = 21
         ReadOnly = True
         TabOrder = 0
+      end
+      object btDestino: TBitBtn
+        Left = 506
+        Top = 4
+        Width = 139
+        Height = 20
+        Caption = 'Seleccionar Destino'
+        TabOrder = 1
+        OnClick = btDestinoClick
       end
     end
   end
