@@ -1,8 +1,8 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 551
-  Top = 28
-  Height = 455
+  Left = 534
+  Top = 189
+  Height = 471
   Width = 396
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
@@ -2005,5 +2005,17 @@ object DM: TDM
     object ZQ_VerificarCtaCteID_CTA_CTE: TIntegerField
       FieldName = 'ID_CTA_CTE'
     end
+  end
+  object Conexion_Usuario: TZConnection
+    Protocol = 'firebird-1.5'
+    HostName = 'localhost'
+    Database = 'C:\SISTEMAS\SiGeFa\Bases\USUARIOS.FDB'
+    User = 'sysdba'
+    Password = 'masterkey'
+    ReadOnly = True
+    Connected = True
+    SQLHourGlass = True
+    Left = 40
+    Top = 384
   end
 end

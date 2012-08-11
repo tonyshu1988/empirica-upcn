@@ -103,6 +103,7 @@ type
     ZQ_ValidarFecha_HoraID_SINCRO_LOTE: TIntegerField;
     ZQ_VerificarCtaCte: TZQuery;
     ZQ_VerificarCtaCteID_CTA_CTE: TIntegerField;
+    Conexion_Usuario: TZConnection;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);
@@ -256,6 +257,12 @@ var
 begin
   SkinData1.Active:= true;
   Application.CreateForm(TFPrincipal, FPrincipal);
+
+  Conexion_Usuario.HostName:= EKUsrLogin.ConeccionUsuario.HostName;
+  Conexion_Usuario.Database:= EKUsrLogin.ConeccionUsuario.Database;
+  Conexion_Usuario.User:= EKUsrLogin.ConeccionUsuario.User;
+  Conexion_Usuario.Password:= EKUsrLogin.ConeccionUsuario.Password;
+  Conexion_Usuario.Protocol:= EKUsrLogin.ConeccionUsuario.Protocol;
 
   auxDecimalSeparator:= DecimalSeparator;
   auxCurrencyDecimals:= CurrencyDecimals;
