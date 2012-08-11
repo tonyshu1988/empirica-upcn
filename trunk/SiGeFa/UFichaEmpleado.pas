@@ -1,5 +1,6 @@
 unit UFichaEmpleado;
 
+//w: 674, h: 516 
 //ZQ_VerificarIngresoEgreso:
 // Para el Ingreso: abro la query y si tiene un registro es porque ya esta registrado y salgo;
 // Para el Egreso: abro la query y si no tiene un registro es porque todavia no esta registrado y salgo;
@@ -57,13 +58,13 @@ type
     ZQ_VerificarIngresoEgresoFECHA_INGRESO: TDateTimeField;
     ZQ_VerificarIngresoEgresoFECHA_EGRESO: TDateTimeField;
     ZQ_Historial_sucursal: TStringField;
-    QuickRep1: TQuickRep;
+    RepFicha: TQuickRep;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
     QRLabel17: TQRLabel;
-    RepColor_Subtitulo: TQRLabel;
-    RepColor_Titulo: TQRLabel;
+    RepFicha_Subtitulo: TQRLabel;
+    RepFicha_Titulo: TQRLabel;
     QRBand11: TQRBand;
     QRlblPieDePagina: TQRLabel;
     QRLabel43: TQRLabel;
@@ -74,6 +75,39 @@ type
     ZQ_VerificarIngresoEgresoDETALLE_INGRESO: TStringField;
     ZQ_VerificarIngresoEgresoDETALLE_EGRESO: TStringField;
     Panel2: TPanel;
+    ZQ_Usuarios: TZQuery;
+    ZQ_UsuariosUSUARIO: TStringField;
+    ZQ_UsuariosNOMBRE: TStringField;
+    ZQ_UsuariosCLAVE: TStringField;
+    ZQ_UsuariosDIR: TStringField;
+    ZQ_UsuariosNUM_DIR: TIntegerField;
+    ZQ_UsuariosTELEFONO: TIntegerField;
+    ZQ_UsuariosCOD_ORIGEN: TStringField;
+    ZQ_UsuariosDB_USR: TStringField;
+    ZQ_UsuariosDB_CLV: TStringField;
+    ZQ_UsuariosCAMBIARCLAVE: TStringField;
+    ZQ_UsuariosGRUPO: TStringField;
+    ZQ_UsuariosHABILITADO: TStringField;
+    ZQ_UsuariosNIVEL: TIntegerField;
+    ZQ_Historial_NombreEmpleado: TStringField;
+    QRGroupHeader1: TQRGroup;
+    QRGroupFooter1: TQRBand;
+    QRBand1: TQRBand;
+    QRDBText1: TQRDBText;
+    ChildBand1: TQRChildBand;
+    btnImprimir: TdxBarLargeButton;
+    QRLabel29: TQRLabel;
+    QRLabel30: TQRLabel;
+    QRLabel1: TQRLabel;
+    QRDBText19: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText3: TQRDBText;
+    QRLabel2: TQRLabel;
+    QRLblFechaFicha: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRLabel3: TQRLabel;
+    QRLabel4: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -85,6 +119,7 @@ type
     procedure DBGridHistoriaDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure btnImprimirClick(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -105,6 +140,10 @@ uses UDM, UPrincipal;
 
 procedure TFFichaEmpleado.FormCreate(Sender: TObject);
 begin
+  Width:= 674;
+  Height:= 516;
+
+  QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   tipoFicha:= '';
   fecha:= dm.EKModelo.Fecha;
   lblFecha.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
@@ -199,9 +238,12 @@ begin
 
   if repetir = false then //repetir 1
   begin
-    //verifico que el usuario ingresado existe y la contraseña sea la correcta.
-
-
+    if not dm.EKUsrLogin.existeUsuario(editRegistrarUsuario.Text, editRegistrarContrasenia.Text) then
+    begin
+      Application.MessageBox('El Usuario\Contraseña ingresado es incorrecto.', 'Validación', MB_OK + MB_ICONINFORMATION);
+      repetir:= true;
+      editRegistrarUsuario.SetFocus;
+    end;                         
 
     if repetir = false then //repetir 2
     begin
@@ -303,6 +345,17 @@ procedure TFFichaEmpleado.DBGridHistoriaDrawColumnCell(Sender: TObject;
   State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridHistoria, Rect, DataCol, Column, State);
+end;
+
+procedure TFFichaEmpleado.btnImprimirClick(Sender: TObject);
+begin
+  if ZQ_Historial.IsEmpty then
+    exit;
+
+  DM.VariablesReportes(RepFicha);
+  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
+  QRLblFechaFicha.Caption:= FormatDateTime('dd/mm/yyyy ', dm.EKModelo.Fecha);
+  EKVistaPreviaQR1.VistaPrevia;
 end;
 
 end.
