@@ -12,8 +12,8 @@ uses
 
 begin
   Application.Initialize;
-  DecimalSeparator := '.';
-  ThousandSeparator := ',';
+  DecimalSeparator:= '.';
+  ThousandSeparator:= ',';
   Application.CreateForm(TDM, DM);
   Application.CreateForm(TFPrincipal, FPrincipal);
   Application.Run;
