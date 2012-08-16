@@ -311,10 +311,10 @@ type
     procedure subirNovedadesServer();
     procedure ZQ_NovedadesServerAfterScroll(DataSet: TDataSet);
     //procedimientos bajar novedades de los clientes desde el servidor FTP al servidor
-    function buscarNovedadesClientes(): boolean;
-    procedure bajarNovedadesClientes();
+    function buscarNovedadesTodosClientes(): boolean;
+    procedure bajarNovedadesTodosClientes();
     //procedimientos para procesar los archivos de novedades de los clientes descargados desde el servidor FTP
-    procedure procesarNovedadesClientes();
+    procedure procesarNovedadesTodosClientes();
     function actualizar_base_server(id_cliente: integer; archivo: string): boolean;
     procedure popUpItemSalirClick(Sender: TObject);
     procedure popUpItemMostrarOcultarClick(Sender: TObject);
@@ -706,9 +706,9 @@ begin
       end
       else
       begin
-        bajarNovedadesClientes;
+        bajarNovedadesTodosClientes;
         if resultado_BajarNovedades then
-          procesarNovedadesClientes;
+          procesarNovedadesTodosClientes;
       end;
       subirNovedades();
 
@@ -1034,7 +1034,7 @@ begin
   if modo = modo_cliente then
     bajarNovedadesServer
   else
-    bajarNovedadesClientes;
+    bajarNovedadesTodosClientes;
   Timer.Enabled:= true;
 
   try
@@ -1058,7 +1058,7 @@ begin
   if modo = modo_cliente then
     procesarNovedadesServer
   else
-    procesarNovedadesClientes;
+    procesarNovedadesTodosClientes;
   Timer.Enabled:= true;
 
   try
@@ -1945,7 +1945,7 @@ end;
 //-------------------------------------------------------------------------------------------------------------
 //busca las novedades subidas por los clientes asociados al sistema en la carpeta del servidor FTP
 
-function TFPrincipal.buscarNovedadesClientes(): boolean;
+function TFPrincipal.buscarNovedadesTodosClientes(): boolean;
 var
   ultimo_archivo: string;
   inicio_nombre_archivo: string;
@@ -1991,7 +1991,7 @@ end;
 
 //bajo todos los archivos de novedades de los diferentes clientes de la aplicacion
 
-procedure TFPrincipal.bajarNovedadesClientes;
+procedure TFPrincipal.bajarNovedadesTodosClientes;
 var
   cantidad_archivos_encontrados: integer;
 begin
@@ -2018,7 +2018,7 @@ begin
   conectarDBEscritura;
   //busco el ultimo archivo que se bajo del servidor
   memoLog.Lines.Add(getFechayHoraString + ' - Buscando Novedades de los Clientes en el Servidor FTP');
-  if not buscarNovedadesClientes then //si devuelve falso es porque no me puedo conectar
+  if not buscarNovedadesTodosClientes then //si devuelve falso es porque no me puedo conectar
   begin
     memoLog.Color:= colorError;
     memoLog.Lines.Add(getFechayHoraString + ' - No se pudo conectar al servidor FTP');
@@ -2068,7 +2068,7 @@ end;
 
 //proceso los archivos de novedades de los clientes que descargue del servidor FTP
 
-procedure TFPrincipal.procesarNovedadesClientes;
+procedure TFPrincipal.procesarNovedadesTodosClientes;
 var
   id_cliente: integer;
 begin
