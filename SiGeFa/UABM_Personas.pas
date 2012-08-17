@@ -291,6 +291,9 @@ type
     QRLabel28: TQRLabel;
     ChildBandObraSocial: TQRChildBand;
     QRLabel31: TQRLabel;
+    grpClave: TGroupBox;
+    edClave: TDBEdit;
+    ZQ_PersonaCLAVE: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -358,6 +361,8 @@ begin
   TabSheetCtaCte.TabVisible:= true;
   TabSheetDetalle.TabVisible:= true;
   TabSheetObraSocial.TabVisible:= true;
+
+  grpClave.Visible:=dm.EKUsrLogin.PermisoAccion('PERSONA_CLAVE');
 
   if not dm.EKUsrLogin.PermisoAccion('PERSONA_DETALLE') then
   begin
@@ -614,6 +619,9 @@ begin
         if ZQ_Persona.State in [dsedit] then
           ZQ_PersonaCODIGO_BARRA.AsString := rellenar(ZQ_PersonaID_PERSONA.AsString,'0',LONG_COD_BARRAS);
   end;
+
+  //Quito los espacios de Clave
+  ZQ_PersonaCLAVE.AsString:=trim(ZQ_PersonaCLAVE.AsString);
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABMPersona) then
