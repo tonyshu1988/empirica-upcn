@@ -18,9 +18,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 977
-    Height = 553
-    ActivePage = TabSheet8
+    Width = 985
+    Height = 564
+    ActivePage = TabSheet5
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -756,7 +756,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              68.791666666666670000
+              68.791666666666680000
               291.041666666666700000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -820,7 +820,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              989.541666666666700000
+              989.541666666666800000
               203.729166666666700000
               896.937500000000000000)
             Alignment = taLeftJustify
@@ -888,7 +888,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               113.770833333333300000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -920,7 +920,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               309.562500000000000000
-              68.791666666666670000
+              68.791666666666680000
               1563.687500000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -987,7 +987,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               698.500000000000000000
               158.750000000000000000
-              600.604166666666700000)
+              600.604166666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -1300,7 +1300,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               5.291666666666667000
               5.291666666666667000
-              780.520833333333300000)
+              780.520833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -1488,7 +1488,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               206.375000000000000000
               264.583333333333300000
-              661.458333333333300000)
+              661.458333333333200000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -1521,7 +1521,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1031.875000000000000000
               264.583333333333300000
-              661.458333333333300000)
+              661.458333333333200000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -1553,7 +1553,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1079.500000000000000000
               7.937500000000000000
-              804.333333333333300000)
+              804.333333333333200000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -1816,10 +1816,10 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
       ImageIndex = 4
       object RepOrdenPago: TQuickRep
         Tag = 99
-        Left = 129
-        Top = 8
+        Left = 233
+        Top = -280
         Width = 794
-        Height = 1123
+        Height = 833
         Frame.Color = clBlack
         Frame.DrawTop = True
         Frame.DrawBottom = True
@@ -2641,7 +2641,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              989.541666666666700000
+              989.541666666666800000
               190.500000000000000000
               896.937500000000000000)
             Alignment = taLeftJustify
@@ -2709,7 +2709,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               100.541666666666700000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -2808,7 +2808,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               698.500000000000000000
               145.520833333333300000
-              600.604166666666700000)
+              600.604166666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -3121,7 +3121,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               5.291666666666667000
               5.291666666666667000
-              780.520833333333300000)
+              780.520833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -3277,89 +3277,24 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           Left = 38
           Top = 350
           Width = 718
-          Height = 150
+          Height = 308
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = True
           Frame.DrawRight = True
           AlignToBottom = False
+          BeforePrint = QRBand21BeforePrint
           Color = clWhite
           TransparentBand = False
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            396.875000000000000000
+            814.916666666666800000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
           BandType = rbSummary
-          object QRLabel93: TQRLabel
-            Left = 78
-            Top = 100
-            Width = 250
-            Height = 14
-            Frame.Color = clBlack
-            Frame.DrawTop = True
-            Frame.DrawBottom = False
-            Frame.DrawLeft = False
-            Frame.DrawRight = False
-            Frame.Style = psDash
-            Size.Values = (
-              37.041666666666670000
-              206.375000000000000000
-              264.583333333333300000
-              661.458333333333300000)
-            Alignment = taCenter
-            AlignToBand = False
-            AutoSize = False
-            AutoStretch = False
-            Caption = 'Firma'
-            Color = clWhite
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-            Transparent = False
-            WordWrap = True
-            ExportAs = exptText
-            FontSize = 8
-          end
-          object QRLabel94: TQRLabel
-            Left = 390
-            Top = 100
-            Width = 250
-            Height = 14
-            Frame.Color = clBlack
-            Frame.DrawTop = True
-            Frame.DrawBottom = False
-            Frame.DrawLeft = False
-            Frame.DrawRight = False
-            Frame.Style = psDash
-            Size.Values = (
-              37.041666666666670000
-              1031.875000000000000000
-              264.583333333333300000
-              661.458333333333300000)
-            Alignment = taCenter
-            AlignToBand = False
-            AutoSize = False
-            AutoStretch = False
-            Caption = 'Aclaraci'#243'n'
-            Color = clWhite
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-            Transparent = False
-            WordWrap = True
-            ExportAs = exptText
-            FontSize = 8
-          end
           object QRlblOrdenPago_ImporteTotal: TQRLabel
             Left = 408
             Top = 3
@@ -3374,7 +3309,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1079.500000000000000000
               7.937500000000000000
-              804.333333333333300000)
+              804.333333333333200000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -3392,24 +3327,76 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
+          object QRLTicket: TQRLabel
+            Left = 29
+            Top = 16
+            Width = 136
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              76.729166666666680000
+              42.333333333333340000
+              359.833333333333400000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = True
+            AutoStretch = False
+            Caption = 'Ticket Comprobante:'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRGrDBImage1: TQRGrDBImage
+            Left = 160
+            Top = 40
+            Width = 321
+            Height = 249
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              658.812500000000000000
+              423.333333333333300000
+              105.833333333333300000
+              849.312499999999900000)
+            Center = False
+            DataField = 'IMAGEN'
+            DataSet = ZQ_Comprobante
+            FitMode = fmKeepWidth
+          end
         end
         object QRBand22: TQRBand
           Left = 38
-          Top = 500
+          Top = 708
           Width = 718
-          Height = 24
+          Height = 31
           Frame.Color = clBlack
           Frame.DrawTop = True
           Frame.DrawBottom = False
           Frame.DrawLeft = True
           Frame.DrawRight = True
-          AlignToBottom = False
+          AlignToBottom = True
           Color = clWhite
           TransparentBand = False
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            63.500000000000000000
+            82.020833333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -3428,7 +3415,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               52.916666666666670000
               10.583333333333330000
               7.937500000000000000
-              328.083333333333300000)
+              328.083333333333400000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -3625,6 +3612,95 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Font.Style = [fsBold]
             ParentFont = False
             Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+        end
+        object ChildBand12: TQRChildBand
+          Left = 38
+          Top = 658
+          Width = 718
+          Height = 50
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          AlignToBottom = True
+          Color = clWhite
+          TransparentBand = False
+          ForceNewColumn = False
+          ForceNewPage = False
+          Size.Values = (
+            132.291666666666700000
+            1899.708333333333000000)
+          PreCaluculateBandHeight = False
+          KeepOnOnePage = False
+          ParentBand = QRBand21
+          PrintOrder = cboAfterParent
+          object QRLabel93: TQRLabel
+            Left = 70
+            Top = 21
+            Width = 250
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = True
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Frame.Style = psDash
+            Size.Values = (
+              37.041666666666670000
+              185.208333333333300000
+              55.562500000000000000
+              661.458333333333400000)
+            Alignment = taCenter
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Caption = 'Firma'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = False
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRLabel94: TQRLabel
+            Left = 398
+            Top = 21
+            Width = 250
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = True
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Frame.Style = psDash
+            Size.Values = (
+              37.041666666666670000
+              1053.041666666667000000
+              55.562500000000000000
+              661.458333333333400000)
+            Alignment = taCenter
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Caption = 'Aclaraci'#243'n'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = False
             WordWrap = True
             ExportAs = exptText
             FontSize = 8
@@ -3876,7 +3952,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               108.479166666666700000
               1124.479166666667000000
               23.812500000000000000
-              732.895833333333300000)
+              732.895833333333200000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -4004,7 +4080,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               1262.062500000000000000
               179.916666666666700000
-              624.416666666666700000)
+              624.416666666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -4270,7 +4346,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              97.895833333333330000
+              97.895833333333320000
               291.041666666666700000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -4334,7 +4410,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333330000
+              97.895833333333320000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -4366,7 +4442,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333330000
+              97.895833333333320000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -4462,7 +4538,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              989.541666666666700000
+              989.541666666666800000
               142.875000000000000000
               896.937500000000000000)
             Alignment = taLeftJustify
@@ -4496,7 +4572,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               309.562500000000000000
-              97.895833333333330000
+              97.895833333333320000
               158.750000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -4530,7 +4606,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               52.916666666666670000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -4595,7 +4671,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1518.708333333333000000
-              97.895833333333330000
+              97.895833333333320000
               367.770833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -4628,8 +4704,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               698.500000000000000000
-              97.895833333333330000
-              600.604166666666700000)
+              97.895833333333320000
+              600.604166666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -4771,7 +4847,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              58.208333333333330000
+              58.208333333333320000
               158.750000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -4836,7 +4912,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               362.479166666666700000
               5.291666666666667000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -4872,7 +4948,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            42.333333333333330000
+            42.333333333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -4924,7 +5000,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1270.000000000000000000
               2.645833333333333000
-              89.958333333333330000)
+              89.958333333333320000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -5050,7 +5126,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              637.645833333333300000
+              637.645833333333200000
               2.645833333333333000
               137.583333333333300000)
             Alignment = taLeftJustify
@@ -5139,7 +5215,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               206.375000000000000000
               264.583333333333300000
-              661.458333333333300000)
+              661.458333333333200000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -5172,7 +5248,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1031.875000000000000000
               264.583333333333300000
-              661.458333333333300000)
+              661.458333333333200000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -5317,7 +5393,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1270.000000000000000000
               2.645833333333333000
-              89.958333333333330000)
+              89.958333333333320000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -5381,7 +5457,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              637.645833333333300000
+              637.645833333333200000
               2.645833333333333000
               381.000000000000000000)
             Alignment = taLeftJustify
@@ -5909,7 +5985,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               1262.062500000000000000
               179.916666666666700000
-              624.416666666666700000)
+              624.416666666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -6175,7 +6251,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              97.895833333333330000
+              97.895833333333320000
               291.041666666666700000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -6239,7 +6315,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333330000
+              97.895833333333320000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -6271,7 +6347,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333330000
+              97.895833333333320000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -6367,7 +6443,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              989.541666666666700000
+              989.541666666666800000
               142.875000000000000000
               896.937500000000000000)
             Alignment = taLeftJustify
@@ -6401,7 +6477,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               309.562500000000000000
-              97.895833333333330000
+              97.895833333333320000
               158.750000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -6435,7 +6511,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               52.916666666666670000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -6500,7 +6576,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1518.708333333333000000
-              97.895833333333330000
+              97.895833333333320000
               367.770833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -6533,8 +6609,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               698.500000000000000000
-              97.895833333333330000
-              600.604166666666700000)
+              97.895833333333320000
+              600.604166666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -6709,7 +6785,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               5.291666666666667000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -6741,8 +6817,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              58.208333333333330000
-              830.791666666666700000)
+              58.208333333333320000
+              830.791666666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -6777,7 +6853,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            42.333333333333330000
+            42.333333333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -6925,7 +7001,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1484.312500000000000000
               2.645833333333333000
-              92.604166666666670000)
+              92.604166666666680000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -7077,7 +7153,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1084.791666666667000000
               7.937500000000000000
-              804.333333333333300000)
+              804.333333333333200000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -7587,7 +7663,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               1262.062500000000000000
               185.208333333333300000
-              624.416666666666700000)
+              624.416666666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -7733,7 +7809,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              76.729166666666670000
+              76.729166666666680000
               1166.812500000000000000
               7.937500000000000000
               658.812500000000000000)
@@ -7765,7 +7841,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              76.729166666666670000
+              76.729166666666680000
               1166.812500000000000000
               71.437500000000000000
               658.812500000000000000)
@@ -8078,7 +8154,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              97.895833333333330000
+              97.895833333333320000
               291.041666666666700000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -8142,7 +8218,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333330000
+              97.895833333333320000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -8174,7 +8250,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333330000
+              97.895833333333320000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -8270,7 +8346,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              989.541666666666700000
+              989.541666666666800000
               142.875000000000000000
               896.937500000000000000)
             Alignment = taLeftJustify
@@ -8304,7 +8380,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               309.562500000000000000
-              97.895833333333330000
+              97.895833333333320000
               158.750000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -8338,7 +8414,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               52.916666666666670000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -8403,7 +8479,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1518.708333333333000000
-              97.895833333333330000
+              97.895833333333320000
               367.770833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -8436,8 +8512,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               698.500000000000000000
-              97.895833333333330000
-              600.604166666666700000)
+              97.895833333333320000
+              600.604166666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -8614,7 +8690,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               5.291666666666667000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -8651,7 +8727,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            42.333333333333330000
+            42.333333333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -8799,7 +8875,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1484.312500000000000000
               2.645833333333333000
-              92.604166666666670000)
+              92.604166666666680000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -8952,7 +9028,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1084.791666666667000000
               7.937500000000000000
-              804.333333333333300000)
+              804.333333333333200000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -9560,7 +9636,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              76.729166666666670000
+              76.729166666666680000
               2182.812500000000000000
               7.937500000000000000
               658.812500000000000000)
@@ -9592,7 +9668,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              76.729166666666670000
+              76.729166666666680000
               2182.812500000000000000
               71.437500000000000000
               658.812500000000000000)
@@ -9627,7 +9703,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               418.041666666666700000
               187.854166666666700000
-              926.041666666666700000)
+              926.041666666666800000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -9659,7 +9735,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               418.041666666666700000
               153.458333333333300000
-              926.041666666666700000)
+              926.041666666666800000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -9691,7 +9767,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               418.041666666666700000
               119.062500000000000000
-              926.041666666666700000)
+              926.041666666666800000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -9723,7 +9799,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               63.500000000000000000
               418.041666666666700000
               23.812500000000000000
-              926.041666666666700000)
+              926.041666666666800000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -9754,8 +9830,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               418.041666666666700000
-              84.666666666666670000
-              926.041666666666700000)
+              84.666666666666680000
+              926.041666666666800000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -9905,7 +9981,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              97.895833333333330000
+              97.895833333333320000
               291.041666666666700000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -9969,7 +10045,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333330000
+              97.895833333333320000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -10001,7 +10077,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333330000
+              97.895833333333320000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -10097,7 +10173,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              989.541666666666700000
+              989.541666666666800000
               142.875000000000000000
               896.937500000000000000)
             Alignment = taLeftJustify
@@ -10131,7 +10207,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               309.562500000000000000
-              97.895833333333330000
+              97.895833333333320000
               158.750000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -10165,7 +10241,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               52.916666666666670000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -10230,7 +10306,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1518.708333333333000000
-              97.895833333333330000
+              97.895833333333320000
               367.770833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -10263,8 +10339,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               698.500000000000000000
-              97.895833333333330000
-              600.604166666666700000)
+              97.895833333333320000
+              600.604166666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -10441,7 +10517,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               5.291666666666667000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -10478,7 +10554,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            92.604166666666670000
+            92.604166666666680000
             2870.729166666667000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -10656,7 +10732,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              902.229166666666700000
+              902.229166666666800000
               2.645833333333333000
               44.979166666666670000)
             Alignment = taCenter
@@ -10688,7 +10764,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              902.229166666666700000
+              902.229166666666800000
               44.979166666666670000
               44.979166666666670000)
             Alignment = taCenter
@@ -10720,7 +10796,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              955.145833333333300000
+              955.145833333333200000
               2.645833333333333000
               44.979166666666670000)
             Alignment = taCenter
@@ -10752,7 +10828,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              955.145833333333300000
+              955.145833333333200000
               44.979166666666670000
               44.979166666666670000)
             Alignment = taCenter
@@ -12792,7 +12868,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.Style = psDash
             Size.Values = (
               37.041666666666670000
-              862.541666666666700000
+              862.541666666666800000
               156.104166666666700000
               529.166666666666700000)
             Alignment = taCenter
@@ -12859,7 +12935,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               2058.458333333333000000
               7.937500000000000000
-              804.333333333333300000)
+              804.333333333333200000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -13159,7 +13235,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               206.375000000000000000
               264.583333333333300000
-              661.458333333333300000)
+              661.458333333333200000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -13192,7 +13268,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1031.875000000000000000
               264.583333333333300000
-              661.458333333333300000)
+              661.458333333333200000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -13462,7 +13538,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              68.791666666666670000
+              68.791666666666680000
               291.041666666666700000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -13526,7 +13602,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              989.541666666666700000
+              989.541666666666800000
               203.729166666666700000
               896.937500000000000000)
             Alignment = taLeftJustify
@@ -13594,7 +13670,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               113.770833333333300000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -13626,7 +13702,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               309.562500000000000000
-              68.791666666666670000
+              68.791666666666680000
               1563.687500000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -13693,7 +13769,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               698.500000000000000000
               158.750000000000000000
-              600.604166666666700000)
+              600.604166666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -13861,7 +13937,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               18.520833333333330000
               2.645833333333333000
-              724.958333333333300000)
+              724.958333333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -13984,7 +14060,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               39.687500000000000000
               7.937500000000000000
               2.645833333333333000
-              828.145833333333300000)
+              828.145833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -14020,7 +14096,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333330000
+            58.208333333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -14041,7 +14117,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1079.500000000000000000
               7.937500000000000000
-              804.333333333333300000)
+              804.333333333333200000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -14288,7 +14364,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               5.291666666666667000
               5.291666666666667000
-              780.520833333333300000)
+              780.520833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -14401,7 +14477,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1079.500000000000000000
               7.937500000000000000
-              804.333333333333300000)
+              804.333333333333200000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -14437,7 +14513,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333330000
+            82.020833333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -14552,7 +14628,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               2.645833333333333000
               809.625000000000000000
-              74.083333333333330000
+              74.083333333333320000
               1063.625000000000000000)
             Shape = qrsRectangle
             VertAdjust = 0
@@ -14625,7 +14701,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            42.333333333333330000
+            42.333333333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -15061,7 +15137,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               1262.062500000000000000
               185.208333333333300000
-              624.416666666666700000)
+              624.416666666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -15816,7 +15892,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               1262.062500000000000000
               185.208333333333300000
-              624.416666666666700000)
+              624.416666666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -15962,7 +16038,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              76.729166666666670000
+              76.729166666666680000
               1166.812500000000000000
               7.937500000000000000
               658.812500000000000000)
@@ -15994,7 +16070,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              76.729166666666670000
+              76.729166666666680000
               1166.812500000000000000
               71.437500000000000000
               658.812500000000000000)
@@ -16186,7 +16262,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               1203.854166666667000000
               219.604166666666700000
               619.125000000000000000)
@@ -16307,7 +16383,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              97.895833333333330000
+              97.895833333333320000
               291.041666666666700000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -16371,7 +16447,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333330000
+              97.895833333333320000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -16403,7 +16479,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333330000
+              97.895833333333320000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -16499,7 +16575,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              989.541666666666700000
+              989.541666666666800000
               142.875000000000000000
               896.937500000000000000)
             Alignment = taLeftJustify
@@ -16533,7 +16609,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               309.562500000000000000
-              97.895833333333330000
+              97.895833333333320000
               158.750000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -16567,7 +16643,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               52.916666666666670000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -16632,7 +16708,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1518.708333333333000000
-              97.895833333333330000
+              97.895833333333320000
               367.770833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -16665,8 +16741,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               698.500000000000000000
-              97.895833333333330000
-              600.604166666666700000)
+              97.895833333333320000
+              600.604166666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -16703,7 +16779,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            60.854166666666670000
+            60.854166666666680000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -16836,7 +16912,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               5.291666666666667000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -16868,7 +16944,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              68.791666666666670000
+              68.791666666666680000
               873.125000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -16905,7 +16981,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            42.333333333333330000
+            42.333333333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -17021,7 +17097,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1267.354166666667000000
               2.645833333333333000
-              92.604166666666670000)
+              92.604166666666680000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -17117,7 +17193,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               7.937500000000000000
               2.645833333333333000
-              82.020833333333330000)
+              82.020833333333320000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -17374,7 +17450,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               7.937500000000000000
               2.645833333333333000
-              82.020833333333330000)
+              82.020833333333320000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -17495,7 +17571,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1084.791666666667000000
               7.937500000000000000
-              804.333333333333300000)
+              804.333333333333200000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -17758,7 +17834,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               206.375000000000000000
               264.583333333333300000
-              661.458333333333300000)
+              661.458333333333200000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -17791,7 +17867,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1031.875000000000000000
               264.583333333333300000
-              661.458333333333300000)
+              661.458333333333200000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -18125,7 +18201,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              989.541666666666700000
+              989.541666666666800000
               190.500000000000000000
               896.937500000000000000)
             Alignment = taLeftJustify
@@ -18193,7 +18269,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               100.541666666666700000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -18292,7 +18368,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               698.500000000000000000
               145.520833333333300000
-              600.604166666666700000)
+              600.604166666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -18460,7 +18536,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               18.520833333333330000
               2.645833333333333000
-              724.958333333333300000)
+              724.958333333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -18583,7 +18659,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               39.687500000000000000
               7.937500000000000000
               2.645833333333333000
-              828.145833333333300000)
+              828.145833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -18619,7 +18695,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333330000
+            58.208333333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -18640,7 +18716,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1079.500000000000000000
               7.937500000000000000
-              804.333333333333300000)
+              804.333333333333200000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -18887,7 +18963,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               5.291666666666667000
               5.291666666666667000
-              780.520833333333300000)
+              780.520833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -18943,7 +19019,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               52.916666666666670000
               10.583333333333330000
               7.937500000000000000
-              407.458333333333300000)
+              407.458333333333400000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -19000,7 +19076,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1079.500000000000000000
               7.937500000000000000
-              804.333333333333300000)
+              804.333333333333200000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -19036,7 +19112,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333330000
+            82.020833333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -19151,7 +19227,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               2.645833333333333000
               809.625000000000000000
-              74.083333333333330000
+              74.083333333333320000
               1063.625000000000000000)
             Shape = qrsRectangle
             VertAdjust = 0
@@ -19224,7 +19300,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            42.333333333333330000
+            42.333333333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -19625,7 +19701,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               1203.854166666667000000
               219.604166666666700000
               619.125000000000000000)
@@ -19660,7 +19736,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               1262.062500000000000000
               185.208333333333300000
-              624.416666666666700000)
+              624.416666666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -20415,7 +20491,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               1262.062500000000000000
               185.208333333333300000
-              624.416666666666700000)
+              624.416666666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -20561,7 +20637,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              76.729166666666670000
+              76.729166666666680000
               1166.812500000000000000
               7.937500000000000000
               658.812500000000000000)
@@ -20593,7 +20669,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              76.729166666666670000
+              76.729166666666680000
               1166.812500000000000000
               71.437500000000000000
               658.812500000000000000)
@@ -20906,7 +20982,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              97.895833333333330000
+              97.895833333333320000
               291.041666666666700000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -20970,7 +21046,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333330000
+              97.895833333333320000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -21002,7 +21078,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333330000
+              97.895833333333320000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -21098,7 +21174,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              989.541666666666700000
+              989.541666666666800000
               142.875000000000000000
               896.937500000000000000)
             Alignment = taLeftJustify
@@ -21132,7 +21208,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               309.562500000000000000
-              97.895833333333330000
+              97.895833333333320000
               158.750000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -21166,7 +21242,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               309.562500000000000000
               52.916666666666670000
-              891.645833333333300000)
+              891.645833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -21231,7 +21307,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1518.708333333333000000
-              97.895833333333330000
+              97.895833333333320000
               367.770833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -21264,8 +21340,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               698.500000000000000000
-              97.895833333333330000
-              600.604166666666700000)
+              97.895833333333320000
+              600.604166666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -21523,7 +21599,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               34.395833333333330000
               7.937500000000000000
               2.645833333333333000
-              82.020833333333330000)
+              82.020833333333320000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -21779,7 +21855,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            42.333333333333330000
+            42.333333333333340000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -21799,7 +21875,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               7.937500000000000000
               2.645833333333333000
-              82.020833333333330000)
+              82.020833333333320000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -21927,7 +22003,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               1267.354166666667000000
               2.645833333333333000
-              92.604166666666670000)
+              92.604166666666680000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -22377,6 +22453,28 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     object ZQ_ComprobanteESTADO: TStringField
       FieldName = 'ESTADO'
       Size = 50
+    end
+    object ZQ_ComprobanteID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
+    end
+    object ZQ_ComprobanteIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_ComprobanteIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object ZQ_ComprobanteINSERT_MANUAL: TStringField
+      FieldName = 'INSERT_MANUAL'
+      Size = 10
+    end
+    object ZQ_ComprobanteID_POSICION_SUC_DESTINO: TIntegerField
+      FieldName = 'ID_POSICION_SUC_DESTINO'
+    end
+    object ZQ_ComprobanteID_PREVENTA: TIntegerField
+      FieldName = 'ID_PREVENTA'
     end
   end
   object ZQ_Destino: TZQuery

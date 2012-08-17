@@ -157,6 +157,7 @@ type
     ZQ_CtaCteVENCIMIENTO_DIAS: TIntegerField;
     DS_CtaCte: TDataSource;
     ZQ_PersonasCODIGO_BARRA: TStringField;
+    ZQ_PersonasCLAVE: TStringField;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);

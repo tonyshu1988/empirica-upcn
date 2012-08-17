@@ -708,6 +708,7 @@ type
     procedure OnSelPers;
     procedure OnSelVendedor;
     procedure OnSelPreventa;
+    procedure pmInputQuery(var Msg: TMessage); message WM_USER +123;
     { Private declarations }
   Public
     { Public declarations }
@@ -1202,12 +1203,34 @@ end;
 
 
 procedure TFCajero.OnSelVendedor;
+var
+s:String;
 begin
   if not (vsel3.ZQ_Personas.IsEmpty) then
   begin
     ZQ_Personas.Locate('id_persona', vsel3.ZQ_PersonasID_PERSONA.AsInteger, []);
-    IdVendedor:= vsel3.ZQ_PersonasID_PERSONA.AsInteger;
-    CD_ComprobanteID_VENDEDOR.AsInteger:= IdVendedor;
+
+    if dm.EKUsrLogin.PermisoAccion('PEDIR_CLAVE_VENDEDOR') then
+    begin
+      PostMessage(Handle, WM_USER +123, 0, 0);
+      InputQuery('Acceso Vendedor','Ingrese su Clave: ',s);
+
+      if (vsel3.ZQ_PersonasCLAVE.AsString=s) then
+       begin
+        IdVendedor:= vsel3.ZQ_PersonasID_PERSONA.AsInteger;
+        CD_ComprobanteID_VENDEDOR.AsInteger:= IdVendedor;
+       end
+      else
+       begin
+         Application.MessageBox('La clave ingresada es incorrecta!', 'Clave Vendedor', MB_OK + MB_ICONEXCLAMATION);
+         exit;
+       end
+    end
+    else
+      begin
+        IdVendedor:= vsel3.ZQ_PersonasID_PERSONA.AsInteger;
+        CD_ComprobanteID_VENDEDOR.AsInteger:= IdVendedor;
+      end
   end;
   vsel3.Close;
 end;
@@ -2977,6 +3000,29 @@ begin
 
   PanelContenedorDerecha.Enabled:= true;
   PanelAuditoriaCierreZ.Visible:= false;
+end;
+
+procedure TFCajero.pmInputQuery(var Msg: TMessage); //message WM_USER +123;
+var
+f : TForm;
+ed : TEdit;
+i : integer;
+begin
+  f := Screen.ActiveForm;
+
+  if (f <> nil) and (f.Handle = GetLastActivePopup(Application.Handle) ) then begin
+  ed := nil;
+  i := 0;
+  while (i < f.ComponentCount) and (ed = nil) do begin
+  if f.Components[i] is TEdit then
+  ed := TEdit(f.Components[i]);
+
+  Inc(i);
+  end;
+
+  if ed <> nil then
+  ed.PasswordChar := '*';
+  end;
 end;
 
 end.

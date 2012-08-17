@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKVistaPreviaQR, QRCtrls, QuickRpt, jpeg, ExtCtrls, EKNumeroATexto,
-  EKDbSuma, QRPDFFilt;
+  EKDbSuma, QRPDFFilt, grimgctrl;
 
 type
   TFImpresion_Comprobantes = class(TForm)
@@ -356,8 +356,6 @@ type
     QRDBText76: TQRDBText;
     QRDBText77: TQRDBText;
     QRBand21: TQRBand;
-    QRLabel93: TQRLabel;
-    QRLabel94: TQRLabel;
     QRlblOrdenPago_ImporteTotal: TQRLabel;
     QRBand22: TQRBand;
     QRlblOrdenPago_PiePagina: TQRLabel;
@@ -831,10 +829,24 @@ type
     QRLabel324: TQRLabel;
     QRLabel323: TQRLabel;
     QRLabel326: TQRLabel;
+    QRLTicket: TQRLabel;
+    ZQ_ComprobanteID_TIPO_IVA: TIntegerField;
+    ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
+    ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
+    ZQ_ComprobanteIMAGEN: TBlobField;
+    ZQ_ComprobanteINSERT_MANUAL: TStringField;
+    ZQ_ComprobanteID_POSICION_SUC_DESTINO: TIntegerField;
+    ZQ_ComprobanteID_PREVENTA: TIntegerField;
+    QRGrDBImage1: TQRGrDBImage;
+    ChildBand12: TQRChildBand;
+    QRLabel93: TQRLabel;
+    QRLabel94: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
     procedure QRSubDetail20BeforePrint(Sender: TQRCustomBand;
+      var PrintBand: Boolean);
+    procedure QRBand21BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
   private
     reporte: TQuickRep;
@@ -1170,6 +1182,14 @@ begin
   QRlblDevolucion_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   DM.VariablesComprobantes(RepDevolucion);
   EKVistaPrevia.Reporte:= RepDevolucion;
+end;
+
+procedure TFImpresion_Comprobantes.QRBand21BeforePrint(
+  Sender: TQRCustomBand; var PrintBand: Boolean);
+begin
+
+  QRLTicket.Visible:=not ZQ_ComprobanteIMAGEN.IsNull;
+
 end;
 
 end.

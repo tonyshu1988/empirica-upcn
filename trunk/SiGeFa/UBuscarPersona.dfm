@@ -19,8 +19,8 @@ object FBuscarPersona: TFBuscarPersona
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 853
-    Height = 344
+    Width = 861
+    Height = 355
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -28,8 +28,8 @@ object FBuscarPersona: TFBuscarPersona
     object DBGridPersonas: TDBGrid
       Left = 3
       Top = 3
-      Width = 847
-      Height = 137
+      Width = 855
+      Height = 148
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas
@@ -120,8 +120,8 @@ object FBuscarPersona: TFBuscarPersona
     end
     object PanelEdicion: TPanel
       Left = 3
-      Top = 140
-      Width = 847
+      Top = 151
+      Width = 855
       Height = 201
       Align = alBottom
       BevelOuter = bvNone
@@ -130,9 +130,9 @@ object FBuscarPersona: TFBuscarPersona
       object PageControl: TPageControl
         Left = 0
         Top = 0
-        Width = 847
+        Width = 855
         Height = 201
-        ActivePage = TabSheetCtaCte
+        ActivePage = TabSheetDatos
         Align = alClient
         TabOrder = 0
         object TabSheetDatos: TTabSheet
@@ -484,7 +484,7 @@ object FBuscarPersona: TFBuscarPersona
           object DBGridTelMail: TDBGrid
             Left = 0
             Top = 0
-            Width = 839
+            Width = 847
             Height = 173
             Align = alClient
             Color = 14606012
@@ -526,7 +526,7 @@ object FBuscarPersona: TFBuscarPersona
           object DBMemoDetalle: TDBMemo
             Left = 0
             Top = 0
-            Width = 831
+            Width = 839
             Height = 165
             Align = alClient
             DataField = 'DESCRIPCION'
@@ -697,7 +697,7 @@ object FBuscarPersona: TFBuscarPersona
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1548,6 +1548,10 @@ object FBuscarPersona: TFBuscarPersona
     object ZQ_PersonasCODIGO_BARRA: TStringField
       FieldName = 'CODIGO_BARRA'
       Size = 40
+    end
+    object ZQ_PersonasCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 10
     end
   end
   object DS_Personas: TDataSource
