@@ -11,7 +11,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, dxBar, dxBarExtItems, ExtCtrls, Buttons, Grids,
   DBGrids, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls,
-  EKOrdenarGrilla, QRCtrls, QuickRpt, EKVistaPreviaQR;
+  EKOrdenarGrilla, QRCtrls, QuickRpt, EKVistaPreviaQR, EKLlenarCombo;
 
 type
   TFFichaEmpleado = class(TForm)
@@ -32,11 +32,6 @@ type
     lblTituloHistorial: TLabel;
     ZQ_Historial: TZQuery;
     DS_Historial: TDataSource;
-    ZQ_HistorialID_HISTORIAL_FICHA: TIntegerField;
-    ZQ_HistorialID_SUCURSAL: TIntegerField;
-    ZQ_HistorialEMPLEADO: TStringField;
-    ZQ_HistorialFECHA_INGRESO: TDateTimeField;
-    ZQ_HistorialFECHA_EGRESO: TDateTimeField;
     Panel1: TPanel;
     DBMemoDetalleIngreso: TDBMemo;
     Label1: TLabel;
@@ -45,7 +40,6 @@ type
     panelRegistrarIngresoEgreso: TPanel;
     lblTituloRegistrar: TLabel;
     Label2: TLabel;
-    editRegistrarUsuario: TEdit;
     Label3: TLabel;
     editRegistrarContrasenia: TEdit;
     memoRegistrarDetalle: TMemo;
@@ -54,10 +48,8 @@ type
     btnRegistrarCancelar: TBitBtn;
     ZQ_VerificarIngresoEgresoID_HISTORIAL_FICHA: TIntegerField;
     ZQ_VerificarIngresoEgresoID_SUCURSAL: TIntegerField;
-    ZQ_VerificarIngresoEgresoEMPLEADO: TStringField;
     ZQ_VerificarIngresoEgresoFECHA_INGRESO: TDateTimeField;
     ZQ_VerificarIngresoEgresoFECHA_EGRESO: TDateTimeField;
-    ZQ_Historial_sucursal: TStringField;
     RepFicha: TQuickRep;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
     QRBand9: TQRBand;
@@ -69,27 +61,11 @@ type
     QRlblPieDePagina: TQRLabel;
     QRLabel43: TQRLabel;
     QRSysData1: TQRSysData;
-    ZQ_HistorialDETALLE_INGRESO: TStringField;
-    ZQ_HistorialDETALLE_EGRESO: TStringField;
     DBMemoDetalleEgreso: TDBMemo;
     ZQ_VerificarIngresoEgresoDETALLE_INGRESO: TStringField;
     ZQ_VerificarIngresoEgresoDETALLE_EGRESO: TStringField;
     Panel2: TPanel;
     ZQ_Usuarios: TZQuery;
-    ZQ_UsuariosUSUARIO: TStringField;
-    ZQ_UsuariosNOMBRE: TStringField;
-    ZQ_UsuariosCLAVE: TStringField;
-    ZQ_UsuariosDIR: TStringField;
-    ZQ_UsuariosNUM_DIR: TIntegerField;
-    ZQ_UsuariosTELEFONO: TIntegerField;
-    ZQ_UsuariosCOD_ORIGEN: TStringField;
-    ZQ_UsuariosDB_USR: TStringField;
-    ZQ_UsuariosDB_CLV: TStringField;
-    ZQ_UsuariosCAMBIARCLAVE: TStringField;
-    ZQ_UsuariosGRUPO: TStringField;
-    ZQ_UsuariosHABILITADO: TStringField;
-    ZQ_UsuariosNIVEL: TIntegerField;
-    ZQ_Historial_NombreEmpleado: TStringField;
     QRGroupHeader1: TQRGroup;
     QRGroupFooter1: TQRBand;
     QRBand1: TQRBand;
@@ -108,6 +84,22 @@ type
     QRDBText5: TQRDBText;
     QRLabel3: TQRLabel;
     QRLabel4: TQRLabel;
+    DS_Usuarios: TDataSource;
+    ComboBoxUsuarios: TComboBox;
+    EKLlenarComboUsuarios: TEKLlenarCombo;
+    ZQ_UsuariosID_PERSONA: TIntegerField;
+    ZQ_UsuariosNOMBRE: TStringField;
+    ZQ_HistorialID_HISTORIAL_FICHA: TIntegerField;
+    ZQ_HistorialID_SUCURSAL: TIntegerField;
+    ZQ_HistorialFECHA_INGRESO: TDateTimeField;
+    ZQ_HistorialFECHA_EGRESO: TDateTimeField;
+    ZQ_HistorialDETALLE_INGRESO: TStringField;
+    ZQ_HistorialDETALLE_EGRESO: TStringField;
+    ZQ_HistorialID_EMPLEADO: TIntegerField;
+    ZQ_Historial_sucursal: TStringField;
+    ZQ_UsuariosCLAVE: TStringField;
+    ZQ_VerificarIngresoEgresoID_EMPLEADO: TIntegerField;
+    ZQ_Historial_NombreEpleado: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -158,10 +150,17 @@ begin
   viendoSucursal:= 'PROPIA';
   btnVerSucursales.Caption:= 'Ver Sucursal Propia / Todas';
   lblTituloHistorial.Caption:= 'HISTORICO '+dm.ZQ_SucursalNOMBRE.AsString+' - '+DateToStr(dm.EKModelo.Fecha);
+
+  ZQ_Usuarios.Close;
+  ZQ_Usuarios.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
+  ZQ_Usuarios.Open;
+
   ZQ_Historial.Close;
   ZQ_Historial.ParamByName('fecha').AsDate:= dm.EKModelo.Fecha;
   ZQ_Historial.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
   ZQ_Historial.Open;
+
+  EKLlenarComboUsuarios.CargarCombo;
 
   btnVerSucursales.Visible:= ivNever;
   if dm.EKUsrLogin.PermisoAccion('FICHAEMP_VERSUCURSAL') then
@@ -188,11 +187,11 @@ begin
   panelRegistrarIngresoEgreso.Visible:= True;
   panelRegistrarIngresoEgreso.BringToFront;
   panelContenedor.Enabled:= False;
-  editRegistrarUsuario.Text:= '';
   editRegistrarContrasenia.Text:= '';
   memoRegistrarDetalle.Lines.Clear;
   tipoFicha:= 'INGRESO';
-  editRegistrarUsuario.SetFocus;
+  ComboBoxUsuarios.SetFocus;
+  ComboBoxUsuarios.ItemIndex := -1;
 end;
 
 
@@ -201,12 +200,12 @@ begin
   panelRegistrarIngresoEgreso.Visible:= True;
   panelRegistrarIngresoEgreso.BringToFront;
   panelContenedor.Enabled:= False;
-  editRegistrarUsuario.Text:= '';
   editRegistrarContrasenia.Text:= '';
   memoRegistrarDetalle.Lines.Clear;
   GrupoVisualizacion.Enabled:= false;
   tipoFicha:= 'EGRESO';
-  editRegistrarUsuario.SetFocus;
+  ComboBoxUsuarios.SetFocus;
+  ComboBoxUsuarios.ItemIndex := -1;
 end;
 
 
@@ -229,20 +228,20 @@ begin
   fechaGuardar:= dm.EKModelo.FechayHora;
   repetir:= false;
 
-  if trim(editRegistrarUsuario.Text) = '' then
+  if trim(ComboBoxUsuarios.Text) = '' then
   begin
     Application.MessageBox('No se ha ingresado ningún Usuario.', 'Validación', MB_OK + MB_ICONINFORMATION);
     repetir:= true;
-    editRegistrarUsuario.SetFocus;
+    ComboBoxUsuarios.SetFocus;
   end;
 
   if repetir = false then //repetir 1
   begin
-    if not dm.EKUsrLogin.existeUsuario(editRegistrarUsuario.Text, editRegistrarContrasenia.Text) then
+    if (ZQ_UsuariosCLAVE.AsString <> editRegistrarContrasenia.Text) then
     begin
       Application.MessageBox('El Usuario\Contraseña ingresado es incorrecto.', 'Validación', MB_OK + MB_ICONINFORMATION);
       repetir:= true;
-      editRegistrarUsuario.SetFocus;
+      editRegistrarContrasenia.SetFocus;
     end;                         
 
     if repetir = false then //repetir 2
@@ -252,7 +251,7 @@ begin
       //para un EGRESO:  que haya un ingreso previo sin fecha de egreso.
       ZQ_VerificarIngresoEgreso.Close;
       ZQ_VerificarIngresoEgreso.ParamByName('fecha').AsDate:= DateOf(fechaGuardar);
-      ZQ_VerificarIngresoEgreso.ParamByName('empleado').AsString:= editRegistrarUsuario.Text;
+      ZQ_VerificarIngresoEgreso.ParamByName('ID_empleado').AsInteger:=StrToInt(EKLlenarComboUsuarios.SelectClave);
       ZQ_VerificarIngresoEgreso.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
       ZQ_VerificarIngresoEgreso.Open;
       if tipoFicha = 'INGRESO' then
@@ -282,7 +281,7 @@ begin
         begin
           ZQ_Historial.Append;
           ZQ_HistorialID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
-          ZQ_HistorialEMPLEADO.AsString:= editRegistrarUsuario.Text;
+          ZQ_HistorialID_EMPLEADO.AsInteger:= StrToInt(EKLlenarComboUsuarios.SelectClave); //editRegistrarUsuario.Text;
           ZQ_HistorialFECHA_INGRESO.AsDateTime:= fechaGuardar;
           ZQ_HistorialFECHA_EGRESO.Clear;
           ZQ_HistorialDETALLE_INGRESO.AsString:= memoRegistrarDetalle.Text;
