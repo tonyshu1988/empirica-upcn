@@ -317,7 +317,6 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
                   Height = 83
                   Align = alClient
                   DataField = 'LOGO'
-                  DataSource = DM.DS_Sucursal
                   Stretch = True
                   TabOrder = 1
                 end
@@ -4068,7 +4067,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
     end
     object ZQ_ComprobanteOBSERVACION: TStringField
       FieldName = 'OBSERVACION'
-      Size = 500
+      Size = 1500
     end
     object ZQ_ComprobanteBASE_IMPONIBLE: TFloatField
       FieldName = 'BASE_IMPONIBLE'
@@ -4604,7 +4603,6 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         Tabla = 'sucursal'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = DM.ZQ_SucursalesVisibles
         TipoComboSQLCampoVer = 'nombre'
         TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False

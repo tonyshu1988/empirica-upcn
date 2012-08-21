@@ -20,7 +20,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     Top = 0
     Width = 985
     Height = 564
-    ActivePage = TabSheet5
+    ActivePage = TabSheet2
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -1819,7 +1819,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
         Left = 233
         Top = -280
         Width = 794
-        Height = 833
+        Height = 1123
         Frame.Color = clBlack
         Frame.DrawTop = True
         Frame.DrawBottom = True
@@ -4226,7 +4226,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               1203.854166666667000000
               219.604166666666700000
               619.125000000000000000)
@@ -4410,7 +4410,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333320000
+              97.895833333333340000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -4442,7 +4442,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333320000
+              97.895833333333340000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -5126,7 +5126,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              637.645833333333200000
+              637.645833333333400000
               2.645833333333333000
               137.583333333333300000)
             Alignment = taLeftJustify
@@ -5336,7 +5336,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               52.916666666666670000
               10.583333333333330000
               7.937500000000000000
-              351.895833333333300000)
+              351.895833333333400000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -22384,7 +22384,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     end
     object ZQ_ComprobanteOBSERVACION: TStringField
       FieldName = 'OBSERVACION'
-      Size = 500
+      Size = 1500
     end
     object ZQ_ComprobanteBASE_IMPONIBLE: TFloatField
       FieldName = 'BASE_IMPONIBLE'
