@@ -470,14 +470,8 @@ begin
 
   if (valor = 'S') then //si el registro esta dado de baja
   begin
-    grilla.Canvas.Font.Color:= clBlack;
     grilla.Canvas.Brush.Color:= baja;
-    if (gdFocused in State) or (gdSelected in State) then
-    begin
-      grilla.Canvas.Font.Color:= clwhite;
-      grilla.Canvas.Brush.Color:= bajaFocus;
-      grilla.Canvas.Font.Style:= grilla.Canvas.Font.Style + [fsBold];
-    end
+    grilla.DefaultDrawColumnCell(a, datacol, column, state);
   end;
 
   if (THackDBGrid(grilla).DataLink.ActiveRecord + 1 = THackDBGrid(grilla).Row) then
@@ -492,9 +486,10 @@ begin
       grilla.Canvas.Brush.Color:= resaltadoFocus;
       grilla.Canvas.Font.Style:= grilla.Canvas.Font.Style + [fsBold];
     end;
+    grilla.DefaultDrawColumnCell(a, datacol, column, state);
   end;
 
-  grilla.DefaultDrawColumnCell(a, datacol, column, state);
+
 end;
 
 
