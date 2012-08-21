@@ -232,7 +232,7 @@ object FTransferirStock: TFTransferirStock
       Top = 34
       Width = 948
       Height = 604
-      ActivePage = TabSTransferirStock
+      ActivePage = TabSAsociarNotaPedido
       Align = alClient
       TabOrder = 0
       OnChange = PageControlTransferirChange
