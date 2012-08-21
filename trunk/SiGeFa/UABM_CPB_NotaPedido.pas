@@ -445,6 +445,9 @@ type
     Label46: TLabel;
     ZQ_VerCpb_ProductoCANTIDAD_RECIBIDA: TFloatField;
     ZQ_VerCpb_ProductoCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_CpbProductoIMPORTE_COSTO: TFloatField;
+    ZQ_VerCpb_ProductoIMPORTE_COSTO: TFloatField;
+    ZQ_VerCpb_Productodiferencia_precios: TFloatField;
 
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
@@ -499,6 +502,7 @@ type
       State: TGridDrawState);
     procedure btnAplicarActualizarClick(Sender: TObject);
     procedure ZQ_VerCpb_ProductoAfterScroll(DataSet: TDataSet);
+    procedure ZQ_VerCpb_ProductoCalcFields(DataSet: TDataSet);
   Private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -1109,6 +1113,7 @@ begin
     CD_Producto_codigoBarra.AsString:= vselProducto.ZQ_ProductoCODIGO_BARRA.AsString;
     CD_Producto_codCabecera.AsString:= vselProducto.ZQ_ProductoCOD_CORTO.AsString;
     CD_Producto_codProducto.AsString:= vselProducto.ZQ_ProductoCOD_CORTO_1.AsString;
+    CD_Producto_precioCosto.AsFloat:= vselProducto.ZQ_ProductoPRECIO_COSTO.AsFloat;
 
     ZQ_CpbProducto.Append;
     ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
@@ -1116,6 +1121,7 @@ begin
     ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
     ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= 0;
     ZQ_CpbProductoCANTIDAD_RECIBIDA.AsFloat:= 0;
+    ZQ_CpbProductoIMPORTE_COSTO.AsFloat:= CD_Producto_precioCosto.AsFloat;
 
     cargarImagen(vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger);
   end;
@@ -1140,6 +1146,7 @@ begin
     CD_Producto_codigoBarra.AsString:= vselProducto.ZQ_ProductoCODIGO_BARRA.AsString;
     CD_Producto_codCabecera.AsString:= vselProducto.ZQ_ProductoCOD_CORTO.AsString;
     CD_Producto_codProducto.AsString:= vselProducto.ZQ_ProductoCOD_CORTO_1.AsString;
+    CD_Producto_precioCosto.AsFloat:= vselProducto.ZQ_ProductoPRECIO_COSTO.AsFloat;
 
     ZQ_CpbProducto.Append;
     ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
@@ -1147,6 +1154,7 @@ begin
     ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
     ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= 0;
     ZQ_CpbProductoCANTIDAD_RECIBIDA.AsFloat:= 0;
+    ZQ_CpbProductoIMPORTE_COSTO.AsFloat:= CD_Producto_precioCosto.AsFloat;
 
     cargarImagen(vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger);
 
@@ -1654,6 +1662,12 @@ begin
     DBImageProducto.Visible:= true;
     DBImageSucursal.Visible:= false;
   end
+end;
+
+procedure TFABM_CPB_NotaPedido.ZQ_VerCpb_ProductoCalcFields(
+  DataSet: TDataSet);
+begin
+ZQ_VerCpb_Productodiferencia_precios.AsFloat := ZQ_VerCpb_ProductoIMPORTE_UNITARIO.AsFloat - ZQ_VerCpb_ProductoIMPORTE_COSTO.AsFloat;
 end;
 
 end.
