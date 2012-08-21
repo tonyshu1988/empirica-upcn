@@ -1601,11 +1601,12 @@ end;
 
 procedure TFABM_Preventa.btnCargarSeniaClick(Sender: TObject);
 begin
-  if cliente <= 0 then
-  begin
-    ShowMessage('Para cargar la seña necesita asociarle un cliente distino de Consumidor Final al comprobante, verifique');
-    exit;
-  end;
+//SE PUEDE CARGAR CUALQUIER CLIENTE
+//  if cliente <= 0 then
+//  begin
+//    ShowMessage('Para cargar la seña necesita asociarle un cliente distino de Consumidor Final al comprobante, verifique');
+//    exit;
+//  end;
 
   dm.centrarPanel(FABM_Preventa, PABM_FormaPago);
   PABM_FormaPago.Visible:= true;

@@ -152,6 +152,7 @@ type
     EKListadoFPago: TEKListadoSQL;
     ZQ_CambiarFPago: TZQuery;
     ZQ_ComprobanteID_PREVENTA: TIntegerField;
+    ZQ_ComprobanteOBSERVACION: TStringField;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);

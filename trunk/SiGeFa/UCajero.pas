@@ -127,13 +127,13 @@ type
     Label21: TLabel;
     Label28: TLabel;
     Label20: TLabel;
-    Label14: TLabel;
+    Label_DetalleCliente: TLabel;
     DBEdit9: TDBEdit;
     DBEdit10: TDBEdit;
     DBEdit11: TDBEdit;
     DBEdit12: TDBEdit;
     DBEdit14: TDBEdit;
-    DBEdit13: TDBEdit;
+    DBEdit_DetalleCliente: TDBEdit;
     Panel3: TPanel;
     Label22: TLabel;
     Label23: TLabel;
@@ -1096,6 +1096,8 @@ begin
   lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
   lblTotAPagar.Caption:= 'Total Venta: ' + FormatFloat('$ ##,###,##0.00 ', 0);
   modoCargaPrevia:= False;
+  DBEdit_DetalleCliente.DataField:= 'pers_direccion';
+  Label_DetalleCliente.Caption:= 'Dirección:';
 
   //Cargo el último nro de comprobante (para que sepa cual sigue)
   ultimoIDPago();
@@ -2348,12 +2350,15 @@ begin
     CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
     CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
     CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente;
-    CD_ComprobanteOBSERVACION.AsString:= Format('Venta de Mostrador, comprobante Nro:%s', [vsel4.ZQ_ComprobanteCODIGO.AsString]);
+//    CD_ComprobanteOBSERVACION.AsString:= Format('Venta de Mostrador, comprobante Nro:%s', [vsel4.ZQ_ComprobanteCODIGO.AsString]);
     CD_ComprobanteID_PREVENTA.AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
     CD_ComprobanteID_TIPO_IVA.AsInteger:= vsel4.ZQ_ComprobanteID_TIPO_IVA.AsInteger;
-
     CD_ComprobanteID_VENDEDOR.AsInteger:= vsel4.ZQ_ComprobanteID_VENDEDOR.AsInteger;
     IdVendedor:= CD_ComprobanteID_VENDEDOR.AsInteger;
+
+    DBEdit_DetalleCliente.DataField:= 'OBSERVACION';
+    Label_DetalleCliente.Caption:= 'Detalle:';
+    CD_ComprobanteOBSERVACION.AsString:= vsel4.ZQ_ComprobanteOBSERVACION.AsString;
 
     ZQ_ComprobPreventa.Close;
     ZQ_ComprobPreventa.ParamByName('id').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
