@@ -161,6 +161,14 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
               end
               item
                 Expanded = False
+                FieldName = 'OBSERVACION'
+                Title.Alignment = taCenter
+                Title.Caption = 'Detalle Cliente'
+                Width = 200
+                Visible = True
+              end
+              item
+                Expanded = False
                 FieldName = 'IMPORTEVENTA_'
                 Title.Alignment = taCenter
                 Title.Caption = 'Importe Venta'
@@ -1023,7 +1031,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
         'c.punto_venta, c.numero_cpb,'
-      '       c.fecha as fecha_hora, c.id_preventa'
+      '       c.fecha as fecha_hora, c.id_preventa, c.observacion'
       'from comprobante c'
       
         'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
@@ -1047,7 +1055,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
         'unto_venta,'
-      '         c.numero_cpb, c.fecha, c.id_preventa'
+      '         c.numero_cpb, c.fecha, c.id_preventa, c.observacion'
       '')
     Params = <>
     IndexFieldNames = 'FECHA Desc;CODIGO Desc'
@@ -1114,6 +1122,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     object ZQ_ComprobanteID_PREVENTA: TIntegerField
       FieldName = 'ID_PREVENTA'
       DisplayFormat = '00000000'
+    end
+    object ZQ_ComprobanteOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 1500
     end
   end
   object DS_Comprobante: TDataSource
@@ -1430,6 +1442,16 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         VaciarValorDespues = False
       end
       item
+        Titulo = 'Detalle Cliente'
+        Campo = 'OBSERVACION'
+        Tabla = 'COMPROBANTE'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
         Titulo = 'Vendedor'
         Campo = 'nombre'
         Tabla = 'p1'
@@ -1494,7 +1516,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
         'c.punto_venta, c.numero_cpb,'
-      '       c.fecha as fecha_hora, c.id_preventa'
+      '       c.fecha as fecha_hora, c.id_preventa, c.observacion'
       'from comprobante c'
       
         'inner join comprobante_forma_pago cfp on (cfp.id_comprobante = c' +
@@ -1521,7 +1543,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
         'unto_venta,'
-      '         c.numero_cpb, c.fecha, c.id_preventa'
+      '         c.numero_cpb, c.fecha, c.id_preventa, c.observacion'
       '')
     SQL_Select.Strings = (
       
@@ -1534,7 +1556,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
         'c.punto_venta, c.numero_cpb,'
-      '       c.fecha as fecha_hora, c.id_preventa')
+      '       c.fecha as fecha_hora, c.id_preventa, c.observacion')
     SQL_From.Strings = (
       'from comprobante c'
       
@@ -1564,7 +1586,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
         'unto_venta,'
-      '         c.numero_cpb, c.fecha, c.id_preventa'
+      '         c.numero_cpb, c.fecha, c.id_preventa, c.observacion'
       '')
     UsarWhereOriginal = EK_Con_Where
     Left = 56
@@ -1638,6 +1660,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       end
       item
         TituloColumna = 'Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle Cliente'
         Visible = True
       end
       item

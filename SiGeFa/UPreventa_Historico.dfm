@@ -151,6 +151,14 @@ object FPreventa_Historico: TFPreventa_Historico
               end
               item
                 Expanded = False
+                FieldName = 'OBSERVACION'
+                Title.Alignment = taCenter
+                Title.Caption = 'Detalle Cliente'
+                Width = 200
+                Visible = True
+              end
+              item
+                Expanded = False
                 FieldName = 'IMPORTEVENTA_'
                 Title.Alignment = taCenter
                 Title.Caption = 'Importe Venta'
@@ -1017,7 +1025,8 @@ object FPreventa_Historico: TFPreventa_Historico
         '       cast(c.fecha_vencimiento as date) fecha_venc, c.importe_v' +
         'enta importeVenta_,'
       '       s.nombre as suc_, p1.nombre as Vendedor_,'
-      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
+      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_,'
+      '       c.observacion'
       'from comprobante c'
       'inner join sucursal s on (c.id_sucursal = s.id_sucursal)'
       'inner join persona p1 on (p1.id_persona = c.id_vendedor)'
@@ -1080,6 +1089,10 @@ object FPreventa_Historico: TFPreventa_Historico
       FieldName = '_codigoFacturaAsociada'
       Size = 10
       Calculated = True
+    end
+    object ZQ_ComprobanteOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 500
     end
   end
   object DS_Comprobante: TDataSource
@@ -1351,6 +1364,16 @@ object FPreventa_Historico: TFPreventa_Historico
         VaciarValorDespues = False
       end
       item
+        Titulo = 'Detalle Cliente'
+        Campo = 'OBSERVACION'
+        Tabla = 'COMPROBANTE'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
         Titulo = 'Vendedor'
         Campo = 'nombre'
         Tabla = 'p1'
@@ -1383,7 +1406,8 @@ object FPreventa_Historico: TFPreventa_Historico
         '       cast(c.fecha_vencimiento as date) fecha_venc, c.importe_v' +
         'enta importeVenta_,'
       '       s.nombre as suc_, p1.nombre as Vendedor_,'
-      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
+      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_,'
+      '       c.observacion'
       'from comprobante c'
       'inner join sucursal s on (c.id_sucursal = s.id_sucursal)'
       'inner join persona p1 on (p1.id_persona = c.id_vendedor)'
@@ -1402,7 +1426,8 @@ object FPreventa_Historico: TFPreventa_Historico
         '       cast(c.fecha_vencimiento as date) fecha_venc, c.importe_v' +
         'enta importeVenta_,'
       '       s.nombre as suc_, p1.nombre as Vendedor_,'
-      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_')
+      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_,'
+      '       c.observacion')
     SQL_From.Strings = (
       'from comprobante c'
       'inner join sucursal s on (c.id_sucursal = s.id_sucursal)'
@@ -1471,6 +1496,10 @@ object FPreventa_Historico: TFPreventa_Historico
       end
       item
         TituloColumna = 'Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle Cliente'
         Visible = True
       end
       item

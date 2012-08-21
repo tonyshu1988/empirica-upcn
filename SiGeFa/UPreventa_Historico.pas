@@ -146,6 +146,7 @@ type
     PopUpItemCambiarFechaVencimiento1: TMenuItem;
     EKMensajeMasDato1: TEKMensajeMasDato;
     ZQ_CambiarVencim: TZQuery;
+    ZQ_ComprobanteOBSERVACION: TStringField;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);

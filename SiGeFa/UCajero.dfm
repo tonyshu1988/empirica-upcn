@@ -2,7 +2,7 @@ object FCajero: TFCajero
   Left = 216
   Top = 109
   Width = 1042
-  Height = 757
+  Height = 717
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -3263,7 +3263,7 @@ object FCajero: TFCajero
     Left = 88
     Top = 0
     Width = 946
-    Height = 678
+    Height = 638
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 2
@@ -3665,7 +3665,7 @@ object FCajero: TFCajero
       Left = 1
       Top = 231
       Width = 944
-      Height = 446
+      Height = 406
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 2
@@ -3692,7 +3692,7 @@ object FCajero: TFCajero
         Left = 1
         Top = 15
         Width = 942
-        Height = 270
+        Height = 230
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3707,7 +3707,7 @@ object FCajero: TFCajero
           Left = 1
           Top = 1
           Width = 940
-          Height = 214
+          Height = 174
           Align = alClient
           Color = 16762303
           DataSource = DS_DetalleFactura
@@ -3781,7 +3781,7 @@ object FCajero: TFCajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 215
+          Top = 175
           Width = 940
           Height = 54
           Align = alBottom
@@ -3851,7 +3851,7 @@ object FCajero: TFCajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 285
+        Top = 245
         Width = 942
         Height = 89
         Align = alBottom
@@ -3956,7 +3956,7 @@ object FCajero: TFCajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 374
+        Top = 334
         Width = 942
         Height = 71
         Align = alBottom
@@ -4160,7 +4160,7 @@ object FCajero: TFCajero
           Font.Style = [fsBold]
           ParentFont = False
         end
-        object Label14: TLabel
+        object Label_DetalleCliente: TLabel
           Left = 4
           Top = 68
           Width = 65
@@ -4239,7 +4239,7 @@ object FCajero: TFCajero
           ReadOnly = True
           TabOrder = 4
         end
-        object DBEdit13: TDBEdit
+        object DBEdit_DetalleCliente: TDBEdit
           Left = 70
           Top = 64
           Width = 302
