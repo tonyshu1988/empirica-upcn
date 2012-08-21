@@ -17,105 +17,6 @@ object FFichaEmpleado: TFFichaEmpleado
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object panelRegistrarIngresoEgreso: TPanel
-    Tag = 99
-    Left = 148
-    Top = 142
-    Width = 369
-    Height = 180
-    BevelInner = bvLowered
-    BorderWidth = 1
-    Color = clActiveBorder
-    TabOrder = 5
-    Visible = False
-    object lblTituloRegistrar: TLabel
-      Left = 3
-      Top = 3
-      Width = 363
-      Height = 13
-      Align = alTop
-      Alignment = taCenter
-      Caption = 'Fichar'
-      Color = clBlue
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-    end
-    object Label2: TLabel
-      Left = 16
-      Top = 28
-      Width = 78
-      Height = 13
-      Alignment = taRightJustify
-      AutoSize = False
-      Caption = 'Usuario:'
-    end
-    object Label3: TLabel
-      Left = 16
-      Top = 54
-      Width = 78
-      Height = 13
-      Alignment = taRightJustify
-      AutoSize = False
-      Caption = 'Contrase'#241'a:'
-    end
-    object Label4: TLabel
-      Left = 16
-      Top = 77
-      Width = 78
-      Height = 13
-      Alignment = taRightJustify
-      AutoSize = False
-      Caption = 'Observaci'#243'n:'
-    end
-    object editRegistrarUsuario: TEdit
-      Left = 95
-      Top = 24
-      Width = 258
-      Height = 21
-      TabOrder = 0
-    end
-    object editRegistrarContrasenia: TEdit
-      Left = 95
-      Top = 50
-      Width = 258
-      Height = 21
-      PasswordChar = '*'
-      TabOrder = 1
-    end
-    object memoRegistrarDetalle: TMemo
-      Left = 95
-      Top = 77
-      Width = 258
-      Height = 60
-      TabOrder = 2
-    end
-    object btnRegistrarAceptar: TBitBtn
-      Left = 15
-      Top = 144
-      Width = 110
-      Height = 29
-      Caption = 'Aceptar'
-      TabOrder = 3
-      OnClick = btnRegistrarAceptarClick
-      Layout = blGlyphRight
-    end
-    object btnRegistrarCancelar: TBitBtn
-      Left = 243
-      Top = 144
-      Width = 110
-      Height = 29
-      Cancel = True
-      Caption = 'Cancelar'
-      TabOrder = 4
-      OnClick = btnRegistrarCancelarClick
-      Layout = blGlyphRight
-    end
-  end
   object panelContenedor: TPanel
     Left = 0
     Top = 0
@@ -251,7 +152,7 @@ object FFichaEmpleado: TFFichaEmpleado
           end
           item
             Expanded = False
-            FieldName = '_NombreEmpleado'
+            FieldName = '_NombreEpleado'
             Title.Alignment = taCenter
             Title.Caption = 'Empleado'
             Width = 159
@@ -322,7 +223,7 @@ object FFichaEmpleado: TFFichaEmpleado
   object RepFicha: TQuickRep
     Tag = 99
     Left = -8
-    Top = 216
+    Top = 208
     Width = 1123
     Height = 794
     Frame.Color = clBlack
@@ -698,6 +599,7 @@ object FFichaEmpleado: TFFichaEmpleado
       end
     end
     object QRGroupHeader1: TQRGroup
+      Tag = 99
       Left = 38
       Top = 127
       Width = 1047
@@ -756,6 +658,7 @@ object FFichaEmpleado: TFFichaEmpleado
       end
     end
     object QRGroupFooter1: TQRBand
+      Tag = 99
       Left = 38
       Top = 186
       Width = 1047
@@ -778,6 +681,7 @@ object FFichaEmpleado: TFFichaEmpleado
       BandType = rbGroupFooter
     end
     object QRBand1: TQRBand
+      Tag = 99
       Left = 38
       Top = 169
       Width = 1047
@@ -876,7 +780,7 @@ object FFichaEmpleado: TFFichaEmpleado
         Frame.DrawRight = False
         Size.Values = (
           37.041666666666670000
-          672.041666666666700000
+          672.041666666666800000
           2.645833333333333000
           449.791666666666700000)
         Alignment = taLeftJustify
@@ -885,7 +789,7 @@ object FFichaEmpleado: TFFichaEmpleado
         AutoStretch = False
         Color = clWhite
         DataSet = ZQ_Historial
-        DataField = '_NombreEmpleado'
+        DataField = '_NombreEpleado'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -9
@@ -911,7 +815,7 @@ object FFichaEmpleado: TFFichaEmpleado
           37.041666666666670000
           1960.562500000000000000
           2.645833333333333000
-          799.041666666666700000)
+          799.041666666666800000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -944,7 +848,7 @@ object FFichaEmpleado: TFFichaEmpleado
           37.041666666666670000
           1137.708333333333000000
           2.645833333333333000
-          806.979166666666700000)
+          806.979166666666800000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
@@ -965,6 +869,7 @@ object FFichaEmpleado: TFFichaEmpleado
       end
     end
     object ChildBand1: TQRChildBand
+      Tag = 99
       Left = 38
       Top = 151
       Width = 1047
@@ -1062,7 +967,7 @@ object FFichaEmpleado: TFFichaEmpleado
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          672.041666666666700000
+          672.041666666666800000
           5.291666666666667000
           449.791666666666700000)
         Alignment = taLeftJustify
@@ -1146,6 +1051,106 @@ object FFichaEmpleado: TFFichaEmpleado
         ExportAs = exptText
         FontSize = 8
       end
+    end
+  end
+  object panelRegistrarIngresoEgreso: TPanel
+    Tag = 99
+    Left = 148
+    Top = 142
+    Width = 369
+    Height = 180
+    BevelInner = bvLowered
+    BorderWidth = 1
+    Color = clActiveBorder
+    TabOrder = 5
+    Visible = False
+    object lblTituloRegistrar: TLabel
+      Left = 3
+      Top = 3
+      Width = 363
+      Height = 13
+      Align = alTop
+      Alignment = taCenter
+      Caption = 'Fichar'
+      Color = clBlue
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 16
+      Top = 28
+      Width = 78
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Usuario:'
+    end
+    object Label3: TLabel
+      Left = 16
+      Top = 54
+      Width = 78
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Contrase'#241'a:'
+    end
+    object Label4: TLabel
+      Left = 16
+      Top = 77
+      Width = 78
+      Height = 13
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = 'Observaci'#243'n:'
+    end
+    object editRegistrarContrasenia: TEdit
+      Left = 95
+      Top = 50
+      Width = 258
+      Height = 21
+      PasswordChar = '*'
+      TabOrder = 0
+    end
+    object memoRegistrarDetalle: TMemo
+      Left = 95
+      Top = 77
+      Width = 258
+      Height = 60
+      TabOrder = 1
+    end
+    object btnRegistrarAceptar: TBitBtn
+      Left = 15
+      Top = 144
+      Width = 110
+      Height = 29
+      Caption = 'Aceptar'
+      TabOrder = 2
+      OnClick = btnRegistrarAceptarClick
+      Layout = blGlyphRight
+    end
+    object btnRegistrarCancelar: TBitBtn
+      Left = 243
+      Top = 144
+      Width = 110
+      Height = 29
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 3
+      OnClick = btnRegistrarCancelarClick
+      Layout = blGlyphRight
+    end
+    object ComboBoxUsuarios: TComboBox
+      Left = 95
+      Top = 24
+      Width = 258
+      Height = 21
+      ItemHeight = 13
+      TabOrder = 4
     end
   end
   object dxBarABM: TdxBarManager
@@ -1853,25 +1858,11 @@ object FFichaEmpleado: TFFichaEmpleado
     object ZQ_HistorialID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
     end
-    object ZQ_HistorialEMPLEADO: TStringField
-      FieldName = 'EMPLEADO'
-      Size = 10
-    end
     object ZQ_HistorialFECHA_INGRESO: TDateTimeField
       FieldName = 'FECHA_INGRESO'
     end
     object ZQ_HistorialFECHA_EGRESO: TDateTimeField
       FieldName = 'FECHA_EGRESO'
-    end
-    object ZQ_Historial_sucursal: TStringField
-      FieldKind = fkLookup
-      FieldName = '_sucursal'
-      LookupDataSet = DM.ZQ_SucursalesVisibles
-      LookupKeyFields = 'ID_SUCURSAL'
-      LookupResultField = 'NOMBRE'
-      KeyFields = 'ID_SUCURSAL'
-      Size = 200
-      Lookup = True
     end
     object ZQ_HistorialDETALLE_INGRESO: TStringField
       FieldName = 'DETALLE_INGRESO'
@@ -1881,13 +1872,26 @@ object FFichaEmpleado: TFFichaEmpleado
       FieldName = 'DETALLE_EGRESO'
       Size = 200
     end
-    object ZQ_Historial_NombreEmpleado: TStringField
+    object ZQ_HistorialID_EMPLEADO: TIntegerField
+      FieldName = 'ID_EMPLEADO'
+    end
+    object ZQ_Historial_sucursal: TStringField
       FieldKind = fkLookup
-      FieldName = '_NombreEmpleado'
-      LookupDataSet = ZQ_Usuarios
-      LookupKeyFields = 'USUARIO'
+      FieldName = '_sucursal'
+      LookupDataSet = DM.ZQ_SucursalesVisibles
+      LookupKeyFields = 'ID_SUCURSAL'
       LookupResultField = 'NOMBRE'
-      KeyFields = 'EMPLEADO'
+      KeyFields = 'ID_SUCURSAL'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_Historial_NombreEpleado: TStringField
+      FieldKind = fkLookup
+      FieldName = '_NombreEpleado'
+      LookupDataSet = ZQ_Usuarios
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'ID_EMPLEADO'
       Size = 100
       Lookup = True
     end
@@ -1931,7 +1935,7 @@ object FFichaEmpleado: TFFichaEmpleado
       'from historial_ficha_emplado h'
       'where cast(h.fecha_ingreso as date) = :fecha'
       '  and h.fecha_egreso is null'
-      '  and h.empleado = :empleado'
+      '  and h.id_empleado = :id_empleado'
       '  and h.id_sucursal = :id_sucursal')
     Params = <
       item
@@ -1941,7 +1945,7 @@ object FFichaEmpleado: TFFichaEmpleado
       end
       item
         DataType = ftUnknown
-        Name = 'empleado'
+        Name = 'id_empleado'
         ParamType = ptUnknown
       end
       item
@@ -1959,7 +1963,7 @@ object FFichaEmpleado: TFFichaEmpleado
       end
       item
         DataType = ftUnknown
-        Name = 'empleado'
+        Name = 'id_empleado'
         ParamType = ptUnknown
       end
       item
@@ -1974,9 +1978,8 @@ object FFichaEmpleado: TFFichaEmpleado
     object ZQ_VerificarIngresoEgresoID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
     end
-    object ZQ_VerificarIngresoEgresoEMPLEADO: TStringField
-      FieldName = 'EMPLEADO'
-      Size = 10
+    object ZQ_VerificarIngresoEgresoID_EMPLEADO: TIntegerField
+      FieldName = 'ID_EMPLEADO'
     end
     object ZQ_VerificarIngresoEgresoFECHA_INGRESO: TDateTimeField
       FieldName = 'FECHA_INGRESO'
@@ -2000,59 +2003,50 @@ object FFichaEmpleado: TFFichaEmpleado
     Top = 336
   end
   object ZQ_Usuarios: TZQuery
-    Connection = DM.Conexion_Usuario
+    Connection = DM.Conexion
     SQL.Strings = (
-      'select * from usuarios')
-    Params = <>
+      'select p.id_persona, p.nombre, p.clave'
+      'from persona_relacion pr'
+      'left join persona p on (pr.id_persona = p.id_persona)'
+      'where (pr.id_relacion = 12) and (pr.id_sucursal = :ID_SUCURSAL)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_SUCURSAL'
+        ParamType = ptUnknown
+      end>
     Left = 488
     Top = 168
-    object ZQ_UsuariosUSUARIO: TStringField
-      FieldName = 'USUARIO'
-      Size = 10
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_SUCURSAL'
+        ParamType = ptUnknown
+      end>
+    object ZQ_UsuariosID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+      Required = True
     end
     object ZQ_UsuariosNOMBRE: TStringField
       FieldName = 'NOMBRE'
-      Size = 40
+      Size = 200
     end
     object ZQ_UsuariosCLAVE: TStringField
       FieldName = 'CLAVE'
-      Size = 12
-    end
-    object ZQ_UsuariosDIR: TStringField
-      FieldName = 'DIR'
-      Size = 30
-    end
-    object ZQ_UsuariosNUM_DIR: TIntegerField
-      FieldName = 'NUM_DIR'
-    end
-    object ZQ_UsuariosTELEFONO: TIntegerField
-      FieldName = 'TELEFONO'
-    end
-    object ZQ_UsuariosCOD_ORIGEN: TStringField
-      FieldName = 'COD_ORIGEN'
-      Size = 1
-    end
-    object ZQ_UsuariosDB_USR: TStringField
-      FieldName = 'DB_USR'
       Size = 10
     end
-    object ZQ_UsuariosDB_CLV: TStringField
-      FieldName = 'DB_CLV'
-    end
-    object ZQ_UsuariosCAMBIARCLAVE: TStringField
-      FieldName = 'CAMBIARCLAVE'
-      Size = 1
-    end
-    object ZQ_UsuariosGRUPO: TStringField
-      FieldName = 'GRUPO'
-      Size = 1
-    end
-    object ZQ_UsuariosHABILITADO: TStringField
-      FieldName = 'HABILITADO'
-      Size = 1
-    end
-    object ZQ_UsuariosNIVEL: TIntegerField
-      FieldName = 'NIVEL'
-    end
+  end
+  object DS_Usuarios: TDataSource
+    DataSet = ZQ_Usuarios
+    Left = 552
+    Top = 168
+  end
+  object EKLlenarComboUsuarios: TEKLlenarCombo
+    dataset = ZQ_Usuarios
+    combo = ComboBoxUsuarios
+    CampoClave = 'ID_PERSONA'
+    CampoVer = 'NOMBRE'
+    Left = 624
+    Top = 168
   end
 end
