@@ -657,17 +657,17 @@ begin
 
       if PageControlTransferir.ActivePage = TabSAsociarNotaPedido then
       begin
-        if confirmarNotaPedido = 'SI' then //si esta configurado para no editar mas las notas de pedido una vez confirmadas
-          if dm.EKModelo.iniciar_transaccion('Update Estado', []) then
-          begin
-            ZQ_Cpb_UpdateEstado.Close;
-            ZQ_Cpb_UpdateEstado.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
-            ZQ_Cpb_UpdateEstado.ParamByName('ID_ESTADO').AsInteger := ESTADO_ALMACENADO;
-            ZQ_Cpb_UpdateEstado.ExecSQL;
 
-            if not DM.EKModelo.finalizar_transaccion('Update Estado') then
-              DM.EKModelo.cancelar_transaccion('Update Estado')
-          end;
+        if dm.EKModelo.iniciar_transaccion('Update Estado', []) then
+        begin
+          ZQ_Cpb_UpdateEstado.Close;
+          ZQ_Cpb_UpdateEstado.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
+          ZQ_Cpb_UpdateEstado.ParamByName('ID_ESTADO').AsInteger := ESTADO_ALMACENADO;
+          ZQ_Cpb_UpdateEstado.ExecSQL;
+
+          if not DM.EKModelo.finalizar_transaccion('Update Estado') then
+            DM.EKModelo.cancelar_transaccion('Update Estado')
+        end;
 
         DBGridNotaPedido.Visible:= true;
         DBGridNotaPedidoDetalle.Visible:= False;
@@ -799,6 +799,10 @@ end;
 procedure TFTransferirStock.CD_ListaProductosCalcFields(DataSet: TDataSet);
 begin
   CD_ListaProductoscantidad_a_almacenar.AsFloat := CD_ListaProductoscantidad_recibida.AsFloat - CD_ListaProductoscantidad_almacenada.AsFloat - CD_ListaProductosalmacenar.AsFloat;
+
+  if CD_ListaProductoscantidad_a_almacenar.AsFloat < 0 then
+    CD_ListaProductosalmacenar.AsFloat := CD_ListaProductoscantidad_recibida.AsFloat - CD_ListaProductoscantidad_almacenada.AsFloat;
+
 end;
 
 

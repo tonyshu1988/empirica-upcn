@@ -736,8 +736,8 @@ var
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
   if ((ZQ_VerCpb.IsEmpty) or
-    ((estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO)) or //si esta anulada o almacenada salgo o
-    ((estado = ESTADO_CONFIRMADO) and (confirmarNotaPedido = 'SI'))) then //si esta confirmada y le doy bola a la confirmacion salgo
+    (estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO) or //si esta anulada o almacenada salgo o
+    (estado = ESTADO_CONFIRMADO)) then //si esta confirmada y le doy bola a la confirmacion salgo
     exit;
 
   confirmarComprobante:= false;
@@ -1320,8 +1320,8 @@ var
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
   if ((ZQ_VerCpb.IsEmpty) or //si no hay nada salgo o
-    ((estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO)) or //si esta anulada o almacenada salgo o
-    ((estado = ESTADO_CONFIRMADO) and (confirmarNotaPedido = 'SI'))) then //si esta confirmada y le doy bola a la confirmacion salgo
+    ((estado = ESTADO_ANULADO)) or //si esta anulada o almacenada salgo o
+    (((estado = ESTADO_ALMACENADO) or (estado = ESTADO_CONFIRMADO)) and (confirmarNotaPedido = 'SI'))) then //si esta confirmada y le doy bola a la confirmacion salgo
     exit;
 
   confirmarComprobante:= true;
