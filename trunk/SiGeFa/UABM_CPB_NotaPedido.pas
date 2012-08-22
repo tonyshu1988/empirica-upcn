@@ -1189,11 +1189,12 @@ end;
 
 procedure TFABM_CPB_NotaPedido.PopItemProducto_QuitarClick(Sender: TObject);
 begin
-  if confirmarComprobante and (ZQ_CpbProductoCANTIDAD.AsFloat <> 0) then
-    exit;
-
-  if not ZQ_CpbProducto.IsEmpty then
-    ZQ_CpbProducto.Delete;
+  if not (confirmarComprobante) and not (ZQ_CpbProducto.IsEmpty) then
+    ZQ_CpbProducto.Delete
+  else
+    if not (ZQ_CpbProducto.IsEmpty) and (ZQ_CpbProductoID_COMPROBANTE_DETALLE.AsInteger = 0) then
+      ZQ_CpbProducto.Delete;
+      
 end;
 
 
