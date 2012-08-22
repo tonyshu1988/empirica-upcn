@@ -7,7 +7,8 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB, DBClient, UBuscarProductoStock,
   EKLlenarCombo, ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls,
   EKListadoSQL, ComCtrls, ZSqlUpdate, ZStoredProcedure, EKOrdenarGrilla,
-  EKDbSuma, ActnList, XPStyleActnCtrls, ActnMan, Buttons;
+  EKDbSuma, ActnList, XPStyleActnCtrls, ActnMan, Buttons,
+  EKBusquedaAvanzada;
 
 type
   TFTransferirStock = class(TForm)
@@ -17,7 +18,7 @@ type
     btnNotaPedido: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
-    btnProcesar: TdxBarLargeButton;
+    btnBuscarHistorico: TdxBarLargeButton;
     btnTransferir: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
@@ -266,6 +267,11 @@ type
     ZQ_UpdateNotaPedido: TZQuery;
     dxBarButton1: TdxBarButton;
     btDestino: TBitBtn;
+    ZQ_Historico_CpbFECHA_IMPRESA: TDateField;
+    ZUpdateSQLHistoricoCpb: TZUpdateSQL;
+    Splitter1: TSplitter;
+    StaticText1: TStaticText;
+    EKBusquedaHistorico: TEKBusquedaAvanzada;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnTransferirClick(Sender: TObject);
@@ -301,6 +307,8 @@ type
     procedure DBGrid_Historico_DetalleDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     function  idStockProducto_pertenece_destino(idStock: integer):boolean;
     procedure btDestinoClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
+    procedure btnBuscarHistoricoClick(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     procedure onSelProducto;
@@ -319,7 +327,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal, UUtilidades;
+uses UDM, UPrincipal, UUtilidades, UImpresion_Comprobantes, EKModelo;
 
 {$R *.dfm}
 procedure TFTransferirStock.onSelProducto;
@@ -996,6 +1004,17 @@ begin
     ZQ_Historico_Cpb.Close;
   end;
   GrupoEditando.Enabled:= not(PanelHistorico.Visible);
+
+  if PanelHistorico.Visible then
+  begin
+    btnBuscarHistorico.Visible :=  ivAlways;
+    btnImprimir.Visible :=  ivAlways;
+  end
+  else
+  begin
+    btnBuscarHistorico.Visible :=  ivNever;
+    btnImprimir.Visible :=  ivNever;
+  end;
 end;
 
 procedure TFTransferirStock.ZQ_Historico_CpbAfterScroll(DataSet: TDataSet);
@@ -1012,6 +1031,31 @@ end;
 
 procedure TFTransferirStock.DBGrid_Historico_CpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
+
+  if not ZQ_Historico_Cpb.IsEmpty then
+  begin
+    if not (ZQ_Historico_CpbFECHA_IMPRESA.IsNull) then
+    begin
+      DBGrid_Historico_Cpb.Canvas.Brush.Color :=StaticText1.Color;
+      DBGrid_Historico_Cpb.Canvas.Font.Color := clBlack;
+      DBGrid_Historico_Cpb.Canvas.Font.Style := DBGrid_Historico_Cpb.Canvas.Font.Style + [fsBold];
+      if (gdFocused in State) or (gdSelected in State) then
+      begin
+        DBGrid_Historico_Cpb.Canvas.Font.Color := clwhite;
+      end
+    end
+    else
+    begin
+      if (gdFocused in State) or (gdSelected in State) then
+      begin
+        DBGrid_Historico_Cpb.Canvas.Font.Color := clwhite;
+        DBGrid_Historico_Cpb.Canvas.Brush.Color:=clBlue;
+        DBGrid_Historico_Cpb.Canvas.Font.Style := DBGrid_Historico_Cpb.Canvas.Font.Style + [fsBold];
+      end;
+    end;
+    DBGrid_Historico_Cpb.DefaultDrawColumnCell(rect,datacol,column,state);
+  end;
+
   FPrincipal.PintarFilasGrillas(DBGrid_Historico_Cpb, Rect, DataCol, Column, State);
 end;
 
@@ -1042,6 +1086,53 @@ begin
     id_pos_sucursal := StrToInt(EKListado_Sucursal.Resultado);
     EditSucursal.Text := EKListado_Sucursal.Seleccion;
   end;
+end;
+
+procedure TFTransferirStock.btnImprimirClick(Sender: TObject);
+begin
+
+  if (ZQ_Historico_Cpb.IsEmpty) then
+    exit;
+
+  if not Assigned(FImpresion_Comprobantes) then
+    FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
+  FImpresion_Comprobantes.cargarDatos(ZQ_Historico_CpbID_COMPROBANTE.AsInteger, 0, 0, false);
+  FImpresion_Comprobantes.imprimir;
+
+  if not ZQ_Historico_CpbFECHA_IMPRESA.IsNull then
+    exit;
+
+  if DM.EKModelo.iniciar_transaccion('IMPRESO' ,[ZQ_Historico_Cpb]) then
+  Begin
+    ZQ_Historico_Cpb.Edit;
+    ZQ_Historico_CpbFECHA_IMPRESA.AsDateTime := dm.EKModelo.Fecha;
+
+   if not DM.EKModelo.finalizar_transaccion('IMPRESO') then
+     DM.EKModelo.cancelar_transaccion('IMPRESO');
+  end; 
+
+end;
+
+procedure TFTransferirStock.btnBuscarHistoricoClick(Sender: TObject);
+begin
+  EKBusquedaHistorico.Buscar;
+
+  ZQ_Historico_Cpb.Filtered:= false;
+
+  if EKBusquedaHistorico.ParametrosSeleccionados1[5] = 'SI' then
+  begin
+    ZQ_Historico_Cpb.Filter:= 'fecha_impresa is not null';
+    ZQ_Historico_Cpb.Filtered:= true;
+  end
+  else
+  begin
+    if EKBusquedaHistorico.ParametrosSeleccionados1[5] = 'NO' then
+    begin
+      ZQ_Historico_Cpb.Filter:= 'fecha_impresa is null';
+      ZQ_Historico_Cpb.Filtered:= true;
+    end;
+  end;
+
 end;
 
 end.

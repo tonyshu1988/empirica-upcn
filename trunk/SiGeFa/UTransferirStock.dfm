@@ -1,6 +1,6 @@
 object FTransferirStock: TFTransferirStock
-  Left = 260
-  Top = 117
+  Left = 290
+  Top = 111
   Width = 958
   Height = 718
   Caption = 'Transferir Stock'
@@ -19,207 +19,6 @@ object FTransferirStock: TFTransferirStock
   OnKeyDown = FormKeyDown
   PixelsPerInch = 96
   TextHeight = 13
-  object PanelHistorico: TPanel
-    Left = 0
-    Top = 0
-    Width = 950
-    Height = 639
-    Align = alClient
-    BevelOuter = bvNone
-    BorderWidth = 2
-    TabOrder = 5
-    object PanelHistorico_Cpb: TPanel
-      Left = 2
-      Top = 2
-      Width = 946
-      Height = 184
-      Align = alTop
-      BevelOuter = bvNone
-      BorderWidth = 4
-      TabOrder = 0
-      object Label3: TLabel
-        Left = 4
-        Top = 4
-        Width = 938
-        Height = 20
-        Align = alTop
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Transferencias Realizadas'
-        Color = 16729670
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -15
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Transparent = False
-        Layout = tlCenter
-      end
-      object DBGrid_Historico_Cpb: TDBGrid
-        Left = 4
-        Top = 24
-        Width = 938
-        Height = 156
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_Historico_Cpb
-        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = ANSI_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGrid_Historico_CpbDrawColumnCell
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'FECHA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Fecha'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'CODIGO'
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'digo'
-            Width = 108
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SUCURSAL_ORIGEN'
-            Title.Alignment = taCenter
-            Title.Caption = 'Sucursal Origen'
-            Width = 248
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SUCURSAL_DESTINO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Sucursal Destino'
-            Width = 229
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SECCION'
-            Title.Alignment = taCenter
-            Title.Caption = 'Sucursal Destino Secci'#243'n'
-            Width = 246
-            Visible = True
-          end>
-      end
-    end
-    object PanelHistoric_Detalle: TPanel
-      Left = 2
-      Top = 186
-      Width = 946
-      Height = 451
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 4
-      TabOrder = 1
-      object Label4: TLabel
-        Left = 4
-        Top = 4
-        Width = 938
-        Height = 20
-        Align = alTop
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Productos Incluidos en la Transferencia'
-        Color = 16729670
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -15
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Transparent = False
-        Layout = tlCenter
-      end
-      object DBGrid_Historico_Detalle: TDBGrid
-        Left = 4
-        Top = 24
-        Width = 938
-        Height = 423
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_Historico_Detalle
-        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = ANSI_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGrid_Historico_DetalleDrawColumnCell
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'COD_CORTO'
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Corto'
-            Width = 92
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'CODIGO_BARRA'
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Barra'
-            Width = 88
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE_MARCA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Marca'
-            Width = 177
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Producto'
-            Width = 244
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'COLOR'
-            Title.Alignment = taCenter
-            Title.Caption = 'Color'
-            Width = 99
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'MEDIDA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Medida'
-            Width = 83
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'CANTIDAD'
-            Title.Alignment = taCenter
-            Title.Caption = 'Cantidad'
-            Width = 75
-            Visible = True
-          end>
-      end
-    end
-  end
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
@@ -773,6 +572,235 @@ object FTransferirStock: TFTransferirStock
       end
     end
   end
+  object PanelHistorico: TPanel
+    Left = 0
+    Top = 0
+    Width = 950
+    Height = 639
+    Align = alClient
+    BevelOuter = bvNone
+    BorderWidth = 2
+    TabOrder = 5
+    object Splitter1: TSplitter
+      Left = 2
+      Top = 186
+      Width = 946
+      Height = 3
+      Cursor = crVSplit
+      Align = alTop
+    end
+    object PanelHistoric_Detalle: TPanel
+      Left = 2
+      Top = 189
+      Width = 946
+      Height = 448
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 4
+      TabOrder = 1
+      object Label4: TLabel
+        Left = 4
+        Top = 4
+        Width = 938
+        Height = 20
+        Align = alTop
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Productos Incluidos en la Transferencia'
+        Color = 16729670
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -15
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+      end
+      object DBGrid_Historico_Detalle: TDBGrid
+        Left = 4
+        Top = 24
+        Width = 938
+        Height = 420
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_Historico_Detalle
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGrid_Historico_DetalleDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'COD_CORTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Corto'
+            Width = 92
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CODIGO_BARRA'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Barra'
+            Width = 88
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_MARCA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Marca'
+            Width = 177
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Producto'
+            Width = 244
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLOR'
+            Title.Alignment = taCenter
+            Title.Caption = 'Color'
+            Width = 99
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MEDIDA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Medida'
+            Width = 83
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CANTIDAD'
+            Title.Alignment = taCenter
+            Title.Caption = 'Cantidad'
+            Width = 75
+            Visible = True
+          end>
+      end
+    end
+    object PanelHistorico_Cpb: TPanel
+      Left = 2
+      Top = 2
+      Width = 946
+      Height = 184
+      Align = alTop
+      BevelOuter = bvNone
+      BorderWidth = 4
+      TabOrder = 0
+      DesignSize = (
+        946
+        184)
+      object Label3: TLabel
+        Left = 4
+        Top = 4
+        Width = 938
+        Height = 20
+        Align = alTop
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Transferencias Realizadas'
+        Color = 16729670
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -15
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+      end
+      object DBGrid_Historico_Cpb: TDBGrid
+        Left = 4
+        Top = 24
+        Width = 938
+        Height = 156
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_Historico_Cpb
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGrid_Historico_CpbDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'FECHA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Fecha'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CODIGO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'digo'
+            Width = 108
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SUCURSAL_ORIGEN'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal Origen'
+            Width = 248
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SUCURSAL_DESTINO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal Destino'
+            Width = 229
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SECCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal Destino Secci'#243'n'
+            Width = 246
+            Visible = True
+          end>
+      end
+      object StaticText1: TStaticText
+        Left = 882
+        Top = 7
+        Width = 56
+        Height = 15
+        Anchors = [akTop, akRight]
+        Caption = 'IMPRESO'
+        Color = 12713983
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsItalic]
+        ParentColor = False
+        ParentFont = False
+        TabOrder = 1
+      end
+    end
+  end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
@@ -907,6 +935,15 @@ object FTransferirStock: TFTransferirStock
           end
           item
             BeginGroup = True
+            Item = btnBuscarHistorico
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnImprimir
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -1223,9 +1260,9 @@ object FTransferirStock: TFTransferirStock
       0
       52)
     object btnBuscar: TdxBarLargeButton
-      Caption = 'F2 - Buscar'
+      Caption = 'Buscar'
       Category = 0
-      Hint = 'F2 - Buscar'
+      Hint = 'Buscar'
       Visible = ivAlways
       ImageIndex = 29
       OnClick = btnBuscarClick
@@ -1257,15 +1294,13 @@ object FTransferirStock: TFTransferirStock
       ImageIndex = 1
       AutoGrayScale = False
     end
-    object btnProcesar: TdxBarLargeButton
-      Caption = 'F8 - Procesar'
+    object btnBuscarHistorico: TdxBarLargeButton
+      Caption = 'Buscar Historico'
       Category = 0
-      Enabled = False
-      Hint = 
-        'Asociar los Productos pertenecientes a cada una de las Sucursale' +
-        's'
-      Visible = ivAlways
-      ImageIndex = 50
+      Hint = 'Buscar Historico'
+      Visible = ivNever
+      ImageIndex = 29
+      OnClick = btnBuscarHistoricoClick
       AutoGrayScale = False
     end
     object btnTransferir: TdxBarLargeButton
@@ -1301,8 +1336,9 @@ object FTransferirStock: TFTransferirStock
       Caption = 'Imprimir'
       Category = 0
       Hint = 'Imprimir'
-      Visible = ivAlways
+      Visible = ivNever
       ImageIndex = 28
+      OnClick = btnImprimirClick
     end
     object btnSalir: TdxBarLargeButton
       Align = iaRight
@@ -1332,12 +1368,11 @@ object FTransferirStock: TFTransferirStock
     end
     object GrupoEditando: TdxBarGroup
       Items = (
-        'btnBuscar'
         'btnNotaPedido'
         'btnNuevo'
         'btnModificar'
-        'btnImprimir'
-        'btnTransferir')
+        'btnTransferir'
+        'btnBuscar')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -2486,6 +2521,7 @@ object FTransferirStock: TFTransferirStock
   object ZQ_Historico_Cpb: TZQuery
     Connection = DM.Conexion
     AfterScroll = ZQ_Historico_CpbAfterScroll
+    UpdateObject = ZUpdateSQLHistoricoCpb
     SQL.Strings = (
       
         'select c.id_comprobante, c.id_sucursal, c.codigo, c.fecha, c.id_' +
@@ -2493,7 +2529,7 @@ object FTransferirStock: TFTransferirStock
       
         '       s1.nombre as sucursal_origen, s2.nombre as sucursal_desti' +
         'no,'
-      '       ps.seccion'
+      '       ps.seccion, c.fecha_impresa'
       'from comprobante c'
       'left join sucursal s1 on (c.id_sucursal = s1.id_sucursal)'
       
@@ -2534,6 +2570,9 @@ object FTransferirStock: TFTransferirStock
     object ZQ_Historico_CpbSECCION: TStringField
       FieldName = 'SECCION'
       Size = 50
+    end
+    object ZQ_Historico_CpbFECHA_IMPRESA: TDateField
+      FieldName = 'FECHA_IMPRESA'
     end
   end
   object ZQ_Historico_Detalle: TZQuery
@@ -2790,5 +2829,147 @@ object FTransferirStock: TFTransferirStock
         Name = 'id_producto'
         ParamType = ptUnknown
       end>
+  end
+  object ZUpdateSQLHistoricoCpb: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM comprobante'
+      'WHERE'
+      '  comprobante.ID_COMPROBANTE = :OLD_ID_COMPROBANTE')
+    InsertSQL.Strings = (
+      'INSERT INTO comprobante'
+      '  (FECHA_IMPRESA)'
+      'VALUES'
+      '  (:FECHA_IMPRESA)')
+    ModifySQL.Strings = (
+      'UPDATE comprobante SET'
+      '  FECHA_IMPRESA = :FECHA_IMPRESA'
+      'WHERE'
+      '  comprobante.ID_COMPROBANTE = :OLD_ID_COMPROBANTE')
+    UseSequenceFieldForRefreshSQL = False
+    Left = 853
+    Top = 58
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'FECHA_IMPRESA'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_ID_COMPROBANTE'
+        ParamType = ptUnknown
+      end>
+  end
+  object EKBusquedaHistorico: TEKBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Comprobante'
+        Campo = 'codigo'
+        Tabla = 'c'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Fecha Transferencia'
+        Campo = 'fecha'
+        Tabla = 'c'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Sucursal Origen'
+        Campo = 'nombre'
+        Tabla = 's1'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Sucursal Destino'
+        Campo = 'nombre'
+        Tabla = 's2'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Secci'#243'n'
+        Campo = 'seccion'
+        Tabla = 'ps'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Impreso'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'SI'
+          'NO')
+        TipoComboAncho = 200
+        ItemIndex = 1
+        VaciarValorDespues = False
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.EKModelo
+    DataSet = ZQ_Historico_Cpb
+    SQL.Strings = (
+      
+        'select c.id_comprobante, c.id_sucursal, c.codigo, c.fecha, c.id_' +
+        'posicion_suc_destino,'
+      
+        '       s1.nombre as sucursal_origen, s2.nombre as sucursal_desti' +
+        'no,'
+      '       ps.seccion, c.fecha_impresa'
+      'from comprobante c'
+      'left join sucursal s1 on (c.id_sucursal = s1.id_sucursal)'
+      
+        'left join posicion_sucursal ps on (c.id_posicion_suc_destino = p' +
+        's.id_posicion_sucursal)'
+      'left join sucursal s2 on (ps.id_sucursal = s2.id_sucursal)'
+      'where c.id_tipo_cpb = 24'
+      ''
+      'order by c.fecha desc')
+    SQL_Select.Strings = (
+      
+        'select c.id_comprobante, c.id_sucursal, c.codigo, c.fecha, c.id_' +
+        'posicion_suc_destino,'
+      
+        '       s1.nombre as sucursal_origen, s2.nombre as sucursal_desti' +
+        'no,'
+      '       ps.seccion, c.fecha_impresa')
+    SQL_From.Strings = (
+      'from comprobante c'
+      'left join sucursal s1 on (c.id_sucursal = s1.id_sucursal)'
+      
+        'left join posicion_sucursal ps on (c.id_posicion_suc_destino = p' +
+        's.id_posicion_sucursal)'
+      'left join sucursal s2 on (ps.id_sucursal = s2.id_sucursal)')
+    SQL_Where.Strings = (
+      'where c.id_tipo_cpb = 24'
+      '')
+    SQL_Orden.Strings = (
+      'order by c.fecha desc')
+    UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
+    Left = 698
+    Top = 533
   end
 end

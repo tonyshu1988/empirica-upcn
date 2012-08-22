@@ -841,6 +841,66 @@ type
     ChildBand12: TQRChildBand;
     QRLabel93: TQRLabel;
     QRLabel94: TQRLabel;
+    TabSheet11: TTabSheet;
+    RepTransferirStock: TQuickRep;
+    QRBand43: TQRBand;
+    QRLabel289: TQRLabel;
+    RepTransferirStock_RENGLON4: TQRLabel;
+    RepTransferirStock_RENGLON3: TQRLabel;
+    RepTransferirStock_RENGLON2: TQRLabel;
+    RepTransferirStock_TITULO: TQRLabel;
+    QRShape14: TQRShape;
+    QRLabel317: TQRLabel;
+    QRLabel318: TQRLabel;
+    RepTransferirStock_RENGLON1: TQRLabel;
+    QRDBText181: TQRDBText;
+    QRDBText182: TQRDBText;
+    QRLabel328: TQRLabel;
+    QRDBImage3: TQRDBImage;
+    QRLabel329: TQRLabel;
+    QRBand46: TQRBand;
+    QRLabel332: TQRLabel;
+    QRLabel334: TQRLabel;
+    QRLabel337: TQRLabel;
+    QRDBText185: TQRDBText;
+    QRDBText186: TQRDBText;
+    QRDBText187: TQRDBText;
+    QRBand47: TQRBand;
+    QRLabel338: TQRLabel;
+    QRDBText190: TQRDBText;
+    QRChildBand21: TQRChildBand;
+    QRLabel339: TQRLabel;
+    QRDBText191: TQRDBText;
+    QRLabel340: TQRLabel;
+    QRChildBand22: TQRChildBand;
+    QRLabel341: TQRLabel;
+    QRLabel342: TQRLabel;
+    QRLabel343: TQRLabel;
+    QRLabel344: TQRLabel;
+    QRLabel345: TQRLabel;
+    QRLabel346: TQRLabel;
+    QRBand48: TQRBand;
+    QRLabel347: TQRLabel;
+    QRLabel348: TQRLabel;
+    QRLabel350: TQRLabel;
+    QRBand49: TQRBand;
+    QRlblTransfStock_PiePagina: TQRLabel;
+    QRSubDetail21: TQRSubDetail;
+    QRDBText192: TQRDBText;
+    QRDBText193: TQRDBText;
+    QRDBText194: TQRDBText;
+    QRDBText195: TQRDBText;
+    QRDBText196: TQRDBText;
+    QRDBText197: TQRDBText;
+    ZQ_ComprobanteSUCURSAL_DESTINO: TStringField;
+    ZQ_ComprobanteSECCION: TStringField;
+    QRDBText183: TQRDBText;
+    QRLabel290: TQRLabel;
+    QRLabel291: TQRLabel;
+    QRLabel306: TQRLabel;
+    QRLabel308: TQRLabel;
+    QRLabelFecha: TQRLabel;
+    QRlblTransferirStock_CantidadTotal: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
@@ -862,7 +922,8 @@ type
     procedure configReciboCtaCte();
     procedure configOrdenPagoCtaCte();
     procedure configNotaCredito();
-    procedure configDevolucion();    
+    procedure configDevolucion();
+    procedure configNotaTransferirStock;
     procedure imprimir();
     function  generarPDF(): string;
   end;
@@ -951,6 +1012,11 @@ begin
                             reporte:= RepOrdenPagoCtaCte;
                             archivoPDF:= 'OrdenPagoCtaCte.pdf';
                           end;
+     CPB_TRANSFERIR_STOCK:begin //CPB_TRANSFERIR_STOCK
+                            reporte:= RepTransferirStock;
+                            configNotaTransferirStock();
+                            archivoPDF:= 'TransferirStock.pdf';
+                          end;
     end;
   end
 end;
@@ -974,6 +1040,24 @@ begin
   Result:= archivoPDF;
 end;
 
+//NOTA TRANSFERIR STOCK
+procedure TFImpresion_Comprobantes.configNotaTransferirStock();
+var
+  cantidadProductos: Double;
+begin
+  if ZQ_Comprobante.IsEmpty then
+    exit;
+
+  cantidadProductos:= EKDbSumaProducto.SumCollection[0].sumvalue;
+  QRlblTransferirStock_CantidadTotal.Caption := 'CANTIDAD: '+FormatFloat('0.00', cantidadProductos);
+
+  QRlblTransfStock_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+
+
+  QRLabelFecha.Caption := FormatDateTime('dd/mm/yyyy ',dm.EKModelo.Fecha);
+  DM.VariablesComprobantes(RepTransferirStock);
+  EKVistaPrevia.Reporte:= RepTransferirStock;
+end;
 
 //NOTA CREDITO
 procedure TFImpresion_Comprobantes.configNotaCredito();
