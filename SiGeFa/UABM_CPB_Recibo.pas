@@ -406,6 +406,8 @@ type
     ZQ_ClienteLIMITE_DEUDA: TFloatField;
     ZQ_ClienteVENCIMIENTO_DIAS: TIntegerField;
     CD_Facturas_recargo: TFloatField;
+    CD_Facturas_pagoCompleto: TStringField;
+    DBCheckBox_GrillaFacturas: TDBCheckBox;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -466,6 +468,7 @@ type
     procedure CD_Facturas_recargoChange(Sender: TField);
     procedure DBGridFacturasColExit(Sender: TObject);
     procedure DBGridFacturasColEnter(Sender: TObject);
+    procedure DBGridFacturasDblClick(Sender: TObject);
   Private
     id_cuenta_fpago: integer;
     estadoPantalla: string;
@@ -537,7 +540,7 @@ procedure TFABM_CPB_Recibo.FormCreate(Sender: TObject);
 begin
   EKOrd_VerCpb.CargarConfigColumnas;
   EKOrd_VerCpb_Fpago.CargarConfigColumnas;
-  EKOrd_VerCpb_NCredito.CargarConfigColumnas;  
+  EKOrd_VerCpb_NCredito.CargarConfigColumnas;
   EKOrd_EditarFpago.CargarConfigColumnas;
 
   dm.EKModelo.abrir(ZQ_Cuenta); //abro las cuentas bancarias
@@ -560,6 +563,12 @@ begin
 
   //FACTURAS
   CD_Facturas.CreateDataSet;
+
+  DBCheckBox_GrillaFacturas.Visible:= false;
+  DBCheckBox_GrillaFacturas.Color:= DBGridFacturas.Color;
+  DBCheckBox_GrillaFacturas.Caption:= '';
+  DBCheckBox_GrillaFacturas.ValueChecked:= 'True';
+  DBCheckBox_GrillaFacturas.ValueUnChecked:= 'False';
 end;
 
 
@@ -874,7 +883,8 @@ begin
     if totalFormaPago > totalCancelarFacturas then
     begin
 //      Application.MessageBox(pchar('El monto total a cancelar de las facturas ('+FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas)+') es distinto al monto total de la forma de pago ('+FormatFloat('$ ###,###,###,##0.00', totalFormaPago)+'), por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
-      Application.MessageBox(pchar('El monto de la forma de pago ('+FormatFloat('$ ###,###,###,##0.00', totalFormaPago)+') es superior al total a cancelar de las facturas ('+FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas)+'), por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
+      Application.MessageBox(pchar('El monto de la forma de pago (' + FormatFloat('$ ###,###,###,##0.00', totalFormaPago) + ') es superior al total a cancelar de las facturas (' + FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas) +
+        '), por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
       DBGridEditar_Fpago.SetFocus;
       exit;
     end;
@@ -1020,7 +1030,7 @@ end;
 procedure TFABM_CPB_Recibo.ZQ_VerCpbAfterScroll(DataSet: TDataSet);
 begin
   ZQ_VerCpb_Fpago.Close;
-  ZQ_VerCpb_NCredito.Close;  
+  ZQ_VerCpb_NCredito.Close;
   ZQ_PagosFactura.Close;
 
   if ZQ_VerCpb.IsEmpty then
@@ -1450,8 +1460,8 @@ begin
   vselFactura.OnSeleccionarTodos:= onSelTodasFactura;
   vselFactura.EKBuscarFacturaVenta.VerConsultaOriginal;
   saldo:= 'Saldo Total: ' + FormatFloat('$ ###,###,###,##0.00', vselFactura.EKDbSumaVenta.SumCollection[0].SumValue);
-  notaCredito:= 'Nota Credito: '+FormatFloat('$ ###,###,###,##0.00', vselFactura.ZQ_SaldoNotaCreditoSALDO.AsFloat);
-  vselFactura.lblSaldoTotal.Caption:= saldo+' || '+notaCredito+' ';
+  notaCredito:= 'Nota Credito: ' + FormatFloat('$ ###,###,###,##0.00', vselFactura.ZQ_SaldoNotaCreditoSALDO.AsFloat);
+  vselFactura.lblSaldoTotal.Caption:= saldo + ' || ' + notaCredito + ' ';
   vselFactura.ShowModal;
 end;
 
@@ -1459,7 +1469,7 @@ end;
 procedure TFABM_CPB_Recibo.onSelFactura;
 var
   saldo_comprobante, recargo_vencimiento: double;
-  vencida: string;
+  vencida, pagoCompleto: string;
 begin
   if (not (vselFactura.ZQ_Factura_Venta.IsEmpty)) then //si se selecciona un factura
   begin
@@ -1477,13 +1487,15 @@ begin
 
     vencida:= 'NO';
     recargo_vencimiento:= 0;
+    pagoCompleto:= 'false';
     saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
-//    if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
-//    begin
-//      recargo_vencimiento:= recargo_factura_vencida;
-//      saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (1 + (recargo_factura_vencida/100));
-//      vencida:= 'SI'
-//    end;
+    if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
+    begin
+      recargo_vencimiento:= recargo_factura_vencida;
+      saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (1 + (recargo_factura_vencida/100));
+      vencida:= 'SI';
+      pagoCompleto:= 'true';
+    end;
 
     CD_Facturas.Append;
     CD_Facturas_idComprobante.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
@@ -1496,6 +1508,7 @@ begin
     CD_Facturas_fecha.AsDateTime:= vselFactura.ZQ_Factura_VentaFECHA.AsDateTime;
     CD_Facturas_descripcion.AsString:= vselFactura.ZQ_Factura_VentaDESCRIPCION.AsString;
     CD_Facturas_recargo.AsFloat:= recargo_vencimiento;
+    CD_Facturas_pagoCompleto.AsString:= pagoCompleto;
     CD_Facturas.Post;
   end;
 
@@ -1509,7 +1522,7 @@ end;
 procedure TFABM_CPB_Recibo.onSelTodasFactura;
 var
   saldo_comprobante, recargo_vencimiento: double;
-  vencida: string;
+  vencida, pagoCompleto: string;
 begin
   if (not (vselFactura.ZQ_Factura_Venta.IsEmpty)) then //si se selecciona un factura
   begin
@@ -1531,13 +1544,15 @@ begin
 
         vencida:= 'NO';
         recargo_vencimiento:= 0;
+        pagoCompleto:= 'false';
         saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
-//        if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
-//        begin
-//          recargo_vencimiento:= recargo_factura_vencida;
-//          saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (1 + (recargo_factura_vencida/100));
-//          vencida:= 'SI'
-//        end;
+        if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
+        begin
+          recargo_vencimiento:= recargo_factura_vencida;
+          saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (1 + (recargo_factura_vencida/100));
+          vencida:= 'SI';
+          pagoCompleto:= 'true';
+        end;
 
         CD_Facturas.Append;
         CD_Facturas_idComprobante.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
@@ -1550,6 +1565,7 @@ begin
         CD_Facturas_fecha.AsDateTime:= vselFactura.ZQ_Factura_VentaFECHA.AsDateTime;
         CD_Facturas_descripcion.AsString:= vselFactura.ZQ_Factura_VentaDESCRIPCION.AsString;
         CD_Facturas_recargo.AsFloat:= recargo_vencimiento;
+        CD_Facturas_pagoCompleto.AsString:= pagoCompleto;
         CD_Facturas.Post;
 
         vselFactura.ZQ_Factura_Venta.Next;
@@ -1572,8 +1588,24 @@ end;
 
 
 procedure TFABM_CPB_Recibo.DBGridFacturasDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+const
+  IsChecked: array[boolean] of Integer = (DFCS_BUTTONCHECK, DFCS_BUTTONCHECK or DFCS_CHECKED);
+var
+  DrawState: Integer;
+  DrawRect: TRect;
 begin
   FPrincipal.PintarFilasGrillas(DBGridFacturas, Rect, DataCol, Column, State);
+
+  if (Column.Field.FieldName = DBCheckBox_GrillaFacturas.DataField) then
+  begin
+    DrawRect:= Rect;
+    InflateRect(DrawRect, -1, -1);
+
+    DrawState:= ISChecked[Column.Field.AsBoolean];
+
+    DBGridFacturas.Canvas.FillRect(Rect);
+    DrawFrameControl(DBGridFacturas.Canvas.Handle, DrawRect, DFC_BUTTON, DrawState);
+  end;
 end;
 
 
@@ -1699,8 +1731,8 @@ begin
       if saldoNotaCredito > 0 then
         ZQ_CpbFormaPagoIMPORTE.AsFloat:= saldoNotaCredito
       else
-      if cargarMonto then
-        ZQ_CpbFormaPagoIMPORTE.AsFloat:= EKSuma_Factura.SumCollection[0].SumValue;
+        if cargarMonto then
+          ZQ_CpbFormaPagoIMPORTE.AsFloat:= EKSuma_Factura.SumCollection[0].SumValue;
 
       ZQ_CpbFormaPago.Post;
     end;
@@ -1898,16 +1930,18 @@ begin
   FPrincipal.PintarFilasGrillas(DBGridCpbActual_NCredito, Rect, DataCol, Column, State);
 end;
 
+
 procedure TFABM_CPB_Recibo.CD_Facturas_recargoChange(Sender: TField);
 var
   saldo_comprobante, recargo_vencimiento: double;
 begin
-  recargo_vencimiento:= CD_Facturas_saldoComprobante.AsFloat * (CD_Facturas_recargo.AsFloat /100);
+  recargo_vencimiento:= CD_Facturas_saldoComprobante.AsFloat * (CD_Facturas_recargo.AsFloat / 100);
   saldo_comprobante:= CD_Facturas_saldoComprobante.AsFloat + recargo_vencimiento;
 
   CD_Facturas.edit;
   CD_Facturas_importeCancelar.AsFloat:= saldo_comprobante;
 end;
+
 
 procedure TFABM_CPB_Recibo.DBGridFacturasColExit(Sender: TObject);
 begin
@@ -1920,14 +1954,32 @@ begin
 //  end;
 end;
 
+
 procedure TFABM_CPB_Recibo.DBGridFacturasColEnter(Sender: TObject);
 begin
-//    if ((sender as tdbgrid).SelectedField.FullName = '_recargo') then
-//    begin
-//      EKSuma_Factura.RecalcAll;
-//      editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[0].SumValue);
-//      editTotalSaldo.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[1].SumValue);
-//    end;
+  if (DBGridFacturas.SelectedField.FieldName = '_recargo') or
+     (DBGridFacturas.SelectedField.FieldName = '_importeCancelar') then
+    DBGridFacturas.Options := DBGridFacturas.Options + [dgEditing]
+  else
+    DBGridFacturas.Options := DBGridFacturas.Options - [dgEditing];
+end;
+
+
+procedure TFABM_CPB_Recibo.DBGridFacturasDblClick(Sender: TObject);
+begin
+  if (DBGridFacturas.SelectedField.FieldName = DBCheckBox_GrillaFacturas.DataField) then
+  begin
+    if DBCheckBox_GrillaFacturas.Checked then
+    begin
+      CD_Facturas.Edit;
+      CD_Facturas_pagoCompleto.AsString:= 'false'
+    end
+    else
+    begin
+      CD_Facturas.Edit;
+      CD_Facturas_pagoCompleto.AsString:= 'true'
+    end;
+  end;
 end;
 
 end.

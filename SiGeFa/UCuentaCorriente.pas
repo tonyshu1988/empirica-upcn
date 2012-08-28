@@ -8,7 +8,7 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, UBuscarPersona, EKEdit, Buttons,
-  EKDbSuma, ComCtrls, EKDBDateTimePicker, Menus;
+  EKDbSuma, ComCtrls, EKDBDateTimePicker, Menus, ZStoredProcedure;
 
 type
   TFCuentaCorriente = class(TForm)
@@ -322,6 +322,18 @@ type
     ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField;
     Popup_ComprobanteDetalle: TPopupMenu;
     PopUpItem_DevolverProducto: TMenuItem;
+    ZP_DevolverProducto: TZStoredProc;
+    DBGridDetalle_FPago: TDBGrid;
+    ZQ_ComprobanteFPago: TZQuery;
+    DS_ComprobanteFPago: TDataSource;
+    ZQ_ComprobanteFPagoID_COMPROB_FP: TIntegerField;
+    ZQ_ComprobanteFPagoID_COMPROBANTE: TIntegerField;
+    ZQ_ComprobanteFPagoFECHA_FP: TDateTimeField;
+    ZQ_ComprobanteFPagoIMPORTE_REAL: TFloatField;
+    ZQ_ComprobanteFPagoIMPORTE: TFloatField;
+    ZQ_ComprobanteFPagoNOMBRE_CUENTA: TStringField;
+    ZQ_ComprobanteFPagoDESCRIPCION: TStringField;
+    EKOrdenar_DetalleFPago: TEKOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -348,18 +360,16 @@ type
     procedure btnAltaReciboClick(Sender: TObject);
     procedure AVerDetalleExecute(Sender: TObject);
     procedure FormActivate(Sender: TObject);
-    procedure DBGridDetalle_ProductoDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure DBGridDetalle_ReciboDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure DBGridDetalle_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridDetalle_ReciboDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure PopUpItem_DevolverProductoClick(Sender: TObject);
-  private
+    procedure verDetalle;
+    procedure DBGridDetalle_FPagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  Private
     viendoResumen: boolean;
     viendoDetalleCpb: boolean;
-    ActivarAfterScroll : boolean;
-  public
+    ActivarAfterScroll: boolean;
+  Public
   end;
 
 var
@@ -380,6 +390,7 @@ begin
   EKOrdenar_CtaCteCliente.GuardarConfigColumnas;
   EKOrdenar_DetalleProducto.GuardarConfigColumnas;
   EKOrdenar_DetalleRecibo.GuardarConfigColumnas;
+  EKOrdenar_DetalleFPago.GuardarConfigColumnas;  
 
   CanClose:= FPrincipal.cerrar_ventana(transaccion);
 end;
@@ -431,7 +442,7 @@ begin
   else
   begin
     //para el resumen de los clientes
-    ActivarAfterScroll := false;
+    ActivarAfterScroll:= false;
 
     viendoResumen:= true;
     PanelResumen.BringToFront;
@@ -457,6 +468,7 @@ begin
   EKOrdenar_CtaCteCliente.CargarConfigColumnas;
   EKOrdenar_DetalleProducto.CargarConfigColumnas;
   EKOrdenar_DetalleRecibo.CargarConfigColumnas;
+  EKOrdenar_DetalleFPago.CargarConfigColumnas;  
 
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnFiltroFecha_Cancelar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnFiltroFecha_Aceptar.Glyph);
@@ -481,7 +493,7 @@ begin
   calcularTotales('GENERAL');
   btnVerDetalleFactura.Click;
 
-  ActivarAfterScroll := false;
+  ActivarAfterScroll:= false;
 end;
 
 
@@ -701,20 +713,17 @@ begin
 
 end;
 
-procedure TFCuentaCorriente.DBGridCliente_CtaCteDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFCuentaCorriente.DBGridCliente_CtaCteDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridCliente_CtaCte, Rect, DataCol, Column, State);
 end;
 
 
-procedure TFCuentaCorriente.DBGridResumen_CtaCtesDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+procedure TFCuentaCorriente.DBGridResumen_CtaCtesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillasConBajas(DBGridResumen_CtaCtes, ZQ_CtaCte_GralDEUDA_VENCIDA.AsString, Rect, DataCol, Column, State);
 end;
+
 
 procedure TFCuentaCorriente.btnExcelClick(Sender: TObject);
 begin
@@ -811,9 +820,10 @@ end;
 procedure TFCuentaCorriente.ZQ_CtaCte_ClienteAfterScroll(DataSet: TDataSet);
 begin
   if not ActivarAfterScroll then
-  exit;
+    exit;
 
   ZQ_ComprobanteDetalle.Close;
+  ZQ_ComprobanteFPago.Close;
   ZQ_ReciboDetalle.Close;
 
   if ZQ_CtaCte_Cliente.IsEmpty then
@@ -822,36 +832,14 @@ begin
   ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ClienteID_COMPROBANTE.AsInteger;
   ZQ_ComprobanteDetalle.Open;
 
+  ZQ_ComprobanteFPago.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ClienteID_COMPROBANTE.AsInteger;
+  ZQ_ComprobanteFPago.ParamByName('fecha').AsDateTime:= ZQ_CtaCte_ClienteFECHA.AsDateTime;
+  ZQ_ComprobanteFPago.Open;
+
   ZQ_ReciboDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ClienteID_COMPROBANTE.AsInteger;
   ZQ_ReciboDetalle.Open;
 
-  if viendoDetalleCpb then
-  begin
-  //si el tipo de comprobante es saldo anterior o nota de credito
-    if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0)
-      or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
-    begin
-      PanelDetalleMov.Visible:= false;
-    end
-    else //sino
-    //si el tipo de comprobante es recibo de cta cte
-      if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
-      begin
-        lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
-        PanelDetalleMov.Visible:= true;
-        DBGridDetalle_Producto.SendToBack;
-        DBGridDetalle_Recibo.BringToFront;
-      end
-      else //sino
-      //si el tipo de comprobante es distinto de nota de credito
-        if AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) = 0 then
-        begin
-          lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
-          PanelDetalleMov.Visible:= true;
-          DBGridDetalle_Producto.BringToFront;
-          DBGridDetalle_Recibo.SendToBack;
-        end;
-  end
+  verDetalle;
 end;
 
 
@@ -860,42 +848,18 @@ begin
   if ZQ_CtaCte_Cliente.IsEmpty then
     Exit;
 
-  if viendoDetalleCpb = true then
+  if viendoDetalleCpb = true then //si estoy con el detalle activado lo desactivo
   begin
+    ActivarAfterScroll:= false;
     viendoDetalleCpb:= false;
     PanelDetalleMov.Visible:= false;
-
-    ActivarAfterScroll := false;
   end
-  else
+  else //si estoy con el detalle desactivado lo activo
   begin
-    ActivarAfterScroll := true;
+    ActivarAfterScroll:= true;
     ZQ_CtaCte_Cliente.Refresh;
     viendoDetalleCpb:= true;
-    //si el tipo de comprobante es saldo anterior o nota de credito
-    if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0)
-      or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
-    begin
-      PanelDetalleMov.Visible:= false;
-    end
-    else //sino
-    //si el tipo de comprobante es recibo de cta cte
-      if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
-      begin
-        lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
-        PanelDetalleMov.Visible:= true;
-        DBGridDetalle_Producto.SendToBack;
-        DBGridDetalle_Recibo.BringToFront;
-      end
-      else //sino
-      //si el tipo de comprobante es distinto de nota de credito
-        if AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) = 0 then
-        begin
-          lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
-          PanelDetalleMov.Visible:= true;
-          DBGridDetalle_Producto.BringToFront;
-          DBGridDetalle_Recibo.SendToBack;
-        end
+    verDetalle;
   end;
 end;
 
@@ -908,7 +872,8 @@ begin
   else
     ShowMessage('Hay un alta de Recibo en curso, verifique');
 end;
-                                   
+
+
 procedure TFCuentaCorriente.FormActivate(Sender: TObject);
 var
   recNo_gral: integer;
@@ -930,24 +895,116 @@ begin
   end;
 end;
 
-procedure TFCuentaCorriente.DBGridDetalle_ProductoDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFCuentaCorriente.DBGridDetalle_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridDetalle_Producto, Rect, DataCol, Column, State);
 end;
 
-procedure TFCuentaCorriente.DBGridDetalle_ReciboDrawColumnCell(
-  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
-  State: TGridDrawState);
+
+procedure TFCuentaCorriente.DBGridDetalle_ReciboDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridDetalle_Recibo, Rect, DataCol, Column, State);
 end;
 
-procedure TFCuentaCorriente.PopUpItem_DevolverProductoClick(
-  Sender: TObject);
+
+procedure TFCuentaCorriente.PopUpItem_DevolverProductoClick(Sender: TObject);
+var
+  recno, id_cpb, id_cpb_detalle: integer;
+  importe_devolver: double;
+  mensaje: string;
 begin
-//
+  if (ZQ_ComprobanteDetalle.IsEmpty) or (ZQ_CtaCte_ClienteHABER.AsFloat <> 0) then
+    exit;
+
+  id_cpb:= ZQ_ComprobanteDetalleID_COMPROBANTE.AsInteger;
+  id_cpb_detalle:= ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE.AsInteger;
+  importe_devolver:= ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat;
+
+  if (importe_devolver > ZQ_CtaCte_ClienteSALDO_CPB.AsFloat) then
+  begin
+    mensaje:= format('No se puede devolver el Producto Seleccionado porque el' + #13 +
+      'precio de este es superior al Saldo de la Factura asociada.' + #13 +
+      '(Precio Producto = %n > Saldo Factura = %n)', [importe_devolver, ZQ_CtaCte_ClienteSALDO_CPB.AsFloat]);
+    Application.MessageBox(pchar(mensaje), 'Atención', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
+
+  mensaje:= format('¿Desea eliminar el producto %s de la Factura %s?', [ZQ_ComprobanteDetalleDETALLE_PROD.AsString, ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString]);
+
+  if (application.MessageBox(pchar(mensaje), 'Eliminar Producto', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, []) then
+    begin
+      ZP_DevolverProducto.Close;
+      ZP_DevolverProducto.ParamByName('id_cpb').AsInteger:= id_cpb;
+      ZP_DevolverProducto.ParamByName('id_cpb_detalle').AsInteger:= id_cpb_detalle;
+      ZP_DevolverProducto.ParamByName('importe_devolucion').AsFloat:= importe_devolver;
+      ZP_DevolverProducto.ExecProc;
+
+      try
+        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+      except
+        begin
+          Application.MessageBox('No se pudo eliminar el Producto.', 'Atención', MB_OK + MB_ICONINFORMATION);
+          exit;
+        end
+      end;
+    end;
+
+  recNo:= ZQ_CtaCte_Cliente.RecNo;
+  ZQ_CtaCte_Cliente.Refresh;
+  ZQ_CtaCte_Cliente.RecNo:= recNo;
+end;
+
+
+procedure TFCuentaCorriente.verDetalle();
+begin
+  if viendoDetalleCpb then
+  begin
+    PanelDetalleMov.Visible:= false;
+    //si el tipo de comprobante es saldo anterior o nota de credito
+    if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
+    begin
+      PanelDetalleMov.Visible:= false;
+    end
+    else //sino
+      //si el tipo de comprobante es recibo de cta cte
+      if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
+      begin
+        lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+        PanelDetalleMov.Visible:= true;
+        DBGridDetalle_FPago.SendToBack;
+        DBGridDetalle_Producto.SendToBack;
+        DBGridDetalle_Recibo.BringToFront;
+      end
+      else //sino
+        //si el tipo de comprobante es Pago factura
+        if AnsiPos('PAGO FACTURA', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
+        begin
+          lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+          PanelDetalleMov.Visible:= true;
+          DBGridDetalle_FPago.BringToFront;
+          DBGridDetalle_Producto.SendToBack;
+          DBGridDetalle_Recibo.SendToBack;
+        end
+        else //sino
+        //si el tipo de comprobante es factura
+          if AnsiPos('FACTURA', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
+          begin
+            lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+            PanelDetalleMov.Visible:= true;
+            DBGridDetalle_FPago.SendToBack;
+            DBGridDetalle_Producto.BringToFront;
+            DBGridDetalle_Recibo.SendToBack;
+          end
+  end;
+end;
+
+
+procedure TFCuentaCorriente.DBGridDetalle_FPagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridDetalle_FPago, Rect, DataCol, Column, State);
 end;
 
 end.
