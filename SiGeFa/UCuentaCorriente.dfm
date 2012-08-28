@@ -1,6 +1,6 @@
 object FCuentaCorriente: TFCuentaCorriente
-  Left = 504
-  Top = 160
+  Left = 242
+  Top = 123
   Width = 1009
   Height = 698
   Caption = 'Cta. Cte. Cliente'
@@ -299,7 +299,7 @@ object FCuentaCorriente: TFCuentaCorriente
             50.270833333333330000
             582.083333333333400000
             124.354166666666700000
-            735.541666666666800000)
+            735.541666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -330,7 +330,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Size.Values = (
             52.916666666666670000
             746.125000000000000000
-            68.791666666666680000
+            68.791666666666670000
             404.812500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -361,7 +361,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            719.666666666666800000
+            719.666666666666700000
             5.291666666666667000
             460.375000000000000000)
           Alignment = taCenter
@@ -1630,7 +1630,7 @@ object FCuentaCorriente: TFCuentaCorriente
             50.270833333333330000
             595.312500000000000000
             124.354166666666700000
-            709.083333333333200000)
+            709.083333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1661,7 +1661,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Size.Values = (
             52.916666666666670000
             762.000000000000000000
-            68.791666666666680000
+            68.791666666666670000
             375.708333333333400000)
           Alignment = taCenter
           AlignToBand = True
@@ -1692,7 +1692,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            743.479166666666800000
+            743.479166666666700000
             5.291666666666667000
             412.750000000000000000)
           Alignment = taCenter
@@ -2335,7 +2335,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Size.Values = (
             34.395833333333340000
             338.666666666666700000
-            18.520833333333330000
+            18.520833333333340000
             277.812500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -2627,7 +2627,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            965.729166666666800000
+            965.729166666666700000
             108.479166666666700000
             153.458333333333300000)
           Alignment = taLeftJustify
@@ -2952,7 +2952,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            783.166666666666800000
+            783.166666666666700000
             198.437500000000000000
             161.395833333333300000)
           Alignment = taLeftJustify
@@ -2985,7 +2985,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Size.Values = (
             34.395833333333340000
             42.333333333333340000
-            18.520833333333330000
+            18.520833333333340000
             111.125000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -4196,6 +4196,7 @@ object FCuentaCorriente: TFCuentaCorriente
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridDetalle_ReciboDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -4236,6 +4237,7 @@ object FCuentaCorriente: TFCuentaCorriente
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridDetalle_ProductoDrawColumnCell
           Columns = <
             item
               Expanded = False
@@ -4283,6 +4285,13 @@ object FCuentaCorriente: TFCuentaCorriente
               Title.Alignment = taCenter
               Title.Caption = 'Cantidad'
               Width = 69
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_VENTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Importe Venta'
               Visible = True
             end>
         end
@@ -5657,7 +5666,8 @@ object FCuentaCorriente: TFCuentaCorriente
         'ROD,'
       
         '       p.codigo_barra, c.nombre as color, m.medida, ma.nombre_ma' +
-        'rca, cd.cantidad'
+        'rca, cd.cantidad,'
+      '       cd.importe_venta'
       'from comprobante_detalle cd'
       'left join producto p on (cd.id_producto=p.id_producto)'
       
@@ -5710,6 +5720,10 @@ object FCuentaCorriente: TFCuentaCorriente
     object ZQ_ComprobanteDetalleCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
     end
+    object ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      currency = True
+    end
   end
   object DS_ComprobanteDetalle: TDataSource
     DataSet = ZQ_ComprobanteDetalle
@@ -5749,6 +5763,7 @@ object FCuentaCorriente: TFCuentaCorriente
     PermitirOrdenar = True
     PermitirMover = True
     PermitirFiltrar = True
+    PopUpGrilla = Popup_ComprobanteDetalle
     Left = 483
     Top = 254
   end
@@ -5841,5 +5856,13 @@ object FCuentaCorriente: TFCuentaCorriente
     PermitirFiltrar = True
     Left = 488
     Top = 410
+  end
+  object Popup_ComprobanteDetalle: TPopupMenu
+    Left = 375
+    Top = 281
+    object PopUpItem_DevolverProducto: TMenuItem
+      Caption = 'Devolver Producto'
+      OnClick = PopUpItem_DevolverProductoClick
+    end
   end
 end

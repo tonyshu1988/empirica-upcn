@@ -1645,6 +1645,8 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
+            OnColEnter = DBGridFacturasColEnter
+            OnColExit = DBGridFacturasColExit
             OnDrawColumnCell = DBGridFacturasDrawColumnCell
             Columns = <
               item

@@ -464,6 +464,8 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure CD_Facturas_recargoChange(Sender: TField);
+    procedure DBGridFacturasColExit(Sender: TObject);
+    procedure DBGridFacturasColEnter(Sender: TObject);
   Private
     id_cuenta_fpago: integer;
     estadoPantalla: string;
@@ -1478,8 +1480,8 @@ begin
     saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
 //    if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
 //    begin
-//      recargo_vencimiento:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (recargo_factura_vencida/100);
-//      saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat + recargo_vencimiento;
+//      recargo_vencimiento:= recargo_factura_vencida;
+//      saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (1 + (recargo_factura_vencida/100));
 //      vencida:= 'SI'
 //    end;
 
@@ -1488,13 +1490,12 @@ begin
     CD_Facturas_idFactura.AsInteger:= vselFactura.ZQ_Factura_VentaID_COMPROBANTE.AsInteger;
     CD_Facturas_idTipoComprobante.AsInteger:= tipoComprobante;
     CD_Facturas_importeComprobante.AsFloat:= vselFactura.ZQ_Factura_VentaIMPORTE_VENTA.AsFloat;
-    CD_Facturas_saldoComprobante.AsFloat:= saldo_comprobante;
+    CD_Facturas_saldoComprobante.AsFloat:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
     CD_Facturas_importeCancelar.AsFloat:= saldo_comprobante;
-    //CD_Facturas_recargo.AsFloat:= recargo_vencimiento;
-    CD_Facturas_recargo.AsFloat:= recargo_factura_vencida;
+    CD_Facturas_vencida.AsString:= vencida;
     CD_Facturas_fecha.AsDateTime:= vselFactura.ZQ_Factura_VentaFECHA.AsDateTime;
     CD_Facturas_descripcion.AsString:= vselFactura.ZQ_Factura_VentaDESCRIPCION.AsString;
-    CD_Facturas_vencida.AsString:= vencida;
+    CD_Facturas_recargo.AsFloat:= recargo_vencimiento;
     CD_Facturas.Post;
   end;
 
@@ -1533,8 +1534,8 @@ begin
         saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
 //        if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
 //        begin
-//          recargo_vencimiento:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (recargo_factura_vencida/100);
-//          saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat + recargo_vencimiento;
+//          recargo_vencimiento:= recargo_factura_vencida;
+//          saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (1 + (recargo_factura_vencida/100));
 //          vencida:= 'SI'
 //        end;
 
@@ -1543,13 +1544,12 @@ begin
         CD_Facturas_idFactura.AsInteger:= vselFactura.ZQ_Factura_VentaID_COMPROBANTE.AsInteger;
         CD_Facturas_idTipoComprobante.AsInteger:= tipoComprobante;
         CD_Facturas_importeComprobante.AsFloat:= vselFactura.ZQ_Factura_VentaIMPORTE_VENTA.AsFloat;
-        CD_Facturas_saldoComprobante.AsFloat:= saldo_comprobante;
+        CD_Facturas_saldoComprobante.AsFloat:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
         CD_Facturas_importeCancelar.AsFloat:= saldo_comprobante;
-        //CD_Facturas_recargo.AsFloat:= recargo_vencimiento;
-        CD_Facturas_recargo.AsFloat:= recargo_factura_vencida;
+        CD_Facturas_vencida.AsString:= vencida;
         CD_Facturas_fecha.AsDateTime:= vselFactura.ZQ_Factura_VentaFECHA.AsDateTime;
         CD_Facturas_descripcion.AsString:= vselFactura.ZQ_Factura_VentaDESCRIPCION.AsString;
-        CD_Facturas_vencida.AsString:= vencida;
+        CD_Facturas_recargo.AsFloat:= recargo_vencimiento;
         CD_Facturas.Post;
 
         vselFactura.ZQ_Factura_Venta.Next;
@@ -1650,8 +1650,8 @@ end;
 
 procedure TFABM_CPB_Recibo.CD_Facturas_importeCancelarValidate(Sender: TField);
 begin
-  if (CD_Facturas_importeCancelar.AsFloat < 0) or (CD_Facturas_importeCancelar.AsFloat > CD_Facturas_saldoComprobante.AsFloat) then
-    raise Exception.Create('El "Importe a Cancelar" ingresado es incorrecto, verifique');
+//  if (CD_Facturas_importeCancelar.AsFloat < 0) or (CD_Facturas_importeCancelar.AsFloat > CD_Facturas_saldoComprobante.AsFloat) then
+//    raise Exception.Create('El "Importe a Cancelar" ingresado es incorrecto, verifique');
 end;
 
 
@@ -1902,12 +1902,32 @@ procedure TFABM_CPB_Recibo.CD_Facturas_recargoChange(Sender: TField);
 var
   saldo_comprobante, recargo_vencimiento: double;
 begin
-//  recargo_vencimiento:= CD_Facturas_importeComprobante.AsFloat * (CD_Facturas_recargo.AsFloat /100);
-//  saldo_comprobante:= CD_Facturas_importeComprobante.AsFloat + recargo_vencimiento;
-//
-//  CD_Facturas.edit;
-//  CD_Facturas_saldoComprobante.AsFloat:= saldo_comprobante;
-//  CD_Facturas_importeCancelar.AsFloat:= saldo_comprobante;
+  recargo_vencimiento:= CD_Facturas_saldoComprobante.AsFloat * (CD_Facturas_recargo.AsFloat /100);
+  saldo_comprobante:= CD_Facturas_saldoComprobante.AsFloat + recargo_vencimiento;
+
+  CD_Facturas.edit;
+  CD_Facturas_importeCancelar.AsFloat:= saldo_comprobante;
+end;
+
+procedure TFABM_CPB_Recibo.DBGridFacturasColExit(Sender: TObject);
+begin
+//  if ((sender as tdbgrid).SelectedField.FullName = '_recargo') then
+//  begin
+//    EKSuma_Factura.RecalcAll;
+//    EKSuma_Factura.RecalcAll;
+//    editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[0].SumValue);
+//    editTotalSaldo.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[1].SumValue);
+//  end;
+end;
+
+procedure TFABM_CPB_Recibo.DBGridFacturasColEnter(Sender: TObject);
+begin
+//    if ((sender as tdbgrid).SelectedField.FullName = '_recargo') then
+//    begin
+//      EKSuma_Factura.RecalcAll;
+//      editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[0].SumValue);
+//      editTotalSaldo.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[1].SumValue);
+//    end;
 end;
 
 end.
