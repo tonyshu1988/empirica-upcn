@@ -632,7 +632,7 @@ begin
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
       recNo:= ZQ_Persona.RecNo;
-      EKBuscar.VerConsultaOriginal;
+      ZQ_Persona.Refresh;
       ZQ_Persona.RecNo:= recNo;
     end
   except

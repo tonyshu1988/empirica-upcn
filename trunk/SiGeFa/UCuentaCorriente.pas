@@ -8,7 +8,7 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, UBuscarPersona, EKEdit, Buttons,
-  EKDbSuma, ComCtrls, EKDBDateTimePicker;
+  EKDbSuma, ComCtrls, EKDBDateTimePicker, Menus;
 
 type
   TFCuentaCorriente = class(TForm)
@@ -319,6 +319,9 @@ type
     DBGridDetalle_Recibo: TDBGrid;
     DBGridDetalle_Producto: TDBGrid;
     lblTitulo_PanelDetalleMov: TLabel;
+    ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField;
+    Popup_ComprobanteDetalle: TPopupMenu;
+    PopUpItem_DevolverProducto: TMenuItem;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -345,6 +348,13 @@ type
     procedure btnAltaReciboClick(Sender: TObject);
     procedure AVerDetalleExecute(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure DBGridDetalle_ProductoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridDetalle_ReciboDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure PopUpItem_DevolverProductoClick(Sender: TObject);
   private
     viendoResumen: boolean;
     viendoDetalleCpb: boolean;
@@ -416,6 +426,7 @@ begin
 
     PanelDetalleMov.Visible:= false;
     viendoDetalleCpb:= false;
+    btnVerDetalleFactura.Click;
   end
   else
   begin
@@ -917,6 +928,26 @@ begin
     ZQ_CtaCte_Cliente.RecNo:= recNo_gral;
     calcularTotales('CLIENTE');
   end;
+end;
+
+procedure TFCuentaCorriente.DBGridDetalle_ProductoDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridDetalle_Producto, Rect, DataCol, Column, State);
+end;
+
+procedure TFCuentaCorriente.DBGridDetalle_ReciboDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridDetalle_Recibo, Rect, DataCol, Column, State);
+end;
+
+procedure TFCuentaCorriente.PopUpItem_DevolverProductoClick(
+  Sender: TObject);
+begin
+//
 end;
 
 end.
