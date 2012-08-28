@@ -400,6 +400,12 @@ type
     ZQ_VerCpb_NCreditoCTA_EGRESO_CODIGO: TStringField;
     ZQ_VerCpb_NCreditoCTA_EGRESO: TStringField;
     EKOrd_VerCpb_NCredito: TEKOrdenarGrilla;
+    CD_Facturas_vencida: TStringField;
+    ZQ_ClienteCODIGO_BARRA: TStringField;
+    ZQ_ClienteCLAVE: TStringField;
+    ZQ_ClienteLIMITE_DEUDA: TFloatField;
+    ZQ_ClienteVENCIMIENTO_DIAS: TIntegerField;
+    CD_Facturas_recargo: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -457,6 +463,7 @@ type
     procedure DBGridCpbActual_NCreditoDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure CD_Facturas_recargoChange(Sender: TField);
   Private
     id_cuenta_fpago: integer;
     estadoPantalla: string;
@@ -466,6 +473,7 @@ type
     vselFactura: TFBuscarComprobante;
     pasarANotaCredito: double;
     totalFormaPago: double;
+    cant_dias_vencim: integer;
     procedure onSelPersona;
     procedure onSelFactura;
     procedure onSelTodasFactura;
@@ -483,7 +491,8 @@ const
 
 implementation
 
-uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar;
+uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar,
+  DateUtils;
 
 {$R *.dfm}
 
@@ -1446,6 +1455,9 @@ end;
 
 
 procedure TFABM_CPB_Recibo.onSelFactura;
+var
+  saldo_comprobante, recargo_vencimiento: double;
+  vencida: string;
 begin
   if (not (vselFactura.ZQ_Factura_Venta.IsEmpty)) then //si se selecciona un factura
   begin
@@ -1461,15 +1473,28 @@ begin
     end;
     CD_Facturas.Filtered:= false;
 
+    vencida:= 'NO';
+    recargo_vencimiento:= 0;
+    saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
+//    if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
+//    begin
+//      recargo_vencimiento:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (recargo_factura_vencida/100);
+//      saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat + recargo_vencimiento;
+//      vencida:= 'SI'
+//    end;
+
     CD_Facturas.Append;
     CD_Facturas_idComprobante.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
     CD_Facturas_idFactura.AsInteger:= vselFactura.ZQ_Factura_VentaID_COMPROBANTE.AsInteger;
     CD_Facturas_idTipoComprobante.AsInteger:= tipoComprobante;
     CD_Facturas_importeComprobante.AsFloat:= vselFactura.ZQ_Factura_VentaIMPORTE_VENTA.AsFloat;
-    CD_Facturas_saldoComprobante.AsFloat:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
-    CD_Facturas_importeCancelar.AsFloat:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
+    CD_Facturas_saldoComprobante.AsFloat:= saldo_comprobante;
+    CD_Facturas_importeCancelar.AsFloat:= saldo_comprobante;
+    //CD_Facturas_recargo.AsFloat:= recargo_vencimiento;
+    CD_Facturas_recargo.AsFloat:= recargo_factura_vencida;
     CD_Facturas_fecha.AsDateTime:= vselFactura.ZQ_Factura_VentaFECHA.AsDateTime;
     CD_Facturas_descripcion.AsString:= vselFactura.ZQ_Factura_VentaDESCRIPCION.AsString;
+    CD_Facturas_vencida.AsString:= vencida;
     CD_Facturas.Post;
   end;
 
@@ -1481,6 +1506,9 @@ end;
 
 
 procedure TFABM_CPB_Recibo.onSelTodasFactura;
+var
+  saldo_comprobante, recargo_vencimiento: double;
+  vencida: string;
 begin
   if (not (vselFactura.ZQ_Factura_Venta.IsEmpty)) then //si se selecciona un factura
   begin
@@ -1499,15 +1527,29 @@ begin
       else
       begin
         CD_Facturas.Filtered:= false;
+
+        vencida:= 'NO';
+        recargo_vencimiento:= 0;
+        saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
+//        if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
+//        begin
+//          recargo_vencimiento:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (recargo_factura_vencida/100);
+//          saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat + recargo_vencimiento;
+//          vencida:= 'SI'
+//        end;
+
         CD_Facturas.Append;
         CD_Facturas_idComprobante.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
         CD_Facturas_idFactura.AsInteger:= vselFactura.ZQ_Factura_VentaID_COMPROBANTE.AsInteger;
         CD_Facturas_idTipoComprobante.AsInteger:= tipoComprobante;
         CD_Facturas_importeComprobante.AsFloat:= vselFactura.ZQ_Factura_VentaIMPORTE_VENTA.AsFloat;
-        CD_Facturas_saldoComprobante.AsFloat:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
-        CD_Facturas_importeCancelar.AsFloat:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
+        CD_Facturas_saldoComprobante.AsFloat:= saldo_comprobante;
+        CD_Facturas_importeCancelar.AsFloat:= saldo_comprobante;
+        //CD_Facturas_recargo.AsFloat:= recargo_vencimiento;
+        CD_Facturas_recargo.AsFloat:= recargo_factura_vencida;
         CD_Facturas_fecha.AsDateTime:= vselFactura.ZQ_Factura_VentaFECHA.AsDateTime;
         CD_Facturas_descripcion.AsString:= vselFactura.ZQ_Factura_VentaDESCRIPCION.AsString;
+        CD_Facturas_vencida.AsString:= vencida;
         CD_Facturas.Post;
 
         vselFactura.ZQ_Factura_Venta.Next;
@@ -1854,6 +1896,18 @@ end;
 procedure TFABM_CPB_Recibo.DBGridCpbActual_NCreditoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridCpbActual_NCredito, Rect, DataCol, Column, State);
+end;
+
+procedure TFABM_CPB_Recibo.CD_Facturas_recargoChange(Sender: TField);
+var
+  saldo_comprobante, recargo_vencimiento: double;
+begin
+//  recargo_vencimiento:= CD_Facturas_importeComprobante.AsFloat * (CD_Facturas_recargo.AsFloat /100);
+//  saldo_comprobante:= CD_Facturas_importeComprobante.AsFloat + recargo_vencimiento;
+//
+//  CD_Facturas.edit;
+//  CD_Facturas_saldoComprobante.AsFloat:= saldo_comprobante;
+//  CD_Facturas_importeCancelar.AsFloat:= saldo_comprobante;
 end;
 
 end.

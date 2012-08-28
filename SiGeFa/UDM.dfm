@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'C:\SISTEMAS\SiGeFa\Bases\SIGEFA LOPEZ.FDB'
+    Database = 'D:\SISTEMAS\EMPIRIKA\SiGeFa\Bases\SiGeFa.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -1467,6 +1467,8 @@ object DM: TDM
     Caption = 'SIGEFA'
     Modo = EKLoginAutomatico
     ModoPermiso = EKPermisoAction
+    Titulo_DBAplicacion = 'db_aplicacion'
+    Titulo_DBUsuario = 'db_usuarios'
     Left = 208
     Top = 16
   end
@@ -2009,11 +2011,10 @@ object DM: TDM
   object Conexion_Usuario: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'C:\SISTEMAS\SiGeFa\Bases\USUARIOS.FDB'
+    Database = 'D:\SISTEMAS\EMPIRIKA\SiGeFa\Bases\USUARIOS.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     ReadOnly = True
-    Connected = True
     SQLHourGlass = True
     Left = 40
     Top = 384
