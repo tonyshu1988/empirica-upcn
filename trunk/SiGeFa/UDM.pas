@@ -143,6 +143,7 @@ var
   asociar_pto_salida: string;
   aplicaImprimirFiscal: string;
   imprimirEtiqueta_opcionReporte: integer;
+  recargo_factura_vencida: double = 10;
 
 
   precio1: string;
@@ -232,6 +233,7 @@ begin
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'tipo_reporte_etiquetas', imprimirEtiqueta_opcionReporte);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'aplicaImprimirFiscal', aplicaImprimirFiscal);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'preventa_diasVencimiento', preventa_diasVencimiento);
+  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'recargo_factura_vencida', recargo_factura_vencida);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'preventa_descontar_stock', preventa_descontar_stock);
 
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO1', precio1);
