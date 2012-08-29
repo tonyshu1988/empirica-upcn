@@ -469,7 +469,11 @@ type
     procedure DBGridFacturasColExit(Sender: TObject);
     procedure DBGridFacturasColEnter(Sender: TObject);
     procedure DBGridFacturasDblClick(Sender: TObject);
+    procedure CD_Facturas_importeCancelarChange(Sender: TField);
+    procedure CD_Facturas_pagoCompletoChange(Sender: TField);
   Private
+    campo_modificado: string;
+    nota_credito_total, nota_credito_saldo: double;
     id_cuenta_fpago: integer;
     estadoPantalla: string;
     tipoComprobante: integer;
@@ -479,6 +483,7 @@ type
     pasarANotaCredito: double;
     totalFormaPago: double;
     cant_dias_vencim: integer;
+    mensaje: string;
     procedure onSelPersona;
     procedure onSelFactura;
     procedure onSelTodasFactura;
@@ -797,7 +802,10 @@ begin
   if ZQ_ComprobanteID_TIPO_CPB.AsInteger = CPB_RECIBO_CTA_CTE then
     if (not verificarSaldoNotaCredito(ZQ_CpbFormaPago, ZQ_ComprobanteID_CLIENTE.AsInteger)) then
     begin
-      Application.MessageBox(pchar('El total a abonar en Nota de Credito es superior al saldo disponible, por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+      mensaje:= format('El Cliente no posee una Nota de Credito con'+#13+
+                       'saldo suficiente para realizar la operación'+#13+
+                       '(Total Nota Credito = %n / Saldo Nota Credito = %n)',[nota_credito_total, nota_credito_saldo]);
+      Application.MessageBox(pchar(mensaje), 'Atención', MB_OK + MB_ICONINFORMATION);
       DBGridEditar_Fpago.SetFocus;
       exit;
     end;
@@ -883,10 +891,10 @@ begin
     if totalFormaPago > totalCancelarFacturas then
     begin
 //      Application.MessageBox(pchar('El monto total a cancelar de las facturas ('+FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas)+') es distinto al monto total de la forma de pago ('+FormatFloat('$ ###,###,###,##0.00', totalFormaPago)+'), por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
-      Application.MessageBox(pchar('El monto de la forma de pago (' + FormatFloat('$ ###,###,###,##0.00', totalFormaPago) + ') es superior al total a cancelar de las facturas (' + FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas) +
-        '), por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-      DBGridEditar_Fpago.SetFocus;
-      exit;
+//      Application.MessageBox(pchar('El monto de la forma de pago (' + FormatFloat('$ ###,###,###,##0.00', totalFormaPago) + ') es superior al total a cancelar de las facturas (' + FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas) +
+//        '), por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+//      DBGridEditar_Fpago.SetFocus;
+//      exit;
     end;
 
     guardarPagos;
@@ -1302,7 +1310,10 @@ begin
   if ZQ_VerCpbID_TIPO_CPB.AsInteger = CPB_RECIBO_CTA_CTE then
     if (not verificarSaldoNotaCredito(ZQ_VerCpb_Fpago, ZQ_VerCpbID_CLIENTE.AsInteger)) then
     begin
-      Application.MessageBox(pchar('El total a abonar en Nota de Credito es superior al saldo disponible, por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+      mensaje:= format('El Cliente no posee una Nota de Credito con'+#13+
+                       'saldo suficiente para realizar la operación'+#13+
+                       '(Total Nota Credito = %n / Saldo Nota Credito = %n)',[nota_credito_total, nota_credito_saldo]);
+      Application.MessageBox(pchar(mensaje), 'Atención', MB_OK + MB_ICONINFORMATION);
       exit;
     end;
 
@@ -1682,8 +1693,8 @@ end;
 
 procedure TFABM_CPB_Recibo.CD_Facturas_importeCancelarValidate(Sender: TField);
 begin
-//  if (CD_Facturas_importeCancelar.AsFloat < 0) or (CD_Facturas_importeCancelar.AsFloat > CD_Facturas_saldoComprobante.AsFloat) then
-//    raise Exception.Create('El "Importe a Cancelar" ingresado es incorrecto, verifique');
+  if (CD_Facturas_importeCancelar.AsFloat < 0) then
+    raise Exception.Create('El "Importe a Cancelar" ingresado es incorrecto, verifique');
 end;
 
 
@@ -1773,8 +1784,6 @@ end;
 
 
 function TFABM_CPB_Recibo.verificarSaldoNotaCredito(query: TDataSet; id_cliente: integer): boolean;
-var
-  totalNotaCredito: double;
 begin
   Result:= true;
   if query.IsEmpty then
@@ -1784,23 +1793,24 @@ begin
   ZQ_SaldoNotaCredito.Close;
   ZQ_SaldoNotaCredito.ParamByName('id_cliente').AsInteger:= id_cliente;
   ZQ_SaldoNotaCredito.Open;
+  nota_credito_saldo:= ZQ_SaldoNotaCreditoSALDO.AsFloat;
 
   //calculo todo lo que me va a pagar con Nota de Credito
-  totalNotaCredito:= 0;
+  nota_credito_total:= 0;
   query.First;
   while not query.Eof do //por cada una de las formas de pago cargadas
   begin
     //si la forma de pago es nota de credito
     if query.FieldByName('CUENTA_INGRESO').AsInteger = 2 then
-      totalNotaCredito:= totalNotaCredito + query.FieldByName('IMPORTE').AsFloat;
+      nota_credito_total:= nota_credito_total + query.FieldByName('IMPORTE').AsFloat;
 
     query.Next;
   end;
 
   //si lo que esta pagando en Nota de Credito es mayo al saldo que tiene devuelvo False
   //para que no lo deje cancelar
-  if totalNotaCredito <> 0 then
-    if totalNotaCredito > ZQ_SaldoNotaCreditoSALDO.AsFloat then
+  if nota_credito_total <> 0 then
+    if nota_credito_total > nota_credito_saldo then
       Result:= false;
 end;
 
@@ -1933,30 +1943,84 @@ end;
 
 procedure TFABM_CPB_Recibo.CD_Facturas_recargoChange(Sender: TField);
 var
-  saldo_comprobante, recargo_vencimiento: double;
+  saldo_comprobante, recargo_descuento: double;
 begin
-  recargo_vencimiento:= CD_Facturas_saldoComprobante.AsFloat * (CD_Facturas_recargo.AsFloat / 100);
-  saldo_comprobante:= CD_Facturas_saldoComprobante.AsFloat + recargo_vencimiento;
+  if campo_modificado <> 'REC_DESC' then
+    exit;
+
+  recargo_descuento:= CD_Facturas_saldoComprobante.AsFloat * (CD_Facturas_recargo.AsFloat / 100);
+  saldo_comprobante:= CD_Facturas_saldoComprobante.AsFloat + recargo_descuento;
 
   CD_Facturas.edit;
   CD_Facturas_importeCancelar.AsFloat:= saldo_comprobante;
+  if recargo_descuento = 0 then
+    CD_Facturas_pagoCompleto.AsString:= 'false'
+  else
+    CD_Facturas_pagoCompleto.AsString:= 'true';
+end;
+
+
+procedure TFABM_CPB_Recibo.CD_Facturas_importeCancelarChange(Sender: TField);
+var
+  recargo_descuento: double;
+begin
+  if campo_modificado <> 'IMPORTE' then
+    exit;
+
+  CD_Facturas.edit;
+
+  if (CD_Facturas_importeCancelar.AsFloat > CD_Facturas_saldoComprobante.AsFloat) then
+    CD_Facturas_pagoCompleto.AsString:= 'true';
+
+  if CD_Facturas_pagoCompleto.AsString = 'false' then
+  begin
+    CD_Facturas_recargo.AsFloat:= 0;
+  end
+  else
+  begin
+    recargo_descuento:= (CD_Facturas_importeCancelar.AsFloat / CD_Facturas_saldoComprobante.AsFloat) - 1;
+
+    CD_Facturas_recargo.AsFloat:= recargo_descuento * 100;
+  end;
+end;
+
+
+procedure TFABM_CPB_Recibo.CD_Facturas_pagoCompletoChange(Sender: TField);
+begin
+  if campo_modificado <> 'CHECK' then
+    exit;
+
+  CD_Facturas.edit;
+  CD_Facturas_recargo.AsFloat:= 0;
+  CD_Facturas_importeCancelar.AsFloat:= CD_Facturas_saldoComprobante.AsFloat;
 end;
 
 
 procedure TFABM_CPB_Recibo.DBGridFacturasColExit(Sender: TObject);
 begin
-//  if ((sender as tdbgrid).SelectedField.FullName = '_recargo') then
-//  begin
-//    EKSuma_Factura.RecalcAll;
-//    EKSuma_Factura.RecalcAll;
-//    editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[0].SumValue);
-//    editTotalSaldo.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[1].SumValue);
-//  end;
+  if ((sender as tdbgrid).SelectedField.FullName = '_recargo')
+    or ((sender as tdbgrid).SelectedField.FullName = '_importeCancelar')
+    or ((sender as tdbgrid).SelectedField.FullName = '_pagoCompleto') then
+  begin
+    EKSuma_Factura.RecalcAll;
+    EKSuma_Factura.RecalcAll;
+    editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[0].SumValue);
+    editTotalSaldo.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[1].SumValue);
+  end;
 end;
 
 
 procedure TFABM_CPB_Recibo.DBGridFacturasColEnter(Sender: TObject);
 begin
+  if ((sender as tdbgrid).SelectedField.FieldName = '_recargo') then
+    campo_modificado:= 'REC_DESC'
+  else
+  if ((sender as tdbgrid).SelectedField.FieldName = '_importeCancelar') then
+    campo_modificado:= 'IMPORTE'
+  else
+  if ((sender as tdbgrid).SelectedField.FieldName = '_pagoCompleto') then
+    campo_modificado:= 'CHECK';
+
   if (DBGridFacturas.SelectedField.FieldName = '_recargo') or
      (DBGridFacturas.SelectedField.FieldName = '_importeCancelar') then
     DBGridFacturas.Options := DBGridFacturas.Options + [dgEditing]
@@ -1981,6 +2045,7 @@ begin
     end;
   end;
 end;
+
 
 end.
 

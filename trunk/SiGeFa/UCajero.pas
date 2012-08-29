@@ -711,7 +711,8 @@ type
     procedure pmInputQuery(var Msg: TMessage); message WM_USER +123;
     { Private declarations }
   Public
-    { Public declarations }
+    nota_credito_saldo, nota_credito_total: double;
+    mensaje: string;
   end;
 
 var
@@ -2036,7 +2037,10 @@ begin
   //verifico si lo que me paga con Nota de credito es menor o igual al saldo disponible en Nota de credito si el Cleinte no es Consum Final
   if ((cliente<>0)and(not verificarSaldoNotaCredito(CD_Fpago, CD_ComprobanteID_CLIENTE.AsInteger))) then
   begin
-    Application.MessageBox(pchar('El total a abonar en Nota de Credito es superior al saldo disponible, por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+    mensaje:= format('El Cliente no posee una Nota de Credito con'+#13+
+                     'saldo suficiente para realizar la operación'+#13+
+                     '(Total Nota Credito = %n / Saldo Nota Credito = %n)',[nota_credito_total, nota_credito_saldo]);
+    Application.MessageBox(pchar(mensaje), 'Atención', MB_OK + MB_ICONINFORMATION);
     result:= false;
     exit;
   end;
@@ -2894,8 +2898,6 @@ end;
 
 
 function TFCajero.verificarSaldoNotaCredito(query: TDataSet; id_cliente: integer): boolean;
-var
-  totalNotaCredito: double;
 begin
   Result:= true;
   if query.IsEmpty then
@@ -2905,22 +2907,23 @@ begin
   ZQ_SaldoNotaCredito.Close;
   ZQ_SaldoNotaCredito.ParamByName('id_cliente').AsInteger:= id_cliente;
   ZQ_SaldoNotaCredito.Open;
+  nota_credito_saldo:= ZQ_SaldoNotaCreditoSALDO.AsFloat;
 
   //calculo todo lo que me va a pagar con Nota de Credito
-  totalNotaCredito:= 0;
+  nota_credito_total:= 0;
   query.First;
   while not query.Eof do //por cada una de las formas de pago cargadas
   begin
     //si la forma de pago es nota de credito
     if query.FieldByName('CUENTA_INGRESO').AsInteger = 2 then
-      totalNotaCredito:= totalNotaCredito + query.FieldByName('IMPORTE').AsFloat;
+      nota_credito_total:= nota_credito_total + query.FieldByName('IMPORTE').AsFloat;
 
     query.Next;
   end;
 
   //si lo que esta pagando en Nota de Credito es mayo al saldo que tiene devuelvo False
   //para que no lo deje cancelar
-  if totalNotaCredito > ZQ_SaldoNotaCreditoSALDO.AsFloat then
+  if nota_credito_total > nota_credito_saldo then
     Result:= false;
 end;
 
