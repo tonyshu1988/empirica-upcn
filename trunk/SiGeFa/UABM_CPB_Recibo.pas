@@ -2031,6 +2031,9 @@ end;
 
 procedure TFABM_CPB_Recibo.DBGridFacturasDblClick(Sender: TObject);
 begin
+  if CD_Facturas.IsEmpty then
+    exit; 
+
   if (DBGridFacturas.SelectedField.FieldName = DBCheckBox_GrillaFacturas.DataField) then
   begin
     if DBCheckBox_GrillaFacturas.Checked then

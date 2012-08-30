@@ -4806,8 +4806,8 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     NombreGuardar = 'ABM_RC_EditarFPago'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
+    PermitirOrdenar = False
+    PermitirMover = False
     PermitirFiltrar = False
     Left = 141
     Top = 416
@@ -5125,6 +5125,7 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     object CD_Facturas_recargo: TFloatField
       FieldName = '_recargo'
       OnChange = CD_Facturas_recargoChange
+      DisplayFormat = '0.00'
     end
     object CD_Facturas_pagoCompleto: TStringField
       FieldName = '_pagoCompleto'
