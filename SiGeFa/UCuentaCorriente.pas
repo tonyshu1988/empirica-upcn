@@ -334,6 +334,7 @@ type
     ZQ_ComprobanteFPagoNOMBRE_CUENTA: TStringField;
     ZQ_ComprobanteFPagoDESCRIPCION: TStringField;
     EKOrdenar_DetalleFPago: TEKOrdenarGrilla;
+    StaticTextDeuda: TStaticText;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -721,7 +722,24 @@ end;
 
 procedure TFCuentaCorriente.DBGridResumen_CtaCtesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  FPrincipal.PintarFilasGrillasConBajas(DBGridResumen_CtaCtes, ZQ_CtaCte_GralDEUDA_VENCIDA.AsString, Rect, DataCol, Column, State);
+
+  if (ZQ_CtaCte_GralDEUDA_VENCIDA.AsString = 'S') then //si tiene deuda Vencida
+  begin
+    DBGridResumen_CtaCtes.Canvas.Brush.Color:= StaticTxtBaja.Color;
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridResumen_CtaCtes.Canvas.Font.Style:= DBGridResumen_CtaCtes.Canvas.Font.Style + [fsBold];
+  end
+  else
+    if (ZQ_CtaCte_GralSALDO.AsFloat > 0) then //si tiene Saldo
+    begin
+      DBGridResumen_CtaCtes.Canvas.Brush.Color:= StaticTextDeuda.Color;
+      if (gdFocused in State) or (gdSelected in State) then
+        DBGridResumen_CtaCtes.Canvas.Font.Style:= DBGridResumen_CtaCtes.Canvas.Font.Style + [fsBold];
+    end;
+
+  DBGridResumen_CtaCtes.DefaultDrawColumnCell(rect, datacol, column, state);
+
+  FPrincipal.PintarFilasGrillas(DBGridResumen_CtaCtes, Rect, DataCol, Column, State);
 end;
 
 
