@@ -1,5 +1,7 @@
 unit UABM_CPB_Recibo;
 
+//ACOMODAR EL PROCEDURE guardarPagos;
+
 // FALTA IMPRESION DEL TICKET, AHI QUE VER QUE PONEMOS COMO PRODUCTO Y HACER TODOS LOS CALCULOS
 
 interface
@@ -408,6 +410,7 @@ type
     CD_Facturas_recargo: TFloatField;
     CD_Facturas_pagoCompleto: TStringField;
     DBCheckBox_GrillaFacturas: TDBCheckBox;
+    ZQ_PagosFacturaDESC_REC: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -780,6 +783,10 @@ begin
       btnBuscarEmpresa.Enabled:= False;
       PanelFacturas.Visible:= true;
     end;
+
+    //verifico si tenia la cuenta DESCCUENTO/RECARGO cargada anteriormente y la elimino
+    if ZQ_CpbFormaPago.Locate('CUENTA_INGRESO', 0, []) then
+      ZQ_CpbFormaPago.Delete;
   end;
 end;
 
@@ -788,6 +795,7 @@ procedure TFABM_CPB_Recibo.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
   totalCancelarFacturas, totalFormaPago: double;
+  descuento_recargo: double;
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
@@ -810,7 +818,41 @@ begin
       exit;
     end;
 
-  if not ZQ_CpbFormaPago.IsEmpty then
+  //calculo lo que tengo que cargar como descuento/recargo  
+  descuento_recargo:= 0;
+  if not CD_Facturas.IsEmpty then
+  begin
+    CD_Facturas.First;
+    while not CD_Facturas.Eof do
+    begin
+      if CD_Facturas_pagoCompleto.AsString = 'true' then
+        descuento_recargo:= descuento_recargo + (CD_Facturas_saldoComprobante.AsFloat - CD_Facturas_importeCancelar.AsFloat);
+
+      CD_Facturas.Next;
+    end;
+  end;
+
+  //si tiene descuento recargo agrego la forma de pago Descuento/Recargo
+  if descuento_recargo <> 0 then
+  begin
+    if ZQ_CpbFormaPago.Locate('CUENTA_INGRESO', 0, []) then
+      ZQ_CpbFormaPago.Edit //si ya tiene cargada la cuenta de descuento/recargo la edito
+    else
+      ZQ_CpbFormaPago.Append; //si todavia no tiene cargada la cuenta de descuento/recargo la agrego
+    ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= 0;
+    ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= 1;
+    ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_Comprobante;
+    ZQ_CpbFormaPagoIMPORTE.AsFloat:= descuento_recargo;
+    ZQ_CpbFormaPago.Post;
+  end
+  else //si no tiene descuento recargo
+  begin
+    //verifico si tenia la cuenta cargada anteriormente y la elimino
+    if ZQ_CpbFormaPago.Locate('CUENTA_INGRESO', 0, []) then
+      ZQ_CpbFormaPago.Delete;
+  end;
+
+  if not ZQ_CpbFormaPago.IsEmpty then  //si tiene forma de pago cargada
   begin
     ZQ_CpbFormaPago.First;
     while not ZQ_CpbFormaPago.Eof do //por cada una de las formas de pago cargadas
@@ -822,21 +864,19 @@ begin
       if ZQ_CpbFormaPagoIMPORTE.IsNull then
         ZQ_CpbFormaPagoIMPORTE.AsFloat:= 0;
 
+      //si es una forma de pago descuento/recargo le actualizo el importe
+      if ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger = 0 then
+        ZQ_CpbFormaPagoIMPORTE.AsFloat:= descuento_recargo;
+
       ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_CpbFormaPagoIMPORTE.AsFloat; //pongo el mismo importe cargado al importe_real
       ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
 
       ZQ_CpbFormaPago.Next;
     end;
-  end
-  else
-  begin
-//    Application.MessageBox('No selecciono ninguna forma de pago, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-//    DBGridEditar_Fpago.SetFocus;
-//    exit;
   end;
 
-  //si se cargo nota de credito
-  if not ZQ_CpbFormaPago_NotaCredito.IsEmpty then
+  //Veo si se cargo nota de credito
+  if not ZQ_CpbFormaPago_NotaCredito.IsEmpty then //si tiene nota de credito como forma pago
   begin
     ZQ_CpbFormaPago_NotaCredito.First;
     while not ZQ_CpbFormaPago_NotaCredito.Eof do //por cada una de las notas de credito
@@ -878,8 +918,9 @@ begin
   ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
 
   EKSuma_FPago.RecalcAll; //es un recibo, el importe del comprobante es igual a la suma de las formas de pago
-  totalFormaPago:= EKSuma_FPago.SumCollection[0].SumValue;
+  totalFormaPago:= EKSuma_FPago.SumCollection[0].SumValue - descuento_recargo;
   ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= totalFormaPago;
+  ZQ_ComprobanteIMPORTE_DESCUENTO.AsFloat:= descuento_recargo;
   ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= totalFormaPago;
 
   //si es un recibo de cuenta corriente
@@ -890,11 +931,9 @@ begin
 
     if totalFormaPago > totalCancelarFacturas then
     begin
-//      Application.MessageBox(pchar('El monto total a cancelar de las facturas ('+FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas)+') es distinto al monto total de la forma de pago ('+FormatFloat('$ ###,###,###,##0.00', totalFormaPago)+'), por favor Verifique'),'Validar Datos',MB_OK+MB_ICONINFORMATION);
-//      Application.MessageBox(pchar('El monto de la forma de pago (' + FormatFloat('$ ###,###,###,##0.00', totalFormaPago) + ') es superior al total a cancelar de las facturas (' + FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas) +
-//        '), por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-//      DBGridEditar_Fpago.SetFocus;
-//      exit;
+      Application.MessageBox(pchar('El monto de la forma de pago (' + FormatFloat('$ ###,###,###,##0.00', totalFormaPago) + ') es superior al total a cancelar de las facturas (' + FormatFloat('$ ###,###,###,##0.00', totalCancelarFacturas) +'), por favor Verifique'), 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+      DBGridEditar_Fpago.SetFocus;
+      exit;
     end;
 
     guardarPagos;
@@ -1644,6 +1683,7 @@ begin
       ZQ_PagosFacturaID_COMPROBANTE.AsInteger:= CD_Facturas_idComprobante.AsInteger;
       ZQ_PagosFacturaID_FACTURA.AsInteger:= CD_Facturas_idFactura.AsInteger;
       ZQ_PagosFacturaID_TIPO_COMPROBANTE.AsInteger:= CD_Facturas_idTipoComprobante.AsInteger;
+      ZQ_PagosFacturaDESC_REC.AsFloat:= CD_Facturas_recargo.AsFloat;
 
       if montoRestante <= CD_Facturas_saldoComprobante.AsFloat then //si lo que me resta pagar es menor o igual al saldo de la cuenta
       begin
@@ -1678,6 +1718,7 @@ begin
     CD_Facturas_importeComprobante.AsFloat:= ZQ_PagosFacturaIMPORTE_VENTA.AsFloat;
     CD_Facturas_saldoComprobante.AsFloat:= ZQ_PagosFacturaIMPORTE_REAL.AsFloat;
     CD_Facturas_importeCancelar.AsFloat:= ZQ_PagosFacturaIMPORTE.AsFloat;
+    CD_Facturas_recargo.AsFloat:= ZQ_PagosFacturaDESC_REC.AsFloat;
     CD_Facturas.Post;
 
     ZQ_PagosFactura.Next;
