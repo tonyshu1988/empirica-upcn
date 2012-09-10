@@ -768,6 +768,7 @@ begin
       if (((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Codigo') or
           ((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Nombre')) then
       begin
+        EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(2, true);
         if EKListadoCuenta.Buscar then
         begin
           if EKListadoCuenta.Resultado <> '' then
@@ -793,6 +794,7 @@ begin
       if (((sender as tdbgrid).SelectedField.FullName = '_CuentaEgreso_Codigo') or
           ((sender as tdbgrid).SelectedField.FullName = '_CuentaEgreso_Nombre')) then
       begin
+        EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(2, true);
         if EKListadoCuenta.Buscar then
         begin
           if EKListadoCuenta.Resultado <> '' then

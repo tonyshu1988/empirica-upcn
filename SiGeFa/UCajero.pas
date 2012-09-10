@@ -2859,6 +2859,7 @@ procedure TFCajero.buscarCuenta(Sender: TObject; var Key: Word; Shift: TShiftSta
 begin
   if key = 112 then
   begin
+    EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(0, true); //todas las cuentas de la suc
     if EKListadoCuenta.Buscar then
     begin
       if EKListadoCuenta.Resultado <> '' then

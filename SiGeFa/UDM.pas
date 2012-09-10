@@ -123,6 +123,7 @@ type
     procedure cargarReporteSucursal(idSucursal: integer);
     procedure configVariables();
     function  verificarCuentaCorriente(id_cliente: integer): boolean;
+    function sql_cuentas_fpago_suc(mayor_que: integer; solo_esta_suc: boolean): string;
   end;
 
 var
@@ -141,9 +142,9 @@ var
   monto_max_venta: double;
   confirmarNotaPedido: string;
   asociar_pto_salida: string;
-  aplicaImprimirFiscal: string;
-  imprimirEtiqueta_opcionReporte: integer;
-  recargo_factura_vencida: double = 10;
+  aplicaImprimirFiscal: string;  //indica que aplicacion se usa para la impresora fiscal delphi/visual
+  imprimirEtiqueta_opcionReporte: integer; //tipo de impresion de etiquetas
+  recargo_factura_vencida: double = 10; //indica el porcentaje de recargo(+)/descuento(-) que se le aplica a las facturas vencidas
 
 
   precio1: string;
@@ -528,6 +529,33 @@ begin
   dm.EKModelo.abrir(ZQ_VerificarCtaCte);
   if ZQ_VerificarCtaCte.IsEmpty then
     Result:= false;
+end;
+
+
+function TDM.sql_cuentas_fpago_suc(mayor_que: integer; solo_esta_suc: boolean): string;
+var
+  sql: string;
+begin
+  sql:= 'select cta.*, tipo.descripcion, '
+       +'coalesce(cta.codigo||'' - '', '' '')||cta.nombre_cuenta||coalesce('' - N°: ''||cta.nro_cta_bancaria, '' - N°: S/N'') as Busqueda '
+       +'from cuenta cta '
+       +'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_tipo_formapago) '
+       +'where cta.baja = ''N'' '
+       +'and cta.id_cuenta > %d ';
+
+  if solo_esta_suc = true then
+  begin
+    sql:= sql + 'and ((cta.id_sucursal = 0) or (cta.id_sucursal = %d)) '
+              + 'order by cta.nombre_cuenta ';
+
+    Result:= format(sql, [mayor_que, SUCURSAL_LOGUEO])
+  end
+  else
+  begin
+    sql:= sql + 'order by cta.nombre_cuenta ';
+
+    Result:= format(sql, [mayor_que])
+  end
 end;
 
 end.

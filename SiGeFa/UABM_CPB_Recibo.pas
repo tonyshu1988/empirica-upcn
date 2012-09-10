@@ -1703,7 +1703,7 @@ begin
   CD_Facturas.First;
   while not CD_Facturas.Eof do //recorro todos los comprobantes agregados y veo cuales puedo pagar
   begin
-    if montoRestante <> 0 then //si todavia tengo plata para pagar, entro, sino salgo
+    if montoRestante > 0 then //si todavia tengo plata para pagar, entro, sino salgo
     begin
       ZQ_PagosFactura.Append;
       ZQ_PagosFacturaID_COMPROBANTE.AsInteger:= CD_Facturas_idComprobante.AsInteger;
@@ -1751,7 +1751,12 @@ begin
 
   while not ZQ_PagosFactura.Eof do
   begin
+    campo_modificado:= '';
+    if ZQ_PagosFacturaDESC_REC.AsFloat <> 0 then
+      campo_modificado:= 'REC_DESC';
+
     CD_Facturas.Append;
+    CD_Facturas_pagoCompleto.AsString:= 'false';
     CD_Facturas_idComprobante.AsInteger:= ZQ_PagosFacturaID_COMPROBANTE.AsInteger;
     CD_Facturas_idFactura.AsInteger:= ZQ_PagosFacturaID_FACTURA.AsInteger;
     CD_Facturas_idTipoComprobante.AsInteger:= ZQ_PagosFacturaID_TIPO_COMPROBANTE.AsInteger;
@@ -1786,6 +1791,7 @@ var
   cargarMonto: boolean;
   saldoNotaCredito: double;
 begin
+  EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(1, true);
   if EKListadoCuenta.Buscar then
   begin
     if EKListadoCuenta.Resultado <> '' then
