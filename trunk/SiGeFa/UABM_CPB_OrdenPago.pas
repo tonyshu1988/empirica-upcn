@@ -1572,6 +1572,7 @@ end;
 
 procedure TFABM_CPB_OrdenPago.buscarCuenta;
 begin
+  EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(2, true); //mayor a nota credito
   if EKListadoCuenta.Buscar then
   begin
     if EKListadoCuenta.Resultado <> '' then

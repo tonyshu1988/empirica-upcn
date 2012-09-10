@@ -276,7 +276,6 @@ var
   pertenece: boolean;
   cerrarSistema: integer; //si es 1 se cierra el sistema
 begin
-
   dm.ZQ_Configuracion_Variables.Close;
   dm.ZQ_Configuracion_Variables.Open;
 

@@ -1351,10 +1351,10 @@ begin
     exit;
 
   if tipo = 'E' then
-    EKListadoCuenta.SQL[5]:= ' and cta.id_cuenta > 1' //que no muestre cuenta corriente
+    EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(1, true) //que no muestre cuenta corriente
   else
     if tipo = 'I' then
-      EKListadoCuenta.SQL[5]:= ' ';
+      EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(0, true); //que muestre cuenta corriente
 
   if EKListadoCuenta.Buscar then
   begin

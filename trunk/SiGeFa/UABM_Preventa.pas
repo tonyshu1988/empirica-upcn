@@ -1532,6 +1532,7 @@ var
 begin
   if key = 118 then
   begin
+    EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(2, true); //mayor a nota credito
     if EKListadoCuenta.Buscar then
     begin
       if EKListadoCuenta.Resultado <> '' then
