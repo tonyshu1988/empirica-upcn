@@ -145,7 +145,11 @@ var
   aplicaImprimirFiscal: string;  //indica que aplicacion se usa para la impresora fiscal delphi/visual
   imprimirEtiqueta_opcionReporte: integer; //tipo de impresion de etiquetas
   recargo_factura_vencida: double = 10; //indica el porcentaje de recargo(+)/descuento(-) que se le aplica a las facturas vencidas
-
+  cajero_cuenta_defecto: integer = -1; //cuenta por defecto para la forma de pago del cajero
+  cajero_borrar_vendedor: boolean = true;
+  cajero_tamanio_lista_fpago: integer = 0;
+  etiqueta_fiscal: string = 'Filtro 2';
+  etiqueta_no_fiscal: string = 'Filtro 1';
 
   precio1: string;
   precio2: string;
@@ -221,21 +225,26 @@ begin
 
   ZQ_Configuracion_Variables.Open;
   configurarColor(ZQ_Configuracion_Variables, 'clave', 'texto', 'colorCampoRequido', colorCampoRequido);
-  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'confirmarNotaPedido', confirmarNotaPedido);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'TextoPieDePagina', TextoPieDePagina);
+  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'provinciaPorDefecto', provinciaPorDefecto);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'imp_ad1_nombre', imp_ad1_nombre);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'imp_ad2_nombre', imp_ad2_nombre);
-  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'provinciaPorDefecto', provinciaPorDefecto);
   configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'monto_max_venta', monto_max_venta);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_diasVencimiento', ctacte_diasVencimiento);
   configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'ctacte_credito', ctacte_credito);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'confirmarNotaPedido', confirmarNotaPedido);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'notaCredito_diasVencimiento', notaCredito_diasVencimiento);
-  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'asociarStock_puntoSalida', asociar_pto_salida);
+  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'cuenta_defecto', cajero_cuenta_defecto);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'tipo_reporte_etiquetas', imprimirEtiqueta_opcionReporte);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'aplicaImprimirFiscal', aplicaImprimirFiscal);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'asociarStock_puntoSalida', asociar_pto_salida);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'preventa_diasVencimiento', preventa_diasVencimiento);
-  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'recargo_factura_vencida', recargo_factura_vencida);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'preventa_descontar_stock', preventa_descontar_stock);
+  configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'recargo_factura_vencida', recargo_factura_vencida);
+  configurarBoolean(ZQ_Configuracion_Variables, 'clave', 'texto', 'borrarVendedor', 'SI', cajero_borrar_vendedor);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'etiquetaNF', etiqueta_no_fiscal);
+  configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'etiquetaF', etiqueta_fiscal);
+  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'caja_tamanioListadoCtas', cajero_tamanio_lista_fpago);
 
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO1', precio1);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'PRECIO2', precio2);
