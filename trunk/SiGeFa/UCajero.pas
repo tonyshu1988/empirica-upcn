@@ -951,18 +951,10 @@ begin
   modoCargaPrevia:= False;
   DS_Sucursal.DataSet:= dm.ZQ_Sucursal;
   DBImage1.DataField:= 'LOGO';
-  dm.ZQ_Configuracion_Variables.Open;
-  dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'cuenta_defecto', []);
-  ctaPorDefecto:= -1;
-  if not (dm.ZQ_Configuracion_VariablesNUMERO.IsNull) then
-    ctaPorDefecto:= dm.ZQ_Configuracion_VariablesNUMERO.AsInteger;
 
-  dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'borrarVendedor', []);
-  borrarVendedor:= dm.ZQ_Configuracion_VariablesTEXTO.AsString = 'SI';
-
-  edCuenta.DropDownRows:= 0;
-  if dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'caja_tamanioListadoCtas', []) then
-    edCuenta.DropDownRows:= dm.ZQ_Configuracion_VariablesNUMERO.AsInteger;
+  ctaPorDefecto:= cajero_cuenta_defecto;
+  borrarVendedor:= cajero_borrar_vendedor;
+  edCuenta.DropDownRows:= cajero_tamanio_lista_fpago;
 
   modoLecturaProd();
   PConfirmarVenta.Visible:= False;

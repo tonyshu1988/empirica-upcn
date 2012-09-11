@@ -445,13 +445,10 @@ begin
     Fiscal:='N';
 
   //Caption de los botones de Filtro
-  dm.ZQ_Configuracion_Variables.Open;
-  dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'etiquetaNF', []);
-  BtnFiltro_NoFiscal.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
-  BtnFiltro_NoFiscalV.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
-  dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'etiquetaF', []);
-  BtnFiltro_Fiscal.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
-  BtnFiltro_FiscalV.Caption:=dm.ZQ_Configuracion_VariablesTEXTO.AsString;
+  BtnFiltro_NoFiscal.Caption:=etiqueta_no_fiscal;
+  BtnFiltro_NoFiscalV.Caption:=etiqueta_no_fiscal;
+  BtnFiltro_Fiscal.Caption:=etiqueta_fiscal;
+  BtnFiltro_FiscalV.Caption:=etiqueta_fiscal;
 end;
 
 
