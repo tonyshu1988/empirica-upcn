@@ -1,6 +1,6 @@
 object FArqueo_Caja: TFArqueo_Caja
-  Left = 369
-  Top = 261
+  Left = 323
+  Top = 140
   Width = 871
   Height = 599
   Caption = 'Arqueo de Caja'
@@ -16,42 +16,43 @@ object FArqueo_Caja: TFArqueo_Caja
   Scaled = False
   Visible = True
   WindowState = wsMaximized
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 855
-    Height = 509
+    Width = 863
+    Height = 520
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
     object Panel5: TPanel
       Left = 1
       Top = 29
-      Width = 853
-      Height = 479
+      Width = 861
+      Height = 490
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 851
-        Height = 477
+        Width = 859
+        Height = 488
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
-        object lblComprobantes: TLabel
+        object lblTotalFPago: TLabel
           Left = 1
-          Top = 447
-          Width = 849
+          Top = 458
+          Width = 857
           Height = 29
           Align = alBottom
           Alignment = taRightJustify
           AutoSize = False
-          Caption = 'Total Ingreso: $ 0.00 '
+          Caption = 'Total Cuentas: $ 0.00 '
           Color = 16729670
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
@@ -63,20 +64,40 @@ object FArqueo_Caja: TFArqueo_Caja
           Transparent = False
           Layout = tlCenter
         end
-        object DBGridListadoProductos: TDBGrid
+        object lblTotalMovimientos: TLabel
+          Left = 1
+          Top = 257
+          Width = 857
+          Height = 29
+          Align = alBottom
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Total Movimientos: $ 0.00 '
+          Color = 16729670
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object DBGridArqueoMovimiento: TDBGrid
           Left = 1
           Top = 1
-          Width = 849
-          Height = 330
+          Width = 857
+          Height = 256
           Align = alClient
           Color = 14606012
-          DataSource = DS_ComprobanteDetalle
+          DataSource = DS_Arqueo_Movimientos
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
           Font.Name = 'Verdana'
           Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           ParentFont = False
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -84,53 +105,78 @@ object FArqueo_Caja: TFArqueo_Caja
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridArqueoMovimientoDrawColumnCell
           Columns = <
             item
               Expanded = False
-              FieldName = 'ID_PRODUCTO'
-              Title.Caption = 'ID'
-              Width = 46
+              FieldName = 'FECHA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha y Hora'
+              Width = 100
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'DETALLE_PROD'
-              Title.Caption = 'Producto'
-              Width = 174
+              FieldName = 'TIPO_MOVIMIENTO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo'
+              Width = 100
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'CANTIDAD'
-              Title.Caption = 'Cant.'
-              Width = 40
+              FieldName = 'TIPO_COMPROBANTE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Comprobante'
+              Width = 100
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'PORC_DESCUENTO'
-              Title.Caption = 'Desc.'
-              Width = 57
+              FieldName = 'CODIGO'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'digo'
+              Width = 100
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'IMPORTE_IVA'
-              Title.Caption = 'Importe IVA'
+              FieldName = 'NOMBRE_ENTIDAD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Entidad'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'OBSERVACION'
+              Title.Alignment = taCenter
+              Title.Caption = 'Observaci'#243'n'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANT_VENDIDA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cant. Vendida'
+              Width = 100
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'IMPORTE_VENTA'
-              Title.Caption = 'Importe Venta'
+              Title.Alignment = taCenter
+              Title.Caption = 'Importe'
+              Width = 100
               Visible = True
             end>
         end
         object DBGridFormaPago: TDBGrid
           Left = 1
-          Top = 331
-          Width = 849
-          Height = 116
+          Top = 286
+          Width = 857
+          Height = 172
           Align = alBottom
           Color = 14606012
           DataSource = DS_Comprobante_FormaPago
@@ -173,7 +219,7 @@ object FArqueo_Caja: TFArqueo_Caja
     object PanelFiltro: TPanel
       Left = 1
       Top = 1
-      Width = 853
+      Width = 861
       Height = 28
       Align = alTop
       Font.Charset = ANSI_CHARSET
@@ -214,8 +260,8 @@ object FArqueo_Caja: TFArqueo_Caja
   end
   object RepArqueo: TQuickRep
     Tag = 99
-    Left = 41
-    Top = 65
+    Left = 833
+    Top = 73
     Width = 794
     Height = 1123
     Frame.Color = clBlack
@@ -338,7 +384,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Size.Values = (
           52.916666666666670000
           759.354166666666700000
-          74.083333333333330000
+          74.083333333333340000
           378.354166666666700000)
         Alignment = taCenter
         AlignToBand = False
@@ -371,7 +417,7 @@ object FArqueo_Caja: TFArqueo_Caja
           47.625000000000000000
           799.041666666666700000
           140.229166666666700000
-          296.333333333333300000)
+          296.333333333333400000)
         Alignment = taCenter
         AlignToBand = False
         AutoSize = True
@@ -412,7 +458,7 @@ object FArqueo_Caja: TFArqueo_Caja
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
       Master = RepArqueo
-      DataSet = ZQ_ComprobanteDetalle
+      DataSet = ZQ_Arqueo_Movimientos
       PrintBefore = False
       PrintIfEmpty = True
       object QRDBText33: TQRDBText
@@ -435,7 +481,7 @@ object FArqueo_Caja: TFArqueo_Caja
         AutoSize = False
         AutoStretch = False
         Color = clWhite
-        DataSet = ZQ_ComprobanteDetalle
+        DataSet = ZQ_Arqueo_Movimientos
         DataField = 'DETALLE_PROD'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -468,7 +514,7 @@ object FArqueo_Caja: TFArqueo_Caja
         AutoSize = False
         AutoStretch = False
         Color = clWhite
-        DataSet = ZQ_ComprobanteDetalle
+        DataSet = ZQ_Arqueo_Movimientos
         DataField = 'IMPORTE_VENTA'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -501,7 +547,7 @@ object FArqueo_Caja: TFArqueo_Caja
         AutoSize = False
         AutoStretch = False
         Color = clWhite
-        DataSet = ZQ_ComprobanteDetalle
+        DataSet = ZQ_Arqueo_Movimientos
         DataField = 'CANTIDAD'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -534,7 +580,7 @@ object FArqueo_Caja: TFArqueo_Caja
         AutoSize = False
         AutoStretch = False
         Color = clWhite
-        DataSet = ZQ_ComprobanteDetalle
+        DataSet = ZQ_Arqueo_Movimientos
         DataField = 'PORC_DESCUENTO'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -567,7 +613,7 @@ object FArqueo_Caja: TFArqueo_Caja
         AutoSize = False
         AutoStretch = False
         Color = clWhite
-        DataSet = ZQ_ComprobanteDetalle
+        DataSet = ZQ_Arqueo_Movimientos
         DataField = 'IMPORTE_IVA'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
@@ -799,7 +845,7 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           1238.250000000000000000
           0.000000000000000000
-          216.958333333333300000)
+          216.958333333333400000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -983,7 +1029,7 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           13.229166666666670000
           -2.645833333333333000
-          264.583333333333300000)
+          264.583333333333400000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -1045,7 +1091,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          1796.520833333333000000
+          1796.520833333334000000
           -2.645833333333333000
           89.958333333333330000)
         Alignment = taRightJustify
@@ -1127,7 +1173,7 @@ object FArqueo_Caja: TFArqueo_Caja
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1599,30 +1645,22 @@ object FArqueo_Caja: TFArqueo_Caja
       Enabled = False
     end
   end
-  object ZQ_ComprobanteDetalle: TZQuery
+  object ZQ_Arqueo_Movimientos: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
+      'select ac.*'
       
-        'select cd.*,pc.nombre||'#39' - COD: '#39'||coalesce(p.cod_corto,'#39#39') DETA' +
-        'LLE_PROD'
-      'from comprobante_detalle cd'
-      'join comprobante c on (c.id_comprobante=cd.id_comprobante)'
-      'left join producto p on (cd.id_producto=p.id_producto)'
-      
-        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
-        '_cabecera)'
-      'where (extractdate(c.fecha)=:fecha)'
-      '    and (c.ID_TIPO_CPB=11)'
-      '    and c.id_sucursal = :id_sucursal')
+        'from arqueo_caja_movimientos(:fecha_arqueo, :id_sucursal_ingreso' +
+        ') ac')
     Params = <
       item
         DataType = ftUnknown
-        Name = 'fecha'
+        Name = 'fecha_arqueo'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'id_sucursal'
+        Name = 'id_sucursal_ingreso'
         ParamType = ptUnknown
       end>
     Left = 177
@@ -1630,123 +1668,81 @@ object FArqueo_Caja: TFArqueo_Caja
     ParamData = <
       item
         DataType = ftUnknown
-        Name = 'fecha'
+        Name = 'fecha_arqueo'
         ParamType = ptUnknown
       end
       item
         DataType = ftUnknown
-        Name = 'id_sucursal'
+        Name = 'id_sucursal_ingreso'
         ParamType = ptUnknown
       end>
-    object ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField
-      DisplayWidth = 15
-      FieldName = 'ID_COMPROBANTE_DETALLE'
-      Required = True
+    object ZQ_Arqueo_MovimientosIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      currency = True
     end
-    object ZQ_ComprobanteDetalleID_COMPROBANTE: TIntegerField
-      DisplayWidth = 19
+    object ZQ_Arqueo_MovimientosCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object ZQ_Arqueo_MovimientosFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object ZQ_Arqueo_MovimientosOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 500
+    end
+    object ZQ_Arqueo_MovimientosTIPO_COMPROBANTE: TStringField
+      FieldName = 'TIPO_COMPROBANTE'
+      Size = 100
+    end
+    object ZQ_Arqueo_MovimientosTIPO_MOVIMIENTO: TStringField
+      FieldName = 'TIPO_MOVIMIENTO'
+    end
+    object ZQ_Arqueo_MovimientosNOMBRE_ENTIDAD: TStringField
+      FieldName = 'NOMBRE_ENTIDAD'
+      Size = 100
+    end
+    object ZQ_Arqueo_MovimientosID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
-    object ZQ_ComprobanteDetalleID_PRODUCTO: TIntegerField
-      DisplayWidth = 15
-      FieldName = 'ID_PRODUCTO'
-      Required = True
-    end
-    object ZQ_ComprobanteDetalleDETALLE: TStringField
-      DisplayWidth = 234
-      FieldName = 'DETALLE'
-      Size = 200
-    end
-    object ZQ_ComprobanteDetalleCANTIDAD: TFloatField
-      DisplayWidth = 12
-      FieldName = 'CANTIDAD'
-    end
-    object ZQ_ComprobanteDetalleIMPORTE_FINAL: TFloatField
-      DisplayWidth = 16
-      FieldName = 'IMPORTE_FINAL'
-      DisplayFormat = '$ #,###,##0.00'
-    end
-    object ZQ_ComprobanteDetallePORC_DESCUENTO: TFloatField
-      DisplayWidth = 19
-      FieldName = 'PORC_DESCUENTO'
-    end
-    object ZQ_ComprobanteDetalleBASE_IMPONIBLE: TFloatField
-      DisplayWidth = 17
-      FieldName = 'BASE_IMPONIBLE'
-    end
-    object ZQ_ComprobanteDetalleIMPORTE_UNITARIO: TFloatField
-      DisplayWidth = 20
-      FieldName = 'IMPORTE_UNITARIO'
-    end
-    object ZQ_ComprobanteDetalleIMPUESTO_INTERNO: TFloatField
-      DisplayWidth = 20
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object ZQ_ComprobanteDetallePORC_IVA: TFloatField
-      DisplayWidth = 12
-      FieldName = 'PORC_IVA'
-    end
-    object ZQ_ComprobanteDetalleCANTIDAD_RECIBIDA: TFloatField
-      DisplayWidth = 22
-      FieldName = 'CANTIDAD_RECIBIDA'
-    end
-    object ZQ_ComprobanteDetalleCANTIDAD_ALMACENADA: TFloatField
-      DisplayWidth = 25
-      FieldName = 'CANTIDAD_ALMACENADA'
-    end
-    object ZQ_ComprobanteDetalleID_STOCK_PRODUCTO: TIntegerField
-      DisplayWidth = 23
-      FieldName = 'ID_STOCK_PRODUCTO'
-    end
-    object ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField
-      DisplayWidth = 16
-      FieldName = 'IMPORTE_VENTA'
-      DisplayFormat = '$ #,###,##0.00'
-    end
-    object ZQ_ComprobanteDetalleDETALLE_PROD: TStringField
-      DisplayWidth = 150
-      FieldName = 'DETALLE_PROD'
-      ReadOnly = True
-      Size = 128
-    end
-    object ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField
-      DisplayWidth = 14
-      FieldName = 'IMPORTE_IVA'
-      DisplayFormat = '$ #,###,##0.00'
+    object ZQ_Arqueo_MovimientosCANT_VENDIDA: TFloatField
+      FieldName = 'CANT_VENDIDA'
     end
   end
-  object DS_ComprobanteDetalle: TDataSource
-    DataSet = ZQ_ComprobanteDetalle
+  object DS_Arqueo_Movimientos: TDataSource
+    DataSet = ZQ_Arqueo_Movimientos
     Left = 181
     Top = 113
   end
   object ZQ_Comprobante_FormaPago: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select sum(cfp.importe_real), tfp.descripcion as tFormaPago_,'
+      'select tfp.descripcion as tFormaPago_, tfp."IF",'
       
-        '       tfp."IF", c1.nombre_cuenta as CuentaIngreso, c2.nombre_cu' +
-        'enta as CuentaEgreso'
+        '       c1.nombre_cuenta as CuentaIngreso, c2.nombre_cuenta as Cu' +
+        'entaEgreso,'
+      '       sum(cfp.importe_real)'
       'from comprobante_forma_pago cfp'
       
         'left join comprobante c on (c.id_comprobante = cfp.id_comprobant' +
         'e)'
       
+        'left join tipo_comprobante tc on (c.id_tipo_cpb = tc.id_tipo_cpb' +
+        ')'
+      
         'left join tipo_formapago tfp on (tfp.id_tipo_formapago=cfp.id_ti' +
         'po_formapag)'
       'left join cuenta c1 on (cfp.cuenta_ingreso=c1.id_cuenta)'
       'left join cuenta c2 on (cfp.cuenta_egreso=c2.id_cuenta)'
-      'where (extractdate(cfp.fecha_fp) = :fecha)'
-      
-        '  and ( (cfp.cuenta_ingreso is not null) and (cfp.cuenta_egreso ' +
-        'is null) )'
+      'where (cast(cfp.fecha_fp as date) = :fecha)'
       '  and (c.id_sucursal = :id_sucursal)'
-      '  and (c.id_tipo_cpb = 11)'
+      '  and (c.fecha_anulado is null)'
+      '  and (tc.signo_cobro_pago <> 0)'
+      '  and c.id_comp_estado = 1'
       '  and (cfp.id_recibo_op is null)'
       
-        'group by tfp.descripcion,tfp."IF",c1.nombre_cuenta,c2.nombre_cue' +
-        'nta'
-      '')
+        'group by tfp.descripcion, tfp."IF", c1.nombre_cuenta, c2.nombre_' +
+        'cuenta')
     Params = <
       item
         DataType = ftUnknown
@@ -1758,7 +1754,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
-    Left = 321
+    Left = 369
     Top = 65
     ParamData = <
       item
@@ -1795,19 +1791,19 @@ object FArqueo_Caja: TFArqueo_Caja
   end
   object DS_Comprobante_FormaPago: TDataSource
     DataSet = ZQ_Comprobante_FormaPago
-    Left = 325
+    Left = 373
     Top = 113
   end
-  object EKDbSuma1: TEKDbSuma
+  object EKDbSuma_ArqueoFpago: TEKDbSuma
     SumCollection = <
       item
         Operacion = goSum
         NombreCampo = 'sum'
       end>
     DataSet = ZQ_Comprobante_FormaPago
-    SumListChanged = EKDbSuma1SumListChanged
-    Left = 322
-    Top = 222
+    SumListChanged = EKDbSuma_ArqueoFpagoSumListChanged
+    Left = 370
+    Top = 174
   end
   object EKVistaPreviaQR1: TEKVistaPreviaQR
     Reporte = RepArqueo
@@ -1815,15 +1811,59 @@ object FArqueo_Caja: TFArqueo_Caja
     Left = 50
     Top = 70
   end
-  object EKDbSuma2: TEKDbSuma
+  object EKDbSuma_ArqueoMov: TEKDbSuma
     SumCollection = <
       item
         Operacion = goSum
         NombreCampo = 'importe_venta'
       end>
-    DataSet = ZQ_ComprobanteDetalle
-    SumListChanged = EKDbSuma1SumListChanged
-    Left = 322
-    Top = 166
+    DataSet = ZQ_Arqueo_Movimientos
+    SumListChanged = EKDbSuma_ArqueoMovSumListChanged
+    Left = 178
+    Top = 174
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridArqueoMovimiento
+    Filtros = <
+      item
+        TituloColumna = 'Fecha y Hora'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Comprobante'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Entidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Observaci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cant. Vendida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardar = 'GrillaArqueoMovimiento'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 178
+    Top = 232
   end
 end
