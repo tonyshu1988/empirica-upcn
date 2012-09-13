@@ -312,16 +312,16 @@ end;
 
 procedure TFPreventa_Historico.DBGridComprobantesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-//  if (ZQ_ComprobanteFECHA_VENC.AsDateTime < dm.EKModelo.Fecha) then //si esta vencida
-//    DBGridComprobantes.Canvas.Brush.Color:= StaticTxtVencida.Color;
-//
-//  if not (ZQ_ComprobanteFECHA_USADO.IsNull) then   //si esta usada
-//    DBGridComprobantes.Canvas.Brush.Color:= StaticTxtUtilizada.Color;
-//
-//  if (gdFocused in State) or (gdSelected in State) then
-//    DBGridComprobantes.Canvas.Font.Style:= DBGridComprobantes.Canvas.Font.Style + [fsBold];
-//  DBGridComprobantes.Canvas.Font.Color:= clBlack;
-//  DBGridComprobantes.DefaultDrawColumnCell(rect, datacol, column, state);
+  if not (ZQ_ComprobanteFECHA_USADO.IsNull) then   //si esta usada
+    DBGridComprobantes.Canvas.Brush.Color:= StaticTxtUtilizada.Color
+  else
+    if (ZQ_ComprobanteFECHA_VENC.AsDateTime < dm.EKModelo.Fecha) then //si esta vencida
+      DBGridComprobantes.Canvas.Brush.Color:= StaticTxtVencida.Color;
+
+  if (gdFocused in State) or (gdSelected in State) then
+    DBGridComprobantes.Canvas.Font.Style:= DBGridComprobantes.Canvas.Font.Style + [fsBold];
+  DBGridComprobantes.Canvas.Font.Color:= clBlack;
+  DBGridComprobantes.DefaultDrawColumnCell(rect, datacol, column, state);
 
   FPrincipal.PintarFilasGrillas(DBGridComprobantes, Rect, DataCol, Column, State);
 end;
