@@ -1865,7 +1865,8 @@ end;
 
 procedure TFCajero.btnConfirmarVentaClick(Sender: TObject);
 begin
-  guardarComprobante()
+  guardarComprobante();
+  ultimoIDPago();
 end;
 
 
@@ -2960,7 +2961,6 @@ end;
 
 procedure TFCajero.btnAuditoriaFiscalClick(Sender: TObject);
 begin
-exit;
   PanelContenedorDerecha.Enabled:= false;
   PanelAuditoriaCierreZ.Visible:= true;
   PanelAuditoriaCierreZ.BringToFront;
