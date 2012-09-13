@@ -799,11 +799,12 @@ begin
   ZQ_EntidadTelefono.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
   ZQ_EntidadTelefono.Open;
 
-  ZQ_PersonaObraSocial.Close;
-  ZQ_PersonaObraSocial.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
-  ZQ_PersonaObraSocial.Open;
-
-
+  if TabSheetObraSocial.Visible then
+  begin
+    ZQ_PersonaObraSocial.Close;
+    ZQ_PersonaObraSocial.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
+    ZQ_PersonaObraSocial.Open;
+  end
 end;
 
 

@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 913
-    Height = 502
+    Width = 921
+    Height = 514
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 531
-    Width = 913
+    Top = 543
+    Width = 921
     Height = 19
     Panels = <
       item
@@ -4719,13 +4719,13 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 913
+    Width = 921
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
-    ColorMap.HighlightColor = clWhite
+    ColorMap.HighlightColor = 14410210
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = clWhite
+    ColorMap.UnusedColor = 14410210
     ParentShowHint = False
     ShowHint = True
     Spacing = 0
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 913
-    Height = 502
+    Width = 921
+    Height = 514
     Align = alClient
     Caption = 'DEMO'
     Color = 16053492
@@ -5183,6 +5183,12 @@ object FPrincipal: TFPrincipal
       object VentadeMostrador2: TMenuItem
         Action = APreventaHistorico
       end
+      object N11: TMenuItem
+        Caption = '-'
+      end
+      object ArqueodeCaja1: TMenuItem
+        Action = AArqueo_Caja
+      end
     end
     object Productos1: TMenuItem
       Caption = 'Productos'
@@ -5190,14 +5196,14 @@ object FPrincipal: TFPrincipal
         Action = AABMProductos
       end
       object ControlStock1: TMenuItem
-        Caption = 'Control Stock'
+        Caption = '-'
         ImageIndex = 17
-        object ABMProductoStock1: TMenuItem
-          Action = AABM_ProductoStock
-        end
-        object ransferirStock1: TMenuItem
-          Action = ATransferirStock
-        end
+      end
+      object ABMProductoStock1: TMenuItem
+        Action = AABM_ProductoStock
+      end
+      object ransferirStock1: TMenuItem
+        Action = ATransferirStock
       end
       object N6: TMenuItem
         Caption = '-'
@@ -5205,15 +5211,15 @@ object FPrincipal: TFPrincipal
       object ABMPrecios1: TMenuItem
         Action = AABM_Precios
       end
-      object ImprimirEtiquetas1: TMenuItem
-        Action = AImprimirEtiqueta
+      object ConsultaPrecios1: TMenuItem
+        Tag = 1
+        Action = AConsulta_Precios
       end
       object N9: TMenuItem
         Caption = '-'
       end
-      object ConsultaPrecios1: TMenuItem
-        Tag = 1
-        Action = AConsulta_Precios
+      object ImprimirEtiquetas1: TMenuItem
+        Action = AImprimirEtiqueta
       end
     end
     object Clientes1: TMenuItem
@@ -5293,12 +5299,6 @@ object FPrincipal: TFPrincipal
       end
       object EstadisticaStock1: TMenuItem
         Action = AEstad_Stock
-      end
-      object Caja1: TMenuItem
-        Caption = 'Caja'
-        object ArqueodeCaja1: TMenuItem
-          Action = AArqueo_Caja
-        end
       end
     end
     object BandejadeMail1: TMenuItem
@@ -5431,6 +5431,7 @@ object FPrincipal: TFPrincipal
     end
     object Optica1: TMenuItem
       Caption = 'Optica'
+      Visible = False
       object ABMObraSocial1: TMenuItem
         Action = AOP_ABMObraSocial
       end

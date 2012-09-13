@@ -128,7 +128,6 @@ type
     ABM1: TMenuItem;
     Facturacin1: TMenuItem;
     Productos2: TMenuItem;
-    Caja1: TMenuItem;
     N1: TMenuItem;
     N3: TMenuItem;
     N6: TMenuItem;
@@ -170,6 +169,7 @@ type
     N10: TMenuItem;
     AFichaEmpleado: TAction;
     FichaEmpleado1: TMenuItem;
+    N11: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);

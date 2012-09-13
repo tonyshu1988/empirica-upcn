@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 252
-  Top = 96
+  Left = 254
+  Top = 115
   Width = 972
   Height = 631
   Caption = 'ABM Personas'
@@ -2876,7 +2876,7 @@ object FABM_Personas: TFABM_Personas
         Top = 0
         Width = 954
         Height = 200
-        ActivePage = TabSheetDatos
+        ActivePage = TabSheetObraSocial
         Align = alClient
         TabOrder = 0
         object TabSheetDatos: TTabSheet

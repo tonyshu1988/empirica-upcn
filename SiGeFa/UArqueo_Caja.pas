@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Buttons, Grids, DBGrids, StdCtrls, ExtCtrls, dxBar,
   dxBarExtItems, ComCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, EKDbSuma, QRCtrls, QuickRpt, EKVistaPreviaQR;
+  ZDataset, EKDbSuma, QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla;
 
 type
   TFArqueo_Caja = class(TForm)
@@ -20,30 +20,13 @@ type
     PanelContenedor: TPanel;
     Panel5: TPanel;
     Panel1: TPanel;
-    lblComprobantes: TLabel;
+    lblTotalFPago: TLabel;
     PanelFiltro: TPanel;
     Label39: TLabel;
-    ZQ_ComprobanteDetalle: TZQuery;
-    ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField;
-    ZQ_ComprobanteDetalleID_COMPROBANTE: TIntegerField;
-    ZQ_ComprobanteDetalleID_PRODUCTO: TIntegerField;
-    ZQ_ComprobanteDetalleDETALLE: TStringField;
-    ZQ_ComprobanteDetalleCANTIDAD: TFloatField;
-    ZQ_ComprobanteDetalleIMPORTE_FINAL: TFloatField;
-    ZQ_ComprobanteDetallePORC_DESCUENTO: TFloatField;
-    ZQ_ComprobanteDetalleBASE_IMPONIBLE: TFloatField;
-    ZQ_ComprobanteDetalleIMPORTE_UNITARIO: TFloatField;
-    ZQ_ComprobanteDetalleIMPUESTO_INTERNO: TFloatField;
-    ZQ_ComprobanteDetallePORC_IVA: TFloatField;
-    ZQ_ComprobanteDetalleCANTIDAD_RECIBIDA: TFloatField;
-    ZQ_ComprobanteDetalleCANTIDAD_ALMACENADA: TFloatField;
-    ZQ_ComprobanteDetalleID_STOCK_PRODUCTO: TIntegerField;
-    ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField;
-    ZQ_ComprobanteDetalleDETALLE_PROD: TStringField;
-    ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField;
-    DS_ComprobanteDetalle: TDataSource;
+    ZQ_Arqueo_Movimientos: TZQuery;
+    DS_Arqueo_Movimientos: TDataSource;
     DateTimePicker1: TDateTimePicker;
-    DBGridListadoProductos: TDBGrid;
+    DBGridArqueoMovimiento: TDBGrid;
     DBGridFormaPago: TDBGrid;
     ZQ_Comprobante_FormaPago: TZQuery;
     ZQ_Comprobante_FormaPagoSUM: TFloatField;
@@ -52,7 +35,7 @@ type
     ZQ_Comprobante_FormaPagoCUENTAINGRESO: TStringField;
     ZQ_Comprobante_FormaPagoCUENTAEGRESO: TStringField;
     DS_Comprobante_FormaPago: TDataSource;
-    EKDbSuma1: TEKDbSuma;
+    EKDbSuma_ArqueoFpago: TEKDbSuma;
     RepArqueo: TQuickRep;
     QRBand14: TQRBand;
     RepArqueo_Titulo: TQRLabel;
@@ -83,13 +66,29 @@ type
     QRSubDetail4: TQRSubDetail;
     QRLabelImporteventa: TQRLabel;
     QRLabelImporteTotal: TQRLabel;
-    EKDbSuma2: TEKDbSuma;
+    EKDbSuma_ArqueoMov: TEKDbSuma;
+    ZQ_Arqueo_MovimientosIMPORTE_VENTA: TFloatField;
+    ZQ_Arqueo_MovimientosCODIGO: TStringField;
+    ZQ_Arqueo_MovimientosFECHA: TDateTimeField;
+    ZQ_Arqueo_MovimientosOBSERVACION: TStringField;
+    ZQ_Arqueo_MovimientosTIPO_COMPROBANTE: TStringField;
+    ZQ_Arqueo_MovimientosTIPO_MOVIMIENTO: TStringField;
+    ZQ_Arqueo_MovimientosNOMBRE_ENTIDAD: TStringField;
+    ZQ_Arqueo_MovimientosID_COMPROBANTE: TIntegerField;
+    ZQ_Arqueo_MovimientosCANT_VENDIDA: TFloatField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
+    lblTotalMovimientos: TLabel;
     procedure DateTimePicker1Change(Sender: TObject);
-    procedure EKDbSuma1SumListChanged(Sender: TObject);
+    procedure EKDbSuma_ArqueoFpagoSumListChanged(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
+    procedure DBGridArqueoMovimientoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure EKDbSuma_ArqueoMovSumListChanged(Sender: TObject);
   private
     { Private declarations }
   public
@@ -101,16 +100,16 @@ var
 
 implementation
 
-uses UDM;
+uses UDM, UPrincipal;
 
 {$R *.dfm}
 
 procedure TFArqueo_Caja.DateTimePicker1Change(Sender: TObject);
 begin
-     ZQ_ComprobanteDetalle.Close;
-     ZQ_ComprobanteDetalle.ParamByName('fecha').AsDate:=DateTimePicker1.Date;
-     ZQ_ComprobanteDetalle.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
-     ZQ_ComprobanteDetalle.Open;
+     ZQ_Arqueo_Movimientos.Close;
+     ZQ_Arqueo_Movimientos.ParamByName('fecha_arqueo').AsDate:=DateTimePicker1.Date;
+     ZQ_Arqueo_Movimientos.ParamByName('id_sucursal_ingreso').AsInteger:= SUCURSAL_LOGUEO;
+     ZQ_Arqueo_Movimientos.Open;
 
      ZQ_Comprobante_FormaPago.Close;
      ZQ_Comprobante_FormaPago.ParamByName('fecha').AsDate:=DateTimePicker1.Date;
@@ -118,13 +117,14 @@ begin
      ZQ_Comprobante_FormaPago.Open;
 end;
 
-procedure TFArqueo_Caja.EKDbSuma1SumListChanged(Sender: TObject);
+procedure TFArqueo_Caja.EKDbSuma_ArqueoFpagoSumListChanged(Sender: TObject);
 begin
-  lblComprobantes.Caption := FormatFloat('Total Ingreso: $ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+  lblTotalFPago.Caption := FormatFloat('Total Cuentas: $ ##,###,##0.00 ', EKDbSuma_ArqueoFpago.SumCollection[0].SumValue);
 end;
 
 procedure TFArqueo_Caja.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
   DateTimePicker1.Date:=dm.EKModelo.Fecha();
   DateTimePicker1Change(self);
 end;
@@ -136,20 +136,38 @@ end;
 
 procedure TFArqueo_Caja.btnImprimirClick(Sender: TObject);
 begin
-  if ZQ_ComprobanteDetalle.IsEmpty then
-  exit;
+  if ZQ_Arqueo_Movimientos.IsEmpty then
+    exit;
 
-  QRLabelImporteventa.Caption := FormatFloat('Total Venta: $ ##,###,##0.00 ', EKDbSuma2.SumCollection[0].SumValue);
-  QRLabelImporteTotal.Caption := FormatFloat('Total: $ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
-
-  DM.VariablesReportes(RepArqueo);
-  EKVistaPreviaQR1.VistaPrevia;
+//  QRLabelImporteventa.Caption := FormatFloat('Total Venta: $ ##,###,##0.00 ', EKDbSuma2.SumCollection[0].SumValue);
+//  QRLabelImporteTotal.Caption := FormatFloat('Total: $ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+//
+//  DM.VariablesReportes(RepArqueo);
+//  EKVistaPreviaQR1.VistaPrevia;
 end;
 
 procedure TFArqueo_Caja.btnExcelClick(Sender: TObject);
 begin
-  if not ZQ_ComprobanteDetalle.IsEmpty then
-    dm.ExportarEXCEL(DBGridListadoProductos);
+  if not ZQ_Arqueo_Movimientos.IsEmpty then
+    dm.ExportarEXCEL(DBGridArqueoMovimiento);
+end;
+
+procedure TFArqueo_Caja.DBGridArqueoMovimientoDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridArqueoMovimiento, Rect, DataCol, Column, State);
+end;
+
+procedure TFArqueo_Caja.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
+end;
+
+procedure TFArqueo_Caja.EKDbSuma_ArqueoMovSumListChanged(Sender: TObject);
+begin
+  lblTotalMovimientos.Caption := FormatFloat('Total Cuentas: $ ##,###,##0.00 ', EKDbSuma_ArqueoMov.SumCollection[0].SumValue);
 end;
 
 end.
