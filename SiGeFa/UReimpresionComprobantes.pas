@@ -444,7 +444,7 @@ begin
     exit;
 
   pregunta:= '¿Desea eliminar el Comprobante Venta Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?';
-  if not ZQ_ComprobanteID_PREVENTA.IsNull then
+  if not ((ZQ_ComprobanteID_PREVENTA.IsNull) or (ZQ_ComprobanteID_PREVENTA.AsInteger = 0)) then
   begin
     codigo_preventa:= ''+FormatFloat('00000000', ZQ_ComprobanteID_PREVENTA.AsInteger);
     pregunta:= '¿Desea eliminar el Comprobante Venta Nº: ' + ZQ_ComprobanteCODIGO.AsString +#13+' con su correspondiente Preventa (Cód. Preventa: '+codigo_preventa+')?';
