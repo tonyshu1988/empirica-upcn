@@ -145,6 +145,7 @@ var
   aplicaImprimirFiscal: string;  //indica que aplicacion se usa para la impresora fiscal delphi/visual
   imprimirEtiqueta_opcionReporte: integer; //tipo de impresion de etiquetas
   recargo_factura_vencida: double = 10; //indica el porcentaje de recargo(+)/descuento(-) que se le aplica a las facturas vencidas
+  recargo_factura_vencida_automatico : boolean = false;
   cajero_cuenta_defecto: integer = -1; //cuenta por defecto para la forma de pago del cajero
   cajero_borrar_vendedor: boolean = true;
   cajero_tamanio_lista_fpago: integer = 0;
@@ -241,6 +242,7 @@ begin
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'preventa_diasVencimiento', preventa_diasVencimiento);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'preventa_descontar_stock', preventa_descontar_stock);
   configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'recargo_factura_vencida', recargo_factura_vencida);
+  configurarBoolean(ZQ_Configuracion_Variables, 'clave', 'texto', 'recargo_factura_vencida', 'SI', recargo_factura_vencida_automatico);
   configurarBoolean(ZQ_Configuracion_Variables, 'clave', 'texto', 'borrarVendedor', 'SI', cajero_borrar_vendedor);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'etiquetaNF', etiqueta_no_fiscal);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'etiquetaF', etiqueta_fiscal);
