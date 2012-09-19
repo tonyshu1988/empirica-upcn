@@ -1559,17 +1559,22 @@ begin
     CD_Facturas.Filtered:= false;
 
     vencida:= 'NO';
-    recargo_vencimiento:= 0;
     pagoCompleto:= 'false';
-    saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
-    if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
+    recargo_vencimiento:= 0;
+    if recargo_factura_vencida_automatico = true then //si se aplica le vencimiento automatico
     begin
-      recargo_vencimiento:= recargo_factura_vencida;
-      saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (1 + (recargo_factura_vencida / 100));
-      vencida:= 'SI';
-      pagoCompleto:= 'true';
+      saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
+      ///chequeo que la factura esta vencida
+      if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
+      begin
+        //si esta vencida calculo cuanto se debe pagar
+        recargo_vencimiento:= recargo_factura_vencida;
+        saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (1 + (recargo_factura_vencida / 100));
+        vencida:= 'SI';
+        pagoCompleto:= 'true';
+      end;
     end;
-
+    
     CD_Facturas.Append;
     CD_Facturas_idComprobante.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
     CD_Facturas_idFactura.AsInteger:= vselFactura.ZQ_Factura_VentaID_COMPROBANTE.AsInteger;
@@ -1615,16 +1620,22 @@ begin
       begin
         CD_Facturas.Filtered:= false;
 
+
         vencida:= 'NO';
-        recargo_vencimiento:= 0;
         pagoCompleto:= 'false';
-        saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
-        if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
+        recargo_vencimiento:= 0;
+        if recargo_factura_vencida_automatico = true then //si se aplica le vencimiento automatico
         begin
-          recargo_vencimiento:= recargo_factura_vencida;
-          saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (1 + (recargo_factura_vencida / 100));
-          vencida:= 'SI';
-          pagoCompleto:= 'true';
+          saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
+          ///chequeo que la factura esta vencida
+          if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
+          begin
+            //si esta vencida calculo cuanto se debe pagar
+            recargo_vencimiento:= recargo_factura_vencida;
+            saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat * (1 + (recargo_factura_vencida / 100));
+            vencida:= 'SI';
+            pagoCompleto:= 'true';
+          end;
         end;
 
         CD_Facturas.Append;
