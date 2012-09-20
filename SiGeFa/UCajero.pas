@@ -998,6 +998,10 @@ begin
   FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivo.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivoF.Glyph);
 
+  //Caption en los filtros
+  btnEfectivo.Caption:= etiqueta_no_fiscal;
+  btnEfectivoF.Caption:= etiqueta_fiscal;
+
   //Ver o no los cierres Fiscales
   if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
   begin
@@ -1600,6 +1604,7 @@ begin
     grupoVertical.Enabled:= False;
     CD_ComprobantemontoRecibido.AsFloat:= 0;
     recalcularBoleta();
+    edPorcDctoTotal.Enabled:= dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE');
     if edPorcDctoTotal.Enabled then
       edPorcDctoTotal.SetFocus;
   end;
