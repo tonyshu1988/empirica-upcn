@@ -3657,6 +3657,7 @@ object FCajero: TFCajero
           Top = 5
           Width = 425
           Height = 15
+          TabStop = False
           BevelInner = bvNone
           BevelOuter = bvNone
           BorderStyle = bsNone

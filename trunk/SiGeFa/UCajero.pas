@@ -1441,7 +1441,7 @@ begin
   PanelDetalles.Enabled:= False;
   grupoVertical.Enabled:= False;
   GrupoGuardarCancelar.Enabled:= False;
-  PanelDetalleProducto.Color:= $00AFFED5;
+  PanelDetalleProducto.Color:= $00FFECEC;
   if edCantidad.Enabled then
     edCantidad.SetFocus;
 
