@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ZConnection, dxBar, dxBarExtItems, StdCtrls, ExtCtrls,
-  dbcTableDataComparer, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   Grids, DBGrids, ComCtrls;
 
 type

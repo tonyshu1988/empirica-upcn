@@ -20,14 +20,14 @@ object FCompararStock: TFCompararStock
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 862
     Height = 30
     Align = alTop
-    TabOrder = 1
+    TabOrder = 0
     object lblOrigen: TLabel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 860
       Height = 28
       Align = alClient
       Caption = ' lblOrigen'
@@ -42,14 +42,14 @@ object FCompararStock: TFCompararStock
   object Panel2: TPanel
     Left = 0
     Top = 30
-    Width = 854
+    Width = 862
     Height = 30
     Align = alTop
-    TabOrder = 4
+    TabOrder = 2
     object lblDestino: TLabel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 860
       Height = 28
       Align = alClient
       Caption = ' lblDestino'
@@ -64,12 +64,12 @@ object FCompararStock: TFCompararStock
   object DBGrid1: TDBGrid
     Left = 0
     Top = 60
-    Width = 854
-    Height = 381
+    Width = 862
+    Height = 392
     Align = alClient
     DataSource = DataSource1
     Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-    TabOrder = 6
+    TabOrder = 5
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -119,13 +119,13 @@ object FCompararStock: TFCompararStock
   end
   object Panel3: TPanel
     Left = 0
-    Top = 441
-    Width = 854
+    Top = 504
+    Width = 862
     Height = 50
     Align = alBottom
     TabOrder = 7
     DesignSize = (
-      854
+      862
       50)
     object Label1: TLabel
       Left = 6
@@ -194,7 +194,7 @@ object FCompararStock: TFCompararStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
