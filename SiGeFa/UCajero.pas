@@ -1013,7 +1013,8 @@ begin
   begin
     btCierreZ.Enabled:= False;
     BtCierreX.Enabled:= False;
-    btnAuditoriaFiscal.Enabled:= False;    
+    btnAuditoriaFiscal.Enabled:= False;
+    btnEfectivo.Visible:=False;    
   end;
 
   ultimoIDPago();
@@ -2833,7 +2834,8 @@ begin
     ZQ_Cuentas.Locate('ID_CUENTA', ctaPorDefecto, []);
     CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
 
-    btnEfectivo.SetFocus;
+    if btnEfectivo.Enabled then
+       btnEfectivo.SetFocus;
   end;
 end;
 

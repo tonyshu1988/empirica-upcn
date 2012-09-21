@@ -49,7 +49,7 @@ object FPreventa: TFPreventa
       Width = 702
       Height = 313
       Align = alClient
-      Color = 16112578
+      Color = 15527129
       DataSource = DS_Comprobante
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
@@ -1100,6 +1100,10 @@ object FPreventa: TFPreventa
       end
       item
         TituloColumna = 'Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle Cliente'
         Visible = True
       end
       item
