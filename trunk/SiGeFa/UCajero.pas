@@ -904,7 +904,7 @@ begin
   if not (ZQ_Productos.IsEmpty) then
   begin
     if (CD_DetalleFacturaCANTIDAD.AsFloat < 0) then CD_DetalleFacturaCANTIDAD.AsFloat:= 1;
-    if (CD_DetalleFacturaPORC_DESCUENTO.AsFloat < 0) then CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= 0;
+    //if (CD_DetalleFacturaPORC_DESCUENTO.AsFloat < 0) then CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= 0;
     desc:= CD_DetalleFacturaPORC_DESCUENTO.AsFloat;
     CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaCANTIDAD.AsFloat * (CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat - (CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat * desc / 100));
   end
@@ -1616,6 +1616,9 @@ procedure TFCajero.EKDbSuma1SumListChanged(Sender: TObject);
 begin
   acumulado:= EKDbSuma1.SumCollection[0].SumValue;
   acumuladoProd:= EKDbSuma1.SumCollection[7].SumValue;
+  if (acumuladoProd=0) then
+   acumuladoProd:=acumulado;
+
   acumuladoIVA:= EKDbSuma1.SumCollection[1].SumValue;
 
   acumPrecio1:= EKDbSuma1.SumCollection[2].SumValue;
@@ -1630,7 +1633,7 @@ begin
   coefPrecio4:= 1;
   coefPrecio5:= 1;
 
-  if acumulado > 0 then
+  if (acumulado>0) then
   begin
     coefPrecio1:= acumPrecio1 / acumuladoProd;
     coefPrecio2:= acumPrecio2 / acumuladoProd;
