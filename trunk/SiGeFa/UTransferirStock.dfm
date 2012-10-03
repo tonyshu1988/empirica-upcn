@@ -786,7 +786,7 @@ object FTransferirStock: TFTransferirStock
         Left = 882
         Top = 7
         Width = 56
-        Height = 15
+        Height = 17
         Anchors = [akTop, akRight]
         Caption = 'IMPRESO'
         Color = 12713983

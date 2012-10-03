@@ -878,14 +878,22 @@ end;
 procedure TFABM_CPB_NotaPedido.btnImprimirClick(Sender: TObject);
 var
   estado: Integer;
+  cliente, empresa: integer;
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
   if ((ZQ_VerCpb.IsEmpty) or (estado = ESTADO_ANULADO)) then
     exit;
 
+  cliente:= -1;
+  empresa:= -1;
+  if not ZQ_VerCpbID_CLIENTE.IsNull then
+    cliente:= ZQ_VerCpbID_CLIENTE.AsInteger;
+  if not ZQ_VerCpbID_PROVEEDOR.IsNull then
+    empresa:= ZQ_VerCpbID_PROVEEDOR.AsInteger;
+
   if not Assigned(FImpresion_Comprobantes) then
     FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
-  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, false);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, cliente, empresa, false);
   FImpresion_Comprobantes.imprimir;
 end;
 
@@ -1287,6 +1295,7 @@ end;
 procedure TFABM_CPB_NotaPedido.btnEnviarMailClick(Sender: TObject);
 var
   destino, archivoPDF: string;
+  cliente, empresa: integer;
 begin
   destino:= '';
   archivoPDF:= '';
@@ -1311,9 +1320,16 @@ begin
   if (not ZQ_BuscarMailEMAIL.IsNull) or (ZQ_BuscarMailEMAIL.AsString <> '') then
     destino:= ZQ_BuscarMailEMAIL.AsString;
 
+  cliente:= -1;
+  empresa:= -1;
+  if not ZQ_VerCpbID_CLIENTE.IsNull then
+    cliente:= ZQ_VerCpbID_CLIENTE.AsInteger;
+  if not ZQ_VerCpbID_PROVEEDOR.IsNull then
+    empresa:= ZQ_VerCpbID_PROVEEDOR.AsInteger;
+
   if not Assigned(FImpresion_Comprobantes) then
     FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
-  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, false);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, cliente, empresa, false);
   archivoPDF:= FImpresion_Comprobantes.generarPDF;
 
   //if not Assigned(TFMailEnviar) then
