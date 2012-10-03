@@ -942,11 +942,11 @@ begin
   noImprimir:= false;
 
   ZQ_Destino.Close;
-  if id_persona = 0 then
+  if id_persona = -1 then
     ZQ_Destino.ParamByName('id_persona').Clear
   else
     ZQ_Destino.ParamByName('id_persona').AsInteger:= id_persona;
-  if id_empresa = 0 then
+  if id_empresa = -1 then
     ZQ_Destino.ParamByName('id_empresa').Clear
   else
     ZQ_Destino.ParamByName('id_empresa').AsInteger:= id_empresa;

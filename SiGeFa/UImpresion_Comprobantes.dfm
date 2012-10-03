@@ -20,7 +20,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     Top = 0
     Width = 985
     Height = 564
-    ActivePage = TabSheet11
+    ActivePage = TabSheet10
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -3290,7 +3290,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            814.916666666666800000
+            814.916666666666700000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -23032,7 +23032,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               13.229166666666670000
               58.208333333333340000
-              830.791666666666800000)
+              830.791666666666700000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
