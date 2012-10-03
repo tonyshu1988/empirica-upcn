@@ -1373,6 +1373,8 @@ end;
 
 procedure TFCajero.btnAceptarProdClick(Sender: TObject);
 begin
+  Perform(WM_NEXTDLGCTL, 0, 0);
+
   if CD_DetalleFacturaIMPORTE_FINAL.AsFloat <= 0 then
   begin
     Application.MessageBox('El importe ingresado es incorrecto.', 'Atención');
