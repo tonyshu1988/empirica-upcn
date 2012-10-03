@@ -415,6 +415,9 @@ end;
 
 procedure TFCuentaCorriente.btnVerCtaCteClick(Sender: TObject);
 begin
+  //para el resumen de los clientes
+  ActivarAfterScroll:= false;
+
   if viendoResumen then
   begin
     //para ver un cliente en especial
@@ -438,13 +441,9 @@ begin
 
     PanelDetalleMov.Visible:= false;
     viendoDetalleCpb:= false;
-    btnVerDetalleFactura.Click;
   end
   else
   begin
-    //para el resumen de los clientes
-    ActivarAfterScroll:= false;
-
     viendoResumen:= true;
     PanelResumen.BringToFront;
     btnVerCtaCte.Caption:= 'F2 - Ver Cta Cte';
@@ -537,6 +536,10 @@ var
   diasDesdeUltimaSemana, diasDesdeUltimoMes, diasDesdeUltimoAnio: integer;
   debe, haber, saldo: Double;
 begin
+  ActivarAfterScroll:= false;
+  PanelDetalleMov.Visible:= false;
+  viendoDetalleCpb:= false;
+
   hoy:= dm.EKModelo.Fecha;
 
   ZQ_CtaCte_Cliente.ParamByName('id_cliente').AsInteger:= ZQ_CtaCte_GralID_CLIENTE_OUT.AsInteger;
@@ -882,6 +885,49 @@ begin
 end;
 
 
+procedure TFCuentaCorriente.verDetalle();
+begin
+  if viendoDetalleCpb then
+  begin
+    //si el tipo de comprobante es saldo anterior o nota de credito
+    if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
+    begin
+      PanelDetalleMov.Visible:= false;
+    end
+    else //sino
+      //si el tipo de comprobante es recibo de cta cte
+      if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
+      begin
+        lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+        PanelDetalleMov.Visible:= true;
+        DBGridDetalle_FPago.SendToBack;
+        DBGridDetalle_Producto.SendToBack;
+        DBGridDetalle_Recibo.BringToFront;
+      end
+      else //sino
+        //si el tipo de comprobante es Pago factura
+        if AnsiPos('PAGO FACTURA', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
+        begin
+          lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+          PanelDetalleMov.Visible:= true;
+          DBGridDetalle_FPago.BringToFront;
+          DBGridDetalle_Producto.SendToBack;
+          DBGridDetalle_Recibo.SendToBack;
+        end
+        else //sino
+        //si el tipo de comprobante es factura
+          if AnsiPos('FACTURA', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
+          begin
+            lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
+            PanelDetalleMov.Visible:= true;
+            DBGridDetalle_FPago.SendToBack;
+            DBGridDetalle_Producto.BringToFront;
+            DBGridDetalle_Recibo.SendToBack;
+          end
+  end;
+end;
+
+
 procedure TFCuentaCorriente.btnAltaReciboClick(Sender: TObject);
 begin
   FPrincipal.AABM_CPB_Recibo.Execute;
@@ -896,6 +942,10 @@ procedure TFCuentaCorriente.FormActivate(Sender: TObject);
 var
   recNo_gral: integer;
 begin
+  ActivarAfterScroll:= false;
+  PanelDetalleMov.Visible:= false;
+  viendoDetalleCpb:= false;
+
   if not ZQ_CtaCte_Gral.IsEmpty then
   begin
     recNo_gral:= ZQ_CtaCte_Gral.RecNo;
@@ -973,50 +1023,6 @@ begin
   recNo:= ZQ_CtaCte_Cliente.RecNo;
   ZQ_CtaCte_Cliente.Refresh;
   ZQ_CtaCte_Cliente.RecNo:= recNo;
-end;
-
-
-procedure TFCuentaCorriente.verDetalle();
-begin
-  if viendoDetalleCpb then
-  begin
-    PanelDetalleMov.Visible:= false;
-    //si el tipo de comprobante es saldo anterior o nota de credito
-    if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
-    begin
-      PanelDetalleMov.Visible:= false;
-    end
-    else //sino
-      //si el tipo de comprobante es recibo de cta cte
-      if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
-      begin
-        lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
-        PanelDetalleMov.Visible:= true;
-        DBGridDetalle_FPago.SendToBack;
-        DBGridDetalle_Producto.SendToBack;
-        DBGridDetalle_Recibo.BringToFront;
-      end
-      else //sino
-        //si el tipo de comprobante es Pago factura
-        if AnsiPos('PAGO FACTURA', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
-        begin
-          lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
-          PanelDetalleMov.Visible:= true;
-          DBGridDetalle_FPago.BringToFront;
-          DBGridDetalle_Producto.SendToBack;
-          DBGridDetalle_Recibo.SendToBack;
-        end
-        else //sino
-        //si el tipo de comprobante es factura
-          if AnsiPos('FACTURA', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0 then
-          begin
-            lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString;
-            PanelDetalleMov.Visible:= true;
-            DBGridDetalle_FPago.SendToBack;
-            DBGridDetalle_Producto.BringToFront;
-            DBGridDetalle_Recibo.SendToBack;
-          end
-  end;
 end;
 
 
