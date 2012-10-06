@@ -230,6 +230,7 @@ begin
 
   ZQ_AudDetallada.ParamByName('id_tabla').AsInteger:= ZQ_AudGeneralID.AsInteger;
   ZQ_AudDetallada.open;
+  lblCantidad.Caption:= 'Total: '+IntToStr(ZQ_AudGeneral.RecordCount);
 
   sql:= 'select * from '+ZQ_AudGeneralTABLE_NAME.AsString+' where '+ZQ_AudGeneralKEY_FIELD.AsString+' = '+ZQ_AudGeneralKEY_VALUE.AsString;
   ZQ_DatosTabla.SQL.Text:= sql;
@@ -547,6 +548,7 @@ begin
   ZQ_AudGeneral.Filtered:= true;
   ZQ_AudGeneral.First;
   lblFiltro.Caption:= 'Filtro: '+ZQ_AudGeneralKEY_FIELD.AsString+' = '+clave;
+  lblCantidad.Caption:= 'Total: '+IntToStr(ZQ_AudGeneral.RecordCount);
 end;
 
 

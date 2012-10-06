@@ -1,6 +1,6 @@
 object FAuditoria: TFAuditoria
-  Left = 282
-  Top = 126
+  Left = 295
+  Top = 39
   Width = 900
   Height = 629
   Caption = 'Auditoria'
@@ -20,15 +20,15 @@ object FAuditoria: TFAuditoria
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 884
-    Height = 539
+    Width = 892
+    Height = 550
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelGrilla: TPanel
       Left = 0
-      Top = 322
-      Width = 884
+      Top = 333
+      Width = 892
       Height = 217
       Align = alBottom
       BevelOuter = bvNone
@@ -43,7 +43,7 @@ object FAuditoria: TFAuditoria
       object DBGridAudDetallada: TDBGrid
         Left = 5
         Top = 5
-        Width = 874
+        Width = 882
         Height = 207
         Align = alClient
         Color = 16112578
@@ -105,8 +105,8 @@ object FAuditoria: TFAuditoria
     object Panel1: TPanel
       Left = 0
       Top = 32
-      Width = 884
-      Height = 290
+      Width = 892
+      Height = 301
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -115,8 +115,8 @@ object FAuditoria: TFAuditoria
       object DBGridAudGeneral: TDBGrid
         Left = 237
         Top = 5
-        Width = 642
-        Height = 184
+        Width = 650
+        Height = 195
         Align = alClient
         Color = 16112578
         DataSource = DS_AudGeneral
@@ -209,8 +209,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosTabla: TDBGrid
         Left = 5
-        Top = 205
-        Width = 874
+        Top = 216
+        Width = 882
         Height = 40
         Align = alBottom
         Color = 12779258
@@ -229,7 +229,7 @@ object FAuditoria: TFAuditoria
         Left = 5
         Top = 5
         Width = 232
-        Height = 184
+        Height = 195
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alLeft
         Color = 16112578
@@ -262,8 +262,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosProducto: TDBGrid
         Left = 5
-        Top = 245
-        Width = 874
+        Top = 256
+        Width = 882
         Height = 40
         Align = alBottom
         Color = 16112578
@@ -334,14 +334,14 @@ object FAuditoria: TFAuditoria
       end
       object Panel3: TPanel
         Left = 5
-        Top = 189
-        Width = 874
+        Top = 200
+        Width = 882
         Height = 16
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 4
         DesignSize = (
-          874
+          882
           16)
         object lblFiltro: TLabel
           Left = 235
@@ -366,7 +366,7 @@ object FAuditoria: TFAuditoria
     object Panel2: TPanel
       Left = 0
       Top = 0
-      Width = 884
+      Width = 892
       Height = 32
       Align = alTop
       BevelOuter = bvNone
@@ -475,7 +475,7 @@ object FAuditoria: TFAuditoria
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
