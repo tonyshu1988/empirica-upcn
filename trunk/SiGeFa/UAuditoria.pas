@@ -11,7 +11,7 @@ uses
 
 type
   TFAuditoria = class(TForm)
-    PanelFondo: TPanel;
+    PanelFondoAuditoria: TPanel;
     dxBarABM: TdxBarManager;
     btnRefrescar: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
@@ -99,6 +99,45 @@ type
     Panel3: TPanel;
     lblFiltro: TLabel;
     lblCantidad: TLabel;
+    PanelFondoXML: TPanel;
+    PanelXML_Buscar: TPanel;
+    PanelXML_Resumen: TPanel;
+    DBGridXML_Archivo: TDBGrid;
+    DBGridXML_Tablas: TDBGrid;
+    lblXML_TotalTablas: TLabel;
+    lblXML_TotalArchivo: TLabel;
+    btnXML_Abrir: TButton;
+    editXML_Archivo: TEdit;
+    CD_XML: TClientDataSet;
+    CD_XMLID: TIntegerField;
+    CD_XMLOPERATION: TStringField;
+    CD_XMLDATE_TIME: TDateTimeField;
+    CD_XMLUSER_NAME: TStringField;
+    CD_XMLTABLE_NAME: TStringField;
+    CD_XMLKEY_FIELD: TStringField;
+    CD_XMLKEY_VALUE: TStringField;
+    CD_XMLFIELD_NAME: TStringField;
+    CD_XMLNEW_VALUE: TStringField;
+    CD_XMLOLD_VALUE: TStringField;
+    CD_XMLFBLOB_NAME: TStringField;
+    CD_XMLFBLOB_OLD_CHAR_VALUE: TStringField;
+    CD_XMLFBLOB_NEW_CHAR_VALUE: TStringField;
+    CD_XMLFBLOB_OLD_BLOB_VALUE: TBlobField;
+    CD_XMLFBLOB_NEW_BLOB_VALUE: TBlobField;
+    DS_XML: TDataSource;
+    OpenFileXML: TOpenDialog;
+    EKOrdenarGrilla4: TEKOrdenarGrilla;
+    CD_XMLTablas: TClientDataSet;
+    CD_XMLTablas_Tabla: TStringField;
+    CD_XMLTablas_CampoClave: TStringField;
+    CD_XMLTablas_Clave: TStringField;
+    CD_XMLTablas_Operacion: TStringField;
+    CD_XMLTablas_Fecha: TDateTimeField;
+    CD_XMLTablas_Id: TStringField;
+    CD_XMLTablas_Usuario: TStringField;
+    DS_XMLTablas: TDataSource;
+    EKOrdenarGrilla5: TEKOrdenarGrilla;
+    btnAuditoria_XML: TdxBarLargeButton;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_AudGeneralAfterScroll(DataSet: TDataSet);
@@ -120,7 +159,10 @@ type
     procedure pUpItem_QuitarFiltroClick(Sender: TObject);
     procedure pUpItem_FiltrarClaveClick(Sender: TObject);
     procedure EKLlenarCombo1Cambio(valor: String);
+    procedure btnXML_AbrirClick(Sender: TObject);
+    procedure btnAuditoria_XMLClick(Sender: TObject);
   private
+    procedure obtener_tablas_actualizar;
     { Private declarations }
   public
     { Public declarations }
@@ -141,6 +183,12 @@ uses UPrincipal, UDM;
 
 procedure TFAuditoria.FormCreate(Sender: TObject);
 begin
+  PanelFondoXML.Visible:= false;
+  CD_XML.CreateDataSet;
+  CD_XMLTablas.CreateDataSet;
+  lblXML_TotalArchivo.Caption:= '';
+  lblXML_TotalTablas.Caption:= '';
+
   lblFiltro.Caption:= '';
   lblCantidad.Caption:= '';  
 
@@ -557,6 +605,61 @@ end;
 procedure TFAuditoria.EKLlenarCombo1Cambio(valor: String);
 begin
   buscarAudotoria();
+end;
+
+
+procedure TFAuditoria.btnXML_AbrirClick(Sender: TObject);
+begin
+  if OpenFileXML.Execute then
+  begin
+    editXML_Archivo.Text:= OpenFileXML.FileName;
+    CD_XML.EmptyDataSet;
+    CD_XML.LoadFromFile(editXML_Archivo.Text);
+    lblXML_TotalArchivo.Caption:= 'Total: '+IntToStr(CD_XML.RecordCount);
+    CD_XML.First;
+    obtener_tablas_actualizar;
+    lblXML_TotalTablas.Caption:= 'Total: '+IntToStr(CD_XMLTablas.RecordCount);
+  end
+end;
+
+
+procedure TFAuditoria.obtener_tablas_actualizar();
+var
+  id_anterior: integer;
+  auxId: string;
+begin
+  if CD_XML.IsEmpty then
+    exit;
+
+  CD_XML.DisableControls;
+  CD_XMLTablas.EmptyDataSet;
+
+  id_anterior:= -1;
+  CD_XML.First;
+  while not CD_XML.Eof do //recorro el clientDataset que contiene los datos del archivo de novedades
+  begin
+    //guardo todas las tablas que se tienen que tocar y la accion que se va a realizar, descarto los repetidos
+    if CD_XMLID.AsInteger <> id_anterior then
+    begin
+      id_anterior:= CD_XMLID.AsInteger;
+      CD_XMLTablas.Append;
+      CD_XMLTablas_Id.AsString:= IntToStr(CD_XMLID.AsInteger);
+      CD_XMLTablas_Tabla.AsString:= CD_XMLTABLE_NAME.AsString;
+      CD_XMLTablas_Clave.AsString:= CD_XMLKEY_VALUE.AsString;
+      CD_XMLTablas_CampoClave.AsString:= CD_XMLKEY_FIELD.AsString;
+      CD_XMLTablas_Operacion.AsString:= CD_XMLOPERATION.AsString;
+      CD_XMLTablas_Fecha.AsDateTime:= CD_XMLDATE_TIME.AsDateTime;
+      CD_XMLTablas.Post;
+    end;
+    CD_XML.Next;
+  end;
+  CD_XML.EnableControls;
+end;
+
+procedure TFAuditoria.btnAuditoria_XMLClick(Sender: TObject);
+begin
+  PanelFondoAuditoria.Visible:= not PanelFondoAuditoria.Visible;
+  PanelFondoXML.Visible:= not PanelFondoXML.Visible;
 end;
 
 end.

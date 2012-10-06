@@ -1,6 +1,6 @@
 object FAuditoria: TFAuditoria
-  Left = 295
-  Top = 39
+  Left = 314
+  Top = 117
   Width = 900
   Height = 629
   Caption = 'Auditoria'
@@ -17,18 +17,18 @@ object FAuditoria: TFAuditoria
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object PanelFondo: TPanel
+  object PanelFondoAuditoria: TPanel
     Left = 0
     Top = 0
-    Width = 892
-    Height = 550
+    Width = 884
+    Height = 539
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelGrilla: TPanel
       Left = 0
-      Top = 333
-      Width = 892
+      Top = 322
+      Width = 884
       Height = 217
       Align = alBottom
       BevelOuter = bvNone
@@ -43,7 +43,7 @@ object FAuditoria: TFAuditoria
       object DBGridAudDetallada: TDBGrid
         Left = 5
         Top = 5
-        Width = 882
+        Width = 874
         Height = 207
         Align = alClient
         Color = 16112578
@@ -105,8 +105,8 @@ object FAuditoria: TFAuditoria
     object Panel1: TPanel
       Left = 0
       Top = 32
-      Width = 892
-      Height = 301
+      Width = 884
+      Height = 290
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -115,8 +115,8 @@ object FAuditoria: TFAuditoria
       object DBGridAudGeneral: TDBGrid
         Left = 237
         Top = 5
-        Width = 650
-        Height = 195
+        Width = 642
+        Height = 184
         Align = alClient
         Color = 16112578
         DataSource = DS_AudGeneral
@@ -209,8 +209,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosTabla: TDBGrid
         Left = 5
-        Top = 216
-        Width = 882
+        Top = 205
+        Width = 874
         Height = 40
         Align = alBottom
         Color = 12779258
@@ -229,7 +229,7 @@ object FAuditoria: TFAuditoria
         Left = 5
         Top = 5
         Width = 232
-        Height = 195
+        Height = 184
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alLeft
         Color = 16112578
@@ -262,8 +262,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosProducto: TDBGrid
         Left = 5
-        Top = 256
-        Width = 882
+        Top = 245
+        Width = 874
         Height = 40
         Align = alBottom
         Color = 16112578
@@ -334,14 +334,14 @@ object FAuditoria: TFAuditoria
       end
       object Panel3: TPanel
         Left = 5
-        Top = 200
-        Width = 882
+        Top = 189
+        Width = 874
         Height = 16
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 4
         DesignSize = (
-          882
+          874
           16)
         object lblFiltro: TLabel
           Left = 235
@@ -366,7 +366,7 @@ object FAuditoria: TFAuditoria
     object Panel2: TPanel
       Left = 0
       Top = 0
-      Width = 892
+      Width = 884
       Height = 32
       Align = alTop
       BevelOuter = bvNone
@@ -472,10 +472,218 @@ object FAuditoria: TFAuditoria
       end
     end
   end
+  object PanelFondoXML: TPanel
+    Left = 0
+    Top = 0
+    Width = 884
+    Height = 539
+    Align = alClient
+    TabOrder = 5
+    object PanelXML_Buscar: TPanel
+      Left = 1
+      Top = 1
+      Width = 882
+      Height = 41
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 0
+      object btnXML_Abrir: TButton
+        Left = 8
+        Top = 8
+        Width = 75
+        Height = 25
+        Caption = 'Abrir'
+        TabOrder = 0
+        OnClick = btnXML_AbrirClick
+      end
+      object editXML_Archivo: TEdit
+        Left = 88
+        Top = 10
+        Width = 665
+        Height = 21
+        TabOrder = 1
+      end
+    end
+    object PanelXML_Resumen: TPanel
+      Left = 1
+      Top = 524
+      Width = 882
+      Height = 14
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 1
+      object lblXML_TotalTablas: TLabel
+        Left = 504
+        Top = 0
+        Width = 378
+        Height = 14
+        Align = alRight
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'lblXML_TotalTablas'
+      end
+      object lblXML_TotalArchivo: TLabel
+        Left = 0
+        Top = 0
+        Width = 504
+        Height = 14
+        Align = alClient
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'lblXML_TotalArchivo'
+      end
+    end
+    object DBGridXML_Archivo: TDBGrid
+      Left = 1
+      Top = 42
+      Width = 503
+      Height = 482
+      Align = alClient
+      Color = 16112578
+      DataSource = DS_AudGeneral
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      TabOrder = 2
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      OnDrawColumnCell = DBGridAudGeneralDrawColumnCell
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'TABLE_NAME'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'OPERATION'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DATE_TIME'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'USER_NAME'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Usuario'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'Nombre_Usuario'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'LOG_TABLES_ID'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'KEY_FIELD'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'KEY_VALUE'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ID_SINCRO_LOTE'
+          Width = 60
+          Visible = True
+        end>
+    end
+    object DBGridXML_Tablas: TDBGrid
+      Left = 504
+      Top = 42
+      Width = 379
+      Height = 482
+      Align = alRight
+      Color = 16112578
+      DataSource = DS_XMLTablas
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      TabOrder = 3
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'MS Sans Serif'
+      TitleFont.Style = []
+      OnDrawColumnCell = DBGridAudGeneralDrawColumnCell
+      Columns = <
+        item
+          Expanded = False
+          FieldName = '_Tabla'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = '_CampoClave'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = '_Clave'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = '_Operacion'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = '_Fecha'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = '_Id'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = '_Usuario'
+          Width = 50
+          Visible = True
+        end>
+    end
+  end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -777,6 +985,11 @@ object FAuditoria: TFAuditoria
         Font.Style = []
         ItemLinks = <
           item
+            Item = btnAuditoria_XML
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btnRefrescar
             Visible = True
           end
@@ -848,6 +1061,15 @@ object FAuditoria: TFAuditoria
       Visible = ivAlways
       ImageIndex = 9
       OnClick = btnEliminarAuditoriaClick
+      AutoGrayScale = False
+    end
+    object btnAuditoria_XML: TdxBarLargeButton
+      Caption = 'Ver Auditoria/XML'
+      Category = 0
+      Hint = 'Ver Auditoria/XML'
+      Visible = ivAlways
+      ImageIndex = 50
+      OnClick = btnAuditoria_XMLClick
       AutoGrayScale = False
     end
     object GrupoVisualizando: TdxBarGroup
@@ -1516,5 +1738,224 @@ object FAuditoria: TFAuditoria
     PermitirFiltrar = True
     Left = 328
     Top = 225
+  end
+  object CD_XML: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID'
+    Params = <>
+    ProviderName = 'DSP_NovedadesCliente'
+    Left = 549
+    Top = 318
+    object CD_XMLID: TIntegerField
+      FieldName = 'ID'
+      ReadOnly = True
+    end
+    object CD_XMLOPERATION: TStringField
+      FieldName = 'OPERATION'
+      Required = True
+      Size = 1
+    end
+    object CD_XMLDATE_TIME: TDateTimeField
+      FieldName = 'DATE_TIME'
+      Required = True
+    end
+    object CD_XMLUSER_NAME: TStringField
+      FieldName = 'USER_NAME'
+      Required = True
+      Size = 67
+    end
+    object CD_XMLTABLE_NAME: TStringField
+      FieldName = 'TABLE_NAME'
+      Required = True
+      Size = 67
+    end
+    object CD_XMLKEY_FIELD: TStringField
+      FieldName = 'KEY_FIELD'
+      Required = True
+      Size = 67
+    end
+    object CD_XMLKEY_VALUE: TStringField
+      FieldName = 'KEY_VALUE'
+      Size = 255
+    end
+    object CD_XMLFIELD_NAME: TStringField
+      FieldName = 'FIELD_NAME'
+      Required = True
+      Size = 67
+    end
+    object CD_XMLNEW_VALUE: TStringField
+      FieldName = 'NEW_VALUE'
+      Size = 255
+    end
+    object CD_XMLOLD_VALUE: TStringField
+      FieldName = 'OLD_VALUE'
+      Size = 255
+    end
+    object CD_XMLFBLOB_NAME: TStringField
+      FieldName = 'FBLOB_NAME'
+      Size = 67
+    end
+    object CD_XMLFBLOB_OLD_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_OLD_CHAR_VALUE'
+      Size = 8000
+    end
+    object CD_XMLFBLOB_NEW_CHAR_VALUE: TStringField
+      FieldName = 'FBLOB_NEW_CHAR_VALUE'
+      Size = 8000
+    end
+    object CD_XMLFBLOB_OLD_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_OLD_BLOB_VALUE'
+    end
+    object CD_XMLFBLOB_NEW_BLOB_VALUE: TBlobField
+      FieldName = 'FBLOB_NEW_BLOB_VALUE'
+    end
+  end
+  object DS_XML: TDataSource
+    DataSet = CD_XML
+    Left = 549
+    Top = 366
+  end
+  object OpenFileXML: TOpenDialog
+    DefaultExt = 'XML'
+    Filter = 'Archivo XML|*.XML'
+    InitialDir = 'c:\'
+    Title = 'Archivo XML de Sincronizaci'#243'n'
+    Left = 640
+    Top = 320
+  end
+  object EKOrdenarGrilla4: TEKOrdenarGrilla
+    Grilla = DBGridXML_Archivo
+    Filtros = <
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'TABLE_NAME'
+        Visible = True
+      end
+      item
+        TituloColumna = 'OPERATION'
+        Visible = True
+      end
+      item
+        TituloColumna = 'DATE_TIME'
+        Visible = True
+      end
+      item
+        TituloColumna = 'USER_NAME'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Usuario'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre_Usuario'
+        Visible = True
+      end
+      item
+        TituloColumna = 'LOG_TABLES_ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'KEY_FIELD'
+        Visible = True
+      end
+      item
+        TituloColumna = 'KEY_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID_SINCRO_LOTE'
+        Visible = True
+      end>
+    NombreGuardar = 'DBGridXML_Archivo'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 552
+    Top = 424
+  end
+  object CD_XMLTablas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 745
+    Top = 318
+    object CD_XMLTablas_Tabla: TStringField
+      FieldName = '_Tabla'
+      Size = 67
+    end
+    object CD_XMLTablas_CampoClave: TStringField
+      FieldName = '_CampoClave'
+      Size = 67
+    end
+    object CD_XMLTablas_Clave: TStringField
+      DisplayWidth = 255
+      FieldName = '_Clave'
+      Size = 67
+    end
+    object CD_XMLTablas_Operacion: TStringField
+      FieldName = '_Operacion'
+      Size = 1
+    end
+    object CD_XMLTablas_Fecha: TDateTimeField
+      FieldName = '_Fecha'
+    end
+    object CD_XMLTablas_Id: TStringField
+      FieldName = '_Id'
+      Size = 40
+    end
+    object CD_XMLTablas_Usuario: TStringField
+      FieldName = '_Usuario'
+      Size = 67
+    end
+  end
+  object DS_XMLTablas: TDataSource
+    DataSet = CD_XMLTablas
+    Left = 745
+    Top = 366
+  end
+  object EKOrdenarGrilla5: TEKOrdenarGrilla
+    Grilla = DBGridXML_Tablas
+    Filtros = <
+      item
+        TituloColumna = '_Tabla'
+        Visible = True
+      end
+      item
+        TituloColumna = '_CampoClave'
+        Visible = True
+      end
+      item
+        TituloColumna = '_Clave'
+        Visible = True
+      end
+      item
+        TituloColumna = '_Operacion'
+        Visible = True
+      end
+      item
+        TituloColumna = '_Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = '_Id'
+        Visible = True
+      end
+      item
+        TituloColumna = '_Usuario'
+        Visible = True
+      end>
+    NombreGuardar = 'DBGridXML_Tablas'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 744
+    Top = 424
   end
 end
