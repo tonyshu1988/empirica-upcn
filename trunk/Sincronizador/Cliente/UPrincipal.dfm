@@ -2,7 +2,7 @@ object FPrincipal: TFPrincipal
   Left = 230
   Top = 95
   Width = 1027
-  Height = 614
+  Height = 637
   Caption = 'Sincronizador SiGeFa '
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,34 +22,34 @@ object FPrincipal: TFPrincipal
   object panelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1019
-    Height = 516
+    Width = 1011
+    Height = 528
     Align = alClient
     TabOrder = 0
     object Splitter1: TSplitter
       Left = 1
-      Top = 247
-      Width = 1017
+      Top = 259
+      Width = 1009
       Height = 6
       Cursor = crVSplit
       Align = alBottom
     end
     object panelAbajo: TPanel
       Left = 1
-      Top = 253
-      Width = 1017
+      Top = 265
+      Width = 1009
       Height = 262
       Align = alBottom
       TabOrder = 0
       object Splitter2: TSplitter
-        Left = 625
+        Left = 617
         Top = 1
         Width = 4
         Height = 260
         Align = alRight
       end
       object panelListaNovedades: TPanel
-        Left = 629
+        Left = 621
         Top = 1
         Width = 387
         Height = 260
@@ -128,7 +128,7 @@ object FPrincipal: TFPrincipal
       object PanelLog: TPanel
         Left = 1
         Top = 1
-        Width = 624
+        Width = 616
         Height = 260
         Align = alClient
         BevelOuter = bvNone
@@ -136,7 +136,7 @@ object FPrincipal: TFPrincipal
         object lblTituloLog: TLabel
           Left = 0
           Top = 0
-          Width = 624
+          Width = 616
           Height = 15
           Align = alTop
           Alignment = taCenter
@@ -154,7 +154,7 @@ object FPrincipal: TFPrincipal
         object memoLog: TMemo
           Left = 0
           Top = 15
-          Width = 624
+          Width = 616
           Height = 245
           Align = alClient
           Color = 10026692
@@ -169,22 +169,22 @@ object FPrincipal: TFPrincipal
     object panelDatos: TPanel
       Left = 1
       Top = 42
-      Width = 1017
-      Height = 205
+      Width = 1009
+      Height = 217
       Align = alClient
       TabOrder = 1
       object Splitter3: TSplitter
-        Left = 625
+        Left = 617
         Top = 1
         Width = 4
-        Height = 175
+        Height = 187
         Align = alRight
       end
       object PanelTablas: TPanel
-        Left = 629
+        Left = 621
         Top = 1
         Width = 387
-        Height = 175
+        Height = 187
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 0
@@ -206,11 +206,19 @@ object FPrincipal: TFPrincipal
           ParentColor = False
           ParentFont = False
         end
+        object lblCantidadTablas: TLabel
+          Left = 0
+          Top = 174
+          Width = 387
+          Height = 13
+          Align = alBottom
+          Alignment = taCenter
+        end
         object DBGridTablasActualizar: TDBGrid
           Left = 0
           Top = 15
           Width = 387
-          Height = 160
+          Height = 159
           Align = alClient
           Color = 13695997
           DataSource = DS_Tablas_Actualizar
@@ -281,8 +289,8 @@ object FPrincipal: TFPrincipal
       object PanelDatosXML: TPanel
         Left = 1
         Top = 1
-        Width = 624
-        Height = 175
+        Width = 616
+        Height = 187
         Align = alClient
         BevelOuter = bvNone
         Caption = 'PanelDatosXML'
@@ -290,7 +298,7 @@ object FPrincipal: TFPrincipal
         object Label5: TLabel
           Left = 0
           Top = 0
-          Width = 624
+          Width = 616
           Height = 15
           Align = alTop
           Alignment = taCenter
@@ -305,13 +313,21 @@ object FPrincipal: TFPrincipal
           ParentColor = False
           ParentFont = False
         end
+        object lblCantidadDatos: TLabel
+          Left = 0
+          Top = 174
+          Width = 616
+          Height = 13
+          Align = alBottom
+          Alignment = taCenter
+        end
         object DBGridUpload: TDBGrid
           Left = 0
           Top = 15
-          Width = 624
-          Height = 160
+          Width = 616
+          Height = 159
           Align = alClient
-          Color = 15915716
+          Color = 16114902
           DataSource = DS_NovedadesCliente
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -452,10 +468,10 @@ object FPrincipal: TFPrincipal
         object DBGridDownload: TDBGrid
           Left = 0
           Top = 15
-          Width = 624
-          Height = 160
+          Width = 616
+          Height = 159
           Align = alClient
-          Color = 15915716
+          Color = 16114902
           DataSource = DS_ProcesarNovedades
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -595,8 +611,8 @@ object FPrincipal: TFPrincipal
       end
       object PanelpBar_Ftp: TPanel
         Left = 1
-        Top = 176
-        Width = 1015
+        Top = 188
+        Width = 1007
         Height = 14
         Align = alBottom
         BevelOuter = bvNone
@@ -614,7 +630,7 @@ object FPrincipal: TFPrincipal
           Tag = 99
           Left = 40
           Top = 0
-          Width = 975
+          Width = 967
           Height = 14
           Align = alClient
           TabOrder = 0
@@ -622,8 +638,8 @@ object FPrincipal: TFPrincipal
       end
       object PanelpBar_Novedades: TPanel
         Left = 1
-        Top = 190
-        Width = 1015
+        Top = 202
+        Width = 1007
         Height = 14
         Align = alBottom
         BevelOuter = bvNone
@@ -641,7 +657,7 @@ object FPrincipal: TFPrincipal
           Tag = 99
           Left = 40
           Top = 0
-          Width = 975
+          Width = 967
           Height = 14
           Align = alClient
           TabOrder = 0
@@ -651,7 +667,7 @@ object FPrincipal: TFPrincipal
     object panelTitulo: TPanel
       Left = 1
       Top = 1
-      Width = 1017
+      Width = 1009
       Height = 41
       Align = alTop
       BevelOuter = bvNone
@@ -685,7 +701,7 @@ object FPrincipal: TFPrincipal
       object lblTituloSincro: TLabel
         Left = 0
         Top = 0
-        Width = 1017
+        Width = 1009
         Height = 15
         Align = alTop
         Alignment = taCenter
@@ -713,15 +729,25 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 568
-    Width = 1019
+    Top = 580
+    Width = 1011
     Height = 19
     Panels = <
       item
-        Width = 300
+        Alignment = taCenter
+        Text = 'SINCRONIZADOR'
+        Width = 120
       end
       item
-        Width = 300
+        Alignment = taCenter
+        Width = 120
+      end
+      item
+        Alignment = taCenter
+        Width = 120
+      end
+      item
+        Width = 120
       end>
   end
   object ZQ_ActualizarBase: TZQuery
@@ -757,7 +783,7 @@ object FPrincipal: TFPrincipal
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -863,26 +889,19 @@ object FPrincipal: TFPrincipal
             Visible = True
           end
           item
-            BeginGroup = True
             Item = btnBajar
             Visible = True
           end
           item
-            Item = btnProcesar
-            Visible = True
-          end
-          item
-            BeginGroup = True
             Item = btnBorrarLog
             Visible = True
           end
           item
-            BeginGroup = True
-            Item = btnOcultar
+            Item = btnConfig
             Visible = True
           end
           item
-            Item = btnConfig
+            Item = btnOcultar
             Visible = True
           end
           item
@@ -1224,7 +1243,6 @@ object FPrincipal: TFPrincipal
       Hint = 'Procesar los archivos descargados del servidor'
       Visible = ivAlways
       ImageIndex = 12
-      OnClick = btnProcesarClick
       AutoGrayScale = False
     end
     object btnBorrarLog: TdxBarLargeButton
@@ -1278,7 +1296,6 @@ object FPrincipal: TFPrincipal
         'btnBajar'
         'btnProcesar'
         'btnBorrarLog'
-        'btnOcultar'
         'btnConfig'
         'btnConectar'
         'btnSalir')

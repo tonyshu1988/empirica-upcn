@@ -53,6 +53,7 @@ procedure TDM.IdFTPWork(ASender: TObject; AWorkMode: TWorkMode; AWorkCount: Int6
 begin
   FPrincipal.pBar_Ftp.Position:= AWorkCount div 1024;
   Application.ProcessMessages;
+  Application.ProcessMessages;  
 end;
 
 
