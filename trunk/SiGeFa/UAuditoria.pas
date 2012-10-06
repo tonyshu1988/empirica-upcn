@@ -161,6 +161,7 @@ type
     procedure EKLlenarCombo1Cambio(valor: String);
     procedure btnXML_AbrirClick(Sender: TObject);
     procedure btnAuditoria_XMLClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     procedure obtener_tablas_actualizar;
     { Private declarations }
@@ -183,6 +184,12 @@ uses UPrincipal, UDM;
 
 procedure TFAuditoria.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
+  EKOrdenarGrilla2.CargarConfigColumnas;
+  EKOrdenarGrilla3.CargarConfigColumnas;
+  EKOrdenarGrilla4.CargarConfigColumnas;
+  EKOrdenarGrilla5.CargarConfigColumnas;
+
   PanelFondoXML.Visible:= false;
   CD_XML.CreateDataSet;
   CD_XMLTablas.CreateDataSet;
@@ -278,7 +285,7 @@ begin
 
   ZQ_AudDetallada.ParamByName('id_tabla').AsInteger:= ZQ_AudGeneralID.AsInteger;
   ZQ_AudDetallada.open;
-  lblCantidad.Caption:= 'Total: '+IntToStr(ZQ_AudGeneral.RecordCount);
+  lblCantidad.Caption:= 'Total: '+IntToStr(ZQ_AudGeneral.RecordCount)+'      ';
 
   sql:= 'select * from '+ZQ_AudGeneralTABLE_NAME.AsString+' where '+ZQ_AudGeneralKEY_FIELD.AsString+' = '+ZQ_AudGeneralKEY_VALUE.AsString;
   ZQ_DatosTabla.SQL.Text:= sql;
@@ -596,7 +603,7 @@ begin
   ZQ_AudGeneral.Filtered:= true;
   ZQ_AudGeneral.First;
   lblFiltro.Caption:= 'Filtro: '+ZQ_AudGeneralKEY_FIELD.AsString+' = '+clave;
-  lblCantidad.Caption:= 'Total: '+IntToStr(ZQ_AudGeneral.RecordCount);
+  lblCantidad.Caption:= 'Total: '+IntToStr(ZQ_AudGeneral.RecordCount)+'      ';
 end;
 
 
@@ -660,6 +667,15 @@ procedure TFAuditoria.btnAuditoria_XMLClick(Sender: TObject);
 begin
   PanelFondoAuditoria.Visible:= not PanelFondoAuditoria.Visible;
   PanelFondoXML.Visible:= not PanelFondoXML.Visible;
+end;
+
+procedure TFAuditoria.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
+  EKOrdenarGrilla2.GuardarConfigColumnas;
+  EKOrdenarGrilla3.GuardarConfigColumnas;
+  EKOrdenarGrilla4.GuardarConfigColumnas;
+  EKOrdenarGrilla5.GuardarConfigColumnas;
 end;
 
 end.

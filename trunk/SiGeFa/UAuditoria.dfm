@@ -14,6 +14,7 @@ object FAuditoria: TFAuditoria
   OldCreateOrder = False
   Position = poDesktopCenter
   Visible = True
+  OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -540,7 +541,7 @@ object FAuditoria: TFAuditoria
       Height = 482
       Align = alClient
       Color = 16112578
-      DataSource = DS_AudGeneral
+      DataSource = DS_XML
       Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
       ReadOnly = True
       TabOrder = 2
@@ -554,67 +555,91 @@ object FAuditoria: TFAuditoria
         item
           Expanded = False
           FieldName = 'ID'
-          Width = 60
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'TABLE_NAME'
-          Width = 60
+          Width = 50
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'OPERATION'
-          Width = 60
+          Width = 50
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'DATE_TIME'
-          Width = 60
+          Width = 50
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'USER_NAME'
-          Width = 60
+          Width = 50
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'Usuario'
-          Width = 60
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'Nombre_Usuario'
-          Width = 60
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'LOG_TABLES_ID'
-          Width = 60
+          FieldName = 'TABLE_NAME'
+          Width = 50
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'KEY_FIELD'
-          Width = 60
+          Width = 50
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'KEY_VALUE'
-          Width = 60
+          Width = 50
           Visible = True
         end
         item
           Expanded = False
-          FieldName = 'ID_SINCRO_LOTE'
-          Width = 60
+          FieldName = 'FIELD_NAME'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'NEW_VALUE'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'OLD_VALUE'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FBLOB_NAME'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FBLOB_OLD_CHAR_VALUE'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FBLOB_NEW_CHAR_VALUE'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FBLOB_OLD_BLOB_VALUE'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FBLOB_NEW_BLOB_VALUE'
+          Width = 50
           Visible = True
         end>
     end
@@ -1831,10 +1856,6 @@ object FAuditoria: TFAuditoria
         Visible = True
       end
       item
-        TituloColumna = 'TABLE_NAME'
-        Visible = True
-      end
-      item
         TituloColumna = 'OPERATION'
         Visible = True
       end
@@ -1847,15 +1868,7 @@ object FAuditoria: TFAuditoria
         Visible = True
       end
       item
-        TituloColumna = 'Usuario'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nombre_Usuario'
-        Visible = True
-      end
-      item
-        TituloColumna = 'LOG_TABLES_ID'
+        TituloColumna = 'TABLE_NAME'
         Visible = True
       end
       item
@@ -1867,7 +1880,35 @@ object FAuditoria: TFAuditoria
         Visible = True
       end
       item
-        TituloColumna = 'ID_SINCRO_LOTE'
+        TituloColumna = 'FIELD_NAME'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NEW_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'OLD_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_NAME'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_OLD_CHAR_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_NEW_CHAR_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_OLD_BLOB_VALUE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FBLOB_NEW_BLOB_VALUE'
         Visible = True
       end>
     NombreGuardar = 'DBGridXML_Archivo'
