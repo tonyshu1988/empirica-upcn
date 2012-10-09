@@ -47,6 +47,13 @@ type
     Label8: TLabel;
     ESleepStopBase: TEdit;
     Label9: TLabel;
+    GroupBox2: TGroupBox;
+    ERutaCopiaOrigen: TEdit;
+    ERutaCopiaDestino: TEdit;
+    Label10: TLabel;
+    Label11: TLabel;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
     procedure BitBtn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
@@ -66,6 +73,8 @@ type
     procedure btnRutaBaseDestinoClick(Sender: TObject);
     procedure btnRutaIniClick(Sender: TObject);
     procedure ChBorrarIniClick(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure SpeedButton2Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -228,6 +237,8 @@ begin
   EKIni1.Ini.WriteString('TEMPORIZADOR', 'sleep_stop_db', ESleepStopBase.Text);
   EKIni1.Ini.WriteString('BASE', 'SIGEFA', ERutaBase.Text);
   EKIni1.Ini.WriteString('COPIA', 'DESTINO', ERutaDestino.Text);
+      EKIni1.Ini.WriteString('COPIA FINAL', 'ORIGEN', ERutaCopiaOrigen.Text);
+      EKIni1.Ini.WriteString('COPIA FINAL', 'DESTINO', ERutaCopiaDestino.Text);
   EKIni1.Ini.WriteString('INI', 'RUTA', ERutaIni.Text);
 
   if ChHacerCopia.Checked then
@@ -265,6 +276,8 @@ begin
   ESleepStopBase.Text := EKIni1.Ini.ReadString('TEMPORIZADOR', 'sleep_stop_db', '');
   ERutaBase.Text:= EKIni1.Ini.ReadString('BASE', 'SIGEFA', '');
   ERutaDestino.Text:= EKIni1.Ini.ReadString('COPIA', 'DESTINO', '');
+  ERutaCopiaOrigen.Text:= EKIni1.Ini.ReadString('COPIA FINAL', 'ORIGEN', '');
+  ERutaCopiaDestino.Text:= EKIni1.Ini.ReadString('COPIA FINAL', 'DESTINO', '');
   ERutaIni.Text:= EKIni1.Ini.ReadString('INI', 'RUTA', '');
 
   Timer1.Interval:= 1000 * StrToInt(EKIni1.Ini.ReadString('TEMPORIZADOR', 'Tiempo', ''));
@@ -292,10 +305,15 @@ var
   RutaIni: string;
   sleep_stop_db: integer;
   sleep_copia_db: integer;
+
+  RutaCopiaOrigen : string;
+  RutaCopiaDestino : string;
 begin
   Rutainstsvc:= EKIni1.Ini.ReadString('FIREBIRD', 'EXE', '');
   RutaBase:= EKIni1.Ini.ReadString('BASE', 'SIGEFA', '');
   RutaDestino:= EKIni1.Ini.ReadString('COPIA', 'DESTINO', '');
+  RutaCopiaOrigen:=EKIni1.Ini.ReadString('COPIA FINAL', 'ORIGEN', '');
+  RutaCopiaDestino:=EKIni1.Ini.ReadString('COPIA FINAL', 'DESTINO', '');
   RutaIni:= EKIni1.Ini.ReadString('INI', 'RUTA', '');
   sleep_stop_db:= EKIni1.Ini.ReadInteger('TEMPORIZADOR', 'sleep_stop_db', 3)*1000;
   sleep_copia_db:= EKIni1.Ini.ReadInteger('TEMPORIZADOR', 'sleep_copia_db', 3)*1000;
@@ -346,6 +364,9 @@ begin
     CopyFile(Pchar(RutaBase),Pchar(RutaDestino+'\'+ExtractFileName(RutaBase)),false);
     //Sleep(sleep_copia_db);
   end;
+
+//  COPIA FINAL
+  CopyFile(Pchar(RutaCopiaOrigen),Pchar(RutaCopiaDestino), false);
 
   Renombre:= RutaBase;
   Delete(Renombre,Length(Renombre)-9, 10); //Renombro la Base a jml.dll
@@ -481,6 +502,38 @@ begin
     ERutaIni.Enabled:= false;
     btnRutaIni.Enabled:= false;
   end;
+end;
+
+procedure TFConfiguracion.SpeedButton1Click(Sender: TObject);
+var
+  cp: string;
+begin
+  cp:= GetCurrentDir;
+  OpenDialog.InitialDir:= cp;
+  OpenDialog.Filter:= 'Base de Datos Firebird (*.FDB)|*.fdb|All Files (*.*)|*.*';
+
+  if (ExtractFilePath(ERutaCopiaOrigen.Text)) <> '' then
+    OpenDialog.InitialDir:= (ExtractFilePath(ERutaCopiaOrigen.text));
+
+  if OpenDialog.Execute then
+    ERutaCopiaOrigen.Text:= OpenDialog.FileName;
+
+end;
+
+procedure TFConfiguracion.SpeedButton2Click(Sender: TObject);
+var
+  cp: string;
+begin
+  cp:= GetCurrentDir;
+  OpenDialog.InitialDir:= cp;
+  OpenDialog.Filter:= 'All Files (*.*)|*.*';
+
+  if (ExtractFilePath(ERutaCopiaDestino.Text)) <> '' then
+    OpenDialog.InitialDir:= (ExtractFilePath(ERutaCopiaDestino.text));
+
+  if OpenDialog.Execute then
+    ERutaCopiaDestino.Text:= OpenDialog.FileName;
+
 end;
 
 end.
