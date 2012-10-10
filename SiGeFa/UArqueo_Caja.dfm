@@ -1,6 +1,6 @@
 object FArqueo_Caja: TFArqueo_Caja
-  Left = 323
-  Top = 140
+  Left = 340
+  Top = 197
   Width = 871
   Height = 599
   Caption = 'Arqueo de Caja'
@@ -30,9 +30,9 @@ object FArqueo_Caja: TFArqueo_Caja
     TabOrder = 4
     object Panel5: TPanel
       Left = 1
-      Top = 29
+      Top = 36
       Width = 861
-      Height = 490
+      Height = 483
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
@@ -40,13 +40,13 @@ object FArqueo_Caja: TFArqueo_Caja
         Left = 1
         Top = 1
         Width = 859
-        Height = 488
+        Height = 481
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object lblTotalFPago: TLabel
           Left = 1
-          Top = 458
+          Top = 451
           Width = 857
           Height = 29
           Align = alBottom
@@ -66,7 +66,7 @@ object FArqueo_Caja: TFArqueo_Caja
         end
         object lblTotalMovimientos: TLabel
           Left = 1
-          Top = 257
+          Top = 250
           Width = 857
           Height = 29
           Align = alBottom
@@ -88,7 +88,7 @@ object FArqueo_Caja: TFArqueo_Caja
           Left = 1
           Top = 1
           Width = 857
-          Height = 256
+          Height = 249
           Align = alClient
           Color = 14606012
           DataSource = DS_Arqueo_Movimientos
@@ -174,7 +174,7 @@ object FArqueo_Caja: TFArqueo_Caja
         end
         object DBGridFormaPago: TDBGrid
           Left = 1
-          Top = 286
+          Top = 279
           Width = 857
           Height = 172
           Align = alBottom
@@ -196,21 +196,42 @@ object FArqueo_Caja: TFArqueo_Caja
           Columns = <
             item
               Expanded = False
-              FieldName = 'TFORMAPAGO_'
+              FieldName = 'CUENTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cuenta'
+              Width = 328
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TIPO_FPAGO'
+              Title.Alignment = taCenter
               Title.Caption = 'Forma de Pago'
+              Width = 232
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'CUENTAINGRESO'
-              Title.Caption = 'Cuenta Ingreso'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SUM'
+              FieldName = 'IMPORTE_VENTA'
+              Title.Alignment = taCenter
               Title.Caption = 'Total'
-              Width = 84
+              Width = 90
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_TRANSFERIDO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Transferido'
+              Width = 90
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FISCAL'
+              Title.Alignment = taCenter
+              Title.Caption = 'IF'
+              Width = 24
               Visible = True
             end>
         end
@@ -220,7 +241,7 @@ object FArqueo_Caja: TFArqueo_Caja
       Left = 1
       Top = 1
       Width = 861
-      Height = 28
+      Height = 35
       Align = alTop
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -233,15 +254,15 @@ object FArqueo_Caja: TFArqueo_Caja
       TabOrder = 1
       object Label39: TLabel
         Left = 19
-        Top = 8
+        Top = 11
         Width = 38
         Height = 13
         Caption = 'Fecha:'
       end
       object DateTimePicker1: TDateTimePicker
-        Left = 64
-        Top = 4
-        Width = 121
+        Left = 61
+        Top = 7
+        Width = 132
         Height = 21
         BevelInner = bvNone
         BevelOuter = bvNone
@@ -260,10 +281,10 @@ object FArqueo_Caja: TFArqueo_Caja
   end
   object RepArqueo: TQuickRep
     Tag = 99
-    Left = 833
-    Top = 73
-    Width = 794
-    Height = 1123
+    Left = -335
+    Top = 129
+    Width = 1123
+    Height = 794
     Frame.Color = clBlack
     Frame.DrawTop = False
     Frame.DrawBottom = False
@@ -272,7 +293,7 @@ object FArqueo_Caja: TFArqueo_Caja
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -13
-    Font.Name = 'Arial'
+    Font.Name = 'Verdana'
     Font.Style = []
     Functions.Strings = (
       'PAGENUMBER'
@@ -284,13 +305,13 @@ object FArqueo_Caja: TFArqueo_Caja
       #39#39)
     Options = [FirstPageHeader, LastPageFooter]
     Page.Columns = 1
-    Page.Orientation = poPortrait
+    Page.Orientation = poLandscape
     Page.PaperSize = A4
     Page.Values = (
       100.000000000000000000
-      2970.000000000000000000
-      100.000000000000000000
       2100.000000000000000000
+      100.000000000000000000
+      2970.000000000000000000
       100.000000000000000000
       100.000000000000000000
       0.000000000000000000)
@@ -321,7 +342,7 @@ object FArqueo_Caja: TFArqueo_Caja
       Tag = 99
       Left = 38
       Top = 38
-      Width = 718
+      Width = 1047
       Height = 90
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -335,12 +356,12 @@ object FArqueo_Caja: TFArqueo_Caja
       ForceNewPage = False
       Size.Values = (
         238.125000000000000000
-        1899.708333333333000000)
+        2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
       BandType = rbPageHeader
       object RepArqueo_Titulo: TQRLabel
-        Left = 278
+        Left = 443
         Top = 4
         Width = 160
         Height = 20
@@ -351,11 +372,11 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          735.541666666666700000
+          1172.104166666667000000
           10.583333333333330000
           423.333333333333300000)
         Alignment = taCenter
-        AlignToBand = False
+        AlignToBand = True
         AutoSize = True
         AutoStretch = False
         Caption = 'RepArqueo_Titulo'
@@ -372,7 +393,7 @@ object FArqueo_Caja: TFArqueo_Caja
         FontSize = 12
       end
       object RepArqueo_Subtitulo: TQRLabel
-        Left = 287
+        Left = 452
         Top = 28
         Width = 143
         Height = 20
@@ -383,11 +404,11 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          759.354166666666700000
+          1195.916666666667000000
           74.083333333333340000
           378.354166666666700000)
         Alignment = taCenter
-        AlignToBand = False
+        AlignToBand = True
         AutoSize = True
         AutoStretch = False
         Caption = 'RepArqueo_Subtitulo'
@@ -403,8 +424,8 @@ object FArqueo_Caja: TFArqueo_Caja
         ExportAs = exptText
         FontSize = 9
       end
-      object QRLabel68: TQRLabel
-        Left = 302
+      object qrlblTitulo: TQRLabel
+        Left = 467
         Top = 53
         Width = 112
         Height = 18
@@ -415,11 +436,11 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           47.625000000000000000
-          799.041666666666700000
+          1235.604166666667000000
           140.229166666666700000
           296.333333333333400000)
         Alignment = taCenter
-        AlignToBand = False
+        AlignToBand = True
         AutoSize = True
         AutoStretch = False
         Caption = 'Arqueo de Caja'
@@ -440,7 +461,7 @@ object FArqueo_Caja: TFArqueo_Caja
       Tag = 99
       Left = 38
       Top = 145
-      Width = 718
+      Width = 1047
       Height = 18
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -454,7 +475,7 @@ object FArqueo_Caja: TFArqueo_Caja
       ForceNewPage = False
       Size.Values = (
         47.625000000000000000
-        1899.708333333333000000)
+        2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
       Master = RepArqueo
@@ -464,7 +485,7 @@ object FArqueo_Caja: TFArqueo_Caja
       object QRDBText33: TQRDBText
         Left = 5
         Top = 1
-        Width = 241
+        Width = 132
         Height = 14
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -475,14 +496,14 @@ object FArqueo_Caja: TFArqueo_Caja
           37.041666666666670000
           13.229166666666670000
           2.645833333333333000
-          637.645833333333400000)
+          349.250000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
         Color = clWhite
         DataSet = ZQ_Arqueo_Movimientos
-        DataField = 'DETALLE_PROD'
+        DataField = 'TIPO_MOVIMIENTO'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -495,9 +516,9 @@ object FArqueo_Caja: TFArqueo_Caja
         FontSize = 8
       end
       object QRDBText3: TQRDBText
-        Left = 553
+        Left = 944
         Top = 1
-        Width = 160
+        Width = 100
         Height = 14
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -506,9 +527,108 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           37.041666666666670000
-          1463.145833333333000000
+          2497.666666666667000000
           2.645833333333333000
-          423.333333333333300000)
+          264.583333333333400000)
+        Alignment = taRightJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = ZQ_Arqueo_Movimientos
+        DataField = 'IMPORTE_TRANSFERIDO'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 8
+      end
+      object QRDBText6: TQRDBText
+        Left = 141
+        Top = 1
+        Width = 136
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          37.041666666666670000
+          373.062500000000000000
+          2.645833333333333000
+          359.833333333333400000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = ZQ_Arqueo_Movimientos
+        DataField = 'TIPO_COMPROBANTE'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 8
+      end
+      object QRDBText7: TQRDBText
+        Left = 288
+        Top = 1
+        Width = 305
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          37.041666666666670000
+          762.000000000000000000
+          2.645833333333333000
+          806.979166666666700000)
+        Alignment = taLeftJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = ZQ_Arqueo_Movimientos
+        DataField = 'NOMBRE_ENTIDAD'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 8
+      end
+      object QRDBText2: TQRDBText
+        Left = 837
+        Top = 1
+        Width = 100
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          37.041666666666670000
+          2214.562500000000000000
+          2.645833333333333000
+          264.583333333333400000)
         Alignment = taRightJustify
         AlignToBand = False
         AutoSize = False
@@ -527,10 +647,10 @@ object FArqueo_Caja: TFArqueo_Caja
         ExportAs = exptText
         FontSize = 8
       end
-      object QRDBText6: TQRDBText
-        Left = 249
+      object QRDBText9: TQRDBText
+        Left = 597
         Top = 1
-        Width = 51
+        Width = 228
         Height = 14
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -539,82 +659,16 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           37.041666666666670000
-          658.812500000000000000
+          1579.562500000000000000
           2.645833333333333000
-          134.937500000000000000)
-        Alignment = taCenter
-        AlignToBand = False
-        AutoSize = False
-        AutoStretch = False
-        Color = clWhite
-        DataSet = ZQ_Arqueo_Movimientos
-        DataField = 'CANTIDAD'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-        WordWrap = True
-        ExportAs = exptText
-        FontSize = 8
-      end
-      object QRDBText7: TQRDBText
-        Left = 304
-        Top = 1
-        Width = 83
-        Height = 14
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          37.041666666666670000
-          804.333333333333200000
-          2.645833333333333000
-          219.604166666666700000)
+          603.250000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
         Color = clWhite
         DataSet = ZQ_Arqueo_Movimientos
-        DataField = 'PORC_DESCUENTO'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        Transparent = True
-        WordWrap = True
-        ExportAs = exptText
-        FontSize = 8
-      end
-      object QRDBText2: TQRDBText
-        Left = 390
-        Top = 1
-        Width = 160
-        Height = 14
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        Size.Values = (
-          37.041666666666670000
-          1031.875000000000000000
-          2.645833333333333000
-          423.333333333333300000)
-        Alignment = taRightJustify
-        AlignToBand = False
-        AutoSize = False
-        AutoStretch = False
-        Color = clWhite
-        DataSet = ZQ_Arqueo_Movimientos
-        DataField = 'IMPORTE_IVA'
+        DataField = 'OBSERVACION'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -631,7 +685,7 @@ object FArqueo_Caja: TFArqueo_Caja
       Tag = 99
       Left = 38
       Top = 163
-      Width = 718
+      Width = 1047
       Height = 20
       Frame.Color = clBlack
       Frame.DrawTop = True
@@ -645,14 +699,14 @@ object FArqueo_Caja: TFArqueo_Caja
       ForceNewPage = False
       Size.Values = (
         52.916666666666670000
-        1899.708333333333000000)
+        2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
       Master = RepArqueo
       PrintBefore = False
       PrintIfEmpty = True
       object QRLabelImporteventa: TQRLabel
-        Left = 575
+        Left = 907
         Top = 0
         Width = 140
         Height = 17
@@ -663,11 +717,11 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1521.354166666667000000
+          2399.770833333333000000
           0.000000000000000000
           370.416666666666700000)
         Alignment = taRightJustify
-        AlignToBand = False
+        AlignToBand = True
         AutoSize = True
         AutoStretch = False
         Caption = 'QRLabelImporteventa'
@@ -688,7 +742,7 @@ object FArqueo_Caja: TFArqueo_Caja
       Tag = 99
       Left = 38
       Top = 198
-      Width = 718
+      Width = 1047
       Height = 17
       Frame.Color = clBlack
       Frame.DrawTop = False
@@ -702,17 +756,17 @@ object FArqueo_Caja: TFArqueo_Caja
       ForceNewPage = False
       Size.Values = (
         44.979166666666670000
-        1899.708333333333000000)
+        2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
       Master = RepArqueo
-      DataSet = ZQ_Comprobante_FormaPago
+      DataSet = ZQ_Arqueo_Fpago
       PrintBefore = False
       PrintIfEmpty = True
       object QRDBText1: TQRDBText
         Left = 5
         Top = 1
-        Width = 241
+        Width = 356
         Height = 14
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -723,14 +777,14 @@ object FArqueo_Caja: TFArqueo_Caja
           37.041666666666670000
           13.229166666666670000
           2.645833333333333000
-          637.645833333333400000)
+          941.916666666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
         Color = clWhite
-        DataSet = ZQ_Comprobante_FormaPago
-        DataField = 'TFORMAPAGO_'
+        DataSet = ZQ_Arqueo_Fpago
+        DataField = 'CUENTA'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -743,9 +797,9 @@ object FArqueo_Caja: TFArqueo_Caja
         FontSize = 8
       end
       object QRDBText4: TQRDBText
-        Left = 251
+        Left = 371
         Top = 1
-        Width = 249
+        Width = 422
         Height = 14
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -754,16 +808,16 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           37.041666666666670000
-          664.104166666666800000
+          981.604166666666700000
           2.645833333333333000
-          658.812500000000000000)
+          1116.541666666667000000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
         Color = clWhite
-        DataSet = ZQ_Comprobante_FormaPago
-        DataField = 'CUENTAINGRESO'
+        DataSet = ZQ_Arqueo_Fpago
+        DataField = 'TIPO_FPAGO'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -776,9 +830,9 @@ object FArqueo_Caja: TFArqueo_Caja
         FontSize = 8
       end
       object QRDBText5: TQRDBText
-        Left = 504
+        Left = 837
         Top = 1
-        Width = 209
+        Width = 100
         Height = 14
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -787,16 +841,49 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           37.041666666666670000
-          1333.500000000000000000
+          2214.562500000000000000
           2.645833333333333000
-          552.979166666666800000)
+          264.583333333333400000)
         Alignment = taRightJustify
         AlignToBand = False
         AutoSize = False
         AutoStretch = False
         Color = clWhite
-        DataSet = ZQ_Comprobante_FormaPago
-        DataField = 'SUM'
+        DataSet = ZQ_Arqueo_Fpago
+        DataField = 'IMPORTE_VENTA'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+        ExportAs = exptText
+        FontSize = 8
+      end
+      object QRDBText8: TQRDBText
+        Left = 944
+        Top = 1
+        Width = 100
+        Height = 14
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        Size.Values = (
+          37.041666666666670000
+          2497.666666666667000000
+          2.645833333333333000
+          264.583333333333400000)
+        Alignment = taRightJustify
+        AlignToBand = False
+        AutoSize = False
+        AutoStretch = False
+        Color = clWhite
+        DataSet = ZQ_Arqueo_Fpago
+        DataField = 'IMPORTE_TRANSFERIDO'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -11
@@ -813,7 +900,7 @@ object FArqueo_Caja: TFArqueo_Caja
       Tag = 99
       Left = 38
       Top = 128
-      Width = 718
+      Width = 1047
       Height = 17
       Frame.Color = clBlack
       Frame.DrawTop = True
@@ -827,14 +914,14 @@ object FArqueo_Caja: TFArqueo_Caja
       ForceNewPage = False
       Size.Values = (
         44.979166666666670000
-        1899.708333333333000000)
+        2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
       BandType = rbTitle
       object QRLabel6: TQRLabel
-        Left = 468
+        Left = 837
         Top = 0
-        Width = 82
+        Width = 54
         Height = 15
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -843,14 +930,14 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          1238.250000000000000000
+          2214.562500000000000000
           0.000000000000000000
-          216.958333333333400000)
+          142.875000000000000000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
-        Caption = 'Importe IVA'
+        Caption = 'Importe'
         Color = clWhite
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -896,9 +983,9 @@ object FArqueo_Caja: TFArqueo_Caja
         FontSize = 9
       end
       object QRLabel8: TQRLabel
-        Left = 249
+        Left = 142
         Top = 0
-        Width = 35
+        Width = 89
         Height = 15
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -907,14 +994,14 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          658.812500000000000000
+          375.708333333333400000
           0.000000000000000000
-          92.604166666666670000)
+          235.479166666666700000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
-        Caption = 'Cant.'
+        Caption = 'Comprobante'
         Color = clWhite
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -930,7 +1017,7 @@ object FArqueo_Caja: TFArqueo_Caja
       object QRLabel9: TQRLabel
         Left = 4
         Top = 0
-        Width = 60
+        Width = 29
         Height = 15
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -941,12 +1028,12 @@ object FArqueo_Caja: TFArqueo_Caja
           39.687500000000000000
           10.583333333333330000
           0.000000000000000000
-          158.750000000000000000)
+          76.729166666666670000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
-        Caption = 'Producto'
+        Caption = 'Tipo'
         Color = clWhite
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -960,9 +1047,9 @@ object FArqueo_Caja: TFArqueo_Caja
         FontSize = 9
       end
       object QRLabel3: TQRLabel
-        Left = 618
+        Left = 962
         Top = 0
-        Width = 95
+        Width = 77
         Height = 15
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -971,14 +1058,14 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          1635.125000000000000000
+          2545.291666666667000000
           0.000000000000000000
-          251.354166666666700000)
+          203.729166666666700000)
         Alignment = taRightJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
-        Caption = 'Importe venta'
+        Caption = 'Transferido'
         Color = clWhite
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -996,7 +1083,7 @@ object FArqueo_Caja: TFArqueo_Caja
       Tag = 99
       Left = 38
       Top = 183
-      Width = 718
+      Width = 1047
       Height = 15
       Frame.Color = clBlack
       Frame.DrawTop = True
@@ -1010,7 +1097,7 @@ object FArqueo_Caja: TFArqueo_Caja
       ForceNewPage = False
       Size.Values = (
         39.687500000000000000
-        1899.708333333333000000)
+        2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
       ParentBand = QRSubDetail2
@@ -1048,7 +1135,7 @@ object FArqueo_Caja: TFArqueo_Caja
         FontSize = 9
       end
       object QRLabel10: TQRLabel
-        Left = 251
+        Left = 371
         Top = -1
         Width = 102
         Height = 15
@@ -1059,7 +1146,7 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          664.104166666666700000
+          981.604166666666700000
           -2.645833333333333000
           269.875000000000000000)
         Alignment = taLeftJustify
@@ -1080,9 +1167,9 @@ object FArqueo_Caja: TFArqueo_Caja
         FontSize = 9
       end
       object QRLabel11: TQRLabel
-        Left = 679
+        Left = 944
         Top = -1
-        Width = 34
+        Width = 77
         Height = 15
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -1091,14 +1178,14 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           39.687500000000000000
-          1796.520833333334000000
+          2497.666666666667000000
           -2.645833333333333000
-          89.958333333333330000)
+          203.729166666666700000)
         Alignment = taRightJustify
         AlignToBand = False
         AutoSize = True
         AutoStretch = False
-        Caption = 'Total'
+        Caption = 'Transferido'
         Color = clWhite
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
@@ -1116,7 +1203,7 @@ object FArqueo_Caja: TFArqueo_Caja
       Tag = 99
       Left = 38
       Top = 215
-      Width = 718
+      Width = 1047
       Height = 20
       Frame.Color = clBlack
       Frame.DrawTop = True
@@ -1130,14 +1217,14 @@ object FArqueo_Caja: TFArqueo_Caja
       ForceNewPage = False
       Size.Values = (
         52.916666666666670000
-        1899.708333333333000000)
+        2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
       Master = RepArqueo
       PrintBefore = False
       PrintIfEmpty = True
       object QRLabelImporteTotal: TQRLabel
-        Left = 578
+        Left = 910
         Top = 0
         Width = 137
         Height = 17
@@ -1148,11 +1235,11 @@ object FArqueo_Caja: TFArqueo_Caja
         Frame.DrawRight = False
         Size.Values = (
           44.979166666666670000
-          1529.291666666667000000
+          2407.708333333333000000
           0.000000000000000000
           362.479166666666700000)
         Alignment = taRightJustify
-        AlignToBand = False
+        AlignToBand = True
         AutoSize = True
         AutoStretch = False
         Caption = 'QRLabelImporteTotal'
@@ -1676,10 +1763,6 @@ object FArqueo_Caja: TFArqueo_Caja
         Name = 'id_sucursal_ingreso'
         ParamType = ptUnknown
       end>
-    object ZQ_Arqueo_MovimientosIMPORTE_VENTA: TFloatField
-      FieldName = 'IMPORTE_VENTA'
-      currency = True
-    end
     object ZQ_Arqueo_MovimientosCODIGO: TStringField
       FieldName = 'CODIGO'
       Size = 50
@@ -1708,89 +1791,23 @@ object FArqueo_Caja: TFArqueo_Caja
     object ZQ_Arqueo_MovimientosCANT_VENDIDA: TFloatField
       FieldName = 'CANT_VENDIDA'
     end
+    object ZQ_Arqueo_MovimientosIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      currency = True
+    end
+    object ZQ_Arqueo_MovimientosIMPORTE_TRANSFERIDO: TFloatField
+      FieldName = 'IMPORTE_TRANSFERIDO'
+      ReadOnly = True
+      currency = True
+    end
   end
   object DS_Arqueo_Movimientos: TDataSource
     DataSet = ZQ_Arqueo_Movimientos
     Left = 181
     Top = 113
   end
-  object ZQ_Comprobante_FormaPago: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select tfp.descripcion as tFormaPago_, tfp."IF",'
-      
-        '       c1.nombre_cuenta as CuentaIngreso, c2.nombre_cuenta as Cu' +
-        'entaEgreso,'
-      '       sum(cfp.importe_real)'
-      'from comprobante_forma_pago cfp'
-      
-        'left join comprobante c on (c.id_comprobante = cfp.id_comprobant' +
-        'e)'
-      
-        'left join tipo_comprobante tc on (c.id_tipo_cpb = tc.id_tipo_cpb' +
-        ')'
-      
-        'left join tipo_formapago tfp on (tfp.id_tipo_formapago=cfp.id_ti' +
-        'po_formapag)'
-      'left join cuenta c1 on (cfp.cuenta_ingreso=c1.id_cuenta)'
-      'left join cuenta c2 on (cfp.cuenta_egreso=c2.id_cuenta)'
-      'where (cast(cfp.fecha_fp as date) = :fecha)'
-      '  and (c.id_sucursal = :id_sucursal)'
-      '  and (c.fecha_anulado is null)'
-      '  and (tc.signo_cobro_pago <> 0)'
-      '  and c.id_comp_estado = 1'
-      '  and (cfp.id_recibo_op is null)'
-      
-        'group by tfp.descripcion, tfp."IF", c1.nombre_cuenta, c2.nombre_' +
-        'cuenta')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'fecha'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id_sucursal'
-        ParamType = ptUnknown
-      end>
-    Left = 369
-    Top = 65
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'fecha'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'id_sucursal'
-        ParamType = ptUnknown
-      end>
-    object ZQ_Comprobante_FormaPagoSUM: TFloatField
-      FieldName = 'SUM'
-      ReadOnly = True
-      DisplayFormat = '$ #,###,##0.00'
-    end
-    object ZQ_Comprobante_FormaPagoTFORMAPAGO_: TStringField
-      FieldName = 'TFORMAPAGO_'
-      Size = 50
-    end
-    object ZQ_Comprobante_FormaPagoIF: TStringField
-      FieldName = 'IF'
-      Size = 1
-    end
-    object ZQ_Comprobante_FormaPagoCUENTAINGRESO: TStringField
-      FieldName = 'CUENTAINGRESO'
-      Size = 50
-    end
-    object ZQ_Comprobante_FormaPagoCUENTAEGRESO: TStringField
-      FieldName = 'CUENTAEGRESO'
-      Size = 50
-    end
-  end
   object DS_Comprobante_FormaPago: TDataSource
-    DataSet = ZQ_Comprobante_FormaPago
+    DataSet = ZQ_Arqueo_Fpago
     Left = 373
     Top = 113
   end
@@ -1798,9 +1815,13 @@ object FArqueo_Caja: TFArqueo_Caja
     SumCollection = <
       item
         Operacion = goSum
-        NombreCampo = 'sum'
+        NombreCampo = 'importe_venta'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'importe_transferido'
       end>
-    DataSet = ZQ_Comprobante_FormaPago
+    DataSet = ZQ_Arqueo_Fpago
     SumListChanged = EKDbSuma_ArqueoFpagoSumListChanged
     Left = 370
     Top = 174
@@ -1816,6 +1837,10 @@ object FArqueo_Caja: TFArqueo_Caja
       item
         Operacion = goSum
         NombreCampo = 'importe_venta'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'importe_transferido'
       end>
     DataSet = ZQ_Arqueo_Movimientos
     SumListChanged = EKDbSuma_ArqueoMovSumListChanged
@@ -1865,5 +1890,85 @@ object FArqueo_Caja: TFArqueo_Caja
     PermitirFiltrar = True
     Left = 178
     Top = 232
+  end
+  object ZQ_Arqueo_Fpago: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select ac.*'
+      
+        'from arqueo_caja_forma_pago(:fecha_arqueo, :id_sucursal_ingreso)' +
+        ' ac')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'fecha_arqueo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal_ingreso'
+        ParamType = ptUnknown
+      end>
+    Left = 369
+    Top = 65
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'fecha_arqueo'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal_ingreso'
+        ParamType = ptUnknown
+      end>
+    object ZQ_Arqueo_FpagoTIPO_FPAGO: TStringField
+      FieldName = 'TIPO_FPAGO'
+      Size = 50
+    end
+    object ZQ_Arqueo_FpagoFISCAL: TStringField
+      FieldName = 'FISCAL'
+      Size = 1
+    end
+    object ZQ_Arqueo_FpagoCUENTA: TStringField
+      FieldName = 'CUENTA'
+      Size = 200
+    end
+    object ZQ_Arqueo_FpagoIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      currency = True
+    end
+    object ZQ_Arqueo_FpagoIMPORTE_TRANSFERIDO: TFloatField
+      FieldName = 'IMPORTE_TRANSFERIDO'
+      currency = True
+    end
+  end
+  object EKOrdenarGrilla2: TEKOrdenarGrilla
+    Grilla = DBGridFormaPago
+    Filtros = <
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Forma de Pago'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Total'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IF'
+        Visible = True
+      end>
+    NombreGuardar = 'GrillaArqueoFormaPago'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 370
+    Top = 229
   end
 end
