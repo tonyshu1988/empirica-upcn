@@ -1,7 +1,6 @@
 unit UABM_CPB_Recibo;
 
-//ACOMODAR EL PROCEDURE guardarPagos;
-
+// ACOMODAR EL PROCEDURE guardarPagos;
 // FALTA IMPRESION DEL TICKET, AHI QUE VER QUE PONEMOS COMO PRODUCTO Y HACER TODOS LOS CALCULOS
 
 interface
@@ -1578,9 +1577,9 @@ begin
     vencida:= 'NO';
     pagoCompleto:= 'false';
     recargo_vencimiento:= 0;
+    saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
     if recargo_factura_vencida_automatico = true then //si se aplica le vencimiento automatico
     begin
-      saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
       ///chequeo que la factura esta vencida
       if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
       begin
@@ -1641,9 +1640,9 @@ begin
         vencida:= 'NO';
         pagoCompleto:= 'false';
         recargo_vencimiento:= 0;
+        saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
         if recargo_factura_vencida_automatico = true then //si se aplica le vencimiento automatico
         begin
-          saldo_comprobante:= vselFactura.ZQ_Factura_VentaIMPORTE_REAL.AsFloat;
           ///chequeo que la factura esta vencida
           if DaysBetween(vselFactura.ZQ_Factura_VentaFECHA.AsDateTime, dm.EKModelo.FechayHora) > (ZQ_ClienteVENCIMIENTO_DIAS.AsInteger) then
           begin
