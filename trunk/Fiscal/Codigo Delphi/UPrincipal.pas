@@ -413,6 +413,8 @@ var
   puntoVenta: widestring;
   numeroCpb: widestring;
   auxEstado: widestring;
+  descuento_redondeoWide: widestring;
+  descuento_redondeo: double;
 begin
   if if_modelo = '' then
     exit;
@@ -528,7 +530,10 @@ begin
         PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat
       else
         PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-      PrecioUnitarioWide:= FloatToStr(PrecioUnitario * 100);
+      PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+      descuento_redondeo:= roundto((PrecioUnitario*Cantidad)- ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat, -2);
+      PrecioUnitarioWide:= FloatToStr(PrecioUnitario*100);
+      descuento_redondeoWide:= FloatToStr(descuento_redondeo*100);
 
       TasaIva:= 0.21;
       TasaIvaWide:= FloatToStr(TasaIva * 10000);
@@ -606,6 +611,21 @@ begin
       end;
 
       ZQ_FormaPago.Next;
+    end;
+
+    if descuento_redondeo > 0 then
+    begin
+      DescripcionFPago:= 'DESCUENTO REDONDEO';
+      CalificadorFPago:= 'D';
+      resultado:= PrinterFiscal_Epson.SendInvoicePayment(DescripcionFPago, descuento_redondeoWide, CalificadorFPago);
+      if not resultado then
+      begin
+        mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
+                       DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+        mostrarError(mensajeError, tituloError);
+        cancelarTicket(marca);
+        exit;
+      end;
     end;
 
 //      //PASO 5: DISCRIMINACION IVA  revisar esto
