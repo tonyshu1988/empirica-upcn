@@ -536,7 +536,7 @@ begin
       begin
         PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
         PrecioUnitario:= RoundTo(PrecioUnitario, -2);
-        descuento_redondeo:= 0;
+        descuento_redondeo:= roundto((PrecioUnitario*Cantidad)- ZQ_ItemsIMPORTE_IF.AsFloat, -2);
       end;
       PrecioUnitarioWide:= FloatToStr(PrecioUnitario*100);
       descuento_redondeoWide:= FloatToStr(descuento_redondeo*100);
