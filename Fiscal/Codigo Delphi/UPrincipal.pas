@@ -100,6 +100,7 @@ type
     errorDriver: integer;
     productoDetallado: boolean;
     mensajeError, tituloError: string;
+    puntoVenta: widestring;
   public
   end;
 
@@ -410,7 +411,6 @@ var
   //CERRAR FACTURA
   auxCerrar: widestring;
   //VARIABLES PARA ACTUALIZAR COMPROBANTE
-  puntoVenta: widestring;
   numeroCpb: widestring;
   auxEstado: widestring;
   descuento_redondeoWide: widestring;
@@ -506,11 +506,11 @@ begin
       TipoFuente, TipoIVAEmisor, TipoIVAComprador, NombreComprador1, NombreComprador2,
       TpoDocComprador, NroDocComprador, BienDeUso, DomicilioComprador1, DomicilioComprador2,
       DomicilioComprador3, LineaVariable1, LineaVariable2, TipoTablaBien);
-
     if not resultado then
     begin
       mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
                      DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+      mensajeError:= '1. OPEN INVOICE'+#13+mensajeError;
       mostrarError(mensajeError, tituloError);
       cancelarTicket(marca);
       exit;
@@ -571,11 +571,11 @@ begin
       resultado:= PrinterFiscal_Epson.SendInvoiceItem(DescripcionProducto, CantidadWide, PrecioUnitarioWide, TasaIvaWide, CalificadorDeItem,
         CantidadDeBultosWide, ImpuestosInternosWide, LineaDescExtra1, LineaDescExtra2,
         LineaDescExtra3, TasaAcrecentamientoWide, ImpuestosIntFijosWide);
-
       if not resultado then
       begin
         mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
                        DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+        mensajeError:= '2. SEND INVOICE ITEM'+#13+mensajeError;
         mostrarError(mensajeError, tituloError);
         cancelarTicket(marca);
         exit;
@@ -592,6 +592,7 @@ begin
     begin
       mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
                      DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+      mensajeError:= '3. GET INVOICE SUBTOTAL'+#13+mensajeError;
       mostrarError(mensajeError, tituloError);
       cancelarTicket(marca);
       exit;
@@ -605,12 +606,12 @@ begin
       MontoFPago:= ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat;
       MontoFPagoWide:= FloatToStr(ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat * 100);
       CalificadorFPago:= 'T';
-
       resultado:= PrinterFiscal_Epson.SendInvoicePayment(DescripcionFPago, MontoFPagoWide, CalificadorFPago);
       if not resultado then
       begin
         mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
                        DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+        mensajeError:= '4. SEND INVOICE PAYMENT (T)'+#13+mensajeError;
         mostrarError(mensajeError, tituloError);
         cancelarTicket(marca);
         exit;
@@ -628,6 +629,7 @@ begin
       begin
         mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
                        DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+        mensajeError:= '4. SEND INVOICE PAYMENT (D)'+#13+mensajeError;
         mostrarError(mensajeError, tituloError);
         cancelarTicket(marca);
         exit;
@@ -658,13 +660,14 @@ begin
 //      //      end;
 //      //    end;
 
-    //PASO 6: CERRAR FACTURA
+    //PASO 5: CERRAR FACTURA
     auxCerrar:= 'TOTAL';
     resultado:= PrinterFiscal_Epson.CloseInvoice(TipoDocumento, TipoLetra, auxCerrar);
     if not resultado then
     begin
       mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
                      DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+      mensajeError:= '5. CLOSE INVOICE'+#13+mensajeError;
       mostrarError(mensajeError, tituloError);
       cancelarTicket(marca);
       exit;
@@ -695,7 +698,8 @@ begin
 
         if not EKModelo.finalizar_transaccion('UPDATE FACTURA') then
         begin
-          //errererrrorr
+          mensajeError:= 'Error al actualizar el PV y NUMERO del comprobante';
+          mostrarError(mensajeError, tituloError);
         end
       end
     end;
@@ -703,7 +707,6 @@ begin
     //PASO 9: CORTO EL TIQUET
     PrinterFiscal_Epson.CutPaper;
   end
-  
 end;
 
 
