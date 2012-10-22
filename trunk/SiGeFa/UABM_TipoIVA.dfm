@@ -22,8 +22,8 @@ object FABM_TipoIVA: TFABM_TipoIVA
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 854
-    Height = 391
+    Width = 862
+    Height = 402
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -142,7 +142,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
             50.270833333333330000
             785.812500000000000000
             124.354166666666700000
-            328.083333333333300000)
+            328.083333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -172,8 +172,8 @@ object FABM_TipoIVA: TFABM_TipoIVA
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            756.708333333333300000
-            68.791666666666670000
+            756.708333333333400000
+            68.791666666666680000
             386.291666666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -204,9 +204,9 @@ object FABM_TipoIVA: TFABM_TipoIVA
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            732.895833333333300000
+            732.895833333333200000
             5.291666666666667000
-            431.270833333333300000)
+            431.270833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -523,7 +523,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -573,7 +573,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -621,7 +621,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -807,7 +807,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
             37.041666666666670000
             1378.479166666667000000
             5.291666666666667000
-            92.604166666666670000)
+            92.604166666666680000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -830,8 +830,8 @@ object FABM_TipoIVA: TFABM_TipoIVA
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 854
-      Height = 391
+      Width = 862
+      Height = 402
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -845,8 +845,8 @@ object FABM_TipoIVA: TFABM_TipoIVA
       object DBGridTipoIva: TDBGrid
         Left = 5
         Top = 5
-        Width = 844
-        Height = 328
+        Width = 852
+        Height = 339
         Align = alClient
         Color = 14606012
         DataSource = DS_TipoIva
@@ -900,12 +900,18 @@ object FABM_TipoIVA: TFABM_TipoIVA
             Title.Caption = 'Coef'
             Width = 40
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'VERIFICA_CUIT'
+            Title.Caption = 'Verifica'
+            Visible = True
           end>
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 333
-        Width = 844
+        Top = 344
+        Width = 852
         Height = 53
         Align = alBottom
         BevelOuter = bvNone
@@ -987,6 +993,20 @@ object FABM_TipoIVA: TFABM_TipoIVA
           Width = 64
           Height = 13
           Caption = 'Coeficiente'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label7: TLabel
+          Left = 580
+          Top = 17
+          Width = 48
+          Height = 13
+          Caption = 'Verificar'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -1089,13 +1109,27 @@ object FABM_TipoIVA: TFABM_TipoIVA
           ParentFont = False
           TabOrder = 5
         end
+        object DBComboBox1: TDBComboBox
+          Left = 580
+          Top = 31
+          Width = 69
+          Height = 21
+          Style = csDropDownList
+          DataField = 'VERIFICA_CUIT'
+          DataSource = DS_TipoIva
+          ItemHeight = 13
+          Items.Strings = (
+            'S'
+            'N')
+          TabOrder = 6
+        end
       end
     end
   end
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 862
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1116,7 +1150,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 744
+      Left = 752
       Top = 1
       Width = 109
       Height = 17
@@ -1133,7 +1167,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1734,6 +1768,10 @@ object FABM_TipoIVA: TFABM_TipoIVA
     object ZQ_TipoIvaCOEFICIENTE: TFloatField
       FieldName = 'COEFICIENTE'
     end
+    object ZQ_TipoIvaVERIFICA_CUIT: TStringField
+      FieldName = 'VERIFICA_CUIT'
+      Size = 1
+    end
   end
   object DS_TipoIva: TDataSource
     DataSet = ZQ_TipoIva
@@ -1828,6 +1866,7 @@ object FABM_TipoIVA: TFABM_TipoIVA
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo

@@ -92,6 +92,9 @@ type
     Label6: TLabel;
     DBEdit1: TDBEdit;
     btnExcel: TdxBarLargeButton;
+    ZQ_TipoIvaVERIFICA_CUIT: TStringField;
+    Label7: TLabel;
+    DBComboBox1: TDBComboBox;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
