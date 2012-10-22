@@ -50,14 +50,13 @@ type
     lblTotAPagar: TLabel;
     lblNroCPB: TLabel;
     PanelDetalles: TPanel;
-    PanelCabeceraFactura: TPanel;
+    PanelDetalleCliente: TPanel;
     Label12: TLabel;
     Label13: TLabel;
     Label16: TLabel;
     Label17: TLabel;
     Label21: TLabel;
     Label28: TLabel;
-    Label20: TLabel;
     Label_DetalleCliente: TLabel;
     DBEdit9: TDBEdit;
     DBEdit10: TDBEdit;
@@ -65,7 +64,7 @@ type
     DBEdit12: TDBEdit;
     DBEdit14: TDBEdit;
     DBEdit_DetalleCliente: TDBEdit;
-    Panel3: TPanel;
+    PDetalleOrden: TPanel;
     Label22: TLabel;
     Label23: TLabel;
     Label24: TLabel;
@@ -73,13 +72,10 @@ type
     Label27: TLabel;
     Label7: TLabel;
     Label26: TLabel;
-    DBImage1: TDBImage;
-    edImagen: TDBImage;
     DBEdit1: TDBEdit;
     DBEdit2: TDBEdit;
     DBEdit3: TDBEdit;
     DBEdit4: TDBEdit;
-    DBEdit5: TDBEdit;
     DBEdit6: TDBEdit;
     DBEdit17: TDBEdit;
     PanelDetallePreventa: TPanel;
@@ -109,6 +105,11 @@ type
     bt_Cargar_Orden: TdxBarLargeButton;
     GrupoGuardarCancelar: TdxBarGroup;
     grupoVertical: TdxBarGroup;
+    DBEdit5: TDBEdit;
+    Label2: TLabel;
+    DBEdit7: TDBEdit;
+    Label8: TLabel;
+    DBEdit8: TDBEdit;
   private
     { Private declarations }
   public

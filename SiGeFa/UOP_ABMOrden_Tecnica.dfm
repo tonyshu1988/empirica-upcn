@@ -1,8 +1,8 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   Left = 411
-  Top = 206
+  Top = 73
   Width = 1142
-  Height = 656
+  Height = 789
   Caption = 'ABM Orden T'#233'cnica'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     Left = 88
     Top = 0
     Width = 1038
-    Height = 566
+    Height = 699
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 0
@@ -98,7 +98,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object PProducto: TPanel
       Tag = 99
       Left = 1
-      Top = 190
+      Top = 241
       Width = 1036
       Height = 41
       Align = alTop
@@ -405,9 +405,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object PanelProductosYFPago: TPanel
       Left = 1
-      Top = 231
+      Top = 282
       Width = 1036
-      Height = 334
+      Height = 416
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 2
@@ -434,7 +434,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Left = 1
         Top = 14
         Width = 1034
-        Height = 159
+        Height = 241
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -447,7 +447,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         end
         object Panel6: TPanel
           Left = 1
-          Top = 104
+          Top = 186
           Width = 1032
           Height = 54
           Align = alBottom
@@ -517,7 +517,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Left = 1
           Top = 1
           Width = 1032
-          Height = 103
+          Height = 185
           Align = alClient
           Color = 15527129
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -590,7 +590,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 173
+        Top = 255
         Width = 1034
         Height = 89
         Align = alBottom
@@ -693,7 +693,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 262
+        Top = 344
         Width = 1034
         Height = 71
         Align = alBottom
@@ -779,14 +779,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Left = 1
       Top = 31
       Width = 1036
-      Height = 159
+      Height = 210
       Align = alTop
       TabOrder = 3
-      object PanelCabeceraFactura: TPanel
-        Left = 526
-        Top = 1
-        Width = 509
-        Height = 116
+      object PanelDetalleCliente: TPanel
+        Left = 1
+        Top = 97
+        Width = 1034
+        Height = 71
         Align = alClient
         BevelOuter = bvLowered
         Font.Charset = ANSI_CHARSET
@@ -799,7 +799,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 507
+          Width = 1032
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -843,12 +843,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           ParentFont = False
         end
         object Label17: TLabel
-          Left = 42
-          Top = 92
-          Width = 27
+          Left = 409
+          Top = 20
+          Width = 36
           Height = 13
           Alignment = taRightJustify
-          Caption = 'IVA:'
+          Caption = 'Edad:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -857,11 +857,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           ParentFont = False
         end
         object Label21: TLabel
-          Left = 269
-          Top = 92
-          Width = 35
+          Left = 494
+          Top = 20
+          Width = 89
           Height = 13
-          Caption = 'Desc.'
+          Caption = 'Tel'#233'fono/Cel:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -883,19 +883,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Font.Style = [fsBold]
           ParentFont = False
         end
-        object Label20: TLabel
-          Left = 359
-          Top = 92
-          Width = 14
-          Height = 13
-          Caption = '%'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
         object Label_DetalleCliente: TLabel
           Left = 4
           Top = 68
@@ -903,6 +890,33 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Height = 13
           Alignment = taRightJustify
           Caption = 'Direcci'#243'n:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label2: TLabel
+          Left = 393
+          Top = 44
+          Width = 36
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Edad:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label8: TLabel
+          Left = 478
+          Top = 44
+          Width = 89
+          Height = 13
+          Caption = 'Tel'#233'fono/Cel:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -947,9 +961,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           TabOrder = 1
         end
         object DBEdit12: TDBEdit
-          Left = 308
-          Top = 88
-          Width = 52
+          Left = 584
+          Top = 16
+          Width = 161
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -959,9 +973,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           TabOrder = 5
         end
         object DBEdit14: TDBEdit
-          Left = 70
-          Top = 88
-          Width = 194
+          Left = 446
+          Top = 16
+          Width = 43
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -982,22 +996,46 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           ReadOnly = True
           TabOrder = 3
         end
+        object DBEdit7: TDBEdit
+          Left = 430
+          Top = 40
+          Width = 43
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'pers_iva'
+          ReadOnly = True
+          TabOrder = 6
+        end
+        object DBEdit8: TDBEdit
+          Left = 568
+          Top = 40
+          Width = 161
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'pers_desc'
+          ReadOnly = True
+          TabOrder = 7
+        end
       end
-      object Panel3: TPanel
+      object PDetalleOrden: TPanel
         Left = 1
         Top = 1
-        Width = 525
-        Height = 116
-        Align = alLeft
+        Width = 1034
+        Height = 96
+        Align = alTop
         BevelOuter = bvLowered
         TabOrder = 0
         object Label22: TLabel
-          Left = 115
+          Left = 10
           Top = 21
-          Width = 48
+          Width = 81
           Height = 13
           Alignment = taRightJustify
-          Caption = 'C'#243'digo:'
+          Caption = 'Nro Factura:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -1006,8 +1044,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           ParentFont = False
         end
         object Label23: TLabel
-          Left = 117
-          Top = 92
+          Left = 45
+          Top = 44
           Width = 43
           Height = 13
           Alignment = taRightJustify
@@ -1020,11 +1058,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           ParentFont = False
         end
         object Label24: TLabel
-          Left = 101
-          Top = 44
-          Width = 62
+          Left = 573
+          Top = 20
+          Width = 71
           Height = 13
-          Caption = 'Producto:'
+          Caption = 'Prometido:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -1033,12 +1071,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           ParentFont = False
         end
         object Label25: TLabel
-          Left = 342
+          Left = 267
           Top = 21
-          Width = 40
+          Width = 43
           Height = 13
           Alignment = taRightJustify
-          Caption = 'Stock:'
+          Caption = 'Fecha:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -1047,12 +1085,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           ParentFont = False
         end
         object Label27: TLabel
-          Left = 108
-          Top = 68
-          Width = 55
+          Left = 461
+          Top = 20
+          Width = 46
           Height = 13
           Alignment = taRightJustify
-          Caption = 'Art'#237'culo:'
+          Caption = 'Avisar:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -1063,11 +1101,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Label7: TLabel
           Left = 1
           Top = 1
-          Width = 523
-          Height = 13
+          Width = 1032
+          Height = 15
           Align = alTop
           Alignment = taCenter
-          Caption = 'Detalles Producto/Servicio'
+          Caption = 'Detalles Orden T'#233'cnica'
           Color = 12648448
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
@@ -1080,8 +1118,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Layout = tlCenter
         end
         object Label26: TLabel
-          Left = 336
-          Top = 92
+          Left = 264
+          Top = 44
           Width = 50
           Height = 13
           Alignment = taRightJustify
@@ -1093,44 +1131,22 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Font.Style = [fsBold]
           ParentFont = False
         end
-        object DBImage1: TDBImage
-          Left = 2
-          Top = 30
-          Width = 97
-          Height = 69
-          Color = 14737632
-          DataField = 'LOGO'
-          Stretch = True
-          TabOrder = 7
-        end
-        object edImagen: TDBImage
-          Left = 2
-          Top = 30
-          Width = 97
-          Height = 69
-          Color = 14737632
-          DataField = 'IMAGEN'
-          QuickDraw = False
-          Stretch = True
-          TabOrder = 8
-          Visible = False
-        end
         object DBEdit1: TDBEdit
-          Left = 164
-          Top = 40
-          Width = 355
+          Left = 652
+          Top = 16
+          Width = 141
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'DETALLE_PROD'
           ReadOnly = True
-          TabOrder = 2
+          TabOrder = 1
         end
         object DBEdit2: TDBEdit
-          Left = 164
+          Left = 92
           Top = 17
-          Width = 143
+          Width = 141
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
@@ -1140,8 +1156,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           TabOrder = 0
         end
         object DBEdit3: TDBEdit
-          Left = 164
-          Top = 88
+          Left = 92
+          Top = 40
           Width = 163
           Height = 21
           BevelInner = bvNone
@@ -1149,11 +1165,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Color = 15527129
           DataField = 'NOMBRE_MARCA'
           ReadOnly = True
-          TabOrder = 5
+          TabOrder = 4
         end
         object DBEdit4: TDBEdit
-          Left = 326
-          Top = 64
+          Left = 518
+          Top = 40
           Width = 193
           Height = 21
           BevelInner = bvNone
@@ -1161,42 +1177,23 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Color = 15527129
           DataField = 'ARTICULO'
           ReadOnly = True
-          TabOrder = 4
-        end
-        object DBEdit5: TDBEdit
-          Left = 384
-          Top = 17
-          Width = 135
-          Height = 21
-          AutoSize = False
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'STOCK_ACTUAL'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 1
+          TabOrder = 3
         end
         object DBEdit6: TDBEdit
-          Left = 164
-          Top = 64
-          Width = 163
+          Left = 516
+          Top = 16
+          Width = 45
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'TIPO_ARTICULO'
           ReadOnly = True
-          TabOrder = 3
+          TabOrder = 2
         end
         object DBEdit17: TDBEdit
-          Left = 390
-          Top = 88
+          Left = 318
+          Top = 40
           Width = 129
           Height = 21
           BevelInner = bvNone
@@ -1204,12 +1201,24 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Color = 15527129
           DataField = 'MEDIDA'
           ReadOnly = True
+          TabOrder = 5
+        end
+        object DBEdit5: TDBEdit
+          Left = 316
+          Top = 17
+          Width = 125
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'COD_CORTO'
+          ReadOnly = True
           TabOrder = 6
         end
       end
       object PanelDetallePreventa: TPanel
         Left = 1
-        Top = 117
+        Top = 168
         Width = 1034
         Height = 41
         Align = alBottom
@@ -1630,11 +1639,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           end
           item
             BeginGroup = True
-            Item = btnVentaRapida
-            Visible = True
-          end
-          item
-            BeginGroup = True
             Item = BtAceptarPago
             Visible = True
           end
@@ -1971,29 +1975,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           end
           item
             Item = BtVendedor
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btPreventa
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = bt_Cargar_Orden
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btCierreZ
-            Visible = True
-          end
-          item
-            Item = BtCierreX
-            Visible = True
-          end
-          item
-            Item = btnAuditoriaFiscal
             Visible = True
           end>
         Name = 'vertical'
