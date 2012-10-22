@@ -294,6 +294,8 @@ type
     grpClave: TGroupBox;
     edClave: TDBEdit;
     ZQ_PersonaCLAVE: TStringField;
+    ZQ_IvaCOEFICIENTE: TFloatField;
+    ZQ_IvaVERIFICA_CUIT: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -740,7 +742,8 @@ begin
     result := false;
   end;
 
-  if not ((ZQ_PersonaCUIT_CUIL.IsNull) or (ZQ_PersonaCUIT_CUIL.AsString = '')) then
+  //Verifica_CUIT es un campo de la tabla TIPO_CUIT, se configura ahí si se le exige el NroCUIT
+  if (ZQ_IvaVERIFICA_CUIT.AsString='S') then
     if not sonTodosNumeros(ZQ_PersonaCUIT_CUIL.AsString) then
     begin
       mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido, Verifique'+char(13)+'(sólo debe ingresar números, sin guiones)';
