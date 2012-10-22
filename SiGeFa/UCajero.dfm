@@ -5940,6 +5940,11 @@ object FCajero: TFCajero
           end
           item
             BeginGroup = True
+            Item = bt_Cargar_Orden
+            Visible = True
+          end
+          item
+            BeginGroup = True
             Item = btCierreZ
             Visible = True
           end
@@ -7801,6 +7806,13 @@ object FCajero: TFCajero
       OnClick = btnAuditoriaFiscalClick
       AutoGrayScale = False
     end
+    object bt_Cargar_Orden: TdxBarLargeButton
+      Caption = 'Cargar Orden'
+      Category = 0
+      Hint = 'Cargar Orden'
+      Visible = ivAlways
+      OnClick = bt_Cargar_OrdenClick
+    end
     object GrupoGuardarCancelar: TdxBarGroup
       Items = (
         'BtAceptarPago'
@@ -9421,5 +9433,55 @@ object FCajero: TFCajero
     DataSet = ZQ_PreventaFP
     Left = 906
     Top = 390
+  end
+  object ZQ_OrdenProductos: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select od.*'
+      'from optica_orden_detalle od'
+      'where (od.id_orden= :ID_ORDEN)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ORDEN'
+        ParamType = ptUnknown
+      end>
+    Left = 266
+    Top = 565
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ORDEN'
+        ParamType = ptUnknown
+      end>
+    object ZQ_OrdenProductosID_ORDEN_DETALLE: TIntegerField
+      FieldName = 'ID_ORDEN_DETALLE'
+      Required = True
+    end
+    object ZQ_OrdenProductosID_ORDEN: TIntegerField
+      FieldName = 'ID_ORDEN'
+      Required = True
+    end
+    object ZQ_OrdenProductosID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_OrdenProductosMONTO_DESCONTADO: TFloatField
+      FieldName = 'MONTO_DESCONTADO'
+    end
+    object ZQ_OrdenProductosMONTO_TOTAL: TFloatField
+      FieldName = 'MONTO_TOTAL'
+    end
+    object ZQ_OrdenProductosCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_OrdenProductosOBSERVACIONES: TStringField
+      FieldName = 'OBSERVACIONES'
+      Size = 1000
+    end
+    object ZQ_OrdenProductosID_LABORATORIO: TIntegerField
+      FieldName = 'ID_LABORATORIO'
+      Required = True
+    end
   end
 end

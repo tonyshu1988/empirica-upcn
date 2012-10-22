@@ -68,7 +68,8 @@ uses
   UOP_ABMMedico in 'UOP_ABMMedico.pas' {FOP_ABMMedico},
   UOP_ABMObraSocial in 'UOP_ABMObraSocial.pas' {FOP_ABMObraSocial},
   UPreventa_Historico in 'UPreventa_Historico.pas' {FPreventa_Historico},
-  UFichaEmpleado in 'UFichaEmpleado.pas' {FFichaEmpleado};
+  UFichaEmpleado in 'UFichaEmpleado.pas' {FFichaEmpleado},
+  UOP_CargarOrden in 'UOP_CargarOrden.pas' {FOP_CargarOrden};
 
 {$R *.res}
 
