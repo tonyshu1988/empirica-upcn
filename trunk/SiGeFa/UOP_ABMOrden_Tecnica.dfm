@@ -1679,6 +1679,10 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             BeginGroup = True
             Item = btIVA
             Visible = True
+          end
+          item
+            Item = btPreventa
+            Visible = True
           end>
         Name = 'vertical'
         OneOnRow = True
@@ -3453,9 +3457,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       AutoGrayScale = False
     end
     object btPreventa: TdxBarLargeButton
-      Caption = 'F8 Preventa'
+      Caption = 'F8 Observaciones'
       Category = 0
-      Hint = 'F8 Preventa'
+      Hint = 'F8 Observaciones'
       Visible = ivAlways
       ImageIndex = 79
       AutoGrayScale = False
