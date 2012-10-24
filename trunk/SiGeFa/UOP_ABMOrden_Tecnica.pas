@@ -10,31 +10,9 @@ uses
 type
   TFOP_ABM_OrdenTecnica = class(TForm)
     PanelContenedorDerecha: TPanel;
-    PanelStatusBar: TPanel;
-    DBText7: TDBText;
-    DBText8: TDBText;
-    PanelCambiarFecha: TPanel;
-    DateTimePicker_FechaCarga: TDateTimePicker;
-    CheckBoxCambiarFecha: TCheckBox;
-    PProducto: TPanel;
-    Label1: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label6: TLabel;
-    Label40: TLabel;
-    PanelDetalleProducto: TPanel;
-    Label5: TLabel;
-    btnAceptarProd: TSpeedButton;
-    btnCancelarProd: TSpeedButton;
-    edProducto: TDBEdit;
-    edCantidad: TDBEdit;
-    edDesc: TDBEdit;
-    edImporteFinal: TDBEdit;
-    edUnitario: TDBEdit;
     PanelProductosYFPago: TPanel;
     Label11: TLabel;
     PanelListadoProducto: TPanel;
-    Label9: TLabel;
     Panel6: TPanel;
     Label36: TLabel;
     lblCantProductos: TLabel;
@@ -69,23 +47,29 @@ type
     Label23: TLabel;
     Label24: TLabel;
     Label25: TLabel;
-    Label27: TLabel;
     Label7: TLabel;
     Label26: TLabel;
     DBEdit1: TDBEdit;
     DBEdit2: TDBEdit;
     DBEdit3: TDBEdit;
     DBEdit4: TDBEdit;
-    DBEdit6: TDBEdit;
     DBEdit17: TDBEdit;
-    PanelDetallePreventa: TPanel;
-    Label54: TLabel;
-    Label56: TLabel;
-    Label59: TLabel;
-    Label60: TLabel;
-    DBEdit20: TDBEdit;
-    DBEdit21: TDBEdit;
-    DBEdit22: TDBEdit;
+    DBEdit5: TDBEdit;
+    dbAvisar: TDBCheckBox;
+    Panel2: TPanel;
+    Label10: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    Label18: TLabel;
+    DBEdit13: TDBEdit;
+    DBEdit15: TDBEdit;
+    DBEdit16: TDBEdit;
+    PanelStatusBar: TPanel;
+    DBText7: TDBText;
+    DBGrid1: TDBGrid;
+    POs: TPanel;
+    Label1: TLabel;
+    PProductos: TPanel;
     dxBarABM: TdxBarManager;
     btBuscProd: TdxBarLargeButton;
     BtBuscarProducto: TdxBarLargeButton;
@@ -105,11 +89,7 @@ type
     bt_Cargar_Orden: TdxBarLargeButton;
     GrupoGuardarCancelar: TdxBarGroup;
     grupoVertical: TdxBarGroup;
-    DBEdit5: TDBEdit;
-    Label2: TLabel;
-    DBEdit7: TDBEdit;
-    Label8: TLabel;
-    DBEdit8: TDBEdit;
+    Splitter1: TSplitter;
   private
     { Private declarations }
   public
