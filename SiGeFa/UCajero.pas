@@ -993,12 +993,14 @@ begin
     ZQ_FormasPago.Filtered:= False;
     ZQ_FormasPago.Filter:= Format('IF = %s', [QuotedStr('S')]);
     ZQ_FormasPago.Filtered:= True;
+    btnEfectivo.Visible:=False;    
   end
   else
   begin
     ZQ_FormasPago.Filtered:= False;
     ZQ_FormasPago.Filter:= '';
     ZQ_FormasPago.Filtered:= True;
+    btnEfectivo.Visible:=True;
   end;
 
   PABM_FormaPago.Visible:= False;
@@ -1028,7 +1030,6 @@ begin
     btCierreZ.Enabled:= False;
     BtCierreX.Enabled:= False;
     btnAuditoriaFiscal.Enabled:= False;
-    btnEfectivo.Visible:=False;    
   end;
 
   ultimoIDPago();
@@ -2853,7 +2854,7 @@ begin
     ZQ_Cuentas.Locate('ID_CUENTA', ctaPorDefecto, []);
     CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
 
-    if btnEfectivo.Enabled then
+    if (btnEfectivo.Visible and btnEfectivo.Enabled) then
        btnEfectivo.SetFocus;
   end;
 end;
