@@ -1,6 +1,6 @@
 object FConfiguracion: TFConfiguracion
-  Left = 403
-  Top = 118
+  Left = 494
+  Top = 199
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Configuraci'#243'n General del Sistema'
@@ -24,9 +24,10 @@ object FConfiguracion: TFConfiguracion
     Top = 0
     Width = 539
     Height = 506
-    ActivePage = TabSheetVariables
+    ActivePage = TabSheetFiscal
     Align = alClient
     TabOrder = 4
+    OnChanging = PageControl1Changing
     object TabSheetGeneral: TTabSheet
       Caption = 'Configuraci'#243'n General'
       object PGeneral: TPanel
@@ -472,13 +473,14 @@ object FConfiguracion: TFConfiguracion
             Align = alClient
             Color = 16112578
             DataSource = DS_Variables
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
             TitleFont.Charset = ANSI_CHARSET
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
+            OnDrawColumnCell = DBGridVariablesDrawColumnCell
             Columns = <
               item
                 Expanded = False
@@ -661,11 +663,259 @@ object FConfiguracion: TFConfiguracion
         end
       end
     end
+    object TabSheetFiscal: TTabSheet
+      Caption = 'Configurar Impresora Fiscal'
+      ImageIndex = 2
+      object Panel5: TPanel
+        Left = 0
+        Top = 0
+        Width = 531
+        Height = 478
+        Align = alClient
+        BevelOuter = bvNone
+        Caption = 'PVariables'
+        TabOrder = 0
+        object Panel6: TPanel
+          Left = 0
+          Top = 24
+          Width = 531
+          Height = 454
+          Align = alClient
+          BevelOuter = bvNone
+          TabOrder = 0
+          object DBGridFiscal: TDBGrid
+            Left = 0
+            Top = 0
+            Width = 531
+            Height = 309
+            Align = alClient
+            Color = 16112578
+            DataSource = DS_Fiscal
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 0
+            TitleFont.Charset = ANSI_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            OnDrawColumnCell = DBGridFiscalDrawColumnCell
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'SISTEMA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Sistema'
+                Width = 83
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'RUTA_ARCHIVO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Path'
+                Width = 256
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MARCA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Marca'
+                Width = 100
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MODELO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Modelo'
+                Width = 100
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'PUERTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Puerto'
+                Width = 42
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'VELOCIDAD'
+                Title.Alignment = taCenter
+                Title.Caption = 'Velocidad'
+                Width = 63
+                Visible = True
+              end>
+          end
+          object Panel7: TPanel
+            Left = 0
+            Top = 309
+            Width = 531
+            Height = 145
+            Align = alBottom
+            BevelOuter = bvNone
+            TabOrder = 1
+            object Label3: TLabel
+              Left = 67
+              Top = 17
+              Width = 39
+              Height = 12
+              Caption = 'Marca:'
+            end
+            object Label5: TLabel
+              Left = 61
+              Top = 42
+              Width = 45
+              Height = 13
+              Caption = 'Modelo:'
+            end
+            object Label18: TLabel
+              Left = 64
+              Top = 68
+              Width = 42
+              Height = 13
+              Caption = 'Puerto:'
+            end
+            object Label19: TLabel
+              Left = 309
+              Top = 68
+              Width = 60
+              Height = 13
+              Caption = 'Velocidad:'
+            end
+            object Label15: TLabel
+              Left = 15
+              Top = 93
+              Width = 91
+              Height = 13
+              Caption = 'Path Aplicacion:'
+            end
+            object Label20: TLabel
+              Left = 55
+              Top = 119
+              Width = 51
+              Height = 13
+              Caption = 'Sistema:'
+            end
+            object DBEdit_IF_Marca: TDBEdit
+              Left = 109
+              Top = 13
+              Width = 363
+              Height = 21
+              DataField = 'MARCA'
+              DataSource = DS_Fiscal
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 0
+            end
+            object DBEdit_IF_Modelo: TDBEdit
+              Left = 109
+              Top = 38
+              Width = 363
+              Height = 21
+              DataField = 'MODELO'
+              DataSource = DS_Fiscal
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 1
+            end
+            object DBEdit_IF_Puerto: TDBEdit
+              Left = 109
+              Top = 64
+              Width = 97
+              Height = 21
+              DataField = 'PUERTO'
+              DataSource = DS_Fiscal
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 2
+            end
+            object DBEdit_IF_Velocidad: TDBEdit
+              Left = 375
+              Top = 64
+              Width = 97
+              Height = 21
+              DataField = 'VELOCIDAD'
+              DataSource = DS_Fiscal
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 3
+            end
+            object DBEdit_IF_Path: TDBEdit
+              Left = 109
+              Top = 89
+              Width = 363
+              Height = 21
+              DataField = 'RUTA_ARCHIVO'
+              DataSource = DS_Fiscal
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 4
+            end
+            object DBEdit_IF_Sistema: TDBEdit
+              Left = 109
+              Top = 115
+              Width = 363
+              Height = 21
+              DataField = 'SISTEMA'
+              DataSource = DS_Fiscal
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 5
+            end
+          end
+        end
+        object Panel9: TPanel
+          Left = 0
+          Top = 0
+          Width = 531
+          Height = 24
+          Align = alTop
+          BevelInner = bvLowered
+          Caption = 'Configurar Impresora Fiscal'
+          Color = 14540253
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clNavy
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+          OnDblClick = Panel1DblClick
+        end
+      end
+    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -971,7 +1221,12 @@ object FConfiguracion: TFConfiguracion
             Visible = True
           end
           item
+            BeginGroup = True
             Item = btNuevo
+            Visible = True
+          end
+          item
+            Item = btnSeleccionar
             Visible = True
           end
           item
@@ -1347,16 +1602,29 @@ object FConfiguracion: TFConfiguracion
       OnClick = btNuevoClick
       AutoGrayScale = False
     end
+    object btnSeleccionar: TdxBarLargeButton
+      Caption = 'Seleccionar'
+      Category = 0
+      Hint = 'Seleccionar'
+      Visible = ivAlways
+      ImageIndex = 5
+      OnClick = btnSeleccionarClick
+      AutoGrayScale = False
+    end
     object GrupoVisualizacion: TdxBarGroup
       Items = (
         'btnSalir'
-        'BtModificar'
-        'btNuevo')
+        'BtModificar')
     end
     object GrupoEdicion: TdxBarGroup
       Items = (
         'BtGuardar'
         'BtCancelar')
+    end
+    object grupoAltaSeleccion: TdxBarGroup
+      Items = (
+        'btNuevo'
+        'btnSeleccionar')
     end
   end
   object BuscarLogo: TOpenPictureDialog
@@ -1365,7 +1633,7 @@ object FConfiguracion: TFConfiguracion
     FilterIndex = 0
     Title = 'Seleccione la Imagen'
     Left = 252
-    Top = 227
+    Top = 230
   end
   object ZQ_General: TZQuery
     Connection = DM.Conexion
@@ -1453,7 +1721,7 @@ object FConfiguracion: TFConfiguracion
   object DS_Variables: TDataSource
     DataSet = ZQ_Variables
     Left = 460
-    Top = 227
+    Top = 230
   end
   object ZQ_Logo: TZQuery
     Connection = DM.Conexion
@@ -1468,7 +1736,7 @@ object FConfiguracion: TFConfiguracion
         ParamType = ptUnknown
       end>
     Left = 394
-    Top = 179
+    Top = 178
     ParamData = <
       item
         DataType = ftUnknown
@@ -1482,7 +1750,7 @@ object FConfiguracion: TFConfiguracion
   object DS_Logo: TDataSource
     DataSet = ZQ_Logo
     Left = 393
-    Top = 227
+    Top = 230
   end
   object ZQ_Variables: TZQuery
     Connection = DM.Conexion
@@ -1555,10 +1823,54 @@ object FConfiguracion: TFConfiguracion
   object DS_General: TDataSource
     DataSet = ZQ_General
     Left = 324
-    Top = 227
+    Top = 230
   end
   object ColorDialog: TColorDialog
     Left = 178
+    Top = 230
+  end
+  object ZQ_Fiscal: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from CONFIGURACION_FISCAL')
+    Params = <>
+    Left = 44
+    Top = 178
+    object ZQ_FiscalID: TIntegerField
+      FieldName = 'ID'
+    end
+    object ZQ_FiscalMARCA: TStringField
+      FieldName = 'MARCA'
+    end
+    object ZQ_FiscalMODELO: TStringField
+      FieldName = 'MODELO'
+      Size = 50
+    end
+    object ZQ_FiscalPUERTO: TStringField
+      FieldName = 'PUERTO'
+      Size = 10
+    end
+    object ZQ_FiscalVELOCIDAD: TStringField
+      FieldName = 'VELOCIDAD'
+      Size = 10
+    end
+    object ZQ_FiscalRUTA_ARCHIVO: TStringField
+      FieldName = 'RUTA_ARCHIVO'
+      Size = 200
+    end
+    object ZQ_FiscalPREDETERMINADA: TStringField
+      FieldName = 'PREDETERMINADA'
+      Size = 1
+    end
+    object ZQ_FiscalSISTEMA: TStringField
+      FieldName = 'SISTEMA'
+      Size = 30
+    end
+  end
+  object DS_Fiscal: TDataSource
+    DataSet = ZQ_Fiscal
+    Left = 44
     Top = 230
   end
 end

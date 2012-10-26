@@ -105,6 +105,36 @@ type
     DBEdit15: TDBEdit;
     DS_General: TDataSource;
     ColorDialog: TColorDialog;
+    TabSheetFiscal: TTabSheet;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    DBGridFiscal: TDBGrid;
+    Panel7: TPanel;
+    Label3: TLabel;
+    Label5: TLabel;
+    Label18: TLabel;
+    Label19: TLabel;
+    DBEdit_IF_Marca: TDBEdit;
+    Panel9: TPanel;
+    ZQ_Fiscal: TZQuery;
+    DS_Fiscal: TDataSource;
+    ZQ_FiscalID: TIntegerField;
+    ZQ_FiscalMARCA: TStringField;
+    ZQ_FiscalMODELO: TStringField;
+    ZQ_FiscalPUERTO: TStringField;
+    ZQ_FiscalVELOCIDAD: TStringField;
+    ZQ_FiscalRUTA_ARCHIVO: TStringField;
+    ZQ_FiscalPREDETERMINADA: TStringField;
+    ZQ_FiscalSISTEMA: TStringField;
+    Label15: TLabel;
+    Label20: TLabel;
+    DBEdit_IF_Modelo: TDBEdit;
+    DBEdit_IF_Puerto: TDBEdit;
+    DBEdit_IF_Velocidad: TDBEdit;
+    DBEdit_IF_Path: TDBEdit;
+    DBEdit_IF_Sistema: TDBEdit;
+    btnSeleccionar: TdxBarLargeButton;
+    grupoAltaSeleccion: TdxBarGroup;
     procedure btnSalirClick(Sender: TObject);
     procedure habilitarCarga(flag: boolean);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -122,6 +152,15 @@ type
     procedure panelColorClick(Sender: TObject);
     procedure btNuevoClick(Sender: TObject);
     procedure Panel1DblClick(Sender: TObject);
+    procedure PageControl1Changing(Sender: TObject;
+      var AllowChange: Boolean);
+    procedure DBGridFiscalDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure DBGridVariablesDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure btnSeleccionarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -136,7 +175,7 @@ const
 
 implementation
 
-uses UDM, UUtilidades;
+uses UDM, UUtilidades, UPrincipal;
 
 {$R *.dfm}
 
@@ -217,6 +256,7 @@ begin
 
   GrupoVisualizacion.Enabled:= not flag;
   GrupoEdicion.Enabled:= flag;
+  grupoAltaSeleccion.Enabled:= flag;
 end;
 
 
@@ -246,6 +286,8 @@ begin
   dm.EKModelo.abrir(ZQ_Variables);
   ZQ_Variables.Filter:= format('clave <> %s', [QuotedStr('demoSistema')]);
   ZQ_Variables.Filtered:= true;
+
+  dm.EKModelo.abrir(ZQ_Fiscal);
 
   habilitarCarga(false);
 end;
@@ -287,13 +329,14 @@ end;
 
 procedure TFConfiguracion.BtModificarClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(abmConfiguracion,[ZQ_General, ZQ_Variables, ZQ_Logo]) then
+  if dm.EKModelo.iniciar_transaccion(abmConfiguracion,[ZQ_General, ZQ_Variables, ZQ_Logo, ZQ_Fiscal]) then
   begin
     habilitarCarga(true);
 
     ZQ_General.edit;
     ZQ_Logo.edit;
     ZQ_Variables.edit;
+    ZQ_Fiscal.Edit;
   end;
 end;
 
@@ -334,15 +377,71 @@ begin
     end
 end;
 
+
 procedure TFConfiguracion.btNuevoClick(Sender: TObject);
 begin
-  ZQ_Variables.Append;
-  DBEdit1.SetFocus;
+  if PageControl1.ActivePage = TabSheetVariables then
+  begin
+    ZQ_Variables.Last;
+    ZQ_Variables.Append;
+    DBEdit1.SetFocus;
+  end
+  else
+  if PageControl1.ActivePage = TabSheetFiscal then
+  begin
+    ZQ_Fiscal.Last;
+    ZQ_Fiscal.Append;
+    DBEdit_IF_Marca.SetFocus;
+  end
 end;
+
 
 procedure TFConfiguracion.Panel1DblClick(Sender: TObject);
 begin
   ZQ_Variables.Filtered:= not ZQ_Variables.Filtered; 
+end;
+
+
+procedure TFConfiguracion.PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
+begin
+  AllowChange:= true;
+  if dm.EKModelo.verificar_transaccion(abmConfiguracion) then
+    AllowChange:= false;
+end;
+
+
+procedure TFConfiguracion.DBGridFiscalDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillasConBajas(DBGridFiscal, ZQ_FiscalPREDETERMINADA.AsString, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFConfiguracion.DBGridVariablesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridVariables, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFConfiguracion.btnSeleccionarClick(Sender: TObject);
+var
+ recno: integer;
+begin
+  if PageControl1.ActivePage = TabSheetFiscal then
+  begin
+    ZQ_Fiscal.DisableControls;
+    recno:= ZQ_Fiscal.RecNo;
+    ZQ_Fiscal.First;
+    while not ZQ_Fiscal.Eof do
+    begin
+      ZQ_Fiscal.Edit;
+      ZQ_FiscalPREDETERMINADA.AsString:= 'N';
+      ZQ_Fiscal.Next;
+    end;
+    ZQ_Fiscal.RecNo:= recno;
+    ZQ_Fiscal.Edit;
+    ZQ_FiscalPREDETERMINADA.AsString:= 'S';
+    ZQ_Fiscal.EnableControls;
+  end
 end;
 
 end.

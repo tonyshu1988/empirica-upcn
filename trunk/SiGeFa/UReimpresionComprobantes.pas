@@ -166,7 +166,7 @@ type
     procedure DBGridComprobantesDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
-    procedure leerSistemaIni;
+    procedure leerConfigFiscal;
     procedure btVerClick(Sender: TObject);
     procedure DBGridComprobantesDblClick(Sender: TObject);
     procedure btnEliminarComprobClick(Sender: TObject);
@@ -187,8 +187,7 @@ var
   FReimpresionComprobantes: TFReimpresionComprobantes;
   where: string;
   //----Fiscal--------
-  Impresora: string;
-  Ruta: string;
+  fiscal_Impresora, fiscal_ruta, fiscal_sistema: string;
   puede: Boolean;
 implementation
 
@@ -196,14 +195,14 @@ uses UDM, UPrincipal, strutils, EKModelo, Math, UUtilidades, DateUtils;
 
 {$R *.dfm}
 
-procedure TFReimpresionComprobantes.leerSistemaIni;
-var
-  Ini: TIniFile;
+procedure TFReimpresionComprobantes.leerConfigFiscal;
 begin
-  Ini:= TIniFile.Create('.\SISTEMA.INI');
-  Ruta:= Ini.ReadString('IMPRESORA', 'RutaImpresora', '');
-  Impresora:= Ini.ReadString('IMPRESORA', 'TipoImpresora', '');
-  Ini.Free;
+  dm.ZQ_Fiscal.Close;
+  dm.ZQ_Fiscal.Open;
+
+  fiscal_Impresora:= DM.ZQ_FiscalMODELO.AsString;
+  fiscal_ruta:= DM.ZQ_FiscalRUTA_ARCHIVO.AsString;
+  fiscal_sistema:= DM.ZQ_FiscalSISTEMA.AsString;
 end;
 
 
@@ -398,15 +397,15 @@ begin
     Exit;
   end;
 
-  leerSistemaIni();
+  leerConfigFiscal();
 
   if (application.MessageBox(pchar('Desea Reimprimir el Comprobante Nro:' + ZQ_ComprobanteCODIGO.AsString + ' ?'), 'Reimpresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
   begin
-    if aplicaImprimirFiscal = 'VISUAL' then //IMPRIMIR DESDE VISUAL
-      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l ' + IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger) + ' -i ' + Impresora + ' -c F'), nil, SW_SHOWNORMAL)
+    if fiscal_sistema = 'VISUAL' then //IMPRIMIR DESDE VISUAL
+      ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar(' -l ' + IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger) + ' -i ' + fiscal_Impresora + ' -c F'), nil, SW_SHOWNORMAL)
     else
-      if aplicaImprimirFiscal = 'DELPHI' then //IMPRIMIR DESDE ELPHI
-        ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-l'+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -cF'), nil, SW_SHOWNORMAL);
+      if fiscal_sistema = 'DELPHI' then //IMPRIMIR DESDE ELPHI
+        ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-l'+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -cF'), nil, SW_SHOWNORMAL);
 
     ZQ_Comprobante.Refresh;
   end;
