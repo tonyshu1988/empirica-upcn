@@ -681,7 +681,7 @@ type
     procedure AVendedorExecute(Sender: TObject);
     procedure ANuevoProdExecute(Sender: TObject);
     function imprimirFiscal(comprob: Integer; tipoAccion: string): Boolean;
-    procedure leerSistemaIni;
+    procedure leerConfigFiscal;
     procedure btCierreZClick(Sender: TObject);
     procedure BtCierreXClick(Sender: TObject);
     procedure calcularFP();
@@ -742,8 +742,7 @@ var
   permitirOnChangeFPAGO: boolean;
   ctaPorDefecto: Integer;
   //----Fiscal--------
-  Impresora: string;
-  Ruta: string;
+  fiscal_Impresora, fiscal_ruta, fiscal_sistema: string;
   id_cuenta_fpago: integer;
   auditoriaFiscalDesde, auditoriaFiscalHasta, auditoriaFiscalTipo: string;
 const
@@ -755,14 +754,14 @@ uses UDM, UPrincipal, strutils, EKModelo, Math, UUtilidades, DateUtils;
 
 {$R *.dfm}
 
-procedure TFCajero.leerSistemaIni;
-var
-  Ini: TIniFile;
+procedure TFCajero.leerConfigFiscal;
 begin
-  Ini:= TIniFile.Create('.\SISTEMA.INI');
-  Ruta:= Ini.ReadString('IMPRESORA', 'RutaImpresora', '');
-  Impresora:= Ini.ReadString('IMPRESORA', 'TipoImpresora', '');
-  Ini.Free;
+  dm.ZQ_Fiscal.Close;
+  dm.ZQ_Fiscal.Open;
+
+  fiscal_Impresora:= DM.ZQ_FiscalMODELO.AsString;
+  fiscal_ruta:= DM.ZQ_FiscalRUTA_ARCHIVO.AsString;
+  fiscal_sistema:= DM.ZQ_FiscalSISTEMA.AsString;
 end;
 
 procedure TFCajero.VerLectorCB(sino: Boolean);
@@ -2587,34 +2586,26 @@ end;
 function TFCajero.imprimirFiscal(comprob: Integer; tipoAccion: string): Boolean;
 begin
   Result:= True;
-  leerSistemaIni;
+  leerConfigFiscal;
 
-  if aplicaImprimirFiscal = 'VISUAL' then //IMPRIMIR DESDE VISUAL
+  if fiscal_sistema = 'VISUAL' then //IMPRIMIR DESDE VISUAL
   begin
     if tipoAccion = 'F' then //si es una factura
-      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -l ' + IntToStr(comprob) + ' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL)
+      ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar(' -l ' + IntToStr(comprob) + ' -i ' + fiscal_Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL)
     else //si es cierre z o x
-      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar(' -i ' + Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL);
+      ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar(' -i ' + fiscal_Impresora + ' -c ' + tipoAccion), nil, SW_SHOWNORMAL);
   end
   else
-  if aplicaImprimirFiscal = 'DELPHI' then //IMPRIMIR DESDE ELPHI
+  if fiscal_sistema = 'DELPHI' then //IMPRIMIR DESDE ELPHI
   begin
     if tipoAccion = 'F' then  //si es una factura
-      ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-l'+IntToStr(comprob)+' -c'+tipoAccion), nil, SW_SHOWNORMAL)
+      ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-l'+IntToStr(comprob)+' -c'+tipoAccion), nil, SW_SHOWNORMAL)
     else
       if tipoAccion = 'A' then //si es la auditoria
-        ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-c'+tipoAccion+' -t'+auditoriaFiscalTipo+' -d'+auditoriaFiscalDesde+' -h'+auditoriaFiscalHasta), nil, SW_SHOWNORMAL)
+        ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-c'+tipoAccion+' -t'+auditoriaFiscalTipo+' -d'+auditoriaFiscalDesde+' -h'+auditoriaFiscalHasta), nil, SW_SHOWNORMAL)
       else //si es cierre z o x
-        ShellExecute(FPrincipal.Handle, nil, pchar(Ruta), pchar('-c'+tipoAccion), nil, SW_SHOWNORMAL);
+        ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-c'+tipoAccion), nil, SW_SHOWNORMAL);
   end;
-
-
-  //  if (acumulado<=0) then
-  //  begin
-  //    Application.MessageBox('El monto final debe ser superior a $0,00, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
-  //    result := false;
-  //    exit;
-  //  end;
 end;
 
 

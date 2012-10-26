@@ -104,6 +104,15 @@ type
     ZQ_VerificarCtaCte: TZQuery;
     ZQ_VerificarCtaCteID_CTA_CTE: TIntegerField;
     Conexion_Usuario: TZConnection;
+    ZQ_Fiscal: TZQuery;
+    ZQ_FiscalID: TIntegerField;
+    ZQ_FiscalMARCA: TStringField;
+    ZQ_FiscalMODELO: TStringField;
+    ZQ_FiscalPUERTO: TStringField;
+    ZQ_FiscalVELOCIDAD: TStringField;
+    ZQ_FiscalRUTA_ARCHIVO: TStringField;
+    ZQ_FiscalPREDETERMINADA: TStringField;
+    ZQ_FiscalSISTEMA: TStringField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);

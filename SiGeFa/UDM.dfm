@@ -7,7 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
-    Database = 'C:\SISTEMAS\SiGeFa\Bases\SIGEFA LOPEZ.FDB'
+    Database = 'C:\SISTEMAS\SiGeFa\Bases\SIGEFA.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Properties.Strings = (
@@ -2018,5 +2018,45 @@ object DM: TDM
     SQLHourGlass = True
     Left = 40
     Top = 384
+  end
+  object ZQ_Fiscal: TZQuery
+    Connection = Conexion
+    SQL.Strings = (
+      'select *'
+      'from CONFIGURACION_FISCAL'
+      'where predeterminada = '#39'S'#39)
+    Params = <>
+    Left = 148
+    Top = 386
+    object ZQ_FiscalID: TIntegerField
+      FieldName = 'ID'
+    end
+    object ZQ_FiscalMARCA: TStringField
+      FieldName = 'MARCA'
+    end
+    object ZQ_FiscalMODELO: TStringField
+      FieldName = 'MODELO'
+      Size = 50
+    end
+    object ZQ_FiscalPUERTO: TStringField
+      FieldName = 'PUERTO'
+      Size = 10
+    end
+    object ZQ_FiscalVELOCIDAD: TStringField
+      FieldName = 'VELOCIDAD'
+      Size = 10
+    end
+    object ZQ_FiscalRUTA_ARCHIVO: TStringField
+      FieldName = 'RUTA_ARCHIVO'
+      Size = 200
+    end
+    object ZQ_FiscalPREDETERMINADA: TStringField
+      FieldName = 'PREDETERMINADA'
+      Size = 1
+    end
+    object ZQ_FiscalSISTEMA: TStringField
+      FieldName = 'SISTEMA'
+      Size = 30
+    end
   end
 end
