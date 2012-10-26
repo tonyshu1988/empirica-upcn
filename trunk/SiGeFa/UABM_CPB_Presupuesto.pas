@@ -327,6 +327,7 @@ type
     ZQ_VerCpb_ProductoIMPORTE_IVA: TFloatField;
     ZQ_VerCpb_ProductoIMPUESTO_INTERNO_1: TFloatField;
     Label19: TLabel;
+    Splitter2: TSplitter;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -470,6 +471,9 @@ begin
   ImagenSucursal.DataField:= 'LOGO';
   ImagenProducto.Visible:= false;
   ImagenSucursal.Visible:= true;
+
+  if dm.EKIni.LeerRegnumero('PRESUP_PanelEditar_DatosGral_Height') <> 0 then
+    PanelEditar_DatosGral.Height:= dm.EKIni.LeerRegnumero('PRESUP_PanelEditar_DatosGral_Height');
 end;
 
 
@@ -1208,6 +1212,8 @@ begin
   EKOrd_VerCpb.GuardarConfigColumnas;
   EKOrd_VerCpb_Producto.GuardarConfigColumnas;
   EKOrd_EditarProducto.GuardarConfigColumnas;
+
+  dm.EKIni.EsribirRegEntero('PRESUP_PanelEditar_DatosGral_Height', PanelEditar_DatosGral.Height);  
 end;
 
 
