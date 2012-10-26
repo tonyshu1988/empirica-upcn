@@ -706,12 +706,21 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      object Splitter2: TSplitter
+        Left = 5
+        Top = 182
+        Width = 874
+        Height = 3
+        Cursor = crVSplit
+        Align = alTop
+      end
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
         Width = 874
         Height = 177
         Align = alTop
+        Constraints.MinHeight = 177
         TabOrder = 0
         DesignSize = (
           874
@@ -722,7 +731,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Width = 44
           Height = 18
           Alignment = taRightJustify
-          Anchors = [akRight]
+          Anchors = [akTop, akRight]
           DataField = 'PUNTO_VENTA'
           DataSource = DS_Comprobante
           Font.Charset = DEFAULT_CHARSET
@@ -739,7 +748,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Width = 88
           Height = 18
           Alignment = taRightJustify
-          Anchors = [akRight]
+          Anchors = [akTop, akRight]
           DataField = 'NUMERO_CPB'
           DataSource = DS_Comprobante
           Font.Charset = DEFAULT_CHARSET
@@ -773,7 +782,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Width = 145
           Height = 15
           Alignment = taCenter
-          Anchors = [akRight]
+          Anchors = [akTop, akRight]
           AutoSize = False
           Caption = 'NUMERO'
           Color = clBtnFace
@@ -792,7 +801,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Width = 44
           Height = 18
           Alignment = taRightJustify
-          Anchors = [akRight]
+          Anchors = [akTop, akRight]
           Caption = '9999'
           Color = clBtnFace
           Font.Charset = DEFAULT_CHARSET
@@ -810,7 +819,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Top = 33
           Width = 88
           Height = 18
-          Anchors = [akRight]
+          Anchors = [akTop, akRight]
           Caption = '99999999'
           Color = clBtnFace
           Font.Charset = DEFAULT_CHARSET
@@ -829,7 +838,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Width = 8
           Height = 18
           Alignment = taCenter
-          Anchors = [akRight]
+          Anchors = [akTop, akRight]
           Caption = '-'
           Color = clBtnFace
           Font.Charset = DEFAULT_CHARSET
@@ -846,7 +855,6 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Top = 7
           Width = 633
           Height = 74
-          Anchors = [akLeft]
           BevelOuter = bvNone
           TabOrder = 0
           object DBText7: TDBText
@@ -1121,10 +1129,11 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           end
         end
         object DBMemoCPB_Observacion: TDBMemo
-          Left = 66
+          Left = 75
           Top = 126
-          Width = 633
+          Width = 790
           Height = 46
+          Anchors = [akLeft, akTop, akRight, akBottom]
           DataField = 'OBSERVACION'
           DataSource = DS_Comprobante
           ScrollBars = ssVertical
@@ -1207,9 +1216,9 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       end
       object PanelEditar_Producto: TPanel
         Left = 5
-        Top = 182
+        Top = 185
         Width = 874
-        Height = 301
+        Height = 298
         Align = alClient
         TabOrder = 1
         object Label19: TLabel
@@ -1231,7 +1240,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         end
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
-          Top = 259
+          Top = 256
           Width = 872
           Height = 41
           Align = alBottom
@@ -1394,7 +1403,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Left = 164
           Top = 14
           Width = 709
-          Height = 245
+          Height = 242
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbProducto
@@ -1503,13 +1512,13 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Left = 1
           Top = 14
           Width = 163
-          Height = 245
+          Height = 242
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
             163
-            245)
+            242)
           object DBTxtCodBarra: TDBText
             Left = 3
             Top = 120
