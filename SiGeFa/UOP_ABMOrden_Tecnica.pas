@@ -24,7 +24,7 @@ type
     PieGrilla: TPanel;
     lblMaxVenta: TLabel;
     btnQuitarPago: TButton;
-    Panel1: TPanel;
+    PPieBoleta: TPanel;
     lblTotAPagar: TLabel;
     lblNroCPB: TLabel;
     PanelDetalles: TPanel;
@@ -90,6 +90,36 @@ type
     GrupoGuardarCancelar: TdxBarGroup;
     grupoVertical: TdxBarGroup;
     Splitter1: TSplitter;
+    PFormaPago: TPanel;
+    PObservaciones: TPanel;
+    dbObsOrden: TDBRichEdit;
+    Label2: TLabel;
+    PReceta: TPanel;
+    DBEdit6: TDBEdit;
+    DBEdit7: TDBEdit;
+    DBEdit8: TDBEdit;
+    DBEdit18: TDBEdit;
+    DBEdit19: TDBEdit;
+    DBEdit20: TDBEdit;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label5: TLabel;
+    Label6: TLabel;
+    Label8: TLabel;
+    Label9: TLabel;
+    Label19: TLabel;
+    DBEdit21: TDBEdit;
+    DBEdit22: TDBEdit;
+    DBEdit23: TDBEdit;
+    DBEdit24: TDBEdit;
+    DBEdit25: TDBEdit;
+    DBEdit26: TDBEdit;
+    Label20: TLabel;
+    Label27: TLabel;
+    Label29: TLabel;
+    Label30: TLabel;
+    Label31: TLabel;
+    Label32: TLabel;
   private
     { Private declarations }
   public
