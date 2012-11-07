@@ -16,7 +16,6 @@ type
     Panel6: TPanel;
     Label36: TLabel;
     lblCantProductos: TLabel;
-    lblMontoProds: TLabel;
     btQuitarProducto: TButton;
     DBGridListadoProductos: TDBGrid;
     PanelFormaPago: TPanel;
@@ -120,6 +119,9 @@ type
     Label30: TLabel;
     Label31: TLabel;
     Label32: TLabel;
+    Button1: TButton;
+    Panel1: TPanel;
+    Label33: TLabel;
   private
     { Private declarations }
   public
