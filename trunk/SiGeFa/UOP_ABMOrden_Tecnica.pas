@@ -122,6 +122,7 @@ type
     Button1: TButton;
     Panel1: TPanel;
     Label33: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
   private
     { Private declarations }
   public
