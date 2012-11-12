@@ -114,6 +114,7 @@ type
     procedure ABuscarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
   public
   end;
@@ -294,6 +295,7 @@ end;
 
 procedure TFOP_ABMObraSocial.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
   PageControl1.ActivePageIndex:= 0;
@@ -378,6 +380,12 @@ procedure TFOP_ABMObraSocial.btnExcelClick(Sender: TObject);
 begin
   if not ZQ_OP_ObraSocial.IsEmpty then
     dm.ExportarEXCEL(DBGridObraSocial);
+end;
+
+procedure TFOP_ABMObraSocial.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.

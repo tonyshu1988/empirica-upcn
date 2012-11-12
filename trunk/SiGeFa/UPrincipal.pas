@@ -169,6 +169,8 @@ type
     AFichaEmpleado: TAction;
     FichaEmpleado1: TMenuItem;
     N11: TMenuItem;
+    AOP_ABMLab: TAction;
+    AOPABMLab1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -228,6 +230,7 @@ type
     procedure AOP_ABMObraSocialExecute(Sender: TObject);
     procedure APreventaHistoricoExecute(Sender: TObject);
     procedure AFichaEmpleadoExecute(Sender: TObject);
+    procedure AOP_ABMLabExecute(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -265,7 +268,8 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging,
   UEstadisticaVentas, UReimpresionComprobantes, UABM_PersonasPuntos,
   UConsulta_Precios, DateUtils, UCompararStock, UOP_ABMMedico,
-  UOP_ABMObraSocial, UPreventa_Historico, UFichaEmpleado;
+  UOP_ABMObraSocial, UPreventa_Historico, UFichaEmpleado,
+  UOP_ABMLaboratorio;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -868,6 +872,12 @@ begin
   Application.CreateForm(TFFichaEmpleado, FFichaEmpleado);
   FFichaEmpleado.ShowModal;
   FFichaEmpleado.Release;
+end;
+
+
+procedure TFPrincipal.AOP_ABMLabExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFOP_ABMLaboratorio, FOP_ABMLaboratorio);
 end;
 
 end.

@@ -15,6 +15,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   Position = poScreenCenter
   Scaled = False
   Visible = True
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -890,6 +891,13 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             Title.Caption = 'Tel'#233'fonos'
             Width = 247
             Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_OS'
+            Title.Alignment = taCenter
+            Title.Caption = 'ID'
+            Visible = True
           end>
       end
       object PanelEdicion: TPanel
@@ -1737,12 +1745,17 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       item
         TituloColumna = 'Tel'#233'fonos'
         Visible = True
+      end
+      item
+        TituloColumna = 'ID'
+        Visible = False
       end>
+    NombreGuardar = 'EkOG_ABMObraSocial'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
-    PermitirMover = False
-    PermitirFiltrar = False
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 232
     Top = 67
   end

@@ -5153,6 +5153,12 @@ object FPrincipal: TFPrincipal
       ImageIndex = 63
       OnExecute = AFichaEmpleadoExecute
     end
+    object AOP_ABMLab: TAction
+      Tag = 1
+      Caption = 'AOP_ABMLab'
+      ImageIndex = 2
+      OnExecute = AOP_ABMLabExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -5430,6 +5436,11 @@ object FPrincipal: TFPrincipal
       object ABMMedicos1: TMenuItem
         Action = AOP_ABMMedico
         Caption = 'ABM Medicos'
+      end
+      object AOPABMLab1: TMenuItem
+        Tag = 1
+        Action = AOP_ABMLab
+        Caption = 'ABM Laboratorios'
       end
     end
   end

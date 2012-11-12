@@ -15,6 +15,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
   Position = poScreenCenter
   Scaled = False
   Visible = True
+  OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -173,7 +174,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Size.Values = (
             52.916666666666670000
             762.000000000000000000
-            68.791666666666670000
+            68.791666666666680000
             373.062500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -861,14 +862,6 @@ object FOP_ABMMedico: TFOP_ABMMedico
         Columns = <
           item
             Expanded = False
-            FieldName = 'ID_MEDICO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Id.'
-            Width = 65
-            Visible = True
-          end
-          item
-            Expanded = False
             FieldName = 'NOMBRE'
             Title.Alignment = taCenter
             Title.Caption = 'Apellido y Nombre'
@@ -897,6 +890,14 @@ object FOP_ABMMedico: TFOP_ABMMedico
             Title.Alignment = taCenter
             Title.Caption = 'Matr'#237'cula'
             Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_MEDICO'
+            Title.Alignment = taCenter
+            Title.Caption = 'ID'
+            Width = 65
             Visible = True
           end>
       end
@@ -1696,10 +1697,6 @@ object FOP_ABMMedico: TFOP_ABMMedico
     Grilla = DBGridMedico
     Filtros = <
       item
-        TituloColumna = 'Id.'
-        Visible = True
-      end
-      item
         TituloColumna = 'Apellido y Nombre'
         Visible = True
       end
@@ -1714,12 +1711,17 @@ object FOP_ABMMedico: TFOP_ABMMedico
       item
         TituloColumna = 'Matr'#237'cula'
         Visible = True
+      end
+      item
+        TituloColumna = 'ID'
+        Visible = False
       end>
+    NombreGuardar = 'EkOG_ABMMedico'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
-    PermitirMover = False
-    PermitirFiltrar = False
+    PermitirMover = True
+    PermitirFiltrar = True
     Left = 48
     Top = 179
   end
