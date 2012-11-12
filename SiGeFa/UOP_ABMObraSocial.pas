@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt;
+  EKVistaPreviaQR, QRCtrls, QuickRpt, ComCtrls;
 
 type
   TFOP_ABMObraSocial = class(TForm)
@@ -33,10 +33,7 @@ type
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
     PanelEdicion: TPanel;
-    Label1: TLabel;
-    DBENombre: TDBEdit;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
-    Label2: TLabel;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -79,17 +76,23 @@ type
     ZQ_OP_ObraSocialTELEFONO: TStringField;
     ZQ_OP_ObraSocialDESCRIPCION: TStringField;
     ZQ_OP_ObraSocialBAJA: TStringField;
-    Label3: TLabel;
-    DBEdit1: TDBEdit;
-    Label4: TLabel;
-    DBEdit2: TDBEdit;
-    DBECodigo: TDBEdit;
-    GroupBox1: TGroupBox;
-    DBMemo1: TDBMemo;
     QRLabel2: TQRLabel;
     QRDBText3: TQRDBText;
     QRLabel3: TQRLabel;
     QRDBText4: TQRDBText;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
+    GroupBox1: TGroupBox;
+    DBMemo1: TDBMemo;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Label4: TLabel;
+    DBENombre: TDBEdit;
+    DBEdit1: TDBEdit;
+    DBEdit2: TDBEdit;
+    DBECodigo: TDBEdit;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -152,7 +155,6 @@ begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
   begin
     DBGridObraSocial.Enabled := false;
-    PanelEdicion.Visible:= true;
 
     ZQ_OP_ObraSocial.Append;
     ZQ_OP_ObraSocialBAJA.AsString:= 'N';
@@ -172,7 +174,6 @@ begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
   begin
     DBGridObraSocial.Enabled := false;
-    PanelEdicion.Visible:= true;
 
     ZQ_OP_ObraSocial.Edit;
 
@@ -264,7 +265,6 @@ begin
       DBGridObraSocial.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
-      PanelEdicion.Visible := false;
       recNo:= ZQ_OP_ObraSocial.RecNo;
       ZQ_OP_ObraSocial.Refresh;
       ZQ_OP_ObraSocial.RecNo:= recNo;
@@ -288,7 +288,6 @@ begin
     DBGridObraSocial.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
-    PanelEdicion.Visible := false;
   end;
 end;
 
@@ -297,6 +296,7 @@ procedure TFOP_ABMObraSocial.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
+  PageControl1.ActivePageIndex:= 0;
 
   EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_OP_ObraSocial, lblCantidadRegistros);

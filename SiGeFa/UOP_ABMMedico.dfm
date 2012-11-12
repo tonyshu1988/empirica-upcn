@@ -173,7 +173,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Size.Values = (
             52.916666666666670000
             762.000000000000000000
-            68.791666666666680000
+            68.791666666666670000
             373.062500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -254,9 +254,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
         KeepOnOnePage = False
         BandType = rbDetail
         object QRDBText1: TQRDBText
-          Left = 79
+          Left = 56
           Top = 0
-          Width = 197
+          Width = 213
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -265,9 +265,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            209.020833333333300000
+            148.166666666666700000
             0.000000000000000000
-            521.229166666666800000)
+            563.562500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -281,9 +281,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           FontSize = 7
         end
         object QRDBText2: TQRDBText
-          Left = 606
+          Left = 633
           Top = 0
-          Width = 109
+          Width = 82
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -292,9 +292,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1603.375000000000000000
+            1674.812500000000000000
             0.000000000000000000
-            288.395833333333400000)
+            216.958333333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -308,9 +308,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           FontSize = 7
         end
         object QRDBText3: TQRDBText
-          Left = 281
+          Left = 273
           Top = 0
-          Width = 173
+          Width = 210
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -319,9 +319,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            743.479166666666800000
+            722.312500000000000000
             0.000000000000000000
-            457.729166666666600000)
+            555.625000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -335,7 +335,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
           FontSize = 7
         end
         object QRDBText4: TQRDBText
-          Left = 460
+          Left = 488
           Top = 0
           Width = 141
           Height = 14
@@ -346,7 +346,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1217.083333333333000000
+            1291.166666666667000000
             0.000000000000000000
             373.062500000000000000)
           Alignment = taLeftJustify
@@ -362,9 +362,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           FontSize = 7
         end
         object QRDBText5: TQRDBText
-          Left = 5
+          Left = 3
           Top = 0
-          Width = 68
+          Width = 46
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -373,9 +373,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            13.229166666666670000
+            7.937500000000000000
             0.000000000000000000
-            179.916666666666700000)
+            121.708333333333400000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
@@ -666,9 +666,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
         KeepOnOnePage = False
         BandType = rbColumnHeader
         object QRLabel30: TQRLabel
-          Left = 79
+          Left = 56
           Top = 2
-          Width = 197
+          Width = 213
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -677,9 +677,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            209.020833333333300000
+            148.166666666666700000
             5.291666666666667000
-            521.229166666666800000)
+            563.562500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -698,9 +698,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           FontSize = 8
         end
         object QRLabel1: TQRLabel
-          Left = 606
+          Left = 633
           Top = 2
-          Width = 109
+          Width = 82
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -709,9 +709,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1603.375000000000000000
+            1674.812500000000000000
             5.291666666666667000
-            288.395833333333400000)
+            216.958333333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -730,9 +730,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           FontSize = 8
         end
         object QRLabel2: TQRLabel
-          Left = 281
+          Left = 273
           Top = 2
-          Width = 173
+          Width = 210
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -741,9 +741,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            743.479166666666800000
+            722.312500000000000000
             5.291666666666667000
-            457.729166666666600000)
+            555.625000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -762,7 +762,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
           FontSize = 8
         end
         object QRLabel3: TQRLabel
-          Left = 460
+          Left = 488
           Top = 2
           Width = 141
           Height = 14
@@ -773,7 +773,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1217.083333333333000000
+            1291.166666666667000000
             5.291666666666667000
             373.062500000000000000)
           Alignment = taLeftJustify
@@ -794,9 +794,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           FontSize = 8
         end
         object QRLabel4: TQRLabel
-          Left = 5
+          Left = 3
           Top = 2
-          Width = 68
+          Width = 46
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -805,9 +805,9 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            13.229166666666670000
+            7.937500000000000000
             5.291666666666667000
-            179.916666666666700000)
+            121.708333333333400000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
@@ -846,7 +846,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
         Left = 5
         Top = 5
         Width = 852
-        Height = 286
+        Height = 334
         Align = alClient
         Color = 14606012
         DataSource = DS_Medico
@@ -902,15 +902,14 @@ object FOP_ABMMedico: TFOP_ABMMedico
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 291
+        Top = 339
         Width = 852
-        Height = 106
+        Height = 58
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
-        Visible = False
         object Label1: TLabel
-          Left = 12
+          Left = 18
           Top = 12
           Width = 110
           Height = 13
@@ -925,7 +924,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Transparent = True
         end
         object Label2: TLabel
-          Left = 64
+          Left = 70
           Top = 36
           Width = 58
           Height = 13
@@ -940,8 +939,8 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Transparent = True
         end
         object Label3: TLabel
-          Left = 68
-          Top = 60
+          Left = 419
+          Top = 36
           Width = 54
           Height = 13
           Alignment = taRightJustify
@@ -955,12 +954,12 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Transparent = True
         end
         object Label4: TLabel
-          Left = 71
-          Top = 84
-          Width = 51
+          Left = 417
+          Top = 12
+          Width = 56
           Height = 13
           Alignment = taRightJustify
-          Caption = 'Matr'#237'cula'
+          Caption = 'Matr'#237'cula:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -970,7 +969,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Transparent = True
         end
         object DBENombre: TDBEdit
-          Left = 126
+          Left = 129
           Top = 8
           Width = 267
           Height = 21
@@ -986,7 +985,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
           TabOrder = 0
         end
         object DBEDireccion: TDBEdit
-          Left = 126
+          Left = 129
           Top = 32
           Width = 267
           Height = 21
@@ -999,11 +998,11 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 1
+          TabOrder = 2
         end
         object DBETelefono: TDBEdit
-          Left = 126
-          Top = 56
+          Left = 474
+          Top = 32
           Width = 203
           Height = 21
           CharCase = ecUpperCase
@@ -1015,11 +1014,11 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 2
+          TabOrder = 3
         end
         object DBEMatricula: TDBEdit
-          Left = 126
-          Top = 80
+          Left = 474
+          Top = 8
           Width = 203
           Height = 21
           CharCase = ecUpperCase
@@ -1031,7 +1030,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 3
+          TabOrder = 1
         end
       end
     end
@@ -1771,13 +1770,61 @@ object FOP_ABMMedico: TFOP_ABMMedico
   object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Nombre'
-        Campo = 'nombre'
-        Tabla = 'medico'
+        Titulo = 'Apellido y Nombre'
+        Campo = 'NOMBRE'
+        Tabla = 'optica_medico'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Direcci'#243'n'
+        Campo = 'DIRECCION'
+        Tabla = 'optica_medico'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Tel'#233'fono'
+        Campo = 'TELEFONO'
+        Tabla = 'optica_medico'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Matr'#237'cula'
+        Campo = 'MATRICULA'
+        Tabla = 'optica_medico'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'BAJA'
+        Tabla = 'optica_medico'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'SI'
+          'NO')
+        TipoComboValoresReales.Strings = (
+          'S'
+          'N')
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo

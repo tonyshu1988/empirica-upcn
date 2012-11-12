@@ -149,7 +149,6 @@ begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
   begin
     DBGridMedico.Enabled := false;
-    PanelEdicion.Visible:= true;
 
     ZQ_Medico.Append;
     ZQ_MedicoBAJA.AsString:= 'N';
@@ -169,7 +168,6 @@ begin
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
   begin
     DBGridMedico.Enabled := false;
-    PanelEdicion.Visible:= true;
 
     ZQ_Medico.Edit;
 
@@ -254,7 +252,6 @@ begin
       DBGridMedico.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
-      PanelEdicion.Visible := false;
       recNo:= ZQ_Medico.RecNo;
       ZQ_Medico.Refresh;
       ZQ_Medico.RecNo:= recNo;
@@ -278,7 +275,6 @@ begin
     DBGridMedico.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
-    PanelEdicion.Visible := false;
   end;
 end;
 
