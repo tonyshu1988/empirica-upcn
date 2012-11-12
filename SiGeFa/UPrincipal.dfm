@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 272
-  Top = 121
+  Left = 295
+  Top = 172
   Width = 929
   Height = 608
   Caption = 'SiGeFa - Sistema de Gesti'#243'n y Facturaci'#243'n'
@@ -4736,7 +4736,6 @@ object FPrincipal: TFPrincipal
     Width = 921
     Height = 514
     Align = alClient
-    Caption = 'DEMO'
     Color = 16053492
     TabOrder = 2
     Visible = False
@@ -4905,12 +4904,6 @@ object FPrincipal: TFPrincipal
       Hint = 'ABM Sucursal Posicion'
       ImageIndex = 59
       OnExecute = AABM_SucursalPosicExecute
-    end
-    object AABMClientes: TAction
-      Caption = 'ABM Clientes'
-      Hint = 'ABM Clientes'
-      ImageIndex = 1
-      OnExecute = AABMClientesExecute
     end
     object AABM_Personas: TAction
       Caption = 'ABM Personas'
@@ -5431,7 +5424,6 @@ object FPrincipal: TFPrincipal
     end
     object Optica1: TMenuItem
       Caption = 'Optica'
-      Visible = False
       object ABMObraSocial1: TMenuItem
         Action = AOP_ABMObraSocial
       end

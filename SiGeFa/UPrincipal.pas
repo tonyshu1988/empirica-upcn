@@ -33,7 +33,6 @@ type
     Empresas1: TMenuItem;
     ABMEmpresas1: TMenuItem;
     AABMProductos: TAction;
-    AABMClientes: TAction;
     AABMEmpresas: TAction;
     Iconos_Barra_32: TImageList;
     AABM_Colores: TAction;
@@ -176,7 +175,6 @@ type
     procedure AConfigImpresoraExecute(Sender: TObject);
     procedure AAcerca_deExecute(Sender: TObject);
     procedure AABMProductosExecute(Sender: TObject);
-    procedure AABMClientesExecute(Sender: TObject);
     procedure AABMEmpresasExecute(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure AABM_ColoresExecute(Sender: TObject);
@@ -234,8 +232,8 @@ type
     { Private declarations }
   Public
     baja, bajaFocus,
-      activo, activoFocus,
-      resaltado, resaltadoFocus: Tcolor;
+    activo, activoFocus,
+    resaltado, resaltadoFocus: Tcolor;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure PintarFilasGrillasConBajas(grilla: TDBGrid; valor: string; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     function cerrar_ventana(transaccion: string): boolean;
@@ -371,8 +369,6 @@ begin
     Application.Terminate;
   end;
 
-
-
    //valido si DEBE o nó cerrarse por causas anormales (;-P)
 //  cerrarSistema:= 0;
 //  if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
@@ -487,8 +483,6 @@ begin
     end;
     grilla.DefaultDrawColumnCell(a, datacol, column, state);
   end;
-
-
 end;
 
 
@@ -506,8 +500,7 @@ begin
 end;
 
 
-procedure TFPrincipal.FormCloseQuery(Sender: TObject;
-  var CanClose: Boolean);
+procedure TFPrincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   if not cerrar_sistema then
     CanClose:= false;
@@ -531,12 +524,6 @@ end;
 procedure TFPrincipal.AABMProductosExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABMProductos, FABMProductos);
-end;
-
-
-procedure TFPrincipal.AABMClientesExecute(Sender: TObject);
-begin
-//  EKVentanas1.Abrir(Sender, TFABMClientes, FABMClientes);
 end;
 
 
@@ -807,27 +794,30 @@ begin
   EKVentanas1.Abrir(Sender, TFDebugging, FDebugging);
 end;
 
+
 procedure TFPrincipal.AReimpresionComprobExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFReimpresionComprobantes, FReimpresionComprobantes);
 //  EKVentanas1.Abrir(Sender, TFPreventa_Historico, FPreventa_Historico);
 end;
 
+
 procedure TFPrincipal.AABM_PersonasPtosExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_PersonasPuntos, FABM_PersonasPuntos);
 end;
+
 
 procedure TFPrincipal.AConsulta_PreciosExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFConsulta_Precios, FConsulta_Precios);
 end;
 
+
 procedure TFPrincipal.AShutdownExecute(Sender: TObject);
 var
 Ruta : string;
 begin
-
 //  if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
 //  begin
 //    dm.ZQ_Configuracion_Variables.Open;
@@ -854,20 +844,24 @@ begin
     end;
 end;
 
+
 procedure TFPrincipal.AOP_ABMMedicoExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFOP_ABMMedico, FOP_ABMMedico);
 end;
+
 
 procedure TFPrincipal.AOP_ABMObraSocialExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFOP_ABMObraSocial, FOP_ABMObraSocial);
 end;
 
+
 procedure TFPrincipal.APreventaHistoricoExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFPreventa_Historico, FPreventa_Historico);
 end;
+
 
 procedure TFPrincipal.AFichaEmpleadoExecute(Sender: TObject);
 begin
