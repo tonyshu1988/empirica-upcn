@@ -108,6 +108,7 @@ type
     procedure ABuscarExecute(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
   public
   end;
@@ -281,6 +282,7 @@ end;
 
 procedure TFOP_ABMMedico.FormCreate(Sender: TObject);
 begin
+  EKOrdenarGrilla1.CargarConfigColumnas;
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
@@ -362,6 +364,12 @@ procedure TFOP_ABMMedico.btnExcelClick(Sender: TObject);
 begin
   if not ZQ_Medico.IsEmpty then
     dm.ExportarEXCEL(DBGridMedico);
+end;
+
+procedure TFOP_ABMMedico.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.
