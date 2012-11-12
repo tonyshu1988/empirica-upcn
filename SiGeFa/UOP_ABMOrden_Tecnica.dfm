@@ -42,15 +42,15 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         TabOrder = 0
         object Panel6: TPanel
           Left = 1
-          Top = 195
+          Top = 200
           Width = 888
-          Height = 44
+          Height = 39
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 0
           object lblCantProductos: TLabel
             Left = 1
-            Top = 28
+            Top = 23
             Width = 886
             Height = 15
             Align = alBottom
@@ -85,7 +85,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Left = 576
           Top = 1
           Width = 313
-          Height = 194
+          Height = 199
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 1
@@ -112,7 +112,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Left = 0
             Top = 13
             Width = 313
-            Height = 128
+            Height = 133
             Align = alClient
             Color = 15527129
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
@@ -150,7 +150,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           end
           object Panel1: TPanel
             Left = 0
-            Top = 141
+            Top = 146
             Width = 313
             Height = 53
             Align = alBottom
@@ -194,7 +194,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Left = 1
           Top = 1
           Width = 575
-          Height = 194
+          Height = 199
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 2
@@ -220,14 +220,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object Splitter1: TSplitter
             Left = 572
             Top = 13
-            Height = 181
+            Height = 186
             Align = alRight
           end
           object DBGridListadoProductos: TDBGrid
             Left = 0
             Top = 13
             Width = 572
-            Height = 181
+            Height = 186
             Align = alClient
             Color = 15527129
             Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
