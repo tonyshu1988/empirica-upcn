@@ -4825,7 +4825,7 @@ object FPrincipal: TFPrincipal
       end>
     Images = EKImageMenu24
     Left = 296
-    Top = 136
+    Top = 144
     StyleName = 'XP Style'
     object AConfigImpresora: TAction
       Caption = 'Configurar Impresora'
@@ -5153,9 +5153,15 @@ object FPrincipal: TFPrincipal
       ImageIndex = 63
       OnExecute = AFichaEmpleadoExecute
     end
+    object AOP_ABMOrdenT: TAction
+      Tag = 1
+      Caption = 'ABM Orden T'#233'cnica'
+      ImageIndex = 29
+      OnExecute = AOP_ABMOrdenTExecute
+    end
     object AOP_ABMLab: TAction
       Tag = 1
-      Caption = 'AOP_ABMLab'
+      Caption = 'ABM Laboratorios'
       ImageIndex = 2
       OnExecute = AOP_ABMLabExecute
     end
@@ -5438,9 +5444,10 @@ object FPrincipal: TFPrincipal
         Caption = 'ABM Medicos'
       end
       object AOPABMLab1: TMenuItem
-        Tag = 1
         Action = AOP_ABMLab
-        Caption = 'ABM Laboratorios'
+      end
+      object ABMOrdenTcnica1: TMenuItem
+        Action = AOP_ABMOrdenT
       end
     end
   end
