@@ -5,7 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, DBCtrls, Grids, DBGrids, StdCtrls, Mask,
-  Buttons, ComCtrls, ExtCtrls;
+  Buttons, ComCtrls, ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
+  ZDataset, DBClient;
 
 type
   TFOP_ABM_OrdenTecnica = class(TForm)
@@ -123,6 +124,43 @@ type
     Panel1: TPanel;
     Label33: TLabel;
     DBLookupComboBox1: TDBLookupComboBox;
+    CD_DetalleFactura: TClientDataSet;
+    CD_Comprobante: TClientDataSet;
+    ZQ_Orden: TZQuery;
+    ZQ_OrdenDetalle: TZQuery;
+    ZQ_OrdenDetalleOS: TZQuery;
+    ZQ_OrdenID_ORDEN: TIntegerField;
+    ZQ_OrdenCODIGO_CLI: TStringField;
+    ZQ_OrdenID_CLIENTE: TIntegerField;
+    ZQ_OrdenID_ESTADO: TIntegerField;
+    ZQ_OrdenFECHA_ORDEN: TDateField;
+    ZQ_OrdenFECHA_PROMETIDO: TDateField;
+    ZQ_OrdenCOD_BARRAS: TStringField;
+    ZQ_OrdenOBSERVACIONES: TStringField;
+    ZQ_OrdenNRO_FACTURA: TStringField;
+    ZQ_OrdenMONTO_TOTAL: TFloatField;
+    ZQ_OrdenMONTO_ENTREGADO: TFloatField;
+    ZQ_OrdenENTREGADO_POR: TIntegerField;
+    ZQ_OrdenFACTURADO_POR: TIntegerField;
+    ZQ_OrdenSALDO: TFloatField;
+    ZQ_OrdenDetalleID_ORDEN_DETALLE: TIntegerField;
+    ZQ_OrdenDetalleID_ORDEN: TIntegerField;
+    ZQ_OrdenDetalleID_PRODUCTO: TIntegerField;
+    ZQ_OrdenDetalleID_LABORATORIO: TIntegerField;
+    ZQ_OrdenDetalleMONTO_DESCONTADO: TFloatField;
+    ZQ_OrdenDetalleMONTO_TOTAL: TFloatField;
+    ZQ_OrdenDetalleCANTIDAD: TFloatField;
+    ZQ_OrdenDetalleOBSERVACIONES: TStringField;
+    ZQ_OrdenDetalleOSID_DETALLE_OS: TIntegerField;
+    ZQ_OrdenDetalleOSID_ORDEN_DETALLE: TIntegerField;
+    ZQ_OrdenDetalleOSID_OS: TIntegerField;
+    ZQ_OrdenDetalleOSMONTO_DESCONTADO: TFloatField;
+    ZQ_OrdenDetalleOSMONTO_TOTAL: TFloatField;
+    ZQ_OrdenDetalleOSCANTIDAD: TFloatField;
+    ZQ_OrdenDetalleOSOBSERVACIONES: TStringField;
+    procedure FormCreate(Sender: TObject);
+    procedure btsalirClick(Sender: TObject);
+    procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
   private
     { Private declarations }
   public
@@ -132,8 +170,121 @@ type
 var
   FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica;
 
+const
+  abmOrden = 'ABM Orden-Tecnica';
 implementation
 
+uses UDM;
+
 {$R *.dfm}
+
+procedure TFOP_ABM_OrdenTecnica.FormCreate(Sender: TObject);
+begin
+//  CurrencyDecimals:= 2;
+//  DecimalSeparator:= '.';
+//  ThousandSeparator:= ',';
+//  DateSeparator:= '/';
+//  ShortDateFormat:= 'dd/MM/yyyy';
+//  dm.ZQ_Configuracion.Close;
+//  dm.ZQ_Configuracion.Open;
+//  idSucursal:= dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger;
+//  CD_Comprobante.CreateDataSet;
+//  CD_DetalleFactura.CreateDataSet;
+//  CD_Fpago.CreateDataSet;
+//  CD_VentaFinal.CreateDataSet;
+//  dm.EKModelo.abrir(ZQ_FormasPago);
+//  dm.EKModelo.abrir(ZQ_Cuentas);
+//  dm.EKModelo.abrir(ZQ_DetalleProd);
+//  Cliente:= -1;
+//  IdVendedor:= -1;
+//  descCliente:= 0;
+//  ClienteIVA:= 0;
+//  IDClienteIVA:= 0;
+//  crearComprobante();
+//  cargarClientePorDefecto();
+//  modoCargaPrevia:= False;
+//  DS_Sucursal.DataSet:= dm.ZQ_Sucursal;
+//  DBImage1.DataField:= 'LOGO';
+//
+//  ctaPorDefecto:= cajero_cuenta_defecto;
+//  borrarVendedor:= cajero_borrar_vendedor;
+//  edCuenta.DropDownRows:= cajero_tamanio_lista_fpago;
+//
+//  modoLecturaProd();
+//  PConfirmarVenta.Visible:= False;
+////  DM.ZQ_Sucursal.Close;
+////  DM.ZQ_Sucursal.ParamByName('id_sucursal').AsInteger:= idSucursal;
+////  DM.ZQ_Sucursal.Open;
+//  edImagen.Visible:= not (ZQ_ProductosIMAGEN.IsNull);
+//  DBImage1.Visible:= True;
+//  DBImage1.BringToFront;
+//
+//  PanelCambiarFecha.Visible:= false;
+//  CheckBoxCambiarFecha.Checked:= false;
+//
+//  if dm.EKUsrLogin.PermisoAccion('CAJA_CAMBIAR_FECHA') then
+//  begin
+//    PanelCambiarFecha.Visible:= true;
+//    DateTimePicker_FechaCarga.DateTime:= dm.EKModelo.FechayHora;
+//  end;
+//
+//  if not (dm.EKUsrLogin.PermisoAccion('NO_FISCAL')) then
+//  begin
+//    ZQ_FormasPago.Filtered:= False;
+//    ZQ_FormasPago.Filter:= Format('IF = %s', [QuotedStr('S')]);
+//    ZQ_FormasPago.Filtered:= True;
+//    btnEfectivo.Visible:=False;
+//  end
+//  else
+//  begin
+//    ZQ_FormasPago.Filtered:= False;
+//    ZQ_FormasPago.Filter:= '';
+//    ZQ_FormasPago.Filtered:= True;
+//    btnEfectivo.Visible:=True;
+//  end;
+//
+//  PABM_FormaPago.Visible:= False;
+//  //Formas de Pago
+//  FPrincipal.Iconos_Menu_16.GetBitmap(1, btFPAceptar.Glyph);
+//  FPrincipal.Iconos_Menu_16.GetBitmap(0, btFPCancelar.Glyph);
+//  //Confirmación Venta
+//  FPrincipal.Iconos_Menu_32.GetBitmap(1, btnConfirmarVenta.Glyph);
+//  FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarVenta.Glyph);
+//  //Venta Rápida
+//  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivo.Glyph);
+//  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivoF.Glyph);
+//
+//  //Caption en los filtros
+//  btnEfectivo.Caption:= etiqueta_no_fiscal;
+//  btnEfectivoF.Caption:= etiqueta_fiscal;
+//
+//  //Ver o no los cierres Fiscales
+//  if (dm.EKUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
+//  begin
+//    btCierreZ.Enabled:= True;
+//    BtCierreX.Enabled:= True;
+//    btnAuditoriaFiscal.Enabled:= True;
+//  end
+//  else
+//  begin
+//    btCierreZ.Enabled:= False;
+//    BtCierreX.Enabled:= False;
+//    btnAuditoriaFiscal.Enabled:= False;
+//  end;
+//
+//  ultimoIDPago();
+//  panelPreventa(false);
+end;
+
+procedure TFOP_ABM_OrdenTecnica.btsalirClick(Sender: TObject);
+begin
+close();
+end;
+
+procedure TFOP_ABM_OrdenTecnica.FormCloseQuery(Sender: TObject;
+  var CanClose: Boolean);
+begin
+  CanClose:= FPrincipal.cerrar_ventana(abmOrden);
+end;
 
 end.
