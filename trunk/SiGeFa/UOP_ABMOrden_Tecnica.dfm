@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 217
-  Top = 124
+  Left = 336
+  Top = 142
   Width = 1024
   Height = 700
   Caption = 'ABM Orden T'#233'cnica'
@@ -3256,7 +3256,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
-          DataField = 'pers_codigo'
+          DataField = 'CODIGO_CLI'
+          DataSource = DS_Orden
           ReadOnly = True
           TabOrder = 0
         end
@@ -3269,6 +3270,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'pers_cuit'
+          DataSource = DS_Orden
           ReadOnly = True
           TabOrder = 1
         end
@@ -3339,12 +3341,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           ParentFont = False
         end
         object Label23: TLabel
-          Left = 45
+          Left = 17
           Top = 44
-          Width = 43
+          Width = 71
           Height = 13
           Alignment = taRightJustify
-          Caption = 'Marca:'
+          Caption = 'Entregado:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -3353,8 +3355,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           ParentFont = False
         end
         object Label24: TLabel
-          Left = 245
-          Top = 68
+          Left = 269
+          Top = 52
           Width = 71
           Height = 13
           Caption = 'Prometido:'
@@ -3398,23 +3400,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Transparent = False
           Layout = tlCenter
         end
-        object Label26: TLabel
-          Left = 264
-          Top = 44
-          Width = 50
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Medida:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
         object DBEdit1: TDBEdit
-          Left = 316
-          Top = 64
+          Left = 348
+          Top = 48
           Width = 125
           Height = 21
           BevelInner = bvNone
@@ -3433,7 +3421,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
-          DataField = 'COD_CORTO'
+          DataField = 'CODIGO_CLI'
           DataSource = DS_Orden
           ReadOnly = True
           TabOrder = 0
@@ -3446,23 +3434,10 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
-          DataField = 'NOMBRE_MARCA'
+          DataField = 'ENTREGADO_POR'
           DataSource = DS_Orden
           ReadOnly = True
           TabOrder = 2
-        end
-        object DBEdit17: TDBEdit
-          Left = 318
-          Top = 40
-          Width = 123
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'MEDIDA'
-          DataSource = DS_Orden
-          ReadOnly = True
-          TabOrder = 3
         end
         object DBEdit5: TDBEdit
           Left = 316
@@ -3475,7 +3450,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           DataField = 'FECHA_ORDEN'
           DataSource = DS_Orden
           ReadOnly = True
-          TabOrder = 4
+          TabOrder = 3
         end
         object dbAvisar: TDBCheckBox
           Left = 96
@@ -3484,7 +3459,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Height = 17
           Caption = 'Avisar'
           DataSource = DS_Orden
-          TabOrder = 5
+          TabOrder = 4
           ValueChecked = 'True'
           ValueUnchecked = 'False'
         end
@@ -6249,6 +6224,28 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object CD_OrdenSALDO: TFloatField
       FieldName = 'SALDO'
     end
+    object CD_Ordenpers_nombre: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_nombre'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'ID_CLIENTE'
+      ReadOnly = True
+      Size = 200
+      Lookup = True
+    end
+    object CD_Ordenpers_direccion: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_direccion'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'DIRECCION'
+      KeyFields = 'ID_CLIENTE'
+      ReadOnly = True
+      Size = 200
+      Lookup = True
+    end
   end
   object ZQ_Orden: TZQuery
     Connection = DM.Conexion
@@ -6517,28 +6514,13 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       FieldName = 'NOMBRE_MARCA'
       Size = 50
     end
-    object ZQ_ProductosDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 500
-    end
-    object ZQ_ProductosCOD_CORTO: TStringField
-      FieldName = 'COD_CORTO'
-    end
-    object ZQ_ProductosCODIGO_BARRA: TStringField
-      FieldName = 'CODIGO_BARRA'
-      Size = 40
-    end
-    object ZQ_ProductosID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-      Required = True
-    end
     object ZQ_ProductosIMAGEN: TBlobField
       FieldName = 'IMAGEN'
     end
     object ZQ_ProductosDETALLE_PROD: TStringField
       FieldName = 'DETALLE_PROD'
       ReadOnly = True
-      Size = 300
+      Size = 186
     end
     object ZQ_ProductosSTOCK_ACTUAL: TFloatField
       FieldName = 'STOCK_ACTUAL'
@@ -6547,39 +6529,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       FieldName = 'ID_STOCK_PRODUCTO'
       Required = True
     end
-    object ZQ_ProductosID_MEDIDA: TIntegerField
-      FieldName = 'ID_MEDIDA'
-    end
-    object ZQ_ProductosID_PROD_CABECERA: TIntegerField
-      FieldName = 'ID_PROD_CABECERA'
-      Required = True
-    end
-    object ZQ_ProductosSTOCK_MAX: TFloatField
-      FieldName = 'STOCK_MAX'
-    end
-    object ZQ_ProductosSTOCK_MIN: TFloatField
-      FieldName = 'STOCK_MIN'
-    end
-    object ZQ_ProductosLLEVAR_STOCK: TStringField
-      FieldName = 'LLEVAR_STOCK'
-      Size = 1
-    end
-    object ZQ_ProductosPRECIO_COSTO_CIMPUESTOS: TFloatField
-      FieldName = 'PRECIO_COSTO_CIMPUESTOS'
-    end
-    object ZQ_ProductosIMPUESTO_ADICIONAL1: TFloatField
-      FieldName = 'IMPUESTO_ADICIONAL1'
-    end
-    object ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField
-      FieldName = 'IMPUESTO_ADICIONAL2'
-    end
-    object ZQ_ProductosBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
     object ZQ_ProductosID_PRECIO: TIntegerField
       FieldName = 'ID_PRECIO'
       Required = True
+    end
+    object ZQ_ProductosID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
     end
     object ZQ_ProductosID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
@@ -6602,6 +6557,15 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object ZQ_ProductosIMPUESTO_IVA: TFloatField
       FieldName = 'IMPUESTO_IVA'
     end
+    object ZQ_ProductosPRECIO_COSTO_CIMPUESTOS: TFloatField
+      FieldName = 'PRECIO_COSTO_CIMPUESTOS'
+    end
+    object ZQ_ProductosIMPUESTO_ADICIONAL1: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL1'
+    end
+    object ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL2'
+    end
     object ZQ_ProductosPRECIO1: TFloatField
       FieldName = 'PRECIO1'
     end
@@ -6616,6 +6580,46 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_ProductosPRECIO5: TFloatField
       FieldName = 'PRECIO5'
+    end
+    object ZQ_ProductosINSERT_MANUAL: TStringField
+      FieldName = 'INSERT_MANUAL'
+      Size = 1
+    end
+    object ZQ_ProductosID_PRODUCTO_1: TIntegerField
+      FieldName = 'ID_PRODUCTO_1'
+      Required = True
+    end
+    object ZQ_ProductosID_MEDIDA: TIntegerField
+      FieldName = 'ID_MEDIDA'
+    end
+    object ZQ_ProductosID_PROD_CABECERA: TIntegerField
+      FieldName = 'ID_PROD_CABECERA'
+      Required = True
+    end
+    object ZQ_ProductosDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object ZQ_ProductosCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_ProductosCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ProductosSTOCK_MAX: TFloatField
+      FieldName = 'STOCK_MAX'
+    end
+    object ZQ_ProductosSTOCK_MIN: TFloatField
+      FieldName = 'STOCK_MIN'
+    end
+    object ZQ_ProductosLLEVAR_STOCK: TStringField
+      FieldName = 'LLEVAR_STOCK'
+      Size = 1
+    end
+    object ZQ_ProductosBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
     end
   end
   object ZQ_Personas: TZQuery
