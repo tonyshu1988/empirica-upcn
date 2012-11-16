@@ -1,6 +1,6 @@
 object FBuscarPersona: TFBuscarPersona
   Left = 312
-  Top = 205
+  Top = 206
   Width = 869
   Height = 434
   Caption = 'Buscar Personas'
@@ -531,6 +531,12 @@ object FBuscarPersona: TFBuscarPersona
             Align = alClient
             DataField = 'DESCRIPCION'
             DataSource = DS_Personas
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
             TabOrder = 0
           end
         end

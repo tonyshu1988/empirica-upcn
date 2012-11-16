@@ -49,11 +49,9 @@ type
     Label24: TLabel;
     Label25: TLabel;
     Label7: TLabel;
-    Label26: TLabel;
     DBEdit1: TDBEdit;
     DBEdit2: TDBEdit;
     DBEdit3: TDBEdit;
-    DBEdit17: TDBEdit;
     DBEdit5: TDBEdit;
     dbAvisar: TDBCheckBox;
     Panel2: TPanel;
@@ -159,20 +157,6 @@ type
     ZQ_OrdenDetalleOSCANTIDAD: TFloatField;
     ZQ_OrdenDetalleOSOBSERVACIONES: TStringField;
     DataSource1: TDataSource;
-    CD_OrdenID_ORDEN: TIntegerField;
-    CD_OrdenCODIGO_CLI: TStringField;
-    CD_OrdenID_CLIENTE: TIntegerField;
-    CD_OrdenID_ESTADO: TIntegerField;
-    CD_OrdenFECHA_ORDEN: TDateField;
-    CD_OrdenFECHA_PROMETIDO: TDateField;
-    CD_OrdenCOD_BARRAS: TStringField;
-    CD_OrdenOBSERVACIONES: TStringField;
-    CD_OrdenNRO_FACTURA: TStringField;
-    CD_OrdenMONTO_TOTAL: TFloatField;
-    CD_OrdenMONTO_ENTREGADO: TFloatField;
-    CD_OrdenENTREGADO_POR: TIntegerField;
-    CD_OrdenFACTURADO_POR: TIntegerField;
-    CD_OrdenSALDO: TFloatField;
     CD_OrdenDetalleID_ORDEN_DETALLE: TIntegerField;
     CD_OrdenDetalleID_ORDEN: TIntegerField;
     CD_OrdenDetalleID_PRODUCTO: TIntegerField;
@@ -191,41 +175,6 @@ type
     codBarras: TEdit;
     EKListadoProducto: TEKListadoSQL;
     ZQ_Productos: TZQuery;
-    ZQ_ProductosNOMBRE_PRODUCTO: TStringField;
-    ZQ_ProductosMEDIDA: TStringField;
-    ZQ_ProductosARTICULO: TStringField;
-    ZQ_ProductosTIPO_ARTICULO: TStringField;
-    ZQ_ProductosNOMBRE_MARCA: TStringField;
-    ZQ_ProductosDESCRIPCION: TStringField;
-    ZQ_ProductosCOD_CORTO: TStringField;
-    ZQ_ProductosCODIGO_BARRA: TStringField;
-    ZQ_ProductosID_PRODUCTO: TIntegerField;
-    ZQ_ProductosIMAGEN: TBlobField;
-    ZQ_ProductosDETALLE_PROD: TStringField;
-    ZQ_ProductosSTOCK_ACTUAL: TFloatField;
-    ZQ_ProductosID_STOCK_PRODUCTO: TIntegerField;
-    ZQ_ProductosID_MEDIDA: TIntegerField;
-    ZQ_ProductosID_PROD_CABECERA: TIntegerField;
-    ZQ_ProductosSTOCK_MAX: TFloatField;
-    ZQ_ProductosSTOCK_MIN: TFloatField;
-    ZQ_ProductosLLEVAR_STOCK: TStringField;
-    ZQ_ProductosPRECIO_COSTO_CIMPUESTOS: TFloatField;
-    ZQ_ProductosIMPUESTO_ADICIONAL1: TFloatField;
-    ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField;
-    ZQ_ProductosBAJA: TStringField;
-    ZQ_ProductosID_PRECIO: TIntegerField;
-    ZQ_ProductosID_SUCURSAL: TIntegerField;
-    ZQ_ProductosPRECIO_COSTO: TFloatField;
-    ZQ_ProductosPRECIO_VENTA: TFloatField;
-    ZQ_ProductosCOEF_GANANCIA: TFloatField;
-    ZQ_ProductosCOEF_DESCUENTO: TFloatField;
-    ZQ_ProductosIMPUESTO_INTERNO: TFloatField;
-    ZQ_ProductosIMPUESTO_IVA: TFloatField;
-    ZQ_ProductosPRECIO1: TFloatField;
-    ZQ_ProductosPRECIO2: TFloatField;
-    ZQ_ProductosPRECIO3: TFloatField;
-    ZQ_ProductosPRECIO4: TFloatField;
-    ZQ_ProductosPRECIO5: TFloatField;
     ZQ_Personas: TZQuery;
     ZQ_PersonasID_PERSONA: TIntegerField;
     ZQ_PersonasID_PROVINCIA: TIntegerField;
@@ -256,6 +205,59 @@ type
     DS_Orden: TDataSource;
     DS_OrdenDetalle: TDataSource;
     DataSetProvider1: TDataSetProvider;
+    CD_OrdenID_ORDEN: TIntegerField;
+    CD_OrdenCODIGO_CLI: TStringField;
+    CD_OrdenID_CLIENTE: TIntegerField;
+    CD_OrdenID_ESTADO: TIntegerField;
+    CD_OrdenFECHA_ORDEN: TDateField;
+    CD_OrdenFECHA_PROMETIDO: TDateField;
+    CD_OrdenCOD_BARRAS: TStringField;
+    CD_OrdenOBSERVACIONES: TStringField;
+    CD_OrdenNRO_FACTURA: TStringField;
+    CD_OrdenMONTO_TOTAL: TFloatField;
+    CD_OrdenMONTO_ENTREGADO: TFloatField;
+    CD_OrdenENTREGADO_POR: TIntegerField;
+    CD_OrdenFACTURADO_POR: TIntegerField;
+    CD_OrdenSALDO: TFloatField;
+    CD_Ordenpers_nombre: TStringField;
+    CD_Ordenpers_direccion: TStringField;
+    ZQ_ProductosNOMBRE_PRODUCTO: TStringField;
+    ZQ_ProductosMEDIDA: TStringField;
+    ZQ_ProductosARTICULO: TStringField;
+    ZQ_ProductosTIPO_ARTICULO: TStringField;
+    ZQ_ProductosNOMBRE_MARCA: TStringField;
+    ZQ_ProductosIMAGEN: TBlobField;
+    ZQ_ProductosDETALLE_PROD: TStringField;
+    ZQ_ProductosSTOCK_ACTUAL: TFloatField;
+    ZQ_ProductosID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_ProductosID_PRECIO: TIntegerField;
+    ZQ_ProductosID_PRODUCTO: TIntegerField;
+    ZQ_ProductosID_SUCURSAL: TIntegerField;
+    ZQ_ProductosPRECIO_COSTO: TFloatField;
+    ZQ_ProductosPRECIO_VENTA: TFloatField;
+    ZQ_ProductosCOEF_GANANCIA: TFloatField;
+    ZQ_ProductosCOEF_DESCUENTO: TFloatField;
+    ZQ_ProductosIMPUESTO_INTERNO: TFloatField;
+    ZQ_ProductosIMPUESTO_IVA: TFloatField;
+    ZQ_ProductosPRECIO_COSTO_CIMPUESTOS: TFloatField;
+    ZQ_ProductosIMPUESTO_ADICIONAL1: TFloatField;
+    ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField;
+    ZQ_ProductosPRECIO1: TFloatField;
+    ZQ_ProductosPRECIO2: TFloatField;
+    ZQ_ProductosPRECIO3: TFloatField;
+    ZQ_ProductosPRECIO4: TFloatField;
+    ZQ_ProductosPRECIO5: TFloatField;
+    ZQ_ProductosINSERT_MANUAL: TStringField;
+    ZQ_ProductosID_PRODUCTO_1: TIntegerField;
+    ZQ_ProductosID_MEDIDA: TIntegerField;
+    ZQ_ProductosID_PROD_CABECERA: TIntegerField;
+    ZQ_ProductosDESCRIPCION: TStringField;
+    ZQ_ProductosCOD_CORTO: TStringField;
+    ZQ_ProductosCODIGO_BARRA: TStringField;
+    ZQ_ProductosSTOCK_MAX: TFloatField;
+    ZQ_ProductosSTOCK_MIN: TFloatField;
+    ZQ_ProductosLLEVAR_STOCK: TStringField;
+    ZQ_ProductosBAJA: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -451,7 +453,6 @@ begin
   CD_OrdenNRO_FACTURA.Clear;
   CD_OrdenENTREGADO_POR.Clear;
   CD_OrdenFACTURADO_POR.Clear;
-
 
 //  lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_OrdenDetalle.RecordCount);
 //  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
@@ -687,7 +688,6 @@ var
 begin
   Result:= False;
     CD_OrdenDetalle.Append;
-
 //    CD_DetalleFacturaID_PRODUCTO.AsInteger:= prod;
 //    CD_DetalleFacturaproducto.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
 //    CD_DetalleFacturaDETALLE.AsString:= detalle;
@@ -719,7 +719,6 @@ begin
 //      else
 //        CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
 //    end;
-//
     modoEscrituraProd();
     Result:= True;
 
@@ -738,7 +737,7 @@ begin
 //    exit;
 //  end;
 
-  if (CD_OrdenDetalle.State = dsBrowse) then
+  if (CD_Orden.State in [dsInsert,dsEdit]) then
   begin
     if not Assigned(vsel2) then
       vsel2:= TFBuscarPersona.Create(nil);
@@ -771,7 +770,6 @@ begin
   vsel2.Close;
 end;
 
-
 procedure TFOP_ABM_OrdenTecnica.OnSelProd;
 begin
   if not vsel.ZQ_Stock.IsEmpty then
@@ -780,8 +778,8 @@ begin
       LeerCodigo('I', codBarras.Text);
 //      if edCantidad.Enabled then
 //        edCantidad.SetFocus;
-     vsel.ZQ_Stock.Filtered:= False;
-     vsel.Close;
+      vsel.ZQ_Stock.Filtered:= False;
+      vsel.Close;
   end;
 end;
 
