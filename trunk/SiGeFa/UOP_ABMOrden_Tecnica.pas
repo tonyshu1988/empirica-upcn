@@ -303,6 +303,7 @@ type
     procedure BtCancelarPagoClick(Sender: TObject);
     procedure cancelarProducto;
     procedure btnMedicoClick(Sender: TObject);
+    procedure btQuitarProductoClick(Sender: TObject);
     
   private
     { Private declarations }
@@ -869,6 +870,16 @@ if (CD_OrdenDetalle.State <> dsBrowse) then exit;
     begin
       CD_OrdenID_MEDICO.AsInteger:=StrToInt(EKListadoMedico.Resultado);
     end
+end;
+
+procedure TFOP_ABM_OrdenTecnica.btQuitarProductoClick(Sender: TObject);
+begin
+  if not (CD_OrdenDetalle.IsEmpty) then
+  begin
+    CD_OrdenDetalle.Delete;
+    lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_OrdenDetalle.RecordCount);
+    //lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+  end;
 end;
 
 end.
