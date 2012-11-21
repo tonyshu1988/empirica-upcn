@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 336
-  Top = 142
+  Left = 327
+  Top = 133
   Width = 1024
   Height = 700
   Caption = 'ABM Orden T'#233'cnica'
@@ -2247,6 +2247,13 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
+        object Splitter1: TSplitter
+          Left = 579
+          Top = 1
+          Width = 5
+          Height = 216
+          Align = alRight
+        end
         object Panel6: TPanel
           Left = 1
           Top = 217
@@ -2393,6 +2400,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
               Top = 22
               Width = 265
               Height = 21
+              DataField = 'ID_LABORATORIO'
+              DataSource = DS_OrdenDetalle
+              KeyField = 'ID_LABORATORIO'
+              ListField = 'NOMBRE'
+              ListSource = DS_Laboratorios
+              NullValueKey = 46
               TabOrder = 0
             end
           end
@@ -2400,7 +2413,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PProductos: TPanel
           Left = 1
           Top = 1
-          Width = 583
+          Width = 578
           Height = 216
           Align = alClient
           BevelOuter = bvNone
@@ -2408,7 +2421,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object Label11: TLabel
             Left = 0
             Top = 0
-            Width = 583
+            Width = 578
             Height = 13
             Align = alTop
             Alignment = taCenter
@@ -2424,13 +2437,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Transparent = False
             Layout = tlCenter
           end
-          object Splitter1: TSplitter
-            Left = 578
-            Top = 13
-            Width = 5
-            Height = 203
-            Align = alRight
-          end
           object DBGridListadoProductos: TDBGrid
             Left = 0
             Top = 13
@@ -2438,6 +2444,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Height = 203
             Align = alClient
             Color = 15527129
+            DataSource = DS_OrdenDetalle
             Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
@@ -2447,62 +2454,28 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             TitleFont.Style = []
             Columns = <
               item
-                Color = 16772332
                 Expanded = False
                 FieldName = 'ID_PRODUCTO'
-                ReadOnly = True
-                Title.Caption = 'ID'
-                Width = 46
                 Visible = True
               end
               item
-                Color = 16772332
                 Expanded = False
-                FieldName = 'producto'
-                ReadOnly = True
-                Title.Caption = 'Producto'
-                Width = 307
+                FieldName = 'MONTO_DESCONTADO'
                 Visible = True
               end
               item
-                Color = 16772332
                 Expanded = False
-                FieldName = 'IMPORTE_UNITARIO'
-                ReadOnly = True
-                Title.Caption = 'Importe Unit.'
-                Width = 66
+                FieldName = 'MONTO_TOTAL'
                 Visible = True
               end
               item
-                Color = 16772332
                 Expanded = False
                 FieldName = 'CANTIDAD'
-                Title.Caption = 'Cant.'
-                Width = 40
                 Visible = True
               end
               item
-                Color = 16772332
                 Expanded = False
-                FieldName = 'PORC_DESCUENTO'
-                Title.Caption = '% Desc.'
-                Width = 52
-                Visible = True
-              end
-              item
-                Color = clWhite
-                Expanded = False
-                FieldName = 'IMPORTE_FINAL'
-                Title.Caption = 'Importe'
-                Width = 100
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'DETALLE'
-                Title.Caption = 'Detalle'
-                Width = 469
+                FieldName = 'OBSERVACIONES'
                 Visible = True
               end>
           end
@@ -3269,7 +3242,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
-          DataField = 'pers_cuit'
+          DataField = 'CODIGO_CLI'
           DataSource = DS_Orden
           ReadOnly = True
           TabOrder = 1
@@ -3421,7 +3394,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
-          DataField = 'CODIGO_CLI'
+          DataField = 'NRO_FACTURA'
           DataSource = DS_Orden
           ReadOnly = True
           TabOrder = 0
@@ -3547,7 +3520,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
-          DataField = 'pers_nombre'
+          DataField = 'med_direccion'
+          DataSource = DS_Orden
           ReadOnly = True
           TabOrder = 0
         end
@@ -3559,7 +3533,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
-          DataField = 'pers_codigo'
+          DataField = 'med_matricula'
+          DataSource = DS_Orden
           ReadOnly = True
           TabOrder = 1
         end
@@ -3571,7 +3546,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
-          DataField = 'pers_cuit'
+          DataField = 'med_nombre'
+          DataSource = DS_Orden
           ReadOnly = True
           TabOrder = 2
         end
@@ -4251,6 +4227,10 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           end
           item
             Item = BtVendedor
+            Visible = True
+          end
+          item
+            Item = btnMedico
             Visible = True
           end
           item
@@ -5968,7 +5948,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 200
+    Left = 168
     Top = 248
     DockControlHeights = (
       114
@@ -5999,7 +5979,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Category = 0
       Hint = 'F3 Clientes'
       Visible = ivAlways
-      ImageIndex = 56
+      ImageIndex = 92
       OnClick = bt_BuscarClienteClick
       AutoGrayScale = False
     end
@@ -6009,7 +5989,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Hint = 'F4 Codificaci'#243'n RP'
       Visible = ivAlways
       ButtonStyle = bsChecked
-      ImageIndex = 17
+      ImageIndex = 93
       OnClick = btCodifClick
       AutoGrayScale = False
     end
@@ -6018,7 +5998,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Category = 0
       Hint = 'F5 Vendedor'
       Visible = ivAlways
-      ImageIndex = 3
+      ImageIndex = 32
       ShortCut = 116
       AutoGrayScale = False
     end
@@ -6049,13 +6029,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       OnClick = btObservacClick
       AutoGrayScale = False
     end
-    object btnVentaRapida: TdxBarLargeButton
-      Caption = 'F9 Venta '#193'gil'
+    object btnMedico: TdxBarLargeButton
+      Caption = 'F9 M'#233'dico'
       Category = 0
-      Hint = 'F9 Venta '#193'gil'
+      Hint = 'F9 M'#233'dico'
       Visible = ivAlways
-      ImageIndex = 81
+      ImageIndex = 87
       ShortCut = 120
+      OnClick = btnMedicoClick
       AutoGrayScale = False
     end
     object BtAceptarPago: TdxBarLargeButton
@@ -6071,6 +6052,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Category = 0
       Visible = ivAlways
       ImageIndex = 9
+      OnClick = BtCancelarPagoClick
       AutoGrayScale = False
     end
     object btsalir: TdxBarLargeButton
@@ -6131,30 +6113,26 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         'btCierreZ'
         'BtCierreX'
         'btnFormaPago'
-        'btnVentaRapida'
+        'btnMedico'
         'btnAuditoriaFiscal')
     end
   end
   object CD_OrdenDetalle: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 362
+    Left = 330
     Top = 248
     object CD_OrdenDetalleID_ORDEN_DETALLE: TIntegerField
       FieldName = 'ID_ORDEN_DETALLE'
-      Required = True
     end
     object CD_OrdenDetalleID_ORDEN: TIntegerField
       FieldName = 'ID_ORDEN'
-      Required = True
     end
     object CD_OrdenDetalleID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
-      Required = True
     end
     object CD_OrdenDetalleID_LABORATORIO: TIntegerField
       FieldName = 'ID_LABORATORIO'
-      Required = True
     end
     object CD_OrdenDetalleMONTO_DESCONTADO: TFloatField
       FieldName = 'MONTO_DESCONTADO'
@@ -6173,11 +6151,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object CD_Orden: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 290
+    ProviderName = 'DataSetProvider1'
+    Left = 250
     Top = 248
     object CD_OrdenID_ORDEN: TIntegerField
       FieldName = 'ID_ORDEN'
-      Required = True
     end
     object CD_OrdenCODIGO_CLI: TStringField
       FieldName = 'CODIGO_CLI'
@@ -6185,11 +6163,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object CD_OrdenID_CLIENTE: TIntegerField
       FieldName = 'ID_CLIENTE'
-      Required = True
     end
     object CD_OrdenID_ESTADO: TIntegerField
       FieldName = 'ID_ESTADO'
-      Required = True
     end
     object CD_OrdenFECHA_ORDEN: TDateField
       FieldName = 'FECHA_ORDEN'
@@ -6246,6 +6222,43 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Size = 200
       Lookup = True
     end
+    object CD_OrdenID_MEDICO: TIntegerField
+      FieldName = 'ID_MEDICO'
+      Required = True
+    end
+    object CD_Ordenmed_nombre: TStringField
+      FieldKind = fkLookup
+      FieldName = 'med_nombre'
+      LookupDataSet = ZQ_Medico
+      LookupKeyFields = 'ID_MEDICO'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'ID_MEDICO'
+      ReadOnly = True
+      Size = 200
+      Lookup = True
+    end
+    object CD_Ordenmed_matricula: TStringField
+      FieldKind = fkLookup
+      FieldName = 'med_matricula'
+      LookupDataSet = ZQ_Medico
+      LookupKeyFields = 'ID_MEDICO'
+      LookupResultField = 'MATRICULA'
+      KeyFields = 'ID_MEDICO'
+      ReadOnly = True
+      Size = 100
+      Lookup = True
+    end
+    object CD_Ordenmed_direccion: TStringField
+      FieldKind = fkLookup
+      FieldName = 'med_direccion'
+      LookupDataSet = ZQ_Medico
+      LookupKeyFields = 'ID_MEDICO'
+      LookupResultField = 'DIRECCION'
+      KeyFields = 'ID_MEDICO'
+      ReadOnly = True
+      Size = 200
+      Lookup = True
+    end
   end
   object ZQ_Orden: TZQuery
     Connection = DM.Conexion
@@ -6253,7 +6266,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'select *'
       'from OPTICA_ORDEN')
     Params = <>
-    Left = 290
+    Left = 242
     Top = 303
     object ZQ_OrdenID_ORDEN: TIntegerField
       FieldName = 'ID_ORDEN'
@@ -6324,6 +6337,40 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Size = 200
       Lookup = True
     end
+    object ZQ_OrdenID_MEDICO: TIntegerField
+      FieldName = 'ID_MEDICO'
+      Required = True
+    end
+    object ZQ_Ordenmed_nombre: TStringField
+      FieldKind = fkLookup
+      FieldName = 'med_nombre'
+      LookupDataSet = ZQ_Medico
+      LookupKeyFields = 'ID_MEDICO'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'ID_MEDICO'
+      Size = 200
+      Lookup = True
+    end
+    object ZQ_Ordenmed_matricula: TStringField
+      FieldKind = fkLookup
+      FieldName = 'med_matricula'
+      LookupDataSet = ZQ_Medico
+      LookupKeyFields = 'ID_MEDICO'
+      LookupResultField = 'MATRICULA'
+      KeyFields = 'ID_MEDICO'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_Ordenmed_direccion: TStringField
+      FieldKind = fkLookup
+      FieldName = 'med_direccion'
+      LookupDataSet = ZQ_Medico
+      LookupKeyFields = 'ID_MEDICO'
+      LookupResultField = 'DIRECCION'
+      KeyFields = 'ID_MEDICO'
+      Size = 200
+      Lookup = True
+    end
   end
   object ZQ_OrdenDetalle: TZQuery
     Connection = DM.Conexion
@@ -6333,7 +6380,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       ''
       '')
     Params = <>
-    Left = 361
+    Left = 329
     Top = 302
     object ZQ_OrdenDetalleID_ORDEN_DETALLE: TIntegerField
       FieldName = 'ID_ORDEN_DETALLE'
@@ -6373,7 +6420,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       '')
     Params = <>
     Left = 760
-    Top = 305
+    Top = 313
     object ZQ_OrdenDetalleOSID_DETALLE_OS: TIntegerField
       FieldName = 'ID_DETALLE_OS'
       Required = True
@@ -6402,7 +6449,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DataSource1: TDataSource
     DataSet = ZQ_Orden
-    Left = 205
+    Left = 165
     Top = 300
   end
   object EKListadoProducto: TEKListadoSQL
@@ -6438,7 +6485,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     CampoBuscar = 'posicSucursal'
     CampoClave = 'id_producto'
     TituloVentana = 'Buscar Producto'
-    Left = 464
+    Left = 424
     Top = 248
   end
   object ZQ_Productos: TZQuery
@@ -6486,8 +6533,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Name = 'prod'
         ParamType = ptUnknown
       end>
-    Left = 464
-    Top = 312
+    Left = 424
+    Top = 304
     ParamData = <
       item
         DataType = ftUnknown
@@ -6634,7 +6681,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'left join tipo_documento td on (td.id_tipo_doc=p.id_tipo_doc)'
       'left join tipo_iva ti on (ti.id_tipo_iva=p.id_tipo_iva)')
     Params = <>
-    Left = 557
+    Left = 525
     Top = 250
     object ZQ_PersonasID_PERSONA: TIntegerField
       FieldName = 'ID_PERSONA'
@@ -6722,22 +6769,114 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DS_Personas: TDataSource
     DataSet = ZQ_Personas
-    Left = 560
+    Left = 528
     Top = 304
   end
   object DS_Orden: TDataSource
-    DataSet = ZQ_Orden
-    Left = 360
+    DataSet = CD_Orden
+    Left = 608
     Top = 352
   end
   object DS_OrdenDetalle: TDataSource
-    DataSet = ZQ_OrdenDetalle
-    Left = 448
-    Top = 352
+    DataSet = CD_OrdenDetalle
+    Left = 608
+    Top = 304
   end
   object DataSetProvider1: TDataSetProvider
     DataSet = ZQ_Orden
-    Left = 788
-    Top = 364
+    Left = 860
+    Top = 316
+  end
+  object ZQ_Laboratorios: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select LAB.ID_LABORATORIO, LAB.NOMBRE, LAB.DIRECCION, LAB.TELEFO' +
+        'NO, LAB.CODIGO, LAB.BAJA'
+      'from OPTICA_LABORATORIO LAB'
+      'where (LAB.baja='#39'N'#39')')
+    Params = <>
+    Left = 605
+    Top = 250
+    object ZQ_LaboratoriosID_LABORATORIO: TIntegerField
+      FieldName = 'ID_LABORATORIO'
+      Required = True
+    end
+    object ZQ_LaboratoriosNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_LaboratoriosDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 100
+    end
+    object ZQ_LaboratoriosTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_LaboratoriosCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object ZQ_LaboratoriosBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+  end
+  object DS_Laboratorios: TDataSource
+    DataSet = ZQ_Laboratorios
+    Left = 533
+    Top = 356
+  end
+  object ZQ_Medico: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select MED.ID_MEDICO, MED.NOMBRE, MED.DIRECCION, MED.TELEFONO, M' +
+        'ED.MATRICULA, MED.BAJA'
+      'from OPTICA_MEDICO MED'
+      'where med.baja='#39'N'#39)
+    Params = <>
+    Left = 757
+    Top = 362
+    object ZQ_MedicoID_MEDICO: TIntegerField
+      FieldName = 'ID_MEDICO'
+      Required = True
+    end
+    object ZQ_MedicoNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_MedicoDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 100
+    end
+    object ZQ_MedicoTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_MedicoMATRICULA: TStringField
+      FieldName = 'MATRICULA'
+      Size = 50
+    end
+    object ZQ_MedicoBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+  end
+  object EKListadoMedico: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      
+        'select MED.ID_MEDICO, coalesce('#39'Matr: '#39'||MED.MATRICULA||'#39' - '#39'||M' +
+        'ED.NOMBRE||'#39' - '#39'||MED.DIRECCION,'#39'Matr: '#39'||MED.MATRICULA||'#39' - '#39'||' +
+        'MED.NOMBRE,MED.NOMBRE) as detalle'
+      'from OPTICA_MEDICO MED'
+      'where med.baja='#39'N'#39)
+    CampoBuscar = 'DETALLE'
+    CampoClave = 'id_MEDICO'
+    TituloVentana = 'Buscar M'#233'dico'
+    Left = 488
+    Top = 200
   end
 end
