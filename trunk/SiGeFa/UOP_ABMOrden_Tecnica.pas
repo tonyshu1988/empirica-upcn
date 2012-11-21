@@ -77,7 +77,7 @@ type
     BtLeerCB: TdxBarLargeButton;
     btnFormaPago: TdxBarLargeButton;
     btObservac: TdxBarLargeButton;
-    btnVentaRapida: TdxBarLargeButton;
+    btnMedico: TdxBarLargeButton;
     BtAceptarPago: TdxBarLargeButton;
     BtCancelarPago: TdxBarLargeButton;
     btsalir: TdxBarLargeButton;
@@ -258,6 +258,30 @@ type
     ZQ_ProductosSTOCK_MIN: TFloatField;
     ZQ_ProductosLLEVAR_STOCK: TStringField;
     ZQ_ProductosBAJA: TStringField;
+    ZQ_Laboratorios: TZQuery;
+    ZQ_LaboratoriosID_LABORATORIO: TIntegerField;
+    ZQ_LaboratoriosNOMBRE: TStringField;
+    ZQ_LaboratoriosDIRECCION: TStringField;
+    ZQ_LaboratoriosTELEFONO: TStringField;
+    ZQ_LaboratoriosCODIGO: TStringField;
+    ZQ_LaboratoriosBAJA: TStringField;
+    DS_Laboratorios: TDataSource;
+    ZQ_OrdenID_MEDICO: TIntegerField;
+    ZQ_Medico: TZQuery;
+    ZQ_MedicoID_MEDICO: TIntegerField;
+    ZQ_MedicoNOMBRE: TStringField;
+    ZQ_MedicoDIRECCION: TStringField;
+    ZQ_MedicoTELEFONO: TStringField;
+    ZQ_MedicoMATRICULA: TStringField;
+    ZQ_MedicoBAJA: TStringField;
+    CD_OrdenID_MEDICO: TIntegerField;
+    ZQ_Ordenmed_nombre: TStringField;
+    ZQ_Ordenmed_matricula: TStringField;
+    ZQ_Ordenmed_direccion: TStringField;
+    CD_Ordenmed_nombre: TStringField;
+    CD_Ordenmed_matricula: TStringField;
+    CD_Ordenmed_direccion: TStringField;
+    EKListadoMedico: TEKListadoSQL;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -276,11 +300,16 @@ type
     function completarCodBar(cod: string): string;
     procedure bt_BuscarClienteClick(Sender: TObject);
     procedure modoEscrituraProd();
+    procedure BtCancelarPagoClick(Sender: TObject);
+    procedure cancelarProducto;
+    procedure btnMedicoClick(Sender: TObject);
+    
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
     vsel3: TFBuscarPersona;
+    vsel4: TFBuscarPersona;
     procedure OnSelProd;
     procedure OnSelPers;
 
@@ -328,7 +357,8 @@ begin
 //  CD_VentaFinal.CreateDataSet;
 //  dm.EKModelo.abrir(ZQ_FormasPago);
 //  dm.EKModelo.abrir(ZQ_Cuentas);
-//  dm.EKModelo.abrir(ZQ_DetalleProd);
+  dm.EKModelo.abrir(ZQ_Laboratorios);
+  dm.EKModelo.abrir(ZQ_Medico);
   Cliente:= -1;
   IdVendedor:= -1;
   descCliente:= 0;
@@ -688,11 +718,11 @@ var
 begin
   Result:= False;
     CD_OrdenDetalle.Append;
-//    CD_DetalleFacturaID_PRODUCTO.AsInteger:= prod;
-//    CD_DetalleFacturaproducto.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
+    CD_OrdenDetalleID_PRODUCTO.AsInteger:= prod;
+//    CD_OrdenDetalle.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
 //    CD_DetalleFacturaDETALLE.AsString:= detalle;
-//    CD_DetalleFacturaCANTIDAD.AsFloat:= 1;
-//    CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
+    CD_OrdenDetalleCANTIDAD.AsFloat:= 1;
+    CD_OrdenDetalleMONTO_TOTAL.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
 //    CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= (ZQ_ProductosCOEF_DESCUENTO.AsFloat * 100);
 //    CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
 //    if ZQ_ProductosIMPUESTO_IVA.IsNull or (ZQ_ProductosIMPUESTO_IVA.AsFloat = 0) then
@@ -705,7 +735,7 @@ begin
 //    CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_ProductosID_STOCK_PRODUCTO.AsInteger;
 //    CD_DetalleFacturaimporte_original.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
 //    CD_DetalleFacturaIMPORTE_COSTO.AsFloat:= ZQ_ProductosPRECIO_COSTO.AsFloat;
-//    // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio=0 toma el PRECIO_VENTA)
+    // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio=0 toma el PRECIO_VENTA)
 //    ZQ_ColsPrecios.Close;
 //    ZQ_ColsPrecios.Open;
 //    for i:= 1 to 5 do
@@ -790,7 +820,8 @@ begin
 //  PanelProductosYFPago.Enabled:= False;
   PanelDetalles.Enabled:= False;
   grupoVertical.Enabled:= False;
-  GrupoGuardarCancelar.Enabled:= False;
+  DBGridListadoProductos.SetFocus;
+//  GrupoGuardarCancelar.Enabled:= False;
 
 //  if edCantidad.Enabled then
 //    edCantidad.SetFocus;
@@ -801,5 +832,43 @@ begin
 end;
 
 
+
+procedure TFOP_ABM_OrdenTecnica.BtCancelarPagoClick(Sender: TObject);
+begin
+    if (application.MessageBox(pchar('Desea Cancelar la Orden actual y quitar todos sus Productos?'), 'Borrar Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+      cancelarProducto();
+end;
+
+procedure TFOP_ABM_OrdenTecnica.cancelarProducto;
+begin
+//  dm.EKModelo.abrir(ZQ_FormasPago);
+//  dm.EKModelo.abrir(ZQ_DetalleProd);
+//  dm.EKModelo.abrir(ZQ_Cuentas);
+  Cliente:= -1;
+  IdVendedor:= -1;
+  descCliente:= 0;
+  ClienteIVA:= 0;
+  IDClienteIVA:= 0;
+  CD_OrdenDetalle.EmptyDataSet;
+  crearOrdenT();
+  lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_OrdenDetalle.RecordCount);
+//  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+
+
+  modoLecturaProd();
+//  RecalcularMontoPago();
+//  panelPreventa(false);
+end;
+
+procedure TFOP_ABM_OrdenTecnica.btnMedicoClick(Sender: TObject);
+begin
+if (CD_OrdenDetalle.State <> dsBrowse) then exit;
+
+  if EKListadoMedico.Buscar then
+    if (EKListadoMedico.Resultado <> '') then
+    begin
+      CD_OrdenID_MEDICO.AsInteger:=StrToInt(EKListadoMedico.Resultado);
+    end
+end;
 
 end.
