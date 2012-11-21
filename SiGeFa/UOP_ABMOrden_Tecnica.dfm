@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 327
-  Top = 133
+  Left = 321
+  Top = 142
   Width = 1007
   Height = 700
   Caption = 'ABM Orden T'#233'cnica'
@@ -6142,12 +6142,15 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object CD_OrdenDetalleMONTO_DESCONTADO: TFloatField
       FieldName = 'MONTO_DESCONTADO'
+      currency = True
     end
     object CD_OrdenDetalleMONTO_TOTAL: TFloatField
       FieldName = 'MONTO_TOTAL'
+      currency = True
     end
     object CD_OrdenDetalleCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
+      OnChange = CD_OrdenDetalleCANTIDADChange
     end
     object CD_OrdenDetalleOBSERVACIONES: TStringField
       FieldName = 'OBSERVACIONES'
@@ -6880,7 +6883,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     CampoBuscar = 'DETALLE'
     CampoClave = 'id_MEDICO'
     TituloVentana = 'Buscar M'#233'dico'
-    Left = 488
-    Top = 200
+    Left = 424
+    Top = 360
   end
 end

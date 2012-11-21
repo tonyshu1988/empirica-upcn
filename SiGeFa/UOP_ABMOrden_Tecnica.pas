@@ -304,6 +304,7 @@ type
     procedure cancelarProducto;
     procedure btnMedicoClick(Sender: TObject);
     procedure btQuitarProductoClick(Sender: TObject);
+    procedure CD_OrdenDetalleCANTIDADChange(Sender: TField);
     
   private
     { Private declarations }
@@ -585,7 +586,7 @@ end;
 
 procedure TFOP_ABM_OrdenTecnica.btBuscProdClick(Sender: TObject);
 begin
-  if (CD_OrdenDetalle.State <> dsBrowse) then exit;
+//  if (CD_OrdenDetalle.State <> dsBrowse) then exit;
   if cliente < 0 then
   begin
     bt_BuscarCliente.Click;
@@ -820,7 +821,7 @@ begin
 //  PanelDetalleProducto.Enabled:= True;
 //  PanelProductosYFPago.Enabled:= False;
   PanelDetalles.Enabled:= False;
-  grupoVertical.Enabled:= False;
+//  grupoVertical.Enabled:= False;
   DBGridListadoProductos.SetFocus;
 //  GrupoGuardarCancelar.Enabled:= False;
 
@@ -880,6 +881,12 @@ begin
     lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_OrdenDetalle.RecordCount);
     //lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
   end;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.CD_OrdenDetalleCANTIDADChange(
+  Sender: TField);
+begin
+  CD_OrdenDetalleMONTO_TOTAL.AsFloat:=
 end;
 
 end.
