@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   Left = 321
-  Top = 142
+  Top = 86
   Width = 1007
   Height = 700
   Caption = 'ABM Orden T'#233'cnica'
@@ -8,7 +8,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Verdana'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
@@ -2339,7 +2339,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Name = 'Verdana'
             TitleFont.Style = []
             Columns = <
               item
@@ -2451,37 +2451,75 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Align = alClient
             Color = 15527129
             DataSource = DS_OrdenDetalle
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
             Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentFont = False
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
+            OnColExit = DBGridListadoProductosColExit
+            OnKeyUp = DBGridListadoProductosKeyUp
             Columns = <
               item
                 Expanded = False
                 FieldName = 'ID_PRODUCTO'
+                Title.Caption = 'ID'
+                Width = 67
                 Visible = True
               end
               item
+                Color = clCream
                 Expanded = False
-                FieldName = 'MONTO_DESCONTADO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MONTO_TOTAL'
+                FieldName = 'prod_pventa'
+                ReadOnly = True
+                Title.Caption = 'Precio Unit.'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'CANTIDAD'
+                Title.Caption = 'Cant.'
+                Width = 34
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'prod_porcDesc'
+                Title.Caption = '% Dcto.'
+                Width = 43
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MONTO_DESCONTADO'
+                Title.Caption = 'Descontado'
+                Width = 69
+                Visible = True
+              end
+              item
+                Color = 10485759
+                Expanded = False
+                FieldName = 'MONTO_TOTAL'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = [fsBold]
+                Title.Caption = 'Total'
+                Width = 97
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'OBSERVACIONES'
+                Width = 2000
                 Visible = True
               end>
           end
@@ -3909,7 +3947,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Visible = True
           end
           item
-            BeginGroup = True
             Item = btsalir
             Visible = True
           end>
@@ -4228,11 +4265,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Visible = True
           end
           item
-            Item = bt_BuscarCliente
+            Item = BtVendedor
             Visible = True
           end
           item
-            Item = BtVendedor
+            Item = bt_BuscarCliente
             Visible = True
           end
           item
@@ -5981,11 +6018,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       AutoGrayScale = False
     end
     object bt_BuscarCliente: TdxBarLargeButton
-      Caption = 'F3 Clientes'
+      Caption = 'F3 Cliente'
       Category = 0
-      Hint = 'F3 Clientes'
+      Hint = 'F3 Cliente'
       Visible = ivAlways
-      ImageIndex = 92
+      ImageIndex = 91
       OnClick = bt_BuscarClienteClick
       AutoGrayScale = False
     end
@@ -6150,7 +6187,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object CD_OrdenDetalleCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
-      OnChange = CD_OrdenDetalleCANTIDADChange
     end
     object CD_OrdenDetalleOBSERVACIONES: TStringField
       FieldName = 'OBSERVACIONES'
@@ -6407,9 +6443,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_OrdenDetalleMONTO_DESCONTADO: TFloatField
       FieldName = 'MONTO_DESCONTADO'
+      currency = True
     end
     object ZQ_OrdenDetalleMONTO_TOTAL: TFloatField
       FieldName = 'MONTO_TOTAL'
+      currency = True
     end
     object ZQ_OrdenDetalleCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
@@ -6417,6 +6455,21 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object ZQ_OrdenDetalleOBSERVACIONES: TStringField
       FieldName = 'OBSERVACIONES'
       Size = 1000
+    end
+    object ZQ_OrdenDetalleprod_pventa: TFloatField
+      FieldKind = fkLookup
+      FieldName = 'prod_pventa'
+      LookupDataSet = ZQ_Productos
+      LookupKeyFields = 'ID_PRODUCTO'
+      LookupResultField = 'PRECIO_VENTA'
+      KeyFields = 'ID_PRODUCTO'
+      currency = True
+      Lookup = True
+    end
+    object ZQ_OrdenDetalleprod_porcDesc: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'prod_porcDesc'
+      Calculated = True
     end
   end
   object ZQ_OrdenDetalleOS: TZQuery
@@ -6785,7 +6838,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     Top = 352
   end
   object DS_OrdenDetalle: TDataSource
-    DataSet = CD_OrdenDetalle
+    DataSet = ZQ_OrdenDetalle
     Left = 608
     Top = 304
   end
