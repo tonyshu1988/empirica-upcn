@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 321
-  Top = 86
+  Left = 306
+  Top = 114
   Width = 1007
   Height = 700
   Caption = 'ABM Orden T'#233'cnica'
@@ -2282,11 +2282,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Layout = tlCenter
           end
           object btQuitarProducto: TButton
-            Left = 4
+            Left = 12
             Top = 5
-            Width = 127
+            Width = 133
             Height = 23
-            Caption = 'Quitar Prod./Serv.'
+            Caption = 'Quitar Prod/Servic.'
             TabOrder = 0
             OnClick = btQuitarProductoClick
           end
@@ -2334,36 +2334,40 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Height = 150
             Align = alClient
             Color = 15527129
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            DataSource = DS_OrdenDetalleOS
+            Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
+            OnKeyUp = DBGrid1KeyUp
             Columns = <
               item
-                Color = 16772332
                 Expanded = False
-                FieldName = 'ID_PRODUCTO'
-                Title.Caption = 'ID'
-                Width = 61
+                FieldName = 'ID_OS'
+                Width = 69
                 Visible = True
               end
               item
-                Color = 16772332
                 Expanded = False
-                FieldName = 'DETALLE'
-                Title.Caption = 'O.S.'
-                Width = 192
+                FieldName = 'MONTO_DESCONTADO'
                 Visible = True
               end
               item
-                Color = clWhite
                 Expanded = False
-                FieldName = 'IMPORTE_FINAL'
-                Title.Caption = 'Importe'
-                Width = 100
+                FieldName = 'MONTO_TOTAL'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CANTIDAD'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'OBSERVACIONES'
                 Visible = True
               end>
           end
@@ -2458,18 +2462,19 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Font.Style = []
             Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             ParentFont = False
+            PopupMenu = Popup_Producto
             TabOrder = 0
             TitleFont.Charset = DEFAULT_CHARSET
             TitleFont.Color = clWindowText
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
-            OnColExit = DBGridListadoProductosColExit
             OnKeyUp = DBGridListadoProductosKeyUp
             Columns = <
               item
                 Expanded = False
                 FieldName = 'ID_PRODUCTO'
+                ReadOnly = True
                 Title.Caption = 'ID'
                 Width = 67
                 Visible = True
@@ -2491,16 +2496,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
               end
               item
                 Expanded = False
-                FieldName = 'prod_porcDesc'
+                FieldName = 'COEF_DESC'
                 Title.Caption = '% Dcto.'
                 Width = 43
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MONTO_DESCONTADO'
-                Title.Caption = 'Descontado'
-                Width = 69
                 Visible = True
               end
               item
@@ -2513,7 +2511,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
                 Font.Name = 'MS Sans Serif'
                 Font.Style = [fsBold]
                 Title.Caption = 'Total'
-                Width = 97
+                Width = 106
                 Visible = True
               end
               item
@@ -6310,8 +6308,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'select *'
       'from OPTICA_ORDEN')
     Params = <>
-    Left = 242
-    Top = 303
+    Left = 482
+    Top = 65535
     object ZQ_OrdenID_ORDEN: TIntegerField
       FieldName = 'ID_ORDEN'
       Required = True
@@ -6417,6 +6415,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_OrdenDetalle: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_OrdenDetalleAfterScroll
     SQL.Strings = (
       'select *'
       'from OPTICA_ORDEN_DETALLE'
@@ -6427,22 +6426,19 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     Top = 302
     object ZQ_OrdenDetalleID_ORDEN_DETALLE: TIntegerField
       FieldName = 'ID_ORDEN_DETALLE'
-      Required = True
     end
     object ZQ_OrdenDetalleID_ORDEN: TIntegerField
       FieldName = 'ID_ORDEN'
-      Required = True
     end
     object ZQ_OrdenDetalleID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
-      Required = True
     end
     object ZQ_OrdenDetalleID_LABORATORIO: TIntegerField
       FieldName = 'ID_LABORATORIO'
-      Required = True
     end
     object ZQ_OrdenDetalleMONTO_DESCONTADO: TFloatField
       FieldName = 'MONTO_DESCONTADO'
+      OnChange = ZQ_OrdenDetalleMONTO_DESCONTADOChange
       currency = True
     end
     object ZQ_OrdenDetalleMONTO_TOTAL: TFloatField
@@ -6451,47 +6447,55 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_OrdenDetalleCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
+      OnChange = ZQ_OrdenDetalleCANTIDADChange
     end
     object ZQ_OrdenDetalleOBSERVACIONES: TStringField
       FieldName = 'OBSERVACIONES'
       Size = 1000
     end
-    object ZQ_OrdenDetalleprod_pventa: TFloatField
-      FieldKind = fkLookup
-      FieldName = 'prod_pventa'
-      LookupDataSet = ZQ_Productos
-      LookupKeyFields = 'ID_PRODUCTO'
-      LookupResultField = 'PRECIO_VENTA'
-      KeyFields = 'ID_PRODUCTO'
-      currency = True
-      Lookup = True
+    object ZQ_OrdenDetalleCOEF_DESC: TFloatField
+      FieldName = 'COEF_DESC'
+      OnChange = ZQ_OrdenDetalleCOEF_DESCChange
     end
-    object ZQ_OrdenDetalleprod_porcDesc: TFloatField
+    object ZQ_OrdenDetalleprod_pventa: TCurrencyField
       FieldKind = fkCalculated
-      FieldName = 'prod_porcDesc'
+      FieldName = 'prod_pventa'
       Calculated = True
     end
   end
   object ZQ_OrdenDetalleOS: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select *'
-      'from OPTICA_DETALLE_OS'
+      
+        'select ODO.ID_DETALLE_OS, ODO.ID_ORDEN_DETALLE, ODO.ID_OS, ODO.M' +
+        'ONTO_DESCONTADO, ODO.MONTO_TOTAL, ODO.CANTIDAD,'
+      '       ODO.OBSERVACIONES'
+      'from OPTICA_DETALLE_OS ODO'
+      'where odo.id_orden_detalle=:idod'
+      ''
       '')
-    Params = <>
-    Left = 760
-    Top = 313
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'idod'
+        ParamType = ptUnknown
+      end>
+    Left = 752
+    Top = 345
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'idod'
+        ParamType = ptUnknown
+      end>
     object ZQ_OrdenDetalleOSID_DETALLE_OS: TIntegerField
       FieldName = 'ID_DETALLE_OS'
-      Required = True
     end
     object ZQ_OrdenDetalleOSID_ORDEN_DETALLE: TIntegerField
       FieldName = 'ID_ORDEN_DETALLE'
-      Required = True
     end
     object ZQ_OrdenDetalleOSID_OS: TIntegerField
       FieldName = 'ID_OS'
-      Required = True
     end
     object ZQ_OrdenDetalleOSMONTO_DESCONTADO: TFloatField
       FieldName = 'MONTO_DESCONTADO'
@@ -6507,10 +6511,10 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Size = 1000
     end
   end
-  object DataSource1: TDataSource
-    DataSet = ZQ_Orden
-    Left = 165
-    Top = 300
+  object DS_OrdenDetalleOS: TDataSource
+    DataSet = ZQ_OrdenDetalleOS
+    Left = 861
+    Top = 348
   end
   object EKListadoProducto: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -6833,9 +6837,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     Top = 304
   end
   object DS_Orden: TDataSource
-    DataSet = CD_Orden
-    Left = 608
-    Top = 352
+    DataSet = ZQ_Orden
+    Left = 544
   end
   object DS_OrdenDetalle: TDataSource
     DataSet = ZQ_OrdenDetalle
@@ -6844,8 +6847,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DataSetProvider1: TDataSetProvider
     DataSet = ZQ_Orden
-    Left = 860
-    Top = 316
+    Left = 532
+    Top = 356
   end
   object ZQ_Laboratorios: TZQuery
     Connection = DM.Conexion
@@ -6856,8 +6859,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'from OPTICA_LABORATORIO LAB'
       'where (LAB.baja='#39'N'#39')')
     Params = <>
-    Left = 605
-    Top = 250
+    Left = 749
+    Top = 298
     object ZQ_LaboratoriosID_LABORATORIO: TIntegerField
       FieldName = 'ID_LABORATORIO'
       Required = True
@@ -6885,8 +6888,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DS_Laboratorios: TDataSource
     DataSet = ZQ_Laboratorios
-    Left = 533
-    Top = 356
+    Left = 853
+    Top = 292
   end
   object ZQ_Medico: TZQuery
     Connection = DM.Conexion
@@ -6897,8 +6900,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'from OPTICA_MEDICO MED'
       'where med.baja='#39'N'#39)
     Params = <>
-    Left = 757
-    Top = 362
+    Left = 901
+    Top = 58
     object ZQ_MedicoID_MEDICO: TIntegerField
       FieldName = 'ID_MEDICO'
       Required = True
@@ -6936,7 +6939,38 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     CampoBuscar = 'DETALLE'
     CampoClave = 'id_MEDICO'
     TituloVentana = 'Buscar M'#233'dico'
-    Left = 424
-    Top = 360
+    Left = 808
+    Top = 64
+  end
+  object EKListadoOS: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      
+        'select OO.ID_OS,coalesce(OO.CODIGO||'#39' - '#39'||OO.NOMBRE||'#39' - '#39'||OO.' +
+        'descripcion,OO.CODIGO||'#39' - '#39'||OO.NOMBRE) as detalle'
+      'from OPTICA_OS OO'
+      'left join optica_persona_os opos on (opos.id_os=oo.id_os)'
+      'where (oo.baja='#39'N'#39')'
+      'and opos.id_persona=:idp'
+      '')
+    CampoBuscar = 'DETALLE'
+    CampoClave = 'id_OS'
+    TituloVentana = 'Buscar Obra Social'
+    Left = 936
+    Top = 296
+  end
+  object Popup_Producto: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    Left = 168
+    Top = 303
+    object PopItemProducto_Agregar: TMenuItem
+      Caption = 'Agregar Producto'
+      ImageIndex = 14
+      OnClick = PopItemProducto_AgregarClick
+    end
+    object PopItemProducto_Quitar: TMenuItem
+      Caption = 'Quitar Producto'
+      ImageIndex = 15
+    end
   end
 end
