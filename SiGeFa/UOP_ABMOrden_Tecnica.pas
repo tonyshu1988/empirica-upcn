@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, DBCtrls, Grids, DBGrids, StdCtrls, Mask,
   Buttons, ComCtrls, ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, DBClient, EKListadoSQL,StrUtils,UDM, UPrincipal, UBuscarPersona,
-  UBuscarProductoStock, Provider;
+  UBuscarProductoStock, Provider, Menus;
 
 type
   TFOP_ABM_OrdenTecnica = class(TForm)
@@ -156,7 +156,7 @@ type
     ZQ_OrdenDetalleOSMONTO_TOTAL: TFloatField;
     ZQ_OrdenDetalleOSCANTIDAD: TFloatField;
     ZQ_OrdenDetalleOSOBSERVACIONES: TStringField;
-    DataSource1: TDataSource;
+    DS_OrdenDetalleOS: TDataSource;
     CD_OrdenDetalleID_ORDEN_DETALLE: TIntegerField;
     CD_OrdenDetalleID_ORDEN: TIntegerField;
     CD_OrdenDetalleID_PRODUCTO: TIntegerField;
@@ -282,8 +282,12 @@ type
     CD_Ordenmed_matricula: TStringField;
     CD_Ordenmed_direccion: TStringField;
     EKListadoMedico: TEKListadoSQL;
-    ZQ_OrdenDetalleprod_pventa: TFloatField;
-    ZQ_OrdenDetalleprod_porcDesc: TFloatField;
+    EKListadoOS: TEKListadoSQL;
+    Popup_Producto: TPopupMenu;
+    PopItemProducto_Agregar: TMenuItem;
+    PopItemProducto_Quitar: TMenuItem;
+    ZQ_OrdenDetalleCOEF_DESC: TFloatField;
+    ZQ_OrdenDetalleprod_pventa: TCurrencyField;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -306,10 +310,17 @@ type
     procedure cancelarProducto;
     procedure btnMedicoClick(Sender: TObject);
     procedure btQuitarProductoClick(Sender: TObject);
+    procedure ZQ_OrdenDetalleAfterScroll(DataSet: TDataSet);
+    procedure DBGrid1KeyUp(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure buscarOS(id:Integer);
+    procedure PopItemProducto_AgregarClick(Sender: TObject);
+    procedure ZQ_OrdenDetalleCANTIDADChange(Sender: TField);
+    procedure ZQ_OrdenDetalleMONTO_DESCONTADOChange(Sender: TField);
+    procedure ZQ_OrdenDetalleCOEF_DESCChange(Sender: TField);
+    function calcMonto():Real ;
     procedure DBGridListadoProductosKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure DBGridListadoProductosColExit(Sender: TObject);
-    
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -458,7 +469,7 @@ begin
   ClienteIVA:= 0;
   IDClienteIVA:= 0;
 
-  if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden, ZQ_OrdenDetalle]) then
+  if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden, ZQ_OrdenDetalle,ZQ_OrdenDetalleOS]) then
   begin
       ZQ_Orden.Append;
 
@@ -735,7 +746,8 @@ begin
 //    CD_DetalleFacturaDETALLE.AsString:= detalle;
     ZQ_OrdenDetalleCANTIDAD.AsFloat:= 1;
     ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:= ZQ_OrdenDetalleprod_pventa.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat;
-    ZQ_OrdenDetalleprod_porcDesc.AsFloat:= 0;
+    ZQ_OrdenDetalleMONTO_DESCONTADO.AsFloat:= 0;
+    ZQ_OrdenDetalleCOEF_DESC.AsFloat:= 0;
 //    CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= (ZQ_ProductosCOEF_DESCUENTO.AsFloat * 100);
 //    CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
 //    if ZQ_ProductosIMPUESTO_IVA.IsNull or (ZQ_ProductosIMPUESTO_IVA.AsFloat = 0) then
@@ -887,7 +899,8 @@ end;
 
 procedure TFOP_ABM_OrdenTecnica.btQuitarProductoClick(Sender: TObject);
 begin
-  if not (CD_OrdenDetalle.IsEmpty) then
+if dm.EKModelo.verificar_transaccion(abmOrden) then
+ if not (ZQ_OrdenDetalle.IsEmpty) then
   begin
     ZQ_OrdenDetalle.Delete;
     lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(ZQ_OrdenDetalle.RecordCount);
@@ -895,78 +908,99 @@ begin
   end;
 end;
 
-procedure TFOP_ABM_OrdenTecnica.DBGridListadoProductosKeyUp(
-  Sender: TObject; var Key: Word; Shift: TShiftState);
-begin
-    if dm.EKModelo.verificar_transaccion(abmOrden) then
-  begin
-    if key = 118 then
-    begin
-//      //PARA LOS RECIBOS - CUENTA INGRESO
-//      if ((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Nombre') then
-//      begin
-//        buscarCuenta;
-//      end;
-//
-//      //MEDIO
-//      if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
-//      begin
-//        //si no hay ninguna cuenta cargada salgo
-//        if ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull then
-//          exit;
-//
-//        buscarFormaPago;
-      end;
-  end;
 
+procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleAfterScroll(
+  DataSet: TDataSet);
+begin
+  ZQ_OrdenDetalleOS.Close;
+  ZQ_OrdenDetalleOS.ParamByName('idod').AsInteger:=ZQ_OrdenDetalleID_ORDEN_DETALLE.AsInteger;
+  dm.EKModelo.abrir(ZQ_OrdenDetalleOS);
 end;
 
-procedure TFOP_ABM_OrdenTecnica.DBGridListadoProductosColExit(
+procedure TFOP_ABM_OrdenTecnica.DBGrid1KeyUp(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+ if dm.EKModelo.verificar_transaccion(abmOrden) then
+  begin
+    if key = 112 then
+    begin
+      ZQ_OrdenDetalleOS.Append;
+      if ((sender as tdbgrid).SelectedField.FullName = 'ID_OS') then
+      begin
+        buscarOS(cliente);
+      end;
+    end;
+end;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.buscarOS(id:Integer);
+begin
+
+  EKListadoOS.SQL[4]:=Format('and opos.id_persona=%d',[id]);
+  if EKListadoOS.Buscar then
+  begin
+    if EKListadoOS.Resultado <> '' then
+    begin
+      ZQ_OrdenDetalleOSID_OS.AsInteger:=StrToInt(EKListadoOS.Resultado)
+    end;
+  end;
+end;
+
+
+
+procedure TFOP_ABM_OrdenTecnica.PopItemProducto_AgregarClick(
   Sender: TObject);
+begin
+  btBuscProd.Click;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleCANTIDADChange(
+  Sender: TField);
 begin
 if dm.EKModelo.verificar_transaccion(abmOrden) then //SI ESTOY DANDO DE ALTA O EDITANDO
   begin
-    //Modifico Precio Final segun la cantidad
-    if ((sender as tdbgrid).SelectedField.FullName = 'CANTIDAD') then
-    begin
       if (not ZQ_OrdenDetalleprod_pventa.IsNull) then
-         ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=ZQ_OrdenDetalleprod_pventa.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat;
-         ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=ZQ_OrdenDetalleMONTO_TOTAL.AsFloat-ZQ_OrdenDetalleMONTO_DESCONTADO.AsFloat;
-    end;
+         ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=calcMonto();
+  end;
+end;
 
-    //Modifico Precio Final segun el porc Descuento
-    if ((sender as tdbgrid).SelectedField.FullName = 'prod_porcDesc') then
-    begin
-      if (not ZQ_OrdenDetalleprod_porcDesc.IsNull) then
-       begin
-         ZQ_OrdenDetalleMONTO_DESCONTADO.AsFloat:=(ZQ_OrdenDetalleprod_pventa.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat)*ZQ_OrdenDetalleprod_porcDesc.AsFloat/100;
-         ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=ZQ_OrdenDetalleMONTO_TOTAL.AsFloat-ZQ_OrdenDetalleMONTO_DESCONTADO.AsFloat;
-       end;
-    end;
-
-    //Modifico Precio Final segun el monto Descuento
-    if ((sender as tdbgrid).SelectedField.FullName = 'MONTO_DESCONTADO') then
-    begin
+procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleMONTO_DESCONTADOChange(
+  Sender: TField);
+begin
+  if dm.EKModelo.verificar_transaccion(abmOrden) then //SI ESTOY DANDO DE ALTA O EDITANDO
+  begin
       if (not ZQ_OrdenDetalleMONTO_DESCONTADO.IsNull) then
        begin
-         ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=(ZQ_OrdenDetalleprod_pventa.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat)-ZQ_OrdenDetalleMONTO_DESCONTADO.AsFloat;
+         ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=calcMonto();
        end;
-    end;
-//
-//    //MEDIO
-//    if ((sender as tdbgrid).SelectedField.FullName = '_TipoFormaPago') then
-//    begin
-//      //si no hay ninguna cuenta cargada salgo
-//      if ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull then
-//        exit;
-//
-//      //si hay algo cargado salgo
-//      if not ZQ_CpbFormaPagoID_TIPO_FORMAPAG.IsNull then
-//        exit;
-//
-//      buscarFormaPago;
-//    end;
   end;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleCOEF_DESCChange(
+  Sender: TField);
+begin
+   if dm.EKModelo.verificar_transaccion(abmOrden) then //SI ESTOY DANDO DE ALTA O EDITANDO
+  begin
+      if (not ZQ_OrdenDetalleCOEF_DESC.IsNull) then
+       begin
+         ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=calcMonto();
+       end;
+  end;
+end;
+
+
+function TFOP_ABM_OrdenTecnica.calcMonto():Real ;
+begin
+  Result:=(ZQ_OrdenDetalleprod_pventa.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat)-(ZQ_OrdenDetalleMONTO_TOTAL.AsFloat*ZQ_OrdenDetalleCOEF_DESC.AsFloat/100);
+end;
+
+procedure TFOP_ABM_OrdenTecnica.DBGridListadoProductosKeyUp(
+  Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if dm.EKModelo.verificar_transaccion(abmOrden) then //SI ESTOY DANDO DE ALTA O EDITANDO
+  if key=112 then btBuscProd.Click;
+
+
 end;
 
 end.
