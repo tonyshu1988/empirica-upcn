@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, DBCtrls, Grids, DBGrids, StdCtrls, Mask,
   Buttons, ComCtrls, ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, DBClient, EKListadoSQL,StrUtils,UDM, UPrincipal, UBuscarPersona,
-  UBuscarProductoStock, Provider, Menus;
+  UBuscarProductoStock, Provider, Menus, ZSequence, EKDbSuma;
 
 type
   TFOP_ABM_OrdenTecnica = class(TForm)
@@ -126,7 +126,7 @@ type
     CD_Orden: TClientDataSet;
     ZQ_Orden: TZQuery;
     ZQ_OrdenDetalle: TZQuery;
-    ZQ_OrdenDetalleOS: TZQuery;
+    ZQ_OrdenDetalleOS2: TZQuery;
     ZQ_OrdenID_ORDEN: TIntegerField;
     ZQ_OrdenCODIGO_CLI: TStringField;
     ZQ_OrdenID_CLIENTE: TIntegerField;
@@ -149,22 +149,7 @@ type
     ZQ_OrdenDetalleMONTO_TOTAL: TFloatField;
     ZQ_OrdenDetalleCANTIDAD: TFloatField;
     ZQ_OrdenDetalleOBSERVACIONES: TStringField;
-    ZQ_OrdenDetalleOSID_DETALLE_OS: TIntegerField;
-    ZQ_OrdenDetalleOSID_ORDEN_DETALLE: TIntegerField;
-    ZQ_OrdenDetalleOSID_OS: TIntegerField;
-    ZQ_OrdenDetalleOSMONTO_DESCONTADO: TFloatField;
-    ZQ_OrdenDetalleOSMONTO_TOTAL: TFloatField;
-    ZQ_OrdenDetalleOSCANTIDAD: TFloatField;
-    ZQ_OrdenDetalleOSOBSERVACIONES: TStringField;
     DS_OrdenDetalleOS: TDataSource;
-    CD_OrdenDetalleID_ORDEN_DETALLE: TIntegerField;
-    CD_OrdenDetalleID_ORDEN: TIntegerField;
-    CD_OrdenDetalleID_PRODUCTO: TIntegerField;
-    CD_OrdenDetalleID_LABORATORIO: TIntegerField;
-    CD_OrdenDetalleMONTO_DESCONTADO: TFloatField;
-    CD_OrdenDetalleMONTO_TOTAL: TFloatField;
-    CD_OrdenDetalleCANTIDAD: TFloatField;
-    CD_OrdenDetalleOBSERVACIONES: TStringField;
     PLeerCodigo: TPanel;
     LeerCodBar: TLabel;
     Image2: TImage;
@@ -205,22 +190,6 @@ type
     DS_Orden: TDataSource;
     DS_OrdenDetalle: TDataSource;
     DataSetProvider1: TDataSetProvider;
-    CD_OrdenID_ORDEN: TIntegerField;
-    CD_OrdenCODIGO_CLI: TStringField;
-    CD_OrdenID_CLIENTE: TIntegerField;
-    CD_OrdenID_ESTADO: TIntegerField;
-    CD_OrdenFECHA_ORDEN: TDateField;
-    CD_OrdenFECHA_PROMETIDO: TDateField;
-    CD_OrdenCOD_BARRAS: TStringField;
-    CD_OrdenOBSERVACIONES: TStringField;
-    CD_OrdenNRO_FACTURA: TStringField;
-    CD_OrdenMONTO_TOTAL: TFloatField;
-    CD_OrdenMONTO_ENTREGADO: TFloatField;
-    CD_OrdenENTREGADO_POR: TIntegerField;
-    CD_OrdenFACTURADO_POR: TIntegerField;
-    CD_OrdenSALDO: TFloatField;
-    CD_Ordenpers_nombre: TStringField;
-    CD_Ordenpers_direccion: TStringField;
     ZQ_ProductosNOMBRE_PRODUCTO: TStringField;
     ZQ_ProductosMEDIDA: TStringField;
     ZQ_ProductosARTICULO: TStringField;
@@ -274,20 +243,98 @@ type
     ZQ_MedicoTELEFONO: TStringField;
     ZQ_MedicoMATRICULA: TStringField;
     ZQ_MedicoBAJA: TStringField;
-    CD_OrdenID_MEDICO: TIntegerField;
     ZQ_Ordenmed_nombre: TStringField;
     ZQ_Ordenmed_matricula: TStringField;
     ZQ_Ordenmed_direccion: TStringField;
-    CD_Ordenmed_nombre: TStringField;
-    CD_Ordenmed_matricula: TStringField;
-    CD_Ordenmed_direccion: TStringField;
     EKListadoMedico: TEKListadoSQL;
     EKListadoOS: TEKListadoSQL;
     Popup_Producto: TPopupMenu;
     PopItemProducto_Agregar: TMenuItem;
     PopItemProducto_Quitar: TMenuItem;
     ZQ_OrdenDetalleCOEF_DESC: TFloatField;
-    ZQ_OrdenDetalleprod_pventa: TCurrencyField;
+    ZQ_DetalleProd: TZQuery;
+    StringField1: TStringField;
+    StringField2: TStringField;
+    StringField3: TStringField;
+    StringField4: TStringField;
+    StringField5: TStringField;
+    BlobField1: TBlobField;
+    StringField6: TStringField;
+    FloatField1: TFloatField;
+    IntegerField1: TIntegerField;
+    IntegerField2: TIntegerField;
+    IntegerField3: TIntegerField;
+    IntegerField4: TIntegerField;
+    FloatField2: TFloatField;
+    FloatField3: TFloatField;
+    FloatField4: TFloatField;
+    FloatField5: TFloatField;
+    FloatField6: TFloatField;
+    FloatField7: TFloatField;
+    FloatField8: TFloatField;
+    FloatField9: TFloatField;
+    FloatField10: TFloatField;
+    FloatField11: TFloatField;
+    FloatField12: TFloatField;
+    FloatField13: TFloatField;
+    FloatField14: TFloatField;
+    FloatField15: TFloatField;
+    StringField7: TStringField;
+    IntegerField5: TIntegerField;
+    IntegerField6: TIntegerField;
+    IntegerField7: TIntegerField;
+    StringField8: TStringField;
+    StringField9: TStringField;
+    StringField10: TStringField;
+    FloatField16: TFloatField;
+    FloatField17: TFloatField;
+    StringField11: TStringField;
+    StringField12: TStringField;
+    CD_OrdenID_ORDEN: TIntegerField;
+    CD_OrdenCODIGO_CLI: TStringField;
+    CD_OrdenID_CLIENTE: TIntegerField;
+    CD_OrdenID_ESTADO: TIntegerField;
+    CD_OrdenFECHA_ORDEN: TDateField;
+    CD_OrdenFECHA_PROMETIDO: TDateField;
+    CD_OrdenCOD_BARRAS: TStringField;
+    CD_OrdenOBSERVACIONES: TStringField;
+    CD_OrdenNRO_FACTURA: TStringField;
+    CD_OrdenMONTO_TOTAL: TFloatField;
+    CD_OrdenMONTO_ENTREGADO: TFloatField;
+    CD_OrdenENTREGADO_POR: TIntegerField;
+    CD_OrdenFACTURADO_POR: TIntegerField;
+    CD_OrdenSALDO: TFloatField;
+    CD_Ordenpers_nombre: TStringField;
+    CD_Ordenpers_direccion: TStringField;
+    CD_OrdenID_MEDICO: TIntegerField;
+    CD_Ordenmed_nombre: TStringField;
+    CD_Ordenmed_matricula: TStringField;
+    CD_Ordenmed_direccion: TStringField;
+    CD_OrdenDetalleID_ORDEN_DETALLE: TIntegerField;
+    CD_OrdenDetalleID_ORDEN: TIntegerField;
+    CD_OrdenDetalleID_PRODUCTO: TIntegerField;
+    CD_OrdenDetalleID_LABORATORIO: TIntegerField;
+    CD_OrdenDetalleMONTO_DESCONTADO: TFloatField;
+    CD_OrdenDetalleMONTO_TOTAL: TFloatField;
+    CD_OrdenDetalleCANTIDAD: TFloatField;
+    CD_OrdenDetalleOBSERVACIONES: TStringField;
+    CD_OrdenDetallePROD_DETALLE: TStringField;
+    CD_OrdenDetalleprod_pventa: TCurrencyField;
+    CD_OrdenDetalleOS: TClientDataSet;
+    ZQ_GenOrdenDetalle: TZSequence;
+    EKDbSumaDetProd: TEKDbSuma;
+    ZQ_OrdenDetalleOS2ID_DETALLE_OS: TIntegerField;
+    ZQ_OrdenDetalleOS2ID_ORDEN_DETALLE: TIntegerField;
+    ZQ_OrdenDetalleOS2ID_OS: TIntegerField;
+    ZQ_OrdenDetalleOS2MONTO_DESCONTADO: TFloatField;
+    ZQ_OrdenDetalleOS2OBSERVACIONES: TStringField;
+    CD_OrdenDetalleOSID_DETALLE_OS: TIntegerField;
+    CD_OrdenDetalleOSID_ORDEN_DETALLE: TIntegerField;
+    CD_OrdenDetalleOSID_OS: TIntegerField;
+    CD_OrdenDetalleOSMONTO_DESCONTADO: TFloatField;
+    CD_OrdenDetalleOSOBSERVACIONES: TStringField;
+    EKDbSumaDetProdOS: TEKDbSuma;
+    CD_OrdenDetalleOSos_detalle: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -315,12 +362,17 @@ type
       Shift: TShiftState);
     procedure buscarOS(id:Integer);
     procedure PopItemProducto_AgregarClick(Sender: TObject);
-    procedure ZQ_OrdenDetalleCANTIDADChange(Sender: TField);
-    procedure ZQ_OrdenDetalleMONTO_DESCONTADOChange(Sender: TField);
-    procedure ZQ_OrdenDetalleCOEF_DESCChange(Sender: TField);
+    procedure CD_OrdenDetalleCANTIDADChange(Sender: TField);
     function calcMonto():Real ;
     procedure DBGridListadoProductosKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure Button1Click(Sender: TObject);
+    procedure EKDbSumaDetProdSumListChanged(Sender: TObject);
+    procedure EKDbSumaDetProdOSSumListChanged(Sender: TObject);
+    procedure recalcularMontosProd();
+    procedure recalcularMontosOS();
+    procedure DBGridListadoProductosColExit(Sender: TObject);
+    procedure DBGrid1ColExit(Sender: TObject);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -370,17 +422,18 @@ begin
   idSucursal:= dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger;
   CD_Orden.CreateDataSet;
   CD_OrdenDetalle.CreateDataSet;
+  CD_ordenDetalleOS.CreateDataSet;
 //  CD_Fpago.CreateDataSet;
 //  CD_VentaFinal.CreateDataSet;
 //  dm.EKModelo.abrir(ZQ_FormasPago);
-//  dm.EKModelo.abrir(ZQ_Cuentas);
+//  dm.EKModelo.abrir(ZQ_DetalleProd);
   dm.EKModelo.abrir(ZQ_Laboratorios);
   dm.EKModelo.abrir(ZQ_Medico);
-  Cliente:= -1;
-  IdVendedor:= -1;
-  descCliente:= 0;
-  ClienteIVA:= 0;
-  IDClienteIVA:= 0;
+  Cliente:=-1;
+  IdVendedor:=-1;
+  descCliente:=0;
+  ClienteIVA:=0;
+  IDClienteIVA:=0;
   crearOrdenT();
 
   //  edCuenta.DropDownRows:= cajero_tamanio_lista_fpago;
@@ -469,11 +522,11 @@ begin
   ClienteIVA:= 0;
   IDClienteIVA:= 0;
 
-  if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden, ZQ_OrdenDetalle,ZQ_OrdenDetalleOS]) then
+//  if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden, ZQ_OrdenDetalle]) then
   begin
-      ZQ_Orden.Append;
+      CD_Orden.Append;
 
-      ZQ_OrdenID_CLIENTE.AsInteger:= cliente;
+      CD_OrdenID_CLIENTE.AsInteger:= cliente;
     //  CD_ComprobanteID_TIPO_CPB.AsInteger:= 11; //Factura
     //  CD_ComprobanteID_VENDEDOR.AsInteger:= IdVendedor;
     //  CD_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
@@ -484,23 +537,23 @@ begin
     //  else
     //    CD_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora();
 
-      ZQ_OrdenOBSERVACIONES.AsString:= '';
-      ZQ_OrdenMONTO_TOTAL.AsFloat:= 0;
-      ZQ_OrdenSALDO.AsFloat:= 0;
-      ZQ_OrdenMONTO_ENTREGADO.AsFloat:= 0;
+      CD_OrdenOBSERVACIONES.AsString:= '';
+      CD_OrdenMONTO_TOTAL.AsFloat:= 0;
+      CD_OrdenSALDO.AsFloat:= 0;
+      CD_OrdenMONTO_ENTREGADO.AsFloat:= 0;
 
     //  if descCliente < 0 then descCliente:= descCliente * 100;
 
     //  CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente / 100;
     //  CD_ComprobanteIMPORTE_DESCUENTO.AsInteger:= 0;
     //  CD_ComprobanteENCABEZADO.AsString:= '';
-      ZQ_OrdenCODIGO_CLI.AsString:= '';
-      ZQ_OrdenFECHA_ORDEN.Clear;
-      ZQ_OrdenFECHA_PROMETIDO.clear;
-      ZQ_OrdenCOD_BARRAS.Clear;
-      ZQ_OrdenNRO_FACTURA.Clear;
-      ZQ_OrdenENTREGADO_POR.Clear;
-      ZQ_OrdenFACTURADO_POR.Clear;
+      CD_OrdenCODIGO_CLI.AsString:= '';
+      CD_OrdenFECHA_ORDEN.Clear;
+      CD_OrdenFECHA_PROMETIDO.clear;
+      CD_OrdenCOD_BARRAS.Clear;
+      CD_OrdenNRO_FACTURA.Clear;
+      CD_OrdenENTREGADO_POR.Clear;
+      CD_OrdenFACTURADO_POR.Clear;
 
     //  lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_OrdenDetalle.RecordCount);
     //  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
@@ -593,11 +646,11 @@ procedure TFOP_ABM_OrdenTecnica.LimpiarCodigo;
 begin
   ZQ_Productos.Close;
   codBarras.Clear;
-  if (ZQ_OrdenDetalle.State <> dsBrowse) then
+  if (CD_OrdenDetalle.State <> dsBrowse) then
   begin
-    ZQ_OrdenDetalleCANTIDAD.AsFloat:= 1;
-    ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:= 0;
-    ZQ_OrdenDetalleMONTO_DESCONTADO.AsFloat:= 0;
+    CD_OrdenDetalleCANTIDAD.AsFloat:= 1;
+    CD_OrdenDetalleMONTO_TOTAL.AsFloat:= 0;
+    CD_OrdenDetalleMONTO_DESCONTADO.AsFloat:= 0;
   end;
   lblMaxVenta.Visible:= False;
 
@@ -738,16 +791,15 @@ var
   i: Integer;
 begin
   Result:= False;
-  if dm.EKModelo.verificar_transaccion(abmOrden) then //SI ESTOY DANDO DE ALTA O EDITANDO
+//  if dm.EKModelo.verificar_transaccion(abmOrden) then //SI ESTOY DANDO DE ALTA O EDITANDO
    begin
-    ZQ_OrdenDetalle.Append;
-    ZQ_OrdenDetalleID_PRODUCTO.AsInteger:= prod;
-//    CD_OrdenDetalle.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
-//    CD_DetalleFacturaDETALLE.AsString:= detalle;
-    ZQ_OrdenDetalleCANTIDAD.AsFloat:= 1;
-    ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:= ZQ_OrdenDetalleprod_pventa.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat;
-    ZQ_OrdenDetalleMONTO_DESCONTADO.AsFloat:= 0;
-    ZQ_OrdenDetalleCOEF_DESC.AsFloat:= 0;
+    CD_OrdenDetalle.Append;
+    CD_OrdenDetalleID_ORDEN_DETALLE.AsInteger:=ZQ_GenOrdenDetalle.GetNextValue;
+    CD_OrdenDetalleID_PRODUCTO.AsInteger:= prod;
+    CD_OrdenDetallePROD_DETALLE.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
+    CD_OrdenDetalleprod_pventa.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
+    CD_OrdenDetalleCANTIDAD.AsFloat:= 1;
+    CD_OrdenDetalleMONTO_TOTAL.AsFloat:= CD_OrdenDetalleprod_pventa.AsFloat*CD_OrdenDetalleCANTIDAD.AsFloat;
 //    CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= (ZQ_ProductosCOEF_DESCUENTO.AsFloat * 100);
 //    CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
 //    if ZQ_ProductosIMPUESTO_IVA.IsNull or (ZQ_ProductosIMPUESTO_IVA.AsFloat = 0) then
@@ -792,7 +844,7 @@ begin
 //    exit;
 //  end;
 
-  if (ZQ_Orden.State in [dsInsert,dsEdit]) then
+  if (CD_Orden.State in [dsInsert,dsEdit]) then
   begin
     if not Assigned(vsel2) then
       vsel2:= TFBuscarPersona.Create(nil);
@@ -819,7 +871,7 @@ begin
       begin
         descCliente:= ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat * 100;
       end;
-    ZQ_OrdenID_CLIENTE.AsInteger:= cliente;
+    CD_OrdenID_CLIENTE.AsInteger:= cliente;
 //    CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente;
   end;
   vsel2.Close;
@@ -876,9 +928,15 @@ begin
   descCliente:= 0;
   ClienteIVA:= 0;
   IDClienteIVA:= 0;
-//  CD_OrdenDetalle.EmptyDataSet;
+
+  recalcularMontosProd();
+
+  CD_OrdenDetalle.EmptyDataSet;
+  CD_Orden.EmptyDataSet;
+  CD_ordenDetalleOS.EmptyDataSet;
+
   crearOrdenT();
-  lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(ZQ_OrdenDetalle.RecordCount);
+  lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_OrdenDetalle.RecordCount);
 //  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
 
 
@@ -889,21 +947,21 @@ end;
 
 procedure TFOP_ABM_OrdenTecnica.btnMedicoClick(Sender: TObject);
 begin
- if (ZQ_Orden.State in [dsInsert,dsEdit]) then
+ if (CD_Orden.State in [dsInsert,dsEdit]) then
   if EKListadoMedico.Buscar then
     if (EKListadoMedico.Resultado <> '') then
     begin
-      ZQ_OrdenID_MEDICO.AsInteger:=StrToInt(EKListadoMedico.Resultado);
+      CD_OrdenID_MEDICO.AsInteger:=StrToInt(EKListadoMedico.Resultado);
     end
 end;
 
 procedure TFOP_ABM_OrdenTecnica.btQuitarProductoClick(Sender: TObject);
 begin
-if dm.EKModelo.verificar_transaccion(abmOrden) then
- if not (ZQ_OrdenDetalle.IsEmpty) then
+//if dm.EKModelo.verificar_transaccion(abmOrden) then
+ if not (CD_OrdenDetalle.IsEmpty) then
   begin
-    ZQ_OrdenDetalle.Delete;
-    lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(ZQ_OrdenDetalle.RecordCount);
+    CD_OrdenDetalle.Delete;
+    lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_OrdenDetalle.RecordCount);
     //lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
   end;
 end;
@@ -912,23 +970,19 @@ end;
 procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleAfterScroll(
   DataSet: TDataSet);
 begin
-  ZQ_OrdenDetalleOS.Close;
-  ZQ_OrdenDetalleOS.ParamByName('idod').AsInteger:=ZQ_OrdenDetalleID_ORDEN_DETALLE.AsInteger;
-  dm.EKModelo.abrir(ZQ_OrdenDetalleOS);
+//  ZQ_OrdenDetalleOS.Close;
+//  ZQ_OrdenDetalleOS.ParamByName('idod').AsInteger:=ZQ_OrdenDetalleID_ORDEN_DETALLE.AsInteger;
+//  dm.EKModelo.abrir(ZQ_OrdenDetalleOS);
 end;
 
 procedure TFOP_ABM_OrdenTecnica.DBGrid1KeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
- if dm.EKModelo.verificar_transaccion(abmOrden) then
+// if dm.EKModelo.verificar_transaccion(abmOrden) then
   begin
-    if key = 112 then
+    if (key = 112)and(cliente>-1) then
     begin
-      ZQ_OrdenDetalleOS.Append;
-      if ((sender as tdbgrid).SelectedField.FullName = 'ID_OS') then
-      begin
         buscarOS(cliente);
-      end;
     end;
 end;
 end;
@@ -941,7 +995,12 @@ begin
   begin
     if EKListadoOS.Resultado <> '' then
     begin
-      ZQ_OrdenDetalleOSID_OS.AsInteger:=StrToInt(EKListadoOS.Resultado)
+      CD_OrdenDetalleOS.Append;
+      CD_ordenDetalleOSID_ORDEN_DETALLE.AsInteger:=CD_OrdenDetalleID_ORDEN_DETALLE.AsInteger;
+      CD_OrdenDetalleOSID_OS.AsInteger:=StrToInt(EKListadoOS.Resultado);
+      CD_OrdenDetalleOSos_detalle.AsString:=EKListadoOS.Seleccion;
+      CD_OrdenDetalleOSMONTO_DESCONTADO.AsFloat:=0;
+      CD_OrdenDetalleOS.Post;
     end;
   end;
 end;
@@ -954,53 +1013,97 @@ begin
   btBuscProd.Click;
 end;
 
-procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleCANTIDADChange(
+procedure TFOP_ABM_OrdenTecnica.CD_OrdenDetalleCANTIDADChange(
   Sender: TField);
 begin
-if dm.EKModelo.verificar_transaccion(abmOrden) then //SI ESTOY DANDO DE ALTA O EDITANDO
-  begin
-      if (not ZQ_OrdenDetalleprod_pventa.IsNull) then
-         ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=calcMonto();
-  end;
+      if (not CD_OrdenDetalleprod_pventa.IsNull) then
+         begin
+         CD_OrdenDetalleMONTO_TOTAL.AsFloat:=calcMonto();
+         recalcularMontosProd;
+         end;
 end;
-
-procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleMONTO_DESCONTADOChange(
-  Sender: TField);
-begin
-  if dm.EKModelo.verificar_transaccion(abmOrden) then //SI ESTOY DANDO DE ALTA O EDITANDO
-  begin
-      if (not ZQ_OrdenDetalleMONTO_DESCONTADO.IsNull) then
-       begin
-         ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=calcMonto();
-       end;
-  end;
-end;
-
-procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleCOEF_DESCChange(
-  Sender: TField);
-begin
-   if dm.EKModelo.verificar_transaccion(abmOrden) then //SI ESTOY DANDO DE ALTA O EDITANDO
-  begin
-      if (not ZQ_OrdenDetalleCOEF_DESC.IsNull) then
-       begin
-         ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=calcMonto();
-       end;
-  end;
-end;
-
 
 function TFOP_ABM_OrdenTecnica.calcMonto():Real ;
+var
+tot:real;
 begin
-  Result:=(ZQ_OrdenDetalleprod_pventa.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat)-(ZQ_OrdenDetalleMONTO_TOTAL.AsFloat*ZQ_OrdenDetalleCOEF_DESC.AsFloat/100);
+  tot:=(CD_OrdenDetalleprod_pventa.AsFloat*CD_OrdenDetalleCANTIDAD.AsFloat);
+  Result:=tot;
 end;
 
 procedure TFOP_ABM_OrdenTecnica.DBGridListadoProductosKeyUp(
   Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if dm.EKModelo.verificar_transaccion(abmOrden) then //SI ESTOY DANDO DE ALTA O EDITANDO
-  if key=112 then btBuscProd.Click;
+//  if dm.EKModelo.verificar_transaccion(abmOrden) then //SI ESTOY DANDO DE ALTA O EDITANDO
+   if key=112 then
+      btBuscProd.Click;
+
+end;
+
+procedure TFOP_ABM_OrdenTecnica.Button1Click(Sender: TObject);
+begin
+//if dm.EKModelo.verificar_transaccion(abmOrden) then
+ if not(CD_OrdenDetalle.IsEmpty) then
+  begin
+    CD_OrdenDetalleOS.Delete;
+  end;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.EKDbSumaDetProdSumListChanged(
+  Sender: TObject);
+begin
+  lblTotAPagar.Caption:=Format('Total a Pagar: $ %s , con $ %s descontado por OOSS.',[CurrToStr(EKDbSumaDetProd.SumCollection[0].SumValue),CurrToStr(EKDbSumaDetProdOS.SumCollection[0].SumValue)]);
+end;
+
+procedure TFOP_ABM_OrdenTecnica.EKDbSumaDetProdOSSumListChanged(
+  Sender: TObject);
+begin
+  lblTotAPagar.Caption:=Format('Total a Pagar: $ %s , con $ %s descontado por OOSS.',[CurrToStr(EKDbSumaDetProd.SumCollection[0].SumValue),CurrToStr(EKDbSumaDetProdOS.SumCollection[0].SumValue)]);
+end;
 
 
+
+procedure TFOP_ABM_OrdenTecnica.recalcularMontosProd;
+begin
+if CD_OrdenDetalle.State in [dsEdit,dsInsert] then
+ begin
+    CD_OrdenDetalle.Post;
+ end;
+    EKDbSumaDetProd.RecalcAll;
+    CD_OrdenDetalle.Edit;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.DBGridListadoProductosColExit(
+  Sender: TObject);
+begin
+if ((sender as tdbgrid).SelectedField.FullName = 'MONTO_TOTAL') then
+    begin
+     recalcularMontosProd();
+    end;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.recalcularMontosOS;
+begin
+if CD_OrdenDetalleOS.State in [dsEdit,dsInsert] then
+ begin
+    CD_OrdenDetalleOS.Post;
+ end;
+    EKDbSumaDetProdOS.RecalcAll;
+    CD_OrdenDetalleOS.Edit;
+end;
+
+
+procedure TFOP_ABM_OrdenTecnica.DBGrid1ColExit(Sender: TObject);
+begin
+if ((sender as tdbgrid).SelectedField.FullName = 'MONTO_DESCONTADO') then
+    begin
+    if EKDbSumaDetProdOS.SumCollection[0].SumValue>EKDbSumaDetProd.SumCollection[0].SumValue then
+     begin
+        showmessage('El total descontado no debe ser mayor al importe total del Producto/Servicio.');
+        exit;
+     end;
+     recalcularMontosOS();
+    end;
 end;
 
 end.
