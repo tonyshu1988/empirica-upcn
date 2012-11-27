@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 306
-  Top = 114
+  Left = 252
+  Top = 123
   Width = 1007
   Height = 700
   Caption = 'ABM Orden T'#233'cnica'
@@ -2251,25 +2251,25 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Left = 562
           Top = 1
           Width = 5
-          Height = 216
+          Height = 215
           Align = alRight
         end
         object Panel6: TPanel
           Left = 1
-          Top = 217
+          Top = 216
           Width = 879
-          Height = 39
+          Height = 40
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 0
           DesignSize = (
             879
-            39)
+            40)
           object lblCantProductos: TLabel
             Left = 1
-            Top = 23
+            Top = 27
             Width = 877
-            Height = 15
+            Height = 12
             Align = alBottom
             Alignment = taRightJustify
             AutoSize = False
@@ -2282,7 +2282,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Layout = tlCenter
           end
           object btQuitarProducto: TButton
-            Left = 12
+            Left = 9
             Top = 5
             Width = 133
             Height = 23
@@ -2292,19 +2292,20 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           end
           object Button1: TButton
             Left = 791
-            Top = 4
+            Top = 5
             Width = 83
             Height = 23
             Anchors = [akTop, akRight]
             Caption = 'Quitar OS'
             TabOrder = 1
+            OnClick = Button1Click
           end
         end
         object POs: TPanel
           Left = 567
           Top = 1
           Width = 313
-          Height = 216
+          Height = 215
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 1
@@ -2331,7 +2332,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Left = 0
             Top = 66
             Width = 313
-            Height = 150
+            Height = 149
             Align = alClient
             Color = 15527129
             DataSource = DS_OrdenDetalleOS
@@ -2342,32 +2343,35 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             TitleFont.Height = -11
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
+            OnColExit = DBGrid1ColExit
             OnKeyUp = DBGrid1KeyUp
             Columns = <
               item
                 Expanded = False
                 FieldName = 'ID_OS'
-                Width = 69
+                ReadOnly = True
+                Width = 35
                 Visible = True
               end
               item
+                Expanded = False
+                FieldName = 'os_detalle'
+                Title.Caption = 'Detalle'
+                Width = 156
+                Visible = True
+              end
+              item
+                Color = 10485759
                 Expanded = False
                 FieldName = 'MONTO_DESCONTADO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MONTO_TOTAL'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CANTIDAD'
+                Title.Caption = 'Importe'
+                Width = 61
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'OBSERVACIONES'
+                Width = 200
                 Visible = True
               end>
           end
@@ -2424,7 +2428,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Left = 1
           Top = 1
           Width = 561
-          Height = 216
+          Height = 215
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 2
@@ -2451,7 +2455,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Left = 0
             Top = 13
             Width = 561
-            Height = 203
+            Height = 202
             Align = alClient
             Color = 15527129
             DataSource = DS_OrdenDetalle
@@ -2469,14 +2473,30 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             TitleFont.Height = -11
             TitleFont.Name = 'MS Sans Serif'
             TitleFont.Style = []
+            OnColExit = DBGridListadoProductosColExit
             OnKeyUp = DBGridListadoProductosKeyUp
             Columns = <
+              item
+                Expanded = False
+                FieldName = 'ID_ORDEN_DETALLE'
+                ReadOnly = True
+                Width = 42
+                Visible = True
+              end
               item
                 Expanded = False
                 FieldName = 'ID_PRODUCTO'
                 ReadOnly = True
                 Title.Caption = 'ID'
-                Width = 67
+                Width = 60
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'prod_detalle'
+                ReadOnly = True
+                Title.Caption = 'Detalle Producto/Servicio'
+                Width = 300
                 Visible = True
               end
               item
@@ -2492,13 +2512,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
                 FieldName = 'CANTIDAD'
                 Title.Caption = 'Cant.'
                 Width = 34
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'COEF_DESC'
-                Title.Caption = '% Dcto.'
-                Width = 43
                 Visible = True
               end
               item
@@ -6185,16 +6198,23 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object CD_OrdenDetalleCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
+      OnChange = CD_OrdenDetalleCANTIDADChange
     end
     object CD_OrdenDetalleOBSERVACIONES: TStringField
       FieldName = 'OBSERVACIONES'
       Size = 1000
     end
+    object CD_OrdenDetallePROD_DETALLE: TStringField
+      FieldName = 'prod_detalle'
+      Size = 100
+    end
+    object CD_OrdenDetalleprod_pventa: TCurrencyField
+      FieldName = 'prod_pventa'
+    end
   end
   object CD_Orden: TClientDataSet
     Aggregates = <>
     Params = <>
-    ProviderName = 'DataSetProvider1'
     Left = 250
     Top = 248
     object CD_OrdenID_ORDEN: TIntegerField
@@ -6438,7 +6458,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_OrdenDetalleMONTO_DESCONTADO: TFloatField
       FieldName = 'MONTO_DESCONTADO'
-      OnChange = ZQ_OrdenDetalleMONTO_DESCONTADOChange
       currency = True
     end
     object ZQ_OrdenDetalleMONTO_TOTAL: TFloatField
@@ -6447,7 +6466,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_OrdenDetalleCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
-      OnChange = ZQ_OrdenDetalleCANTIDADChange
     end
     object ZQ_OrdenDetalleOBSERVACIONES: TStringField
       FieldName = 'OBSERVACIONES'
@@ -6455,21 +6473,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_OrdenDetalleCOEF_DESC: TFloatField
       FieldName = 'COEF_DESC'
-      OnChange = ZQ_OrdenDetalleCOEF_DESCChange
-    end
-    object ZQ_OrdenDetalleprod_pventa: TCurrencyField
-      FieldKind = fkCalculated
-      FieldName = 'prod_pventa'
-      Calculated = True
     end
   end
-  object ZQ_OrdenDetalleOS: TZQuery
+  object ZQ_OrdenDetalleOS2: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      
-        'select ODO.ID_DETALLE_OS, ODO.ID_ORDEN_DETALLE, ODO.ID_OS, ODO.M' +
-        'ONTO_DESCONTADO, ODO.MONTO_TOTAL, ODO.CANTIDAD,'
-      '       ODO.OBSERVACIONES'
+      'select ODO.*'
       'from OPTICA_DETALLE_OS ODO'
       'where odo.id_orden_detalle=:idod'
       ''
@@ -6480,41 +6489,38 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Name = 'idod'
         ParamType = ptUnknown
       end>
-    Left = 752
-    Top = 345
+    Left = 568
+    Top = 393
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'idod'
         ParamType = ptUnknown
       end>
-    object ZQ_OrdenDetalleOSID_DETALLE_OS: TIntegerField
+    object ZQ_OrdenDetalleOS2ID_DETALLE_OS: TIntegerField
       FieldName = 'ID_DETALLE_OS'
+      Required = True
     end
-    object ZQ_OrdenDetalleOSID_ORDEN_DETALLE: TIntegerField
+    object ZQ_OrdenDetalleOS2ID_ORDEN_DETALLE: TIntegerField
       FieldName = 'ID_ORDEN_DETALLE'
+      Required = True
     end
-    object ZQ_OrdenDetalleOSID_OS: TIntegerField
+    object ZQ_OrdenDetalleOS2ID_OS: TIntegerField
       FieldName = 'ID_OS'
+      Required = True
     end
-    object ZQ_OrdenDetalleOSMONTO_DESCONTADO: TFloatField
+    object ZQ_OrdenDetalleOS2MONTO_DESCONTADO: TFloatField
       FieldName = 'MONTO_DESCONTADO'
     end
-    object ZQ_OrdenDetalleOSMONTO_TOTAL: TFloatField
-      FieldName = 'MONTO_TOTAL'
-    end
-    object ZQ_OrdenDetalleOSCANTIDAD: TFloatField
-      FieldName = 'CANTIDAD'
-    end
-    object ZQ_OrdenDetalleOSOBSERVACIONES: TStringField
+    object ZQ_OrdenDetalleOS2OBSERVACIONES: TStringField
       FieldName = 'OBSERVACIONES'
       Size = 1000
     end
   end
   object DS_OrdenDetalleOS: TDataSource
-    DataSet = ZQ_OrdenDetalleOS
-    Left = 861
-    Top = 348
+    DataSet = CD_OrdenDetalleOS
+    Left = 837
+    Top = 340
   end
   object EKListadoProducto: TEKListadoSQL
     Modelo = DM.EKModelo
@@ -6735,6 +6741,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_Personas: TZQuery
     Connection = DM.Conexion
+    Active = True
     SQL.Strings = (
       
         'select p.*,prov.nombre_provincia as prov,td.nombre_tipo_doc as t' +
@@ -6833,7 +6840,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DS_Personas: TDataSource
     DataSet = ZQ_Personas
-    Left = 528
+    Left = 520
     Top = 304
   end
   object DS_Orden: TDataSource
@@ -6841,14 +6848,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     Left = 544
   end
   object DS_OrdenDetalle: TDataSource
-    DataSet = ZQ_OrdenDetalle
-    Left = 608
+    DataSet = CD_OrdenDetalle
+    Left = 616
     Top = 304
   end
   object DataSetProvider1: TDataSetProvider
-    DataSet = ZQ_Orden
-    Left = 532
-    Top = 356
+    DataSet = ZQ_OrdenDetalleOS2
+    Left = 612
+    Top = 252
   end
   object ZQ_Laboratorios: TZQuery
     Connection = DM.Conexion
@@ -6859,8 +6866,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'from OPTICA_LABORATORIO LAB'
       'where (LAB.baja='#39'N'#39')')
     Params = <>
-    Left = 749
-    Top = 298
+    Left = 741
+    Top = 290
     object ZQ_LaboratoriosID_LABORATORIO: TIntegerField
       FieldName = 'ID_LABORATORIO'
       Required = True
@@ -6888,11 +6895,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DS_Laboratorios: TDataSource
     DataSet = ZQ_Laboratorios
-    Left = 853
+    Left = 837
     Top = 292
   end
   object ZQ_Medico: TZQuery
     Connection = DM.Conexion
+    Active = True
     SQL.Strings = (
       
         'select MED.ID_MEDICO, MED.NOMBRE, MED.DIRECCION, MED.TELEFONO, M' +
@@ -6956,8 +6964,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     CampoBuscar = 'DETALLE'
     CampoClave = 'id_OS'
     TituloVentana = 'Buscar Obra Social'
-    Left = 936
-    Top = 296
+    Left = 928
+    Top = 336
   end
   object Popup_Producto: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
@@ -6972,5 +6980,235 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Caption = 'Quitar Producto'
       ImageIndex = 15
     end
+  end
+  object ZQ_DetalleProd: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
+        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,pc.im' +
+        'agen'
+      
+        ',pc.nombre||'#39'  -  M: '#39'||coalesce(m.medida,'#39#39')||'#39'  -  CB:'#39'||coale' +
+        'sce(p.codigo_barra,'#39#39') DETALLE_PROD, sp.stock_actual,sp.id_stock' +
+        '_producto,'
+      
+        'pr.*,p.id_producto,p.id_medida,p.id_prod_cabecera,p.descripcion,' +
+        'p.cod_corto,p.codigo_barra,p.stock_max,p.stock_min,p.llevar_stoc' +
+        'k,'
+      'p.baja'
+      'from producto_cabecera pc'
+      'join producto p on (p.id_prod_cabecera = pc.id_prod_cabecera)'
+      'join stock_producto sp on (sp.id_producto=p.id_producto)'
+      
+        'join posicion_sucursal ps on (ps.id_posicion_sucursal=sp.id_posi' +
+        'cion_sucursal)'
+      'left join medida m on (p.id_medida = m.id_medida)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      
+        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
+        'rticulo)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'join configuracion c on (c.id_sucursal=ps.id_sucursal)'
+      
+        'left join precio pr on ((pr.id_producto=p.id_producto)and(pr.id_' +
+        'sucursal=c.id_sucursal))'
+      'where (pc.baja <> '#39'S'#39')and(ps.punto_salida='#39'S'#39')and(p.baja<>'#39'S'#39')'
+      ''
+      ''
+      ''
+      ''
+      ''
+      '')
+    Params = <>
+    Left = 424
+    Top = 352
+    object StringField1: TStringField
+      FieldName = 'NOMBRE_PRODUCTO'
+      Size = 100
+    end
+    object StringField2: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object StringField3: TStringField
+      FieldName = 'ARTICULO'
+      Size = 200
+    end
+    object StringField4: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object StringField5: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object BlobField1: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object StringField6: TStringField
+      FieldName = 'DETALLE_PROD'
+      ReadOnly = True
+      Size = 186
+    end
+    object FloatField1: TFloatField
+      FieldName = 'STOCK_ACTUAL'
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+      Required = True
+    end
+    object IntegerField2: TIntegerField
+      FieldName = 'ID_PRECIO'
+      Required = True
+    end
+    object IntegerField3: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+    end
+    object IntegerField4: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object FloatField2: TFloatField
+      FieldName = 'PRECIO_COSTO'
+    end
+    object FloatField3: TFloatField
+      FieldName = 'PRECIO_VENTA'
+    end
+    object FloatField4: TFloatField
+      FieldName = 'COEF_GANANCIA'
+    end
+    object FloatField5: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+    end
+    object FloatField6: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object FloatField7: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+    end
+    object FloatField8: TFloatField
+      FieldName = 'PRECIO_COSTO_CIMPUESTOS'
+    end
+    object FloatField9: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL1'
+    end
+    object FloatField10: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL2'
+    end
+    object FloatField11: TFloatField
+      FieldName = 'PRECIO1'
+    end
+    object FloatField12: TFloatField
+      FieldName = 'PRECIO2'
+    end
+    object FloatField13: TFloatField
+      FieldName = 'PRECIO3'
+    end
+    object FloatField14: TFloatField
+      FieldName = 'PRECIO4'
+    end
+    object FloatField15: TFloatField
+      FieldName = 'PRECIO5'
+    end
+    object StringField7: TStringField
+      FieldName = 'INSERT_MANUAL'
+      Size = 1
+    end
+    object IntegerField5: TIntegerField
+      FieldName = 'ID_PRODUCTO_1'
+      Required = True
+    end
+    object IntegerField6: TIntegerField
+      FieldName = 'ID_MEDIDA'
+    end
+    object IntegerField7: TIntegerField
+      FieldName = 'ID_PROD_CABECERA'
+      Required = True
+    end
+    object StringField8: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object StringField9: TStringField
+      FieldName = 'COD_CORTO'
+    end
+    object StringField10: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object FloatField16: TFloatField
+      FieldName = 'STOCK_MAX'
+    end
+    object FloatField17: TFloatField
+      FieldName = 'STOCK_MIN'
+    end
+    object StringField11: TStringField
+      FieldName = 'LLEVAR_STOCK'
+      Size = 1
+    end
+    object StringField12: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+  end
+  object CD_OrdenDetalleOS: TClientDataSet
+    Aggregates = <>
+    IndexFieldNames = 'ID_ORDEN_DETALLE'
+    MasterFields = 'ID_ORDEN_DETALLE'
+    MasterSource = DS_OrdenDetalle
+    PacketRecords = 0
+    Params = <>
+    ProviderName = 'DataSetProvider1'
+    Left = 747
+    Top = 340
+    object CD_OrdenDetalleOSID_DETALLE_OS: TIntegerField
+      FieldName = 'ID_DETALLE_OS'
+    end
+    object CD_OrdenDetalleOSID_ORDEN_DETALLE: TIntegerField
+      FieldName = 'ID_ORDEN_DETALLE'
+    end
+    object CD_OrdenDetalleOSID_OS: TIntegerField
+      FieldName = 'ID_OS'
+    end
+    object CD_OrdenDetalleOSMONTO_DESCONTADO: TFloatField
+      FieldName = 'MONTO_DESCONTADO'
+      currency = True
+    end
+    object CD_OrdenDetalleOSOBSERVACIONES: TStringField
+      FieldName = 'OBSERVACIONES'
+      Size = 1000
+    end
+    object CD_OrdenDetalleOSos_detalle: TStringField
+      FieldName = 'os_detalle'
+      Size = 100
+    end
+  end
+  object ZQ_GenOrdenDetalle: TZSequence
+    Connection = DM.Conexion
+    SequenceName = 'GEN_OPTICA_ORDEN_DETALLE_ID'
+    Left = 253
+    Top = 340
+  end
+  object EKDbSumaDetProd: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'monto_Total'
+      end>
+    DataSet = CD_OrdenDetalle
+    SumListChanged = EKDbSumaDetProdSumListChanged
+    Left = 524
+    Top = 358
+  end
+  object EKDbSumaDetProdOS: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'monto_descontado'
+      end>
+    DataSet = CD_OrdenDetalleOS
+    SumListChanged = EKDbSumaDetProdOSSumListChanged
+    Left = 932
+    Top = 294
   end
 end
