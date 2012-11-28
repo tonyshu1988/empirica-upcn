@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   Left = 252
-  Top = 123
+  Top = 86
   Width = 1007
   Height = 700
   Caption = 'ABM Orden T'#233'cnica'
@@ -2364,6 +2364,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
                 Color = 10485759
                 Expanded = False
                 FieldName = 'MONTO_DESCONTADO'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = [fsBold]
                 Title.Caption = 'Importe'
                 Width = 61
                 Visible = True
@@ -2371,6 +2376,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
               item
                 Expanded = False
                 FieldName = 'OBSERVACIONES'
+                Title.Caption = 'Observaciones'
                 Width = 200
                 Visible = True
               end>
@@ -2545,9 +2551,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         BevelOuter = bvNone
         TabOrder = 2
         object lblTotAPagar: TLabel
-          Left = 172
+          Left = 0
           Top = 0
-          Width = 709
+          Width = 881
           Height = 41
           Align = alClient
           Alignment = taRightJustify
@@ -2557,24 +2563,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Font.Charset = ANSI_CHARSET
           Font.Color = clWhite
           Font.Height = -21
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-        object lblNroCPB: TLabel
-          Left = 0
-          Top = 0
-          Width = 172
-          Height = 41
-          Align = alLeft
-          Caption = ' Orden N'#186': 99999 '
-          Color = 12648448
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -17
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentColor = False
@@ -6198,7 +6186,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object CD_OrdenDetalleCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
-      OnChange = CD_OrdenDetalleCANTIDADChange
     end
     object CD_OrdenDetalleOBSERVACIONES: TStringField
       FieldName = 'OBSERVACIONES'
@@ -6328,8 +6315,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'select *'
       'from OPTICA_ORDEN')
     Params = <>
-    Left = 482
-    Top = 65535
+    Left = 602
+    Top = 31
     object ZQ_OrdenID_ORDEN: TIntegerField
       FieldName = 'ID_ORDEN'
       Required = True
@@ -6466,6 +6453,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_OrdenDetalleCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
+      OnChange = ZQ_OrdenDetalleCANTIDADChange
     end
     object ZQ_OrdenDetalleOBSERVACIONES: TStringField
       FieldName = 'OBSERVACIONES'
@@ -6474,8 +6462,27 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object ZQ_OrdenDetalleCOEF_DESC: TFloatField
       FieldName = 'COEF_DESC'
     end
+    object ZQ_OrdenDetalleprod_detalle: TStringField
+      FieldKind = fkLookup
+      FieldName = 'prod_detalle'
+      LookupDataSet = ZQ_DetalleProd
+      LookupKeyFields = 'ID_PRODUCTO'
+      LookupResultField = 'DETALLE_PROD'
+      KeyFields = 'ID_PRODUCTO'
+      Size = 200
+      Lookup = True
+    end
+    object ZQ_OrdenDetalleprod_pventa: TCurrencyField
+      FieldKind = fkLookup
+      FieldName = 'prod_pventa'
+      LookupDataSet = ZQ_DetalleProd
+      LookupKeyFields = 'ID_PRODUCTO'
+      LookupResultField = 'PRECIO_VENTA'
+      KeyFields = 'ID_PRODUCTO'
+      Lookup = True
+    end
   end
-  object ZQ_OrdenDetalleOS2: TZQuery
+  object ZQ_OrdenDetalleOS: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
       'select ODO.*'
@@ -6489,36 +6496,46 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Name = 'idod'
         ParamType = ptUnknown
       end>
-    Left = 568
-    Top = 393
+    Left = 736
+    Top = 305
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'idod'
         ParamType = ptUnknown
       end>
-    object ZQ_OrdenDetalleOS2ID_DETALLE_OS: TIntegerField
+    object ZQ_OrdenDetalleOSID_DETALLE_OS: TIntegerField
       FieldName = 'ID_DETALLE_OS'
       Required = True
     end
-    object ZQ_OrdenDetalleOS2ID_ORDEN_DETALLE: TIntegerField
+    object ZQ_OrdenDetalleOSID_ORDEN_DETALLE: TIntegerField
       FieldName = 'ID_ORDEN_DETALLE'
       Required = True
     end
-    object ZQ_OrdenDetalleOS2ID_OS: TIntegerField
+    object ZQ_OrdenDetalleOSID_OS: TIntegerField
       FieldName = 'ID_OS'
       Required = True
     end
-    object ZQ_OrdenDetalleOS2MONTO_DESCONTADO: TFloatField
+    object ZQ_OrdenDetalleOSMONTO_DESCONTADO: TFloatField
       FieldName = 'MONTO_DESCONTADO'
     end
-    object ZQ_OrdenDetalleOS2OBSERVACIONES: TStringField
+    object ZQ_OrdenDetalleOSOBSERVACIONES: TStringField
       FieldName = 'OBSERVACIONES'
       Size = 1000
     end
+    object ZQ_OrdenDetalleOSos_detalle: TStringField
+      FieldKind = fkLookup
+      FieldName = 'os_detalle'
+      LookupDataSet = ZQ_OS
+      LookupKeyFields = 'ID_OS'
+      LookupResultField = 'DETALLE'
+      KeyFields = 'ID_OS'
+      Size = 100
+      Lookup = True
+    end
   end
   object DS_OrdenDetalleOS: TDataSource
-    DataSet = CD_OrdenDetalleOS
+    DataSet = ZQ_OrdenDetalleOS
     Left = 837
     Top = 340
   end
@@ -6741,7 +6758,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_Personas: TZQuery
     Connection = DM.Conexion
-    Active = True
     SQL.Strings = (
       
         'select p.*,prov.nombre_provincia as prov,td.nombre_tipo_doc as t' +
@@ -6845,15 +6861,16 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DS_Orden: TDataSource
     DataSet = ZQ_Orden
-    Left = 544
+    Left = 248
+    Top = 304
   end
   object DS_OrdenDetalle: TDataSource
-    DataSet = CD_OrdenDetalle
+    DataSet = ZQ_OrdenDetalle
     Left = 616
     Top = 304
   end
   object DataSetProvider1: TDataSetProvider
-    DataSet = ZQ_OrdenDetalleOS2
+    DataSet = ZQ_OrdenDetalleOS
     Left = 612
     Top = 252
   end
@@ -6866,8 +6883,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'from OPTICA_LABORATORIO LAB'
       'where (LAB.baja='#39'N'#39')')
     Params = <>
-    Left = 741
-    Top = 290
+    Left = 909
+    Top = 202
     object ZQ_LaboratoriosID_LABORATORIO: TIntegerField
       FieldName = 'ID_LABORATORIO'
       Required = True
@@ -6900,7 +6917,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_Medico: TZQuery
     Connection = DM.Conexion
-    Active = True
     SQL.Strings = (
       
         'select MED.ID_MEDICO, MED.NOMBRE, MED.DIRECCION, MED.TELEFONO, M' +
@@ -7021,7 +7037,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       ''
       '')
     Params = <>
-    Left = 424
+    Left = 520
     Top = 352
     object StringField1: TStringField
       FieldName = 'NOMBRE_PRODUCTO'
@@ -7159,8 +7175,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     PacketRecords = 0
     Params = <>
     ProviderName = 'DataSetProvider1'
-    Left = 747
-    Top = 340
+    Left = 627
+    Top = 364
     object CD_OrdenDetalleOSID_DETALLE_OS: TIntegerField
       FieldName = 'ID_DETALLE_OS'
     end
@@ -7186,8 +7202,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object ZQ_GenOrdenDetalle: TZSequence
     Connection = DM.Conexion
     SequenceName = 'GEN_OPTICA_ORDEN_DETALLE_ID'
-    Left = 253
-    Top = 340
+    Left = 165
+    Top = 356
   end
   object EKDbSumaDetProd: TEKDbSuma
     SumCollection = <
@@ -7197,8 +7213,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end>
     DataSet = CD_OrdenDetalle
     SumListChanged = EKDbSumaDetProdSumListChanged
-    Left = 524
-    Top = 358
+    Left = 332
+    Top = 350
   end
   object EKDbSumaDetProdOS: TEKDbSuma
     SumCollection = <
@@ -7210,5 +7226,36 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     SumListChanged = EKDbSumaDetProdOSSumListChanged
     Left = 932
     Top = 294
+  end
+  object ZQ_GenOrden: TZSequence
+    Connection = DM.Conexion
+    SequenceName = 'GEN_OPTICA_ORDEN_ID'
+    Left = 605
+    Top = 84
+  end
+  object ZQ_OS: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select OO.ID_OS,coalesce(OO.CODIGO||'#39' - '#39'||OO.NOMBRE||'#39' - '#39'||OO.' +
+        'descripcion,OO.CODIGO||'#39' - '#39'||OO.NOMBRE) as detalle'
+      'from OPTICA_OS OO'
+      'where (oo.baja='#39'N'#39')'
+      ''
+      ''
+      ''
+      '')
+    Params = <>
+    Left = 736
+    Top = 361
+    object ZQ_OSID_OS: TIntegerField
+      FieldName = 'ID_OS'
+      Required = True
+    end
+    object ZQ_OSDETALLE: TStringField
+      FieldName = 'DETALLE'
+      ReadOnly = True
+      Size = 1306
+    end
   end
 end
