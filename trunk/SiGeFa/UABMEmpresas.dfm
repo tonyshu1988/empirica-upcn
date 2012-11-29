@@ -1,7 +1,7 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 216
+  Left = 234
   Top = 64
-  Width = 1024
+  Width = 1006
   Height = 663
   Caption = 'ABM Empresas'
   Color = clBtnFace
@@ -22,14 +22,2065 @@ object FABMEmpresas: TFABMEmpresas
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 573
+    Width = 998
+    Height = 584
     Align = alClient
     TabOrder = 0
+    object PageControlEdicion: TPageControl
+      Left = 1
+      Top = 377
+      Width = 996
+      Height = 206
+      ActivePage = TabEmpresa
+      Align = alBottom
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object TabEmpresa: TTabSheet
+        Caption = 'Empresa'
+        object Label10: TLabel
+          Left = 22
+          Top = 113
+          Width = 89
+          Height = 13
+          Caption = 'Observaciones:'
+        end
+        object DBMemoEmpresa: TDBMemo
+          Left = 112
+          Top = 113
+          Width = 741
+          Height = 63
+          Hint = 'Seleccione un Telefono/Mail y haga click derecho'
+          DataField = 'DESCRIPCION'
+          DataSource = DS_Empresa
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          PopupMenu = PopupMenuSkypeMail
+          TabOrder = 1
+        end
+        object PanelEdicion: TPanel
+          Left = 2
+          Top = 2
+          Width = 856
+          Height = 109
+          BevelOuter = bvNone
+          Enabled = False
+          TabOrder = 0
+          object Label5: TLabel
+            Left = 5
+            Top = 5
+            Width = 104
+            Height = 13
+            Caption = 'Nombre Empresa:'
+          end
+          object Label2: TLabel
+            Left = 52
+            Top = 89
+            Width = 57
+            Height = 13
+            Caption = 'Provincia:'
+          end
+          object Label11: TLabel
+            Left = 580
+            Top = 5
+            Width = 55
+            Height = 13
+            Caption = 'Cuit/Cuil:'
+          end
+          object Label1: TLabel
+            Left = 581
+            Top = 61
+            Width = 54
+            Height = 13
+            Caption = 'Tipo IVA:'
+          end
+          object Label3: TLabel
+            Left = 552
+            Top = 33
+            Width = 83
+            Height = 13
+            Caption = 'Tipo Empresa:'
+          end
+          object Label4: TLabel
+            Left = 51
+            Top = 61
+            Width = 58
+            Height = 13
+            Caption = 'Direcci'#243'n:'
+          end
+          object Label6: TLabel
+            Left = 335
+            Top = 89
+            Width = 58
+            Height = 13
+            Caption = 'Localidad:'
+          end
+          object Label7: TLabel
+            Left = 690
+            Top = 89
+            Width = 66
+            Height = 13
+            Caption = 'Cod.Postal:'
+          end
+          object Label9: TLabel
+            Left = 54
+            Top = 34
+            Width = 55
+            Height = 13
+            Caption = 'Pag.Web:'
+          end
+          object dbNombre: TDBEdit
+            Left = 110
+            Top = 1
+            Width = 433
+            Height = 22
+            CharCase = ecUpperCase
+            DataField = 'NOMBRE'
+            DataSource = DS_Empresa
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+          end
+          object DBCBoxProvincia: TDBLookupComboBox
+            Left = 110
+            Top = 85
+            Width = 215
+            Height = 22
+            DataField = 'ID_PROVINCIA'
+            DataSource = DS_Empresa
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            KeyField = 'ID_PROVINCIA'
+            ListField = 'NOMBRE_PROVINCIA'
+            ListSource = DS_Provincia
+            ParentFont = False
+            TabOrder = 6
+          end
+          object DBEditCuitCuil: TDBEdit
+            Left = 636
+            Top = 1
+            Width = 215
+            Height = 22
+            CharCase = ecUpperCase
+            DataField = 'CUIT_CUIL'
+            DataSource = DS_Empresa
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+          end
+          object DBCBoxTipoIva: TDBLookupComboBox
+            Left = 636
+            Top = 57
+            Width = 215
+            Height = 22
+            DataField = 'ID_TIPO_IVA'
+            DataSource = DS_Empresa
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            KeyField = 'ID_TIPO_IVA'
+            ListField = 'NOMBRE_TIPO_IVA'
+            ListSource = DS_TipoIVA
+            ParentFont = False
+            TabOrder = 5
+          end
+          object DBCBoxTipoEmpresa: TDBLookupComboBox
+            Left = 636
+            Top = 29
+            Width = 215
+            Height = 22
+            DataField = 'ID_TIPO_EMPRESA'
+            DataSource = DS_Empresa
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            KeyField = 'ID_TIPO_EMPRESA'
+            ListField = 'DESCRIPCION'
+            ListSource = DS_TipoEmpresa
+            ParentFont = False
+            TabOrder = 3
+          end
+          object DBEditDireccion: TDBEdit
+            Left = 110
+            Top = 57
+            Width = 432
+            Height = 22
+            CharCase = ecUpperCase
+            DataField = 'DIRECCION'
+            DataSource = DS_Empresa
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 4
+          end
+          object DBEditLocalidad: TDBEdit
+            Left = 395
+            Top = 85
+            Width = 288
+            Height = 22
+            CharCase = ecUpperCase
+            DataField = 'LOCALIDAD'
+            DataSource = DS_Empresa
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 7
+          end
+          object DBEditCodPostal: TDBEdit
+            Left = 762
+            Top = 85
+            Width = 89
+            Height = 22
+            CharCase = ecUpperCase
+            DataField = 'CODIGO_POSTAL'
+            DataSource = DS_Empresa
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 8
+          end
+          object DBEditWeb: TDBEdit
+            Left = 110
+            Top = 30
+            Width = 432
+            Height = 22
+            DataField = 'PAGINA_WEB'
+            DataSource = DS_Empresa
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 2
+          end
+          object btIrWeb: TButton
+            Left = 7
+            Top = 30
+            Width = 40
+            Height = 19
+            Caption = 'Ir'
+            TabOrder = 9
+            TabStop = False
+            OnClick = btIrWebClick
+          end
+        end
+      end
+      object TabTelMail: TTabSheet
+        Caption = 'Tel'#233'fonos/Mails'
+        ImageIndex = 5
+        object DBGridEntidadTelefonoEmpresa: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 998
+          Height = 178
+          Hint = 'Haga click derecho para agregar o quitar un Contacto'
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_EntidadTelefonoEmpresa
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridEntidadTelefonoEmpresaDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Title.Caption = 'Descripcion'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TELEFONO'
+              Title.Caption = 'Tel'#233'fono'
+              Width = 200
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MAIL'
+              Title.Caption = 'Mail'
+              Width = 200
+              Visible = True
+            end>
+        end
+      end
+      object TabContactos: TTabSheet
+        Caption = 'Contactos'
+        ImageIndex = 18
+        object Splitter1: TSplitter
+          Left = 536
+          Top = 0
+          Width = 8
+          Height = 104
+          Align = alRight
+        end
+        object DBGridContactos: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 536
+          Height = 104
+          Hint = 'Haga click derecho para agregar o quitar un Contacto'
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_PersonaRelacionContacto
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridContactosDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'nombre'
+              Title.Alignment = taCenter
+              Title.Caption = 'Nombre y Apellido'
+              Width = 278
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'direccion'
+              Title.Alignment = taCenter
+              Title.Caption = 'Direcci'#243'n'
+              Width = 81
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'localidad'
+              Title.Alignment = taCenter
+              Title.Caption = 'Localidad'
+              Width = 117
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cod_postal'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cod.Postal'
+              Width = 57
+              Visible = True
+            end>
+        end
+        object Panel1: TPanel
+          Left = 0
+          Top = 104
+          Width = 998
+          Height = 19
+          Align = alBottom
+          ParentShowHint = False
+          ShowHint = False
+          TabOrder = 1
+          object Label12: TLabel
+            Left = 1
+            Top = 5
+            Width = 106
+            Height = 13
+            Align = alBottom
+            Caption = 'Datos Adicionales:'
+          end
+        end
+        object DBMemoContactos: TDBMemo
+          Left = 0
+          Top = 123
+          Width = 998
+          Height = 55
+          Align = alBottom
+          Color = clWhite
+          DataField = 'descripcion'
+          DataSource = DS_PersonaRelacionContacto
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          PopupMenu = PopupMenuSkypeMail
+          TabOrder = 2
+        end
+        object DBGridContactoTelMail: TDBGrid
+          Left = 544
+          Top = 0
+          Width = 454
+          Height = 104
+          Hint = 'Haga click derecho para agregar o quitar un Contacto'
+          Align = alRight
+          Color = 14606012
+          DataSource = DS_EntidadTelefonoContacto
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridContactoTelMailDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Title.Alignment = taCenter
+              Title.Caption = 'Descripcion'
+              Width = 150
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TELEFONO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tel'#233'fono'
+              Width = 150
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MAIL'
+              Title.Alignment = taCenter
+              Title.Caption = 'Mail'
+              Width = 150
+              Visible = True
+            end>
+        end
+      end
+      object TabViajantes: TTabSheet
+        Caption = 'Viajantes'
+        ImageIndex = 9
+        object Splitter2: TSplitter
+          Left = 528
+          Top = 0
+          Width = 8
+          Height = 104
+          Align = alRight
+        end
+        object DBGridViajantes: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 528
+          Height = 104
+          Hint = 'Presione sobre el titulo de la columna para modificar el orden'
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_PersonaRelacionViajante
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = False
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridViajantesDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'nombre'
+              Title.Alignment = taCenter
+              Title.Caption = 'Nombre y Apellido'
+              Width = 249
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'direccion'
+              Title.Alignment = taCenter
+              Title.Caption = 'Direcci'#243'n'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'localidad'
+              Title.Alignment = taCenter
+              Title.Caption = 'Localidad'
+              Width = 84
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'cod_postal'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cod.Postal'
+              Width = 57
+              Visible = True
+            end>
+        end
+        object DBMemoViajantes: TDBMemo
+          Left = 0
+          Top = 123
+          Width = 998
+          Height = 55
+          Align = alBottom
+          Color = clWhite
+          DataField = 'descripcion'
+          DataSource = DS_PersonaRelacionViajante
+          PopupMenu = PopupMenuSkypeMail
+          TabOrder = 1
+        end
+        object Panel2: TPanel
+          Left = 0
+          Top = 104
+          Width = 998
+          Height = 19
+          Align = alBottom
+          ParentShowHint = False
+          ShowHint = False
+          TabOrder = 2
+          object Label13: TLabel
+            Left = 1
+            Top = 5
+            Width = 106
+            Height = 13
+            Align = alBottom
+            Caption = 'Datos Adicionales:'
+          end
+        end
+        object DBGridViajanteTelMail: TDBGrid
+          Left = 536
+          Top = 0
+          Width = 462
+          Height = 104
+          Hint = 'Haga click derecho para agregar o quitar un Contacto'
+          Align = alRight
+          Color = 14606012
+          DataSource = DS_EntidadTelefonoViajantes
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridViajanteTelMailDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'DESCRIPCION'
+              Title.Alignment = taCenter
+              Title.Caption = 'Descripcion'
+              Width = 150
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TELEFONO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tel'#233'fono'
+              Width = 150
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MAIL'
+              Title.Alignment = taCenter
+              Title.Caption = 'Mail'
+              Width = 150
+              Visible = True
+            end>
+        end
+      end
+      object TabMarcas: TTabSheet
+        Caption = 'Marcas'
+        ImageIndex = 4
+        object GrillaMarcas: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 998
+          Height = 104
+          Hint = 'Presione sobre el titulo de la columna para modificar el orden'
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_EmpresaMarca
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Style = []
+          OnDrawColumnCell = GrillaMarcasDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = '_codMarca'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'digo'
+              Width = 146
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = '_marca'
+              Title.Alignment = taCenter
+              Title.Caption = 'Nombre'
+              Visible = True
+            end>
+        end
+        object DBMemo1: TDBMemo
+          Left = 0
+          Top = 123
+          Width = 998
+          Height = 55
+          Align = alBottom
+          Color = clWhite
+          DataField = 'DESCRIPCION'
+          DataSource = DS_EmpresaMarca
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          PopupMenu = PopupMenuSkypeMail
+          TabOrder = 1
+        end
+        object Panel3: TPanel
+          Left = 0
+          Top = 104
+          Width = 998
+          Height = 19
+          Align = alBottom
+          ParentShowHint = False
+          ShowHint = False
+          TabOrder = 2
+          object Label14: TLabel
+            Left = 1
+            Top = 5
+            Width = 106
+            Height = 13
+            Align = alBottom
+            Caption = 'Datos Adicionales:'
+          end
+        end
+      end
+      object TabDescripcion: TTabSheet
+        BorderWidth = 3
+        Caption = 'Detalle'
+        ImageIndex = 3
+        object DBMemoDescripcion: TDBMemo
+          Left = 0
+          Top = 0
+          Width = 992
+          Height = 172
+          Align = alClient
+          DataField = 'DESCRIPCION_PRIVADA'
+          DataSource = DS_Empresa
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          PopupMenu = PopupMenuSkypeMail
+          TabOrder = 0
+        end
+      end
+      object TabCtaCte: TTabSheet
+        Caption = 'Cuenta Corriente'
+        ImageIndex = 6
+        object btnCtaCte_Alta: TButton
+          Left = 8
+          Top = 8
+          Width = 75
+          Height = 25
+          Caption = 'Alta'
+          TabOrder = 0
+          OnClick = btnCtaCte
+        end
+        object btnCtaCte_Modificar: TButton
+          Left = 8
+          Top = 40
+          Width = 75
+          Height = 25
+          Caption = 'Modificar'
+          TabOrder = 1
+          OnClick = btnCtaCte
+        end
+        object btnCtaCte_Baja: TButton
+          Left = 8
+          Top = 72
+          Width = 75
+          Height = 25
+          Caption = 'Baja'
+          TabOrder = 2
+          OnClick = btnCtaCte
+        end
+        object btnCtaCte_Reactivar: TButton
+          Left = 8
+          Top = 104
+          Width = 75
+          Height = 25
+          Caption = 'Reactivar'
+          TabOrder = 3
+          OnClick = btnCtaCte
+        end
+        object gBoxCuentaCorriente: TGroupBox
+          Left = 88
+          Top = 1
+          Width = 276
+          Height = 170
+          Caption = ' Cuenta Corriente '
+          TabOrder = 4
+          object Label15: TLabel
+            Left = 49
+            Top = 22
+            Width = 64
+            Height = 13
+            Caption = 'Fecha Alta:'
+          end
+          object Label8: TLabel
+            Left = 66
+            Top = 77
+            Width = 47
+            Height = 13
+            Caption = 'Credito:'
+          end
+          object Label16: TLabel
+            Left = 9
+            Top = 107
+            Width = 104
+            Height = 13
+            Caption = 'Dias Vencimiento:'
+          end
+          object Label17: TLabel
+            Left = 45
+            Top = 50
+            Width = 68
+            Height = 13
+            Caption = 'Fecha Baja:'
+          end
+          object EKDBFechaCtaCte: TEKDBDateTimePicker
+            Left = 115
+            Top = 18
+            Width = 153
+            Height = 21
+            Date = 40793.391464837970000000
+            Time = 40793.391464837970000000
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+            DataField = 'FECHA_ALTA'
+            DataSource = DS_CtaCte
+          end
+          object DBEditLimiteDeuda: TDBEdit
+            Left = 115
+            Top = 75
+            Width = 153
+            Height = 21
+            DataField = 'LIMITE_DEUDA'
+            DataSource = DS_CtaCte
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+          end
+          object btnCtaCte_Aceptar: TBitBtn
+            Left = 21
+            Top = 135
+            Width = 40
+            Height = 29
+            TabOrder = 2
+            OnClick = btnCtaCte_AceptarClick
+          end
+          object btnCtaCte_Cancelar: TBitBtn
+            Left = 212
+            Top = 135
+            Width = 40
+            Height = 29
+            TabOrder = 3
+            OnClick = btnCtaCte_CancelarClick
+          end
+          object DBEditVencimDia: TDBEdit
+            Left = 115
+            Top = 105
+            Width = 153
+            Height = 21
+            DataField = 'VENCIMIENTO_DIAS'
+            DataSource = DS_CtaCte
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 4
+          end
+          object EKDBDateTimePicker1: TEKDBDateTimePicker
+            Left = 115
+            Top = 46
+            Width = 153
+            Height = 21
+            Date = 40793.391464837970000000
+            Time = 40793.391464837970000000
+            Enabled = False
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 5
+            DataField = 'FECHA_BAJA'
+            DataSource = DS_CtaCte
+          end
+        end
+      end
+    end
+    object DBGridEmpresas: TDBGrid
+      Left = 1
+      Top = 20
+      Width = 996
+      Height = 357
+      Hint = 'Presione sobre el titulo de la columna para modificar el orden'
+      Align = alClient
+      Color = 14606012
+      DataSource = DS_Empresa
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      OnDrawColumnCell = DBGridEmpresasDrawColumnCell
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'NOMBRE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nombre Empresa'
+          Width = 226
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'DIRECCION'
+          Title.Alignment = taCenter
+          Title.Caption = 'Direcci'#243'n'
+          Width = 199
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'tipo_IVA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo I.V.A'
+          Width = 50
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CUIT_CUIL'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cuit/Cuil'
+          Width = 82
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'provincia'
+          Title.Alignment = taCenter
+          Title.Caption = 'Provincia'
+          Width = 145
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'LOCALIDAD'
+          Title.Alignment = taCenter
+          Title.Caption = 'Localidad'
+          Width = 120
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CODIGO_POSTAL'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cod.Postal'
+          Width = 70
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PAGINA_WEB'
+          Title.Alignment = taCenter
+          Title.Caption = 'Pag.Web'
+          Width = 176
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'tipo_empresa'
+          Title.Alignment = taCenter
+          Title.Caption = 'Tipo Empresa'
+          Width = 92
+          Visible = True
+        end>
+    end
+    object PBusqueda: TPanel
+      Left = 1
+      Top = 1
+      Width = 996
+      Height = 19
+      Align = alTop
+      ParentShowHint = False
+      ShowHint = False
+      TabOrder = 2
+      object lblCantidadRegistros: TLabel
+        Left = 1
+        Top = 1
+        Width = 134
+        Height = 17
+        Align = alLeft
+        Caption = 'lblCantidadRegistros'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clNavy
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+      end
+      object StaticTxtBaja: TStaticText
+        Left = 886
+        Top = 1
+        Width = 109
+        Height = 17
+        Align = alRight
+        Alignment = taCenter
+        AutoSize = False
+        BorderStyle = sbsSunken
+        Caption = 'Dado de Baja'
+        Color = 6974207
+        ParentColor = False
+        TabOrder = 0
+      end
+    end
+    object RepListaEmpresas: TQuickRep
+      Tag = 99
+      Left = 28
+      Top = 129
+      Width = 1123
+      Height = 794
+      Frame.Color = clBlack
+      Frame.DrawTop = False
+      Frame.DrawBottom = False
+      Frame.DrawLeft = False
+      Frame.DrawRight = False
+      DataSet = ZQ_Empresa
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      Functions.Strings = (
+        'PAGENUMBER'
+        'COLUMNNUMBER'
+        'REPORTTITLE')
+      Functions.DATA = (
+        '0'
+        '0'
+        #39#39)
+      Options = [FirstPageHeader, LastPageFooter]
+      Page.Columns = 1
+      Page.Orientation = poLandscape
+      Page.PaperSize = A4
+      Page.Values = (
+        100.000000000000000000
+        2100.000000000000000000
+        100.000000000000000000
+        2970.000000000000000000
+        100.000000000000000000
+        100.000000000000000000
+        0.000000000000000000)
+      PrinterSettings.Copies = 1
+      PrinterSettings.OutputBin = Auto
+      PrinterSettings.Duplex = False
+      PrinterSettings.FirstPage = 0
+      PrinterSettings.LastPage = 0
+      PrinterSettings.UseStandardprinter = False
+      PrinterSettings.UseCustomBinCode = False
+      PrinterSettings.CustomBinCode = 0
+      PrinterSettings.ExtendedDuplex = 0
+      PrinterSettings.UseCustomPaperCode = False
+      PrinterSettings.CustomPaperCode = 0
+      PrinterSettings.PrintMetaFile = False
+      PrinterSettings.PrintQuality = 0
+      PrinterSettings.Collate = 0
+      PrinterSettings.ColorOption = 0
+      PrintIfEmpty = True
+      ReportTitle = 'Reporte de Libro Banco'
+      SnapToGrid = True
+      Units = MM
+      Zoom = 100
+      PrevFormStyle = fsNormal
+      PreviewInitialState = wsNormal
+      PrevInitialZoom = qrZoomToFit
+      PreviewDefaultSaveType = stQRP
+      object QRBand5: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 38
+        Width = 1047
+        Height = 72
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          190.500000000000000000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbPageHeader
+        object QRDBLogo: TQRDBImage
+          Left = 78
+          Top = 2
+          Width = 64
+          Height = 64
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            169.333333333333300000
+            206.375000000000000000
+            5.291666666666667000
+            169.333333333333300000)
+          DataField = 'LOGO'
+        end
+        object QRLabel11: TQRLabel
+          Left = 457
+          Top = 47
+          Width = 133
+          Height = 19
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            50.270833333333330000
+            1209.145833333333000000
+            124.354166666666700000
+            351.895833333333400000)
+          Alignment = taCenter
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Lista Empresas'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 12
+        end
+        object RepListaEmpresas_subtitulo: TQRLabel
+          Left = 427
+          Top = 26
+          Width = 192
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            1129.770833333333000000
+            68.791666666666670000
+            508.000000000000000000)
+          Alignment = taCenter
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'RepListaEmpresas_subtitulo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic, fsUnderline]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 9
+        end
+        object RepListaEmpresas_Titulo: TQRLabel
+          Left = 412
+          Top = 2
+          Width = 223
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            1090.083333333333000000
+            5.291666666666667000
+            590.020833333333400000)
+          Alignment = taCenter
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'RepListaEmpresas_Titulo'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsUnderline]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 12
+        end
+      end
+      object QRBandDetalle: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 158
+        Width = 1047
+        Height = 15
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = True
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -9
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ForceNewColumn = False
+        ForceNewPage = False
+        ParentFont = False
+        Size.Values = (
+          39.687500000000000000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbDetail
+        object QRDBTextCoefGanancia: TQRDBText
+          Left = 565
+          Top = 0
+          Width = 113
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333340000
+            1494.895833333333000000
+            0.000000000000000000
+            298.979166666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Empresa
+          DataField = 'LOCALIDAD'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QRDBText1: TQRDBText
+          Left = 4
+          Top = 0
+          Width = 155
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333340000
+            10.583333333333330000
+            0.000000000000000000
+            410.104166666666800000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Empresa
+          DataField = 'NOMBRE'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QRDBTextPrecioCosto: TQRDBText
+          Left = 868
+          Top = 0
+          Width = 176
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333340000
+            2296.583333333333000000
+            0.000000000000000000
+            465.666666666666800000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Empresa
+          DataField = 'EMAIL'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QRDBTextPrecioVenta: TQRDBText
+          Left = 682
+          Top = 0
+          Width = 183
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333340000
+            1804.458333333333000000
+            0.000000000000000000
+            484.187500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Empresa
+          DataField = 'TELEFONO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QRDBText6: TQRDBText
+          Left = 393
+          Top = 0
+          Width = 169
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333340000
+            1039.812500000000000000
+            0.000000000000000000
+            447.145833333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Empresa
+          DataField = 'DIRECCION'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QRDBText7: TQRDBText
+          Left = 309
+          Top = 0
+          Width = 81
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333340000
+            817.562500000000000000
+            0.000000000000000000
+            214.312500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Empresa
+          DataField = 'CUIT_CUIL'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+        object QRDBText5: TQRDBText
+          Left = 163
+          Top = 0
+          Width = 142
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333340000
+            431.270833333333400000
+            0.000000000000000000
+            375.708333333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_Empresa
+          DataField = 'tipo_IVA'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 6
+        end
+      end
+      object QRBand7: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 191
+        Width = 1047
+        Height = 24
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          63.500000000000000000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbPageFooter
+        object QRLabel24: TQRLabel
+          Left = 957
+          Top = 1
+          Width = 39
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333340000
+            2532.062500000000000000
+            2.645833333333333000
+            103.187500000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'P'#225'gina:'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRSysData2: TQRSysData
+          Left = 1006
+          Top = 1
+          Width = 41
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333340000
+            2661.708333333333000000
+            2.645833333333333000
+            108.479166666666700000)
+          Alignment = taRightJustify
+          AlignToBand = True
+          AutoSize = False
+          Color = clWhite
+          Data = qrsPageNumber
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRSysData3: TQRSysData
+          Left = 999
+          Top = 3
+          Width = 45
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            2643.187500000000000000
+            7.937500000000000000
+            119.062500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          Color = clWhite
+          Data = qrsPageNumber
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabel43: TQRLabel
+          Left = 957
+          Top = 3
+          Width = 39
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            2532.062500000000000000
+            7.937500000000000000
+            103.187500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'P'#225'gina:'
+          Color = clWhite
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRlblPieDePaginaListado: TQRLabel
+          Left = 4
+          Top = 3
+          Width = 115
+          Height = 20
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            52.916666666666670000
+            10.583333333333330000
+            7.937500000000000000
+            304.270833333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'QRlblPieDePaginaListado'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsItalic]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+      end
+      object QRBand1: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 173
+        Width = 1047
+        Height = 18
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          47.625000000000000000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbSummary
+        object QRExpr15: TQRExpr
+          Left = 855
+          Top = 2
+          Width = 192
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2262.187500000000000000
+            5.291666666666667000
+            508.000000000000000000)
+          Alignment = taRightJustify
+          AlignToBand = True
+          AutoSize = True
+          AutoStretch = False
+          Color = clWhite
+          ResetAfterPrint = False
+          Transparent = False
+          WordWrap = True
+          Expression = #39'Cantidad de Registros: '#39'+COUNT'
+          ExportAs = exptText
+          FontSize = 8
+        end
+      end
+      object TitleBand1: TQRBand
+        Tag = 99
+        Left = 38
+        Top = 110
+        Width = 1047
+        Height = 31
+        Frame.Color = clBlack
+        Frame.DrawTop = False
+        Frame.DrawBottom = False
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clWhite
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          82.020833333333340000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbTitle
+        object QRLabel48: TQRLabel
+          Left = 5
+          Top = 2
+          Width = 126
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333340000
+            13.229166666666670000
+            5.291666666666667000
+            333.375000000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = True
+          AutoStretch = False
+          Caption = 'Criterios de Busqueda:'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold, fsItalic]
+          ParentFont = False
+          Transparent = False
+          WordWrap = False
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRLabelCritBusqueda: TQRLabel
+          Left = 5
+          Top = 16
+          Width = 692
+          Height = 13
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            34.395833333333330000
+            13.229166666666670000
+            42.333333333333330000
+            1830.916666666667000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = True
+          Caption = 'QRLabelCritBusqueda'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -9
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+      end
+      object ColumnHeaderBand1: TQRBand
+        Left = 38
+        Top = 141
+        Width = 1047
+        Height = 17
+        Frame.Color = clBlack
+        Frame.DrawTop = True
+        Frame.DrawBottom = True
+        Frame.DrawLeft = False
+        Frame.DrawRight = False
+        AlignToBottom = False
+        Color = clSilver
+        TransparentBand = False
+        ForceNewColumn = False
+        ForceNewPage = False
+        Size.Values = (
+          44.979166666666670000
+          2770.187500000000000000)
+        PreCaluculateBandHeight = False
+        KeepOnOnePage = False
+        BandType = rbColumnHeader
+        object QRLabel1: TQRLabel
+          Left = 4
+          Top = 1
+          Width = 109
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            10.583333333333330000
+            2.645833333333333000
+            288.395833333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Nombre'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel12: TQRLabel
+          Left = 163
+          Top = 1
+          Width = 73
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            431.270833333333400000
+            2.645833333333333000
+            193.145833333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Tipo I.V.A.'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel7: TQRLabel
+          Left = 309
+          Top = 1
+          Width = 67
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            817.562500000000000000
+            2.645833333333333000
+            177.270833333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Cuit/Cuil'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel8: TQRLabel
+          Left = 393
+          Top = 1
+          Width = 66
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1039.812500000000000000
+            2.645833333333333000
+            174.625000000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Direcci'#243'n'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel14: TQRLabel
+          Left = 565
+          Top = 1
+          Width = 80
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1494.895833333333000000
+            2.645833333333333000
+            211.666666666666700000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Localidad'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel10: TQRLabel
+          Left = 683
+          Top = 1
+          Width = 70
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1807.104166666667000000
+            2.645833333333333000
+            185.208333333333300000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Tel'#233'fono'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel6: TQRLabel
+          Left = 868
+          Top = 1
+          Width = 69
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2296.583333333333000000
+            2.645833333333333000
+            182.562500000000000000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Email'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+      end
+    end
     object RepDetalleEmpresa: TQuickRep
       Tag = 99
-      Left = 100
-      Top = 106
+      Left = 108
+      Top = 346
       Width = 794
       Height = 1123
       Frame.Color = clBlack
@@ -158,10 +2209,10 @@ object FABMEmpresas: TFABMEmpresas
           ExportAs = exptText
           FontSize = 12
         end
-        object QRLabel3: TQRLabel
-          Left = 268
+        object RepDetalleEmpresa_subtitulo: TQRLabel
+          Left = 259
           Top = 26
-          Width = 181
+          Width = 200
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -170,14 +2221,14 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            709.083333333333300000
+            685.270833333333400000
             68.791666666666670000
-            478.895833333333300000)
+            529.166666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepCtas_Reporte_Titulo_2'
+          Caption = 'RepDetalleEmpresa_subtitulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -190,10 +2241,10 @@ object FABMEmpresas: TFABMEmpresas
           ExportAs = exptText
           FontSize = 9
         end
-        object QRLabel4: TQRLabel
-          Left = 239
+        object RepDetalleEmpresa_titulo: TQRLabel
+          Left = 244
           Top = 2
-          Width = 240
+          Width = 229
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -202,14 +2253,14 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            632.354166666666700000
+            645.583333333333400000
             5.291666666666667000
-            635.000000000000000000)
+            605.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepCtas_Reporte_Titulo_1'
+          Caption = 'RepDetalleEmpresa_titulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -434,7 +2485,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -450,7 +2501,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             1677.458333333333000000
             2.645833333333333000
             103.187500000000000000)
@@ -482,7 +2533,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -1411,1883 +3462,11 @@ object FABMEmpresas: TFABMEmpresas
         end
       end
     end
-    object RepListaEmpresas: TQuickRep
-      Tag = 99
-      Left = 68
-      Top = 313
-      Width = 1123
-      Height = 794
-      Frame.Color = clBlack
-      Frame.DrawTop = False
-      Frame.DrawBottom = False
-      Frame.DrawLeft = False
-      Frame.DrawRight = False
-      DataSet = ZQ_Empresa
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      Functions.Strings = (
-        'PAGENUMBER'
-        'COLUMNNUMBER'
-        'REPORTTITLE')
-      Functions.DATA = (
-        '0'
-        '0'
-        #39#39)
-      Options = [FirstPageHeader, LastPageFooter]
-      Page.Columns = 1
-      Page.Orientation = poLandscape
-      Page.PaperSize = A4
-      Page.Values = (
-        100.000000000000000000
-        2100.000000000000000000
-        100.000000000000000000
-        2970.000000000000000000
-        100.000000000000000000
-        100.000000000000000000
-        0.000000000000000000)
-      PrinterSettings.Copies = 1
-      PrinterSettings.OutputBin = Auto
-      PrinterSettings.Duplex = False
-      PrinterSettings.FirstPage = 0
-      PrinterSettings.LastPage = 0
-      PrinterSettings.UseStandardprinter = False
-      PrinterSettings.UseCustomBinCode = False
-      PrinterSettings.CustomBinCode = 0
-      PrinterSettings.ExtendedDuplex = 0
-      PrinterSettings.UseCustomPaperCode = False
-      PrinterSettings.CustomPaperCode = 0
-      PrinterSettings.PrintMetaFile = False
-      PrinterSettings.PrintQuality = 0
-      PrinterSettings.Collate = 0
-      PrinterSettings.ColorOption = 0
-      PrintIfEmpty = True
-      ReportTitle = 'Reporte de Libro Banco'
-      SnapToGrid = True
-      Units = MM
-      Zoom = 100
-      PrevFormStyle = fsNormal
-      PreviewInitialState = wsNormal
-      PrevInitialZoom = qrZoomToFit
-      PreviewDefaultSaveType = stQRP
-      object QRBand5: TQRBand
-        Tag = 99
-        Left = 38
-        Top = 38
-        Width = 1047
-        Height = 72
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        AlignToBottom = False
-        Color = clWhite
-        TransparentBand = False
-        ForceNewColumn = False
-        ForceNewPage = False
-        Size.Values = (
-          190.500000000000000000
-          2770.187500000000000000)
-        PreCaluculateBandHeight = False
-        KeepOnOnePage = False
-        BandType = rbPageHeader
-        object QRDBLogo: TQRDBImage
-          Left = 78
-          Top = 2
-          Width = 64
-          Height = 64
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            169.333333333333300000
-            206.375000000000000000
-            5.291666666666667000
-            169.333333333333300000)
-          DataField = 'LOGO'
-        end
-        object QRLabel11: TQRLabel
-          Left = 457
-          Top = 47
-          Width = 133
-          Height = 19
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            50.270833333333330000
-            1209.145833333333000000
-            124.354166666666700000
-            351.895833333333300000)
-          Alignment = taCenter
-          AlignToBand = True
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'Lista Empresas'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 12
-        end
-        object RepCtas_Reporte_Titulo_2: TQRLabel
-          Left = 433
-          Top = 26
-          Width = 181
-          Height = 20
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            52.916666666666670000
-            1145.645833333333000000
-            68.791666666666670000
-            478.895833333333300000)
-          Alignment = taCenter
-          AlignToBand = True
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'RepCtas_Reporte_Titulo_2'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold, fsItalic, fsUnderline]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 9
-        end
-        object RepCtas_Reporte_Titulo_1: TQRLabel
-          Left = 403
-          Top = 2
-          Width = 240
-          Height = 20
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            52.916666666666670000
-            1066.270833333333000000
-            5.291666666666667000
-            635.000000000000000000)
-          Alignment = taCenter
-          AlignToBand = True
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'RepCtas_Reporte_Titulo_1'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold, fsUnderline]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 12
-        end
-      end
-      object QRBandDetalle: TQRBand
-        Tag = 99
-        Left = 38
-        Top = 127
-        Width = 1047
-        Height = 15
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = True
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        AlignToBottom = False
-        Color = clWhite
-        TransparentBand = False
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -9
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ForceNewColumn = False
-        ForceNewPage = False
-        ParentFont = False
-        Size.Values = (
-          39.687500000000000000
-          2770.187500000000000000)
-        PreCaluculateBandHeight = False
-        KeepOnOnePage = False
-        BandType = rbDetail
-        object QRDBTextCoefGanancia: TQRDBText
-          Left = 565
-          Top = 0
-          Width = 113
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333340000
-            1494.895833333333000000
-            0.000000000000000000
-            298.979166666666700000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Empresa
-          DataField = 'LOCALIDAD'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 6
-        end
-        object QRDBText1: TQRDBText
-          Left = 4
-          Top = 0
-          Width = 155
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333340000
-            10.583333333333330000
-            0.000000000000000000
-            410.104166666666800000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Empresa
-          DataField = 'NOMBRE'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 6
-        end
-        object QRDBTextPrecioCosto: TQRDBText
-          Left = 868
-          Top = 0
-          Width = 176
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333340000
-            2296.583333333333000000
-            0.000000000000000000
-            465.666666666666800000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Empresa
-          DataField = 'EMAIL'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 6
-        end
-        object QRDBTextPrecioVenta: TQRDBText
-          Left = 682
-          Top = 0
-          Width = 183
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333340000
-            1804.458333333333000000
-            0.000000000000000000
-            484.187500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Empresa
-          DataField = 'TELEFONO'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 6
-        end
-        object QRDBText6: TQRDBText
-          Left = 393
-          Top = 0
-          Width = 169
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333340000
-            1039.812500000000000000
-            0.000000000000000000
-            447.145833333333400000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Empresa
-          DataField = 'DIRECCION'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 6
-        end
-        object QRDBText7: TQRDBText
-          Left = 309
-          Top = 0
-          Width = 81
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333340000
-            817.562500000000000000
-            0.000000000000000000
-            214.312500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Empresa
-          DataField = 'CUIT_CUIL'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 6
-        end
-        object QRDBText5: TQRDBText
-          Left = 163
-          Top = 0
-          Width = 142
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333340000
-            431.270833333333400000
-            0.000000000000000000
-            375.708333333333400000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_Empresa
-          DataField = 'tipo_IVA'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 6
-        end
-      end
-      object QRBand7: TQRBand
-        Tag = 99
-        Left = 38
-        Top = 160
-        Width = 1047
-        Height = 16
-        Frame.Color = clBlack
-        Frame.DrawTop = True
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        AlignToBottom = False
-        Color = clWhite
-        TransparentBand = False
-        ForceNewColumn = False
-        ForceNewPage = False
-        Size.Values = (
-          42.333333333333330000
-          2770.187500000000000000)
-        PreCaluculateBandHeight = False
-        KeepOnOnePage = False
-        BandType = rbPageFooter
-        object QRLabel24: TQRLabel
-          Left = 957
-          Top = 1
-          Width = 39
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333330000
-            2532.062500000000000000
-            2.645833333333333000
-            103.187500000000000000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = True
-          AutoStretch = False
-          Caption = 'P'#225'gina:'
-          Color = clWhite
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-        object QRSysData2: TQRSysData
-          Left = 1006
-          Top = 1
-          Width = 41
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333330000
-            2661.708333333333000000
-            2.645833333333333000
-            108.479166666666700000)
-          Alignment = taRightJustify
-          AlignToBand = True
-          AutoSize = False
-          Color = clWhite
-          Data = qrsPageNumber
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-      end
-      object QRBand1: TQRBand
-        Tag = 99
-        Left = 38
-        Top = 142
-        Width = 1047
-        Height = 18
-        Frame.Color = clBlack
-        Frame.DrawTop = False
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        AlignToBottom = False
-        Color = clWhite
-        TransparentBand = False
-        ForceNewColumn = False
-        ForceNewPage = False
-        Size.Values = (
-          47.625000000000000000
-          2770.187500000000000000)
-        PreCaluculateBandHeight = False
-        KeepOnOnePage = False
-        BandType = rbSummary
-        object QRExpr15: TQRExpr
-          Left = 855
-          Top = 2
-          Width = 192
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            2262.187500000000000000
-            5.291666666666667000
-            508.000000000000000000)
-          Alignment = taRightJustify
-          AlignToBand = True
-          AutoSize = True
-          AutoStretch = False
-          Color = clWhite
-          ResetAfterPrint = False
-          Transparent = False
-          WordWrap = True
-          Expression = #39'Cantidad de Registros: '#39'+COUNT'
-          ExportAs = exptText
-          FontSize = 8
-        end
-      end
-      object QRChildBandCleinte: TQRChildBand
-        Tag = 99
-        Left = 38
-        Top = 110
-        Width = 1047
-        Height = 17
-        Frame.Color = clBlack
-        Frame.DrawTop = True
-        Frame.DrawBottom = False
-        Frame.DrawLeft = False
-        Frame.DrawRight = False
-        AlignToBottom = False
-        Color = clSilver
-        TransparentBand = False
-        ForceNewColumn = False
-        ForceNewPage = False
-        Size.Values = (
-          44.979166666666670000
-          2770.187500000000000000)
-        PreCaluculateBandHeight = False
-        KeepOnOnePage = False
-        ParentBand = QRBand5
-        PrintOrder = cboAfterParent
-        object QRLabel1: TQRLabel
-          Left = 4
-          Top = 1
-          Width = 109
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            10.583333333333330000
-            2.645833333333333000
-            288.395833333333400000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Nombre'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 8
-        end
-        object QRLabel6: TQRLabel
-          Left = 868
-          Top = 1
-          Width = 69
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            2296.583333333333000000
-            2.645833333333333000
-            182.562500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Email'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 8
-        end
-        object QRLabel7: TQRLabel
-          Left = 309
-          Top = 1
-          Width = 67
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            817.562500000000000000
-            2.645833333333333000
-            177.270833333333300000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Cuit/Cuil'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 8
-        end
-        object QRLabel8: TQRLabel
-          Left = 393
-          Top = 1
-          Width = 66
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1039.812500000000000000
-            2.645833333333333000
-            174.625000000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Direcci'#243'n'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 8
-        end
-        object QRLabel10: TQRLabel
-          Left = 683
-          Top = 1
-          Width = 43
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1807.104166666667000000
-            2.645833333333333000
-            113.770833333333300000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Tel'#233'fono'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 8
-        end
-        object QRLabel12: TQRLabel
-          Left = 163
-          Top = 1
-          Width = 73
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            431.270833333333400000
-            2.645833333333333000
-            193.145833333333300000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Tipo I.V.A.'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 8
-        end
-        object QRLabel14: TQRLabel
-          Left = 565
-          Top = 1
-          Width = 80
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1494.895833333333000000
-            2.645833333333333000
-            211.666666666666700000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Localidad'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 8
-        end
-      end
-    end
-    object PageControlEdicion: TPageControl
-      Left = 1
-      Top = 366
-      Width = 1006
-      Height = 206
-      ActivePage = TabEmpresa
-      Align = alBottom
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      object TabEmpresa: TTabSheet
-        Caption = 'Empresa'
-        object Label10: TLabel
-          Left = 22
-          Top = 113
-          Width = 89
-          Height = 13
-          Caption = 'Observaciones:'
-        end
-        object DBMemoEmpresa: TDBMemo
-          Left = 112
-          Top = 113
-          Width = 741
-          Height = 63
-          Hint = 'Seleccione un Telefono/Mail y haga click derecho'
-          DataField = 'DESCRIPCION'
-          DataSource = DS_Empresa
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          PopupMenu = PopupMenuSkypeMail
-          TabOrder = 1
-        end
-        object PanelEdicion: TPanel
-          Left = 2
-          Top = 2
-          Width = 856
-          Height = 109
-          BevelOuter = bvNone
-          Enabled = False
-          TabOrder = 0
-          object Label5: TLabel
-            Left = 5
-            Top = 5
-            Width = 104
-            Height = 13
-            Caption = 'Nombre Empresa:'
-          end
-          object Label2: TLabel
-            Left = 52
-            Top = 89
-            Width = 57
-            Height = 13
-            Caption = 'Provincia:'
-          end
-          object Label11: TLabel
-            Left = 580
-            Top = 5
-            Width = 55
-            Height = 13
-            Caption = 'Cuit/Cuil:'
-          end
-          object Label1: TLabel
-            Left = 581
-            Top = 61
-            Width = 54
-            Height = 13
-            Caption = 'Tipo IVA:'
-          end
-          object Label3: TLabel
-            Left = 552
-            Top = 33
-            Width = 83
-            Height = 13
-            Caption = 'Tipo Empresa:'
-          end
-          object Label4: TLabel
-            Left = 51
-            Top = 61
-            Width = 58
-            Height = 13
-            Caption = 'Direcci'#243'n:'
-          end
-          object Label6: TLabel
-            Left = 335
-            Top = 89
-            Width = 58
-            Height = 13
-            Caption = 'Localidad:'
-          end
-          object Label7: TLabel
-            Left = 690
-            Top = 89
-            Width = 66
-            Height = 13
-            Caption = 'Cod.Postal:'
-          end
-          object Label9: TLabel
-            Left = 54
-            Top = 34
-            Width = 55
-            Height = 13
-            Caption = 'Pag.Web:'
-          end
-          object dbNombre: TDBEdit
-            Left = 110
-            Top = 1
-            Width = 433
-            Height = 22
-            CharCase = ecUpperCase
-            DataField = 'NOMBRE'
-            DataSource = DS_Empresa
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 0
-          end
-          object DBCBoxProvincia: TDBLookupComboBox
-            Left = 110
-            Top = 85
-            Width = 215
-            Height = 22
-            DataField = 'ID_PROVINCIA'
-            DataSource = DS_Empresa
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            KeyField = 'ID_PROVINCIA'
-            ListField = 'NOMBRE_PROVINCIA'
-            ListSource = DS_Provincia
-            ParentFont = False
-            TabOrder = 6
-          end
-          object DBEditCuitCuil: TDBEdit
-            Left = 636
-            Top = 1
-            Width = 215
-            Height = 22
-            CharCase = ecUpperCase
-            DataField = 'CUIT_CUIL'
-            DataSource = DS_Empresa
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 1
-          end
-          object DBCBoxTipoIva: TDBLookupComboBox
-            Left = 636
-            Top = 57
-            Width = 215
-            Height = 22
-            DataField = 'ID_TIPO_IVA'
-            DataSource = DS_Empresa
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            KeyField = 'ID_TIPO_IVA'
-            ListField = 'NOMBRE_TIPO_IVA'
-            ListSource = DS_TipoIVA
-            ParentFont = False
-            TabOrder = 5
-          end
-          object DBCBoxTipoEmpresa: TDBLookupComboBox
-            Left = 636
-            Top = 29
-            Width = 215
-            Height = 22
-            DataField = 'ID_TIPO_EMPRESA'
-            DataSource = DS_Empresa
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            KeyField = 'ID_TIPO_EMPRESA'
-            ListField = 'DESCRIPCION'
-            ListSource = DS_TipoEmpresa
-            ParentFont = False
-            TabOrder = 3
-          end
-          object DBEditDireccion: TDBEdit
-            Left = 110
-            Top = 57
-            Width = 432
-            Height = 22
-            CharCase = ecUpperCase
-            DataField = 'DIRECCION'
-            DataSource = DS_Empresa
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 4
-          end
-          object DBEditLocalidad: TDBEdit
-            Left = 395
-            Top = 85
-            Width = 288
-            Height = 22
-            CharCase = ecUpperCase
-            DataField = 'LOCALIDAD'
-            DataSource = DS_Empresa
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 7
-          end
-          object DBEditCodPostal: TDBEdit
-            Left = 762
-            Top = 85
-            Width = 89
-            Height = 22
-            CharCase = ecUpperCase
-            DataField = 'CODIGO_POSTAL'
-            DataSource = DS_Empresa
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 8
-          end
-          object DBEditWeb: TDBEdit
-            Left = 110
-            Top = 30
-            Width = 432
-            Height = 22
-            DataField = 'PAGINA_WEB'
-            DataSource = DS_Empresa
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -12
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 2
-          end
-          object btIrWeb: TButton
-            Left = 7
-            Top = 30
-            Width = 40
-            Height = 19
-            Caption = 'Ir'
-            TabOrder = 9
-            TabStop = False
-            OnClick = btIrWebClick
-          end
-        end
-      end
-      object TabTelMail: TTabSheet
-        Caption = 'Tel'#233'fonos/Mails'
-        ImageIndex = 5
-        object DBGridEntidadTelefonoEmpresa: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 998
-          Height = 178
-          Hint = 'Haga click derecho para agregar o quitar un Contacto'
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_EntidadTelefonoEmpresa
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridEntidadTelefonoEmpresaDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'DESCRIPCION'
-              Title.Caption = 'Descripcion'
-              Width = 200
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'TELEFONO'
-              Title.Caption = 'Tel'#233'fono'
-              Width = 200
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MAIL'
-              Title.Caption = 'Mail'
-              Width = 200
-              Visible = True
-            end>
-        end
-      end
-      object TabContactos: TTabSheet
-        Caption = 'Contactos'
-        ImageIndex = 18
-        object Splitter1: TSplitter
-          Left = 536
-          Top = 0
-          Width = 8
-          Height = 104
-          Align = alRight
-        end
-        object DBGridContactos: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 536
-          Height = 104
-          Hint = 'Haga click derecho para agregar o quitar un Contacto'
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_PersonaRelacionContacto
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridContactosDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'nombre'
-              Title.Alignment = taCenter
-              Title.Caption = 'Nombre y Apellido'
-              Width = 278
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'direccion'
-              Title.Alignment = taCenter
-              Title.Caption = 'Direcci'#243'n'
-              Width = 81
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'localidad'
-              Title.Alignment = taCenter
-              Title.Caption = 'Localidad'
-              Width = 117
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'cod_postal'
-              Title.Alignment = taCenter
-              Title.Caption = 'Cod.Postal'
-              Width = 57
-              Visible = True
-            end>
-        end
-        object Panel1: TPanel
-          Left = 0
-          Top = 104
-          Width = 998
-          Height = 19
-          Align = alBottom
-          ParentShowHint = False
-          ShowHint = False
-          TabOrder = 1
-          object Label12: TLabel
-            Left = 1
-            Top = 5
-            Width = 996
-            Height = 13
-            Align = alBottom
-            Caption = 'Datos Adicionales:'
-          end
-        end
-        object DBMemoContactos: TDBMemo
-          Left = 0
-          Top = 123
-          Width = 998
-          Height = 55
-          Align = alBottom
-          Color = clWhite
-          DataField = 'descripcion'
-          DataSource = DS_PersonaRelacionContacto
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          PopupMenu = PopupMenuSkypeMail
-          TabOrder = 2
-        end
-        object DBGridContactoTelMail: TDBGrid
-          Left = 544
-          Top = 0
-          Width = 454
-          Height = 104
-          Hint = 'Haga click derecho para agregar o quitar un Contacto'
-          Align = alRight
-          Color = 14606012
-          DataSource = DS_EntidadTelefonoContacto
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 3
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridContactoTelMailDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'DESCRIPCION'
-              Title.Alignment = taCenter
-              Title.Caption = 'Descripcion'
-              Width = 150
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'TELEFONO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Tel'#233'fono'
-              Width = 150
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MAIL'
-              Title.Alignment = taCenter
-              Title.Caption = 'Mail'
-              Width = 150
-              Visible = True
-            end>
-        end
-      end
-      object TabViajantes: TTabSheet
-        Caption = 'Viajantes'
-        ImageIndex = 9
-        object Splitter2: TSplitter
-          Left = 528
-          Top = 0
-          Width = 8
-          Height = 104
-          Align = alRight
-        end
-        object DBGridViajantes: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 528
-          Height = 104
-          Hint = 'Presione sobre el titulo de la columna para modificar el orden'
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_PersonaRelacionViajante
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = False
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridViajantesDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'nombre'
-              Title.Alignment = taCenter
-              Title.Caption = 'Nombre y Apellido'
-              Width = 249
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'direccion'
-              Title.Alignment = taCenter
-              Title.Caption = 'Direcci'#243'n'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'localidad'
-              Title.Alignment = taCenter
-              Title.Caption = 'Localidad'
-              Width = 84
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'cod_postal'
-              Title.Alignment = taCenter
-              Title.Caption = 'Cod.Postal'
-              Width = 57
-              Visible = True
-            end>
-        end
-        object DBMemoViajantes: TDBMemo
-          Left = 0
-          Top = 123
-          Width = 998
-          Height = 55
-          Align = alBottom
-          Color = clWhite
-          DataField = 'descripcion'
-          DataSource = DS_PersonaRelacionViajante
-          PopupMenu = PopupMenuSkypeMail
-          TabOrder = 1
-        end
-        object Panel2: TPanel
-          Left = 0
-          Top = 104
-          Width = 998
-          Height = 19
-          Align = alBottom
-          ParentShowHint = False
-          ShowHint = False
-          TabOrder = 2
-          object Label13: TLabel
-            Left = 1
-            Top = 5
-            Width = 996
-            Height = 13
-            Align = alBottom
-            Caption = 'Datos Adicionales:'
-          end
-        end
-        object DBGridViajanteTelMail: TDBGrid
-          Left = 536
-          Top = 0
-          Width = 462
-          Height = 104
-          Hint = 'Haga click derecho para agregar o quitar un Contacto'
-          Align = alRight
-          Color = 14606012
-          DataSource = DS_EntidadTelefonoViajantes
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 3
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridViajanteTelMailDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'DESCRIPCION'
-              Title.Alignment = taCenter
-              Title.Caption = 'Descripcion'
-              Width = 150
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'TELEFONO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Tel'#233'fono'
-              Width = 150
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MAIL'
-              Title.Alignment = taCenter
-              Title.Caption = 'Mail'
-              Width = 150
-              Visible = True
-            end>
-        end
-      end
-      object TabMarcas: TTabSheet
-        Caption = 'Marcas'
-        ImageIndex = 4
-        object GrillaMarcas: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 998
-          Height = 104
-          Hint = 'Presione sobre el titulo de la columna para modificar el orden'
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_EmpresaMarca
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          ParentShowHint = False
-          ShowHint = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
-          TitleFont.Style = []
-          OnDrawColumnCell = GrillaMarcasDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = '_codMarca'
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'digo'
-              Width = 146
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = '_marca'
-              Title.Alignment = taCenter
-              Title.Caption = 'Nombre'
-              Visible = True
-            end>
-        end
-        object DBMemo1: TDBMemo
-          Left = 0
-          Top = 123
-          Width = 998
-          Height = 55
-          Align = alBottom
-          Color = clWhite
-          DataField = 'DESCRIPCION'
-          DataSource = DS_EmpresaMarca
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          PopupMenu = PopupMenuSkypeMail
-          TabOrder = 1
-        end
-        object Panel3: TPanel
-          Left = 0
-          Top = 104
-          Width = 998
-          Height = 19
-          Align = alBottom
-          ParentShowHint = False
-          ShowHint = False
-          TabOrder = 2
-          object Label14: TLabel
-            Left = 1
-            Top = 5
-            Width = 996
-            Height = 13
-            Align = alBottom
-            Caption = 'Datos Adicionales:'
-          end
-        end
-      end
-      object TabDescripcion: TTabSheet
-        BorderWidth = 3
-        Caption = 'Detalle'
-        ImageIndex = 3
-        object DBMemoDescripcion: TDBMemo
-          Left = 0
-          Top = 0
-          Width = 992
-          Height = 172
-          Align = alClient
-          DataField = 'DESCRIPCION_PRIVADA'
-          DataSource = DS_Empresa
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          PopupMenu = PopupMenuSkypeMail
-          TabOrder = 0
-        end
-      end
-      object TabCtaCte: TTabSheet
-        Caption = 'Cuenta Corriente'
-        ImageIndex = 6
-        object btnCtaCte_Alta: TButton
-          Left = 8
-          Top = 8
-          Width = 75
-          Height = 25
-          Caption = 'Alta'
-          TabOrder = 0
-          OnClick = btnCtaCte
-        end
-        object btnCtaCte_Modificar: TButton
-          Left = 8
-          Top = 40
-          Width = 75
-          Height = 25
-          Caption = 'Modificar'
-          TabOrder = 1
-          OnClick = btnCtaCte
-        end
-        object btnCtaCte_Baja: TButton
-          Left = 8
-          Top = 72
-          Width = 75
-          Height = 25
-          Caption = 'Baja'
-          TabOrder = 2
-          OnClick = btnCtaCte
-        end
-        object btnCtaCte_Reactivar: TButton
-          Left = 8
-          Top = 104
-          Width = 75
-          Height = 25
-          Caption = 'Reactivar'
-          TabOrder = 3
-          OnClick = btnCtaCte
-        end
-        object gBoxCuentaCorriente: TGroupBox
-          Left = 88
-          Top = 1
-          Width = 276
-          Height = 170
-          Caption = ' Cuenta Corriente '
-          TabOrder = 4
-          object Label15: TLabel
-            Left = 49
-            Top = 22
-            Width = 64
-            Height = 13
-            Caption = 'Fecha Alta:'
-          end
-          object Label8: TLabel
-            Left = 66
-            Top = 77
-            Width = 47
-            Height = 13
-            Caption = 'Credito:'
-          end
-          object Label16: TLabel
-            Left = 9
-            Top = 107
-            Width = 104
-            Height = 13
-            Caption = 'Dias Vencimiento:'
-          end
-          object Label17: TLabel
-            Left = 45
-            Top = 50
-            Width = 68
-            Height = 13
-            Caption = 'Fecha Baja:'
-          end
-          object EKDBFechaCtaCte: TEKDBDateTimePicker
-            Left = 115
-            Top = 18
-            Width = 153
-            Height = 21
-            Date = 40793.391464837970000000
-            Time = 40793.391464837970000000
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 0
-            DataField = 'FECHA_ALTA'
-            DataSource = DS_CtaCte
-          end
-          object DBEditLimiteDeuda: TDBEdit
-            Left = 115
-            Top = 75
-            Width = 153
-            Height = 21
-            DataField = 'LIMITE_DEUDA'
-            DataSource = DS_CtaCte
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 1
-          end
-          object btnCtaCte_Aceptar: TBitBtn
-            Left = 21
-            Top = 135
-            Width = 40
-            Height = 29
-            TabOrder = 2
-            OnClick = btnCtaCte_AceptarClick
-          end
-          object btnCtaCte_Cancelar: TBitBtn
-            Left = 212
-            Top = 135
-            Width = 40
-            Height = 29
-            TabOrder = 3
-            OnClick = btnCtaCte_CancelarClick
-          end
-          object DBEditVencimDia: TDBEdit
-            Left = 115
-            Top = 105
-            Width = 153
-            Height = 21
-            DataField = 'VENCIMIENTO_DIAS'
-            DataSource = DS_CtaCte
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 4
-          end
-          object EKDBDateTimePicker1: TEKDBDateTimePicker
-            Left = 115
-            Top = 46
-            Width = 153
-            Height = 21
-            Date = 40793.391464837970000000
-            Time = 40793.391464837970000000
-            Enabled = False
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 5
-            DataField = 'FECHA_BAJA'
-            DataSource = DS_CtaCte
-          end
-        end
-      end
-    end
-    object DBGridEmpresas: TDBGrid
-      Left = 1
-      Top = 20
-      Width = 1006
-      Height = 346
-      Hint = 'Presione sobre el titulo de la columna para modificar el orden'
-      Align = alClient
-      Color = 14606012
-      DataSource = DS_Empresa
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-      ParentFont = False
-      ParentShowHint = False
-      ShowHint = True
-      TabOrder = 1
-      TitleFont.Charset = ANSI_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Verdana'
-      TitleFont.Style = []
-      OnDrawColumnCell = DBGridEmpresasDrawColumnCell
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'NOMBRE'
-          Title.Alignment = taCenter
-          Title.Caption = 'Nombre Empresa'
-          Width = 226
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'DIRECCION'
-          Title.Alignment = taCenter
-          Title.Caption = 'Direcci'#243'n'
-          Width = 199
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'tipo_IVA'
-          Title.Alignment = taCenter
-          Title.Caption = 'Tipo I.V.A'
-          Width = 50
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'CUIT_CUIL'
-          Title.Alignment = taCenter
-          Title.Caption = 'Cuit/Cuil'
-          Width = 82
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'provincia'
-          Title.Alignment = taCenter
-          Title.Caption = 'Provincia'
-          Width = 145
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'LOCALIDAD'
-          Title.Alignment = taCenter
-          Title.Caption = 'Localidad'
-          Width = 120
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'CODIGO_POSTAL'
-          Title.Alignment = taCenter
-          Title.Caption = 'Cod.Postal'
-          Width = 70
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'PAGINA_WEB'
-          Title.Alignment = taCenter
-          Title.Caption = 'Pag.Web'
-          Width = 176
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'tipo_empresa'
-          Title.Alignment = taCenter
-          Title.Caption = 'Tipo Empresa'
-          Width = 92
-          Visible = True
-        end>
-    end
-    object PBusqueda: TPanel
-      Left = 1
-      Top = 1
-      Width = 1006
-      Height = 19
-      Align = alTop
-      ParentShowHint = False
-      ShowHint = False
-      TabOrder = 2
-      object lblCantidadRegistros: TLabel
-        Left = 1
-        Top = 1
-        Width = 134
-        Height = 17
-        Align = alLeft
-        Caption = 'lblCantidadRegistros'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clNavy
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-      end
-      object StaticTxtBaja: TStaticText
-        Left = 896
-        Top = 1
-        Width = 109
-        Height = 17
-        Align = alRight
-        Alignment = taCenter
-        AutoSize = False
-        BorderStyle = sbsSunken
-        Caption = 'Dado de Baja'
-        Color = 6974207
-        ParentColor = False
-        TabOrder = 0
-      end
-    end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4101,9 +4280,9 @@ object FABMEmpresas: TFABMEmpresas
       AutoGrayScale = False
     end
     object btImprimirDetalle: TdxBarLargeButton
-      Caption = 'Detalle Empresa'
+      Caption = 'Detalle'
       Category = 0
-      Hint = 'Detalle Empresa'
+      Hint = 'Detalle'
       Visible = ivAlways
       ImageIndex = 28
       OnClick = btImprimirDetalleClick
@@ -4340,6 +4519,7 @@ object FABMEmpresas: TFABMEmpresas
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Direcci'#243'n'
@@ -4349,6 +4529,7 @@ object FABMEmpresas: TFABMEmpresas
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Cuit/Cuil'
@@ -4358,6 +4539,7 @@ object FABMEmpresas: TFABMEmpresas
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tel'#233'fono'
@@ -4367,6 +4549,7 @@ object FABMEmpresas: TFABMEmpresas
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Email'
@@ -4376,6 +4559,7 @@ object FABMEmpresas: TFABMEmpresas
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Baja'
@@ -4392,6 +4576,7 @@ object FABMEmpresas: TFABMEmpresas
           'N')
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo

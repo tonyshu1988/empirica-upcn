@@ -8,7 +8,7 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
   StdCtrls, EKDbSuma, EKOrdenarGrilla, Buttons, mxNativeExcel, mxExport,
   ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls, EKVistaPreviaQR,
-  ZStoredProcedure, Series, TeEngine, TeeProcs, Chart, DbChart;
+  ZStoredProcedure, Series, TeEngine, TeeProcs, Chart, DbChart, Menus;
 
 type
   TFEstadisticaVentas = class(TForm)
@@ -256,7 +256,6 @@ type
     QRDBText5: TQRDBText;
     QRDBText6: TQRDBText;
     QRBand7: TQRBand;
-    critbusqueda: TQRLabel;
     QRBand8: TQRBand;
     ReporteEstadVarias_PieDePagina: TQRLabel;
     QRLabel7: TQRLabel;
@@ -290,7 +289,6 @@ type
     QRDBText2: TQRDBText;
     QRDBText3: TQRDBText;
     QRBand13: TQRBand;
-    critbusqueda2: TQRLabel;
     QRBand14: TQRBand;
     ReporteEstadVariasCostos_piedePagina: TQRLabel;
     QRLabel11: TQRLabel;
@@ -325,7 +323,7 @@ type
     QRDBText11: TQRDBText;
     QRBand19: TQRBand;
     QRBand20: TQRBand;
-    qrpie: TQRLabel;
+    ReporteEstadRanking_piedePagina: TQRLabel;
     QRLabel20: TQRLabel;
     QRSysData4: TQRSysData;
     QRBand21: TQRBand;
@@ -339,7 +337,38 @@ type
     QRLabel1: TQRLabel;
     QRDBText12: TQRDBText;
     EKVistaPreviaRanking: TEKVistaPreviaQR;
-    ZQ_TotalesFECHAC: TDateField;
+    QRLabel48: TQRLabel;
+    QRLabelCritBusquedaEstadVarias: TQRLabel;
+    QRLabel2: TQRLabel;
+    QRLabelCritBusquedaEstadVariasCosto: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRLabelCritBusquedaEstadRankingFecha: TQRLabel;
+    ReporteRankingTotal: TQuickRep;
+    QRBand23: TQRBand;
+    QRDBImage4: TQRDBImage;
+    qrTipoRankingTotal: TQRLabel;
+    ReporteRankingTotal_subtitulo: TQRLabel;
+    ReporteRankingTotal_titulo: TQRLabel;
+    QRBand24: TQRBand;
+    QRDBText13: TQRDBText;
+    QRDBText14: TQRDBText;
+    QRDBText15: TQRDBText;
+    QRBand25: TQRBand;
+    QRLabel33: TQRLabel;
+    QRLabelCritBusquedaEstadRankingTotales: TQRLabel;
+    QRBand26: TQRBand;
+    ReporteEstadRankingTotal_piedePagina: TQRLabel;
+    QRLabel36: TQRLabel;
+    QRSysData5: TQRSysData;
+    QRBand27: TQRBand;
+    QRLabel37: TQRLabel;
+    QRLabel38: TQRLabel;
+    QRLabel39: TQRLabel;
+    QRBand28: TQRBand;
+    QRExpr8: TQRExpr;
+    QRExpr9: TQRExpr;
+    QRLabel41: TQRLabel;
+    EKVistaPreviaRankingTotales: TEKVistaPreviaQR;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -780,24 +809,34 @@ begin
     QRlblImporteTotal.Caption:= lblTotalComprobantes.Caption;
     EKVistaPrevia.VistaPrevia;
   end;
+
  //Ranking Ventas Diarias
   if PageControl.ActivePage = TabRanking then
   begin
- if ZQ_ProductosVendidos.IsEmpty then
+    if ZQ_ProductosVendidos.IsEmpty then
       exit;
-    DM.VariablesReportes(ReporteRanking);
-    if btRankingProds.Down then
-     tipoRanking:=btRankingProds.Caption
-     else
-      if btRankingClientes.Down then
-       tipoRanking:=btRankingClientes.Caption
-       else
-        if btRankingVended.Down then
-         tipoRanking:=btRankingVended.Caption;
 
-    qrTipoRanking.Caption:='Estadísticas de '+tipoRanking;
-    qrpie.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    DM.VariablesReportes(ReporteRanking);
+    DM.VariablesReportes(ReporteRankingTotal);
+
+    if btRankingProds.Down then
+      tipoRanking:=btRankingProds.Caption
+    else
+      if btRankingClientes.Down then
+        tipoRanking:=btRankingClientes.Caption
+      else
+        if btRankingVended.Down then
+          tipoRanking:=btRankingVended.Caption;
+
+    QRLabelCritBusquedaEstadRankingFecha.Caption := EKBusquedaRanking.ParametrosBuscados;
+    qrTipoRanking.Caption:='Estadística Ranking de '+tipoRanking+' por Fecha';
+    ReporteEstadRanking_piedePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
     EKVistaPreviaRanking.VistaPrevia;
+
+    QRLabelCritBusquedaEstadRankingTotales.Caption := EKBusquedaRanking.ParametrosBuscados;
+    qrTipoRankingTotal.Caption:='Estadística Ranking de '+tipoRanking+' Totales';
+    ReporteEstadRanking_piedePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    EKVistaPreviaRankingTotales.VistaPrevia;
   end;
 
 
@@ -810,9 +849,10 @@ begin
      begin
       DM.VariablesReportes(ReporteEstadVariasCostos);
 
-      critbusqueda2.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
-                            EKBusquedaVarias.ParametrosSeleccionados1[3],EKBusquedaVarias.ParametrosSeleccionados1[4]]);
+//      QRLabelCritBusquedaEstadVariasCosto.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
+//                            EKBusquedaVarias.ParametrosSeleccionados1[3],EKBusquedaVarias.ParametrosSeleccionados1[4]]);
 
+      QRLabelCritBusquedaEstadVariasCosto.Caption:= EKBusquedaVarias.ParametrosBuscados;
       qrTipoEstad2.Caption:='Estadística según '+EKBusquedaVarias.ParametrosSelecReales1[1];
 
       ReporteEstadVariasCostos_piedePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
@@ -822,9 +862,10 @@ begin
      begin
       DM.VariablesReportes(ReporteEstadVarias);
 
-      CritBusqueda.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
-                            EKBusquedaVarias.ParametrosSeleccionados1[3],EKBusquedaVarias.ParametrosSeleccionados1[4]]);
+//      QRLabelCritBusquedaEstadVarias.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
+//                            EKBusquedaVarias.ParametrosSeleccionados1[3],EKBusquedaVarias.ParametrosSeleccionados1[4]]);
 
+      QRLabelCritBusquedaEstadVarias.Caption:= EKBusquedaVarias.ParametrosBuscados;
       qrTipoEstad.Caption:='Estadística según '+EKBusquedaVarias.ParametrosSelecReales1[1];
 
       ReporteEstadVarias_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
@@ -887,7 +928,7 @@ begin
 
   ZQ_Totales.Close;
   ZQ_Totales.SQL[1]:= Format('%s as agrupam, ', ['cd.id_producto']);
-  ZQ_Totales.SQL[3]:= Format('%s, ', ['(ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')) as DETALLE_PROD']);
+  ZQ_Totales.SQL[2]:= Format('%s, ', ['(ma.nombre_marca||'' ''||pc.nombre||'' (''||coalesce(m.medida, ''S/M'')||coalesce('' - ''||co.nombre, ''S/C'')) as DETALLE_PROD']);
 end;
 
 
@@ -899,7 +940,7 @@ begin
 
   ZQ_Totales.Close;
   ZQ_Totales.SQL[1]:= Format('%s as agrupam, ', ['c.id_vendedor']);
-  ZQ_Totales.SQL[3]:= Format('%s, ', ['vend.nombre as DETALLE_PROD']);
+  ZQ_Totales.SQL[2]:= Format('%s, ', ['vend.nombre as DETALLE_PROD']);
 end;
 
 
@@ -911,7 +952,7 @@ begin
 
   ZQ_Totales.Close;
   ZQ_Totales.SQL[1]:= Format('%s as agrupam, ', ['c.id_cliente']);
-  ZQ_Totales.SQL[3]:= Format('%s, ', ['cli.nombre as DETALLE_PROD']);
+  ZQ_Totales.SQL[2]:= Format('%s, ', ['cli.nombre as DETALLE_PROD']);
 end;
 
 
@@ -968,10 +1009,12 @@ begin
      lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[2].SumValue);
 end;
 
+
 procedure TFEstadisticaVentas.EKDbSumaHorariosSumListChanged(
   Sender: TObject);
 begin
  lblTotHorarios.Caption:=Format('Cantidad: %f ',[EKDbSumaHorarios.SumCollection[1].SumValue])+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaHorarios.SumCollection[0].SumValue);
 end;
+
 
 end.
