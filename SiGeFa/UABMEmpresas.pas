@@ -203,8 +203,8 @@ type
     QRBand5: TQRBand;
     QRDBLogo: TQRDBImage;
     QRLabel11: TQRLabel;
-    RepCtas_Reporte_Titulo_2: TQRLabel;
-    RepCtas_Reporte_Titulo_1: TQRLabel;
+    RepListaEmpresas_subtitulo: TQRLabel;
+    RepListaEmpresas_Titulo: TQRLabel;
     QRBandDetalle: TQRBand;
     QRDBTextCoefGanancia: TQRDBText;
     QRDBText1: TQRDBText;
@@ -218,21 +218,13 @@ type
     QRSysData2: TQRSysData;
     QRBand1: TQRBand;
     QRExpr15: TQRExpr;
-    QRChildBandCleinte: TQRChildBand;
-    QRLabel1: TQRLabel;
-    QRLabel6: TQRLabel;
-    QRLabel7: TQRLabel;
-    QRLabel8: TQRLabel;
-    QRLabel10: TQRLabel;
-    QRLabel12: TQRLabel;
-    QRLabel14: TQRLabel;
     EKVistaPreviaListaEmpresas: TEKVistaPreviaQR;
     RepDetalleEmpresa: TQuickRep;
     QRBand2: TQRBand;
     QRDBLogo2: TQRDBImage;
     QRLabel2: TQRLabel;
-    QRLabel3: TQRLabel;
-    QRLabel4: TQRLabel;
+    RepDetalleEmpresa_subtitulo: TQRLabel;
+    RepDetalleEmpresa_titulo: TQRLabel;
     QRBand3: TQRBand;
     QRDBText3: TQRDBText;
     QRDBText9: TQRDBText;
@@ -345,6 +337,20 @@ type
     DS_CtaCte: TDataSource;
     ZQ_EmpresaCODIGO_CORTO: TIntegerField;
     btnExcel: TdxBarLargeButton;
+    TitleBand1: TQRBand;
+    ColumnHeaderBand1: TQRBand;
+    QRLabel1: TQRLabel;
+    QRLabel12: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRLabel8: TQRLabel;
+    QRLabel14: TQRLabel;
+    QRLabel10: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRLabel48: TQRLabel;
+    QRLabelCritBusqueda: TQRLabel;
+    QRSysData3: TQRSysData;
+    QRLabel43: TQRLabel;
+    QRlblPieDePaginaListado: TQRLabel;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -1072,6 +1078,9 @@ begin
   if ZQ_Empresa.IsEmpty then
     exit;
 
+  DM.VariablesReportes(RepListaEmpresas);
+  QRlblPieDePaginaListado.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption := EKBusquedaAvanzadaEmpresas.ParametrosBuscados;
   EKVistaPreviaListaEmpresas.VistaPrevia;
 end;
 
