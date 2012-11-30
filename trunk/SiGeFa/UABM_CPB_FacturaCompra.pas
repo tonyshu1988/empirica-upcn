@@ -9,7 +9,8 @@ uses
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
-  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona, ZSqlUpdate;
+  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona, ZSqlUpdate,jpeg,
+  ExtDlgs;
 
 type
   TFABM_CPB_FacturaCompra = class(TForm)
@@ -21,7 +22,7 @@ type
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnBaja: TdxBarLargeButton;
-    btnReactivar: TdxBarLargeButton;
+    btnImagen: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
     btnImprimirListado: TdxBarLargeButton;
@@ -431,6 +432,12 @@ type
     ZQ_ActualizarListaID_PRECIO: TIntegerField;
     ZQ_ActualizarPrecioID_PRECIO: TIntegerField;
     Label6: TLabel;
+    edImagen: TDBImage;
+    ZQ_ComprobanteIMAGEN: TBlobField;
+    buscarImagen: TOpenPictureDialog;
+    PopupMenuImagen: TPopupMenu;
+    popUp_VerImagen1: TMenuItem;
+    popUp_CargarImagen1: TMenuItem;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -482,6 +489,10 @@ type
       State: TGridDrawState);
     procedure btnAplicarActualizarClick(Sender: TObject);
     procedure ZQ_VerCpb_ProductoAfterScroll(DataSet: TDataSet);
+    procedure edImagenDblClick(Sender: TObject);
+    procedure CargaImagen(Archivo: string);
+    procedure popUp_VerImagen1Click(Sender: TObject);
+    procedure btnImagenClick(Sender: TObject);
   Private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -508,7 +519,8 @@ const
 
 implementation
 
-uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar;
+uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar,
+  UVerImagen;
 
 {$R *.dfm}
 
@@ -858,8 +870,8 @@ end;
 
 procedure TFABM_CPB_FacturaCompra.AReactivarExecute(Sender: TObject);
 begin
-  if btnReactivar.Enabled then
-    btnReactivar.Click;
+  if btnImagen.Enabled then
+    btnImagen.Click;
 end;
 
 procedure TFABM_CPB_FacturaCompra.AGuardarExecute(Sender: TObject);
@@ -1516,6 +1528,117 @@ begin
     DBImageProducto.Visible:= true;
     DBImageSucursal.Visible:= false;
   end
+end;
+
+procedure TFABM_CPB_FacturaCompra.edImagenDblClick(Sender: TObject);
+var
+  jpg: TJpegImage;
+begin
+  try
+    if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+      //si esta activa la transaccion
+      if buscarImagen.Execute then //abro para buscar la imagen
+      begin
+        CargaImagen(buscarImagen.FileName);
+      end
+  except
+    showmessage('Formato de Imagen no soportado (debe bajar la resolución).');
+  end;
+
+end;
+
+procedure TFABM_CPB_FacturaCompra.CargaImagen(Archivo: string);
+var
+  imagenArchivo: TGraphic; //contiene la imagen, es del tipo TGraphic poque puede ser jpg o bmp
+  imagenJPG: TJPEGImage;
+  Rectangulo: TRect;
+  EscalaX,
+    EscalaY,
+    Escala: Single;
+begin
+  //creo el tipo correcto dependiendo de la extencion del archivo
+  if pos('.jpg', archivo) > 0 then
+    imagenArchivo:= TJPEGImage.Create
+  else
+    if pos('.jpeg', archivo) > 0 then
+      imagenArchivo:= TJPEGImage.Create
+    else
+      if pos('.bmp', archivo) > 0 then
+        imagenArchivo:= TBitmap.Create;
+
+  try
+    //cargo la imagen
+    imagenArchivo.LoadFromFile(Archivo);
+
+    //comprimo la imagen
+    imagenJPG:= TJPEGImage.Create;
+    imagenJPG.CompressionQuality:= 50;
+    imagenJPG.Compress;
+
+    if pos('.bmp', archivo) > 0 then
+    begin
+      imagenJPG.Assign(TBitmap(imagenArchivo))
+    end
+    else
+    begin
+      imagenJPG.Assign(imagenArchivo);
+    end;
+
+    //Por defecto, escala 1:1
+    EscalaX:= 1.0;
+    EscalaY:= 1.0;
+
+    //    //Hallamos la escala de reducción Horizontal
+    //    if edImagen.Width < imagenJPG.Width then
+    //      EscalaX := edImagen.Width / imagenJPG.Width;
+    //
+    //    //La escala vertical
+    //    if edImagen.Height < imagenJPG.Height then
+    //      EscalaY := edImagen.Height / imagenJPG.Height;
+
+        //Escogemos la menor de las 2
+    if EscalaY < EscalaX then Escala:= EscalaY else Escala:= EscalaX;
+
+    //Y la usamos para reducir el rectangulo destino
+    with Rectangulo do begin
+      Right:= Trunc(imagenJPG.Width * Escala);
+      Bottom:= Trunc(imagenJPG.Height * Escala);
+      Left:= 0;
+      Top:= 0;
+    end;
+
+    //Dibujamos el bitmap con el nuevo tamaño en el TImage destino
+    with edImagen.Picture.Bitmap do begin
+      Width:= Rectangulo.Right;
+      Height:= Rectangulo.Bottom;
+      Canvas.StretchDraw(Rectangulo, imagenJPG);
+    end;
+
+  finally
+    imagenArchivo.Free;
+    imagenJPG.Free;
+  end;
+end;
+
+procedure TFABM_CPB_FacturaCompra.popUp_VerImagen1Click(Sender: TObject);
+begin
+  Application.CreateForm(TFVerImagen, FVerImagen);
+  FVerImagen.cargarImagenComprobante(ZQ_ComprobanteID_COMPROBANTE.AsInteger);
+  FVerImagen.ShowModal;
+  FVerImagen.Release;
+end;
+
+procedure TFABM_CPB_FacturaCompra.btnImagenClick(Sender: TObject);
+begin
+
+  if ZQ_VerCpb.IsEmpty then
+  exit;
+
+  Application.CreateForm(TFVerImagen, FVerImagen);
+  FVerImagen.cargarImagenComprobante(ZQ_VerCpbID_COMPROBANTE.AsInteger);
+  FVerImagen.ShowModal;
+  FVerImagen.Release;
+  
 end;
 
 end.
