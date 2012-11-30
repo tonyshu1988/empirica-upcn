@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 252
-  Top = 86
+  Left = 345
+  Top = 116
   Width = 1007
   Height = 700
   Caption = 'ABM Orden T'#233'cnica'
@@ -2290,7 +2290,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             TabOrder = 0
             OnClick = btQuitarProductoClick
           end
-          object Button1: TButton
+          object btQuitarOS: TButton
             Left = 791
             Top = 5
             Width = 83
@@ -2298,7 +2298,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Anchors = [akTop, akRight]
             Caption = 'Quitar OS'
             TabOrder = 1
-            OnClick = Button1Click
+            OnClick = btQuitarOSClick
           end
         end
         object POs: TPanel
@@ -2470,7 +2470,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Font.Height = -11
             Font.Name = 'Verdana'
             Font.Style = []
-            Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
             ParentFont = False
             PopupMenu = Popup_Producto
             TabOrder = 0
@@ -3026,7 +3026,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             object btnQuitarPago: TButton
               Left = 4
               Top = 3
-              Width = 136
+              Width = 125
               Height = 23
               Caption = 'Quitar Entrega'
               TabOrder = 0
@@ -3621,6 +3621,152 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         ParentFont = False
         Transparent = True
       end
+    end
+  end
+  object PCargaProd: TPanel
+    Left = 219
+    Top = 240
+    Width = 558
+    Height = 122
+    BevelInner = bvLowered
+    TabOrder = 6
+    object Label62: TLabel
+      Left = 2
+      Top = 2
+      Width = 554
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Carga de Producto/Servicio'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label63: TLabel
+      Left = 10
+      Top = 56
+      Width = 88
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Precio Unitario:'
+    end
+    object Label64: TLabel
+      Left = 27
+      Top = 28
+      Width = 71
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Descripci'#243'n:'
+    end
+    object Label65: TLabel
+      Left = 208
+      Top = 56
+      Width = 56
+      Height = 13
+      Caption = 'Cantidad:'
+    end
+    object DBText1: TDBText
+      Left = 104
+      Top = 56
+      Width = 89
+      Height = 13
+      DataField = 'prod_pventa'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+    end
+    object Label26: TLabel
+      Left = 344
+      Top = 56
+      Width = 71
+      Height = 13
+      Caption = 'Monto Total:'
+    end
+    object btnAceptarProd: TButton
+      Left = 31
+      Top = 88
+      Width = 75
+      Height = 24
+      Caption = 'Aceptar'
+      TabOrder = 0
+      OnClick = btnAceptarProdClick
+    end
+    object btnCancProd: TButton
+      Left = 462
+      Top = 88
+      Width = 75
+      Height = 24
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 1
+      OnClick = btnCancProdClick
+    end
+    object DBEdit4: TDBEdit
+      Left = 104
+      Top = 24
+      Width = 433
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'prod_detalle'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object edCant: TDBEdit
+      Left = 268
+      Top = 52
+      Width = 61
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'CANTIDAD'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+    end
+    object edMontoTotal: TDBEdit
+      Left = 420
+      Top = 52
+      Width = 117
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'MONTO_TOTAL'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
     end
   end
   object dxBarABM: TdxBarManager
@@ -6159,156 +6305,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         'btnAuditoriaFiscal')
     end
   end
-  object CD_OrdenDetalle: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 330
-    Top = 248
-    object CD_OrdenDetalleID_ORDEN_DETALLE: TIntegerField
-      FieldName = 'ID_ORDEN_DETALLE'
-    end
-    object CD_OrdenDetalleID_ORDEN: TIntegerField
-      FieldName = 'ID_ORDEN'
-    end
-    object CD_OrdenDetalleID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-    end
-    object CD_OrdenDetalleID_LABORATORIO: TIntegerField
-      FieldName = 'ID_LABORATORIO'
-    end
-    object CD_OrdenDetalleMONTO_DESCONTADO: TFloatField
-      FieldName = 'MONTO_DESCONTADO'
-      currency = True
-    end
-    object CD_OrdenDetalleMONTO_TOTAL: TFloatField
-      FieldName = 'MONTO_TOTAL'
-      currency = True
-    end
-    object CD_OrdenDetalleCANTIDAD: TFloatField
-      FieldName = 'CANTIDAD'
-    end
-    object CD_OrdenDetalleOBSERVACIONES: TStringField
-      FieldName = 'OBSERVACIONES'
-      Size = 1000
-    end
-    object CD_OrdenDetallePROD_DETALLE: TStringField
-      FieldName = 'prod_detalle'
-      Size = 100
-    end
-    object CD_OrdenDetalleprod_pventa: TCurrencyField
-      FieldName = 'prod_pventa'
-    end
-  end
-  object CD_Orden: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 250
-    Top = 248
-    object CD_OrdenID_ORDEN: TIntegerField
-      FieldName = 'ID_ORDEN'
-    end
-    object CD_OrdenCODIGO_CLI: TStringField
-      FieldName = 'CODIGO_CLI'
-      Size = 50
-    end
-    object CD_OrdenID_CLIENTE: TIntegerField
-      FieldName = 'ID_CLIENTE'
-    end
-    object CD_OrdenID_ESTADO: TIntegerField
-      FieldName = 'ID_ESTADO'
-    end
-    object CD_OrdenFECHA_ORDEN: TDateField
-      FieldName = 'FECHA_ORDEN'
-    end
-    object CD_OrdenFECHA_PROMETIDO: TDateField
-      FieldName = 'FECHA_PROMETIDO'
-    end
-    object CD_OrdenCOD_BARRAS: TStringField
-      FieldName = 'COD_BARRAS'
-      Size = 100
-    end
-    object CD_OrdenOBSERVACIONES: TStringField
-      FieldName = 'OBSERVACIONES'
-      Size = 5000
-    end
-    object CD_OrdenNRO_FACTURA: TStringField
-      FieldName = 'NRO_FACTURA'
-      Size = 50
-    end
-    object CD_OrdenMONTO_TOTAL: TFloatField
-      FieldName = 'MONTO_TOTAL'
-    end
-    object CD_OrdenMONTO_ENTREGADO: TFloatField
-      FieldName = 'MONTO_ENTREGADO'
-    end
-    object CD_OrdenENTREGADO_POR: TIntegerField
-      FieldName = 'ENTREGADO_POR'
-    end
-    object CD_OrdenFACTURADO_POR: TIntegerField
-      FieldName = 'FACTURADO_POR'
-    end
-    object CD_OrdenSALDO: TFloatField
-      FieldName = 'SALDO'
-    end
-    object CD_Ordenpers_nombre: TStringField
-      FieldKind = fkLookup
-      FieldName = 'pers_nombre'
-      LookupDataSet = ZQ_Personas
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'NOMBRE'
-      KeyFields = 'ID_CLIENTE'
-      ReadOnly = True
-      Size = 200
-      Lookup = True
-    end
-    object CD_Ordenpers_direccion: TStringField
-      FieldKind = fkLookup
-      FieldName = 'pers_direccion'
-      LookupDataSet = ZQ_Personas
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'DIRECCION'
-      KeyFields = 'ID_CLIENTE'
-      ReadOnly = True
-      Size = 200
-      Lookup = True
-    end
-    object CD_OrdenID_MEDICO: TIntegerField
-      FieldName = 'ID_MEDICO'
-    end
-    object CD_Ordenmed_nombre: TStringField
-      FieldKind = fkLookup
-      FieldName = 'med_nombre'
-      LookupDataSet = ZQ_Medico
-      LookupKeyFields = 'ID_MEDICO'
-      LookupResultField = 'NOMBRE'
-      KeyFields = 'ID_MEDICO'
-      ReadOnly = True
-      Size = 200
-      Lookup = True
-    end
-    object CD_Ordenmed_matricula: TStringField
-      FieldKind = fkLookup
-      FieldName = 'med_matricula'
-      LookupDataSet = ZQ_Medico
-      LookupKeyFields = 'ID_MEDICO'
-      LookupResultField = 'MATRICULA'
-      KeyFields = 'ID_MEDICO'
-      ReadOnly = True
-      Size = 100
-      Lookup = True
-    end
-    object CD_Ordenmed_direccion: TStringField
-      FieldKind = fkLookup
-      FieldName = 'med_direccion'
-      LookupDataSet = ZQ_Medico
-      LookupKeyFields = 'ID_MEDICO'
-      LookupResultField = 'DIRECCION'
-      KeyFields = 'ID_MEDICO'
-      ReadOnly = True
-      Size = 200
-      Lookup = True
-    end
-  end
   object ZQ_Orden: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -6496,8 +6492,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Name = 'idod'
         ParamType = ptUnknown
       end>
-    Left = 736
-    Top = 305
+    MasterFields = 'ID_ORDEN_DETALLE'
+    MasterSource = DS_OrdenDetalle
+    LinkedFields = 'ID_ORDEN_DETALLE'
+    Left = 744
+    Top = 313
     ParamData = <
       item
         DataType = ftUnknown
@@ -6506,15 +6505,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end>
     object ZQ_OrdenDetalleOSID_DETALLE_OS: TIntegerField
       FieldName = 'ID_DETALLE_OS'
-      Required = True
     end
     object ZQ_OrdenDetalleOSID_ORDEN_DETALLE: TIntegerField
       FieldName = 'ID_ORDEN_DETALLE'
-      Required = True
     end
     object ZQ_OrdenDetalleOSID_OS: TIntegerField
       FieldName = 'ID_OS'
-      Required = True
     end
     object ZQ_OrdenDetalleOSMONTO_DESCONTADO: TFloatField
       FieldName = 'MONTO_DESCONTADO'
@@ -6869,11 +6865,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     Left = 616
     Top = 304
   end
-  object DataSetProvider1: TDataSetProvider
-    DataSet = ZQ_OrdenDetalleOS
-    Left = 612
-    Top = 252
-  end
   object ZQ_Laboratorios: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -7167,65 +7158,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Size = 1
     end
   end
-  object CD_OrdenDetalleOS: TClientDataSet
-    Aggregates = <>
-    IndexFieldNames = 'ID_ORDEN_DETALLE'
-    MasterFields = 'ID_ORDEN_DETALLE'
-    MasterSource = DS_OrdenDetalle
-    PacketRecords = 0
-    Params = <>
-    ProviderName = 'DataSetProvider1'
-    Left = 627
-    Top = 364
-    object CD_OrdenDetalleOSID_DETALLE_OS: TIntegerField
-      FieldName = 'ID_DETALLE_OS'
-    end
-    object CD_OrdenDetalleOSID_ORDEN_DETALLE: TIntegerField
-      FieldName = 'ID_ORDEN_DETALLE'
-    end
-    object CD_OrdenDetalleOSID_OS: TIntegerField
-      FieldName = 'ID_OS'
-    end
-    object CD_OrdenDetalleOSMONTO_DESCONTADO: TFloatField
-      FieldName = 'MONTO_DESCONTADO'
-      currency = True
-    end
-    object CD_OrdenDetalleOSOBSERVACIONES: TStringField
-      FieldName = 'OBSERVACIONES'
-      Size = 1000
-    end
-    object CD_OrdenDetalleOSos_detalle: TStringField
-      FieldName = 'os_detalle'
-      Size = 100
-    end
-  end
   object ZQ_GenOrdenDetalle: TZSequence
     Connection = DM.Conexion
     SequenceName = 'GEN_OPTICA_ORDEN_DETALLE_ID'
     Left = 165
     Top = 356
-  end
-  object EKDbSumaDetProd: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'monto_Total'
-      end>
-    DataSet = CD_OrdenDetalle
-    SumListChanged = EKDbSumaDetProdSumListChanged
-    Left = 332
-    Top = 350
-  end
-  object EKDbSumaDetProdOS: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'monto_descontado'
-      end>
-    DataSet = CD_OrdenDetalleOS
-    SumListChanged = EKDbSumaDetProdOSSumListChanged
-    Left = 932
-    Top = 294
   end
   object ZQ_GenOrden: TZSequence
     Connection = DM.Conexion
@@ -7256,6 +7193,21 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       FieldName = 'DETALLE'
       ReadOnly = True
       Size = 1306
+    end
+  end
+  object PopupMenuOS: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    Left = 696
+    Top = 287
+    object MenuItem1: TMenuItem
+      Caption = 'Agregar Producto'
+      ImageIndex = 14
+      OnClick = MenuItem1Click
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Quitar Producto'
+      ImageIndex = 15
+      OnClick = MenuItem2Click
     end
   end
 end
