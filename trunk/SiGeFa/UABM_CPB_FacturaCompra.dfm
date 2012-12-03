@@ -176,8 +176,8 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            759.354166666666800000
-            68.791666666666680000
+            759.354166666666700000
+            68.791666666666670000
             378.354166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -6347,6 +6347,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     end
     object popUp_CargarImagen1: TMenuItem
       Caption = 'Cargar Imagen'
+      OnClick = popUp_CargarImagen1Click
     end
   end
 end
