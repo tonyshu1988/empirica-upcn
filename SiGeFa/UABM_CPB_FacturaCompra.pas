@@ -493,6 +493,7 @@ type
     procedure CargaImagen(Archivo: string);
     procedure popUp_VerImagen1Click(Sender: TObject);
     procedure btnImagenClick(Sender: TObject);
+    procedure popUp_CargarImagen1Click(Sender: TObject);
   Private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -1639,6 +1640,24 @@ begin
   FVerImagen.ShowModal;
   FVerImagen.Release;
   
+end;
+
+procedure TFABM_CPB_FacturaCompra.popUp_CargarImagen1Click(
+  Sender: TObject);
+var
+  jpg: TJpegImage;
+begin
+  try
+    if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+      //si esta activa la transaccion
+      if buscarImagen.Execute then //abro para buscar la imagen
+      begin
+        CargaImagen(buscarImagen.FileName);
+      end
+  except
+    showmessage('Formato de Imagen no soportado (debe bajar la resolución).');
+  end;
+
 end;
 
 end.

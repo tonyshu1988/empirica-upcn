@@ -9,7 +9,7 @@ uses
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
-  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona;
+  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona, ExtDlgs, jpeg;
 
 type
   TFABM_CPB_Remito = class(TForm)
@@ -357,6 +357,106 @@ type
     ZQ_VerCpb_ProductoIMPORTE_IVA: TFloatField;
     ZQ_VerCpb_ProductoIMPUESTO_INTERNO_1: TFloatField;
     Label23: TLabel;
+    Panel5: TPanel;
+    Panel6: TPanel;
+    Splitter2: TSplitter;
+    Panel7: TPanel;
+    DBGrid1: TDBGrid;
+    Panel8: TPanel;
+    PanelCpbActual_FPago: TPanel;
+    Label27: TLabel;
+    Label25: TLabel;
+    DBGridCpbActual_FPago: TDBGrid;
+    DBGridVerFacturas: TDBGrid;
+    Panel9: TPanel;
+    GroupBox1: TGroupBox;
+    Label24: TLabel;
+    DBText1: TDBText;
+    Label28: TLabel;
+    DBText2: TDBText;
+    Label39: TLabel;
+    DBText3: TDBText;
+    DBText4: TDBText;
+    Label40: TLabel;
+    DBText5: TDBText;
+    Label41: TLabel;
+    DBMemo1: TDBMemo;
+    Panel10: TPanel;
+    Panel11: TPanel;
+    DBText32: TDBText;
+    DBText35: TDBText;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    Label42: TLabel;
+    Label43: TLabel;
+    Panel12: TPanel;
+    Label44: TLabel;
+    Label45: TLabel;
+    Label46: TLabel;
+    Label47: TLabel;
+    Label48: TLabel;
+    Label49: TLabel;
+    Label50: TLabel;
+    Label51: TLabel;
+    Label52: TLabel;
+    DBText36: TDBText;
+    DBText37: TDBText;
+    DBText38: TDBText;
+    DBText39: TDBText;
+    DBText40: TDBText;
+    DBText41: TDBText;
+    DBText42: TDBText;
+    DBText43: TDBText;
+    DBText44: TDBText;
+    Panel13: TPanel;
+    DBText45: TDBText;
+    Label53: TLabel;
+    Label54: TLabel;
+    DBText46: TDBText;
+    Label55: TLabel;
+    DBText47: TDBText;
+    Label56: TLabel;
+    DBText48: TDBText;
+    Label57: TLabel;
+    DBText49: TDBText;
+    Label58: TLabel;
+    DBText50: TDBText;
+    Label59: TLabel;
+    DBText51: TDBText;
+    Label60: TLabel;
+    DBText52: TDBText;
+    Label61: TLabel;
+    DBText53: TDBText;
+    Label62: TLabel;
+    DBText54: TDBText;
+    DBMemo2: TDBMemo;
+    Panel14: TPanel;
+    Panel15: TPanel;
+    Label63: TLabel;
+    EKDBDateTimePicker1: TEKDBDateTimePicker;
+    edImagen: TDBImage;
+    PanelEditar_FPago: TPanel;
+    Label64: TLabel;
+    PanelEditar_FPagoInfo: TPanel;
+    Label65: TLabel;
+    btnEliminarFPago: TButton;
+    Edit1: TEdit;
+    DBGridEditar_Fpago: TDBGrid;
+    PanelFacturas: TPanel;
+    Label66: TLabel;
+    PanelFacturasEditar: TPanel;
+    btnAgregarFactura: TSpeedButton;
+    btnQuitarFactura: TSpeedButton;
+    PanelFacturasDatos: TPanel;
+    PanelFacturasInfo: TPanel;
+    Label67: TLabel;
+    editTotalFacturas: TEdit;
+    DBGridFacturas: TDBGrid;
+    buscarImagen: TOpenPictureDialog;
+    PopupMenuImagen: TPopupMenu;
+    popUp_VerImagen1: TMenuItem;
+    popUp_CargarImagen1: TMenuItem;
+    ZQ_ComprobanteIMAGEN: TBlobField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -404,6 +504,11 @@ type
       State: TGridDrawState);
     procedure btnBajaClick(Sender: TObject);
     procedure ZQ_VerCpb_ProductoAfterScroll(DataSet: TDataSet);
+    procedure edImagenDblClick(Sender: TObject);
+    procedure popUp_CargarImagen1Click(Sender: TObject);
+    procedure popUp_VerImagen1Click(Sender: TObject);
+    procedure CargaImagen(Archivo: string);
+    procedure btnReactivarClick(Sender: TObject);
   Private
     estadoPantalla: string;
     tipoComprobante: integer;
@@ -430,7 +535,8 @@ const
 
 implementation
 
-uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar;
+uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar,
+  UVerImagen;
 
 {$R *.dfm}
 
@@ -1348,6 +1454,134 @@ begin
     DBImageProducto.Visible:= true;
     DBImageSucursal.Visible:= false;
   end
+end;
+
+procedure TFABM_CPB_Remito.edImagenDblClick(Sender: TObject);
+var
+  jpg: TJpegImage;
+begin
+  try
+    if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+      //si esta activa la transaccion
+      if buscarImagen.Execute then //abro para buscar la imagen
+      begin
+        CargaImagen(buscarImagen.FileName);
+      end
+  except
+    showmessage('Formato de Imagen no soportado (debe bajar la resolución).');
+  end;
+
+end;
+
+procedure TFABM_CPB_Remito.popUp_CargarImagen1Click(Sender: TObject);
+var
+  jpg: TJpegImage;
+begin
+  try
+    if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+      //si esta activa la transaccion
+      if buscarImagen.Execute then //abro para buscar la imagen
+      begin
+        CargaImagen(buscarImagen.FileName);
+      end
+  except
+    showmessage('Formato de Imagen no soportado (debe bajar la resolución).');
+  end;
+
+end;
+
+procedure TFABM_CPB_Remito.popUp_VerImagen1Click(Sender: TObject);
+begin
+  Application.CreateForm(TFVerImagen, FVerImagen);
+  FVerImagen.cargarImagenComprobante(ZQ_ComprobanteID_COMPROBANTE.AsInteger);
+  FVerImagen.ShowModal;
+  FVerImagen.Release;
+end;
+
+
+procedure TFABM_CPB_Remito.CargaImagen(Archivo: string);
+var
+  imagenArchivo: TGraphic; //contiene la imagen, es del tipo TGraphic poque puede ser jpg o bmp
+  imagenJPG: TJPEGImage;
+  Rectangulo: TRect;
+  EscalaX,
+    EscalaY,
+    Escala: Single;
+begin
+  //creo el tipo correcto dependiendo de la extencion del archivo
+  if pos('.jpg', archivo) > 0 then
+    imagenArchivo:= TJPEGImage.Create
+  else
+    if pos('.jpeg', archivo) > 0 then
+      imagenArchivo:= TJPEGImage.Create
+    else
+      if pos('.bmp', archivo) > 0 then
+        imagenArchivo:= TBitmap.Create;
+
+  try
+    //cargo la imagen
+    imagenArchivo.LoadFromFile(Archivo);
+
+    //comprimo la imagen
+    imagenJPG:= TJPEGImage.Create;
+    imagenJPG.CompressionQuality:= 50;
+    imagenJPG.Compress;
+
+    if pos('.bmp', archivo) > 0 then
+    begin
+      imagenJPG.Assign(TBitmap(imagenArchivo))
+    end
+    else
+    begin
+      imagenJPG.Assign(imagenArchivo);
+    end;
+
+    //Por defecto, escala 1:1
+    EscalaX:= 1.0;
+    EscalaY:= 1.0;
+
+    //    //Hallamos la escala de reducción Horizontal
+    //    if edImagen.Width < imagenJPG.Width then
+    //      EscalaX := edImagen.Width / imagenJPG.Width;
+    //
+    //    //La escala vertical
+    //    if edImagen.Height < imagenJPG.Height then
+    //      EscalaY := edImagen.Height / imagenJPG.Height;
+
+        //Escogemos la menor de las 2
+    if EscalaY < EscalaX then Escala:= EscalaY else Escala:= EscalaX;
+
+    //Y la usamos para reducir el rectangulo destino
+    with Rectangulo do begin
+      Right:= Trunc(imagenJPG.Width * Escala);
+      Bottom:= Trunc(imagenJPG.Height * Escala);
+      Left:= 0;
+      Top:= 0;
+    end;
+
+    //Dibujamos el bitmap con el nuevo tamaño en el TImage destino
+    with edImagen.Picture.Bitmap do begin
+      Width:= Rectangulo.Right;
+      Height:= Rectangulo.Bottom;
+      Canvas.StretchDraw(Rectangulo, imagenJPG);
+    end;
+
+  finally
+    imagenArchivo.Free;
+    imagenJPG.Free;
+  end;
+end;
+
+
+procedure TFABM_CPB_Remito.btnReactivarClick(Sender: TObject);
+begin
+  if ZQ_VerCpb.IsEmpty then
+  exit;
+
+  Application.CreateForm(TFVerImagen, FVerImagen);
+  FVerImagen.cargarImagenComprobante(ZQ_VerCpbID_COMPROBANTE.AsInteger);
+  FVerImagen.ShowModal;
+  FVerImagen.Release;
 end;
 
 end.
