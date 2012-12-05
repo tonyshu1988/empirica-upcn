@@ -7,7 +7,8 @@ uses
   Dialogs, dxBar, dxBarExtItems, DBCtrls, Grids, DBGrids, StdCtrls, Mask,
   Buttons, ComCtrls, ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, DBClient, EKListadoSQL,StrUtils,UDM, UPrincipal, UBuscarPersona,
-  UBuscarProductoStock, Provider, Menus, ZSequence, EKDbSuma;
+  UBuscarProductoStock, Provider, Menus, ZSequence, EKDbSuma,
+  EKDBDateTimePicker;
 
 type
   TFOP_ABM_OrdenTecnica = class(TForm)
@@ -48,10 +49,8 @@ type
     Label24: TLabel;
     Label25: TLabel;
     Label7: TLabel;
-    DBEdit1: TDBEdit;
     DBEdit2: TDBEdit;
     DBEdit3: TDBEdit;
-    DBEdit5: TDBEdit;
     dbAvisar: TDBCheckBox;
     Panel2: TPanel;
     Label10: TLabel;
@@ -332,6 +331,109 @@ type
     EKDbSumaOS: TEKDbSuma;
     ZQ_OrdenDetalleprod_laboratorio: TStringField;
     ZQ_LaboratoriosDETALLE: TStringField;
+    EKDBDateTimePicker1: TEKDBDateTimePicker;
+    EKDBDateTimePicker2: TEKDBDateTimePicker;
+    ZQ_Ordenpers_cod: TStringField;
+    ZQ_Ordenpers_cuit: TStringField;
+    ZQ_PersonasCODIGO_BARRA: TStringField;
+    ZQ_PersonasCLAVE: TStringField;
+    ZQ_PersonasANIOS: TIntegerField;
+    ZQ_Ordenpers_edad: TStringField;
+    ZQ_Ordenpers_telefono: TStringField;
+    PABM_FormaPago: TPanel;
+    Label45: TLabel;
+    Label47: TLabel;
+    Label48: TLabel;
+    Label49: TLabel;
+    Label50: TLabel;
+    Label51: TLabel;
+    Label53: TLabel;
+    Label55: TLabel;
+    Label58: TLabel;
+    Label61: TLabel;
+    edDetalleMDPCbox: TDBLookupComboBox;
+    edMDPFecha: TDBEdit;
+    edMDPBanco: TDBEdit;
+    edMDPNro: TDBEdit;
+    edImporte: TDBEdit;
+    edCodCuenta: TDBEdit;
+    edCuenta: TDBLookupComboBox;
+    edImporteVenta: TDBEdit;
+    edCodMDP: TDBEdit;
+    btFPAceptar: TBitBtn;
+    btFPCancelar: TBitBtn;
+    edDetalleMDP: TDBEdit;
+    ZQ_CodifRP: TZQuery;
+    ZQ_CodifRPID_RECETA: TIntegerField;
+    ZQ_CodifRPID_ORDEN: TIntegerField;
+    ZQ_CodifRPNRO_HISTCLINICA: TStringField;
+    ZQ_CodifRPID_MEDICO: TIntegerField;
+    ZQ_CodifRPESF_LD: TStringField;
+    ZQ_CodifRPESF_LI: TStringField;
+    ZQ_CodifRPESF_CD: TStringField;
+    ZQ_CodifRPESF_CI: TStringField;
+    ZQ_CodifRPESF_ID: TStringField;
+    ZQ_CodifRPESF_II: TStringField;
+    ZQ_CodifRPCIL_LD: TStringField;
+    ZQ_CodifRPCIL_LI: TStringField;
+    ZQ_CodifRPCIL_CD: TStringField;
+    ZQ_CodifRPCIL_CI: TStringField;
+    ZQ_CodifRPCIL_ID: TStringField;
+    ZQ_CodifRPCIL_II: TStringField;
+    ZQ_CodifRPEJE_LD: TStringField;
+    ZQ_CodifRPEJE_LI: TStringField;
+    ZQ_CodifRPEJE_CD: TStringField;
+    ZQ_CodifRPEJE_CI: TStringField;
+    ZQ_CodifRPEJE_ID: TStringField;
+    ZQ_CodifRPEJE_II: TStringField;
+    DS_CodifRP: TDataSource;
+    Label46: TLabel;
+    Label52: TLabel;
+    DBEdit5: TDBEdit;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DS_Medico: TDataSource;
+    ZQ_MedicoDETALLE: TStringField;
+    ZQ_Orden_Entrega: TZQuery;
+    DS_Orden_Entrega: TDataSource;
+    ZQ_Orden_EntregaID_ENTREGA: TIntegerField;
+    ZQ_Orden_EntregaID_ORDEN: TIntegerField;
+    ZQ_Orden_EntregaID_TIPO_FORMAPAG: TIntegerField;
+    ZQ_Orden_EntregaMDCP_FECHA: TDateField;
+    ZQ_Orden_EntregaMDCP_BANCO: TStringField;
+    ZQ_Orden_EntregaMDCP_CHEQUE: TStringField;
+    ZQ_Orden_EntregaIMPORTE: TFloatField;
+    ZQ_Orden_EntregaCONCILIADO: TDateField;
+    ZQ_Orden_EntregaCUENTA_INGRESO: TIntegerField;
+    ZQ_Orden_EntregaCUENTA_EGRESO: TIntegerField;
+    ZQ_Orden_EntregaFECHA_FP: TDateTimeField;
+    ZQ_Orden_EntregaIMPORTE_REAL: TFloatField;
+    ZQ_Orden_EntregaID_RECIBO_OP: TIntegerField;
+    ZQ_Orden_EntregaINSERT_MANUAL: TStringField;
+    EKListadoCuenta: TEKListadoSQL;
+    EKListadoMedio: TEKListadoSQL;
+    ZQ_ColsPrecios: TZQuery;
+    ZQ_ColsPreciosCOLUMNA_PRECIO: TIntegerField;
+    ZQ_FormasPago: TZQuery;
+    ZQ_FormasPagoID_TIPO_FORMAPAGO: TIntegerField;
+    ZQ_FormasPagoDESCRIPCION: TStringField;
+    ZQ_FormasPagoBAJA: TStringField;
+    ZQ_FormasPagoIF: TStringField;
+    ZQ_FormasPagoDESC_REC: TFloatField;
+    ZQ_FormasPagoCOD_CORTO: TIntegerField;
+    ZQ_FormasPagoGENERA_VUELTO: TStringField;
+    ZQ_FormasPagoCOLUMNA_PRECIO: TIntegerField;
+    ZQ_FormasPagoMODIFICABLE: TStringField;
+    ZQ_Cuentas: TZQuery;
+    ZQ_CuentasID_CUENTA: TIntegerField;
+    ZQ_CuentasMEDIO_DEFECTO: TIntegerField;
+    ZQ_CuentasCODIGO: TStringField;
+    ZQ_CuentasNOMBRE_CUENTA: TStringField;
+    ZQ_CuentasNRO_CTA_BANCARIA: TStringField;
+    ZQ_CuentasBAJA: TStringField;
+    ZQ_CuentasA_CTA_CORRIENTE: TStringField;
+    ZQ_CuentasID_SUCURSAL: TIntegerField;
+    ZQ_CuentasA_NOTA_CREDITO: TStringField;
+    ZQ_CuentasMODIFICABLE: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -378,6 +480,7 @@ type
     procedure EKDbSumaProdSumListChanged(Sender: TObject);
     procedure EKDbSumaOSSumListChanged(Sender: TObject);
     procedure modoEscrituraOS();
+    procedure btnFormaPagoClick(Sender: TObject);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -527,7 +630,7 @@ begin
   ClienteIVA:= 0;
   IDClienteIVA:= 0;
 
-  if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden,ZQ_OrdenDetalle,ZQ_OrdenDetalleOS]) then
+  if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden,ZQ_OrdenDetalle,ZQ_OrdenDetalleOS,ZQ_Orden_Entrega,ZQ_CodifRP]) then
   begin
       ZQ_Orden.Append;
 
@@ -562,6 +665,9 @@ begin
 
       //Cargo el último nro de Orden (para que sepa cual sigue)
       ultimoIDOrden();
+
+      ZQ_CodifRP.Append;
+      ZQ_CodifRPID_ORDEN.AsInteger:=ZQ_OrdenID_ORDEN.AsInteger;
   end;
 
 
@@ -619,7 +725,6 @@ begin
 
   if cliente < 0 then
   begin
-    //Application.MessageBox('Debe seleccionar el Cliente.', 'Atención');
     bt_BuscarCliente.Click;
     exit;
   end;
@@ -1202,13 +1307,13 @@ procedure TFOP_ABM_OrdenTecnica.EKDbSumaProdSumListChanged(
 begin
   acumulado:= EKDbSumaProd.SumCollection[0].SumValue;
   acumuladoProd:= EKDbSumaProd.SumCollection[0].SumValue;
-  lblTotAPagar.Caption:=Format('Total a Pagar: $ %s , con $ %s descontado por OOSS.',[CurrToStr(EKDbSumaProd.SumCollection[0].SumValue),CurrToStr(EKDbSumaOS.SumCollection[0].SumValue)]);
+  lblTotAPagar.Caption:=Format('Total a Pagar: $ %s.',[CurrToStr(acumulado - EKDbSumaOS.SumCollection[0].SumValue)]);
 end;
 
 procedure TFOP_ABM_OrdenTecnica.EKDbSumaOSSumListChanged(Sender: TObject);
 begin
   acumuladoOS:= EKDbSumaOS.SumCollection[0].SumValue;
-  lblTotAPagar.Caption:=Format('Total a Pagar: $ %s , con $ %s descontado por OOSS.',[CurrToStr(EKDbSumaProd.SumCollection[0].SumValue),CurrToStr(EKDbSumaOS.SumCollection[0].SumValue)]);
+  lblTotAPagar.Caption:=Format('Total a Pagar: $ %s.',[CurrToStr(acumulado - EKDbSumaOS.SumCollection[0].SumValue)]);
 end;
 
 procedure TFOP_ABM_OrdenTecnica.modoEscrituraOS;
@@ -1223,6 +1328,30 @@ begin
   dm.centrarPanel(FOP_ABM_OrdenTecnica, PCargaOS);
   if edMontoOS.Enabled then
     edMontoOS.SetFocus;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.btnFormaPagoClick(Sender: TObject);
+begin
+ if not (btnFormaPago.Enabled) then
+    exit;
+
+
+  if (ZQ_Orden.State in [dsInsert, dsEdit]) and (not ZQ_OrdenDetalle.IsEmpty) and PanelProductosYFPago.Enabled then
+  begin
+    dm.centrarPanel(FOP_ABM_OrdenTecnica, PABM_FormaPago);
+    PABM_FormaPago.Top:= FCajero.Height - 300;
+    PABM_FormaPago.Visible:= true;
+    PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
+    PABM_FormaPago.BringToFront;
+    grupoVertical.Enabled:= false;
+    GrupoGuardarCancelar.Enabled:= false;
+    ZQ_Orden_Entrega.Append;
+    edCodCuenta.SetFocus;
+    edImporte.SetFocus;
+    edCodCuenta.SetFocus;
+    ZQ_Cuentas.Locate('ID_CUENTA', ctaPorDefecto, []);
+    ZQ_Orden_EntregaCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+  end
 end;
 
 end.
