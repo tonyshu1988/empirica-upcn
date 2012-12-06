@@ -434,6 +434,13 @@ type
     ZQ_CuentasID_SUCURSAL: TIntegerField;
     ZQ_CuentasA_NOTA_CREDITO: TStringField;
     ZQ_CuentasMODIFICABLE: TStringField;
+    ZQ_Orden_Entrega_ctaIngreso: TStringField;
+    ZQ_Orden_EntregamedioPago: TStringField;
+    ZQ_Orden_Entrega_desc_rec: TFloatField;
+    ZQ_Orden_Entrega_efectivo: TStringField;
+    ZQ_Orden_Entrega_nroPrecio: TStringField;
+    ZQ_Orden_Entrega_fiscal: TStringField;
+    ZQ_Orden_Entrega_esCtaCorr: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -481,6 +488,12 @@ type
     procedure EKDbSumaOSSumListChanged(Sender: TObject);
     procedure modoEscrituraOS();
     procedure btnFormaPagoClick(Sender: TObject);
+    procedure btFPAceptarClick(Sender: TObject);
+    procedure btFPCancelarClick(Sender: TObject);
+    procedure buscarCuenta(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure edCodCuentaExit(Sender: TObject);
+    procedure calcularFP();
+    procedure buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -537,6 +550,8 @@ begin
   dm.EKModelo.abrir(ZQ_DetalleProd);
   dm.EKModelo.abrir(ZQ_Laboratorios);
   dm.EKModelo.abrir(ZQ_Medico);
+  dm.EKModelo.abrir(ZQ_FormasPago);
+  dm.EKModelo.abrir(ZQ_Cuentas);
   Cliente:=-1;
   IdVendedor:=-1;
   descCliente:=0;
@@ -544,10 +559,10 @@ begin
   IDClienteIVA:=0;
   crearOrdenT();
 
-  //  edCuenta.DropDownRows:= cajero_tamanio_lista_fpago;
+  edCuenta.DropDownRows:= cajero_tamanio_lista_fpago;
 
   modoLecturaProd();
-//  PConfirmarVenta.Visible:= False;
+
 
 //
 //  if not (dm.EKUsrLogin.PermisoAccion('NO_FISCAL')) then
@@ -565,21 +580,13 @@ begin
 //    btnEfectivo.Visible:=True;
 //  end;
 //
-//  PABM_FormaPago.Visible:= False;
-//  //Formas de Pago
-//  FPrincipal.Iconos_Menu_16.GetBitmap(1, btFPAceptar.Glyph);
-//  FPrincipal.Iconos_Menu_16.GetBitmap(0, btFPCancelar.Glyph);
-//  //Confirmación Venta
-//  FPrincipal.Iconos_Menu_32.GetBitmap(1, btnConfirmarVenta.Glyph);
-//  FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarVenta.Glyph);
-//  //Venta Rápida
-//  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivo.Glyph);
-//  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivoF.Glyph);
-//
-//  //Caption en los filtros
-//  btnEfectivo.Caption:= etiqueta_no_fiscal;
-//  btnEfectivoF.Caption:= etiqueta_fiscal;
-//
+  PABM_FormaPago.Visible:= False;
+  //Formas de Pago
+  FPrincipal.Iconos_Menu_16.GetBitmap(1, btFPAceptar.Glyph);
+  FPrincipal.Iconos_Menu_16.GetBitmap(0, btFPCancelar.Glyph);
+
+  ctaPorDefecto:= cajero_cuenta_defecto;
+  edCuenta.DropDownRows:= cajero_tamanio_lista_fpago;
 
 end;
 
@@ -1335,11 +1342,10 @@ begin
  if not (btnFormaPago.Enabled) then
     exit;
 
-
   if (ZQ_Orden.State in [dsInsert, dsEdit]) and (not ZQ_OrdenDetalle.IsEmpty) and PanelProductosYFPago.Enabled then
   begin
     dm.centrarPanel(FOP_ABM_OrdenTecnica, PABM_FormaPago);
-    PABM_FormaPago.Top:= FCajero.Height - 300;
+    PABM_FormaPago.Top:= FOP_ABM_OrdenTecnica.Height - 300;
     PABM_FormaPago.Visible:= true;
     PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
     PABM_FormaPago.BringToFront;
@@ -1353,5 +1359,157 @@ begin
     ZQ_Orden_EntregaCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
   end
 end;
+
+procedure TFOP_ABM_OrdenTecnica.btFPAceptarClick(Sender: TObject);
+begin
+ if ZQ_Orden_Entrega.State in [dsInsert, dsEdit] then
+  begin
+    if ZQ_Orden_EntregaCUENTA_INGRESO.AsInteger = 1 then //si se eligio Cuenta Corriente
+    begin
+      if cliente <= 0 then //si es consumidor final
+      begin
+        ShowMessage('No se puede elegir Cuenta Corriente para el cliente CONSUMIDOR FINAL, verifique');
+        exit;
+      end
+      else //si no es consumidor final
+      begin
+        if not dm.verificarCuentaCorriente(cliente) then //si no tiene cuenta corriente en el negocio
+        begin
+          ShowMessage('El cliente ' + ZQ_Ordenpers_nombre.AsString + ' no tiene Cuenta Corriente en el negocio, verifique');
+          exit;
+        end;
+      end;
+    end
+    else
+      if ZQ_Orden_EntregaCUENTA_INGRESO.AsInteger = 2 then //si se eligio Nota Credito
+      begin
+        if cliente <= 0 then //si es consumidor final
+        begin
+          ShowMessage('No se puede elegir Nota Credito para el cliente CONSUMIDOR FINAL, verifique');
+          exit;
+        end
+      end;
+
+    ZQ_Orden_Entrega.Post;
+    PABM_FormaPago.Visible:= False;
+    PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
+    grupoVertical.Enabled:= true;
+    GrupoGuardarCancelar.Enabled:= true;
+    DBGridFormaPago.SetFocus;
+  end
+end;
+
+procedure TFOP_ABM_OrdenTecnica.btFPCancelarClick(Sender: TObject);
+begin
+  if ZQ_Orden_Entrega.State in [dsInsert, dsEdit] then
+  begin
+    ZQ_Orden_Entrega.Cancel;
+    PABM_FormaPago.Visible:= False;
+    PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
+    grupoVertical.Enabled:= true;
+    GrupoGuardarCancelar.Enabled:= true;
+    DBGridFormaPago.SetFocus;
+  end
+end;
+
+procedure TFOP_ABM_OrdenTecnica.buscarCuenta(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+  begin
+    EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(0, true); //todas las cuentas de la suc
+    if EKListadoCuenta.Buscar then
+    begin
+      if EKListadoCuenta.Resultado <> '' then
+      begin
+        id_cuenta_fpago:= StrToInt(EKListadoCuenta.Resultado);
+        ZQ_Cuentas.Locate('ID_CUENTA', id_cuenta_fpago, []);
+        ZQ_Orden_EntregaCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+      end;
+    end;
+  end;
+end;
+
+
+procedure TFOP_ABM_OrdenTecnica.edCodCuentaExit(Sender: TObject);
+begin
+  if not ((ZQ_Orden_Entrega_ctaIngreso.AsString = '') or (ZQ_Orden_EntregamedioPago.AsString = '')) then
+//    calcularFP();
+end;
+
+
+procedure TFOP_ABM_OrdenTecnica.calcularFP();
+var
+  precio: Double;
+begin
+//  if not (ZQ_OrdenDetalle.IsEmpty) then
+//    if ZQ_Orden_Entrega.State in [dsInsert, dsEdit] then
+//    begin
+//      //Si es una sola forma de pago le pongo el valor del total por defecto
+//      if ((acumulado > 0) and ((ZQ_Orden_EntregaIMPORTE.IsNull) or (ZQ_Orden_EntregaIMPORTE.AsFloat = 0)))
+//        and not (ZQ_Orden_EntregaID_TIPO_FORMAPAG.IsNull and ZQ_Orden_EntregaCUENTA_INGRESO.IsNull) then
+//      begin
+//        ZQ_Orden_EntregaIMPORTE.AsFloat:= acumulado - acumFpago;
+//      end;
+//
+//      if not (ZQ_Orden_Entrega_nroPrecio.IsNull) then
+//      begin
+//        case ZQ_Orden_Entrega_nroPrecio.AsInteger of
+//          0:
+//            begin
+//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat;
+//            end;
+//          1:
+//            begin
+//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio1;
+//            end;
+//          2:
+//            begin
+//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio2;
+//            end;
+//          3:
+//            begin
+//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio3;
+//            end;
+//          4:
+//            begin
+//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio4;
+//            end;
+//          5:
+//            begin
+//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio5;
+//            end;
+//        end;
+//
+//        ZQ_Orden_Entrega_importeVenta.AsFloat:= precio + (precio * CD_Fpago_desc_rec.AsFloat);
+//      end;
+//
+//      RecalcularMontoPago();
+//    end;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShiftState);
+begin
+  if key = 112 then
+  begin
+    id_cuenta_fpago:= ZQ_Orden_EntregaCUENTA_INGRESO.AsInteger;
+    EKListadoMedio.SQL.Clear;
+    EKListadoMedio.SQL.Add(Format('select tipo.* ' +
+      'from tipo_formapago tipo ' +
+      'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago = ctfp.id_tipo_formapago) ' +
+      'where tipo.baja = %s ' +
+      '  and ctfp.id_cuenta = %d ' +
+      'order by tipo.descripcion',
+      [QuotedStr('N'), id_cuenta_fpago]));
+
+    if EKListadoMedio.Buscar then
+    begin
+      if EKListadoMedio.Resultado <> '' then
+      begin
+        ZQ_Orden_EntregaID_TIPO_FORMAPAG.AsInteger:= StrToInt(EKListadoMedio.Resultado);
+      end;
+    end;
+  end;
+end;
+
 
 end.
