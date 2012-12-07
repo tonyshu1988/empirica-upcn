@@ -357,6 +357,9 @@ type
     Label27: TLabel;
     Label25: TLabel;
     DBGridVerFacturas: TDBGrid;
+    btnVerImagen: TdxBarLargeButton;
+    DBImagen: TDBImage;
+    ZQ_VerCpbIMAGEN: TBlobField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -407,6 +410,7 @@ type
     procedure aplicarPagosCuentaCorriente; //cuando se confirma el recibo aplica todos los pagos realizados a las facturas correspondiente
     procedure buscarFormaPago();
     procedure buscarCuenta();
+    procedure btnVerImagenClick(Sender: TObject);
   Private
     id_cuenta_fpago: integer;
     estadoPantalla: string;
@@ -1646,6 +1650,18 @@ begin
       ZQ_CpbFormaPago.Post;
     end;
   end;
+end;
+
+
+procedure TFABM_CPB_OrdenPago.btnVerImagenClick(Sender: TObject);
+begin
+  if ZQ_VerCpb.IsEmpty or ZQ_VerCpbIMAGEN.IsNull then
+    exit;
+
+  Application.CreateForm(TFVerImagen, FVerImagen);
+  FVerImagen.cargarImagenComprobante(ZQ_VerCpbID_COMPROBANTE.AsInteger);
+  FVerImagen.ShowModal;
+  FVerImagen.Release;
 end;
 
 end.

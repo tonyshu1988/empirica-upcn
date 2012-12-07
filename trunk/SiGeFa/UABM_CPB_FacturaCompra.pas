@@ -22,7 +22,7 @@ type
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnBaja: TdxBarLargeButton;
-    btnImagen: TdxBarLargeButton;
+    btnVerImagen: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
     btnImprimirListado: TdxBarLargeButton;
@@ -38,7 +38,6 @@ type
     AModificar: TAction;
     AConfirmar: TAction;
     ABaja: TAction;
-    AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
     PanelEditar: TPanel;
@@ -438,6 +437,8 @@ type
     PopupMenuImagen: TPopupMenu;
     popUp_VerImagen1: TMenuItem;
     popUp_CargarImagen1: TMenuItem;
+    DBImagen: TDBImage;
+    ZQ_VerCpbIMAGEN: TBlobField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -451,7 +452,6 @@ type
     procedure AModificarExecute(Sender: TObject);
     procedure AConfirmarExecute(Sender: TObject);
     procedure ABajaExecute(Sender: TObject);
-    procedure AReactivarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -492,7 +492,7 @@ type
     procedure edImagenDblClick(Sender: TObject);
     procedure CargaImagen(Archivo: string);
     procedure popUp_VerImagen1Click(Sender: TObject);
-    procedure btnImagenClick(Sender: TObject);
+    procedure btnVerImagenClick(Sender: TObject);
     procedure popUp_CargarImagen1Click(Sender: TObject);
   Private
     confirmarComprobante: boolean;
@@ -867,12 +867,6 @@ procedure TFABM_CPB_FacturaCompra.ABajaExecute(Sender: TObject);
 begin
   if btnBaja.Enabled then
     btnBaja.Click;
-end;
-
-procedure TFABM_CPB_FacturaCompra.AReactivarExecute(Sender: TObject);
-begin
-  if btnImagen.Enabled then
-    btnImagen.Click;
 end;
 
 procedure TFABM_CPB_FacturaCompra.AGuardarExecute(Sender: TObject);
@@ -1531,6 +1525,7 @@ begin
   end
 end;
 
+
 procedure TFABM_CPB_FacturaCompra.edImagenDblClick(Sender: TObject);
 var
   jpg: TJpegImage;
@@ -1545,8 +1540,8 @@ begin
   except
     showmessage('Formato de Imagen no soportado (debe bajar la resolución).');
   end;
-
 end;
+
 
 procedure TFABM_CPB_FacturaCompra.CargaImagen(Archivo: string);
 var
@@ -1621,6 +1616,7 @@ begin
   end;
 end;
 
+
 procedure TFABM_CPB_FacturaCompra.popUp_VerImagen1Click(Sender: TObject);
 begin
   Application.CreateForm(TFVerImagen, FVerImagen);
@@ -1629,18 +1625,18 @@ begin
   FVerImagen.Release;
 end;
 
-procedure TFABM_CPB_FacturaCompra.btnImagenClick(Sender: TObject);
-begin
 
-  if ZQ_VerCpb.IsEmpty then
-  exit;
+procedure TFABM_CPB_FacturaCompra.btnVerImagenClick(Sender: TObject);
+begin
+  if ZQ_VerCpb.IsEmpty or ZQ_VerCpbIMAGEN.IsNull then
+    exit;
 
   Application.CreateForm(TFVerImagen, FVerImagen);
   FVerImagen.cargarImagenComprobante(ZQ_VerCpbID_COMPROBANTE.AsInteger);
   FVerImagen.ShowModal;
   FVerImagen.Release;
-  
 end;
+
 
 procedure TFABM_CPB_FacturaCompra.popUp_CargarImagen1Click(
   Sender: TObject);
@@ -1657,7 +1653,6 @@ begin
   except
     showmessage('Formato de Imagen no soportado (debe bajar la resolución).');
   end;
-
 end;
 
 end.
