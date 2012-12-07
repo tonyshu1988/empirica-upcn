@@ -1516,7 +1516,7 @@ var
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
   if ((ZQ_VerCpb.IsEmpty) or
-    ((estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO))) then
+    ((estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO) or (estado = ESTADO_CONFIRMADO))) then
     exit;
 
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;

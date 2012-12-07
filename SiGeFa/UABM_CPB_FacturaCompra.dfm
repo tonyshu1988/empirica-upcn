@@ -1,7 +1,7 @@
 object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
-  Left = 226
-  Top = 213
-  Width = 1026
+  Left = 333
+  Top = 194
+  Width = 914
   Height = 637
   Caption = 'ABM Factura Compra'
   Color = clBtnFace
@@ -26,7 +26,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 1018
+    Width = 906
     Height = 539
     Align = alClient
     BevelOuter = bvNone
@@ -146,7 +146,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             50.270833333333330000
             674.687500000000000000
             124.354166666666700000
-            550.333333333333400000)
+            550.333333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -679,7 +679,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -1383,7 +1383,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 1018
+      Width = 906
       Height = 539
       Align = alClient
       BevelOuter = bvNone
@@ -1398,12 +1398,12 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 1008
+        Width = 896
         Height = 177
         Align = alTop
         TabOrder = 0
         DesignSize = (
-          1008
+          896
           177)
         object btnBuscarEmpresa: TSpeedButton
           Left = 7
@@ -1831,14 +1831,14 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       object PanelEditar_Producto: TPanel
         Left = 5
         Top = 182
-        Width = 1008
+        Width = 896
         Height = 352
         Align = alClient
         TabOrder = 1
         object Label6: TLabel
           Left = 1
           Top = 1
-          Width = 1006
+          Width = 894
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -1855,16 +1855,16 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
           Top = 310
-          Width = 1006
+          Width = 894
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            1006
+            894
             41)
           object Label25: TLabel
-            Left = 460
+            Left = 348
             Top = 3
             Width = 111
             Height = 13
@@ -1878,7 +1878,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             ParentFont = False
           end
           object Label26: TLabel
-            Left = 596
+            Left = 484
             Top = 3
             Width = 121
             Height = 13
@@ -1892,7 +1892,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             ParentFont = False
           end
           object Label29: TLabel
-            Left = 869
+            Left = 757
             Top = 3
             Width = 58
             Height = 13
@@ -1906,7 +1906,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             ParentFont = False
           end
           object Label30: TLabel
-            Left = 733
+            Left = 621
             Top = 3
             Width = 51
             Height = 13
@@ -1929,7 +1929,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             OnClick = btnEliminarProductoClick
           end
           object editTotalProductos: TEdit
-            Left = 460
+            Left = 348
             Top = 17
             Width = 129
             Height = 19
@@ -1950,7 +1950,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             TabOrder = 1
           end
           object editTotalImponible: TEdit
-            Left = 596
+            Left = 484
             Top = 17
             Width = 129
             Height = 19
@@ -1971,7 +1971,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             TabOrder = 2
           end
           object editTotalIva: TEdit
-            Left = 732
+            Left = 620
             Top = 17
             Width = 129
             Height = 19
@@ -1992,7 +1992,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             TabOrder = 3
           end
           object editTotalFinal: TEdit
-            Left = 868
+            Left = 756
             Top = 17
             Width = 129
             Height = 19
@@ -2016,7 +2016,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         object DBGridEditar_Producto: TDBGrid
           Left = 164
           Top = 14
-          Width = 843
+          Width = 731
           Height = 296
           Align = alClient
           Color = 14606012
@@ -2251,7 +2251,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 1018
+      Width = 906
       Height = 539
       Align = alClient
       BevelOuter = bvNone
@@ -2264,7 +2264,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 482
+        Left = 370
         Top = 5
         Width = 6
         Height = 529
@@ -2273,7 +2273,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 477
+        Width = 365
         Height = 529
         Align = alClient
         BevelOuter = bvNone
@@ -2281,7 +2281,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 477
+          Width = 365
           Height = 529
           Align = alClient
           Color = 14606012
@@ -2359,11 +2359,18 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
               Title.Caption = 'Saldo'
               Width = 107
               Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_COMPROBANTE'
+              Title.Alignment = taCenter
+              Title.Caption = 'ID'
+              Visible = True
             end>
         end
       end
       object PanelCpbActual: TPanel
-        Left = 488
+        Left = 376
         Top = 5
         Width = 525
         Height = 529
@@ -2921,12 +2928,22 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             object DBMemoCpbActual_Info: TDBMemo
               Left = 8
               Top = 61
-              Width = 505
+              Width = 409
               Height = 55
               Anchors = [akLeft, akTop, akRight]
               DataField = 'OBSERVACION'
               DataSource = DS_VerCpb
               TabOrder = 0
+            end
+            object DBImagen: TDBImage
+              Left = 421
+              Top = 61
+              Width = 87
+              Height = 55
+              DataField = 'IMAGEN'
+              DataSource = DS_VerCpb
+              Stretch = True
+              TabOrder = 1
             end
           end
         end
@@ -2936,7 +2953,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 1018
+    Width = 906
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -2945,7 +2962,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     object lblTipoComprobante: TLabel
       Left = 1
       Top = 1
-      Width = 1012
+      Width = 900
       Height = 17
       Align = alCustom
       Alignment = taCenter
@@ -2974,7 +2991,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 908
+      Left = 796
       Top = 1
       Width = 109
       Height = 17
@@ -2988,7 +3005,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 799
+      Left = 687
       Top = 1
       Width = 109
       Height = 17
@@ -3148,7 +3165,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
           end
           item
             BeginGroup = True
-            Item = btnImagen
+            Item = btnVerImagen
             Visible = True
           end
           item
@@ -3514,13 +3531,13 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       OnClick = btnBajaClick
       AutoGrayScale = False
     end
-    object btnImagen: TdxBarLargeButton
+    object btnVerImagen: TdxBarLargeButton
       Caption = 'Imagen'
       Category = 0
       Hint = 'Ver Imagen Adjunta'
       Visible = ivAlways
-      ImageIndex = 88
-      OnClick = btnImagenClick
+      ImageIndex = 95
+      OnClick = btnVerImagenClick
       AutoGrayScale = False
     end
     object btnGuardar: TdxBarLargeButton
@@ -3587,7 +3604,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         'btnEnviarMail'
         'btnBaja'
         'btnSalir'
-        'btnImagen'
+        'btnVerImagen'
         'btnImprimirListado'
         'btnConfirmar'
         'btnActualizarPrecios')
@@ -3627,11 +3644,6 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       Caption = 'ABaja'
       ShortCut = 116
       OnExecute = ABajaExecute
-    end
-    object AReactivar: TAction
-      Caption = 'AReactivar'
-      ShortCut = 117
-      OnExecute = AReactivarExecute
     end
     object AGuardar: TAction
       Caption = 'AGuardar'
@@ -4938,6 +4950,9 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       FieldName = 'SALDO'
       currency = True
     end
+    object ZQ_VerCpbIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
   end
   object ZQ_VerCpb_Producto: TZQuery
     Connection = DM.Conexion
@@ -5082,6 +5097,10 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       end
       item
         TituloColumna = 'Saldo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID'
         Visible = True
       end>
     NombreGuardar = 'ABM_FC_VerCpb'

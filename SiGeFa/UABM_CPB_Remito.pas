@@ -21,7 +21,7 @@ type
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnBaja: TdxBarLargeButton;
-    btnReactivar: TdxBarLargeButton;
+    bntVerImagen: TdxBarLargeButton;
     btnGuardar: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
     btnImprimir: TdxBarLargeButton;
@@ -37,7 +37,6 @@ type
     AModificar: TAction;
     AConfirmar: TAction;
     ABaja: TAction;
-    AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
     PanelEditar: TPanel;
@@ -457,6 +456,8 @@ type
     popUp_VerImagen1: TMenuItem;
     popUp_CargarImagen1: TMenuItem;
     ZQ_ComprobanteIMAGEN: TBlobField;
+    DBImagen: TDBImage;
+    ZQ_VerCpbIMAGEN: TBlobField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -470,7 +471,6 @@ type
     procedure AModificarExecute(Sender: TObject);
     procedure AConfirmarExecute(Sender: TObject);
     procedure ABajaExecute(Sender: TObject);
-    procedure AReactivarExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ABuscarExecute(Sender: TObject);
@@ -508,7 +508,7 @@ type
     procedure popUp_CargarImagen1Click(Sender: TObject);
     procedure popUp_VerImagen1Click(Sender: TObject);
     procedure CargaImagen(Archivo: string);
-    procedure btnReactivarClick(Sender: TObject);
+    procedure bntVerImagenClick(Sender: TObject);
   Private
     estadoPantalla: string;
     tipoComprobante: integer;
@@ -894,12 +894,6 @@ procedure TFABM_CPB_Remito.ABajaExecute(Sender: TObject);
 begin
   if btnBaja.Enabled then
     btnBaja.Click;
-end;
-
-procedure TFABM_CPB_Remito.AReactivarExecute(Sender: TObject);
-begin
-  if btnReactivar.Enabled then
-    btnReactivar.Click;
 end;
 
 procedure TFABM_CPB_Remito.AGuardarExecute(Sender: TObject);
@@ -1573,10 +1567,10 @@ begin
 end;
 
 
-procedure TFABM_CPB_Remito.btnReactivarClick(Sender: TObject);
+procedure TFABM_CPB_Remito.bntVerImagenClick(Sender: TObject);
 begin
-  if ZQ_VerCpb.IsEmpty then
-  exit;
+  if ZQ_VerCpb.IsEmpty or ZQ_VerCpbIMAGEN.IsNull then
+    exit;
 
   Application.CreateForm(TFVerImagen, FVerImagen);
   FVerImagen.cargarImagenComprobante(ZQ_VerCpbID_COMPROBANTE.AsInteger);
