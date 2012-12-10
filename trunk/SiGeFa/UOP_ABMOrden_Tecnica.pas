@@ -441,6 +441,11 @@ type
     ZQ_Orden_Entrega_nroPrecio: TStringField;
     ZQ_Orden_Entrega_fiscal: TStringField;
     ZQ_Orden_Entrega_esCtaCorr: TStringField;
+    ZQ_OrdenDetalle_acumProd: TFloatField;
+    DBText3: TDBText;
+    ZQ_OrdenDetalleOS_acumOS: TFloatField;
+    DBText4: TDBText;
+    ZQ_OrdenDetalle_acumOS: TFloatField;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -472,8 +477,6 @@ type
     procedure DBGridListadoProductosKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure btQuitarOSClick(Sender: TObject);
-    procedure recalcularMontosProd();
-    procedure recalcularMontosOS();
     procedure DBGridListadoProductosColExit(Sender: TObject);
     procedure DBGridListadoOSColExit(Sender: TObject);
     procedure MenuItem1Click(Sender: TObject);
@@ -494,6 +497,8 @@ type
     procedure edCodCuentaExit(Sender: TObject);
     procedure calcularFP();
     procedure buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShiftState);
+    procedure ZQ_OrdenDetalleCalcFields(DataSet: TDataSet);
+    procedure ZQ_OrdenDetalleOSAfterPost(DataSet: TDataSet);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -1150,16 +1155,6 @@ if dm.EKModelo.verificar_transaccion(abmOrden) then
   end;
 end;
 
-procedure TFOP_ABM_OrdenTecnica.recalcularMontosProd;
-begin
-//if dm.EKModelo.verificar_transaccion(abmOrden) then
-// begin
-//    ZQ_OrdenDetalle.Post;
-//    EKDbSumaDetProd.RecalcAll;
-//    ZQ_OrdenDetalle.Edit;
-// end;
-end;
-
 procedure TFOP_ABM_OrdenTecnica.DBGridListadoProductosColExit(
   Sender: TObject);
 begin
@@ -1169,28 +1164,11 @@ if ((sender as tdbgrid).SelectedField.FullName = 'MONTO_TOTAL') then
     end;
 end;
 
-procedure TFOP_ABM_OrdenTecnica.recalcularMontosOS;
-begin
-//if ZQ_OrdenDetalleOS.State in [dsEdit,dsInsert] then
-// begin
-//    ZQ_OrdenDetalleOS.Post;
-// end;
-//    EKDbSumaDetProdOS.RecalcAll;
-//    ZQ_OrdenDetalleOS.Last;
-//    ZQ_OrdenDetalleOS.Edit;
-//    if EKDbSumaDetProdOS.SumCollection[0].SumValue>EKDbSumaDetProd.SumCollection[0].SumValue then
-//     begin
-//        Showmessage('El total descontado no debe ser mayor al importe total del Producto/Servicio.');
-//        exit;
-//     end;
-end;
-
-
 procedure TFOP_ABM_OrdenTecnica.DBGridListadoOSColExit(Sender: TObject);
 begin
 if ((sender as tdbgrid).SelectedField.FullName = 'MONTO_DESCONTADO') then
     begin
-     recalcularMontosOS();
+     //recalcularMontosOS();
     end;
 end;
 
@@ -1223,7 +1201,6 @@ Perform(WM_NEXTDLGCTL, 0, 0);
     begin
       ZQ_OrdenDetalle.Post;
       lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(ZQ_OrdenDetalle.RecordCount);
-      //lblTotAPagar.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
       modoLecturaProd();
       if DBGridListadoProductos.Enabled then
         DBGridListadoProductos.SetFocus;
@@ -1288,8 +1265,6 @@ Perform(WM_NEXTDLGCTL, 0, 0);
        end
       else
        begin
-      //lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(ZQ_OrdenDetalle.RecordCount);
-      //lblTotAPagar.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
         modoLecturaProd();
         if DBGridListadoOS.Enabled then
           DBGridListadoOS.SetFocus;
@@ -1302,7 +1277,7 @@ end;
 function TFOP_ABM_OrdenTecnica.verificarTotOS: Boolean;
 begin
   Result:= True;
-  if (acumuladoOS > ZQ_OrdenDetalleMONTO_TOTAL.AsFloat) then
+  if (ZQ_OrdenDetalleOS_acumOS.AsFloat > ZQ_OrdenDetalle_acumProd.AsFloat) then
   begin
     Application.MessageBox(PCHAR(Format('El monto a descontar no debe ser superior a $%s, por favor Verifique',[CurrToStr(ZQ_OrdenDetalleMONTO_TOTAL.AsFloat)])), 'Validación', MB_OK + MB_ICONINFORMATION);
     result:= false;
@@ -1511,5 +1486,20 @@ begin
   end;
 end;
 
+
+procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleCalcFields(
+  DataSet: TDataSet);
+begin
+  ZQ_OrdenDetalle_acumProd.AsFloat:=ZQ_OrdenDetalle_acumProd.AsFloat + ZQ_OrdenDetalleMONTO_TOTAL.AsFloat;
+
+end;
+
+procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleOSAfterPost(
+  DataSet: TDataSet);
+begin
+   ZQ_OrdenDetalle.Edit;
+   ZQ_OrdenDetalle_acumOS.AsFloat:=ZQ_OrdenDetalle_acumOS.AsFloat + ZQ_OrdenDetalleOSMONTO_DESCONTADO.AsFloat ;
+   ZQ_OrdenDetalle.Post;
+end;
 
 end.
