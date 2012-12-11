@@ -5881,6 +5881,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
     end
   end
   object ZSP_Stock_Max: TZStoredProc
+    Connection = DM.Conexion
     Params = <
       item
         DataType = ftFloat
