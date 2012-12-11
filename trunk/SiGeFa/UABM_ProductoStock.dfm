@@ -22,8 +22,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 946
-    Height = 512
+    Width = 954
+    Height = 523
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -31,29 +31,29 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelAsociar: TPanel
       Left = 5
       Top = 5
-      Width = 936
-      Height = 502
+      Width = 944
+      Height = 513
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object Splitter1: TSplitter
         Left = 423
         Top = 21
-        Height = 481
+        Height = 492
       end
       object PanelAsociar_Producto: TPanel
         Left = 426
         Top = 21
-        Width = 510
-        Height = 481
+        Width = 518
+        Height = 492
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 510
-          Height = 481
+          Width = 518
+          Height = 492
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -149,7 +149,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Left = 0
         Top = 21
         Width = 423
-        Height = 481
+        Height = 492
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -157,7 +157,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Left = 0
           Top = 0
           Width = 423
-          Height = 481
+          Height = 492
           Align = alClient
           Color = 14606012
           DataSource = DS_Sucursal
@@ -185,7 +185,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 936
+        Width = 944
         Height = 21
         Align = alTop
         BevelOuter = bvNone
@@ -198,8 +198,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelCarga: TPanel
       Left = 5
       Top = 5
-      Width = 936
-      Height = 502
+      Width = 944
+      Height = 513
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
@@ -318,7 +318,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               50.270833333333330000
               1232.958333333333000000
               124.354166666666700000
-              304.270833333333300000)
+              304.270833333333400000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -349,7 +349,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Size.Values = (
               52.916666666666670000
               1132.416666666667000000
-              68.791666666666670000
+              68.791666666666680000
               505.354166666666700000)
             Alignment = taCenter
             AlignToBand = True
@@ -382,7 +382,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               52.916666666666670000
               1087.437500000000000000
               5.291666666666667000
-              592.666666666666700000)
+              592.666666666666800000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -424,7 +424,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewPage = False
           ParentFont = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -775,7 +775,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333330000
+            58.208333333333340000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -825,7 +825,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333330000
+            82.020833333333340000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -1210,8 +1210,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object DBGridStock: TDBGrid
         Left = 0
         Top = 0
-        Width = 936
-        Height = 477
+        Width = 944
+        Height = 488
         Align = alClient
         Color = 14606012
         DataSource = DS_Stock
@@ -1437,15 +1437,15 @@ object FABM_ProductoStock: TFABM_ProductoStock
       end
       object Panel2: TPanel
         Left = 0
-        Top = 477
-        Width = 936
+        Top = 488
+        Width = 944
         Height = 25
         Align = alBottom
         TabOrder = 1
         object lblResumen: TLabel
           Left = 1
           Top = 1
-          Width = 934
+          Width = 942
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -1463,7 +1463,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1602,6 +1602,11 @@ object FABM_ProductoStock: TFABM_ProductoStock
           end
           item
             Item = btnExcel
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btRepedido
             Visible = True
           end
           item
@@ -2025,6 +2030,16 @@ object FABM_ProductoStock: TFABM_ProductoStock
       Visible = ivAlways
       ImageIndex = 77
       OnClick = btnExcelClick
+      AutoGrayScale = False
+    end
+    object btRepedido: TdxBarLargeButton
+      Caption = 'Repedido'
+      Category = 0
+      Hint = 'Repedido'
+      Visible = ivAlways
+      ButtonStyle = bsChecked
+      ImageIndex = 68
+      OnClick = btRepedidoClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
