@@ -1,7 +1,7 @@
 object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
-  Left = 274
-  Top = 162
-  Width = 961
+  Left = 157
+  Top = 150
+  Width = 1061
   Height = 590
   Caption = 'ABM Nota de Pedido'
   Color = clBtnFace
@@ -26,7 +26,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 953
+    Width = 1053
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -35,7 +35,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
     object lblTipoComprobante: TLabel
       Left = 1
       Top = 1
-      Width = 943
+      Width = 1043
       Height = 17
       Align = alCustom
       Alignment = taCenter
@@ -64,7 +64,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 843
+      Left = 943
       Top = 1
       Width = 109
       Height = 17
@@ -78,7 +78,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 734
+      Left = 834
       Top = 1
       Width = 109
       Height = 17
@@ -92,7 +92,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       TabOrder = 1
     end
     object StaticTxtAlmacenado: TStaticText
-      Left = 625
+      Left = 725
       Top = 1
       Width = 109
       Height = 17
@@ -109,7 +109,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 953
+    Width = 1053
     Height = 492
     Align = alClient
     BevelOuter = bvNone
@@ -580,7 +580,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 953
+      Width = 1053
       Height = 492
       Align = alClient
       BevelOuter = bvNone
@@ -595,15 +595,15 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 943
+        Width = 1043
         Height = 177
         Align = alTop
         TabOrder = 0
         DesignSize = (
-          943
+          1043
           177)
         object DBTxtCPB_PuntoVenta: TDBText
-          Left = 778
+          Left = 878
           Top = 33
           Width = 44
           Height = 18
@@ -620,7 +620,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
           Transparent = False
         end
         object DBTxtCPB_Numero: TDBText
-          Left = 835
+          Left = 935
           Top = 33
           Width = 88
           Height = 18
@@ -671,7 +671,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
           OnClick = btnBuscarPersonaClick
         end
         object Label12: TLabel
-          Left = 778
+          Left = 878
           Top = 12
           Width = 145
           Height = 15
@@ -690,7 +690,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
           Transparent = True
         end
         object LblCPB_PuntoVenta: TLabel
-          Left = 778
+          Left = 878
           Top = 33
           Width = 44
           Height = 18
@@ -709,7 +709,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
           Visible = False
         end
         object LblCPB_Numero: TLabel
-          Left = 835
+          Left = 935
           Top = 33
           Width = 88
           Height = 18
@@ -727,7 +727,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
           Visible = False
         end
         object Label26: TLabel
-          Left = 824
+          Left = 924
           Top = 33
           Width = 8
           Height = 18
@@ -1398,14 +1398,14 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       object PanelEditar_Producto: TPanel
         Left = 5
         Top = 182
-        Width = 943
+        Width = 1043
         Height = 305
         Align = alClient
         TabOrder = 1
         object Label46: TLabel
           Left = 1
           Top = 1
-          Width = 941
+          Width = 1041
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -1422,16 +1422,16 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
           Top = 263
-          Width = 941
+          Width = 1041
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            941
+            1041
             41)
           object Label25: TLabel
-            Left = 666
+            Left = 766
             Top = 3
             Width = 70
             Height = 13
@@ -1445,7 +1445,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
             ParentFont = False
           end
           object Label19: TLabel
-            Left = 802
+            Left = 902
             Top = 3
             Width = 80
             Height = 13
@@ -1468,7 +1468,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
             OnClick = btnEliminarProductoClick
           end
           object editTotalProductos: TEdit
-            Left = 666
+            Left = 766
             Top = 17
             Width = 129
             Height = 19
@@ -1489,7 +1489,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
             TabOrder = 1
           end
           object editTotalRecibido: TEdit
-            Left = 802
+            Left = 902
             Top = 17
             Width = 129
             Height = 19
@@ -1513,7 +1513,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         object DBGridEditar_Producto: TDBGrid
           Left = 164
           Top = 14
-          Width = 778
+          Width = 878
           Height = 249
           Align = alClient
           Color = 14606012
@@ -1729,7 +1729,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 953
+      Width = 1053
       Height = 492
       Align = alClient
       BevelOuter = bvNone
@@ -1742,7 +1742,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 417
+        Left = 517
         Top = 5
         Width = 6
         Height = 482
@@ -1751,7 +1751,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 412
+        Width = 512
         Height = 482
         Align = alClient
         BevelOuter = bvNone
@@ -1759,7 +1759,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 412
+          Width = 512
           Height = 482
           Align = alClient
           Color = 14606012
@@ -1847,7 +1847,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
         end
       end
       object PanelCpbActual: TPanel
-        Left = 423
+        Left = 523
         Top = 5
         Width = 525
         Height = 482
@@ -2553,6 +2553,11 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
             Visible = True
           end
           item
+            BeginGroup = True
+            Item = btStock_max
+            Visible = True
+          end
+          item
             Item = btnSalir
             Visible = True
           end>
@@ -2977,6 +2982,15 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       Visible = ivAlways
       ImageIndex = 68
       OnClick = btnActualizarPreciosClick
+      AutoGrayScale = False
+    end
+    object btStock_max: TdxBarLargeButton
+      Caption = 'Stock Max'
+      Category = 0
+      Hint = 'Stock Max'
+      Visible = ivAlways
+      ImageIndex = 75
+      OnClick = btStock_maxClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -5865,5 +5879,64 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       currency = True
       Calculated = True
     end
+  end
+  object ZSP_Stock_Max: TZStoredProc
+    Params = <
+      item
+        DataType = ftFloat
+        Name = 'SUPERA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUCTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_POS_SUCURSAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'CANTIDAD'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'NOTA_PEDIDO_STOCK_MAXIMO'
+    Left = 277
+    Top = 353
+    ParamData = <
+      item
+        DataType = ftFloat
+        Name = 'SUPERA'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_PRODUCTO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_POS_SUCURSAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftFloat
+        Name = 'CANTIDAD'
+        ParamType = ptInput
+      end>
+    object ZSP_Stock_MaxSUPERA: TFloatField
+      FieldName = 'SUPERA'
+      ReadOnly = True
+    end
+  end
+  object EKListadoPosicionSucursal: TEKListadoSQL
+    Modelo = DM.EKModelo
+    CampoBuscar = 'seccion'
+    CampoClave = 'id_posicion_sucursal'
+    TituloVentana = 'Seleccione la Posicion sucursal que desea Controlar'
+    Left = 277
+    Top = 401
   end
 end

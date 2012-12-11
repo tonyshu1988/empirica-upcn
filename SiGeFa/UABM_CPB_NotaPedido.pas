@@ -448,6 +448,10 @@ type
     ZQ_CpbProductoIMPORTE_COSTO: TFloatField;
     ZQ_VerCpb_ProductoIMPORTE_COSTO: TFloatField;
     ZQ_VerCpb_Productodiferencia_precios: TFloatField;
+    btStock_max: TdxBarLargeButton;
+    ZSP_Stock_Max: TZStoredProc;
+    ZSP_Stock_MaxSUPERA: TFloatField;
+    EKListadoPosicionSucursal: TEKListadoSQL;
 
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
@@ -503,6 +507,7 @@ type
     procedure btnAplicarActualizarClick(Sender: TObject);
     procedure ZQ_VerCpb_ProductoAfterScroll(DataSet: TDataSet);
     procedure ZQ_VerCpb_ProductoCalcFields(DataSet: TDataSet);
+    procedure btStock_maxClick(Sender: TObject);
   Private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -1685,6 +1690,48 @@ procedure TFABM_CPB_NotaPedido.ZQ_VerCpb_ProductoCalcFields(
   DataSet: TDataSet);
 begin
 ZQ_VerCpb_Productodiferencia_precios.AsFloat := ZQ_VerCpb_ProductoIMPORTE_UNITARIO.AsFloat - ZQ_VerCpb_ProductoIMPORTE_COSTO.AsFloat;
+end;
+
+procedure TFABM_CPB_NotaPedido.btStock_maxClick(Sender: TObject);
+var
+id_pos_sucursal : integer;
+begin
+
+  EKListadoPosicionSucursal.SQL.Text:= 'Select ps.id_posicion_sucursal, ps.seccion '+
+  'From posicion_sucursal ps '+
+  'where ps.id_sucursal = '+IntToStr(SUCURSAL_LOGUEO);
+
+  if EKListadoPosicionSucursal.Buscar then
+  begin
+    if (EKListadoPosicionSucursal.Resultado <> '') then
+    begin
+      id_pos_sucursal := StrToInt(EKListadoPosicionSucursal.Resultado);
+    end;
+  end;
+
+  ZQ_CpbProducto.First;
+  while not ZQ_CpbProducto.Eof do
+  begin
+    if ZQ_CpbProductoID_PRODUCTO.IsNull then
+      ZQ_CpbProducto.Delete
+    else
+    begin
+      ZSP_Stock_Max.Close;
+      ZSP_Stock_Max.ParamByName('ID_PRODUCTO').AsInteger := ZQ_CpbProductoID_PRODUCTO.AsInteger;
+      ZSP_Stock_Max.ParamByName('ID_POS_SUCURSAL').AsInteger := id_pos_sucursal;
+      ZSP_Stock_Max.ParamByName('CANTIDAD').AsFloat := ZQ_CpbProductoCANTIDAD.AsFloat;
+      ZSP_Stock_Max.Open;
+
+      if ZSP_Stock_MaxSUPERA.AsFloat > 0 then
+      begin
+        ShowMessage('El producto '+ZQ_CpbProducto_Nombre.AsString+' supera el stock maximo permitido en '+ZSP_Stock_MaxSUPERA.AsString+' unidades');
+      end;
+
+
+      ZQ_CpbProducto.Next;
+    end;
+  end;
+
 end;
 
 end.

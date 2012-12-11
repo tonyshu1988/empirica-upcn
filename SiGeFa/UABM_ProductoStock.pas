@@ -165,6 +165,7 @@ type
     ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
     ZQ_SeccionSuc: TZQuery;
+    btRepedido: TdxBarLargeButton;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnGuardarClick(Sender: TObject);
@@ -200,6 +201,7 @@ type
     procedure validarPermisosUsuario;
     procedure btnExcelClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
+    procedure btRepedidoClick(Sender: TObject);
   Private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -805,6 +807,22 @@ begin
   DM.VariablesReportes(RepProductoStock);
   QRLabelCritBusqueda.Caption:= EKBuscarStock.ParametrosBuscados;
   EKVistaPreviaQR1.VistaPrevia;
+end;
+
+procedure TFABM_ProductoStock.btRepedidoClick(Sender: TObject);
+begin
+
+  if ZQ_Stock.Filtered = false then
+  begin
+    ZQ_Stock.Filter := 'stock_actual <= stock_repedido';
+    ZQ_Stock.Filtered := true;
+    DBGridStock.Color := $00D1C7FE;
+  end
+  else
+  begin
+    ZQ_Stock.Filtered := false;
+    DBGridStock.Color := $00DEDEBC;
+  end;
 end;
 
 end.
