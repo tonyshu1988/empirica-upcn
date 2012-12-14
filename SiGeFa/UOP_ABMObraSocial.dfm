@@ -174,7 +174,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Size.Values = (
             52.916666666666670000
             730.250000000000000000
-            68.791666666666680000
+            68.791666666666670000
             439.208333333333400000)
           Alignment = taCenter
           AlignToBand = True
@@ -543,7 +543,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            592.666666666666800000)
+            592.666666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -851,7 +851,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         Align = alClient
         Color = 14606012
         DataSource = DS_OP_ObraSocial
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -1748,7 +1748,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       end
       item
         TituloColumna = 'ID'
-        Visible = False
+        Visible = True
       end>
     NombreGuardar = 'EkOG_ABMObraSocial'
     AltoTituloColumna = 15

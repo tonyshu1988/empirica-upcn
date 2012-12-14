@@ -851,7 +851,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
         Align = alClient
         Color = 14606012
         DataSource = DS_Medico
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -1714,7 +1714,7 @@ object FOP_ABMMedico: TFOP_ABMMedico
       end
       item
         TituloColumna = 'ID'
-        Visible = False
+        Visible = True
       end>
     NombreGuardar = 'EkOG_ABMMedico'
     AltoTituloColumna = 15

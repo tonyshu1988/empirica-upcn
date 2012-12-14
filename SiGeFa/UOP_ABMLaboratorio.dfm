@@ -792,7 +792,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
         Align = alClient
         Color = 14606012
         DataSource = DS_Laboratorio
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -1656,7 +1656,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
       end
       item
         TituloColumna = 'ID'
-        Visible = False
+        Visible = True
       end>
     NombreGuardar = 'EkOG_ABMLaboratorio'
     AltoTituloColumna = 15
