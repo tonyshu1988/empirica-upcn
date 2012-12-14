@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 240
-  Top = 112
+  Left = 340
+  Top = 67
   Width = 1042
   Height = 717
   Caption = 'Cajero SiGeFa'
@@ -3259,105 +3259,6 @@ object FCajero: TFCajero
         end>
     end
   end
-  object PanelAuditoriaCierreZ: TPanel
-    Left = 376
-    Top = 280
-    Width = 318
-    Height = 143
-    BevelInner = bvLowered
-    TabOrder = 9
-    Visible = False
-    object Label62: TLabel
-      Left = 2
-      Top = 2
-      Width = 314
-      Height = 16
-      Align = alTop
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Auditoria Cierre Z'
-      Color = 12648448
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Layout = tlCenter
-    end
-    object Label63: TLabel
-      Left = 18
-      Top = 56
-      Width = 74
-      Height = 13
-      Caption = 'Fecha Hasta:'
-    end
-    object Label64: TLabel
-      Left = 14
-      Top = 32
-      Width = 78
-      Height = 13
-      Caption = 'Fecha Desde:'
-    end
-    object Label65: TLabel
-      Left = 8
-      Top = 80
-      Width = 84
-      Height = 13
-      Caption = 'Tipo Auditoria:'
-    end
-    object DateTimeFechaDesde: TDateTimePicker
-      Left = 95
-      Top = 28
-      Width = 121
-      Height = 21
-      Date = 41068.667614293980000000
-      Time = 41068.667614293980000000
-      TabOrder = 0
-    end
-    object DateTimeFechaHasta: TDateTimePicker
-      Left = 95
-      Top = 52
-      Width = 121
-      Height = 21
-      Date = 41068.667614293980000000
-      Time = 41068.667614293980000000
-      TabOrder = 1
-    end
-    object ComboBoxTipoAuditoria: TComboBox
-      Left = 95
-      Top = 76
-      Width = 214
-      Height = 21
-      ItemHeight = 13
-      ItemIndex = 0
-      TabOrder = 2
-      Text = 'T = Reporte total general'
-      Items.Strings = (
-        'T = Reporte total general'
-        'D = Reporte detallado')
-    end
-    object btnAuditoriaAceptar: TButton
-      Left = 7
-      Top = 112
-      Width = 75
-      Height = 24
-      Caption = 'Imprimir'
-      TabOrder = 3
-      OnClick = btnAuditoriaAceptarClick
-    end
-    object btnAuditoriaCancelar: TButton
-      Left = 234
-      Top = 112
-      Width = 75
-      Height = 24
-      Cancel = True
-      Caption = 'Cancelar'
-      TabOrder = 4
-      OnClick = btnAuditoriaCancelarClick
-    end
-  end
   object PanelContenedorDerecha: TPanel
     Left = 88
     Top = 0
@@ -4992,6 +4893,105 @@ object FCajero: TFCajero
       TabOrder = 3
       OnExit = edCodCuentaExit
       OnKeyUp = buscarFormaPago
+    end
+  end
+  object PanelAuditoriaCierreZ: TPanel
+    Left = 376
+    Top = 280
+    Width = 318
+    Height = 143
+    BevelInner = bvLowered
+    TabOrder = 9
+    Visible = False
+    object Label62: TLabel
+      Left = 2
+      Top = 2
+      Width = 314
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Auditoria Cierre Z'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label63: TLabel
+      Left = 18
+      Top = 56
+      Width = 74
+      Height = 13
+      Caption = 'Fecha Hasta:'
+    end
+    object Label64: TLabel
+      Left = 14
+      Top = 32
+      Width = 78
+      Height = 13
+      Caption = 'Fecha Desde:'
+    end
+    object Label65: TLabel
+      Left = 8
+      Top = 80
+      Width = 84
+      Height = 13
+      Caption = 'Tipo Auditoria:'
+    end
+    object DateTimeFechaDesde: TDateTimePicker
+      Left = 95
+      Top = 28
+      Width = 121
+      Height = 21
+      Date = 41068.667614293980000000
+      Time = 41068.667614293980000000
+      TabOrder = 0
+    end
+    object DateTimeFechaHasta: TDateTimePicker
+      Left = 95
+      Top = 52
+      Width = 121
+      Height = 21
+      Date = 41068.667614293980000000
+      Time = 41068.667614293980000000
+      TabOrder = 1
+    end
+    object ComboBoxTipoAuditoria: TComboBox
+      Left = 95
+      Top = 76
+      Width = 214
+      Height = 21
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 2
+      Text = 'T = Reporte total general'
+      Items.Strings = (
+        'T = Reporte total general'
+        'D = Reporte detallado')
+    end
+    object btnAuditoriaAceptar: TButton
+      Left = 7
+      Top = 112
+      Width = 75
+      Height = 24
+      Caption = 'Imprimir'
+      TabOrder = 3
+      OnClick = btnAuditoriaAceptarClick
+    end
+    object btnAuditoriaCancelar: TButton
+      Left = 234
+      Top = 112
+      Width = 75
+      Height = 24
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 4
+      OnClick = btnAuditoriaCancelarClick
     end
   end
   object ZQ_Comprobante_FormaPago: TZQuery
@@ -8354,8 +8354,8 @@ object FCajero: TFCajero
   object CD_DetalleFactura: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 490
-    Top = 248
+    Left = 498
+    Top = 232
     object CD_DetalleFacturaID_COMPROBANTE_DETALLE: TIntegerField
       FieldName = 'ID_COMPROBANTE_DETALLE'
     end
@@ -8552,8 +8552,8 @@ object FCajero: TFCajero
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProvider1'
-    Left = 570
-    Top = 296
+    Left = 594
+    Top = 288
     object CD_ComprobanteID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
     end
@@ -8752,7 +8752,7 @@ object FCajero: TFCajero
       'select *'
       'from comprobante')
     Params = <>
-    Left = 586
+    Left = 594
     Top = 338
     object ZQ_ComprobanteID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
@@ -8889,8 +8889,8 @@ object FCajero: TFCajero
   end
   object DS_DetalleFactura: TDataSource
     DataSet = CD_DetalleFactura
-    Left = 664
-    Top = 296
+    Left = 688
+    Top = 288
   end
   object DS_Sucursal: TDataSource
     Left = 667
@@ -9342,7 +9342,7 @@ object FCajero: TFCajero
         Name = 'id_sucursal'
         ParamType = ptUnknown
       end>
-    Left = 584
+    Left = 592
     Top = 386
     ParamData = <
       item
@@ -9446,8 +9446,8 @@ object FCajero: TFCajero
         Name = 'ID_ORDEN'
         ParamType = ptUnknown
       end>
-    Left = 266
-    Top = 565
+    Left = 322
+    Top = 517
     ParamData = <
       item
         DataType = ftUnknown

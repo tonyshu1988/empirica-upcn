@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 257
-  Top = 129
+  Left = 183
+  Top = 109
   Width = 1006
   Height = 700
   Caption = 'ABM Orden T'#233'cnica'
@@ -18,6 +18,129 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object PCargaOS: TPanel
+    Left = 283
+    Top = 285
+    Width = 551
+    Height = 140
+    BevelInner = bvLowered
+    TabOrder = 3
+    object Label39: TLabel
+      Left = 2
+      Top = 2
+      Width = 547
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Descuento por Obra Social'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label41: TLabel
+      Left = 11
+      Top = 20
+      Width = 66
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Descripci'#243'n'
+    end
+    object Label43: TLabel
+      Left = 428
+      Top = 20
+      Width = 105
+      Height = 13
+      Caption = 'Monto Descontado'
+    end
+    object Label40: TLabel
+      Left = 11
+      Top = 64
+      Width = 84
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Observaciones'
+    end
+    object btAceptarOS: TButton
+      Left = 462
+      Top = 80
+      Width = 75
+      Height = 19
+      Caption = 'Aceptar'
+      TabOrder = 0
+      OnClick = btAceptarOSClick
+    end
+    object btCancelarOs: TButton
+      Left = 462
+      Top = 110
+      Width = 75
+      Height = 19
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 1
+      OnClick = btCancelarOsClick
+    end
+    object DBEdit17: TDBEdit
+      Left = 11
+      Top = 35
+      Width = 385
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'os_detalle'
+      DataSource = DS_OrdenDetalleOS
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object edMontoOS: TDBEdit
+      Left = 428
+      Top = 35
+      Width = 110
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'MONTO_DESCONTADO'
+      DataSource = DS_OrdenDetalleOS
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+    end
+    object edObsOS: TDBMemo
+      Left = 11
+      Top = 80
+      Width = 438
+      Height = 49
+      Color = 15527129
+      DataField = 'OBSERVACIONES'
+      DataSource = DS_OrdenDetalleOS
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ScrollBars = ssVertical
+      TabOrder = 4
+    end
+  end
   object PABM_FormaPago: TPanel
     Left = 117
     Top = 409
@@ -507,129 +630,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       NullValueKey = 46
       ParentFont = False
       TabOrder = 6
-    end
-  end
-  object PCargaOS: TPanel
-    Left = 283
-    Top = 285
-    Width = 551
-    Height = 140
-    BevelInner = bvLowered
-    TabOrder = 5
-    object Label39: TLabel
-      Left = 2
-      Top = 2
-      Width = 547
-      Height = 16
-      Align = alTop
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Descuento por Obra Social'
-      Color = 12648448
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Layout = tlCenter
-    end
-    object Label41: TLabel
-      Left = 11
-      Top = 20
-      Width = 66
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Descripci'#243'n'
-    end
-    object Label43: TLabel
-      Left = 428
-      Top = 20
-      Width = 105
-      Height = 13
-      Caption = 'Monto Descontado'
-    end
-    object Label40: TLabel
-      Left = 11
-      Top = 64
-      Width = 84
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Observaciones'
-    end
-    object btAceptarOS: TButton
-      Left = 462
-      Top = 80
-      Width = 75
-      Height = 19
-      Caption = 'Aceptar'
-      TabOrder = 0
-      OnClick = btAceptarOSClick
-    end
-    object btCancelarOs: TButton
-      Left = 462
-      Top = 110
-      Width = 75
-      Height = 19
-      Cancel = True
-      Caption = 'Cancelar'
-      TabOrder = 1
-      OnClick = btCancelarOsClick
-    end
-    object DBEdit17: TDBEdit
-      Left = 11
-      Top = 35
-      Width = 385
-      Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'os_detalle'
-      DataSource = DS_OrdenDetalleOS
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ReadOnly = True
-      TabOrder = 2
-    end
-    object edMontoOS: TDBEdit
-      Left = 428
-      Top = 35
-      Width = 110
-      Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'MONTO_DESCONTADO'
-      DataSource = DS_OrdenDetalleOS
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 3
-    end
-    object edObsOS: TDBMemo
-      Left = 11
-      Top = 80
-      Width = 438
-      Height = 49
-      Color = 15527129
-      DataField = 'OBSERVACIONES'
-      DataSource = DS_OrdenDetalleOS
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ScrollBars = ssVertical
-      TabOrder = 4
     end
   end
   object PLeerCodigo: TPanel
@@ -2909,7 +2909,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Width = 65
             Height = 17
             DataField = '_acumOS'
-            DataSource = DS_OrdenDetalleOS
+            DataSource = DS_Totales
           end
           object btQuitarProducto: TButton
             Left = 9
@@ -7087,7 +7087,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_OrdenDetalle: TZQuery
     Connection = DM.Conexion
-    OnCalcFields = ZQ_OrdenDetalleCalcFields
+    AfterScroll = ZQ_OrdenDetalleAfterScroll
     SQL.Strings = (
       'select *'
       'from OPTICA_ORDEN_DETALLE'
@@ -7169,7 +7169,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_OrdenDetalleOS: TZQuery
     Connection = DM.Conexion
-    AfterPost = ZQ_OrdenDetalleOSAfterPost
     SQL.Strings = (
       'select ODO.*'
       'from OPTICA_DETALLE_OS ODO'
@@ -7906,6 +7905,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_OS: TZQuery
     Connection = DM.Conexion
+    Active = True
     SQL.Strings = (
       
         'select OO.ID_OS,coalesce(OO.CODIGO||'#39' - '#39'||OO.NOMBRE||'#39' - '#39'||OO.' +
@@ -7931,8 +7931,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object PopupMenuOS: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
-    Left = 696
-    Top = 287
+    Left = 744
+    Top = 263
     object MenuItem1: TMenuItem
       Caption = 'Agregar OS'
       ImageIndex = 14
@@ -8072,8 +8072,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DS_Medico: TDataSource
     DataSet = ZQ_Medico
-    Left = 560
-    Top = 296
+    Left = 328
+    Top = 248
   end
   object ZQ_Orden_Entrega: TZQuery
     Connection = DM.Conexion
@@ -8336,5 +8336,47 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       FieldName = 'MODIFICABLE'
       Size = 1
     end
+  end
+  object CD_Totales: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProvider1'
+    Left = 613
+    Top = 252
+    object CD_TotalesID_DETALLE_OS: TIntegerField
+      FieldName = 'ID_DETALLE_OS'
+    end
+    object CD_TotalesID_ORDEN_DETALLE: TIntegerField
+      FieldName = 'ID_ORDEN_DETALLE'
+    end
+    object CD_TotalesID_OS: TIntegerField
+      FieldName = 'ID_OS'
+    end
+    object CD_TotalesMONTO_DESCONTADO: TFloatField
+      FieldName = 'MONTO_DESCONTADO'
+    end
+    object CD_TotalesOBSERVACIONES: TStringField
+      FieldName = 'OBSERVACIONES'
+      Size = 1000
+    end
+    object CD_Totalesos_detalle: TStringField
+      FieldName = 'os_detalle'
+      ReadOnly = True
+      Size = 100
+    end
+    object CD_Totales_acumOS: TFloatField
+      FieldName = '_acumOS'
+      ReadOnly = True
+    end
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = ZQ_OrdenDetalleOS
+    Left = 837
+    Top = 395
+  end
+  object DS_Totales: TDataSource
+    DataSet = CD_Totales
+    Left = 677
+    Top = 308
   end
 end
