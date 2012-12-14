@@ -1,6 +1,6 @@
 object FABM_CPB_Recibo: TFABM_CPB_Recibo
   Left = 295
-  Top = 160
+  Top = 161
   Width = 892
   Height = 586
   Caption = 'ABM Recibos'

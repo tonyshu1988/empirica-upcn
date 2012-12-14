@@ -2,8 +2,6 @@ unit UCajero;
 
 interface
 
-//VER EL TEMA DE DESCONTAR EL STOCK CUANDO ES UNA PREVENTA
-
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DB,
@@ -1031,7 +1029,7 @@ begin
     btnAuditoriaFiscal.Enabled:= False;
   end;
 
-  ultimoIDPago();
+  //ultimoIDPago();
   panelPreventa(false);
 end;
 
