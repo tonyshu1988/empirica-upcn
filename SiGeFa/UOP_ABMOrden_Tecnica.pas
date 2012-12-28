@@ -8,7 +8,7 @@ uses
   Buttons, ComCtrls, ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, DBClient, EKListadoSQL,StrUtils,UDM, UPrincipal, UBuscarPersona,
   UBuscarProductoStock, Provider, Menus, ZSequence, EKDbSuma,
-  EKDBDateTimePicker;
+  EKDBDateTimePicker, EKBusquedaAvanzada;
 
 type
   TFOP_ABM_OrdenTecnica = class(TForm)
@@ -52,7 +52,7 @@ type
     DBEdit2: TDBEdit;
     DBEdit3: TDBEdit;
     dbAvisar: TDBCheckBox;
-    Panel2: TPanel;
+    PMedico: TPanel;
     Label10: TLabel;
     Label14: TLabel;
     Label15: TLabel;
@@ -456,11 +456,31 @@ type
     CD_Totalesos_detalle: TStringField;
     CD_Totales_acumOS: TFloatField;
     DS_Totales: TDataSource;
+    PListado: TPanel;
+    btNuevo: TdxBarLargeButton;
+    btEditar: TdxBarLargeButton;
+    Panel2: TPanel;
+    PanelComprobante: TPanel;
+    lblTotalOrdenes: TLabel;
+    Splitter2: TSplitter;
+    DBGridComprobantes: TDBGrid;
+    PanelFPagoYProd: TPanel;
+    Splitter3: TSplitter;
+    PanelProducto: TPanel;
+    lblTotalProducto: TLabel;
+    DBGrid1: TDBGrid;
+    PanelFpago: TPanel;
+    lblTotalFPago: TLabel;
+    DBGrid2: TDBGrid;
+    btBuscarOrden: TdxBarLargeButton;
+    EKBuscarOrdenes: TEKBusquedaAvanzada;
+    grupoOrden: TdxBarGroup;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure crearOrdenT();
     procedure modoLecturaProd();
+    procedure modoListado();
     procedure ultimoIDOrden;
     procedure VerLectorCB(sino: Boolean);
     procedure btObservacClick(Sender: TObject);
@@ -508,6 +528,12 @@ type
     procedure calcularFP();
     procedure buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure ZQ_OrdenDetalleAfterScroll(DataSet: TDataSet);
+    procedure codBarrasKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure codBarrasEnter(Sender: TObject);
+    procedure btBuscarOrdenClick(Sender: TObject);
+    procedure btNuevoClick(Sender: TObject);
+    function guardarOrden(): Boolean;
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -571,11 +597,9 @@ begin
   descCliente:=0;
   ClienteIVA:=0;
   IDClienteIVA:=0;
-  crearOrdenT();
 
-  edCuenta.DropDownRows:= cajero_tamanio_lista_fpago;
 
-  modoLecturaProd();
+  modoListado();
 
 
 //
@@ -758,16 +782,31 @@ end;
 
 procedure TFOP_ABM_OrdenTecnica.modoLecturaProd();
 begin
+
   VerLectorCB(false);
-  PanelProductosYFPago.Enabled:= True;
-  PanelDetalles.Enabled:= True;
+  PListado.Enabled:= True;
+  PListado.Visible:= false;
   PCargaProd.Enabled:=false;
   PCargaProd.SendToBack;
-  PCargaOS.Enabled:=false;
   PCargaOS.SendToBack;
-  grupoVertical.Enabled:= True;
-  GrupoGuardarCancelar.Enabled:= True;
-  PanelContenedorDerecha.Enabled:=True;
+  grupoVertical.Enabled:= false;
+  GrupoGuardarCancelar.Enabled:= false;
+  PanelContenedorDerecha.Enabled:=true;
+  ZQ_Productos.Close;
+
+end;
+
+procedure TFOP_ABM_OrdenTecnica.modoListado();
+begin
+  VerLectorCB(false);
+  PListado.Enabled:= True;
+  PListado.Visible:= True;
+  PCargaProd.Enabled:=false;
+  PCargaProd.SendToBack;
+  PCargaOS.SendToBack;
+  grupoVertical.Enabled:= false;
+  GrupoGuardarCancelar.Enabled:= false;
+  PanelContenedorDerecha.Enabled:=false;
   ZQ_Productos.Close;
 end;
 
@@ -1322,6 +1361,8 @@ begin
     edMontoOS.SetFocus;
 end;
 
+
+
 procedure TFOP_ABM_OrdenTecnica.btnFormaPagoClick(Sender: TObject);
 begin
  if not (btnFormaPago.Enabled) then
@@ -1510,5 +1551,97 @@ begin
          CD_Totales.Next;
      end;
 end;
+
+procedure TFOP_ABM_OrdenTecnica.codBarrasKeyDown(Sender: TObject;
+  var Key: Word; Shift: TShiftState);
+begin
+  if key = 13 then
+  begin
+    IdentificarCodigo;
+
+  end
+  else if key = 27 then
+  begin
+    VerLectorCB(false);
+    modoLecturaProd();
+
+  if DBGridListadoProductos.Enabled then
+    DBGridListadoProductos.SetFocus;
+  end
+end;
+
+procedure TFOP_ABM_OrdenTecnica.codBarrasEnter(Sender: TObject);
+begin
+  LimpiarCodigo;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.btBuscarOrdenClick(Sender: TObject);
+begin
+  if FOP_ABM_OrdenTecnica.Active then
+  begin
+    //EKBuscarOrdenes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
+
+    if PListado.Visible then
+      if EKBuscarOrdenes.Buscar then
+        ZQ_Orden.First;
+  end
+end;
+
+procedure TFOP_ABM_OrdenTecnica.btNuevoClick(Sender: TObject);
+begin
+
+crearOrdenT();
+
+modoLecturaProd();
+
+end;
+
+function TFOP_ABM_OrdenTecnica.guardarOrden(): Boolean;
+var
+  comprobante, vendedor: integer;
+begin
+  Result:= False;
+  //Hacer las validaciones correspondientes
+
+  if (dm.EKModelo.verificar_transaccion(abmOrden)) then
+   try
+    begin
+
+      if not (dm.EKModelo.finalizar_transaccion(abmOrden)) then
+      begin
+        dm.EKModelo.cancelar_transaccion(abmOrden);
+        Application.MessageBox('No se pudo guardar la Orden Técnica.', 'Atención');
+        dm.EKModelo.cancelar_transaccion(abmOrden);
+      end
+      else
+      begin
+        //Application.MessageBox(PChar(Format('Se creó el Comprobante Nro: %s',[ZQ_ComprobanteCODIGO.AsString])),'Atención');
+
+//        if (totFiscal > 0) then
+//        begin
+//          imprimirFiscal(comprobante, 'F');
+//        end;
+
+        //ShowMessage(inttostr(comprobante)+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
+
+        CD_Totales.EmptyDataSet;
+
+        PanelContenedorDerecha.Enabled:= True;
+        if DBGridListadoProductos.Enabled then
+          DBGridListadoProductos.SetFocus;
+
+        LimpiarCodigo();
+        modoListado();
+
+        Result:= True;
+      end;
+    end
+   except
+    begin
+      Application.MessageBox('No se pudo guardar la Orden Técnica.', 'Atención');
+    end;
+   end;
+end;
+
 
 end.
