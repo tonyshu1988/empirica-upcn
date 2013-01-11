@@ -139,12 +139,14 @@ object FOP_CargarOrden: TFOP_CargarOrden
           Expanded = False
           FieldName = 'ENTREGADO'
           Title.Caption = 'Entregado Por'
+          Width = 90
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'FACTURADO'
           Title.Caption = 'Facturado Por'
+          Width = 87
           Visible = True
         end
         item
@@ -838,8 +840,8 @@ object FOP_CargarOrden: TFOP_CargarOrden
         're as Facturado, oe.descripcion as estado'
       'from optica_orden o'
       'left join persona p on (o.id_cliente = p.id_persona)'
-      'left join persona pe on (o.entregado_por = p.id_persona)'
-      'left join persona pf on (o.facturado_por = p.id_persona)'
+      'left join persona pe on (o.entregado_por = pe.id_persona)'
+      'left join persona pf on (o.facturado_por = pf.id_persona)'
       'left join optica_estado oe on (o.id_estado = oe.id_estado)'
       'where o.saldo > 0')
     Params = <>
@@ -937,8 +939,8 @@ object FOP_CargarOrden: TFOP_CargarOrden
         're as Facturado, oe.descripcion as estado'
       'from optica_orden o'
       'left join persona p on (o.id_cliente = p.id_persona)'
-      'left join persona pe on (o.entregado_por = p.id_persona)'
-      'left join persona pf on (o.facturado_por = p.id_persona)'
+      'left join persona pe on (o.entregado_por = pe.id_persona)'
+      'left join persona pf on (o.facturado_por = pf.id_persona)'
       'left join optica_estado oe on (o.id_estado = oe.id_estado)'
       'where o.saldo > 0')
     SQL_Select.Strings = (
@@ -948,8 +950,8 @@ object FOP_CargarOrden: TFOP_CargarOrden
     SQL_From.Strings = (
       'from optica_orden o'
       'left join persona p on (o.id_cliente = p.id_persona)'
-      'left join persona pe on (o.entregado_por = p.id_persona)'
-      'left join persona pf on (o.facturado_por = p.id_persona)'
+      'left join persona pe on (o.entregado_por = pe.id_persona)'
+      'left join persona pf on (o.facturado_por = pf.id_persona)'
       'left join optica_estado oe on (o.id_estado = oe.id_estado)')
     SQL_Where.Strings = (
       'where o.saldo > 0')
