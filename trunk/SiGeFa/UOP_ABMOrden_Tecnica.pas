@@ -475,6 +475,8 @@ type
     btBuscarOrden: TdxBarLargeButton;
     EKBuscarOrdenes: TEKBusquedaAvanzada;
     grupoOrden: TdxBarGroup;
+    DBText5: TDBText;
+    ZQ_GenOrdenEntrega: TZSequence;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -537,6 +539,9 @@ type
     procedure BtAceptarPagoClick(Sender: TObject);
     procedure btEditarClick(Sender: TObject);
     procedure editarOrdenT(id:Integer);
+    procedure BtVendedorClick(Sender: TObject);
+    procedure OnSelVendedor();
+    procedure btnQuitarPagoClick(Sender: TObject);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -682,9 +687,12 @@ begin
   begin
       ZQ_Orden.Append;
 
+
       ZQ_OrdenID_ORDEN.AsInteger:=ZQ_GenOrden.GetNextValue;
       ZQ_OrdenID_CLIENTE.AsInteger:= cliente;
 
+      //Pongo el Estado PENDIENTE
+      ZQ_OrdenID_ESTADO.AsInteger:=1;
 
       ZQ_OrdenOBSERVACIONES.AsString:= '';
       ZQ_OrdenMONTO_TOTAL.AsFloat:= 0;
@@ -791,6 +799,7 @@ begin
   PCargaProd.Enabled:=false;
   PCargaProd.SendToBack;
   PCargaOS.SendToBack;
+  PanelDetalles.Enabled:= true;
   grupoVertical.Enabled:= true;
   GrupoGuardarCancelar.Enabled:= true;
   grupoOrden.Enabled:= false;
@@ -972,8 +981,11 @@ begin
     ZQ_OrdenDetalle.Append;
     ZQ_OrdenDetalleID_ORDEN_DETALLE.AsInteger:=ZQ_GenOrdenDetalle.GetNextValue;
     ZQ_OrdenDetalleID_PRODUCTO.AsInteger:= prod;
+    ZQ_OrdenDetalleID_ORDEN.AsInteger:=ZQ_OrdenID_ORDEN.AsInteger;
     ZQ_OrdenDetalleCANTIDAD.AsFloat:= 1;
     ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:= ZQ_OrdenDetalleprod_pventa.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat;
+
+
 //    CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= (ZQ_ProductosCOEF_DESCUENTO.AsFloat * 100);
 //    CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
 //    if ZQ_ProductosIMPUESTO_IVA.IsNull or (ZQ_ProductosIMPUESTO_IVA.AsFloat = 0) then
@@ -1000,6 +1012,8 @@ begin
 //      else
 //        CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
 //    end;
+
+
     modoEscrituraProd();
     Result:= True;
    end;
@@ -1384,11 +1398,16 @@ begin
     grupoVertical.Enabled:= false;
     GrupoGuardarCancelar.Enabled:= false;
     ZQ_Orden_Entrega.Append;
+    ZQ_Orden_EntregaID_ORDEN.AsInteger:=ZQ_OrdenID_ORDEN.AsInteger;
+    ZQ_Orden_EntregaID_ENTREGA.AsInteger:=ZQ_GenOrdenEntrega.GetNextValue;
     edCodCuenta.SetFocus;
     edImporte.SetFocus;
     edCodCuenta.SetFocus;
     ZQ_Cuentas.Locate('ID_CUENTA', ctaPorDefecto, []);
     ZQ_Orden_EntregaCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+    ZQ_Orden_EntregaID_TIPO_FORMAPAG.AsInteger:= ZQ_CuentasMEDIO_DEFECTO.AsInteger;
+
+    ZQ_Orden_EntregaIMPORTE.AsFloat:= acumuladoProd ;
   end
 end;
 
@@ -1613,12 +1632,10 @@ begin
   if (dm.EKModelo.verificar_transaccion(abmOrden)) then
    try
     begin
-
       if not (dm.EKModelo.finalizar_transaccion(abmOrden)) then
       begin
         dm.EKModelo.cancelar_transaccion(abmOrden);
         Application.MessageBox('No se pudo guardar la Orden Técnica.', 'Atención');
-        dm.EKModelo.cancelar_transaccion(abmOrden);
         modoListado();
       end
       else
@@ -1664,9 +1681,64 @@ end;
 
 procedure TFOP_ABM_OrdenTecnica.editarOrdenT(id: Integer);
 begin
-   if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden,ZQ_OrdenDetalle,ZQ_OrdenDetalleOS,ZQ_Orden_Entrega,ZQ_CodifRP]) then
+  if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden,ZQ_OrdenDetalle,ZQ_OrdenDetalleOS,ZQ_Orden_Entrega,ZQ_CodifRP]) then
   begin
+      cliente:=ZQ_OrdenID_CLIENTE.AsInteger;
       ZQ_Orden.Edit;
+      modoLecturaProd;
+  end;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.BtVendedorClick(Sender: TObject);
+begin
+    if not Assigned(vsel3) then
+      vsel3:= TFBuscarPersona.Create(nil);
+
+    vsel3.configRelacion(RELACION_EMPLEADO, false);
+    vsel3.EKBusqueda.Abrir;
+    vsel3.OnSeleccionar:= OnSelVendedor;
+    vsel3.ShowModal;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.OnSelVendedor;
+var
+s:String;
+begin
+  if not (vsel3.ZQ_Personas.IsEmpty) then
+  begin
+    ZQ_Personas.Locate('id_persona', vsel3.ZQ_PersonasID_PERSONA.AsInteger, []);
+
+    if dm.EKUsrLogin.PermisoAccion('PEDIR_CLAVE_VENDEDOR') then
+    begin
+      PostMessage(Handle, WM_USER +123, 0, 0);
+      InputQuery('Acceso Vendedor','Ingrese su Clave: ',s);
+
+      if (vsel3.ZQ_PersonasCLAVE.AsString=s) then
+       begin
+        IdVendedor:= vsel3.ZQ_PersonasID_PERSONA.AsInteger;
+        ZQ_OrdenFACTURADO_POR.AsInteger:= IdVendedor;
+       end
+      else
+       begin
+         Application.MessageBox('La clave ingresada es incorrecta!', 'Clave Vendedor', MB_OK + MB_ICONEXCLAMATION);
+         exit;
+       end
+    end
+    else
+      begin
+        IdVendedor:= vsel3.ZQ_PersonasID_PERSONA.AsInteger;
+        ZQ_OrdenFACTURADO_POR.AsInteger:= IdVendedor;
+      end
+  end;
+  vsel3.Close;
+end;
+procedure TFOP_ABM_OrdenTecnica.btnQuitarPagoClick(Sender: TObject);
+begin
+if dm.EKModelo.verificar_transaccion(abmOrden) then
+ if not (ZQ_Orden_Entrega.IsEmpty) then
+  begin
+    ZQ_Orden_Entrega.Delete;
+    //lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
   end;
 end;
 
