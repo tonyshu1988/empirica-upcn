@@ -789,8 +789,9 @@ begin
   PCargaProd.Enabled:=false;
   PCargaProd.SendToBack;
   PCargaOS.SendToBack;
-  grupoVertical.Enabled:= false;
-  GrupoGuardarCancelar.Enabled:= false;
+  grupoVertical.Enabled:= true;
+  GrupoGuardarCancelar.Enabled:= true;
+  grupoOrden.Enabled:= false;
   PanelContenedorDerecha.Enabled:=true;
   ZQ_Productos.Close;
 
@@ -804,10 +805,13 @@ begin
   PCargaProd.Enabled:=false;
   PCargaProd.SendToBack;
   PCargaOS.SendToBack;
+  grupoOrden.Enabled:=true;
   grupoVertical.Enabled:= false;
   GrupoGuardarCancelar.Enabled:= false;
   PanelContenedorDerecha.Enabled:=false;
   ZQ_Productos.Close;
+  btCodif.Down:=false;
+  btObservac.Down:=false;
 end;
 
 procedure TFOP_ABM_OrdenTecnica.LimpiarCodigo;
@@ -917,6 +921,7 @@ begin
     ZQ_Productos.Close;
     ZQ_Productos.sql[15]:= Format('and(p.id_producto=%s)', [IdProd]);
     ZQ_Productos.Open;
+    ZQ_Productos.SQL.SaveToFile('JMJ.TXT');
   end;
 
   //Codigo de Barras
@@ -1099,13 +1104,13 @@ begin
 //  CD_Orden.EmptyDataSet;
 //  CD_ordenDetalleOS.EmptyDataSet;
 
-  crearOrdenT();
+  //crearOrdenT();
 
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(ZQ_OrdenDetalle.RecordCount);
 //  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
 
 
-  modoLecturaProd();
+  modoListado();
 //  RecalcularMontoPago();
 //  panelPreventa(false);
 end;
@@ -1544,6 +1549,7 @@ begin
 
 
   acumuladoOS:=0;
+
   CD_Totales.First;
     while not(CD_Totales.Eof) do
      begin

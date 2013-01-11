@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 242
-  Top = 109
+  Left = 241
+  Top = 79
   Width = 1070
   Height = 700
   Caption = 'ABM Orden T'#233'cnica'
@@ -18,6 +18,433 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object PListado: TPanel
+    Left = 114
+    Top = 0
+    Width = 940
+    Height = 610
+    Align = alClient
+    TabOrder = 9
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 938
+      Height = 608
+      Align = alClient
+      Caption = 'Panel1'
+      TabOrder = 0
+      object PanelComprobante: TPanel
+        Left = 1
+        Top = 1
+        Width = 936
+        Height = 484
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object lblTotalOrdenes: TLabel
+          Left = 0
+          Top = 463
+          Width = 936
+          Height = 21
+          Align = alBottom
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Total '#211'rdenes: $ 0.00 '
+          Color = 16729670
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object Splitter2: TSplitter
+          Left = 0
+          Top = 454
+          Width = 936
+          Height = 9
+          Cursor = crVSplit
+          Align = alBottom
+        end
+        object DBGridComprobantes: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 936
+          Height = 454
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_Orden
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID_ORDEN'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CODIGO_CLI'
+              Width = 109
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_CLIENTE'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_ESTADO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_ORDEN'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_PROMETIDO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'COD_BARRAS'
+              Width = 165
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'OBSERVACIONES'
+              Width = 130
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NRO_FACTURA'
+              Width = 136
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MONTO_TOTAL'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MONTO_ENTREGADO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ENTREGADO_POR'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FACTURADO_POR'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SALDO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_nombre'
+              Width = 235
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_direccion'
+              Width = 241
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_MEDICO'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'med_nombre'
+              Width = 208
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'med_matricula'
+              Width = 101
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'med_direccion'
+              Width = 237
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_cod'
+              Width = 62
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_cuit'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_edad'
+              Width = 68
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_telefono'
+              Width = 87
+              Visible = True
+            end>
+        end
+      end
+      object PanelFPagoYProd: TPanel
+        Left = 1
+        Top = 485
+        Width = 936
+        Height = 122
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 1
+        Visible = False
+        object Splitter3: TSplitter
+          Left = 607
+          Top = 0
+          Width = 5
+          Height = 122
+        end
+        object PanelProducto: TPanel
+          Left = 612
+          Top = 0
+          Width = 324
+          Height = 122
+          Align = alClient
+          BevelOuter = bvNone
+          Caption = 'PanelProducto'
+          TabOrder = 0
+          object lblTotalProducto: TLabel
+            Left = 0
+            Top = 101
+            Width = 324
+            Height = 21
+            Align = alBottom
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Total Producto/Servic.: $ 0.00 '
+            Color = 16729670
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
+          object DBGrid1: TDBGrid
+            Left = 0
+            Top = 0
+            Width = 324
+            Height = 101
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_OrdenDetalle
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentFont = False
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'ID_PRODUCTO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Id'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'prod_detalle'
+                Title.Alignment = taCenter
+                Title.Caption = 'Producto'
+                Width = 240
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CANTIDAD'
+                Title.Alignment = taCenter
+                Title.Caption = 'Cant.'
+                Width = 53
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MONTO_TOTAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Importe'
+                Width = 101
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CODIGO_BARRA'
+                Title.Alignment = taCenter
+                Title.Caption = 'C'#243'd. Barra'
+                Width = 80
+                Visible = True
+              end>
+          end
+        end
+        object PanelFpago: TPanel
+          Left = 0
+          Top = 0
+          Width = 607
+          Height = 122
+          Align = alLeft
+          BevelOuter = bvNone
+          Caption = 'PanelFpago'
+          TabOrder = 1
+          object lblTotalFPago: TLabel
+            Left = 0
+            Top = 101
+            Width = 607
+            Height = 21
+            Align = alBottom
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Total Entregas: $ 0.00 '
+            Color = 16729670
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
+          object DBGrid2: TDBGrid
+            Left = 0
+            Top = 0
+            Width = 607
+            Height = 101
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_Orden_Entrega
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentFont = False
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = '_ctaIngreso'
+                Title.Alignment = taCenter
+                Title.Caption = 'Cuenta'
+                Width = 241
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'medioPago'
+                Title.Alignment = taCenter
+                Title.Caption = 'Forma de Pago'
+                Width = 149
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE_REAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Importe'
+                Width = 81
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_FECHA'
+                Title.Alignment = taCenter
+                Title.Caption = 'MDP Fecha'
+                Width = 105
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_BANCO'
+                Title.Alignment = taCenter
+                Title.Caption = 'Banco'
+                Width = 188
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_CHEQUE'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#250'mero'
+                Width = 113
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'FECHA_FP'
+                Title.Alignment = taCenter
+                Title.Caption = 'Fecha'
+                Visible = True
+              end>
+          end
+        end
+      end
+    end
+  end
   object PLeerCodigo: TPanel
     Left = 336
     Top = 176
@@ -2357,7 +2784,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     BevelOuter = bvSpace
     BevelWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 8
+    TabOrder = 6
     object Label45: TLabel
       Left = 4
       Top = 4
@@ -2640,251 +3067,52 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       OnKeyUp = buscarFormaPago
     end
   end
-  object PCargaProd: TPanel
-    Left = 283
-    Top = 96
-    Width = 551
-    Height = 183
-    BevelInner = bvLowered
-    TabOrder = 2
-    object Label62: TLabel
-      Left = 2
-      Top = 2
-      Width = 547
-      Height = 16
-      Align = alTop
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Carga de Producto/Servicio'
-      Color = 12648448
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Layout = tlCenter
-    end
-    object Label63: TLabel
-      Left = 11
-      Top = 56
-      Width = 88
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Precio Unitario:'
-    end
-    object Label64: TLabel
-      Left = 11
-      Top = 28
-      Width = 71
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Descripci'#243'n:'
-    end
-    object Label65: TLabel
-      Left = 208
-      Top = 56
-      Width = 56
-      Height = 13
-      Caption = 'Cantidad:'
-    end
-    object DBText1: TDBText
-      Left = 104
-      Top = 56
-      Width = 89
-      Height = 13
-      DataField = 'prod_pventa'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Transparent = True
-    end
-    object Label26: TLabel
-      Left = 344
-      Top = 56
-      Width = 71
-      Height = 13
-      Caption = 'Monto Total:'
-    end
-    object Label42: TLabel
-      Left = 11
-      Top = 107
-      Width = 84
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Observaciones'
-    end
-    object Label44: TLabel
-      Left = 11
-      Top = 82
-      Width = 70
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Laboratorio:'
-    end
-    object btnAceptarProd: TButton
-      Left = 462
-      Top = 124
-      Width = 75
-      Height = 19
-      Caption = 'Aceptar'
-      TabOrder = 0
-      OnClick = btnAceptarProdClick
-    end
-    object btnCancProd: TButton
-      Left = 462
-      Top = 154
-      Width = 75
-      Height = 19
-      Cancel = True
-      Caption = 'Cancelar'
-      TabOrder = 1
-      OnClick = btnCancProdClick
-    end
-    object DBEdit4: TDBEdit
-      Left = 88
-      Top = 24
-      Width = 449
-      Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'prod_detalle'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ReadOnly = True
-      TabOrder = 2
-    end
-    object edCant: TDBEdit
-      Left = 268
-      Top = 52
-      Width = 61
-      Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'CANTIDAD'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 3
-    end
-    object edMontoTotal: TDBEdit
-      Left = 420
-      Top = 52
-      Width = 117
-      Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'MONTO_TOTAL'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 4
-    end
-    object edObsProd: TDBMemo
-      Left = 11
-      Top = 124
-      Width = 438
-      Height = 49
-      Color = 15527129
-      DataField = 'OBSERVACIONES'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ScrollBars = ssVertical
-      TabOrder = 5
-    end
-    object edLabProd: TDBLookupComboBox
-      Left = 88
-      Top = 80
-      Width = 450
-      Height = 21
-      Color = 15527129
-      DataField = 'ID_LABORATORIO'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      KeyField = 'ID_LABORATORIO'
-      ListField = 'NOMBRE'
-      ListSource = DS_Laboratorios
-      NullValueKey = 46
-      ParentFont = False
-      TabOrder = 6
-    end
-  end
   object PanelContenedorDerecha: TPanel
     Left = 114
     Top = 0
-    Width = 948
-    Height = 621
+    Width = 940
+    Height = 610
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 0
     object PanelProductosYFPago: TPanel
       Left = 1
       Top = 194
-      Width = 946
-      Height = 426
+      Width = 938
+      Height = 415
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 0
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 1
-        Width = 944
-        Height = 257
+        Width = 936
+        Height = 246
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
         object Splitter1: TSplitter
-          Left = 625
+          Left = 617
           Top = 1
           Width = 5
-          Height = 215
+          Height = 204
           Align = alRight
         end
         object Panel6: TPanel
           Left = 1
-          Top = 216
-          Width = 942
+          Top = 205
+          Width = 934
           Height = 40
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 0
           DesignSize = (
-            942
+            934
             40)
           object lblCantProductos: TLabel
             Left = 1
             Top = 27
-            Width = 940
+            Width = 932
             Height = 12
             Align = alBottom
             Alignment = taRightJustify
@@ -2934,10 +3162,10 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           end
         end
         object POs: TPanel
-          Left = 630
+          Left = 622
           Top = 1
           Width = 313
-          Height = 215
+          Height = 204
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 1
@@ -2964,7 +3192,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Left = 0
             Top = 66
             Width = 313
-            Height = 149
+            Height = 138
             Align = alClient
             Color = 15527129
             DataSource = DS_OrdenDetalleOS
@@ -3068,15 +3296,15 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PProductos: TPanel
           Left = 1
           Top = 1
-          Width = 624
-          Height = 215
+          Width = 616
+          Height = 204
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 2
           object Label11: TLabel
             Left = 0
             Top = 0
-            Width = 624
+            Width = 616
             Height = 13
             Align = alTop
             Alignment = taCenter
@@ -3095,8 +3323,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object DBGridListadoProductos: TDBGrid
             Left = 0
             Top = 13
-            Width = 624
-            Height = 202
+            Width = 616
+            Height = 191
             Align = alClient
             Color = 15527129
             DataSource = DS_OrdenDetalle
@@ -3179,8 +3407,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
       object PPieBoleta: TPanel
         Left = 1
-        Top = 384
-        Width = 944
+        Top = 373
+        Width = 936
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
@@ -3188,7 +3416,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object lblTotAPagar: TLabel
           Left = 0
           Top = 0
-          Width = 944
+          Width = 936
           Height = 41
           Align = alClient
           Alignment = taRightJustify
@@ -3208,8 +3436,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 258
-        Width = 944
+        Top = 247
+        Width = 936
         Height = 126
         Align = alBottom
         Caption = 'PVarios'
@@ -3223,7 +3451,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PReceta: TPanel
           Left = 1
           Top = 1
-          Width = 942
+          Width = 934
           Height = 124
           Align = alClient
           BevelOuter = bvLowered
@@ -3307,7 +3535,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object Label9: TLabel
             Left = 1
             Top = 1
-            Width = 940
+            Width = 932
             Height = 16
             Align = alTop
             Alignment = taCenter
@@ -3710,14 +3938,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PObservaciones: TPanel
           Left = 1
           Top = 1
-          Width = 942
+          Width = 934
           Height = 124
           Align = alClient
           TabOrder = 1
           object Label2: TLabel
             Left = 1
             Top = 1
-            Width = 940
+            Width = 932
             Height = 16
             Align = alTop
             Alignment = taCenter
@@ -3736,7 +3964,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object dbObsOrden: TDBRichEdit
             Left = 1
             Top = 17
-            Width = 940
+            Width = 932
             Height = 106
             Align = alClient
             Color = clCream
@@ -3755,14 +3983,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PFormaPago: TPanel
           Left = 1
           Top = 1
-          Width = 942
+          Width = 934
           Height = 124
           Align = alClient
           TabOrder = 0
           object Label36: TLabel
             Left = 1
             Top = 1
-            Width = 940
+            Width = 932
             Height = 16
             Align = alTop
             Alignment = taCenter
@@ -3781,7 +4009,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object PieGrilla: TPanel
             Left = 1
             Top = 91
-            Width = 940
+            Width = 932
             Height = 32
             Align = alBottom
             BevelOuter = bvLowered
@@ -3789,7 +4017,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             object lblMaxVenta: TLabel
               Left = 1
               Top = 1
-              Width = 938
+              Width = 930
               Height = 20
               Align = alTop
               Alignment = taCenter
@@ -3816,7 +4044,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object DBGridFormaPago: TDBGrid
             Left = 1
             Top = 17
-            Width = 940
+            Width = 932
             Height = 74
             Align = alClient
             Color = 15527129
@@ -3914,14 +4142,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object PanelDetalles: TPanel
       Left = 1
       Top = 31
-      Width = 946
+      Width = 938
       Height = 163
       Align = alTop
       TabOrder = 1
       object PanelDetalleCliente: TPanel
         Left = 1
         Top = 94
-        Width = 944
+        Width = 936
         Height = 68
         Align = alBottom
         BevelOuter = bvLowered
@@ -3935,7 +4163,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 942
+          Width = 934
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4115,7 +4343,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       object PDetalleOrden: TPanel
         Left = 1
         Top = 1
-        Width = 605
+        Width = 597
         Height = 93
         Align = alClient
         BevelOuter = bvLowered
@@ -4184,7 +4412,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Label7: TLabel
           Left = 1
           Top = 1
-          Width = 603
+          Width = 595
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4261,7 +4489,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         end
       end
       object PMedico: TPanel
-        Left = 606
+        Left = 598
         Top = 1
         Width = 339
         Height = 93
@@ -4378,7 +4606,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 946
+      Width = 938
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -4402,437 +4630,209 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
     end
   end
-  object PListado: TPanel
-    Left = 114
-    Top = 0
-    Width = 948
-    Height = 621
-    Align = alClient
-    TabOrder = 9
-    object Panel2: TPanel
-      Left = 1
-      Top = 1
-      Width = 946
-      Height = 619
-      Align = alClient
-      Caption = 'Panel1'
+  object PCargaProd: TPanel
+    Left = 283
+    Top = 96
+    Width = 551
+    Height = 183
+    BevelInner = bvLowered
+    TabOrder = 2
+    object Label62: TLabel
+      Left = 2
+      Top = 2
+      Width = 547
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Carga de Producto/Servicio'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label63: TLabel
+      Left = 11
+      Top = 56
+      Width = 88
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Precio Unitario:'
+    end
+    object Label64: TLabel
+      Left = 11
+      Top = 28
+      Width = 71
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Descripci'#243'n:'
+    end
+    object Label65: TLabel
+      Left = 208
+      Top = 56
+      Width = 56
+      Height = 13
+      Caption = 'Cantidad:'
+    end
+    object DBText1: TDBText
+      Left = 104
+      Top = 56
+      Width = 89
+      Height = 13
+      DataField = 'prod_pventa'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+    end
+    object Label26: TLabel
+      Left = 344
+      Top = 56
+      Width = 71
+      Height = 13
+      Caption = 'Monto Total:'
+    end
+    object Label42: TLabel
+      Left = 11
+      Top = 107
+      Width = 84
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Observaciones'
+    end
+    object Label44: TLabel
+      Left = 11
+      Top = 82
+      Width = 70
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Laboratorio:'
+    end
+    object btnAceptarProd: TButton
+      Left = 462
+      Top = 124
+      Width = 75
+      Height = 19
+      Caption = 'Aceptar'
       TabOrder = 0
-      object PanelComprobante: TPanel
-        Left = 1
-        Top = 1
-        Width = 944
-        Height = 495
-        Align = alClient
-        BevelOuter = bvNone
-        TabOrder = 0
-        object lblTotalOrdenes: TLabel
-          Left = 0
-          Top = 474
-          Width = 944
-          Height = 21
-          Align = alBottom
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Total '#211'rdenes: $ 0.00 '
-          Color = 16729670
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -15
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-        object Splitter2: TSplitter
-          Left = 0
-          Top = 465
-          Width = 944
-          Height = 9
-          Cursor = crVSplit
-          Align = alBottom
-        end
-        object DBGridComprobantes: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 944
-          Height = 465
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_Orden
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'ID_ORDEN'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CODIGO_CLI'
-              Width = 109
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_CLIENTE'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_ESTADO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_ORDEN'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_PROMETIDO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'COD_BARRAS'
-              Width = 165
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'OBSERVACIONES'
-              Width = 130
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NRO_FACTURA'
-              Width = 136
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MONTO_TOTAL'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MONTO_ENTREGADO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ENTREGADO_POR'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FACTURADO_POR'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SALDO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_nombre'
-              Width = 235
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_direccion'
-              Width = 241
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_MEDICO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'med_nombre'
-              Width = 208
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'med_matricula'
-              Width = 101
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'med_direccion'
-              Width = 237
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_cod'
-              Width = 62
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_cuit'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_edad'
-              Width = 68
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_telefono'
-              Width = 87
-              Visible = True
-            end>
-        end
-      end
-      object PanelFPagoYProd: TPanel
-        Left = 1
-        Top = 496
-        Width = 944
-        Height = 122
-        Align = alBottom
-        BevelOuter = bvNone
-        TabOrder = 1
-        Visible = False
-        object Splitter3: TSplitter
-          Left = 607
-          Top = 0
-          Width = 5
-          Height = 122
-        end
-        object PanelProducto: TPanel
-          Left = 612
-          Top = 0
-          Width = 332
-          Height = 122
-          Align = alClient
-          BevelOuter = bvNone
-          Caption = 'PanelProducto'
-          TabOrder = 0
-          object lblTotalProducto: TLabel
-            Left = 0
-            Top = 101
-            Width = 332
-            Height = 21
-            Align = alBottom
-            Alignment = taRightJustify
-            AutoSize = False
-            Caption = 'Total Producto/Servic.: $ 0.00 '
-            Color = 16729670
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-          end
-          object DBGrid1: TDBGrid
-            Left = 0
-            Top = 0
-            Width = 332
-            Height = 101
-            Align = alClient
-            Color = 14606012
-            DataSource = DS_OrdenDetalle
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-            ParentFont = False
-            TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'ID_PRODUCTO'
-                Title.Alignment = taCenter
-                Title.Caption = 'Id'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'prod_detalle'
-                Title.Alignment = taCenter
-                Title.Caption = 'Producto'
-                Width = 240
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CANTIDAD'
-                Title.Alignment = taCenter
-                Title.Caption = 'Cant.'
-                Width = 53
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MONTO_TOTAL'
-                Title.Alignment = taCenter
-                Title.Caption = 'Importe'
-                Width = 101
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CODIGO_BARRA'
-                Title.Alignment = taCenter
-                Title.Caption = 'C'#243'd. Barra'
-                Width = 80
-                Visible = True
-              end>
-          end
-        end
-        object PanelFpago: TPanel
-          Left = 0
-          Top = 0
-          Width = 607
-          Height = 122
-          Align = alLeft
-          BevelOuter = bvNone
-          Caption = 'PanelFpago'
-          TabOrder = 1
-          object lblTotalFPago: TLabel
-            Left = 0
-            Top = 101
-            Width = 607
-            Height = 21
-            Align = alBottom
-            Alignment = taRightJustify
-            AutoSize = False
-            Caption = 'Total Entregas: $ 0.00 '
-            Color = 16729670
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-          end
-          object DBGrid2: TDBGrid
-            Left = 0
-            Top = 0
-            Width = 607
-            Height = 101
-            Align = alClient
-            Color = 14606012
-            DataSource = DS_Orden_Entrega
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-            ParentFont = False
-            TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            Columns = <
-              item
-                Expanded = False
-                FieldName = '_ctaIngreso'
-                Title.Alignment = taCenter
-                Title.Caption = 'Cuenta'
-                Width = 241
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'medioPago'
-                Title.Alignment = taCenter
-                Title.Caption = 'Forma de Pago'
-                Width = 149
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'IMPORTE_REAL'
-                Title.Alignment = taCenter
-                Title.Caption = 'Importe'
-                Width = 81
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MDCP_FECHA'
-                Title.Alignment = taCenter
-                Title.Caption = 'MDP Fecha'
-                Width = 105
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MDCP_BANCO'
-                Title.Alignment = taCenter
-                Title.Caption = 'Banco'
-                Width = 188
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MDCP_CHEQUE'
-                Title.Alignment = taCenter
-                Title.Caption = 'N'#250'mero'
-                Width = 113
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'FECHA_FP'
-                Title.Alignment = taCenter
-                Title.Caption = 'Fecha'
-                Visible = True
-              end>
-          end
-        end
-      end
+      OnClick = btnAceptarProdClick
+    end
+    object btnCancProd: TButton
+      Left = 462
+      Top = 154
+      Width = 75
+      Height = 19
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 1
+      OnClick = btnCancProdClick
+    end
+    object DBEdit4: TDBEdit
+      Left = 88
+      Top = 24
+      Width = 449
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'prod_detalle'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object edCant: TDBEdit
+      Left = 268
+      Top = 52
+      Width = 61
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'CANTIDAD'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+    end
+    object edMontoTotal: TDBEdit
+      Left = 420
+      Top = 52
+      Width = 117
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'MONTO_TOTAL'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+    end
+    object edObsProd: TDBMemo
+      Left = 11
+      Top = 124
+      Width = 438
+      Height = 49
+      Color = 15527129
+      DataField = 'OBSERVACIONES'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ScrollBars = ssVertical
+      TabOrder = 5
+    end
+    object edLabProd: TDBLookupComboBox
+      Left = 88
+      Top = 80
+      Width = 450
+      Height = 21
+      Color = 15527129
+      DataField = 'ID_LABORATORIO'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      KeyField = 'ID_LABORATORIO'
+      ListField = 'NOMBRE'
+      ListSource = DS_Laboratorios
+      NullValueKey = 46
+      ParentFont = False
+      TabOrder = 6
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -7657,7 +7657,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     MasterFields = 'ID_ORDEN_DETALLE'
     MasterSource = DS_OrdenDetalle
     LinkedFields = 'ID_ORDEN_DETALLE'
-    Left = 744
+    Left = 768
     Top = 313
     ParamData = <
       item
@@ -8158,6 +8158,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'where med.baja='#39'N'#39)
     CampoBuscar = 'DETALLE'
     CampoClave = 'id_MEDICO'
+    BuscarEnQuery = ZQ_Medico
     TituloVentana = 'Buscar M'#233'dico'
     Left = 816
     Top = 56
@@ -8815,8 +8816,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProvider1'
-    Left = 613
-    Top = 252
+    Left = 629
+    Top = 228
     object CD_TotalesID_DETALLE_OS: TIntegerField
       FieldName = 'ID_DETALLE_OS'
     end
