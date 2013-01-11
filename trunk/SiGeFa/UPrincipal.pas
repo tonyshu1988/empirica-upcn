@@ -272,7 +272,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UEstadisticaVentas, UReimpresionComprobantes, UABM_PersonasPuntos,
   UConsulta_Precios, DateUtils, UCompararStock, UOP_ABMMedico,
   UOP_ABMObraSocial, UPreventa_Historico, UFichaEmpleado,
-  UOP_ABMLaboratorio, UOP_ABMOrden_Tecnica;
+  UOP_ABMLaboratorio, UOP_ABMOrden_Tecnica, UCuentaCorrienteProveedor;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -771,7 +771,8 @@ end;
 
 procedure TFPrincipal.ACtaCte_ProveedorExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFCuentaCorriente_Proveedor, FCuentaCorriente_Proveedor);
+//  EKVentanas1.Abrir(Sender, TFCuentaCorriente_Proveedor, FCuentaCorriente_Proveedor);
+  EKVentanas1.Abrir(Sender, TFCuentaCorrienteProveedor, FCuentaCorrienteProveedor);
 end;
 
 
