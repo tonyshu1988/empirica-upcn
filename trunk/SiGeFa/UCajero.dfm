@@ -7712,7 +7712,7 @@ object FCajero: TFCajero
       Category = 0
       Hint = 'F5 Vendedor'
       Visible = ivAlways
-      ImageIndex = 3
+      ImageIndex = 87
       ShortCut = 116
       OnClick = btVendedorClick
       AutoGrayScale = False
@@ -7811,6 +7811,7 @@ object FCajero: TFCajero
       Category = 0
       Hint = 'Cargar Orden'
       Visible = ivAlways
+      ImageIndex = 90
       OnClick = bt_Cargar_OrdenClick
     end
     object GrupoGuardarCancelar: TdxBarGroup
