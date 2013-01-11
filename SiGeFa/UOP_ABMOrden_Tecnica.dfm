@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 241
-  Top = 79
+  Left = 276
+  Top = 128
   Width = 1070
   Height = 700
   Caption = 'ABM Orden T'#233'cnica'
@@ -21,30 +21,30 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object PListado: TPanel
     Left = 114
     Top = 0
-    Width = 940
-    Height = 610
+    Width = 948
+    Height = 621
     Align = alClient
     TabOrder = 9
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 938
-      Height = 608
+      Width = 946
+      Height = 619
       Align = alClient
       Caption = 'Panel1'
       TabOrder = 0
       object PanelComprobante: TPanel
         Left = 1
         Top = 1
-        Width = 936
-        Height = 484
+        Width = 944
+        Height = 495
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object lblTotalOrdenes: TLabel
           Left = 0
-          Top = 463
-          Width = 936
+          Top = 474
+          Width = 944
           Height = 21
           Align = alBottom
           Alignment = taRightJustify
@@ -63,8 +63,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         end
         object Splitter2: TSplitter
           Left = 0
-          Top = 454
-          Width = 936
+          Top = 465
+          Width = 944
           Height = 9
           Cursor = crVSplit
           Align = alBottom
@@ -72,8 +72,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object DBGridComprobantes: TDBGrid
           Left = 0
           Top = 0
-          Width = 936
-          Height = 454
+          Width = 944
+          Height = 465
           Align = alClient
           Color = 14606012
           DataSource = DS_Orden
@@ -229,8 +229,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
       object PanelFPagoYProd: TPanel
         Left = 1
-        Top = 485
-        Width = 936
+        Top = 496
+        Width = 944
         Height = 122
         Align = alBottom
         BevelOuter = bvNone
@@ -245,7 +245,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PanelProducto: TPanel
           Left = 612
           Top = 0
-          Width = 324
+          Width = 332
           Height = 122
           Align = alClient
           BevelOuter = bvNone
@@ -254,7 +254,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object lblTotalProducto: TLabel
             Left = 0
             Top = 101
-            Width = 324
+            Width = 332
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -274,7 +274,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object DBGrid1: TDBGrid
             Left = 0
             Top = 0
-            Width = 324
+            Width = 332
             Height = 101
             Align = alClient
             Color = 14606012
@@ -2784,7 +2784,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     BevelOuter = bvSpace
     BevelWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 6
+    TabOrder = 4
     object Label45: TLabel
       Left = 4
       Top = 4
@@ -3070,49 +3070,49 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object PanelContenedorDerecha: TPanel
     Left = 114
     Top = 0
-    Width = 940
-    Height = 610
+    Width = 948
+    Height = 621
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 0
     object PanelProductosYFPago: TPanel
       Left = 1
       Top = 194
-      Width = 938
-      Height = 415
+      Width = 946
+      Height = 426
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 0
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 1
-        Width = 936
-        Height = 246
+        Width = 944
+        Height = 257
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
         object Splitter1: TSplitter
-          Left = 617
+          Left = 625
           Top = 1
           Width = 5
-          Height = 204
+          Height = 215
           Align = alRight
         end
         object Panel6: TPanel
           Left = 1
-          Top = 205
-          Width = 934
+          Top = 216
+          Width = 942
           Height = 40
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 0
           DesignSize = (
-            934
+            942
             40)
           object lblCantProductos: TLabel
             Left = 1
             Top = 27
-            Width = 932
+            Width = 940
             Height = 12
             Align = alBottom
             Alignment = taRightJustify
@@ -3162,10 +3162,10 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           end
         end
         object POs: TPanel
-          Left = 622
+          Left = 630
           Top = 1
           Width = 313
-          Height = 204
+          Height = 215
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 1
@@ -3192,7 +3192,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Left = 0
             Top = 66
             Width = 313
-            Height = 138
+            Height = 149
             Align = alClient
             Color = 15527129
             DataSource = DS_OrdenDetalleOS
@@ -3296,15 +3296,15 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PProductos: TPanel
           Left = 1
           Top = 1
-          Width = 616
-          Height = 204
+          Width = 624
+          Height = 215
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 2
           object Label11: TLabel
             Left = 0
             Top = 0
-            Width = 616
+            Width = 624
             Height = 13
             Align = alTop
             Alignment = taCenter
@@ -3323,8 +3323,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object DBGridListadoProductos: TDBGrid
             Left = 0
             Top = 13
-            Width = 616
-            Height = 191
+            Width = 624
+            Height = 202
             Align = alClient
             Color = 15527129
             DataSource = DS_OrdenDetalle
@@ -3407,8 +3407,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
       object PPieBoleta: TPanel
         Left = 1
-        Top = 373
-        Width = 936
+        Top = 384
+        Width = 944
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
@@ -3416,7 +3416,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object lblTotAPagar: TLabel
           Left = 0
           Top = 0
-          Width = 936
+          Width = 944
           Height = 41
           Align = alClient
           Alignment = taRightJustify
@@ -3436,8 +3436,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 247
-        Width = 936
+        Top = 258
+        Width = 944
         Height = 126
         Align = alBottom
         Caption = 'PVarios'
@@ -3451,7 +3451,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PReceta: TPanel
           Left = 1
           Top = 1
-          Width = 934
+          Width = 942
           Height = 124
           Align = alClient
           BevelOuter = bvLowered
@@ -3535,7 +3535,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object Label9: TLabel
             Left = 1
             Top = 1
-            Width = 932
+            Width = 940
             Height = 16
             Align = alTop
             Alignment = taCenter
@@ -3938,14 +3938,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PObservaciones: TPanel
           Left = 1
           Top = 1
-          Width = 934
+          Width = 942
           Height = 124
           Align = alClient
           TabOrder = 1
           object Label2: TLabel
             Left = 1
             Top = 1
-            Width = 932
+            Width = 940
             Height = 16
             Align = alTop
             Alignment = taCenter
@@ -3964,7 +3964,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object dbObsOrden: TDBRichEdit
             Left = 1
             Top = 17
-            Width = 932
+            Width = 940
             Height = 106
             Align = alClient
             Color = clCream
@@ -3983,14 +3983,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PFormaPago: TPanel
           Left = 1
           Top = 1
-          Width = 934
+          Width = 942
           Height = 124
           Align = alClient
           TabOrder = 0
           object Label36: TLabel
             Left = 1
             Top = 1
-            Width = 932
+            Width = 940
             Height = 16
             Align = alTop
             Alignment = taCenter
@@ -4009,7 +4009,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object PieGrilla: TPanel
             Left = 1
             Top = 91
-            Width = 932
+            Width = 940
             Height = 32
             Align = alBottom
             BevelOuter = bvLowered
@@ -4017,7 +4017,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             object lblMaxVenta: TLabel
               Left = 1
               Top = 1
-              Width = 930
+              Width = 938
               Height = 20
               Align = alTop
               Alignment = taCenter
@@ -4044,7 +4044,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object DBGridFormaPago: TDBGrid
             Left = 1
             Top = 17
-            Width = 932
+            Width = 940
             Height = 74
             Align = alClient
             Color = 15527129
@@ -4142,14 +4142,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object PanelDetalles: TPanel
       Left = 1
       Top = 31
-      Width = 938
+      Width = 946
       Height = 163
       Align = alTop
       TabOrder = 1
       object PanelDetalleCliente: TPanel
         Left = 1
         Top = 94
-        Width = 936
+        Width = 944
         Height = 68
         Align = alBottom
         BevelOuter = bvLowered
@@ -4163,7 +4163,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 934
+          Width = 942
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4343,7 +4343,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       object PDetalleOrden: TPanel
         Left = 1
         Top = 1
-        Width = 597
+        Width = 605
         Height = 93
         Align = alClient
         BevelOuter = bvLowered
@@ -4412,7 +4412,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Label7: TLabel
           Left = 1
           Top = 1
-          Width = 595
+          Width = 603
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4489,7 +4489,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         end
       end
       object PMedico: TPanel
-        Left = 598
+        Left = 606
         Top = 1
         Width = 339
         Height = 93
@@ -4606,7 +4606,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 938
+      Width = 946
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -4832,7 +4832,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -7306,6 +7306,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Hint = 'F10 Guardar Orden'
       Visible = ivAlways
       ImageIndex = 5
+      OnClick = BtAceptarPagoClick
       AutoGrayScale = False
     end
     object BtCancelarPago: TdxBarLargeButton
@@ -7371,6 +7372,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Hint = 'Editar Orden'
       Visible = ivAlways
       ImageIndex = 1
+      OnClick = btEditarClick
       AutoGrayScale = False
     end
     object btBuscarOrden: TdxBarLargeButton
@@ -7408,7 +7410,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Items = (
         'btNuevo'
         'btEditar'
-        'btBuscarOrden')
+        'btBuscarOrden'
+        'btsalir')
     end
   end
   object ZQ_Orden: TZQuery
@@ -8379,7 +8382,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_OS: TZQuery
     Connection = DM.Conexion
-    Active = True
     SQL.Strings = (
       
         'select OO.ID_OS,coalesce(OO.CODIGO||'#39' - '#39'||OO.NOMBRE||'#39' - '#39'||OO.' +
@@ -8812,7 +8814,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
   end
   object CD_Totales: TClientDataSet
-    Active = True
     Aggregates = <>
     Params = <>
     ProviderName = 'DataSetProvider1'

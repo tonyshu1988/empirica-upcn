@@ -534,6 +534,9 @@ type
     procedure btBuscarOrdenClick(Sender: TObject);
     procedure btNuevoClick(Sender: TObject);
     function guardarOrden(): Boolean;
+    procedure BtAceptarPagoClick(Sender: TObject);
+    procedure btEditarClick(Sender: TObject);
+    procedure editarOrdenT(id:Integer);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -581,7 +584,7 @@ begin
   dm.ZQ_Configuracion.Close;
   dm.ZQ_Configuracion.Open;
   idSucursal:= dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger;
-//  CD_Orden.CreateDataSet;
+  CD_Totales.CreateDataSet;
 //  CD_OrdenDetalle.CreateDataSet;
 //  CD_ordenDetalleOS.CreateDataSet;
 //  CD_Fpago.CreateDataSet;
@@ -782,7 +785,6 @@ end;
 
 procedure TFOP_ABM_OrdenTecnica.modoLecturaProd();
 begin
-
   VerLectorCB(false);
   PListado.Enabled:= True;
   PListado.Visible:= false;
@@ -793,8 +795,6 @@ begin
   GrupoGuardarCancelar.Enabled:= true;
   grupoOrden.Enabled:= false;
   PanelContenedorDerecha.Enabled:=true;
-  ZQ_Productos.Close;
-
 end;
 
 procedure TFOP_ABM_OrdenTecnica.modoListado();
@@ -802,6 +802,7 @@ begin
   VerLectorCB(false);
   PListado.Enabled:= True;
   PListado.Visible:= True;
+  PListado.BringToFront;
   PCargaProd.Enabled:=false;
   PCargaProd.SendToBack;
   PCargaOS.SendToBack;
@@ -809,7 +810,7 @@ begin
   grupoVertical.Enabled:= false;
   GrupoGuardarCancelar.Enabled:= false;
   PanelContenedorDerecha.Enabled:=false;
-  ZQ_Productos.Close;
+//  ZQ_Productos.Close;
   btCodif.Down:=false;
   btObservac.Down:=false;
 end;
@@ -1618,6 +1619,7 @@ begin
         dm.EKModelo.cancelar_transaccion(abmOrden);
         Application.MessageBox('No se pudo guardar la Orden Técnica.', 'Atención');
         dm.EKModelo.cancelar_transaccion(abmOrden);
+        modoListado();
       end
       else
       begin
@@ -1649,5 +1651,23 @@ begin
    end;
 end;
 
+
+procedure TFOP_ABM_OrdenTecnica.BtAceptarPagoClick(Sender: TObject);
+begin
+  guardarOrden();
+end;
+
+procedure TFOP_ABM_OrdenTecnica.btEditarClick(Sender: TObject);
+begin
+editarOrdenT(ZQ_OrdenID_ORDEN.AsInteger);
+end;
+
+procedure TFOP_ABM_OrdenTecnica.editarOrdenT(id: Integer);
+begin
+   if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden,ZQ_OrdenDetalle,ZQ_OrdenDetalleOS,ZQ_Orden_Entrega,ZQ_CodifRP]) then
+  begin
+      ZQ_Orden.Edit;
+  end;
+end;
 
 end.
