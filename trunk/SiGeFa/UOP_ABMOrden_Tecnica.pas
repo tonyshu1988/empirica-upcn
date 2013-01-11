@@ -477,6 +477,7 @@ type
     grupoOrden: TdxBarGroup;
     DBText5: TDBText;
     ZQ_GenOrdenEntrega: TZSequence;
+    ZQ_GenOrdenDetalleOS: TZSequence;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -574,6 +575,8 @@ var
 const
   abmOrden = 'ABM Orden-Tecnica';
 implementation
+
+uses UUtilidades;
 
 
 
@@ -685,8 +688,8 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden,ZQ_OrdenDetalle,ZQ_OrdenDetalleOS,ZQ_Orden_Entrega,ZQ_CodifRP]) then
   begin
-      ZQ_Orden.Append;
 
+      ZQ_Orden.Append;
 
       ZQ_OrdenID_ORDEN.AsInteger:=ZQ_GenOrden.GetNextValue;
       ZQ_OrdenID_CLIENTE.AsInteger:= cliente;
@@ -704,11 +707,11 @@ begin
     //  CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente / 100;
     //  CD_ComprobanteIMPORTE_DESCUENTO.AsInteger:= 0;
     //  CD_ComprobanteENCABEZADO.AsString:= '';
-      ZQ_OrdenCODIGO_CLI.AsString:= '';
-      ZQ_OrdenFECHA_ORDEN.Clear;
+      ZQ_OrdenCODIGO_CLI.AsString:=rellenar(ZQ_OrdenID_ORDEN.AsString,'0',9);
+      ZQ_OrdenFECHA_ORDEN.AsDateTime:=dm.EKModelo.Fecha();
       ZQ_OrdenFECHA_PROMETIDO.clear;
       ZQ_OrdenCOD_BARRAS.Clear;
-      ZQ_OrdenNRO_FACTURA.Clear;
+      ZQ_OrdenNRO_FACTURA.AsString:=rellenar(ZQ_OrdenID_ORDEN.AsString,'0',9);
       ZQ_OrdenENTREGADO_POR.Clear;
       ZQ_OrdenFACTURADO_POR.Clear;
 
@@ -960,7 +963,7 @@ begin
         exit;
       end;
 
-    agregar('', ZQ_ProductosID_PRODUCTO.AsInteger);
+    agregar('',ZQ_ProductosID_PRODUCTO.AsInteger);
   end
   else
   begin
@@ -984,7 +987,6 @@ begin
     ZQ_OrdenDetalleID_ORDEN.AsInteger:=ZQ_OrdenID_ORDEN.AsInteger;
     ZQ_OrdenDetalleCANTIDAD.AsFloat:= 1;
     ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:= ZQ_OrdenDetalleprod_pventa.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat;
-
 
 //    CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= (ZQ_ProductosCOEF_DESCUENTO.AsFloat * 100);
 //    CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
@@ -1098,7 +1100,7 @@ end;
 
 procedure TFOP_ABM_OrdenTecnica.BtCancelarPagoClick(Sender: TObject);
 begin
-    if (application.MessageBox(pchar('Desea Cancelar la Orden actual y quitar todos sus Productos?'), 'Borrar Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if (application.MessageBox(pchar('Desea Cancelar la Orden actual ?'), 'Cancelar Cambios', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
       cancelarProducto();
 end;
 
@@ -1173,6 +1175,7 @@ begin
     if EKListadoOS.Resultado <> '' then
     begin
       ZQ_OrdenDetalleOS.Append;
+      ZQ_OrdenDetalleOSID_DETALLE_OS.AsInteger:=ZQ_GenOrdenDetalleOS.GetNextValue;
       ZQ_ordenDetalleOSID_ORDEN_DETALLE.AsInteger:=ZQ_OrdenDetalleID_ORDEN_DETALLE.AsInteger;
       ZQ_OrdenDetalleOSID_OS.AsInteger:=StrToInt(EKListadoOS.Resultado);
       ZQ_OrdenDetalleOSMONTO_DESCONTADO.AsFloat:=0;
