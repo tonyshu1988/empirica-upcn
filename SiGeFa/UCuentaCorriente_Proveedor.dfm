@@ -1,6 +1,6 @@
 object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
-  Left = 274
-  Top = 156
+  Left = 285
+  Top = 223
   Width = 950
   Height = 597
   Caption = 'Cta. Cte. Proveedor'
@@ -144,7 +144,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
             50.270833333333330000
             547.687500000000000000
             124.354166666666700000
-            804.333333333333200000)
+            804.333333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -175,7 +175,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
           Size.Values = (
             52.916666666666670000
             730.250000000000000000
-            68.791666666666680000
+            68.791666666666670000
             436.562500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -849,7 +849,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
           Size.Values = (
             34.395833333333340000
             338.666666666666700000
-            18.520833333333330000
+            18.520833333333340000
             277.812500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -1141,7 +1141,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            965.729166666666800000
+            965.729166666666700000
             108.479166666666700000
             153.458333333333300000)
           Alignment = taLeftJustify
@@ -1336,7 +1336,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            783.166666666666800000
+            783.166666666666700000
             150.812500000000000000
             161.395833333333300000)
           Alignment = taLeftJustify
@@ -1369,7 +1369,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
           Size.Values = (
             34.395833333333340000
             42.333333333333340000
-            18.520833333333330000
+            18.520833333333340000
             111.125000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -2713,7 +2713,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
             50.270833333333330000
             582.083333333333400000
             124.354166666666700000
-            735.541666666666800000)
+            735.541666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -2744,7 +2744,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
           Size.Values = (
             52.916666666666670000
             746.125000000000000000
-            68.791666666666680000
+            68.791666666666670000
             404.812500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -2775,7 +2775,7 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            719.666666666666800000
+            719.666666666666700000
             5.291666666666667000
             460.375000000000000000)
           Alignment = taCenter
@@ -4564,14 +4564,14 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
     Connection = DM.Conexion
     SQL.Strings = (
       
-        'select cc.id_proveedor_out, cc.limite_deuda, cc.vencimiento_dias' +
-        ', cc.saldo, cc.fecha_alta, cc.fecha_baja,'
+        'select cc.id_cliente_out, cc.limite_deuda, cc.saldo, cc.fecha_al' +
+        'ta, cc.fecha_baja, cc.debe, cc.haber, cc.nombre,'
       
-        '       cc.debe, cc.haber, cc.nombre, cc.localidad, cc.codigo_pos' +
-        'tal, cc.cuit_cuil,'
+        '       cc.numero_doc, cc.localidad, cc.codigo_postal, cc.cuit_cu' +
+        'il, cc.baja, cc.nombre_provincia, cc.nombre_tipo_iva,'
       
-        '       cc.baja, cc.nombre_provincia, cc.nombre_tipo_iva, cc.cod_' +
-        'iva, cc.codigo_corto, cc.deuda_vencida'
+        '       cc.cod_iva, cc.nombre_tipo_doc, cc.codigo_corto, cc.venci' +
+        'miento_dias, cc.id_proveedor_out, cc.deuda_vencida'
       'from ctacte_general(:id_proveedor, null) cc'
       'order by cc.nombre')
     Params = <
@@ -4588,6 +4588,10 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
         Name = 'id_proveedor'
         ParamType = ptUnknown
       end>
+    object ZQ_CtaCte_GralID_CLIENTE_OUT: TIntegerField
+      FieldName = 'ID_CLIENTE_OUT'
+      ReadOnly = True
+    end
     object ZQ_CtaCte_GralLIMITE_DEUDA: TFloatField
       FieldName = 'LIMITE_DEUDA'
       currency = True
@@ -4654,6 +4658,15 @@ object FCuentaCorriente_Proveedor: TFCuentaCorriente_Proveedor
       FieldName = 'DEUDA_VENCIDA'
       ReadOnly = True
       Size = 1
+    end
+    object ZQ_CtaCte_GralNUMERO_DOC: TStringField
+      FieldName = 'NUMERO_DOC'
+      ReadOnly = True
+      Size = 50
+    end
+    object ZQ_CtaCte_GralNOMBRE_TIPO_DOC: TStringField
+      FieldName = 'NOMBRE_TIPO_DOC'
+      ReadOnly = True
     end
   end
   object DS_CtaCte_Gral: TDataSource

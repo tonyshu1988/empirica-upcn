@@ -71,7 +71,8 @@ uses
   UFichaEmpleado in 'UFichaEmpleado.pas' {FFichaEmpleado},
   UOP_CargarOrden in 'UOP_CargarOrden.pas' {FOP_CargarOrden},
   UOP_ABMOrden_Tecnica in 'UOP_ABMOrden_Tecnica.pas' {FOP_ABM_OrdenTecnica},
-  UOP_ABMLaboratorio in 'UOP_ABMLaboratorio.pas' {FOP_ABMLaboratorio};
+  UOP_ABMLaboratorio in 'UOP_ABMLaboratorio.pas' {FOP_ABMLaboratorio},
+  UCuentaCorrienteProveedor in 'UCuentaCorrienteProveedor.pas' {FCuentaCorrienteProveedor};
 
 {$R *.res}
 

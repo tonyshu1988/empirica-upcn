@@ -278,6 +278,9 @@ type
     ZQ_CtaCte_GralDEUDA_VENCIDA: TStringField;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
+    ZQ_CtaCte_GralID_CLIENTE_OUT: TIntegerField;
+    ZQ_CtaCte_GralNUMERO_DOC: TStringField;
+    ZQ_CtaCte_GralNOMBRE_TIPO_DOC: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
