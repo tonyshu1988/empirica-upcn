@@ -543,6 +543,7 @@ type
     procedure BtVendedorClick(Sender: TObject);
     procedure OnSelVendedor();
     procedure btnQuitarPagoClick(Sender: TObject);
+    function validarBoleta(): Boolean;
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -1418,6 +1419,7 @@ procedure TFOP_ABM_OrdenTecnica.btFPAceptarClick(Sender: TObject);
 begin
  if ZQ_Orden_Entrega.State in [dsInsert, dsEdit] then
   begin
+   if not(ZQ_Orden_EntregaCUENTA_INGRESO.IsNull or ZQ_Orden_EntregaID_TIPO_FORMAPAG.IsNull) then
     if ZQ_Orden_EntregaCUENTA_INGRESO.AsInteger = 1 then //si se eligio Cuenta Corriente
     begin
       if cliente <= 0 then //si es consumidor final
@@ -1630,7 +1632,10 @@ var
   comprobante, vendedor: integer;
 begin
   Result:= False;
-  //Hacer las validaciones correspondientes
+
+  ZQ_OrdenMONTO_TOTAL.AsFloat:=acumulado;
+//  ZQ_OrdenMONTO_ENTREGADO.AsFloat:=
+
 
   if (dm.EKModelo.verificar_transaccion(abmOrden)) then
    try
@@ -1674,12 +1679,16 @@ end;
 
 procedure TFOP_ABM_OrdenTecnica.BtAceptarPagoClick(Sender: TObject);
 begin
-  guardarOrden();
+if validarBoleta() then
+  begin
+    guardarOrden();
+  end
 end;
 
 procedure TFOP_ABM_OrdenTecnica.btEditarClick(Sender: TObject);
 begin
-editarOrdenT(ZQ_OrdenID_ORDEN.AsInteger);
+ if (not(ZQ_Orden.IsEmpty) and not(ZQ_OrdenID_ESTADO.IsNull)) then
+    editarOrdenT(ZQ_OrdenID_ORDEN.AsInteger);
 end;
 
 procedure TFOP_ABM_OrdenTecnica.editarOrdenT(id: Integer);
@@ -1743,6 +1752,41 @@ if dm.EKModelo.verificar_transaccion(abmOrden) then
     ZQ_Orden_Entrega.Delete;
     //lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
   end;
+end;
+
+function TFOP_ABM_OrdenTecnica.validarBoleta: Boolean;
+begin
+
+  Result:= True;
+
+  if (acumulado <= 0) then
+  begin
+    Application.MessageBox('El monto final debe ser superior a $ 0.00, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
+    exit;
+  end;
+
+  if (cliente < 0) then
+  begin
+    Application.MessageBox('Debe seleccionar un Cliente, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
+    exit;
+  end;
+
+//  if (IdVendedor < 0) then
+//  begin
+//    Application.MessageBox('Debe seleccionar un Vendedor, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+//    result:= false;
+//    exit;
+//  end;
+
+  if ZQ_OrdenDetalle.IsEmpty then
+  begin
+    Application.MessageBox('Debe cargar al menos un Producto, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
+    exit;
+  end;
+
 end;
 
 end.
