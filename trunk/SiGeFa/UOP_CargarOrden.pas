@@ -43,6 +43,7 @@ type
     ABuscar: TAction;
     ASeccionar: TAction;
     ZQ_Optica_OrdenAVISAR: TStringField;
+    ZQ_Optica_OrdenMONTO_RECONOCIDO: TFloatField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);

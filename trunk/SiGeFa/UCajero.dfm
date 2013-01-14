@@ -9577,9 +9577,6 @@ object FCajero: TFCajero
       FieldName = 'ID_PRODUCTO'
       Required = True
     end
-    object ZQ_OrdenProductosMONTO_DESCONTADO: TFloatField
-      FieldName = 'MONTO_DESCONTADO'
-    end
     object ZQ_OrdenProductosMONTO_TOTAL: TFloatField
       FieldName = 'MONTO_TOTAL'
     end
@@ -9593,6 +9590,12 @@ object FCajero: TFCajero
     object ZQ_OrdenProductosID_LABORATORIO: TIntegerField
       FieldName = 'ID_LABORATORIO'
       Required = True
+    end
+    object ZQ_OrdenProductosMONTO_RECONOCIDO: TFloatField
+      FieldName = 'MONTO_RECONOCIDO'
+    end
+    object ZQ_OrdenProductosMONTO_FINAL: TFloatField
+      FieldName = 'MONTO_FINAL'
     end
   end
   object ZQ_OpticaEntrega: TZQuery

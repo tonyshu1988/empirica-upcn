@@ -601,7 +601,6 @@ type
     ZQ_OrdenProductosID_ORDEN_DETALLE: TIntegerField;
     ZQ_OrdenProductosID_ORDEN: TIntegerField;
     ZQ_OrdenProductosID_PRODUCTO: TIntegerField;
-    ZQ_OrdenProductosMONTO_DESCONTADO: TFloatField;
     ZQ_OrdenProductosMONTO_TOTAL: TFloatField;
     ZQ_OrdenProductosCANTIDAD: TFloatField;
     ZQ_OrdenProductosOBSERVACIONES: TStringField;
@@ -639,6 +638,8 @@ type
     DS_Optica_Orden: TDataSource;
     ZQ_Optica_OrdenID_COMPROBANTE: TIntegerField;
     ZQ_Optica_OrdenSALDO: TFloatField;
+    ZQ_OrdenProductosMONTO_RECONOCIDO: TFloatField;
+    ZQ_OrdenProductosMONTO_FINAL: TFloatField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -3150,7 +3151,7 @@ begin
       ZQ_Productos.sql[15]:= Format('and(p.id_producto=%s)', [ZQ_OrdenProductosID_PRODUCTO.AsString]);
       ZQ_Productos.Open;
 
-      Importe_Producto := ZQ_OrdenProductosMONTO_TOTAL.AsFloat - ZQ_OrdenProductosMONTO_DESCONTADO.AsFloat;
+      Importe_Producto := ZQ_OrdenProductosMONTO_FINAL.AsFloat;
 
       CD_DetalleFactura.Append;
       CD_DetalleFacturaID_PRODUCTO.AsInteger:= ZQ_OrdenProductosID_PRODUCTO.AsInteger;
@@ -3161,11 +3162,11 @@ begin
       CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:= Importe_Producto/ZQ_OrdenProductosCANTIDAD.AsFloat;
       CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
       CD_DetalleFacturaPORC_IVA.AsFloat:= ZQ_ProductosIMPUESTO_IVA.AsFloat;
-      CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= Importe_Producto*ZQ_OrdenProductosCANTIDAD.AsFloat;
-      CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= Importe_Producto*ZQ_OrdenProductosCANTIDAD.AsFloat;
+      CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= Importe_Producto;
+      CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= Importe_Producto;
       CD_DetalleFacturaIMPORTE_IVA.AsFloat:= Importe_Producto*ZQ_ProductosIMPUESTO_IVA.AsFloat;
       CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_ProductosID_STOCK_PRODUCTO.AsInteger;
-      CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= Importe_Producto*ZQ_OrdenProductosCANTIDAD.AsFloat;
+      CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= Importe_Producto;
       CD_DetalleFacturaIMPORTE_COSTO.AsFloat:= ZQ_ProductosPRECIO_COSTO.AsFloat;
       CD_DetalleFacturaimporte_original.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
 
@@ -3178,9 +3179,9 @@ begin
         ZQ_ColsPrecios.Filtered:= True;
 
         if ZQ_ColsPreciosCOLUMNA_PRECIO.AsInteger = i then
-          CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_Productos.FieldByName(Format('PRECIO%d', [i])).AsFloat
+          CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= Importe_Producto//ZQ_Productos.FieldByName(Format('PRECIO%d', [i])).AsFloat
         else
-          CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
+          CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= Importe_Producto;//ZQ_ProductosPRECIO_VENTA.AsFloat;
       end;
 
 

@@ -102,20 +102,28 @@ object FOP_CargarOrden: TFOP_CargarOrden
           Expanded = False
           FieldName = 'MONTO_TOTAL'
           Title.Caption = 'Monto total'
-          Width = 100
+          Width = 110
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'MONTO_RECONOCIDO'
+          Title.Caption = 'Monto Reconocido'
+          Width = 110
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'MONTO_ENTREGADO'
           Title.Caption = 'Monto Entregado'
+          Width = 110
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'SALDO'
           Title.Caption = 'Saldo'
-          Width = 100
+          Width = 110
           Visible = True
         end
         item
@@ -872,12 +880,15 @@ object FOP_CargarOrden: TFOP_CargarOrden
     end
     object ZQ_Optica_OrdenMONTO_TOTAL: TFloatField
       FieldName = 'MONTO_TOTAL'
+      currency = True
     end
     object ZQ_Optica_OrdenMONTO_ENTREGADO: TFloatField
       FieldName = 'MONTO_ENTREGADO'
+      currency = True
     end
     object ZQ_Optica_OrdenSALDO: TFloatField
       FieldName = 'SALDO'
+      currency = True
     end
     object ZQ_Optica_OrdenCLIENTE: TStringField
       FieldName = 'CLIENTE'
@@ -898,6 +909,11 @@ object FOP_CargarOrden: TFOP_CargarOrden
     object ZQ_Optica_OrdenAVISAR: TStringField
       FieldName = 'AVISAR'
       Size = 1
+    end
+    object ZQ_Optica_OrdenMONTO_RECONOCIDO: TFloatField
+      FieldName = 'MONTO_RECONOCIDO'
+      ReadOnly = True
+      currency = True
     end
   end
   object DS_Optica_Orden: TDataSource
