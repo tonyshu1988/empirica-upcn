@@ -975,6 +975,7 @@ object FOP_CargarOrden: TFOP_CargarOrden
         Titulo = 'Avisar'
         Campo = 'avisar'
         Tabla = 'o'
+        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboValoresVer.Strings = (

@@ -637,6 +637,8 @@ type
     DBEdit24: TDBEdit;
     ZQ_Optica_OrdenMONTO_ENTREGADO: TFloatField;
     DS_Optica_Orden: TDataSource;
+    ZQ_Optica_OrdenID_COMPROBANTE: TIntegerField;
+    ZQ_Optica_OrdenSALDO: TFloatField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -1764,9 +1766,11 @@ begin
       if modoCargaOrden then
       begin
         ZQ_Optica_Orden.Edit;
-        ZQ_Optica_OrdenFECHA_ORDEN.AsDateTime:= dm.EKModelo.FechayHora();
+        //ZQ_Optica_OrdenFECHA_ORDEN.AsDateTime:= dm.EKModelo.FechayHora();
         ZQ_Optica_OrdenID_ESTADO.AsInteger:= 2;
         ZQ_Optica_OrdenFACTURADO_POR.AsInteger := ZQ_ComprobanteID_VENDEDOR.AsInteger;
+        ZQ_Optica_OrdenID_COMPROBANTE.AsInteger := ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+        ZQ_Optica_OrdenSALDO.AsFloat := 0;
         ZQ_Optica_Orden.Post;
       end;
 
