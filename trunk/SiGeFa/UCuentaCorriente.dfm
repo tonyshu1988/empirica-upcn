@@ -299,7 +299,7 @@ object FCuentaCorriente: TFCuentaCorriente
             50.270833333333330000
             582.083333333333400000
             124.354166666666700000
-            735.541666666666700000)
+            735.541666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -330,7 +330,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Size.Values = (
             52.916666666666670000
             746.125000000000000000
-            68.791666666666670000
+            68.791666666666680000
             404.812500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -361,7 +361,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            719.666666666666700000
+            719.666666666666800000
             5.291666666666667000
             460.375000000000000000)
           Alignment = taCenter
@@ -1675,7 +1675,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Size.Values = (
             52.916666666666670000
             762.000000000000000000
-            68.791666666666670000
+            68.791666666666680000
             375.708333333333400000)
           Alignment = taCenter
           AlignToBand = True
@@ -1706,7 +1706,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            743.479166666666700000
+            743.479166666666800000
             5.291666666666667000
             412.750000000000000000)
           Alignment = taCenter
@@ -2349,7 +2349,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Size.Values = (
             34.395833333333340000
             338.666666666666700000
-            18.520833333333340000
+            18.520833333333330000
             277.812500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -2641,7 +2641,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            965.729166666666700000
+            965.729166666666800000
             108.479166666666700000
             153.458333333333300000)
           Alignment = taLeftJustify
@@ -2966,7 +2966,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            783.166666666666700000
+            783.166666666666800000
             198.437500000000000000
             161.395833333333300000)
           Alignment = taLeftJustify
@@ -2999,7 +2999,7 @@ object FCuentaCorriente: TFCuentaCorriente
           Size.Values = (
             34.395833333333340000
             42.333333333333340000
-            18.520833333333340000
+            18.520833333333330000
             111.125000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -5847,7 +5847,13 @@ object FCuentaCorriente: TFCuentaCorriente
       
         'select pf.*, cast(c.fecha as Date) fecha, c.importe_venta, fp.im' +
         'porte_real,'
-      '       '#39'FACTURA '#39'||c.codigo as Descripcion'
+      '       case'
+      '        when (c.id_tipo_cpb = 11) then '#39'FACTURA '#39'||c.codigo'
+      '        when (c.id_tipo_cpb = 25) then '#39'SALDO INICIAL CTA. CTE.'#39
+      
+        '        when (c.id_tipo_cpb = 28) then '#39'NOTA DEBITO '#39'||lpad(c.pu' +
+        'nto_venta, 4, '#39'0'#39')||'#39'-'#39'||lpad(c.numero_cpb, 8, '#39'0'#39')'
+      '       end as Descripcion, c.id_tipo_cpb'
       'from pago_facturas pf'
       'left join comprobante c on (pf.id_factura = c.id_comprobante)'
       
