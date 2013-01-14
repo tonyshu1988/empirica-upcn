@@ -890,7 +890,7 @@ begin
   if viendoDetalleCpb then
   begin
     //si el tipo de comprobante es saldo anterior o nota de credito
-    if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
+    if (AnsiPos('SALDO ', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString) <> 0) then
     begin
       PanelDetalleMov.Visible:= false;
     end

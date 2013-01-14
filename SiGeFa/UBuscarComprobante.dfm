@@ -19,15 +19,15 @@ object FBuscarComprobante: TFBuscarComprobante
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 347
     Align = alClient
     TabOrder = 0
     object DBGridFacturas: TDBGrid
       Left = 1
       Top = 26
-      Width = 712
-      Height = 163
+      Width = 720
+      Height = 174
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -83,8 +83,8 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object PanelDetalle: TPanel
       Left = 1
-      Top = 210
-      Width = 712
+      Top = 221
+      Width = 720
       Height = 125
       Align = alBottom
       BevelOuter = bvNone
@@ -92,7 +92,7 @@ object FBuscarComprobante: TFBuscarComprobante
       object DBGridDetalle: TDBGrid
         Left = 0
         Top = 0
-        Width = 712
+        Width = 720
         Height = 125
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alClient
@@ -141,7 +141,7 @@ object FBuscarComprobante: TFBuscarComprobante
       Tag = 99
       Left = 1
       Top = 1
-      Width = 712
+      Width = 720
       Height = 25
       Align = alTop
       BevelOuter = bvNone
@@ -171,14 +171,14 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object Panel2: TPanel
       Left = 1
-      Top = 189
-      Width = 712
+      Top = 200
+      Width = 720
       Height = 21
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 3
       DesignSize = (
-        712
+        720
         21)
       object lblDetalleFactura: TLabel
         Left = 3
@@ -208,7 +208,7 @@ object FBuscarComprobante: TFBuscarComprobante
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1163,12 +1163,17 @@ object FBuscarComprobante: TFBuscarComprobante
     AfterScroll = ZQ_Factura_CompraAfterScroll
     SQL.Strings = (
       
-        'select distinct c.id_comprobante, c.id_proveedor, c.punto_venta|' +
-        '|'#39'-'#39'||c.numero_cpb as codigo, cast(c.fecha as Date) fecha, c.imp' +
-        'orte_venta,'
+        'select distinct c.id_comprobante, c.id_proveedor, lpad(c.punto_v' +
+        'enta,4,'#39'0'#39')||'#39'-'#39'||lpad(c.numero_cpb,8,'#39'0'#39') as codigo,'
       
-        '       cfp.importe_real, '#39'FACTURA '#39'||lpad(c.punto_venta,4,'#39'0'#39')||' +
-        #39'-'#39'||lpad(c.numero_cpb,8,'#39'0'#39') as Descripcion'
+        '       cast(c.fecha_cobrada as Date) fecha, c.importe_venta, cfp' +
+        '.importe_real,'
+      '       case'
+      
+        '        when (c.id_tipo_cpb = 13) then '#39'FACTURA '#39'||lpad(c.punto_' +
+        'venta,4,'#39'0'#39')||'#39'-'#39'||lpad(c.numero_cpb,8,'#39'0'#39')'
+      '        when (c.id_tipo_cpb = 26) then c.observacion'
+      '       end as Descripcion'
       'from comprobante c'
       
         'left join comprobante_forma_pago cfp on (c.id_comprobante = cfp.' +
@@ -1180,12 +1185,14 @@ object FBuscarComprobante: TFBuscarComprobante
       
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)'
-      'where c.id_tipo_cpb = 13'
-      '  and cfp.cuenta_egreso = 1'
+      
+        'where ((c.id_tipo_cpb = 13 and cfp.cuenta_egreso = 1) or (c.id_t' +
+        'ipo_cpb = 26))'
       '  and cfp.importe_real <> 0'
       '  and c.fecha_anulado is null'
       '  and c.id_proveedor = :id_proveedor'
-      'order by c.fecha, c.codigo')
+      '  and cfp.id_recibo_op is null'
+      'order by c.fecha_cobrada, c.codigo')
     Params = <
       item
         DataType = ftUnknown
@@ -1217,9 +1224,11 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object ZQ_Factura_CompraIMPORTE_VENTA: TFloatField
       FieldName = 'IMPORTE_VENTA'
+      currency = True
     end
     object ZQ_Factura_CompraIMPORTE_REAL: TFloatField
       FieldName = 'IMPORTE_REAL'
+      currency = True
     end
     object ZQ_Factura_CompraDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
@@ -1353,13 +1362,14 @@ object FBuscarComprobante: TFBuscarComprobante
     DataSet = ZQ_Factura_Compra
     SQL.Strings = (
       
-        'select distinct c.id_comprobante, c.id_proveedor, c.punto_venta|' +
-        '|'#39'-'#39'||c.numero_cpb as codigo, cast(c.fecha as Date) fecha, c.imp' +
-        'orte_venta,'
-      '       cfp.importe_real,'
+        'select distinct c.id_comprobante, c.id_proveedor, lpad(c.punto_v' +
+        'enta,4,'#39'0'#39')||'#39'-'#39'||lpad(c.numero_cpb,8,'#39'0'#39') as codigo,'
+      
+        '       cast(c.fecha_cobrada as Date) fecha, c.importe_venta, cfp' +
+        '.importe_real,'
       '       case'
       
-        '        when (c.id_tipo_cpb = 11) then '#39'FACTURA '#39'||lpad(c.punto_' +
+        '        when (c.id_tipo_cpb = 13) then '#39'FACTURA '#39'||lpad(c.punto_' +
         'venta,4,'#39'0'#39')||'#39'-'#39'||lpad(c.numero_cpb,8,'#39'0'#39')'
       '        when (c.id_tipo_cpb = 26) then c.observacion'
       '       end as Descripcion'
@@ -1375,21 +1385,23 @@ object FBuscarComprobante: TFBuscarComprobante
         'left join producto_cabecera pc on (pr.id_prod_cabecera = pc.id_p' +
         'rod_cabecera)'
       
-        'where ((c.id_tipo_cpb = 13 and cfp.cuenta_ingreso = 1) or (c.id_' +
-        'tipo_cpb = 26))'
+        'where ((c.id_tipo_cpb = 13 and cfp.cuenta_egreso = 1) or (c.id_t' +
+        'ipo_cpb = 26))'
       '  and cfp.importe_real <> 0'
       '  and c.fecha_anulado is null'
       '  and c.id_proveedor = :id_proveedor'
-      'order by c.fecha, c.codigo')
+      '  and cfp.id_recibo_op is null'
+      'order by c.fecha_cobrada, c.codigo')
     SQL_Select.Strings = (
       
-        'select distinct c.id_comprobante, c.id_proveedor, c.punto_venta|' +
-        '|'#39'-'#39'||c.numero_cpb as codigo, cast(c.fecha as Date) fecha, c.imp' +
-        'orte_venta,'
-      '       cfp.importe_real,'
+        'select distinct c.id_comprobante, c.id_proveedor, lpad(c.punto_v' +
+        'enta,4,'#39'0'#39')||'#39'-'#39'||lpad(c.numero_cpb,8,'#39'0'#39') as codigo,'
+      
+        '       cast(c.fecha_cobrada as Date) fecha, c.importe_venta, cfp' +
+        '.importe_real,'
       '       case'
       
-        '        when (c.id_tipo_cpb = 11) then '#39'FACTURA '#39'||lpad(c.punto_' +
+        '        when (c.id_tipo_cpb = 13) then '#39'FACTURA '#39'||lpad(c.punto_' +
         'venta,4,'#39'0'#39')||'#39'-'#39'||lpad(c.numero_cpb,8,'#39'0'#39')'
       '        when (c.id_tipo_cpb = 26) then c.observacion'
       '       end as Descripcion')
@@ -1407,13 +1419,14 @@ object FBuscarComprobante: TFBuscarComprobante
         'rod_cabecera)')
     SQL_Where.Strings = (
       
-        'where ((c.id_tipo_cpb = 13 and cfp.cuenta_ingreso = 1) or (c.id_' +
-        'tipo_cpb = 26))'
+        'where ((c.id_tipo_cpb = 13 and cfp.cuenta_egreso = 1) or (c.id_t' +
+        'ipo_cpb = 26))'
       '  and cfp.importe_real <> 0'
       '  and c.fecha_anulado is null'
-      '  and c.id_proveedor = :id_proveedor')
+      '  and c.id_proveedor = :id_proveedor'
+      '  and cfp.id_recibo_op is null')
     SQL_Orden.Strings = (
-      'order by c.fecha, c.codigo')
+      'order by c.fecha_cobrada, c.codigo')
     UsarWhereOriginal = EK_Con_Where
     PantallaReducida = True
     Left = 328

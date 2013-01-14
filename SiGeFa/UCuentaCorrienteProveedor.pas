@@ -259,26 +259,24 @@ type
     ZQ_CtaCte_ProveedorSALDO_CPB: TFloatField;
     ZQ_CtaCte_ProveedorSALDO: TFloatField;
     ZQ_CtaCte_ProveedorSUCURSAL: TStringField;
-    DS_ReciboDetalle: TDataSource;
-    ZQ_ReciboDetalle: TZQuery;
-    ZQ_ReciboDetalleID_PAGO_FACTURAS: TIntegerField;
-    ZQ_ReciboDetalleID_COMPROBANTE: TIntegerField;
-    ZQ_ReciboDetalleID_FACTURA: TIntegerField;
-    ZQ_ReciboDetalleID_TIPO_COMPROBANTE: TIntegerField;
-    ZQ_ReciboDetalleIMPORTE: TFloatField;
-    ZQ_ReciboDetalleFECHA: TDateTimeField;
-    ZQ_ReciboDetalleIMPORTE_VENTA: TFloatField;
-    ZQ_ReciboDetalleDESCRIPCION: TStringField;
-    ZQ_ReciboDetalleIMPORTE_REAL: TFloatField;
+    DS_OrdenPagoDetalle: TDataSource;
+    ZQ_OrdenPagoDetalle: TZQuery;
+    ZQ_OrdenPagoDetalleID_PAGO_FACTURAS: TIntegerField;
+    ZQ_OrdenPagoDetalleID_COMPROBANTE: TIntegerField;
+    ZQ_OrdenPagoDetalleID_FACTURA: TIntegerField;
+    ZQ_OrdenPagoDetalleID_TIPO_COMPROBANTE: TIntegerField;
+    ZQ_OrdenPagoDetalleIMPORTE: TFloatField;
+    ZQ_OrdenPagoDetalleFECHA: TDateTimeField;
+    ZQ_OrdenPagoDetalleIMPORTE_VENTA: TFloatField;
+    ZQ_OrdenPagoDetalleDESCRIPCION: TStringField;
+    ZQ_OrdenPagoDetalleIMPORTE_REAL: TFloatField;
     EKOrdenar_DetalleRecibo: TEKOrdenarGrilla;
     btnAltaRecibo: TdxBarLargeButton;
     PanelDetalleMov: TPanel;
-    DBGridDetalle_Recibo: TDBGrid;
+    DBGridDetalle_OP: TDBGrid;
     DBGridDetalle_Producto: TDBGrid;
     lblTitulo_PanelDetalleMov: TLabel;
     ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField;
-    Popup_ComprobanteDetalle: TPopupMenu;
-    PopUpItem_DevolverProducto: TMenuItem;
     ZP_DevolverProducto: TZStoredProc;
     DBGridDetalle_FPago: TDBGrid;
     ZQ_ComprobanteFPago: TZQuery;
@@ -322,6 +320,10 @@ type
     ZQ_ProveedorFECHA_BAJA: TDateField;
     DS_Proveedor: TDataSource;
     EKBuscarProveedor: TEKBusquedaAvanzada;
+    ZQ_ComprobanteDetalleIMPORTE_UNITARIO: TFloatField;
+    ZQ_ComprobanteDetallePORC_IVA: TFloatField;
+    ZQ_ComprobanteDetalleBASE_IMPONIBLE: TFloatField;
+    ZQ_OrdenPagoDetalleDESC_REC: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -349,8 +351,7 @@ type
     procedure AVerDetalleExecute(Sender: TObject);
     procedure FormActivate(Sender: TObject);
     procedure DBGridDetalle_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure DBGridDetalle_ReciboDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure PopUpItem_DevolverProductoClick(Sender: TObject);
+    procedure DBGridDetalle_OPDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure verDetalle;
     procedure DBGridDetalle_FPagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
   Private
@@ -368,7 +369,8 @@ const
 
 implementation
 
-uses UPrincipal, UDM, DateUtils, UImpresion_Comprobantes, UABM_CPB_Recibo;
+uses UPrincipal, UDM, DateUtils, UImpresion_Comprobantes,
+  UABM_CPB_OrdenPago;
 
 {$R *.dfm}
 
@@ -832,7 +834,7 @@ begin
 
   ZQ_ComprobanteDetalle.Close;
   ZQ_ComprobanteFPago.Close;
-  ZQ_ReciboDetalle.Close;
+  ZQ_OrdenPagoDetalle.Close;
 
   if ZQ_CtaCte_Proveedor.IsEmpty then
     exit;
@@ -844,8 +846,8 @@ begin
   ZQ_ComprobanteFPago.ParamByName('fecha').AsDateTime:= ZQ_CtaCte_ProveedorFECHA.AsDateTime;
   ZQ_ComprobanteFPago.Open;
 
-  ZQ_ReciboDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ProveedorID_COMPROBANTE.AsInteger;
-  ZQ_ReciboDetalle.Open;
+  ZQ_OrdenPagoDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_CtaCte_ProveedorID_COMPROBANTE.AsInteger;
+  ZQ_OrdenPagoDetalle.Open;
 
   verDetalle;
 end;
@@ -877,19 +879,19 @@ begin
   if viendoDetalleCpb then
   begin
     //si el tipo de comprobante es saldo anterior o nota de credito
-    if (AnsiPos('SALDO ANTERIOR', ZQ_CtaCte_ProveedorTIPO_COMPROBANTE.AsString) <> 0) or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ProveedorTIPO_COMPROBANTE.AsString) <> 0) then
+    if (AnsiPos('SALDO ', ZQ_CtaCte_ProveedorTIPO_COMPROBANTE.AsString) <> 0) or (AnsiPos('NOTA CREDITOS', ZQ_CtaCte_ProveedorTIPO_COMPROBANTE.AsString) <> 0) then
     begin
       PanelDetalleMov.Visible:= false;
     end
     else //sino
       //si el tipo de comprobante es recibo de cta cte
-      if AnsiPos('RECIBO CTA CTE', ZQ_CtaCte_ProveedorTIPO_COMPROBANTE.AsString) <> 0 then
+      if AnsiPos('ORDEN PAGO CTA CTE', ZQ_CtaCte_ProveedorTIPO_COMPROBANTE.AsString) <> 0 then
       begin
         lblTitulo_PanelDetalleMov.Caption:= 'DETALLE ' + ZQ_CtaCte_ProveedorTIPO_COMPROBANTE.AsString;
         PanelDetalleMov.Visible:= true;
         DBGridDetalle_FPago.SendToBack;
         DBGridDetalle_Producto.SendToBack;
-        DBGridDetalle_Recibo.BringToFront;
+        DBGridDetalle_OP.BringToFront;
       end
       else //sino
         //si el tipo de comprobante es Pago factura
@@ -899,7 +901,7 @@ begin
           PanelDetalleMov.Visible:= true;
           DBGridDetalle_FPago.BringToFront;
           DBGridDetalle_Producto.SendToBack;
-          DBGridDetalle_Recibo.SendToBack;
+          DBGridDetalle_OP.SendToBack;
         end
         else //sino
         //si el tipo de comprobante es factura
@@ -909,7 +911,7 @@ begin
             PanelDetalleMov.Visible:= true;
             DBGridDetalle_FPago.SendToBack;
             DBGridDetalle_Producto.BringToFront;
-            DBGridDetalle_Recibo.SendToBack;
+            DBGridDetalle_OP.SendToBack;
           end
   end;
 end;
@@ -917,11 +919,11 @@ end;
 
 procedure TFCuentaCorrienteProveedor.btnAltaReciboClick(Sender: TObject);
 begin
-//  FPrincipal.AABM_CPB_Recibo.Execute;
-//  if not dm.EKModelo.verificar_transaccion('ABM RECIBOS') then
-//    FABM_CPB_Recibo.alta_recibo_cta_cte_desde_afuera(ZQ_ClienteID_PERSONA.AsInteger)
-//  else
-//    ShowMessage('Hay un alta de Recibo en curso, verifique');
+  FPrincipal.AABM_CPB_OrdenPago.Execute;
+  if not dm.EKModelo.verificar_transaccion('ABM ORDEN PAGO') then
+    FABM_CPB_OrdenPago.alta_orden_pago_cta_cte_desde_afuera(ZQ_ProveedorID_EMPRESA.AsInteger)
+  else
+    ShowMessage('Hay un alta de Orden de Pago en curso, verifique');
 end;
 
 
@@ -957,59 +959,9 @@ begin
 end;
 
 
-procedure TFCuentaCorrienteProveedor.DBGridDetalle_ReciboDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure TFCuentaCorrienteProveedor.DBGridDetalle_OPDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  FPrincipal.PintarFilasGrillas(DBGridDetalle_Recibo, Rect, DataCol, Column, State);
-end;
-
-
-procedure TFCuentaCorrienteProveedor.PopUpItem_DevolverProductoClick(Sender: TObject);
-var
-  recno, id_cpb, id_cpb_detalle: integer;
-  importe_devolver: double;
-  mensaje: string;
-begin
-//  if (ZQ_ComprobanteDetalle.IsEmpty) or (ZQ_CtaCte_ProveedorHABER.AsFloat <> 0) then
-//    exit;
-//
-//  id_cpb:= ZQ_ComprobanteDetalleID_COMPROBANTE.AsInteger;
-//  id_cpb_detalle:= ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE.AsInteger;
-//  importe_devolver:= ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat;
-//
-//  if (importe_devolver > ZQ_CtaCte_ClienteSALDO_CPB.AsFloat) then
-//  begin
-//    mensaje:= format('No se puede devolver el Producto Seleccionado porque el' + #13 +
-//      'precio de este es superior al Saldo de la Factura asociada.' + #13 +
-//      '(Precio Producto = %n > Saldo Factura = %n)', [importe_devolver, ZQ_CtaCte_ClienteSALDO_CPB.AsFloat]);
-//    Application.MessageBox(pchar(mensaje), 'Atención', MB_OK + MB_ICONINFORMATION);
-//    exit;
-//  end;
-//
-//  mensaje:= format('¿Desea eliminar el producto %s de la Factura %s?', [ZQ_ComprobanteDetalleDETALLE_PROD.AsString, ZQ_CtaCte_ClienteTIPO_COMPROBANTE.AsString]);
-//
-//  if (application.MessageBox(pchar(mensaje), 'Eliminar Producto', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, []) then
-//    begin
-//      ZP_DevolverProducto.Close;
-//      ZP_DevolverProducto.ParamByName('id_cpb').AsInteger:= id_cpb;
-//      ZP_DevolverProducto.ParamByName('id_cpb_detalle').AsInteger:= id_cpb_detalle;
-//      ZP_DevolverProducto.ParamByName('importe_devolucion').AsFloat:= importe_devolver;
-//      ZP_DevolverProducto.ExecProc;
-//
-//      try
-//        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-//          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
-//      except
-//        begin
-//          Application.MessageBox('No se pudo eliminar el Producto.', 'Atención', MB_OK + MB_ICONINFORMATION);
-//          exit;
-//        end
-//      end;
-//    end;
-//
-//  recNo:= ZQ_CtaCte_Cliente.RecNo;
-//  ZQ_CtaCte_Cliente.Refresh;
-//  ZQ_CtaCte_Cliente.RecNo:= recNo;
+  FPrincipal.PintarFilasGrillas(DBGridDetalle_OP, Rect, DataCol, Column, State);
 end;
 
 

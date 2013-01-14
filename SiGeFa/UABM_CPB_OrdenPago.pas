@@ -316,8 +316,6 @@ type
     btnQuitarFactura: TSpeedButton;
     PanelFacturasDatos: TPanel;
     PanelFacturasInfo: TPanel;
-    Label24: TLabel;
-    editTotalFacturas: TEdit;
     DBGridFacturas: TDBGrid;
     Label19: TLabel;
     CD_Facturas: TClientDataSet;
@@ -360,6 +358,10 @@ type
     btnVerImagen: TdxBarLargeButton;
     DBImagen: TDBImage;
     ZQ_VerCpbIMAGEN: TBlobField;
+    Label31: TLabel;
+    editTotalSaldo: TEdit;
+    Label24: TLabel;
+    editTotalFacturas: TEdit;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -411,6 +413,7 @@ type
     procedure buscarFormaPago();
     procedure buscarCuenta();
     procedure btnVerImagenClick(Sender: TObject);
+    procedure alta_orden_pago_cta_cte_desde_afuera(id_proveedor: integer);
   Private
     id_cuenta_fpago: integer;
     estadoPantalla: string;
@@ -421,6 +424,7 @@ type
     vselFactura: TFBuscarComprobante;
     procedure onSelPersona;
     procedure onSelFactura;
+    procedure onSelTodasFactura;
   Public
     { Public declarations }
   end;
@@ -692,6 +696,7 @@ begin
 
       EKSuma_Factura.RecalcAll;
       editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', 0);
+      editTotalSaldo.Text:= FormatFloat('$ ###,###,###,##0.00', 0);
 
       cargarFacturas;
 
@@ -1004,6 +1009,7 @@ begin
       CD_Facturas.EmptyDataSet;
       EKSuma_Factura.RecalcAll;
       editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', 0);
+      editTotalSaldo.Text:= FormatFloat('$ ###,###,###,##0.00', 0);
       if ZQ_ComprobanteID_TIPO_CPB.AsInteger = CPB_OP_CTA_CTE then //si es un recibo de cuenta corriente
         PanelFacturas.Visible:= true;
     end
@@ -1050,6 +1056,7 @@ begin
     CD_Facturas.EmptyDataSet;
     EKSuma_Factura.RecalcAll;
     editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', 0);
+    editTotalSaldo.Text:= FormatFloat('$ ###,###,###,##0.00', 0);
     PanelFacturas.Visible:= false;
   end
   else
@@ -1445,6 +1452,8 @@ begin
   vselFactura.SeleccionarYSalir:= true;
   vselFactura.configFactura(false, true, ZQ_ComprobanteID_PROVEEDOR.AsInteger);
   vselFactura.OnSeleccionar:= onSelFactura;
+  vselFactura.OnSeleccionarTodos:= onSelTodasFactura;
+  vselFactura.EKBuscarFacturaVenta.VerConsultaOriginal;
   vselFactura.ShowModal;
 end;
 
@@ -1484,9 +1493,52 @@ begin
 end;
 
 
+procedure TFABM_CPB_OrdenPago.onSelTodasFactura;
+begin
+  if (not (vselFactura.ZQ_Factura_Compra.IsEmpty)) then //si se selecciona un factura
+  begin
+    btnAgregarFactura.Down:= true;
+
+    vselFactura.ZQ_Factura_Compra.First;
+    while not vselFactura.ZQ_Factura_Compra.Eof do
+    begin
+      CD_Facturas.Filter:= '_idFactura = ' + vselFactura.ZQ_Factura_CompraID_COMPROBANTE.AsString;
+      CD_Facturas.Filtered:= true;
+      if not CD_Facturas.IsEmpty then
+      begin
+        CD_Facturas.Filtered:= false;
+        vselFactura.ZQ_Factura_Compra.Next;
+      end
+      else
+      begin
+        CD_Facturas.Filtered:= false;
+
+        CD_Facturas.Append;
+        CD_Facturas_idComprobante.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+        CD_Facturas_idFactura.AsInteger:= vselFactura.ZQ_Factura_CompraID_COMPROBANTE.AsInteger;
+        CD_Facturas_idTipoComprobante.AsInteger:= tipoComprobante;
+        CD_Facturas_importeComprobante.AsFloat:= vselFactura.ZQ_Factura_CompraIMPORTE_VENTA.AsFloat;
+        CD_Facturas_saldoComprobante.AsFloat:= vselFactura.ZQ_Factura_CompraIMPORTE_REAL.AsFloat;
+        CD_Facturas_importeCancelar.AsFloat:= vselFactura.ZQ_Factura_CompraIMPORTE_REAL.AsFloat;
+        CD_Facturas_fecha.AsDateTime:= vselFactura.ZQ_Factura_CompraFECHA.AsDateTime;
+        CD_Facturas_descripcion.AsString:= vselFactura.ZQ_Factura_CompraDESCRIPCION.AsString;
+        CD_Facturas.Post;
+
+        vselFactura.ZQ_Factura_Compra.Next;
+      end
+    end;
+
+    if vselFactura.SeleccionarYSalir then
+      vselFactura.Close;
+  end;
+
+  DBGridFacturas.SetFocus;
+end;
+
 procedure TFABM_CPB_OrdenPago.EKSuma_FacturaSumListChanged(Sender: TObject);
 begin
   editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[0].SumValue);
+  editTotalSaldo.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Factura.SumCollection[1].SumValue);
 end;
 
 
@@ -1662,6 +1714,84 @@ begin
   FVerImagen.cargarImagenComprobante(ZQ_VerCpbID_COMPROBANTE.AsInteger);
   FVerImagen.ShowModal;
   FVerImagen.Release;
+end;
+
+
+procedure TFABM_CPB_OrdenPago.alta_orden_pago_cta_cte_desde_afuera(id_proveedor: integer);
+begin
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_NumeroCpb, ZQ_PagosFactura]) then
+  begin
+    tipoComprobante:= CPB_OP_CTA_CTE;
+
+    GrupoEditando.Enabled:= false;
+    PanelTipoCpb.Visible:= false;
+    PanelFacturas.Visible:= false;
+
+    modoEdicion(true);
+    ZQ_Proveedor.Close;
+    ZQ_Cliente.Close;
+
+    ZQ_CpbFormaPago.Close;
+    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= -1;
+    ZQ_CpbFormaPago.Open;
+
+    cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
+    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - NUEVO';
+
+    ZP_CpbID.Active:= false;
+    ZP_CpbID.Active:= true;
+    id_comprobante:= ZP_CpbIDID.AsInteger;
+    ZP_CpbID.Active:= false;
+
+    ZQ_NumeroCpb.Close;
+    ZQ_NumeroCpb.ParamByName('id_tipo').AsInteger:= tipoComprobante;
+    ZQ_NumeroCpb.Open;
+
+    ZQ_Comprobante.Append;
+    ZQ_ComprobanteID_COMPROBANTE.AsInteger:= id_comprobante;
+    ZQ_ComprobanteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
+    ZQ_ComprobanteID_TIPO_CPB.AsInteger:= tipoComprobante;
+    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
+    ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
+    ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
+    ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_ComprobanteFECHA_COBRADA.Clear;
+    ZQ_ComprobanteFECHA_ENVIADA.Clear;
+    ZQ_ComprobanteFECHA_IMPRESA.Clear;
+    ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
+    ZQ_ComprobanteFECHA_ANULADO.Clear;
+
+    EKDBDateEmision.SetFocus;
+
+    if not CD_Facturas.IsEmpty then
+      CD_Facturas.EmptyDataSet;
+
+    ZQ_PagosFactura.Close;
+    ZQ_PagosFactura.ParamByName('id_comprobante').AsInteger:= -1;
+    ZQ_PagosFactura.Open;
+
+    btnBuscarPersona.Enabled:= False;
+    btnBuscarEmpresa.Down:= true;
+
+    PanelEditar_DatosGralProveedor.BringToFront;
+
+    ZQ_Proveedor.Close;
+    ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= id_proveedor;
+    ZQ_Proveedor.Open;
+
+    if ZQ_Comprobante.State = dsBrowse then
+      ZQ_Comprobante.Edit;
+    ZQ_ComprobanteID_PROVEEDOR.AsInteger:= ZQ_ProveedorID_EMPRESA.AsInteger;
+    ZQ_ComprobanteID_CLIENTE.Clear;
+
+    CD_Facturas.EmptyDataSet;
+    EKSuma_Factura.RecalcAll;
+    editTotalFacturas.Text:= FormatFloat('$ ###,###,###,##0.00', 0);
+    editTotalSaldo.Text:= FormatFloat('$ ###,###,###,##0.00', 0);
+    PanelFacturas.Visible:= true;
+
+    EKDBDateEmision.SetFocus;
+  end;
 end;
 
 end.
