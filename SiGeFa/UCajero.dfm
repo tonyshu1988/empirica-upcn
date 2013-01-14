@@ -9704,6 +9704,12 @@ object FCajero: TFCajero
     object ZQ_Optica_OrdenMONTO_ENTREGADO: TFloatField
       FieldName = 'MONTO_ENTREGADO'
     end
+    object ZQ_Optica_OrdenID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_Optica_OrdenSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
   end
   object DS_Optica_Orden: TDataSource
     DataSet = ZQ_Optica_Orden
