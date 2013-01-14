@@ -1131,4 +1131,19 @@ object FPreventa: TFPreventa
     Left = 72
     Top = 48
   end
+  object ATeclasRapidas: TActionManager
+    Left = 292
+    Top = 212
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ASeccionar: TAction
+      Caption = 'ASeccionar'
+      ShortCut = 113
+      OnExecute = ASeccionarExecute
+    end
+  end
 end

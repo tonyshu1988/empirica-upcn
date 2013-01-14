@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, EKBusquedaAvanzada, dxBar, dxBarExtItems,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, StdCtrls;
+  EKOrdenarGrilla, StdCtrls, ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFPreventa = class(TForm)
@@ -59,6 +59,9 @@ type
     Label29: TLabel;
     ZQ_ComprobanteVENCIDA: TStringField;
     ZQ_ComprobanteSENIA_: TFloatField;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ASeccionar: TAction;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -67,6 +70,8 @@ type
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridDblClick(Sender: TObject);
+    procedure ABuscarExecute(Sender: TObject);
+    procedure ASeccionarExecute(Sender: TObject);
 
   Private
     { Private declarations }
@@ -137,6 +142,16 @@ end;
 procedure TFPreventa.DBGridDblClick(Sender: TObject);
 begin
   btnSeleccionar.Click;
+end;
+
+procedure TFPreventa.ABuscarExecute(Sender: TObject);
+begin
+btnBuscar.Click;
+end;
+
+procedure TFPreventa.ASeccionarExecute(Sender: TObject);
+begin
+btnSeleccionar.Click;
 end;
 
 end.

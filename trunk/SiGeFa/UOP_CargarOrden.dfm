@@ -1,6 +1,6 @@
 object FOP_CargarOrden: TFOP_CargarOrden
-  Left = 328
-  Top = 194
+  Left = 259
+  Top = 162
   Width = 870
   Height = 581
   Caption = 'Cargar Orden'
@@ -11,6 +11,7 @@ object FOP_CargarOrden: TFOP_CargarOrden
   Font.Name = 'Verdana'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   PixelsPerInch = 96
   TextHeight = 13
   object PContenedor: TPanel
@@ -20,31 +21,11 @@ object FOP_CargarOrden: TFOP_CargarOrden
     Height = 502
     Align = alClient
     TabOrder = 0
-    object Label29: TLabel
-      Left = 1
-      Top = 484
-      Width = 860
-      Height = 17
-      Align = alBottom
-      Alignment = taRightJustify
-      AutoSize = False
-      Caption = 'Comprobantes Vencidos  '
-      Color = clRed
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Transparent = False
-      Layout = tlCenter
-    end
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
       Width = 860
-      Height = 483
+      Height = 500
       Align = alClient
       Color = 15527129
       DataSource = DS_Optica_Orden
@@ -71,9 +52,16 @@ object FOP_CargarOrden: TFOP_CargarOrden
         end
         item
           Expanded = False
+          FieldName = 'NRO_FACTURA'
+          Title.Caption = 'Nro. Factura'
+          Width = 74
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'CODIGO_CLI'
           Title.Caption = 'Cod. Cliente'
-          Width = 83
+          Width = 75
           Visible = True
         end
         item
@@ -94,7 +82,7 @@ object FOP_CargarOrden: TFOP_CargarOrden
           Expanded = False
           FieldName = 'FECHA_ORDEN'
           Title.Caption = 'Fecha Orden'
-          Width = 101
+          Width = 99
           Visible = True
         end
         item
@@ -107,20 +95,14 @@ object FOP_CargarOrden: TFOP_CargarOrden
           Expanded = False
           FieldName = 'COD_BARRAS'
           Title.Caption = 'cod. Barras'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'NRO_FACTURA'
-          Title.Caption = 'Nro. Factura'
-          Width = 95
+          Width = 71
           Visible = True
         end
         item
           Expanded = False
           FieldName = 'MONTO_TOTAL'
           Title.Caption = 'Monto total'
+          Width = 100
           Visible = True
         end
         item
@@ -133,6 +115,7 @@ object FOP_CargarOrden: TFOP_CargarOrden
           Expanded = False
           FieldName = 'SALDO'
           Title.Caption = 'Saldo'
+          Width = 100
           Visible = True
         end
         item
@@ -912,6 +895,10 @@ object FOP_CargarOrden: TFOP_CargarOrden
       FieldName = 'ESTADO'
       Size = 100
     end
+    object ZQ_Optica_OrdenAVISAR: TStringField
+      FieldName = 'AVISAR'
+      Size = 1
+    end
   end
   object DS_Optica_Orden: TDataSource
     DataSet = ZQ_Optica_Orden
@@ -921,11 +908,81 @@ object FOP_CargarOrden: TFOP_CargarOrden
   object EKBusquedaAvanzadaOrden: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'Nro Factura'
+        Campo = 'nro_factura'
+        Tabla = 'o'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
         Titulo = 'C'#243'digo Cliente'
         Campo = 'codigo_cli'
         Tabla = 'o'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Cliente'
+        Campo = 'cliente'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Fecha Orden'
+        Campo = 'fecha_orden'
+        Tabla = 'o'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Fecha Prometido'
+        Campo = 'fecha_prometido'
+        Tabla = 'o'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'C'#243'digo de Barras'
+        Campo = 'cod_barras'
+        Tabla = 'o'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Avisar'
+        Campo = 'avisar'
+        Tabla = 'o'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'Si'
+          'No')
+        TipoComboValoresReales.Strings = (
+          'S'
+          'N')
         TipoComboAncho = 200
         ItemIndex = -1
         VaciarValorDespues = False
@@ -956,7 +1013,23 @@ object FOP_CargarOrden: TFOP_CargarOrden
     SQL_Where.Strings = (
       'where o.saldo > 0')
     UsarWhereOriginal = EK_Con_Where
+    PantallaReducida = True
     Left = 112
     Top = 216
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 292
+    Top = 212
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ASeccionar: TAction
+      Caption = 'ASeccionar'
+      ShortCut = 113
+      OnExecute = ASeccionarExecute
+    end
   end
 end
