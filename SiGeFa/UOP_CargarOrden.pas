@@ -5,12 +5,12 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, StdCtrls, ExtCtrls, DB,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada;
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
+  ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFOP_CargarOrden = class(TForm)
     PContenedor: TPanel;
-    Label29: TLabel;
     DBGrid: TDBGrid;
     dxBarABM: TdxBarManager;
     btnBuscar: TdxBarLargeButton;
@@ -39,9 +39,15 @@ type
     ZQ_Optica_OrdenFACTURADO: TStringField;
     ZQ_Optica_OrdenESTADO: TStringField;
     EKBusquedaAvanzadaOrden: TEKBusquedaAvanzada;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ASeccionar: TAction;
+    ZQ_Optica_OrdenAVISAR: TStringField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
+    procedure ABuscarExecute(Sender: TObject);
+    procedure ASeccionarExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -77,6 +83,16 @@ end;
 procedure TFOP_CargarOrden.btnSalirClick(Sender: TObject);
 begin
 close;
+end;
+
+procedure TFOP_CargarOrden.ABuscarExecute(Sender: TObject);
+begin
+btnBuscar.Click;
+end;
+
+procedure TFOP_CargarOrden.ASeccionarExecute(Sender: TObject);
+begin
+btnSeleccionar.Click;
 end;
 
 end.
