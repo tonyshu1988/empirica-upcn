@@ -3234,7 +3234,7 @@ begin
           CD_FpagoFECHA_FP.AsDateTime := ZQ_OpticaEntregaFECHA_FP.AsDateTime;  
           CD_FpagoMDCP_BANCO.AsString:= ZQ_OpticaEntregaMDCP_BANCO.AsString;
           CD_FpagoMDCP_CHEQUE.AsString:= ZQ_OpticaEntregaMDCP_CHEQUE.AsString;
-          CD_FpagoIMPORTE.AsFloat:=ZQ_OpticaEntregaIMPORTE.AsFloat;
+          CD_FpagoIMPORTE.AsFloat:=ZQ_OpticaEntregaIMPORTE.AsFloat; 
 
           calcularFP();
           CD_Fpago.Post;
