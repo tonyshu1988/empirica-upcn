@@ -640,6 +640,7 @@ type
     ZQ_Optica_OrdenSALDO: TFloatField;
     ZQ_OrdenProductosMONTO_RECONOCIDO: TFloatField;
     ZQ_OrdenProductosMONTO_FINAL: TFloatField;
+    CD_FpagoFECHA_FP: TDateTimeField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -2145,12 +2146,17 @@ begin
     ZQ_Comprobante_FormaPago.Append;
     ZQ_Comprobante_FormaPagoID_COMPROBANTE.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
 
-    if CD_Fpago_esSenia.AsString = 'S' then
-      //si es una seña cambio la fecha de pago a la fecha de la seña por las estadisticas
-      ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime:= ZQ_PreventaFPFECHA_FP.AsDateTime
-    else
-      //si no es una seña la fecha de pago es la misma del comprobante
-      ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
+//    if CD_Fpago_esSenia.AsString = 'S' then
+//      //si es una seña cambio la fecha de pago a la fecha de la seña por las estadisticas
+//      ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime:= ZQ_PreventaFPFECHA_FP.AsDateTime
+//    else
+//      //si no es una seña la fecha de pago es la misma del comprobante
+//      ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
+
+    if CD_FpagoFECHA_FP.IsNull then
+      ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime := ZQ_ComprobanteFECHA.AsDateTime
+     else
+      ZQ_Comprobante_FormaPagoFECHA_FP.AsDateTime := CD_FpagoFECHA_FP.AsDateTime;
 
     ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger:= CD_FpagoID_TIPO_FORMAPAG.AsInteger;
     if CD_FpagoMDCP_FECHA.IsNull then
@@ -2452,6 +2458,8 @@ begin
           CD_FpagoMDCP_FECHA.clear
         else
           CD_FpagoMDCP_FECHA.AsDateTime:= ZQ_PreventaFPMDCP_FECHA.AsDateTime;
+
+        CD_FpagoFECHA_FP.AsDateTime := ZQ_PreventaFPFECHA_FP.AsDateTime;
         CD_FpagoMDCP_BANCO.AsString:= ZQ_PreventaFPMDCP_BANCO.AsString;
         CD_FpagoMDCP_CHEQUE.AsString:= ZQ_PreventaFPMDCP_CHEQUE.AsString;
         CD_FpagoIMPORTE.AsFloat:= ZQ_PreventaFPIMPORTE.AsFloat;
@@ -3223,6 +3231,7 @@ begin
           else
             CD_FpagoMDCP_FECHA.AsDateTime:= ZQ_OpticaEntregaMDCP_FECHA.AsDateTime;
 
+          CD_FpagoFECHA_FP.AsDateTime := ZQ_OpticaEntregaFECHA_FP.AsDateTime;  
           CD_FpagoMDCP_BANCO.AsString:= ZQ_OpticaEntregaMDCP_BANCO.AsString;
           CD_FpagoMDCP_CHEQUE.AsString:= ZQ_OpticaEntregaMDCP_CHEQUE.AsString;
           CD_FpagoIMPORTE.AsFloat:=ZQ_OpticaEntregaIMPORTE.AsFloat;

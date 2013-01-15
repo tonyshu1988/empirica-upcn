@@ -5272,6 +5272,9 @@ object FCajero: TFCajero
       FieldName = '_esSenia'
       Size = 1
     end
+    object CD_FpagoFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
   end
   object DSFpago: TDataSource
     DataSet = CD_Fpago
