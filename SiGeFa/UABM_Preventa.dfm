@@ -1,6 +1,6 @@
 object FABM_Preventa: TFABM_Preventa
-  Left = 315
-  Top = 139
+  Left = 147
+  Top = 154
   Width = 1027
   Height = 664
   Caption = 'Venta de Mostrador'
@@ -3082,9 +3082,9 @@ object FABM_Preventa: TFABM_Preventa
     end
   end
   object PanelContenedorDerecha: TPanel
-    Left = 88
+    Left = 95
     Top = 0
-    Width = 931
+    Width = 924
     Height = 585
     Align = alClient
     Caption = 'PanelContenedorDerecha'
@@ -3092,7 +3092,7 @@ object FABM_Preventa: TFABM_Preventa
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 929
+      Width = 922
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -3116,7 +3116,7 @@ object FABM_Preventa: TFABM_Preventa
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 550
+        Left = 543
         Top = 1
         Width = 378
         Height = 28
@@ -3139,7 +3139,7 @@ object FABM_Preventa: TFABM_Preventa
       Tag = 99
       Left = 1
       Top = 209
-      Width = 929
+      Width = 922
       Height = 41
       Align = alTop
       Color = 12648448
@@ -3250,7 +3250,7 @@ object FABM_Preventa: TFABM_Preventa
         Tag = 99
         Left = 1
         Top = 16
-        Width = 927
+        Width = 920
         Height = 24
         Align = alBottom
         BevelOuter = bvNone
@@ -3457,7 +3457,7 @@ object FABM_Preventa: TFABM_Preventa
     object Panel1: TPanel
       Left = 1
       Top = 250
-      Width = 929
+      Width = 922
       Height = 334
       Align = alClient
       Caption = 'Panel1'
@@ -3465,7 +3465,7 @@ object FABM_Preventa: TFABM_Preventa
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 1
-        Width = 927
+        Width = 920
         Height = 332
         Align = alClient
         Caption = 'PanelListadoProducto'
@@ -3480,7 +3480,7 @@ object FABM_Preventa: TFABM_Preventa
         object Label11: TLabel
           Left = 1
           Top = 1
-          Width = 925
+          Width = 918
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -3499,7 +3499,7 @@ object FABM_Preventa: TFABM_Preventa
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 15
-          Width = 925
+          Width = 918
           Height = 234
           Align = alClient
           Color = 15527129
@@ -3575,7 +3575,7 @@ object FABM_Preventa: TFABM_Preventa
         object PieGrilla: TPanel
           Left = 1
           Top = 249
-          Width = 925
+          Width = 918
           Height = 82
           Align = alBottom
           BevelOuter = bvLowered
@@ -3583,7 +3583,7 @@ object FABM_Preventa: TFABM_Preventa
           object lblCantProductos: TLabel
             Left = 1
             Top = 1
-            Width = 923
+            Width = 916
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3599,7 +3599,7 @@ object FABM_Preventa: TFABM_Preventa
           object lblTotAPagar: TLabel
             Left = 1
             Top = 38
-            Width = 923
+            Width = 916
             Height = 43
             Align = alBottom
             Alignment = taRightJustify
@@ -3619,7 +3619,7 @@ object FABM_Preventa: TFABM_Preventa
           object lblMaxVenta: TLabel
             Left = 1
             Top = 16
-            Width = 923
+            Width = 916
             Height = 20
             Align = alTop
             Alignment = taCenter
@@ -3649,7 +3649,7 @@ object FABM_Preventa: TFABM_Preventa
     object Panel3: TPanel
       Left = 1
       Top = 118
-      Width = 929
+      Width = 922
       Height = 91
       Align = alTop
       BevelOuter = bvNone
@@ -3741,7 +3741,7 @@ object FABM_Preventa: TFABM_Preventa
       object Label7: TLabel
         Left = 0
         Top = 0
-        Width = 929
+        Width = 922
         Height = 14
         Align = alTop
         Alignment = taCenter
@@ -3870,7 +3870,7 @@ object FABM_Preventa: TFABM_Preventa
     object PanelCabeceraFactura: TPanel
       Left = 1
       Top = 31
-      Width = 929
+      Width = 922
       Height = 87
       Align = alTop
       BevelOuter = bvLowered
@@ -3884,7 +3884,7 @@ object FABM_Preventa: TFABM_Preventa
       object Label12: TLabel
         Left = 1
         Top = 1
-        Width = 927
+        Width = 920
         Height = 14
         Align = alTop
         Alignment = taCenter
@@ -4390,7 +4390,6 @@ object FABM_Preventa: TFABM_Preventa
             Visible = True
           end
           item
-            BeginGroup = True
             Item = btsalir
             Visible = True
           end>
@@ -6429,14 +6428,14 @@ object FABM_Preventa: TFABM_Preventa
     Left = 152
     Top = 376
     DockControlHeights = (
-      88
+      95
       0
       0
       52)
     object btBuscProd: TdxBarLargeButton
-      Caption = 'F1 Productos'
+      Caption = 'F1 - Producto'
       Category = 0
-      Hint = 'F1 Productos'
+      Hint = 'Buscar un producto rapidamente'
       Visible = ivAlways
       ImageIndex = 7
       ShortCut = 112
@@ -6444,9 +6443,9 @@ object FABM_Preventa: TFABM_Preventa
       AutoGrayScale = False
     end
     object BtBuscarProducto: TdxBarLargeButton
-      Caption = 'F2 B'#250'squeda'
+      Caption = 'F2 - B'#250'squeda'
       Category = 0
-      Hint = 'F2 B'#250'squeda'
+      Hint = 'Buscar un producto detalladamente'
       Visible = ivAlways
       ImageIndex = 29
       ShortCut = 113
@@ -6454,27 +6453,27 @@ object FABM_Preventa: TFABM_Preventa
       AutoGrayScale = False
     end
     object bt_BuscarCliente: TdxBarLargeButton
-      Caption = 'F3 Clientes'
+      Caption = 'F3 - Cliente'
       Category = 0
-      Hint = 'F3 Clientes'
+      Hint = 'Seleccionar el cliente'
       Visible = ivAlways
       ImageIndex = 56
       OnClick = bt_BuscarClienteClick
       AutoGrayScale = False
     end
     object btIVA: TdxBarLargeButton
-      Caption = 'F4 Tipo IVA'
+      Caption = 'F4 - Tipo IVA'
       Category = 0
-      Hint = 'F4 Tipo IVA'
+      Hint = 'Seleccionar el Tipo IVA'
       Visible = ivAlways
       ImageIndex = 17
       OnClick = btIVAClick
       AutoGrayScale = False
     end
     object BtVendedor: TdxBarLargeButton
-      Caption = 'F5 Vendedor'
+      Caption = 'F5 - Vendedor'
       Category = 0
-      Hint = 'F5 Vendedor'
+      Hint = 'Selccionar el Vendedor'
       Visible = ivAlways
       ImageIndex = 3
       ShortCut = 116
@@ -6482,26 +6481,27 @@ object FABM_Preventa: TFABM_Preventa
       AutoGrayScale = False
     end
     object BtAgregarPago: TdxBarLargeButton
-      Caption = 'F6 Leer C'#243'digo Producto'
+      Caption = 'F6 - Leer C'#243'digo'
       Category = 0
-      Hint = 'F6 Leer C'#243'digo Producto'
+      Hint = 'Leer el Codigo de Barras del Producto'
       Visible = ivAlways
       ImageIndex = 85
       OnClick = BtAgregarPagoClick
       AutoGrayScale = False
     end
     object BtAceptarPago: TdxBarLargeButton
-      Caption = 'F10 Guardar Pre-Venta'
+      Caption = 'F11 - Guardar'
       Category = 0
-      Hint = 'F10 Guardar Pre-Venta'
+      Hint = 'Guardar la Preventa'
       Visible = ivAlways
       ImageIndex = 5
       OnClick = BtAceptarPagoClick
       AutoGrayScale = False
     end
     object BtCancelarPago: TdxBarLargeButton
-      Caption = 'F11 Cancelar'
+      Caption = 'F12 - Cancelar'
       Category = 0
+      Hint = 'Cancelar la Preventa'
       Visible = ivAlways
       ImageIndex = 9
       OnClick = BtCancelarPagoClick
@@ -6509,9 +6509,9 @@ object FABM_Preventa: TFABM_Preventa
     end
     object btsalir: TdxBarLargeButton
       Align = iaRight
-      Caption = 'F12 Salir'
+      Caption = 'Salir'
       Category = 0
-      Hint = 'F12 Salir'
+      Hint = 'Salir'
       Visible = ivAlways
       ImageIndex = 6
       OnClick = btsalirClick
@@ -6577,18 +6577,13 @@ object FABM_Preventa: TFABM_Preventa
     end
     object AGuardar: TAction
       Caption = 'AAceptar'
-      ShortCut = 121
+      ShortCut = 122
       OnExecute = AGuardarExecute
     end
     object ACancelar: TAction
       Caption = 'ACancelar'
-      ShortCut = 122
-      OnExecute = ACancelarExecute
-    end
-    object ASalir: TAction
-      Caption = 'ASalir'
       ShortCut = 123
-      OnExecute = ASalirExecute
+      OnExecute = ACancelarExecute
     end
     object ACargarSenia: TAction
       Caption = 'ACargarSenia'

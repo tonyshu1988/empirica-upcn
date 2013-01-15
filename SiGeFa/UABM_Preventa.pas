@@ -51,7 +51,6 @@ type
     ANuevo: TAction;
     ATipoIVA: TAction;
     ACliente: TAction;
-    ASalir: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
     AVendedor: TAction;
@@ -453,7 +452,6 @@ type
     procedure ANuevoProdCBarraExecute(Sender: TObject);
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
-    procedure ASalirExecute(Sender: TObject);
     procedure ACargarSeniaExecute(Sender: TObject);
   Private
     { Private declarations }
@@ -1678,13 +1676,6 @@ procedure TFABM_Preventa.ACancelarExecute(Sender: TObject);
 begin
   if BtCancelarPago.Enabled then
     BtCancelarPago.Click;
-end;
-
-
-procedure TFABM_Preventa.ASalirExecute(Sender: TObject);
-begin
-  if btsalir.Enabled then
-    btsalir.Click;
 end;
 
 
