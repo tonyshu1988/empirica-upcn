@@ -3104,6 +3104,13 @@ end;
 
 procedure TFCajero.bt_Cargar_OrdenClick(Sender: TObject);
 begin
+  if IdVendedor < 0 then
+  begin
+    //Application.MessageBox('Debe seleccionar el Vendedor.', 'Atención');
+    btVendedorClick(self);
+    exit;
+  end;
+
   if not (CD_DetalleFactura.IsEmpty) then
   begin
     Application.MessageBox('Debe cargar la Venta en un Comprobante vacio.' +
