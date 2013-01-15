@@ -3010,7 +3010,8 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
       Enabled = False
       Items = (
         'btnGuardar'
-        'btnCancelar')
+        'btnCancelar'
+        'btStock_max')
     end
   end
   object ATeclasRapidas: TActionManager
