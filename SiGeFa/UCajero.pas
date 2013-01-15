@@ -1324,11 +1324,11 @@ begin
 //  if PConfirmarVenta.Visible then
 //    exit;
 
-//  if modoCargaPrevia then
-//  begin
-//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-//    exit;
-//  end;
+  if modoCargaPrevia or modoCargaOrden then
+  begin
+    Application.MessageBox('No puede modificar una venta/Orden ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   if (CD_DetalleFactura.State <> dsBrowse) then
     exit;
@@ -1523,11 +1523,11 @@ end;
 
 procedure TFCajero.EditarProdClick(Sender: TObject);
 begin
-//  if modoCargaPrevia then
-//  begin
-//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-//    exit;
-//  end;
+  if modoCargaPrevia or modoCargaOrden then
+  begin
+    Application.MessageBox('No puede modificar una venta/Orden ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   if not (CD_DetalleFactura.IsEmpty) then
   begin
@@ -1545,11 +1545,11 @@ end;
 
 procedure TFCajero.BtBuscarProductoClick(Sender: TObject);
 begin
-//  if modoCargaPrevia then
-//  begin
-//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-//    exit;
-//  end;
+  if modoCargaPrevia or modoCargaOrden then
+  begin
+    Application.MessageBox('No puede modificar una venta/Orden ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   if (CD_DetalleFactura.State <> dsBrowse) then
     exit;
@@ -1597,11 +1597,11 @@ end;
 
 procedure TFCajero.btIVAClick(Sender: TObject);
 begin
-//  if modoCargaPrevia then
-//  begin
-//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-//    exit;
-//  end;
+  if modoCargaPrevia or modoCargaOrden then
+  begin
+    Application.MessageBox('No puede modificar una venta/Orden ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   if (CD_DetalleFactura.State = dsBrowse) then
     if (CD_Comprobante.State = dsInsert) then
@@ -2039,11 +2039,11 @@ end;
 
 procedure TFCajero.btQuitarProductoClick(Sender: TObject);
 begin
-//  if modoCargaPrevia then
-//  begin
-//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-//    exit;
-//  end;
+  if modoCargaPrevia or modoCargaOrden then
+  begin
+    Application.MessageBox('No puede modificar una venta/Orden ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   if not (CD_DetalleFactura.IsEmpty) then
   begin
@@ -2330,11 +2330,11 @@ end;
 
 procedure TFCajero.btBuscProdClick(Sender: TObject);
 begin
-//  if modoCargaPrevia then
-//  begin
-//    Application.MessageBox('No puede modificar una venta ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
-//    exit;
-//  end;
+  if modoCargaPrevia or modoCargaOrden then
+  begin
+    Application.MessageBox('No puede modificar una venta/Orden ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   if (CD_DetalleFactura.State <> dsBrowse) then exit;
   if cliente < 0 then
@@ -2760,7 +2760,7 @@ end;
 
 procedure TFCajero.menuEditarFPClick(Sender: TObject);
 begin
-  if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible then
+  if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible or (CD_Fpago_esSenia.AsString = 'S') then
     exit;
 
   if (CD_Comprobante.State in [dsInsert, dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
