@@ -765,7 +765,11 @@ function TEKModeloTransaccion.FechayHora: TdateTime;
 begin
   sql := TZQuery.Create(self);
   sql.Connection := Fconeccion;
-  sql.SQL.Text := 'Select current_timestamp as fechayhora from RDB$DATABASE';
+  if Fconeccion.Protocol = 'firebird-1.5' then
+    sql.SQL.Text := 'Select current_timestamp as fechayhora from RDB$DATABASE'
+  else
+    if Fconeccion.Protocol = 'postgresql' then
+      sql.SQL.Text := 'Select current_timestamp as fechayhora';
   sql.Active := true;
   result := sql.fieldbyname('fechayhora').AsDateTime;
   sql.Close;
