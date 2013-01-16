@@ -18,205 +18,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object PCargaProd: TPanel
-    Left = 299
-    Top = 240
-    Width = 551
-    Height = 183
-    BevelInner = bvLowered
-    TabOrder = 2
-    object Label62: TLabel
-      Left = 2
-      Top = 2
-      Width = 547
-      Height = 16
-      Align = alTop
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Carga de Producto/Servicio'
-      Color = 12648448
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Layout = tlCenter
-    end
-    object Label63: TLabel
-      Left = 11
-      Top = 56
-      Width = 88
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Precio Unitario:'
-    end
-    object Label64: TLabel
-      Left = 11
-      Top = 28
-      Width = 71
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Descripci'#243'n:'
-    end
-    object Label65: TLabel
-      Left = 208
-      Top = 56
-      Width = 56
-      Height = 13
-      Caption = 'Cantidad:'
-    end
-    object DBText1: TDBText
-      Left = 104
-      Top = 56
-      Width = 89
-      Height = 13
-      DataField = 'prod_pventa'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Transparent = True
-    end
-    object Label26: TLabel
-      Left = 344
-      Top = 56
-      Width = 71
-      Height = 13
-      Caption = 'Monto Total:'
-    end
-    object Label42: TLabel
-      Left = 11
-      Top = 107
-      Width = 84
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Observaciones'
-    end
-    object Label44: TLabel
-      Left = 11
-      Top = 82
-      Width = 70
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Laboratorio:'
-    end
-    object btnAceptarProd: TButton
-      Left = 462
-      Top = 124
-      Width = 75
-      Height = 19
-      Caption = 'Aceptar'
-      TabOrder = 0
-      OnClick = btnAceptarProdClick
-    end
-    object btnCancProd: TButton
-      Left = 462
-      Top = 154
-      Width = 75
-      Height = 19
-      Cancel = True
-      Caption = 'Cancelar'
-      TabOrder = 1
-      OnClick = btnCancProdClick
-    end
-    object DBEdit4: TDBEdit
-      Left = 88
-      Top = 24
-      Width = 449
-      Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'prod_detalle'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ReadOnly = True
-      TabOrder = 2
-    end
-    object edCant: TDBEdit
-      Left = 268
-      Top = 52
-      Width = 61
-      Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'CANTIDAD'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 3
-    end
-    object edMontoTotal: TDBEdit
-      Left = 420
-      Top = 52
-      Width = 117
-      Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'MONTO_TOTAL'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 4
-    end
-    object edObsProd: TDBMemo
-      Left = 11
-      Top = 124
-      Width = 438
-      Height = 49
-      Color = 15527129
-      DataField = 'OBSERVACIONES'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ScrollBars = ssVertical
-      TabOrder = 5
-    end
-    object edLabProd: TDBLookupComboBox
-      Left = 88
-      Top = 80
-      Width = 450
-      Height = 21
-      Color = 15527129
-      DataField = 'ID_LABORATORIO'
-      DataSource = DS_OrdenDetalle
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      KeyField = 'ID_LABORATORIO'
-      ListField = 'NOMBRE'
-      ListSource = DS_Laboratorios
-      NullValueKey = 46
-      ParentFont = False
-      TabOrder = 6
-    end
-  end
   object PCargaOS: TPanel
     Left = 283
     Top = 285
@@ -4904,6 +4705,205 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
     end
   end
+  object PCargaProd: TPanel
+    Left = 307
+    Top = 248
+    Width = 551
+    Height = 183
+    BevelInner = bvLowered
+    TabOrder = 2
+    object Label62: TLabel
+      Left = 2
+      Top = 2
+      Width = 547
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Carga de Producto/Servicio'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label63: TLabel
+      Left = 11
+      Top = 56
+      Width = 88
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Precio Unitario:'
+    end
+    object Label64: TLabel
+      Left = 11
+      Top = 28
+      Width = 71
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Descripci'#243'n:'
+    end
+    object Label65: TLabel
+      Left = 208
+      Top = 56
+      Width = 56
+      Height = 13
+      Caption = 'Cantidad:'
+    end
+    object DBText1: TDBText
+      Left = 421
+      Top = 56
+      Width = 113
+      Height = 13
+      DataField = 'IMPORTE_TOTAL'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+    end
+    object Label26: TLabel
+      Left = 344
+      Top = 56
+      Width = 71
+      Height = 13
+      Caption = 'Monto Total:'
+    end
+    object Label42: TLabel
+      Left = 11
+      Top = 107
+      Width = 84
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Observaciones'
+    end
+    object Label44: TLabel
+      Left = 11
+      Top = 82
+      Width = 70
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Laboratorio:'
+    end
+    object btnAceptarProd: TButton
+      Left = 462
+      Top = 124
+      Width = 75
+      Height = 19
+      Caption = 'Aceptar'
+      TabOrder = 0
+      OnClick = btnAceptarProdClick
+    end
+    object btnCancProd: TButton
+      Left = 462
+      Top = 154
+      Width = 75
+      Height = 19
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 1
+      OnClick = btnCancProdClick
+    end
+    object DBEdit4: TDBEdit
+      Left = 88
+      Top = 24
+      Width = 449
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'prod_detalle'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 2
+    end
+    object edCant: TDBEdit
+      Left = 268
+      Top = 52
+      Width = 61
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'CANTIDAD'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+    end
+    object edImporteUnitario: TDBEdit
+      Left = 105
+      Top = 52
+      Width = 87
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'IMPORTE_UNITARIO'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+    end
+    object edObsProd: TDBMemo
+      Left = 11
+      Top = 124
+      Width = 438
+      Height = 49
+      Color = 15527129
+      DataField = 'OBSERVACIONES'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ScrollBars = ssVertical
+      TabOrder = 5
+    end
+    object edLabProd: TDBLookupComboBox
+      Left = 88
+      Top = 80
+      Width = 450
+      Height = 21
+      Color = 15527129
+      DataField = 'ID_LABORATORIO'
+      DataSource = DS_OrdenDetalle
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      KeyField = 'ID_LABORATORIO'
+      ListField = 'NOMBRE'
+      ListSource = DS_Laboratorios
+      NullValueKey = 46
+      ParentFont = False
+      TabOrder = 6
+    end
+  end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
@@ -7695,10 +7695,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object ZQ_OrdenDetalleID_LABORATORIO: TIntegerField
       FieldName = 'ID_LABORATORIO'
     end
-    object ZQ_OrdenDetalleMONTO_TOTAL: TFloatField
-      FieldName = 'MONTO_TOTAL'
-      currency = True
-    end
     object ZQ_OrdenDetalleCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
       OnChange = ZQ_OrdenDetalleCANTIDADChange
@@ -7736,11 +7732,17 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Size = 100
       Lookup = True
     end
-    object ZQ_OrdenDetalleMONTO_RECONOCIDO: TFloatField
-      FieldName = 'MONTO_RECONOCIDO'
+    object ZQ_OrdenDetalleIMPORTE_RECONOCIDO: TFloatField
+      FieldName = 'IMPORTE_RECONOCIDO'
     end
-    object ZQ_OrdenDetalleMONTO_FINAL: TFloatField
-      FieldName = 'MONTO_FINAL'
+    object ZQ_OrdenDetalleIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+    end
+    object ZQ_OrdenDetalleIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_OrdenDetalleIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
     end
   end
   object ZQ_OrdenDetalleOS: TZQuery
@@ -8146,6 +8148,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_Laboratorios: TZQuery
     Connection = DM.Conexion
+    Active = True
     SQL.Strings = (
       
         'select LAB.*,coalesce('#39'C'#243'd: '#39'||LAB.codigo||'#39' - '#39'||LAB.nombre||'#39' ' +
@@ -8190,7 +8193,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DS_Laboratorios: TDataSource
     DataSet = ZQ_Laboratorios
-    Left = 837
+    Left = 885
     Top = 292
   end
   object ZQ_Medico: TZQuery
@@ -8289,6 +8292,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_DetalleProd: TZQuery
     Connection = DM.Conexion
+    Active = True
     SQL.Strings = (
       
         'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
@@ -8513,7 +8517,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     SumCollection = <
       item
         Operacion = goSum
-        NombreCampo = 'monto_total'
+        NombreCampo = 'IMPORTE_total'
       end
       item
         Operacion = goCount
