@@ -139,7 +139,6 @@ type
     ZQ_OrdenDetalleID_ORDEN: TIntegerField;
     ZQ_OrdenDetalleID_PRODUCTO: TIntegerField;
     ZQ_OrdenDetalleID_LABORATORIO: TIntegerField;
-    ZQ_OrdenDetalleMONTO_TOTAL: TFloatField;
     ZQ_OrdenDetalleCANTIDAD: TFloatField;
     ZQ_OrdenDetalleOBSERVACIONES: TStringField;
     DS_OrdenDetalleOS: TDataSource;
@@ -308,7 +307,7 @@ type
     DBText1: TDBText;
     edCant: TDBEdit;
     Label26: TLabel;
-    edMontoTotal: TDBEdit;
+    edImporteUnitario: TDBEdit;
     PCargaOS: TPanel;
     Label39: TLabel;
     Label41: TLabel;
@@ -479,10 +478,12 @@ type
     EKDbSumaEntregas: TEKDbSuma;
     ZQ_OrdenMONTO_RECONOCIDO: TFloatField;
     ZQ_OrdenID_COMPROBANTE: TIntegerField;
-    ZQ_OrdenDetalleMONTO_RECONOCIDO: TFloatField;
-    ZQ_OrdenDetalleMONTO_FINAL: TFloatField;
     ZQ_OrdenID_SUCURSAL: TIntegerField;
     Splitter2: TSplitter;
+    ZQ_OrdenDetalleIMPORTE_RECONOCIDO: TFloatField;
+    ZQ_OrdenDetalleIMPORTE_UNITARIO: TFloatField;
+    ZQ_OrdenDetalleIMPORTE_VENTA: TFloatField;
+    ZQ_OrdenDetalleIMPORTE_TOTAL: TFloatField;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -662,8 +663,6 @@ begin
   acumPrecio5:= 0;
   IdProd:= '';
 
-
-
 //  EKDbSuma1.SumCollection[0].SumValue:= 0;
 //  EKDbSuma1.SumCollection[1].SumValue:= 0;
 //  EKDbSuma1.SumCollection[2].SumValue:= 0;
@@ -818,9 +817,10 @@ begin
   if (ZQ_OrdenDetalle.State <> dsBrowse) then
   begin
     ZQ_OrdenDetalleCANTIDAD.AsFloat:= 1;
-    ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:= 0;
-    ZQ_OrdenDetalleMONTO_FINAL.AsFloat:= 0;
-    ZQ_OrdenDetalleMONTO_RECONOCIDO.AsFloat:= 0;
+    ZQ_OrdenDetalleIMPORTE_UNITARIO.AsFloat:= 0;
+    ZQ_OrdenDetalleIMPORTE_RECONOCIDO.AsFloat:= 0;
+    ZQ_OrdenDetalleIMPORTE_VENTA.AsFloat:= 0;
+    ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:= 0;
   end;
 
 
@@ -970,9 +970,10 @@ begin
     ZQ_OrdenDetalleID_ORDEN_DETALLE.AsInteger:=ZQ_GenOrdenDetalle.GetNextValue;
     ZQ_OrdenDetalleID_PRODUCTO.AsInteger:= prod;
     ZQ_OrdenDetalleID_ORDEN.AsInteger:=ZQ_OrdenID_ORDEN.AsInteger;
+    ZQ_OrdenDetalleIMPORTE_UNITARIO.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
     ZQ_OrdenDetalleCANTIDAD.AsFloat:= 1;
-    ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:= ZQ_OrdenDetalleprod_pventa.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat;
-    ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=ZQ_OrdenDetalleMONTO_TOTAL.AsFloat-(descCliente/100)*ZQ_OrdenDetalleMONTO_TOTAL.AsFloat;
+    ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:= ZQ_OrdenDetalleIMPORTE_UNITARIO.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat;
+    ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:=ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat-(descCliente/100)*ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat;
 
     // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio=0 toma el PRECIO_VENTA)
 //    ZQ_ColsPrecios.Close;
@@ -1060,7 +1061,7 @@ begin
   if edCant.Enabled then
     edCant.SetFocus;
 
-  edMontoTotal.Enabled:= dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE');
+  edImporteUnitario.Enabled:= dm.EKUsrLogin.PermisoAccion('CAJA_MODIF_IMPORTE');
 end;
 
 
@@ -1139,7 +1140,7 @@ procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleCANTIDADChange(
 begin
       if (not ZQ_OrdenDetalleprod_pventa.IsNull) then
          begin
-           ZQ_OrdenDetalleMONTO_TOTAL.AsFloat:=ZQ_OrdenDetalleprod_pventa.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat;
+           ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:=ZQ_OrdenDetalleIMPORTE_UNITARIO.AsFloat*ZQ_OrdenDetalleCANTIDAD.AsFloat;
          end;
 end;
 
@@ -1192,7 +1193,7 @@ procedure TFOP_ABM_OrdenTecnica.btnAceptarProdClick(Sender: TObject);
 begin
 Perform(WM_NEXTDLGCTL, 0, 0);
 
-  if ZQ_OrdenDetalleMONTO_TOTAL.AsFloat <= 0 then
+  if ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat <= 0 then
   begin
     Application.MessageBox('El importe ingresado es incorrecto.', 'Atención');
     if edCant.Enabled then
@@ -1284,9 +1285,9 @@ function TFOP_ABM_OrdenTecnica.verificarTotOS: Boolean;
 begin
   Result:= True;
 
-  if (ZQ_OrdenDetalleOSMONTO_DESCONTADO.AsFloat > ZQ_OrdenDetalleMONTO_TOTAL.AsFloat) then
+  if (ZQ_OrdenDetalleOSMONTO_DESCONTADO.AsFloat > ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat) then
   begin
-    Application.MessageBox(PCHAR(Format('El monto a descontar no debe ser superior a $%s, por favor Verifique',[CurrToStr(ZQ_OrdenDetalleMONTO_TOTAL.AsFloat)])), 'Validación', MB_OK + MB_ICONINFORMATION);
+    Application.MessageBox(PCHAR(Format('El monto a descontar no debe ser superior a $%s, por favor Verifique',[CurrToStr(ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat)])), 'Validación', MB_OK + MB_ICONINFORMATION);
     result:= false;
   end;
 
@@ -1444,51 +1445,48 @@ begin
         ZQ_Orden_EntregaIMPORTE.AsFloat:= acumProductos;
       end;
 
-//      if not (ZQ_Orden_Entrega_nroPrecio.IsNull) then
-//      begin
-//        case ZQ_Orden_Entrega_nroPrecio.AsInteger of
-//          0:
-//            begin
-//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat;
-//            end;
-//          1:
-//            begin
-//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio1;
-//            end;
-//          2:
-//            begin
-//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio2;
-//            end;
-//          3:
-//            begin
-//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio3;
-//            end;
-//          4:
-//            begin
-//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio4;
-//            end;
-//          5:
-//            begin
-//              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio5;
-//            end;
-//        end;
-//
-//        ZQ_Orden_Entrega_importeVenta.AsFloat:= precio + (precio * CD_Fpago_desc_rec.AsFloat);
-//      end;
-//
-//      RecalcularMontoPago();
+      if not (ZQ_Orden_Entrega_nroPrecio.IsNull) then
+      begin
+        case ZQ_Orden_Entrega_nroPrecio.AsInteger of
+          0:
+            begin
+              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat;
+            end;
+          1:
+            begin
+              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio1;
+            end;
+          2:
+            begin
+              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio2;
+            end;
+          3:
+            begin
+              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio3;
+            end;
+          4:
+            begin
+              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio4;
+            end;
+          5:
+            begin
+              precio:= ZQ_Orden_EntregaIMPORTE.AsFloat * coefPrecio5;
+            end;
+        end;
+        ZQ_Orden_EntregaIMPORTE_REAL.AsFloat:= precio + (precio * ZQ_Orden_Entrega_desc_rec.AsFloat);
+      end;
+
+      RecalcularMontoPago();
 
     end;
 end;
 
 procedure TFOP_ABM_OrdenTecnica.RecalcularMontoPago();
 begin
-  acumEntrega:= EKDbSumaEntregas.SumCollection[0].SumValue;
 
+  acumEntrega:= EKDbSumaEntregas.SumCollection[0].SumValue;
   acumFinal:= EKDbSumaEntregas.SumCollection[1].SumValue;
   lblTotAPagar.Caption:= 'Total a Pagar: ' + FormatFloat('$ ##,###,##0.00 ', acumFinal);
-
-
 
 end;
 
