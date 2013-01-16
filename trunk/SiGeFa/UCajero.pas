@@ -601,7 +601,6 @@ type
     ZQ_OrdenProductosID_ORDEN_DETALLE: TIntegerField;
     ZQ_OrdenProductosID_ORDEN: TIntegerField;
     ZQ_OrdenProductosID_PRODUCTO: TIntegerField;
-    ZQ_OrdenProductosMONTO_TOTAL: TFloatField;
     ZQ_OrdenProductosCANTIDAD: TFloatField;
     ZQ_OrdenProductosOBSERVACIONES: TStringField;
     ZQ_OrdenProductosID_LABORATORIO: TIntegerField;
@@ -638,9 +637,11 @@ type
     DS_Optica_Orden: TDataSource;
     ZQ_Optica_OrdenID_COMPROBANTE: TIntegerField;
     ZQ_Optica_OrdenSALDO: TFloatField;
-    ZQ_OrdenProductosMONTO_RECONOCIDO: TFloatField;
-    ZQ_OrdenProductosMONTO_FINAL: TFloatField;
     CD_FpagoFECHA_FP: TDateTimeField;
+    ZQ_OrdenProductosIMPORTE_RECONOCIDO: TFloatField;
+    ZQ_OrdenProductosIMPORTE_VENTA: TFloatField;
+    ZQ_OrdenProductosIMPORTE_UNITARIO: TFloatField;
+    ZQ_OrdenProductosIMPORTE_TOTAL: TFloatField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -3166,7 +3167,7 @@ begin
       ZQ_Productos.sql[15]:= Format('and(p.id_producto=%s)', [ZQ_OrdenProductosID_PRODUCTO.AsString]);
       ZQ_Productos.Open;
 
-      Importe_Producto := ZQ_OrdenProductosMONTO_FINAL.AsFloat;
+      Importe_Producto := ZQ_OrdenProductosIMPORTE_VENTA.AsFloat;
 
       CD_DetalleFactura.Append;
       CD_DetalleFacturaID_PRODUCTO.AsInteger:= ZQ_OrdenProductosID_PRODUCTO.AsInteger;
@@ -3174,7 +3175,7 @@ begin
       CD_DetalleFacturaDETALLE.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
       CD_DetalleFacturaCANTIDAD.AsFloat:= ZQ_OrdenProductosCANTIDAD.AsFloat;
 
-      CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:= Importe_Producto/ZQ_OrdenProductosCANTIDAD.AsFloat;
+      CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:= ZQ_OrdenProductosIMPORTE_UNITARIO.AsFloat;
       CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
       CD_DetalleFacturaPORC_IVA.AsFloat:= ZQ_ProductosIMPUESTO_IVA.AsFloat;
       CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= Importe_Producto;
@@ -3219,36 +3220,6 @@ begin
 //    ZQ_ComprobPreventa.ParamByName('id').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
 //    ZQ_ComprobPreventa.Open;
 //
-//    //cargo las señas de la Orden como formas de pago!
-      ZQ_OpticaEntrega.Close;
-      ZQ_OpticaEntrega.ParamByName('ID_ORDEN').AsInteger:= vsel5.ZQ_Optica_OrdenID_ORDEN.AsInteger;
-      ZQ_OpticaEntrega.Open;
-
-      if ZQ_OpticaEntrega.RecordCount > 0 then
-      begin
-        ZQ_OpticaEntrega.First;
-        while not (ZQ_OpticaEntrega.Eof) do
-        begin
-          CD_Fpago.Append;
-          CD_Fpago_esSenia.AsString:= 'S';
-          CD_FpagoID_TIPO_FORMAPAG.AsInteger:= ZQ_OpticaEntregaID_TIPO_FORMAPAG.AsInteger;
-          CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_OpticaEntregaCUENTA_INGRESO.AsInteger;
-          if ZQ_OpticaEntregaMDCP_FECHA.IsNull then
-            CD_FpagoMDCP_FECHA.clear
-          else
-            CD_FpagoMDCP_FECHA.AsDateTime:= ZQ_OpticaEntregaMDCP_FECHA.AsDateTime;
-
-          CD_FpagoFECHA_FP.AsDateTime := ZQ_OpticaEntregaFECHA_FP.AsDateTime;  
-          CD_FpagoMDCP_BANCO.AsString:= ZQ_OpticaEntregaMDCP_BANCO.AsString;
-          CD_FpagoMDCP_CHEQUE.AsString:= ZQ_OpticaEntregaMDCP_CHEQUE.AsString;
-          CD_FpagoIMPORTE.AsFloat:=ZQ_OpticaEntregaIMPORTE.AsFloat; 
-
-          calcularFP();
-          CD_Fpago.Post;
-          ZQ_OpticaEntrega.Next;
-        end;
-      end;
-
       CD_DetalleFactura.Post;
 
       lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
@@ -3259,6 +3230,36 @@ begin
 
 
       ZQ_OrdenProductos.Next;
+    end;
+
+////cargo las señas de la Orden como formas de pago!
+    ZQ_OpticaEntrega.Close;
+    ZQ_OpticaEntrega.ParamByName('ID_ORDEN').AsInteger:= vsel5.ZQ_Optica_OrdenID_ORDEN.AsInteger;
+    ZQ_OpticaEntrega.Open;
+
+    if ZQ_OpticaEntrega.RecordCount > 0 then
+    begin
+      ZQ_OpticaEntrega.First;
+      while not (ZQ_OpticaEntrega.Eof) do
+      begin
+        CD_Fpago.Append;
+        CD_Fpago_esSenia.AsString:= 'S';
+        CD_FpagoID_TIPO_FORMAPAG.AsInteger:= ZQ_OpticaEntregaID_TIPO_FORMAPAG.AsInteger;
+        CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_OpticaEntregaCUENTA_INGRESO.AsInteger;
+        if ZQ_OpticaEntregaMDCP_FECHA.IsNull then
+          CD_FpagoMDCP_FECHA.clear
+        else
+          CD_FpagoMDCP_FECHA.AsDateTime:= ZQ_OpticaEntregaMDCP_FECHA.AsDateTime;
+
+        CD_FpagoFECHA_FP.AsDateTime := ZQ_OpticaEntregaFECHA_FP.AsDateTime;
+        CD_FpagoMDCP_BANCO.AsString:= ZQ_OpticaEntregaMDCP_BANCO.AsString;
+        CD_FpagoMDCP_CHEQUE.AsString:= ZQ_OpticaEntregaMDCP_CHEQUE.AsString;
+        CD_FpagoIMPORTE.AsFloat:=ZQ_OpticaEntregaIMPORTE.AsFloat;
+
+        CD_Fpago_importeVenta.AsFloat:= ZQ_OpticaEntregaIMPORTE_REAL.AsFloat;
+        CD_Fpago.Post;
+        ZQ_OpticaEntrega.Next;
+      end;
     end;
 
   end;
