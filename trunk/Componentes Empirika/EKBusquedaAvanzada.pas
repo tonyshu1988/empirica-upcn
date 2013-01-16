@@ -583,7 +583,9 @@ function TEKBusquedaAvanzada.ArmarConsulta: TStrings;
 var
   select: string;
   s : string;
+  s_postgres: string;
 begin
+  s_postgres:= '';
   if Not (CopiaGuardada) then
   begin
     //ShowMessage('haciendo copia');
@@ -601,11 +603,20 @@ begin
   Consulta.Clear;
   if LimiteRegistros > 0 then
   begin
-    s := FSQL_Select_Copia.Text;
-    select :=  stringreplace(s, 'SELECT','' , [rfIgnoreCase]);
-    s :=  'SELECT FIRST '+inttostr(LimiteRegistros)+' SKIP '+IntToStr(contador);
-    select := s+#13+ select;
-    Consulta.Text := select;
+    if Modelo.Coneccion.Protocol = 'firebird-1.5' then
+    begin
+      s := FSQL_Select_Copia.Text;
+      select :=  stringreplace(s, 'SELECT','' , [rfIgnoreCase]);
+      s :=  'SELECT FIRST '+inttostr(LimiteRegistros)+' SKIP '+IntToStr(contador);
+      select := s+#13+ select;
+      Consulta.Text := select;
+    end
+    else
+      if Modelo.Coneccion.Protocol = 'postgresql' then
+      begin
+        Consulta.AddStrings(FSQL_Select_Copia);
+        s_postgres:= 'LIMIT '+inttostr(LimiteRegistros)+' OFFSET '+IntToStr(contador);
+      end
   end
   else
     Consulta.AddStrings(FSQL_Select_Copia);
@@ -613,6 +624,7 @@ begin
   Consulta.AddStrings(FSQL_From_Copia);
   Consulta.AddStrings(FSQL_Where_Copia);
   Consulta.AddStrings(FSQL_Orden_Copia);
+  Consulta.Add(s_postgres);
   result := Consulta;
 end;
 
