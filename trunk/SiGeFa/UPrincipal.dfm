@@ -5148,22 +5148,24 @@ object FPrincipal: TFPrincipal
       OnExecute = APreventaHistoricoExecute
     end
     object AFichaEmpleado: TAction
-      Tag = 1
       Caption = 'Ficha Empleado'
       ImageIndex = 63
       OnExecute = AFichaEmpleadoExecute
     end
     object AOP_ABMOrdenT: TAction
-      Tag = 1
       Caption = 'ABM Orden T'#233'cnica'
       ImageIndex = 29
       OnExecute = AOP_ABMOrdenTExecute
     end
     object AOP_ABMLab: TAction
-      Tag = 1
       Caption = 'ABM Laboratorios'
       ImageIndex = 2
       OnExecute = AOP_ABMLabExecute
+    end
+    object AABM_FacturaOS: TAction
+      Caption = 'ABM Factura Obra Social'
+      ImageIndex = 60
+      OnExecute = AABM_FacturaOSExecute
     end
   end
   object MainMenuPrincipal: TMainMenu
@@ -5448,6 +5450,10 @@ object FPrincipal: TFPrincipal
       end
       object ABMOrdenTcnica1: TMenuItem
         Action = AOP_ABMOrdenT
+      end
+      object ABMFacturaObraSocial1: TMenuItem
+        Tag = 1
+        Action = AABM_FacturaOS
       end
     end
   end

@@ -72,7 +72,8 @@ uses
   UOP_CargarOrden in 'UOP_CargarOrden.pas' {FOP_CargarOrden},
   UOP_ABMOrden_Tecnica in 'UOP_ABMOrden_Tecnica.pas' {FOP_ABM_OrdenTecnica},
   UOP_ABMLaboratorio in 'UOP_ABMLaboratorio.pas' {FOP_ABMLaboratorio},
-  UCuentaCorrienteProveedor in 'UCuentaCorrienteProveedor.pas' {FCuentaCorrienteProveedor};
+  UCuentaCorrienteProveedor in 'UCuentaCorrienteProveedor.pas' {FCuentaCorrienteProveedor},
+  UABM_CPB_FacturaObraSocial in 'UABM_CPB_FacturaObraSocial.pas' {FABM_CPB_FacturaObraSocial};
 
 {$R *.res}
 
