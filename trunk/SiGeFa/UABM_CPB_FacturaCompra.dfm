@@ -146,7 +146,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             50.270833333333330000
             674.687500000000000000
             124.354166666666700000
-            550.333333333333300000)
+            550.333333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -176,8 +176,8 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            759.354166666666700000
-            68.791666666666670000
+            759.354166666666800000
+            68.791666666666680000
             378.354166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -679,7 +679,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -2734,6 +2734,24 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             DesignSize = (
               521
               158)
+            object DBTxtFechaAnulado: TDBText
+              Left = 8
+              Top = 118
+              Width = 130
+              Height = 13
+              AutoSize = True
+              Color = 14342874
+              DataField = 'FECHA_ANULADO'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+              Visible = False
+            end
             object lblVerFecha_Cpb_Dev: TLabel
               Left = 164
               Top = 36
@@ -2803,6 +2821,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
               Width = 46
               Height = 13
               Alignment = taRightJustify
+              Anchors = [akTop, akRight]
               Caption = 'Importe'
             end
             object DBTxtSaldo: TDBText
@@ -2810,7 +2829,6 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
               Top = 132
               Width = 177
               Height = 23
-              Anchors = [akTop, akRight]
               DataField = 'SALDO'
               DataSource = DS_VerCpb
               Font.Charset = DEFAULT_CHARSET
@@ -2907,24 +2925,6 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
               ParentFont = False
               Visible = False
             end
-            object DBTxtFechaAnulado: TDBText
-              Left = 8
-              Top = 118
-              Width = 130
-              Height = 13
-              AutoSize = True
-              Color = 14342874
-              DataField = 'FECHA_ANULADO'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-              Visible = False
-            end
             object DBMemoCpbActual_Info: TDBMemo
               Left = 8
               Top = 61
@@ -2940,6 +2940,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
               Top = 61
               Width = 87
               Height = 55
+              Anchors = [akTop, akRight]
               DataField = 'IMAGEN'
               DataSource = DS_VerCpb
               Stretch = True

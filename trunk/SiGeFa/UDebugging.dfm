@@ -22,8 +22,8 @@ object FDebugging: TFDebugging
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 979
-    Height = 453
+    Width = 987
+    Height = 464
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -35,13 +35,13 @@ object FDebugging: TFDebugging
     ParentFont = False
     TabOrder = 0
     DesignSize = (
-      979
-      453)
+      987
+      464)
     object DBGrid: TDBGrid
       Left = 5
       Top = 73
-      Width = 784
-      Height = 375
+      Width = 792
+      Height = 386
       Align = alClient
       Color = 16112578
       DataSource = DataSource
@@ -56,7 +56,7 @@ object FDebugging: TFDebugging
     object Panel2: TPanel
       Left = 5
       Top = 5
-      Width = 969
+      Width = 977
       Height = 68
       Align = alTop
       BevelOuter = bvNone
@@ -94,10 +94,10 @@ object FDebugging: TFDebugging
       end
     end
     object Panel4: TPanel
-      Left = 789
+      Left = 797
       Top = 73
       Width = 185
-      Height = 375
+      Height = 386
       Align = alRight
       Caption = 'Panel4'
       TabOrder = 2
@@ -105,7 +105,7 @@ object FDebugging: TFDebugging
         Left = 1
         Top = 1
         Width = 183
-        Height = 302
+        Height = 313
         Align = alClient
         Color = 16112578
         Lines.Strings = (
@@ -115,7 +115,7 @@ object FDebugging: TFDebugging
       end
       object Panel3: TPanel
         Left = 1
-        Top = 303
+        Top = 314
         Width = 183
         Height = 71
         Align = alBottom
@@ -202,7 +202,7 @@ object FDebugging: TFDebugging
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
