@@ -3119,6 +3119,38 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
             DesignSize = (
               521
               158)
+            object lblAnulado: TLabel
+              Left = 8
+              Top = 132
+              Width = 105
+              Height = 23
+              Caption = 'ANULADO'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 4868863
+              Font.Height = -19
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Visible = False
+            end
+            object DBTxtFechaAnulado: TDBText
+              Left = 8
+              Top = 118
+              Width = 130
+              Height = 13
+              AutoSize = True
+              Color = 14342874
+              DataField = 'FECHA_ANULADO'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+              Visible = False
+            end
             object lblDatos_Proveedor: TLabel
               Left = 8
               Top = 19
@@ -3212,38 +3244,6 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
               ParentColor = False
               ParentFont = False
             end
-            object DBTxtFechaAnulado: TDBText
-              Left = 8
-              Top = 118
-              Width = 130
-              Height = 13
-              AutoSize = True
-              Color = 14342874
-              DataField = 'FECHA_ANULADO'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-              Visible = False
-            end
-            object lblAnulado: TLabel
-              Left = 8
-              Top = 132
-              Width = 105
-              Height = 23
-              Caption = 'ANULADO'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = 4868863
-              Font.Height = -19
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-              Visible = False
-            end
             object DBTxtMonto: TDBText
               Left = 336
               Top = 132
@@ -3266,6 +3266,7 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
               Width = 46
               Height = 13
               Alignment = taRightJustify
+              Anchors = [akTop, akRight]
               Caption = 'Importe'
             end
             object DBMemoCpbActual_Info: TDBMemo
@@ -3283,6 +3284,7 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
               Top = 61
               Width = 87
               Height = 55
+              Anchors = [akTop, akRight]
               DataField = 'IMAGEN'
               DataSource = DS_VerCpb
               Stretch = True

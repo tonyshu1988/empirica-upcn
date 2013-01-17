@@ -2387,6 +2387,7 @@ object FABM_CPB_NotaPedido: TFABM_CPB_NotaPedido
               Width = 46
               Height = 13
               Alignment = taRightJustify
+              Anchors = [akTop, akRight]
               Caption = 'Importe'
             end
             object DBMemoCpbActual_Info: TDBMemo

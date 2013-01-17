@@ -1607,6 +1607,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
               Width = 46
               Height = 13
               Alignment = taRightJustify
+              Anchors = [akTop, akRight]
               Caption = 'Importe'
             end
             object DBMemoCpbActual_Info: TDBMemo
@@ -3851,7 +3852,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       end
       item
         TituloColumna = 'ID'
-        Visible = False
+        Visible = True
       end>
     NombreGuardar = 'ABM_PR_VerCpb'
     AltoTituloColumna = 15

@@ -106,7 +106,7 @@ begin
   if dm.EKModelo.verificar_transaccion(Transaccion_Debug) then
   begin
     if not (application.MessageBox(pchar('La Transacción esta activa, hay cambios sin guardar. Los Cancela?'), 'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
-      canClose := False
+      canClose:= False
     else
       dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
   end;
@@ -119,11 +119,11 @@ begin
   lblConexion1.Caption:= '';
   lblConexion2.Caption:= '';
 
-  IBDatabase1.DatabaseName := dm.Conexion.HostName+':'+dm.Conexion.Database;
+  IBDatabase1.DatabaseName:= dm.Conexion.HostName + ':' + dm.Conexion.Database;
   IBDatabase1.Params.Clear;
   IBDatabase1.Params.Add('user_name=SYSDBA');
   IBDatabase1.Params.Add('password=masterkey');
-  IBDatabase1.SQLDialect := 3;
+  IBDatabase1.SQLDialect:= 3;
   IBDatabase1.Connected:= true;
 
   btnVerUser.Click;
@@ -141,7 +141,7 @@ begin
 
   sysdba:= false;
   memo1.Clear;
-  for i := 0 to IBDatabaseInfo1.UserNames.Count - 1 do
+  for i:= 0 to IBDatabaseInfo1.UserNames.Count - 1 do
   begin
     Memo1.Lines.Add(IBDatabaseInfo1.UserNames[i]);
     if (IBDatabaseInfo1.UserNames[i] = 'SYSDBA') and (not sysdba) then
@@ -151,7 +151,7 @@ begin
     end
   end;
 
-  lblConexion1.Caption:= 'Total Conectados: '+IntToStr(IBDatabaseInfo1.UserNames.Count - 1);
+  lblConexion1.Caption:= 'Total Conectados: ' + IntToStr(IBDatabaseInfo1.UserNames.Count - 1);
   lblConexion2.Caption:= '(incluido esta conexión)';
 end;
 
@@ -336,19 +336,19 @@ begin
       lblEstadoT.Caption:= 'TRIGGERS ACTIVADOS';
 
       ZQ_ActivarT.Close;
-      ZQ_ActivarT.ParamByName('TIPO').AsString:= 'T';      
+      ZQ_ActivarT.ParamByName('TIPO').AsString:= 'T';
       ZQ_ActivarT.ExecSQL;
 
       if not dm.EKModelo.finalizar_transaccion(Transaccion_Debug) then
       begin
-         dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
+        dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
       end;
 
     except //si se produce una excepcion cierro la transaccion y pongo en true la variable triggerActivo
       if not dm.EKModelo.finalizar_transaccion(Transaccion_Debug) then
       begin
-         triggerActivo:= false;
-         dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
+        triggerActivo:= false;
+        dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
       end;
     end;
   end;
@@ -389,31 +389,31 @@ begin
       ZQ_DesactivarT.Close;
       case RadioGroupTriggers.ItemIndex of
         0: begin
-              lblEstadoT.Caption:= 'TODOS LOS TRIGGERS DESACTIVADOS';
-              ZQ_DesactivarT.ParamByName('Tipo').AsString:= 'T';
-           end;
+            lblEstadoT.Caption:= 'TODOS LOS TRIGGERS DESACTIVADOS';
+            ZQ_DesactivarT.ParamByName('Tipo').AsString:= 'T';
+          end;
         1: begin
-              lblEstadoT.Caption:= 'TRIGGERS DEL SISTEMA DESACTIVADOS';
-              ZQ_DesactivarT.ParamByName('Tipo').AsString:= 'S';
-           end;
+            lblEstadoT.Caption:= 'TRIGGERS DEL SISTEMA DESACTIVADOS';
+            ZQ_DesactivarT.ParamByName('Tipo').AsString:= 'S';
+          end;
         2: begin
-              lblEstadoT.Caption:= 'TRIGGERS DE AUDITORIA DESACTIVADOS';
-              ZQ_DesactivarT.ParamByName('Tipo').AsString:= 'A';
-           end;
+            lblEstadoT.Caption:= 'TRIGGERS DE AUDITORIA DESACTIVADOS';
+            ZQ_DesactivarT.ParamByName('Tipo').AsString:= 'A';
+          end;
       end;
       ZQ_DesactivarT.ExecSQL;
       panelTriggers.Visible:= false;
       if not dm.EKModelo.finalizar_transaccion(Transaccion_Debug) then
       begin
-         dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
+        dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
       end;
 
     except //si se produce una excepcion cierro la transaccion y pongo en false la variable triggerActivo
       if not dm.EKModelo.finalizar_transaccion(Transaccion_Debug) then
       begin
-         triggerActivo:= true;
-         panelTriggers.Visible:= false;
-         dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
+        triggerActivo:= true;
+        panelTriggers.Visible:= false;
+        dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
       end;
     end;
   end;
@@ -422,12 +422,19 @@ end;
 
 procedure TFDebugging.btnEjecutarActualizarClick(Sender: TObject);
 begin
-  DataSource.DataSet:= ZQ_Actualizar;
+  try
+    begin
+      DataSource.DataSet:= ZQ_Actualizar;
 
-  ZQ_Actualizar.Close;
-  ZQ_Actualizar.Open;
-
-  ShowMessage('Actualización Completada');
+      ZQ_Actualizar.Close;
+      ZQ_Actualizar.Open;
+      ZQ_Actualizar.CommitUpdates;
+      
+      ShowMessage('Actualización Completada');
+    end
+  except
+    ShowMessage('Se produjo un error');
+  end;
 end;
 
 
@@ -568,3 +575,4 @@ begin
 end;
 
 end.
+
