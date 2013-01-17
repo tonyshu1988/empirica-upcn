@@ -160,6 +160,7 @@ var
   cajero_tamanio_lista_fpago: integer = 0;
   etiqueta_fiscal: string = 'Filtro 2';
   etiqueta_no_fiscal: string = 'Filtro 1';
+  Optica : boolean = false;
 
   precio1: string;
   precio2: string;
@@ -253,6 +254,7 @@ begin
   configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'recargo_factura_vencida', recargo_factura_vencida);
   configurarBoolean(ZQ_Configuracion_Variables, 'clave', 'texto', 'recargo_factura_vencida', 'SI', recargo_factura_vencida_automatico);
   configurarBoolean(ZQ_Configuracion_Variables, 'clave', 'texto', 'borrarVendedor', 'SI', cajero_borrar_vendedor);
+  configurarBoolean(ZQ_Configuracion_Variables, 'clave', 'texto', 'Optica', 'SI', Optica);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'etiquetaNF', etiqueta_no_fiscal);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'etiquetaF', etiqueta_fiscal);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'caja_tamanioListadoCtas', cajero_tamanio_lista_fpago);
@@ -295,6 +297,10 @@ begin
   //seteo de variables globales
   enviandoMail:= false;          //setea la bandera en false indicando q no se esta enviando mail
   configVariables;
+
+
+  // Si la variable optica esta en true entonces el menu optica estara visible.
+  FPrincipal.Optica1.Visible := Optica;
 
   //cargo la imagen de fondo del sistema
   EKIni.abrir;

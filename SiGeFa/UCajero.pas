@@ -974,6 +974,12 @@ end;
 
 procedure TFCajero.FormCreate(Sender: TObject);
 begin
+  // Si la variable optica esta en true entonces el menu optica estara visible.
+  if Optica then
+    bt_Cargar_Orden.Visible := ivAlways
+  else
+    bt_Cargar_Orden.Visible := ivNever;
+
   CurrencyDecimals:= 2;
   DecimalSeparator:= '.';
   ThousandSeparator:= ',';
