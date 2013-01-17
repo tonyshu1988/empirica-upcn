@@ -282,7 +282,6 @@ begin
     lblTotalFPago.Caption:= FormatFloat('Total Seña: $ ##,###,##0.00 ', EKDbSumaFpago.SumCollection[0].SumValue);
     lblTotalProducto.Caption:= FormatFloat('Total Producto: $ ##,###,##0.00 ', EKDbSumaProducto.SumCollection[0].SumValue);
   end;
-//  Application.ProcessMessages;
 end;
 
 
@@ -306,7 +305,7 @@ end;
 
 procedure TFPreventa_Historico.btnImprimirClick(Sender: TObject);
 begin
-//
+//  exit;
 end;
 
 

@@ -965,7 +965,7 @@ object FPreventa_Historico: TFPreventa_Historico
       Caption = 'Imprimir'
       Category = 0
       Hint = 'Imprimir'
-      Visible = ivAlways
+      Visible = ivNever
       ImageIndex = 28
       OnClick = btnImprimirClick
       AutoGrayScale = False
