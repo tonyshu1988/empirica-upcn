@@ -3140,6 +3140,7 @@ begin
   if not Assigned(vsel4) then
     vsel5:= TFOP_CargarOrden.Create(nil);
   vsel5.OnSeleccionar:= OnSelOrden;
+  vsel5.EKBusquedaAvanzadaOrden.Abrir;
   vsel5.ShowModal;
   vsel5:= nil;
 end;
