@@ -1,6 +1,6 @@
 object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
-  Left = 333
-  Top = 194
+  Left = 288
+  Top = 186
   Width = 914
   Height = 637
   Caption = 'ABM Factura Obra Social'
@@ -917,872 +917,6 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         end
       end
     end
-    object PanelEditar: TPanel
-      Left = 0
-      Top = 0
-      Width = 906
-      Height = 539
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 5
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 1
-      object PanelEditar_DatosGral: TPanel
-        Left = 5
-        Top = 5
-        Width = 896
-        Height = 177
-        Align = alTop
-        TabOrder = 0
-        DesignSize = (
-          896
-          177)
-        object btnBuscarEmpresa: TSpeedButton
-          Left = 7
-          Top = 11
-          Width = 50
-          Height = 50
-          Hint = 'Buscar una empresa para asociar al comprobante'
-          GroupIndex = 2
-          Caption = '(F1)'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -8
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Layout = blGlyphTop
-          ParentFont = False
-          OnClick = btnBuscarEmpresaClick
-        end
-        object PanelEditar_DatosGralProveedor: TPanel
-          Left = 66
-          Top = 7
-          Width = 633
-          Height = 74
-          Anchors = [akLeft]
-          BevelOuter = bvNone
-          TabOrder = 0
-          object Label13: TLabel
-            Left = 13
-            Top = 58
-            Width = 62
-            Height = 13
-            Caption = 'Tipo Emp.:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label14: TLabel
-            Left = 438
-            Top = 40
-            Width = 57
-            Height = 13
-            Caption = 'Provincia:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label15: TLabel
-            Left = 142
-            Top = 40
-            Width = 58
-            Height = 13
-            Caption = 'Localidad:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label16: TLabel
-            Left = 5
-            Top = 40
-            Width = 70
-            Height = 13
-            Caption = 'C'#243'd. Postal:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label17: TLabel
-            Left = 17
-            Top = 22
-            Width = 58
-            Height = 13
-            Caption = 'Direcci'#243'n:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label18: TLabel
-            Left = 150
-            Top = 5
-            Width = 50
-            Height = 13
-            Caption = 'Nombre:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label20: TLabel
-            Left = 30
-            Top = 5
-            Width = 45
-            Height = 13
-            Caption = 'C'#243'digo:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label21: TLabel
-            Left = 458
-            Top = 58
-            Width = 55
-            Height = 13
-            Caption = 'Cuit/Cuil:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label22: TLabel
-            Left = 242
-            Top = 58
-            Width = 26
-            Height = 13
-            Caption = 'IVA:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object DBText6: TDBText
-            Left = 76
-            Top = 22
-            Width = 545
-            Height = 13
-            DataField = 'DIRECCION'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText17: TDBText
-            Left = 201
-            Top = 5
-            Width = 420
-            Height = 13
-            DataField = 'NOMBRE'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText18: TDBText
-            Left = 76
-            Top = 5
-            Width = 65
-            Height = 13
-            DataField = 'CODIGO_CORTO'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText19: TDBText
-            Left = 515
-            Top = 58
-            Width = 114
-            Height = 13
-            DataField = 'CUIT_CUIL'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText20: TDBText
-            Left = 269
-            Top = 58
-            Width = 181
-            Height = 13
-            DataField = 'NOMBRE_TIPO_IVA'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText22: TDBText
-            Left = 77
-            Top = 58
-            Width = 161
-            Height = 13
-            DataField = 'TIPO_EMPRESA'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText23: TDBText
-            Left = 496
-            Top = 40
-            Width = 133
-            Height = 13
-            DataField = 'NOMBRE_PROVINCIA'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText24: TDBText
-            Left = 202
-            Top = 40
-            Width = 232
-            Height = 13
-            DataField = 'LOCALIDAD'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBText25: TDBText
-            Left = 77
-            Top = 40
-            Width = 57
-            Height = 13
-            DataField = 'CODIGO_POSTAL'
-            DataSource = DS_Proveedor
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-        end
-        object DBMemoCPB_Observacion: TDBMemo
-          Left = 66
-          Top = 126
-          Width = 633
-          Height = 46
-          DataField = 'OBSERVACION'
-          DataSource = DS_Comprobante
-          ScrollBars = ssVertical
-          TabOrder = 2
-        end
-        object PanelFechas: TPanel
-          Left = 64
-          Top = 82
-          Width = 637
-          Height = 42
-          BevelOuter = bvNone
-          TabOrder = 1
-          object Label12: TLabel
-            Left = 11
-            Top = 1
-            Width = 79
-            Height = 13
-            Caption = 'Fecha Factura'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label19: TLabel
-            Left = 262
-            Top = 1
-            Width = 49
-            Height = 13
-            Caption = 'Pto. Vta.'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label23: TLabel
-            Left = 326
-            Top = 1
-            Width = 45
-            Height = 13
-            Caption = 'N'#250'mero'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object PanelFechaFactura: TPanel
-            Left = 127
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 1
-            object lblTituloFecha_Cobrado: TLabel
-              Left = 11
-              Top = 1
-              Width = 79
-              Height = 13
-              Caption = 'Fecha Factura'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateFactura: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA_COBRADA'
-              DataSource = DS_Comprobante
-            end
-          end
-          object PanelFechaEmision: TPanel
-            Left = 0
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 0
-            object lblTituloFecha_Carga: TLabel
-              Left = 12
-              Top = 1
-              Width = 72
-              Height = 13
-              Caption = 'Fecha Carga'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateCarga: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA'
-              DataSource = DS_Comprobante
-            end
-          end
-          object DBEditPuntoVenta: TDBEdit
-            Left = 261
-            Top = 14
-            Width = 54
-            Height = 21
-            DataField = 'PUNTO_VENTA'
-            DataSource = DS_Comprobante
-            TabOrder = 2
-          end
-          object DBEditNumeroCpb: TDBEdit
-            Left = 325
-            Top = 14
-            Width = 121
-            Height = 21
-            DataField = 'NUMERO_CPB'
-            DataSource = DS_Comprobante
-            TabOrder = 3
-          end
-        end
-        object edImagen: TDBImage
-          Left = 707
-          Top = 57
-          Width = 145
-          Height = 115
-          DataField = 'IMAGEN'
-          DataSource = DS_Comprobante
-          Stretch = True
-          TabOrder = 3
-        end
-      end
-      object PanelEditar_Producto: TPanel
-        Left = 5
-        Top = 182
-        Width = 896
-        Height = 352
-        Align = alClient
-        TabOrder = 1
-        object Label6: TLabel
-          Left = 1
-          Top = 1
-          Width = 894
-          Height = 13
-          Align = alTop
-          Alignment = taCenter
-          Caption = 'LISTADO DE PRODUCTOS (F3 = Agregar un Producto)'
-          Color = clBlue
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-        end
-        object PanelEditar_ProductoInfo: TPanel
-          Left = 1
-          Top = 310
-          Width = 894
-          Height = 41
-          Align = alBottom
-          BevelOuter = bvNone
-          TabOrder = 1
-          DesignSize = (
-            894
-            41)
-          object Label25: TLabel
-            Left = 348
-            Top = 3
-            Width = 111
-            Height = 13
-            Anchors = [akTop, akRight]
-            Caption = 'Cantidad Productos'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label26: TLabel
-            Left = 484
-            Top = 3
-            Width = 121
-            Height = 13
-            Anchors = [akTop, akRight]
-            Caption = 'Total Base Imponible'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label29: TLabel
-            Left = 757
-            Top = 3
-            Width = 58
-            Height = 13
-            Anchors = [akTop, akRight]
-            Caption = 'Total Final'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label30: TLabel
-            Left = 621
-            Top = 3
-            Width = 51
-            Height = 13
-            Anchors = [akTop, akRight]
-            Caption = 'Total Iva'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object btnEliminarProducto: TButton
-            Left = 164
-            Top = 1
-            Width = 145
-            Height = 18
-            Caption = 'Quitar (Ctrl+Delete)'
-            TabOrder = 0
-            OnClick = btnEliminarProductoClick
-          end
-          object editTotalProductos: TEdit
-            Left = 348
-            Top = 17
-            Width = 129
-            Height = 19
-            Anchors = [akTop, akRight]
-            AutoSize = False
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BiDiMode = bdRightToLeft
-            Color = 12189695
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentBiDiMode = False
-            ParentFont = False
-            ReadOnly = True
-            TabOrder = 1
-          end
-          object editTotalImponible: TEdit
-            Left = 484
-            Top = 17
-            Width = 129
-            Height = 19
-            Anchors = [akTop, akRight]
-            AutoSize = False
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BiDiMode = bdRightToLeft
-            Color = 12189695
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentBiDiMode = False
-            ParentFont = False
-            ReadOnly = True
-            TabOrder = 2
-          end
-          object editTotalIva: TEdit
-            Left = 620
-            Top = 17
-            Width = 129
-            Height = 19
-            Anchors = [akTop, akRight]
-            AutoSize = False
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BiDiMode = bdRightToLeft
-            Color = 12189695
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentBiDiMode = False
-            ParentFont = False
-            ReadOnly = True
-            TabOrder = 3
-          end
-          object editTotalFinal: TEdit
-            Left = 756
-            Top = 17
-            Width = 129
-            Height = 19
-            Anchors = [akTop, akRight]
-            AutoSize = False
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BiDiMode = bdRightToLeft
-            Color = 12189695
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentBiDiMode = False
-            ParentFont = False
-            ReadOnly = True
-            TabOrder = 4
-          end
-        end
-        object DBGridEditar_Producto: TDBGrid
-          Left = 164
-          Top = 14
-          Width = 731
-          Height = 296
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_CpbProducto
-          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          PopupMenu = Popup_Producto
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridEditar_ProductoDrawColumnCell
-          OnKeyDown = DBGridEditar_ProductoKeyDown
-          OnKeyUp = DBGridEditar_ProductoKeyUp
-          Columns = <
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_CodBarra'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Barra'
-              Width = 121
-              Visible = True
-            end
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_Nombre'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Nombre'
-              Width = 192
-              Visible = True
-            end
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_Medida'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Medida'
-              Width = 84
-              Visible = True
-            end
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_Marca'
-              Title.Alignment = taCenter
-              Title.Caption = 'Marca'
-              Width = 180
-              Visible = True
-            end
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_Color'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Color'
-              Width = 118
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CANTIDAD'
-              Title.Alignment = taCenter
-              Title.Caption = 'Cantidad'
-              Width = 61
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_UNITARIO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Importe Unitario'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'BASE_IMPONIBLE'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Base Imponible'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'PORC_IVA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Coef. IVA'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_IVA'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Importe IVA'
-              Width = 86
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_FINAL'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Total'
-              Width = 101
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DETALLE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Detalle'
-              Width = 309
-              Visible = True
-            end>
-        end
-        object Panel1: TPanel
-          Left = 1
-          Top = 14
-          Width = 163
-          Height = 296
-          Align = alLeft
-          BevelOuter = bvNone
-          TabOrder = 2
-          DesignSize = (
-            163
-            296)
-          object DBTxtCodBarra: TDBText
-            Left = 3
-            Top = 120
-            Width = 153
-            Height = 13
-            DataField = '_CodBarra'
-            DataSource = DS_CpbProducto
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBTxtNombre: TDBText
-            Left = 3
-            Top = 150
-            Width = 153
-            Height = 13
-            DataField = '_Nombre'
-            DataSource = DS_CpbProducto
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBTxtMedida: TDBText
-            Left = 3
-            Top = 165
-            Width = 153
-            Height = 13
-            DataField = '_Medida'
-            DataSource = DS_CpbProducto
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBTxtColor: TDBText
-            Left = 3
-            Top = 180
-            Width = 153
-            Height = 13
-            DataField = '_Color'
-            DataSource = DS_CpbProducto
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object DBTxtMarca: TDBText
-            Left = 3
-            Top = 135
-            Width = 153
-            Height = 13
-            DataField = '_Marca'
-            DataSource = DS_CpbProducto
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object ImagenProducto: TDBImage
-            Left = 3
-            Top = 4
-            Width = 156
-            Height = 112
-            Anchors = [akTop]
-            DataField = 'IMAGEN'
-            DataSource = DS_Imagen
-            Stretch = True
-            TabOrder = 0
-            TabStop = False
-          end
-          object ImagenSucursal: TDBImage
-            Left = 3
-            Top = 4
-            Width = 156
-            Height = 112
-            Anchors = [akTop]
-            DataField = 'LOGO'
-            DataSource = DS_ImagenSuc
-            Stretch = True
-            TabOrder = 1
-            TabStop = False
-          end
-        end
-      end
-    end
     object PanelVer: TPanel
       Left = 0
       Top = 0
@@ -2279,14 +1413,6 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
               ParentFont = False
               Visible = False
             end
-            object lblVerFecha_Cpb_Dev: TLabel
-              Left = 164
-              Top = 36
-              Width = 61
-              Height = 13
-              Alignment = taRightJustify
-              Caption = 'F. Factura:'
-            end
             object Label24: TLabel
               Left = 8
               Top = 36
@@ -2308,22 +1434,6 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
               Font.Height = -19
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object DBText2: TDBText
-              Left = 228
-              Top = 36
-              Width = 80
-              Height = 13
-              Color = 14342874
-              DataField = 'FECHA_COBRADA'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
               ParentFont = False
             end
             object DBText1: TDBText
@@ -2376,17 +1486,17 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
             object Label28: TLabel
               Left = 8
               Top = 17
-              Width = 64
+              Width = 71
               Height = 13
-              Caption = 'Proveedor:'
+              Caption = 'Obra Social:'
             end
             object DBText4: TDBText
-              Left = 78
+              Left = 82
               Top = 17
-              Width = 427
+              Width = 423
               Height = 13
               Color = 14342874
-              DataField = 'PROVEEDOR'
+              DataField = 'NOMBRE'
               DataSource = DS_VerCpb
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
@@ -2397,7 +1507,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
               ParentFont = False
             end
             object Label31: TLabel
-              Left = 327
+              Left = 155
               Top = 36
               Width = 50
               Height = 13
@@ -2405,7 +1515,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
               Caption = 'N'#250'mero:'
             end
             object DBText5: TDBText
-              Left = 378
+              Left = 206
               Top = 36
               Width = 40
               Height = 13
@@ -2422,7 +1532,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
               ParentFont = False
             end
             object DBText32: TDBText
-              Left = 424
+              Left = 252
               Top = 36
               Width = 71
               Height = 13
@@ -2463,6 +1573,637 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
               TabOrder = 0
             end
           end
+        end
+      end
+    end
+    object PanelEditar: TPanel
+      Left = 0
+      Top = 0
+      Width = 906
+      Height = 539
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 5
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 1
+      object PanelEditar_DatosGral: TPanel
+        Left = 5
+        Top = 5
+        Width = 896
+        Height = 177
+        Align = alTop
+        TabOrder = 0
+        DesignSize = (
+          896
+          177)
+        object btnBuscarObraSocial: TSpeedButton
+          Left = 7
+          Top = 11
+          Width = 50
+          Height = 50
+          Hint = 'Buscar una empresa para asociar al comprobante'
+          GroupIndex = 2
+          Caption = '(F1)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Layout = blGlyphTop
+          ParentFont = False
+          OnClick = btnBuscarObraSocialClick
+        end
+        object PanelEditar_DatosGralProveedor: TPanel
+          Left = 66
+          Top = 7
+          Width = 633
+          Height = 74
+          Anchors = [akLeft]
+          BevelOuter = bvNone
+          TabOrder = 0
+          object Label14: TLabel
+            Left = 438
+            Top = 40
+            Width = 57
+            Height = 13
+            Caption = 'Provincia:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Visible = False
+          end
+          object Label15: TLabel
+            Left = 142
+            Top = 40
+            Width = 58
+            Height = 13
+            Caption = 'Localidad:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label16: TLabel
+            Left = 5
+            Top = 40
+            Width = 70
+            Height = 13
+            Caption = 'C'#243'd. Postal:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label17: TLabel
+            Left = 17
+            Top = 22
+            Width = 58
+            Height = 13
+            Caption = 'Direcci'#243'n:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label18: TLabel
+            Left = 150
+            Top = 5
+            Width = 50
+            Height = 13
+            Caption = 'Nombre:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label20: TLabel
+            Left = 30
+            Top = 5
+            Width = 45
+            Height = 13
+            Caption = 'C'#243'digo:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label21: TLabel
+            Left = 265
+            Top = 58
+            Width = 55
+            Height = 13
+            Caption = 'Cuit/Cuil:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label22: TLabel
+            Left = 49
+            Top = 58
+            Width = 26
+            Height = 13
+            Caption = 'IVA:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object DBText6: TDBText
+            Left = 76
+            Top = 22
+            Width = 545
+            Height = 13
+            DataField = 'DIRECCION'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText17: TDBText
+            Left = 201
+            Top = 5
+            Width = 420
+            Height = 13
+            DataField = 'NOMBRE'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText18: TDBText
+            Left = 76
+            Top = 5
+            Width = 65
+            Height = 13
+            DataField = 'CODIGO'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText19: TDBText
+            Left = 322
+            Top = 58
+            Width = 114
+            Height = 13
+            DataField = 'CUIT_CUIL'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText20: TDBText
+            Left = 76
+            Top = 58
+            Width = 181
+            Height = 13
+            DataField = 'NOMBRE_TIPO_IVA'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText23: TDBText
+            Left = 496
+            Top = 40
+            Width = 133
+            Height = 13
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Visible = False
+          end
+          object DBText24: TDBText
+            Left = 202
+            Top = 40
+            Width = 232
+            Height = 13
+            DataField = 'LOCALIDAD'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText25: TDBText
+            Left = 77
+            Top = 40
+            Width = 57
+            Height = 13
+            DataField = 'CODIGO_POSTAL'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object DBMemoCPB_Observacion: TDBMemo
+          Left = 66
+          Top = 126
+          Width = 633
+          Height = 46
+          DataField = 'OBSERVACION'
+          DataSource = DS_Comprobante
+          ScrollBars = ssVertical
+          TabOrder = 2
+        end
+        object PanelFechas: TPanel
+          Left = 64
+          Top = 82
+          Width = 637
+          Height = 42
+          BevelOuter = bvNone
+          TabOrder = 1
+          object Label12: TLabel
+            Left = 11
+            Top = 1
+            Width = 79
+            Height = 13
+            Caption = 'Fecha Factura'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label19: TLabel
+            Left = 131
+            Top = 1
+            Width = 49
+            Height = 13
+            Caption = 'Pto. Vta.'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label23: TLabel
+            Left = 195
+            Top = 1
+            Width = 45
+            Height = 13
+            Caption = 'N'#250'mero'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object PanelFechaEmision: TPanel
+            Left = 0
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 0
+            object lblTituloFecha_Carga: TLabel
+              Left = 12
+              Top = 1
+              Width = 72
+              Height = 13
+              Caption = 'Fecha Carga'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateCarga: TEKDBDateTimePicker
+              Left = 11
+              Top = 14
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA'
+              DataSource = DS_Comprobante
+            end
+          end
+          object DBEditPuntoVenta: TDBEdit
+            Left = 131
+            Top = 14
+            Width = 54
+            Height = 21
+            DataField = 'PUNTO_VENTA'
+            DataSource = DS_Comprobante
+            TabOrder = 1
+          end
+          object DBEditNumeroCpb: TDBEdit
+            Left = 195
+            Top = 14
+            Width = 121
+            Height = 21
+            DataField = 'NUMERO_CPB'
+            DataSource = DS_Comprobante
+            TabOrder = 2
+          end
+        end
+      end
+      object PanelEditar_Producto: TPanel
+        Left = 5
+        Top = 182
+        Width = 896
+        Height = 352
+        Align = alClient
+        TabOrder = 1
+        object Label6: TLabel
+          Left = 1
+          Top = 1
+          Width = 894
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'LISTADO DE PRODUCTOS (F3 = Agregar un Producto)'
+          Color = clBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object PanelEditar_ProductoInfo: TPanel
+          Left = 1
+          Top = 310
+          Width = 894
+          Height = 41
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 1
+          DesignSize = (
+            894
+            41)
+          object Label25: TLabel
+            Left = 348
+            Top = 3
+            Width = 111
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Cantidad Productos'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label26: TLabel
+            Left = 484
+            Top = 3
+            Width = 121
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Total Base Imponible'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label29: TLabel
+            Left = 757
+            Top = 3
+            Width = 58
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Total Final'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label30: TLabel
+            Left = 621
+            Top = 3
+            Width = 51
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Total Iva'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object btnEliminarProducto: TButton
+            Left = 164
+            Top = 1
+            Width = 145
+            Height = 18
+            Caption = 'Quitar (Ctrl+Delete)'
+            TabOrder = 0
+            OnClick = btnEliminarProductoClick
+          end
+          object editTotalProductos: TEdit
+            Left = 348
+            Top = 17
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 1
+          end
+          object editTotalImponible: TEdit
+            Left = 484
+            Top = 17
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object editTotalIva: TEdit
+            Left = 620
+            Top = 17
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 3
+          end
+          object editTotalFinal: TEdit
+            Left = 756
+            Top = 17
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 4
+          end
+        end
+        object DBGridEditar_Producto: TDBGrid
+          Left = 1
+          Top = 14
+          Width = 894
+          Height = 296
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_CpbProducto
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = Popup_Producto
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridEditar_ProductoDrawColumnCell
+          OnKeyDown = DBGridEditar_ProductoKeyDown
+          OnKeyUp = DBGridEditar_ProductoKeyUp
+          Columns = <
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = '_Afiliado_Nombre'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Afiliado'
+              Width = 192
+              Visible = True
+            end
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = '_Afiliado_Numero'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Nro. Afiliado'
+              Width = 109
+              Visible = True
+            end
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = '_Producto'
+              Title.Alignment = taCenter
+              Title.Caption = 'Producto'
+              Width = 358
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cantidad'
+              Width = 61
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_FINAL'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Total'
+              Width = 101
+              Visible = True
+            end>
         end
       end
     end
@@ -3149,7 +2890,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     Left = 227
     Top = 218
     Bitmap = {
-      494C010102000400040030003000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010103000400040030003000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000C00000003000000001002000000000000090
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3214,7 +2955,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000095969C0095969C000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3238,7 +2979,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000008F91A100757895007578950081839900999AA400000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3262,7 +3003,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000898A99006C6F9300595E9F00555CA0005E63960075789500999AA4000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3285,9 +3026,9 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       49004A4949004A4949004A4949004A4949004A4949004A4949004A4949004A49
       4900737373000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000008C8E
+      A2006E739F005D63AB00535DC000535DC000565EBB00646AA7007A7D9E009697
+      A500000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3309,9 +3050,9 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000004343430000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000000000000000000000007E8093006368
+      9600565EB600515BD100525FE900525FE900525EE100535DC0005A61A9006E71
+      95009496A2000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3333,9 +3074,9 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000A0A0A0000000000000000000A0A0A00000000000A0A0A000000
       0000000000004A49490000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000008F91A1006A6E9C005D63
+      AB00515BD100525EE1005461F6005461F600525FE900525EE100565EBB005D63
+      AB00777A9C009496A20000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3357,9 +3098,9 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       000000000000000000000A0A0A00000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000888895006E739F00575EB200515B
+      D1005360EA005461F6005462FA005462FA005462FA005461F600525EE100535D
+      C0005A61A900757895009697A500000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3381,9 +3122,9 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0A000A0A0A000A0A0A000A0A0A000A0A0A000A0A0A000A0A0A000A0A0A000A0A
       0A00333333000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000999AA40086879C006E739F005D63AB00555FCE00545E
+      E5005461F6005462FA005462FA005462FA005462FA005461F6005360EA00525E
+      E100565EBB005A61A9007A7D9E008F909C00999AA40000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3404,11 +3145,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       49004A49490035576D0098CFFF009DD8FF0096D0FE009DD8FF007AA8C9001313
       13002424240024242400242424002424240024242400242424002C2B2B002424
       2400000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000007D7E860075768200757682007576
+      8200757682006B6E86006B6E860060659600565DAB00555FCE00545EE5005461
+      F6005462FA005462FA005C69FA005967FC005967FC005462FA005462FA005461
+      F600525EE100555EC9005B61A20062668A006B6E860075768200757682007576
+      8200757682007778840090919600000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3428,11 +3169,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       54004A4949005481A00098CFFF009DD8FF009DD8FF0098CFFF0092C8EE002424
       2400434343003D3D3D00434343003D3D3D00434343003D3D3D00333333007373
       7300000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000999AA4007E80930062668A0061659A005A61A9005A61
+      A9005A61A9006066A8005D63AB00565EBB00515BD100525EE1005461F6005462
+      FA005C69FA005C69FA006975FC006975FC006471FB005C69FA005967FC005461
+      F6005461F6005460DE00535DC000565EB6005D63AB005D63AB005D63AB005A61
+      A9005B61A2006065960075789500888895000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3452,11 +3193,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       6400393E41007DB4DB009DD8FF009DD8FF009DD8FF009DD8FF009DD8FF003649
       56005454540054545400545454004A4949005B5B5B0000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000007D7E860060659600565EB600535DC000525EE1005661
+      E5005661E5005561E9005360EA005360EA005865F2005461F6005462FA005967
+      FC005C69FA006975FC007C86FC007E88FC007580FC006471FB005C69FA005462
+      FA005461F6005461F6005461F6005360EA005360EA005561E9005561E9005661
+      E500555FD900535DC000595E9F00686A8A00999AA40000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3476,11 +3217,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       7200324E5E009DD8FF009DD8FF009DD8FF009DD8FF00ACDBFE00A3D8FE005A7B
       9300434343005B5B5B0000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006E7080005C619A00535DC000525EE1005461F6005462
+      FA005967FC005462FA005462FA005462FA005462FA005462FA005462FA005967
+      FC00616EFC007580FC008D96FC00919AFC00858EFC007580FC00616EFC005462
+      FA005462FA005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005360EA00525EE100565EB60062668A009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3500,11 +3241,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       84001B6792008CC8EE0098CFFF008DCAF30094CEF600ACDBFE00ACDBFE0063A1
       C5003360780077868E0000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006B6E86005A61A900515BD1005461F6005461F6005462
+      FA005462FA005462FA005462FA005462FA005462FA005462FA005462FA005C69
+      FA006471FB007E88FC009DA5FC00A4ABFC00919AFC007E88FC006471FB005C69
+      FA005462FA005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA00525EE100565EBB0061659A009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3524,11 +3265,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       84001B67920074B3DC007CBBE50087C1EF008AC2EC007CBBE5007CC1E1004B8D
       B5001365900013659000296C8E00000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000757682005A61A900525EDC00525FE9005462FA005462
+      FA005462FA005462FA005462FA005462FA005462FA005462FA005462FA005C69
+      FA006D79FC008D96FC00ACB2FC00B4BAFC00A4ABFC008892FB006D79FC005967
+      FC005462FA005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA00575FBE0061659A009293A50000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3548,11 +3289,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       8800236B94008AC2EC0098CFFF0098CFFF0096D0FE0083B9E2006698C0002D6C
       950018527B00135A840013659000247095000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000686A8A006066A800525EDC005461F6005461F6005462
+      FA005462FA005462FA005462FA005462FA005462FA005462FA005462FA00616E
+      FC00717DFC00919AFC00BFC4FC00C5C9FD00ACB2FC00919AFC006D79FC005C69
+      FA005462FA005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3572,11 +3313,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       92007DB4DB00A8D6FE0098CFFF0098CFFF0095CEFE0095CEFE0098CFFF0092C7
       EC002074A00013628D00135E880011709E00678D9F0000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000757682005D63AB005460DE005360EA005462FA005462
+      FA005462FA005462FA005462FA005462FA005462FA005462FA005462FA006471
+      FB007C86FC009DA5FC00C5C9FD00CDD1FD00B4BAFC009DA5FC007580FC005C69
+      FA005967FC005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3596,11 +3337,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       D100ACDBFE0098CFFF0098CFFF0096D0FE0095CEFE0096D0FE0098CFFF0098CF
       FF0074B3DC0011709E0011709E0011709E003D7DA20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006E7189005D63AB005460DE005461F6005461F6005462
+      FA005462FA005462FA005462FA005462FA005462FA005462FA005967FC006975
+      FC008D96FC00A4ABFC00C9CDFD00D1D5FD00BFC4FC009DA5FC007580FC00616E
+      FC005967FC005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005461F600565EBB0061659A009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3620,11 +3361,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       EB00A8D6FE0096D0FE0096D0FE0096D0FE0098CFFF00A8D6FE0098CFFF0098CF
       FF0087C1EF001E79A40011709E001174A300367DA10000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000707288005D63AB005460DE005461F6005461F6005462
+      FA005462FA005462FA005462FA005462FA005462FA005462FA005C69FA006D79
+      FC008D96FC00ACB2FC00C9CDFD00D1D5FD00C1C6FC00A4ABFC007E88FC006471
+      FB005967FC005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3644,11 +3385,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       FD0098CFFF0096D0FE0096D0FE0098CFFF00A3D8FE00ACDBFE00B6E0FE00ACDB
       FE0094CEF6001D7EAC000E76A6000D7EB0004187A70000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000757682005D63AB005460DE005360EA005462FA005462
+      FA005462FA005462FA005462FA005462FA005462FA005462FA005C69FA00717D
+      FC00919AFC00ACB2FC00C9CDFD00CDD1FD00C5C9FD00ACB2FC00858EFC006471
+      FB005C69FA005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA005962C0006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3668,11 +3409,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       FE0098CFFF009DD8FF009DD8FF00A3D8FE00ACDBFE00B6E0FE00C2E5FE00CBE9
       FE00BBE2FE002C8DBA001079A9000C82B4005CA1BF0000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006E7189005D63AB005460DE005461F6005462FA005462
+      FA005462FA005462FA005462FA005462FA005462FA005967FC005C69FA00717D
+      FC009DA5FC00B4BAFC00C5C9FD00CDD1FD00C5C9FD00ACB2FC008892FB006D79
+      FC005C69FA005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3692,11 +3433,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       FE0098CFFF009DD8FF00A3D8FE00ACDBFE00B6E0FE00C2E5FE00C7E8FE00D2EC
       FD00D8EFFE00439BC4000E7AAB000C86B80080A4B60000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000707288005D63AB005460DE005461F6005461F6005462
+      FA005462FA005462FA005462FA005462FA005462FA005462FA005C69FA007580
+      FC009DA5FC00B4BAFC00CDD1FD00CDD1FD00CDD1FD00B0B6FC008D96FC006975
+      FC005C69FA005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005461F600565EBB0061659A009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3716,11 +3457,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       FE009DD8FF0098CFFF00ACDBFE00B6E0FE00C2E5FE00C7E8FE00D2ECFD00D8EF
       FE00E2F3FE00439BC4000E7AAB000C82B4000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000757682005D63AB005460DE005360EA005462FA005462
+      FA005462FA005462FA005462FA005462FA005462FA005967FC00616EFC007C86
+      FC00A4ABFC00BFC4FC00C5C9FD00CDD1FD00C5C9FD00B4BAFC008F98FC00717D
+      FC00616EFC005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3740,11 +3481,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       EA0061AFDF005CABD5007CC1E100BBE2FE00C7E8FE00D2ECFD00D8EFFE00E2F3
       FE00E2F3FE002C8DBA000C82B4001485B6000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006E7189005D63AB005460DE005461F6005462FA005462
+      FA005462FA005462FA005462FA005462FA005462FA005C69FA006471FB00858E
+      FC00ACB2FC00BFC4FC00BFC4FC00C2C8FD00CDD1FD00BFC4FC0097A0FC007E88
+      FC006471FB005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3764,11 +3505,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       A3000E76A6002C8DBA002788B800B6E0FE00CBE9FE00D8EFFE00E2F3FE00E8F6
       FE00B6D8EC001485B6000C82B4004493B7000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000707288005D63AB005460DE005360EA005462FA005462
+      FA005462FA005462FA005462FA005462FA005462FA005C69FA006975FC008892
+      FB00B4BAFC00C5C9FD00BFC4FC00BFC4FC00C5C9FD00BFC4FC00A4ABFC008892
+      FB006975FC005C69FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005461F600565EBB006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3788,11 +3529,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       A6000E76A6000E76A6000E7AAB005CABD500D8EFFE00D8EFFE00E8F6FE00EEF8
       FE0055ACD0000C82B4000C86B800000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000757682005D63AB00545EE5005461F6005462FA005462
+      FA005462FA005462FA005462FA005462FA005462FA005C69FA006975FC008F98
+      FC00BFC4FC00CDD1FD00C5C9FD00C9CDFD00CDD1FD00BFC4FC00A8AFFC008D96
+      FC006D79FC005462FA005462FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA00575FBE0061659A009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3812,11 +3553,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       AB000E7AAB000E7AAB000E7AAB001485B6009ED1EC00E8F6FE00E8F6FE007CC1
       E1000C86B8000C86B8000C89BC00000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006E7189005D63AB005460DE005360EA005462FA005462
+      FA005462FA005462FA005462FA005462FA005462FA006471FB007C86FC009DA5
+      FC00BFC4FC00CDD1FD00C5C9FD00C2C8FD00C5C9FD00C5C9FD00B0B6FC0097A0
+      FC007580FC005C69FA005C69FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3836,11 +3577,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       AB000E7AAB000D7EB0000C82B4000E7AAB002394C300B3DDF40051AFD9000C89
       BC000C86B8000C89BC005AADCF00000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000757682005D63AB005460DE005461F6005462FA005462
+      FA005462FA005462FA005462FA005462FA005462FA00717DFC00919AFC00ACB2
+      FC00B4BAFC00B4BAFC00B0B6FC00B4BAFC00BFC4FC00BFC4FC00C5C9FD00ACB2
+      FC008D96FC006D79FC005C69FA005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3860,11 +3601,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       AB000C82B4000D7EB0000C82B4000C82B4000C82B4000D8CC0000C89BC000C89
       BC000C89BC00148EC00000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006E7189005D63AB005460DE005360EA005462FA005462
+      FA005462FA005462FA005462FA005462FA005462FA007C86FC00ACB2FC00BFC4
+      FC00B0B6FC00ACB2FC00A4ABFC00A4ABFC00ACB2FC00BFC4FC00C5C9FD00BFC4
+      FC00919AFC007580FC00616EFC005462FA005462FA005462FA005462FA005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3884,11 +3625,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       B4000C82B4000C82B4000C82B4000C86B8000C86B8000C89BC000C89BC000C89
       BC000D8CC0000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000757682005D63AB00545EE5005461F6005462FA005462
+      FA005462FA005462FA005462FA005967FC005C69FA007C86FC00ACB2FC00BFC4
+      FC00B4BAFC00ACB2FC00A0A7FC00A0A7FC00A8AFFC00B4BAFC00BFC4FC00B4BA
+      FC0097A0FC007580FC006471FB005462FA005462FA005462FA005462FA005462
+      FA005462FA005461F600565EBB0061659A009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3908,11 +3649,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       00001485B6000C82B4000C89BC000C86B8000C89BC000C89BC000D8CC0001C94
       C500000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006E7189005D63AB005460DE005360EA005462FA005462
+      FA005462FA005462FA005462FA005C69FA00616EFC00858EFC00ACB2FC00B4BA
+      FC00B4BAFC00ACB2FC009DA5FC009DA5FC00A0A7FC00ACB2FC00B4BAFC00B4BA
+      FC00919AFC007E88FC006471FB005967FC005462FA005967FC005462FA005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3932,11 +3673,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       00000000000075BAD6003BA0C8002394C3002394C30044A4CC00000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000707288005D63AB005460DE005461F6005462FA005462
+      FA005462FA005967FC005C69FA006471FB006D79FC00858EFC00A4ABFC00B4BA
+      FC00B4BAFC00ACB2FC009DA5FC0097A0FC00A0A7FC00A8AFFC00B4BAFC00ACB2
+      FC0097A0FC00858EFC006D79FC006471FB005C69FA005462FA005967FC005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3956,11 +3697,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000707288005D63AB005460DE005360EA005462FA005462
+      FA005C69FA00616EFC006D79FC007C86FC00858EFC00919AFC00ACB2FC00B4BA
+      FC00BFC4FC00ACB2FC00A0A7FC009DA5FC00A4ABFC00ACB2FC00B4BAFC00B4BA
+      FC00A4ABFC00919AFC008892FB007580FC006975FC00616EFC005967FC005967
+      FC005462FA005461F600565EBB006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -3980,11 +3721,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000707288005D63AB005460DE005461F6005462FA005C69
+      FA006975FC007E88FC008F98FC00A4ABFC00B4BAFC00C5C9FD00CDD1FD00D1D5
+      FD00D1D5FD00C5C9FD00ACB2FC00A8AFFC00B4BAFC00C5C9FD00D1D5FD00D4D8
+      FD00CDD1FD00C1C6FC00B4BAFC00A4ABFC008D96FC007C86FC006471FB005967
+      FC005865F200525FE900575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4004,11 +3745,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000757682005D63AB005460DE005360EA005462FA006975
+      FC007C86FC00919AFC00ACB2FC00C1C6FC00D1D5FD00DEE1FD00E6E8FD00E6E8
+      FD00E0E2FD00CDD1FD00B4BAFC00B4BAFC00BFC4FC00CDD1FD00DEE1FD00E6E8
+      FD00E6E8FD00DEE1FD00D1D5FD00C1C6FC00A4ABFC008D96FC007C86FC00616E
+      FC005C69FA005461F600565EBB0061659A009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4028,11 +3769,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006E7189005D63AB005460DE005461F6005C69FA00717D
+      FC008D96FC00A4ABFC00B4BAFC00BFC4FC00C9CDFD00D1D5FD00D9DDFD00D9DD
+      FD00D1D5FD00C5C9FD00B4BAFC00B4BAFC00B4BAFC00C1C6FC00D1D5FD00D9DD
+      FD00D4D8FD00D1D5FD00C9CDFD00BFC4FC00ACB2FC009DA5FC00858EFC006975
+      FC00616DFA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4052,11 +3793,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000707288005D63AB005460DE005461F6005C69F200717D
+      FC00919AFC00A0A7FC00ACB2FC00B0B6FC00B4BAFC00BFC4FC00C5C9FD00C1C6
+      FC00BBC0FC00B4BAFC00B4BAFC00ACB2FC00ACB2FC00ACB2FC00BFC4FC00C5C9
+      FD00C1C6FC00BFC4FC00B4BAFC00ACB2FC00A8AFFC009DA5FC00858EFC00717D
+      FC00616DFA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4076,11 +3817,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000757682005D63AB005460DE005360EA005967FC006471
+      FB00717DFC007C86FC007C86FC007E88FC00858EFC008892FB008892FB008F98
+      FC00919AFC009DA5FC00B4BAFC00B4BAFC00A0A7FC00919AFC008F98FC008D96
+      FC008D96FC00858EFC00858EFC007E88FC007C86FC007580FC006975FC00616D
+      FA005C69F2005461F600565EBB0061659A009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4100,11 +3841,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000006E7189005A61A9005460DE005360EA005462FA005462
+      FA005967FC005462FA005967FC005462FA005C69FA005462FA005C69FA006471
+      FB006D79FC00858EFC00ACB2FC00ACB2FC008F98FC007C86FC006975FC005C69
+      FA005C69FA005C69FA005462FA005C69FA005462FA005C69FA005462FA005462
+      FA005462FA005360EA00575FBE006066A8009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4124,11 +3865,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000757682005B61A200555FCE00525FE9005461F6005462
+      FA005967FC005462FA005967FC005462FA005462FA005C69FA005967FC005C69
+      FA00616EFC006D79FC00858EFC008892FB007580FC006471FB00616EFC005967
+      FC005462FA005967FC005967FC005462FA005462FA005462FA005462FA005462
+      FA005461F600525EE100575EB200606596009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4148,11 +3889,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000007576820061659A00535DC000525EDC005360EA005461
+      F6005461F6005461F6005360EA005865F2005461F6005461F6005461F6005461
+      F6005865F2005C69F2006571F2006571F200616DFA005C69F2005461F6005461
+      F6005360EA005461F6005461F6005865F2005461F6005461F6005360EA005461
+      F600545EE500515BD100565DAB0062668A009496A20000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4172,11 +3913,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000898A9900757895006066A8005D63AB005A62BA005A62
+      BA005A62BA005962C0005962C0005962C0005962C0005A62BA005962C0005962
+      C0005A62BA006169C1006169C1006169C1005962C0006169C1005A62BA005962
+      C0005962C0005A62BA005962C0005A62BA005A62BA005962C0005962C0005A62
+      BA005A62BA005D63AB006368960076788C000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4196,11 +3937,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000008888950070728800676A8E00636896006368
+      960063689600636896006368960063689600636896006368960063689600646A
+      A700636896006368960063689600636896006368960063689600646AA7006368
+      960063689600646AA7006368960063689600646AA70063689600636896006368
+      960063689600696B870070728800909196000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4220,11 +3961,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
-      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000999AA4009697A5009496A2009496
+      A2009496A2009293A5009293A5009293A5009293A5009293A5009293A5009496
+      A2009496A2009293A5009293A5009293A5009293A5009293A5009496A2009496
+      A2009496A2009496A2008F91A1009293A5009496A2009496A2009496A2009496
+      A2009496A2009496A20000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -4305,43 +4046,43 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000000000000000424D3E000000000000003E000000
       28000000C0000000300000000100010000000000800400000000000000000000
-      000000000000000000000000FFFFFF00FFFFFFFFFFFFFFFFFFFFFFFF00000000
-      0000000000000000FFFFFFC7FFFFFFFFFFFFFFFF000000000000000000000000
-      FFFFFE03FFFFFFFFFFFFFFFF000000000000000000000000FFFFF000FFFFFFFF
-      FFFFFFFF000000000000000000000000FFFF80007FFFFFFFFFFFFFFF00000000
-      0000000000000000FFFC00001FFFFFFFF0000007000000000000000000000000
-      FFE0000007FFFFFFE0000003000000000000000000000000FF00000003FFFFFF
-      E0000003000000000000000000000000F800000000FFFFFFE000000700000000
-      0000000000000000C0000000007FFFFFF0000007000000000000000000000000
-      80000000001FFFFFF000000F00000000000000000000000000000000000FF000
-      0000000F000000000000000000000000800000000003E0000000007F00000000
-      0000000000000000E00000000001C000000003FF000000000000000000000000
-      F80000000001E000000003FF000000000000000000000000FE0000000001E000
-      000001FF000000000000000000000000FF800000000FE000000000FF00000000
-      0000000000000000FFC00000007FE0000000007F000000000000000000000000
-      FFE0000001FFE0000000007F000000000000000000000000FFE0000003FFE000
-      0000007F000000000000000000000000FFE0000003FFF0000000007F00000000
-      0000000000000000FFE0000003FFF0000000007F000000000000000000000000
-      FFE0000003FFF8000000007F000000000000000000000000FFE0000003FFFF00
-      000000FF000000000000000000000000FFE0000003FFFFF0008000FF00000000
-      0000000000000000FFE0000003FFFFFC078000FF000000000000000000000000
-      FFE0000003FFFFFC078001FF000000000000000000000000FFE0000003FFFFF8
-      078001FF000000000000000000000000FFE0000003FFFFF003C001FF00000000
-      0000000000000000FFE0000003FFFFF001C003FF000000000000000000000000
-      FFE0000003FFFFF001E007FF000000000000000000000000FFE0000003FFFFE0
-      01F00FFF000000000000000000000000FFE0000003FFFFE001F83FFF00000000
-      0000000000000000FFE0000003FFFFE000FFFFFF000000000000000000000000
-      FFE0000003FFFFC0007FFFFF000000000000000000000000FFE0000003FFFFC0
-      007FFFFF000000000000000000000000FFE0000003FFFFC0007FFFFF00000000
-      0000000000000000FFE0000003FFFF80007FFFFF000000000000000000000000
-      FFE0000003FFFF80007FFFFF000000000000000000000000FFE0000003FFFFC0
-      007FFFFF000000000000000000000000FFE0000003FFFFC0007FFFFF00000000
-      0000000000000000FFF0000003FFFFE000FFFFFF000000000000000000000000
-      FFF8000003FFFFE001FFFFFF000000000000000000000000FFFE00000FFFFFF0
-      03FFFFFF000000000000000000000000FFFFC000FFFFFFF80FFFFFFF00000000
-      0000000000000000FFFFF81FFFFFFFFFFFFFFFFF000000000000000000000000
-      FFFFFFFFFFFFFFFFFFFFFFFF000000000000000000000000FFFFFFFFFFFFFFFF
-      FFFFFFFF00000000000000000000000000000000000000000000000000000000
+      000000000000000000000000FFFFFF00FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      FFFF000000000000FFFFFFC7FFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000
+      FFFFFE03FFFFFFFFFFFFFFFFFFFFFCFFFFFF000000000000FFFFF000FFFFFFFF
+      FFFFFFFFFFFFF83FFFFF000000000000FFFF80007FFFFFFFFFFFFFFFFFFFF01F
+      FFFF000000000000FFFC00001FFFFFFFF0000007FFFFE00FFFFF000000000000
+      FFE0000007FFFFFFE0000003FFFFC007FFFF000000000000FF00000003FFFFFF
+      E0000003FFFF8003FFFF000000000000F800000000FFFFFFE0000007FFFF0001
+      FFFF000000000000C0000000007FFFFFF0000007FFFC00007FFF000000000000
+      80000000001FFFFFF000000FFF00000001FF00000000000000000000000FF000
+      0000000FFC00000000FF000000000000800000000003E0000000007FFC000000
+      007F000000000000E00000000001C000000003FFFC000000007F000000000000
+      F80000000001E000000003FFFC000000007F000000000000FE0000000001E000
+      000001FFFC000000007F000000000000FF800000000FE000000000FFFC000000
+      007F000000000000FFC00000007FE0000000007FFC000000007F000000000000
+      FFE0000001FFE0000000007FFC000000007F000000000000FFE0000003FFE000
+      0000007FFC000000007F000000000000FFE0000003FFF0000000007FFC000000
+      007F000000000000FFE0000003FFF0000000007FFC000000007F000000000000
+      FFE0000003FFF8000000007FFC000000007F000000000000FFE0000003FFFF00
+      000000FFFC000000007F000000000000FFE0000003FFFFF0008000FFFC000000
+      007F000000000000FFE0000003FFFFFC078000FFFC000000007F000000000000
+      FFE0000003FFFFFC078001FFFC000000007F000000000000FFE0000003FFFFF8
+      078001FFFC000000007F000000000000FFE0000003FFFFF003C001FFFC000000
+      007F000000000000FFE0000003FFFFF001C003FFFC000000007F000000000000
+      FFE0000003FFFFF001E007FFFC000000007F000000000000FFE0000003FFFFE0
+      01F00FFFFC000000007F000000000000FFE0000003FFFFE001F83FFFFC000000
+      007F000000000000FFE0000003FFFFE000FFFFFFFC000000007F000000000000
+      FFE0000003FFFFC0007FFFFFFC000000007F000000000000FFE0000003FFFFC0
+      007FFFFFFC000000007F000000000000FFE0000003FFFFC0007FFFFFFC000000
+      007F000000000000FFE0000003FFFF80007FFFFFFC000000007F000000000000
+      FFE0000003FFFF80007FFFFFFC000000007F000000000000FFE0000003FFFFC0
+      007FFFFFFC000000007F000000000000FFE0000003FFFFC0007FFFFFFC000000
+      007F000000000000FFF0000003FFFFE000FFFFFFFC000000007F000000000000
+      FFF8000003FFFFE001FFFFFFFC00000000FF000000000000FFFE00000FFFFFF0
+      03FFFFFFFE00000000FF000000000000FFFFC000FFFFFFF80FFFFFFFFF000000
+      03FF000000000000FFFFF81FFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000
+      FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF000000000000FFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFFFFFFFF00000000000000000000000000000000000000000000
       000000000000}
   end
   object ZQ_VerCpb: TZQuery
@@ -4428,9 +4169,6 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     end
     object ZQ_VerCpbIMAGEN: TBlobField
       FieldName = 'IMAGEN'
-    end
-    object ZQ_VerCpbID_PROVEEDOR: TIntegerField
-      FieldName = 'ID_PROVEEDOR'
     end
     object ZQ_VerCpbCODIGO_1: TStringField
       FieldName = 'CODIGO_1'
@@ -4571,7 +4309,6 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     Top = 136
   end
   object EKOrd_VerCpb: TEKOrdenarGrilla
-    Grilla = DBGridListaCpb
     Filtros = <
       item
         TituloColumna = 'Fecha Carga'
@@ -4605,7 +4342,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         TituloColumna = 'ID'
         Visible = True
       end>
-    NombreGuardar = 'ABM_FC_VerCpb'
+    NombreGuardar = 'ABM_FOS_VerCpb'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -4615,7 +4352,6 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     Top = 152
   end
   object EKOrd_VerCpb_Producto: TEKOrdenarGrilla
-    Grilla = DBGridCpbActual_Producto
     Filtros = <
       item
         TituloColumna = 'C'#243'd. Barra'
@@ -4637,7 +4373,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         TituloColumna = 'Importe Final'
         Visible = True
       end>
-    NombreGuardar = 'ABM_FC_VerProductos'
+    NombreGuardar = 'ABM_FOS_VerProductos'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -4649,124 +4385,99 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
   end
   object EKListadoEntidad: TEKListadoSQL
     Modelo = DM.EKModelo
+    SQL.Strings = (
+      'select os.id_os, os.nombre as busqueda'
+      'from optica_os os'
+      'where os.baja = '#39'N'#39)
     CampoBuscar = 'busqueda'
-    CampoClave = 'id'
+    CampoClave = 'id_os'
     TituloVentana = 'Buscar'
-    Left = 293
-    Top = 480
+    Left = 461
+    Top = 368
   end
-  object ZQ_Proveedor: TZQuery
+  object ZQ_ObraSocial: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      
-        'select emp.id_empresa as id, emp.*, pro.nombre_provincia, iva.no' +
-        'mbre_tipo_iva,'
-      
-        '       iva.abreviatura as cod_iva, tipo.descripcion as tipo_Empr' +
-        'esa'
-      'from empresa emp'
-      
-        'left join tipo_empresa tipo on (emp.id_tipo_empresa = tipo.id_ti' +
-        'po_empresa)'
-      'left join tipo_iva iva on (emp.id_tipo_iva = iva.id_tipo_iva)'
-      'left join provincia pro on (emp.id_provincia = pro.id_provincia)'
-      'where emp.id_empresa = :id_empresa')
+      'select os.id_os as id, os.*, iva.nombre_tipo_iva,'
+      '       iva.abreviatura as cod_iva'
+      'from optica_os os'
+      'left join tipo_iva iva on (os.id_tipo_iva = iva.id_tipo_iva)'
+      'where os.id_os = :id_os')
     Params = <
       item
         DataType = ftUnknown
-        Name = 'id_empresa'
+        Name = 'id_os'
         ParamType = ptUnknown
       end>
-    Left = 205
-    Top = 424
+    Left = 461
+    Top = 256
     ParamData = <
       item
         DataType = ftUnknown
-        Name = 'id_empresa'
+        Name = 'id_os'
         ParamType = ptUnknown
       end>
-    object ZQ_ProveedorID: TIntegerField
+    object ZQ_ObraSocialID: TIntegerField
       FieldName = 'ID'
     end
-    object ZQ_ProveedorID_EMPRESA: TIntegerField
-      FieldName = 'ID_EMPRESA'
+    object ZQ_ObraSocialID_OS: TIntegerField
+      FieldName = 'ID_OS'
     end
-    object ZQ_ProveedorID_PROVINCIA: TIntegerField
-      FieldName = 'ID_PROVINCIA'
+    object ZQ_ObraSocialCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 100
     end
-    object ZQ_ProveedorID_TIPO_IVA: TIntegerField
-      FieldName = 'ID_TIPO_IVA'
-    end
-    object ZQ_ProveedorID_TIPO_EMPRESA: TIntegerField
-      FieldName = 'ID_TIPO_EMPRESA'
-    end
-    object ZQ_ProveedorCUIT_CUIL: TStringField
-      FieldName = 'CUIT_CUIL'
-      Size = 30
-    end
-    object ZQ_ProveedorNOMBRE: TStringField
+    object ZQ_ObraSocialNOMBRE: TStringField
       FieldName = 'NOMBRE'
       Size = 200
     end
-    object ZQ_ProveedorDIRECCION: TStringField
+    object ZQ_ObraSocialDIRECCION: TStringField
       FieldName = 'DIRECCION'
-      Size = 200
+      Size = 100
     end
-    object ZQ_ProveedorLOCALIDAD: TStringField
-      FieldName = 'LOCALIDAD'
-      Size = 200
-    end
-    object ZQ_ProveedorCODIGO_POSTAL: TStringField
-      FieldName = 'CODIGO_POSTAL'
-    end
-    object ZQ_ProveedorTELEFONO: TStringField
+    object ZQ_ObraSocialTELEFONO: TStringField
       FieldName = 'TELEFONO'
       Size = 100
     end
-    object ZQ_ProveedorEMAIL: TStringField
-      FieldName = 'EMAIL'
-      Size = 100
+    object ZQ_ObraSocialDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
     end
-    object ZQ_ProveedorPAGINA_WEB: TStringField
-      FieldName = 'PAGINA_WEB'
-      Size = 200
-    end
-    object ZQ_ProveedorBAJA: TStringField
+    object ZQ_ObraSocialBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
     end
-    object ZQ_ProveedorDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 500
+    object ZQ_ObraSocialCUIT_CUIL: TStringField
+      FieldName = 'CUIT_CUIL'
+      Size = 30
     end
-    object ZQ_ProveedorDESCRIPCION_PRIVADA: TStringField
-      FieldName = 'DESCRIPCION_PRIVADA'
-      Size = 1000
+    object ZQ_ObraSocialLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
     end
-    object ZQ_ProveedorNOMBRE_PROVINCIA: TStringField
-      FieldName = 'NOMBRE_PROVINCIA'
-      Size = 50
+    object ZQ_ObraSocialCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
     end
-    object ZQ_ProveedorNOMBRE_TIPO_IVA: TStringField
+    object ZQ_ObraSocialEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_ObraSocialID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_ObraSocialNOMBRE_TIPO_IVA: TStringField
       FieldName = 'NOMBRE_TIPO_IVA'
       Size = 50
     end
-    object ZQ_ProveedorCOD_IVA: TStringField
+    object ZQ_ObraSocialCOD_IVA: TStringField
       FieldName = 'COD_IVA'
       Size = 10
     end
-    object ZQ_ProveedorTIPO_EMPRESA: TStringField
-      FieldName = 'TIPO_EMPRESA'
-      Size = 100
-    end
-    object ZQ_ProveedorCODIGO_CORTO: TIntegerField
-      FieldName = 'CODIGO_CORTO'
-    end
   end
-  object DS_Proveedor: TDataSource
-    DataSet = ZQ_Proveedor
-    Left = 293
-    Top = 432
+  object DS_ObraSocial: TDataSource
+    DataSet = ZQ_ObraSocial
+    Left = 461
+    Top = 312
   end
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
@@ -4916,8 +4627,8 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         Name = 'id_comprobante'
         ParamType = ptUnknown
       end>
-    Left = 49
-    Top = 425
+    Left = 713
+    Top = 289
     ParamData = <
       item
         DataType = ftUnknown
@@ -4933,19 +4644,9 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     object ZQ_CpbProductoID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
     end
-    object ZQ_CpbProducto_CodBarra: TStringField
-      FieldKind = fkLookup
-      FieldName = '_CodBarra'
-      LookupDataSet = CD_Producto
-      LookupKeyFields = 'idProducto'
-      LookupResultField = 'codigoBarra'
-      KeyFields = 'ID_PRODUCTO'
-      Size = 40
-      Lookup = True
-    end
     object ZQ_CpbProducto_Nombre: TStringField
       FieldKind = fkLookup
-      FieldName = '_Nombre'
+      FieldName = '_Producto'
       LookupDataSet = CD_Producto
       LookupKeyFields = 'idProducto'
       LookupResultField = 'producto'
@@ -4955,52 +4656,22 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     end
     object ZQ_CpbProducto_Medida: TStringField
       FieldKind = fkLookup
-      FieldName = '_Medida'
+      FieldName = '_Afiliado_Nombre'
       LookupDataSet = CD_Producto
       LookupKeyFields = 'idProducto'
-      LookupResultField = 'medida'
+      LookupResultField = 'afiliado_nombre'
       KeyFields = 'ID_PRODUCTO'
-      Size = 30
+      Size = 200
       Lookup = True
     end
     object ZQ_CpbProducto_Color: TStringField
       FieldKind = fkLookup
-      FieldName = '_Color'
+      FieldName = '_Afiliado_Numero'
       LookupDataSet = CD_Producto
       LookupKeyFields = 'idProducto'
-      LookupResultField = 'color'
+      LookupResultField = 'afiliado_numero'
       KeyFields = 'ID_PRODUCTO'
-      Size = 30
-      Lookup = True
-    end
-    object ZQ_CpbProducto_Marca: TStringField
-      FieldKind = fkLookup
-      FieldName = '_Marca'
-      LookupDataSet = CD_Producto
-      LookupKeyFields = 'idProducto'
-      LookupResultField = 'marca'
-      KeyFields = 'ID_PRODUCTO'
-      Size = 50
-      Lookup = True
-    end
-    object ZQ_CpbProducto_TipoArticulo: TStringField
-      FieldKind = fkLookup
-      FieldName = '_TipoArticulo'
-      LookupDataSet = CD_Producto
-      LookupKeyFields = 'idProducto'
-      LookupResultField = 'tipoArticulo'
-      KeyFields = 'ID_PRODUCTO'
-      Size = 200
-      Lookup = True
-    end
-    object ZQ_CpbProducto_Articulo: TStringField
-      FieldKind = fkLookup
-      FieldName = '_Articulo'
-      LookupDataSet = CD_Producto
-      LookupKeyFields = 'idProducto'
-      LookupResultField = 'articulo'
-      KeyFields = 'ID_PRODUCTO'
-      Size = 200
+      Size = 100
       Lookup = True
     end
     object ZQ_CpbProductoDETALLE: TStringField
@@ -5009,11 +4680,9 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     end
     object ZQ_CpbProductoCANTIDAD: TFloatField
       FieldName = 'CANTIDAD'
-      OnChange = calcularImporteProducto
     end
     object ZQ_CpbProductoIMPORTE_UNITARIO: TFloatField
       FieldName = 'IMPORTE_UNITARIO'
-      OnChange = calcularImporteProducto
       currency = True
     end
     object ZQ_CpbProductoBASE_IMPONIBLE: TFloatField
@@ -5022,7 +4691,6 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     end
     object ZQ_CpbProductoPORC_IVA: TFloatField
       FieldName = 'PORC_IVA'
-      OnChange = calcularImporteProducto
     end
     object ZQ_CpbProductoIMPORTE_IVA: TFloatField
       FieldName = 'IMPORTE_IVA'
@@ -5048,8 +4716,8 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
   end
   object DS_CpbProducto: TDataSource
     DataSet = ZQ_CpbProducto
-    Left = 49
-    Top = 473
+    Left = 713
+    Top = 337
   end
   object ZP_CpbID: TZStoredProc
     Connection = DM.Conexion
@@ -5074,56 +4742,34 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
   end
   object DS_Producto: TDataSource
     DataSet = CD_Producto
-    Left = 128
-    Top = 473
+    Left = 792
+    Top = 337
   end
   object CD_Producto: TClientDataSet
     Aggregates = <>
     Params = <>
-    Left = 128
-    Top = 424
+    Left = 792
+    Top = 288
     object CD_Producto_idProducto: TIntegerField
       FieldName = 'idProducto'
     end
     object CD_Producto_producto: TStringField
       FieldName = 'producto'
-      Size = 100
-    end
-    object CD_Producto_medida: TStringField
-      FieldName = 'medida'
-      Size = 30
-    end
-    object CD_Producto_marca: TStringField
-      FieldName = 'marca'
-      Size = 50
-    end
-    object CD_Producto_tipoArticulo: TStringField
-      FieldName = 'tipoArticulo'
       Size = 200
     end
-    object CD_Producto_articulo: TStringField
-      FieldName = 'articulo'
+    object CD_Producto_afiliado_nombre: TStringField
+      FieldName = 'afiliado_nombre'
       Size = 200
     end
-    object CD_Producto_codigoBarra: TStringField
-      FieldName = 'codigoBarra'
-      Size = 40
-    end
-    object CD_Producto_codProducto: TStringField
-      FieldName = 'codProducto'
-    end
-    object CD_Producto_codCabecera: TStringField
-      FieldName = 'codCabecera'
-    end
-    object CD_Producto_color: TStringField
-      FieldName = 'color'
-      Size = 30
+    object CD_Producto_afiliado_numero: TStringField
+      FieldName = 'afiliado_numero'
+      Size = 500
     end
   end
   object Popup_Producto: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
-    Left = 208
-    Top = 479
+    Left = 592
+    Top = 295
     object PopItemProducto_Agregar: TMenuItem
       Caption = 'Agregar Producto (F3)'
       ImageIndex = 14
@@ -5213,26 +4859,17 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     Top = 88
   end
   object EKOrd_EditarProducto: TEKOrdenarGrilla
-    Grilla = DBGridEditar_Producto
     Filtros = <
       item
-        TituloColumna = 'C'#243'd. Barra'
+        TituloColumna = 'Afiliado'
         Visible = True
       end
       item
-        TituloColumna = 'Nombre'
+        TituloColumna = 'Nro. Afiliado'
         Visible = True
       end
       item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Marca'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Color'
+        TituloColumna = 'Producto'
         Visible = True
       end
       item
@@ -5240,30 +4877,10 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         Visible = True
       end
       item
-        TituloColumna = 'Importe Unitario'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Base Imponible'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Coef. IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe IVA'
-        Visible = True
-      end
-      item
         TituloColumna = 'Total'
         Visible = True
-      end
-      item
-        TituloColumna = 'Detalle'
-        Visible = True
       end>
-    NombreGuardar = 'ABM_FC_EditarProductos'
+    NombreGuardar = 'ABM_FOS_EditarProductos'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
