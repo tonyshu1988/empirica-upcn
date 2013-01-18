@@ -2196,6 +2196,18 @@ begin
         CD_FpagoIMPORTE.AsFloat:= acumulado - acumFpago;
       end;
 
+      //Si esta en modo Carga orden el coefPrecio siempre es 1 ya que no se puede modificar el precio.
+      // ni aplicar descuentos a cada producto en particular.. si al final
+      if modoCargaOrden then
+      begin
+        coefPrecio1 := 1;
+        coefPrecio2 := 1;
+        coefPrecio3 := 1;
+        coefPrecio4 := 1;
+        coefPrecio5 := 1;
+      end;
+
+
       if not (CD_Fpago_nroPrecio.IsNull) then
       begin
         case CD_Fpago_nroPrecio.AsInteger of
@@ -3191,6 +3203,7 @@ begin
       CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= Importe_Producto;
       CD_DetalleFacturaIMPORTE_COSTO.AsFloat:= ZQ_ProductosPRECIO_COSTO.AsFloat;
       CD_DetalleFacturaimporte_original.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
+
 
       ZQ_ColsPrecios.Close;
       ZQ_ColsPrecios.Open;
