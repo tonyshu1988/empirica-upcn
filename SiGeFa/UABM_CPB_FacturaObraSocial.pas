@@ -9,7 +9,7 @@ uses
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
-  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona, ZSqlUpdate,jpeg,
+  EKDbSuma, DBClient, Menus, UOP_BuscarProductosOS, ZSqlUpdate,jpeg,
   ExtDlgs;
 
 type
@@ -50,7 +50,7 @@ type
     PanelEditar_ProductoInfo: TPanel;
     DBGridEditar_Producto: TDBGrid;
     btnEliminarProducto: TButton;
-    btnBuscarEmpresa: TSpeedButton;
+    btnBuscarObraSocial: TSpeedButton;
     ImageListEntidad: TImageList;
     ZQ_VerCpb: TZQuery;
     ZQ_VerCpb_Producto: TZQuery;
@@ -77,10 +77,8 @@ type
     PanelCpbActual_ProductoDetalle: TPanel;
     GroupBox2: TGroupBox;
     DBMemoCpbActual_Producto: TDBMemo;
-    lblVerFecha_Cpb_Dev: TLabel;
     Label24: TLabel;
     DBTxtMonto: TDBText;
-    DBText2: TDBText;
     DBMemoCpbActual_Info: TDBMemo;
     DBText1: TDBText;
     Label1: TLabel;
@@ -89,30 +87,8 @@ type
     lblTipoComprobante: TLabel;
     EKListadoEntidad: TEKListadoSQL;
     PanelEditar_DatosGralProveedor: TPanel;
-    ZQ_Proveedor: TZQuery;
-    DS_Proveedor: TDataSource;
-    ZQ_ProveedorID: TIntegerField;
-    ZQ_ProveedorID_EMPRESA: TIntegerField;
-    ZQ_ProveedorID_PROVINCIA: TIntegerField;
-    ZQ_ProveedorID_TIPO_IVA: TIntegerField;
-    ZQ_ProveedorID_TIPO_EMPRESA: TIntegerField;
-    ZQ_ProveedorCUIT_CUIL: TStringField;
-    ZQ_ProveedorNOMBRE: TStringField;
-    ZQ_ProveedorDIRECCION: TStringField;
-    ZQ_ProveedorLOCALIDAD: TStringField;
-    ZQ_ProveedorCODIGO_POSTAL: TStringField;
-    ZQ_ProveedorTELEFONO: TStringField;
-    ZQ_ProveedorEMAIL: TStringField;
-    ZQ_ProveedorPAGINA_WEB: TStringField;
-    ZQ_ProveedorBAJA: TStringField;
-    ZQ_ProveedorDESCRIPCION: TStringField;
-    ZQ_ProveedorDESCRIPCION_PRIVADA: TStringField;
-    ZQ_ProveedorNOMBRE_PROVINCIA: TStringField;
-    ZQ_ProveedorNOMBRE_TIPO_IVA: TStringField;
-    ZQ_ProveedorCOD_IVA: TStringField;
-    ZQ_ProveedorTIPO_EMPRESA: TStringField;
-    ZQ_ProveedorCODIGO_CORTO: TIntegerField;
-    Label13: TLabel;
+    ZQ_ObraSocial: TZQuery;
+    DS_ObraSocial: TDataSource;
     Label14: TLabel;
     Label15: TLabel;
     Label16: TLabel;
@@ -126,7 +102,6 @@ type
     DBText18: TDBText;
     DBText19: TDBText;
     DBText20: TDBText;
-    DBText22: TDBText;
     DBText23: TDBText;
     DBText24: TDBText;
     DBText25: TDBText;
@@ -170,27 +145,18 @@ type
     ZQ_CpbProductoIMPORTE_UNITARIO: TFloatField;
     ZP_CpbID: TZStoredProc;
     ZP_CpbIDID: TIntegerField;
-    Panel1: TPanel;
-    ImagenProducto: TDBImage;
     DS_Producto: TDataSource;
     CD_Producto: TClientDataSet;
     CD_Producto_idProducto: TIntegerField;
     CD_Producto_producto: TStringField;
-    CD_Producto_medida: TStringField;
-    CD_Producto_marca: TStringField;
-    CD_Producto_tipoArticulo: TStringField;
-    CD_Producto_articulo: TStringField;
-    CD_Producto_codigoBarra: TStringField;
-    CD_Producto_codProducto: TStringField;
-    CD_Producto_codCabecera: TStringField;
+    CD_Producto_afiliado_nombre: TStringField;
+    CD_Producto_afiliado_numero: TStringField;
     Popup_Producto: TPopupMenu;
     PopItemProducto_Agregar: TMenuItem;
     PopItemProducto_Quitar: TMenuItem;
     ZQ_CpbProducto_Nombre: TStringField;
     ZQ_CpbProducto_Medida: TStringField;
     ZQ_CpbProducto_Color: TStringField;
-    ZQ_CpbProducto_CodBarra: TStringField;
-    CD_Producto_color: TStringField;
     Panel2: TPanel;
     DBImageProducto: TDBImage;
     ZQ_Imagen: TZQuery;
@@ -215,11 +181,8 @@ type
     PopupGridProducto: TPopupMenu;
     PopUpItem_ProductoOcultarDetalle: TMenuItem;
     PanelFechas: TPanel;
-    PanelFechaFactura: TPanel;
     PanelFechaEmision: TPanel;
     EKDBDateCarga: TEKDBDateTimePicker;
-    EKDBDateFactura: TEKDBDateTimePicker;
-    lblTituloFecha_Cobrado: TLabel;
     ZQ_BuscarMail: TZQuery;
     ZQ_BuscarMailEMAIL: TStringField;
     btnConfirmar: TdxBarLargeButton;
@@ -241,7 +204,6 @@ type
     ZQ_CpbProductoBASE_IMPONIBLE: TFloatField;
     ZQ_CpbProductoPORC_IVA: TFloatField;
     ZQ_CpbProductoIMPORTE_IVA: TFloatField;
-    ImagenSucursal: TDBImage;
     DS_ImagenSuc: TDataSource;
     editTotalProductos: TEdit;
     editTotalImponible: TEdit;
@@ -259,14 +221,6 @@ type
     Label31: TLabel;
     DBText5: TDBText;
     DBText32: TDBText;
-    DBTxtCodBarra: TDBText;
-    DBTxtNombre: TDBText;
-    DBTxtMedida: TDBText;
-    DBTxtColor: TDBText;
-    DBTxtMarca: TDBText;
-    ZQ_CpbProducto_Marca: TStringField;
-    ZQ_CpbProducto_TipoArticulo: TStringField;
-    ZQ_CpbProducto_Articulo: TStringField;
     StaticTxtConfirmado: TStaticText;
     EKBuscar: TEKBusquedaAvanzada;
     RepListado: TQuickRep;
@@ -319,10 +273,8 @@ type
     ZQ_VerCpb_ProductoDETALLE: TStringField;
     ZQ_VerCpb_ProductoCANTIDAD: TFloatField;
     Label6: TLabel;
-    edImagen: TDBImage;
     ZQ_ComprobanteIMAGEN: TBlobField;
     ZQ_VerCpbIMAGEN: TBlobField;
-    ZQ_VerCpbID_PROVEEDOR: TIntegerField;
     ZQ_VerCpbCODIGO_1: TStringField;
     ZQ_VerCpbNOMBRE: TStringField;
     ZQ_VerCpbDIRECCION: TStringField;
@@ -335,6 +287,21 @@ type
     ZQ_ComprobanteID_POSICION_SUC_DESTINO: TIntegerField;
     ZQ_ComprobanteID_PREVENTA: TIntegerField;
     ZQ_ComprobanteID_OBRA_SOCIAL: TIntegerField;
+    ZQ_ObraSocialID: TIntegerField;
+    ZQ_ObraSocialID_OS: TIntegerField;
+    ZQ_ObraSocialCODIGO: TStringField;
+    ZQ_ObraSocialNOMBRE: TStringField;
+    ZQ_ObraSocialDIRECCION: TStringField;
+    ZQ_ObraSocialTELEFONO: TStringField;
+    ZQ_ObraSocialDESCRIPCION: TStringField;
+    ZQ_ObraSocialBAJA: TStringField;
+    ZQ_ObraSocialCUIT_CUIL: TStringField;
+    ZQ_ObraSocialLOCALIDAD: TStringField;
+    ZQ_ObraSocialCODIGO_POSTAL: TStringField;
+    ZQ_ObraSocialEMAIL: TStringField;
+    ZQ_ObraSocialID_TIPO_IVA: TIntegerField;
+    ZQ_ObraSocialNOMBRE_TIPO_IVA: TStringField;
+    ZQ_ObraSocialCOD_IVA: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -355,14 +322,13 @@ type
     procedure ZQ_VerCpbAfterScroll(DataSet: TDataSet);
     procedure modoEdicion(flag: boolean);
     procedure cargarTipoComprobante(tipo: integer);
-    procedure btnBuscarEmpresaClick(Sender: TObject);
+    procedure btnBuscarObraSocialClick(Sender: TObject);
     procedure PopItemProducto_AgregarClick(Sender: TObject);
     procedure PopItemProducto_QuitarClick(Sender: TObject);
     procedure btnEliminarProductoClick(Sender: TObject);
     procedure DBGridEditar_ProductoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure agregarProducto();
     procedure cargarProductosClienDataset();
-    procedure cargarImagen(id_prducto: integer);
     procedure ZQ_CpbProductoAfterScroll(DataSet: TDataSet);
     procedure PopUpItem_ProductoOcultarDetalleClick(Sender: TObject); //configuro la pantalla de visualizacion segun el tipo de comprobante
     procedure configPanelFechas(panel: TPanel; Activar: boolean);
@@ -375,7 +341,6 @@ type
     procedure DBGridEditar_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure ZQ_CpbProductoCANTIDADChange(Sender: TField);
     procedure DBGridCpbActual_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure calcularImporteProducto(Sender: TField);
     procedure btnBajaClick(Sender: TObject);
     procedure ZQ_VerCpb_ProductoAfterScroll(DataSet: TDataSet);
   Private
@@ -383,7 +348,7 @@ type
     estadoPantalla: string;
     tipoComprobante: integer;
     id_comprobante: integer;
-    vselProducto: TFBuscarProducto;
+    vselProducto: TFOP_BuscarProductosOS;
     procedure onSelProducto;
     procedure onSelTodosProducto;
     function getColumnIndex(Grid: TDBGrid; Nombre: string): Integer;
@@ -460,15 +425,15 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.FormCreate(Sender: TObject);
 begin
-  tipoComprobante:= CPB_FACTURA_COMPRA;
+  tipoComprobante:= CPB_FACTURA_OSOCIAL;
 
-  EKOrd_VerCpb.CargarConfigColumnas;
-  EKOrd_VerCpb_Producto.CargarConfigColumnas;
-  EKOrd_EditarProducto.CargarConfigColumnas;
+//  EKOrd_VerCpb.CargarConfigColumnas;
+//  EKOrd_VerCpb_Producto.CargarConfigColumnas;
+//  EKOrd_EditarProducto.CargarConfigColumnas;
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
-  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(4, btnBuscarObraSocial.Glyph); //cargo la imagen del boton buscar entidad
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
     TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
@@ -478,11 +443,6 @@ begin
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 
   CD_Producto.CreateDataSet;
-
-  DS_ImagenSuc.DataSet:= dm.ZQ_Sucursal;
-  ImagenSucursal.DataField:= 'LOGO';
-  ImagenProducto.Visible:= false;
-  ImagenSucursal.Visible:= true;
 end;
 
 
@@ -525,55 +485,51 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.cargarTipoComprobante(tipo: integer);
 begin
-  lblTipoComprobante.Caption:= 'FACTURA COMPRA';
+  lblTipoComprobante.Caption:= 'FACTURA OBRA SOCIAL';
 end;
 
 
 procedure TFABM_CPB_FacturaObraSocial.btnNuevoClick(Sender: TObject);
 begin
-//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_CpbFormaPago]) then
-//  begin
-//    modoEdicion(true);
-//    confirmarComprobante:= false;
-//
-//    ZQ_Proveedor.Close;
-//    ZQ_Imagen.Close;
-//
-//    ZQ_CpbFormaPago.Close;
-//    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= -1;
-//    ZQ_CpbFormaPago.Open;
-//
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
+  begin
+    modoEdicion(true);
+    confirmarComprobante:= false;
+
+    ZQ_ObraSocial.Close;
+    ZQ_Imagen.Close;
+
 //    ZQ_CpbProducto.Close;
 //    ZQ_CpbProducto.ParamByName('id_comprobante').AsInteger:= -1;
 //    ZQ_CpbProducto.Open;
-//
+
 //    if not CD_Producto.IsEmpty then
 //      CD_Producto.EmptyDataSet;
-//
-//    cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
-//    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - NUEVO';
-//
-//    ZP_CpbID.Active:= false;
-//    ZP_CpbID.Active:= true;
-//    id_comprobante:= ZP_CpbIDID.AsInteger;
-//    ZP_CpbID.Active:= false;
-//
-//    ZQ_Comprobante.Append;
-//    ZQ_ComprobanteID_COMPROBANTE.AsInteger:= id_comprobante;
-//    ZQ_ComprobanteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
-//    ZQ_ComprobanteID_TIPO_CPB.AsInteger:= tipoComprobante;
-//    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
-//    ZQ_ComprobantePUNTO_VENTA.Clear;
-//    ZQ_ComprobanteNUMERO_CPB.Clear;
-//    ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
-//    ZQ_ComprobanteFECHA_COBRADA.AsDateTime:= dm.EKModelo.FechayHora;
-//    ZQ_ComprobanteFECHA_ENVIADA.Clear;
-//    ZQ_ComprobanteFECHA_IMPRESA.Clear;
-//    ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
-//    ZQ_ComprobanteFECHA_ANULADO.Clear;
-//
-//    EKDBDateCarga.SetFocus;
-//  end;
+
+    cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
+    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - NUEVO';
+
+    ZP_CpbID.Active:= false;
+    ZP_CpbID.Active:= true;
+    id_comprobante:= ZP_CpbIDID.AsInteger;
+    ZP_CpbID.Active:= false;
+
+    ZQ_Comprobante.Append;
+    ZQ_ComprobanteID_COMPROBANTE.AsInteger:= id_comprobante;
+    ZQ_ComprobanteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
+    ZQ_ComprobanteID_TIPO_CPB.AsInteger:= tipoComprobante;
+    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
+    ZQ_ComprobantePUNTO_VENTA.Clear;
+    ZQ_ComprobanteNUMERO_CPB.Clear;
+    ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_ComprobanteFECHA_COBRADA.Clear;
+    ZQ_ComprobanteFECHA_ENVIADA.Clear;
+    ZQ_ComprobanteFECHA_IMPRESA.Clear;
+    ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
+    ZQ_ComprobanteFECHA_ANULADO.Clear;
+
+    EKDBDateCarga.SetFocus;
+  end;
 end;
 
 
@@ -581,46 +537,42 @@ procedure TFABM_CPB_FacturaObraSocial.btnModificarClick(Sender: TObject);
 var
   estado: integer;
 begin
-//  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-//  if ((ZQ_VerCpb.IsEmpty) or
-//    ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO))) then
-//    exit;
-//
-//  confirmarComprobante:= false;
-//  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
-//
-//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_CpbFormaPago]) then
-//  begin
-//    modoEdicion(true);
-//
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if ((ZQ_VerCpb.IsEmpty) or
+    ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO))) then
+    exit;
+
+  confirmarComprobante:= false;
+  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+
+  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
+  begin
+    modoEdicion(true);
+
 //    if not CD_Producto.IsEmpty then
 //      CD_Producto.EmptyDataSet;
 //    cargarProductosClienDataset();
-//
-//    ZQ_Comprobante.Close;
-//    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//    ZQ_Comprobante.Open;
-//
+
+    ZQ_Comprobante.Close;
+    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+    ZQ_Comprobante.Open;
+
 //    ZQ_CpbProducto.Close;
 //    ZQ_CpbProducto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
 //    ZQ_CpbProducto.Open;
-//
-//    ZQ_CpbFormaPago.Close;
-//    ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//    ZQ_CpbFormaPago.Open;
-//
-//    PanelEditar_DatosGralProveedor.BringToFront;
-//    ZQ_Proveedor.Close;
-//    ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= ZQ_ComprobanteID_PROVEEDOR.AsInteger;
-//    ZQ_Proveedor.Open;
-//
-//    cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
-//    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
-//
-//    ZQ_Comprobante.Edit;
-//
-//    EKDBDateCarga.SetFocus;
-//  end;
+
+    PanelEditar_DatosGralProveedor.BringToFront;
+    ZQ_ObraSocial.Close;
+    ZQ_ObraSocial.ParamByName('id_os').AsInteger:= ZQ_ComprobanteID_OBRA_SOCIAL.AsInteger;
+    ZQ_ObraSocial.Open;
+
+    cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
+    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
+
+    ZQ_Comprobante.Edit;
+
+    EKDBDateCarga.SetFocus;
+  end;
 end;
 
 
@@ -628,28 +580,28 @@ procedure TFABM_CPB_FacturaObraSocial.btnGuardarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-//  Perform(WM_NEXTDLGCTL, 0, 0);
-//
-//  if ZQ_ComprobanteID_PROVEEDOR.IsNull and ZQ_ComprobanteID_CLIENTE.IsNull then
-//  begin
-//    Application.MessageBox('Debe asociar una Persona o Empresa al Comprobante, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-//    EKDBDateCarga.SetFocus;
-//    exit;
-//  end;
-//
+  Perform(WM_NEXTDLGCTL, 0, 0);
+
+  if ZQ_ComprobanteID_OBRA_SOCIAL.IsNull then
+  begin
+    Application.MessageBox('Debe asociar una Obra Social al Comprobante, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+    EKDBDateCarga.SetFocus;
+    exit;
+  end;
+
 //  EKSuma_Productos.RecalcAll; //el importe del comprobante es igual a la suma del importe de los productos
 //  ZQ_ComprobanteBASE_IMPONIBLE.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
 //  ZQ_ComprobanteIMPORTE_IVA.AsFloat:= EKSuma_Productos.SumCollection[2].SumValue;
 //  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_Productos.SumCollection[3].SumValue;
 //  ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= EKSuma_Productos.SumCollection[3].SumValue;
 //  ZQ_ComprobanteSALDO.AsFloat:= EKSuma_Productos.SumCollection[3].SumValue;
-//
-//  if confirmarComprobante then
-//    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO
-//  else
-//    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
-//
-//  //cargo la forma de pago cuenta corriente al comprobante
+
+  if confirmarComprobante then
+    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO
+  else
+    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
+
+  //cargo la forma de pago cuenta corriente al comprobante
 //  if ZQ_Comprobante.State = dsInsert then
 //  begin
 //    ZQ_CpbFormaPago.Append;
@@ -662,24 +614,24 @@ begin
 //  ZQ_CpbFormaPagoIMPORTE.AsFloat:= ZQ_ComprobanteSALDO.AsFloat;
 //  ZQ_CpbFormaPagoIMPORTE_REAL.AsFloat:= ZQ_ComprobanteSALDO.AsFloat;
 //  ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA_COBRADA.AsDateTime;
-//
-//  try
-//    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-//    begin
-//      modoEdicion(false);
-//      DBGridListaCpb.SetFocus;
-//
-//      ZQ_VerCpb.Refresh;
-//      ZQ_VerCpb.Locate('ID_COMPROBANTE', id_comprobante, []);
-//    end
-//  except
-//    begin
-//      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención', MB_OK + MB_ICONINFORMATION);
-//      exit;
-//    end
-//  end;
-//
-//  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+
+  try
+    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    begin
+      modoEdicion(false);
+      DBGridListaCpb.SetFocus;
+
+      ZQ_VerCpb.Refresh;
+      ZQ_VerCpb.Locate('ID_COMPROBANTE', id_comprobante, []);
+    end
+  except
+    begin
+      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención', MB_OK + MB_ICONINFORMATION);
+      exit;
+    end
+  end;
+
+  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 end;
 
 
@@ -699,10 +651,10 @@ begin
   if ZQ_VerCpb.IsEmpty then
     exit;
 
-  DM.VariablesReportes(RepListado);
-  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption:= EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+//  DM.VariablesReportes(RepListado);
+//  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
+//  QRLabelCritBusqueda.Caption:= EKBuscar.ParametrosBuscados;
+//  EKVistaPrevia.VistaPrevia;
 end;
 
 
@@ -719,8 +671,8 @@ begin //F1
   end
   else
   begin
-    if btnBuscarEmpresa.Enabled then
-      btnBuscarEmpresa.Click;
+    if btnBuscarObraSocial.Enabled then
+      btnBuscarObraSocial.Click;
   end;
 end;
 
@@ -766,65 +718,56 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.ZQ_VerCpbAfterScroll(DataSet: TDataSet);
 begin
-  ZQ_VerCpb_Producto.Close;
-
-  if ZQ_VerCpb.IsEmpty then
-    exit;
-
-  ZQ_VerCpb_Producto.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
-  ZQ_VerCpb_Producto.Open;
-
-  if ZQ_VerCpbFECHA_ANULADO.IsNull then
-  begin
-    DBTxtFechaAnulado.Visible:= false;
-    lblAnulado.Visible:= False;
-
-    DBTxtSaldo.Visible:= true;
-    lblSaldo.Visible:= true;
-  end
-  else
-  begin
-    DBTxtFechaAnulado.Visible:= true;
-    lblAnulado.Visible:= true;
-
-    DBTxtSaldo.Visible:= false;
-    lblSaldo.Visible:= False;
-  end;
+//  ZQ_VerCpb_Producto.Close;
+//
+//  if ZQ_VerCpb.IsEmpty then
+//    exit;
+//
+//  ZQ_VerCpb_Producto.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+//  ZQ_VerCpb_Producto.Open;
+//
+//  if ZQ_VerCpbFECHA_ANULADO.IsNull then
+//  begin
+//    DBTxtFechaAnulado.Visible:= false;
+//    lblAnulado.Visible:= False;
+//
+//    DBTxtSaldo.Visible:= true;
+//    lblSaldo.Visible:= true;
+//  end
+//  else
+//  begin
+//    DBTxtFechaAnulado.Visible:= true;
+//    lblAnulado.Visible:= true;
+//
+//    DBTxtSaldo.Visible:= false;
+//    lblSaldo.Visible:= False;
+//  end;
 end;
 
 
 //PINTAR GRILLAS VISUALIZACION
 
-procedure TFABM_CPB_FacturaObraSocial.btnBuscarEmpresaClick(Sender: TObject);
+procedure TFABM_CPB_FacturaObraSocial.btnBuscarObraSocialClick(Sender: TObject);
 var
   sql: string;
 begin
   if confirmarComprobante then
     exit;
 
-  sql:= Format('select emp.id_empresa as id, emp.nombre||%s|| coalesce(tipo.descripcion, %s) as busqueda ' +
-    'from empresa emp ' +
-    'left join tipo_empresa tipo on (emp.id_tipo_empresa = tipo.id_tipo_empresa) ' +
-    'where emp.baja = %s ' +
-    'order by emp.nombre', [QuotedStr(' - '), QuotedStr(''), QuotedStr('N')]);
-
-  EKListadoEntidad.SQL.Text:= sql;
-
   if EKListadoEntidad.Buscar then
   begin
     if (EKListadoEntidad.Resultado <> '') then
     begin
-      btnBuscarEmpresa.Down:= true;
+      btnBuscarObraSocial.Down:= true;
       PanelEditar_DatosGralProveedor.BringToFront;
 
-      ZQ_Proveedor.Close;
-      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= StrToInt(EKListadoEntidad.Resultado);
-      ZQ_Proveedor.Open;
+      ZQ_ObraSocial.Close;
+      ZQ_ObraSocial.ParamByName('id_os').AsInteger:= StrToInt(EKListadoEntidad.Resultado);
+      ZQ_ObraSocial.Open;
 
       if ZQ_Comprobante.State = dsBrowse then
         ZQ_Comprobante.Edit;
-      ZQ_ComprobanteID_CLIENTE.Clear;
-      ZQ_ComprobanteID_PROVEEDOR.AsInteger:= ZQ_ProveedorID_EMPRESA.AsInteger;
+      ZQ_ComprobanteID_OBRA_SOCIAL.AsInteger:= ZQ_ObraSocialID_OS.AsInteger;
     end
   end;
 
@@ -844,17 +787,17 @@ begin
   ZQ_VerCpb_Producto.First;
   while not ZQ_VerCpb_Producto.Eof do
   begin
-    CD_Producto.Append;
-    CD_Producto_idProducto.AsInteger:= ZQ_VerCpb_ProductoID_PRODUCTO.AsInteger;
-    CD_Producto_producto.AsString:= ZQ_VerCpb_ProductoPRODUCTO.AsString;
-    CD_Producto_medida.AsString:= ZQ_VerCpb_ProductoMEDIDA.AsString;
-    CD_Producto_color.AsString:= ZQ_VerCpb_ProductoCOLOR.AsString;
-    CD_Producto_marca.AsString:= ZQ_VerCpb_ProductoMARCA.AsString;
-    CD_Producto_tipoArticulo.AsString:= ZQ_VerCpb_ProductoTIPO_ARTICULO.AsString;
-    CD_Producto_articulo.AsString:= ZQ_VerCpb_ProductoARTICULO.AsString;
-    CD_Producto_codigoBarra.AsString:= ZQ_VerCpb_ProductoCODIGO_BARRA.AsString;
-    CD_Producto_codCabecera.AsString:= ZQ_VerCpb_ProductoCOD_CABECERA.AsString;
-    CD_Producto_codProducto.AsString:= ZQ_VerCpb_ProductoCOD_PRODUCTO.AsString;
+//    CD_Producto.Append;
+//    CD_Producto_idProducto.AsInteger:= ZQ_VerCpb_ProductoID_PRODUCTO.AsInteger;
+//    CD_Producto_producto.AsString:= ZQ_VerCpb_ProductoPRODUCTO.AsString;
+//    CD_Producto_medida.AsString:= ZQ_VerCpb_ProductoMEDIDA.AsString;
+//    CD_Producto_color.AsString:= ZQ_VerCpb_ProductoCOLOR.AsString;
+//    CD_Producto_marca.AsString:= ZQ_VerCpb_ProductoMARCA.AsString;
+//    CD_Producto_tipoArticulo.AsString:= ZQ_VerCpb_ProductoTIPO_ARTICULO.AsString;
+//    CD_Producto_articulo.AsString:= ZQ_VerCpb_ProductoARTICULO.AsString;
+//    CD_Producto_codigoBarra.AsString:= ZQ_VerCpb_ProductoCODIGO_BARRA.AsString;
+//    CD_Producto_codCabecera.AsString:= ZQ_VerCpb_ProductoCOD_CABECERA.AsString;
+//    CD_Producto_codProducto.AsString:= ZQ_VerCpb_ProductoCOD_PRODUCTO.AsString;
 
     ZQ_VerCpb_Producto.Next;
   end;
@@ -864,26 +807,24 @@ procedure TFABM_CPB_FacturaObraSocial.onSelProducto;
 begin
   if not vselProducto.ZQ_Producto.IsEmpty then
   begin
-    CD_Producto.Append;
-    CD_Producto_idProducto.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
-    CD_Producto_producto.AsString:= vselProducto.ZQ_ProductoNOMBRE.AsString;
-    CD_Producto_medida.AsString:= vselProducto.ZQ_ProductoMEDIDA.AsString;
-    CD_Producto_color.AsString:= vselProducto.ZQ_ProductoCOLOR.AsString;
-    CD_Producto_marca.AsString:= vselProducto.ZQ_ProductoNOMBRE_MARCA.AsString;
-    CD_Producto_tipoArticulo.AsString:= vselProducto.ZQ_ProductoTIPO_ARTICULO.AsString;
-    CD_Producto_articulo.AsString:= vselProducto.ZQ_ProductoNOMBRE_ARTICULO.AsString;
-    CD_Producto_codigoBarra.AsString:= vselProducto.ZQ_ProductoCODIGO_BARRA.AsString;
-    CD_Producto_codCabecera.AsString:= vselProducto.ZQ_ProductoCOD_CORTO.AsString;
-    CD_Producto_codProducto.AsString:= vselProducto.ZQ_ProductoCOD_CORTO_1.AsString;
+    CD_Producto.Filter:= 'idProducto = ' + vselProducto.ZQ_ProductoID_PRODUCTO.AsString;
+    CD_Producto.Filtered:= true;
+    if CD_Producto.IsEmpty then //si el producto ya esta cargado, paso al proximo
+    begin
+      CD_Producto.Append;
+      CD_Producto_idProducto.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+      CD_Producto_producto.AsString:= vselProducto.ZQ_ProductoPRODUCTO_NOMBRE.AsString;
+      CD_Producto_afiliado_nombre.AsString:= vselProducto.ZQ_ProductoAFILIADO_NOMBRE.AsString;
+      CD_Producto_afiliado_numero.AsString:= vselProducto.ZQ_ProductoAFILIADO_NUMERO.AsString;
 
-    ZQ_CpbProducto.Append;
-    ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
-    ZQ_CpbProductoID_PRODUCTO.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
-    ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
-    ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= 0;
-    ZQ_CpbProductoPORC_IVA.AsFloat:= 0;
-
-    cargarImagen(vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger);
+      ZQ_CpbProducto.Append;
+      ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
+      ZQ_CpbProductoID_PRODUCTO.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
+      ZQ_CpbProductoCANTIDAD.AsFloat:= vselProducto.ZQ_ProductoCANTIDAD.AsFloat;
+      ZQ_CpbProductoIMPORTE_FINAL.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
+      ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
+      ZQ_CpbProductoIMPORTE_VENTA.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
+    end;
   end;
 
   vselProducto.Close;
@@ -895,26 +836,27 @@ begin
   vselProducto.ZQ_Producto.First;
   while not vselProducto.ZQ_Producto.Eof do
   begin
+    CD_Producto.Filter:= 'idProducto = ' + vselProducto.ZQ_ProductoID_PRODUCTO.AsString;
+    CD_Producto.Filtered:= true;
+    if not CD_Producto.IsEmpty then //si el producto ya esta cargado, paso al proximo
+    begin
+      CD_Producto.Filtered:= false;
+      vselProducto.ZQ_Producto.Next;
+    end;
+
     CD_Producto.Append;
     CD_Producto_idProducto.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
-    CD_Producto_producto.AsString:= vselProducto.ZQ_ProductoNOMBRE.AsString;
-    CD_Producto_medida.AsString:= vselProducto.ZQ_ProductoMEDIDA.AsString;
-    CD_Producto_color.AsString:= vselProducto.ZQ_ProductoCOLOR.AsString;
-    CD_Producto_marca.AsString:= vselProducto.ZQ_ProductoNOMBRE_MARCA.AsString;
-    CD_Producto_tipoArticulo.AsString:= vselProducto.ZQ_ProductoTIPO_ARTICULO.AsString;
-    CD_Producto_articulo.AsString:= vselProducto.ZQ_ProductoNOMBRE_ARTICULO.AsString;
-    CD_Producto_codigoBarra.AsString:= vselProducto.ZQ_ProductoCODIGO_BARRA.AsString;
-    CD_Producto_codCabecera.AsString:= vselProducto.ZQ_ProductoCOD_CORTO.AsString;
-    CD_Producto_codProducto.AsString:= vselProducto.ZQ_ProductoCOD_CORTO_1.AsString;
+    CD_Producto_producto.AsString:= vselProducto.ZQ_ProductoPRODUCTO_NOMBRE.AsString;
+    CD_Producto_afiliado_nombre.AsString:= vselProducto.ZQ_ProductoAFILIADO_NOMBRE.AsString;
+    CD_Producto_afiliado_numero.AsString:= vselProducto.ZQ_ProductoAFILIADO_NUMERO.AsString;
 
     ZQ_CpbProducto.Append;
     ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
     ZQ_CpbProductoID_PRODUCTO.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
-    ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
-    ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= 0;
-    ZQ_CpbProductoPORC_IVA.AsFloat:= 0;
-
-    cargarImagen(vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger);
+    ZQ_CpbProductoCANTIDAD.AsFloat:= vselProducto.ZQ_ProductoCANTIDAD.AsFloat;
+    ZQ_CpbProductoIMPORTE_FINAL.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
+    ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
+    ZQ_CpbProductoIMPORTE_VENTA.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
 
     vselProducto.ZQ_Producto.Next;
   end;
@@ -931,12 +873,16 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.agregarProducto();
 begin
+  if ZQ_ComprobanteID_OBRA_SOCIAL.IsNull then
+  begin
+    ShowMessage('No se selecciono ninguna Obra Social, Verifique');
+    exit;
+  end;
+
   if not Assigned(vselProducto) then
-    vselProducto:= TFBuscarProducto.Create(nil);
+    vselProducto:= TFOP_BuscarProductosOS.Create(nil);
 
-  if not ZQ_ComprobanteID_PROVEEDOR.IsNull then
-    vselProducto.filtrarEmpresa(ZQ_ComprobanteID_PROVEEDOR.AsInteger);
-
+  vselProducto.EKBuscarProducto.SQL_Where.ValueFromIndex[2]:= IntToStr(ZQ_ComprobanteID_OBRA_SOCIAL.AsInteger);
   vselProducto.OnSeleccionar:= onSelProducto;
   vselProducto.OnSeleccionarTodos:= onSelTodosProducto;
   vselProducto.btnSeleccionarTodos.Visible:= ivAlways;
@@ -976,33 +922,12 @@ begin
 end;
 
 
-procedure TFABM_CPB_FacturaObraSocial.cargarImagen(id_prducto: integer);
-begin
-  ZQ_Imagen.Close;
-  ZQ_Imagen.ParamByName('id_producto').AsInteger:= id_prducto;
-  ZQ_Imagen.Open;
-
-  if ZQ_ImagenIMAGEN.Value = '' then
-  begin
-    ImagenProducto.Visible:= false;
-    ImagenSucursal.Visible:= true;
-  end
-  else
-  begin
-    ImagenProducto.Visible:= true;
-    ImagenSucursal.Visible:= false;
-  end
-end;
-
-
 procedure TFABM_CPB_FacturaObraSocial.ZQ_CpbProductoAfterScroll(DataSet: TDataSet);
 begin
   ZQ_Imagen.Close;
 
   if ZQ_CpbProducto.IsEmpty then
     exit;
-
-  cargarImagen(ZQ_CpbProductoID_PRODUCTO.AsInteger);
 end;
 
 
@@ -1067,7 +992,7 @@ begin
 
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
-  if (application.MessageBox(pchar('¿Desea confirmar la Factura de Compra seleccionada?'), 'ABM Factura de Compra', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea confirmar la Factura de Obra Social seleccionada?'), 'ABM Factura de Obra Social', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
     begin
       ZQ_Comprobante.Close;
@@ -1082,7 +1007,7 @@ begin
           dm.EKModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
-          Application.MessageBox('No se pudo confirmar la Factura de Compra.', 'Atención', MB_OK + MB_ICONINFORMATION);
+          Application.MessageBox('No se pudo confirmar la Factura de Obra Social.', 'Atención', MB_OK + MB_ICONINFORMATION);
           exit;
         end
       end;
@@ -1097,8 +1022,7 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.ZQ_CpbProductoCANTIDADChange(Sender: TField);
 begin
-  ZQ_CpbProductoCANTIDAD_RECIBIDA.AsFloat:= ZQ_CpbProductoCANTIDAD.AsFloat;
-  ZQ_CpbProductoIMPORTE_VENTA.AsFloat:= ZQ_CpbProductoCANTIDAD.AsFloat * ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat;
+
 end;
 
 
@@ -1110,15 +1034,15 @@ var
 begin
   columna:= (sender as tdbgrid).SelectedField.FullName;
 
-  if (Key = 13) or (key = 9) then { if it's an enter key }
-  begin
-    Key:= 0; {ignore}
-    if (columna = 'IMPORTE_FINAL') then
-    begin
-      DBGridEditar_Producto.SelectedIndex:= 0;
-      ZQ_CpbProducto.Append;
-    end;
-  end;
+//  if (Key = 13) or (key = 9) then { if it's an enter key }
+//  begin
+//    Key:= 0; {ignore}
+//    if (columna = 'IMPORTE_FINAL') then
+//    begin
+//      DBGridEditar_Producto.SelectedIndex:= 0;
+//      ZQ_CpbProducto.Append;
+//    end;
+//  end;
 
   if (Shift = [ssCtrl]) and (Key = VK_DELETE) then
   begin
@@ -1132,15 +1056,15 @@ procedure TFABM_CPB_FacturaObraSocial.EKSuma_ProductosSumListChanged(Sender: TOb
 var
   cantidad, imponible, iva, total: string;
 begin
-  cantidad:= FormatFloat('###,###,###,##0.00', EKSuma_Productos.SumCollection[0].SumValue);
-  imponible:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Productos.SumCollection[1].SumValue);
-  iva:= FormatFloat('###,###,###,##0.00', EKSuma_Productos.SumCollection[2].SumValue);
-  total:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Productos.SumCollection[3].SumValue);
-
-  editTotalProductos.Text:= cantidad;
-  editTotalImponible.Text:= imponible;
-  editTotalIva.Text:= iva;
-  editTotalFinal.Text:= total;
+//  cantidad:= FormatFloat('###,###,###,##0.00', EKSuma_Productos.SumCollection[0].SumValue);
+//  imponible:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Productos.SumCollection[1].SumValue);
+//  iva:= FormatFloat('###,###,###,##0.00', EKSuma_Productos.SumCollection[2].SumValue);
+//  total:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Productos.SumCollection[3].SumValue);
+//
+//  editTotalProductos.Text:= cantidad;
+//  editTotalImponible.Text:= imponible;
+//  editTotalIva.Text:= iva;
+//  editTotalFinal.Text:= total;
 end;
 
 
@@ -1184,40 +1108,6 @@ end;
 procedure TFABM_CPB_FacturaObraSocial.DBGridCpbActual_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridCpbActual_Producto, Rect, DataCol, Column, State);
-end;
-
-
-procedure TFABM_CPB_FacturaObraSocial.calcularImporteProducto(Sender: TField);
-var
-  cantidad,
-    precio_unitario,
-    coef_iva,
-    importe_iva,
-    imponible: double;
-  final: double;
-begin
-  cantidad:= 0;
-  precio_unitario:= 0;
-  coef_iva:= 0;
-
-  if not ZQ_CpbProductoCANTIDAD.IsNull then
-    cantidad:= ZQ_CpbProductoCANTIDAD.AsFloat;
-
-  if not ZQ_CpbProductoIMPORTE_UNITARIO.IsNull then
-    precio_unitario:= ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat;
-
-  if not ZQ_CpbProductoPORC_IVA.IsNull then
-    coef_iva:= ZQ_CpbProductoPORC_IVA.AsFloat;
-
-  imponible:= cantidad * precio_unitario;
-  importe_iva:= imponible * coef_iva;
-  final:= imponible + importe_iva;
-
-  ZQ_CpbProductoCANTIDAD_RECIBIDA.AsFloat:= cantidad;
-  ZQ_CpbProductoBASE_IMPONIBLE.AsFloat:= imponible;
-  ZQ_CpbProductoIMPORTE_IVA.AsFloat:= importe_iva;
-  ZQ_CpbProductoIMPORTE_FINAL.AsFloat:= final;
-  ZQ_CpbProductoIMPORTE_VENTA.AsFloat:= final;
 end;
 
 
