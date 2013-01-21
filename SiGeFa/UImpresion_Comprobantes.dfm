@@ -20,7 +20,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     Top = 0
     Width = 985
     Height = 564
-    ActivePage = TabSheet10
+    ActivePage = TabSheet11
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -1816,8 +1816,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
       ImageIndex = 4
       object RepOrdenPago: TQuickRep
         Tag = 99
-        Left = 233
-        Top = -280
+        Left = 97
+        Top = 8
         Width = 794
         Height = 1123
         Frame.Color = clBlack
@@ -3290,7 +3290,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            814.916666666666700000
+            814.916666666666800000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -3713,7 +3713,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
       ImageIndex = 1
       object RepPresupuesto: TQuickRep
         Tag = 99
-        Left = 129
+        Left = 113
         Top = 8
         Width = 794
         Height = 1123
@@ -5618,7 +5618,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
       ImageIndex = 3
       object RepRemito: TQuickRep
         Tag = 99
-        Left = 17
+        Left = 113
         Top = 8
         Width = 794
         Height = 1123
@@ -7488,7 +7488,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
       ImageIndex = 2
       object RepNotaPedido: TQuickRep
         Tag = 99
-        Left = 97
+        Left = 113
         Top = 8
         Width = 794
         Height = 1123
@@ -9860,7 +9860,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               2209.270833333333000000
               219.604166666666700000
               619.125000000000000000)
@@ -10045,7 +10045,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333320000
+              97.895833333333340000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -10077,7 +10077,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333320000
+              97.895833333333340000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -13141,7 +13141,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
       ImageIndex = 5
       object RepReciboCtaCte: TQuickRep
         Tag = 99
-        Left = 65
+        Left = 105
         Top = 10
         Width = 794
         Height = 1123
@@ -15102,7 +15102,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               1203.854166666667000000
               219.604166666666700000
               619.125000000000000000)
@@ -15717,8 +15717,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
       ImageIndex = 7
       object RepNotaCredito: TQuickRep
         Tag = 99
-        Left = 113
-        Top = 2
+        Left = 97
+        Top = 10
         Width = 794
         Height = 1123
         Frame.Color = clBlack
@@ -16447,7 +16447,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333320000
+              97.895833333333340000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -16479,7 +16479,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333320000
+              97.895833333333340000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -17740,8 +17740,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
       ImageIndex = 8
       object RepOrdenPagoCtaCte: TQuickRep
         Tag = 99
-        Left = 129
-        Top = -94
+        Left = 105
+        Top = 10
         Width = 794
         Height = 1123
         Frame.Color = clBlack
@@ -22093,8 +22093,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
       ImageIndex = 10
       object RepTransferirStock: TQuickRep
         Tag = 99
-        Left = 153
-        Top = 21
+        Left = 113
+        Top = 13
         Width = 794
         Height = 1123
         Frame.Color = clBlack
@@ -23032,7 +23032,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               13.229166666666670000
               58.208333333333340000
-              830.791666666666700000)
+              830.791666666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True

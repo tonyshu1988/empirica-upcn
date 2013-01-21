@@ -1,7 +1,7 @@
 object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
   Left = 282
   Top = 127
-  Width = 892
+  Width = 910
   Height = 586
   Caption = 'ABM Presupuesto'
   Color = clBtnFace
@@ -26,7 +26,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 884
+    Width = 902
     Height = 488
     Align = alClient
     BevelOuter = bvNone
@@ -34,7 +34,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 884
+      Width = 902
       Height = 488
       Align = alClient
       BevelOuter = bvNone
@@ -49,7 +49,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       object Splitter2: TSplitter
         Left = 5
         Top = 182
-        Width = 874
+        Width = 892
         Height = 3
         Cursor = crVSplit
         Align = alTop
@@ -57,16 +57,16 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 874
+        Width = 892
         Height = 177
         Align = alTop
         Constraints.MinHeight = 177
         TabOrder = 0
         DesignSize = (
-          874
+          892
           177)
         object DBTxtCPB_PuntoVenta: TDBText
-          Left = 709
+          Left = 727
           Top = 33
           Width = 44
           Height = 18
@@ -83,7 +83,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Transparent = False
         end
         object DBTxtCPB_Numero: TDBText
-          Left = 766
+          Left = 784
           Top = 33
           Width = 88
           Height = 18
@@ -117,7 +117,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           OnClick = btnBuscarPersonaClick
         end
         object Label12: TLabel
-          Left = 709
+          Left = 727
           Top = 12
           Width = 145
           Height = 15
@@ -136,7 +136,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Transparent = True
         end
         object LblCPB_PuntoVenta: TLabel
-          Left = 709
+          Left = 727
           Top = 33
           Width = 44
           Height = 18
@@ -155,7 +155,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Visible = False
         end
         object LblCPB_Numero: TLabel
-          Left = 766
+          Left = 784
           Top = 33
           Width = 88
           Height = 18
@@ -173,7 +173,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Visible = False
         end
         object Label26: TLabel
-          Left = 755
+          Left = 773
           Top = 33
           Width = 8
           Height = 18
@@ -471,7 +471,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         object DBMemoCPB_Observacion: TDBMemo
           Left = 75
           Top = 126
-          Width = 790
+          Width = 808
           Height = 46
           Anchors = [akLeft, akTop, akRight, akBottom]
           DataField = 'OBSERVACION'
@@ -557,14 +557,14 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       object PanelEditar_Producto: TPanel
         Left = 5
         Top = 185
-        Width = 874
+        Width = 892
         Height = 298
         Align = alClient
         TabOrder = 1
         object Label19: TLabel
           Left = 1
           Top = 1
-          Width = 872
+          Width = 890
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -581,16 +581,16 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
           Top = 256
-          Width = 872
+          Width = 890
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            872
+            890
             41)
           object Label25: TLabel
-            Left = 320
+            Left = 338
             Top = 3
             Width = 111
             Height = 13
@@ -604,7 +604,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
             ParentFont = False
           end
           object Label13: TLabel
-            Left = 456
+            Left = 474
             Top = 3
             Width = 121
             Height = 13
@@ -618,7 +618,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
             ParentFont = False
           end
           object Label29: TLabel
-            Left = 729
+            Left = 747
             Top = 3
             Width = 58
             Height = 13
@@ -632,7 +632,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
             ParentFont = False
           end
           object Label30: TLabel
-            Left = 593
+            Left = 611
             Top = 3
             Width = 92
             Height = 13
@@ -655,7 +655,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
             OnClick = btnEliminarProductoClick
           end
           object editTotalProductos: TEdit
-            Left = 320
+            Left = 338
             Top = 17
             Width = 129
             Height = 19
@@ -676,7 +676,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
             TabOrder = 1
           end
           object editTotalImponible: TEdit
-            Left = 456
+            Left = 474
             Top = 17
             Width = 129
             Height = 19
@@ -697,7 +697,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
             TabOrder = 2
           end
           object editTotalDesc: TEdit
-            Left = 592
+            Left = 610
             Top = 17
             Width = 129
             Height = 19
@@ -718,7 +718,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
             TabOrder = 3
           end
           object editTotalFinal: TEdit
-            Left = 728
+            Left = 746
             Top = 17
             Width = 129
             Height = 19
@@ -742,7 +742,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         object DBGridEditar_Producto: TDBGrid
           Left = 164
           Top = 14
-          Width = 709
+          Width = 727
           Height = 242
           Align = alClient
           Color = 14606012
@@ -959,7 +959,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 884
+      Width = 902
       Height = 488
       Align = alClient
       BevelOuter = bvNone
@@ -972,7 +972,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 348
+        Left = 366
         Top = 5
         Width = 6
         Height = 478
@@ -981,7 +981,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 343
+        Width = 361
         Height = 478
         Align = alClient
         BevelOuter = bvNone
@@ -989,7 +989,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 343
+          Width = 361
           Height = 478
           Align = alClient
           Color = 14606012
@@ -1097,7 +1097,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         end
       end
       object PanelCpbActual: TPanel
-        Left = 354
+        Left = 372
         Top = 5
         Width = 525
         Height = 478
@@ -1628,7 +1628,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 884
+    Width = 902
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1637,7 +1637,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
     object lblTipoComprobante: TLabel
       Left = 1
       Top = 1
-      Width = 874
+      Width = 892
       Height = 17
       Align = alCustom
       Alignment = taCenter
@@ -1666,7 +1666,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 774
+      Left = 792
       Top = 1
       Width = 109
       Height = 17
@@ -1680,7 +1680,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 665
+      Left = 683
       Top = 1
       Width = 109
       Height = 17

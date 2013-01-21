@@ -50,6 +50,8 @@ type
     ZQ_ProductoPRODUCTO_ARTICULO: TStringField;
     ZQ_ProductoPRODUCTO_TIPO_ARTICULO: TStringField;
     ZQ_ProductoID_PRODUCTO: TIntegerField;
+    ZQ_ProductoPRODUCTO_COLOR: TStringField;
+    ZQ_ProductoID_DETALLE_OS: TIntegerField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
@@ -62,6 +64,7 @@ type
     procedure btnSeleccionarTodosClick(Sender: TObject);
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure ASelTodosExecute(Sender: TObject);
   private
     { Private declarations }
   public
@@ -127,6 +130,12 @@ begin
     btnSeleccionar.Click;
 end;
 
+procedure TFOP_BuscarProductosOS.ASelTodosExecute(Sender: TObject);
+begin
+  if btnSeleccionarTodos.Enabled then
+    btnSeleccionarTodos.Click;
+end;
+
 
 procedure TFOP_BuscarProductosOS.ASalirExecute(Sender: TObject);
 begin
@@ -152,7 +161,10 @@ begin
   if (not (ZQ_Producto.IsEmpty)) then
   begin
     if Assigned(OnSeleccionarTodos) then
-      OnSeleccionarTodos
+    begin
+      Application.ProcessMessages;
+      OnSeleccionarTodos;
+    end
   end
   else
     Application.MessageBox(PChar('No hay ningún producto para seleccionar.'),'Datos Incompletos',MB_OK+MB_ICONWARNING);
@@ -163,5 +175,7 @@ procedure TFOP_BuscarProductosOS.DBGridDrawColumnCell(Sender: TObject; const Rec
 begin
   FPrincipal.PintarFilasGrillas(DBGrid, Rect, DataCol, Column, State);
 end;
+
+
 
 end.

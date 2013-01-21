@@ -202,11 +202,11 @@ type
     procedure btnExcelClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btRepedidoClick(Sender: TObject);
-  Private
+  private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
     procedure onSelTodosProducto;
-  Public
+  public
     { Public declarations }
   end;
 
@@ -369,21 +369,22 @@ begin
       if not CD_Producto.IsEmpty then //si el producto ya esta cargado, paso al proximo
       begin
         CD_Producto.Filtered:= false;
-        vsel.ZQ_Producto.Next;
+      end
+      else
+      begin
+        CD_Producto.Filtered:= false;
+        CD_Producto.Append;
+        CD_Producto_idProducto.AsInteger:= vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
+        CD_Producto_producto.AsString:= vsel.ZQ_ProductoNOMBRE.AsString;
+        CD_Producto_medida.AsString:= vsel.ZQ_ProductoMEDIDA.AsString;
+        CD_Producto_color.AsString:= vsel.ZQ_ProductoCOLOR.AsString;
+        CD_Producto_marca.AsString:= vsel.ZQ_ProductoNOMBRE_MARCA.AsString;
+        CD_Producto_tipoArticulo.AsString:= vsel.ZQ_ProductoTIPO_ARTICULO.AsString;
+        CD_Producto_articulo.AsString:= vsel.ZQ_ProductoNOMBRE_ARTICULO.AsString;
+        CD_Producto_codigoBarra.AsString:= vsel.ZQ_ProductoCODIGO_BARRA.AsString;
+        CD_Producto_codCabecera.AsString:= vsel.ZQ_ProductoCOD_CORTO.AsString;
+        CD_Producto_codProducto.AsString:= vsel.ZQ_ProductoCOD_CORTO_1.AsString;
       end;
-
-      CD_Producto.Filtered:= false;
-      CD_Producto.Append;
-      CD_Producto_idProducto.AsInteger:= vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
-      CD_Producto_producto.AsString:= vsel.ZQ_ProductoNOMBRE.AsString;
-      CD_Producto_medida.AsString:= vsel.ZQ_ProductoMEDIDA.AsString;
-      CD_Producto_color.AsString:= vsel.ZQ_ProductoCOLOR.AsString;
-      CD_Producto_marca.AsString:= vsel.ZQ_ProductoNOMBRE_MARCA.AsString;
-      CD_Producto_tipoArticulo.AsString:= vsel.ZQ_ProductoTIPO_ARTICULO.AsString;
-      CD_Producto_articulo.AsString:= vsel.ZQ_ProductoNOMBRE_ARTICULO.AsString;
-      CD_Producto_codigoBarra.AsString:= vsel.ZQ_ProductoCODIGO_BARRA.AsString;
-      CD_Producto_codCabecera.AsString:= vsel.ZQ_ProductoCOD_CORTO.AsString;
-      CD_Producto_codProducto.AsString:= vsel.ZQ_ProductoCOD_CORTO_1.AsString;
 
       vsel.ZQ_Producto.Next;
     end;
@@ -750,7 +751,7 @@ begin
       permisos:= true;
   end;
 
-  if not ( permisos and dm.EKUsrLogin.PermisoAccion('MODIFICAR_STOCK_AJEN') ) then
+  if not (permisos and dm.EKUsrLogin.PermisoAccion('MODIFICAR_STOCK_AJEN')) then
   begin
     ZQ_Stock.RevertRecord;
     ShowMessage(pchar('El usuario no posee los permisos para modificar el stock de la sucursal ' + ZQ_StockSUCURSAL.AsString + '.'));
@@ -814,14 +815,14 @@ begin
 
   if ZQ_Stock.Filtered = false then
   begin
-    ZQ_Stock.Filter := 'stock_actual <= stock_repedido';
-    ZQ_Stock.Filtered := true;
-    DBGridStock.Color := $00D1C7FE;
+    ZQ_Stock.Filter:= 'stock_actual <= stock_repedido';
+    ZQ_Stock.Filtered:= true;
+    DBGridStock.Color:= $00D1C7FE;
   end
   else
   begin
-    ZQ_Stock.Filtered := false;
-    DBGridStock.Color := $00DEDEBC;
+    ZQ_Stock.Filtered:= false;
+    DBGridStock.Color:= $00DEDEBC;
   end;
 end;
 

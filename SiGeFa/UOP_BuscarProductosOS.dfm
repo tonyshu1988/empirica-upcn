@@ -1,7 +1,7 @@
 object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
-  Left = 373
-  Top = 236
-  Width = 730
+  Left = 337
+  Top = 233
+  Width = 852
   Height = 426
   Caption = 
     'Buscar Productos de Ordenes Tecnicas reconocidos por la Obra Soc' +
@@ -22,14 +22,14 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 722
+    Width = 844
     Height = 347
     Align = alClient
     TabOrder = 0
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
-      Width = 720
+      Width = 842
       Height = 345
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
@@ -47,6 +47,127 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
       TitleFont.Style = []
       OnDrawColumnCell = DBGridDrawColumnCell
       OnDblClick = btnSeleccionarClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'AFILIADO_NUMERO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Nro Afiliado'
+          Width = 80
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'AFILIADO_NOMBRE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Afiliado'
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'FECHA_ORDEN'
+          Title.Alignment = taCenter
+          Title.Caption = 'Fecha Orden'
+          Width = 88
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ORDEN_COD_BARRA'
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'd Barra Orden'
+          Width = 109
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'CANTIDAD'
+          Title.Alignment = taCenter
+          Title.Caption = 'Cantidad'
+          Width = 67
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'MONTO_DESCONTADO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Monto'
+          Width = 82
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'OBSERVACIONES'
+          Title.Alignment = taCenter
+          Title.Caption = 'Observaci'#243'n'
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRODUCTO_NOMBRE'
+          Title.Alignment = taCenter
+          Title.Caption = 'Prod. Nombre'
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRODUCTO_COD_CORTO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Prod. C'#243'd. Corto'
+          Width = 123
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRODUCTO_COD_BARRA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Prod. C'#243'd. Barra'
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRODUCTO_MEDIDA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Prod. Medida'
+          Width = 114
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRODUCTO_MARCA'
+          Title.Alignment = taCenter
+          Title.Caption = 'Prod. Marca'
+          Width = 168
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRODUCTO_ARTICULO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Prod. Art'#237'culo'
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRODUCTO_TIPO_ARTICULO'
+          Title.Alignment = taCenter
+          Title.Caption = 'Prod. Tipo Art'#237'culo'
+          Width = 200
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PRODUCTO_COLOR'
+          Title.Alignment = taCenter
+          Title.Caption = 'Prod. Color'
+          Width = 121
+          Visible = True
+        end>
     end
   end
   object dxBarABM: TdxBarManager
@@ -733,8 +854,8 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
     Connection = DM.Conexion
     SQL.Strings = (
       
-        'select os.id_os, os.codigo as os_codigo, os.nombre as os_nombre,' +
-        ' per.nombre as afiliado_nombre,'
+        'select os.id_os, osdet.id_detalle_os, os.codigo as os_codigo, os' +
+        '.nombre as os_nombre, per.nombre as afiliado_nombre,'
       
         '       peros.nro_afiliado as afiliado_numero, orden.fecha_orden,' +
         ' orden.fecha_prometido,'
@@ -752,32 +873,33 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
         'ducto_medida, mc.nombre_marca as producto_marca,'
       
         '       ar.descripcion as producto_articulo, ta.descripcion as pr' +
-        'oducto_tipo_articulo, ordet.id_producto'
-      'from optica_detalle_os osdet'
-      'left join optica_os os on (osdet.id_os = os.id_os)'
+        'oducto_tipo_articulo, ordet.id_producto, co.nombre as producto_c' +
+        'olor'
+      'from optica_orden orden'
       
-        'left join optica_orden_detalle ordet on (osdet.id_orden_detalle ' +
-        '= ordet.id_orden_detalle)'
+        'inner join optica_orden_detalle ordet on (orden.id_orden = ordet' +
+        '.id_orden)'
       
-        'left join optica_orden orden on (ordet.id_orden = orden.id_orden' +
-        ')'
-      'left join persona per on (orden.id_cliente = per.id_persona)'
+        'inner join optica_detalle_os osdet on (ordet.id_orden_detalle = ' +
+        'osdet.id_orden_detalle)'
+      'inner join optica_os os on (osdet.id_os = os.id_os)'
       
-        'left join optica_persona_os peros on (per.id_persona = peros.id_' +
-        'persona_os)'
+        'inner join optica_persona_os peros on (orden.id_cliente = peros.' +
+        'id_persona) and (peros.id_os = osdet.id_os)'
+      'inner join persona per on (orden.id_cliente = per.id_persona)'
       
-        'left join producto prod on (ordet.id_producto = prod.id_producto' +
-        ')'
+        'inner join producto prod on (ordet.id_producto = prod.id_product' +
+        'o)'
       
-        'left join producto_cabecera pcab on (prod.id_prod_cabecera = pca' +
-        'b.id_prod_cabecera)'
-      'left join medida md on (prod.id_medida = md.id_medida)'
-      'left join marca mc on (pcab.id_marca = mc.id_marca)'
-      'left join articulo ar on (pcab.id_articulo = ar.id_articulo)'
+        'inner join producto_cabecera pcab on (prod.id_prod_cabecera = pc' +
+        'ab.id_prod_cabecera)'
+      'inner join medida md on (prod.id_medida = md.id_medida)'
+      'inner join marca mc on (pcab.id_marca = mc.id_marca)'
+      'inner join articulo ar on (pcab.id_articulo = ar.id_articulo)'
       
-        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
-        'articulo)'
-      'left join color co on (pcab.color = co.id_color)'
+        'inner join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo' +
+        '_articulo)'
+      'inner join color co on (pcab.color = co.id_color)'
       'where (orden.id_estado <> 4)'
       '  and osdet.id_factura_os is null')
     Params = <>
@@ -785,6 +907,10 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
     Top = 48
     object ZQ_ProductoID_OS: TIntegerField
       FieldName = 'ID_OS'
+    end
+    object ZQ_ProductoID_DETALLE_OS: TIntegerField
+      FieldName = 'ID_DETALLE_OS'
+      Required = True
     end
     object ZQ_ProductoID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
@@ -862,6 +988,10 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
       FieldName = 'PRODUCTO_TIPO_ARTICULO'
       Size = 200
     end
+    object ZQ_ProductoPRODUCTO_COLOR: TStringField
+      FieldName = 'PRODUCTO_COLOR'
+      Size = 30
+    end
   end
   object DS_Producto: TDataSource
     DataSet = ZQ_Producto
@@ -872,6 +1002,63 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
     Grilla = DBGrid
     Filtros = <
       item
+        TituloColumna = 'Nro Afiliado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Afiliado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Orden'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd Barra Orden'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Monto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Observaci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Prod. Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Prod. C'#243'd. Corto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Prod. C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Prod. Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Prod. Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Prod. Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Prod. Tipo Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Prod. Color'
         Visible = True
       end>
     NombreGuardar = 'BuscarProductoOS'
@@ -886,9 +1073,123 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
   object EKBuscarProducto: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Producto'
+        Titulo = 'Nro. Afiliado'
+        Campo = 'nro_afiliado'
+        Tabla = 'optica_persona_os'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Afiliado'
+        Campo = 'nombre'
+        Tabla = 'persona'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Fecha Orden'
+        Campo = 'fecha_orden'
+        Tabla = 'optica_orden'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Cantidad'
+        Campo = 'cantidad'
+        Tabla = 'optica_orden_detalle'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Monto'
+        Campo = 'monto_descontado'
+        Tabla = 'optica_detalle_os'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Prod. Nombre'
         Campo = 'nombre'
         Tabla = 'producto_cabecera'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Prod. C'#243'd. Corto'
+        Campo = 'cod_corto'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Prod. C'#243'd. Barra'
+        Campo = 'codigo_barra'
+        Tabla = 'producto'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Prod. Medida'
+        Campo = 'medida'
+        Tabla = 'medida'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Prod. Marca'
+        Campo = 'nombre_marca'
+        Tabla = 'marca'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Prod. Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'articulo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Prod. Tipo Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'tipo_articulo'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -900,8 +1201,8 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
     DataSet = ZQ_Producto
     SQL.Strings = (
       
-        'select os.id_os, os.codigo as os_codigo, os.nombre as os_nombre,' +
-        ' per.nombre as afiliado_nombre,'
+        'select os.id_os, osdet.id_detalle_os, os.codigo as os_codigo, os' +
+        '.nombre as os_nombre, per.nombre as afiliado_nombre,'
       
         '       peros.nro_afiliado as afiliado_numero, orden.fecha_orden,' +
         ' orden.fecha_prometido,'
@@ -919,39 +1220,40 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
         'ducto_medida, mc.nombre_marca as producto_marca,'
       
         '       ar.descripcion as producto_articulo, ta.descripcion as pr' +
-        'oducto_tipo_articulo, ordet.id_producto'
-      'from optica_detalle_os osdet'
-      'left join optica_os os on (osdet.id_os = os.id_os)'
+        'oducto_tipo_articulo, ordet.id_producto, co.nombre as producto_c' +
+        'olor'
+      'from optica_orden orden'
       
-        'left join optica_orden_detalle ordet on (osdet.id_orden_detalle ' +
-        '= ordet.id_orden_detalle)'
+        'inner join optica_orden_detalle ordet on (orden.id_orden = ordet' +
+        '.id_orden)'
       
-        'left join optica_orden orden on (ordet.id_orden = orden.id_orden' +
-        ')'
-      'left join persona per on (orden.id_cliente = per.id_persona)'
+        'inner join optica_detalle_os osdet on (ordet.id_orden_detalle = ' +
+        'osdet.id_orden_detalle)'
+      'inner join optica_os os on (osdet.id_os = os.id_os)'
       
-        'left join optica_persona_os peros on (per.id_persona = peros.id_' +
-        'persona_os)'
+        'inner join optica_persona_os peros on (orden.id_cliente = peros.' +
+        'id_persona) and (peros.id_os = osdet.id_os)'
+      'inner join persona per on (orden.id_cliente = per.id_persona)'
       
-        'left join producto prod on (ordet.id_producto = prod.id_producto' +
-        ')'
+        'inner join producto prod on (ordet.id_producto = prod.id_product' +
+        'o)'
       
-        'left join producto_cabecera pcab on (prod.id_prod_cabecera = pca' +
-        'b.id_prod_cabecera)'
-      'left join medida md on (prod.id_medida = md.id_medida)'
-      'left join marca mc on (pcab.id_marca = mc.id_marca)'
-      'left join articulo ar on (pcab.id_articulo = ar.id_articulo)'
+        'inner join producto_cabecera pcab on (prod.id_prod_cabecera = pc' +
+        'ab.id_prod_cabecera)'
+      'inner join medida md on (prod.id_medida = md.id_medida)'
+      'inner join marca mc on (pcab.id_marca = mc.id_marca)'
+      'inner join articulo ar on (pcab.id_articulo = ar.id_articulo)'
       
-        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
-        'articulo)'
-      'left join color co on (pcab.color = co.id_color)'
+        'inner join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo' +
+        '_articulo)'
+      'inner join color co on (pcab.color = co.id_color)'
       'where (orden.id_estado <> 4)'
       'and osdet.id_factura_os is null'
       'and osdet.id_os = ')
     SQL_Select.Strings = (
       
-        'select os.id_os, os.codigo as os_codigo, os.nombre as os_nombre,' +
-        ' per.nombre as afiliado_nombre,'
+        'select os.id_os, osdet.id_detalle_os, os.codigo as os_codigo, os' +
+        '.nombre as os_nombre, per.nombre as afiliado_nombre,'
       
         '       peros.nro_afiliado as afiliado_numero, orden.fecha_orden,' +
         ' orden.fecha_prometido,'
@@ -969,33 +1271,34 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
         'ducto_medida, mc.nombre_marca as producto_marca,'
       
         '       ar.descripcion as producto_articulo, ta.descripcion as pr' +
-        'oducto_tipo_articulo, ordet.id_producto')
+        'oducto_tipo_articulo, ordet.id_producto, co.nombre as producto_c' +
+        'olor')
     SQL_From.Strings = (
-      'from optica_detalle_os osdet'
-      'left join optica_os os on (osdet.id_os = os.id_os)'
+      'from optica_orden orden'
       
-        'left join optica_orden_detalle ordet on (osdet.id_orden_detalle ' +
-        '= ordet.id_orden_detalle)'
+        'inner join optica_orden_detalle ordet on (orden.id_orden = ordet' +
+        '.id_orden)'
       
-        'left join optica_orden orden on (ordet.id_orden = orden.id_orden' +
-        ')'
-      'left join persona per on (orden.id_cliente = per.id_persona)'
+        'inner join optica_detalle_os osdet on (ordet.id_orden_detalle = ' +
+        'osdet.id_orden_detalle)'
+      'inner join optica_os os on (osdet.id_os = os.id_os)'
       
-        'left join optica_persona_os peros on (per.id_persona = peros.id_' +
-        'persona_os)'
+        'inner join optica_persona_os peros on (orden.id_cliente = peros.' +
+        'id_persona) and (peros.id_os = osdet.id_os)'
+      'inner join persona per on (orden.id_cliente = per.id_persona)'
       
-        'left join producto prod on (ordet.id_producto = prod.id_producto' +
-        ')'
+        'inner join producto prod on (ordet.id_producto = prod.id_product' +
+        'o)'
       
-        'left join producto_cabecera pcab on (prod.id_prod_cabecera = pca' +
-        'b.id_prod_cabecera)'
-      'left join medida md on (prod.id_medida = md.id_medida)'
-      'left join marca mc on (pcab.id_marca = mc.id_marca)'
-      'left join articulo ar on (pcab.id_articulo = ar.id_articulo)'
+        'inner join producto_cabecera pcab on (prod.id_prod_cabecera = pc' +
+        'ab.id_prod_cabecera)'
+      'inner join medida md on (prod.id_medida = md.id_medida)'
+      'inner join marca mc on (pcab.id_marca = mc.id_marca)'
+      'inner join articulo ar on (pcab.id_articulo = ar.id_articulo)'
       
-        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
-        'articulo)'
-      'left join color co on (pcab.color = co.id_color)')
+        'inner join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo' +
+        '_articulo)'
+      'inner join color co on (pcab.color = co.id_color)')
     SQL_Where.Strings = (
       'where (orden.id_estado <> 4)'
       'and osdet.id_factura_os is null'
@@ -1021,6 +1324,7 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
     object ASelTodos: TAction
       Caption = 'ASelTodos'
       ShortCut = 114
+      OnExecute = ASelTodosExecute
     end
     object ASalir: TAction
       Caption = 'ASalir'
