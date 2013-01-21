@@ -1,6 +1,6 @@
 object FBuscarProducto: TFBuscarProducto
-  Left = 532
-  Top = 233
+  Left = 381
+  Top = 204
   Width = 730
   Height = 426
   Caption = 'Buscar Producto'
@@ -20,15 +20,15 @@ object FBuscarProducto: TFBuscarProducto
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 347
     Align = alClient
     TabOrder = 0
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
-      Width = 712
-      Height = 334
+      Width = 720
+      Height = 345
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -142,7 +142,7 @@ object FBuscarProducto: TFBuscarProducto
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1000,6 +1000,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Cabecera'
@@ -1009,6 +1010,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Barra'
@@ -1018,6 +1020,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nombre Producto'
@@ -1027,6 +1030,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Medida'
@@ -1036,6 +1040,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Marca'
@@ -1045,6 +1050,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tipo Art'#237'culo'
@@ -1054,6 +1060,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Art'#237'culo'
@@ -1063,6 +1070,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Color'
@@ -1072,6 +1080,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Baja'
@@ -1088,6 +1097,7 @@ object FBuscarProducto: TFBuscarProducto
           'S')
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -1312,6 +1322,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Barra'
@@ -1321,6 +1332,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'd. Cabecera'
@@ -1330,6 +1342,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Producto'
@@ -1339,6 +1352,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Medida'
@@ -1348,6 +1362,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Color'
@@ -1357,6 +1372,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Marca'
@@ -1366,6 +1382,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tipo Art'#237'culo'
@@ -1375,6 +1392,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Art'#237'culo'
@@ -1384,6 +1402,7 @@ object FBuscarProducto: TFBuscarProducto
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Baja'
@@ -1400,6 +1419,7 @@ object FBuscarProducto: TFBuscarProducto
           'S')
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo

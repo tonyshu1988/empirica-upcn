@@ -32,7 +32,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
       Top = 1
       Width = 991
       Height = 592
-      ActivePage = TabBalance
+      ActivePage = TabDetalleCuenta
       Align = alClient
       TabOrder = 0
       object TabSaldosCuentas: TTabSheet
@@ -3498,6 +3498,7 @@ object FEstadisticaDisponibilidades: TFEstadisticaDisponibilidades
             item
               Expanded = False
               FieldName = 'diferencia'
+              Title.Alignment = taCenter
               Title.Caption = 'Diferencia'
               Visible = True
             end

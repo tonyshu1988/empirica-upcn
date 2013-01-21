@@ -349,7 +349,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Size.Values = (
               52.916666666666670000
               1132.416666666667000000
-              68.791666666666680000
+              68.791666666666670000
               505.354166666666700000)
             Alignment = taCenter
             AlignToBand = True
@@ -382,7 +382,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               52.916666666666670000
               1087.437500000000000000
               5.291666666666667000
-              592.666666666666800000)
+              592.666666666666700000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
