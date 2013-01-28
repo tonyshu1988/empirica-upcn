@@ -134,31 +134,6 @@ begin
 end;
 
 
-//function TEKUsrLogin.habilitarMenu(menu: TMenuItem): boolean;
-//var
-//  long, indice: integer;
-//  resultado: boolean;
-//begin
-//  resultado:= false; //por defecto no se muestran las opciones
-//  long:= menu.Count;
-//  for indice:= 0 to (long - 1) do //recorro una por una las opciones menu
-//  begin
-//    if menu.Items[indice].Tag = 1 then //si el tag de la opcion actual es = 1
-//      resultado:= true //las opciones se tiene q mostrar
-//    else //si el tag es distinto de 1 tengo que preguntar por los permisos
-//    begin //si estoy en modo action y tiene una accion asignada
-//      if (ModoPermiso = EKPermisoAction) and Assigned(Menu.Items[indice].Action) then
-//        if PermisoAccion(Menu.items[indice].Action.Name) then //si tengo permiso para la accion de la opcion
-//          resultado:= true //las opciones se tiene q mostrar
-//      else
-//        Menu.Items[indice].visible:= false //la opcion no se muestra
-//    end;
-//  end;
-//
-//  Result:= resultado;
-//end;
-
-
 procedure TEKUsrLogin.chequear_permisos;
 var
   n1, n2, n3: integer;
@@ -233,33 +208,6 @@ begin
         menu.Items[n1].Enabled:= false;
     end
   end;
-
-//  if Assigned(FMenu) then //si el menu esta asignado
-//    for i := menu.Items.Count-1 downto 0 do //recorro el nivel 0 del menu
-//    begin
-//      menuvacio := true; //por defecto todos los menu estan vacio
-//
-//      for j := menu.items[i].Count-1 downto 0 do //recorro el nivel 1 del menu
-//      begin
-//        if menu.Items[i].Items[j].Tag <> 1 then //si el tag del nivel 1 de la opcion actual es <> 1
-//        begin
-//          if menu.Items[i].Items[j].Tag <> 2 then //si el tag del nivel 1 de la opcion actual es <> 1
-//            if (ModoPermiso = EKPermisoAction) and Assigned(Menu.items[i].Items[j].Action) then //si estoy en modo action y tiene una accion asignada
-//              if not PermisoAccion(Menu.items[i].Items[j].Action.Name) then //si no tengo permiso para la accion del menu
-//                if not PermisoCaption(Menu.items[i].Items[j].Caption) then //si no tengo permiso para de caption del menu
-//                  Menu.Items[i].Items[j].visible := false //oculto el menu
-//                else
-//                  menuvacio := false //seteo que no esta vacio
-//              else //si tengo permiso para la accion del menu
-//                menuvacio := false; //seteo que no esta vacio
-//        end
-//        else //si el tag del nivel 1 de la opcion actual es igual a 1
-//            menuvacio := false;
-//      end;
-//
-//      if menuvacio then //si el menu esta vacio entonces lo deshabilito
-//        menu.Items[i].Enabled := false;
-//    end;
 end;
 
 
@@ -269,9 +217,12 @@ var
   Ini: TIniFile;
   leer: string;
   encriptado: string;
+  protocolo: string;
 
+  //si el usuario esta habilitado para entrar al sistema entonces realizo la conexion con la base de datos
   procedure final_correcto;
   begin
+    //obtengo el usuario real y el password de la base de datos
     usuariodb:= EKLoginForm1.EKSQLUsuarios.fieldbyname('db_usr').AsString;
     passworddb:= EKLoginForm1.EKSQLUsuarios.fieldbyname('db_clv').AsString;
 
@@ -288,6 +239,7 @@ var
       if not EKUsrLogin1.coneccion.Connected then
         Application.Terminate;
     end;
+
     error_clave:= '';
     conectar:= true;
   end;
@@ -302,6 +254,7 @@ begin
     exit;
   end;
 
+  //chequeo el modo. Si esta en "LoginSistema_ini" entonces el usuario de logueo y el password viene del sistema ini
   if Modo = EKLoginSistema_ini then
   begin
     Ini:= TIniFile.Create('.\SISTEMA.INI');
@@ -315,6 +268,13 @@ begin
         ipl:= ip;
       Usuariolog:= Ini.ReadString(leer, 'usuario', '');
       passwordlog:= Ini.ReadString(leer, 'password', '');
+
+      if encriptado = 'S' then //si el usuario de logueo y la pass estan encriptada la desencripto
+      begin
+        usuariolog:= Desencriptar('momiamun', pchar(usuariolog), length(usuariolog));
+        passwordlog:= Desencriptar('momiamun', pchar(passwordlog), length(passwordlog));
+      end;
+
       db:= Ini.ReadString(leer, Titulo_DBAplicacion, 'automatico');
       dbu:= Ini.ReadString(leer, Titulo_DBUsuario, '');
       protocolo:= Ini.ReadString(leer, 'protocolo', 'firebird-1.5');
@@ -323,6 +283,7 @@ begin
     end;
   end;
 
+  //chequeo el modo. Si esta en "LoginAutomatico" entonces el usuario de logueo y el password lo calculo yo
   if Modo = EKLoginAutomatico then
   begin
     Ini:= TIniFile.Create('.\SISTEMA.INI');
@@ -353,27 +314,23 @@ begin
   error_clave:= 'Verifique el archivo "sistema.ini"' + chr(13) +
     'El error no esta en el usuario de sistema sino en el de base datos';
 
-  if encriptado = 'S' then
-  begin
-    usuariolog:= Desencriptar('momiamun', pchar(usuariolog), length(usuariolog));
-    passwordlog:= Desencriptar('momiamun', pchar(passwordlog), length(passwordlog));
-  end;
-
-  EKUsrLogin1.coneccion.HostName:= ipl;
-  EKUsrLogin1.coneccion.Database:= dbu;
-  EKUsrLogin1.coneccion.User:= usuariolog;
-  EKUsrLogin1.coneccion.Password:= passwordlog;
-  EKUsrLogin1.Coneccion.Protocol:= protocolo;
-  EKUsrLogin1.coneccion.connect;
+  //se conecta a la base de usuario con el usuario de logueo
+  //si esta en modo "LoginAutomatico" se conecta con LOGIN y pass 354875642
+  EKLoginForm1.ConexionUsuario.HostName:= ipl;
+  EKLoginForm1.ConexionUsuario.Database:= dbu;
+  EKLoginForm1.ConexionUsuario.User:= usuariolog;
+  EKLoginForm1.ConexionUsuario.Password:= passwordlog;
+  EKLoginForm1.ConexionUsuario.Protocol:= protocolo; //firebird-1.5
+  EKLoginForm1.ConexionUsuario.connect;
 
   error_clave:= '';
 
   if Assigned(EKUsrLogin1.Coneccion) then
+  begin
     with EKLoginForm1 do
     begin
       if (ip = 'automatico') or (db = 'automatico') then
       begin
-        EKSQLAplicacion.Connection:= EKUsrLogin1.Coneccion;
         EKSQLAplicacion.ParamByName('aplicacion').AsString:= FAplicacion;
         EKSQLAplicacion.Open;
 
@@ -389,27 +346,31 @@ begin
       ConeccionUsuario:= TZConnection.Create(nil);
       ZQ_Usuarios:= TZQuery.Create(nil);
 
-      EKSQLUsuarios.Connection:= EKUsrLogin1.Coneccion;
-      EKSQLpermisos.Connection:= EKUsrLogin1.Coneccion;
-      EKSQLGrupo.Connection:= EKUsrLogin1.Coneccion;
-
       EKSQLpermisos.ParamByName('usu').AsString:= EKLoginForm1.usuario.Text;
       EKSQLpermisos.ParamByName('aplica').AsString:= FAplicacion;
 
       EKSQLUsuarios.Open;
       EKSQLpermisos.Open;
 
+      //si el usuario no tiene ningun permiso asignado
       if EKSQLpermisos.RecordCount = 0 then
+        //verifico si el usuario existe
         if EKSQLUsuarios.Locate('usuario', VarArrayOf([usuario.Text]), [loCaseInsensitive]) then
+          //si existe verifico que este habilitado
           if EKSQLUsuarios.FieldByName('habilitado').AsString <> 'S' then
-            showmessage('El Usuario esta deshabilitado')
-          else
-            showmessage('El Usuario ingresado no tiene permisos')
-        else
-          showmessage('El Usuario ingresado no existe')
-      else
+            showmessage('El Usuario "'+usuario.Text+'"  esta deshabilitado.')
+          else //si esta habilitado el problema es que no tiene permisos
+            showmessage('El Usuario "'+usuario.Text+'" no tiene permisos.')
+        else //si el usuario no existe
+          showmessage('El Usuario "'+usuario.Text+'" no existe.')
+      else //si el usuario tiene algun permiso asignado
       begin
-      //-- GUARDA PERMISOS EN ARRAY --
+        //chequeo si el usuario es un grupo
+        EKSQLGrupo.Close;
+        EKSQLGrupo.ParamByName('usr').AsString:= EKSQLpermisosUSUARIO.AsString;
+        EKSQLGrupo.Open;
+
+        //-- GUARDO LOS PERMISOS ASIGNADOS AL USUARIO EN EL ARRAY EKPermisos[] --
         i:= 0;
         SetLength(EKpermisos1, EKSQLpermisos.RecordCount);
         while not EKSQLpermisos.Eof do
@@ -419,9 +380,6 @@ begin
           EKPermisos1[i].caption:= EKSQLpermisosCAPTION.AsString;
           EKPermisos1[i].valor:= EKSQLpermisosVALOR.AsString;
 
-          EKSQLGrupo.Close;
-          EKSQLGrupo.ParamByName('usr').AsString:= EKSQLpermisosUSUARIO.AsString;
-          EKSQLGrupo.Open;
           if (EKSQLGrupoGRUPO.IsNull) or (EKSQLGrupoGRUPO.AsString = 'N') then
             EKPermisos1[i].esGrupo:= 'N'
           else
@@ -432,13 +390,16 @@ begin
         end;
         EKSQLGrupo.Close;
 
+        //verifico si el usuario existe
         if EKSQLUsuarios.Locate('usuario', VarArrayOf([usuario.Text]), [loCaseInsensitive]) then
         begin
+          //chequeo que la contraseña ingresada sea la misma que figura en la base de datos de usuarios
           if EKSQLUsuarios.FieldByName('clave').AsString = password.Text then
           begin
+            //verifico que este habilitado
             if EKSQLUsuarios.FieldByName('habilitado').AsString <> 'S' then
-              showmessage('El Usuario ingresado esta deshabilitado')
-            else
+              showmessage('El Usuario "'+usuario.Text+'"  esta deshabilitado.')
+            else //Si el usuario esta habilitado
             begin
               usuariosis:= usuario.Text;
               nusuariosis:= EKSQLUsuarios.fieldbyname('nombre').asstring;
@@ -453,29 +414,25 @@ begin
                 cambioclave.nusuario.Caption:= EKSQLUsuarios.fieldbyname('nombre').asstring;
                 cambioclave.ShowModal;
                 cambioclave.Release;
-                //-- CONTROLA SI MODIFICO LA PASSWORD --
+
+                //verifico que el cambio de contraseña fue exitoso
                 if passwordsis <> oldpasswd then
-                begin
-                  //-- FINAL CORRECTO --
-                  final_correcto;
-                end
-                else
-                  showmessage('El Usuario Ingresado esta obligado a modificar su contraseña')
+                  final_correcto
+                else //si no se cambio la contraseña
+                  showmessage('El Usuario "'+usuario.Text+'" esta obligado a modificar su contraseña.')
               end
               else
-              begin
-                //-- FINAL CORRECTO --
                 final_correcto;
-              end;
             end;
           end
-          else
-            showmessage('La Contraseña ingresada es Incorrecta')
+          else //si la contraseña es distinta
+            showmessage('La Contraseña ingresada para el Usuario "'+usuario.Text+'" es Incorrecta.')
         end
-        else
-          showmessage('El Usuario ingresado no existe');
+        else  //si el usuario no existe
+          showmessage('El Usuario "'+usuario.Text+'" no existe.')
       end;
     end
+  end
   else
     ShowMessage('TEKUsrLogin: Error, No se definió Conección');
 end;
@@ -596,6 +553,9 @@ end;
 
 function TEKUsrLogin.existeUsuario(nombre, password: string): boolean;
 begin
+  //se utiliza para verificar si un usuario esta en la base de datos o no.
+  //Esta en la pantalla de ficha de empleado.
+  
   result:= false;
 
   //si paso un nombre vacio salgo
@@ -805,6 +765,7 @@ end;
 initialization
 
   Application.CreateForm(TEKLoginForm, EKLoginForm1);
+
 {$IFDEF MUNISF}
   st:= TMemoryStream.Create;
   EKLoginForm1.image1.Picture.Graphic.SaveToStream(st);
