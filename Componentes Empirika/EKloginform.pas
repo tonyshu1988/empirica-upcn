@@ -5,7 +5,7 @@ interface
 uses
   Windows,  Forms, Dialogs, EKUsrLogin, ZAbstractRODataset, ZDataset,
   jpeg, Controls, StdCtrls, DB, ExtCtrls, ComCtrls, Classes,
-  ZAbstractDataset;
+  ZAbstractDataset, ZConnection;
 
 type
   TEKPermisos = record
@@ -36,6 +36,7 @@ type
     EKSQLAplicacion: TZReadOnlyQuery;
     EKSQLGrupo: TZQuery;
     EKSQLGrupoGRUPO: TStringField;
+    ConexionUsuario: TZConnection;
     procedure sButton1Click(Sender: TObject);
     procedure btingresarClick(Sender: TObject);
     procedure passwordKeyDown(Sender: TObject; var Key: Word;
