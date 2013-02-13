@@ -438,15 +438,6 @@ type
     ZQ_Orden_Entrega_fiscal: TStringField;
     ZQ_Orden_Entrega_esCtaCorr: TStringField;
     ZQ_OrdenDetalleOS_acumOS: TFloatField;
-    CD_Totales: TClientDataSet;
-    DataSetProvider1: TDataSetProvider;
-    CD_TotalesID_DETALLE_OS: TIntegerField;
-    CD_TotalesID_ORDEN_DETALLE: TIntegerField;
-    CD_TotalesID_OS: TIntegerField;
-    CD_TotalesMONTO_DESCONTADO: TFloatField;
-    CD_TotalesOBSERVACIONES: TStringField;
-    CD_Totalesos_detalle: TStringField;
-    CD_Totales_acumOS: TFloatField;
     DS_Totales: TDataSource;
     PListado: TPanel;
     btNuevo: TdxBarLargeButton;
@@ -522,8 +513,6 @@ type
     procedure btCancelarOsClick(Sender: TObject);
     procedure btAceptarOSClick(Sender: TObject);
     function verificarTotOS():Boolean;
-    procedure EKDbSumaProdSumListChanged(Sender: TObject);
-    procedure EKDbSumaOSSumListChanged(Sender: TObject);
     procedure modoEscrituraOS();
     procedure btnFormaPagoClick(Sender: TObject);
     procedure btFPAceptarClick(Sender: TObject);
@@ -548,6 +537,11 @@ type
     procedure EKDbSumaEntregasSumListChanged(Sender: TObject);
     procedure recalcularTotales();
     procedure RecalcularMontoPago();
+    procedure edImporteUnitarioExit(Sender: TObject);
+    procedure edCantExit(Sender: TObject);
+    procedure EKDbSumaProdSumListChanged(Sender: TObject);
+    procedure EKDbSumaOSSumListChanged(Sender: TObject);
+    procedure ZQ_OrdenDetalleBeforeDelete(DataSet: TDataSet);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -596,7 +590,6 @@ begin
   dm.ZQ_Configuracion.Close;
   dm.ZQ_Configuracion.Open;
   idSucursal:= dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger;
-  CD_Totales.CreateDataSet;
 //  CD_OrdenDetalle.CreateDataSet;
 //  CD_ordenDetalleOS.CreateDataSet;
 //  CD_Fpago.CreateDataSet;
@@ -718,6 +711,9 @@ begin
 
       ZQ_CodifRP.Append;
       ZQ_CodifRPID_ORDEN.AsInteger:=ZQ_OrdenID_ORDEN.AsInteger;
+
+
+      recalcularTotales();
   end;
 
 
@@ -1104,7 +1100,10 @@ begin
 if dm.EKModelo.verificar_transaccion(abmOrden) then
  if not (ZQ_OrdenDetalle.IsEmpty) then
   begin
+
     ZQ_OrdenDetalle.Delete;
+
+    recalcularTotales();
   end;
 end;
 
@@ -1165,7 +1164,9 @@ begin
 if dm.EKModelo.verificar_transaccion(abmOrden) then
  if not(ZQ_OrdenDetalleOS.IsEmpty) then
   begin
+
     ZQ_OrdenDetalleOS.Delete;
+    recalcularTotales();
   end;
 end;
 
@@ -1205,7 +1206,13 @@ Perform(WM_NEXTDLGCTL, 0, 0);
 
     if ((ZQ_ProductosLLEVAR_STOCK.AsString <> 'S') or (ZQ_ProductosSTOCK_ACTUAL.AsFloat >= ZQ_OrdenDetalleCANTIDAD.AsFloat)) then
     begin
+
+      ZQ_OrdenDetalleIMPORTE_VENTA.AsFloat:=ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat;
+
       ZQ_OrdenDetalle.Post;
+
+      recalcularTotales();
+
       modoLecturaProd();
       if DBGridListadoProductos.Enabled then
         DBGridListadoProductos.SetFocus;
@@ -1271,8 +1278,9 @@ Perform(WM_NEXTDLGCTL, 0, 0);
        end
       else
        begin
+
         modoLecturaProd();
-        EKDbSumaOS.RecalcAll;
+        recalcularTotales();
         if DBGridListadoOS.Enabled then
           DBGridListadoOS.SetFocus;
        end
@@ -1296,17 +1304,6 @@ begin
     Application.MessageBox(PCHAR(Format('El monto reconocido total no debe ser superior a $%s, por favor Verifique',[CurrToStr(acumProductos)])), 'Validación', MB_OK + MB_ICONINFORMATION);
     result:= false;
   end;
-end;
-
-procedure TFOP_ABM_OrdenTecnica.EKDbSumaProdSumListChanged(
-  Sender: TObject);
-begin
-  recalcularTotales()
-end;
-
-procedure TFOP_ABM_OrdenTecnica.EKDbSumaOSSumListChanged(Sender: TObject);
-begin
-  recalcularTotales()
 end;
 
 procedure TFOP_ABM_OrdenTecnica.modoEscrituraOS;
@@ -1587,7 +1584,6 @@ begin
 
         //ShowMessage(inttostr(comprobante)+' '+ZQ_FormasPagoDESCRIPCION.AsString+' '+ZQ_CuentasNOMBRE_CUENTA.AsString);
 
-        CD_Totales.EmptyDataSet;
 
         PanelContenedorDerecha.Enabled:= True;
         if DBGridListadoProductos.Enabled then
@@ -1739,11 +1735,73 @@ end;
 
 procedure TFOP_ABM_OrdenTecnica.recalcularTotales;
 begin
+
+  if dm.EKModelo.verificar_transaccion(abmOrden) then
+   begin
+    EKDbSumaProd.RecalcAll;
+    EKDbSumaOS.RecalcAll;
+    EKDbSumaEntregas.RecalcAll;
+   end;
+  acumEntrega:=EKDbSumaEntregas.SumCollection[0].SumValue;
+  acumOS:=EKDbSumaProd.SumCollection[2].SumValue;
   acumProductos:= EKDbSumaProd.SumCollection[0].SumValue;
   acumFinal:=acumProductos-acumOS-acumEntrega;
   cantProductos:=round(EKDbSumaProd.SumCollection[1].SumValue);
   lblTotAPagar.Caption:=Format('Total a Pagar: $ %s.',[CurrToStr(acumFinal)]);
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + CurrToStr(cantProductos);
+end;
+
+procedure TFOP_ABM_OrdenTecnica.edImporteUnitarioExit(Sender: TObject);
+begin
+ if not (ZQ_OrdenDetalle.IsEmpty) then
+  begin
+    if (ZQ_OrdenDetalleCANTIDAD.AsFloat < 0) then ZQ_OrdenDetalleCANTIDAD.AsFloat:= 1;
+    //if (CD_DetalleFacturaPORC_DESCUENTO.AsFloat < 0) then CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= 0;
+    ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:= (ZQ_OrdenDetalleCANTIDAD.AsFloat * ZQ_OrdenDetalleIMPORTE_UNITARIO.AsFloat);
+    ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:=ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat-(descCliente/100)*ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat;
+  end
+end;
+
+procedure TFOP_ABM_OrdenTecnica.edCantExit(Sender: TObject);
+begin
+  if not (ZQ_OrdenDetalle.IsEmpty) then
+  begin
+    if (ZQ_OrdenDetalleCANTIDAD.AsFloat < 0) then ZQ_OrdenDetalleCANTIDAD.AsFloat:= 1;
+    //if (CD_DetalleFacturaPORC_DESCUENTO.AsFloat < 0) then CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= 0;
+    ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:= (ZQ_OrdenDetalleCANTIDAD.AsFloat * ZQ_OrdenDetalleIMPORTE_UNITARIO.AsFloat);
+    ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:=ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat-(descCliente/100)*ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat;
+  end
+end;
+
+procedure TFOP_ABM_OrdenTecnica.EKDbSumaProdSumListChanged(
+  Sender: TObject);
+begin
+   if dm.EKModelo.verificar_transaccion(abmOrden) then
+      EKDbSumaProd.RecalcAll;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.EKDbSumaOSSumListChanged(Sender: TObject);
+begin
+  if dm.EKModelo.verificar_transaccion(abmOrden) then
+    EKDbSumaOS.RecalcAll;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleBeforeDelete(
+  DataSet: TDataSet);
+begin
+  ZQ_OrdenDetalleOS.First;
+  while not ZQ_OrdenDetalleOS.EoF do
+    begin
+      ZQ_OrdenDetalleOS.Delete;
+      ZQ_OrdenDetalleOS.Next; // esta línea hace que el bucle trabaje con el próximo registro
+    end;
+
+   if dm.EKModelo.verificar_transaccion(abmOrden) then
+     EKDbSumaOS.RecalcAll;
+
+   ZQ_OrdenDetalle.Edit;
+   ZQ_OrdenDetalleIMPORTE_RECONOCIDO.AsFloat:=EKDbSumaOS.SumCollection[0].SumValue;
+   ZQ_OrdenDetalle.Post;
 end;
 
 end.
