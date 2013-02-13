@@ -3441,7 +3441,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
               item
                 Color = clCream
                 Expanded = False
-                FieldName = 'prod_pventa'
+                FieldName = 'IMPORTE_UNITARIO'
                 ReadOnly = True
                 Title.Caption = 'Precio Unit.'
                 Visible = True
@@ -3456,7 +3456,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
               item
                 Color = 10485759
                 Expanded = False
-                FieldName = 'MONTO_TOTAL'
+                FieldName = 'IMPORTE_TOTAL'
                 Font.Charset = DEFAULT_CHARSET
                 Font.Color = clWindowText
                 Font.Height = -11
@@ -4814,7 +4814,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object DBEdit4: TDBEdit
       Left = 88
       Top = 24
-      Width = 449
+      Width = 450
       Height = 21
       BevelInner = bvNone
       BevelOuter = bvNone
@@ -4847,6 +4847,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
+      OnExit = edCantExit
     end
     object edImporteUnitario: TDBEdit
       Left = 105
@@ -4865,6 +4866,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 4
+      OnExit = edImporteUnitarioExit
     end
     object edObsProd: TDBMemo
       Left = 11
@@ -7671,6 +7673,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_OrdenDetalle: TZQuery
     Connection = DM.Conexion
+    BeforeDelete = ZQ_OrdenDetalleBeforeDelete
     SQL.Strings = (
       'select *'
       'from OPTICA_ORDEN_DETALLE'
@@ -7734,15 +7737,19 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_OrdenDetalleIMPORTE_RECONOCIDO: TFloatField
       FieldName = 'IMPORTE_RECONOCIDO'
+      DisplayFormat = '$ 000.00'
     end
     object ZQ_OrdenDetalleIMPORTE_UNITARIO: TFloatField
       FieldName = 'IMPORTE_UNITARIO'
+      DisplayFormat = '$ 000.00'
     end
     object ZQ_OrdenDetalleIMPORTE_VENTA: TFloatField
       FieldName = 'IMPORTE_VENTA'
+      DisplayFormat = '$ 000.00'
     end
     object ZQ_OrdenDetalleIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
+      DisplayFormat = '$ 000.00'
     end
   end
   object ZQ_OrdenDetalleOS: TZQuery
@@ -8139,7 +8146,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object DS_Orden: TDataSource
     DataSet = ZQ_Orden
     Left = 248
-    Top = 304
+    Top = 248
   end
   object DS_OrdenDetalle: TDataSource
     DataSet = ZQ_OrdenDetalle
@@ -8148,7 +8155,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_Laboratorios: TZQuery
     Connection = DM.Conexion
-    Active = True
     SQL.Strings = (
       
         'select LAB.*,coalesce('#39'C'#243'd: '#39'||LAB.codigo||'#39' - '#39'||LAB.nombre||'#39' ' +
@@ -8292,7 +8298,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_DetalleProd: TZQuery
     Connection = DM.Conexion
-    Active = True
     SQL.Strings = (
       
         'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
@@ -8517,11 +8522,15 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     SumCollection = <
       item
         Operacion = goSum
-        NombreCampo = 'IMPORTE_total'
+        NombreCampo = 'IMPORTE_TOTAL'
       end
       item
         Operacion = goCount
         NombreCampo = 'id_producto'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'importe_reconocido'
       end>
     DataSet = ZQ_OrdenDetalle
     SumListChanged = EKDbSumaProdSumListChanged
@@ -8536,8 +8545,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end>
     DataSet = ZQ_OrdenDetalleOS
     SumListChanged = EKDbSumaOSSumListChanged
-    Left = 932
-    Top = 286
+    Left = 972
+    Top = 294
   end
   object ZQ_CodifRP: TZQuery
     Connection = DM.Conexion
@@ -8640,8 +8649,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DS_CodifRP: TDataSource
     DataSet = ZQ_CodifRP
-    Left = 304
-    Top = 360
+    Left = 248
+    Top = 304
   end
   object DS_Medico: TDataSource
     DataSet = ZQ_Medico
@@ -8914,45 +8923,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Size = 1
     end
   end
-  object CD_Totales: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'DataSetProvider1'
-    Left = 677
-    Top = 252
-    object CD_TotalesID_DETALLE_OS: TIntegerField
-      FieldName = 'ID_DETALLE_OS'
-    end
-    object CD_TotalesID_ORDEN_DETALLE: TIntegerField
-      FieldName = 'ID_ORDEN_DETALLE'
-    end
-    object CD_TotalesID_OS: TIntegerField
-      FieldName = 'ID_OS'
-    end
-    object CD_TotalesMONTO_DESCONTADO: TFloatField
-      FieldName = 'MONTO_DESCONTADO'
-    end
-    object CD_TotalesOBSERVACIONES: TStringField
-      FieldName = 'OBSERVACIONES'
-      Size = 1000
-    end
-    object CD_Totalesos_detalle: TStringField
-      FieldName = 'os_detalle'
-      ReadOnly = True
-      Size = 100
-    end
-    object CD_Totales_acumOS: TFloatField
-      FieldName = '_acumOS'
-      ReadOnly = True
-    end
-  end
-  object DataSetProvider1: TDataSetProvider
-    DataSet = ZQ_OrdenDetalleOS
-    Left = 837
-    Top = 395
-  end
   object DS_Totales: TDataSource
-    DataSet = CD_Totales
     Left = 677
     Top = 308
   end
