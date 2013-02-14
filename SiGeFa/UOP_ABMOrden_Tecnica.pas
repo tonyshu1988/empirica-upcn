@@ -8,7 +8,7 @@ uses
   Buttons, ComCtrls, ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, DBClient, EKListadoSQL,StrUtils,UDM, UPrincipal, UBuscarPersona,
   UBuscarProductoStock, Provider, Menus, ZSequence, EKDbSuma,
-  EKDBDateTimePicker, EKBusquedaAvanzada;
+  EKDBDateTimePicker, EKBusquedaAvanzada, EKOrdenarGrilla;
 
 type
   TFOP_ABM_OrdenTecnica = class(TForm)
@@ -474,6 +474,7 @@ type
     ZQ_OrdenDetalleIMPORTE_UNITARIO: TFloatField;
     ZQ_OrdenDetalleIMPORTE_VENTA: TFloatField;
     ZQ_OrdenDetalleIMPORTE_TOTAL: TFloatField;
+    EKOrdenarGrilla1: TEKOrdenarGrilla;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -541,7 +542,6 @@ type
     procedure ZQ_OrdenDetalleBeforeDelete(DataSet: TDataSet);
     procedure ZQ_OrdenDetalleOSAfterPost(DataSet: TDataSet);
     procedure ZQ_OrdenDetalleOSAfterDelete(DataSet: TDataSet);
-    procedure ZQ_OrdenDetalleAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -1255,8 +1255,8 @@ Perform(WM_NEXTDLGCTL, 0, 0);
 
   if (not (ZQ_OrdenDetalleOSID_OS.IsNull)) then
     begin
-//      id:=ZQ_OrdenDetalleOS.RecNo;
-//      ZQ_OrdenDetalleOS.Post;
+      id:=ZQ_OrdenDetalleOS.RecNo;
+      ZQ_OrdenDetalleOS.Post;
 
       if not(verificarTotOS()) then
        begin
@@ -1602,6 +1602,7 @@ begin
   ZQ_OrdenMONTO_TOTAL.AsFloat:=acumProductos;
   ZQ_OrdenMONTO_RECONOCIDO.AsFloat:=acumOS;
   ZQ_OrdenMONTO_ENTREGADO.AsFloat:=acumEntrega;
+  ZQ_OrdenSALDO.AsFloat:=ZQ_OrdenMONTO_TOTAL.AsFloat-ZQ_OrdenMONTO_RECONOCIDO.AsFloat-ZQ_OrdenMONTO_ENTREGADO.AsFloat;
 
 if validarBoleta() then
   begin
@@ -1628,6 +1629,7 @@ begin
   if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden,ZQ_OrdenDetalle,ZQ_OrdenDetalleOS,ZQ_Orden_Entrega,ZQ_CodifRP]) then
   begin
       cliente:=ZQ_OrdenID_CLIENTE.AsInteger;
+      recalcularTotales();
       ZQ_Orden.Edit;
       modoLecturaProd;
   end;
@@ -1792,11 +1794,13 @@ begin
 
   if dm.EKModelo.verificar_transaccion(abmOrden) then
    begin
-   EKDbSumaOS.RecalcAll;
+    EKDbSumaOS.RecalcAll;
+    ZQ_OrdenDetalleOS.Last;
     ZQ_OrdenDetalle.Edit;
     ZQ_OrdenDetalleIMPORTE_RECONOCIDO.AsFloat:=EKDbSumaOS.SumCollection[0].SumValue;
+    ZQ_OrdenDetalleIMPORTE_VENTA.AsFloat:=ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat-ZQ_OrdenDetalleIMPORTE_RECONOCIDO.AsFloat;
     ZQ_OrdenDetalle.Post;
-    ZQ_OrdenDetalleOS.Last;
+
    end;
 end;
 
@@ -1805,20 +1809,12 @@ procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleOSAfterDelete(
 begin
 if dm.EKModelo.verificar_transaccion(abmOrden) then
    begin
-   EKDbSumaOS.RecalcAll;
+    ZQ_OrdenDetalleOS.Last;
     ZQ_OrdenDetalle.Edit;
     ZQ_OrdenDetalleIMPORTE_RECONOCIDO.AsFloat:=EKDbSumaOS.SumCollection[0].SumValue;
+    ZQ_OrdenDetalleIMPORTE_VENTA.AsFloat:=ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat-ZQ_OrdenDetalleIMPORTE_RECONOCIDO.AsFloat;
     ZQ_OrdenDetalle.Post;
-    ZQ_OrdenDetalleOS.Last;
-   end
-end;
 
-procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleAfterScroll(
-  DataSet: TDataSet);
-begin
-  if (ZQ_OrdenDetalleOS.State<>dsInactive) then
-   begin
-    EKDbSumaOS.RecalcAll;
    end
 end;
 

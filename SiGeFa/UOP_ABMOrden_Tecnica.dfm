@@ -87,56 +87,92 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             item
               Expanded = False
               FieldName = 'ID_ORDEN'
+              Title.Caption = 'ID'
+              Width = 54
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CODIGO_CLI'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_CLIENTE'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_ESTADO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_ORDEN'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_PROMETIDO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'COD_BARRAS'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'OBSERVACIONES'
+              Title.Caption = 'C'#243'digo'
+              Width = 91
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'NRO_FACTURA'
+              Width = 137
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_cod'
+              Title.Caption = 'C'#243'd. Cliente'
+              Width = 86
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_cuit'
+              Title.Caption = 'Cuit Cliente'
+              Width = 106
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_nombre'
+              Title.Caption = 'Nombre Cliente'
+              Width = 163
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_direccion'
+              Title.Caption = 'Direcci'#243'n'
+              Width = 299
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_ORDEN'
+              Title.Caption = 'Fecha Orden'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_PROMETIDO'
+              Title.Caption = 'Fecha Prometido'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'med_nombre'
+              Title.Caption = 'M'#233'dico'
+              Width = 311
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'MONTO_TOTAL'
+              Title.Caption = 'Monto Total'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MONTO_RECONOCIDO'
+              Title.Caption = 'Monto Reconocido OS'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'MONTO_ENTREGADO'
+              Title.Caption = 'Monto Entregado'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SALDO'
+              Title.Caption = 'Saldo Pendiente'
               Visible = True
             end
             item
@@ -151,87 +187,34 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             end
             item
               Expanded = False
-              FieldName = 'SALDO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_nombre'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_direccion'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_MEDICO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'med_nombre'
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'med_matricula'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'med_direccion'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_cod'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_cuit'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_edad'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_telefono'
+              Title.Caption = 'Matr'#237'cula M'#233'dico'
+              Width = 150
               Visible = True
             end
             item
               Expanded = False
               FieldName = '_estado'
+              Title.Caption = 'Estado Orden'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'AVISAR'
+              Title.Caption = 'Avisar'
               Visible = True
             end
             item
               Expanded = False
               FieldName = '_vendedor'
+              Title.Caption = 'Vendedor'
+              Width = 171
               Visible = True
             end
             item
               Expanded = False
-              FieldName = 'MONTO_RECONOCIDO'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_COMPROBANTE'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_SUCURSAL'
+              FieldName = 'OBSERVACIONES'
+              Title.Caption = 'Observaciones'
               Visible = True
             end>
         end
@@ -4038,6 +4021,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
                 FieldName = '_importeVenta'
                 ReadOnly = True
                 Title.Caption = 'Importe Venta'
+                Width = 93
                 Visible = True
               end
               item
@@ -7499,13 +7483,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_Orden: TZQuery
     Connection = DM.Conexion
-    SortedFields = 'FECHA_ORDEN'
-    SortType = stDescending
+    SortedFields = 'FECHA_ORDEN;ID_ORDEN'
     SQL.Strings = (
       'select *'
       'from OPTICA_ORDEN')
     Params = <>
-    IndexFieldNames = 'FECHA_ORDEN Desc'
+    IndexFieldNames = 'FECHA_ORDEN Asc;ID_ORDEN Asc'
     Left = 650
     Top = 31
     object ZQ_OrdenID_ORDEN: TIntegerField
@@ -7678,7 +7661,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_OrdenDetalle: TZQuery
     Connection = DM.Conexion
-    AfterScroll = ZQ_OrdenDetalleAfterScroll
     BeforeDelete = ZQ_OrdenDetalleBeforeDelete
     SQL.Strings = (
       'select *'
@@ -9014,5 +8996,100 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     SumListChanged = EKDbSumaEntregasSumListChanged
     Left = 956
     Top = 470
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Grilla = DBGridComprobantes
+    Filtros = <
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NRO_FACTURA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuit Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Orden'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Prometido'
+        Visible = True
+      end
+      item
+        TituloColumna = 'M'#233'dico'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Monto Total'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Monto Reconocido OS'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Monto Entregado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Saldo Pendiente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ENTREGADO_POR'
+        Visible = True
+      end
+      item
+        TituloColumna = 'FACTURADO_POR'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Matr'#237'cula M'#233'dico'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Estado Orden'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Avisar'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Vendedor'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Observaciones'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 388
+    Top = 104
   end
 end
