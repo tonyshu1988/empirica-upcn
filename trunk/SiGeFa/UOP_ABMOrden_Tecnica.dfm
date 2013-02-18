@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 371
-  Top = 90
+  Left = 185
+  Top = 105
   Width = 1070
   Height = 653
   Caption = 'ABM Orden T'#233'cnica'
@@ -7469,11 +7469,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object ZQ_Orden: TZQuery
     Connection = DM.Conexion
     SortedFields = 'FECHA_ORDEN;ID_ORDEN'
+    SortType = stDescending
     SQL.Strings = (
       'select *'
       'from OPTICA_ORDEN')
     Params = <>
-    IndexFieldNames = 'FECHA_ORDEN Asc;ID_ORDEN Asc'
+    IndexFieldNames = 'FECHA_ORDEN Desc;ID_ORDEN Desc'
     Left = 650
     Top = 31
     object ZQ_OrdenID_ORDEN: TIntegerField
