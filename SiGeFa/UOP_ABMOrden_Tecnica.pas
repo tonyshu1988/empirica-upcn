@@ -243,43 +243,6 @@ type
     PopItemProducto_Agregar: TMenuItem;
     PopItemProducto_Quitar: TMenuItem;
     ZQ_DetalleProd: TZQuery;
-    StringField1: TStringField;
-    StringField2: TStringField;
-    StringField3: TStringField;
-    StringField4: TStringField;
-    StringField5: TStringField;
-    BlobField1: TBlobField;
-    StringField6: TStringField;
-    FloatField1: TFloatField;
-    IntegerField1: TIntegerField;
-    IntegerField2: TIntegerField;
-    IntegerField3: TIntegerField;
-    IntegerField4: TIntegerField;
-    FloatField2: TFloatField;
-    FloatField3: TFloatField;
-    FloatField4: TFloatField;
-    FloatField5: TFloatField;
-    FloatField6: TFloatField;
-    FloatField7: TFloatField;
-    FloatField8: TFloatField;
-    FloatField9: TFloatField;
-    FloatField10: TFloatField;
-    FloatField11: TFloatField;
-    FloatField12: TFloatField;
-    FloatField13: TFloatField;
-    FloatField14: TFloatField;
-    FloatField15: TFloatField;
-    StringField7: TStringField;
-    IntegerField5: TIntegerField;
-    IntegerField6: TIntegerField;
-    IntegerField7: TIntegerField;
-    StringField8: TStringField;
-    StringField9: TStringField;
-    StringField10: TStringField;
-    FloatField16: TFloatField;
-    FloatField17: TFloatField;
-    StringField11: TStringField;
-    StringField12: TStringField;
     ZQ_GenOrdenDetalle: TZSequence;
     ZQ_OrdenDetalleOSID_DETALLE_OS: TIntegerField;
     ZQ_OrdenDetalleOSID_ORDEN_DETALLE: TIntegerField;
@@ -475,6 +438,44 @@ type
     ZQ_OrdenDetalleIMPORTE_VENTA: TFloatField;
     ZQ_OrdenDetalleIMPORTE_TOTAL: TFloatField;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    ZQ_DetalleProdNOMBRE_PRODUCTO: TStringField;
+    ZQ_DetalleProdMEDIDA: TStringField;
+    ZQ_DetalleProdARTICULO: TStringField;
+    ZQ_DetalleProdTIPO_ARTICULO: TStringField;
+    ZQ_DetalleProdNOMBRE_MARCA: TStringField;
+    ZQ_DetalleProdIMAGEN: TBlobField;
+    ZQ_DetalleProdDETALLE_PROD: TStringField;
+    ZQ_DetalleProdSTOCK_ACTUAL: TFloatField;
+    ZQ_DetalleProdID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_DetalleProdID_PRECIO: TIntegerField;
+    ZQ_DetalleProdID_PRODUCTO: TIntegerField;
+    ZQ_DetalleProdID_SUCURSAL: TIntegerField;
+    ZQ_DetalleProdPRECIO_COSTO: TFloatField;
+    ZQ_DetalleProdPRECIO_VENTA: TFloatField;
+    ZQ_DetalleProdCOEF_GANANCIA: TFloatField;
+    ZQ_DetalleProdCOEF_DESCUENTO: TFloatField;
+    ZQ_DetalleProdIMPUESTO_INTERNO: TFloatField;
+    ZQ_DetalleProdIMPUESTO_IVA: TFloatField;
+    ZQ_DetalleProdPRECIO_COSTO_CIMPUESTOS: TFloatField;
+    ZQ_DetalleProdIMPUESTO_ADICIONAL1: TFloatField;
+    ZQ_DetalleProdIMPUESTO_ADICIONAL2: TFloatField;
+    ZQ_DetalleProdPRECIO1: TFloatField;
+    ZQ_DetalleProdPRECIO2: TFloatField;
+    ZQ_DetalleProdPRECIO3: TFloatField;
+    ZQ_DetalleProdPRECIO4: TFloatField;
+    ZQ_DetalleProdPRECIO5: TFloatField;
+    ZQ_DetalleProdINSERT_MANUAL: TStringField;
+    ZQ_DetalleProdID_PRODUCTO_1: TIntegerField;
+    ZQ_DetalleProdID_MEDIDA: TIntegerField;
+    ZQ_DetalleProdID_PROD_CABECERA: TIntegerField;
+    ZQ_DetalleProdDESCRIPCION: TStringField;
+    ZQ_DetalleProdCOD_CORTO: TStringField;
+    ZQ_DetalleProdCODIGO_BARRA: TStringField;
+    ZQ_DetalleProdSTOCK_MAX: TFloatField;
+    ZQ_DetalleProdSTOCK_MIN: TFloatField;
+    ZQ_DetalleProdLLEVAR_STOCK: TStringField;
+    ZQ_DetalleProdBAJA: TStringField;
+    EKDbSumaOrdenes: TEKDbSuma;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -542,6 +543,8 @@ type
     procedure ZQ_OrdenDetalleBeforeDelete(DataSet: TDataSet);
     procedure ZQ_OrdenDetalleOSAfterPost(DataSet: TDataSet);
     procedure ZQ_OrdenDetalleOSAfterDelete(DataSet: TDataSet);
+    procedure ZQ_ProductosAfterScroll(DataSet: TDataSet);
+    procedure EKDbSumaOrdenesSumListChanged(Sender: TObject);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -592,12 +595,12 @@ begin
   idSucursal:= dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger;
 
   dm.EKModelo.abrir(ZQ_OS);
-  dm.EKModelo.abrir(ZQ_EstadoOrden);  
-  dm.EKModelo.abrir(ZQ_DetalleProd);
+  dm.EKModelo.abrir(ZQ_EstadoOrden);
   dm.EKModelo.abrir(ZQ_Laboratorios);
   dm.EKModelo.abrir(ZQ_Medico);
   dm.EKModelo.abrir(ZQ_FormasPago);
   dm.EKModelo.abrir(ZQ_Cuentas);
+  dm.EKModelo.abrir(ZQ_DetalleProd);
 
   Cliente:=-1;
   IdVendedor:=-1;
@@ -1069,7 +1072,7 @@ procedure TFOP_ABM_OrdenTecnica.cancelarProducto;
 begin
   dm.EKModelo.abrir(ZQ_OS);
   dm.EKModelo.abrir(ZQ_DetalleProd);
-//  dm.EKModelo.abrir(ZQ_Cuentas);
+  
   if dm.EKModelo.verificar_transaccion(abmOrden) then
    dm.EKModelo.cancelar_transaccion(abmOrden);
   Cliente:= -1;
@@ -1077,7 +1080,6 @@ begin
   descCliente:= 0;
 
   ZQ_GenOrden.CloseSequence;
-//  CD_OrdenDetalle.EmptyDataSet;
 
   modoListado();
 end;
@@ -1374,12 +1376,16 @@ begin
         end
       end;
 
+    if ZQ_Orden_EntregaIMPORTE_REAL.IsNull then
+       ZQ_Orden_EntregaIMPORTE_REAL.AsFloat:=ZQ_Orden_EntregaIMPORTE.AsFloat;
+
     ZQ_Orden_Entrega.Post;
     PABM_FormaPago.Visible:= False;
     PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
     grupoVertical.Enabled:= true;
     GrupoGuardarCancelar.Enabled:= true;
     DBGridFormaPago.SetFocus;
+    recalcularTotales();
   end
 end;
 
@@ -1685,6 +1691,7 @@ if dm.EKModelo.verificar_transaccion(abmOrden) then
   begin
     ZQ_Orden_Entrega.Delete;
   end;
+  recalcularTotales();
 end;
 
 function TFOP_ABM_OrdenTecnica.validarBoleta: Boolean;
@@ -1737,7 +1744,7 @@ begin
     EKDbSumaOS.RecalcAll;
     EKDbSumaEntregas.RecalcAll;
    end;
-   
+
   acumEntrega:=EKDbSumaEntregas.SumCollection[0].SumValue;
   acumOS:=EKDbSumaProd.SumCollection[2].SumValue;
   acumProductos:= EKDbSumaProd.SumCollection[0].SumValue;
@@ -1816,6 +1823,28 @@ if dm.EKModelo.verificar_transaccion(abmOrden) then
     ZQ_OrdenDetalle.Post;
 
    end
+end;
+
+procedure TFOP_ABM_OrdenTecnica.ZQ_ProductosAfterScroll(DataSet: TDataSet);
+begin
+//  ZQ_DetalleProd.Close;
+//  ZQ_DetalleProd.ParamByName('idp').AsInteger:=ZQ_ProductosID_PRODUCTO.AsInteger;
+//  ZQ_DetalleProd.Open;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.EKDbSumaOrdenesSumListChanged(
+  Sender: TObject);
+var
+tot1,tot2,tot3,totales:Double;
+begin
+
+  tot1:=EKDbSumaOrdenes.SumCollection[0].SumValue;
+  tot2:=EKDbSumaOrdenes.SumCollection[1].SumValue;
+  tot3:=EKDbSumaOrdenes.SumCollection[2].SumValue;
+  totales:=EKDbSumaOrdenes.SumCollection[3].SumValue;
+
+
+  lblTotalOrdenes.Caption:=Format('%s órdenes - Total Saldo Pendiente: $ %s de $ %s.',[CurrToStr(EKDbSumaOrdenes.SumCollection[4].SumValue),CurrToStr(totales),CurrToStr(tot1)]);
 end;
 
 end.

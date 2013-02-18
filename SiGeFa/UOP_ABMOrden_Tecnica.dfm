@@ -1,8 +1,8 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 276
-  Top = 100
-  Width = 1095
-  Height = 700
+  Left = 371
+  Top = 90
+  Width = 1070
+  Height = 653
   Caption = 'ABM Orden T'#233'cnica'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,503 +18,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object PListado: TPanel
-    Left = 114
-    Top = 0
-    Width = 973
-    Height = 621
-    Align = alClient
-    TabOrder = 9
-    object Panel2: TPanel
-      Left = 1
-      Top = 1
-      Width = 971
-      Height = 619
-      Align = alClient
-      Caption = 'Panel1'
-      TabOrder = 0
-      object PanelComprobante: TPanel
-        Left = 1
-        Top = 1
-        Width = 969
-        Height = 495
-        Align = alClient
-        BevelOuter = bvNone
-        TabOrder = 0
-        object lblTotalOrdenes: TLabel
-          Left = 0
-          Top = 474
-          Width = 969
-          Height = 21
-          Align = alBottom
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Total '#211'rdenes: $ 0.00 '
-          Color = 16729670
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -15
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-        object DBGridComprobantes: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 969
-          Height = 474
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_Orden
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          ParentFont = False
-          ReadOnly = True
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'ID_ORDEN'
-              Title.Caption = 'ID'
-              Width = 54
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CODIGO_CLI'
-              Title.Caption = 'C'#243'digo'
-              Width = 91
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'NRO_FACTURA'
-              Width = 137
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_cod'
-              Title.Caption = 'C'#243'd. Cliente'
-              Width = 86
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_cuit'
-              Title.Caption = 'Cuit Cliente'
-              Width = 106
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_nombre'
-              Title.Caption = 'Nombre Cliente'
-              Width = 163
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'pers_direccion'
-              Title.Caption = 'Direcci'#243'n'
-              Width = 299
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_ORDEN'
-              Title.Caption = 'Fecha Orden'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_PROMETIDO'
-              Title.Caption = 'Fecha Prometido'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'med_nombre'
-              Title.Caption = 'M'#233'dico'
-              Width = 311
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MONTO_TOTAL'
-              Title.Caption = 'Monto Total'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MONTO_RECONOCIDO'
-              Title.Caption = 'Monto Reconocido OS'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MONTO_ENTREGADO'
-              Title.Caption = 'Monto Entregado'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'SALDO'
-              Title.Caption = 'Saldo Pendiente'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ENTREGADO_POR'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FACTURADO_POR'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'med_matricula'
-              Title.Caption = 'Matr'#237'cula M'#233'dico'
-              Width = 150
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = '_estado'
-              Title.Caption = 'Estado Orden'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'AVISAR'
-              Title.Caption = 'Avisar'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = '_vendedor'
-              Title.Caption = 'Vendedor'
-              Width = 171
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'OBSERVACIONES'
-              Title.Caption = 'Observaciones'
-              Visible = True
-            end>
-        end
-      end
-      object PanelFPagoYProd: TPanel
-        Left = 1
-        Top = 496
-        Width = 969
-        Height = 122
-        Align = alBottom
-        BevelOuter = bvNone
-        TabOrder = 1
-        object Splitter3: TSplitter
-          Left = 607
-          Top = 9
-          Width = 5
-          Height = 113
-        end
-        object Splitter2: TSplitter
-          Left = 0
-          Top = 0
-          Width = 969
-          Height = 9
-          Cursor = crVSplit
-          Align = alTop
-        end
-        object PanelProducto: TPanel
-          Left = 612
-          Top = 9
-          Width = 357
-          Height = 113
-          Align = alClient
-          BevelOuter = bvNone
-          Caption = 'PanelProducto'
-          TabOrder = 0
-          object lblTotalProducto: TLabel
-            Left = 0
-            Top = 92
-            Width = 357
-            Height = 21
-            Align = alBottom
-            Alignment = taRightJustify
-            AutoSize = False
-            Caption = 'Total Producto/Servic.: $ 0.00 '
-            Color = 16729670
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-          end
-          object DBGrid1: TDBGrid
-            Left = 0
-            Top = 0
-            Width = 357
-            Height = 92
-            Align = alClient
-            Color = 14606012
-            DataSource = DS_OrdenDetalle
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-            ParentFont = False
-            TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'ID_ORDEN_DETALLE'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_ORDEN'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_PRODUCTO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_LABORATORIO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MONTO_TOTAL'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CANTIDAD'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'OBSERVACIONES'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'prod_detalle'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'prod_pventa'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'prod_laboratorio'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MONTO_RECONOCIDO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MONTO_FINAL'
-                Visible = True
-              end>
-          end
-        end
-        object PanelFpago: TPanel
-          Left = 0
-          Top = 9
-          Width = 607
-          Height = 113
-          Align = alLeft
-          BevelOuter = bvNone
-          Caption = 'PanelFpago'
-          TabOrder = 1
-          object lblTotalFPago: TLabel
-            Left = 0
-            Top = 92
-            Width = 607
-            Height = 21
-            Align = alBottom
-            Alignment = taRightJustify
-            AutoSize = False
-            Caption = 'Total Entregas: $ 0.00 '
-            Color = 16729670
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-          end
-          object DBGrid2: TDBGrid
-            Left = 0
-            Top = 0
-            Width = 607
-            Height = 92
-            Align = alClient
-            Color = 14606012
-            DataSource = DS_Orden_Entrega
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-            ParentFont = False
-            TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'ID_ENTREGA'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_ORDEN'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_TIPO_FORMAPAG'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MDCP_FECHA'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MDCP_BANCO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MDCP_CHEQUE'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'IMPORTE'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CONCILIADO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CUENTA_INGRESO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CUENTA_EGRESO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'FECHA_FP'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'IMPORTE_REAL'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_RECIBO_OP'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = '_ctaIngreso'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'medioPago'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = '_desc_rec'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = '_efectivo'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = '_nroPrecio'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = '_fiscal'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = '_esCtaCorr'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'INSERT_MANUAL'
-                Visible = True
-              end>
-          end
-        end
-      end
-    end
-  end
   object PABM_FormaPago: TPanel
     Left = 117
     Top = 409
@@ -3018,49 +2521,49 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object PanelContenedorDerecha: TPanel
     Left = 114
     Top = 0
-    Width = 973
-    Height = 621
+    Width = 940
+    Height = 563
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 0
     object PanelProductosYFPago: TPanel
       Left = 1
       Top = 194
-      Width = 971
-      Height = 426
+      Width = 938
+      Height = 368
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 0
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 1
-        Width = 969
-        Height = 257
+        Width = 936
+        Height = 199
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
         object Splitter1: TSplitter
-          Left = 650
+          Left = 617
           Top = 1
           Width = 5
-          Height = 215
+          Height = 157
           Align = alRight
         end
         object Panel6: TPanel
           Left = 1
-          Top = 216
-          Width = 967
+          Top = 158
+          Width = 934
           Height = 40
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 0
           DesignSize = (
-            967
+            934
             40)
           object lblCantProductos: TLabel
             Left = 1
             Top = 27
-            Width = 965
+            Width = 932
             Height = 12
             Align = alBottom
             Alignment = taRightJustify
@@ -3083,7 +2586,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             OnClick = btQuitarProductoClick
           end
           object btQuitarOS: TButton
-            Left = 953
+            Left = 928
             Top = 5
             Width = 83
             Height = 23
@@ -3094,10 +2597,10 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           end
         end
         object POs: TPanel
-          Left = 655
+          Left = 622
           Top = 1
           Width = 313
-          Height = 215
+          Height = 157
           Align = alRight
           BevelOuter = bvNone
           TabOrder = 1
@@ -3124,7 +2627,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Left = 0
             Top = 66
             Width = 313
-            Height = 149
+            Height = 91
             Align = alClient
             Color = 15527129
             DataSource = DS_OrdenDetalleOS
@@ -3226,15 +2729,15 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PProductos: TPanel
           Left = 1
           Top = 1
-          Width = 649
-          Height = 215
+          Width = 616
+          Height = 157
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 2
           object Label11: TLabel
             Left = 0
             Top = 0
-            Width = 649
+            Width = 616
             Height = 13
             Align = alTop
             Alignment = taCenter
@@ -3253,8 +2756,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object DBGridListadoProductos: TDBGrid
             Left = 0
             Top = 13
-            Width = 649
-            Height = 202
+            Width = 616
+            Height = 144
             Align = alClient
             Color = 15527129
             DataSource = DS_OrdenDetalle
@@ -3342,8 +2845,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
       object PPieBoleta: TPanel
         Left = 1
-        Top = 384
-        Width = 969
+        Top = 326
+        Width = 936
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
@@ -3351,7 +2854,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object lblTotAPagar: TLabel
           Left = 0
           Top = 0
-          Width = 969
+          Width = 936
           Height = 41
           Align = alClient
           Alignment = taRightJustify
@@ -3371,8 +2874,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 258
-        Width = 969
+        Top = 200
+        Width = 936
         Height = 126
         Align = alBottom
         Caption = 'PVarios'
@@ -3386,7 +2889,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PReceta: TPanel
           Left = 1
           Top = 1
-          Width = 967
+          Width = 934
           Height = 124
           Align = alClient
           BevelOuter = bvLowered
@@ -3470,7 +2973,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object Label9: TLabel
             Left = 1
             Top = 1
-            Width = 965
+            Width = 932
             Height = 16
             Align = alTop
             Alignment = taCenter
@@ -3873,14 +3376,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PObservaciones: TPanel
           Left = 1
           Top = 1
-          Width = 967
+          Width = 934
           Height = 124
           Align = alClient
           TabOrder = 1
           object Label2: TLabel
             Left = 1
             Top = 1
-            Width = 965
+            Width = 932
             Height = 16
             Align = alTop
             Alignment = taCenter
@@ -3899,7 +3402,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object dbObsOrden: TDBRichEdit
             Left = 1
             Top = 17
-            Width = 965
+            Width = 932
             Height = 106
             Align = alClient
             Color = clCream
@@ -3918,14 +3421,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PFormaPago: TPanel
           Left = 1
           Top = 1
-          Width = 967
+          Width = 934
           Height = 124
           Align = alClient
           TabOrder = 0
           object Label36: TLabel
             Left = 1
             Top = 1
-            Width = 965
+            Width = 932
             Height = 16
             Align = alTop
             Alignment = taCenter
@@ -3944,7 +3447,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object PieGrilla: TPanel
             Left = 1
             Top = 91
-            Width = 965
+            Width = 932
             Height = 32
             Align = alBottom
             BevelOuter = bvLowered
@@ -3962,7 +3465,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object DBGridFormaPago: TDBGrid
             Left = 1
             Top = 17
-            Width = 965
+            Width = 932
             Height = 74
             Align = alClient
             Color = 15527129
@@ -4016,15 +3519,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
                 Visible = True
               end
               item
-                Color = clWhite
-                Expanded = False
-                FieldName = '_importeVenta'
-                ReadOnly = True
-                Title.Caption = 'Importe Venta'
-                Width = 93
-                Visible = True
-              end
-              item
                 Color = 16772332
                 Expanded = False
                 FieldName = 'MDCP_FECHA'
@@ -4046,13 +3540,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
                 Title.Caption = 'N'#250'mero'
                 Width = 97
                 Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = '_esSenia'
-                Title.Alignment = taCenter
-                Title.Caption = 'Se'#241'a'
-                Visible = True
               end>
           end
         end
@@ -4061,14 +3548,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object PanelDetalles: TPanel
       Left = 1
       Top = 31
-      Width = 971
+      Width = 938
       Height = 163
       Align = alTop
       TabOrder = 1
       object PanelDetalleCliente: TPanel
         Left = 1
         Top = 94
-        Width = 969
+        Width = 936
         Height = 68
         Align = alBottom
         BevelOuter = bvLowered
@@ -4082,7 +3569,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 967
+          Width = 934
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4262,7 +3749,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       object PDetalleOrden: TPanel
         Left = 1
         Top = 1
-        Width = 630
+        Width = 597
         Height = 93
         Align = alClient
         BevelOuter = bvLowered
@@ -4331,7 +3818,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Label7: TLabel
           Left = 1
           Top = 1
-          Width = 628
+          Width = 595
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4410,7 +3897,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         end
       end
       object PMedico: TPanel
-        Left = 631
+        Left = 598
         Top = 1
         Width = 339
         Height = 93
@@ -4527,13 +4014,13 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 971
+      Width = 938
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
       TabOrder = 2
       object DBText7: TDBText
-        Left = 626
+        Left = 593
         Top = 1
         Width = 344
         Height = 28
@@ -4895,10 +4382,508 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       TabOrder = 4
     end
   end
+  object PListado: TPanel
+    Left = 114
+    Top = 0
+    Width = 940
+    Height = 563
+    Align = alClient
+    TabOrder = 9
+    object Panel2: TPanel
+      Left = 1
+      Top = 1
+      Width = 938
+      Height = 561
+      Align = alClient
+      Caption = 'Panel1'
+      TabOrder = 0
+      object PanelComprobante: TPanel
+        Left = 1
+        Top = 1
+        Width = 936
+        Height = 437
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object lblTotalOrdenes: TLabel
+          Left = 0
+          Top = 416
+          Width = 936
+          Height = 21
+          Align = alBottom
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Total '#211'rdenes: $ 0.00 '
+          Color = 16729670
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object DBGridComprobantes: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 936
+          Height = 416
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_Orden
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          ParentFont = False
+          ReadOnly = True
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID_ORDEN'
+              Title.Caption = 'ID'
+              Width = 54
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CODIGO_CLI'
+              Title.Caption = 'C'#243'digo'
+              Width = 91
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NRO_FACTURA'
+              Width = 137
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_cod'
+              Title.Caption = 'C'#243'd. Cliente'
+              Width = 86
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_cuit'
+              Title.Caption = 'Cuit Cliente'
+              Width = 106
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_nombre'
+              Title.Caption = 'Nombre Cliente'
+              Width = 163
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'pers_direccion'
+              Title.Caption = 'Direcci'#243'n'
+              Width = 299
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_ORDEN'
+              Title.Caption = 'Fecha Orden'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_PROMETIDO'
+              Title.Caption = 'Fecha Prometido'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'med_nombre'
+              Title.Caption = 'M'#233'dico'
+              Width = 311
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MONTO_TOTAL'
+              Title.Caption = 'Monto Total'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MONTO_RECONOCIDO'
+              Title.Caption = 'Monto Reconocido OS'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MONTO_ENTREGADO'
+              Title.Caption = 'Monto Entregado'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SALDO'
+              Title.Caption = 'Saldo Pendiente'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ENTREGADO_POR'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FACTURADO_POR'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'med_matricula'
+              Title.Caption = 'Matr'#237'cula M'#233'dico'
+              Width = 150
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = '_estado'
+              Title.Caption = 'Estado Orden'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'AVISAR'
+              Title.Caption = 'Avisar'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = '_vendedor'
+              Title.Caption = 'Vendedor'
+              Width = 171
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'OBSERVACIONES'
+              Title.Caption = 'Observaciones'
+              Visible = True
+            end>
+        end
+      end
+      object PanelFPagoYProd: TPanel
+        Left = 1
+        Top = 438
+        Width = 936
+        Height = 122
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 1
+        Visible = False
+        object Splitter3: TSplitter
+          Left = 607
+          Top = 9
+          Width = 5
+          Height = 113
+        end
+        object Splitter2: TSplitter
+          Left = 0
+          Top = 0
+          Width = 936
+          Height = 9
+          Cursor = crVSplit
+          Align = alTop
+        end
+        object PanelProducto: TPanel
+          Left = 612
+          Top = 9
+          Width = 324
+          Height = 113
+          Align = alClient
+          BevelOuter = bvNone
+          Caption = 'PanelProducto'
+          TabOrder = 0
+          object lblTotalProducto: TLabel
+            Left = 0
+            Top = 92
+            Width = 324
+            Height = 21
+            Align = alBottom
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Total Producto/Servic.: $ 0.00 '
+            Color = 16729670
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
+          object DBGrid1: TDBGrid
+            Left = 0
+            Top = 0
+            Width = 324
+            Height = 92
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_OrdenDetalle
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentFont = False
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'ID_ORDEN_DETALLE'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_ORDEN'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_PRODUCTO'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_LABORATORIO'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MONTO_TOTAL'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CANTIDAD'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'OBSERVACIONES'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'prod_detalle'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'prod_pventa'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'prod_laboratorio'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MONTO_RECONOCIDO'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MONTO_FINAL'
+                Visible = True
+              end>
+          end
+        end
+        object PanelFpago: TPanel
+          Left = 0
+          Top = 9
+          Width = 607
+          Height = 113
+          Align = alLeft
+          BevelOuter = bvNone
+          Caption = 'PanelFpago'
+          TabOrder = 1
+          object lblTotalFPago: TLabel
+            Left = 0
+            Top = 92
+            Width = 607
+            Height = 21
+            Align = alBottom
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Total Entregas: $ 0.00 '
+            Color = 16729670
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
+          object DBGrid2: TDBGrid
+            Left = 0
+            Top = 0
+            Width = 607
+            Height = 92
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_Orden_Entrega
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            ParentFont = False
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'ID_ENTREGA'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_ORDEN'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_TIPO_FORMAPAG'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_FECHA'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_BANCO'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MDCP_CHEQUE'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CONCILIADO'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CUENTA_INGRESO'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CUENTA_EGRESO'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'FECHA_FP'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE_REAL'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_RECIBO_OP'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = '_ctaIngreso'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'medioPago'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = '_desc_rec'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = '_efectivo'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = '_nroPrecio'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = '_fiscal'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = '_esCtaCorr'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'INSERT_MANUAL'
+                Visible = True
+              end>
+          end
+        end
+      end
+    end
+  end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -7524,9 +7509,11 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_OrdenMONTO_TOTAL: TFloatField
       FieldName = 'MONTO_TOTAL'
+      currency = True
     end
     object ZQ_OrdenMONTO_ENTREGADO: TFloatField
       FieldName = 'MONTO_ENTREGADO'
+      currency = True
     end
     object ZQ_OrdenENTREGADO_POR: TIntegerField
       FieldName = 'ENTREGADO_POR'
@@ -7536,6 +7523,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_OrdenSALDO: TFloatField
       FieldName = 'SALDO'
+      currency = True
     end
     object ZQ_Ordenpers_nombre: TStringField
       FieldKind = fkLookup
@@ -7651,6 +7639,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_OrdenMONTO_RECONOCIDO: TFloatField
       FieldName = 'MONTO_RECONOCIDO'
+      currency = True
     end
     object ZQ_OrdenID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
@@ -7831,6 +7820,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object ZQ_Productos: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_ProductosAfterScroll
     SQL.Strings = (
       
         'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
@@ -8323,134 +8313,135 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       ''
       ''
       ''
+      ''
       '')
     Params = <>
     Left = 520
     Top = 352
-    object StringField1: TStringField
+    object ZQ_DetalleProdNOMBRE_PRODUCTO: TStringField
       FieldName = 'NOMBRE_PRODUCTO'
       Size = 100
     end
-    object StringField2: TStringField
+    object ZQ_DetalleProdMEDIDA: TStringField
       FieldName = 'MEDIDA'
       Size = 30
     end
-    object StringField3: TStringField
+    object ZQ_DetalleProdARTICULO: TStringField
       FieldName = 'ARTICULO'
       Size = 200
     end
-    object StringField4: TStringField
+    object ZQ_DetalleProdTIPO_ARTICULO: TStringField
       FieldName = 'TIPO_ARTICULO'
       Size = 200
     end
-    object StringField5: TStringField
+    object ZQ_DetalleProdNOMBRE_MARCA: TStringField
       FieldName = 'NOMBRE_MARCA'
       Size = 50
     end
-    object BlobField1: TBlobField
+    object ZQ_DetalleProdIMAGEN: TBlobField
       FieldName = 'IMAGEN'
     end
-    object StringField6: TStringField
+    object ZQ_DetalleProdDETALLE_PROD: TStringField
       FieldName = 'DETALLE_PROD'
       ReadOnly = True
       Size = 186
     end
-    object FloatField1: TFloatField
+    object ZQ_DetalleProdSTOCK_ACTUAL: TFloatField
       FieldName = 'STOCK_ACTUAL'
     end
-    object IntegerField1: TIntegerField
+    object ZQ_DetalleProdID_STOCK_PRODUCTO: TIntegerField
       FieldName = 'ID_STOCK_PRODUCTO'
       Required = True
     end
-    object IntegerField2: TIntegerField
+    object ZQ_DetalleProdID_PRECIO: TIntegerField
       FieldName = 'ID_PRECIO'
       Required = True
     end
-    object IntegerField3: TIntegerField
+    object ZQ_DetalleProdID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
     end
-    object IntegerField4: TIntegerField
+    object ZQ_DetalleProdID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
     end
-    object FloatField2: TFloatField
+    object ZQ_DetalleProdPRECIO_COSTO: TFloatField
       FieldName = 'PRECIO_COSTO'
     end
-    object FloatField3: TFloatField
+    object ZQ_DetalleProdPRECIO_VENTA: TFloatField
       FieldName = 'PRECIO_VENTA'
     end
-    object FloatField4: TFloatField
+    object ZQ_DetalleProdCOEF_GANANCIA: TFloatField
       FieldName = 'COEF_GANANCIA'
     end
-    object FloatField5: TFloatField
+    object ZQ_DetalleProdCOEF_DESCUENTO: TFloatField
       FieldName = 'COEF_DESCUENTO'
     end
-    object FloatField6: TFloatField
+    object ZQ_DetalleProdIMPUESTO_INTERNO: TFloatField
       FieldName = 'IMPUESTO_INTERNO'
     end
-    object FloatField7: TFloatField
+    object ZQ_DetalleProdIMPUESTO_IVA: TFloatField
       FieldName = 'IMPUESTO_IVA'
     end
-    object FloatField8: TFloatField
+    object ZQ_DetalleProdPRECIO_COSTO_CIMPUESTOS: TFloatField
       FieldName = 'PRECIO_COSTO_CIMPUESTOS'
     end
-    object FloatField9: TFloatField
+    object ZQ_DetalleProdIMPUESTO_ADICIONAL1: TFloatField
       FieldName = 'IMPUESTO_ADICIONAL1'
     end
-    object FloatField10: TFloatField
+    object ZQ_DetalleProdIMPUESTO_ADICIONAL2: TFloatField
       FieldName = 'IMPUESTO_ADICIONAL2'
     end
-    object FloatField11: TFloatField
+    object ZQ_DetalleProdPRECIO1: TFloatField
       FieldName = 'PRECIO1'
     end
-    object FloatField12: TFloatField
+    object ZQ_DetalleProdPRECIO2: TFloatField
       FieldName = 'PRECIO2'
     end
-    object FloatField13: TFloatField
+    object ZQ_DetalleProdPRECIO3: TFloatField
       FieldName = 'PRECIO3'
     end
-    object FloatField14: TFloatField
+    object ZQ_DetalleProdPRECIO4: TFloatField
       FieldName = 'PRECIO4'
     end
-    object FloatField15: TFloatField
+    object ZQ_DetalleProdPRECIO5: TFloatField
       FieldName = 'PRECIO5'
     end
-    object StringField7: TStringField
+    object ZQ_DetalleProdINSERT_MANUAL: TStringField
       FieldName = 'INSERT_MANUAL'
       Size = 1
     end
-    object IntegerField5: TIntegerField
+    object ZQ_DetalleProdID_PRODUCTO_1: TIntegerField
       FieldName = 'ID_PRODUCTO_1'
       Required = True
     end
-    object IntegerField6: TIntegerField
+    object ZQ_DetalleProdID_MEDIDA: TIntegerField
       FieldName = 'ID_MEDIDA'
     end
-    object IntegerField7: TIntegerField
+    object ZQ_DetalleProdID_PROD_CABECERA: TIntegerField
       FieldName = 'ID_PROD_CABECERA'
       Required = True
     end
-    object StringField8: TStringField
+    object ZQ_DetalleProdDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
       Size = 500
     end
-    object StringField9: TStringField
+    object ZQ_DetalleProdCOD_CORTO: TStringField
       FieldName = 'COD_CORTO'
     end
-    object StringField10: TStringField
+    object ZQ_DetalleProdCODIGO_BARRA: TStringField
       FieldName = 'CODIGO_BARRA'
       Size = 40
     end
-    object FloatField16: TFloatField
+    object ZQ_DetalleProdSTOCK_MAX: TFloatField
       FieldName = 'STOCK_MAX'
     end
-    object FloatField17: TFloatField
+    object ZQ_DetalleProdSTOCK_MIN: TFloatField
       FieldName = 'STOCK_MIN'
     end
-    object StringField11: TStringField
+    object ZQ_DetalleProdLLEVAR_STOCK: TStringField
       FieldName = 'LLEVAR_STOCK'
       Size = 1
     end
-    object StringField12: TStringField
+    object ZQ_DetalleProdBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
     end
@@ -8927,6 +8918,102 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         TipoComboAncho = 350
         ItemIndex = -1
         VaciarValorDespues = False
+      end
+      item
+        Titulo = 'C'#243'digo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Cliente'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Fecha Orden'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Fecha Prometido'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'M'#233'dico'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Obra Social'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Monto Total'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Monto Reconocido'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Monto Entregado'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Saldo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Estado Orden'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Observaciones'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -8946,8 +9033,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     SQL_Orden.Strings = (
       '')
     UsarWhereOriginal = EK_Sin_Where
-    Left = 1000
-    Top = 151
+    Left = 192
+    Top = 119
   end
   object ZQ_GenOrdenEntrega: TZSequence
     Connection = DM.Conexion
@@ -9091,5 +9178,32 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     PermitirFiltrar = True
     Left = 388
     Top = 104
+  end
+  object EKDbSumaOrdenes: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'monto_total'
+      end
+      item
+        Operacion = goCount
+        NombreCampo = 'monto_entregado'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'monto_reconocido'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'saldo'
+      end
+      item
+        Operacion = goCount
+        NombreCampo = 'id_orden'
+      end>
+    DataSet = ZQ_Orden
+    SumListChanged = EKDbSumaOrdenesSumListChanged
+    Left = 516
+    Top = 174
   end
 end
