@@ -1635,6 +1635,7 @@ begin
   if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden,ZQ_OrdenDetalle,ZQ_OrdenDetalleOS,ZQ_Orden_Entrega,ZQ_CodifRP]) then
   begin
       cliente:=ZQ_OrdenID_CLIENTE.AsInteger;
+      IdVendedor:=ZQ_OrdenFACTURADO_POR.AsInteger;
       recalcularTotales();
       ZQ_Orden.Edit;
       modoLecturaProd;
@@ -1699,7 +1700,7 @@ begin
 
   Result:= True;
 
-  if (acumProductos <= 0) then
+  if (acumFinal < 0) then
   begin
     Application.MessageBox('El monto final debe ser superior a $ 0.00, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
     result:= false;
@@ -1713,12 +1714,12 @@ begin
     exit;
   end;
 
-//  if (IdVendedor < 0) then
-//  begin
-//    Application.MessageBox('Debe seleccionar un Vendedor, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
-//    result:= false;
-//    exit;
-//  end;
+  if (IdVendedor < 0) then
+  begin
+    Application.MessageBox('Debe seleccionar un Vendedor, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    result:= false;
+    exit;
+  end;
 
   if ZQ_OrdenDetalle.IsEmpty then
   begin
