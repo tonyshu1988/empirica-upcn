@@ -1480,7 +1480,14 @@ begin
   begin
     if (AComponent is TLabel) then
     begin
-      FInfoRegistros:= nil;
+      if Assigned(FInfoRegistros) and (AComponent.Name = FInfoRegistros.Name) then
+        FInfoRegistros:= nil;
+    end
+    else
+    if (AComponent is TZQuery) then
+    begin
+      if Assigned(FDataset) and (AComponent.Name = FDataset.Name) then
+        FDataset:= nil;
     end
   end;
 end;
