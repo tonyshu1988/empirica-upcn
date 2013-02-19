@@ -64,6 +64,8 @@ type
     procedure SetDataSet(Value:TDataSet);
     procedure Loaded; override;
     procedure SetSumCollection(const Value: TEKDBSumaItems);
+
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
   public
     constructor Create(AOwner: TComponent); override;
     destructor Destroy; override;
@@ -84,7 +86,7 @@ begin
 end;
 
 //-----------------------------------------------------------------
-//      TEKDBSumaItem
+//      TEKDBSuma
 //-----------------------------------------------------------------
 constructor TEKDbSuma.Create(AOwner: TComponent);
 begin
@@ -335,6 +337,22 @@ begin
 end;
 
 
+procedure TEKDbSuma.Notification(AComponent: TComponent; Operation: TOperation);
+var
+  I: Integer;
+  NeedLayout: Boolean;
+begin
+  inherited Notification(AComponent, Operation);
+
+  if (Operation = opRemove) then
+  begin
+    if (AComponent is TDataSet) then
+    begin
+      if Assigned(FDataSet) and (AComponent.Name = FDataSet.Name) then
+        FDataSet:= nil;
+    end
+  end;
+end;
 //-----------------------------------------------------------------
 //      TEKDBSumaItem
 //-----------------------------------------------------------------
@@ -360,9 +378,6 @@ begin
 end;
 
 
-//-----------------------------------------------------------------
-//      TEKDBSumaItems
-//-----------------------------------------------------------------
 function TEKDBSumaItems.GetOwner:TPersistent;
 begin
   Result := FOwner;
@@ -379,6 +394,9 @@ procedure TEKDBSumaItems.SetItem(Index: Integer; Value: TEKDBSumaItem);
 begin
  inherited SetItem(Index, Value);
 end;
+//-----------------------------------------------------------------
+//      TEKDBSumaItems
+//-----------------------------------------------------------------
 
 
 end.

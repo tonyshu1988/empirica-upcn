@@ -27,6 +27,7 @@ type
     { Private declarations }
   protected
     { Protected declarations }
+    procedure Notification(AComponent: TComponent; Operation: TOperation); override;
   public
     function Buscar() : Boolean;
     constructor Create(AOwner: TComponent); override;
@@ -206,6 +207,23 @@ end;
 procedure TEKListadoSQL.SetSQL(const Value: TStrings);
 begin
   FSQL.Assign(Value);
+end;
+
+procedure TEKListadoSQL.Notification(AComponent: TComponent; Operation: TOperation);
+var
+  I: Integer;
+  NeedLayout: Boolean;
+begin
+  inherited Notification(AComponent, Operation);
+
+  if (Operation = opRemove) then
+  begin
+    if (AComponent is TZQuery) then
+    begin
+      if Assigned(FBuscarEnQuery) and (AComponent.Name = FBuscarEnQuery.Name) then
+        FBuscarEnQuery:= nil;
+    end
+  end;
 end;
 
 end.
