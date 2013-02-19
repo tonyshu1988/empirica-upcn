@@ -365,11 +365,6 @@ begin
           showmessage('El Usuario "'+usuario.Text+'" no existe.')
       else //si el usuario tiene algun permiso asignado
       begin
-        //chequeo si el usuario es un grupo
-        EKSQLGrupo.Close;
-        EKSQLGrupo.ParamByName('usr').AsString:= EKSQLpermisosUSUARIO.AsString;
-        EKSQLGrupo.Open;
-
         //-- GUARDO LOS PERMISOS ASIGNADOS AL USUARIO EN EL ARRAY EKPermisos[] --
         i:= 0;
         SetLength(EKpermisos1, EKSQLpermisos.RecordCount);
@@ -380,6 +375,10 @@ begin
           EKPermisos1[i].caption:= EKSQLpermisosCAPTION.AsString;
           EKPermisos1[i].valor:= EKSQLpermisosVALOR.AsString;
 
+          //chequeo si el usuario es un grupo
+          EKSQLGrupo.Close;
+          EKSQLGrupo.ParamByName('usr').AsString:= EKSQLpermisosUSUARIO.AsString;
+          EKSQLGrupo.Open;
           if (EKSQLGrupoGRUPO.IsNull) or (EKSQLGrupoGRUPO.AsString = 'N') then
             EKPermisos1[i].esGrupo:= 'N'
           else
@@ -555,7 +554,7 @@ function TEKUsrLogin.existeUsuario(nombre, password: string): boolean;
 begin
   //se utiliza para verificar si un usuario esta en la base de datos o no.
   //Esta en la pantalla de ficha de empleado.
-  
+
   result:= false;
 
   //si paso un nombre vacio salgo
