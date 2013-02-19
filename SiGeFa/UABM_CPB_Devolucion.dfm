@@ -4098,7 +4098,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       end
       item
         TituloColumna = 'ID'
-        Visible = False
+        Visible = True
       end>
     NombreGuardar = 'ABM_Cpb_VerCpb'
     AltoTituloColumna = 15

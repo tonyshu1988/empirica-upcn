@@ -1096,7 +1096,7 @@ begin
 
   if not Assigned(FImpresion_Comprobantes) then
     FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
-  FImpresion_Comprobantes.cargarDatos(ZQ_Historico_CpbID_COMPROBANTE.AsInteger, -1, -1, false);
+  FImpresion_Comprobantes.cargarDatos(ZQ_Historico_CpbID_COMPROBANTE.AsInteger, -1, -1, -1, false);
   FImpresion_Comprobantes.imprimir;
 
   if not ZQ_Historico_CpbFECHA_IMPRESA.IsNull then

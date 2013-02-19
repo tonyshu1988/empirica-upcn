@@ -146,7 +146,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
             50.270833333333330000
             653.520833333333400000
             124.354166666666700000
-            592.666666666666800000)
+            592.666666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -176,8 +176,8 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            759.354166666666800000
-            68.791666666666680000
+            759.354166666666700000
+            68.791666666666670000
             378.354166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -4540,7 +4540,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     Connection = DM.Conexion
     SQL.Strings = (
       'select e.email'
-      'from empresa e')
+      'from optica_os e')
     Params = <>
     Left = 533
     Top = 137

@@ -984,38 +984,28 @@ procedure TFABM_CPB_FacturaObraSocial.btnEnviarMailClick(Sender: TObject);
 var
   destino, archivoPDF: string;
 begin
-  //  destino:= '';
-  //  archivoPDF:= '';
-  //
-  //  if ZQ_VerCpb.IsEmpty then
-  //    exit;
-  //
-  //  ZQ_BuscarMail.Close;
-  //  if ZQ_VerCpbID_PROVEEDOR.IsNull then //si es un CLIENTE
-  //  begin
-  //      ZQ_BuscarMail.SQL.Text:= Format('select p.email from persona p where p.id_persona = %d',
-  //                                       [ZQ_VerCpbID_CLIENTE.AsInteger]);
-  //  end
-  //  else
-  //    if ZQ_VerCpbID_CLIENTE.IsNull then //si es un PROVEEDOR
-  //    begin
-  //      ZQ_BuscarMail.SQL.Text:= Format('select e.email from empresa e where e.id_empresa = %d',
-  //                                       [ZQ_VerCpbID_PROVEEDOR.AsInteger]);
-  //    end;
-  //
-  //  ZQ_BuscarMail.Open;
-  //  if (not ZQ_BuscarMailEMAIL.IsNull) or (ZQ_BuscarMailEMAIL.AsString <> '') then
-  //    destino:= ZQ_BuscarMailEMAIL.AsString;
-  //
-  //  if not Assigned(FImpresion_Comprobantes) then
-  //    FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
-  //  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, false);
-  //  archivoPDF:= FImpresion_Comprobantes.generarPDF;
-  //
-  //  //if not Assigned(TFMailEnviar) then
-  //    Application.CreateForm(TFMailEnviar, FMailEnviar);
-  //  FMailEnviar.enviarConAdjunto(destino, dm.ZQ_SucursalNOMBRE.AsString, archivoPDF);
-  //  FMailEnviar.ShowModal;
+  destino:= '';
+  archivoPDF:= '';
+
+  if ZQ_VerCpb.IsEmpty then
+    exit;
+
+  ZQ_BuscarMail.Close;
+  ZQ_BuscarMail.SQL.Text:= Format('select p.email from optica_os p where p.id_os = %d', [ZQ_VerCpbID_OBRA_SOCIAL.AsInteger]);
+  ZQ_BuscarMail.Open;
+
+  if (not ZQ_BuscarMailEMAIL.IsNull) or (ZQ_BuscarMailEMAIL.AsString <> '') then
+    destino:= ZQ_BuscarMailEMAIL.AsString;
+
+  if not Assigned(FImpresion_Comprobantes) then
+    FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, -1, -1, ZQ_VerCpbID_OBRA_SOCIAL.AsInteger, false);
+  archivoPDF:= FImpresion_Comprobantes.generarPDF;
+
+  //if not Assigned(TFMailEnviar) then
+    Application.CreateForm(TFMailEnviar, FMailEnviar);
+  FMailEnviar.enviarConAdjunto(destino, dm.ZQ_SucursalNOMBRE.AsString, archivoPDF);
+  FMailEnviar.ShowModal;
 end;
 
 
@@ -1157,6 +1147,17 @@ begin
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
       ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
 
+      ZQ_VerCpb_Producto.First;
+      while not ZQ_VerCpb_Producto.Eof do
+      begin
+        ZQ_ActualizarDetalleOS.ParamByName('id').AsInteger:= ZQ_VerCpb_ProductoID_DETALLE_OS.AsInteger;
+        ZQ_ActualizarDetalleOS.ParamByName('id_factura').clear;
+        ZQ_ActualizarDetalleOS.ParamByName('detalle').clear;
+        ZQ_ActualizarDetalleOS.ExecSQL;
+
+        ZQ_VerCpb_Producto.Next;
+      end;
+
       try
         if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
           dm.EKModelo.cancelar_transaccion(transaccion_ABM)
@@ -1191,7 +1192,7 @@ begin
 
   if not Assigned(FImpresion_Comprobantes) then
     FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
-  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, obra_social, -1, false);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, -1, -1, obra_social, false);
   FImpresion_Comprobantes.imprimir;
 end;
 

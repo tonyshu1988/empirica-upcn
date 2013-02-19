@@ -1011,7 +1011,7 @@ begin
   if not ZQ_VerCpbID_PROVEEDOR.IsNull then
     empresa:= ZQ_VerCpbID_PROVEEDOR.AsInteger;
 
-  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, cliente, empresa, false);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, cliente, empresa, -1, false);
   FImpresion_Comprobantes.imprimir;
 end;
 
@@ -1366,7 +1366,7 @@ begin
 
   if not Assigned(FImpresion_Comprobantes) then
     FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
-  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, cliente, empresa, false);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, cliente, empresa, -1, false);
   archivoPDF:= FImpresion_Comprobantes.generarPDF;
 
   //if not Assigned(TFMailEnviar) then
