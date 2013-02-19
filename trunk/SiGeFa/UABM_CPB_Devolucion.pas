@@ -1143,7 +1143,7 @@ begin
 
   if not Assigned(FImpresion_Comprobantes) then
     FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
-  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, cliente, empresa, false);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, cliente, empresa, -1, false);
   FImpresion_Comprobantes.imprimir;
 end;
 

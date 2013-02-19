@@ -85,14 +85,48 @@ type
     TabSheet2: TTabSheet;
     GroupBox1: TGroupBox;
     DBMemo1: TDBMemo;
-    Label1: TLabel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
+    Label9: TLabel;
+    Label8: TLabel;
+    Label5: TLabel;
+    Label16: TLabel;
+    Label10: TLabel;
+    Label7: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    DBLCBoxProvincia: TDBLookupComboBox;
+    DBLCBoxCondIva: TDBLookupComboBox;
     DBENombre: TDBEdit;
-    DBEdit1: TDBEdit;
-    DBEdit2: TDBEdit;
-    DBECodigo: TDBEdit;
+    DBELocalidad: TDBEdit;
+    DBEDireccion: TDBEdit;
+    DBECodPostal: TDBEdit;
+    DBECuit_Cuil: TDBEdit;
+    DBEditCodigo: TDBEdit;
+    Label6: TLabel;
+    DBETelefono: TDBEdit;
+    Label13: TLabel;
+    DBEMail: TDBEdit;
+    ZQ_Provincia: TZQuery;
+    ZQ_ProvinciaID_PROVINCIA: TIntegerField;
+    ZQ_ProvinciaNOMBRE_PROVINCIA: TStringField;
+    ZQ_Iva: TZQuery;
+    ZQ_IvaID_TIPO_IVA: TIntegerField;
+    ZQ_IvaNOMBRE_TIPO_IVA: TStringField;
+    ZQ_IvaABREVIATURA: TStringField;
+    ZQ_IvaDISCRIMINAR: TStringField;
+    ZQ_IvaLETRA: TStringField;
+    ZQ_IvaFISCAL: TStringField;
+    ZQ_IvaCOEFICIENTE: TFloatField;
+    ZQ_IvaVERIFICA_CUIT: TStringField;
+    DS_Iva: TDataSource;
+    DS_Provincia: TDataSource;
+    ZQ_OP_ObraSocialCUIT_CUIL: TStringField;
+    ZQ_OP_ObraSocialLOCALIDAD: TStringField;
+    ZQ_OP_ObraSocialCODIGO_POSTAL: TStringField;
+    ZQ_OP_ObraSocialEMAIL: TStringField;
+    ZQ_OP_ObraSocialID_TIPO_IVA: TIntegerField;
+    ZQ_OP_ObraSocialID_PROVINCIA: TIntegerField;
+    ZQ_OP_ObraSocial_tipoIva: TStringField;
+    ZQ_OP_ObraSocial_provincia: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -160,7 +194,7 @@ begin
     ZQ_OP_ObraSocial.Append;
     ZQ_OP_ObraSocialBAJA.AsString:= 'N';
 
-    DBECodigo.SetFocus;
+    DBEditCodigo.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -178,7 +212,7 @@ begin
 
     ZQ_OP_ObraSocial.Edit;
 
-    DBECodigo.SetFocus;
+    DBEditCodigo.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -245,10 +279,10 @@ var
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
-  if (trim(DBECodigo.Text) = '') then
+  if (trim(DBEditCodigo.Text) = '') then
   begin
     Application.MessageBox('El campo "Código" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
-    DBECodigo.SetFocus;
+    DBEditCodigo.SetFocus;
     exit;
   end;
 
@@ -295,6 +329,9 @@ end;
 
 procedure TFOP_ABMObraSocial.FormCreate(Sender: TObject);
 begin
+  dm.EKModelo.abrir(ZQ_Provincia);
+  dm.EKModelo.abrir(ZQ_Iva);
+
   EKOrdenarGrilla1.CargarConfigColumnas;
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
@@ -360,10 +397,6 @@ end;
 //----------------------------------
 //  FIN TECLAS RAPIDAS
 //----------------------------------
-
-
-
-
 
 procedure TFOP_ABMObraSocial.btnImprimirClick(Sender: TObject);
 begin

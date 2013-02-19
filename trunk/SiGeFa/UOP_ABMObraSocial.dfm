@@ -2,7 +2,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   Left = 304
   Top = 178
   Width = 872
-  Height = 632
+  Height = 675
   Caption = 'ABM Obra Social'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -24,7 +24,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     Left = 0
     Top = 19
     Width = 864
-    Height = 534
+    Height = 577
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -174,7 +174,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Size.Values = (
             52.916666666666670000
             730.250000000000000000
-            68.791666666666670000
+            68.791666666666680000
             439.208333333333400000)
           Alignment = taCenter
           AlignToBand = True
@@ -543,7 +543,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            592.666666666666700000)
+            592.666666666666800000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -832,7 +832,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       Left = 0
       Top = 0
       Width = 864
-      Height = 534
+      Height = 577
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -847,7 +847,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         Left = 5
         Top = 5
         Width = 854
-        Height = 385
+        Height = 382
         Align = alClient
         Color = 14606012
         DataSource = DS_OP_ObraSocial
@@ -873,7 +873,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             FieldName = 'NOMBRE'
             Title.Alignment = taCenter
             Title.Caption = 'Nombre'
-            Width = 376
+            Width = 177
             Visible = True
           end
           item
@@ -881,7 +881,31 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             FieldName = 'DIRECCION'
             Title.Alignment = taCenter
             Title.Caption = 'Direcci'#243'n'
-            Width = 258
+            Width = 227
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CODIGO_POSTAL'
+            Title.Alignment = taCenter
+            Title.Caption = 'C.Postal'
+            Width = 54
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'LOCALIDAD'
+            Title.Alignment = taCenter
+            Title.Caption = 'Localidad'
+            Width = 131
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = '_provincia'
+            Title.Alignment = taCenter
+            Title.Caption = 'Provincia'
+            Width = 111
             Visible = True
           end
           item
@@ -889,7 +913,31 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             FieldName = 'TELEFONO'
             Title.Alignment = taCenter
             Title.Caption = 'Tel'#233'fonos'
-            Width = 247
+            Width = 178
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'EMAIL'
+            Title.Alignment = taCenter
+            Title.Caption = 'eMail'
+            Width = 165
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = '_tipoIva'
+            Title.Alignment = taCenter
+            Title.Caption = 'Condici'#243'n IVA'
+            Width = 150
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CUIT_CUIL'
+            Title.Alignment = taCenter
+            Title.Caption = 'Cuit/Cuil'
+            Width = 140
             Visible = True
           end
           item
@@ -897,14 +945,15 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             FieldName = 'ID_OS'
             Title.Alignment = taCenter
             Title.Caption = 'ID'
+            Width = 43
             Visible = True
           end>
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 390
+        Top = 387
         Width = 854
-        Height = 139
+        Height = 185
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
@@ -912,17 +961,62 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Left = 0
           Top = 0
           Width = 854
-          Height = 139
+          Height = 185
           ActivePage = TabSheet1
           Align = alClient
           TabOrder = 0
           object TabSheet1: TTabSheet
             Caption = 'Datos Obra Social'
-            object Label1: TLabel
-              Left = 32
-              Top = 37
+            object Label9: TLabel
+              Left = 387
+              Top = 88
+              Width = 57
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Provincia:'
+              Transparent = True
+            end
+            object Label8: TLabel
+              Left = 415
+              Top = 62
+              Width = 29
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'C.P.:'
+              Transparent = True
+            end
+            object Label5: TLabel
+              Left = 42
+              Top = 62
+              Width = 58
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Direcci'#243'n:'
+              Transparent = True
+            end
+            object Label16: TLabel
+              Left = 42
+              Top = 88
+              Width = 58
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Localidad:'
+              Transparent = True
+            end
+            object Label10: TLabel
+              Left = 11
+              Top = 138
+              Width = 86
+              Height = 13
+              Caption = 'Condici'#243'n IVA:'
+              Transparent = True
+            end
+            object Label7: TLabel
+              Left = 50
+              Top = 36
               Width = 50
               Height = 13
+              Alignment = taRightJustify
               Caption = 'Nombre:'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
@@ -932,12 +1026,22 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               ParentFont = False
               Transparent = True
             end
-            object Label2: TLabel
-              Left = 37
-              Top = 12
-              Width = 45
+            object Label11: TLabel
+              Left = 389
+              Top = 138
+              Width = 55
               Height = 13
-              Caption = 'C'#243'digo:'
+              Alignment = taRightJustify
+              Caption = 'Cuit/Cuil:'
+              Transparent = True
+            end
+            object Label12: TLabel
+              Left = 19
+              Top = 11
+              Width = 81
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Codigo Corto:'
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clBlack
               Font.Height = -11
@@ -946,38 +1050,64 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               ParentFont = False
               Transparent = True
             end
-            object Label3: TLabel
-              Left = 24
-              Top = 61
-              Width = 58
+            object Label6: TLabel
+              Left = 51
+              Top = 113
+              Width = 49
               Height = 13
-              Caption = 'Direcci'#243'n:'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clBlack
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
+              Alignment = taRightJustify
+              Caption = 'Telefono'
               Transparent = True
             end
-            object Label4: TLabel
-              Left = 22
-              Top = 85
-              Width = 60
+            object Label13: TLabel
+              Left = 410
+              Top = 113
+              Width = 34
               Height = 13
-              Caption = 'Tel'#233'fonos:'
+              Alignment = taRightJustify
+              Caption = 'eMail:'
+              Transparent = True
+            end
+            object DBLCBoxProvincia: TDBLookupComboBox
+              Left = 447
+              Top = 84
+              Width = 270
+              Height = 21
+              DataField = 'ID_PROVINCIA'
+              DataSource = DS_OP_ObraSocial
               Font.Charset = DEFAULT_CHARSET
-              Font.Color = clBlack
+              Font.Color = clWindowText
               Font.Height = -11
               Font.Name = 'Verdana'
-              Font.Style = []
+              Font.Style = [fsBold]
+              KeyField = 'ID_PROVINCIA'
+              ListField = 'NOMBRE_PROVINCIA'
+              ListSource = DS_Provincia
               ParentFont = False
-              Transparent = True
+              TabOrder = 5
+            end
+            object DBLCBoxCondIva: TDBLookupComboBox
+              Left = 104
+              Top = 134
+              Width = 270
+              Height = 21
+              DataField = 'ID_TIPO_IVA'
+              DataSource = DS_OP_ObraSocial
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              KeyField = 'ID_TIPO_IVA'
+              ListField = 'NOMBRE_TIPO_IVA'
+              ListSource = DS_Iva
+              ParentFont = False
+              TabOrder = 8
             end
             object DBENombre: TDBEdit
-              Left = 89
-              Top = 33
-              Width = 491
+              Left = 104
+              Top = 32
+              Width = 270
               Height = 21
               CharCase = ecUpperCase
               DataField = 'NOMBRE'
@@ -990,10 +1120,26 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               ParentFont = False
               TabOrder = 1
             end
-            object DBEdit1: TDBEdit
-              Left = 89
-              Top = 57
-              Width = 492
+            object DBELocalidad: TDBEdit
+              Left = 104
+              Top = 84
+              Width = 270
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'LOCALIDAD'
+              DataSource = DS_OP_ObraSocial
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 4
+            end
+            object DBEDireccion: TDBEdit
+              Left = 104
+              Top = 58
+              Width = 270
               Height = 21
               CharCase = ecUpperCase
               DataField = 'DIRECCION'
@@ -1006,13 +1152,13 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               ParentFont = False
               TabOrder = 2
             end
-            object DBEdit2: TDBEdit
-              Left = 89
-              Top = 81
-              Width = 492
+            object DBECodPostal: TDBEdit
+              Left = 447
+              Top = 58
+              Width = 67
               Height = 21
               CharCase = ecUpperCase
-              DataField = 'TELEFONO'
+              DataField = 'CODIGO_POSTAL'
               DataSource = DS_OP_ObraSocial
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
@@ -1022,10 +1168,25 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               ParentFont = False
               TabOrder = 3
             end
-            object DBECodigo: TDBEdit
-              Left = 89
-              Top = 9
-              Width = 97
+            object DBECuit_Cuil: TDBEdit
+              Left = 447
+              Top = 134
+              Width = 270
+              Height = 21
+              DataField = 'CUIT_CUIL'
+              DataSource = DS_OP_ObraSocial
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 9
+            end
+            object DBEditCodigo: TDBEdit
+              Left = 104
+              Top = 7
+              Width = 105
               Height = 21
               CharCase = ecUpperCase
               DataField = 'CODIGO'
@@ -1038,6 +1199,37 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               ParentFont = False
               TabOrder = 0
             end
+            object DBETelefono: TDBEdit
+              Left = 104
+              Top = 109
+              Width = 270
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'TELEFONO'
+              DataSource = DS_OP_ObraSocial
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 6
+            end
+            object DBEMail: TDBEdit
+              Left = 447
+              Top = 109
+              Width = 270
+              Height = 21
+              DataField = 'EMAIL'
+              DataSource = DS_OP_ObraSocial
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 7
+            end
           end
           object TabSheet2: TTabSheet
             Caption = 'Descripci'#243'n'
@@ -1046,7 +1238,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               Left = 0
               Top = 0
               Width = 846
-              Height = 111
+              Height = 157
               Align = alClient
               Caption = '  Descripci'#243'n  '
               TabOrder = 0
@@ -1054,7 +1246,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
                 Left = 2
                 Top = 15
                 Width = 842
-                Height = 94
+                Height = 140
                 Align = alClient
                 DataField = 'DESCRIPCION'
                 DataSource = DS_OP_ObraSocial
@@ -1721,6 +1913,47 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       FieldName = 'BAJA'
       Size = 1
     end
+    object ZQ_OP_ObraSocialCUIT_CUIL: TStringField
+      FieldName = 'CUIT_CUIL'
+      Size = 30
+    end
+    object ZQ_OP_ObraSocialLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_OP_ObraSocialCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_OP_ObraSocialEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_OP_ObraSocialID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_OP_ObraSocialID_PROVINCIA: TIntegerField
+      FieldName = 'ID_PROVINCIA'
+    end
+    object ZQ_OP_ObraSocial_provincia: TStringField
+      FieldKind = fkLookup
+      FieldName = '_provincia'
+      LookupDataSet = ZQ_Provincia
+      LookupKeyFields = 'ID_PROVINCIA'
+      LookupResultField = 'NOMBRE_PROVINCIA'
+      KeyFields = 'ID_PROVINCIA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_OP_ObraSocial_tipoIva: TStringField
+      FieldKind = fkLookup
+      FieldName = '_tipoIva'
+      LookupDataSet = ZQ_Iva
+      LookupKeyFields = 'ID_TIPO_IVA'
+      LookupResultField = 'NOMBRE_TIPO_IVA'
+      KeyFields = 'ID_TIPO_IVA'
+      Size = 100
+      Lookup = True
+    end
   end
   object DS_OP_ObraSocial: TDataSource
     DataSet = ZQ_OP_ObraSocial
@@ -1743,12 +1976,36 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         Visible = True
       end
       item
+        TituloColumna = 'C.Postal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Provincia'
+        Visible = True
+      end
+      item
         TituloColumna = 'Tel'#233'fonos'
         Visible = True
       end
       item
-        TituloColumna = 'ID'
+        TituloColumna = 'eMail'
         Visible = True
+      end
+      item
+        TituloColumna = 'Condici'#243'n IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuit/Cuil'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID'
+        Visible = False
       end>
     NombreGuardar = 'EkOG_ABMObraSocial'
     AltoTituloColumna = 15
@@ -1858,5 +2115,72 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     ShowModal = False
     Left = 48
     Top = 184
+  end
+  object ZQ_Provincia: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from provincia')
+    Params = <>
+    Left = 232
+    Top = 128
+    object ZQ_ProvinciaID_PROVINCIA: TIntegerField
+      FieldName = 'ID_PROVINCIA'
+      Required = True
+    end
+    object ZQ_ProvinciaNOMBRE_PROVINCIA: TStringField
+      FieldName = 'NOMBRE_PROVINCIA'
+      Size = 100
+    end
+  end
+  object ZQ_Iva: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from tipo_iva')
+    Params = <>
+    Left = 304
+    Top = 128
+    object ZQ_IvaID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+      Required = True
+    end
+    object ZQ_IvaNOMBRE_TIPO_IVA: TStringField
+      FieldName = 'NOMBRE_TIPO_IVA'
+      Size = 100
+    end
+    object ZQ_IvaABREVIATURA: TStringField
+      FieldName = 'ABREVIATURA'
+      Size = 10
+    end
+    object ZQ_IvaDISCRIMINAR: TStringField
+      FieldName = 'DISCRIMINAR'
+      Size = 1
+    end
+    object ZQ_IvaLETRA: TStringField
+      FieldName = 'LETRA'
+      Size = 1
+    end
+    object ZQ_IvaFISCAL: TStringField
+      FieldName = 'FISCAL'
+      Size = 1
+    end
+    object ZQ_IvaCOEFICIENTE: TFloatField
+      FieldName = 'COEFICIENTE'
+    end
+    object ZQ_IvaVERIFICA_CUIT: TStringField
+      FieldName = 'VERIFICA_CUIT'
+      Size = 1
+    end
+  end
+  object DS_Iva: TDataSource
+    DataSet = ZQ_Iva
+    Left = 304
+    Top = 176
+  end
+  object DS_Provincia: TDataSource
+    DataSet = ZQ_Provincia
+    Left = 232
+    Top = 176
   end
 end

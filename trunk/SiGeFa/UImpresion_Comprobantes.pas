@@ -901,6 +901,56 @@ type
     QRLabel308: TQRLabel;
     QRLabelFecha: TQRLabel;
     QRlblTransferirStock_CantidadTotal: TQRLabel;
+    TabSheet12: TTabSheet;
+    RepRemitoOS: TQuickRep;
+    QRBand50: TQRBand;
+    QRLabel319: TQRLabel;
+    RepRemitoOS_RENGLON4: TQRLabel;
+    RepRemitoOS_RENGLON3: TQRLabel;
+    RepRemitoOS_RENGLON2: TQRLabel;
+    RepRemitoOS_TITULO: TQRLabel;
+    QRShape15: TQRShape;
+    QRLabel349: TQRLabel;
+    QRLabel351: TQRLabel;
+    RepRemitoOS_RENGLON1: TQRLabel;
+    QRDBText173: TQRDBText;
+    QRDBText184: TQRDBText;
+    QRDBText188: TQRDBText;
+    QRLabel353: TQRLabel;
+    QRDBLogo9: TQRDBImage;
+    QRLabel354: TQRLabel;
+    QRBand51: TQRBand;
+    QRLabel355: TQRLabel;
+    QRLabel356: TQRLabel;
+    QRLabel357: TQRLabel;
+    QRLabel358: TQRLabel;
+    QRLabel359: TQRLabel;
+    QRLabel360: TQRLabel;
+    QRLabel361: TQRLabel;
+    QRDBText189: TQRDBText;
+    QRDBText198: TQRDBText;
+    QRDBText199: TQRDBText;
+    QRDBText200: TQRDBText;
+    QRDBText201: TQRDBText;
+    QRDBText202: TQRDBText;
+    QRDBText203: TQRDBText;
+    QRBand52: TQRBand;
+    QRLabel362: TQRLabel;
+    QRDBText204: TQRDBText;
+    QRChildBand24: TQRChildBand;
+    QRLabel364: TQRLabel;
+    QRChildBand25: TQRChildBand;
+    QRLabel365: TQRLabel;
+    QRLabel368: TQRLabel;
+    QRLabel369: TQRLabel;
+    QRBand53: TQRBand;
+    QRlblRemitoOS_CantidadTotal: TQRLabel;
+    QRBand54: TQRBand;
+    QRlblRemitoOS_PiePagina: TQRLabel;
+    QRSubDetail22: TQRSubDetail;
+    QRDBText206: TQRDBText;
+    QRDBText209: TQRDBText;
+    QRDBText211: TQRDBText;
     procedure FormCreate(Sender: TObject);
     procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
@@ -913,11 +963,12 @@ type
     archivoPDF: string;
     noImprimir: boolean;
   public
-    procedure cargarDatos(id_comprobante: integer; id_persona: integer; id_empresa: integer; cta_cte: boolean);
+    procedure cargarDatos(id_comprobante: integer; id_persona: integer; id_empresa: integer; id_os: integer; cta_cte: boolean);
     procedure configRecibo();
     procedure configPresupuesto();
     procedure configNotaPedido();
     procedure configRemito();
+    procedure configRemitoOS();
     procedure configOrdenPago();
     procedure configReciboCtaCte();
     procedure configOrdenPagoCtaCte();
@@ -937,7 +988,7 @@ uses UDM;
 
 {$R *.dfm}
 
-procedure TFImpresion_Comprobantes.cargarDatos(id_comprobante: integer; id_persona: integer; id_empresa: integer; cta_cte: boolean);
+procedure TFImpresion_Comprobantes.cargarDatos(id_comprobante: integer; id_persona: integer; id_empresa: integer; id_os: integer; cta_cte: boolean);
 begin
   noImprimir:= false;
 
@@ -950,6 +1001,10 @@ begin
     ZQ_Destino.ParamByName('id_empresa').Clear
   else
     ZQ_Destino.ParamByName('id_empresa').AsInteger:= id_empresa;
+  if id_os = -1 then
+    ZQ_Destino.ParamByName('id_obra_social').Clear
+  else
+    ZQ_Destino.ParamByName('id_obra_social').AsInteger:= id_os;
   ZQ_Destino.Open;
 
   //if not cta_cte then //si no es un comprobante de cuenta corriente
@@ -1017,6 +1072,11 @@ begin
                             configNotaTransferirStock();
                             archivoPDF:= 'TransferirStock.pdf';
                           end;
+      CPB_FACTURA_OSOCIAL: begin //CPB_REMITO_VENTA
+                          configRemitoOS;
+                          reporte:= RepRemitoOS;
+                          archivoPDF:= 'RemitoOS.pdf';
+                        end;
     end;
   end
 end;
@@ -1193,6 +1253,23 @@ begin
 end;
 
 
+//REMITO  OS
+procedure TFImpresion_Comprobantes.configRemitoOS();
+var
+  cantidadProductos: Double;
+begin
+  if ZQ_Comprobante.IsEmpty then
+    exit;
+
+  cantidadProductos:= EKDbSumaProducto.SumCollection[0].sumvalue;
+  QRlblRemitoOS_CantidadTotal.Caption := 'CANTIDAD: '+FormatFloat('0.00', cantidadProductos);
+
+  QRlblRemitoOS_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  DM.VariablesComprobantes(RepRemitoOS);
+  EKVistaPrevia.Reporte:= RepRemitoOS;
+end;
+
+
 //NOTA PEDIDO
 procedure TFImpresion_Comprobantes.configNotaPedido();
 var
@@ -1239,6 +1316,7 @@ begin
   QRDBLogo6.DataSet:= dm.ZQ_Sucursal;
   QRDBLogo7.DataSet:= dm.ZQ_Sucursal;
   QRDBLogo8.DataSet:= dm.ZQ_Sucursal;
+  QRDBLogo9.DataSet:= dm.ZQ_Sucursal;
 end;
 
 //REPORTE DEVOLUCION
@@ -1268,12 +1346,11 @@ begin
   EKVistaPrevia.Reporte:= RepDevolucion;
 end;
 
+
 procedure TFImpresion_Comprobantes.QRBand21BeforePrint(
   Sender: TQRCustomBand; var PrintBand: Boolean);
 begin
-
   QRLTicket.Visible:=not ZQ_ComprobanteIMAGEN.IsNull;
-
 end;
 
 end.

@@ -110,7 +110,9 @@ type
    public
      conectadoPOP3, conectadoSMTP: boolean;
      hintPOP3_Autentic, hintPOP3_SSL,
-     hintSMTP_Autentic, hintSMTP_SSL: String;
+     hintSMTP_Autentic, hintSMTP_SSL,
+     hintPOP3_Server, hintSMTP_Server,
+     hintPOP3_Port, hintSMTP_Port: String;
    end;
 
 var
@@ -152,8 +154,26 @@ begin
                  '         Ciudad "utUseExplicitTLS"'+#13+
                  '         Arnet ""';
 
+  hintPOP3_Server:= 'Ejemplo: Gmail "pop.gmail.com"'+#13+
+                    '          Ciudad ""'+#13+
+                    '          Arnet ""';
+  hintSMTP_Server:= 'Ejemplo: Gmail "smtp.gmail.com"'+#13+
+                    '         Ciudad ""'+#13+
+                    '         Arnet ""';
+
+  hintPOP3_Port:= 'Ejemplo: Gmail "995"'+#13+
+                  '         Ciudad ""'+#13+
+                  '         Arnet ""';
+  hintSMTP_Port:= 'Ejemplo: Gmail "465"'+#13+
+                  '         Ciudad ""'+#13+
+                  '         Arnet ""';
+
+  DBEditSMTPServidor.Hint:= hintSMTP_Server;
+  DBEditSMTPPuerto.Hint:= hintSMTP_Port;
   SMTPAuthType.Hint:= hintSMTP_Autentic;
   SMTPUseTLS.Hint:= hintSMTP_SSL;
+  DBEditPOPServidor.Hint:= hintPOP3_Server;
+  DBEditPOPPuerto.Hint:= hintPOP3_Port;
   POPAuthType.Hint:= hintPOP3_Autentic;
   POP3UseTLS.Hint:= hintPOP3_SSL;
 

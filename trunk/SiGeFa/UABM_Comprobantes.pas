@@ -1200,7 +1200,7 @@ begin
 
   if not Assigned(FImpresion_Comprobantes) then
     FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
-  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, false);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, -1, false);
   FImpresion_Comprobantes.imprimir;
 end;
 
@@ -2048,7 +2048,7 @@ begin
 
   if not Assigned(FImpresion_Comprobantes) then
     FImpresion_Comprobantes := TFImpresion_Comprobantes.Create(nil);
-  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, false);
+  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, ZQ_VerCpbID_CLIENTE.AsInteger, ZQ_VerCpbID_PROVEEDOR.AsInteger, -1, false);
   archivoPDF:= FImpresion_Comprobantes.generarPDF;
 
   //if not Assigned(TFMailEnviar) then
