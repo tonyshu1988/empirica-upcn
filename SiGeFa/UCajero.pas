@@ -642,6 +642,7 @@ type
     ZQ_OrdenProductosIMPORTE_VENTA: TFloatField;
     ZQ_OrdenProductosIMPORTE_UNITARIO: TFloatField;
     ZQ_OrdenProductosIMPORTE_TOTAL: TFloatField;
+    ZQ_Optica_OrdenCODIGO_CLI: TStringField;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
@@ -3277,10 +3278,12 @@ begin
         CD_FpagoIMPORTE.AsFloat:=ZQ_OpticaEntregaIMPORTE.AsFloat;
 
         CD_Fpago_importeVenta.AsFloat:= ZQ_OpticaEntregaIMPORTE_REAL.AsFloat;
+        
         CD_Fpago.Post;
         ZQ_OpticaEntrega.Next;
       end;
     end;
+
 
   end;
 end;
