@@ -8,7 +8,7 @@ uses
   Buttons, ComCtrls, ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, DBClient, EKListadoSQL,StrUtils,UDM, UPrincipal, UBuscarPersona,
   UBuscarProductoStock, Provider, Menus, ZSequence, EKDbSuma,
-  EKDBDateTimePicker, EKBusquedaAvanzada, EKOrdenarGrilla;
+  EKDBDateTimePicker, EKBusquedaAvanzada, EKOrdenarGrilla, ZSqlUpdate;
 
 type
   TFOP_ABM_OrdenTecnica = class(TForm)
@@ -476,6 +476,14 @@ type
     ZQ_DetalleProdLLEVAR_STOCK: TStringField;
     ZQ_DetalleProdBAJA: TStringField;
     EKDbSumaOrdenes: TEKDbSuma;
+    ZU_Orden: TZUpdateSQL;
+    ZQ_OrdenNOMBRE_CLI: TStringField;
+    ZQ_OrdenDIRECC_CLI: TStringField;
+    ZQ_OrdenNOMBRE_MED: TStringField;
+    ZQ_OrdenMATRIC_MED: TStringField;
+    ZQ_OrdenO_ESTADO: TStringField;
+    Panel3: TPanel;
+    lblEstado: TStaticText;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -545,6 +553,10 @@ type
     procedure ZQ_OrdenDetalleOSAfterDelete(DataSet: TDataSet);
     procedure ZQ_ProductosAfterScroll(DataSet: TDataSet);
     procedure EKDbSumaOrdenesSumListChanged(Sender: TObject);
+    procedure DBGridComprobantesDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure ZQ_OrdenAfterScroll(DataSet: TDataSet);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -1846,6 +1858,54 @@ begin
 
 
   lblTotalOrdenes.Caption:=Format('%s órdenes - Total Saldo Pendiente: $ %s de $ %s.',[CurrToStr(EKDbSumaOrdenes.SumCollection[4].SumValue),CurrToStr(totales),CurrToStr(tot1)]);
+end;
+
+procedure TFOP_ABM_OrdenTecnica.DBGridComprobantesDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  if not ZQ_Orden.IsEmpty then
+    begin
+       case ZQ_OrdenID_ESTADO.AsInteger of
+       1:
+         begin      //Pendientes
+           DBGridComprobantes.Canvas.Brush.Color :=$00DEDEBC;
+           DBGridComprobantes.Canvas.Font.Color := clBlack;
+           if (gdFocused in State) or (gdSelected in State) then
+             begin
+             DBGridComprobantes.Canvas.Font.Style := DBGridComprobantes.Canvas.Font.Style + [fsBold];
+             end
+         end;
+       2:
+         begin       //Terminadas
+           DBGridComprobantes.Canvas.Brush.Color :=$00FF3737;
+           DBGridComprobantes.Canvas.Font.Color := clwhite;
+           if (gdFocused in State) or (gdSelected in State) then
+             begin
+             DBGridComprobantes.Canvas.Font.Style := DBGridComprobantes.Canvas.Font.Style + [fsBold];
+             end
+         end;
+       3:
+         begin     //Cobradas
+           DBGridComprobantes.Canvas.Brush.Color :=$0095FFCA;
+           DBGridComprobantes.Canvas.Font.Color := clBlack;
+           if (gdFocused in State) or (gdSelected in State) then
+             begin
+             DBGridComprobantes.Canvas.Font.Style := DBGridComprobantes.Canvas.Font.Style + [fsBold];
+             end
+         end;
+      end;
+
+      DBGridComprobantes.DefaultDrawColumnCell(rect,datacol,column,state);
+    end;
+
+end;
+
+procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenAfterScroll(DataSet: TDataSet);
+begin
+   lblEstado.Caption:=Format('%s',[ZQ_OrdenO_ESTADO.AsString]);
+   lblEstado.Color:=DBGridComprobantes.Canvas.Brush.Color;
+   lblEstado.Font.Color:=DBGridComprobantes.Canvas.Font.Color;
 end;
 
 end.
