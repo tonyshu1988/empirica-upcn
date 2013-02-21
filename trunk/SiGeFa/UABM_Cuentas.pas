@@ -7,7 +7,8 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, Menus, EKListadoSQL;
+  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, Menus, EKListadoSQL,
+  EKLlenarCombo;
 
 type
   TFABM_Cuentas = class(TForm)
@@ -81,7 +82,7 @@ type
     QRLabel2: TQRLabel;
     QRLabel3: TQRLabel;
     QRDBText4: TQRDBText;
-    DBLookupComboBox1: TDBLookupComboBox;
+    DBLookupCBoxMedio: TDBLookupComboBox;
     DS_MedioPago: TDataSource;
     ZQ_CuentasID_CUENTA: TIntegerField;
     ZQ_CuentasCODIGO: TStringField;
@@ -116,6 +117,27 @@ type
     ZQ_TipoFPagoCOLUMNA_PRECIO: TIntegerField;
     ZQ_TipoFPagoMODIFICABLE: TStringField;
     ZQ_MedioPagodescripcion: TStringField;
+    Label5: TLabel;
+    ZQ_Sucursales: TZQuery;
+    ZQ_SucursalesID_SUCURSAL: TIntegerField;
+    ZQ_SucursalesNOMBRE: TStringField;
+    ZQ_SucursalesDIRECCION: TStringField;
+    ZQ_SucursalesLOCALIDAD: TStringField;
+    ZQ_SucursalesCODIGO_POSTAL: TStringField;
+    ZQ_SucursalesTELEFONO: TStringField;
+    ZQ_SucursalesEMAIL: TStringField;
+    ZQ_SucursalesBAJA: TStringField;
+    ZQ_SucursalesLOGO: TBlobField;
+    ZQ_SucursalesREPORTE_TITULO: TStringField;
+    ZQ_SucursalesREPORTE_SUBTITULO: TStringField;
+    ZQ_SucursalesCOMPROBANTE_TITULO: TStringField;
+    ZQ_SucursalesCOMPROBANTE_RENGLON1: TStringField;
+    ZQ_SucursalesCOMPROBANTE_RENGLON2: TStringField;
+    ZQ_SucursalesCOMPROBANTE_RENGLON3: TStringField;
+    ZQ_SucursalesCOMPROBANTE_RENGLON4: TStringField;
+    DBLookupCBoxSucursal: TDBLookupComboBox;
+    DS_Sucursales: TDataSource;
+    ZQ_Cuentas_sucursal: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -347,6 +369,7 @@ begin
     ZQ_CuentasMODIFICABLE.AsString:= 'S';
     ZQ_CuentasA_CTA_CORRIENTE.AsString:= 'N';
     ZQ_CuentasA_NOTA_CREDITO.AsString:= 'N';
+    ZQ_CuentasID_SUCURSAL.AsInteger:= 0;
 
     DBENombre.SetFocus;
     GrupoEditando.Enabled:= false;

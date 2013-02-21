@@ -874,7 +874,8 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
       
         '       ar.descripcion as producto_articulo, ta.descripcion as pr' +
         'oducto_tipo_articulo, ordet.id_producto, co.nombre as producto_c' +
-        'olor'
+        'olor,'
+      '       per.id_persona as id_persona_afiliado'
       'from optica_orden orden'
       
         'inner join optica_orden_detalle ordet on (orden.id_orden = ordet' +
@@ -910,7 +911,6 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
     end
     object ZQ_ProductoID_DETALLE_OS: TIntegerField
       FieldName = 'ID_DETALLE_OS'
-      Required = True
     end
     object ZQ_ProductoID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
@@ -991,6 +991,9 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
     object ZQ_ProductoPRODUCTO_COLOR: TStringField
       FieldName = 'PRODUCTO_COLOR'
       Size = 30
+    end
+    object ZQ_ProductoID_PERSONA_AFILIADO: TIntegerField
+      FieldName = 'ID_PERSONA_AFILIADO'
     end
   end
   object DS_Producto: TDataSource
@@ -1221,7 +1224,8 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
       
         '       ar.descripcion as producto_articulo, ta.descripcion as pr' +
         'oducto_tipo_articulo, ordet.id_producto, co.nombre as producto_c' +
-        'olor'
+        'olor,'
+      '       per.id_persona as id_persona_afiliado'
       'from optica_orden orden'
       
         'inner join optica_orden_detalle ordet on (orden.id_orden = ordet' +
@@ -1272,7 +1276,8 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
       
         '       ar.descripcion as producto_articulo, ta.descripcion as pr' +
         'oducto_tipo_articulo, ordet.id_producto, co.nombre as producto_c' +
-        'olor')
+        'olor,'
+      '       per.id_persona as id_persona_afiliado')
     SQL_From.Strings = (
       'from optica_orden orden'
       

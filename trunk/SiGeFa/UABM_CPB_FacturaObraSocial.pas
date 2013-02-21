@@ -292,6 +292,9 @@ type
     ZQ_VerCpb_ProductoID_DETALLE_OS: TIntegerField;
     btnImprimirComprobante: TdxBarLargeButton;
     ZQ_VerCpbID_OBRA_SOCIAL: TIntegerField;
+    CD_Producto_producto_imprimir: TStringField;
+    ZQ_VerCpb_ProductoDETALLE_PROD_FACTURA: TStringField;
+    ZQ_CpbProductoID_AUXILIAR: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -595,12 +598,17 @@ begin
   begin
     ZQ_ActualizarDetalleOS.ParamByName('id').AsInteger:= ZQ_CpbProducto_IdDetalleOS.AsInteger;
     ZQ_ActualizarDetalleOS.ParamByName('id_factura').AsInteger:= ZQ_CpbProductoID_COMPROBANTE_DETALLE.AsInteger;
-    ZQ_ActualizarDetalleOS.ParamByName('detalle').AsString:= ZQ_CpbProductoDETALLE.AsString;
+    ZQ_ActualizarDetalleOS.ParamByName('detalle').AsString:= ZQ_CpbProducto_Nombre.AsString;
     ZQ_ActualizarDetalleOS.ExecSQL;
+
+    if (ZQ_CpbProductoDETALLE.IsNull) or (trim(ZQ_CpbProductoDETALLE.AsString) = '') then
+    begin
+      ZQ_CpbProducto.edit;
+      ZQ_CpbProductoDETALLE.AsString:= ZQ_CpbProducto_Nombre.AsString;
+    end;
 
     ZQ_CpbProducto.Next;
   end;
-
 
   //cargo la forma de pago cuenta corriente al comprobante
 //  if ZQ_Comprobante.State = dsInsert then
@@ -725,6 +733,7 @@ begin
     exit;
 
   ZQ_VerCpb_Producto.ParamByName('id_comprobante').AsInteger:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+  ZQ_VerCpb_Producto.ParamByName('id_os').AsInteger:= ZQ_VerCpbID_OBRA_SOCIAL.AsInteger;
   ZQ_VerCpb_Producto.Open;
 
   if ZQ_VerCpbFECHA_ANULADO.IsNull then
@@ -805,7 +814,8 @@ begin
     CD_Producto_idDetalleOS.AsInteger:= ZQ_VerCpb_ProductoID_DETALLE_OS.AsInteger;
     CD_Producto_idProducto.AsInteger:= ZQ_VerCpb_ProductoID_PRODUCTO.AsInteger;
     CD_Producto_idCPBDetalle.AsInteger:= ZQ_VerCpb_ProductoID_COMPROBANTE_DETALLE.AsInteger;
-    CD_Producto_producto.AsString:= ZQ_VerCpb_ProductoDETALLE.AsString;
+    CD_Producto_producto.AsString:= ZQ_VerCpb_ProductoDETALLE_PROD_FACTURA.AsString; //producto real
+    CD_Producto_producto_imprimir.AsString:= ZQ_VerCpb_ProductoDETALLE.AsString; //renglon que se imprime
     CD_Producto_afiliado_nombre.AsString:= ZQ_VerCpb_ProductoAFILIADO.AsString;
     CD_Producto_afiliado_numero.AsString:= ZQ_VerCpb_ProductoNRO_AFILIADO.AsString;
 
@@ -838,7 +848,8 @@ begin
       CD_Producto_idDetalleOS.AsInteger:= vselProducto.ZQ_ProductoID_DETALLE_OS.AsInteger;
       CD_Producto_idProducto.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
       CD_Producto_idCPBDetalle.AsInteger:= id_cpb_detalle;
-      CD_Producto_producto.AsString:= nombre_producto;
+      CD_Producto_producto.AsString:= nombre_producto; //producto real
+      CD_Producto_producto_imprimir.AsString:= ''; //renglon que se imprime
       CD_Producto_afiliado_nombre.AsString:= vselProducto.ZQ_ProductoAFILIADO_NOMBRE.AsString;
       CD_Producto_afiliado_numero.AsString:= vselProducto.ZQ_ProductoAFILIADO_NUMERO.AsString;
 
@@ -846,7 +857,8 @@ begin
       ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
       ZQ_CpbProductoID_COMPROBANTE_DETALLE.AsInteger:= id_cpb_detalle;
       ZQ_CpbProductoID_PRODUCTO.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
-      ZQ_CpbProductoDETALLE.AsString:= nombre_producto;
+      ZQ_CpbProductoID_AUXILIAR.AsInteger:= vselProducto.ZQ_ProductoID_PERSONA_AFILIADO.AsInteger;
+      ZQ_CpbProductoDETALLE.AsString:= ''; //renglon que se imprime
       ZQ_CpbProductoCANTIDAD.AsFloat:= vselProducto.ZQ_ProductoCANTIDAD.AsFloat;
       ZQ_CpbProductoIMPORTE_FINAL.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
       ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
@@ -891,7 +903,8 @@ begin
         CD_Producto_idDetalleOS.AsInteger:= vselProducto.ZQ_ProductoID_DETALLE_OS.AsInteger;
         CD_Producto_idProducto.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
         CD_Producto_idCPBDetalle.AsInteger:= id_cpb_detalle;
-        CD_Producto_producto.AsString:= nombre_producto;
+        CD_Producto_producto.AsString:= nombre_producto; //producto real
+        CD_Producto_producto_imprimir.AsString:= ''; //renglon que se imprime
         CD_Producto_afiliado_nombre.AsString:= vselProducto.ZQ_ProductoAFILIADO_NOMBRE.AsString;
         CD_Producto_afiliado_numero.AsString:= vselProducto.ZQ_ProductoAFILIADO_NUMERO.AsString;
 
@@ -899,7 +912,8 @@ begin
         ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
         ZQ_CpbProductoID_COMPROBANTE_DETALLE.AsInteger:= id_cpb_detalle;
         ZQ_CpbProductoID_PRODUCTO.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
-        ZQ_CpbProductoDETALLE.AsString:= nombre_producto;
+        ZQ_CpbProductoID_AUXILIAR.AsInteger:= vselProducto.ZQ_ProductoID_PERSONA_AFILIADO.AsInteger;
+        ZQ_CpbProductoDETALLE.AsString:= ''; //renglon que se imprime
         ZQ_CpbProductoCANTIDAD.AsFloat:= vselProducto.ZQ_ProductoCANTIDAD.AsFloat;
         ZQ_CpbProductoIMPORTE_FINAL.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
         ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
