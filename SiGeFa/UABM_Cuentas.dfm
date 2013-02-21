@@ -1,6 +1,6 @@
 object FABM_Cuentas: TFABM_Cuentas
-  Left = 320
-  Top = 200
+  Left = 340
+  Top = 211
   Width = 870
   Height = 500
   Caption = 'ABM Cuentas'
@@ -22,8 +22,8 @@ object FABM_Cuentas: TFABM_Cuentas
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 854
-    Height = 391
+    Width = 862
+    Height = 402
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -140,7 +140,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            836.083333333333300000
+            836.083333333333400000
             124.354166666666700000
             224.895833333333300000)
           Alignment = taCenter
@@ -523,7 +523,7 @@ object FABM_Cuentas: TFABM_Cuentas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -573,7 +573,7 @@ object FABM_Cuentas: TFABM_Cuentas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -621,7 +621,7 @@ object FABM_Cuentas: TFABM_Cuentas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -830,8 +830,8 @@ object FABM_Cuentas: TFABM_Cuentas
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 854
-      Height = 391
+      Width = 862
+      Height = 402
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -845,8 +845,8 @@ object FABM_Cuentas: TFABM_Cuentas
       object DBGridCuentas: TDBGrid
         Left = 5
         Top = 5
-        Width = 524
-        Height = 299
+        Width = 603
+        Height = 310
         Align = alClient
         Color = 14606012
         DataSource = DS_Cuentas
@@ -864,7 +864,7 @@ object FABM_Cuentas: TFABM_Cuentas
             FieldName = 'CODIGO'
             Title.Alignment = taCenter
             Title.Caption = 'C'#243'digo'
-            Width = 118
+            Width = 68
             Visible = True
           end
           item
@@ -880,7 +880,7 @@ object FABM_Cuentas: TFABM_Cuentas
             FieldName = 'NRO_CTA_BANCARIA'
             Title.Alignment = taCenter
             Title.Caption = 'Nro. Cta. Bancaria'
-            Width = 139
+            Width = 117
             Visible = True
           end
           item
@@ -896,14 +896,22 @@ object FABM_Cuentas: TFABM_Cuentas
             FieldName = 'MODIFICABLE'
             Title.Alignment = taCenter
             Title.Caption = 'Modificable'
-            Width = 98
+            Width = 71
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = '_sucursal'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal'
+            Width = 200
             Visible = True
           end>
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 304
-        Width = 844
+        Top = 315
+        Width = 852
         Height = 82
         Align = alBottom
         BevelOuter = bvNone
@@ -924,11 +932,11 @@ object FABM_Cuentas: TFABM_Cuentas
           Transparent = True
         end
         object Label2: TLabel
-          Left = 486
-          Top = 62
-          Width = 110
+          Left = 542
+          Top = 36
+          Width = 54
           Height = 13
-          Caption = 'Medio Cobro/Pago:'
+          Caption = 'Sucursal:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -957,6 +965,20 @@ object FABM_Cuentas: TFABM_Cuentas
           Width = 111
           Height = 13
           Caption = 'Nro. Cta. Bancaria:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label5: TLabel
+          Left = 486
+          Top = 62
+          Width = 110
+          Height = 13
+          Caption = 'Medio Cobro/Pago:'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -1012,26 +1034,38 @@ object FABM_Cuentas: TFABM_Cuentas
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
-          TabOrder = 2
+          TabOrder = 3
         end
-        object DBLookupComboBox1: TDBLookupComboBox
+        object DBLookupCBoxMedio: TDBLookupComboBox
           Left = 599
           Top = 58
-          Width = 162
+          Width = 242
           Height = 21
           DataField = 'MEDIO_DEFECTO'
           DataSource = DS_Cuentas
           KeyField = 'ID_TIPO_FORMAPAGO'
           ListField = 'DESCRIPCION'
           ListSource = DS_MedioPago
-          TabOrder = 3
+          TabOrder = 4
+        end
+        object DBLookupCBoxSucursal: TDBLookupComboBox
+          Left = 599
+          Top = 32
+          Width = 242
+          Height = 21
+          DataField = 'ID_SUCURSAL'
+          DataSource = DS_Cuentas
+          KeyField = 'ID_SUCURSAL'
+          ListField = 'NOMBRE'
+          ListSource = DS_Sucursales
+          TabOrder = 2
         end
       end
       object DBGridFPago: TDBGrid
-        Left = 529
+        Left = 608
         Top = 5
-        Width = 320
-        Height = 299
+        Width = 249
+        Height = 310
         Align = alRight
         Color = 14606012
         DataSource = DS_MedioPago
@@ -1058,7 +1092,7 @@ object FABM_Cuentas: TFABM_Cuentas
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 862
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1080,7 +1114,7 @@ object FABM_Cuentas: TFABM_Cuentas
       Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
-      Left = 744
+      Left = 752
       Top = 1
       Width = 109
       Height = 17
@@ -1097,7 +1131,7 @@ object FABM_Cuentas: TFABM_Cuentas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1731,6 +1765,17 @@ object FABM_Cuentas: TFABM_Cuentas
       FieldName = 'MODIFICABLE'
       Size = 1
     end
+    object ZQ_Cuentas_sucursal: TStringField
+      DisplayWidth = 200
+      FieldKind = fkLookup
+      FieldName = '_sucursal'
+      LookupDataSet = ZQ_Sucursales
+      LookupKeyFields = 'ID_SUCURSAL'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'ID_SUCURSAL'
+      Size = 200
+      Lookup = True
+    end
   end
   object DS_Cuentas: TDataSource
     DataSet = ZQ_Cuentas
@@ -1916,6 +1961,10 @@ object FABM_Cuentas: TFABM_Cuentas
       item
         TituloColumna = 'Modificable'
         Visible = True
+      end
+      item
+        TituloColumna = 'ID Sucursal'
+        Visible = True
       end>
     NombreGuardar = 'ABM_Cuentas'
     AltoTituloColumna = 15
@@ -2029,5 +2078,79 @@ object FABM_Cuentas: TFABM_Cuentas
       FieldName = 'MODIFICABLE'
       Size = 1
     end
+  end
+  object ZQ_Sucursales: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select s.* from sucursal s ')
+    Params = <>
+    Left = 368
+    Top = 192
+    object ZQ_SucursalesID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_SucursalesNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_SucursalesDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_SucursalesLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_SucursalesCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_SucursalesTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_SucursalesEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_SucursalesBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_SucursalesLOGO: TBlobField
+      FieldName = 'LOGO'
+    end
+    object ZQ_SucursalesREPORTE_TITULO: TStringField
+      FieldName = 'REPORTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalesREPORTE_SUBTITULO: TStringField
+      FieldName = 'REPORTE_SUBTITULO'
+      Size = 50
+    end
+    object ZQ_SucursalesCOMPROBANTE_TITULO: TStringField
+      FieldName = 'COMPROBANTE_TITULO'
+      Size = 50
+    end
+    object ZQ_SucursalesCOMPROBANTE_RENGLON1: TStringField
+      FieldName = 'COMPROBANTE_RENGLON1'
+      Size = 50
+    end
+    object ZQ_SucursalesCOMPROBANTE_RENGLON2: TStringField
+      FieldName = 'COMPROBANTE_RENGLON2'
+      Size = 50
+    end
+    object ZQ_SucursalesCOMPROBANTE_RENGLON3: TStringField
+      FieldName = 'COMPROBANTE_RENGLON3'
+      Size = 50
+    end
+    object ZQ_SucursalesCOMPROBANTE_RENGLON4: TStringField
+      FieldName = 'COMPROBANTE_RENGLON4'
+      Size = 50
+    end
+  end
+  object DS_Sucursales: TDataSource
+    DataSet = ZQ_Sucursales
+    Left = 368
+    Top = 243
   end
 end

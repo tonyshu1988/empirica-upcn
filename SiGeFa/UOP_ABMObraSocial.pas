@@ -127,6 +127,14 @@ type
     ZQ_OP_ObraSocialID_PROVINCIA: TIntegerField;
     ZQ_OP_ObraSocial_tipoIva: TStringField;
     ZQ_OP_ObraSocial_provincia: TStringField;
+    ZQ_OP_ObraSocialFACTURA_AUTOMATICA: TStringField;
+    DBCheckBoxFacturaAuto: TDBCheckBox;
+    QRLabel4: TQRLabel;
+    QRDBText5: TQRDBText;
+    QRLabel5: TQRLabel;
+    QRLabel6: TQRLabel;
+    QRDBText6: TQRDBText;
+    QRDBText7: TQRDBText;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -193,6 +201,7 @@ begin
 
     ZQ_OP_ObraSocial.Append;
     ZQ_OP_ObraSocialBAJA.AsString:= 'N';
+    ZQ_OP_ObraSocialFACTURA_AUTOMATICA.AsString:= 'N';    
 
     DBEditCodigo.SetFocus;
     GrupoEditando.Enabled := false;

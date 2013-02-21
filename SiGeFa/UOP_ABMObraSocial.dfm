@@ -1,8 +1,8 @@
 object FOP_ABMObraSocial: TFOP_ABMObraSocial
-  Left = 304
-  Top = 178
-  Width = 872
-  Height = 675
+  Left = 323
+  Top = 203
+  Width = 826
+  Height = 480
   Caption = 'ABM Obra Social'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -23,17 +23,17 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 864
-    Height = 577
+    Width = 818
+    Height = 382
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object RepObraSocial: TQuickRep
       Tag = 99
-      Left = 60
-      Top = 76
-      Width = 794
-      Height = 1123
+      Left = -12
+      Top = 52
+      Width = 1123
+      Height = 794
       Frame.Color = clBlack
       Frame.DrawTop = False
       Frame.DrawBottom = False
@@ -55,13 +55,13 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         #39#39)
       Options = [FirstPageHeader, LastPageFooter]
       Page.Columns = 1
-      Page.Orientation = poPortrait
+      Page.Orientation = poLandscape
       Page.PaperSize = A4
       Page.Values = (
         100.000000000000000000
-        2970.000000000000000000
-        100.000000000000000000
         2100.000000000000000000
+        100.000000000000000000
+        2970.000000000000000000
         100.000000000000000000
         100.000000000000000000
         0.000000000000000000)
@@ -93,7 +93,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         Tag = 99
         Left = 38
         Top = 38
-        Width = 718
+        Width = 1047
         Height = 72
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -107,12 +107,12 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         ForceNewPage = False
         Size.Values = (
           190.500000000000000000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageHeader
         object QRDBLogo: TQRDBImage
-          Left = 66
+          Left = 186
           Top = 2
           Width = 64
           Height = 64
@@ -123,14 +123,14 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             169.333333333333300000
-            174.625000000000000000
+            492.124999999999900000
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
           Stretch = True
         end
         object QRLabel17: TQRLabel
-          Left = 309
+          Left = 473
           Top = 47
           Width = 100
           Height = 19
@@ -141,7 +141,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            817.562500000000000000
+            1251.479166666667000000
             124.354166666666700000
             264.583333333333400000)
           Alignment = taCenter
@@ -162,7 +162,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           FontSize = 12
         end
         object RepObraSocial_Subtitulo: TQRLabel
-          Left = 276
+          Left = 440
           Top = 26
           Width = 166
           Height = 20
@@ -173,7 +173,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            730.250000000000000000
+            1164.166666666667000000
             68.791666666666680000
             439.208333333333400000)
           Alignment = taCenter
@@ -194,7 +194,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           FontSize = 9
         end
         object RepObraSocial_Titulo: TQRLabel
-          Left = 264
+          Left = 428
           Top = 2
           Width = 190
           Height = 20
@@ -205,7 +205,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            698.500000000000000000
+            1132.416666666667000000
             5.291666666666667000
             502.708333333333400000)
           Alignment = taCenter
@@ -230,7 +230,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         Tag = 99
         Left = 38
         Top = 159
-        Width = 718
+        Width = 1047
         Height = 14
         Frame.Color = clSilver
         Frame.DrawTop = False
@@ -250,7 +250,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         ParentFont = False
         Size.Values = (
           37.041666666666670000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbDetail
@@ -284,7 +284,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         object QRDBText1: TQRDBText
           Left = 68
           Top = 0
-          Width = 253
+          Width = 181
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -295,7 +295,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             37.041666666666670000
             179.916666666666700000
             0.000000000000000000
-            669.395833333333400000)
+            478.895833333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -309,9 +309,9 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           FontSize = 7
         end
         object QRDBText2: TQRDBText
-          Left = 684
+          Left = 934
           Top = 0
-          Width = 30
+          Width = 109
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -320,23 +320,23 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1809.750000000000000000
+            2471.208333333333000000
             0.000000000000000000
-            79.375000000000000000)
-          Alignment = taCenter
+            288.395833333333400000)
+          Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_OP_ObraSocial
-          DataField = 'BAJA'
+          DataField = 'TELEFONO'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
         object QRDBText3: TQRDBText
-          Left = 324
+          Left = 253
           Top = 0
           Width = 165
           Height = 14
@@ -347,7 +347,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            857.250000000000000000
+            669.395833333333400000
             0.000000000000000000
             436.562499999999900000)
           Alignment = taLeftJustify
@@ -363,9 +363,9 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           FontSize = 7
         end
         object QRDBText4: TQRDBText
-          Left = 492
+          Left = 422
           Top = 0
-          Width = 187
+          Width = 124
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -374,16 +374,97 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1301.750000000000000000
+            1116.541666666667000000
             0.000000000000000000
-            494.770833333333400000)
+            328.083333333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_OP_ObraSocial
-          DataField = 'TELEFONO'
+          DataField = 'LOCALIDAD'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText5: TQRDBText
+          Left = 550
+          Top = 0
+          Width = 124
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1455.208333333333000000
+            0.000000000000000000
+            328.083333333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_OP_ObraSocial
+          DataField = '_provincia'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText6: TQRDBText
+          Left = 678
+          Top = 0
+          Width = 124
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1793.875000000000000000
+            0.000000000000000000
+            328.083333333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_OP_ObraSocial
+          DataField = '_tipoIva'
+          Transparent = False
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 7
+        end
+        object QRDBText7: TQRDBText
+          Left = 806
+          Top = 0
+          Width = 124
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2132.541666666667000000
+            0.000000000000000000
+            328.083333333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Color = clWhite
+          DataSet = ZQ_OP_ObraSocial
+          DataField = 'CUIT_CUIL'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -394,7 +475,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         Tag = 99
         Left = 38
         Top = 195
-        Width = 718
+        Width = 1047
         Height = 24
         Frame.Color = clBlack
         Frame.DrawTop = True
@@ -408,7 +489,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         ForceNewPage = False
         Size.Values = (
           63.500000000000000000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageFooter
@@ -511,7 +592,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         Tag = 99
         Left = 38
         Top = 173
-        Width = 718
+        Width = 1047
         Height = 22
         Frame.Color = clBlack
         Frame.DrawTop = True
@@ -525,7 +606,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         ForceNewPage = False
         Size.Values = (
           58.208333333333340000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbSummary
@@ -561,7 +642,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         Tag = 99
         Left = 38
         Top = 110
-        Width = 718
+        Width = 1047
         Height = 31
         Frame.Color = clBlack
         Frame.DrawTop = False
@@ -575,7 +656,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         ForceNewPage = False
         Size.Values = (
           82.020833333333340000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbTitle
@@ -648,7 +729,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         Tag = 99
         Left = 38
         Top = 141
-        Width = 718
+        Width = 1047
         Height = 18
         Frame.Color = clBlack
         Frame.DrawTop = True
@@ -662,7 +743,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         ForceNewPage = False
         Size.Values = (
           47.625000000000000000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbColumnHeader
@@ -731,9 +812,9 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           FontSize = 8
         end
         object QRLabel1: TQRLabel
-          Left = 684
+          Left = 934
           Top = 2
-          Width = 30
+          Width = 109
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -742,14 +823,14 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1809.750000000000000000
+            2471.208333333333000000
             5.291666666666667000
-            79.375000000000000000)
+            288.395833333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
-          AutoSize = True
+          AutoSize = False
           AutoStretch = False
-          Caption = 'Baja'
+          Caption = 'Tel'#233'fonos'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -763,7 +844,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           FontSize = 8
         end
         object QRLabel2: TQRLabel
-          Left = 324
+          Left = 253
           Top = 2
           Width = 143
           Height = 14
@@ -774,7 +855,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            857.250000000000000000
+            669.395833333333400000
             5.291666666666667000
             378.354166666666700000)
           Alignment = taLeftJustify
@@ -795,9 +876,9 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           FontSize = 8
         end
         object QRLabel3: TQRLabel
-          Left = 493
+          Left = 422
           Top = 2
-          Width = 143
+          Width = 124
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -806,14 +887,110 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            1304.395833333333000000
+            1116.541666666667000000
             5.291666666666667000
-            378.354166666666700000)
+            328.083333333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Tel'#233'fonos'
+          Caption = 'Localidad'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel4: TQRLabel
+          Left = 550
+          Top = 2
+          Width = 124
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1455.208333333333000000
+            5.291666666666667000
+            328.083333333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Provincia'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel5: TQRLabel
+          Left = 806
+          Top = 2
+          Width = 124
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2132.541666666667000000
+            5.291666666666667000
+            328.083333333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Cuit/Cuil'
+          Color = clWhite
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          WordWrap = True
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRLabel6: TQRLabel
+          Left = 678
+          Top = 2
+          Width = 124
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            1793.875000000000000000
+            5.291666666666667000
+            328.083333333333400000)
+          Alignment = taLeftJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = False
+          Caption = 'Condici'#243'n IVA'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -831,8 +1008,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 864
-      Height = 577
+      Width = 818
+      Height = 382
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -846,8 +1023,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       object DBGridObraSocial: TDBGrid
         Left = 5
         Top = 5
-        Width = 854
-        Height = 382
+        Width = 808
+        Height = 187
         Align = alClient
         Color = 14606012
         DataSource = DS_OP_ObraSocial
@@ -951,8 +1128,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 387
-        Width = 854
+        Top = 192
+        Width = 808
         Height = 185
         Align = alBottom
         BevelOuter = bvNone
@@ -960,7 +1137,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         object PageControl1: TPageControl
           Left = 0
           Top = 0
-          Width = 854
+          Width = 808
           Height = 185
           ActivePage = TabSheet1
           Align = alClient
@@ -1230,6 +1407,19 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               ParentFont = False
               TabOrder = 7
             end
+            object DBCheckBoxFacturaAuto: TDBCheckBox
+              Left = 447
+              Top = 34
+              Width = 322
+              Height = 17
+              TabStop = False
+              Caption = 'Facturar Sobre Automaticamente'
+              DataField = 'FACTURA_AUTOMATICA'
+              DataSource = DS_OP_ObraSocial
+              TabOrder = 10
+              ValueChecked = 'S'
+              ValueUnchecked = 'N'
+            end
           end
           object TabSheet2: TTabSheet
             Caption = 'Descripci'#243'n'
@@ -1237,7 +1427,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             object GroupBox1: TGroupBox
               Left = 0
               Top = 0
-              Width = 846
+              Width = 800
               Height = 157
               Align = alClient
               Caption = '  Descripci'#243'n  '
@@ -1245,7 +1435,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               object DBMemo1: TDBMemo
                 Left = 2
                 Top = 15
-                Width = 842
+                Width = 796
                 Height = 140
                 Align = alClient
                 DataField = 'DESCRIPCION'
@@ -1261,7 +1451,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 864
+    Width = 818
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1283,7 +1473,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
-      Left = 754
+      Left = 708
       Top = 1
       Width = 109
       Height = 17
@@ -1954,6 +2144,10 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       Size = 100
       Lookup = True
     end
+    object ZQ_OP_ObraSocialFACTURA_AUTOMATICA: TStringField
+      FieldName = 'FACTURA_AUTOMATICA'
+      Size = 1
+    end
   end
   object DS_OP_ObraSocial: TDataSource
     DataSet = ZQ_OP_ObraSocial
@@ -2005,7 +2199,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       end
       item
         TituloColumna = 'ID'
-        Visible = False
+        Visible = True
       end>
     NombreGuardar = 'EkOG_ABMObraSocial'
     AltoTituloColumna = 15
@@ -2113,8 +2307,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object EKVistaPrevia: TEKVistaPreviaQR
     Reporte = RepObraSocial
     ShowModal = False
-    Left = 48
-    Top = 184
+    Left = 336
+    Top = 112
   end
   object ZQ_Provincia: TZQuery
     Connection = DM.Conexion
@@ -2122,8 +2316,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       'select *'
       'from provincia')
     Params = <>
-    Left = 232
-    Top = 128
+    Left = 440
+    Top = 64
     object ZQ_ProvinciaID_PROVINCIA: TIntegerField
       FieldName = 'ID_PROVINCIA'
       Required = True
@@ -2139,8 +2333,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       'select *'
       'from tipo_iva')
     Params = <>
-    Left = 304
-    Top = 128
+    Left = 512
+    Top = 64
     object ZQ_IvaID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True
@@ -2175,12 +2369,12 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   end
   object DS_Iva: TDataSource
     DataSet = ZQ_Iva
-    Left = 304
-    Top = 176
+    Left = 512
+    Top = 112
   end
   object DS_Provincia: TDataSource
     DataSet = ZQ_Provincia
-    Left = 232
-    Top = 176
+    Left = 440
+    Top = 112
   end
 end
