@@ -47,7 +47,7 @@ type
     { Public declarations }
     ZQ_Usuarios: TZQuery;
     Timer: TTimer;
-    ip, ipl, db, dbu, protocolo: string;
+    ip, ipl, db, dbu, protocolo, puerto: string;
     usuariodb, passworddb, usuariolog, passwordlog, usuariosis, nusuariosis, passwordsis, oldpasswd: string;
     constructor create(AOwner: TComponent); Override;
     destructor destroy; Override;
@@ -222,23 +222,44 @@ var
   //si el usuario esta habilitado para entrar al sistema entonces realizo la conexion con la base de datos
   procedure final_correcto;
   begin
-    //obtengo el usuario real y el password de la base de datos
-    usuariodb:= EKLoginForm1.EKSQLUsuarios.fieldbyname('db_usr').AsString;
-    passworddb:= EKLoginForm1.EKSQLUsuarios.fieldbyname('db_clv').AsString;
-
     // CAMBIA EL USUARIO DE BASE DE DATOS //
     error_clave:= 'Error al intentar conectar a la Base de Datos con el usuario "' + usuariodb + '"';
-    if usuariodb <> '' then
+
+    if FConeccion.Protocol = 'firebird-1.5' then
     begin
-      EKUsrLogin1.coneccion.Disconnect;
-      EKUsrLogin1.coneccion.HostName:= ip;
-      EKUsrLogin1.coneccion.User:= usuariodb;
-      EKUsrLogin1.coneccion.Password:= passworddb;
-      EKUsrLogin1.Coneccion.Database:= db;
-      EKUsrLogin1.coneccion.Connect;
-      if not EKUsrLogin1.coneccion.Connected then
-        Application.Terminate;
-    end;
+      usuariodb:= EKLoginForm1.EKSQLUsuarios.fieldbyname('db_usr').AsString;
+      passworddb:= EKLoginForm1.EKSQLUsuarios.fieldbyname('db_clv').AsString;
+
+      if usuariodb <> '' then
+      begin
+        EKUsrLogin1.coneccion.Disconnect;
+        EKUsrLogin1.coneccion.HostName:= ip;
+        EKUsrLogin1.coneccion.User:= usuariodb;
+        EKUsrLogin1.coneccion.Password:= passworddb;
+        EKUsrLogin1.Coneccion.Database:= db;
+        EKUsrLogin1.coneccion.Connect;
+        if not EKUsrLogin1.coneccion.Connected then
+          Application.Terminate;
+      end;
+    end
+    else
+      if Fconeccion.Protocol = 'postgresql' then
+      begin
+        if usuariodb <> '' then
+        begin
+          EKUsrLogin1.coneccion.Disconnect;
+          EKUsrLogin1.coneccion.HostName:= ip;
+          EKUsrLogin1.coneccion.Port:= strtoint(puerto);
+          EKUsrLogin1.coneccion.User:= usuariodb;
+          EKUsrLogin1.coneccion.Password:= passworddb;
+          EKUsrLogin1.Coneccion.Database:= db;
+          EKUsrLogin1.coneccion.Connect;
+          if not EKUsrLogin1.coneccion.Connected then
+            Application.Terminate;
+        end;
+      end;
+
+
 
     error_clave:= '';
     conectar:= true;
@@ -278,6 +299,7 @@ begin
       db:= Ini.ReadString(leer, Titulo_DBAplicacion, 'automatico');
       dbu:= Ini.ReadString(leer, Titulo_DBUsuario, '');
       protocolo:= Ini.ReadString(leer, 'protocolo', 'firebird-1.5');
+      puerto:= Ini.ReadString(leer, 'puerto', '0');
     finally
       Ini.Free;
     end;
@@ -296,6 +318,14 @@ begin
       db:= Ini.ReadString(leer, Titulo_DBAplicacion, 'automatico');
       dbu:= Ini.ReadString(leer, Titulo_DBUsuario, 'dbusuarios');
       protocolo:= Ini.ReadString(leer, 'protocolo', 'firebird-1.5');
+      puerto:= Ini.ReadString(leer, 'puerto', '0');
+
+      //si es Postgres obtengo el pass y el user de la base de datos de 
+      if Fconeccion.Protocol = 'postgresql' then
+      begin
+        usuariodb:= Ini.ReadString(leer, 'usuario', '');
+        passworddb:= Ini.ReadString(leer, 'password', '');
+      end
     finally
       Ini.Free;
     end;
@@ -320,7 +350,7 @@ begin
   EKLoginForm1.ConexionUsuario.Database:= dbu;
   EKLoginForm1.ConexionUsuario.User:= usuariolog;
   EKLoginForm1.ConexionUsuario.Password:= passwordlog;
-  EKLoginForm1.ConexionUsuario.Protocol:= protocolo; //firebird-1.5
+  EKLoginForm1.ConexionUsuario.Protocol:= 'firebird-1.5';
   EKLoginForm1.ConexionUsuario.connect;
 
   error_clave:= '';
