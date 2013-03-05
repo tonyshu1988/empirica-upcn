@@ -484,6 +484,18 @@ type
     ZQ_OrdenO_ESTADO: TStringField;
     Panel3: TPanel;
     lblEstado: TStaticText;
+    Label54: TLabel;
+    Label56: TLabel;
+    Label57: TLabel;
+    Label59: TLabel;
+    Label60: TLabel;
+    Label66: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit27: TDBEdit;
+    DBEdit28: TDBEdit;
+    DBEdit29: TDBEdit;
+    DBEdit30: TDBEdit;
+    DBEdit31: TDBEdit;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
