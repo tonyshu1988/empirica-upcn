@@ -175,6 +175,8 @@ type
     ABMOrdenTcnica1: TMenuItem;
     AABM_FacturaOS: TAction;
     ABMFacturaObraSocial1: TMenuItem;
+    AOP_Reportes: TAction;
+    ReporteOptica1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -237,6 +239,7 @@ type
     procedure AOP_ABMLabExecute(Sender: TObject);
     procedure AOP_ABMOrdenTExecute(Sender: TObject);
     procedure AABM_FacturaOSExecute(Sender: TObject);
+    procedure AOP_ReportesExecute(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -276,7 +279,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UConsulta_Precios, DateUtils, UCompararStock, UOP_ABMMedico,
   UOP_ABMObraSocial, UPreventa_Historico, UFichaEmpleado,
   UOP_ABMLaboratorio, UOP_ABMOrden_Tecnica, UCuentaCorrienteProveedor,
-  UABM_CPB_FacturaObraSocial;
+  UABM_CPB_FacturaObraSocial, UOP_Reportes;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -896,6 +899,11 @@ end;
 procedure TFPrincipal.AABM_FacturaOSExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_CPB_FacturaObraSocial, FABM_CPB_FacturaObraSocial);
+end;
+
+procedure TFPrincipal.AOP_ReportesExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFOP_Reportes, FOP_Reportes);
 end;
 
 end.

@@ -74,7 +74,8 @@ uses
   UOP_ABMLaboratorio in 'UOP_ABMLaboratorio.pas' {FOP_ABMLaboratorio},
   UCuentaCorrienteProveedor in 'UCuentaCorrienteProveedor.pas' {FCuentaCorrienteProveedor},
   UABM_CPB_FacturaObraSocial in 'UABM_CPB_FacturaObraSocial.pas' {FABM_CPB_FacturaObraSocial},
-  UOP_BuscarProductosOS in 'UOP_BuscarProductosOS.pas' {FOP_BuscarProductosOS};
+  UOP_BuscarProductosOS in 'UOP_BuscarProductosOS.pas' {FOP_BuscarProductosOS},
+  UOP_Reportes in 'UOP_Reportes.pas' {FOP_Reportes};
 
 {$R *.res}
 
