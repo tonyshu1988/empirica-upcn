@@ -5167,6 +5167,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 60
       OnExecute = AABM_FacturaOSExecute
     end
+    object AOP_Reportes: TAction
+      Caption = 'Reportes Optica'
+      ImageIndex = 59
+      OnExecute = AOP_ReportesExecute
+    end
   end
   object MainMenuPrincipal: TMainMenu
     Images = EKImageMenu24
@@ -5454,6 +5459,10 @@ object FPrincipal: TFPrincipal
       object ABMFacturaObraSocial1: TMenuItem
         Tag = 1
         Action = AABM_FacturaOS
+      end
+      object ReporteOptica1: TMenuItem
+        Tag = 1
+        Action = AOP_Reportes
       end
     end
   end
