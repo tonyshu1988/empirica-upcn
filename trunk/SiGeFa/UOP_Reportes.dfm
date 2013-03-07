@@ -15,6 +15,8 @@ object FOP_Reportes: TFOP_Reportes
   Position = poDefault
   Scaled = False
   Visible = True
+  OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PContenedor: TPanel
@@ -2037,5 +2039,69 @@ object FOP_Reportes: TFOP_Reportes
       ShortCut = 113
       OnExecute = AImprimirExecute
     end
+  end
+  object EKOrdenarGrillaOrden: TEKOrdenarGrilla
+    Grilla = DBGridOrden
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'M'#233'dico'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Afiliado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Orden'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Total'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Total OS'
+        Visible = True
+      end>
+    NombreGuardar = 'OGOrden'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 61
+    Top = 393
+  end
+  object EKOrdenarGrillaOrdenDetalle: TEKOrdenarGrilla
+    Grilla = DBGridOrdenDetalle
+    Filtros = <
+      item
+        TituloColumna = 'Productos'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Total'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe OS'
+        Visible = True
+      end>
+    NombreGuardar = 'OGOrdenDetalle'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 61
+    Top = 449
   end
 end

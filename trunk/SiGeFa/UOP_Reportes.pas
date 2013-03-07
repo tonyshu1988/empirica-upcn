@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, ComCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKVistaPreviaQR,
   EKBusquedaAvanzada, QuickRpt, QRCtrls, ActnList, XPStyleActnCtrls,
-  ActnMan;
+  ActnMan, EKOrdenarGrilla;
 
 type
   TFOP_Reportes = class(TForm)
@@ -87,6 +87,8 @@ type
     ZQ_OrdenNOMBRE: TStringField;
     QRLabel1: TQRLabel;
     QRDBText7: TQRDBText;
+    EKOrdenarGrillaOrden: TEKOrdenarGrilla;
+    EKOrdenarGrillaOrdenDetalle: TEKOrdenarGrilla;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
@@ -98,6 +100,8 @@ type
     procedure DBGridOrdenDetalleDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -175,6 +179,19 @@ procedure TFOP_Reportes.DBGridOrdenDetalleDrawColumnCell(Sender: TObject;
   State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridOrdenDetalle, Rect, DataCol, Column, State);
+end;
+
+procedure TFOP_Reportes.FormCreate(Sender: TObject);
+begin
+  EKOrdenarGrillaOrden.CargarConfigColumnas;
+  EKOrdenarGrillaOrdenDetalle.CargarConfigColumnas;
+end;
+
+procedure TFOP_Reportes.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+  EKOrdenarGrillaOrden.GuardarConfigColumnas;
+  EKOrdenarGrillaOrdenDetalle.GuardarConfigColumnas;
 end;
 
 end.
