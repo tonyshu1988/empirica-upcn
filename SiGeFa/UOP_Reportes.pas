@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, ComCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKVistaPreviaQR,
   EKBusquedaAvanzada, QuickRpt, QRCtrls, ActnList, XPStyleActnCtrls,
-  ActnMan, EKOrdenarGrilla;
+  ActnMan, EKOrdenarGrilla, StdCtrls, EKDbSuma;
 
 type
   TFOP_Reportes = class(TForm)
@@ -89,6 +89,16 @@ type
     QRDBText7: TQRDBText;
     EKOrdenarGrillaOrden: TEKOrdenarGrilla;
     EKOrdenarGrillaOrdenDetalle: TEKOrdenarGrilla;
+    POrden: TPanel;
+    POrdenDetalle: TPanel;
+    Label7: TLabel;
+    Label1: TLabel;
+    POrdenTotales: TPanel;
+    lblTotalOrden: TLabel;
+    POrdenDetalleTotales: TPanel;
+    lblTotalOrdenDetalle: TLabel;
+    EKDbSumaOrden: TEKDbSuma;
+    EKDbSumaOrdenDetalle: TEKDbSuma;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
@@ -123,6 +133,10 @@ begin
     0: //Reporte Medicos
       begin
         EKBusquedaReporteMedicos.Buscar;
+        EKDbSumaOrden.RecalcAll;
+        EKDbSumaOrdenDetalle.RecalcAll;
+        lblTotalOrden.Caption:= 'Total Importe: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrden.SumCollection[0].SumValue) + ' - Total OS: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrden.SumCollection[1].SumValue);
+        lblTotalOrdenDetalle.Caption:= 'Total Importe: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrdenDetalle.SumCollection[0].SumValue) + ' - Total OS: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrdenDetalle.SumCollection[1].SumValue);
       end;
 
   end;
@@ -155,6 +169,8 @@ begin
   ZQ_OrdenDetalle.ParamByName('ID_ORDEN').AsInteger := ZQ_OrdenID_ORDEN.AsInteger;
   ZQ_OrdenDetalle.Open;
 
+  EKDbSumaOrdenDetalle.RecalcAll;
+  lblTotalOrdenDetalle.Caption:= 'Total Importe: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrdenDetalle.SumCollection[0].SumValue) + ' - Total OS: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrdenDetalle.SumCollection[1].SumValue);
 end;
 
 procedure TFOP_Reportes.ABuscarExecute(Sender: TObject);
