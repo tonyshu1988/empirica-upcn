@@ -13,6 +13,7 @@ object FOP_Reportes: TFOP_Reportes
   FormStyle = fsMDIChild
   OldCreateOrder = False
   Position = poDefault
+  Scaled = False
   Visible = True
   PixelsPerInch = 96
   TextHeight = 13
@@ -34,94 +35,1225 @@ object FOP_Reportes: TFOP_Reportes
       object TabReporteMedico: TTabSheet
         Caption = 'Reporte Medicos'
         object Splitter1: TSplitter
-          Left = 472
+          Left = 525
           Top = 0
-          Width = 6
+          Width = 4
           Height = 659
         end
         object DBGridOrdenDetalle: TDBGrid
-          Left = 478
+          Left = 529
           Top = 0
-          Width = 528
+          Width = 477
           Height = 659
           Align = alClient
           Color = 14606012
           DataSource = DS_OrdenDetalle
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
           TitleFont.Charset = ANSI_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridOrdenDetalleDrawColumnCell
           Columns = <
             item
               Expanded = False
               FieldName = 'PRODUCTO'
-              Width = 103
+              Title.Caption = 'Productos'
+              Width = 308
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'CANTIDAD'
+              Title.Caption = 'Cantidad'
+              Width = 57
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'IMPORTE_TOTAL'
+              Title.Caption = 'Importe Total'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'IMPORTE_RECONOCIDO'
+              Title.Caption = 'Importe OS'
               Visible = True
             end>
         end
         object DBGridOrden: TDBGrid
           Left = 0
           Top = 0
-          Width = 472
+          Width = 525
           Height = 659
           Align = alLeft
           Color = 14606012
           DataSource = DS_Orden
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 1
           TitleFont.Charset = ANSI_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridOrdenDrawColumnCell
           Columns = <
             item
               Expanded = False
               FieldName = 'CODIGO_CLI'
-              Width = 88
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_ORDEN'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MONTO_TOTAL'
-              Width = 64
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'MONTO_RECONOCIDO'
-              Width = 64
+              Title.Caption = 'C'#243'digo'
+              Width = 52
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'MEDICO'
-              Width = 56
+              Title.Caption = 'M'#233'dico'
+              Width = 172
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE'
+              Title.Caption = 'Afiliado'
+              Width = 176
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_ORDEN'
+              Title.Caption = 'Fecha Orden'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MONTO_TOTAL'
+              Title.Caption = 'Importe Total'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'MONTO_RECONOCIDO'
+              Title.Caption = 'Total OS'
+              Width = 81
               Visible = True
             end>
+        end
+        object ReporteMedicos: TQuickRep
+          Tag = 99
+          Left = 164
+          Top = 88
+          Width = 794
+          Height = 1123
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          DataSet = ZQ_Orden
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Functions.Strings = (
+            'PAGENUMBER'
+            'COLUMNNUMBER'
+            'REPORTTITLE')
+          Functions.DATA = (
+            '0'
+            '0'
+            #39#39)
+          Options = [FirstPageHeader, LastPageFooter]
+          Page.Columns = 1
+          Page.Orientation = poPortrait
+          Page.PaperSize = A4
+          Page.Values = (
+            100.000000000000000000
+            2970.000000000000000000
+            100.000000000000000000
+            2100.000000000000000000
+            100.000000000000000000
+            100.000000000000000000
+            0.000000000000000000)
+          PrinterSettings.Copies = 1
+          PrinterSettings.OutputBin = Auto
+          PrinterSettings.Duplex = False
+          PrinterSettings.FirstPage = 0
+          PrinterSettings.LastPage = 0
+          PrinterSettings.UseStandardprinter = False
+          PrinterSettings.UseCustomBinCode = False
+          PrinterSettings.CustomBinCode = 0
+          PrinterSettings.ExtendedDuplex = 0
+          PrinterSettings.UseCustomPaperCode = False
+          PrinterSettings.CustomPaperCode = 0
+          PrinterSettings.PrintMetaFile = False
+          PrinterSettings.PrintQuality = 0
+          PrinterSettings.Collate = 0
+          PrinterSettings.ColorOption = 0
+          PrintIfEmpty = True
+          ReportTitle = '+'
+          SnapToGrid = True
+          Units = MM
+          Zoom = 100
+          PrevFormStyle = fsNormal
+          PreviewInitialState = wsNormal
+          PrevInitialZoom = qrZoomToFit
+          PreviewDefaultSaveType = stQRP
+          object QRBand5: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 38
+            Width = 718
+            Height = 113
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              298.979166666666700000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbPageHeader
+            object QRReporteComprobantes_Titulo: TQRLabel
+              Left = 285
+              Top = 72
+              Width = 148
+              Height = 19
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                50.270833333333330000
+                754.062500000000000000
+                190.500000000000000000
+                391.583333333333400000)
+              Alignment = taCenter
+              AlignToBand = True
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Reporte M'#233'dicos'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 12
+            end
+            object ReporteMedicos_Titulo: TQRLabel
+              Left = 257
+              Top = 22
+              Width = 203
+              Height = 20
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                52.916666666666670000
+                679.979166666666800000
+                58.208333333333340000
+                537.104166666666800000)
+              Alignment = taCenter
+              AlignToBand = True
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'ReporteMedicos_Titulo'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -16
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsUnderline]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 12
+            end
+            object ReporteMedicos_Subtitulo: TQRLabel
+              Left = 271
+              Top = 46
+              Width = 175
+              Height = 20
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                52.916666666666670000
+                717.020833333333400000
+                121.708333333333300000
+                463.020833333333400000)
+              Alignment = taCenter
+              AlignToBand = True
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'ReporteMedicos_Subtitulo'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -12
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold, fsItalic, fsUnderline]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 9
+            end
+            object QRDBLogo: TQRDBImage
+              Left = 66
+              Top = 16
+              Width = 64
+              Height = 64
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                169.333333333333300000
+                174.625000000000000000
+                42.333333333333340000
+                169.333333333333300000)
+              DataField = 'LOGO'
+              Stretch = True
+            end
+          end
+          object ChildBandlineaOrden: TQRChildBand
+            Tag = 99
+            Left = 38
+            Top = 251
+            Width = 718
+            Height = 1
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = True
+            Frame.DrawRight = True
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              2.645833333333333000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            PrintOrder = cboAfterParent
+            object QRShape3: TQRShape
+              Left = 8
+              Top = 1
+              Width = 705
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Frame.Style = psClear
+              Frame.Width = 0
+              Size.Values = (
+                171.979166666666700000
+                20.788690476190480000
+                1.889880952380953000
+                1865.312500000000000000)
+              Pen.Color = clGray
+              Pen.Style = psDot
+              Shape = qrsHorLine
+              VertAdjust = 0
+            end
+          end
+          object DetailBand1: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 151
+            Width = 718
+            Height = 32
+            Frame.Color = clBlack
+            Frame.DrawTop = True
+            Frame.DrawBottom = True
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clSilver
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              84.666666666666680000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbDetail
+            object QRDBText3: TQRDBText
+              Left = 62
+              Top = 1
+              Width = 80
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                164.041666666666700000
+                2.645833333333333000
+                211.666666666666700000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZQ_Orden
+              DataField = 'CODIGO_CLI'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRDBText4: TQRDBText
+              Left = 371
+              Top = 1
+              Width = 341
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                981.604166666666800000
+                2.645833333333333000
+                902.229166666666800000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZQ_Orden
+              DataField = 'MEDICO'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel4: TQRLabel
+              Left = 11
+              Top = 1
+              Width = 49
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                29.104166666666670000
+                2.645833333333333000
+                129.645833333333300000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'C'#243'digo:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel7: TQRLabel
+              Left = 318
+              Top = 1
+              Width = 50
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                841.375000000000000000
+                2.645833333333333000
+                132.291666666666700000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Medico:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRDBText8: TQRDBText
+              Left = 234
+              Top = 1
+              Width = 82
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                619.125000000000000000
+                2.645833333333333000
+                216.958333333333400000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZQ_Orden
+              DataField = 'FECHA_ORDEN'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel15: TQRLabel
+              Left = 145
+              Top = 1
+              Width = 87
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                383.645833333333400000
+                2.645833333333333000
+                230.187500000000000000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Fecha Orden:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel1: TQRLabel
+              Left = 5
+              Top = 17
+              Width = 55
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                13.229166666666670000
+                44.979166666666670000
+                145.520833333333300000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Afiliado:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRDBText7: TQRDBText
+              Left = 62
+              Top = 17
+              Width = 307
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                164.041666666666700000
+                44.979166666666670000
+                812.270833333333400000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZQ_Orden
+              DataField = 'NOMBRE'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+          end
+          object QRSubDetail1: TQRSubDetail
+            Tag = 99
+            Left = 38
+            Top = 197
+            Width = 718
+            Height = 19
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              50.270833333333330000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            Master = ReporteMedicos
+            DataSet = ZQ_OrdenDetalle
+            FooterBand = SummaryBand1
+            PrintBefore = False
+            PrintIfEmpty = True
+            object QRDBText1: TQRDBText
+              Left = 449
+              Top = 1
+              Width = 58
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1187.979166666667000000
+                2.645833333333333000
+                153.458333333333300000)
+              Alignment = taCenter
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZQ_OrdenDetalle
+              DataField = 'CANTIDAD'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRDBText2: TQRDBText
+              Left = 615
+              Top = 2
+              Width = 100
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1627.187500000000000000
+                5.291666666666667000
+                264.583333333333400000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZQ_OrdenDetalle
+              DataField = 'IMPORTE_RECONOCIDO'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRDBText12: TQRDBText
+              Left = 2
+              Top = 1
+              Width = 443
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                5.291666666666667000
+                2.645833333333333000
+                1172.104166666667000000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZQ_OrdenDetalle
+              DataField = 'PRODUCTO'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRDBText13: TQRDBText
+              Left = 511
+              Top = 1
+              Width = 100
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1352.020833333333000000
+                2.645833333333333000
+                264.583333333333400000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZQ_OrdenDetalle
+              DataField = 'IMPORTE_TOTAL'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+          end
+          object ChildBand3: TQRChildBand
+            Tag = 99
+            Left = 38
+            Top = 183
+            Width = 718
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = True
+            Frame.DrawBottom = True
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clSilver
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              37.041666666666670000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            ParentBand = DetailBand1
+            PrintOrder = cboAfterParent
+            object QRLabel8: TQRLabel
+              Left = 2
+              Top = 0
+              Width = 66
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                5.291666666666667000
+                0.000000000000000000
+                174.625000000000000000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Productos'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel9: TQRLabel
+              Left = 615
+              Top = 0
+              Width = 100
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1627.187500000000000000
+                0.000000000000000000
+                264.583333333333400000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'Importe OS'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel21: TQRLabel
+              Left = 449
+              Top = 0
+              Width = 58
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1187.979166666667000000
+                0.000000000000000000
+                153.458333333333300000)
+              Alignment = taLeftJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Cantidad'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel22: TQRLabel
+              Left = 511
+              Top = 0
+              Width = 100
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1352.020833333333000000
+                0.000000000000000000
+                264.583333333333400000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Caption = 'Importe Total'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+          end
+          object SummaryBand1: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 216
+            Width = 718
+            Height = 18
+            Frame.Color = clBlack
+            Frame.DrawTop = True
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clWhite
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              47.625000000000000000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbGroupFooter
+            object QRLabel10: TQRLabel
+              Left = 454
+              Top = 2
+              Width = 53
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1201.208333333333000000
+                5.291666666666667000
+                140.229166666666700000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Totales:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRDBText5: TQRDBText
+              Left = 511
+              Top = 1
+              Width = 100
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1352.020833333333000000
+                2.645833333333333000
+                264.583333333333400000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZQ_Orden
+              DataField = 'MONTO_TOTAL'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRDBText6: TQRDBText
+              Left = 615
+              Top = 2
+              Width = 100
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1627.187500000000000000
+                5.291666666666667000
+                264.583333333333400000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Color = clWhite
+              DataSet = ZQ_Orden
+              DataField = 'MONTO_RECONOCIDO'
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+              Transparent = False
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+          end
+          object SummaryBand2: TQRBand
+            Tag = 99
+            Left = 38
+            Top = 234
+            Width = 718
+            Height = 17
+            Frame.Color = clBlack
+            Frame.DrawTop = True
+            Frame.DrawBottom = True
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            AlignToBottom = False
+            Color = clSilver
+            TransparentBand = False
+            ForceNewColumn = False
+            ForceNewPage = False
+            Size.Values = (
+              44.979166666666670000
+              1899.708333333333000000)
+            PreCaluculateBandHeight = False
+            KeepOnOnePage = False
+            BandType = rbSummary
+            object QRLabel23: TQRLabel
+              Left = 348
+              Top = 1
+              Width = 95
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                920.750000000000000000
+                2.645833333333333000
+                251.354166666666700000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Importe Total:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRExpr6: TQRExpr
+              Left = 447
+              Top = 1
+              Width = 101
+              Height = 15
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                39.687500000000000000
+                1182.687500000000000000
+                2.645833333333333000
+                267.229166666666700000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              Color = clWhite
+              ParentFont = False
+              ResetAfterPrint = False
+              Transparent = True
+              WordWrap = True
+              Expression = 'FORMATNUMERIC('#39'$ ###,###,###,##0.00'#39',SUM(ZQ_ORDEN.MONTO_TOTAL))'
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRLabel24: TQRLabel
+              Left = 552
+              Top = 1
+              Width = 59
+              Height = 14
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                37.041666666666670000
+                1460.500000000000000000
+                2.645833333333333000
+                156.104166666666700000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = True
+              AutoStretch = False
+              Caption = 'Total OS:'
+              Color = clWhite
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+              WordWrap = True
+              ExportAs = exptText
+              FontSize = 8
+            end
+            object QRExpr7: TQRExpr
+              Left = 615
+              Top = 1
+              Width = 101
+              Height = 15
+              Frame.Color = clBlack
+              Frame.DrawTop = False
+              Frame.DrawBottom = False
+              Frame.DrawLeft = False
+              Frame.DrawRight = False
+              Size.Values = (
+                39.687500000000000000
+                1627.187500000000000000
+                2.645833333333333000
+                267.229166666666700000)
+              Alignment = taRightJustify
+              AlignToBand = False
+              AutoSize = False
+              AutoStretch = False
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Arial'
+              Font.Style = []
+              Color = clWhite
+              ParentFont = False
+              ResetAfterPrint = False
+              Transparent = True
+              WordWrap = True
+              Expression = 
+                'FORMATNUMERIC('#39'$ ###,###,###,##0.00'#39',SUM(ZQ_Orden.MONTO_RECONOCI' +
+                'DO))'
+              ExportAs = exptText
+              FontSize = 8
+            end
+          end
         end
       end
     end
@@ -631,9 +1763,9 @@ object FOP_Reportes: TFOP_Reportes
       AutoGrayScale = False
     end
     object btnImprimir: TdxBarLargeButton
-      Caption = 'Imprimir'
+      Caption = 'F2 - Imprimir'
       Category = 0
-      Hint = 'Imprimir'
+      Hint = 'F2 - Imprimir'
       Visible = ivAlways
       ImageIndex = 28
       OnClick = btnImprimirClick
@@ -681,14 +1813,15 @@ object FOP_Reportes: TFOP_Reportes
     SQL.Strings = (
       
         'select distinct oo.id_orden, oo.codigo_cli, oo.fecha_orden, oo.m' +
-        'onto_total, oo.monto_reconocido, om.nombre as medico'
+        'onto_total, oo.monto_reconocido, om.nombre as medico, pe.nombre'
       'from optica_orden oo'
       'left join optica_orden_detalle od on (oo.id_orden = od.id_orden)'
       'left join producto p on (od.id_producto = p.id_producto)'
       
         'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
         'od_cabecera)'
-      'left join optica_medico om on (oo.id_medico = om.id_medico)')
+      'left join optica_medico om on (oo.id_medico = om.id_medico)'
+      'left join persona pe on (oo.id_cliente = pe.id_persona)')
     Params = <>
     Left = 61
     Top = 153
@@ -705,16 +1838,23 @@ object FOP_Reportes: TFOP_Reportes
     end
     object ZQ_OrdenMONTO_TOTAL: TFloatField
       FieldName = 'MONTO_TOTAL'
+      currency = True
     end
     object ZQ_OrdenMONTO_RECONOCIDO: TFloatField
       FieldName = 'MONTO_RECONOCIDO'
+      currency = True
     end
     object ZQ_OrdenMEDICO: TStringField
       FieldName = 'MEDICO'
       Size = 200
     end
+    object ZQ_OrdenNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
   end
   object EKVistaPreviaReporteMedicos: TEKVistaPreviaQR
+    Reporte = ReporteMedicos
     ShowModal = False
     Left = 61
     Top = 97
@@ -726,6 +1866,16 @@ object FOP_Reportes: TFOP_Reportes
   end
   object EKBusquedaReporteMedicos: TEKBusquedaAvanzada
     CriteriosBusqueda = <
+      item
+        Titulo = 'Medico:'
+        Campo = 'nombre'
+        Tabla = 'om'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
       item
         Titulo = 'C'#243'digo:'
         Campo = 'codigo_cli'
@@ -742,7 +1892,18 @@ object FOP_Reportes: TFOP_Reportes
         Tabla = 'oo'
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
+        TipoCampoIndice = 6
+        TipoCampoIndiceVer = 'Desde - Hasta'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Afiliado'
+        Campo = 'nombre'
+        Tabla = 'pe'
+        TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -769,16 +1930,6 @@ object FOP_Reportes: TFOP_Reportes
         TipoComboAncho = 200
         ItemIndex = -1
         VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Medico:'
-        Campo = 'medico'
-        Tabla = 'om'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -786,18 +1937,19 @@ object FOP_Reportes: TFOP_Reportes
     SQL.Strings = (
       
         'select distinct oo.id_orden, oo.codigo_cli, oo.fecha_orden, oo.m' +
-        'onto_total, oo.monto_reconocido, om.nombre as medico'
+        'onto_total, oo.monto_reconocido, om.nombre as medico, pe.nombre'
       'from optica_orden oo'
       'left join optica_orden_detalle od on (oo.id_orden = od.id_orden)'
       'left join producto p on (od.id_producto = p.id_producto)'
       
         'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
         'od_cabecera)'
-      'left join optica_medico om on (oo.id_medico = om.id_medico)')
+      'left join optica_medico om on (oo.id_medico = om.id_medico)'
+      'left join persona pe on (oo.id_cliente = pe.id_persona)')
     SQL_Select.Strings = (
       
         'select distinct oo.id_orden, oo.codigo_cli, oo.fecha_orden, oo.m' +
-        'onto_total, oo.monto_reconocido, om.nombre as medico')
+        'onto_total, oo.monto_reconocido, om.nombre as medico, pe.nombre')
     SQL_From.Strings = (
       'from optica_orden oo'
       'left join optica_orden_detalle od on (oo.id_orden = od.id_orden)'
@@ -805,7 +1957,8 @@ object FOP_Reportes: TFOP_Reportes
       
         'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
         'od_cabecera)'
-      'left join optica_medico om on (oo.id_medico = om.id_medico)')
+      'left join optica_medico om on (oo.id_medico = om.id_medico)'
+      'left join persona pe on (oo.id_cliente = pe.id_persona)')
     UsarWhereOriginal = EK_Sin_Where
     Left = 61
     Top = 41
@@ -813,14 +1966,27 @@ object FOP_Reportes: TFOP_Reportes
   object ZQ_OrdenDetalle: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
+      'select cast(('
       
-        'select pc.nombre as producto, od.cantidad, od.importe_total, od.' +
-        'importe_reconocido'
+        '       COALESCE (pc.nombre||'#39' - M: '#39'||coalesce(m.medida,'#39#39'),'#39#39')|' +
+        '|'
+      '       COALESCE ('#39' - A.: '#39' || a.descripcion,'#39#39')||'
+      
+        '       COALESCE ('#39' - T.A.: '#39' || ta.descripcion,'#39#39'))as varchar(10' +
+        '00))'
+      
+        '         AS Producto, od.cantidad, od.importe_total, od.importe_' +
+        'reconocido'
       'from optica_orden_detalle od'
-      'left join producto p on (od.id_producto = p.id_producto)'
+      'join producto p on (od.id_producto =  p.id_producto)'
       
         'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
         'od_cabecera)'
+      'left join medida m on (p.id_medida=m.id_medida)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      
+        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
+        'rticulo)'
       'where (od.id_orden = :ID_ORDEN)')
     Params = <
       item
@@ -845,14 +2011,31 @@ object FOP_Reportes: TFOP_Reportes
     end
     object ZQ_OrdenDetalleIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
+      currency = True
     end
     object ZQ_OrdenDetalleIMPORTE_RECONOCIDO: TFloatField
       FieldName = 'IMPORTE_RECONOCIDO'
+      currency = True
     end
   end
   object DS_OrdenDetalle: TDataSource
     DataSet = ZQ_OrdenDetalle
     Left = 61
     Top = 337
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 92
+    Top = 604
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object AImprimir: TAction
+      Caption = 'AImprimir'
+      ShortCut = 113
+      OnExecute = AImprimirExecute
+    end
   end
 end
