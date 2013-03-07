@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, ComCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKVistaPreviaQR,
-  EKBusquedaAvanzada;
+  EKBusquedaAvanzada, QuickRpt, QRCtrls, ActnList, XPStyleActnCtrls,
+  ActnMan;
 
 type
   TFOP_Reportes = class(TForm)
@@ -46,10 +47,57 @@ type
     ZQ_OrdenMONTO_TOTAL: TFloatField;
     ZQ_OrdenMONTO_RECONOCIDO: TFloatField;
     ZQ_OrdenMEDICO: TStringField;
+    ReporteMedicos: TQuickRep;
+    QRBand5: TQRBand;
+    QRReporteComprobantes_Titulo: TQRLabel;
+    ChildBandlineaOrden: TQRChildBand;
+    QRShape3: TQRShape;
+    DetailBand1: TQRBand;
+    QRDBText3: TQRDBText;
+    QRDBText4: TQRDBText;
+    QRLabel4: TQRLabel;
+    QRLabel7: TQRLabel;
+    QRDBText8: TQRDBText;
+    QRLabel15: TQRLabel;
+    QRSubDetail1: TQRSubDetail;
+    QRDBText1: TQRDBText;
+    QRDBText2: TQRDBText;
+    QRDBText12: TQRDBText;
+    ChildBand3: TQRChildBand;
+    QRLabel8: TQRLabel;
+    QRLabel9: TQRLabel;
+    QRLabel21: TQRLabel;
+    QRLabel22: TQRLabel;
+    SummaryBand1: TQRBand;
+    QRLabel10: TQRLabel;
+    SummaryBand2: TQRBand;
+    QRLabel23: TQRLabel;
+    QRExpr6: TQRExpr;
+    QRLabel24: TQRLabel;
+    QRExpr7: TQRExpr;
+    QRDBText13: TQRDBText;
+    QRDBText5: TQRDBText;
+    QRDBText6: TQRDBText;
+    ReporteMedicos_Titulo: TQRLabel;
+    ReporteMedicos_Subtitulo: TQRLabel;
+    QRDBLogo: TQRDBImage;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    AImprimir: TAction;
+    ZQ_OrdenNOMBRE: TStringField;
+    QRLabel1: TQRLabel;
+    QRDBText7: TQRDBText;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure ZQ_OrdenAfterScroll(DataSet: TDataSet);
+    procedure ABuscarExecute(Sender: TObject);
+    procedure AImprimirExecute(Sender: TObject);
+    procedure DBGridOrdenDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridOrdenDetalleDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     { Private declarations }
   public
@@ -61,7 +109,7 @@ var
 
 implementation
 
-uses UDM;
+uses UDM, UPrincipal;
 
 {$R *.dfm}
 
@@ -71,15 +119,6 @@ begin
     0: //Reporte Medicos
       begin
         EKBusquedaReporteMedicos.Buscar;
-//        btBuscar.Visible := ivAlways;
-//        BtNuevo.Visible := ivAlways;
-//        BtModificar.Visible := ivAlways;
-//        btEliminar.Visible := ivAlways;
-//        BtGuardar.Visible := ivAlways;
-//        BtCancelar.Visible := ivAlways;
-//        btBuscarCuota.Visible := ivNever;
-//        BtImprimeContrato.Visible := ivAlways;
-//        BtImprimir.Visible := ivAlways;
       end;
 
   end;
@@ -92,19 +131,15 @@ end;
 
 procedure TFOP_Reportes.btnImprimirClick(Sender: TObject);
 begin
+
   case PageControlReportes.ActivePageIndex of
     0: //Reporte Medicos
       begin
-        EKVistaPreviaReporteMedicos.VistaPrevia;      
-//        btBuscar.Visible := ivAlways;
-//        BtNuevo.Visible := ivAlways;
-//        BtModificar.Visible := ivAlways;
-//        btEliminar.Visible := ivAlways;
-//        BtGuardar.Visible := ivAlways;
-//        BtCancelar.Visible := ivAlways;
-//        btBuscarCuota.Visible := ivNever;
-//        BtImprimeContrato.Visible := ivAlways;
-//        BtImprimir.Visible := ivAlways;
+        if ZQ_Orden.IsEmpty then
+          exit;
+
+        DM.VariablesReportes(ReporteMedicos);
+        EKVistaPreviaReporteMedicos.VistaPrevia;
       end;
 
   end;
@@ -116,6 +151,30 @@ begin
   ZQ_OrdenDetalle.ParamByName('ID_ORDEN').AsInteger := ZQ_OrdenID_ORDEN.AsInteger;
   ZQ_OrdenDetalle.Open;
 
+end;
+
+procedure TFOP_Reportes.ABuscarExecute(Sender: TObject);
+begin
+btnBuscar.Click;
+end;
+
+procedure TFOP_Reportes.AImprimirExecute(Sender: TObject);
+begin
+btnImprimir.Click;
+end;
+
+procedure TFOP_Reportes.DBGridOrdenDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridOrden, Rect, DataCol, Column, State);
+end;
+
+procedure TFOP_Reportes.DBGridOrdenDetalleDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridOrdenDetalle, Rect, DataCol, Column, State);
 end;
 
 end.
