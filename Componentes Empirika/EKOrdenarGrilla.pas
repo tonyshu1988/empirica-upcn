@@ -585,13 +585,13 @@ var
 begin
     if not Assigned(column.Field) then
     begin
-      ShowMessage('No se puede ordenar ni buscar sobre este tipo de campo');
+      //ShowMessage('No se puede ordenar ni buscar sobre este tipo de campo');
       exit;
     end;
 
     if column.Field.FieldKind = fkLookup then   // saco los lockup porque dan error
     begin
-      ShowMessage('No se puede ordenar ni buscar sobre este tipo de campo (lookup)');
+      //ShowMessage('No se puede ordenar ni buscar sobre este tipo de campo (lookup)');
       exit;
     end;
 
