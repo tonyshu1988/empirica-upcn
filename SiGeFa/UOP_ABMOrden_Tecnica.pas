@@ -80,7 +80,7 @@ type
     btsalir: TdxBarLargeButton;
     btCierreZ: TdxBarLargeButton;
     BtCierreX: TdxBarLargeButton;
-    btnAuditoriaFiscal: TdxBarLargeButton;
+    btDetallesOrden: TdxBarLargeButton;
     bt_Cargar_Orden: TdxBarLargeButton;
     GrupoGuardarCancelar: TdxBarGroup;
     grupoVertical: TdxBarGroup;
@@ -569,6 +569,7 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure ZQ_OrdenAfterScroll(DataSet: TDataSet);
+    procedure btDetallesOrdenClick(Sender: TObject);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -803,6 +804,7 @@ begin
   PListado.Enabled:= True;
   PListado.Visible:= false;
   PCargaProd.Enabled:=false;
+  PFormaPago.BringToFront;
   PCargaProd.SendToBack;
   PCargaOS.SendToBack;
   PanelDetalles.Enabled:= true;
@@ -817,6 +819,7 @@ begin
   VerLectorCB(false);
   PListado.Enabled:= True;
   PListado.Visible:= True;
+  PFormaPago.BringToFront;
   PListado.BringToFront;
   PCargaProd.Enabled:=false;
   PCargaProd.SendToBack;
@@ -825,6 +828,7 @@ begin
   grupoVertical.Enabled:= false;
   GrupoGuardarCancelar.Enabled:= false;
   PanelContenedorDerecha.Enabled:=false;
+
 //  ZQ_Productos.Close;
   btCodif.Down:=false;
   btObservac.Down:=false;
@@ -1918,6 +1922,20 @@ begin
    lblEstado.Caption:=Format('%s',[ZQ_OrdenO_ESTADO.AsString]);
    lblEstado.Color:=DBGridComprobantes.Canvas.Brush.Color;
    lblEstado.Font.Color:=DBGridComprobantes.Canvas.Font.Color;
+end;
+
+procedure TFOP_ABM_OrdenTecnica.btDetallesOrdenClick(Sender: TObject);
+begin
+
+ if not(btDetallesOrden.Down) then
+     begin
+      PanelFPagoYProd.Visible:=false;
+     end
+ else
+     begin
+      PanelFPagoYProd.BringToFront;
+      PanelFPagoYProd.Visible:=true;
+     end
 end;
 
 end.
