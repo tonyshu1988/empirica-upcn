@@ -2650,6 +2650,7 @@ begin
     edCodCuenta.SetFocus;
     ZQ_Cuentas.Locate('ID_CUENTA', ctaPorDefecto, []);
     CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+    edImporte.SetFocus;
   end
 end;
 

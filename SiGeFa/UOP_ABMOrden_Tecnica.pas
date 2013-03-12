@@ -432,7 +432,6 @@ type
     ZQ_OrdenMONTO_RECONOCIDO: TFloatField;
     ZQ_OrdenID_COMPROBANTE: TIntegerField;
     ZQ_OrdenID_SUCURSAL: TIntegerField;
-    Splitter2: TSplitter;
     ZQ_OrdenDetalleIMPORTE_RECONOCIDO: TFloatField;
     ZQ_OrdenDetalleIMPORTE_UNITARIO: TFloatField;
     ZQ_OrdenDetalleIMPORTE_VENTA: TFloatField;
@@ -497,6 +496,7 @@ type
     DBEdit30: TDBEdit;
     DBEdit31: TDBEdit;
     EKDbSuma1: TEKDbSuma;
+    Splitter2: TSplitter;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -1729,9 +1729,9 @@ begin
 
   Result:= True;
 
-  if (acumFinal < 0) then
+  if (acumFinal <= 0) then
   begin
-    Application.MessageBox('El monto final debe ser superior a $ 0.00, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    Application.MessageBox('El monto final debe ser superior a $ 0.00, por favor Verifique'+char(13)+'(si desea abonar el monto total, cargue la Orden en el Cajero)', 'Validación', MB_OK + MB_ICONINFORMATION);
     result:= false;
     exit;
   end;
@@ -1888,49 +1888,49 @@ procedure TFOP_ABM_OrdenTecnica.DBGridComprobantesDrawColumnCell(
 begin
   if not ZQ_Orden.IsEmpty then
     begin
-       case ZQ_OrdenID_ESTADO.AsInteger of
+      case ZQ_OrdenID_ESTADO.AsInteger of
        1:
          begin      //Pendientes
            DBGridComprobantes.Canvas.Brush.Color :=$00DEDEBC;
            DBGridComprobantes.Canvas.Font.Color := clBlack;
            if (gdFocused in State) or (gdSelected in State) then
              begin
-             DBGridComprobantes.Canvas.Font.Style := DBGridComprobantes.Canvas.Font.Style + [fsBold];
+              DBGridComprobantes.Canvas.Font.Style := DBGridComprobantes.Canvas.Font.Style + [fsBold];
              end
          end;
        2:
          begin       //Terminadas
-           DBGridComprobantes.Canvas.Brush.Color :=$00FF3737;
-           DBGridComprobantes.Canvas.Font.Color := clwhite;
+           DBGridComprobantes.Canvas.Brush.Color :=$00C4FDE0;
+           DBGridComprobantes.Canvas.Font.Color := clBlack;
            if (gdFocused in State) or (gdSelected in State) then
              begin
-             DBGridComprobantes.Canvas.Font.Style := DBGridComprobantes.Canvas.Font.Style + [fsBold];
+              DBGridComprobantes.Canvas.Font.Style := DBGridComprobantes.Canvas.Font.Style + [fsBold];
              end
          end;
        3:
          begin     //Cobradas
-           DBGridComprobantes.Canvas.Brush.Color :=$0095FFCA;
+           DBGridComprobantes.Canvas.Brush.Color :=$00FF4646;
            DBGridComprobantes.Canvas.Font.Color := clBlack;
            if (gdFocused in State) or (gdSelected in State) then
              begin
-             DBGridComprobantes.Canvas.Font.Style := DBGridComprobantes.Canvas.Font.Style + [fsBold];
+              DBGridComprobantes.Canvas.Font.Style := DBGridComprobantes.Canvas.Font.Style + [fsBold];
              end
          end;
       end;
 
       DBGridComprobantes.DefaultDrawColumnCell(rect,datacol,column,state);
+      
     end;
 
 end;
 
 procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenAfterScroll(DataSet: TDataSet);
 begin
+
    lblEstado.Caption:=Format('%s',[ZQ_OrdenO_ESTADO.AsString]);
-   lblEstado.Color:=DBGridComprobantes.Canvas.Brush.Color;
-   lblEstado.Font.Color:=DBGridComprobantes.Canvas.Font.Color;
    if not(ZQ_OrdenDetalle.State=dsInactive) then
     begin
-    EKDbSuma1.RecalcAll;
+      EKDbSuma1.RecalcAll;
     end;
    lblTotalProducto.Caption:= 'Total Producto/Servic.: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue)+
                               '/ Total Reconocido OSs: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[2].SumValue);
@@ -1941,12 +1941,16 @@ begin
 
  if not(btDetallesOrden.Down) then
      begin
+
       PanelFPagoYProd.Visible:=false;
+      Splitter2.Visible:=false;
      end
  else
      begin
+
       PanelFPagoYProd.BringToFront;
       PanelFPagoYProd.Visible:=true;
+      Splitter2.Visible:=true;
      end
 end;
 
