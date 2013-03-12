@@ -496,6 +496,7 @@ type
     DBEdit29: TDBEdit;
     DBEdit30: TDBEdit;
     DBEdit31: TDBEdit;
+    EKDbSuma1: TEKDbSuma;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -1762,6 +1763,7 @@ procedure TFOP_ABM_OrdenTecnica.EKDbSumaEntregasSumListChanged(
   Sender: TObject);
 begin
    acumEntrega:=EKDbSumaEntregas.SumCollection[0].SumValue;
+   lblTotalFPago.Caption:= 'Total Entregas: ' + FormatFloat('$ ##,###,##0.00 ', acumEntrega);
 end;
 
 procedure TFOP_ABM_OrdenTecnica.recalcularTotales;
@@ -1781,6 +1783,7 @@ begin
   cantProductos:=round(EKDbSumaProd.SumCollection[1].SumValue);
   lblTotAPagar.Caption:=Format('Total a Pagar: $ %s.',[CurrToStr(acumFinal)]);
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + CurrToStr(cantProductos);
+
 end;
 
 procedure TFOP_ABM_OrdenTecnica.edImporteUnitarioExit(Sender: TObject);
@@ -1810,6 +1813,9 @@ procedure TFOP_ABM_OrdenTecnica.EKDbSumaProdSumListChanged(
 begin
    if dm.EKModelo.verificar_transaccion(abmOrden) then
       EKDbSumaProd.RecalcAll;
+
+  
+
 end;
 
 procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleBeforeDelete(
@@ -1922,6 +1928,12 @@ begin
    lblEstado.Caption:=Format('%s',[ZQ_OrdenO_ESTADO.AsString]);
    lblEstado.Color:=DBGridComprobantes.Canvas.Brush.Color;
    lblEstado.Font.Color:=DBGridComprobantes.Canvas.Font.Color;
+   if not(ZQ_OrdenDetalle.State=dsInactive) then
+    begin
+    EKDbSuma1.RecalcAll;
+    end;
+   lblTotalProducto.Caption:= 'Total Producto/Servic.: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue)+
+                              '/ Total Reconocido OSs: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[2].SumValue);
 end;
 
 procedure TFOP_ABM_OrdenTecnica.btDetallesOrdenClick(Sender: TObject);

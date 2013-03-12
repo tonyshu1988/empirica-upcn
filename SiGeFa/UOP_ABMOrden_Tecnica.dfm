@@ -1,7 +1,7 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 225
-  Top = 120
-  Width = 1012
+  Left = 241
+  Top = 82
+  Width = 1042
   Height = 653
   Caption = 'ABM Orden T'#233'cnica'
   Color = clBtnFace
@@ -2845,7 +2845,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object PanelContenedorDerecha: TPanel
     Left = 114
     Top = 0
-    Width = 882
+    Width = 912
     Height = 563
     Align = alClient
     Caption = 'PanelContenedorDerecha'
@@ -2853,7 +2853,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object PanelProductosYFPago: TPanel
       Left = 1
       Top = 194
-      Width = 880
+      Width = 910
       Height = 368
       Align = alClient
       Caption = 'PanelProductosYFPago'
@@ -2861,13 +2861,13 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 1
-        Width = 878
+        Width = 908
         Height = 199
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
         object Splitter1: TSplitter
-          Left = 559
+          Left = 589
           Top = 1
           Width = 5
           Height = 157
@@ -2876,18 +2876,18 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Panel6: TPanel
           Left = 1
           Top = 158
-          Width = 876
+          Width = 906
           Height = 40
           Align = alBottom
           BevelOuter = bvLowered
           TabOrder = 0
           DesignSize = (
-            876
+            906
             40)
           object lblCantProductos: TLabel
             Left = 1
             Top = 27
-            Width = 874
+            Width = 904
             Height = 12
             Align = alBottom
             Alignment = taRightJustify
@@ -2910,7 +2910,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             OnClick = btQuitarProductoClick
           end
           object btQuitarOS: TButton
-            Left = 750
+            Left = 780
             Top = 5
             Width = 83
             Height = 20
@@ -2921,7 +2921,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           end
         end
         object POs: TPanel
-          Left = 564
+          Left = 594
           Top = 1
           Width = 313
           Height = 157
@@ -3054,7 +3054,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PProductos: TPanel
           Left = 1
           Top = 1
-          Width = 558
+          Width = 588
           Height = 157
           Align = alClient
           BevelOuter = bvNone
@@ -3062,7 +3062,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object Label11: TLabel
             Left = 0
             Top = 0
-            Width = 558
+            Width = 588
             Height = 13
             Align = alTop
             Alignment = taCenter
@@ -3081,7 +3081,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object DBGridListadoProductos: TDBGrid
             Left = 0
             Top = 13
-            Width = 558
+            Width = 588
             Height = 144
             Align = alClient
             Color = 15527129
@@ -3149,13 +3149,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
               item
                 Expanded = False
                 FieldName = 'OBSERVACIONES'
+                Title.Caption = 'Observaciones'
                 Width = 2000
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'IMPORTE_RECONOCIDO'
-                Width = 52
                 Visible = True
               end>
           end
@@ -3164,7 +3159,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       object PPieBoleta: TPanel
         Left = 1
         Top = 326
-        Width = 878
+        Width = 908
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
@@ -3172,7 +3167,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object lblTotAPagar: TLabel
           Left = 0
           Top = 0
-          Width = 878
+          Width = 908
           Height = 41
           Align = alClient
           Alignment = taRightJustify
@@ -3193,7 +3188,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       object PanelFormaPago: TPanel
         Left = 1
         Top = 200
-        Width = 878
+        Width = 908
         Height = 126
         Align = alBottom
         Caption = 'PVarios'
@@ -3207,14 +3202,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PObservaciones: TPanel
           Left = 1
           Top = 1
-          Width = 876
+          Width = 906
           Height = 124
           Align = alClient
           TabOrder = 1
           object Label2: TLabel
             Left = 1
             Top = 1
-            Width = 874
+            Width = 904
             Height = 16
             Align = alTop
             Alignment = taCenter
@@ -3233,7 +3228,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object dbObsOrden: TDBRichEdit
             Left = 1
             Top = 17
-            Width = 874
+            Width = 904
             Height = 106
             Align = alClient
             Color = clCream
@@ -3249,135 +3244,10 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             TabOrder = 0
           end
         end
-        object PFormaPago: TPanel
-          Left = 1
-          Top = 1
-          Width = 876
-          Height = 124
-          Align = alClient
-          TabOrder = 0
-          object Label36: TLabel
-            Left = 1
-            Top = 1
-            Width = 874
-            Height = 16
-            Align = alTop
-            Alignment = taCenter
-            AutoSize = False
-            Caption = 'Entregas [F7]'
-            Color = 12648448
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object PieGrilla: TPanel
-            Left = 1
-            Top = 91
-            Width = 874
-            Height = 32
-            Align = alBottom
-            BevelOuter = bvLowered
-            TabOrder = 0
-            object btnQuitarPago: TButton
-              Left = 8
-              Top = 3
-              Width = 105
-              Height = 20
-              Caption = 'Quitar Entrega'
-              TabOrder = 0
-              OnClick = btnQuitarPagoClick
-            end
-          end
-          object DBGridFormaPago: TDBGrid
-            Left = 1
-            Top = 17
-            Width = 874
-            Height = 74
-            Align = alClient
-            Color = 15527129
-            DataSource = DS_Orden_Entrega
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-            TabOrder = 1
-            TitleFont.Charset = ANSI_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            Columns = <
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'CUENTA_INGRESO'
-                Title.Caption = 'C'#243'd'
-                Width = 30
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = '_ctaIngreso'
-                Title.Caption = 'Cuenta'
-                Width = 150
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'ID_TIPO_FORMAPAG'
-                Title.Caption = 'MP'
-                Width = 29
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'medioPago'
-                Title.Caption = 'Medio Pago'
-                Width = 226
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'IMPORTE'
-                Title.Caption = 'Importe'
-                Width = 59
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'MDCP_FECHA'
-                Title.Caption = 'Fecha'
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'MDCP_BANCO'
-                Title.Caption = 'Banco'
-                Width = 103
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'MDCP_CHEQUE'
-                Title.Caption = 'N'#250'mero'
-                Width = 97
-                Visible = True
-              end>
-          end
-        end
         object PReceta: TPanel
           Left = 1
           Top = 1
-          Width = 876
+          Width = 906
           Height = 124
           Align = alClient
           BevelOuter = bvLowered
@@ -3461,7 +3331,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object Label9: TLabel
             Left = 1
             Top = 1
-            Width = 874
+            Width = 904
             Height = 16
             Align = alTop
             Alignment = taCenter
@@ -4053,19 +3923,144 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             TabOrder = 19
           end
         end
+        object PFormaPago: TPanel
+          Left = 1
+          Top = 1
+          Width = 906
+          Height = 124
+          Align = alClient
+          TabOrder = 0
+          object Label36: TLabel
+            Left = 1
+            Top = 1
+            Width = 904
+            Height = 16
+            Align = alTop
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'Entregas [F7]'
+            Color = 12648448
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object PieGrilla: TPanel
+            Left = 1
+            Top = 91
+            Width = 904
+            Height = 32
+            Align = alBottom
+            BevelOuter = bvLowered
+            TabOrder = 0
+            object btnQuitarPago: TButton
+              Left = 8
+              Top = 3
+              Width = 105
+              Height = 20
+              Caption = 'Quitar Entrega'
+              TabOrder = 0
+              OnClick = btnQuitarPagoClick
+            end
+          end
+          object DBGridFormaPago: TDBGrid
+            Left = 1
+            Top = 17
+            Width = 904
+            Height = 74
+            Align = alClient
+            Color = 15527129
+            DataSource = DS_Orden_Entrega
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 1
+            TitleFont.Charset = ANSI_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'CUENTA_INGRESO'
+                Title.Caption = 'C'#243'd'
+                Width = 30
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = '_ctaIngreso'
+                Title.Caption = 'Cuenta'
+                Width = 150
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'ID_TIPO_FORMAPAG'
+                Title.Caption = 'MP'
+                Width = 29
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'medioPago'
+                Title.Caption = 'Medio Pago'
+                Width = 226
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'IMPORTE'
+                Title.Caption = 'Importe'
+                Width = 59
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'MDCP_FECHA'
+                Title.Caption = 'Fecha'
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'MDCP_BANCO'
+                Title.Caption = 'Banco'
+                Width = 103
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'MDCP_CHEQUE'
+                Title.Caption = 'N'#250'mero'
+                Width = 97
+                Visible = True
+              end>
+          end
+        end
       end
     end
     object PanelDetalles: TPanel
       Left = 1
       Top = 31
-      Width = 880
+      Width = 910
       Height = 163
       Align = alTop
       TabOrder = 1
       object PanelDetalleCliente: TPanel
         Left = 1
         Top = 94
-        Width = 878
+        Width = 908
         Height = 68
         Align = alBottom
         BevelOuter = bvLowered
@@ -4079,7 +4074,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 876
+          Width = 906
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4259,7 +4254,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       object PDetalleOrden: TPanel
         Left = 1
         Top = 1
-        Width = 539
+        Width = 569
         Height = 93
         Align = alClient
         BevelOuter = bvLowered
@@ -4297,6 +4292,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           Font.Name = 'Verdana'
           Font.Style = [fsBold]
           ParentFont = False
+          Visible = False
         end
         object Label24: TLabel
           Left = 272
@@ -4328,7 +4324,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Label7: TLabel
           Left = 1
           Top = 1
-          Width = 537
+          Width = 567
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4367,6 +4363,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           DataField = 'ENTREGADO_POR'
           DataSource = DS_Orden
           TabOrder = 1
+          Visible = False
         end
         object dbAvisar: TDBCheckBox
           Left = 92
@@ -4407,7 +4404,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         end
       end
       object PMedico: TPanel
-        Left = 540
+        Left = 570
         Top = 1
         Width = 339
         Height = 93
@@ -4524,13 +4521,13 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 880
+      Width = 910
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
       TabOrder = 2
       object DBText7: TDBText
-        Left = 535
+        Left = 565
         Top = 1
         Width = 344
         Height = 28
@@ -4571,14 +4568,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object PListado: TPanel
     Left = 114
     Top = 0
-    Width = 882
+    Width = 912
     Height = 563
     Align = alClient
     TabOrder = 9
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 880
+      Width = 910
       Height = 561
       Align = alClient
       Caption = 'Panel1'
@@ -4586,7 +4583,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       object PanelComprobante: TPanel
         Left = 1
         Top = 1
-        Width = 878
+        Width = 908
         Height = 437
         Align = alClient
         BevelOuter = bvNone
@@ -4594,7 +4591,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object lblTotalOrdenes: TLabel
           Left = 0
           Top = 416
-          Width = 878
+          Width = 908
           Height = 21
           Align = alBottom
           Alignment = taRightJustify
@@ -4614,7 +4611,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object DBGridComprobantes: TDBGrid
           Left = 0
           Top = 17
-          Width = 878
+          Width = 908
           Height = 399
           Align = alClient
           Color = 14606012
@@ -4674,7 +4671,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
               Expanded = False
               FieldName = 'DIRECC_CLI'
               Title.Caption = 'Direcci'#243'n'
-              Width = 221
+              Width = 174
               Visible = True
             end
             item
@@ -4723,16 +4720,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             end
             item
               Expanded = False
-              FieldName = 'ENTREGADO_POR'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FACTURADO_POR'
-              Visible = True
-            end
-            item
-              Expanded = False
               FieldName = 'MATRIC_MED'
               Title.Caption = 'Matr'#237'cula M'#233'dico'
               Width = 150
@@ -4765,6 +4752,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             end
             item
               Expanded = False
+              FieldName = 'FACTURADO_POR'
+              Title.Caption = 'Facturado Por'
+              Visible = True
+            end
+            item
+              Expanded = False
               FieldName = 'NRO_FACTURA'
               Width = 137
               Visible = True
@@ -4773,13 +4766,13 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Panel3: TPanel
           Left = 0
           Top = 0
-          Width = 878
+          Width = 908
           Height = 17
           Align = alTop
           BevelOuter = bvLowered
           TabOrder = 1
           object lblEstado: TStaticText
-            Left = 722
+            Left = 752
             Top = 1
             Width = 155
             Height = 15
@@ -4801,14 +4794,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       object PanelFPagoYProd: TPanel
         Left = 1
         Top = 438
-        Width = 878
+        Width = 908
         Height = 122
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 1
         Visible = False
         object Splitter3: TSplitter
-          Left = 607
+          Left = 513
           Top = 9
           Width = 5
           Height = 113
@@ -4816,15 +4809,15 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Splitter2: TSplitter
           Left = 0
           Top = 0
-          Width = 878
+          Width = 908
           Height = 9
           Cursor = crVSplit
           Align = alTop
         end
         object PanelProducto: TPanel
-          Left = 612
+          Left = 518
           Top = 9
-          Width = 266
+          Width = 390
           Height = 113
           Align = alClient
           BevelOuter = bvNone
@@ -4833,7 +4826,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object lblTotalProducto: TLabel
             Left = 0
             Top = 92
-            Width = 266
+            Width = 390
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -4853,7 +4846,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object DBGrid1: TDBGrid
             Left = 0
             Top = 0
-            Width = 266
+            Width = 390
             Height = 92
             Align = alClient
             Color = 14606012
@@ -4874,62 +4867,52 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Columns = <
               item
                 Expanded = False
-                FieldName = 'ID_ORDEN_DETALLE'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_ORDEN'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_PRODUCTO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_LABORATORIO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MONTO_TOTAL'
+                FieldName = 'prod_detalle'
+                Title.Caption = 'Producto/Servicio'
+                Width = 200
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'CANTIDAD'
+                Title.Caption = 'Cant.'
+                Width = 36
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'OBSERVACIONES'
+                FieldName = 'IMPORTE_UNITARIO'
+                Title.Caption = 'Precio Vta.'
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'prod_detalle'
+                FieldName = 'IMPORTE_TOTAL'
+                Title.Caption = 'Monto Total'
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'prod_pventa'
+                FieldName = 'IMPORTE_RECONOCIDO'
+                Title.Caption = 'Monto Reconoc. OSs'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE_VENTA'
+                Title.Caption = 'Monto Final'
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'prod_laboratorio'
+                Title.Caption = 'Laboratorio'
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = 'MONTO_RECONOCIDO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MONTO_FINAL'
+                FieldName = 'OBSERVACIONES'
+                Title.Caption = 'Observaciones'
                 Visible = True
               end>
           end
@@ -4937,7 +4920,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PanelFpago: TPanel
           Left = 0
           Top = 9
-          Width = 607
+          Width = 513
           Height = 113
           Align = alLeft
           BevelOuter = bvNone
@@ -4946,7 +4929,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object lblTotalFPago: TLabel
             Left = 0
             Top = 92
-            Width = 607
+            Width = 513
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -4966,7 +4949,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object DBGrid2: TDBGrid
             Left = 0
             Top = 0
-            Width = 607
+            Width = 513
             Height = 92
             Align = alClient
             Color = 14606012
@@ -4987,107 +4970,41 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             Columns = <
               item
                 Expanded = False
-                FieldName = 'ID_ENTREGA'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_ORDEN'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_TIPO_FORMAPAG'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MDCP_FECHA'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MDCP_BANCO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MDCP_CHEQUE'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'IMPORTE'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CONCILIADO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CUENTA_INGRESO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CUENTA_EGRESO'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'FECHA_FP'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'IMPORTE_REAL'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_RECIBO_OP'
-                Visible = True
-              end
-              item
-                Expanded = False
                 FieldName = '_ctaIngreso'
+                Title.Caption = 'Cuenta'
+                Width = 227
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'medioPago'
+                Title.Caption = 'Medio'
+                Width = 200
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = '_desc_rec'
+                FieldName = 'IMPORTE'
+                Title.Caption = 'Importe'
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = '_efectivo'
+                FieldName = 'MDCP_FECHA'
+                Title.Caption = 'MDP Fecha'
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = '_nroPrecio'
+                FieldName = 'MDCP_BANCO'
+                Title.Caption = 'MDP Banco'
+                Width = 300
                 Visible = True
               end
               item
                 Expanded = False
-                FieldName = '_fiscal'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = '_esCtaCorr'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'INSERT_MANUAL'
+                FieldName = 'MDCP_CHEQUE'
+                Title.Caption = 'MDP Nro Cheque'
                 Visible = True
               end>
           end
@@ -7967,22 +7884,22 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
     object ZQ_OrdenDetalleIMPORTE_RECONOCIDO: TFloatField
       FieldName = 'IMPORTE_RECONOCIDO'
-      DisplayFormat = '0.00'
+      DisplayFormat = '$ 0.00'
       currency = True
     end
     object ZQ_OrdenDetalleIMPORTE_UNITARIO: TFloatField
       FieldName = 'IMPORTE_UNITARIO'
-      DisplayFormat = '0.00'
+      DisplayFormat = '$ 0.00'
       currency = True
     end
     object ZQ_OrdenDetalleIMPORTE_VENTA: TFloatField
       FieldName = 'IMPORTE_VENTA'
-      DisplayFormat = '0.00'
+      DisplayFormat = '$ 0.00'
       currency = True
     end
     object ZQ_OrdenDetalleIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
-      DisplayFormat = '0.00'
+      DisplayFormat = '$ 0.00'
       currency = True
     end
   end
@@ -8777,8 +8694,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         NombreCampo = 'monto_descontado'
       end>
     DataSet = ZQ_OrdenDetalleOS
-    Left = 972
-    Top = 294
+    Left = 852
+    Top = 246
   end
   object ZQ_CodifRP: TZQuery
     Connection = DM.Conexion
@@ -9059,7 +8976,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'from tipo_formapago tfp')
     Params = <>
     Left = 851
-    Top = 441
+    Top = 377
     object ZQ_ColsPreciosCOLUMNA_PRECIO: TIntegerField
       FieldName = 'COLUMNA_PRECIO'
     end
@@ -9183,7 +9100,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         VaciarValorDespues = False
       end
       item
-        Titulo = 'Cliente'
+        Titulo = 'Nombre Cliente'
         Campo = 'nombre'
         Tabla = 'persona'
         TipoCampoIndiceVer = 'Contiene'
@@ -9230,7 +9147,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Titulo = 'Monto Total'
         Campo = 'monto_total'
         Tabla = 'OPTICA_ORDEN'
-        TipoCampoIndiceVer = 'Contiene'
+        TipoCampo = EK_Numero
+        TipoCampoIndice = 2
+        TipoCampoIndiceVer = '>='
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -9240,7 +9159,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Titulo = 'Monto Reconocido'
         Campo = 'monto_reconocido'
         Tabla = 'OPTICA_ORDEN'
-        TipoCampoIndiceVer = 'Contiene'
+        TipoCampo = EK_Numero
+        TipoCampoIndice = 2
+        TipoCampoIndiceVer = '>='
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -9250,7 +9171,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Titulo = 'Monto Entregado'
         Campo = 'monto_entregado'
         Tabla = 'OPTICA_ORDEN'
-        TipoCampoIndiceVer = 'Contiene'
+        TipoCampo = EK_Numero
+        TipoCampoIndice = 2
+        TipoCampoIndiceVer = '>='
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -9260,7 +9183,9 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Titulo = 'Saldo'
         Campo = 'saldo'
         Tabla = 'OPTICA_ORDEN'
-        TipoCampoIndiceVer = 'Contiene'
+        TipoCampo = EK_Numero
+        TipoCampoIndice = 2
+        TipoCampoIndiceVer = '>='
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -9376,8 +9301,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end>
     DataSet = ZQ_Orden_Entrega
     SumListChanged = EKDbSumaEntregasSumListChanged
-    Left = 956
-    Top = 470
+    Left = 660
+    Top = 478
   end
   object EKOrdenarGrilla1: TEKOrdenarGrilla
     Grilla = DBGridComprobantes
@@ -9435,14 +9360,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Visible = True
       end
       item
-        TituloColumna = 'ENTREGADO_POR'
-        Visible = True
-      end
-      item
-        TituloColumna = 'FACTURADO_POR'
-        Visible = True
-      end
-      item
         TituloColumna = 'Matr'#237'cula M'#233'dico'
         Visible = True
       end
@@ -9460,6 +9377,10 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       end
       item
         TituloColumna = 'Observaciones'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Facturado Por'
         Visible = True
       end
       item
@@ -9656,5 +9577,23 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         Name = 'OLD_ID_ORDEN'
         ParamType = ptUnknown
       end>
+  end
+  object EKDbSuma1: TEKDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_TOTAL'
+      end
+      item
+        Operacion = goCount
+        NombreCampo = 'id_producto'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'importe_reconocido'
+      end>
+    DataSet = ZQ_OrdenDetalle
+    Left = 356
+    Top = 366
   end
 end
