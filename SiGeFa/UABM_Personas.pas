@@ -766,10 +766,14 @@ end;
 
 procedure TFABM_Personas.ZQ_PersonaAfterScroll(DataSet: TDataSet);
 begin
+  ZQ_PersonaObraSocial.Close;
+  ZQ_VerRelacionPersona.Close;
+  ZQ_CtaCte.Close;
+  ZQ_EntidadTelefono.Close;
+
   if ZQ_Persona.IsEmpty then
     exit;
 
-  ZQ_VerRelacionPersona.Close;
   ZQ_VerRelacionPersona.ParamByName('id_persona').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
   ZQ_VerRelacionPersona.Open;
 
@@ -784,7 +788,6 @@ begin
     RadioGroupRelacionCliente.ItemIndex:= 0;
   end;
 
-  ZQ_CtaCte.Close;
   ZQ_CtaCte.ParamByName('id_persona').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
   ZQ_CtaCte.Open;
 
@@ -796,18 +799,13 @@ begin
     TabSheetCtaCte.TabVisible:= true
   else
     TabSheetCtaCte.TabVisible:= false;
-  permisosUsuario;    
+  permisosUsuario;
 
-  ZQ_EntidadTelefono.Close;
   ZQ_EntidadTelefono.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
   ZQ_EntidadTelefono.Open;
 
-  if TabSheetObraSocial.Visible then
-  begin
-    ZQ_PersonaObraSocial.Close;
-    ZQ_PersonaObraSocial.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
-    ZQ_PersonaObraSocial.Open;
-  end
+  ZQ_PersonaObraSocial.ParamByName('ID_PERSONA').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
+  ZQ_PersonaObraSocial.Open;
 end;
 
 

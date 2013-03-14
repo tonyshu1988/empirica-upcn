@@ -135,6 +135,14 @@ type
     QRLabel6: TQRLabel;
     QRDBText6: TQRDBText;
     QRDBText7: TQRDBText;
+    TabAfiliados: TTabSheet;
+    ZQ_Afiliados: TZQuery;
+    DS_Afiliados: TDataSource;
+    ZQ_AfiliadosNRO_AFILIADO: TStringField;
+    ZQ_AfiliadosNOMBRE: TStringField;
+    ZQ_AfiliadosID_PERSONA: TIntegerField;
+    DBGridAfiliados: TDBGrid;
+    EKOrdenarGrilla2: TEKOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -157,6 +165,10 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ZQ_OP_ObraSocialAfterScroll(DataSet: TDataSet);
+    procedure DBGridAfiliadosDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
   public
   end;
@@ -428,6 +440,25 @@ procedure TFOP_ABMObraSocial.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   EKOrdenarGrilla1.GuardarConfigColumnas;
+end;
+
+procedure TFOP_ABMObraSocial.ZQ_OP_ObraSocialAfterScroll(
+  DataSet: TDataSet);
+begin
+  ZQ_Afiliados.Close;
+
+  if ZQ_OP_ObraSocial.IsEmpty then
+    exit;
+
+  ZQ_Afiliados.ParamByName('ID_OS').AsInteger:= ZQ_OP_ObraSocialID_OS.AsInteger;
+  ZQ_Afiliados.Open;
+end;
+
+procedure TFOP_ABMObraSocial.DBGridAfiliadosDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridAfiliados, Rect, DataCol, Column, State);
 end;
 
 end.

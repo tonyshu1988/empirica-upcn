@@ -174,7 +174,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Size.Values = (
             52.916666666666670000
             1164.166666666667000000
-            68.791666666666680000
+            68.791666666666670000
             439.208333333333400000)
           Alignment = taCenter
           AlignToBand = True
@@ -624,7 +624,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            592.666666666666800000)
+            592.666666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1139,7 +1139,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Top = 0
           Width = 808
           Height = 185
-          ActivePage = TabSheet1
+          ActivePage = TabAfiliados
           Align = alClient
           TabOrder = 0
           object TabSheet1: TTabSheet
@@ -1442,6 +1442,51 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
                 DataSource = DS_OP_ObraSocial
                 TabOrder = 0
               end
+            end
+          end
+          object TabAfiliados: TTabSheet
+            Caption = 'Afiliados'
+            ImageIndex = 2
+            object DBGridAfiliados: TDBGrid
+              Left = 0
+              Top = 0
+              Width = 800
+              Height = 157
+              Align = alClient
+              Color = 14606012
+              DataSource = DS_Afiliados
+              Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Verdana'
+              TitleFont.Style = []
+              OnDrawColumnCell = DBGridAfiliadosDrawColumnCell
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'NRO_AFILIADO'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Nro. Afiliado'
+                  Width = 110
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'NOMBRE'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Nombre'
+                  Width = 417
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'ID_PERSONA'
+                  Title.Alignment = taCenter
+                  Title.Caption = 'Id Persona'
+                  Visible = True
+                end>
             end
           end
         end
@@ -2069,6 +2114,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   end
   object ZQ_OP_ObraSocial: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_OP_ObraSocialAfterScroll
     SQL.Strings = (
       'select *'
       'from OPTICA_OS os'
@@ -2376,5 +2422,68 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     DataSet = ZQ_Provincia
     Left = 440
     Top = 112
+  end
+  object ZQ_Afiliados: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select os.nro_afiliado, per.nombre, per.id_persona'
+      'from Optica_persona_os os'
+      'left join persona per on os.id_persona = per.id_persona'
+      'where os.id_os = :ID_OS'
+      'order by per.nombre')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_OS'
+        ParamType = ptUnknown
+      end>
+    Left = 608
+    Top = 64
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_OS'
+        ParamType = ptUnknown
+      end>
+    object ZQ_AfiliadosNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
+      Size = 100
+    end
+    object ZQ_AfiliadosNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_AfiliadosID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+    end
+  end
+  object DS_Afiliados: TDataSource
+    DataSet = ZQ_Afiliados
+    Left = 608
+    Top = 112
+  end
+  object EKOrdenarGrilla2: TEKOrdenarGrilla
+    Grilla = DBGridAfiliados
+    Filtros = <
+      item
+        TituloColumna = 'Nro. Afiliado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Id Persona'
+        Visible = True
+      end>
+    NombreGuardar = 'EkOG_ABMObraSocialAfiliados'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = False
+    PermitirFiltrar = False
+    Left = 696
+    Top = 59
   end
 end
