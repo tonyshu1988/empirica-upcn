@@ -74,6 +74,14 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
         end
         item
           Expanded = False
+          FieldName = 'NRO_FACTURA'
+          Title.Alignment = taCenter
+          Title.Caption = 'C'#243'd. Orden'
+          Width = 80
+          Visible = True
+        end
+        item
+          Expanded = False
           FieldName = 'ORDEN_COD_BARRA'
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd Barra Orden'
@@ -875,7 +883,7 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
         '       ar.descripcion as producto_articulo, ta.descripcion as pr' +
         'oducto_tipo_articulo, ordet.id_producto, co.nombre as producto_c' +
         'olor,'
-      '       per.id_persona as id_persona_afiliado'
+      '       per.id_persona as id_persona_afiliado, orden.nro_factura'
       'from optica_orden orden'
       
         'inner join optica_orden_detalle ordet on (orden.id_orden = ordet' +
@@ -995,6 +1003,10 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
     object ZQ_ProductoID_PERSONA_AFILIADO: TIntegerField
       FieldName = 'ID_PERSONA_AFILIADO'
     end
+    object ZQ_ProductoNRO_FACTURA: TStringField
+      FieldName = 'NRO_FACTURA'
+      Size = 50
+    end
   end
   object DS_Producto: TDataSource
     DataSet = ZQ_Producto
@@ -1014,6 +1026,10 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
       end
       item
         TituloColumna = 'Fecha Orden'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Orden'
         Visible = True
       end
       item
@@ -1102,6 +1118,16 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'C'#243'digo Orden'
+        Campo = 'nro_factura'
+        Tabla = 'orden'
+        TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -1225,7 +1251,7 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
         '       ar.descripcion as producto_articulo, ta.descripcion as pr' +
         'oducto_tipo_articulo, ordet.id_producto, co.nombre as producto_c' +
         'olor,'
-      '       per.id_persona as id_persona_afiliado'
+      '       per.id_persona as id_persona_afiliado, orden.nro_factura'
       'from optica_orden orden'
       
         'inner join optica_orden_detalle ordet on (orden.id_orden = ordet' +
@@ -1277,7 +1303,7 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
         '       ar.descripcion as producto_articulo, ta.descripcion as pr' +
         'oducto_tipo_articulo, ordet.id_producto, co.nombre as producto_c' +
         'olor,'
-      '       per.id_persona as id_persona_afiliado')
+      '       per.id_persona as id_persona_afiliado, orden.nro_factura')
     SQL_From.Strings = (
       'from optica_orden orden'
       
