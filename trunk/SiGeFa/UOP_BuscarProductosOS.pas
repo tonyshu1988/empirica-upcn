@@ -53,6 +53,7 @@ type
     ZQ_ProductoPRODUCTO_COLOR: TStringField;
     ZQ_ProductoID_DETALLE_OS: TIntegerField;
     ZQ_ProductoID_PERSONA_AFILIADO: TIntegerField;
+    ZQ_ProductoNRO_FACTURA: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);

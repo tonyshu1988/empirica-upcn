@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 358
-  Top = 106
+  Left = 296
+  Top = 120
   Width = 972
   Height = 631
   Caption = 'ABM Personas'
@@ -173,8 +173,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            687.916666666666800000
-            68.791666666666680000
+            687.916666666666700000
+            68.791666666666670000
             521.229166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -207,7 +207,7 @@ object FABM_Personas: TFABM_Personas
             52.916666666666670000
             645.583333333333400000
             5.291666666666667000
-            608.541666666666800000)
+            608.541666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -656,7 +656,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            941.916666666666800000
+            941.916666666666700000
             198.437500000000000000
             92.604166666666680000)
           Alignment = taLeftJustify
@@ -1821,7 +1821,7 @@ object FABM_Personas: TFABM_Personas
           Size.Values = (
             52.916666666666670000
             1121.833333333333000000
-            68.791666666666680000
+            68.791666666666670000
             523.875000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -2727,7 +2727,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            902.229166666666800000
+            902.229166666666700000
             2.645833333333333000
             293.687500000000000000)
           Alignment = taLeftJustify
@@ -2876,7 +2876,7 @@ object FABM_Personas: TFABM_Personas
         Top = 0
         Width = 954
         Height = 200
-        ActivePage = TabSheetDatos
+        ActivePage = TabSheetObraSocial
         Align = alClient
         TabOrder = 0
         object TabSheetDatos: TTabSheet
