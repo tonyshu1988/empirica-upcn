@@ -510,11 +510,14 @@ begin
     CD_LiqFactura.First;
     while not CD_LiqFactura.Eof do
     begin
-//      ZQ_LiqFacturas.Append;
-//      ZQ_LiqFacturasID_OPTICA_LIQUIDACION_FACTURA.AsInteger:= CD_LiqFacturaid_liq_factura.AsInteger;
-//      ZQ_LiqFacturasID_OPTICA_LIQUIDACION.AsInteger:= ZQ_LiquidacionID_OPTICA_LIQUIDACION.AsInteger;
-//      ZQ_LiqFacturasID_COMPROBANTE.AsInteger:= CD_LiqFacturaid_comprobante.AsInteger;
-//
+      if not ZQ_LiqFacturas.Locate('ID_OPTICA_LIQUIDACION_FACTURA', CD_LiqFacturaid_liq_factura.AsInteger, []) then
+      begin
+        ZQ_LiqFacturas.Append;
+        ZQ_LiqFacturasID_OPTICA_LIQUIDACION_FACTURA.AsInteger:= CD_LiqFacturaid_liq_factura.AsInteger;
+        ZQ_LiqFacturasID_OPTICA_LIQUIDACION.AsInteger:= ZQ_LiquidacionID_OPTICA_LIQUIDACION.AsInteger;
+        ZQ_LiqFacturasID_COMPROBANTE.AsInteger:= CD_LiqFacturaid_comprobante.AsInteger;
+      end;
+
       CD_LiqFactura.Next;
     end
   end;
@@ -984,9 +987,9 @@ procedure TFOP_ABM_LiquidacionOS.PopItemFactura_QuitarClick(Sender: TObject);
 begin
   if not CD_LiqFactura.IsEmpty then
   begin
-    CD_LiqFactura.Delete;
     if ZQ_LiqFacturas.Locate('ID_OPTICA_LIQUIDACION_FACTURA', CD_LiqFacturaid_liq_factura.AsInteger, []) then
       ZQ_LiqFacturas.Delete;
+    CD_LiqFactura.Delete;
   end
 end;
 
@@ -995,9 +998,9 @@ procedure TFOP_ABM_LiquidacionOS.btnQuitarLiqFacturaClick(Sender: TObject);
 begin
   if not CD_LiqFactura.IsEmpty then
   begin
-    CD_LiqFactura.Delete;
     if ZQ_LiqFacturas.Locate('ID_OPTICA_LIQUIDACION_FACTURA', CD_LiqFacturaid_liq_factura.AsInteger, []) then
       ZQ_LiqFacturas.Delete;
+    CD_LiqFactura.Delete;
   end
 end;
 

@@ -1466,6 +1466,49 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           OnDrawColumnCell = DBGridListaCpbDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'ID_OPTICA_LIQUIDACION'
+              Width = 120
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_OS'
+              Width = 120
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_LIQUIDACION'
+              Width = 120
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_ANULACION'
+              Width = 120
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ANULADO'
+              Width = 120
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DETALLE'
+              Width = 120
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE'
+              Width = 120
+              Visible = True
+            end>
         end
       end
       object PanelCpbActual: TPanel
@@ -1501,6 +1544,70 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
             TitleFont.Name = 'Verdana'
             TitleFont.Style = []
             OnDrawColumnCell = DBGridFacturasDrawColumnCell
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'FECHA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Fecha'
+                Width = 100
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CODIGO'
+                Title.Alignment = taCenter
+                Title.Caption = 'C'#243'digo'
+                Width = 112
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'PUNTO_VENTA'
+                Title.Alignment = taCenter
+                Title.Caption = 'PV'
+                Width = 55
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NUMERO_CPB'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#250'mero'
+                Width = 69
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE_TOTAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Importe'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DETALLE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Detalle'
+                Width = 390
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_OPTICA_LIQUIDACION_FACTURA'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID O.L.F.'
+                Width = 80
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_COMPROBANTE'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Cpb'
+                Width = 49
+                Visible = True
+              end>
           end
         end
         object PanelCpbActual_Info: TPanel
@@ -3939,9 +4046,11 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
     end
     object ZQ_LiqFacturasNUMERO_CPB: TIntegerField
       FieldName = 'NUMERO_CPB'
+      DisplayFormat = '00000000'
     end
     object ZQ_LiqFacturasPUNTO_VENTA: TIntegerField
       FieldName = 'PUNTO_VENTA'
+      DisplayFormat = '0000'
     end
     object ZQ_LiqFacturasFECHA: TDateTimeField
       FieldName = 'FECHA'
