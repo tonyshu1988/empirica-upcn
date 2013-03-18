@@ -643,6 +643,18 @@ type
     ZQ_OrdenProductosIMPORTE_UNITARIO: TFloatField;
     ZQ_OrdenProductosIMPORTE_TOTAL: TFloatField;
     ZQ_Optica_OrdenCODIGO_CLI: TStringField;
+    ZQ_Optica_OrdenID_CLIENTE: TIntegerField;
+    ZQ_Optica_OrdenCOD_BARRAS: TStringField;
+    ZQ_Optica_OrdenOBSERVACIONES: TStringField;
+    ZQ_Optica_OrdenNRO_FACTURA: TStringField;
+    ZQ_Optica_OrdenMONTO_TOTAL: TFloatField;
+    ZQ_Optica_OrdenENTREGADO_POR: TIntegerField;
+    ZQ_Optica_OrdenID_MEDICO: TIntegerField;
+    ZQ_Optica_OrdenAVISAR: TStringField;
+    ZQ_Optica_OrdenMONTO_RECONOCIDO: TFloatField;
+    ZQ_Optica_OrdenID_SUCURSAL: TIntegerField;
+    Label69: TLabel;
+    DBEdit25: TDBEdit;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prod: integer): Boolean;
