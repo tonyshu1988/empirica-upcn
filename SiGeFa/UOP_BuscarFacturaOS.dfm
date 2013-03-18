@@ -1,6 +1,6 @@
 object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
-  Left = 327
-  Top = 225
+  Left = 549
+  Top = 258
   Width = 733
   Height = 426
   Caption = 'Buscar Facturas a Liquidar'
@@ -872,6 +872,39 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
     Grilla = DBGrid
     Filtros = <
       item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo Factura'
+        Visible = True
+      end
+      item
+        TituloColumna = 'PV Factura'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Factura'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. OS'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre OS'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Id CPB'
         Visible = True
       end>
     NombreGuardar = 'BuscarProductoOS'
@@ -886,10 +919,53 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
   object EKBuscarFacturas: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
-        Titulo = 'Sin Titulo'
-        Campo = 'id_obra_social'
+        Titulo = 'C'#243'digo Factura'
+        Campo = 'codigo'
         Tabla = 'cpb'
         TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Punto Venta'
+        Campo = 'punto_venta'
+        Tabla = 'cpb'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Nro. Factura'
+        Campo = 'numero_cpb'
+        Tabla = 'cpb'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Fecha'
+        Campo = 'fecga'
+        Tabla = 'cpb'
+        TipoCampo = EK_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Importe'
+        Campo = 'importe_total'
+        Tabla = 'cpb'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -915,8 +991,12 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
       
         'left join optica_detalle_os od_os on (cd.id_comprobante_detalle ' +
         '= od_os.id_factura_os)'
+      
+        'left join optica_liquidacion_factura olf on (cpb.id_comprobante ' +
+        '= olf.id_comprobante)'
       'where (cpb.id_tipo_cpb = 40)'
       '  and cpb.id_comp_estado = 1'
+      '  and olf.id_optica_liquidacion_factura is null'
       '  and cpb.id_obra_social = '
       'order by cpb.fecha desc')
     SQL_Select.Strings = (
@@ -936,10 +1016,14 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
         'comprobante)'
       
         'left join optica_detalle_os od_os on (cd.id_comprobante_detalle ' +
-        '= od_os.id_factura_os)')
+        '= od_os.id_factura_os)'
+      
+        'left join optica_liquidacion_factura olf on (cpb.id_comprobante ' +
+        '= olf.id_comprobante)')
     SQL_Where.Strings = (
       'where (cpb.id_tipo_cpb = 40)'
       '  and cpb.id_comp_estado = 1'
+      '  and olf.id_optica_liquidacion_factura is null'
       '  and cpb.id_obra_social = ')
     SQL_Orden.Strings = (
       'order by cpb.fecha desc')
