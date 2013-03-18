@@ -1,6 +1,6 @@
 object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
-  Left = 285
-  Top = 174
+  Left = 256
+  Top = 133
   Width = 922
   Height = 632
   Caption = 'ABM Factura Obra Social'
@@ -146,7 +146,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
             50.270833333333330000
             653.520833333333400000
             124.354166666666700000
-            592.666666666666700000)
+            592.666666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -176,8 +176,8 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            759.354166666666700000
-            68.791666666666670000
+            759.354166666666800000
+            68.791666666666680000
             378.354166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -1862,6 +1862,535 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         end
       end
     end
+    object PanelLiquidacion: TPanel
+      Left = 0
+      Top = 0
+      Width = 914
+      Height = 534
+      Align = alClient
+      BevelOuter = bvNone
+      TabOrder = 3
+      object PanelDatosOSLiquidar: TPanel
+        Left = 0
+        Top = 0
+        Width = 914
+        Height = 177
+        Align = alTop
+        TabOrder = 0
+        DesignSize = (
+          914
+          177)
+        object btnBuscarOSLiquidar: TSpeedButton
+          Left = 7
+          Top = 11
+          Width = 50
+          Height = 50
+          Hint = 'Buscar una Obras Social para Liquidar'
+          GroupIndex = 2
+          Caption = '(F1)'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -8
+          Font.Name = 'Verdana'
+          Font.Style = []
+          Layout = blGlyphTop
+          ParentFont = False
+          OnClick = btnBuscarOSLiquidarClick
+        end
+        object PanelDatosOSLiquidacion: TPanel
+          Left = 66
+          Top = 7
+          Width = 633
+          Height = 74
+          Anchors = [akLeft]
+          BevelOuter = bvNone
+          TabOrder = 0
+          object Label2: TLabel
+            Left = 438
+            Top = 40
+            Width = 57
+            Height = 13
+            Caption = 'Provincia:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Visible = False
+          end
+          object Label3: TLabel
+            Left = 142
+            Top = 40
+            Width = 58
+            Height = 13
+            Caption = 'Localidad:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label4: TLabel
+            Left = 5
+            Top = 40
+            Width = 70
+            Height = 13
+            Caption = 'C'#243'd. Postal:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label5: TLabel
+            Left = 17
+            Top = 22
+            Width = 58
+            Height = 13
+            Caption = 'Direcci'#243'n:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label7: TLabel
+            Left = 150
+            Top = 5
+            Width = 50
+            Height = 13
+            Caption = 'Nombre:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label8: TLabel
+            Left = 30
+            Top = 5
+            Width = 45
+            Height = 13
+            Caption = 'C'#243'digo:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label9: TLabel
+            Left = 265
+            Top = 58
+            Width = 55
+            Height = 13
+            Caption = 'Cuit/Cuil:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label10: TLabel
+            Left = 49
+            Top = 58
+            Width = 26
+            Height = 13
+            Caption = 'IVA:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object DBText2: TDBText
+            Left = 76
+            Top = 22
+            Width = 545
+            Height = 13
+            DataField = 'DIRECCION'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText3: TDBText
+            Left = 201
+            Top = 5
+            Width = 420
+            Height = 13
+            DataField = 'NOMBRE'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText7: TDBText
+            Left = 76
+            Top = 5
+            Width = 65
+            Height = 13
+            DataField = 'CODIGO'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText8: TDBText
+            Left = 322
+            Top = 58
+            Width = 114
+            Height = 13
+            DataField = 'CUIT_CUIL'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText9: TDBText
+            Left = 76
+            Top = 58
+            Width = 181
+            Height = 13
+            DataField = 'NOMBRE_TIPO_IVA'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText10: TDBText
+            Left = 496
+            Top = 40
+            Width = 133
+            Height = 13
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Visible = False
+          end
+          object DBText11: TDBText
+            Left = 202
+            Top = 40
+            Width = 232
+            Height = 13
+            DataField = 'LOCALIDAD'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object DBText12: TDBText
+            Left = 77
+            Top = 40
+            Width = 57
+            Height = 13
+            DataField = 'CODIGO_POSTAL'
+            DataSource = DS_ObraSocial
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+        end
+        object DBMemoDetalleLiq: TDBMemo
+          Left = 74
+          Top = 126
+          Width = 633
+          Height = 46
+          DataField = 'OBSERVACION'
+          DataSource = DS_Comprobante
+          ScrollBars = ssVertical
+          TabOrder = 2
+        end
+        object PanelFechaLiquidacion: TPanel
+          Left = 64
+          Top = 82
+          Width = 637
+          Height = 42
+          BevelOuter = bvNone
+          TabOrder = 1
+          object Label11: TLabel
+            Left = 11
+            Top = 1
+            Width = 79
+            Height = 13
+            Caption = 'Fecha Factura'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Panel4: TPanel
+            Left = 0
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 0
+            object Label27: TLabel
+              Left = 12
+              Top = 1
+              Width = 100
+              Height = 13
+              Caption = 'Fecha Liquidacion'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+            object EKDBDateFechaLiq: TEKDBDateTimePicker
+              Left = 11
+              Top = 14
+              Width = 105
+              Height = 21
+              Date = 40717.702273252320000000
+              Time = 40717.702273252320000000
+              TabOrder = 0
+              DataField = 'FECHA_LIQUIDACION'
+              DataSource = DS_Liquidacion
+            end
+          end
+        end
+      end
+      object Panel1: TPanel
+        Left = 0
+        Top = 177
+        Width = 914
+        Height = 357
+        Align = alClient
+        TabOrder = 1
+        object Label13: TLabel
+          Left = 1
+          Top = 1
+          Width = 912
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'LISTADO DE PRODUCTOS (F3 = Agregar un Producto)'
+          Color = clBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+        end
+        object Panel2: TPanel
+          Left = 1
+          Top = 315
+          Width = 912
+          Height = 41
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 1
+          DesignSize = (
+            912
+            41)
+          object Label26: TLabel
+            Left = 348
+            Top = 3
+            Width = 111
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Cantidad Productos'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label30: TLabel
+            Left = 484
+            Top = 3
+            Width = 121
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Total Base Imponible'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label32: TLabel
+            Left = 757
+            Top = 3
+            Width = 58
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Total Final'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label33: TLabel
+            Left = 621
+            Top = 3
+            Width = 51
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Total Iva'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object btnQuitarLiqFactura: TButton
+            Left = 5
+            Top = 3
+            Width = 145
+            Height = 18
+            Caption = 'Quitar (Ctrl+Delete)'
+            TabOrder = 0
+            OnClick = btnQuitarLiqFacturaClick
+          end
+          object Edit1: TEdit
+            Left = 348
+            Top = 17
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 1
+          end
+          object editTotalImponible: TEdit
+            Left = 484
+            Top = 17
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 2
+          end
+          object editTotalIva: TEdit
+            Left = 620
+            Top = 17
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 3
+          end
+          object Edit2: TEdit
+            Left = 756
+            Top = 17
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 4
+          end
+        end
+        object DBGridFacturasLiq: TDBGrid
+          Left = 1
+          Top = 14
+          Width = 912
+          Height = 301
+          Align = alClient
+          Color = 14606012
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = Popup_Factura
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+        end
+      end
+    end
   end
   object PanelInfo: TPanel
     Left = 0
@@ -1930,6 +2459,20 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       Color = 10025203
       ParentColor = False
       TabOrder = 1
+    end
+    object StaticTxtLiquidado: TStaticText
+      Left = 586
+      Top = 1
+      Width = 109
+      Height = 17
+      Align = alRight
+      Alignment = taCenter
+      AutoSize = False
+      BorderStyle = sbsSunken
+      Caption = 'LIQUIDADO'
+      Color = 13828006
+      ParentColor = False
+      TabOrder = 2
     end
   end
   object dxBarABM: TdxBarManager
@@ -2056,6 +2599,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
           item
             BeginGroup = True
             Item = btnBaja
+            Visible = True
+          end
+          item
+            BeginGroup = True
+            Item = btnLiquidar
             Visible = True
           end
           item
@@ -2501,6 +3049,15 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       OnClick = btnImprimirComprobanteClick
       AutoGrayScale = False
     end
+    object btnLiquidar: TdxBarLargeButton
+      Caption = 'F6 - Liquidar'
+      Category = 0
+      Hint = 'F6 - Liquidar'
+      Visible = ivAlways
+      ImageIndex = 94
+      OnClick = btnLiquidarClick
+      AutoGrayScale = False
+    end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
@@ -2511,7 +3068,8 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         'btnSalir'
         'btnImprimirListado'
         'btnConfirmar'
-        'btnImprimirComprobante')
+        'btnImprimirComprobante'
+        'btnLiquidar')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -2548,6 +3106,11 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       Caption = 'ABaja'
       ShortCut = 116
       OnExecute = ABajaExecute
+    end
+    object ALiquidar: TAction
+      Caption = 'ALiquidar'
+      ShortCut = 117
+      OnExecute = ALiquidarExecute
     end
     object AGuardar: TAction
       Caption = 'AGuardar'
@@ -4778,5 +5341,68 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     SequenceName = 'GEN_COMPROBANTE_DETALLE_ID'
     Left = 720
     Top = 288
+  end
+  object Popup_Factura: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    Left = 600
+    Top = 295
+    object PopItemFactura_Agregar: TMenuItem
+      Caption = 'Agregar Factura (F3)'
+      ImageIndex = 14
+      OnClick = PopItemFactura_AgregarClick
+    end
+    object PopItemFactura_Quitar: TMenuItem
+      Caption = 'Quitar Factura'
+      ImageIndex = 15
+      OnClick = PopItemFactura_QuitarClick
+    end
+  end
+  object ZQ_Liquidacion: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select ol.*'
+      'from optica_liquidacion ol'
+      'where ol.id_optica_liquidacion = :id_liquidacion')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_liquidacion'
+        ParamType = ptUnknown
+      end>
+    Left = 200
+    Top = 400
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_liquidacion'
+        ParamType = ptUnknown
+      end>
+    object ZQ_LiquidacionID_OPTICA_LIQUIDACION: TIntegerField
+      FieldName = 'ID_OPTICA_LIQUIDACION'
+    end
+    object ZQ_LiquidacionID_OS: TIntegerField
+      FieldName = 'ID_OS'
+    end
+    object ZQ_LiquidacionFECHA_LIQUIDACION: TDateTimeField
+      FieldName = 'FECHA_LIQUIDACION'
+    end
+    object ZQ_LiquidacionFECHA_ANULACION: TDateTimeField
+      FieldName = 'FECHA_ANULACION'
+    end
+    object ZQ_LiquidacionANULADO: TStringField
+      FieldName = 'ANULADO'
+      Size = 1
+    end
+  end
+  object DS_Liquidacion: TDataSource
+    DataSet = ZQ_Liquidacion
+    Left = 200
+    Top = 452
+  end
+  object ZS_Liquidacion: TZSequence
+    Connection = DM.Conexion
+    SequenceName = 'GEN_OPTICA_LIQUIDACION_ID'
+    Left = 200
+    Top = 348
   end
 end

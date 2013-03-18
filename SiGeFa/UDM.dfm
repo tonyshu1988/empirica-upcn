@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 542
-  Top = 222
+  Left = 543
+  Top = 223
   Height = 471
   Width = 396
   object Conexion: TZConnection
@@ -16,6 +16,7 @@ object DM: TDM
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
+    Connected = True
     SQLHourGlass = True
     Left = 38
     Top = 16

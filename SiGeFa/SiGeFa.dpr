@@ -75,7 +75,8 @@ uses
   UCuentaCorrienteProveedor in 'UCuentaCorrienteProveedor.pas' {FCuentaCorrienteProveedor},
   UABM_CPB_FacturaObraSocial in 'UABM_CPB_FacturaObraSocial.pas' {FABM_CPB_FacturaObraSocial},
   UOP_BuscarProductosOS in 'UOP_BuscarProductosOS.pas' {FOP_BuscarProductosOS},
-  UOP_Reportes in 'UOP_Reportes.pas' {FOP_Reportes};
+  UOP_Reportes in 'UOP_Reportes.pas' {FOP_Reportes},
+  UOP_BuscarFacturaOS in 'UOP_BuscarFacturaOS.pas' {FOP_BuscarFacturaOS};
 
 {$R *.res}
 
