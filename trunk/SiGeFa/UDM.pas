@@ -222,6 +222,7 @@ Const
   ESTADO_CONFIRMADO    = 1;
   ESTADO_ALMACENADO    = 2;
   ESTADO_ANULADO       = 3;
+  ESTADO_LIQUIDADO     = 4;  
 
   LONG_COD_BARRAS       = 14;
   LONG_CODIGO           = 14;
