@@ -173,10 +173,12 @@ type
     AOPABMLab1: TMenuItem;
     AOP_ABMOrdenT: TAction;
     ABMOrdenTcnica1: TMenuItem;
-    AABM_FacturaOS: TAction;
+    AOP_ABMFacturaOS: TAction;
     ABMFacturaObraSocial1: TMenuItem;
     AOP_Reportes: TAction;
     ReporteOptica1: TMenuItem;
+    AOP_ABMLiquidarOS: TAction;
+    ABMLiquidacinObraSocial1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -238,8 +240,9 @@ type
     procedure AFichaEmpleadoExecute(Sender: TObject);
     procedure AOP_ABMLabExecute(Sender: TObject);
     procedure AOP_ABMOrdenTExecute(Sender: TObject);
-    procedure AABM_FacturaOSExecute(Sender: TObject);
+    procedure AOP_ABMFacturaOSExecute(Sender: TObject);
     procedure AOP_ReportesExecute(Sender: TObject);
+    procedure AOP_ABMLiquidarOSExecute(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -279,7 +282,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UConsulta_Precios, DateUtils, UCompararStock, UOP_ABMMedico,
   UOP_ABMObraSocial, UPreventa_Historico, UFichaEmpleado,
   UOP_ABMLaboratorio, UOP_ABMOrden_Tecnica, UCuentaCorrienteProveedor,
-  UABM_CPB_FacturaObraSocial, UOP_Reportes;
+  UABM_CPB_FacturaObraSocial, UOP_Reportes, UOP_ABM_LiquidacionOS;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -896,7 +899,7 @@ begin
   EKVentanas1.Abrir(Sender, TFOP_ABM_OrdenTecnica, FOP_ABM_OrdenTecnica);
 end;
 
-procedure TFPrincipal.AABM_FacturaOSExecute(Sender: TObject);
+procedure TFPrincipal.AOP_ABMFacturaOSExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFABM_CPB_FacturaObraSocial, FABM_CPB_FacturaObraSocial);
 end;
@@ -904,6 +907,11 @@ end;
 procedure TFPrincipal.AOP_ReportesExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFOP_Reportes, FOP_Reportes);
+end;
+
+procedure TFPrincipal.AOP_ABMLiquidarOSExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFOP_ABM_LiquidacionOS, FOP_ABM_LiquidacionOS);
 end;
 
 end.

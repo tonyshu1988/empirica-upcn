@@ -213,8 +213,9 @@ begin
 
     ZQ_OP_ObraSocial.Append;
     ZQ_OP_ObraSocialBAJA.AsString:= 'N';
-    ZQ_OP_ObraSocialFACTURA_AUTOMATICA.AsString:= 'N';    
+    ZQ_OP_ObraSocialFACTURA_AUTOMATICA.AsString:= 'N';
 
+    PageControl1.ActivePageIndex:= 0;
     DBEditCodigo.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -233,6 +234,7 @@ begin
 
     ZQ_OP_ObraSocial.Edit;
 
+    PageControl1.ActivePageIndex:= 0;
     DBEditCodigo.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
