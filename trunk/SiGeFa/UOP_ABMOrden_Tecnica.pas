@@ -1189,7 +1189,7 @@ end;
 
 procedure TFOP_ABM_OrdenTecnica.btQuitarOSClick(Sender: TObject);
 begin
-if dm.EKModelo.verificar_transaccion(abmOrden) then
+if dm.EKModelo.verificar_transaccion(abmOrden)and(not ZQ_OrdenDetalleOS.IsEmpty) then
   begin
     ZQ_OrdenDetalleOS.Delete;
     recalcularTotales();
@@ -1261,7 +1261,7 @@ end;
 
 procedure TFOP_ABM_OrdenTecnica.btCancelarOsClick(Sender: TObject);
 begin
-  if (ZQ_OrdenDetalleOS.State in [dsInsert, dsEdit]) then
+  if (ZQ_OrdenDetalleOS.State in [dsInsert, dsEdit])and(not ZQ_OrdenDetalleOS.IsEmpty) then
     ZQ_OrdenDetalleOS.Delete;
 
   recalcularTotales();
@@ -1512,7 +1512,7 @@ begin
 
   acumEntrega:= EKDbSumaEntregas.SumCollection[0].SumValue;
   acumFinal:= EKDbSumaEntregas.SumCollection[1].SumValue;
-  lblTotAPagar.Caption:= 'Total a Pagar: ' + FormatFloat('$ ##,###,##0.00 ', acumFinal);
+  lblTotAPagar.Caption:= 'Saldo Pendiente: ' + FormatFloat('$ ##,###,##0.00 ', acumFinal);
 
 end;
 
@@ -1731,7 +1731,7 @@ begin
 
   if (acumFinal <= 0) then
   begin
-    Application.MessageBox('El monto final debe ser superior a $ 0.00, por favor Verifique'+char(13)+'(si desea abonar el monto total, cargue la Orden en el Cajero)', 'Validación', MB_OK + MB_ICONINFORMATION);
+    Application.MessageBox('El saldo pendiente debe ser superior a $ 0.00, por favor verifique'+char(13)+'(si desea abonar el monto total, cargue la Orden en el Cajero)', 'Validación', MB_OK + MB_ICONINFORMATION);
     result:= false;
     exit;
   end;
@@ -1781,7 +1781,7 @@ begin
   acumProductos:= EKDbSumaProd.SumCollection[0].SumValue;
   acumFinal:=acumProductos-acumOS-acumEntrega;
   cantProductos:=round(EKDbSumaProd.SumCollection[1].SumValue);
-  lblTotAPagar.Caption:=Format('Total a Pagar: $ %s.',[CurrToStr(acumFinal)]);
+  lblTotAPagar.Caption:=Format('Saldo Pendiente: $ %s.',[CurrToStr(acumFinal)]);
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + CurrToStr(cantProductos);
 
 end;
@@ -1821,11 +1821,14 @@ end;
 procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenDetalleBeforeDelete(
   DataSet: TDataSet);
 begin
-  ZQ_OrdenDetalleOS.First;
-  while not ZQ_OrdenDetalleOS.EoF do
-    begin
-      ZQ_OrdenDetalleOS.Delete;
-      ZQ_OrdenDetalleOS.Next; // esta línea hace que el bucle trabaje con el próximo registro
+  if not ZQ_OrdenDetalleOS.IsEmpty then
+  begin
+    ZQ_OrdenDetalleOS.First;
+    while not ZQ_OrdenDetalleOS.EoF do
+      begin
+        ZQ_OrdenDetalleOS.Delete;
+        ZQ_OrdenDetalleOS.Next; // esta línea hace que el bucle trabaje con el próximo registro
+      end;
     end;
 
 end;
