@@ -1,6 +1,6 @@
 object FOP_CargarOrden: TFOP_CargarOrden
-  Left = 259
-  Top = 162
+  Left = 396
+  Top = 195
   Width = 870
   Height = 581
   Caption = 'Cargar Orden'
@@ -825,6 +825,8 @@ object FOP_CargarOrden: TFOP_CargarOrden
   end
   object ZQ_Optica_Orden: TZQuery
     Connection = DM.Conexion
+    SortedFields = 'FECHA_ORDEN'
+    SortType = stDescending
     SQL.Strings = (
       
         'select o.*, p.nombre as cliente, pe.nombre as Entregado, pf.nomb' +
@@ -836,6 +838,7 @@ object FOP_CargarOrden: TFOP_CargarOrden
       'left join optica_estado oe on (o.id_estado = oe.id_estado)'
       'where o.saldo > 0')
     Params = <>
+    IndexFieldNames = 'FECHA_ORDEN Desc'
     Left = 240
     Top = 112
     object ZQ_Optica_OrdenID_ORDEN: TIntegerField

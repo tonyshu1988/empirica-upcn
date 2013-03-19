@@ -44,233 +44,10 @@ object FOP_Reportes: TFOP_Reportes
           Cursor = crVSplit
           Align = alTop
         end
-        object POrden: TPanel
-          Left = 0
-          Top = 0
-          Width = 1006
-          Height = 363
-          Align = alTop
-          Caption = 'POrden'
-          TabOrder = 1
-          object Label7: TLabel
-            Left = 1
-            Top = 1
-            Width = 1004
-            Height = 13
-            Align = alTop
-            Alignment = taCenter
-            Caption = 'Orden'
-            Color = 12648448
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-          end
-          object DBGridOrden: TDBGrid
-            Left = 1
-            Top = 14
-            Width = 1004
-            Height = 315
-            Align = alClient
-            Color = 14606012
-            DataSource = DS_Orden
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-            TabOrder = 0
-            TitleFont.Charset = ANSI_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            OnDrawColumnCell = DBGridOrdenDrawColumnCell
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'CODIGO_CLI'
-                Title.Caption = 'C'#243'digo'
-                Width = 76
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MEDICO'
-                Title.Caption = 'M'#233'dico'
-                Width = 300
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'NOMBRE'
-                Title.Caption = 'Afiliado'
-                Width = 300
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'FECHA_ORDEN'
-                Title.Caption = 'Fecha Orden'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MONTO_TOTAL'
-                Title.Alignment = taRightJustify
-                Title.Caption = 'Importe Total'
-                Width = 90
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'MONTO_RECONOCIDO'
-                Title.Alignment = taRightJustify
-                Title.Caption = 'Total OS'
-                Width = 90
-                Visible = True
-              end>
-          end
-          object POrdenTotales: TPanel
-            Left = 1
-            Top = 329
-            Width = 1004
-            Height = 33
-            Align = alBottom
-            Caption = 'POrdenTotales'
-            TabOrder = 1
-            object lblTotalOrden: TLabel
-              Left = 1
-              Top = 1
-              Width = 1002
-              Height = 31
-              Align = alClient
-              Alignment = taRightJustify
-              AutoSize = False
-              Caption = 'Total Importe: $ 0.00 - Total OS: $ 0.00 '
-              Color = 12648448
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -21
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-              Transparent = False
-              Layout = tlCenter
-            end
-          end
-        end
-        object POrdenDetalle: TPanel
-          Left = 0
-          Top = 367
-          Width = 1006
-          Height = 292
-          Align = alClient
-          Caption = 'POrdenDetalle'
-          TabOrder = 2
-          object Label1: TLabel
-            Left = 1
-            Top = 1
-            Width = 1004
-            Height = 13
-            Align = alTop
-            Alignment = taCenter
-            Caption = 'Detalle Orden'
-            Color = 12648448
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-          end
-          object DBGridOrdenDetalle: TDBGrid
-            Left = 1
-            Top = 14
-            Width = 1004
-            Height = 244
-            Align = alClient
-            Color = 14606012
-            DataSource = DS_OrdenDetalle
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-            TabOrder = 0
-            TitleFont.Charset = ANSI_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            OnDrawColumnCell = DBGridOrdenDetalleDrawColumnCell
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'PRODUCTO'
-                Title.Caption = 'Productos'
-                Width = 583
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CANTIDAD'
-                Title.Caption = 'Cantidad'
-                Width = 57
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'IMPORTE_TOTAL'
-                Title.Alignment = taRightJustify
-                Title.Caption = 'Importe Total'
-                Width = 90
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'IMPORTE_RECONOCIDO'
-                Title.Alignment = taRightJustify
-                Title.Caption = 'Importe OS'
-                Width = 90
-                Visible = True
-              end>
-          end
-          object POrdenDetalleTotales: TPanel
-            Left = 1
-            Top = 258
-            Width = 1004
-            Height = 33
-            Align = alBottom
-            Caption = 'POrdenDetalleTotales'
-            TabOrder = 1
-            object lblTotalOrdenDetalle: TLabel
-              Left = 1
-              Top = 1
-              Width = 1002
-              Height = 31
-              Align = alClient
-              Alignment = taRightJustify
-              AutoSize = False
-              Caption = 'Total Importe: $ 0.00 - Total OS: $ 0.00 '
-              Color = 12648448
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -21
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-              Transparent = False
-              Layout = tlCenter
-            end
-          end
-        end
         object ReporteMedicos: TQuickRep
           Tag = 99
-          Left = 684
-          Top = 528
+          Left = 564
+          Top = 448
           Width = 794
           Height = 1123
           Frame.Color = clBlack
@@ -1377,6 +1154,229 @@ object FOP_Reportes: TFOP_Reportes
                 'DO))'
               ExportAs = exptText
               FontSize = 8
+            end
+          end
+        end
+        object POrden: TPanel
+          Left = 0
+          Top = 0
+          Width = 1006
+          Height = 363
+          Align = alTop
+          Caption = 'POrden'
+          TabOrder = 0
+          object Label7: TLabel
+            Left = 1
+            Top = 1
+            Width = 1004
+            Height = 13
+            Align = alTop
+            Alignment = taCenter
+            Caption = 'Orden'
+            Color = 12648448
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
+          object DBGridOrden: TDBGrid
+            Left = 1
+            Top = 14
+            Width = 1004
+            Height = 315
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_Orden
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 0
+            TitleFont.Charset = ANSI_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            OnDrawColumnCell = DBGridOrdenDrawColumnCell
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'CODIGO_CLI'
+                Title.Caption = 'C'#243'digo'
+                Width = 76
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MEDICO'
+                Title.Caption = 'M'#233'dico'
+                Width = 300
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NOMBRE'
+                Title.Caption = 'Afiliado'
+                Width = 300
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'FECHA_ORDEN'
+                Title.Caption = 'Fecha Orden'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MONTO_TOTAL'
+                Title.Alignment = taRightJustify
+                Title.Caption = 'Importe Total'
+                Width = 90
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'MONTO_RECONOCIDO'
+                Title.Alignment = taRightJustify
+                Title.Caption = 'Total OS'
+                Width = 90
+                Visible = True
+              end>
+          end
+          object POrdenTotales: TPanel
+            Left = 1
+            Top = 329
+            Width = 1004
+            Height = 33
+            Align = alBottom
+            Caption = 'POrdenTotales'
+            TabOrder = 1
+            object lblTotalOrden: TLabel
+              Left = 1
+              Top = 1
+              Width = 1002
+              Height = 31
+              Align = alClient
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = 'Total Importe: $ 0.00 - Total OS: $ 0.00 '
+              Color = 16729670
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWhite
+              Font.Height = -19
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+              Transparent = False
+              Layout = tlCenter
+            end
+          end
+        end
+        object POrdenDetalle: TPanel
+          Left = 0
+          Top = 367
+          Width = 1006
+          Height = 292
+          Align = alClient
+          Caption = 'POrdenDetalle'
+          TabOrder = 2
+          object Label1: TLabel
+            Left = 1
+            Top = 1
+            Width = 1004
+            Height = 13
+            Align = alTop
+            Alignment = taCenter
+            Caption = 'Detalle Orden'
+            Color = 12648448
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
+          object DBGridOrdenDetalle: TDBGrid
+            Left = 1
+            Top = 14
+            Width = 1004
+            Height = 244
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_OrdenDetalle
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 0
+            TitleFont.Charset = ANSI_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            OnDrawColumnCell = DBGridOrdenDetalleDrawColumnCell
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'PRODUCTO'
+                Title.Caption = 'Productos'
+                Width = 583
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CANTIDAD'
+                Title.Caption = 'Cantidad'
+                Width = 57
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE_TOTAL'
+                Title.Alignment = taRightJustify
+                Title.Caption = 'Importe Total'
+                Width = 90
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE_RECONOCIDO'
+                Title.Alignment = taRightJustify
+                Title.Caption = 'Importe OS'
+                Width = 90
+                Visible = True
+              end>
+          end
+          object POrdenDetalleTotales: TPanel
+            Left = 1
+            Top = 258
+            Width = 1004
+            Height = 33
+            Align = alBottom
+            Caption = 'POrdenDetalleTotales'
+            TabOrder = 1
+            object lblTotalOrdenDetalle: TLabel
+              Left = 1
+              Top = 1
+              Width = 1002
+              Height = 31
+              Align = alClient
+              Alignment = taRightJustify
+              AutoSize = False
+              Caption = 'Total Importe: $ 0.00 - Total OS: $ 0.00 '
+              Color = 16729670
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWhite
+              Font.Height = -19
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+              Transparent = False
+              Layout = tlCenter
             end
           end
         end
