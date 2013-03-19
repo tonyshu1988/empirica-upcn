@@ -943,7 +943,6 @@ begin
     ZQ_Productos.Close;
     ZQ_Productos.sql[15]:= Format('and(p.id_producto=%s)', [IdProd]);
     ZQ_Productos.Open;
-    ZQ_Productos.SQL.SaveToFile('JMJ.TXT');
   end;
 
   //Codigo de Barras
