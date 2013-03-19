@@ -564,7 +564,6 @@ type
     procedure ZQ_OrdenDetalleBeforeDelete(DataSet: TDataSet);
     procedure ZQ_OrdenDetalleOSAfterPost(DataSet: TDataSet);
     procedure ZQ_OrdenDetalleOSAfterDelete(DataSet: TDataSet);
-    procedure ZQ_ProductosAfterScroll(DataSet: TDataSet);
     procedure EKDbSumaOrdenesSumListChanged(Sender: TObject);
     procedure DBGridComprobantesDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
@@ -1791,7 +1790,6 @@ begin
  if not (ZQ_OrdenDetalle.IsEmpty) then
   begin
     if (ZQ_OrdenDetalleCANTIDAD.AsFloat < 0) then ZQ_OrdenDetalleCANTIDAD.AsFloat:= 1;
-    //if (CD_DetalleFacturaPORC_DESCUENTO.AsFloat < 0) then CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= 0;
     ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:= (ZQ_OrdenDetalleCANTIDAD.AsFloat * ZQ_OrdenDetalleIMPORTE_UNITARIO.AsFloat);
     ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:=ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat-(descCliente/100)*ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat;
   end
@@ -1802,7 +1800,6 @@ begin
   if not (ZQ_OrdenDetalle.IsEmpty) then
   begin
     if (ZQ_OrdenDetalleCANTIDAD.AsFloat < 0) then ZQ_OrdenDetalleCANTIDAD.AsFloat:= 1;
-    //if (CD_DetalleFacturaPORC_DESCUENTO.AsFloat < 0) then CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= 0;
     ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:= (ZQ_OrdenDetalleCANTIDAD.AsFloat * ZQ_OrdenDetalleIMPORTE_UNITARIO.AsFloat);
     ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat:=ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat-(descCliente/100)*ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat;
   end
@@ -1856,18 +1853,12 @@ if dm.EKModelo.verificar_transaccion(abmOrden) then
    begin
     ZQ_OrdenDetalleOS.Last;
     ZQ_OrdenDetalle.Edit;
+    EKDbSumaOS.RecalcAll;
     ZQ_OrdenDetalleIMPORTE_RECONOCIDO.AsFloat:=EKDbSumaOS.SumCollection[0].SumValue;
     ZQ_OrdenDetalleIMPORTE_VENTA.AsFloat:=ZQ_OrdenDetalleIMPORTE_TOTAL.AsFloat-ZQ_OrdenDetalleIMPORTE_RECONOCIDO.AsFloat;
     ZQ_OrdenDetalle.Post;
 
    end
-end;
-
-procedure TFOP_ABM_OrdenTecnica.ZQ_ProductosAfterScroll(DataSet: TDataSet);
-begin
-//  ZQ_DetalleProd.Close;
-//  ZQ_DetalleProd.ParamByName('idp').AsInteger:=ZQ_ProductosID_PRODUCTO.AsInteger;
-//  ZQ_DetalleProd.Open;
 end;
 
 procedure TFOP_ABM_OrdenTecnica.EKDbSumaOrdenesSumListChanged(
@@ -1936,7 +1927,7 @@ begin
       EKDbSuma1.RecalcAll;
     end;
    lblTotalProducto.Caption:= 'Total Producto/Servic.: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue)+
-                              '/ Total Reconocido OSs: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[2].SumValue);
+                              ' / Total Reconocido OSs: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[2].SumValue);
 end;
 
 procedure TFOP_ABM_OrdenTecnica.btDetallesOrdenClick(Sender: TObject);
