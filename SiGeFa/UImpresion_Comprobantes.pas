@@ -951,6 +951,7 @@ type
     QRDBText206: TQRDBText;
     QRDBText209: TQRDBText;
     QRDBText211: TQRDBText;
+    TabSheet13: TTabSheet;
     procedure FormCreate(Sender: TObject);
     procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);

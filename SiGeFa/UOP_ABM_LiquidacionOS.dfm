@@ -1,6 +1,6 @@
 object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
-  Left = 487
-  Top = 204
+  Left = 327
+  Top = 188
   Width = 922
   Height = 632
   Caption = 'ABM Liquidaci'#243'n Obra Social'
@@ -31,6 +31,410 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    object PanelVer: TPanel
+      Left = 0
+      Top = 0
+      Width = 914
+      Height = 534
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 5
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object Splitter1: TSplitter
+        Left = 378
+        Top = 5
+        Width = 6
+        Height = 524
+        Align = alRight
+      end
+      object PanelListaCpb: TPanel
+        Left = 5
+        Top = 5
+        Width = 373
+        Height = 524
+        Align = alClient
+        BevelOuter = bvNone
+        TabOrder = 0
+        object DBGridListaCpb: TDBGrid
+          Left = 0
+          Top = 0
+          Width = 373
+          Height = 524
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_VerCpb
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridListaCpbDrawColumnCell
+          Columns = <
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'ID_OPTICA_LIQUIDACION'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'digo'
+              Width = 89
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'FECHA_LIQUIDACION'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha'
+              Width = 93
+              Visible = True
+            end
+            item
+              Alignment = taCenter
+              Expanded = False
+              FieldName = 'FECHA_ANULACION'
+              Title.Alignment = taCenter
+              Title.Caption = 'Anulado'
+              Width = 94
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CODIGO'
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. OS'
+              Width = 61
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Obra Social'
+              Width = 215
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_TIPO_IVA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Tipo Iva'
+              Width = 161
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CUIT_CUIL'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cuit/Cuil'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Total Liq.'
+              Width = 87
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'ID_OS'
+              Title.Alignment = taCenter
+              Title.Caption = 'Id OS'
+              Visible = True
+            end>
+        end
+      end
+      object PanelCpbActual: TPanel
+        Left = 384
+        Top = 5
+        Width = 525
+        Height = 524
+        Align = alRight
+        BevelOuter = bvNone
+        Constraints.MinWidth = 525
+        TabOrder = 1
+        object PanelCpbActual_Facturas: TPanel
+          Left = 0
+          Top = 0
+          Width = 525
+          Height = 362
+          Align = alClient
+          BevelOuter = bvNone
+          TabOrder = 0
+          object DBGridFacturas: TDBGrid
+            Left = 0
+            Top = 0
+            Width = 525
+            Height = 362
+            Align = alClient
+            Color = 14606012
+            DataSource = DS_VerLiqFacturas
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            OnDrawColumnCell = DBGridFacturasDrawColumnCell
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'FECHA'
+                Title.Alignment = taCenter
+                Title.Caption = 'Fecha'
+                Width = 100
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CODIGO'
+                Title.Alignment = taCenter
+                Title.Caption = 'C'#243'digo'
+                Width = 112
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'PUNTO_VENTA'
+                Title.Alignment = taCenter
+                Title.Caption = 'PV'
+                Width = 55
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'NUMERO_CPB'
+                Title.Alignment = taCenter
+                Title.Caption = 'N'#250'mero'
+                Width = 69
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'IMPORTE_TOTAL'
+                Title.Alignment = taCenter
+                Title.Caption = 'Importe'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DETALLE'
+                Title.Alignment = taCenter
+                Title.Caption = 'Detalle'
+                Width = 263
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_OPTICA_LIQUIDACION_FACTURA'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID O.L.F.'
+                Width = 80
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'ID_COMPROBANTE'
+                Title.Alignment = taCenter
+                Title.Caption = 'ID Cpb'
+                Width = 49
+                Visible = True
+              end>
+          end
+        end
+        object PanelCpbActual_Info: TPanel
+          Left = 0
+          Top = 362
+          Width = 525
+          Height = 162
+          Align = alBottom
+          BevelOuter = bvNone
+          BorderWidth = 2
+          TabOrder = 1
+          object GroupBoxCpbActual_Info: TGroupBox
+            Left = 2
+            Top = 2
+            Width = 521
+            Height = 158
+            Align = alClient
+            Caption = '  Datos Liquidaci'#243'n  '
+            TabOrder = 0
+            DesignSize = (
+              521
+              158)
+            object DBTxtFechaAnulado: TDBText
+              Left = 8
+              Top = 118
+              Width = 130
+              Height = 13
+              AutoSize = True
+              Color = 14342874
+              DataField = 'FECHA_ANULACION'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+              Visible = False
+            end
+            object Label24: TLabel
+              Left = 8
+              Top = 36
+              Width = 54
+              Height = 13
+              Caption = 'F. Carga:'
+            end
+            object DBTxtMonto: TDBText
+              Left = 336
+              Top = 132
+              Width = 177
+              Height = 23
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clNavy
+              Font.Height = -19
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+            end
+            object DBText1: TDBText
+              Left = 66
+              Top = 36
+              Width = 80
+              Height = 13
+              Color = 14342874
+              DataField = 'FECHA_LIQUIDACION'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label1: TLabel
+              Left = 461
+              Top = 118
+              Width = 52
+              Height = 13
+              Alignment = taRightJustify
+              Anchors = [akTop, akRight]
+              Caption = 'Total Liq.'
+            end
+            object DBTxtSaldo: TDBText
+              Left = 8
+              Top = 132
+              Width = 177
+              Height = 23
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clTeal
+              Font.Height = -19
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Visible = False
+            end
+            object lblSaldo: TLabel
+              Left = 8
+              Top = 118
+              Width = 32
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Saldo'
+              Visible = False
+            end
+            object Label28: TLabel
+              Left = 8
+              Top = 17
+              Width = 71
+              Height = 13
+              Caption = 'Obra Social:'
+            end
+            object DBText4: TDBText
+              Left = 82
+              Top = 17
+              Width = 423
+              Height = 13
+              Color = 14342874
+              DataField = 'NOMBRE'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object Label31: TLabel
+              Left = 160
+              Top = 36
+              Width = 45
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'C'#243'digo:'
+            end
+            object DBText5: TDBText
+              Left = 206
+              Top = 36
+              Width = 115
+              Height = 13
+              Color = 14342874
+              DataField = 'ID_OPTICA_LIQUIDACION'
+              DataSource = DS_VerCpb
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+            end
+            object lblAnulado: TLabel
+              Left = 8
+              Top = 132
+              Width = 105
+              Height = 23
+              Caption = 'ANULADO'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = 4868863
+              Font.Height = -19
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Visible = False
+            end
+            object DBMemoCpbActual_Info: TDBMemo
+              Left = 8
+              Top = 61
+              Width = 505
+              Height = 55
+              Anchors = [akLeft, akTop, akRight]
+              DataField = 'DETALLE'
+              DataSource = DS_VerCpb
+              TabOrder = 0
+            end
+          end
+        end
+      end
+    end
     object RepListado: TQuickRep
       Tag = 99
       Left = 46
@@ -133,9 +537,9 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           Stretch = True
         end
         object QRLabel17: TQRLabel
-          Left = 247
+          Left = 221
           Top = 47
-          Width = 224
+          Width = 276
           Height = 19
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -144,14 +548,14 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            653.520833333333400000
+            584.729166666666800000
             124.354166666666700000
-            592.666666666666700000)
+            730.250000000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'FACTURAS OBRA SOCIAL'
+          Caption = 'LIQUIDACIONES OBRA SOCIAL'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -176,8 +580,8 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            759.354166666666700000
-            68.791666666666670000
+            759.354166666666800000
+            68.791666666666680000
             378.354166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -278,34 +682,7 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_VerCpb
-          DataField = 'FECHA'
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-        object QRDBText1: TQRDBText
-          Left = 152
-          Top = 0
-          Width = 29
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            402.166666666666700000
-            0.000000000000000000
-            76.729166666666680000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_VerCpb
-          DataField = 'PUNTO_VENTA'
+          DataField = 'FECHA_LIQUIDACION'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -332,7 +709,7 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_VerCpb
-          DataField = 'SALDO'
+          DataField = 'IMPORTE'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -341,7 +718,7 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
         object QRDBText3: TQRDBText
           Left = 79
           Top = 0
-          Width = 69
+          Width = 82
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -352,23 +729,23 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
             37.041666666666670000
             209.020833333333300000
             0.000000000000000000
-            182.562500000000000000)
+            216.958333333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_VerCpb
-          DataField = 'FECHA_COBRADA'
+          DataField = 'ID_OPTICA_LIQUIDACION'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
         object QRDBText4: TQRDBText
-          Left = 186
+          Left = 175
           Top = 0
-          Width = 57
+          Width = 70
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -377,52 +754,25 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            492.125000000000000000
+            463.020833333333400000
             0.000000000000000000
-            150.812500000000000000)
+            185.208333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
           DataSet = ZQ_VerCpb
-          DataField = 'NUMERO_CPB'
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-        object QRDBText5: TQRDBText
-          Left = 532
-          Top = 0
-          Width = 89
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1407.583333333333000000
-            0.000000000000000000
-            235.479166666666700000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataSet = ZQ_VerCpb
-          DataField = 'IMPORTE_TOTAL'
+          DataField = 'CODIGO'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
         object QRDBText6: TQRDBText
-          Left = 249
+          Left = 257
           Top = 0
-          Width = 278
+          Width = 352
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -431,9 +781,9 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            658.812500000000000000
+            679.979166666666800000
             0.000000000000000000
-            735.541666666666800000)
+            931.333333333333500000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
@@ -756,9 +1106,9 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           FontSize = 8
         end
         object QRLabel30: TQRLabel
-          Left = 152
+          Left = 175
           Top = 2
-          Width = 91
+          Width = 62
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -767,14 +1117,14 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            402.166666666666700000
+            463.020833333333400000
             5.291666666666667000
-            240.770833333333300000)
+            164.041666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'PV - N'#250'mero'
+          Caption = 'C'#243'd. OS'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -806,7 +1156,7 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Saldo'
+          Caption = 'Total Liq.'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -822,7 +1172,7 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
         object QRLabel2: TQRLabel
           Left = 79
           Top = 2
-          Width = 67
+          Width = 84
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -833,44 +1183,12 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
             37.041666666666670000
             209.020833333333300000
             5.291666666666667000
-            177.270833333333300000)
+            222.250000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'F. Factura'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 8
-        end
-        object QRLabel3: TQRLabel
-          Left = 532
-          Top = 2
-          Width = 89
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            1407.583333333333000000
-            5.291666666666667000
-            235.479166666666700000)
-          Alignment = taRightJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Importe'
+          Caption = 'C'#243'digo Liq.'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -884,7 +1202,7 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           FontSize = 8
         end
         object QRLabel4: TQRLabel
-          Left = 249
+          Left = 257
           Top = 2
           Width = 278
           Height = 14
@@ -895,7 +1213,7 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            658.812500000000000000
+            679.979166666666800000
             5.291666666666667000
             735.541666666666800000)
           Alignment = taLeftJustify
@@ -1281,10 +1599,10 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           object Label32: TLabel
             Left = 757
             Top = 3
-            Width = 28
+            Width = 95
             Height = 13
             Anchors = [akTop, akRight]
-            Caption = 'Total'
+            Caption = 'Total Liquidaci'#243'n'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -1320,6 +1638,7 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
             Top = 17
             Width = 129
             Height = 19
+            TabStop = False
             Anchors = [akTop, akRight]
             AutoSize = False
             BevelInner = bvNone
@@ -1341,6 +1660,7 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
             Top = 17
             Width = 129
             Height = 19
+            TabStop = False
             Anchors = [akTop, akRight]
             AutoSize = False
             BevelInner = bvNone
@@ -1358,7 +1678,7 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
             TabOrder = 2
           end
         end
-        object DBGridFacturasLiq: TDBGrid
+        object DBGridCargaFacturasLiq: TDBGrid
           Left = 1
           Top = 14
           Width = 912
@@ -1375,434 +1695,48 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
           TitleFont.Height = -11
           TitleFont.Name = 'Verdana'
           TitleFont.Style = []
+          OnDrawColumnCell = DBGridCargaFacturasLiqDrawColumnCell
+          OnKeyDown = DBGridCargaFacturasLiqKeyDown
           Columns = <
             item
               Expanded = False
               FieldName = 'fecha'
+              Title.Alignment = taCenter
+              Title.Caption = 'Fecha'
+              Width = 92
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'codigo'
-              Width = 217
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'digo'
+              Width = 289
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'punto_venta'
+              Title.Alignment = taCenter
+              Title.Caption = 'PV'
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'numero_cpb'
+              Title.Alignment = taCenter
+              Title.Caption = 'N'#250'mero'
+              Width = 129
               Visible = True
             end
             item
               Expanded = False
               FieldName = 'importe'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'id_comprobante'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'id_liquidacion'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'id_liq_factura'
+              Title.Alignment = taCenter
+              Title.Caption = 'Importe'
+              Width = 137
               Visible = True
             end>
-        end
-      end
-    end
-    object PanelVer: TPanel
-      Left = 0
-      Top = 0
-      Width = 914
-      Height = 534
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 5
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      object Splitter1: TSplitter
-        Left = 378
-        Top = 5
-        Width = 6
-        Height = 524
-        Align = alRight
-      end
-      object PanelListaCpb: TPanel
-        Left = 5
-        Top = 5
-        Width = 373
-        Height = 524
-        Align = alClient
-        BevelOuter = bvNone
-        TabOrder = 0
-        object DBGridListaCpb: TDBGrid
-          Left = 0
-          Top = 0
-          Width = 373
-          Height = 524
-          Align = alClient
-          Color = 14606012
-          DataSource = DS_VerCpb
-          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnDrawColumnCell = DBGridListaCpbDrawColumnCell
-          Columns = <
-            item
-              Expanded = False
-              FieldName = 'ID_OPTICA_LIQUIDACION'
-              Width = 120
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ID_OS'
-              Width = 120
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_LIQUIDACION'
-              Width = 120
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'FECHA_ANULACION'
-              Width = 120
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'ANULADO'
-              Width = 120
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DETALLE'
-              Width = 120
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE'
-              Width = 120
-              Visible = True
-            end>
-        end
-      end
-      object PanelCpbActual: TPanel
-        Left = 384
-        Top = 5
-        Width = 525
-        Height = 524
-        Align = alRight
-        BevelOuter = bvNone
-        Constraints.MinWidth = 525
-        TabOrder = 1
-        object PanelCpbActual_Facturas: TPanel
-          Left = 0
-          Top = 0
-          Width = 525
-          Height = 362
-          Align = alClient
-          BevelOuter = bvNone
-          TabOrder = 0
-          object DBGridFacturas: TDBGrid
-            Left = 0
-            Top = 0
-            Width = 525
-            Height = 362
-            Align = alClient
-            Color = 14606012
-            DataSource = DS_VerLiqFacturas
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-            TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            OnDrawColumnCell = DBGridFacturasDrawColumnCell
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'FECHA'
-                Title.Alignment = taCenter
-                Title.Caption = 'Fecha'
-                Width = 100
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CODIGO'
-                Title.Alignment = taCenter
-                Title.Caption = 'C'#243'digo'
-                Width = 112
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'PUNTO_VENTA'
-                Title.Alignment = taCenter
-                Title.Caption = 'PV'
-                Width = 55
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'NUMERO_CPB'
-                Title.Alignment = taCenter
-                Title.Caption = 'N'#250'mero'
-                Width = 69
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'IMPORTE_TOTAL'
-                Title.Alignment = taCenter
-                Title.Caption = 'Importe'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'DETALLE'
-                Title.Alignment = taCenter
-                Title.Caption = 'Detalle'
-                Width = 390
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_OPTICA_LIQUIDACION_FACTURA'
-                Title.Alignment = taCenter
-                Title.Caption = 'ID O.L.F.'
-                Width = 80
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'ID_COMPROBANTE'
-                Title.Alignment = taCenter
-                Title.Caption = 'ID Cpb'
-                Width = 49
-                Visible = True
-              end>
-          end
-        end
-        object PanelCpbActual_Info: TPanel
-          Left = 0
-          Top = 362
-          Width = 525
-          Height = 162
-          Align = alBottom
-          BevelOuter = bvNone
-          BorderWidth = 2
-          TabOrder = 1
-          object GroupBoxCpbActual_Info: TGroupBox
-            Left = 2
-            Top = 2
-            Width = 521
-            Height = 158
-            Align = alClient
-            Caption = '  Datos Comprobante  '
-            TabOrder = 0
-            DesignSize = (
-              521
-              158)
-            object DBTxtFechaAnulado: TDBText
-              Left = 8
-              Top = 118
-              Width = 130
-              Height = 13
-              AutoSize = True
-              Color = 14342874
-              DataField = 'FECHA_ANULACION'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-              Visible = False
-            end
-            object Label24: TLabel
-              Left = 8
-              Top = 36
-              Width = 54
-              Height = 13
-              Caption = 'F. Carga:'
-            end
-            object DBTxtMonto: TDBText
-              Left = 336
-              Top = 132
-              Width = 177
-              Height = 23
-              Alignment = taRightJustify
-              Anchors = [akTop, akRight]
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clNavy
-              Font.Height = -19
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object DBText1: TDBText
-              Left = 66
-              Top = 36
-              Width = 80
-              Height = 13
-              Color = 14342874
-              DataField = 'FECHA_LIQUIDACION'
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object Label1: TLabel
-              Left = 467
-              Top = 118
-              Width = 46
-              Height = 13
-              Alignment = taRightJustify
-              Anchors = [akTop, akRight]
-              Caption = 'Importe'
-            end
-            object DBTxtSaldo: TDBText
-              Left = 8
-              Top = 132
-              Width = 177
-              Height = 23
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clTeal
-              Font.Height = -19
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-            end
-            object lblSaldo: TLabel
-              Left = 8
-              Top = 118
-              Width = 32
-              Height = 13
-              Alignment = taRightJustify
-              Caption = 'Saldo'
-            end
-            object Label28: TLabel
-              Left = 8
-              Top = 17
-              Width = 71
-              Height = 13
-              Caption = 'Obra Social:'
-            end
-            object DBText4: TDBText
-              Left = 82
-              Top = 17
-              Width = 423
-              Height = 13
-              Color = 14342874
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object Label31: TLabel
-              Left = 155
-              Top = 36
-              Width = 50
-              Height = 13
-              Alignment = taRightJustify
-              Caption = 'N'#250'mero:'
-            end
-            object DBText5: TDBText
-              Left = 206
-              Top = 36
-              Width = 40
-              Height = 13
-              Alignment = taRightJustify
-              Color = 14342874
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object DBText32: TDBText
-              Left = 252
-              Top = 36
-              Width = 71
-              Height = 13
-              Alignment = taRightJustify
-              Color = 14342874
-              DataSource = DS_VerCpb
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-            end
-            object lblAnulado: TLabel
-              Left = 8
-              Top = 132
-              Width = 105
-              Height = 23
-              Caption = 'ANULADO'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = 4868863
-              Font.Height = -19
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-              Visible = False
-            end
-            object DBMemoCpbActual_Info: TDBMemo
-              Left = 8
-              Top = 61
-              Width = 505
-              Height = 55
-              Anchors = [akLeft, akTop, akRight]
-              DataField = 'DETALLE'
-              DataSource = DS_VerCpb
-              TabOrder = 0
-            end
-          end
         end
       end
     end
@@ -1860,6 +1794,20 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
       Color = 6974207
       ParentColor = False
       TabOrder = 0
+    end
+    object StaticTxtConfirmado: TStaticText
+      Left = 695
+      Top = 1
+      Width = 109
+      Height = 17
+      Align = alRight
+      Alignment = taCenter
+      AutoSize = False
+      BorderStyle = sbsSunken
+      Caption = 'CONFIRMADO'
+      Color = 10025203
+      ParentColor = False
+      TabOrder = 1
     end
   end
   object dxBarABM: TdxBarManager
@@ -3699,26 +3647,28 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
     Connection = DM.Conexion
     AfterScroll = ZQ_VerCpbAfterScroll
     SQL.Strings = (
-      'select ol.*'
-      'from optica_liquidacion ol')
+      'select ol.*, os.*, iva.nombre_tipo_iva, pro.nombre_provincia'
+      'from optica_liquidacion ol'
+      'left join optica_os os on ol.id_os = os.id_os'
+      'left join tipo_iva iva on os.id_tipo_iva = iva.id_tipo_iva'
+      'left join provincia pro on os.id_provincia = pro.id_provincia')
     Params = <>
     Left = 34
     Top = 244
     object ZQ_VerCpbID_OPTICA_LIQUIDACION: TIntegerField
       FieldName = 'ID_OPTICA_LIQUIDACION'
+      DisplayFormat = '00000000'
     end
     object ZQ_VerCpbID_OS: TIntegerField
       FieldName = 'ID_OS'
     end
     object ZQ_VerCpbFECHA_LIQUIDACION: TDateTimeField
       FieldName = 'FECHA_LIQUIDACION'
+      DisplayFormat = 'dd/mm/yyyy'
     end
     object ZQ_VerCpbFECHA_ANULACION: TDateTimeField
       FieldName = 'FECHA_ANULACION'
-    end
-    object ZQ_VerCpbANULADO: TStringField
-      FieldName = 'ANULADO'
-      Size = 1
+      DisplayFormat = 'dd/mm/yyyy'
     end
     object ZQ_VerCpbDETALLE: TStringField
       FieldName = 'DETALLE'
@@ -3726,6 +3676,71 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
     end
     object ZQ_VerCpbIMPORTE: TFloatField
       FieldName = 'IMPORTE'
+      currency = True
+    end
+    object ZQ_VerCpbESTADO: TIntegerField
+      FieldName = 'ESTADO'
+    end
+    object ZQ_VerCpbCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 100
+    end
+    object ZQ_VerCpbNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_VerCpbDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 100
+    end
+    object ZQ_VerCpbTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_VerCpbDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
+    end
+    object ZQ_VerCpbBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_VerCpbCUIT_CUIL: TStringField
+      FieldName = 'CUIT_CUIL'
+      Size = 30
+    end
+    object ZQ_VerCpbLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_VerCpbCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_VerCpbEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_VerCpbID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_VerCpbID_PROVINCIA: TIntegerField
+      FieldName = 'ID_PROVINCIA'
+    end
+    object ZQ_VerCpbFACTURA_AUTOMATICA: TStringField
+      FieldName = 'FACTURA_AUTOMATICA'
+      Size = 1
+    end
+    object ZQ_VerCpbID_OS_1: TIntegerField
+      FieldName = 'ID_OS_1'
+      Required = True
+    end
+    object ZQ_VerCpbNOMBRE_TIPO_IVA: TStringField
+      FieldName = 'NOMBRE_TIPO_IVA'
+      Size = 50
+    end
+    object ZQ_VerCpbNOMBRE_PROVINCIA: TStringField
+      FieldName = 'NOMBRE_PROVINCIA'
+      Size = 50
     end
   end
   object DS_VerCpb: TDataSource
@@ -3735,8 +3750,44 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
   end
   object EKOrd_VerCpb: TEKOrdenarGrilla
     Grilla = DBGridListaCpb
-    Filtros = <>
-    NombreGuardar = 'ABM_FOS_VerCpb'
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Anulado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. OS'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Obra Social'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Iva'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuit/Cuil'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Id OS'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_OPLiq_VerCpb'
     AltoTituloColumna = 15
     FuenteNormal = []
     PermitirOrdenar = True
@@ -3857,6 +3908,16 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
   object EKBuscar: TEKBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'C'#243'digo'
+        Campo = 'id_optica_liquidacion'
+        Tabla = 'optica_liquidacion'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
         Titulo = 'Fecha'
         Campo = 'fecha_liquidacion'
         Tabla = 'optica_liquidacion'
@@ -3867,20 +3928,65 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
         TipoComboAncho = 200
         ItemIndex = -1
         VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Obra Social'
+        Campo = 'Nombre'
+        Tabla = 'optica_os'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Importe'
+        Campo = 'importe'
+        Tabla = 'optica_liquidacion'
+        TipoCampo = EK_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Estado'
+        Campo = 'estado'
+        Tabla = 'optica_liquidacion'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboValoresVer.Strings = (
+          'SIN CONFIRMAR'
+          'CONFIRMADO'
+          'ANULADO')
+        TipoComboValoresReales.Strings = (
+          '0'
+          '1'
+          '2')
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
     DataSet = ZQ_VerCpb
     SQL.Strings = (
-      'select ol.*'
+      'select ol.*, os.*, iva.nombre_tipo_iva, pro.nombre_provincia'
       'from optica_liquidacion ol'
-      '')
+      'left join optica_os os on ol.id_os = os.id_os'
+      'left join tipo_iva iva on os.id_tipo_iva = iva.id_tipo_iva'
+      'left join provincia pro on os.id_provincia = pro.id_provincia'
+      'order by ol.fecha_liquidacion desc, ol.id_optica_liquidacion')
     SQL_Select.Strings = (
-      'select ol.*')
+      'select ol.*, os.*, iva.nombre_tipo_iva, pro.nombre_provincia')
     SQL_From.Strings = (
-      'from optica_liquidacion ol')
+      'from optica_liquidacion ol'
+      'left join optica_os os on ol.id_os = os.id_os'
+      'left join tipo_iva iva on os.id_tipo_iva = iva.id_tipo_iva'
+      'left join provincia pro on os.id_provincia = pro.id_provincia')
     SQL_Orden.Strings = (
-      '')
+      'order by ol.fecha_liquidacion desc, ol.id_optica_liquidacion')
     UsarWhereOriginal = EK_Sin_Where
     Left = 37
     Top = 400
@@ -3938,16 +4044,15 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
     object ZQ_LiquidacionFECHA_ANULACION: TDateTimeField
       FieldName = 'FECHA_ANULACION'
     end
-    object ZQ_LiquidacionANULADO: TStringField
-      FieldName = 'ANULADO'
-      Size = 1
-    end
     object ZQ_LiquidacionDETALLE: TStringField
       FieldName = 'DETALLE'
       Size = 1000
     end
     object ZQ_LiquidacionIMPORTE: TFloatField
       FieldName = 'IMPORTE'
+    end
+    object ZQ_LiquidacionESTADO: TIntegerField
+      FieldName = 'ESTADO'
     end
   end
   object DS_Liquidacion: TDataSource
@@ -3971,15 +4076,19 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
     end
     object CD_LiqFacturapunto_venta: TIntegerField
       FieldName = 'punto_venta'
+      DisplayFormat = '0000'
     end
     object CD_LiqFacturanumero_cpb: TIntegerField
       FieldName = 'numero_cpb'
+      DisplayFormat = '00000000'
     end
     object CD_LiqFacturafecha: TDateTimeField
       FieldName = 'fecha'
+      DisplayFormat = 'dd/mm/yyyy'
     end
     object CD_LiqFacturaimporte: TFloatField
       FieldName = 'importe'
+      currency = True
     end
     object CD_LiqFacturaid_liquidacion: TIntegerField
       FieldName = 'id_liquidacion'
@@ -4054,9 +4163,11 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
     end
     object ZQ_LiqFacturasFECHA: TDateTimeField
       FieldName = 'FECHA'
+      DisplayFormat = 'dd/mm/yyyy'
     end
     object ZQ_LiqFacturasIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
+      currency = True
     end
     object ZQ_LiqFacturasID_OBRA_SOCIAL: TIntegerField
       FieldName = 'ID_OBRA_SOCIAL'
@@ -4144,5 +4255,49 @@ object FOP_ABM_LiquidacionOS: TFOP_ABM_LiquidacionOS
     SequenceName = 'GEN_OPTICA_LIQ_FACTURA_ID'
     Left = 125
     Top = 296
+  end
+  object EKOrd_VerCpb_Facturas: TEKOrdenarGrilla
+    Grilla = DBGridFacturas
+    Filtros = <
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'PV'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'mero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID O.L.F.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID Cpb'
+        Visible = True
+      end>
+    NombreGuardar = 'ABM_OPLiq_VerCpbFacturas'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = True
+    Left = 472
+    Top = 192
   end
 end

@@ -25372,6 +25372,10 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
         end
       end
     end
+    object TabSheet13: TTabSheet
+      Caption = 'TabSheet13'
+      ImageIndex = 12
+    end
   end
   object ZQ_Fpago: TZQuery
     Connection = DM.Conexion
