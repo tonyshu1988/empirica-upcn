@@ -1,6 +1,6 @@
 object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
-  Left = 549
-  Top = 258
+  Left = 347
+  Top = 195
   Width = 733
   Height = 426
   Caption = 'Buscar Facturas a Liquidar'
@@ -837,9 +837,11 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
     end
     object ZQ_FacturasNUMERO_CPB: TIntegerField
       FieldName = 'NUMERO_CPB'
+      DisplayFormat = '00000000'
     end
     object ZQ_FacturasPUNTO_VENTA: TIntegerField
       FieldName = 'PUNTO_VENTA'
+      DisplayFormat = '0000'
     end
     object ZQ_FacturasFECHA: TDateTimeField
       FieldName = 'FECHA'
@@ -994,9 +996,14 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
       
         'left join optica_liquidacion_factura olf on (cpb.id_comprobante ' +
         '= olf.id_comprobante)'
+      
+        'left join optica_liquidacion ol on olf.id_optica_liquidacion = o' +
+        'l.id_optica_liquidacion'
       'where (cpb.id_tipo_cpb = 40)'
       '  and cpb.id_comp_estado = 1'
-      '  and olf.id_optica_liquidacion_factura is null'
+      
+        '  and ((olf.id_optica_liquidacion_factura is null) or (ol.estado' +
+        ' = 2))'
       '  and cpb.id_obra_social = '
       'order by cpb.fecha desc')
     SQL_Select.Strings = (
@@ -1019,11 +1026,16 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
         '= od_os.id_factura_os)'
       
         'left join optica_liquidacion_factura olf on (cpb.id_comprobante ' +
-        '= olf.id_comprobante)')
+        '= olf.id_comprobante)'
+      
+        'left join optica_liquidacion ol on olf.id_optica_liquidacion = o' +
+        'l.id_optica_liquidacion')
     SQL_Where.Strings = (
       'where (cpb.id_tipo_cpb = 40)'
       '  and cpb.id_comp_estado = 1'
-      '  and olf.id_optica_liquidacion_factura is null'
+      
+        '  and ((olf.id_optica_liquidacion_factura is null) or (ol.estado' +
+        ' = 2))'
       '  and cpb.id_obra_social = ')
     SQL_Orden.Strings = (
       'order by cpb.fecha desc')

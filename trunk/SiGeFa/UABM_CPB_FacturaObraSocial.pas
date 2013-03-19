@@ -10,7 +10,7 @@ uses
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
   EKDbSuma, DBClient, Menus, UOP_BuscarProductosOS, ZSqlUpdate, jpeg,
-  ExtDlgs, ZSequence, UOP_BuscarFacturaOS;
+  ExtDlgs, ZSequence;
 
 type
   TFABM_CPB_FacturaObraSocial = class(TForm)
@@ -296,68 +296,7 @@ type
     ZQ_VerCpb_ProductoDETALLE_PROD_FACTURA: TStringField;
     ZQ_CpbProductoID_AUXILIAR: TIntegerField;
     StaticTxtLiquidado: TStaticText;
-    PanelLiquidacion: TPanel;
-    PanelDatosOSLiquidar: TPanel;
-    btnBuscarOSLiquidar: TSpeedButton;
-    PanelDatosOSLiquidacion: TPanel;
-    Label2: TLabel;
-    Label3: TLabel;
-    Label4: TLabel;
-    Label5: TLabel;
-    Label7: TLabel;
-    Label8: TLabel;
-    Label9: TLabel;
-    Label10: TLabel;
-    DBText2: TDBText;
-    DBText3: TDBText;
-    DBText7: TDBText;
-    DBText8: TDBText;
-    DBText9: TDBText;
-    DBText10: TDBText;
-    DBText11: TDBText;
-    DBText12: TDBText;
-    DBMemoDetalleLiq: TDBMemo;
-    PanelFechaLiquidacion: TPanel;
-    Label11: TLabel;
-    Panel4: TPanel;
-    Label27: TLabel;
-    EKDBDateFechaLiq: TEKDBDateTimePicker;
-    btnLiquidar: TdxBarLargeButton;
     ALiquidar: TAction;
-    Panel1: TPanel;
-    Label13: TLabel;
-    Panel2: TPanel;
-    Label26: TLabel;
-    Label30: TLabel;
-    Label32: TLabel;
-    Label33: TLabel;
-    btnQuitarLiqFactura: TButton;
-    Edit1: TEdit;
-    editTotalImponible: TEdit;
-    editTotalIva: TEdit;
-    Edit2: TEdit;
-    DBGridFacturasLiq: TDBGrid;
-    Popup_Factura: TPopupMenu;
-    PopItemFactura_Agregar: TMenuItem;
-    PopItemFactura_Quitar: TMenuItem;
-    ZQ_Liquidacion: TZQuery;
-    ZQ_LiquidacionID_OPTICA_LIQUIDACION: TIntegerField;
-    ZQ_LiquidacionID_OS: TIntegerField;
-    ZQ_LiquidacionFECHA_LIQUIDACION: TDateTimeField;
-    ZQ_LiquidacionFECHA_ANULACION: TDateTimeField;
-    ZQ_LiquidacionANULADO: TStringField;
-    DS_Liquidacion: TDataSource;
-    ZS_Liquidacion: TZSequence;
-    CD_LiqFactura: TClientDataSet;
-    DS_LiqFactura: TDataSource;
-    CD_LiqFacturaid_comprobante: TIntegerField;
-    CD_LiqFacturapunto_venta: TIntegerField;
-    CD_LiqFacturanumero_cpb: TIntegerField;
-    CD_LiqFacturafecha: TDateTimeField;
-    CD_LiqFacturaimporte: TFloatField;
-    CD_LiqFacturaid_liquidacion: TIntegerField;
-    CD_LiqFacturacodigo: TStringField;
-    ZQ_LiquidacionDETALLE: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -382,11 +321,8 @@ type
     procedure PopItemProducto_AgregarClick(Sender: TObject);
     procedure PopItemProducto_QuitarClick(Sender: TObject);
     procedure btnEliminarProductoClick(Sender: TObject);
-    procedure DBGridEditar_ProductoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure agregarProducto();
-    procedure agregarFactura();    
-    procedure cargarProductosClienDataset();
-    procedure cargarFacturasClienDataset();    
+    procedure agregarProducto();    
+    procedure cargarProductosClienDataset();    
     procedure ZQ_CpbProductoAfterScroll(DataSet: TDataSet); //configuro la pantalla de visualizacion segun el tipo de comprobante
     procedure configPanelFechas(panel: TPanel; Activar: boolean);
     procedure btnEnviarMailClick(Sender: TObject);
@@ -400,25 +336,15 @@ type
     procedure DBGridCpbActual_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnBajaClick(Sender: TObject);
     procedure btnImprimirComprobanteClick(Sender: TObject);
-    procedure btnBuscarOSLiquidarClick(Sender: TObject);
-    procedure btnLiquidarClick(Sender: TObject);
-    procedure ALiquidarExecute(Sender: TObject);
-    procedure PopItemFactura_AgregarClick(Sender: TObject);
-    procedure PopItemFactura_QuitarClick(Sender: TObject);
-    procedure btnQuitarLiqFacturaClick(Sender: TObject);
     procedure guardarFactura;
-    procedure guardarLiquidacion;
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
     tipoComprobante: integer;
     id_comprobante, id_liquidacion: integer;
     vselProducto: TFOP_BuscarProductosOS;
-    vselFactura: TFOP_BuscarFacturaOS;
     procedure onSelProducto;
     procedure onSelTodosProducto;
-    procedure onSelFactura;
-    procedure onSelTodosFactura;
     function getColumnIndex(Grid: TDBGrid; Nombre: string): Integer;
   public
     { Public declarations }
@@ -482,7 +408,6 @@ begin
     PanelVer.BringToFront;
     PanelVer.Visible:= true;
     PanelEditar.Visible:= false;
-    PanelLiquidacion.Visible:= false;
 
     lblCantidadRegistros.Visible:= true;
     StaticTxtBaja.Visible:= true;
@@ -507,7 +432,6 @@ begin
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
   FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(4, btnBuscarObraSocial.Glyph); //cargo la imagen del boton buscar OS
-  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(4, btnBuscarOSLiquidar.Glyph); //cargo la imagen del boton buscar OS
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
     TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
@@ -517,7 +441,6 @@ begin
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 
   CD_Producto.CreateDataSet;
-  CD_LiqFactura.CreateDataSet;  
 end;
 
 
@@ -716,11 +639,7 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.btnGuardarClick(Sender: TObject);
 begin
-  if PanelEditar.Visible then
-    guardarFactura
-  else
-    if PanelLiquidacion.Visible then
-      guardarLiquidacion;
+  guardarFactura;
 end;
 
 
@@ -773,6 +692,11 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.AModificarExecute(Sender: TObject);
 begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  begin
+    agregarProducto;
+  end;
+
   if btnModificar.Enabled then
     btnModificar.Click;
 end;
@@ -787,12 +711,6 @@ procedure TFABM_CPB_FacturaObraSocial.ABajaExecute(Sender: TObject);
 begin
   if btnBaja.Enabled then
     btnBaja.Click;
-end;
-
-procedure TFABM_CPB_FacturaObraSocial.ALiquidarExecute(Sender: TObject);
-begin
-  if btnLiquidar.Enabled then
-    btnLiquidar.Click;
 end;
 
 procedure TFABM_CPB_FacturaObraSocial.AGuardarExecute(Sender: TObject);
@@ -1072,17 +990,6 @@ begin
 end;
 
 
-procedure TFABM_CPB_FacturaObraSocial.DBGridEditar_ProductoKeyUp(Sender: TObject;
-  var Key: Word; Shift: TShiftState);
-begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
-  begin
-    if key = 114 then
-      agregarProducto;
-  end;
-end;
-
-
 procedure TFABM_CPB_FacturaObraSocial.ZQ_CpbProductoAfterScroll(DataSet: TDataSet);
 begin
   ZQ_Imagen.Close;
@@ -1312,255 +1219,6 @@ begin
     FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
   FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, -1, -1, obra_social, false);
   FImpresion_Comprobantes.imprimir;
-end;
-
-
-procedure TFABM_CPB_FacturaObraSocial.btnBuscarOSLiquidarClick(
-  Sender: TObject);
-var
-  sql: string;
-begin
-  if EKListadoEntidad.Buscar then
-  begin
-    if (EKListadoEntidad.Resultado <> '') then
-    begin
-//      if not ZQ_CpbProducto.IsEmpty then
-//      begin
-//        CD_Producto.EmptyDataSet;
-//        ZQ_CpbProducto.First;
-//        while not ZQ_CpbProducto.Eof do
-//          ZQ_CpbProducto.Delete;
-//      end;
-//
-//
-//      if Assigned(vselProducto) then
-//        vselProducto.ZQ_Producto.Close;
-
-      if not CD_LiqFactura.IsEmpty then
-        CD_LiqFactura.EmptyDataSet;
-
-      btnBuscarOSLiquidar.Down:= true;
-      PanelDatosOSLiquidacion.BringToFront;
-
-      ZQ_ObraSocial.Close;
-      ZQ_ObraSocial.ParamByName('id_os').AsInteger:= StrToInt(EKListadoEntidad.Resultado);
-      ZQ_ObraSocial.Open;
-
-      if ZQ_Liquidacion.State = dsBrowse then
-        ZQ_Liquidacion.Edit;
-      ZQ_LiquidacionID_OS.AsInteger:= ZQ_ObraSocialID_OS.AsInteger;
-    end
-  end;
-
-  EKDBDateFechaLiq.SetFocus;
-end;
-
-
-procedure TFABM_CPB_FacturaObraSocial.btnLiquidarClick(Sender: TObject);
-begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion]) then
-  begin
-    estadoPantalla:= LIQUIDANDO;
-    PanelLiquidacion.BringToFront;
-    PanelLiquidacion.Visible:= true;
-    PanelVer.Visible:= false;
-
-    lblCantidadRegistros.Visible:= false;
-    StaticTxtBaja.Visible:= false;
-    StaticTxtConfirmado.Visible:= false;
-    StaticTxtLiquidado.Visible:= false;
-    lblTipoComprobante.Visible:= true;
-
-    GrupoEditando.Enabled:= false;
-    GrupoGuardarCancelar.Enabled:= true;
-
-    lblTipoComprobante.Caption:= 'LIQUIDACION';
-
-    ZQ_ObraSocial.Close;
-    CD_LiqFactura.EmptyDataSet;
-    
-    id_liquidacion:= ZS_Liquidacion.GetNextValue;
-    ZQ_Liquidacion.Append;
-    ZQ_LiquidacionFECHA_LIQUIDACION.AsDateTime:= dm.EKModelo.FechayHora;
-    ZQ_LiquidacionFECHA_ANULACION.Clear;
-    ZQ_LiquidacionANULADO.AsString:= 'N';
-
-    EKDBDateFechaLiq.SetFocus;
-  end;
-end;
-
-
-procedure TFABM_CPB_FacturaObraSocial.PopItemFactura_AgregarClick(
-  Sender: TObject);
-begin
-  agregarFactura;
-end;
-
-
-procedure TFABM_CPB_FacturaObraSocial.agregarFactura;
-begin
-  if ZQ_LiquidacionID_OS.IsNull then
-  begin
-    ShowMessage('No se selecciono ninguna Obra Social, Verifique');
-    exit;
-  end;
-
-  if not Assigned(vselFactura) then
-    vselFactura:= TFOP_BuscarFacturaOS.Create(nil);
-
-  vselFactura.EKBuscarFacturas.SQL_Where.ValueFromIndex[2]:= IntToStr(ZQ_LiquidacionID_OS.AsInteger);
-  vselFactura.ZQ_Facturas.Close;
-  vselFactura.OnSeleccionar:= onSelFactura;
-  vselFactura.OnSeleccionarTodos:= onSelTodosFactura;
-  vselFactura.btnSeleccionarTodos.Visible:= ivAlways;
-  vselFactura.SeleccionarYSalir:= false;
-  vselFactura.ShowModal;
-end;
-
-
-procedure TFABM_CPB_FacturaObraSocial.onSelFactura;
-begin
-  if not vselFactura.ZQ_Facturas.IsEmpty then
-  begin
-    CD_LiqFactura.Filter:= 'id_comprobante = ' + vselFactura.ZQ_FacturasID_COMPROBANTE.AsString;
-    CD_LiqFactura.Filtered:= true;
-    if CD_LiqFactura.IsEmpty then //si la factura no esta cargada la agrego
-    begin
-      CD_LiqFactura.Filtered:= false;
-      CD_LiqFactura.Append;
-      CD_LiqFacturaid_comprobante.AsInteger:= vselFactura.ZQ_FacturasID_COMPROBANTE.AsInteger;
-      CD_LiqFacturacodigo.AsString:= vselFactura.ZQ_FacturasCODIGO.AsString;
-      CD_LiqFacturapunto_venta.AsInteger:= vselFactura.ZQ_FacturasPUNTO_VENTA.AsInteger;
-      CD_LiqFacturanumero_cpb.AsInteger:= vselFactura.ZQ_FacturasNUMERO_CPB.AsInteger;
-      CD_LiqFacturafecha.AsDateTime:= vselFactura.ZQ_FacturasFECHA.AsDateTime;
-      CD_LiqFacturaimporte.AsFloat:= vselFactura.ZQ_FacturasIMPORTE_TOTAL.AsFloat;
-    end
-    else
-      CD_LiqFactura.Filtered:= false;
-  end;
-
-  if vselFactura.SeleccionarYSalir then
-    vselFactura.Close;
-end;
-
-
-procedure TFABM_CPB_FacturaObraSocial.onSelTodosFactura;
-begin
-  if not vselFactura.ZQ_Facturas.IsEmpty then
-  begin
-    vselFactura.ZQ_Facturas.First;
-    while not vselFactura.ZQ_Facturas.Eof do
-    begin
-      CD_LiqFactura.Filter:= 'id_comprobante = ' + vselFactura.ZQ_FacturasID_COMPROBANTE.AsString;
-      CD_LiqFactura.Filtered:= true;
-      if not CD_Producto.IsEmpty then //si la factura ya esta cargado, paso al proximo
-      begin
-        CD_LiqFactura.Filtered:= false;
-      end
-      else
-      begin
-        CD_LiqFactura.Filtered:= false;
-        CD_LiqFactura.Append;
-        CD_LiqFacturaid_comprobante.AsInteger:= vselFactura.ZQ_FacturasID_COMPROBANTE.AsInteger;
-        CD_LiqFacturacodigo.AsString:= vselFactura.ZQ_FacturasCODIGO.AsString;
-        CD_LiqFacturapunto_venta.AsInteger:= vselFactura.ZQ_FacturasPUNTO_VENTA.AsInteger;
-        CD_LiqFacturanumero_cpb.AsInteger:= vselFactura.ZQ_FacturasNUMERO_CPB.AsInteger;
-        CD_LiqFacturafecha.AsDateTime:= vselFactura.ZQ_FacturasFECHA.AsDateTime;
-        CD_LiqFacturaimporte.AsFloat:= vselFactura.ZQ_FacturasIMPORTE_TOTAL.AsFloat;
-      end;
-
-      vselFactura.ZQ_Facturas.Next;
-    end;
-  end;
-
-  vselFactura.Close;
-end;
-
-
-procedure TFABM_CPB_FacturaObraSocial.PopItemFactura_QuitarClick(Sender: TObject);
-begin
-  if not CD_LiqFactura.IsEmpty then
-  begin
-    CD_LiqFactura.Delete;
-//    CD_Producto.Locate('idCPBDetalle', ZQ_CpbProductoID_COMPROBANTE_DETALLE.AsInteger, []);
-//    CD_Producto.Delete;
-  end
-end;
-
-
-procedure TFABM_CPB_FacturaObraSocial.btnQuitarLiqFacturaClick(Sender: TObject);
-begin
-  if not CD_LiqFactura.IsEmpty then
-  begin
-    CD_LiqFactura.Delete;
-//    CD_Producto.Locate('idCPBDetalle', ZQ_CpbProductoID_COMPROBANTE_DETALLE.AsInteger, []);
-//    CD_Producto.Delete;
-  end
-end;
-
-
-procedure TFABM_CPB_FacturaObraSocial.guardarLiquidacion;
-begin
-  Perform(WM_NEXTDLGCTL, 0, 0);
-
-  if ZQ_LiquidacionID_OS.IsNull then
-  begin
-    Application.MessageBox('Debe asociar una Obra Social a la Liquidacion, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-    EKDBDateFechaLiq.SetFocus;
-    exit;
-  end;
-
-//  EKSuma_Productos.RecalcAll; //el importe del comprobante es igual a la suma del importe de todos los productos
-//  EKSuma_Productos.RecalcAll;
-//  ZQ_ComprobanteBASE_IMPONIBLE.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
-//  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
-//  ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
-//  ZQ_ComprobanteSALDO.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
-//
-//  if confirmarComprobante then
-//    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO
-//  else
-//    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
-//
-//  ZQ_CpbProducto.First;
-//  while not ZQ_CpbProducto.Eof do
-//  begin
-//    ZQ_ActualizarDetalleOS.ParamByName('id').AsInteger:= ZQ_CpbProducto_IdDetalleOS.AsInteger;
-//    ZQ_ActualizarDetalleOS.ParamByName('id_factura').AsInteger:= ZQ_CpbProductoID_COMPROBANTE_DETALLE.AsInteger;
-//    ZQ_ActualizarDetalleOS.ParamByName('detalle').AsString:= ZQ_CpbProducto_Nombre.AsString;
-//    ZQ_ActualizarDetalleOS.ExecSQL;
-//
-//    if (ZQ_CpbProductoDETALLE.IsNull) or (trim(ZQ_CpbProductoDETALLE.AsString) = '') then
-//    begin
-//      ZQ_CpbProducto.edit;
-//      ZQ_CpbProductoDETALLE.AsString:= ZQ_CpbProducto_Nombre.AsString;
-//    end;
-//
-//    ZQ_CpbProducto.Next;
-//  end;
-
-  try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-    begin
-      modoEdicion(false);
-      DBGridListaCpb.SetFocus;
-
-      ZQ_VerCpb.Refresh;
-      ZQ_VerCpb.First;
-    end
-  except
-    begin
-      Application.MessageBox('Verifique que los datos estén cargados correctamente.', 'Atención', MB_OK + MB_ICONINFORMATION);
-      exit;
-    end
-  end;
-
-  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
-end;
-
-procedure TFABM_CPB_FacturaObraSocial.cargarFacturasClienDataset;
-begin
-//
 end;
 
 end.

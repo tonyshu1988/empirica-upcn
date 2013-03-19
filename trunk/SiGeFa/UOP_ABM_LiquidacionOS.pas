@@ -69,7 +69,6 @@ type
     DBText4: TDBText;
     Label31: TLabel;
     DBText5: TDBText;
-    DBText32: TDBText;
     EKBuscar: TEKBusquedaAvanzada;
     RepListado: TQuickRep;
     QRBand9: TQRBand;
@@ -79,7 +78,6 @@ type
     RepListado_Titulo: TQRLabel;
     QRBand10: TQRBand;
     QRDBText19: TQRDBText;
-    QRDBText1: TQRDBText;
     QRDBText2: TQRDBText;
     QRBand11: TQRBand;
     QRlblPieDePagina: TQRLabel;
@@ -97,8 +95,6 @@ type
     QRDBText3: TQRDBText;
     QRLabel2: TQRLabel;
     QRDBText4: TQRDBText;
-    QRLabel3: TQRLabel;
-    QRDBText5: TQRDBText;
     QRLabel4: TQRLabel;
     QRDBText6: TQRDBText;
     EKVistaPrevia: TEKVistaPreviaQR;
@@ -155,7 +151,7 @@ type
     btnQuitarLiqFactura: TButton;
     editCantidadFacturas: TEdit;
     EditImporteFinal: TEdit;
-    DBGridFacturasLiq: TDBGrid;
+    DBGridCargaFacturasLiq: TDBGrid;
     Popup_Factura: TPopupMenu;
     PopItemFactura_Agregar: TMenuItem;
     PopItemFactura_Quitar: TMenuItem;
@@ -164,7 +160,6 @@ type
     ZQ_LiquidacionID_OS: TIntegerField;
     ZQ_LiquidacionFECHA_LIQUIDACION: TDateTimeField;
     ZQ_LiquidacionFECHA_ANULACION: TDateTimeField;
-    ZQ_LiquidacionANULADO: TStringField;
     DS_Liquidacion: TDataSource;
     ZS_Liquidacion: TZSequence;
     CD_LiqFactura: TClientDataSet;
@@ -181,7 +176,6 @@ type
     ZQ_VerCpbID_OS: TIntegerField;
     ZQ_VerCpbFECHA_LIQUIDACION: TDateTimeField;
     ZQ_VerCpbFECHA_ANULACION: TDateTimeField;
-    ZQ_VerCpbANULADO: TStringField;
     ZQ_VerCpbDETALLE: TStringField;
     ZQ_LiqFacturas: TZQuery;
     ZQ_LiqFacturasID_OPTICA_LIQUIDACION_FACTURA: TIntegerField;
@@ -202,6 +196,26 @@ type
     DS_VerLiqFacturas: TDataSource;
     CD_LiqFacturaid_liq_factura: TIntegerField;
     ZS_LiqFactura: TZSequence;
+    ZQ_LiquidacionESTADO: TIntegerField;
+    ZQ_VerCpbESTADO: TIntegerField;
+    StaticTxtConfirmado: TStaticText;
+    EKOrd_VerCpb_Facturas: TEKOrdenarGrilla;
+    ZQ_VerCpbCODIGO: TStringField;
+    ZQ_VerCpbNOMBRE: TStringField;
+    ZQ_VerCpbDIRECCION: TStringField;
+    ZQ_VerCpbTELEFONO: TStringField;
+    ZQ_VerCpbDESCRIPCION: TStringField;
+    ZQ_VerCpbBAJA: TStringField;
+    ZQ_VerCpbCUIT_CUIL: TStringField;
+    ZQ_VerCpbLOCALIDAD: TStringField;
+    ZQ_VerCpbCODIGO_POSTAL: TStringField;
+    ZQ_VerCpbEMAIL: TStringField;
+    ZQ_VerCpbID_TIPO_IVA: TIntegerField;
+    ZQ_VerCpbID_PROVINCIA: TIntegerField;
+    ZQ_VerCpbFACTURA_AUTOMATICA: TStringField;
+    ZQ_VerCpbID_OS_1: TIntegerField;
+    ZQ_VerCpbNOMBRE_TIPO_IVA: TStringField;
+    ZQ_VerCpbNOMBRE_PROVINCIA: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -237,6 +251,8 @@ type
     procedure PopItemFactura_QuitarClick(Sender: TObject);
     procedure btnQuitarLiqFacturaClick(Sender: TObject);
     procedure EKDbSumaSumListChanged(Sender: TObject);
+    procedure DBGridCargaFacturasLiqDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridCargaFacturasLiqKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
   private
     nuevo: boolean;
     estadoPantalla: string;
@@ -317,8 +333,8 @@ end;
 
 procedure TFOP_ABM_LiquidacionOS.FormCreate(Sender: TObject);
 begin
-//  EKOrd_VerCpb.CargarConfigColumnas;
-//  EKOrd_VerCpb_Producto.CargarConfigColumnas;
+  EKOrd_VerCpb.CargarConfigColumnas;
+  EKOrd_VerCpb_Facturas.CargarConfigColumnas;
 //  EKOrd_EditarProducto.CargarConfigColumnas;
 
   modoEdicion(false);
@@ -333,6 +349,9 @@ begin
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 
   CD_LiqFactura.CreateDataSet;
+
+  DBTxtSaldo.Visible:= false;
+  lblSaldo.Visible:= False;
 end;
 
 
@@ -396,12 +415,10 @@ begin
     ZQ_ObraSocial.Close;
     CD_LiqFactura.EmptyDataSet;
 
-    id_liquidacion:= ZS_Liquidacion.GetNextValue;
     ZQ_Liquidacion.Append;
-    ZQ_LiquidacionID_OPTICA_LIQUIDACION.AsInteger:= id_liquidacion;
     ZQ_LiquidacionFECHA_LIQUIDACION.AsDateTime:= dm.EKModelo.FechayHora;
     ZQ_LiquidacionFECHA_ANULACION.Clear;
-    ZQ_LiquidacionANULADO.AsString:= 'N';
+    ZQ_LiquidacionESTADO.AsInteger:= 0;
 
     EKDBDateFechaLiq.SetFocus;
   end;
@@ -412,7 +429,8 @@ procedure TFOP_ABM_LiquidacionOS.btnModificarClick(Sender: TObject);
 var
   estado: integer;
 begin
-  if ZQ_VerCpb.IsEmpty or (ZQ_VerCpbANULADO.AsString = 'S') then
+  estado:= ZQ_VerCpbESTADO.AsInteger;
+  if (ZQ_VerCpb.IsEmpty) or (estado = 1) or (estado = 2) then
     exit;
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion, ZQ_LiqFacturas]) then
@@ -441,47 +459,12 @@ begin
 
     EKDBDateFechaLiq.SetFocus;
   end;
-
-//  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-//  if ((ZQ_VerCpb.IsEmpty) or
-//    ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO))) then
-//    exit;
-//
-//  confirmarComprobante:= false;
-//  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
-//
-//  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
-//  begin
-//    modoEdicion(true);
-//
-//    if not CD_Producto.IsEmpty then
-//      CD_Producto.EmptyDataSet;
-//    cargarProductosClienDataset();
-//
-//    ZQ_Comprobante.Close;
-//    ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//    ZQ_Comprobante.Open;
-//
-//    ZQ_CpbProducto.Close;
-//    ZQ_CpbProducto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//    ZQ_CpbProducto.Open;
-//
-//    PanelEditar_DatosGralProveedor.BringToFront;
-//    ZQ_ObraSocial.Close;
-//    ZQ_ObraSocial.ParamByName('id_os').AsInteger:= ZQ_ComprobanteID_OBRA_SOCIAL.AsInteger;
-//    ZQ_ObraSocial.Open;
-//
-//    cargarTipoComprobante(tipoComprobante); //acomodo la pantalla de edicion segun el tipo de comprobante que es
-//    lblTipoComprobante.Caption:= lblTipoComprobante.Caption + ' - MODIFICAR';
-//
-//    ZQ_Comprobante.Edit;
-//
-//    EKDBDateCarga.SetFocus;
-//  end;
 end;
 
 
 procedure TFOP_ABM_LiquidacionOS.btnGuardarClick(Sender: TObject);
+var
+  recNo: integer;
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
@@ -494,12 +477,15 @@ begin
 
   if nuevo then
   begin
+    id_liquidacion:= ZS_Liquidacion.GetNextValue;
+    ZQ_LiquidacionID_OPTICA_LIQUIDACION.AsInteger:= id_liquidacion;
+    
     CD_LiqFactura.First;
     while not CD_LiqFactura.Eof do
     begin
       ZQ_LiqFacturas.Append;
       ZQ_LiqFacturasID_OPTICA_LIQUIDACION_FACTURA.AsInteger:= CD_LiqFacturaid_liq_factura.AsInteger;
-      ZQ_LiqFacturasID_OPTICA_LIQUIDACION.AsInteger:= ZQ_LiquidacionID_OPTICA_LIQUIDACION.AsInteger;
+      ZQ_LiqFacturasID_OPTICA_LIQUIDACION.AsInteger:= id_liquidacion;
       ZQ_LiqFacturasID_COMPROBANTE.AsInteger:= CD_LiqFacturaid_comprobante.AsInteger;
 
       CD_LiqFactura.Next;
@@ -526,36 +512,15 @@ begin
   EKDbSuma.RecalcAll;
   ZQ_LiquidacionIMPORTE.AsFloat:= EKDbSuma.SumCollection[0].SumValue;
 
-//  if confirmarComprobante then
-//    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO
-//  else
-//    ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
-//
-//  ZQ_CpbProducto.First;
-//  while not ZQ_CpbProducto.Eof do
-//  begin
-//    ZQ_ActualizarDetalleOS.ParamByName('id').AsInteger:= ZQ_CpbProducto_IdDetalleOS.AsInteger;
-//    ZQ_ActualizarDetalleOS.ParamByName('id_factura').AsInteger:= ZQ_CpbProductoID_COMPROBANTE_DETALLE.AsInteger;
-//    ZQ_ActualizarDetalleOS.ParamByName('detalle').AsString:= ZQ_CpbProducto_Nombre.AsString;
-//    ZQ_ActualizarDetalleOS.ExecSQL;
-//
-//    if (ZQ_CpbProductoDETALLE.IsNull) or (trim(ZQ_CpbProductoDETALLE.AsString) = '') then
-//    begin
-//      ZQ_CpbProducto.edit;
-//      ZQ_CpbProductoDETALLE.AsString:= ZQ_CpbProducto_Nombre.AsString;
-//    end;
-//
-//    ZQ_CpbProducto.Next;
-//  end;
-
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       modoEdicion(false);
       DBGridListaCpb.SetFocus;
 
+      recNo:= ZQ_VerCpb.RecNo;
       ZQ_VerCpb.Refresh;
-      ZQ_VerCpb.First;
+      ZQ_VerCpb.RecNo:= recNo;
     end
   except
     begin
@@ -584,10 +549,10 @@ begin
   if ZQ_VerCpb.IsEmpty then
     exit;
 
-//  DM.VariablesReportes(RepListado);
-//  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-//  QRLabelCritBusqueda.Caption:= EKBuscar.ParametrosBuscados;
-//  EKVistaPrevia.VistaPrevia;
+  DM.VariablesReportes(RepListado);
+  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
+  QRLabelCritBusqueda.Caption:= EKBuscar.ParametrosBuscados;
+  EKVistaPrevia.VistaPrevia;
 end;
 
 
@@ -617,14 +582,19 @@ end;
 
 procedure TFOP_ABM_LiquidacionOS.AModificarExecute(Sender: TObject);
 begin
+  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  begin
+    agregarFactura;
+  end;
+
   if btnModificar.Enabled then
     btnModificar.Click;
 end;
 
 procedure TFOP_ABM_LiquidacionOS.AConfirmarExecute(Sender: TObject);
 begin
-//  if btnConfirmar.Enabled then
-//    btnConfirmar.Click;
+  if btnConfirmar.Enabled then
+    btnConfirmar.Click;
 end;
 
 procedure TFOP_ABM_LiquidacionOS.ABajaExecute(Sender: TObject);
@@ -659,22 +629,22 @@ begin
   ZQ_LiqFacturas.ParamByName('id_liquidacion').AsInteger:= ZQ_VerCpbID_OPTICA_LIQUIDACION.AsInteger;
   ZQ_LiqFacturas.Open;
 
-//  if ZQ_VerCpbFECHA_ANULADO.IsNull then
-//  begin
-//    DBTxtFechaAnulado.Visible:= false;
-//    lblAnulado.Visible:= False;
-//
+  if ZQ_VerCpbFECHA_ANULACION.IsNull then
+  begin
+    DBTxtFechaAnulado.Visible:= false;
+    lblAnulado.Visible:= False;
+
 //    DBTxtSaldo.Visible:= true;
 //    lblSaldo.Visible:= true;
-//  end
-//  else
-//  begin
-//    DBTxtFechaAnulado.Visible:= true;
-//    lblAnulado.Visible:= true;
-//
+  end
+  else
+  begin
+    DBTxtFechaAnulado.Visible:= true;
+    lblAnulado.Visible:= true;
+
 //    DBTxtSaldo.Visible:= false;
 //    lblSaldo.Visible:= False;
-//  end;
+  end;
 end;
 
 
@@ -716,38 +686,35 @@ procedure TFOP_ABM_LiquidacionOS.btnConfirmarClick(Sender: TObject);
 var
   recno, estado: Integer;
 begin
-//  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-//  if ((ZQ_VerCpb.IsEmpty) or
-//    ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO))) then
-//    exit;
-//
-//  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
-//
-//  if (application.MessageBox(pchar('¿Desea confirmar la Factura de Obra Social seleccionada?'), 'ABM Factura de Obra Social', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
-//    begin
-//      ZQ_Comprobante.Close;
-//      ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//      ZQ_Comprobante.Open;
-//
-//      ZQ_Comprobante.Edit;
-//      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
-//
-//      try
-//        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-//          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
-//      except
-//        begin
-//          Application.MessageBox('No se pudo confirmar la Factura de Obra Social.', 'Atención', MB_OK + MB_ICONINFORMATION);
-//          exit;
-//        end
-//      end;
-//    end;
-//
-//  recNo:= ZQ_VerCpb.RecNo;
-//  ZQ_VerCpb.Refresh;
-//  ZQ_VerCpb.RecNo:= recNo;
-//  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+  estado:= ZQ_VerCpbESTADO.AsInteger;
+  if (ZQ_VerCpb.IsEmpty) or (estado = 1) or (estado = 2) then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea confirmar la Liquidación seleccionada?'), 'ABM Liquidación', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion]) then
+    begin
+      ZQ_Liquidacion.Close;
+      ZQ_Liquidacion.ParamByName('id_liquidacion').AsInteger:= ZQ_VerCpbID_OPTICA_LIQUIDACION.AsInteger;
+      ZQ_Liquidacion.Open;
+
+      ZQ_Liquidacion.Edit;
+      ZQ_LiquidacionESTADO.AsInteger:= 1;
+
+      try
+        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+      except
+        begin
+          Application.MessageBox('No se pudo confirmar la Liquidación.', 'Atención', MB_OK + MB_ICONINFORMATION);
+          exit;
+        end
+      end;
+    end;
+
+  recNo:= ZQ_VerCpb.RecNo;
+  ZQ_VerCpb.Refresh;
+  ZQ_VerCpb.RecNo:= recNo;
+  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 end;
 
 
@@ -755,15 +722,31 @@ end;
 
 procedure TFOP_ABM_LiquidacionOS.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-//  EKOrd_VerCpb.GuardarConfigColumnas;
-//  EKOrd_VerCpb_Producto.GuardarConfigColumnas;
+  EKOrd_VerCpb.GuardarConfigColumnas;
+  EKOrd_VerCpb_Facturas.GuardarConfigColumnas;
 //  EKOrd_EditarProducto.GuardarConfigColumnas;
 end;
 
 
 procedure TFOP_ABM_LiquidacionOS.DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  FPrincipal.PintarFilasGrillasConBajas(DBGridListaCpb, ZQ_VerCpbANULADO.AsString, Rect, DataCol, Column, State);
+  if (ZQ_VerCpbESTADO.AsInteger = 1) then //si el registro esta confirmado
+  begin
+    DBGridListaCpb.Canvas.Brush.Color:= StaticTxtConfirmado.Color;
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridListaCpb.Canvas.Font.Style:= DBGridListaCpb.Canvas.Font.Style + [fsBold];
+  end;
+
+  if (ZQ_VerCpbESTADO.AsInteger = 2) then //si el registro esta dado de baja
+  begin
+    DBGridListaCpb.Canvas.Brush.Color:= StaticTxtBaja.Color;
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridListaCpb.Canvas.Font.Style:= DBGridListaCpb.Canvas.Font.Style + [fsBold];
+  end;
+
+  DBGridListaCpb.DefaultDrawColumnCell(rect, datacol, column, state);
+
+  FPrincipal.PintarFilasGrillas(DBGridListaCpb, Rect, DataCol, Column, State);
 end;
 
 
@@ -777,50 +760,36 @@ procedure TFOP_ABM_LiquidacionOS.btnBajaClick(Sender: TObject);
 var
   recno, estado: Integer;
 begin
-//  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-//  if ((ZQ_VerCpb.IsEmpty) or
-//    ((estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO))) then
-//    exit;
-//
-//  id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
-//
-//  if (application.MessageBox(pchar('¿Desea anular la Factura de Compra seleccionada?'), 'ABM Factura de Compra', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-//    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
-//    begin
-//      ZQ_Comprobante.Close;
-//      ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-//      ZQ_Comprobante.Open;
-//
-//      ZQ_Comprobante.Edit;
-//      ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
-//      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
-//
-//      ZQ_VerCpb_Producto.First;
-//      while not ZQ_VerCpb_Producto.Eof do
-//      begin
-//        ZQ_ActualizarDetalleOS.ParamByName('id').AsInteger:= ZQ_VerCpb_ProductoID_DETALLE_OS.AsInteger;
-//        ZQ_ActualizarDetalleOS.ParamByName('id_factura').clear;
-//        ZQ_ActualizarDetalleOS.ParamByName('detalle').clear;
-//        ZQ_ActualizarDetalleOS.ExecSQL;
-//
-//        ZQ_VerCpb_Producto.Next;
-//      end;
-//
-//      try
-//        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-//          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
-//      except
-//        begin
-//          Application.MessageBox('No se pudo anular la Factura de Compra.', 'Atención', MB_OK + MB_ICONINFORMATION);
-//          exit;
-//        end
-//      end;
-//    end;
-//
-//  recNo:= ZQ_VerCpb.RecNo;
-//  ZQ_VerCpb.Refresh;
-//  ZQ_VerCpb.RecNo:= recNo;
-//  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
+  estado:= ZQ_VerCpbESTADO.AsInteger;
+  if (ZQ_VerCpb.IsEmpty) or (estado = 2) then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea anular la Liquidación seleccionada?'), 'ABM Liquidación', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion]) then
+    begin
+      ZQ_Liquidacion.Close;
+      ZQ_Liquidacion.ParamByName('id_liquidacion').AsInteger:= ZQ_VerCpbID_OPTICA_LIQUIDACION.AsInteger;
+      ZQ_Liquidacion.Open;
+
+      ZQ_Liquidacion.Edit;
+      ZQ_LiquidacionESTADO.AsInteger:= 2;
+      ZQ_LiquidacionFECHA_ANULACION.AsDateTime:= dm.EKModelo.FechayHora;
+
+      try
+        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+      except
+        begin
+          Application.MessageBox('No se pudo anular la Liquidación.', 'Atención', MB_OK + MB_ICONINFORMATION);
+          exit;
+        end
+      end;
+    end;
+
+  recNo:= ZQ_VerCpb.RecNo;
+  ZQ_VerCpb.Refresh;
+  ZQ_VerCpb.RecNo:= recNo;
+  dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 end;
 
 
@@ -854,18 +823,6 @@ begin
   begin
     if (EKListadoEntidad.Resultado <> '') then
     begin
-//      if not ZQ_CpbProducto.IsEmpty then
-//      begin
-//        CD_Producto.EmptyDataSet;
-//        ZQ_CpbProducto.First;
-//        while not ZQ_CpbProducto.Eof do
-//          ZQ_CpbProducto.Delete;
-//      end;
-//
-//
-//      if Assigned(vselProducto) then
-//        vselProducto.ZQ_Producto.Close;
-
       if not CD_LiqFactura.IsEmpty then
         CD_LiqFactura.EmptyDataSet;
 
@@ -935,6 +892,7 @@ begin
       CD_LiqFacturanumero_cpb.AsInteger:= vselFactura.ZQ_FacturasNUMERO_CPB.AsInteger;
       CD_LiqFacturafecha.AsDateTime:= vselFactura.ZQ_FacturasFECHA.AsDateTime;
       CD_LiqFacturaimporte.AsFloat:= vselFactura.ZQ_FacturasIMPORTE_TOTAL.AsFloat;
+      CD_LiqFactura.Post;
     end
     else
       CD_LiqFactura.Filtered:= false;
@@ -963,7 +921,7 @@ begin
       else
       begin
         CD_LiqFactura.Filtered:= false;
-        
+
         id_liq_factura:= ZS_LiqFactura.GetNextValue;
         CD_LiqFactura.Append;
         CD_LiqFacturaid_comprobante.AsInteger:= vselFactura.ZQ_FacturasID_COMPROBANTE.AsInteger;
@@ -973,6 +931,7 @@ begin
         CD_LiqFacturanumero_cpb.AsInteger:= vselFactura.ZQ_FacturasNUMERO_CPB.AsInteger;
         CD_LiqFacturafecha.AsDateTime:= vselFactura.ZQ_FacturasFECHA.AsDateTime;
         CD_LiqFacturaimporte.AsFloat:= vselFactura.ZQ_FacturasIMPORTE_TOTAL.AsFloat;
+        CD_LiqFactura.Post;
       end;
 
       vselFactura.ZQ_Facturas.Next;
@@ -985,12 +944,7 @@ end;
 
 procedure TFOP_ABM_LiquidacionOS.PopItemFactura_QuitarClick(Sender: TObject);
 begin
-  if not CD_LiqFactura.IsEmpty then
-  begin
-    if ZQ_LiqFacturas.Locate('ID_OPTICA_LIQUIDACION_FACTURA', CD_LiqFacturaid_liq_factura.AsInteger, []) then
-      ZQ_LiqFacturas.Delete;
-    CD_LiqFactura.Delete;
-  end
+  btnQuitarLiqFactura.Click;
 end;
 
 
@@ -1001,7 +955,7 @@ begin
     if ZQ_LiqFacturas.Locate('ID_OPTICA_LIQUIDACION_FACTURA', CD_LiqFacturaid_liq_factura.AsInteger, []) then
       ZQ_LiqFacturas.Delete;
     CD_LiqFactura.Delete;
-  end
+  end;
 end;
 
 
@@ -1012,14 +966,15 @@ begin
   begin
     CD_LiqFactura.Append;
     CD_LiqFacturaid_comprobante.AsInteger:= ZQ_LiqFacturasID_COMPROBANTE.AsInteger;
-    CD_LiqFacturaid_liq_factura.AsInteger:= ZQ_LiqFacturasID_OPTICA_LIQUIDACION_FACTURA.AsInteger;    
+    CD_LiqFacturaid_liq_factura.AsInteger:= ZQ_LiqFacturasID_OPTICA_LIQUIDACION_FACTURA.AsInteger;
     CD_LiqFacturapunto_venta.AsInteger:= ZQ_LiqFacturasPUNTO_VENTA.AsInteger;
     CD_LiqFacturanumero_cpb.AsInteger:= ZQ_LiqFacturasNUMERO_CPB.AsInteger;
     CD_LiqFacturafecha.AsDateTime:= ZQ_LiqFacturasFECHA.AsDateTime;
     CD_LiqFacturaimporte.AsFloat:= ZQ_LiqFacturasIMPORTE_TOTAL.AsFloat;
     CD_LiqFacturaid_liquidacion.AsInteger:= ZQ_LiqFacturasID_OPTICA_LIQUIDACION.AsInteger;
     CD_LiqFacturacodigo.AsString:= ZQ_LiqFacturasCODIGO.AsString;
-
+    CD_LiqFactura.Post;
+    
     ZQ_LiqFacturas.Next;
   end;
 end;
@@ -1035,6 +990,29 @@ begin
   editCantidadFacturas.Text:= cantidad;
   EditImporteFinal.Text:= total;
 end;
+
+
+procedure TFOP_ABM_LiquidacionOS.DBGridCargaFacturasLiqDrawColumnCell(
+  Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillas(DBGridCargaFacturasLiq, Rect, DataCol, Column, State);
+end;
+
+
+procedure TFOP_ABM_LiquidacionOS.DBGridCargaFacturasLiqKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
+var
+  columna: string;
+begin
+  columna:= (sender as tdbgrid).SelectedField.FullName;
+
+  if (Shift = [ssCtrl]) and (Key = VK_DELETE) then
+  begin
+    Key:= 0; {ignore}
+    btnQuitarLiqFactura.Click;
+  end
+end;
+
 
 end.
 
