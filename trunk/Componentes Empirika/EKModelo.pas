@@ -105,6 +105,7 @@ begin
   iniciar_transaccion(nombre, datasets, CtrlError);
 end;
 
+
 function TEKModeloTransaccion.iniciar_transaccion(nombre : string; datasets : array of TZAbstractDataSet; CtrlError : TEKControlDataSetError ) : boolean;
 var
   i, nds  : integer;
@@ -146,7 +147,6 @@ begin
     exit;
   end;
 
-
   // Verifica que no halla un transaccion del mismo tipo/nombre
   //-----------------------------------------------------------
   for i:=0 to ta-1 do
@@ -157,7 +157,6 @@ begin
       result := false;
       exit;
     end;
-
 
   // Guarda datos de la transaccion iniciada
   //----------------------------------------
@@ -194,7 +193,6 @@ begin
 
   result := true;
 end;
-
 
 
 procedure TEKModeloTransaccion.asignar_eventos(dataset : TZAbstractDataSet);
@@ -241,6 +239,7 @@ begin
     FOnIniciarSql(dataset);
 end;
 
+
 procedure TEKModeloTransaccion.despues_de_abrir(DataSet: TDataSet);
 var
   i, j, ta, ta_a : integer;
@@ -262,6 +261,7 @@ begin
   if Assigned(FOnfinalizarSql) then
     FOnfinalizarSql(DataSet);
 end;
+
 
 procedure TEKModeloTransaccion.antes_de_cerrar(DataSet: TDataSet);
 var
@@ -298,7 +298,6 @@ begin
       end;
     end;
   end;
-
 end;
 
 
@@ -307,6 +306,7 @@ begin
   asignar_eventos(dataset);
   dataset.Open;
 end;
+
 
 function TEKModeloTransaccion.bloquear_transaccion(nombre : string) : boolean;
 var
@@ -356,13 +356,13 @@ begin
   result := true;
 end;
 
+
 function TEKModeloTransaccion.finalizar_transaccion(nombre : string) : boolean;
 var
   ta, ta_a, i : integer;
   s : string;
   bien : boolean;
 begin
-
   // Verifica que no halla un transaccion bloqueada
   //-----------------------------------------------
   if (transaccion_blk <> '') and (transaccion_blk <> nombre) then
@@ -402,23 +402,20 @@ begin
     Coneccion.Commit;
     bien := true;
   except
-    raise Exception.Create('Há ocurrido un error. Vuelva a intentarlo.');
-//    on E: Exception do
-//    begin
+//    raise Exception.Create('Há ocurrido un error. Vuelva a intentarlo.');
+    on E: Exception do
+    begin
 //        if Assigned(transacciones_activas[ta_a].CtrlError) then
 //        transacciones_activas[ta_a].CtrlError(transacciones_activas[ta_a].datasets[i], e)
 //      else
-//        control_errores(E);
-//    end
+        control_errores(E);
+    end
   end;
   if not bien then
   begin
-    // Application.MessageBox(pchar('Se produjo un error al guardar los datos en la transacción '+nombre+chr(13)+'La Transacción quedara bloqueada hasta que se guarden correctamente los datos o se cancele la misma.'), 'ERROR');
-
     // No hace Coneccion.Rollback;
     // Si se produce un error bloquea la transaccion
     // (Solo se puede trabajar sobre esta transaccion)
-    //
     // Mantiene la transaccion abierta con el servidor
     // Devuelve el control al punto donde fue llamada la funcion dando
     // la posibilidad de modificar los datos para eliminar el error o

@@ -22,6 +22,7 @@ var
   s: string;
 begin
   F_Error.error_c.Caption:= e.Message;
+  s:= 'Se produjo un Error inesperado, verifique que los datos estén cargados correctamente.'; //e.Message;
 
   // Si es un error generado por los Zeos
   if e.ClassName = 'EZSQLException' then
@@ -29,11 +30,9 @@ begin
     d:= pos('exception', e.Message);
     h:= pos('Error Code', e.Message);
 
-          // Si NO es una exeption (otro tipo de error)
+    // Si NO es una exeption (otro tipo de error)
     if d = 0 then
     begin
-      s:= e.Message;
-
       if EZSQLException(e).ErrorCode = -902 then // Usuario
       begin
         if pos('user name', e.Message) > 0 then
@@ -97,17 +96,15 @@ begin
     //si es un error de base de datos
     if e.ClassName = 'EDatabaseError' then
     begin
-      s:= e.Message;
-
       s:= StringReplace(s, 'Field', 'El campo', [rfReplaceAll]);
       s:= StringReplace(s, 'must have a value', 'No puede estar vacio', [rfReplaceAll]);
+
       f_error.Caption:= 'ERROR EN BASE DE DATOS';
       f_error.text_error.Caption:= s;
       F_Error.Visible:= False;
       F_Error.ShowModal;
     end
-    // Otro tipo de Error
-    else
+    else // Otro tipo de Error
     begin
       if pos('is not a valid date', e.Message) > 0 then
         s:= 'El día mes y año no conforman una Fecha Válida'
@@ -118,9 +115,7 @@ begin
       else if pos('is not a valid floating', e.Message) > 0 then
         s:= 'Un campo numérico decimal no es válido o no fue ingresado'
       else if pos('is not a valid integer', e.Message) > 0 then
-        s:= 'Un campo numérico entero no es válido o no fue ingresado'
-      else
-        s:= e.message;
+        s:= 'Un campo numérico entero no es válido o no fue ingresado';
 
       f_error.Caption:= 'ERROR GENERAL';
       f_error.text_error.Caption:= s;

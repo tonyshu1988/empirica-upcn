@@ -4,18 +4,17 @@ interface
 
 uses
   Windows, Messages,  Forms,
-  Dialogs, StdCtrls, Classes, Controls;
+  Dialogs, StdCtrls, Classes, Controls, Graphics, ExtCtrls;
 
 type
   TF_Error = class(TForm)
-    Button1: TButton;
+    btnSalir: TButton;
     text_error: TLabel;
     error_c: TLabel;
-    Button2: TButton;
-    procedure Button1Click(Sender: TObject);
-    procedure FormShow(Sender: TObject);
-    procedure FormDblClick(Sender: TObject);
-    procedure Button2Click(Sender: TObject);
+    btnDetalle: TButton;
+    Image1: TImage;
+    procedure btnSalirClick(Sender: TObject);
+    procedure btnDetalleClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -30,47 +29,28 @@ implementation
 
 {$R *.dfm}
 
-procedure TF_Error.Button1Click(Sender: TObject);
+procedure TF_Error.btnSalirClick(Sender: TObject);
 begin
   close;
 end;
 
-procedure TF_Error.FormShow(Sender: TObject);
-begin
-
-  Width := text_error.Width + 60;
-  Height := text_error.Height + 100;
-{  if ancho < 313 then
-    Width := 313
-  else
-    Width := ancho;
-
-  if largo < 140 then
-    Height := 140
-  else
-    Height := largo;
-    }
-end;
-
-procedure TF_Error.FormDblClick(Sender: TObject);
+procedure TF_Error.btnDetalleClick(Sender: TObject);
 begin
   ShowMessage(error_c.Caption);
 end;
 
-procedure TF_Error.Button2Click(Sender: TObject);
-begin
-  ShowMessage(error_c.Caption);
-end;
 
 procedure TF_Error.FormCreate(Sender: TObject);
 begin
   if assigned(F_Error) then
-
-  F_Error.Visible:=False;
+    F_Error.Visible:= False;
 end;
+
 
 initialization
   F_Error := TF_Error.Create(nil);
+
+  
 finalization
   F_Error.free;
 end.
