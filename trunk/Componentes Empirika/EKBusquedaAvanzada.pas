@@ -1271,7 +1271,17 @@ begin
     ShowMessage('Hay un error en los parametros ingresados');
     exit;
   end;
-  txt_fecha:= inttostr(monthof(fecha))+'/'+ inttostr(dayof(fecha))+'/'+inttostr(yearof(fecha));
+
+  if FDataset.Connection.Protocol = 'firebird-1.5' then
+  begin
+    txt_fecha:= inttostr(monthof(fecha))+'/'+ inttostr(dayof(fecha))+'/'+inttostr(yearof(fecha));
+  end
+  else
+  if FDataset.Connection.Protocol = 'postgresql' then
+  begin
+    txt_fecha:= inttostr(yearof(fecha))+'-'+inttostr(monthof(fecha))+'-'+ inttostr(dayof(fecha));
+  end;
+
   txt_campo:= TEKCriterioBA(FCriterios.Items[x]).FTabla+'.'+TEKCriterioBA(FCriterios.Items[x]).FCampo;
   txt_condicion:= operador.Items[operador.ItemIndex];
   armarfecha:=  Format('cast('+txt_campo+' as Date) '+txt_condicion+' %s', [QuotedStr(txt_fecha)]);
