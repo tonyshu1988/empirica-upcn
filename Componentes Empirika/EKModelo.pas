@@ -405,12 +405,13 @@ begin
 //    raise Exception.Create('Há ocurrido un error. Vuelva a intentarlo.');
     on E: Exception do
     begin
-//        if Assigned(transacciones_activas[ta_a].CtrlError) then
+//      if Assigned(transacciones_activas[ta_a].CtrlError) then
 //        transacciones_activas[ta_a].CtrlError(transacciones_activas[ta_a].datasets[i], e)
 //      else
         control_errores(E);
     end
   end;
+
   if not bien then
   begin
     // No hace Coneccion.Rollback;

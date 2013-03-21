@@ -1268,7 +1268,7 @@ begin
   try
     fecha := strtodate(campo.Text);
   except
-    ShowMessage('Hay un error en los parametros ingresados');
+//    ShowMessage('Hay un error en los parametros ingresados');
     exit;
   end;
 
