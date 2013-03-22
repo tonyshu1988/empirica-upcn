@@ -60,6 +60,7 @@ begin
   Activate;
 end;
 
+
 procedure TEKEventos.aldesactivar(Sender: TObject);
 begin
     if Assigned(FoldDeActivate) then
@@ -68,6 +69,7 @@ begin
     if Assigned(FEventosBase) then
       FEventosBase.Activate;
 end;
+
 
 constructor TEKEventos.Create(AOwner: TComponent);
 begin
@@ -94,7 +96,6 @@ begin
 end;
 
 
-
 destructor TEKEventos.destroy;
 begin
   if Assigned(Owner) then
@@ -113,8 +114,6 @@ begin
         end;
   inherited;
 end;
-
-
 
 
 Procedure TEKEventos.SetEnterPorTab(const Value: Boolean);

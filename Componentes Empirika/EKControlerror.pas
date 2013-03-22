@@ -3,17 +3,27 @@ unit EKControlerror;
 interface
 
 uses
-  Messages, SysUtils, strUtils, zdbcintfs, DB;
+  Messages, SysUtils, strUtils, zdbcintfs, DB, ZConnection;
 
 var
   error_clave, error_foranea, error_nulo: string;
 
 procedure control_errores(E: Exception);
-
+procedure control_errores_mensaje(titulo, error, detalle: string);
 
 implementation
 
 uses EKerror;
+
+
+procedure control_errores_mensaje(titulo, error, detalle: string);
+begin
+  f_error.Caption:= titulo;
+  f_error.text_error.Caption:= error;
+  F_Error.error_c.Caption:= detalle;
+  F_Error.Visible:= False;
+  F_Error.ShowModal;
+end;
 
 
 procedure control_errores(E: Exception);

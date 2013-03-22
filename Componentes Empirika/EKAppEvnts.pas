@@ -115,8 +115,7 @@ type
     procedure DoMessage(var Msg: TMsg; var Handled: Boolean);
     procedure DoMinimize(Sender: TObject);
     procedure DoRestore(Sender: TObject);
-    procedure DoShowHint(var HintStr: string; var CanShow: Boolean;
-      var HintInfo: THintInfo);
+    procedure DoShowHint(var HintStr: string; var CanShow: Boolean; var HintInfo: THintInfo);
     procedure DoShortcut(var Msg: TWMKey; var Handled: Boolean);
     procedure DoSettingChange(Sender: TObject; Flag: Integer; const Section: string; var Result: Longint);
     procedure DoModalBegin(Sender: TObject);
@@ -133,8 +132,7 @@ type
     procedure enter_por_tab(Sender: TObject; var Key: Char);
     function CheckDispatching(AppEvents: TCustomEKApplicationEvents): Boolean;
 
-    property AppEvents[Index: Integer]: TCustomEKApplicationEvents
-      read GetAppEvents; default;
+    property AppEvents[Index: Integer]: TCustomEKApplicationEvents read GetAppEvents; default;
     property Count: Integer read GetCount;
     property OnFormActivate : TNotifyEvent read FOnFormActivate write FOnFormActivate;
   end;
