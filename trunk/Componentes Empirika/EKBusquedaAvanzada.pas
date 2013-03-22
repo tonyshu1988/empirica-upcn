@@ -244,6 +244,7 @@ type
     procedure Notification(AComponent: TComponent; Operation: TOperation); override;
   public
     { Public declarations }
+    errorDatos: boolean;
     function ArmarConsulta(): TStrings;
     function Abrir() : boolean;
     procedure Siguiente();
@@ -314,7 +315,7 @@ type
 procedure Register;
 
 implementation
-uses EKUBusqueda;
+uses EKUBusqueda, EKcontrolerror;
 
 procedure Register;
 begin
@@ -633,6 +634,8 @@ var SavedParams : TParams;
     SavedConsulta : TStrings;
     abierto : boolean;
 begin
+//
+
     abierto := FDataset.Active;
     result := false;
     SavedParams := TParams.Create;
@@ -650,13 +653,21 @@ begin
     try
       modelo.abrir(DataSet);
     except
-      ShowMessage('Hay un error en los parámetros ingresados'+#13+#13+'Verifique los campos numéricos o los campos fecha');
-      FDataset.SQL.Assign(SavedConsulta);
-      FDataset.Params.AssignValues(SavedParams);
-      if abierto then
-         Modelo.abrir(Dataset);
-      result := false;
-      exit;
+      on E: Exception do
+      begin
+        //ShowMessage('Hay un error en los parámetros ingresados'+#13+#13+'Verifique los campos numéricos o los campos fecha');
+        control_errores_mensaje('Error en la Busqueda', 'Hay un error en los parámetros ingresados'+#13+'Verifique los campos numéricos o los campos fecha', 'Hay un error en los parámetros ingresados'+#13+'Verifique los campos numéricos o los campos fecha');
+
+        if modelo.Coneccion.Protocol = 'postgresql' then
+          modelo.Coneccion.Rollback;
+
+        FDataset.SQL.Assign(SavedConsulta);
+        FDataset.Params.AssignValues(SavedParams);
+        if abierto then
+           Modelo.abrir(Dataset);
+        result := false;
+        exit;
+      end;
     end;
 
     SavedParams.Free;
@@ -847,6 +858,8 @@ var
   orden : string;
   ParamBuscados : String;
 begin
+  errorDatos:= false;
+
   top := 0;
   if FCriterios.Count > 0 then
   begin
@@ -1125,6 +1138,7 @@ begin
       end
       else
         result := true;
+
       if FVaciarValorDespues then
          BlanquearDatosBusqueda(self);
     end
@@ -1268,7 +1282,7 @@ begin
   try
     fecha := strtodate(campo.Text);
   except
-//    ShowMessage('Hay un error en los parametros ingresados');
+    errorDatos:= true;
     exit;
   end;
 
