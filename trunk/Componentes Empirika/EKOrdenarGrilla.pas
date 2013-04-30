@@ -133,14 +133,6 @@ end;
 
 procedure TEKColumna.Assign(Source: TPersistent);
 begin
-//  if Source is TCheckConstraint then
-//  begin
-//   FGroupOperation := TEKDBSumaItem(Source).FGroupOperation;
-//   FFieldName := TEKDBSumaItem(Source).FFieldName;
-//   Value := TEKDBSumaItem(Source).Value;
-//   SumValue := TEKDBSumaItem(Source).SumValue;
-//  end;
-//  inherited Assign(Source);
 end;
 
 
@@ -505,10 +497,6 @@ begin
   begin
     TEKColumna(FFiltros.Add).FTituloColumna:= grilla.Columns[i].Title.Caption;
     FFiltros[i].FVisible:= grilla.Columns[i].Visible;
-//    itemNuevo:= TEKColumna.Create(nil);
-//    itemNuevo.FTituloColumna:= grilla.Columns[i].Title.Caption;
-//    itemNuevo.FVisible:= grilla.Columns[i].Visible;
-//    TEKColumna(FFiltros.Add):= itemNuevo;
   end
 end;
 

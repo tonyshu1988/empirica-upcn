@@ -411,7 +411,9 @@ object FBusqueda: TFBusqueda
       'Empieza'
       'Termina'
       'Distinto'
-      'No Contiene')
+      'No Contiene'
+      'Es Nulo'
+      'Es No Nulo')
   end
   object c_nro: TComboBox
     Left = 192
@@ -429,7 +431,9 @@ object FBusqueda: TFBusqueda
       '>='
       '<'
       '<='
-      '<>')
+      '<>'
+      'Es Nulo'
+      'Es No Nulo')
   end
   object Buscar: TButton
     Left = 24
