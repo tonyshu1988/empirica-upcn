@@ -259,8 +259,6 @@ var
         end;
       end;
 
-
-
     error_clave:= '';
     conectar:= true;
   end;
