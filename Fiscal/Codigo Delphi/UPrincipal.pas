@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, EKIni, ZConnection, EKModelo, StdCtrls, ExtCtrls, OleCtrls, StrUtils,
   DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  Buttons, ComCtrls, Grids, DBGrids, EPSON_Impresora_Fiscal_TLB, ComObj;
+  Buttons, ComCtrls, Grids, DBGrids, EPSON_Impresora_Fiscal_TLB, ComObj,
+  FiscalPrinterLib_TLB;
 
 type
   TFPrincipal = class(TForm)
@@ -70,12 +71,20 @@ type
     ZQ_Config_FiscalVELOCIDAD: TStringField;
     ZQ_Config_FiscalPREDETERMINADA: TStringField;
     btnCancelarFactura: TButton;
+    Hasar: THASAR;
+    gBoxImpresora: TGroupBox;
+    Label3: TLabel;
+    Label5: TLabel;
+    cBoxImpresora_Marca: TComboBox;
+    cBoxImpresora_Velocidad: TComboBox;
+    cBoxImpresora_Puerto: TComboBox;
+    Label4: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure leerParametros();
     procedure leerArchivoIni();
     procedure cierreZ();
     procedure cierreX();
-    procedure facturar(marca:String);
+    procedure facturar(marca: string);
     procedure auditoria();
     procedure btnCierreZClick(Sender: TObject);
     procedure btnCierreXClick(Sender: TObject);
@@ -86,21 +95,25 @@ type
     procedure btnAbrirPuertoClick(Sender: TObject);
     procedure btnCerrarPuertoClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure mostrarError(mensaje, titulo : String);
+    procedure mostrarError(mensaje, titulo: string);
     procedure cancelarTicket(marca: string);
     procedure btnCancelarFacturaClick(Sender: TObject);
+    procedure cBoxImpresora_MarcaChange(Sender: TObject);
+    procedure cBoxImpresora_PuertoChange(Sender: TObject);
+    procedure cBoxImpresora_VelocidadChange(Sender: TObject);
   private
     PrinterFiscal_Epson: _PrinterFiscalDisp;
     db_name, db_host, db_pass, db_user: string;
-    if_puerto,if_marca,if_modelo: string;
+    if_puerto, if_marca, if_modelo: string;
     if_velocidad: integer;
     preview: boolean;
-    id_cpb, comando, impresora, audModo, audFDesde, audFHasta: string;
+    id_cpb, impresora, audModo, audFDesde, audFHasta: string;
     resultado: boolean;
     errorDriver: integer;
     productoDetallado: boolean;
     mensajeError, tituloError: string;
     puntoVenta: widestring;
+    comando:widestring;
   public
   end;
 
@@ -117,7 +130,8 @@ uses IniFiles, UUtilidades, Math, DateUtils;
 {$R *.dfm}
 
 //mensaje de error, con el botón "Aceptar"
-procedure TFPrincipal.mostrarError(mensaje, titulo : String);
+
+procedure TFPrincipal.mostrarError(mensaje, titulo: string);
 begin
   mensaje:= mensaje + #13 + #13 + 'Para mas información contacte al soporte tecnico.';
 
@@ -127,6 +141,12 @@ end;
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
+  if_puerto:= '1';
+  if_velocidad:= 9600;
+  if_marca:= '';
+  if_modelo:= '';
+
+  //OBJETO PARA LA IMPRESORA EPSON
   PrinterFiscal_Epson:= CreateComObject(CLASS_PrinterFiscal) as _PrinterFiscalDisp;
 
   tituloError:= 'ERROR MODULO FISCAL';
@@ -140,17 +160,20 @@ begin
 
     ZQ_Config_Fiscal.Close;
     EKModelo.abrir(ZQ_Config_Fiscal);
-    if_puerto:= ZQ_Config_FiscalPUERTO.AsString;
-    if_velocidad:= ZQ_Config_FiscalVELOCIDAD.AsInteger;
-    if_marca:= ZQ_Config_FiscalMARCA.AsString;
-    if_modelo:=ZQ_Config_FiscalMODELO.AsString;
-    ZQ_Config_Fiscal.Close;
+    if not ZQ_Config_Fiscal.IsEmpty then
+    begin
+      if_puerto:= ZQ_Config_FiscalPUERTO.AsString;
+      if_velocidad:= ZQ_Config_FiscalVELOCIDAD.AsInteger;
+      if_marca:= ZQ_Config_FiscalMARCA.AsString;
+      if_modelo:= ZQ_Config_FiscalMODELO.AsString;
+      ZQ_Config_Fiscal.Close;
+    end;
   except
     on e: exception do
     begin
-      mensajeError:= 'Error de Base de Datos '+db_host+':'+db_name+
-                     #13+'Descripción:'+
-                     #13+e.Message;
+      mensajeError:= 'Error de Base de Datos ' + db_host + ':' + db_name +
+        #13 + 'Descripción:' +
+        #13 + e.Message;
 
       mostrarError(mensajeError, tituloError);
       Application.Terminate;
@@ -188,6 +211,30 @@ begin
 end;
 
 
+function TFPrincipal.abrirImpresora: integer;
+begin
+  if if_marca = '' then
+    exit;
+
+  if (if_marca = 'EPSON') then
+  begin
+    lblErrorDriver.Caption:= '';
+    PrinterFiscal_Epson.PortNumber:= strtoint(if_puerto);
+    PrinterFiscal_Epson.BaudRate:= IntToStr(if_velocidad);
+    Result:= 0;
+  end;
+
+  if (if_marca = 'HASAR') then
+  begin
+    lblErrorDriver.Caption:= '';
+    Hasar.Puerto:= strtoint(if_puerto);
+    Hasar.Baudios:= if_velocidad;
+    Hasar.Modelo:= MODELO_P330;
+    Result:= 0;
+  end
+end;
+
+
 procedure TFPrincipal.leerParametros;
 var
   i: integer;
@@ -205,30 +252,30 @@ begin
   begin
     for i:= 1 to ParamCount do
     begin
-      editParametros.Text:= editParametros.Text+' '+ParamStr(i);
+      editParametros.Text:= editParametros.Text + ' ' + ParamStr(i);
 
-        if LeftStr(ParamStr(i), 2) = '-c' then //-c = Comando. Z(Cierre Z), X(Cierre X), A(Auditoria Z), F(Impresion de Factura)
-          comando:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+      if LeftStr(ParamStr(i), 2) = '-c' then //-c = Comando. Z(Cierre Z), X(Cierre X), A(Auditoria Z), F(Impresion de Factura)
+        comando:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+      else
+        if LeftStr(ParamStr(i), 2) = '-l' then //-l = Nro de comprobante a imprimir. Solo con comando F
+          id_cpb:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
         else
-          if LeftStr(ParamStr(i), 2) = '-l' then //-l = Nro de comprobante a imprimir. Solo con comando F
-            id_cpb:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+          if LeftStr(ParamStr(i), 2) = '-t' then //-t = Tipo de auditoria Z (T=Total general; D=Detallado). Solo con comando A
+            audModo:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
           else
-            if LeftStr(ParamStr(i), 2) = '-t' then //-t = Tipo de auditoria Z (T=Total general; D=Detallado). Solo con comando A
-              audModo:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+            if LeftStr(ParamStr(i), 2) = '-d' then //-d = Fecha desde de la auditoria Z. Solo con comando A
+              audFDesde:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
             else
-              if LeftStr(ParamStr(i), 2) = '-d' then //-d = Fecha desde de la auditoria Z. Solo con comando A
-                audFDesde:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+              if LeftStr(ParamStr(i), 2) = '-h' then //-h = Fecha hasta de la auditoria Z. Solo con comando A
+                audFHasta:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
               else
-                if LeftStr(ParamStr(i), 2) = '-h' then //-h = Fecha hasta de la auditoria Z. Solo con comando A
-                  audFHasta:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-                else
-                  if LeftStr(ParamStr(i), 2) = '-p' then //-p = si se muestra el panel principal
-                    preview:= true;
+                if LeftStr(ParamStr(i), 2) = '-p' then //-p = si se muestra el panel principal
+                  preview:= true;
     end;
 
     Visible:= preview;
     Panel1.Enabled:= preview;
-  
+
     try
       if comando <> '' then
       begin
@@ -258,28 +305,17 @@ begin
   begin
     Visible:= true;
     Panel1.Enabled:= true;
-  end
-end;
-
-
-function TFPrincipal.abrirImpresora: integer;
-begin
-  if if_modelo = '' then
-    exit;
-
-  if (if_marca = 'EPSON') then
-  begin
-    lblErrorDriver.Caption:= '';
-    PrinterFiscal_Epson.PortNumber:= strtoint(if_puerto);
-    PrinterFiscal_Epson.BaudRate:= IntToStr(if_velocidad);
-    Result:= 0;
+    gBoxImpresora.Visible:= true;
+    cBoxImpresora_MarcaChange(self);
+    cBoxImpresora_PuertoChange(self);
+    cBoxImpresora_VelocidadChange(self);
   end
 end;
 
 
 function TFPrincipal.cerrarImpresora: integer;
 begin
-  if if_modelo = '' then
+  if if_marca = '' then
     exit;
 
   if (if_marca = 'EPSON') then
@@ -293,11 +329,12 @@ end;
 ///////////////////////////////////////////
 //              CIERRE Z
 ///////////////////////////////////////////
+
 procedure TFPrincipal.cierreZ;
 var
   auxTipo, auxImprimir, auxEstado: WideString;
 begin
-  if if_modelo = '' then
+  if if_marca = '' then
     exit;
 
   if (if_marca = 'EPSON') then
@@ -308,17 +345,26 @@ begin
     if PrinterFiscal_Epson.CloseJournal(auxTipo, auxImprimir) then
       PrinterFiscal_Epson.Status(auxEstado);
   end;
+
+  if (if_marca = 'HASAR') then
+  begin
+    Hasar.Comenzar;
+    Hasar.TratarDeCancelarTodo;
+    Hasar.ReporteZ;
+    Hasar.Finalizar;
+  end;
 end;
 
 
 ///////////////////////////////////////////
 //              CIERRE X
 ///////////////////////////////////////////
+
 procedure TFPrincipal.cierreX;
 var
   auxTipo, auxImprimir, auxEstado: WideString;
 begin
-  if if_modelo = '' then
+  if if_marca = '' then
     exit;
 
   if (if_marca = 'EPSON') then
@@ -329,17 +375,28 @@ begin
     if PrinterFiscal_Epson.CloseJournal(auxTipo, auxImprimir) then
       PrinterFiscal_Epson.Status(auxEstado);
   end;
+
+  if (if_marca = 'HASAR') then
+  begin
+    Hasar.Comenzar;
+    Hasar.TratarDeCancelarTodo;
+    Hasar.ReporteX;
+    Hasar.Finalizar;
+  end;
 end;
 
 
 ///////////////////////////////////////////
 //              AUDITORIA
 ///////////////////////////////////////////
+
 procedure TFPrincipal.auditoria;
 var
   auxEstado, auxMode, auxFdesde, auxFHasta, auxTipo: WideString;
+  auxFDesdeD, auxFHastaD: TDateTime;
+  anio, mes, dia: integer;
 begin
-  if if_modelo = '' then
+  if if_marca = '' then
     exit;
 
   if (if_marca = 'EPSON') then
@@ -352,62 +409,85 @@ begin
     if PrinterFiscal_Epson.Audit(auxTipo, auxMode, auxFdesde, auxFHasta) then
       PrinterFiscal_Epson.Status(auxEstado);
   end;
+
+  if (if_marca = 'HASAR') then
+  begin
+    anio:= StrToInt(MidStr(audFDesde, 1, 2));
+    mes:= StrToInt(MidStr(audFDesde, 3, 2));
+    dia:= StrToInt(MidStr(audFDesde, 5, 2));
+    auxFDesdeD:= EncodeDate(anio, mes, dia);
+
+    anio:= StrToInt(MidStr(audFHasta, 1, 2));
+    mes:= StrToInt(MidStr(audFHasta, 3, 2));
+    dia:= StrToInt(MidStr(audFHasta, 5, 2));
+    auxFHastaD:= EncodeDate(anio, mes, dia);
+
+    Hasar.Comenzar;
+    Hasar.TratarDeCancelarTodo;
+    if audModo = 'T' then //T = Reporte total general
+      Hasar.ReporteZPorFechas(auxFDesdeD, auxFHastaD, false)
+    else
+    if audModo = 'D' then //D = Reporte detallado
+      Hasar.ReporteZPorFechas(auxFDesdeD, auxFHastaD, true);
+    Hasar.Finalizar;
+  end;
 end;
 
 
 ///////////////////////////////////////////
 //              FACTURA
 ///////////////////////////////////////////
+
 procedure TFPrincipal.facturar(marca: string);
 var
   //VARIABLES PARA ABRIR FACTURA
-  TipoDocumento: widestring;        // Tipo de documento fiscal a realizar. F=Ticket-factura; M=Nota de crédito; T=Ticket-factura
-  TipoPapel: widestring;            // Tipo de salida impresa para factura fiscal o recibo. C=Formulario continuo; S=Hoja suelta o slip
-  TipoLetra: widestring;            // Letra del documento fiscal (A,B o C)
-  CantidadCopias: widestring;       // Cantidad de copias que se deben imprimir (1 a 5)
-  TipoFormulario: widestring;       // Tipo de formulario que se utiliza para la factura emitidas en hoja suelta o formulario continuo. A=Autoimpreso; F=Formulario pre-impreso; P=La impresora fiscal debe dibujar las líneas
-  TipoFuente: widestring;           // Tamaño de los caracteres que se van a utilizar en toda la factura en CPI (10, 12, 17)
-  TipoIVAEmisor: widestring;        // Responsabilidad frente al IVA del EMISOR (I, R, N, E, M)
-  TipoIVAComprador: widestring;     // Responsabilidad frente al IVA del COMPROADOR (I, R, N, E, M, F, S)
-  NombreComprador1: widestring;     // Nombre comercial del comprador línea 1 (max 40 bytes)
-  NombreComprador2: widestring;     // Nombre comercial del comprador línea 2 (max 40 bytes)
-  TpoDocComprador: widestring;      // Tipo de documento del comprador (CUIT, CUIL, DNI) (max 6 bytes)
-  NroDocComprador: widestring;      // CUIT o Numero documento del comprador (max 11 bytes)
-  BienDeUso: widestring;            // Bien de uso (B o N)
-  DomicilioComprador1: widestring;  // Domicilio del comprador, línea 1 (max 40 bytes)
-  DomicilioComprador2: widestring;  // Domicilio del comprador, línea 2 (max 40 bytes)
-  DomicilioComprador3: widestring;  // Domicilio del comprador, línea 3 (max 40 bytes)
-  LineaVariable1: widestring;       // Línea 1 de texto variable (max 40 bytes)
-  LineaVariable2: widestring;       // Línea 1 de texto variable (max 40 bytes)
-  TipoTablaBien: widestring;        // Formato para almacenar los datos (C o G)
+  TipoDocumento: widestring; // Tipo de documento fiscal a realizar. F=Ticket-factura; M=Nota de crédito; T=Ticket-factura
+  TipoPapel: widestring; // Tipo de salida impresa para factura fiscal o recibo. C=Formulario continuo; S=Hoja suelta o slip
+  TipoLetra: widestring; // Letra del documento fiscal (A,B o C)
+  CantidadCopias: widestring; // Cantidad de copias que se deben imprimir (1 a 5)
+  TipoFormulario: widestring; // Tipo de formulario que se utiliza para la factura emitidas en hoja suelta o formulario continuo. A=Autoimpreso; F=Formulario pre-impreso; P=La impresora fiscal debe dibujar las líneas
+  TipoFuente: widestring; // Tamaño de los caracteres que se van a utilizar en toda la factura en CPI (10, 12, 17)
+  TipoIVAEmisor: widestring; // Responsabilidad frente al IVA del EMISOR (I, R, N, E, M)
+  TipoIVAComprador: widestring; // Responsabilidad frente al IVA del COMPROADOR (I, R, N, E, M, F, S)
+  NombreComprador1: widestring; // Nombre comercial del comprador línea 1 (max 40 bytes)
+  NombreComprador2: widestring; // Nombre comercial del comprador línea 2 (max 40 bytes)
+  TpoDocComprador: widestring; // Tipo de documento del comprador (CUIT, CUIL, DNI) (max 6 bytes)
+  NroDocComprador: widestring; // CUIT o Numero documento del comprador (max 11 bytes)
+  BienDeUso: widestring; // Bien de uso (B o N)
+  DomicilioComprador1: widestring; // Domicilio del comprador, línea 1 (max 40 bytes)
+  DomicilioComprador2: widestring; // Domicilio del comprador, línea 2 (max 40 bytes)
+  DomicilioComprador3: widestring; // Domicilio del comprador, línea 3 (max 40 bytes)
+  LineaVariable1: widestring; // Línea 1 de texto variable (max 40 bytes)
+  LineaVariable2: widestring; // Línea 1 de texto variable (max 40 bytes)
+  TipoTablaBien: widestring; // Formato para almacenar los datos (C o G)
   //VARIABLES PARA ENVIAR ITEMS
-  DescripcionProducto: widestring;      // Descripción del producto (max 20 bytes)
+  DescripcionProducto: widestring; // Descripción del producto (max 20 bytes)
   Cantidad: double;
-  CantidadWide: widestring;             // Cantidad vendida
+  CantidadWide: widestring; // Cantidad vendida
   PrecioUnitario: double;
-  PrecioUnitarioWide: widestring;       // Precio Unitario
+  PrecioUnitarioWide: widestring; // Precio Unitario
   TasaIva: double;
-  TasaIvaWide: widestring;              // Tasa del iva
-  CalificadorDeItem: widestring;            // Calificador de la operación. M = Monto agregado mercadería (SUMA); m = Anula el item vendido (RESTA); R = Bonificacion (RESTA); r = anula una bonificacion (SUMA)
+  TasaIvaWide: widestring; // Tasa del iva
+  CalificadorDeItem: widestring; // Calificador de la operación. M = Monto agregado mercadería (SUMA); m = Anula el item vendido (RESTA); R = Bonificacion (RESTA); r = anula una bonificacion (SUMA)
   CantidadDeBultos: integer;
-  CantidadDeBultosWide: widestring;     // Canidad de bultos
+  CantidadDeBultosWide: widestring; // Canidad de bultos
   ImpuestosInternos: double;
-  ImpuestosInternosWide: widestring;    // Impuestos internos porcentuales
-  LineaDescExtra1: widestring;          // Linea 1 descripcion complementaria del item (max 30 bytes)
-  LineaDescExtra2: widestring;          // Linea 2 descripcion complementaria del item (max 30 bytes)
-  LineaDescExtra3: widestring;          // Linea 3 descripcion complementaria del item (max 30 bytes)
+  ImpuestosInternosWide: widestring; // Impuestos internos porcentuales
+  LineaDescExtra1: widestring; // Linea 1 descripcion complementaria del item (max 30 bytes)
+  LineaDescExtra2: widestring; // Linea 2 descripcion complementaria del item (max 30 bytes)
+  LineaDescExtra3: widestring; // Linea 3 descripcion complementaria del item (max 30 bytes)
   TasaAcrecentamiento: double;
-  TasaAcrecentamientoWide: widestring;  // Tasa Acrecentamiento
+  TasaAcrecentamientoWide: widestring; // Tasa Acrecentamiento
   ImpuestosIntFijos: double;
-  ImpuestosIntFijosWide: widestring;    // Impuestos Internos Fijos
+  ImpuestosIntFijosWide: widestring; // Impuestos Internos Fijos
   //SUBTOTAL
   auxSubtotal1: widestring;
   auxSubtotal2: widestring;
   //VARIABLES PARA ENVIAR FORMA PAGO
-  DescripcionFPago: widestring;   // Texto con descripcion del pago (max 25 bytes)
+  DescripcionFPago: widestring; // Texto con descripcion del pago (max 25 bytes)
   MontoFPago: double;
-  MontoFPagoWide: widestring;     // monto
-  CalificadorFPago: widestring;   // Calificador del item de línea. C=Cancelar el comprobante, T=Suma al importe pagado, t=Anula un pago hecho con T, D=Realiza un DESCUENTO GLOBAL de monto fijo, R=Realiza un RECARGO GLOBAL de monto fijo
+  MontoFPagoWide: widestring; // monto
+  CalificadorFPago: widestring; // Calificador del item de línea. C=Cancelar el comprobante, T=Suma al importe pagado, t=Anula un pago hecho con T, D=Realiza un DESCUENTO GLOBAL de monto fijo, R=Realiza un RECARGO GLOBAL de monto fijo
   //CERRAR FACTURA
   auxCerrar: widestring;
   //VARIABLES PARA ACTUALIZAR COMPROBANTE
@@ -416,7 +496,7 @@ var
   descuento_redondeoWide: widestring;
   descuento_redondeo: double;
 begin
-  if if_modelo = '' then
+  if if_marca = '' then
     exit;
 
   ZQ_Factura.Close;
@@ -508,9 +588,9 @@ begin
       DomicilioComprador3, LineaVariable1, LineaVariable2, TipoTablaBien);
     if not resultado then
     begin
-      mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
-                     DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
-      mensajeError:= '1. OPEN INVOICE'+#13+mensajeError;
+      mensajeError:= DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
+        DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+      mensajeError:= '1. OPEN INVOICE' + #13 + mensajeError;
       mostrarError(mensajeError, tituloError);
       cancelarTicket(marca);
       exit;
@@ -530,16 +610,16 @@ begin
       begin
         PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
         PrecioUnitario:= RoundTo(PrecioUnitario, -2);
-        descuento_redondeo:= roundto((PrecioUnitario*Cantidad)- ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat, -2);
+        descuento_redondeo:= roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat, -2);
       end
       else
       begin
         PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
         PrecioUnitario:= RoundTo(PrecioUnitario, -2);
-        descuento_redondeo:= roundto((PrecioUnitario*Cantidad)- ZQ_ItemsIMPORTE_IF.AsFloat, -2);
+        descuento_redondeo:= roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
       end;
-      PrecioUnitarioWide:= FloatToStr(PrecioUnitario*100);
-      descuento_redondeoWide:= FloatToStr(descuento_redondeo*100);
+      PrecioUnitarioWide:= FloatToStr(PrecioUnitario * 100);
+      descuento_redondeoWide:= FloatToStr(descuento_redondeo * 100);
 
       TasaIva:= 0.21;
       TasaIvaWide:= FloatToStr(TasaIva * 10000);
@@ -573,9 +653,9 @@ begin
         LineaDescExtra3, TasaAcrecentamientoWide, ImpuestosIntFijosWide);
       if not resultado then
       begin
-        mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
-                       DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
-        mensajeError:= '2. SEND INVOICE ITEM'+#13+mensajeError;
+        mensajeError:= DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
+          DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+        mensajeError:= '2. SEND INVOICE ITEM' + #13 + mensajeError;
         mostrarError(mensajeError, tituloError);
         cancelarTicket(marca);
         exit;
@@ -590,9 +670,9 @@ begin
     resultado:= PrinterFiscal_Epson.GetInvoiceSubtotal(auxSubtotal1, auxSubtotal2);
     if not resultado then
     begin
-      mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
-                     DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
-      mensajeError:= '3. GET INVOICE SUBTOTAL'+#13+mensajeError;
+      mensajeError:= DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
+        DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+      mensajeError:= '3. GET INVOICE SUBTOTAL' + #13 + mensajeError;
       mostrarError(mensajeError, tituloError);
       cancelarTicket(marca);
       exit;
@@ -609,9 +689,9 @@ begin
       resultado:= PrinterFiscal_Epson.SendInvoicePayment(DescripcionFPago, MontoFPagoWide, CalificadorFPago);
       if not resultado then
       begin
-        mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
-                       DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
-        mensajeError:= '4. SEND INVOICE PAYMENT (T)'+#13+mensajeError;
+        mensajeError:= DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
+          DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+        mensajeError:= '4. SEND INVOICE PAYMENT (T)' + #13 + mensajeError;
         mostrarError(mensajeError, tituloError);
         cancelarTicket(marca);
         exit;
@@ -627,9 +707,9 @@ begin
       resultado:= PrinterFiscal_Epson.SendInvoicePayment(DescripcionFPago, descuento_redondeoWide, CalificadorFPago);
       if not resultado then
       begin
-        mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
-                       DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
-        mensajeError:= '4. SEND INVOICE PAYMENT (D)'+#13+mensajeError;
+        mensajeError:= DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
+          DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+        mensajeError:= '4. SEND INVOICE PAYMENT (D)' + #13 + mensajeError;
         mostrarError(mensajeError, tituloError);
         cancelarTicket(marca);
         exit;
@@ -665,9 +745,9 @@ begin
     resultado:= PrinterFiscal_Epson.CloseInvoice(TipoDocumento, TipoLetra, auxCerrar);
     if not resultado then
     begin
-      mensajeError:= DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.PrinterStatus, 'PrinterCode')+#13+#13+
-                     DecodificadorErrorFiscal('$'+PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
-      mensajeError:= '5. CLOSE INVOICE'+#13+mensajeError;
+      mensajeError:= DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
+        DecodificadorErrorFiscal('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+      mensajeError:= '5. CLOSE INVOICE' + #13 + mensajeError;
       mostrarError(mensajeError, tituloError);
       cancelarTicket(marca);
       exit;
@@ -744,12 +824,12 @@ begin
   anio:= RightStr(IntToStr(YearOf(DateTimeFechaDesde.Date)), 2);
   mes:= rellenar(IntToStr(MonthOf(DateTimeFechaDesde.Date)), '0', 2);
   dia:= rellenar(IntToStr(DayOf(DateTimeFechaDesde.Date)), '0', 2);
-  audFDesde:= anio+mes+dia;
+  audFDesde:= anio + mes + dia;
 
   anio:= RightStr(IntToStr(YearOf(DateTimeFechaHasta.Date)), 2);
   mes:= rellenar(IntToStr(MonthOf(DateTimeFechaHasta.Date)), '0', 2);
   dia:= rellenar(IntToStr(DayOf(DateTimeFechaHasta.Date)), '0', 2);
-  audFHasta:= anio+mes+dia;
+  audFHasta:= anio + mes + dia;
 
   if ComboBoxTipoAuditoria.ItemIndex = 0 then
     audModo:= 'T'
@@ -788,7 +868,25 @@ end;
 
 procedure TFPrincipal.btnCancelarFacturaClick(Sender: TObject);
 begin
-  cancelarTicket(if_modelo);
+  cancelarTicket(if_marca);
+end;
+
+
+procedure TFPrincipal.cBoxImpresora_MarcaChange(Sender: TObject);
+begin
+  if_marca:= cBoxImpresora_Marca.Text;
+end;
+
+
+procedure TFPrincipal.cBoxImpresora_PuertoChange(Sender: TObject);
+begin
+  if_puerto:= cBoxImpresora_Puerto.Text;
+end;
+
+
+procedure TFPrincipal.cBoxImpresora_VelocidadChange(Sender: TObject);
+begin
+  if_velocidad:= strtoint(cBoxImpresora_Velocidad.Text);
 end;
 
 end.
