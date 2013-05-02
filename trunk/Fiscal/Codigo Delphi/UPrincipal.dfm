@@ -86,7 +86,7 @@ object FPrincipal: TFPrincipal
     object editParametros: TEdit
       Left = 80
       Top = 42
-      Width = 505
+      Width = 509
       Height = 21
       TabOrder = 1
     end
@@ -161,7 +161,7 @@ object FPrincipal: TFPrincipal
       TabOrder = 9
     end
     object DateTimeFechaHasta: TDateTimePicker
-      Left = 253
+      Left = 251
       Top = 174
       Width = 121
       Height = 21
@@ -170,7 +170,7 @@ object FPrincipal: TFPrincipal
       TabOrder = 10
     end
     object ComboBoxTipoAuditoria: TComboBox
-      Left = 379
+      Left = 375
       Top = 174
       Width = 214
       Height = 21
@@ -191,6 +191,89 @@ object FPrincipal: TFPrincipal
       TabOrder = 12
       Visible = False
       OnClick = btnCancelarFacturaClick
+    end
+    object Hasar: THASAR
+      Left = 200
+      Top = 120
+      Width = 32
+      Height = 32
+      ControlData = {000300004F0300004F030000}
+    end
+    object gBoxImpresora: TGroupBox
+      Left = 404
+      Top = 72
+      Width = 185
+      Height = 83
+      Caption = ' Impresora '
+      TabOrder = 14
+      object Label3: TLabel
+        Left = 32
+        Top = 16
+        Width = 39
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Marca:'
+      end
+      object Label5: TLabel
+        Left = 11
+        Top = 60
+        Width = 60
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Velocidad:'
+      end
+      object Label4: TLabel
+        Left = 29
+        Top = 38
+        Width = 42
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Puerto:'
+      end
+      object cBoxImpresora_Marca: TComboBox
+        Left = 74
+        Top = 12
+        Width = 104
+        Height = 21
+        ItemHeight = 13
+        ItemIndex = 0
+        TabOrder = 0
+        Text = 'EPSON'
+        OnChange = cBoxImpresora_MarcaChange
+        Items.Strings = (
+          'EPSON'
+          'HASAR')
+      end
+      object cBoxImpresora_Velocidad: TComboBox
+        Left = 74
+        Top = 56
+        Width = 104
+        Height = 21
+        ItemHeight = 13
+        ItemIndex = 2
+        TabOrder = 1
+        Text = '9600'
+        OnChange = cBoxImpresora_VelocidadChange
+        Items.Strings = (
+          '2400'
+          '4800'
+          '9600'
+          '19200')
+      end
+      object cBoxImpresora_Puerto: TComboBox
+        Left = 74
+        Top = 34
+        Width = 104
+        Height = 21
+        ItemHeight = 13
+        ItemIndex = 0
+        TabOrder = 2
+        Text = '1'
+        OnChange = cBoxImpresora_PuertoChange
+        Items.Strings = (
+          '1'
+          '2')
+      end
     end
   end
   object conexion: TZConnection
