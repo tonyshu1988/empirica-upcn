@@ -102,7 +102,7 @@ function TEKModeloTransaccion.iniciar_transaccion(nombre : string; datasets : ar
 var
   CtrlError : TEKControlDataSetError;
 begin
-  iniciar_transaccion(nombre, datasets, CtrlError);
+  result:= iniciar_transaccion(nombre, datasets, CtrlError);
 end;
 
 

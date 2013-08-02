@@ -2,12 +2,11 @@ object FListadoSQL: TFListadoSQL
   Tag = 98
   Left = 434
   Top = 290
-  ActiveControl = buscar
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Seleccione'
-  ClientHeight = 323
-  ClientWidth = 665
+  ClientHeight = 328
+  ClientWidth = 661
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -306,132 +305,228 @@ object FListadoSQL: TFListadoSQL
   Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
-  object Label1: TLabel
-    Left = 8
-    Top = 12
-    Width = 48
-    Height = 13
-    Caption = 'Buscar:'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Verdana'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
-  object campo_buscar: TLabel
-    Left = 168
-    Top = 296
-    Width = 83
-    Height = 13
-    Caption = 'campo_buscar'
-    Visible = False
-  end
-  object grilla: TDBGrid
-    Tag = 98
-    Left = 8
-    Top = 40
-    Width = 649
-    Height = 241
-    Color = 16768185
-    DataSource = D_Datos
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlack
-    Font.Height = -11
-    Font.Name = 'Verdana'
-    Font.Style = []
-    Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
-    ParentFont = False
+  object Panel1: TPanel
+    Left = 0
+    Top = 0
+    Width = 661
+    Height = 328
+    Align = alClient
+    BevelOuter = bvNone
+    BorderWidth = 5
     TabOrder = 0
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Verdana'
-    TitleFont.Style = []
-    OnDblClick = grillaDblClick
-    Columns = <
-      item
-        Expanded = False
-        Title.Caption = 'Clave'
-        Width = 124
-        Visible = True
+    object Panel_Seleccionar: TPanel
+      Left = 5
+      Top = 282
+      Width = 651
+      Height = 41
+      Align = alBottom
+      BevelOuter = bvNone
+      TabOrder = 4
+      DesignSize = (
+        651
+        41)
+      object bt_seleccionar: TButton
+        Left = 21
+        Top = 11
+        Width = 137
+        Height = 25
+        Caption = 'Seleccionar'
+        ModalResult = 1
+        TabOrder = 0
       end
-      item
-        Expanded = False
-        Title.Caption = 'Campo de B'#250'squeda'
-        Width = 2500
-        Visible = True
-      end>
-  end
-  object bt_seleccionar: TButton
-    Left = 8
-    Top = 288
-    Width = 137
-    Height = 25
-    Caption = 'Seleccionar'
-    ModalResult = 1
-    TabOrder = 1
-  end
-  object bt_salir: TButton
-    Left = 520
-    Top = 286
-    Width = 137
-    Height = 25
-    Caption = 'Cancelar'
-    ModalResult = 2
-    TabOrder = 2
-  end
-  object buscar: TEdit
-    Tag = 98
-    Left = 72
-    Top = 8
-    Width = 577
-    Height = 21
-    CharCase = ecUpperCase
-    Color = 13828095
-    TabOrder = 3
-    OnKeyUp = buscarKeyUp
-  end
-  object panel_edicion: TPanel
-    Left = 664
-    Top = 40
-    Width = 81
-    Height = 105
-    TabOrder = 4
-    Visible = False
-    object bt_nuevo: TButton
-      Left = 8
-      Top = 8
-      Width = 65
-      Height = 25
-      Caption = '&Nuevo'
-      Enabled = False
-      TabOrder = 0
+      object bt_salir: TButton
+        Left = 498
+        Top = 11
+        Width = 137
+        Height = 25
+        Anchors = [akTop, akRight]
+        Caption = 'Cancelar'
+        ModalResult = 2
+        TabOrder = 1
+      end
+      object bt_actualizar: TButton
+        Left = 176
+        Top = 11
+        Width = 145
+        Height = 25
+        Caption = 'Actualizar Datos'
+        TabOrder = 2
+      end
     end
-    object Bt_modificar: TButton
-      Left = 8
-      Top = 40
-      Width = 65
-      Height = 25
-      Caption = '&Modificar'
-      Enabled = False
-      TabOrder = 1
+    object panel_edicion: TPanel
+      Left = 575
+      Top = 61
+      Width = 81
+      Height = 221
+      Align = alRight
+      BevelOuter = bvNone
+      TabOrder = 3
+      Visible = False
+      object bt_nuevo: TButton
+        Left = 6
+        Top = 1
+        Width = 73
+        Height = 25
+        Caption = '&Nuevo'
+        Enabled = False
+        TabOrder = 0
+      end
+      object Bt_modificar: TButton
+        Left = 6
+        Top = 33
+        Width = 73
+        Height = 25
+        Caption = '&Modificar'
+        Enabled = False
+        TabOrder = 1
+      end
+      object bt_eliminar: TButton
+        Left = 6
+        Top = 65
+        Width = 73
+        Height = 25
+        Caption = '&Eliminar'
+        Enabled = False
+        TabOrder = 2
+        OnClick = bt_eliminarClick
+      end
     end
-    object bt_eliminar: TButton
-      Left = 8
-      Top = 72
-      Width = 65
-      Height = 25
-      Caption = '&Eliminar'
-      Enabled = False
+    object grilla: TDBGrid
+      Tag = 98
+      Left = 5
+      Top = 61
+      Width = 570
+      Height = 221
+      Align = alClient
+      Color = 14606012
+      DataSource = D_Datos
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 2
-      OnClick = bt_eliminarClick
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      OnDrawColumnCell = grillaDrawColumnCell
+      OnDblClick = grillaDblClick
+      Columns = <
+        item
+          Expanded = False
+          Title.Alignment = taCenter
+          Title.Caption = 'Clave'
+          Width = 60
+          Visible = True
+        end
+        item
+          Expanded = False
+          Title.Alignment = taCenter
+          Title.Caption = 'Campo Busqueda'
+          Width = 500
+          Visible = True
+        end
+        item
+          Expanded = False
+          Title.Alignment = taCenter
+          Title.Caption = 'Campo Busqueda 2'
+          Visible = False
+        end>
+    end
+    object Panel_Buscar: TPanel
+      Left = 5
+      Top = 5
+      Width = 651
+      Height = 28
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 0
+      DesignSize = (
+        651
+        28)
+      object lblBuscar: TLabel
+        Left = 18
+        Top = 7
+        Width = 115
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Campo Busqueda:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object campo_buscar: TLabel
+        Left = 566
+        Top = 7
+        Width = 83
+        Height = 13
+        Caption = 'campo_buscar'
+        Visible = False
+      end
+      object buscar: TEdit
+        Tag = 98
+        Left = 136
+        Top = 3
+        Width = 429
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        CharCase = ecUpperCase
+        TabOrder = 0
+        OnKeyUp = buscarKeyUp
+      end
+    end
+    object Panel_Buscar2: TPanel
+      Left = 5
+      Top = 33
+      Width = 651
+      Height = 28
+      Align = alTop
+      BevelOuter = bvNone
+      TabOrder = 1
+      Visible = False
+      DesignSize = (
+        651
+        28)
+      object lblBuscar2: TLabel
+        Left = 6
+        Top = 7
+        Width = 127
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Campo Busqueda 2:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object campo_buscar2: TLabel
+        Left = 566
+        Top = 7
+        Width = 90
+        Height = 13
+        Caption = 'campo_buscar2'
+        Visible = False
+      end
+      object buscar2: TEdit
+        Tag = 98
+        Left = 136
+        Top = 3
+        Width = 429
+        Height = 21
+        Anchors = [akLeft, akTop, akRight]
+        CharCase = ecUpperCase
+        TabOrder = 0
+        OnKeyUp = buscar2KeyUp
+      end
     end
   end
   object D_Datos: TDataSource
     DataSet = C_sql
-    Left = 528
-    Top = 4
+    Left = 216
+    Top = 148
   end
   object SQL: TZQuery
     ReadOnly = True
@@ -439,26 +534,26 @@ object FListadoSQL: TFListadoSQL
       '')
     ParamCheck = False
     Params = <>
-    Left = 560
-    Top = 4
+    Left = 216
+    Top = 100
   end
   object P_sql: TDataSetProvider
     DataSet = SQL
     ResolveToDataSet = True
-    Left = 592
-    Top = 8
+    Left = 336
+    Top = 96
   end
   object C_sql: TClientDataSet
     Aggregates = <>
     Params = <>
     ProviderName = 'P_sql'
     ReadOnly = True
-    Left = 624
-    Top = 8
+    Left = 336
+    Top = 152
   end
   object ActionManager1: TActionManager
-    Left = 432
-    Top = 288
+    Left = 456
+    Top = 152
     StyleName = 'XP Style'
     object Action1: TAction
       Caption = 'cancelar'
@@ -484,5 +579,23 @@ object FListadoSQL: TFListadoSQL
       Caption = 'Eliminar'
       ShortCut = 16453
     end
+  end
+  object EKOrdenarGrilla1: TEKOrdenarGrilla
+    Filtros = <
+      item
+        TituloColumna = 'Clave'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Campo de B'#250'squeda'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    PermitirOrdenar = True
+    PermitirMover = True
+    PermitirFiltrar = False
+    Left = 80
+    Top = 136
   end
 end
