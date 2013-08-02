@@ -253,7 +253,8 @@ type
     procedure Anterior();
     function Buscar(): boolean;
     function BuscarSinEjecutar(): boolean;
-    function Buscar1(ejecutar: boolean): boolean;
+    function BuscarSinMostrar(): boolean;
+    function Buscar1(ejecutar: boolean; mostrar: boolean): boolean;
     procedure VerConsultaOriginal();
     procedure ProcesarCambiosEnConsulta();
     procedure ProcesarCambiosSinEjecutar();
@@ -609,20 +610,19 @@ begin
   Consulta.Clear;
   if LimiteRegistros > 0 then
   begin
-    if Modelo.Coneccion.Protocol = 'firebird-1.5' then
-    begin
       s:= FSQL_Select_Copia.Text;
       select:= stringreplace(s, 'SELECT', '', [rfIgnoreCase]);
       s:= 'SELECT FIRST ' + inttostr(LimiteRegistros) + ' SKIP ' + IntToStr(contador);
       select:= s + #13 + select;
       Consulta.Text:= select;
-    end
-    else
-      if Modelo.Coneccion.Protocol = 'postgresql' then
-      begin
-        Consulta.AddStrings(FSQL_Select_Copia);
-        s_postgres:= 'LIMIT ' + inttostr(LimiteRegistros) + ' OFFSET ' + IntToStr(contador);
-      end
+
+      if Assigned(Modelo) then
+        if Modelo.Coneccion.Protocol = 'postgresql' then
+        begin
+          Consulta.Text:= '';
+          Consulta.AddStrings(FSQL_Select_Copia);
+          s_postgres:= 'LIMIT ' + inttostr(LimiteRegistros) + ' OFFSET ' + IntToStr(contador);
+        end
   end
   else
     Consulta.AddStrings(FSQL_Select_Copia);
@@ -633,6 +633,7 @@ begin
   Consulta.Add(s_postgres);
   result:= Consulta;
 end;
+
 
 function TEKBusquedaAvanzada.EjecutarSql;
 var SavedParams: TParams;
@@ -840,19 +841,26 @@ begin
   Abrir();
 end;
 
- //  fin funciones de busqueda
-
+//  fin funciones de busqueda
 function TEKBusquedaAvanzada.Buscar(): Boolean;
 begin
-  result:= buscar1(true);
+  result:= buscar1(true, true);
 end;
+
 
 function TEKBusquedaAvanzada.BuscarSinEjecutar(): Boolean;
 begin
-  result:= buscar1(false);
+  result:= buscar1(false, true);
 end;
 
-function TEKBusquedaAvanzada.Buscar1(ejecutar: boolean): Boolean;
+
+function TEKBusquedaAvanzada.BuscarSinMostrar: boolean;
+begin
+  Result:= Buscar1(true, false);
+end;
+
+
+function TEKBusquedaAvanzada.Buscar1(ejecutar: boolean; mostrar: boolean): Boolean;
 var
   i, x: integer;
   top, ofset: integer;
@@ -1064,7 +1072,7 @@ begin
     if not FMostrar_vaciar_valores then
       FBusqueda.Bot_Vaciar.Visible:= false;
 
-    if FBusqueda.ShowModal = mrOK then
+    if (not (mostrar) or (FBusqueda.ShowModal = mrOK)) then
     begin
       if not (CopiaGuardada) then
         ArmarConsulta; //lo llamo para que guarde la copia antes de armar la query
@@ -1282,6 +1290,7 @@ begin
   armalinea:= txt;
 end;
 
+
 function TEKBusquedaAvanzada.armarfecha(x: integer; operador: TComboBox; campo: TEdit): string;
 var
   fecha: tdate;
@@ -1296,11 +1305,8 @@ begin
     exit;
   end;
 
-  if FDataset.Connection.Protocol = 'firebird-1.5' then
-  begin
-    txt_fecha:= inttostr(monthof(fecha)) + '/' + inttostr(dayof(fecha)) + '/' + inttostr(yearof(fecha));
-  end
-  else
+  txt_fecha:= inttostr(monthof(fecha)) + '/' + inttostr(dayof(fecha)) + '/' + inttostr(yearof(fecha));
+  if Assigned(FDataset) then
     if FDataset.Connection.Protocol = 'postgresql' then
     begin
       txt_fecha:= inttostr(yearof(fecha)) + '-' + inttostr(monthof(fecha)) + '-' + inttostr(dayof(fecha));
