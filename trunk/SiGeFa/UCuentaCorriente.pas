@@ -435,9 +435,9 @@ begin
 
     DBGridCliente_CtaCte.SetFocus;
 
-    btnSaldoInicial.Visible:= ivAlways;
-    btnAltaRecibo.Visible:= ivAlways;
-    btnVerDetalleFactura.Visible:= ivAlways;
+    btnSaldoInicial.Enabled:= true;
+    btnAltaRecibo.Enabled:= true;
+    btnVerDetalleFactura.Enabled:= true;
 
     PanelDetalleMov.Visible:= false;
     viendoDetalleCpb:= false;
@@ -452,9 +452,9 @@ begin
 
     DBGridResumen_CtaCtes.SetFocus;
 
-    btnSaldoInicial.Visible:= ivNever;
-    btnAltaRecibo.Visible:= ivNever;
-    btnVerDetalleFactura.Visible:= ivNever;
+    btnSaldoInicial.Enabled:= false;
+    btnAltaRecibo.Enabled:= false;
+    btnVerDetalleFactura.Enabled:= false;
   end;
 end;
 
@@ -481,9 +481,9 @@ begin
 
   PanelResumen.BringToFront;
   viendoResumen:= true;
-  btnSaldoInicial.Visible:= ivNever;
-  btnAltaRecibo.Visible:= ivNever;
-  btnVerDetalleFactura.Visible:= ivNever;
+   btnSaldoInicial.Enabled:= false;
+    btnAltaRecibo.Enabled:= false;
+    btnVerDetalleFactura.Enabled:= false;
 
   ZQ_CtaCte_Gral.Close;
   ZQ_CtaCte_Gral.ParamByName('id_cliente').AsInteger:= -1;

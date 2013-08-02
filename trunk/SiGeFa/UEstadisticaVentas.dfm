@@ -23,9 +23,9 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object PageControl: TPageControl
     Left = 0
     Top = 0
-    Width = 989
-    Height = 594
-    ActivePage = TabRanking
+    Width = 981
+    Height = 583
+    ActivePage = TabHorarioGrafico
     Align = alClient
     TabOrder = 4
     OnChange = PageControlChange
@@ -261,7 +261,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewPage = False
             ParentFont = False
             Size.Values = (
-              42.333333333333340000
+              42.333333333333330000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -446,7 +446,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333340000
+              82.020833333333330000
               2770.187500000000000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -1433,7 +1433,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 973
+            Width = 102
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1447,7 +1447,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 973
+            Width = 120
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1461,7 +1461,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 973
+            Width = 126
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -1481,8 +1481,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object DBChartHorario: TDBChart
         Left = 0
         Top = 0
-        Width = 981
-        Height = 287
+        Width = 973
+        Height = 276
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
         BackWall.Color = clSilver
@@ -1521,8 +1521,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         TabOrder = 0
         object Splitter4: TSplitter
           Left = 0
-          Top = 283
-          Width = 981
+          Top = 272
+          Width = 973
           Height = 4
           Cursor = crVSplit
           Align = alBottom
@@ -1595,8 +1595,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
       end
       object DBChart1: TDBChart
         Left = 0
-        Top = 287
-        Width = 981
+        Top = 276
+        Width = 973
         Height = 279
         BackWall.Brush.Color = clWhite
         BackWall.Brush.Style = bsClear
@@ -1662,17 +1662,17 @@ object FEstadisticaVentas: TFEstadisticaVentas
       Caption = 'Ranking Ventas'
       ImageIndex = 4
       object Splitter3: TSplitter
-        Left = 616
+        Left = 608
         Top = 33
         Width = 9
-        Height = 533
+        Height = 522
         Align = alRight
         Beveled = True
       end
       object Panel4: TPanel
         Left = 0
         Top = 0
-        Width = 981
+        Width = 973
         Height = 33
         Align = alTop
         BevelOuter = bvNone
@@ -1719,10 +1719,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
       end
       object Panel6: TPanel
-        Left = 625
+        Left = 617
         Top = 33
         Width = 356
-        Height = 533
+        Height = 522
         Align = alRight
         BevelOuter = bvNone
         TabOrder = 1
@@ -1748,7 +1748,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object lblTotales: TLabel
           Left = 0
-          Top = 325
+          Top = 314
           Width = 356
           Height = 20
           Align = alBottom
@@ -1768,7 +1768,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object Splitter6: TSplitter
           Left = 0
-          Top = 345
+          Top = 334
           Width = 356
           Height = 9
           Cursor = crVSplit
@@ -1779,7 +1779,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Left = 0
           Top = 20
           Width = 356
-          Height = 305
+          Height = 294
           Align = alClient
           Color = 14606012
           DataSource = DS_Top20
@@ -1821,7 +1821,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object DBChart2: TDBChart
           Left = 0
-          Top = 354
+          Top = 343
           Width = 356
           Height = 179
           BackWall.Brush.Color = clWhite
@@ -1890,15 +1890,15 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object Panel1: TPanel
         Left = 0
         Top = 33
-        Width = 616
-        Height = 533
+        Width = 608
+        Height = 522
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 2
         object Label3: TLabel
           Left = 1
           Top = 1
-          Width = 614
+          Width = 606
           Height = 20
           Align = alTop
           Alignment = taCenter
@@ -1917,8 +1917,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         end
         object lblProdsVendidos: TLabel
           Left = 1
-          Top = 512
-          Width = 614
+          Top = 501
+          Width = 606
           Height = 20
           Align = alBottom
           Alignment = taRightJustify
@@ -1938,8 +1938,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object grillaRanking: TDBGrid
           Left = 1
           Top = 21
-          Width = 614
-          Height = 491
+          Width = 606
+          Height = 480
           Align = alClient
           Color = 14606012
           DataSource = DS_ProductosVendidos
@@ -2105,7 +2105,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               50.270833333333330000
               730.250000000000000000
               124.354166666666700000
-              436.562499999999900000)
+              436.562500000000000000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -2135,7 +2135,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             Frame.DrawRight = False
             Size.Values = (
               52.916666666666670000
-              717.020833333333400000
+              717.020833333333300000
               68.791666666666670000
               465.666666666666700000)
             Alignment = taCenter
@@ -2211,7 +2211,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           ForceNewPage = False
           ParentFont = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -2342,7 +2342,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333340000
+            82.020833333333330000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -2358,7 +2358,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333340000
+              34.395833333333330000
               13.229166666666670000
               5.291666666666667000
               333.375000000000000000)
@@ -2919,7 +2919,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               50.270833333333330000
               730.250000000000000000
               124.354166666666700000
-              436.562499999999900000)
+              436.562500000000000000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -2983,7 +2983,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               52.916666666666670000
               627.062500000000000000
               5.291666666666667000
-              645.583333333333400000)
+              645.583333333333300000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -3025,7 +3025,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           ForceNewPage = False
           ParentFont = False
           Size.Values = (
-            42.333333333333340000
+            42.333333333333330000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -3129,7 +3129,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333340000
+            82.020833333333330000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -3145,7 +3145,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333340000
+              34.395833333333330000
               13.229166666666670000
               5.291666666666667000
               333.375000000000000000)
@@ -3565,15 +3565,15 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object Panel2: TPanel
         Left = 0
         Top = 0
-        Width = 981
-        Height = 566
+        Width = 973
+        Height = 555
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object lblTotVarias: TLabel
           Left = 0
-          Top = 545
-          Width = 981
+          Top = 534
+          Width = 973
           Height = 21
           Align = alBottom
           Alignment = taRightJustify
@@ -3593,8 +3593,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object gridVarias: TDBGrid
           Left = 0
           Top = 33
-          Width = 981
-          Height = 512
+          Width = 973
+          Height = 501
           Align = alClient
           Color = 14606012
           DataSource = DS_EstadVarias
@@ -3651,7 +3651,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object PanelFiltroV: TPanel
           Left = 0
           Top = 0
-          Width = 981
+          Width = 973
           Height = 33
           Align = alTop
           BevelOuter = bvNone
@@ -3813,7 +3813,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
                 50.270833333333330000
                 701.145833333333300000
                 124.354166666666700000
-                494.770833333333400000)
+                494.770833333333300000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -3843,7 +3843,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                685.270833333333400000
+                685.270833333333300000
                 68.791666666666670000
                 529.166666666666700000)
               Alignment = taCenter
@@ -3919,7 +3919,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewPage = False
             ParentFont = False
             Size.Values = (
-              42.333333333333340000
+              42.333333333333330000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -4023,7 +4023,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333340000
+              82.020833333333330000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -4039,7 +4039,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawLeft = False
               Frame.DrawRight = False
               Size.Values = (
-                34.395833333333340000
+                34.395833333333330000
                 13.229166666666670000
                 5.291666666666667000
                 333.375000000000000000)
@@ -4568,7 +4568,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
                 50.270833333333330000
                 701.145833333333300000
                 124.354166666666700000
-                494.770833333333400000)
+                494.770833333333300000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -4600,7 +4600,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
                 52.916666666666670000
                 627.062500000000000000
                 68.791666666666670000
-                645.583333333333400000)
+                645.583333333333300000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -4630,7 +4630,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                558.270833333333400000
+                558.270833333333300000
                 5.291666666666667000
                 783.166666666666700000)
               Alignment = taCenter
@@ -4674,7 +4674,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewPage = False
             ParentFont = False
             Size.Values = (
-              42.333333333333340000
+              42.333333333333330000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -4832,7 +4832,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              82.020833333333340000
+              82.020833333333330000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -4848,7 +4848,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawLeft = False
               Frame.DrawRight = False
               Size.Values = (
-                34.395833333333340000
+                34.395833333333330000
                 13.229166666666670000
                 5.291666666666667000
                 333.375000000000000000)
@@ -6074,7 +6074,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
