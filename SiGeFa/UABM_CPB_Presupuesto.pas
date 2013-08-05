@@ -819,6 +819,10 @@ procedure TFABM_CPB_Presupuesto.onSelPersona;
 begin
   if (not (vselPersona.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
   begin
+    CD_Producto.EmptyDataSet;
+      ZQ_CpbProducto.CancelUpdates;
+      EKSuma_Productos.RecalcAll;
+      
     btnBuscarPersona.Down:= true;
     PanelEditar_DatosGralCliente.BringToFront;
 

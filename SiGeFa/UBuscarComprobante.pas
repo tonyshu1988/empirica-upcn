@@ -182,7 +182,8 @@ end;
 
 procedure TFBuscarComprobante.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  //EKOrdenarGrilla.GuardarConfigColumnas;
+  ZQ_Factura_Venta.Refresh;
+  ZQ_Factura_Compra.Refresh;
 end;
 
 

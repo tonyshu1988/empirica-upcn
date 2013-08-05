@@ -1115,7 +1115,7 @@ end;
 
 procedure TFTransferirStock.btnBuscarHistoricoClick(Sender: TObject);
 begin
-  EKBusquedaHistorico.Buscar;
+  if not EKBusquedaHistorico.Buscar then exit; 
 
   ZQ_Historico_Cpb.Filtered:= false;
 

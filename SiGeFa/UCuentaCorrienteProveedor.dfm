@@ -1,7 +1,7 @@
 object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
-  Left = 433
-  Top = 90
-  Width = 1009
+  Left = 466
+  Top = 157
+  Width = 1088
   Height = 672
   Caption = 'Cta. Cte. Proveedor'
   Color = clBtnFace
@@ -180,22 +180,22 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
   object PanelResumen: TPanel
     Left = 0
     Top = 0
-    Width = 993
+    Width = 1072
     Height = 582
     Align = alClient
     TabOrder = 1
     object PanelResumen_Abajo: TPanel
       Left = 1
       Top = 529
-      Width = 991
+      Width = 1070
       Height = 52
       Align = alBottom
       TabOrder = 0
       DesignSize = (
-        991
+        1070
         52)
       object Panel1: TPanel
-        Left = 199
+        Left = 238
         Top = 6
         Width = 592
         Height = 42
@@ -339,7 +339,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
     object DBGridResumen_CtaCtes: TDBGrid
       Left = 1
       Top = 20
-      Width = 991
+      Width = 1070
       Height = 509
       Align = alClient
       Color = 14606012
@@ -485,7 +485,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
     object PanelResumen_Arriba: TPanel
       Left = 1
       Top = 1
-      Width = 991
+      Width = 1070
       Height = 19
       Align = alTop
       TabOrder = 2
@@ -504,7 +504,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 881
+        Left = 960
         Top = 1
         Width = 109
         Height = 17
@@ -518,7 +518,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
         TabOrder = 0
       end
       object StaticTextDeuda: TStaticText
-        Left = 772
+        Left = 851
         Top = 1
         Width = 109
         Height = 17
@@ -1523,7 +1523,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
   object PanelProveedor: TPanel
     Left = 0
     Top = 0
-    Width = 993
+    Width = 1072
     Height = 582
     Align = alClient
     BevelOuter = bvNone
@@ -3230,7 +3230,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
     object PanelProveedor_Datos: TPanel
       Left = 3
       Top = 3
-      Width = 987
+      Width = 1066
       Height = 99
       Align = alTop
       BevelInner = bvRaised
@@ -3537,17 +3537,17 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
     object PanelProveedor_Resumen: TPanel
       Left = 3
       Top = 494
-      Width = 987
+      Width = 1066
       Height = 85
       Align = alBottom
       TabOrder = 2
       DesignSize = (
-        987
+        1066
         85)
       object lblFiltro_Fechas: TLabel
         Left = 1
         Top = 1
-        Width = 985
+        Width = 1064
         Height = 17
         Align = alTop
         Alignment = taCenter
@@ -3560,8 +3560,28 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
         Font.Style = [fsBold]
         ParentFont = False
       end
+      object lblDeudor: TLabel
+        Left = 1
+        Top = 18
+        Width = 192
+        Height = 66
+        Align = alLeft
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'SUPERA EL LIMITE DE CREDITO PERMITIDO'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clRed
+        Font.Height = -16
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = True
+        Layout = tlCenter
+        Visible = False
+        WordWrap = True
+      end
       object PanelProveedor_ResumenFiltro: TPanel
-        Left = 194
+        Left = 233
         Top = 15
         Width = 597
         Height = 45
@@ -3702,7 +3722,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
         end
       end
       object PanelProveedor_ResumenTotales: TPanel
-        Left = 193
+        Left = 232
         Top = 50
         Width = 597
         Height = 32
@@ -3813,7 +3833,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
     object PanelFiltro: TPanel
       Left = 3
       Top = 102
-      Width = 987
+      Width = 1066
       Height = 24
       Align = alTop
       ParentShowHint = False
@@ -3891,7 +3911,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
     object PanelProveedor_CtaCte: TPanel
       Left = 3
       Top = 126
-      Width = 987
+      Width = 1066
       Height = 368
       Align = alClient
       BorderWidth = 3
@@ -3899,7 +3919,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
       object DBGridProveedor_CtaCte: TDBGrid
         Left = 4
         Top = 4
-        Width = 979
+        Width = 1058
         Height = 226
         Align = alClient
         Color = 14606012
@@ -3988,7 +4008,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
       object PanelDetalleMov: TPanel
         Left = 4
         Top = 230
-        Width = 979
+        Width = 1058
         Height = 134
         Align = alBottom
         BevelOuter = bvNone
@@ -3998,7 +4018,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
         object lblTitulo_PanelDetalleMov: TLabel
           Left = 2
           Top = 2
-          Width = 975
+          Width = 1054
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4014,7 +4034,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
         object DBGridDetalle_OP: TDBGrid
           Left = 2
           Top = 15
-          Width = 975
+          Width = 1054
           Height = 117
           Align = alClient
           Color = 14606012
@@ -4055,7 +4075,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
         object DBGridDetalle_FPago: TDBGrid
           Left = 2
           Top = 15
-          Width = 975
+          Width = 1054
           Height = 117
           Align = alClient
           Color = 14606012
@@ -4106,7 +4126,7 @@ object FCuentaCorrienteProveedor: TFCuentaCorrienteProveedor
         object DBGridDetalle_Producto: TDBGrid
           Left = 2
           Top = 15
-          Width = 975
+          Width = 1054
           Height = 117
           Align = alClient
           Color = 14606012

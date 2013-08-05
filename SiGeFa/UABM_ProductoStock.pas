@@ -166,6 +166,8 @@ type
     ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
     ZQ_SeccionSuc: TZQuery;
     btRepedido: TdxBarLargeButton;
+    lblCant: TLabel;
+    QRExpr1: TQRExpr;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnGuardarClick(Sender: TObject);
@@ -701,6 +703,7 @@ end;
 procedure TFABM_ProductoStock.EKDbSuma1SumListChanged(Sender: TObject);
 begin
   lblResumen.Caption:= 'Total Stock: ' + FloatToStr(EKDbSuma1.SumCollection.Items[0].SumValue);
+   lblCant.Caption:= FloatToStr(EKDbSuma1.SumCollection.Items[1].SumValue)+' productos.';
 end;
 
 procedure TFABM_ProductoStock.DBGridStockKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);

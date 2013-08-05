@@ -50,7 +50,6 @@ type
     PanelEditar_ProductoInfo: TPanel;
     DBGridEditar_Producto: TDBGrid;
     btnEliminarProducto: TButton;
-    btnBuscarEmpresa: TSpeedButton;
     ImageListEntidad: TImageList;
     ZQ_VerCpb: TZQuery;
     ZQ_VerCpb_Producto: TZQuery;
@@ -112,7 +111,6 @@ type
     ZQ_Cliente: TZQuery;
     DS_Proveedor: TDataSource;
     DS_Cliente: TDataSource;
-    btnBuscarPersona: TSpeedButton;
     ZQ_ProveedorID: TIntegerField;
     ZQ_ProveedorID_EMPRESA: TIntegerField;
     ZQ_ProveedorID_PROVINCIA: TIntegerField;
@@ -384,8 +382,6 @@ type
     Panel11: TPanel;
     DBText32: TDBText;
     DBText35: TDBText;
-    SpeedButton1: TSpeedButton;
-    SpeedButton2: TSpeedButton;
     Label42: TLabel;
     Label43: TLabel;
     Panel12: TPanel;
@@ -458,6 +454,8 @@ type
     ZQ_ComprobanteIMAGEN: TBlobField;
     DBImagen: TDBImage;
     ZQ_VerCpbIMAGEN: TBlobField;
+    btnBuscarEmpresa: TSpeedButton;
+    btnBuscarPersona: TSpeedButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -587,6 +585,7 @@ begin
   StaticTxtBaja.Color:= FPrincipal.baja;
   FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
   FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
+
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
     TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
@@ -968,6 +967,9 @@ begin
   begin
     if (EKListadoEntidad.Resultado <> '') then
     begin
+      CD_Producto.EmptyDataSet;
+      ZQ_CpbProducto.CancelUpdates;
+      EKSuma_Productos.RecalcAll;
       btnBuscarEmpresa.Down:= true;
       ZQ_Cliente.Close;
       PanelEditar_DatosGralProveedor.BringToFront;
@@ -1007,6 +1009,9 @@ procedure TFABM_CPB_Remito.onSelPersona;
 begin
   if (not (vselPersona.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
   begin
+    CD_Producto.EmptyDataSet;
+      ZQ_CpbProducto.CancelUpdates;
+      EKSuma_Productos.RecalcAll;
     btnBuscarPersona.Down:= true;
     ZQ_Proveedor.Close;
     PanelEditar_DatosGralCliente.BringToFront;

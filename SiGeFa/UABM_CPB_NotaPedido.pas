@@ -804,19 +804,26 @@ var
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
-  ZQ_CpbProducto.First;
+    ZQ_CpbProducto.First;
   while not ZQ_CpbProducto.Eof do
   begin
     if ZQ_CpbProductoID_PRODUCTO.IsNull then
       ZQ_CpbProducto.Delete
     else
-      ZQ_CpbProducto.Next;
+        begin
+        if ZQ_CpbProductoCANTIDAD.AsFloat<=0 then
+        begin
+          Application.MessageBox('La cantidad debe ser mayor a 0, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+          exit;
+        end;
+        ZQ_CpbProducto.Next;
+        end
   end;
-
+  ZQ_CpbProducto.First;
 
   if ZQ_ComprobanteID_PROVEEDOR.IsNull and ZQ_ComprobanteID_CLIENTE.IsNull then
   begin
-    Application.MessageBox('Debe asociar una Persona o Empresa al Comprobante, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
+    Application.MessageBox('Debe asociar una Empresa al Comprobante, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
     EKDBDateEmision.SetFocus;
     exit;
   end;
@@ -1017,6 +1024,10 @@ begin
   begin
     if (EKListadoEntidad.Resultado <> '') then
     begin
+      CD_Producto.EmptyDataSet;
+      ZQ_CpbProducto.CancelUpdates;
+      EKSuma_Productos.RecalcAll;
+      
       btnBuscarEmpresa.Down:= true;
       ZQ_Cliente.Close;
       PanelEditar_DatosGralProveedor.BringToFront;
@@ -1059,6 +1070,10 @@ procedure TFABM_CPB_NotaPedido.onSelPersona;
 begin
   if (not (vselPersona.ZQ_Personas.IsEmpty)) then //si se selecciona un cliente
   begin
+    CD_Producto.EmptyDataSet;
+    ZQ_CpbProducto.CancelUpdates;
+    EKSuma_Productos.RecalcAll;
+
     btnBuscarPersona.Down:= true;
     ZQ_Proveedor.Close;
     PanelEditar_DatosGralCliente.BringToFront;
@@ -1107,6 +1122,7 @@ begin
     CD_Producto_codProducto.AsString:= ZQ_VerCpb_ProductoCOD_PRODUCTO.AsString;
     CD_Producto_precioCosto.AsFloat:= ZQ_VerCpb_ProductoPRECIO_COSTO.AsFloat;
 
+
     ZQ_VerCpb_Producto.Next;
   end;
 end;
@@ -1135,6 +1151,7 @@ begin
     ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= 0;
     ZQ_CpbProductoCANTIDAD_RECIBIDA.AsFloat:= 0;
     ZQ_CpbProductoIMPORTE_COSTO.AsFloat:= CD_Producto_precioCosto.AsFloat;
+    ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoPRECIO_COSTO.AsFloat;
 
     cargarImagen(vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger);
   end;
@@ -1168,6 +1185,7 @@ begin
     ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= 0;
     ZQ_CpbProductoCANTIDAD_RECIBIDA.AsFloat:= 0;
     ZQ_CpbProductoIMPORTE_COSTO.AsFloat:= CD_Producto_precioCosto.AsFloat;
+    ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoPRECIO_COSTO.AsFloat;
 
     cargarImagen(vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger);
 
@@ -1287,8 +1305,8 @@ begin
     cantidad:= ZQ_CpbProductoCANTIDAD_RECIBIDA.AsFloat;
 
   if not ZQ_CpbProductoIMPORTE_UNITARIO.IsNull then
-    precio_unitario:= ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat;
-
+         precio_unitario:= ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat;
+         
   imponible:= cantidad * precio_unitario;
   final:= imponible;
 
