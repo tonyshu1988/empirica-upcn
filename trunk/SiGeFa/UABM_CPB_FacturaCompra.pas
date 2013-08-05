@@ -10,7 +10,7 @@ uses
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
   EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona, ZSqlUpdate,jpeg,
-  ExtDlgs;
+  ExtDlgs,UBuscarComprobante;
 
 type
   TFABM_CPB_FacturaCompra = class(TForm)
@@ -439,6 +439,90 @@ type
     popUp_CargarImagen1: TMenuItem;
     DBImagen: TDBImage;
     ZQ_VerCpbIMAGEN: TBlobField;
+    btnBuscarNP: TSpeedButton;
+    EKListadoNotaPedido: TEKListadoSQL;
+    ZQ_NotasPedido: TZQuery;
+    ZQ_NotasPedidoID_COMPROBANTE: TIntegerField;
+    ZQ_NotasPedidoID_SUCURSAL: TIntegerField;
+    ZQ_NotasPedidoID_PROVEEDOR: TIntegerField;
+    ZQ_NotasPedidoID_CLIENTE: TIntegerField;
+    ZQ_NotasPedidoID_TIPO_CPB: TIntegerField;
+    ZQ_NotasPedidoID_VENDEDOR: TIntegerField;
+    ZQ_NotasPedidoID_COMP_ESTADO: TIntegerField;
+    ZQ_NotasPedidoCODIGO: TStringField;
+    ZQ_NotasPedidoFECHA: TDateTimeField;
+    ZQ_NotasPedidoOBSERVACION: TStringField;
+    ZQ_NotasPedidoBASE_IMPONIBLE: TFloatField;
+    ZQ_NotasPedidoSALDO: TFloatField;
+    ZQ_NotasPedidoIMPORTE_TOTAL: TFloatField;
+    ZQ_NotasPedidoPORC_IVA: TFloatField;
+    ZQ_NotasPedidoIMPORTE_IVA: TFloatField;
+    ZQ_NotasPedidoPORC_DESCUENTO: TFloatField;
+    ZQ_NotasPedidoIMPORTE_DESCUENTO: TFloatField;
+    ZQ_NotasPedidoENCABEZADO: TStringField;
+    ZQ_NotasPedidoPIE: TStringField;
+    ZQ_NotasPedidoFECHA_COBRADA: TDateTimeField;
+    ZQ_NotasPedidoFECHA_ENVIADA: TDateField;
+    ZQ_NotasPedidoFECHA_IMPRESA: TDateField;
+    ZQ_NotasPedidoFECHA_VENCIMIENTO: TDateField;
+    ZQ_NotasPedidoPUNTO_VENTA: TIntegerField;
+    ZQ_NotasPedidoNUMERO_CPB: TIntegerField;
+    ZQ_NotasPedidoFECHA_ANULADO: TDateField;
+    ZQ_NotasPedidoID_TIPO_IVA: TIntegerField;
+    ZQ_NotasPedidoID_TIPO_MOVIMIENTO: TIntegerField;
+    ZQ_NotasPedidoIMPORTE_VENTA: TFloatField;
+    ZQ_NotasPedidoIMAGEN: TBlobField;
+    ZQ_NotasPedidoINSERT_MANUAL: TStringField;
+    ZQ_NotasPedidoID_POSICION_SUC_DESTINO: TIntegerField;
+    ZQ_NotasPedidoID_PREVENTA: TIntegerField;
+    ZQ_NotasPedidoID_OBRA_SOCIAL: TIntegerField;
+    ZQ_NotasPedidoSUCURSAL: TStringField;
+    ZQ_NotasPedidoPROVEEDOR: TStringField;
+    ZQ_NotasPedidoCUIT_PROVEEDOR: TStringField;
+    ZQ_NotasPedidoNOMBRE_TIPO_CPB: TStringField;
+    ZQ_NotasPedidoESTADO: TStringField;
+    ZQ_NotasPedidoDESCR: TStringField;
+    ZQ_NotaPedidoDetalle: TZQuery;
+    ZQ_NotaPedidoDetalleID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_NotaPedidoDetalleID_COMPROBANTE: TIntegerField;
+    ZQ_NotaPedidoDetalleID_PRODUCTO: TIntegerField;
+    ZQ_NotaPedidoDetalleDETALLE: TStringField;
+    ZQ_NotaPedidoDetalleCANTIDAD: TFloatField;
+    ZQ_NotaPedidoDetalleIMPORTE_FINAL: TFloatField;
+    ZQ_NotaPedidoDetallePORC_DESCUENTO: TFloatField;
+    ZQ_NotaPedidoDetalleBASE_IMPONIBLE: TFloatField;
+    ZQ_NotaPedidoDetalleIMPORTE_UNITARIO: TFloatField;
+    ZQ_NotaPedidoDetalleIMPUESTO_INTERNO: TFloatField;
+    ZQ_NotaPedidoDetallePORC_IVA: TFloatField;
+    ZQ_NotaPedidoDetalleCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_NotaPedidoDetalleCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_NotaPedidoDetalleID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_NotaPedidoDetalleIMPORTE_VENTA: TFloatField;
+    ZQ_NotaPedidoDetalleIMPORTE_IVA: TFloatField;
+    ZQ_NotaPedidoDetalleIMPORTE_IF: TFloatField;
+    ZQ_NotaPedidoDetalleIMPORTE_IF_SINIVA: TFloatField;
+    ZQ_NotaPedidoDetalleIMPORTE_IVA_IF: TFloatField;
+    ZQ_NotaPedidoDetalleINSERT_MANUAL: TStringField;
+    ZQ_NotaPedidoDetalleIMPORTE_COSTO: TFloatField;
+    ZQ_NotaPedidoDetalleID_AUXILIAR: TIntegerField;
+    ZQ_NotaPedidoDetalleNOMBRE: TStringField;
+    ZQ_NotaPedidoDetalleCOD_CORTO: TStringField;
+    ZQ_NotaPedidoDetalleID_PRODUCTO_1: TIntegerField;
+    ZQ_NotaPedidoDetalleCOD_CORTO_1: TStringField;
+    ZQ_NotaPedidoDetalleCODIGO_BARRA: TStringField;
+    ZQ_NotaPedidoDetalleLLEVAR_STOCK: TStringField;
+    ZQ_NotaPedidoDetalleMEDIDA: TStringField;
+    ZQ_NotaPedidoDetalleNOMBRE_MARCA: TStringField;
+    ZQ_NotaPedidoDetalleBAJA: TStringField;
+    ZQ_NotaPedidoDetalleNOMBRE_ARTICULO: TStringField;
+    ZQ_NotaPedidoDetalleTIPO_ARTICULO: TStringField;
+    ZQ_NotaPedidoDetalleCOLOR: TStringField;
+    ZQ_NotaPedidoDetallePRECIO_COSTO: TFloatField;
+    ZQ_NotaPedidoDetallePRECIO_VENTA: TFloatField;
+    ZQ_NotaPedidoDetalleCOEF_GANANCIA: TFloatField;
+    ZQ_NotaPedidoDetalleCOEF_DESCUENTO: TFloatField;
+    ZQ_NotaPedidoDetalleIMPUESTO_IVA: TFloatField;
+    ZQ_NotaPedidoDetalleID_PRECIO: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -494,14 +578,18 @@ type
     procedure popUp_VerImagen1Click(Sender: TObject);
     procedure btnVerImagenClick(Sender: TObject);
     procedure popUp_CargarImagen1Click(Sender: TObject);
+    procedure btnBuscarNPClick(Sender: TObject);
+    procedure cargarNotaPedido(id:Integer);
   Private
-    confirmarComprobante: boolean;
     estadoPantalla: string;
     tipoComprobante: integer;
     id_comprobante: integer;
     vselProducto: TFBuscarProducto;
+
+    confirmarComprobante: boolean;
     procedure onSelProducto;
     procedure onSelTodosProducto;
+
     function getColumnIndex(Grid: TDBGrid; Nombre: string): Integer;
   Public
     { Public declarations }
@@ -587,6 +675,7 @@ begin
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
   FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.EKImageMenu24.GetBitmap(42, btnBuscarNP.Glyph); //cargo la imagen del boton buscar entidad
 
   FPrincipal.Iconos_Menu_32.GetBitmap(10, btnAplicarActualizar.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarActualizar.Glyph);
@@ -687,7 +776,7 @@ begin
     ZQ_ComprobantePUNTO_VENTA.Clear;
     ZQ_ComprobanteNUMERO_CPB.Clear;
     ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
-    ZQ_ComprobanteFECHA_COBRADA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_ComprobanteFECHA_COBRADA.Clear;
     ZQ_ComprobanteFECHA_ENVIADA.Clear;
     ZQ_ComprobanteFECHA_IMPRESA.Clear;
     ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
@@ -935,6 +1024,10 @@ begin
   begin
     if (EKListadoEntidad.Resultado <> '') then
     begin
+      CD_Producto.EmptyDataSet;
+      ZQ_CpbProducto.CancelUpdates;
+      EKSuma_Productos.RecalcAll;
+      
       btnBuscarEmpresa.Down:= true;
       PanelEditar_DatosGralProveedor.BringToFront;
 
@@ -1001,6 +1094,8 @@ begin
     ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
     ZQ_CpbProductoID_PRODUCTO.AsInteger:= vselProducto.ZQ_ProductoID_PRODUCTO.AsInteger;
     ZQ_CpbProductoCANTIDAD.AsFloat:= 0;
+    ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoPRECIO_COSTO.AsFloat;
+    ZQ_CpbProductoBASE_IMPONIBLE.AsFloat:= 0;
     ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:= 0;
     ZQ_CpbProductoPORC_IVA.AsFloat:= 0;
 
@@ -1189,6 +1284,13 @@ begin
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
   if (application.MessageBox(pchar('¿Desea confirmar la Factura de Compra seleccionada?'), 'ABM Factura de Compra', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+   begin
+    if ZQ_VerCpbSALDO.AsFloat<=0 then
+    begin
+      Application.MessageBox(pchar('El monto total debe ser superior a $ 0.00, por favor Verifique el comprobante'), 'Validar Datos', MB_OK
+        + MB_ICONINFORMATION);
+      exit;
+    end;
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
     begin
       ZQ_Comprobante.Close;
@@ -1197,7 +1299,8 @@ begin
 
       ZQ_Comprobante.Edit;
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
-
+      if ZQ_ComprobanteFECHA_COBRADA.IsNull then
+         ZQ_ComprobanteFECHA_COBRADA.AsDateTime:=dm.EKModelo.FechayHora;
       try
         if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
           dm.EKModelo.cancelar_transaccion(transaccion_ABM)
@@ -1208,7 +1311,7 @@ begin
         end
       end;
     end;
-
+  end;
   recNo:= ZQ_VerCpb.RecNo;
   ZQ_VerCpb.Refresh;
   ZQ_VerCpb.RecNo:= recNo;
@@ -1654,5 +1757,97 @@ begin
     showmessage('Formato de Imagen no soportado (debe bajar la resolución).');
   end;
 end;
+
+procedure TFABM_CPB_FacturaCompra.btnBuscarNPClick(Sender: TObject);
+var
+  sql: string;
+begin
+//Cargo los productos y la cabecera de la Nota de Pedido en la Factura
+// Una vez que le asigno una nota de pedido se cargan los productos
+// y en la nota de pedido se clava la fecha_cobrada, asi no aparece de nuevo acá
+
+
+  ZQ_NotasPedido.Close;
+  ZQ_NotasPedido.Open;
+  if confirmarComprobante then
+    exit;
+
+  if EKListadoNotaPedido.Buscar then
+  begin
+    if (EKListadoNotaPedido.Resultado <> '') then
+    begin
+      CD_Producto.EmptyDataSet;
+      ZQ_CpbProducto.CancelUpdates;
+      EKSuma_Productos.RecalcAll;
+
+      btnBuscarNP.Down:= true;
+      PanelEditar_DatosGralProveedor.BringToFront;
+
+      ZQ_NotasPedido.Close;
+      ZQ_NotasPedido.ParamByName('idcpb').AsInteger:= StrToInt(EKListadoNotaPedido.Resultado);
+      ZQ_NotasPedido.Open;
+
+
+      ZQ_Proveedor.Close;
+      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= ZQ_NotasPedidoID_PROVEEDOR.AsInteger;
+      ZQ_Proveedor.Open;
+
+      if ZQ_Comprobante.State = dsBrowse then
+        ZQ_Comprobante.Edit;
+      ZQ_ComprobanteID_CLIENTE.Clear;
+      ZQ_ComprobanteID_PROVEEDOR.AsInteger:= ZQ_ProveedorID_EMPRESA.AsInteger;
+      ZQ_ComprobanteNUMERO_CPB.AsInteger:=ZQ_NotasPedidoNUMERO_CPB.AsInteger;
+      ZQ_ComprobantePUNTO_VENTA.AsInteger:=ZQ_NotasPedidoPUNTO_VENTA.AsInteger;
+      ZQ_ComprobanteFECHA_COBRADA.AsDateTime:=ZQ_NotasPedidoFECHA_COBRADA.AsDateTime;
+
+      cargarNotaPedido(ZQ_NotasPedidoID_COMPROBANTE.AsInteger);
+    end
+  end;
+
+  EKDBDateCarga.SetFocus;
+  ZQ_NotasPedido.Close;
+end;
+
+procedure TFABM_CPB_FacturaCompra.cargarNotaPedido(id: Integer);
+begin
+
+  ZQ_NotaPedidoDetalle.Close;
+  ZQ_NotaPedidoDetalle.ParamByName('id').AsInteger:=id;
+  dm.EKModelo.abrir(ZQ_NotaPedidoDetalle);
+
+  ZQ_NotaPedidoDetalle.First;
+  while not ZQ_NotaPedidoDetalle.Eof do
+  begin
+    CD_Producto.Append;
+    CD_Producto_idProducto.AsInteger:= ZQ_NotaPedidoDetalleID_PRODUCTO.AsInteger;
+    CD_Producto_producto.AsString:= ZQ_NotaPedidoDetalleNOMBRE.AsString;
+    CD_Producto_medida.AsString:= ZQ_NotaPedidoDetalleMEDIDA.AsString;
+    CD_Producto_color.AsString:= ZQ_NotaPedidoDetalleCOLOR.AsString;
+    CD_Producto_marca.AsString:= ZQ_NotaPedidoDetalleNOMBRE_MARCA.AsString;
+    CD_Producto_tipoArticulo.AsString:= ZQ_NotaPedidoDetalleTIPO_ARTICULO.AsString;
+    CD_Producto_articulo.AsString:= ZQ_NotaPedidoDetalleNOMBRE_ARTICULO.AsString;
+    CD_Producto_codigoBarra.AsString:= ZQ_NotaPedidoDetalleCODIGO_BARRA.AsString;
+    CD_Producto_codCabecera.AsString:= ZQ_NotaPedidoDetalleCOD_CORTO.AsString;
+    CD_Producto_codProducto.AsString:= ZQ_NotaPedidoDetalleCOD_CORTO_1.AsString;
+
+
+    ZQ_CpbProducto.Append;
+    ZQ_CpbProductoID_COMPROBANTE.AsInteger:= id_comprobante;
+    ZQ_CpbProductoID_PRODUCTO.AsInteger:= ZQ_NotaPedidoDetalleID_PRODUCTO.AsInteger;
+    ZQ_CpbProductoCANTIDAD.AsFloat:= ZQ_NotaPedidoDetalleCANTIDAD_RECIBIDA.AsFloat;
+    ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= ZQ_NotaPedidoDetalleIMPORTE_UNITARIO.AsFloat;
+    ZQ_CpbProductoBASE_IMPONIBLE.AsFloat:= ZQ_NotaPedidoDetalleIMPORTE_UNITARIO.AsFloat*ZQ_CpbProductoCANTIDAD.AsFloat;
+    ZQ_CpbProductoCANTIDAD_ALMACENADA.AsFloat:=ZQ_NotaPedidoDetalleCANTIDAD_ALMACENADA.AsFloat;
+    ZQ_CpbProductoPORC_IVA.AsFloat:= ZQ_NotaPedidoDetallePORC_IVA.AsFloat;
+
+
+    cargarImagen(ZQ_NotaPedidoDetalleID_PRODUCTO.AsInteger);
+
+    ZQ_NotaPedidoDetalle.Next;
+  end;
+
+  ZQ_NotaPedidoDetalle.Close;
+end;
+
 
 end.

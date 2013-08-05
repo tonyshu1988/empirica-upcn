@@ -1,6 +1,6 @@
 object FTransferirStock: TFTransferirStock
-  Left = 290
-  Top = 111
+  Left = 494
+  Top = 204
   Width = 958
   Height = 718
   Caption = 'Transferir Stock'
@@ -22,15 +22,15 @@ object FTransferirStock: TFTransferirStock
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 950
-    Height = 639
+    Width = 942
+    Height = 628
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
-      Width = 948
-      Height = 604
+      Width = 940
+      Height = 593
       ActivePage = TabSAsociarNotaPedido
       Align = alClient
       TabOrder = 0
@@ -207,10 +207,10 @@ object FTransferirStock: TFTransferirStock
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            940
+            932
             41)
           object Label25: TLabel
-            Left = 784
+            Left = 776
             Top = 7
             Width = 99
             Height = 13
@@ -233,7 +233,7 @@ object FTransferirStock: TFTransferirStock
             OnClick = btBorrarLineaClick
           end
           object editTotalProductos: TEdit
-            Left = 784
+            Left = 776
             Top = 21
             Width = 129
             Height = 19
@@ -261,8 +261,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedido: TDBGrid
           Left = 0
           Top = 0
-          Width = 940
-          Height = 535
+          Width = 932
+          Height = 524
           Hint = 
             'Haga doble click en la nota de pedido que desea cargar al sistem' +
             'a'
@@ -339,8 +339,8 @@ object FTransferirStock: TFTransferirStock
         object DBGridNotaPedidoDetalle: TDBGrid
           Left = 0
           Top = 0
-          Width = 940
-          Height = 535
+          Width = 932
+          Height = 524
           Align = alClient
           Color = 14606012
           DataSource = DS_ListaProductos
@@ -486,14 +486,14 @@ object FTransferirStock: TFTransferirStock
         end
         object PanelNotaPedidoDetalle: TPanel
           Left = 0
-          Top = 535
-          Width = 940
+          Top = 524
+          Width = 932
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
-            940
+            932
             41)
           object Label2: TLabel
             Left = 816
@@ -536,7 +536,7 @@ object FTransferirStock: TFTransferirStock
     object PanelSeleccionarDeposito: TPanel
       Left = 1
       Top = 1
-      Width = 948
+      Width = 940
       Height = 33
       Align = alTop
       TabOrder = 1
@@ -575,8 +575,8 @@ object FTransferirStock: TFTransferirStock
   object PanelHistorico: TPanel
     Left = 0
     Top = 0
-    Width = 950
-    Height = 639
+    Width = 942
+    Height = 628
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
@@ -584,7 +584,7 @@ object FTransferirStock: TFTransferirStock
     object Splitter1: TSplitter
       Left = 2
       Top = 186
-      Width = 946
+      Width = 938
       Height = 3
       Cursor = crVSplit
       Align = alTop
@@ -592,8 +592,8 @@ object FTransferirStock: TFTransferirStock
     object PanelHistoric_Detalle: TPanel
       Left = 2
       Top = 189
-      Width = 946
-      Height = 448
+      Width = 938
+      Height = 437
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 4
@@ -601,13 +601,13 @@ object FTransferirStock: TFTransferirStock
       object Label4: TLabel
         Left = 4
         Top = 4
-        Width = 938
+        Width = 930
         Height = 20
         Align = alTop
         Alignment = taCenter
         AutoSize = False
         Caption = 'Productos Incluidos en la Transferencia'
-        Color = 16729670
+        Color = 12648448
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -15
@@ -621,8 +621,8 @@ object FTransferirStock: TFTransferirStock
       object DBGrid_Historico_Detalle: TDBGrid
         Left = 4
         Top = 24
-        Width = 938
-        Height = 420
+        Width = 930
+        Height = 409
         Align = alClient
         Color = 14606012
         DataSource = DS_Historico_Detalle
@@ -696,25 +696,25 @@ object FTransferirStock: TFTransferirStock
     object PanelHistorico_Cpb: TPanel
       Left = 2
       Top = 2
-      Width = 946
+      Width = 938
       Height = 184
       Align = alTop
       BevelOuter = bvNone
       BorderWidth = 4
       TabOrder = 0
       DesignSize = (
-        946
+        938
         184)
       object Label3: TLabel
         Left = 4
         Top = 4
-        Width = 938
+        Width = 930
         Height = 20
         Align = alTop
         Alignment = taCenter
         AutoSize = False
         Caption = 'Transferencias Realizadas'
-        Color = 16729670
+        Color = 12648448
         Font.Charset = ANSI_CHARSET
         Font.Color = clWhite
         Font.Height = -15
@@ -728,7 +728,7 @@ object FTransferirStock: TFTransferirStock
       object DBGrid_Historico_Cpb: TDBGrid
         Left = 4
         Top = 24
-        Width = 938
+        Width = 930
         Height = 156
         Align = alClient
         Color = 14606012
@@ -804,7 +804,7 @@ object FTransferirStock: TFTransferirStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1488,6 +1488,12 @@ object FTransferirStock: TFTransferirStock
     CampoBuscar = 'Busqueda'
     CampoClave = 'id_posicion_sucursal'
     TituloVentana = 'Buscar Sucursal'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
     Left = 104
     Top = 272
   end

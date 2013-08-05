@@ -324,6 +324,7 @@ type
     ZQ_ComprobanteDetallePORC_IVA: TFloatField;
     ZQ_ComprobanteDetalleBASE_IMPONIBLE: TFloatField;
     ZQ_OrdenPagoDetalleDESC_REC: TFloatField;
+    lblDeudor: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -354,6 +355,7 @@ type
     procedure DBGridDetalle_OPDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure verDetalle;
     procedure DBGridDetalle_FPagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure ojoDeudor(tf:Boolean);
   Private
     viendoResumen: boolean;
     viendoDetalleCpb: boolean;
@@ -618,6 +620,8 @@ begin
     debeTotal:= ZQ_CtaCte_GralDEBE.AsFloat;
     haberTotal:= ZQ_CtaCte_GralHABER.AsFloat;
     saldoTotal:= ZQ_CtaCte_GralSALDO.AsFloat;
+
+    //ojoDeudor(saldoTotal>ZQ_CtaCte_GralLIMITE_DEUDA.AsFloat);
 
     EKEdit_CantidadFiltro.Text:= IntToStr(ZQ_CtaCte_Proveedor.RecordCount);
     EKEdit_DebeFiltro.Text:= FormatFloat('$ ###,###,##0.00', debeFilro);
@@ -968,6 +972,11 @@ end;
 procedure TFCuentaCorrienteProveedor.DBGridDetalle_FPagoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridDetalle_FPago, Rect, DataCol, Column, State);
+end;
+
+procedure TFCuentaCorrienteProveedor.ojoDeudor(tf:Boolean);
+begin
+  lblDeudor.Visible:=tf;
 end;
 
 end.

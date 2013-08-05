@@ -1167,6 +1167,7 @@ begin
   begin
     if (EKListadoEntidad.Resultado <> '') then
     begin
+      
       btnBuscarEmpresa.Down:= true;
       ZQ_Cliente.Close;
       PanelEditar_DatosGralProveedor.BringToFront;

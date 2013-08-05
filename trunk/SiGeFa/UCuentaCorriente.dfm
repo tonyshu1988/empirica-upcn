@@ -1,6 +1,6 @@
 object FCuentaCorriente: TFCuentaCorriente
-  Left = 44
-  Top = 86
+  Left = 419
+  Top = 243
   Width = 1009
   Height = 672
   Caption = 'Cta. Cte. Cliente'
