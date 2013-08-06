@@ -113,6 +113,8 @@ type
     ZQ_FiscalRUTA_ARCHIVO: TStringField;
     ZQ_FiscalPREDETERMINADA: TStringField;
     ZQ_FiscalSISTEMA: TStringField;
+    ZQ_SucursalCOMPROBANTE_FUENTE: TStringField;
+    ZQ_SucursalCOMPROBANTE_FUENTE_STYLE: TIntegerField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);
@@ -457,18 +459,39 @@ begin
   Form := Tform(Reporte.Owner);
   Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Titulo'));
   Etiqueta.Caption:= ZQ_SucursalCOMPROBANTE_TITULO.AsString;
+  if not ZQ_SucursalCOMPROBANTE_FUENTE.IsNull then
+    Etiqueta.Font.Name:=ZQ_SucursalCOMPROBANTE_FUENTE.AsString;
+  if not ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.IsNull then
+    Etiqueta.Font.Style:=TFontStyles(Byte(ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.AsInteger));
+
 
   Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Renglon1'));
   Etiqueta.Caption:= ZQ_SucursalCOMPROBANTE_RENGLON1.AsString;
+  if not ZQ_SucursalCOMPROBANTE_FUENTE.IsNull then
+    Etiqueta.Font.Name:=ZQ_SucursalCOMPROBANTE_FUENTE.AsString;
+  if not ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.IsNull then
+    Etiqueta.Font.Style:=TFontStyles(Byte(ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.AsInteger));
 
   Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Renglon2'));
   Etiqueta.Caption:= ZQ_SucursalCOMPROBANTE_RENGLON2.AsString;
+  if not ZQ_SucursalCOMPROBANTE_FUENTE.IsNull then
+    Etiqueta.Font.Name:=ZQ_SucursalCOMPROBANTE_FUENTE.AsString;
+  if not ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.IsNull then
+    Etiqueta.Font.Style:=TFontStyles(Byte(ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.AsInteger));
 
   Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Renglon3'));
   Etiqueta.Caption:= ZQ_SucursalCOMPROBANTE_RENGLON3.AsString;
+  if not ZQ_SucursalCOMPROBANTE_FUENTE.IsNull then
+    Etiqueta.Font.Name:=ZQ_SucursalCOMPROBANTE_FUENTE.AsString;
+  if not ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.IsNull then
+    Etiqueta.Font.Style:=TFontStyles(Byte(ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.AsInteger));
 
   Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Renglon4'));
   Etiqueta.Caption:= ZQ_SucursalCOMPROBANTE_RENGLON4.AsString;
+  if not ZQ_SucursalCOMPROBANTE_FUENTE.IsNull then
+    Etiqueta.Font.Name:=ZQ_SucursalCOMPROBANTE_FUENTE.AsString;
+  if not ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.IsNull then
+    Etiqueta.Font.Style:=TFontStyles(Byte(ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.AsInteger));
 end;
 
 

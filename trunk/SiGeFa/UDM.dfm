@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 543
-  Top = 223
+  Left = 1030
+  Top = 274
   Height = 471
   Width = 396
   object Conexion: TZConnection
@@ -16,6 +16,7 @@ object DM: TDM
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
+    Connected = True
     SQLHourGlass = True
     Left = 38
     Top = 16
@@ -1817,6 +1818,13 @@ object DM: TDM
     object ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField
       FieldName = 'COMPROBANTE_RENGLON4'
       Size = 50
+    end
+    object ZQ_SucursalCOMPROBANTE_FUENTE: TStringField
+      FieldName = 'COMPROBANTE_FUENTE'
+      Size = 100
+    end
+    object ZQ_SucursalCOMPROBANTE_FUENTE_STYLE: TIntegerField
+      FieldName = 'COMPROBANTE_FUENTE_STYLE'
     end
   end
   object ZQ_Configuracion_Variables: TZQuery

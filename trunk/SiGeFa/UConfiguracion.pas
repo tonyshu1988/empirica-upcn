@@ -135,6 +135,11 @@ type
     DBEdit_IF_Sistema: TDBEdit;
     btnSeleccionar: TdxBarLargeButton;
     grupoAltaSeleccion: TdxBarGroup;
+    FontDialog1: TFontDialog;
+    BitBtn1: TBitBtn;
+    dbfuente1: TDBText;
+    ZQ_GeneralCOMPROBANTE_FUENTE: TStringField;
+    ZQ_GeneralCOMPROBANTE_FUENTE_STYLE: TIntegerField;
     procedure btnSalirClick(Sender: TObject);
     procedure habilitarCarga(flag: boolean);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -161,6 +166,7 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     procedure btnSeleccionarClick(Sender: TObject);
+    procedure BitBtn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -288,8 +294,12 @@ begin
   ZQ_Variables.Filtered:= true;
 
   dm.EKModelo.abrir(ZQ_Fiscal);
-
   habilitarCarga(false);
+
+   if not ZQ_GeneralCOMPROBANTE_FUENTE.IsNull then
+    dbfuente1.Font.Name:=ZQ_GeneralCOMPROBANTE_FUENTE.AsString;
+  if not ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.IsNull then
+    dbfuente1.Font.Style:=TFontStyles(Byte(ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.AsInteger));
 end;
 
 
@@ -442,6 +452,26 @@ begin
     ZQ_FiscalPREDETERMINADA.AsString:= 'S';
     ZQ_Fiscal.EnableControls;
   end
+end;
+
+procedure TFConfiguracion.BitBtn1Click(Sender: TObject);
+begin
+  if not ZQ_GeneralCOMPROBANTE_FUENTE.IsNull then
+    FontDialog1.Font.Name:=ZQ_GeneralCOMPROBANTE_FUENTE.AsString;
+  if not ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.IsNull then
+    FontDialog1.Font.Style:=TFontStyles(Byte(ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.AsInteger));
+
+  if FontDialog1.Execute then
+   begin
+       ZQ_GeneralCOMPROBANTE_FUENTE.AsString:=FontDialog1.Font.Name;
+       ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.AsInteger:=Byte(FontDialog1.Font.Style);
+   end;
+
+   if not ZQ_GeneralCOMPROBANTE_FUENTE.IsNull then
+    dbfuente1.Font.Name:=ZQ_GeneralCOMPROBANTE_FUENTE.AsString;
+  if not ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.IsNull then
+    dbfuente1.Font.Style:=TFontStyles(Byte(ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.AsInteger));
+
 end;
 
 end.

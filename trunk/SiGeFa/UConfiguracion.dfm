@@ -4,8 +4,8 @@ object FConfiguracion: TFConfiguracion
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Configuraci'#243'n General del Sistema'
-  ClientHeight = 558
-  ClientWidth = 539
+  ClientHeight = 605
+  ClientWidth = 552
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -22,9 +22,9 @@ object FConfiguracion: TFConfiguracion
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 539
-    Height = 506
-    ActivePage = TabSheetFiscal
+    Width = 552
+    Height = 553
+    ActivePage = TabSheetGeneral
     Align = alClient
     TabOrder = 4
     OnChanging = PageControl1Changing
@@ -33,15 +33,15 @@ object FConfiguracion: TFConfiguracion
       object PGeneral: TPanel
         Left = 0
         Top = 0
-        Width = 531
-        Height = 478
+        Width = 544
+        Height = 525
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object GroupBox1: TGroupBox
           Left = 0
           Top = 24
-          Width = 531
+          Width = 544
           Height = 234
           Align = alTop
           Caption = ' Datos Organizaci'#243'n '
@@ -207,7 +207,7 @@ object FConfiguracion: TFConfiguracion
         object Panel3: TPanel
           Left = 0
           Top = 0
-          Width = 531
+          Width = 544
           Height = 24
           Align = alTop
           BevelInner = bvLowered
@@ -224,13 +224,13 @@ object FConfiguracion: TFConfiguracion
         object GroupBox2: TGroupBox
           Left = 0
           Top = 258
-          Width = 531
+          Width = 544
           Height = 76
-          Align = alBottom
+          Align = alTop
           Caption = '  Configuraci'#243'n de Reportes  '
           TabOrder = 2
           object Label10: TLabel
-            Left = 81
+            Left = 32
             Top = 22
             Width = 36
             Height = 13
@@ -244,7 +244,7 @@ object FConfiguracion: TFConfiguracion
             Transparent = True
           end
           object Label11: TLabel
-            Left = 62
+            Left = 13
             Top = 49
             Width = 55
             Height = 13
@@ -258,9 +258,9 @@ object FConfiguracion: TFConfiguracion
             Transparent = True
           end
           object DBEdit9: TDBEdit
-            Left = 120
+            Left = 71
             Top = 18
-            Width = 521
+            Width = 450
             Height = 21
             CharCase = ecUpperCase
             DataField = 'REPORTE_TITULO'
@@ -274,9 +274,9 @@ object FConfiguracion: TFConfiguracion
             TabOrder = 0
           end
           object DBEdit10: TDBEdit
-            Left = 120
+            Left = 71
             Top = 45
-            Width = 521
+            Width = 450
             Height = 21
             DataField = 'REPORTE_SUBTITULO'
             DataSource = DS_General
@@ -292,13 +292,13 @@ object FConfiguracion: TFConfiguracion
         object GroupBox3: TGroupBox
           Left = 0
           Top = 334
-          Width = 531
-          Height = 144
-          Align = alBottom
+          Width = 544
+          Height = 191
+          Align = alClient
           Caption = '  Configuraci'#243'n de Comprobantes  '
           TabOrder = 3
           object Label1: TLabel
-            Left = 81
+            Left = 32
             Top = 20
             Width = 36
             Height = 13
@@ -312,7 +312,7 @@ object FConfiguracion: TFConfiguracion
             Transparent = True
           end
           object Label2: TLabel
-            Left = 55
+            Left = 6
             Top = 69
             Width = 62
             Height = 13
@@ -326,7 +326,7 @@ object FConfiguracion: TFConfiguracion
             Transparent = True
           end
           object Label12: TLabel
-            Left = 55
+            Left = 6
             Top = 93
             Width = 62
             Height = 13
@@ -340,7 +340,7 @@ object FConfiguracion: TFConfiguracion
             Transparent = True
           end
           object Label13: TLabel
-            Left = 55
+            Left = 6
             Top = 118
             Width = 62
             Height = 13
@@ -354,7 +354,7 @@ object FConfiguracion: TFConfiguracion
             Transparent = True
           end
           object Label14: TLabel
-            Left = 55
+            Left = 6
             Top = 44
             Width = 62
             Height = 13
@@ -367,10 +367,24 @@ object FConfiguracion: TFConfiguracion
             ParentFont = False
             Transparent = True
           end
+          object dbfuente1: TDBText
+            Left = 152
+            Top = 155
+            Width = 369
+            Height = 17
+            DataField = 'COMPROBANTE_FUENTE'
+            DataSource = DS_General
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
           object DBEdit11: TDBEdit
-            Left = 120
+            Left = 71
             Top = 16
-            Width = 521
+            Width = 450
             Height = 21
             DataField = 'COMPROBANTE_TITULO'
             DataSource = DS_General
@@ -383,9 +397,9 @@ object FConfiguracion: TFConfiguracion
             TabOrder = 0
           end
           object DBEdit12: TDBEdit
-            Left = 120
+            Left = 71
             Top = 65
-            Width = 521
+            Width = 450
             Height = 21
             DataField = 'COMPROBANTE_RENGLON2'
             DataSource = DS_General
@@ -398,9 +412,9 @@ object FConfiguracion: TFConfiguracion
             TabOrder = 2
           end
           object DBEdit13: TDBEdit
-            Left = 120
+            Left = 71
             Top = 114
-            Width = 521
+            Width = 450
             Height = 21
             DataField = 'COMPROBANTE_RENGLON4'
             DataSource = DS_General
@@ -413,9 +427,9 @@ object FConfiguracion: TFConfiguracion
             TabOrder = 4
           end
           object DBEdit14: TDBEdit
-            Left = 120
+            Left = 71
             Top = 89
-            Width = 521
+            Width = 450
             Height = 21
             DataField = 'COMPROBANTE_RENGLON3'
             DataSource = DS_General
@@ -428,9 +442,9 @@ object FConfiguracion: TFConfiguracion
             TabOrder = 3
           end
           object DBEdit15: TDBEdit
-            Left = 120
+            Left = 71
             Top = 40
-            Width = 521
+            Width = 450
             Height = 21
             DataField = 'COMPROBANTE_RENGLON1'
             DataSource = DS_General
@@ -442,6 +456,15 @@ object FConfiguracion: TFConfiguracion
             ParentFont = False
             TabOrder = 1
           end
+          object BitBtn1: TBitBtn
+            Left = 8
+            Top = 152
+            Width = 129
+            Height = 23
+            Caption = 'Cambiar Fuente'
+            TabOrder = 5
+            OnClick = BitBtn1Click
+          end
         end
       end
     end
@@ -451,8 +474,8 @@ object FConfiguracion: TFConfiguracion
       object PVariables: TPanel
         Left = 0
         Top = 0
-        Width = 531
-        Height = 478
+        Width = 544
+        Height = 525
         Align = alClient
         BevelOuter = bvNone
         Caption = 'PVariables'
@@ -460,16 +483,16 @@ object FConfiguracion: TFConfiguracion
         object Panel4: TPanel
           Left = 0
           Top = 24
-          Width = 531
-          Height = 454
+          Width = 544
+          Height = 501
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object DBGridVariables: TDBGrid
             Left = 0
             Top = 0
-            Width = 531
-            Height = 309
+            Width = 544
+            Height = 356
             Align = alClient
             Color = 16112578
             DataSource = DS_Variables
@@ -518,8 +541,8 @@ object FConfiguracion: TFConfiguracion
           end
           object Panel2: TPanel
             Left = 0
-            Top = 309
-            Width = 531
+            Top = 356
+            Width = 544
             Height = 145
             Align = alBottom
             BevelOuter = bvNone
@@ -646,7 +669,7 @@ object FConfiguracion: TFConfiguracion
         object Panel1: TPanel
           Left = 0
           Top = 0
-          Width = 531
+          Width = 544
           Height = 24
           Align = alTop
           BevelInner = bvLowered
@@ -669,8 +692,8 @@ object FConfiguracion: TFConfiguracion
       object Panel5: TPanel
         Left = 0
         Top = 0
-        Width = 531
-        Height = 478
+        Width = 544
+        Height = 525
         Align = alClient
         BevelOuter = bvNone
         Caption = 'PVariables'
@@ -678,16 +701,16 @@ object FConfiguracion: TFConfiguracion
         object Panel6: TPanel
           Left = 0
           Top = 24
-          Width = 531
-          Height = 454
+          Width = 544
+          Height = 501
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object DBGridFiscal: TDBGrid
             Left = 0
             Top = 0
-            Width = 531
-            Height = 309
+            Width = 544
+            Height = 356
             Align = alClient
             Color = 16112578
             DataSource = DS_Fiscal
@@ -751,8 +774,8 @@ object FConfiguracion: TFConfiguracion
           end
           object Panel7: TPanel
             Left = 0
-            Top = 309
-            Width = 531
+            Top = 356
+            Width = 544
             Height = 145
             Align = alBottom
             BevelOuter = bvNone
@@ -761,7 +784,7 @@ object FConfiguracion: TFConfiguracion
               Left = 67
               Top = 17
               Width = 39
-              Height = 12
+              Height = 13
               Caption = 'Marca:'
             end
             object Label5: TLabel
@@ -894,7 +917,7 @@ object FConfiguracion: TFConfiguracion
         object Panel9: TPanel
           Left = 0
           Top = 0
-          Width = 531
+          Width = 544
           Height = 24
           Align = alTop
           BevelInner = bvLowered
@@ -915,7 +938,7 @@ object FConfiguracion: TFConfiguracion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1717,6 +1740,13 @@ object FConfiguracion: TFConfiguracion
       FieldName = 'COMPROBANTE_RENGLON4'
       Size = 50
     end
+    object ZQ_GeneralCOMPROBANTE_FUENTE: TStringField
+      FieldName = 'COMPROBANTE_FUENTE'
+      Size = 100
+    end
+    object ZQ_GeneralCOMPROBANTE_FUENTE_STYLE: TIntegerField
+      FieldName = 'COMPROBANTE_FUENTE_STYLE'
+    end
   end
   object DS_Variables: TDataSource
     DataSet = ZQ_Variables
@@ -1872,5 +1902,15 @@ object FConfiguracion: TFConfiguracion
     DataSet = ZQ_Fiscal
     Left = 44
     Top = 230
+  end
+  object FontDialog1: TFontDialog
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Verdana'
+    Font.Style = []
+    Options = [fdForceFontExist, fdNoSizeSel, fdWysiwyg]
+    Left = 284
+    Top = 430
   end
 end
