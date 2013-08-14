@@ -115,6 +115,9 @@ type
     ZQ_FiscalSISTEMA: TStringField;
     ZQ_SucursalCOMPROBANTE_FUENTE: TStringField;
     ZQ_SucursalCOMPROBANTE_FUENTE_STYLE: TIntegerField;
+    ZQ_CPB_Estado: TZQuery;
+    ZQ_CPB_EstadoID_COMP_ESTADO: TIntegerField;
+    ZQ_CPB_EstadoDESCRIPCION: TStringField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);
@@ -153,6 +156,7 @@ var
   monto_max_venta: double;
   confirmarNotaPedido: string;
   asociar_pto_salida: string;
+  asociar_pto_salida_id: integer;
   aplicaImprimirFiscal: string;  //indica que aplicacion se usa para la impresora fiscal delphi/visual
   imprimirEtiqueta_opcionReporte: integer; //tipo de impresion de etiquetas
   recargo_factura_vencida: double = 10; //indica el porcentaje de recargo(+)/descuento(-) que se le aplica a las facturas vencidas
@@ -255,6 +259,7 @@ begin
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'tipo_reporte_etiquetas', imprimirEtiqueta_opcionReporte);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'aplicaImprimirFiscal', aplicaImprimirFiscal);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'asociarStock_puntoSalida', asociar_pto_salida);
+  configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'asociarStock_puntoSalida', asociar_pto_salida_id);
   configurarInteger(ZQ_Configuracion_Variables, 'clave', 'numero', 'preventa_diasVencimiento', preventa_diasVencimiento);
   configurarString(ZQ_Configuracion_Variables, 'clave', 'texto', 'preventa_descontar_stock', preventa_descontar_stock);
   configurarReal(ZQ_Configuracion_Variables, 'clave', 'numero', 'recargo_factura_vencida', recargo_factura_vencida);

@@ -4657,6 +4657,21 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         TipoComboAncho = 200
         ItemIndex = -1
         VaciarValorDespues = False
+      end
+      item
+        Titulo = 'Estado'
+        Campo = 'id_comp_estado'
+        Tabla = 'comprobante'
+        TipoCampoIngreso = EK_Combo
+        TipoCampoIndice = 4
+        TipoCampoIndiceVer = 'Distinto'
+        TipoComboSQL = DM.ZQ_CPB_Estado
+        TipoComboSQLCampoVer = 'descripcion'
+        TipoComboSQLCampoReal = 'id_comp_estado'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = 2
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo

@@ -140,9 +140,10 @@ begin
   if (usaDevolucion = 'S') then
   begin
    EKBuscarStock.SQL_Where.Clear;
-   //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo
+   //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo sino del que esté habilitado
    sql:= Format('where (pc.baja <> ''S'') and (pr.baja <> ''S'') and (sucursal.id_sucursal = %d) '
                +' and (posicion_sucursal.PUNTO_SALIDA = %s)', [SUCURSAL_LOGUEO, QuotedStr('S')]);
+   //              , [SUCURSAL_LOGUEO]);
    EKBuscarStock.SQL_Where.Text:=sql;
    ZQ_Stock.SQL[22]:=sql;
   end;
@@ -150,10 +151,10 @@ begin
   if (usaCajero = 'S') then
   begin
    EKBuscarStock.SQL_Where.Clear;
-   //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo
+   //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo sino del que esté habilitado
    sql:= Format('where (pc.baja <> ''S'') and (pr.baja <> ''S'') and (sucursal.id_sucursal = %d) '
-               +' and (posicion_sucursal.PUNTO_SALIDA = %s) '
-               +' and (stock_producto.STOCK_ACTUAL > 0)',[SUCURSAL_LOGUEO, QuotedStr('S')]);
+               +' and (posicion_sucursal.PUNTO_SALIDA = %s) and (stock_producto.STOCK_ACTUAL > 0)',[SUCURSAL_LOGUEO, QuotedStr('S')]);
+              // +' and (stock_producto.STOCK_ACTUAL > 0)',[SUCURSAL_LOGUEO]);
    EKBuscarStock.SQL_Where.Text:=sql;
    ZQ_Stock.SQL[22]:=sql;
   end;

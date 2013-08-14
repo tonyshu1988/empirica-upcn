@@ -397,27 +397,50 @@ procedure TFABM_SucursalPosicion.btnPuntoSalidaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_PosicionSucursal.IsEmpty) OR (ZQ_PosicionSucursalPUNTO_SALIDA.AsString = 'S') then
+  if (ZQ_PosicionSucursal.IsEmpty) then
     exit;
+  if (ZQ_PosicionSucursalPUNTO_SALIDA.AsString = 'S') then
+   begin
+      if (application.MessageBox(pchar('¿Desea quitar la marca de la "Posición Sucursal" seleccionada como punto de salida?'+char(13)+
+                                        '(recuerde que debe seleccionar al menos un punto de Salida de Productos)'), 'ABM Posición Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+        begin
+          if dm.EKModelo.iniciar_transaccion(Transaccion_ABMPosicionSuc, [ZQ_PosicionSucursal]) then
+          begin
 
-  if (application.MessageBox(pchar('¿Desea marcar la "Posición Sucursal" seleccionada como punto de salida de la sucursal '+ZQ_PosicionSucursalsucursal.AsString+'?'), 'ABM Posición Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-  begin
-    if dm.EKModelo.iniciar_transaccion(Transaccion_ABMPosicionSuc, []) then
+            ZQ_PosicionSucursal.Edit;
+            ZQ_PosicionSucursalPUNTO_SALIDA.AsString:='N';
+            ZQ_PosicionSucursal.Post;
+
+
+            if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABMPosicionSuc)) then
+              dm.EKModelo.cancelar_transaccion(Transaccion_ABMPosicionSuc);
+          end;
+
+          recNo:= ZQ_PosicionSucursal.RecNo;
+          ZQ_PosicionSucursal.Refresh;
+          ZQ_PosicionSucursal.RecNo:= recNo;
+        end;
+        exit;
+   end
+  else
+    if (application.MessageBox(pchar('¿Desea marcar la "Posición Sucursal" seleccionada como punto de salida de la sucursal '+ZQ_PosicionSucursalsucursal.AsString+'?'), 'ABM Posición Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
     begin
+      if dm.EKModelo.iniciar_transaccion(Transaccion_ABMPosicionSuc, []) then
+      begin
 
-      ZQ_MarcaPSalida.close;
-      ZQ_MarcaPSalida.ParamByName('id_sucursal').AsInteger:= ZQ_PosicionSucursalID_SUCURSAL.AsInteger;
-      ZQ_MarcaPSalida.ParamByName('id_posicion_sucursal').AsInteger:= ZQ_PosicionSucursalID_POSICION_SUCURSAL.AsInteger;
-      ZQ_MarcaPSalida.ExecSQL;
+        ZQ_MarcaPSalida.close;
+        ZQ_MarcaPSalida.ParamByName('id_sucursal').AsInteger:= ZQ_PosicionSucursalID_SUCURSAL.AsInteger;
+        ZQ_MarcaPSalida.ParamByName('id_posicion_sucursal').AsInteger:= ZQ_PosicionSucursalID_POSICION_SUCURSAL.AsInteger;
+        ZQ_MarcaPSalida.ExecSQL;
 
-      if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABMPosicionSuc)) then
-        dm.EKModelo.cancelar_transaccion(Transaccion_ABMPosicionSuc);
+        if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABMPosicionSuc)) then
+          dm.EKModelo.cancelar_transaccion(Transaccion_ABMPosicionSuc);
+      end;
+
+      recNo:= ZQ_PosicionSucursal.RecNo;
+      ZQ_PosicionSucursal.Refresh;
+      ZQ_PosicionSucursal.RecNo:= recNo;
     end;
-
-    recNo:= ZQ_PosicionSucursal.RecNo;
-    ZQ_PosicionSucursal.Refresh;
-    ZQ_PosicionSucursal.RecNo:= recNo;
-  end;
 end;
 
 procedure TFABM_SucursalPosicion.btnExcelClick(Sender: TObject);

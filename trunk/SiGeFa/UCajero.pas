@@ -654,6 +654,8 @@ type
     ZQ_Optica_OrdenID_SUCURSAL: TIntegerField;
     Label69: TLabel;
     DBEdit25: TDBEdit;
+    ZQ_ProductosSECCION: TStringField;
+    DBEdit26: TDBEdit;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
@@ -915,7 +917,7 @@ begin
   if id = 'I' then
   begin
     ZQ_Productos.Close;
-    ZQ_Productos.sql[15]:= Format('and(sp.id_stock_producto=%s)', [IdProdStock]);
+    ZQ_Productos.sql[15]:= Format('and(sp.id_stock_producto=%d)', [strToInt(IdProdStock)]);
     ZQ_Productos.Open;
   end;
 
@@ -931,7 +933,7 @@ begin
   begin
     if ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0 then
     begin
-      Application.MessageBox('El Stock del Producto es Insuficiente.', 'Stock Producto');
+      Application.MessageBox('El stock actual del producto en dicha sección es insuficiente para la cantidad ingresada', 'Stock Producto');
       LimpiarCodigo;
       exit;
     end;
@@ -1468,7 +1470,7 @@ begin
     end
     else
     begin
-      Application.MessageBox('El stock actual del producto es insuficiente para la cantidad ingresada.', 'Atención');
+      Application.MessageBox('El stock actual del producto en dicha sección es insuficiente para la cantidad ingresada.', 'Atención');
       if edCantidad.Enabled then
         edCantidad.SetFocus;
       exit;

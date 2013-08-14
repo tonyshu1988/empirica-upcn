@@ -47,8 +47,8 @@ object FBuscarProductoStock: TFBuscarProductoStock
           Expanded = False
           FieldName = 'COD_CORTO_PRODUCTO'
           Title.Alignment = taCenter
-          Title.Caption = 'C'#243'd. Producto'
-          Width = 86
+          Title.Caption = 'C'#243'd. Prod.'
+          Width = 75
           Visible = True
         end
         item
@@ -63,7 +63,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
           FieldName = 'NOMBRE'
           Title.Alignment = taCenter
           Title.Caption = 'Producto'
-          Width = 211
+          Width = 318
           Visible = True
         end
         item
@@ -71,7 +71,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
           FieldName = 'SUCURSAL'
           Title.Alignment = taCenter
           Title.Caption = 'Sucursal'
-          Width = 138
+          Width = 142
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SECCION'
+          Title.Alignment = taCenter
+          Title.Caption = 'Secci'#243'n'
+          Width = 108
           Visible = True
         end
         item
@@ -202,13 +210,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
           FieldName = 'COD_CORTO_CABECERA'
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. Cabecera'
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'SECCION'
-          Title.Caption = 'Secci'#243'n'
-          Width = 108
           Visible = True
         end
         item
