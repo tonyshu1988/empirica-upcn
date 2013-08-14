@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 1030
-  Top = 274
+  Left = 1032
+  Top = 276
   Height = 471
   Width = 396
   object Conexion: TZConnection
@@ -16,7 +16,6 @@ object DM: TDM
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
-    Connected = True
     SQLHourGlass = True
     Left = 38
     Top = 16
@@ -2065,6 +2064,23 @@ object DM: TDM
     object ZQ_FiscalSISTEMA: TStringField
       FieldName = 'SISTEMA'
       Size = 30
+    end
+  end
+  object ZQ_CPB_Estado: TZQuery
+    Connection = Conexion
+    SQL.Strings = (
+      'select *'
+      'from COMPROBANTE_ESTADO')
+    Params = <>
+    Left = 236
+    Top = 386
+    object ZQ_CPB_EstadoID_COMP_ESTADO: TIntegerField
+      FieldName = 'ID_COMP_ESTADO'
+      Required = True
+    end
+    object ZQ_CPB_EstadoDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 50
     end
   end
 end

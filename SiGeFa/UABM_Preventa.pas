@@ -59,7 +59,6 @@ type
     QuitarProd: TMenuItem;
     PProducto: TPanel;
     Panel1: TPanel;
-    EKListadoProducto: TEKListadoSQL;
     ZQ_Productos: TZQuery;
     ZQ_ProductosNOMBRE_PRODUCTO: TStringField;
     ZQ_ProductosMEDIDA: TStringField;
@@ -204,7 +203,6 @@ type
     Image2: TImage;
     Label8: TLabel;
     Label10: TLabel;
-    Label19: TLabel;
     ZQ_PersonasCOEFIVA: TFloatField;
     grupoVertical: TdxBarGroup;
     EditarProd: TMenuItem;
@@ -389,6 +387,10 @@ type
     btnCargarSenia: TBitBtn;
     ACargarSenia: TAction;
     btnHistorial: TdxBarLargeButton;
+    ZQ_ProductosBAJA: TStringField;
+    ZQ_ProductosSECCION: TStringField;
+    DBEdit16: TDBEdit;
+    EKListadoProducto: TEKListadoSQL;
     procedure btBuscProdClick(Sender: TObject);
     procedure VerLectorCB(sino: Boolean);
     procedure IdentificarCodigo();
@@ -524,12 +526,12 @@ begin
   cod:= codBarras.Text;
   try
     begin
-      if not (sonTodosNumeros(MidStr(cod, 2, Length(cod) - 1))) then
-      begin
-        Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
-        LimpiarCodigo;
-        exit;
-      end;
+//      if not (sonTodosNumeros(MidStr(cod, 2, Length(cod) - 1))) then
+//      begin
+//        Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
+//        LimpiarCodigo;
+//        exit;
+//      end;
       if UpperCase(MidStr(Cod, 1, 1)) = 'C' then
       begin
         LeerCodigo('C', Cod);
@@ -547,8 +549,8 @@ begin
       begin
         LeerCodigo('B', completarCodBar(Cod));
         exit;
-      end;
-
+      end
+      else
       if (Length(cod) > LONG_COD_BARRAS) then
       begin
         Application.MessageBox('Longitud de código incorrecta', 'Código incorrecto');
@@ -604,18 +606,18 @@ begin
       exit;
     end
   end;
-  //Codigo Corto
-  if id = 'C' then
-  begin
-    ZQ_Productos.Close;
-    ZQ_Productos.sql[15]:= Format('and(p.cod_corto=%s)', [QuotedStr(IdProd)]);
-    ZQ_Productos.Open;
-  end;
+//  //Codigo Corto
+//  if id = 'C' then
+//  begin
+//    ZQ_Productos.Close;
+//    ZQ_Productos.sql[15]:= Format('and(p.cod_corto=%s)', [QuotedStr(IdProd)]);
+//    ZQ_Productos.Open;
+//  end;
 
   if id = 'I' then
   begin
     ZQ_Productos.Close;
-    ZQ_Productos.sql[15]:= Format('and(p.id_producto=%s)', [IdProd]);
+    ZQ_Productos.sql[15]:= Format('and(sp.id_stock_producto=%d)', [strToInt(IdProdStock)]);
     ZQ_Productos.Open;
   end;
 
@@ -631,7 +633,7 @@ begin
   begin
     if ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0 then
     begin
-      Application.MessageBox('El Stock del Producto es Insuficiente.', 'Stock Producto');
+      Application.MessageBox('El stock actual del producto en dicha sección es insuficiente para la cantidad ingresada', 'Stock Producto');
       LimpiarCodigo;
       exit;
     end;
@@ -971,7 +973,7 @@ begin
   begin
 
     CD_DetalleFactura.Append;
-    CD_DetalleFacturaID_PRODUCTO.AsInteger:= prod;
+    CD_DetalleFacturaID_PRODUCTO.AsInteger:= ZQ_ProductosID_PRODUCTO.AsInteger;
     CD_DetalleFacturaproducto.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
     CD_DetalleFacturaDETALLE.AsString:= detalle;
     CD_DetalleFacturaCANTIDAD.AsFloat:= 1;
@@ -985,7 +987,7 @@ begin
     CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= (CD_DetalleFacturaCANTIDAD.AsInteger * CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
     CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
     CD_DetalleFacturaIMPORTE_IVA.AsFloat:= CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
-    CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_ProductosID_STOCK_PRODUCTO.AsInteger;
+    CD_DetalleFacturaID_PROD_STOCK.AsInteger:=prodStock;
 //        CD_DetalleFacturaimporte_original.AsFloat:=CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
     modoEscrituraProd();
     Result:= True;
@@ -1097,7 +1099,7 @@ begin
   if not (CD_DetalleFactura.IsEmpty) then
   begin
     ZQ_Productos.Close;
-    ZQ_Productos.sql[15]:= Format('and(p.id_producto=%s)', [CD_DetalleFacturaID_PRODUCTO.AsString]);
+    ZQ_Productos.sql[15]:= Format('and(sp.id_stock_producto=%s)', [CD_DetalleFacturaID_PROD_STOCK.AsString]);
     ZQ_Productos.Open;
 
     CD_DetalleFactura.Edit;
@@ -1140,9 +1142,9 @@ procedure TFABM_Preventa.OnSelProd;
 begin
   if not vsel.ZQ_Stock.IsEmpty then
   begin
-    if not (ProductoYaCargado(vsel.ZQ_StockID_PRODUCTO.AsInteger)) then
+    if not (ProductoYaCargado(vsel.ZQ_StockID_STOCK_PRODUCTO.AsInteger)) then
     begin
-      codBarras.Text:= 'I' + vsel.ZQ_StockID_PRODUCTO.AsString;
+      codBarras.Text:= 'I' + vsel.ZQ_StockID_STOCK_PRODUCTO.AsString;
         //IdentificarCodigo;
       LeerCodigo('I', codBarras.Text);
       if edCantidad.Enabled then

@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 242
-  Top = 75
+  Left = 361
+  Top = 182
   Width = 1024
   Height = 700
   Caption = 'FABMProductos'
@@ -23,15 +23,15 @@ object FABMProductos: TFABMProductos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1016
-    Height = 621
+    Width = 1008
+    Height = 610
     Align = alClient
     Caption = 'PContenedor'
     TabOrder = 4
     object Splitter1: TSplitter
       Left = 1
       Top = 299
-      Width = 1014
+      Width = 1006
       Height = 16
       Cursor = crVSplit
       Align = alTop
@@ -40,12 +40,12 @@ object FABMProductos: TFABMProductos
     object PCabeceraProducto: TPanel
       Left = 1
       Top = 1
-      Width = 1014
+      Width = 1006
       Height = 298
       Align = alTop
       TabOrder = 0
       DesignSize = (
-        1014
+        1006
         298)
       object panelImprimirListado: TPanel
         Left = 386
@@ -99,7 +99,7 @@ object FABMProductos: TFABMProductos
       object PanelCabecera: TPanel
         Left = 1
         Top = 1
-        Width = 1012
+        Width = 1004
         Height = 19
         Align = alTop
         BevelOuter = bvNone
@@ -120,7 +120,7 @@ object FABMProductos: TFABMProductos
           Layout = tlCenter
         end
         object StaticTxtBaja: TStaticText
-          Left = 903
+          Left = 895
           Top = 0
           Width = 109
           Height = 19
@@ -137,7 +137,7 @@ object FABMProductos: TFABMProductos
       object Grilla: TEKDBGrid
         Left = 1
         Top = 224
-        Width = 1012
+        Width = 1004
         Height = 73
         Align = alClient
         Color = 14606012
@@ -345,7 +345,7 @@ object FABMProductos: TFABMProductos
               50.270833333333330000
               1232.958333333333000000
               124.354166666666700000
-              304.270833333333400000)
+              304.270833333333300000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -376,7 +376,7 @@ object FABMProductos: TFABMProductos
             Size.Values = (
               52.916666666666670000
               1116.541666666667000000
-              68.791666666666680000
+              68.791666666666670000
               537.104166666666700000)
             Alignment = taCenter
             AlignToBand = True
@@ -409,7 +409,7 @@ object FABMProductos: TFABMProductos
               52.916666666666670000
               1068.916666666667000000
               5.291666666666667000
-              632.354166666666800000)
+              632.354166666666700000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -451,7 +451,7 @@ object FABMProductos: TFABMProductos
           ForceNewPage = False
           ParentFont = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -753,7 +753,7 @@ object FABMProductos: TFABMProductos
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333340000
+            58.208333333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -803,7 +803,7 @@ object FABMProductos: TFABMProductos
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333340000
+            82.020833333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -1581,7 +1581,7 @@ object FABMProductos: TFABMProductos
       object PProducto: TPanel
         Left = 1
         Top = 20
-        Width = 1012
+        Width = 1004
         Height = 204
         Align = alTop
         TabOrder = 4
@@ -1692,7 +1692,7 @@ object FABMProductos: TFABMProductos
         object Label11: TLabel
           Left = 1
           Top = 1
-          Width = 1010
+          Width = 1002
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -1841,15 +1841,15 @@ object FABMProductos: TFABMProductos
     object PanelDetalle: TPanel
       Left = 1
       Top = 315
-      Width = 1014
-      Height = 305
+      Width = 1006
+      Height = 294
       Align = alClient
       TabOrder = 1
       object grillaDetalle: TEKDBGrid
         Left = 1
         Top = 1
-        Width = 1012
-        Height = 57
+        Width = 1004
+        Height = 46
         Align = alClient
         Color = 14606012
         DataSource = DS_DetalleProducto
@@ -2022,8 +2022,8 @@ object FABMProductos: TFABMProductos
       end
       object PDatosdetalle: TPanel
         Left = 1
-        Top = 58
-        Width = 1012
+        Top = 47
+        Width = 1004
         Height = 246
         Align = alBottom
         Caption = 'PDatosdetalle'
@@ -2032,14 +2032,14 @@ object FABMProductos: TFABMProductos
         object PContenedorDetalle: TPanel
           Left = 1
           Top = 1
-          Width = 911
+          Width = 903
           Height = 244
           Align = alClient
           TabOrder = 0
           object Label9: TLabel
             Left = 1
             Top = 1
-            Width = 909
+            Width = 901
             Height = 14
             Align = alTop
             Alignment = taCenter
@@ -2056,7 +2056,7 @@ object FABMProductos: TFABMProductos
             Layout = tlCenter
           end
           object PMedidas: TPanel
-            Left = 772
+            Left = 764
             Top = 15
             Width = 138
             Height = 228
@@ -2107,7 +2107,7 @@ object FABMProductos: TFABMProductos
           object PContenedorDetallePrecios: TPanel
             Left = 1
             Top = 15
-            Width = 771
+            Width = 763
             Height = 228
             Align = alClient
             BevelOuter = bvNone
@@ -2115,13 +2115,13 @@ object FABMProductos: TFABMProductos
             object PDetalle_Prod: TPanel
               Left = 0
               Top = 0
-              Width = 771
+              Width = 763
               Height = 87
               Align = alClient
               BevelOuter = bvNone
               TabOrder = 0
               DesignSize = (
-                771
+                763
                 87)
               object LabelCodCorto: TLabel
                 Left = 8
@@ -2139,7 +2139,7 @@ object FABMProductos: TFABMProductos
                 ParentFont = False
               end
               object Label22: TLabel
-                Left = 408
+                Left = 392
                 Top = 1
                 Width = 66
                 Height = 13
@@ -2241,9 +2241,9 @@ object FABMProductos: TFABMProductos
                 TabOrder = 5
               end
               object DBMemo1: TDBMemo
-                Left = 408
+                Left = 392
                 Top = 15
-                Width = 354
+                Width = 370
                 Height = 63
                 Anchors = [akLeft, akTop, akRight, akBottom]
                 DataField = 'DESCRIPCION'
@@ -2304,7 +2304,7 @@ object FABMProductos: TFABMProductos
               object EditStockActual: TEdit
                 Left = 313
                 Top = 57
-                Width = 81
+                Width = 64
                 Height = 21
                 Font.Charset = ANSI_CHARSET
                 Font.Color = clWindowText
@@ -2320,7 +2320,7 @@ object FABMProductos: TFABMProductos
             object PPrecios: TPanel
               Left = 0
               Top = 87
-              Width = 771
+              Width = 763
               Height = 141
               Align = alBottom
               BevelOuter = bvNone
@@ -2531,7 +2531,7 @@ object FABMProductos: TFABMProductos
               object Label7: TLabel
                 Left = 0
                 Top = 0
-                Width = 771
+                Width = 763
                 Height = 14
                 Align = alTop
                 Alignment = taCenter
@@ -2784,7 +2784,7 @@ object FABMProductos: TFABMProductos
           end
         end
         object Panel2: TPanel
-          Left = 912
+          Left = 904
           Top = 1
           Width = 99
           Height = 244
@@ -2908,7 +2908,7 @@ object FABMProductos: TFABMProductos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3703,6 +3703,7 @@ object FABMProductos: TFABMProductos
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'digo Corto'
@@ -3713,6 +3714,7 @@ object FABMProductos: TFABMProductos
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'digo Cabecera'
@@ -3722,6 +3724,7 @@ object FABMProductos: TFABMProductos
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nombre'
@@ -3731,6 +3734,7 @@ object FABMProductos: TFABMProductos
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Descripci'#243'n'
@@ -3740,6 +3744,7 @@ object FABMProductos: TFABMProductos
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Art'#237'culo'
@@ -3749,6 +3754,7 @@ object FABMProductos: TFABMProductos
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Marca'
@@ -3758,6 +3764,7 @@ object FABMProductos: TFABMProductos
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Color'
@@ -3773,6 +3780,7 @@ object FABMProductos: TFABMProductos
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Baja'
@@ -3790,6 +3798,7 @@ object FABMProductos: TFABMProductos
         TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -4100,7 +4109,7 @@ object FABMProductos: TFABMProductos
     Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
     Left = 648
-    Top = 96
+    Top = 104
     object AgregaDetalle: TMenuItem
       Caption = 'Agregar Detalle'
       Enabled = False
@@ -4252,6 +4261,12 @@ object FABMProductos: TFABMProductos
     CampoClave = 'ID_MARCA'
     BuscarEnQuery = ZQ_Marca
     TituloVentana = 'Buscar Marca'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
     Left = 453
     Top = 216
   end
@@ -4268,6 +4283,12 @@ object FABMProductos: TFABMProductos
     CampoClave = 'ID_ARTICULO'
     BuscarEnQuery = ZQ_Articulo
     TituloVentana = 'Buscar Art'#237'culo'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
     Left = 541
     Top = 216
   end
@@ -4344,6 +4365,12 @@ object FABMProductos: TFABMProductos
       '')
     CampoBuscar = 'medida'
     CampoClave = 'id_medida'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
     Left = 756
     Top = 152
   end
@@ -4402,6 +4429,12 @@ object FABMProductos: TFABMProductos
     CampoClave = 'id_color'
     BuscarEnQuery = ZQ_Color
     TituloVentana = 'Buscar Art'#237'culo'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
     Left = 845
     Top = 96
   end
@@ -4958,6 +4991,11 @@ object FABMProductos: TFABMProductos
         DataType = ftFloat
         Name = 'STOCK_MAX'
         ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_POSIC_SUCURSAL'
+        ParamType = ptInput
       end>
     StoredProcName = 'ASOCIAR_PRODUCTO_PTO_SALIDA'
     Left = 656
@@ -4981,6 +5019,11 @@ object FABMProductos: TFABMProductos
       item
         DataType = ftFloat
         Name = 'STOCK_MAX'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_POSIC_SUCURSAL'
         ParamType = ptInput
       end>
   end

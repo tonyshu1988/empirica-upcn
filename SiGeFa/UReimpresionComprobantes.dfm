@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 278
-  Top = 25
+  Left = 450
+  Top = 222
   Width = 966
   Height = 634
   Caption = 'Reimpresi'#243'n de Comprobantes'
@@ -23,39 +23,39 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 958
-    Height = 555
+    Width = 950
+    Height = 544
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 956
-      Height = 553
+      Width = 948
+      Height = 542
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 954
-        Height = 551
+        Width = 946
+        Height = 540
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object PanelComprobante: TPanel
           Left = 1
           Top = 33
-          Width = 952
-          Height = 395
+          Width = 944
+          Height = 384
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object lblTotalComprobantes: TLabel
             Left = 0
-            Top = 374
-            Width = 952
+            Top = 363
+            Width = 944
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -74,8 +74,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           end
           object Splitter1: TSplitter
             Left = 0
-            Top = 365
-            Width = 952
+            Top = 354
+            Width = 944
             Height = 9
             Cursor = crVSplit
             Align = alBottom
@@ -83,8 +83,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object DBGridComprobantes: TDBGrid
             Left = 0
             Top = 0
-            Width = 952
-            Height = 365
+            Width = 944
+            Height = 354
             Align = alClient
             Color = 14606012
             DataSource = DS_Comprobante
@@ -211,8 +211,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         end
         object PanelFPagoYProd: TPanel
           Left = 1
-          Top = 428
-          Width = 952
+          Top = 417
+          Width = 944
           Height = 122
           Align = alBottom
           BevelOuter = bvNone
@@ -226,7 +226,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object PanelProducto: TPanel
             Left = 612
             Top = 0
-            Width = 340
+            Width = 332
             Height = 122
             Align = alClient
             BevelOuter = bvNone
@@ -235,7 +235,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object lblTotalProducto: TLabel
               Left = 0
               Top = 101
-              Width = 340
+              Width = 332
               Height = 21
               Align = alBottom
               Alignment = taRightJustify
@@ -255,7 +255,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object DBGridListadoProductos: TDBGrid
               Left = 0
               Top = 0
-              Width = 340
+              Width = 332
               Height = 101
               Align = alClient
               Color = 14606012
@@ -458,7 +458,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         object PanelFiltro: TPanel
           Left = 1
           Top = 1
-          Width = 952
+          Width = 944
           Height = 32
           Align = alTop
           BevelOuter = bvNone
@@ -510,7 +510,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -618,11 +618,6 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           item
             BeginGroup = True
             Item = btVer
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btnEliminarComprob
             Visible = True
           end
           item
@@ -2023,6 +2018,12 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     CampoBuscar = 'nombre'
     CampoClave = 'id_persona'
     TituloVentana = 'Buscar Cliente'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
     Left = 635
     Top = 259
   end
@@ -2066,6 +2067,12 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     CampoBuscar = 'nombre_cuenta'
     CampoClave = 'id_cuenta'
     TituloVentana = 'Buscar Cuenta'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
     Left = 771
     Top = 258
   end
@@ -2079,6 +2086,12 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     CampoBuscar = 'descripcion'
     CampoClave = 'id_tipo_formapago'
     TituloVentana = 'Buscar Forma Pago'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
     Left = 875
     Top = 259
   end

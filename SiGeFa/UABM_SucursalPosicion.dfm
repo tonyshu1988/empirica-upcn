@@ -1,6 +1,6 @@
 object FABM_SucursalPosicion: TFABM_SucursalPosicion
-  Left = 242
-  Top = 162
+  Left = 405
+  Top = 225
   Width = 981
   Height = 549
   Caption = 'ABM Sucursal Posicion'
@@ -948,6 +948,12 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Title.Alignment = taCenter
           Title.Caption = 'Punto Salida'
           Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'ID_POSICION_SUCURSAL'
+          Title.Caption = 'ID'
+          Visible = True
         end>
     end
     object PanelEdicion: TPanel
@@ -1113,9 +1119,15 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         Height = 21
         DataField = 'ID_SUCURSAL'
         DataSource = DS_PosicionSucursal
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
         KeyField = 'ID_SUCURSAL'
         ListField = 'NOMBRE'
         ListSource = DS_Sucursal
+        ParentFont = False
         TabOrder = 0
         OnKeyUp = DBLookupCBoxSucKeyUp
       end
@@ -1722,9 +1734,9 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       AutoGrayScale = False
     end
     object btnPuntoSalida: TdxBarLargeButton
-      Caption = 'Es Punto Salida'
+      Caption = 'Punto Salida S/N'
       Category = 0
-      Hint = 'Es Punto Salida'
+      Hint = 'Punto Salida S/N'
       Visible = ivAlways
       ImageIndex = 81
       OnClick = btnPuntoSalidaClick
@@ -1873,6 +1885,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Secci'#243'n'
@@ -1882,6 +1895,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Sector'
@@ -1891,6 +1905,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Fila'
@@ -1900,6 +1915,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Columna'
@@ -1909,6 +1925,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Baja'
@@ -1925,6 +1942,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           'N')
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -1952,6 +1970,12 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       'where s.baja <> '#39'S'#39)
     CampoBuscar = 'nombre'
     CampoClave = 'id_sucursal'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
     Left = 192
     Top = 160
   end

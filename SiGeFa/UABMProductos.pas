@@ -770,28 +770,34 @@ begin
     end
   end;
 
-
-  if (asociar_pto_salida = 'SI') then // Asociamos el producto con el pto de salida de forma automatica, de esta manera ya esta asociado a producto_stock
+// Asociamos el producto con el pto de salida de forma automatica y a una posic de la configuracion, de esta manera ya esta asociado a producto_stock
+  if (asociar_pto_salida = 'SI') then
   begin
-    if dm.EKModelo.iniciar_transaccion('ASOCIAR', []) then
-    begin
-      ZQ_DetalleProducto.First;
-      while not ZQ_DetalleProducto.Eof do
+   if (asociar_pto_salida_id>0) then
+   begin
+      if dm.EKModelo.iniciar_transaccion('ASOCIAR', []) then
       begin
-        Asociar_producto_pto_salida.Close;
-        Asociar_producto_pto_salida.ParamByName('ID_PRODUCTO').AsInteger := ZQ_DetalleProductoID_PRODUCTO.AsInteger;
-        Asociar_producto_pto_salida.ParamByName('STOCK_MIN').AsFloat := ZQ_DetalleProductoSTOCK_MIN.AsInteger;
-        Asociar_producto_pto_salida.ParamByName('STOCK_MAX').AsFloat := ZQ_DetalleProductoSTOCK_MAX.AsInteger;
-        Asociar_producto_pto_salida.ParamByName('STOCK_ACTUAL').AsFloat := StrToFloat(EditStockActual.Text);
-        Asociar_producto_pto_salida.ExecProc;
+        ZQ_DetalleProducto.First;
+        while not ZQ_DetalleProducto.Eof do
+        begin
+          Asociar_producto_pto_salida.Close;
+          Asociar_producto_pto_salida.ParamByName('ID_PRODUCTO').AsInteger := ZQ_DetalleProductoID_PRODUCTO.AsInteger;
+          Asociar_producto_pto_salida.ParamByName('STOCK_MIN').AsFloat := ZQ_DetalleProductoSTOCK_MIN.AsInteger;
+          Asociar_producto_pto_salida.ParamByName('STOCK_MAX').AsFloat := ZQ_DetalleProductoSTOCK_MAX.AsInteger;
+          Asociar_producto_pto_salida.ParamByName('STOCK_ACTUAL').AsFloat := StrToFloat(EditStockActual.Text);
+          Asociar_producto_pto_salida.ParamByName('ID_POSIC_SUCURSAL').AsInteger := asociar_pto_salida_id;
+          Asociar_producto_pto_salida.ExecProc;
 
-        ZQ_DetalleProducto.Next;
+          ZQ_DetalleProducto.Next;
+        end;
+
+        if not (dm.EKModelo.finalizar_transaccion('ASOCIAR')) then
+          dm.EKModelo.cancelar_transaccion('ASOCIAR');
       end;
-
-      if not (dm.EKModelo.finalizar_transaccion('ASOCIAR')) then
-        dm.EKModelo.cancelar_transaccion('ASOCIAR');
-    end;
-  end;
+   end
+   else
+    ShowMessage('Debe asociar el producto manualmente y/o configurar la Sección/Posición por Defecto!');
+  end
 
   
 end;
@@ -958,6 +964,12 @@ begin
   PDatosDetalle.Visible := true;
 
   campoQueCambia:= '';
+  if (asociar_pto_salida = 'SI') then
+    begin
+      LStockActual.Visible := true;
+      EditStockActual.Visible := true;
+      EditStockActual.Text := '0';
+    end;
 end;
 
 
