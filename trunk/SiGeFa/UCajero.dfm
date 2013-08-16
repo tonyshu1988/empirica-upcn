@@ -7990,7 +7990,7 @@ object FCajero: TFCajero
       '        COALESCE ('#39' - Sector: '#39' || ps.sector,'#39#39')||'
       '        COALESCE ('#39' - Fila: '#39' || ps.fila,'#39#39')||'
       
-        '        COALESCE ('#39' - Columna: '#39' || ps.columna,'#39#39'))as varchar(20' +
+        '        COALESCE ('#39' - Columna: '#39' || ps.columna,'#39#39'))as varchar(30' +
         '00))'
       '         AS posicSucursal'
       'from producto_cabecera pc'
@@ -8005,7 +8005,7 @@ object FCajero: TFCajero
       
         'where (ps.punto_salida='#39'S'#39')and(pc.baja<>'#39'S'#39')and(sp.stock_actual>' +
         '0)'
-      'order by 2')
+      'order by 3')
     CampoBuscar = 'secc'
     CampoBuscar2 = 'posicSucursal'
     CampoClave = 'id_stock_producto'
@@ -8016,7 +8016,7 @@ object FCajero: TFCajero
     ColorGrilla = 14606012
     AnchoClave = 80
     AnchoBuscar1 = 100
-    AnchoBuscar2 = 2000
+    AnchoBuscar2 = 3000
     Left = 136
     Top = 240
   end

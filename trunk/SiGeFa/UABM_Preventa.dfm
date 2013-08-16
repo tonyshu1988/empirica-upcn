@@ -7744,7 +7744,7 @@ object FABM_Preventa: TFABM_Preventa
       
         'where (ps.punto_salida='#39'S'#39')and(pc.baja<>'#39'S'#39')and(sp.stock_actual>' +
         '0)'
-      'order by 2')
+      'order by 3')
     CampoBuscar = 'secc'
     CampoBuscar2 = 'posicSucursal'
     CampoClave = 'id_stock_producto'
