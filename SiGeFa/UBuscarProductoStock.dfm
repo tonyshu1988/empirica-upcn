@@ -1,5 +1,5 @@
 object FBuscarProductoStock: TFBuscarProductoStock
-  Left = 349
+  Left = 608
   Top = 224
   Width = 730
   Height = 426
@@ -923,7 +923,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
     Grilla = DBGridStock
     Filtros = <
       item
-        TituloColumna = 'C'#243'd. Producto'
+        TituloColumna = 'C'#243'd. Prod.'
         Visible = True
       end
       item
@@ -936,6 +936,10 @@ object FBuscarProductoStock: TFBuscarProductoStock
       end
       item
         TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Secci'#243'n'
         Visible = True
       end
       item
@@ -984,10 +988,6 @@ object FBuscarProductoStock: TFBuscarProductoStock
       end
       item
         TituloColumna = 'C'#243'd. Cabecera'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Secci'#243'n'
         Visible = True
       end
       item

@@ -855,7 +855,7 @@ begin
       end
       else if (Length(cod) > LONG_COD_BARRAS) then
       begin
-        Application.MessageBox('Longitud de código incorrecta', 'Código incorrecto');
+        Application.MessageBox('Longitud de código incorrecta', 'Código incorrecto',MB_ICONINFORMATION);
         LimpiarCodigo;
         exit;
       end;
@@ -864,7 +864,7 @@ begin
     end
   except
     begin
-      Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
+      Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto',MB_ICONINFORMATION);
       LimpiarCodigo;
       exit;
     end;
@@ -901,7 +901,7 @@ begin
     IdProdStock:= MidStr(cod, 2, Length(cod) - 1);
   except
     begin
-      Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
+      Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto',MB_ICONINFORMATION);
       LimpiarCodigo;
       exit;
     end
@@ -929,30 +929,27 @@ begin
     ZQ_Productos.Open;
   end;
 
-  if not (ZQ_Productos.IsEmpty) then
-  begin
-    if ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0 then
-    begin
-      Application.MessageBox('El stock actual del producto en dicha sección es insuficiente para la cantidad ingresada', 'Stock Producto');
-      LimpiarCodigo;
-      exit;
-    end;
-
-    if ((id = 'B') or (id = 'C')) then
-      if ZQ_Productos.RecordCount > 1 then
+      if not(ZQ_Productos.IsEmpty) then
       begin
-        Application.MessageBox('El código ingresado corresponde a más de un producto' + char(13) +
-          '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Producto Repetido');
-        LimpiarCodigo;
-        exit;
-      end;
 
+        if ((id='B') or (id='C')) then
+          if ZQ_Productos.RecordCount>1 then
+          begin
+            Application.MessageBox('El código ingresado corresponde a más de un producto y/o se encuentra ubicado en más de un sector al mismo tiempo.'+char(13)+
+                                    '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Producto Repetido',MB_ICONINFORMATION);
+            exit;
+          end;
+        if ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0 then
+        begin
+          Application.MessageBox('El Stock del Producto es Insuficiente.', 'Stock Producto',MB_ICONINFORMATION);
+          exit;
+        end;
     agregar('', ZQ_ProductosID_STOCK_PRODUCTO.AsInteger);
   end
   else
   begin
     Application.MessageBox('El producto no pudo ser encontrado.' + char(13) +
-      '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Código incorrecto');
+      '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Código incorrecto',MB_ICONINFORMATION);
     LimpiarCodigo;
     exit;
   end;
@@ -1449,7 +1446,7 @@ begin
 
   if CD_DetalleFacturaIMPORTE_FINAL.AsFloat <= 0 then
   begin
-    Application.MessageBox('El importe ingresado es incorrecto.', 'Atención');
+    Application.MessageBox('El importe ingresado es incorrecto.', 'Atención',MB_ICONINFORMATION);
     if edImporteFinal.Enabled then
       edImporteFinal.SetFocus;
     exit;
@@ -1470,7 +1467,7 @@ begin
     end
     else
     begin
-      Application.MessageBox('El stock actual del producto en dicha sección es insuficiente para la cantidad ingresada.', 'Atención');
+      Application.MessageBox('El stock actual del producto en dicha sección es insuficiente para la cantidad ingresada.', 'Atención',MB_ICONINFORMATION);
       if edCantidad.Enabled then
         edCantidad.SetFocus;
       exit;
@@ -1809,7 +1806,7 @@ begin
       if not (dm.EKModelo.finalizar_transaccion(abmComprobante)) then
       begin
         dm.EKModelo.cancelar_transaccion(abmComprobante);
-        Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
+        Application.MessageBox('No se pudo crear el Comprobante', 'Atención',MB_ICONINFORMATION);
         dm.EKModelo.cancelar_transaccion(abmComprobante);
       end
       else
@@ -1846,7 +1843,7 @@ begin
     end
   except
     begin
-      Application.MessageBox('No se pudo crear el Comprobante', 'Atención');
+      Application.MessageBox('No se pudo crear el Comprobante', 'Atención',MB_ICONINFORMATION);
     end;
   end;
 end;

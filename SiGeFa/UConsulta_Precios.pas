@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DBCtrls, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, strutils, Mask, UBuscarProductoStock,
-  ActnList, XPStyleActnCtrls, ActnMan;
+  ActnList, XPStyleActnCtrls, ActnMan, EKListadoSQL;
 
 type
   TFConsulta_Precios = class(TForm)
@@ -29,6 +29,34 @@ type
     GB_Cod_Barra: TGroupBox;
     codbarras: TEdit;
     Label1: TLabel;
+    DS_Productos: TDataSource;
+    Label8: TLabel;
+    DBEdit1: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBEdit6: TDBEdit;
+    DBMemo1: TDBMemo;
+    GB_Datos_Empresa: TGroupBox;
+    DBImage1: TDBImage;
+    Label9: TLabel;
+    Label10: TLabel;
+    Label11: TLabel;
+    Label12: TLabel;
+    Label13: TLabel;
+    DBText1: TDBText;
+    DBText2: TDBText;
+    DBText3: TDBText;
+    DBText4: TDBText;
+    BotonesRapidos: TActionManager;
+    ABuscarProd: TAction;
+    ACodBarra: TAction;
+    ASalir: TAction;
+    Label14: TLabel;
+    DBEdit7: TDBEdit;
+    Label15: TLabel;
+    DBEdit8: TDBEdit;
+    EKListadoProducto: TEKListadoSQL;
     ZQ_Productos: TZQuery;
     ZQ_ProductosNOMBRE_PRODUCTO: TStringField;
     ZQ_ProductosMEDIDA: TStringField;
@@ -65,32 +93,8 @@ type
     ZQ_ProductosPRECIO3: TFloatField;
     ZQ_ProductosPRECIO4: TFloatField;
     ZQ_ProductosPRECIO5: TFloatField;
-    DS_Productos: TDataSource;
-    Label8: TLabel;
-    DBEdit2: TDBEdit;
-    DBEdit1: TDBEdit;
-    DBEdit3: TDBEdit;
-    DBEdit4: TDBEdit;
-    DBEdit5: TDBEdit;
-    DBEdit6: TDBEdit;
-    DBMemo1: TDBMemo;
-    GB_Datos_Empresa: TGroupBox;
-    DBImage1: TDBImage;
-    Label9: TLabel;
-    Label10: TLabel;
-    Label11: TLabel;
-    Label12: TLabel;
-    Label13: TLabel;
-    DBText1: TDBText;
-    DBText2: TDBText;
-    DBText3: TDBText;
-    DBText4: TDBText;
-    BotonesRapidos: TActionManager;
-    ABuscarProd: TAction;
-    ACodBarra: TAction;
-    ASalir: TAction;
-    Label14: TLabel;
-    DBEdit7: TDBEdit;
+    ZQ_ProductosSECCION: TStringField;
+    DBMemo2: TDBMemo;
     procedure codbarrasKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormActivate(Sender: TObject);
@@ -167,7 +171,7 @@ begin
         else
         if (Length(cod) > LONG_COD_BARRAS) then
         begin
-          Application.MessageBox('Longitud de código incorrecta', 'Código incorrecto');
+          Application.MessageBox('Longitud de código incorrecta', 'Código incorrecto',MB_ICONINFORMATION);
           exit;
         end;
 
@@ -175,7 +179,7 @@ begin
       end
      except
       begin
-        Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
+        Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto',MB_ICONINFORMATION);
         exit;
       end;
      end;
@@ -192,11 +196,18 @@ begin
       IdProd:= MidStr(cod, 2, Length(cod) - 1);
   except
     begin
-      Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto');
+      Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto',MB_ICONINFORMATION);
       exit;
     end
   end;
      //Codigo de Barras
+      if id = 'I' then
+      begin
+        ZQ_Productos.Close;
+        ZQ_Productos.sql[15]:= Format('and(sp.id_stock_producto=%d)', [strToInt(IdProd)]);
+        ZQ_Productos.Open;
+      end
+    else
      if id='B' then
        begin
         ZQ_Productos.Close;
@@ -206,25 +217,24 @@ begin
 
       if not(ZQ_Productos.IsEmpty) then
       begin
-        if ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0 then
-        begin
-          Application.MessageBox('El Stock del Producto es Insuficiente.', 'Stock Producto');
-          exit;
-        end;
 
         if ((id='B') or (id='C')) then
           if ZQ_Productos.RecordCount>1 then
           begin
-            Application.MessageBox('El código ingresado corresponde a más de un producto'+char(13)+
-                                    '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Producto Repetido');
+            Application.MessageBox('El código ingresado corresponde a más de un producto y/o se encuentra ubicado en más de un sector al mismo tiempo.'+char(13)+
+                                    '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Producto Repetido',MB_ICONINFORMATION);
             exit;
           end;
-
+        if ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0 then
+        begin
+          Application.MessageBox('El Stock del Producto es Insuficiente.', 'Stock Producto',MB_ICONINFORMATION);
+          exit;
+        end;
       end
       else
       begin
         Application.MessageBox('El producto no pudo ser encontrado.'+char(13)+
-                                  '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Código incorrecto');
+                                  '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Código incorrecto',MB_ICONINFORMATION);
         exit;
       end;
 end;
@@ -248,12 +258,15 @@ end;
 
 procedure TFConsulta_Precios.btnBuscarClick(Sender: TObject);
 begin
-  if not Assigned(vsel) then
-    vsel:= TFBuscarProductoStock.Create(nil);
-  vsel.usaCajero:='S';
-  vsel.OnSeleccionar := OnSelProd;
-  vsel.ShowModal;
-  vsel.usaCajero:='N';
+  if EKListadoProducto.Buscar then
+    if (EKListadoProducto.Resultado <> '') then
+    begin
+      //Traigo el ID_producto_stock
+      codBarras.Text:= 'I' + EKListadoProducto.Resultado;
+      LeerCodigo('I', codBarras.Text);
+      //IdentificarCodigo;
+      codbarras.Clear;
+    end
 end;
 
 procedure TFConsulta_Precios.ABuscarProdExecute(Sender: TObject);

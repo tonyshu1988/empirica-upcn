@@ -580,7 +580,7 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
     HabilitarPopMenu(4);
     PCabeceraProducto.Height := 221;
     PProducto.Visible:=True;
-    grilla.Visible := false;
+    grilla.Enabled := false;
 
     ZQ_ProductoCabecera.Append;
     ZQ_ProductoCabeceraBAJA.AsString:= 'N';
@@ -684,6 +684,14 @@ begin
     exit;
   end;
 
+  if not(sonTodosNumeros(ZQ_DetalleProductoCOD_CORTO.AsString)) then
+  begin
+    Application.MessageBox('El campo Código Corto debe ser numérico, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
+//    dpCodCorto.SetFocus;
+    result := false;
+    exit;
+  end;
+
   if (zq_preciosPRECIO_COSTO.IsNull) then
   begin
     Application.MessageBox('El campo Precio Costo se encuentra vacío, por favor Verifique','Validación',MB_OK+MB_ICONINFORMATION);
@@ -761,7 +769,7 @@ begin
       EditStockActual.Visible := false;
 
       PProducto.Visible:=false;
-      Grilla.Visible := true;
+      Grilla.Enabled := true;
     end
   except
     begin
@@ -817,7 +825,7 @@ begin
       EditStockActual.Visible := false;
 
       PProducto.Visible:=false;
-      Grilla.Visible := true;
+      Grilla.Enabled := true;
     end;
 end;
 
@@ -835,9 +843,9 @@ if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecer
     GrupoEditando.Enabled := true;
     GrupoVisualizando.Enabled := false;
 
-    PCabeceraProducto.Height := 221;
+    //PCabeceraProducto.Height := 221;
     PProducto.Visible:=True;
-    Grilla.Visible := false;
+    Grilla.Enabled := false;
   end;
 end;
 
@@ -933,10 +941,10 @@ begin
     exit;
  end;
 
-  //Deshabilito el cod corto cuando inserto un nuevo producto, lo genera solo el sistema
-  LabelCodCorto.Enabled:= false;
-  EDDCODCORTO.Enabled := false;
-
+///////////////////////Deshabilito el cod corto cuando inserto un nuevo producto, lo genera solo el sistema,  POR QUE??????? ///////////
+//  LabelCodCorto.Enabled:= false;
+//  EDDCODCORTO.Enabled := false;
+///////////////////////////////////////////////
   ZQ_Articulo.Refresh;
 
   ZQ_DetalleProducto.Append;
@@ -1311,6 +1319,7 @@ begin
 
   panelImprimirListado.Visible:= true;
   panelImprimirListado.BringToFront;
+  dm.centrarPanel(FABMProductos,panelImprimirListado);
   GrupoVisualizando.Enabled:= false;
 end;
 
