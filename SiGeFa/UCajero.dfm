@@ -1,8 +1,8 @@
 object FCajero: TFCajero
-  Left = 375
-  Top = 174
+  Left = 329
+  Top = 18
   Width = 1109
-  Height = 822
+  Height = 812
   Caption = 'Cajero SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -3038,7 +3038,7 @@ object FCajero: TFCajero
     Left = 88
     Top = 0
     Width = 1005
-    Height = 732
+    Height = 722
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 2
@@ -3441,7 +3441,7 @@ object FCajero: TFCajero
       Left = 1
       Top = 231
       Width = 1003
-      Height = 500
+      Height = 490
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 2
@@ -3468,7 +3468,7 @@ object FCajero: TFCajero
         Left = 1
         Top = 14
         Width = 1001
-        Height = 325
+        Height = 315
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3481,7 +3481,7 @@ object FCajero: TFCajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 270
+          Top = 260
           Width = 999
           Height = 54
           Align = alBottom
@@ -3552,7 +3552,7 @@ object FCajero: TFCajero
           Left = 1
           Top = 1
           Width = 999
-          Height = 269
+          Height = 259
           Align = alClient
           Color = 15527129
           DataSource = DS_DetalleFactura
@@ -3627,7 +3627,7 @@ object FCajero: TFCajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 339
+        Top = 329
         Width = 1001
         Height = 89
         Align = alBottom
@@ -3732,7 +3732,7 @@ object FCajero: TFCajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 428
+        Top = 418
         Width = 1001
         Height = 71
         Align = alBottom
@@ -7976,50 +7976,6 @@ object FCajero: TFCajero
         'btnAuditoriaFiscal')
     end
   end
-  object EKListadoProducto: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select sp.id_stock_producto,ps.seccion as secc,'
-      '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
-      
-        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
-        #39#39'),'#39#39')||'
-      '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
-      '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39')||'
-      '        COALESCE ('#39' - Secci'#243'n: '#39' || ps.seccion,'#39#39')||'
-      '        COALESCE ('#39' - Sector: '#39' || ps.sector,'#39#39')||'
-      '        COALESCE ('#39' - Fila: '#39' || ps.fila,'#39#39')||'
-      
-        '        COALESCE ('#39' - Columna: '#39' || ps.columna,'#39#39'))as varchar(30' +
-        '00))'
-      '         AS posicSucursal'
-      'from producto_cabecera pc'
-      'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
-      'join stock_producto sp on (sp.id_producto =  pr.id_producto)'
-      
-        'join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.id_po' +
-        'sicion_sucursal)'
-      'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
-      'join configuracion c on (c.id_sucursal=su.id_sucursal)'
-      'left join medida m on (pr.id_medida=m.id_medida)'
-      
-        'where (ps.punto_salida='#39'S'#39')and(pc.baja<>'#39'S'#39')and(sp.stock_actual>' +
-        '0)'
-      'order by 3')
-    CampoBuscar = 'secc'
-    CampoBuscar2 = 'posicSucursal'
-    CampoClave = 'id_stock_producto'
-    TituloVentana = 'Buscar Producto'
-    TituloBuscar = 'Ubicaci'#243'n:'
-    TituloBuscar2 = 'Detalle Producto:'
-    BuscarDoble = True
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 100
-    AnchoBuscar2 = 3000
-    Left = 136
-    Top = 240
-  end
   object ZQ_Productos: TZQuery
     Connection = DM.Conexion
     AfterScroll = ZQ_ProductosAfterScroll
@@ -9824,5 +9780,50 @@ object FCajero: TFCajero
     DataSet = ZQ_Optica_Orden
     Left = 554
     Top = 563
+  end
+  object EKListadoProducto: TEKListadoSQL
+    Modelo = DM.EKModelo
+    SQL.Strings = (
+      
+        'select sp.id_stock_producto,cast((  COALESCE ('#39'Secci'#243'n: '#39' || ps.' +
+        'seccion,'#39#39')||'
+      '        COALESCE ('#39' - Sector: '#39' || ps.sector,'#39#39')||'
+      '        COALESCE ('#39' - Fila: '#39' || ps.fila,'#39#39')||'
+      
+        '        COALESCE ('#39' - Columna: '#39' || ps.columna,'#39#39'))as varchar(30' +
+        '00))as secc,'
+      '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
+      
+        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
+        #39#39'),'#39#39')||'
+      '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
+      
+        '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39'))as varchar(200' +
+        '0))'
+      '         AS posicSucursal'
+      'from producto_cabecera pc'
+      'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
+      'join stock_producto sp on (sp.id_producto =  pr.id_producto)'
+      
+        'join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.id_po' +
+        'sicion_sucursal)'
+      'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'join configuracion c on (c.id_sucursal=su.id_sucursal)'
+      'left join medida m on (pr.id_medida=m.id_medida)'
+      'where (ps.punto_salida='#39'S'#39')and(pc.baja<>'#39'S'#39')'
+      'order by 3')
+    CampoBuscar = 'posicSucursal'
+    CampoBuscar2 = 'secc'
+    CampoClave = 'id_stock_producto'
+    TituloVentana = 'Buscar Producto'
+    TituloBuscar = 'Detalle Producto:'
+    TituloBuscar2 = 'Ubicaci'#243'n:'
+    BuscarDoble = True
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 3000
+    AnchoBuscar2 = 1000
+    Left = 144
+    Top = 304
   end
 end

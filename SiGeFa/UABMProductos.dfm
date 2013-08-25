@@ -1,8 +1,8 @@
 object FABMProductos: TFABMProductos
-  Left = 337
-  Top = 39
+  Left = 33
+  Top = 120
   Width = 1168
-  Height = 909
+  Height = 675
   Caption = 'FABMProductos'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -24,16 +24,16 @@ object FABMProductos: TFABMProductos
     Left = 0
     Top = 0
     Width = 1152
-    Height = 819
+    Height = 585
     Align = alClient
     Caption = 'PContenedor'
     TabOrder = 4
     DesignSize = (
       1152
-      819)
+      585)
     object Splitter1: TSplitter
       Left = 1
-      Top = 502
+      Top = 268
       Width = 1150
       Height = 16
       Cursor = crVSplit
@@ -45,7 +45,7 @@ object FABMProductos: TFABMProductos
       Left = 14
       Top = 135
       Width = 1123
-      Height = 370
+      Height = 794
       Frame.Color = clBlack
       Frame.DrawTop = False
       Frame.DrawBottom = False
@@ -1392,7 +1392,7 @@ object FABMProductos: TFABMProductos
       Left = 1
       Top = 1
       Width = 1150
-      Height = 501
+      Height = 267
       Align = alClient
       TabOrder = 0
       object PanelCabecera: TPanel
@@ -1437,7 +1437,7 @@ object FABMProductos: TFABMProductos
         Left = 1
         Top = 20
         Width = 1148
-        Height = 276
+        Height = 42
         Align = alClient
         Color = 14606012
         DataSource = DS_ProductoCabecera
@@ -1531,7 +1531,7 @@ object FABMProductos: TFABMProductos
       end
       object PProducto: TPanel
         Left = 1
-        Top = 296
+        Top = 62
         Width = 1148
         Height = 204
         Align = alBottom
@@ -1791,7 +1791,7 @@ object FABMProductos: TFABMProductos
     end
     object PanelDetalle: TPanel
       Left = 1
-      Top = 518
+      Top = 284
       Width = 1150
       Height = 300
       Align = alBottom
@@ -2764,7 +2764,7 @@ object FABMProductos: TFABMProductos
     end
     object panelImprimirListado: TPanel
       Left = 458
-      Top = 310
+      Top = 238
       Width = 233
       Height = 121
       Anchors = []

@@ -1,6 +1,6 @@
 object FABM_Preventa: TFABM_Preventa
-  Left = 528
-  Top = 205
+  Left = 376
+  Top = 103
   Width = 1027
   Height = 664
   Caption = 'Venta de Mostrador'
@@ -7718,19 +7718,22 @@ object FABM_Preventa: TFABM_Preventa
   object EKListadoProducto: TEKListadoSQL
     Modelo = DM.EKModelo
     SQL.Strings = (
-      'select sp.id_stock_producto,ps.seccion as secc,'
+      
+        'select sp.id_stock_producto,cast((  COALESCE ('#39'Secci'#243'n: '#39' || ps.' +
+        'seccion,'#39#39')||'
+      '        COALESCE ('#39' - Sector: '#39' || ps.sector,'#39#39')||'
+      '        COALESCE ('#39' - Fila: '#39' || ps.fila,'#39#39')||'
+      
+        '        COALESCE ('#39' - Columna: '#39' || ps.columna,'#39#39'))as varchar(30' +
+        '00))as secc,'
       '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
       
         '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
         #39#39'),'#39#39')||'
       '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
-      '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39')||'
-      '        COALESCE ('#39' - Secci'#243'n: '#39' || ps.seccion,'#39#39')||'
-      '        COALESCE ('#39' - Sector: '#39' || ps.sector,'#39#39')||'
-      '        COALESCE ('#39' - Fila: '#39' || ps.fila,'#39#39')||'
       
-        '        COALESCE ('#39' - Columna: '#39' || ps.columna,'#39#39'))as varchar(20' +
-        '00))'
+        '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39'))as varchar(200' +
+        '0))'
       '         AS posicSucursal'
       'from producto_cabecera pc'
       'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
@@ -7741,21 +7744,19 @@ object FABM_Preventa: TFABM_Preventa
       'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'join configuracion c on (c.id_sucursal=su.id_sucursal)'
       'left join medida m on (pr.id_medida=m.id_medida)'
-      
-        'where (ps.punto_salida='#39'S'#39')and(pc.baja<>'#39'S'#39')and(sp.stock_actual>' +
-        '0)'
+      'where (ps.punto_salida='#39'S'#39')and(pc.baja<>'#39'S'#39')'
       'order by 3')
-    CampoBuscar = 'secc'
-    CampoBuscar2 = 'posicSucursal'
+    CampoBuscar = 'posicSucursal'
+    CampoBuscar2 = 'secc'
     CampoClave = 'id_stock_producto'
     TituloVentana = 'Buscar Producto'
-    TituloBuscar = 'Ubicaci'#243'n:'
-    TituloBuscar2 = 'Detalle Producto:'
+    TituloBuscar = 'Detalle Producto:'
+    TituloBuscar2 = 'Ubicaci'#243'n:'
     BuscarDoble = True
     ColorGrilla = 14606012
     AnchoClave = 80
-    AnchoBuscar1 = 100
-    AnchoBuscar2 = 2000
+    AnchoBuscar1 = 3000
+    AnchoBuscar2 = 1000
     Left = 144
     Top = 304
   end

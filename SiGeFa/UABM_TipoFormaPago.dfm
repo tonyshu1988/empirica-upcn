@@ -890,10 +890,16 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           Height = 21
           DataField = 'IF'
           DataSource = DS_TipoFPago
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
           ItemHeight = 13
           Items.Strings = (
             'N'
             'S')
+          ParentFont = False
           TabOrder = 3
         end
         object DBComboBox1: TDBComboBox
@@ -903,6 +909,11 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           Height = 21
           DataField = 'COLUMNA_PRECIO'
           DataSource = DS_TipoFPago
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
           ItemHeight = 13
           Items.Strings = (
             '1'
@@ -910,6 +921,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
             '3'
             '4'
             '5')
+          ParentFont = False
           TabOrder = 4
         end
         object DBComboBox2: TDBComboBox
@@ -919,10 +931,16 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           Height = 21
           DataField = 'GENERA_VUELTO'
           DataSource = DS_TipoFPago
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
           ItemHeight = 13
           Items.Strings = (
             'N'
             'S')
+          ParentFont = False
           TabOrder = 5
         end
       end
@@ -1687,6 +1705,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
