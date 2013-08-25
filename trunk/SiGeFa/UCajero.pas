@@ -163,7 +163,6 @@ type
     btnFormaPago: TdxBarLargeButton;
     GrupoGuardarCancelar: TdxBarGroup;
     grupoVertical: TdxBarGroup;
-    EKListadoProducto: TEKListadoSQL;
     ZQ_Productos: TZQuery;
     ZQ_ProductosNOMBRE_PRODUCTO: TStringField;
     ZQ_ProductosMEDIDA: TStringField;
@@ -656,6 +655,7 @@ type
     DBEdit25: TDBEdit;
     ZQ_ProductosSECCION: TStringField;
     DBEdit26: TDBEdit;
+    EKListadoProducto: TEKListadoSQL;
     procedure btsalirClick(Sender: TObject);
     procedure BtBuscarProductoClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
@@ -3179,125 +3179,125 @@ var
   i: Integer;
   Importe_Producto : real;
 begin
-//  panelOrden(true);
+  panelOrden(true);
+
+  ZQ_Optica_Orden.Close;
+  ZQ_Optica_Orden.ParamByName('ID_ORDEN').AsInteger := vsel5.ZQ_Optica_OrdenID_ORDEN.AsInteger;
+  ZQ_Optica_Orden.open;
+
+  ZQ_OrdenProductos.Close;
+  ZQ_OrdenProductos.ParamByName('ID_ORDEN').AsInteger:= vsel5.ZQ_Optica_OrdenID_ORDEN.AsInteger;
+  ZQ_OrdenProductos.Open;
+
+  if not (ZQ_OrdenProductos.IsEmpty) then
+  begin
+    CD_DetalleFactura.EmptyDataSet;
+    while not (ZQ_OrdenProductos.Eof) do
+    begin
+
+      ZQ_Productos.Close;
+      ZQ_Productos.sql[15]:= Format('and(sp.id_producto=%s)', [ZQ_OrdenProductosID_PRODUCTO.AsString]);
+      ZQ_Productos.Open;
+
+      Importe_Producto := ZQ_OrdenProductosIMPORTE_VENTA.AsFloat;
+
+      CD_DetalleFactura.Append;
+      CD_DetalleFacturaID_PRODUCTO.AsInteger:= ZQ_OrdenProductosID_PRODUCTO.AsInteger;
+      CD_DetalleFacturaproducto.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
+      CD_DetalleFacturaDETALLE.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
+      CD_DetalleFacturaCANTIDAD.AsFloat:= ZQ_OrdenProductosCANTIDAD.AsFloat;
+
+      CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:= ZQ_OrdenProductosIMPORTE_UNITARIO.AsFloat;
+      CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
+      CD_DetalleFacturaPORC_IVA.AsFloat:= ZQ_ProductosIMPUESTO_IVA.AsFloat;
+      CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= Importe_Producto;
+      CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= Importe_Producto;
+      CD_DetalleFacturaIMPORTE_IVA.AsFloat:= Importe_Producto*ZQ_ProductosIMPUESTO_IVA.AsFloat;
+      CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_ProductosID_STOCK_PRODUCTO.AsInteger;
+      CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= Importe_Producto;
+      CD_DetalleFacturaIMPORTE_COSTO.AsFloat:= ZQ_ProductosPRECIO_COSTO.AsFloat;
+      CD_DetalleFacturaimporte_original.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
+
+
+      ZQ_ColsPrecios.Close;
+      ZQ_ColsPrecios.Open;
+      for i:= 1 to 5 do
+      begin
+        ZQ_ColsPrecios.Filtered:= False;
+        ZQ_ColsPrecios.Filter:= Format('COLUMNA_PRECIO=%d', [i]);
+        ZQ_ColsPrecios.Filtered:= True;
+
+        if ZQ_ColsPreciosCOLUMNA_PRECIO.AsInteger = i then
+          CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= Importe_Producto//ZQ_Productos.FieldByName(Format('PRECIO%d', [i])).AsFloat
+        else
+          CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= Importe_Producto;//ZQ_ProductosPRECIO_VENTA.AsFloat;
+      end;
+
+
+      //Cargo el mismo Cliente y detalles del comprobante
+      ZQ_Personas.Locate('id_persona', vsel5.ZQ_Optica_OrdenID_CLIENTE.AsInteger, []);
+      Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
+      IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
+      CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
+      CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
+      CD_ComprobanteOBSERVACION.AsString:= Format('Orden Nro: %s', [vsel5.ZQ_Optica_OrdenNRO_FACTURA.AsString]);
+//    CD_ComprobanteID_PREVENTA.AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+//    CD_ComprobanteID_VENDEDOR.AsInteger:= vsel4.ZQ_ComprobanteID_VENDEDOR.AsInteger;
+//    IdVendedor:= CD_ComprobanteID_VENDEDOR.AsInteger;
 //
-//  ZQ_Optica_Orden.Close;
-//  ZQ_Optica_Orden.ParamByName('ID_ORDEN').AsInteger := vsel5.ZQ_Optica_OrdenID_ORDEN.AsInteger;
-//  ZQ_Optica_Orden.open;
+      DBEdit_DetalleCliente.DataField:= 'OBSERVACION';
+      Label_DetalleCliente.Caption:= 'Detalle:';
+      CD_ComprobanteOBSERVACION.AsString:= vsel5.ZQ_Optica_OrdenOBSERVACIONES.AsString;
 //
-//  ZQ_OrdenProductos.Close;
-//  ZQ_OrdenProductos.ParamByName('ID_ORDEN').AsInteger:= vsel5.ZQ_Optica_OrdenID_ORDEN.AsInteger;
-//  ZQ_OrdenProductos.Open;
+//    ZQ_ComprobPreventa.Close;
+//    ZQ_ComprobPreventa.ParamByName('id').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+//    ZQ_ComprobPreventa.Open;
 //
-//  if not (ZQ_OrdenProductos.IsEmpty) then
-//  begin
-//    CD_DetalleFactura.EmptyDataSet;
-//    while not (ZQ_OrdenProductos.Eof) do
-//    begin
-//
-//      ZQ_Productos.Close;
-//      ZQ_Productos.sql[15]:= Format('and(sp.id_stock_producto=%s)', [ZQ_OrdenProductosID_PRODUCTO.AsString]);
-//      ZQ_Productos.Open;
-//
-//      Importe_Producto := ZQ_OrdenProductosIMPORTE_VENTA.AsFloat;
-//
-//      CD_DetalleFactura.Append;
-//      CD_DetalleFacturaID_PRODUCTO.AsInteger:= ZQ_OrdenProductosID_PRODUCTO.AsInteger;
-//      CD_DetalleFacturaproducto.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
-//      CD_DetalleFacturaDETALLE.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
-//      CD_DetalleFacturaCANTIDAD.AsFloat:= ZQ_OrdenProductosCANTIDAD.AsFloat;
-//
-//      CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:= ZQ_OrdenProductosIMPORTE_UNITARIO.AsFloat;
-//      CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
-//      CD_DetalleFacturaPORC_IVA.AsFloat:= ZQ_ProductosIMPUESTO_IVA.AsFloat;
-//      CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= Importe_Producto;
-//      CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= Importe_Producto;
-//      CD_DetalleFacturaIMPORTE_IVA.AsFloat:= Importe_Producto*ZQ_ProductosIMPUESTO_IVA.AsFloat;
-//      CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_ProductosID_STOCK_PRODUCTO.AsInteger;
-//      CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= Importe_Producto;
-//      CD_DetalleFacturaIMPORTE_COSTO.AsFloat:= ZQ_ProductosPRECIO_COSTO.AsFloat;
-//      CD_DetalleFacturaimporte_original.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
-//
-//
-//      ZQ_ColsPrecios.Close;
-//      ZQ_ColsPrecios.Open;
-//      for i:= 1 to 5 do
-//      begin
-//        ZQ_ColsPrecios.Filtered:= False;
-//        ZQ_ColsPrecios.Filter:= Format('COLUMNA_PRECIO=%d', [i]);
-//        ZQ_ColsPrecios.Filtered:= True;
-//
-//        if ZQ_ColsPreciosCOLUMNA_PRECIO.AsInteger = i then
-//          CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= Importe_Producto//ZQ_Productos.FieldByName(Format('PRECIO%d', [i])).AsFloat
-//        else
-//          CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= Importe_Producto;//ZQ_ProductosPRECIO_VENTA.AsFloat;
-//      end;
-//
-//
-//      //Cargo el mismo Cliente y detalles del comprobante
-//      ZQ_Personas.Locate('id_persona', vsel5.ZQ_Optica_OrdenID_CLIENTE.AsInteger, []);
-//      Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
-//      IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
-//      CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
-//      CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
-//      CD_ComprobanteOBSERVACION.AsString:= Format('Orden Nro: %s', [vsel5.ZQ_Optica_OrdenNRO_FACTURA.AsString]);
-////    CD_ComprobanteID_PREVENTA.AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-////    CD_ComprobanteID_VENDEDOR.AsInteger:= vsel4.ZQ_ComprobanteID_VENDEDOR.AsInteger;
-////    IdVendedor:= CD_ComprobanteID_VENDEDOR.AsInteger;
-////
-//      DBEdit_DetalleCliente.DataField:= 'OBSERVACION';
-//      Label_DetalleCliente.Caption:= 'Detalle:';
-//      CD_ComprobanteOBSERVACION.AsString:= vsel5.ZQ_Optica_OrdenOBSERVACIONES.AsString;
-////
-////    ZQ_ComprobPreventa.Close;
-////    ZQ_ComprobPreventa.ParamByName('id').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-////    ZQ_ComprobPreventa.Open;
-////
-//      CD_DetalleFactura.Post;
-//
-//      lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
-//      lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
-//
-//      //Permite que no se modifique la venta
-//      modoCargaOrden:= True;
-//
-//
-//      ZQ_OrdenProductos.Next;
-//    end;
-//
-//////cargo las señas de la Orden como formas de pago!
-//    ZQ_OpticaEntrega.Close;
-//    ZQ_OpticaEntrega.ParamByName('ID_ORDEN').AsInteger:= vsel5.ZQ_Optica_OrdenID_ORDEN.AsInteger;
-//    ZQ_OpticaEntrega.Open;
-//
-//    if ZQ_OpticaEntrega.RecordCount > 0 then
-//    begin
-//      ZQ_OpticaEntrega.First;
-//      while not (ZQ_OpticaEntrega.Eof) do
-//      begin
-//        CD_Fpago.Append;
-//        CD_Fpago_esSenia.AsString:= 'S';
-//        CD_FpagoID_TIPO_FORMAPAG.AsInteger:= ZQ_OpticaEntregaID_TIPO_FORMAPAG.AsInteger;
-//        CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_OpticaEntregaCUENTA_INGRESO.AsInteger;
-//        if ZQ_OpticaEntregaMDCP_FECHA.IsNull then
-//          CD_FpagoMDCP_FECHA.clear
-//        else
-//          CD_FpagoMDCP_FECHA.AsDateTime:= ZQ_OpticaEntregaMDCP_FECHA.AsDateTime;
-//
-//        CD_FpagoFECHA_FP.AsDateTime := ZQ_OpticaEntregaFECHA_FP.AsDateTime;
-//        CD_FpagoMDCP_BANCO.AsString:= ZQ_OpticaEntregaMDCP_BANCO.AsString;
-//        CD_FpagoMDCP_CHEQUE.AsString:= ZQ_OpticaEntregaMDCP_CHEQUE.AsString;
-//        CD_FpagoIMPORTE.AsFloat:=ZQ_OpticaEntregaIMPORTE.AsFloat;
-//
-//        CD_Fpago_importeVenta.AsFloat:= ZQ_OpticaEntregaIMPORTE_REAL.AsFloat;
-//
-//        CD_Fpago.Post;
-//        ZQ_OpticaEntrega.Next;
-//      end;
-//    end;
-//
-//
-//  end;
+      CD_DetalleFactura.Post;
+
+      lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
+      lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSuma1.SumCollection[0].SumValue);
+
+      //Permite que no se modifique la venta
+      modoCargaOrden:= True;
+
+
+      ZQ_OrdenProductos.Next;
+    end;
+
+////cargo las señas de la Orden como formas de pago!
+    ZQ_OpticaEntrega.Close;
+    ZQ_OpticaEntrega.ParamByName('ID_ORDEN').AsInteger:= vsel5.ZQ_Optica_OrdenID_ORDEN.AsInteger;
+    ZQ_OpticaEntrega.Open;
+
+    if ZQ_OpticaEntrega.RecordCount > 0 then
+    begin
+      ZQ_OpticaEntrega.First;
+      while not (ZQ_OpticaEntrega.Eof) do
+      begin
+        CD_Fpago.Append;
+        CD_Fpago_esSenia.AsString:= 'S';
+        CD_FpagoID_TIPO_FORMAPAG.AsInteger:= ZQ_OpticaEntregaID_TIPO_FORMAPAG.AsInteger;
+        CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_OpticaEntregaCUENTA_INGRESO.AsInteger;
+        if ZQ_OpticaEntregaMDCP_FECHA.IsNull then
+          CD_FpagoMDCP_FECHA.clear
+        else
+          CD_FpagoMDCP_FECHA.AsDateTime:= ZQ_OpticaEntregaMDCP_FECHA.AsDateTime;
+
+        CD_FpagoFECHA_FP.AsDateTime := ZQ_OpticaEntregaFECHA_FP.AsDateTime;
+        CD_FpagoMDCP_BANCO.AsString:= ZQ_OpticaEntregaMDCP_BANCO.AsString;
+        CD_FpagoMDCP_CHEQUE.AsString:= ZQ_OpticaEntregaMDCP_CHEQUE.AsString;
+        CD_FpagoIMPORTE.AsFloat:=ZQ_OpticaEntregaIMPORTE.AsFloat;
+
+        CD_Fpago_importeVenta.AsFloat:= ZQ_OpticaEntregaIMPORTE_REAL.AsFloat;
+
+        CD_Fpago.Post;
+        ZQ_OpticaEntrega.Next;
+      end;
+    end;
+
+
+  end;
 end;
 
 procedure TFCajero.panelorden(flag: boolean);
