@@ -23,15 +23,15 @@ object FABM_Autoridad: TFABM_Autoridad
   object pContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 875
-    Height = 410
+    Width = 883
+    Height = 421
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object pDatos: TPanel
       Left = 0
-      Top = 369
-      Width = 875
+      Top = 380
+      Width = 883
       Height = 41
       Align = alBottom
       BevelOuter = bvNone
@@ -89,8 +89,8 @@ object FABM_Autoridad: TFABM_Autoridad
     object dbGridAutoridad: TDBGrid
       Left = 0
       Top = 0
-      Width = 875
-      Height = 369
+      Width = 883
+      Height = 380
       Align = alClient
       Color = 16772842
       DataSource = DS_Autoridad
@@ -121,7 +121,7 @@ object FABM_Autoridad: TFABM_Autoridad
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -201,62 +201,6 @@ object FABM_Autoridad: TFABM_Autoridad
       A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
       E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
       8DE0A48DE0A48DE0A48D}
-    Bars = <
-      item
-        AllowClose = False
-        AllowCustomizing = False
-        AllowQuickCustomizing = False
-        BorderStyle = bbsNone
-        Caption = 'barra'
-        DockedDockingStyle = dsBottom
-        DockedLeft = 0
-        DockedTop = 0
-        DockingStyle = dsBottom
-        FloatLeft = 276
-        FloatTop = 216
-        FloatClientWidth = 39
-        FloatClientHeight = 38
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ItemLinks = <
-          item
-            Item = btnNuevo
-            Visible = True
-          end
-          item
-            Item = btnModificar
-            Visible = True
-          end
-          item
-            Item = btnEliminar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btnGuardar
-            Visible = True
-          end
-          item
-            Item = btnCancelar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btnSalir
-            Visible = True
-          end>
-        Name = 'barra'
-        OneOnRow = True
-        Row = 0
-        UseOwnFont = True
-        UseRecentItems = False
-        UseRestSpace = True
-        Visible = True
-        WholeRow = False
-      end>
     CanCustomize = False
     Categories.Strings = (
       'Edicion')
@@ -265,8 +209,8 @@ object FABM_Autoridad: TFABM_Autoridad
     Categories.Visibles = (
       True)
     HideFloatingBarsWhenInactive = False
-    Images = FPrincipal.Iconos_Barra_32
-    LargeImages = FPrincipal.Iconos_Barra_32
+    ImageOptions.Images = FPrincipal.Iconos_Barra_32
+    ImageOptions.LargeImages = FPrincipal.Iconos_Barra_32
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
     MenusShowRecentItemsFirst = False
@@ -283,12 +227,68 @@ object FABM_Autoridad: TFABM_Autoridad
       0
       0
       52)
+    object dxBarABMBar1: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      BorderStyle = bbsNone
+      Caption = 'barra'
+      CaptionButtons = <>
+      DockedDockingStyle = dsBottom
+      DockedLeft = 0
+      DockedTop = 0
+      DockingStyle = dsBottom
+      FloatLeft = 276
+      FloatTop = 216
+      FloatClientWidth = 39
+      FloatClientHeight = 38
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'btnNuevo'
+        end
+        item
+          Visible = True
+          ItemName = 'btnModificar'
+        end
+        item
+          Visible = True
+          ItemName = 'btnEliminar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btnGuardar'
+        end
+        item
+          Visible = True
+          ItemName = 'btnCancelar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btnSalir'
+        end>
+      OldName = 'barra'
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = True
+      UseRecentItems = False
+      UseRestSpace = True
+      Visible = True
+      WholeRow = False
+    end
     object btnNuevo: TdxBarLargeButton
       Caption = 'Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
-      ImageIndex = 0
+      LargeImageIndex = 0
       OnClick = btnNuevoClick
       AutoGrayScale = False
       HotImageIndex = 0
@@ -298,7 +298,7 @@ object FABM_Autoridad: TFABM_Autoridad
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
-      ImageIndex = 1
+      LargeImageIndex = 1
       OnClick = btnModificarClick
       AutoGrayScale = False
       HotImageIndex = 1
@@ -308,7 +308,7 @@ object FABM_Autoridad: TFABM_Autoridad
       Category = 0
       Hint = 'Eliminar el registro actual'
       Visible = ivAlways
-      ImageIndex = 2
+      LargeImageIndex = 2
       OnClick = btnEliminarClick
       AutoGrayScale = False
       HotImageIndex = 2
@@ -319,7 +319,7 @@ object FABM_Autoridad: TFABM_Autoridad
       Enabled = False
       Hint = 'Guarda los cambios'
       Visible = ivAlways
-      ImageIndex = 3
+      LargeImageIndex = 3
       OnClick = btnGuardarClick
       AutoGrayScale = False
       HotImageIndex = 3
@@ -330,7 +330,7 @@ object FABM_Autoridad: TFABM_Autoridad
       Enabled = False
       Hint = 'Cancela los cambios'
       Visible = ivAlways
-      ImageIndex = 4
+      LargeImageIndex = 4
       OnClick = btnCancelarClick
       AutoGrayScale = False
       HotImageIndex = 4
@@ -341,7 +341,7 @@ object FABM_Autoridad: TFABM_Autoridad
       Category = 0
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
-      ImageIndex = 6
+      LargeImageIndex = 6
       OnClick = btnSalirClick
       AutoGrayScale = False
       HotImageIndex = 6
@@ -351,7 +351,7 @@ object FABM_Autoridad: TFABM_Autoridad
       Category = 0
       Hint = 'Ver Detalle'
       Visible = ivAlways
-      ImageIndex = 69
+      LargeImageIndex = 69
       AutoGrayScale = False
     end
     object btnImprimir: TdxBarLargeButton
@@ -359,7 +359,7 @@ object FABM_Autoridad: TFABM_Autoridad
       Category = 0
       Hint = 'Imprimir'
       Visible = ivAlways
-      ImageIndex = 28
+      LargeImageIndex = 28
     end
     object GrupoVisualizando: TdxBarGroup
       Items = (

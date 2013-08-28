@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, ComCtrls, dxtree, dxdbtree, StdCtrls,
   ExtCtrls, DBCtrls, Mask, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, EKListadoSQL, Grids, DBGrids, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt, EKOrdenarGrilla;
+  EKVistaPreviaQR, QRCtrls, QuickRpt, EKOrdenarGrilla, cxClasses;
 
 type
   TFConceptos = class(TForm)
@@ -283,7 +283,7 @@ begin
             if (gdFocused in State) or (gdSelected in State) then
              begin
                Grilla.Canvas.Font.Color := clwhite;
-               Grilla.Canvas.Brush.Color:=clBlue;
+               Grilla.Canvas.Brush.Color:=clNavy;
                Grilla.Canvas.Font.Style := Grilla.Canvas.Font.Style + [fsBold];
              end;
           end;
