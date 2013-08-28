@@ -24,8 +24,8 @@ object FABMProveedores: TFABMProveedores
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1022
-    Height = 579
+    Width = 1030
+    Height = 590
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 4
@@ -110,7 +110,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          227.100694444444400000
+          227.100694444444500000
           2769.305555555556000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -144,7 +144,7 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawRight = False
           Size.Values = (
             50.711805555555560000
-            1159.756944444444000000
+            1159.756944444445000000
             158.750000000000000000
             447.586805555555600000)
           Alignment = taCenter
@@ -175,9 +175,9 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            1139.913194444444000000
-            94.809027777777780000
+            52.916666666666660000
+            1139.913194444445000000
+            94.809027777777790000
             487.274305555555600000)
           Alignment = taCenter
           AlignToBand = True
@@ -207,10 +207,10 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
+            52.916666666666660000
             1064.947916666667000000
             30.868055555555560000
-            639.409722222222200000)
+            639.409722222222300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -750,7 +750,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          46.302083333333330000
+          46.302083333333340000
           2769.305555555556000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -766,10 +766,10 @@ object FABMProveedores: TFABMProveedores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.482638888888890000
+            37.482638888888900000
             2350.381944444444000000
             4.409722222222222000
-            418.923611111111100000)
+            418.923611111111200000)
           Alignment = taRightJustify
           AlignToBand = True
           AutoSize = True
@@ -806,7 +806,7 @@ object FABMProveedores: TFABMProveedores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          41.892361111111110000
+          41.892361111111120000
           2769.305555555556000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -847,8 +847,8 @@ object FABMProveedores: TFABMProveedores
     object DBGridProveedores: TDBGrid
       Left = 1
       Top = 20
-      Width = 1020
-      Height = 365
+      Width = 1028
+      Height = 376
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Proveedores
@@ -912,7 +912,7 @@ object FABMProveedores: TFABMProveedores
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 1020
+      Width = 1028
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -934,7 +934,7 @@ object FABMProveedores: TFABMProveedores
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 910
+        Left = 918
         Top = 1
         Width = 109
         Height = 17
@@ -950,10 +950,10 @@ object FABMProveedores: TFABMProveedores
     end
     object PageControl1: TPageControl
       Left = 1
-      Top = 385
-      Width = 1020
+      Top = 396
+      Width = 1028
       Height = 193
-      ActivePage = TabSheet2
+      ActivePage = TabSheet1
       Align = alBottom
       TabOrder = 3
       object TabSheet1: TTabSheet
@@ -961,7 +961,7 @@ object FABMProveedores: TFABMProveedores
         object Panel_edicion: TPanel
           Left = 0
           Top = 2
-          Width = 1012
+          Width = 1020
           Height = 163
           Align = alBottom
           Enabled = False
@@ -1285,7 +1285,7 @@ object FABMProveedores: TFABMProveedores
         object GBoxConceptosAsig: TGroupBox
           Left = 489
           Top = 0
-          Width = 523
+          Width = 531
           Height = 165
           Align = alClient
           Caption = ' Conceptos Asignados '
@@ -1293,7 +1293,7 @@ object FABMProveedores: TFABMProveedores
           object DBGridConceptos: TDBGrid
             Left = 2
             Top = 15
-            Width = 519
+            Width = 527
             Height = 148
             Hint = 'Haga click derecho para agregar o quitar un Concepto'
             Align = alClient
@@ -1325,7 +1325,7 @@ object FABMProveedores: TFABMProveedores
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1405,76 +1405,6 @@ object FABMProveedores: TFABMProveedores
       A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
       E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
       8DE0A48DE0A48DE0A48D}
-    Bars = <
-      item
-        AllowClose = False
-        AllowCustomizing = False
-        AllowQuickCustomizing = False
-        BorderStyle = bbsNone
-        Caption = 'barra'
-        DockedDockingStyle = dsBottom
-        DockedLeft = 0
-        DockedTop = 0
-        DockingStyle = dsBottom
-        FloatLeft = 276
-        FloatTop = 216
-        FloatClientWidth = 39
-        FloatClientHeight = 38
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ItemLinks = <
-          item
-            Item = btBuscar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = BtNuevo
-            Visible = True
-          end
-          item
-            Item = BtModificar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btBaja
-            Visible = True
-          end
-          item
-            Item = btReactivar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = BtGuardar
-            Visible = True
-          end
-          item
-            Item = BtCancelar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btImprimir
-            Visible = True
-          end
-          item
-            Item = bt_salir
-            Visible = True
-          end>
-        Name = 'barra'
-        OneOnRow = True
-        Row = 0
-        UseOwnFont = True
-        UseRecentItems = False
-        UseRestSpace = True
-        Visible = True
-        WholeRow = False
-      end>
     CanCustomize = False
     Categories.Strings = (
       'Edicion')
@@ -1483,8 +1413,8 @@ object FABMProveedores: TFABMProveedores
     Categories.Visibles = (
       True)
     HideFloatingBarsWhenInactive = False
-    Images = FPrincipal.Iconos_Barra_32
-    LargeImages = FPrincipal.Iconos_Barra_32
+    ImageOptions.Images = FPrincipal.Iconos_Barra_32
+    ImageOptions.LargeImages = FPrincipal.Iconos_Barra_32
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
     MenusShowRecentItemsFirst = False
@@ -1501,12 +1431,82 @@ object FABMProveedores: TFABMProveedores
       0
       0
       52)
+    object dxBarABMBar1: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      BorderStyle = bbsNone
+      Caption = 'barra'
+      CaptionButtons = <>
+      DockedDockingStyle = dsBottom
+      DockedLeft = 0
+      DockedTop = 0
+      DockingStyle = dsBottom
+      FloatLeft = 276
+      FloatTop = 216
+      FloatClientWidth = 39
+      FloatClientHeight = 38
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'btBuscar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'BtNuevo'
+        end
+        item
+          Visible = True
+          ItemName = 'BtModificar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btBaja'
+        end
+        item
+          Visible = True
+          ItemName = 'btReactivar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'BtGuardar'
+        end
+        item
+          Visible = True
+          ItemName = 'BtCancelar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btImprimir'
+        end
+        item
+          Visible = True
+          ItemName = 'bt_salir'
+        end>
+      OldName = 'barra'
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = True
+      UseRecentItems = False
+      UseRestSpace = True
+      Visible = True
+      WholeRow = False
+    end
     object BtNuevo: TdxBarLargeButton
       Caption = 'Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
-      ImageIndex = 0
+      LargeImageIndex = 0
       OnClick = BtNuevoClick
       AutoGrayScale = False
     end
@@ -1515,7 +1515,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
-      ImageIndex = 1
+      LargeImageIndex = 1
       OnClick = BtModificarClick
       AutoGrayScale = False
     end
@@ -1524,7 +1524,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
-      ImageIndex = 25
+      LargeImageIndex = 25
       OnClick = btBajaClick
       AutoGrayScale = False
     end
@@ -1533,7 +1533,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Buscar'
       Visible = ivAlways
-      ImageIndex = 29
+      LargeImageIndex = 29
       OnClick = btBuscarClick
       AutoGrayScale = False
     end
@@ -1543,7 +1543,7 @@ object FABMProveedores: TFABMProveedores
       Enabled = False
       Hint = 'Guarda los cambios'
       Visible = ivAlways
-      ImageIndex = 3
+      LargeImageIndex = 3
       OnClick = BtGuardarClick
       AutoGrayScale = False
     end
@@ -1553,7 +1553,7 @@ object FABMProveedores: TFABMProveedores
       Enabled = False
       Hint = 'Cancela los cambios'
       Visible = ivAlways
-      ImageIndex = 4
+      LargeImageIndex = 4
       OnClick = BtCancelarClick
       AutoGrayScale = False
     end
@@ -1562,7 +1562,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
-      ImageIndex = 24
+      LargeImageIndex = 24
       OnClick = btReactivarClick
       AutoGrayScale = False
     end
@@ -1572,7 +1572,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Ver/Ocultar Detalle'
       Visible = ivAlways
-      ImageIndex = 69
+      LargeImageIndex = 69
       OnClick = btVerDetalleClick
       AutoGrayScale = False
     end
@@ -1581,7 +1581,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Da de Baja o Reactiva el Inmueble'
       Visible = ivAlways
-      ImageIndex = 9
+      LargeImageIndex = 9
       AutoGrayScale = False
     end
     object bt_salir: TdxBarLargeButton
@@ -1590,7 +1590,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
-      ImageIndex = 6
+      LargeImageIndex = 6
       OnClick = bt_salirClick
       AutoGrayScale = False
     end
@@ -1599,7 +1599,7 @@ object FABMProveedores: TFABMProveedores
       Category = 0
       Hint = 'Imprimir'
       Visible = ivAlways
-      ImageIndex = 28
+      LargeImageIndex = 28
       OnClick = btImprimirClick
     end
     object GrupoEditando: TdxBarGroup
@@ -1743,6 +1743,7 @@ object FABMProveedores: TFABMProveedores
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nombre Fantasia'
@@ -1752,6 +1753,7 @@ object FABMProveedores: TFABMProveedores
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tipo'
@@ -1765,6 +1767,7 @@ object FABMProveedores: TFABMProveedores
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Condici'#243'n IVA'
@@ -1778,6 +1781,7 @@ object FABMProveedores: TFABMProveedores
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Tipo Factura'
@@ -1791,6 +1795,7 @@ object FABMProveedores: TFABMProveedores
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Direccion'
@@ -1800,6 +1805,7 @@ object FABMProveedores: TFABMProveedores
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nro Doc/CUIT/CUIL'
@@ -1809,6 +1815,7 @@ object FABMProveedores: TFABMProveedores
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Datos Adicionales'
@@ -1818,6 +1825,7 @@ object FABMProveedores: TFABMProveedores
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Baja'
@@ -1834,6 +1842,7 @@ object FABMProveedores: TFABMProveedores
           'N')
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
@@ -2273,6 +2282,12 @@ object FABMProveedores: TFABMProveedores
     CampoClave = 'id_cuenta'
     BuscarEnQuery = ZQ_CuentasA
     TituloVentana = 'Seleccionar Cuentas'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
     Left = 200
     Top = 312
   end
@@ -2286,6 +2301,12 @@ object FABMProveedores: TFABMProveedores
     CampoClave = 'id_concepto'
     BuscarEnQuery = ZQ_Conceptos
     TituloVentana = 'Seleccionar Concepto'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
     Left = 312
     Top = 312
   end
@@ -2389,6 +2410,7 @@ object FABMProveedores: TFABMProveedores
       '  ie_proveedores.ID_TIPO_FACTURA = :ID_TIPO_FACTURA'
       'WHERE'
       '  ie_proveedores.NRO_PROVEEDOR = :OLD_NRO_PROVEEDOR')
+    UseSequenceFieldForRefreshSQL = False
     Left = 224
     Top = 72
     ParamData = <

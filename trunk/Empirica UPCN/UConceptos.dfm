@@ -23,8 +23,8 @@ object FConceptos: TFConceptos
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 410
+    Width = 862
+    Height = 421
     Align = alClient
     Caption = 'Panel1'
     TabOrder = 4
@@ -142,7 +142,7 @@ object FConceptos: TFConceptos
             50.270833333333330000
             801.687500000000000000
             158.750000000000000000
-            296.333333333333300000)
+            296.333333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -531,7 +531,7 @@ object FConceptos: TFConceptos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -547,7 +547,7 @@ object FConceptos: TFConceptos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             1685.395833333333000000
             2.645833333333333000
             103.187500000000000000)
@@ -579,7 +579,7 @@ object FConceptos: TFConceptos
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -635,7 +635,7 @@ object FConceptos: TFConceptos
             37.041666666666670000
             1373.187500000000000000
             5.291666666666667000
-            526.520833333333300000)
+            526.520833333333400000)
           Alignment = taRightJustify
           AlignToBand = True
           AutoSize = True
@@ -653,8 +653,8 @@ object FConceptos: TFConceptos
     object Grilla: TDBGrid
       Left = 1
       Top = 20
-      Width = 852
-      Height = 319
+      Width = 860
+      Height = 330
       Align = alClient
       Color = 16772842
       DataSource = DS_IE_Conceptos
@@ -696,7 +696,7 @@ object FConceptos: TFConceptos
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 852
+      Width = 860
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -717,7 +717,7 @@ object FConceptos: TFConceptos
         ParentFont = False
       end
       object StaticText3: TStaticText
-        Left = 742
+        Left = 750
         Top = 1
         Width = 109
         Height = 17
@@ -733,8 +733,8 @@ object FConceptos: TFConceptos
     end
     object pDatos: TPanel
       Left = 1
-      Top = 339
-      Width = 852
+      Top = 350
+      Width = 860
       Height = 70
       Align = alBottom
       BevelOuter = bvNone
@@ -862,7 +862,7 @@ object FConceptos: TFConceptos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -942,76 +942,6 @@ object FConceptos: TFConceptos
       A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48D
       E0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A48DE0A4
       8DE0A48DE0A48DE0A48D}
-    Bars = <
-      item
-        AllowClose = False
-        AllowCustomizing = False
-        AllowQuickCustomizing = False
-        BorderStyle = bbsNone
-        Caption = 'barra'
-        DockedDockingStyle = dsBottom
-        DockedLeft = 0
-        DockedTop = 0
-        DockingStyle = dsBottom
-        FloatLeft = 276
-        FloatTop = 216
-        FloatClientWidth = 39
-        FloatClientHeight = 38
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ItemLinks = <
-          item
-            Item = btBuscar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = BtNuevo
-            Visible = True
-          end
-          item
-            Item = BtModificar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btBaja
-            Visible = True
-          end
-          item
-            Item = btReactivar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = BtGuardar
-            Visible = True
-          end
-          item
-            Item = BtCancelar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btnImprimir
-            Visible = True
-          end
-          item
-            Item = bt_salir
-            Visible = True
-          end>
-        Name = 'barra'
-        OneOnRow = True
-        Row = 0
-        UseOwnFont = True
-        UseRecentItems = False
-        UseRestSpace = True
-        Visible = True
-        WholeRow = False
-      end>
     CanCustomize = False
     Categories.Strings = (
       'Edicion')
@@ -1020,7 +950,7 @@ object FConceptos: TFConceptos
     Categories.Visibles = (
       True)
     HideFloatingBarsWhenInactive = False
-    LargeImages = FPrincipal.Iconos_Barra_32
+    ImageOptions.LargeImages = FPrincipal.Iconos_Barra_32
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
     MenusShowRecentItemsFirst = False
@@ -1037,12 +967,82 @@ object FConceptos: TFConceptos
       0
       0
       52)
+    object dxBarABMBar1: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      BorderStyle = bbsNone
+      Caption = 'barra'
+      CaptionButtons = <>
+      DockedDockingStyle = dsBottom
+      DockedLeft = 0
+      DockedTop = 0
+      DockingStyle = dsBottom
+      FloatLeft = 276
+      FloatTop = 216
+      FloatClientWidth = 39
+      FloatClientHeight = 38
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'btBuscar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'BtNuevo'
+        end
+        item
+          Visible = True
+          ItemName = 'BtModificar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btBaja'
+        end
+        item
+          Visible = True
+          ItemName = 'btReactivar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'BtGuardar'
+        end
+        item
+          Visible = True
+          ItemName = 'BtCancelar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btnImprimir'
+        end
+        item
+          Visible = True
+          ItemName = 'bt_salir'
+        end>
+      OldName = 'barra'
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = True
+      UseRecentItems = False
+      UseRestSpace = True
+      Visible = True
+      WholeRow = False
+    end
     object BtNuevo: TdxBarLargeButton
       Caption = 'Nuevo'
       Category = 0
       Hint = 'Inserta un nuevo registro'
       Visible = ivAlways
-      ImageIndex = 0
+      LargeImageIndex = 0
       OnClick = BtNuevoClick
       AutoGrayScale = False
     end
@@ -1051,7 +1051,7 @@ object FConceptos: TFConceptos
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
-      ImageIndex = 1
+      LargeImageIndex = 1
       OnClick = BtModificarClick
       AutoGrayScale = False
     end
@@ -1060,7 +1060,7 @@ object FConceptos: TFConceptos
       Category = 0
       Hint = 'Da de baja un registro'
       Visible = ivAlways
-      ImageIndex = 25
+      LargeImageIndex = 25
       OnClick = btBajaClick
       AutoGrayScale = False
     end
@@ -1069,7 +1069,7 @@ object FConceptos: TFConceptos
       Category = 0
       Hint = 'Buscar'
       Visible = ivAlways
-      ImageIndex = 29
+      LargeImageIndex = 29
       OnClick = btBuscarClick
       AutoGrayScale = False
     end
@@ -1079,7 +1079,7 @@ object FConceptos: TFConceptos
       Enabled = False
       Hint = 'Guarda los cambios'
       Visible = ivAlways
-      ImageIndex = 3
+      LargeImageIndex = 3
       OnClick = BtGuardarClick
       AutoGrayScale = False
     end
@@ -1089,7 +1089,7 @@ object FConceptos: TFConceptos
       Enabled = False
       Hint = 'Cancela los cambios'
       Visible = ivAlways
-      ImageIndex = 4
+      LargeImageIndex = 4
       OnClick = BtCancelarClick
       AutoGrayScale = False
     end
@@ -1098,7 +1098,7 @@ object FConceptos: TFConceptos
       Category = 0
       Hint = 'Reactiva un registro'
       Visible = ivAlways
-      ImageIndex = 24
+      LargeImageIndex = 24
       OnClick = btReactivarClick
       AutoGrayScale = False
     end
@@ -1108,7 +1108,7 @@ object FConceptos: TFConceptos
       Category = 0
       Hint = 'Selecciona la calle Visualizada'
       Visible = ivAlways
-      ImageIndex = 12
+      LargeImageIndex = 12
       ShortCut = 122
       AutoGrayScale = False
     end
@@ -1117,7 +1117,7 @@ object FConceptos: TFConceptos
       Category = 0
       Hint = 'Da de Baja o Reactiva el Inmueble'
       Visible = ivAlways
-      ImageIndex = 9
+      LargeImageIndex = 9
       AutoGrayScale = False
     end
     object bt_salir: TdxBarLargeButton
@@ -1126,7 +1126,7 @@ object FConceptos: TFConceptos
       Category = 0
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
-      ImageIndex = 6
+      LargeImageIndex = 6
       OnClick = bt_salirClick
       AutoGrayScale = False
     end
@@ -1135,7 +1135,7 @@ object FConceptos: TFConceptos
       Category = 0
       Hint = 'Imprimir'
       Visible = ivAlways
-      ImageIndex = 28
+      LargeImageIndex = 28
       OnClick = btnImprimirClick
     end
     object GrupoEditando: TdxBarGroup
@@ -1167,6 +1167,7 @@ object FConceptos: TFConceptos
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Nombre Concepto'
@@ -1176,6 +1177,7 @@ object FConceptos: TFConceptos
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Importe'
@@ -1186,6 +1188,7 @@ object FConceptos: TFConceptos
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end
       item
         Titulo = 'Baja'
@@ -1202,6 +1205,7 @@ object FConceptos: TFConceptos
           'N')
         TipoComboAncho = 200
         ItemIndex = -1
+        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo

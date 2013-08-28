@@ -7,7 +7,8 @@ uses
   Dialogs, dxBar, dxBarExtItems, StdCtrls, DBCtrls, Mask, ExtCtrls, Grids,
   DBGrids, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ZSqlUpdate,
   EKBusquedaAvanzada, QuickRpt, QRCtrls, EKVistaPreviaQR, EKOrdenarGrilla,
-  ComCtrls, DBClient, Provider, ZStoredProcedure, Menus, EKListadoSQL;
+  ComCtrls, DBClient, Provider, ZStoredProcedure, Menus, EKListadoSQL,
+  cxClasses;
 
 type
   TFABMProveedores = class(TForm)
@@ -440,7 +441,7 @@ begin
             if (gdFocused in State) or (gdSelected in State) then
              begin
                DBGridProveedores.Canvas.Font.Color := clwhite;
-               DBGridProveedores.Canvas.Brush.Color:=clBlue;
+               DBGridProveedores.Canvas.Brush.Color:=clNavy;
                DBGridProveedores.Canvas.Font.Style := DBGridProveedores.Canvas.Font.Style + [fsBold];
              end;
           end;

@@ -11,7 +11,7 @@ uses
   EKLlenarCombo, mxNativeExcel, mxExport, QuickRpt, QRCtrls,
   EKVistaPreviaQR, EKNumeroATexto, DBClient, QPrinters, EKIni, jpeg,
   EKOrdenarGrilla, UAlta_OrdenPago, EKDBDateTimePicker, Menus, ZSqlUpdate,
-  Buttons;
+  Buttons, cxClasses;
 
 type
   TFMovimientos = class(TForm)
@@ -485,6 +485,7 @@ type
     ZQ_ProveedoresNRO_PROVEEDOR: TIntegerField;
     ZQ_ProveedoresAPELLIDO_Y_NOMBRE: TStringField;
     ZQ_ProveedoresID_TIPO: TIntegerField;
+    ZQ_Cuenta_MovimientofechaEmision: TDateField;
     procedure BtEgresosClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure BtGuardarClick(Sender: TObject);

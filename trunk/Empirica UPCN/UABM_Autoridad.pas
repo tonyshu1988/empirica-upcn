@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls, DBCtrls, Mask,
-  QuickRpt, EKVistaPreviaQR, QRCtrls, EKOrdenarGrilla;
+  QuickRpt, EKVistaPreviaQR, QRCtrls, EKOrdenarGrilla, cxClasses;
 
 type
   TFABM_Autoridad = class(TForm)
