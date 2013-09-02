@@ -479,7 +479,7 @@ begin
   begin
     id_liquidacion:= ZS_Liquidacion.GetNextValue;
     ZQ_LiquidacionID_OPTICA_LIQUIDACION.AsInteger:= id_liquidacion;
-    
+
     CD_LiqFactura.First;
     while not CD_LiqFactura.Eof do
     begin
@@ -974,7 +974,7 @@ begin
     CD_LiqFacturaid_liquidacion.AsInteger:= ZQ_LiqFacturasID_OPTICA_LIQUIDACION.AsInteger;
     CD_LiqFacturacodigo.AsString:= ZQ_LiqFacturasCODIGO.AsString;
     CD_LiqFactura.Post;
-    
+
     ZQ_LiqFacturas.Next;
   end;
 end;
