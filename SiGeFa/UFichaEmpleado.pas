@@ -11,7 +11,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, dxBar, dxBarExtItems, ExtCtrls, Buttons, Grids,
   DBGrids, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls,
-  EKOrdenarGrilla, QRCtrls, QuickRpt, EKVistaPreviaQR, EKLlenarCombo;
+  EKOrdenarGrilla, QRCtrls, QuickRpt, EKVistaPreviaQR, EKLlenarCombo,
+  cxClasses;
 
 type
   TFFichaEmpleado = class(TForm)
@@ -126,7 +127,7 @@ var
 
 implementation
 
-uses UDM, UPrincipal;
+uses UDM, UPrincipal, DateUtils;
 
 {$R *.dfm}
 
