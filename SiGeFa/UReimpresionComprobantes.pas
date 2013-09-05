@@ -406,7 +406,7 @@ begin
       ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar(' -l ' + IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger) + ' -i ' + fiscal_Impresora + ' -c F'), nil, SW_SHOWNORMAL)
     else
       if fiscal_sistema = 'DELPHI' then //IMPRIMIR DESDE ELPHI
-        ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-l'+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -cF'), nil, SW_SHOWNORMAL);
+        ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-l'+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -cF'+' -id'+inttostr(ID_FISCAL)), nil, SW_SHOWNORMAL);
 
     ZQ_Comprobante.Refresh;
   end;

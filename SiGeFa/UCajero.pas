@@ -2690,12 +2690,12 @@ begin
   if fiscal_sistema = 'DELPHI' then //IMPRIMIR DESDE ELPHI
   begin
     if tipoAccion = 'F' then  //si es una factura
-      ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-l'+IntToStr(comprob)+' -c'+tipoAccion), nil, SW_SHOWNORMAL)
+      ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-l'+IntToStr(comprob)+' -c'+tipoAccion+' -id'+inttostr(ID_FISCAL)), nil, SW_SHOWNORMAL)
     else
       if tipoAccion = 'A' then //si es la auditoria
-        ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-c'+tipoAccion+' -t'+auditoriaFiscalTipo+' -d'+auditoriaFiscalDesde+' -h'+auditoriaFiscalHasta), nil, SW_SHOWNORMAL)
+        ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-c'+tipoAccion+' -t'+auditoriaFiscalTipo+' -d'+auditoriaFiscalDesde+' -h'+auditoriaFiscalHasta+' -id'+inttostr(ID_FISCAL)), nil, SW_SHOWNORMAL)
       else //si es cierre z o x
-        ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-c'+tipoAccion), nil, SW_SHOWNORMAL);
+        ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-c'+tipoAccion+' -id'+inttostr(ID_FISCAL)), nil, SW_SHOWNORMAL);
   end;
 end;
 
