@@ -22,8 +22,10 @@ procedure configurarInteger(Query: TZQuery; clave: string; campo: string; busque
 procedure configurarReal(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: double);
 procedure configurarDate(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: TDateTime);
 procedure configurarColor(Query: TZQuery; clave: string; campo: string; busqueda: string; var variable: TColor);
-function DecodificadorErrorFiscal(Codigo: integer; TipoError: string): string;
+function DecodificadorErrorFiscalEpson(Codigo: integer; TipoError: string): string;
 function DejarSoloNumeros(Cadena: string): string;
+function LPad(S: String; Len: Integer; Ch: Char): String; overload;
+function LPad(D: Integer; Len: Integer; Ch: Char): String; overload;
 
 implementation
 
@@ -31,6 +33,18 @@ const
   TablaMul: array[1..10] of Integer = (5, 4, 3, 2, 7, 6, 5, 4, 3, 2); {Tabla Arbitraria}
 
 //Delvuelve una cadena rellena de tantos caracteres como indique cantidad a la izquierda
+
+function LPad(S: String; Len: Integer; Ch: Char): String; overload;
+begin
+  Len := Len - Length(S);
+  if Len < 0 then Len := 0;
+  Result := DupeString(Ch, Len) + S;
+end;
+
+function LPad(D: Integer; Len: Integer; Ch: Char): String; overload;
+begin
+  Result := LPad(IntToStr(D), Len, Ch);
+end;
 
 function rellenar(texto: string; caracter: Char; cantidad: integer): string;
 var
@@ -78,7 +92,7 @@ begin
 end;
 
 
-function DecodificadorErrorFiscal(Codigo: integer; TipoError: string): string;
+function DecodificadorErrorFiscalEpson(Codigo: integer; TipoError: string): string;
 var
   decimal, quociente, resto: integer;
   binario, strresto, strquociente, bit, TipoCodigo, Error: string;
