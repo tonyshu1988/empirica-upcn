@@ -143,6 +143,7 @@ type
 var
   DM: TDM;
   SUCURSAL_LOGUEO: integer; //Mantiene el id de la sucursal con la cual me conecte
+  ID_FISCAL: integer;
   enviandoMail: boolean; //TRUE si se esta enviado un mail; FALSE en caso contrario
   sucursales: TEKArrayPermisos; //array de permisos valores que tiene un campo usuario y un campo valor
   TextoPieDePagina: string;
@@ -309,12 +310,12 @@ begin
   enviandoMail:= false;          //setea la bandera en false indicando q no se esta enviando mail
   configVariables;
 
-
   // Si la variable optica esta en true entonces el menu optica estara visible.
   FPrincipal.Optica1.Visible := Optica;
 
   //cargo la imagen de fondo del sistema
   EKIni.abrir;
+  ID_FISCAL:= EKIni.Ini.ReadInteger('IMPRESORA_FISCAL', 'id_fiscal', -1);
   logo_fondo:= EKIni.Ini.ReadString('LOGO_FONDO', 'logo', '');
   try
     if logo_fondo <> '' then

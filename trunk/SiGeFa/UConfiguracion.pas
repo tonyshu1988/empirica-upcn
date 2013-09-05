@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, StdCtrls, Mask, DBCtrls,
   Buttons, Grids, DBGrids, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, ComCtrls, ZStoredProcedure, ExtDlgs, ZSqlUpdate, DBClient, STRUTILS,
-  EKOrdenarGrilla, EKDBDateTimePicker;
+  EKOrdenarGrilla, EKDBDateTimePicker, cxClasses;
 
 type
   TFConfiguracion = class(TForm)
@@ -168,7 +168,7 @@ type
     procedure btnSeleccionarClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
   private
-    { Private declarations }
+    id_IFiscal: integer;
   public
     { Public declarations }
   end;
@@ -318,6 +318,12 @@ begin
   if dm.EKModelo.verificar_transaccion(abmConfiguracion) then
   begin
     dm.EKModelo.finalizar_transaccion(abmConfiguracion);
+
+    //configuro la impresora fiscal por defecto
+    DM.EKIni.abrir;
+    DM.EKIni.Ini.WriteInteger('IMPRESORA_FISCAL', 'id_fiscal', id_IFiscal);
+    ID_FISCAL:= id_IFiscal;
+
     dm.configVariables;
     dm.cargarReporteSucursal(SUCURSAL_LOGUEO);
     
@@ -450,6 +456,7 @@ begin
     ZQ_Fiscal.RecNo:= recno;
     ZQ_Fiscal.Edit;
     ZQ_FiscalPREDETERMINADA.AsString:= 'S';
+    id_IFiscal:= ZQ_FiscalID.AsInteger;
     ZQ_Fiscal.EnableControls;
   end
 end;

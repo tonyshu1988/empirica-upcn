@@ -9,7 +9,7 @@ uses
   EKEdit, UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
   XPStyleActnCtrls, ActnMan, EKListadoSQL, EKDbSuma,
   ZStoredProcedure, UBuscarPersona, Buttons, jpeg, Menus, UCargarPreventa,
-  ComCtrls, IniFiles, ShellAPI, dxBarExtDBItems,UOP_CargarOrden;
+  ComCtrls, IniFiles, ShellAPI, dxBarExtDBItems,UOP_CargarOrden, cxClasses;
 
 type
   TFCajero = class(TForm)
@@ -806,6 +806,7 @@ uses UDM, UPrincipal, strutils, EKModelo, Math, UUtilidades, DateUtils;
 procedure TFCajero.leerConfigFiscal;
 begin
   dm.ZQ_Fiscal.Close;
+  dm.ZQ_Fiscal.ParamByName('id_fiscal').AsInteger:= ID_FISCAL;
   dm.ZQ_Fiscal.Open;
 
   fiscal_Impresora:= DM.ZQ_FiscalMODELO.AsString;
