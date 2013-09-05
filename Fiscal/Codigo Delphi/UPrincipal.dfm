@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 372
-  Top = 271
+  Left = 395
+  Top = 294
   Width = 611
   Height = 309
   Caption = 'Modulo Impresi'#243'n Fiscal'
@@ -200,9 +200,9 @@ object FPrincipal: TFPrincipal
       ControlData = {000300004F0300004F030000}
     end
     object gBoxImpresora: TGroupBox
-      Left = 404
+      Left = 248
       Top = 72
-      Width = 185
+      Width = 341
       Height = 83
       Caption = ' Impresora '
       TabOrder = 14
@@ -229,6 +229,14 @@ object FPrincipal: TFPrincipal
         Height = 13
         Alignment = taRightJustify
         Caption = 'Puerto:'
+      end
+      object Label6: TLabel
+        Left = 183
+        Top = 16
+        Width = 45
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Modelo:'
       end
       object cBoxImpresora_Marca: TComboBox
         Left = 74
@@ -274,6 +282,20 @@ object FPrincipal: TFPrincipal
           '1'
           '2')
       end
+      object cBoxImpresora_Modelo: TComboBox
+        Left = 231
+        Top = 12
+        Width = 104
+        Height = 21
+        ItemHeight = 13
+        TabOrder = 3
+        Text = 'TM-U220AF'
+        OnChange = cBoxImpresora_ModeloChange
+        Items.Strings = (
+          'TM-U220AF'
+          'P-330F'
+          'P-715F')
+      end
     end
   end
   object conexion: TZConnection
@@ -283,6 +305,7 @@ object FPrincipal: TFPrincipal
     User = 'sysdba'
     Password = 'masterkey'
     AutoCommit = False
+    Connected = True
     Left = 536
     Top = 80
   end
@@ -306,7 +329,7 @@ object FPrincipal: TFPrincipal
       
         '       cpb.id_tipo_iva, iva.nombre_tipo_iva, iva.letra as tipo_f' +
         'actura,'
-      '       iva.fiscal as letra_fiscal'
+      '       iva.fiscal as letra_fiscal, cli.id_tipo_doc'
       'from comprobante cpb'
       'left join persona cli on (cpb.id_cliente = cli.id_persona)'
       'left join tipo_iva iva on (cpb.id_tipo_iva = iva.id_tipo_iva)'
@@ -368,6 +391,9 @@ object FPrincipal: TFPrincipal
     object ZQ_FacturaLETRA_FISCAL: TStringField
       FieldName = 'LETRA_FISCAL'
       Size = 1
+    end
+    object ZQ_FacturaID_TIPO_DOC: TIntegerField
+      FieldName = 'ID_TIPO_DOC'
     end
   end
   object ZQ_Items: TZQuery
@@ -564,10 +590,21 @@ object FPrincipal: TFPrincipal
     SQL.Strings = (
       'select c.*'
       'from configuracion_fiscal  c'
-      'where c.predeterminada='#39'S'#39)
-    Params = <>
+      'where c.id = :id_fiscal')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_fiscal'
+        ParamType = ptUnknown
+      end>
     Left = 368
     Top = 192
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_fiscal'
+        ParamType = ptUnknown
+      end>
     object ZQ_Config_FiscalID: TIntegerField
       FieldName = 'ID'
       Required = True
