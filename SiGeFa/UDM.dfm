@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 692
-  Top = 270
+  Left = 523
+  Top = 210
   Height = 471
   Width = 396
   object Conexion: TZConnection
@@ -2031,10 +2031,21 @@ object DM: TDM
     SQL.Strings = (
       'select *'
       'from CONFIGURACION_FISCAL'
-      'where predeterminada = '#39'S'#39)
-    Params = <>
+      'where id = :id_fiscal')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_fiscal'
+        ParamType = ptUnknown
+      end>
     Left = 148
     Top = 386
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_fiscal'
+        ParamType = ptUnknown
+      end>
     object ZQ_FiscalID: TIntegerField
       FieldName = 'ID'
     end

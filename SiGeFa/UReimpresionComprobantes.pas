@@ -8,7 +8,7 @@ uses
   ZDataset, Buttons, ExtCtrls, Grids, DBGrids, StdCtrls, dxBar,
   dxBarExtItems, EKDbSuma, EKOrdenarGrilla, ComCtrls, IniFiles, ShellAPI,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, Menus,
-  EKListadoSQL;
+  EKListadoSQL, cxClasses;
 
 type
   TFReimpresionComprobantes = class(TForm)
@@ -198,6 +198,7 @@ uses UDM, UPrincipal, strutils, EKModelo, Math, UUtilidades, DateUtils;
 procedure TFReimpresionComprobantes.leerConfigFiscal;
 begin
   dm.ZQ_Fiscal.Close;
+  dm.ZQ_Fiscal.ParamByName('id_fiscal').AsInteger:= ID_FISCAL;  
   dm.ZQ_Fiscal.Open;
 
   fiscal_Impresora:= DM.ZQ_FiscalMODELO.AsString;
