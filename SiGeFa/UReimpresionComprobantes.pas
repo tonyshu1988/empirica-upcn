@@ -8,7 +8,7 @@ uses
   ZDataset, Buttons, ExtCtrls, Grids, DBGrids, StdCtrls, dxBar,
   dxBarExtItems, EKDbSuma, EKOrdenarGrilla, ComCtrls, IniFiles, ShellAPI,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, Menus,
-  EKListadoSQL, cxClasses;
+  EKListadoSQL, cxClasses, ZIBEventAlerter;
 
 type
   TFReimpresionComprobantes = class(TForm)
@@ -153,6 +153,7 @@ type
     ZQ_CambiarFPago: TZQuery;
     ZQ_ComprobanteID_PREVENTA: TIntegerField;
     ZQ_ComprobanteOBSERVACION: TStringField;
+    ZIBEvent: TZIBEventAlerter;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
@@ -177,6 +178,8 @@ type
     procedure PopUpItemCambiarCuentaClick(Sender: TObject);
     procedure PopUpItemCambiarFPagoClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
+    procedure ZIBEventEventAlert(Sender: TObject;
+      EventName: String; EventCount: Integer; var CancelAlerts: Boolean);
   Private
     { Private declarations }
   Public
@@ -395,7 +398,7 @@ begin
   if not ((ZQ_ComprobantePUNTO_VENTA.IsNull) and (ZQ_ComprobanteNUMERO_CPB.IsNull)) then
   begin
     Application.MessageBox(PChar('El comprobante seleccionado ya esta impreso.'), 'Reimpresión de Comprobantes', MB_OK + MB_ICONINFORMATION);
-    Exit;
+//    Exit;
   end;
 
   leerConfigFiscal();
@@ -407,8 +410,6 @@ begin
     else
       if fiscal_sistema = 'DELPHI' then //IMPRIMIR DESDE ELPHI
         ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-l'+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -cF'+' -id'+inttostr(ID_FISCAL)), nil, SW_SHOWNORMAL);
-
-    ZQ_Comprobante.Refresh;
   end;
 end;
 
@@ -679,9 +680,17 @@ begin
     end;
 end;
 
+
 procedure TFReimpresionComprobantes.FormActivate(Sender: TObject);
 begin
   if not ZQ_Comprobante.IsEmpty then
+    ZQ_Comprobante.Refresh;
+end;
+
+
+procedure TFReimpresionComprobantes.ZIBEventEventAlert(Sender: TObject; EventName: String; EventCount: Integer; var CancelAlerts: Boolean);
+begin
+  if EventName = 'FACTURA_IMPRESA' then
     ZQ_Comprobante.Refresh;
 end;
 
