@@ -7,7 +7,7 @@ FiscalPrinterLib_TLB;
 
 function HasarObtenerTipoDocumento(id_tipo_doc: integer): FiscalPrinterLib_TLB.TiposDeDocumento;
 function HasarObtenerTipoIVAComprador(id_tipo_iva: integer): FiscalPrinterLib_TLB.TiposDeResponsabilidades;
-function HasarObtenerTipoFactura(id_tipo_iva: integer): FiscalPrinterLib_TLB.DocumentosFiscales;
+function HasarObtenerTipoFactura(modelo: string; id_tipo_iva: integer): FiscalPrinterLib_TLB.DocumentosFiscales;
 
 implementation
 
@@ -40,14 +40,23 @@ begin
 end;
 
 
-function HasarObtenerTipoFactura(id_tipo_iva: integer): FiscalPrinterLib_TLB.DocumentosFiscales;
+function HasarObtenerTipoFactura(modelo: string; id_tipo_iva: integer): FiscalPrinterLib_TLB.DocumentosFiscales;
 begin
-  case id_tipo_iva of
-    12, 13: Result:= FACTURA_A;
-    11, 14, 15: Result:= FACTURA_B;
+  if modelo = 'P-330F' then
+    case id_tipo_iva of
+      12, 13: Result:= FACTURA_A;
+      11, 14, 15: Result:= FACTURA_B;
+    else
+      Result:= FACTURA_B;
+    end
   else
-    Result:= FACTURA_B;
-  end
+    if modelo = 'P-715F' then
+      case id_tipo_iva of
+        12, 13: Result:= TICKET_FACTURA_A;
+        11, 14, 15: Result:= TICKET_FACTURA_B;
+      else
+        Result:= TICKET_FACTURA_B;
+      end
 end;
 
 end.
