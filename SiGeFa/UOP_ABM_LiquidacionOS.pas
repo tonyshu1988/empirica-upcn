@@ -10,7 +10,7 @@ uses
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
   EKDbSuma, DBClient, Menus, UOP_BuscarProductosOS, ZSqlUpdate, jpeg,
-  ExtDlgs, ZSequence, UOP_BuscarFacturaOS;
+  ExtDlgs, ZSequence, UOP_BuscarFacturaOS, cxClasses;
 
 type
   TFOP_ABM_LiquidacionOS = class(TForm)
