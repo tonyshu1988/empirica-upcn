@@ -993,7 +993,7 @@ begin
   resultado:= true;
   marca:= 'HASAR';
   CantidadCopias:= '1';
-  Hasar.DescripcionesLargas:= true; //trunca las descripciones largas
+  Hasar.DescripcionesLargas:= false; //trunca las descripciones largas
   Hasar.Comenzar;
   Hasar.TratarDeCancelarTodo;
 
@@ -1144,7 +1144,7 @@ begin
   resultado:= true;
   marca:= 'HASAR';
   CantidadCopias:= '1';
-  Hasar.DescripcionesLargas:= true; //trunca las descripciones largas
+  Hasar.DescripcionesLargas:= false; //trunca las descripciones largas
   Hasar.Comenzar;
   Hasar.TratarDeCancelarTodo;
 
@@ -1179,7 +1179,7 @@ begin
   while not ZQ_Items.Eof do
   begin
     //Max de 20 caracteres
-    DescripcionProducto:= LeftStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString, 50);
+    DescripcionProducto:= LeftStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString, 20);
     if productoDetallado then
     begin
       LineaDescExtra1:= LeftStr(' Marca: ' + ZQ_ItemsNOMBRE_MARCA.AsString, 30);
