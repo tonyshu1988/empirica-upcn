@@ -65,7 +65,7 @@ object FPrincipal: TFPrincipal
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
-      TabOrder = 0
+      TabOrder = 12
       object Label1: TLabel
         Left = 1
         Top = 1
@@ -88,7 +88,7 @@ object FPrincipal: TFPrincipal
       Top = 42
       Width = 509
       Height = 21
-      TabOrder = 1
+      TabOrder = 0
     end
     object btnCierreZ: TButton
       Left = 9
@@ -96,7 +96,7 @@ object FPrincipal: TFPrincipal
       Width = 113
       Height = 25
       Caption = 'Cierre Z'
-      TabOrder = 2
+      TabOrder = 3
       OnClick = btnCierreZClick
     end
     object btnCierreX: TButton
@@ -105,7 +105,7 @@ object FPrincipal: TFPrincipal
       Width = 113
       Height = 25
       Caption = 'Cierre X'
-      TabOrder = 3
+      TabOrder = 4
       OnClick = btnCierreXClick
     end
     object btnAuditoria: TButton
@@ -114,7 +114,7 @@ object FPrincipal: TFPrincipal
       Width = 113
       Height = 25
       Caption = 'Auditoria'
-      TabOrder = 4
+      TabOrder = 5
       OnClick = btnAuditoriaClick
     end
     object editNumeroComprobante: TEdit
@@ -122,7 +122,7 @@ object FPrincipal: TFPrincipal
       Top = 206
       Width = 121
       Height = 21
-      TabOrder = 5
+      TabOrder = 10
     end
     object btnFactura: TButton
       Left = 9
@@ -130,7 +130,7 @@ object FPrincipal: TFPrincipal
       Width = 113
       Height = 25
       Caption = 'Factura'
-      TabOrder = 6
+      TabOrder = 9
       OnClick = btnFacturaClick
     end
     object btnAbrirPuerto: TBitBtn
@@ -139,7 +139,7 @@ object FPrincipal: TFPrincipal
       Width = 113
       Height = 25
       Caption = 'Abrir Puerto'
-      TabOrder = 7
+      TabOrder = 1
       OnClick = btnAbrirPuertoClick
     end
     object btnCerrarPuerto: TBitBtn
@@ -148,7 +148,7 @@ object FPrincipal: TFPrincipal
       Width = 113
       Height = 25
       Caption = 'Cerrar Puerto'
-      TabOrder = 8
+      TabOrder = 2
       OnClick = btnCerrarPuertoClick
     end
     object DateTimeFechaDesde: TDateTimePicker
@@ -158,7 +158,7 @@ object FPrincipal: TFPrincipal
       Height = 21
       Date = 41068.667614293980000000
       Time = 41068.667614293980000000
-      TabOrder = 9
+      TabOrder = 6
     end
     object DateTimeFechaHasta: TDateTimePicker
       Left = 251
@@ -167,7 +167,7 @@ object FPrincipal: TFPrincipal
       Height = 21
       Date = 41068.667614293980000000
       Time = 41068.667614293980000000
-      TabOrder = 10
+      TabOrder = 7
     end
     object ComboBoxTipoAuditoria: TComboBox
       Left = 375
@@ -176,7 +176,7 @@ object FPrincipal: TFPrincipal
       Height = 21
       ItemHeight = 13
       ItemIndex = 0
-      TabOrder = 11
+      TabOrder = 8
       Text = 'T = Reporte total general'
       Items.Strings = (
         'T = Reporte total general'
@@ -188,7 +188,7 @@ object FPrincipal: TFPrincipal
       Width = 113
       Height = 25
       Caption = 'Cancelar Factura'
-      TabOrder = 12
+      TabOrder = 11
       Visible = False
       OnClick = btnCancelarFacturaClick
     end
@@ -197,6 +197,11 @@ object FPrincipal: TFPrincipal
       Top = 120
       Width = 32
       Height = 32
+      OnImpresoraNoResponde = HasarImpresoraNoResponde
+      OnErrorImpresora = HasarErrorImpresora
+      OnErrorFiscal = HasarErrorFiscal
+      OnImpresoraOcupada = HasarImpresoraOcupada
+      OnFaltaPapel = HasarFaltaPapel
       ControlData = {000300004F0300004F030000}
     end
     object gBoxImpresora: TGroupBox
@@ -205,7 +210,7 @@ object FPrincipal: TFPrincipal
       Width = 341
       Height = 83
       Caption = ' Impresora '
-      TabOrder = 14
+      TabOrder = 13
       object Label3: TLabel
         Left = 32
         Top = 16
@@ -244,9 +249,9 @@ object FPrincipal: TFPrincipal
         Width = 104
         Height = 21
         ItemHeight = 13
-        ItemIndex = 0
+        ItemIndex = 1
         TabOrder = 0
-        Text = 'EPSON'
+        Text = 'HASAR'
         OnChange = cBoxImpresora_MarcaChange
         Items.Strings = (
           'EPSON'
@@ -259,7 +264,7 @@ object FPrincipal: TFPrincipal
         Height = 21
         ItemHeight = 13
         ItemIndex = 2
-        TabOrder = 1
+        TabOrder = 3
         Text = '9600'
         OnChange = cBoxImpresora_VelocidadChange
         Items.Strings = (
@@ -274,9 +279,9 @@ object FPrincipal: TFPrincipal
         Width = 104
         Height = 21
         ItemHeight = 13
-        ItemIndex = 0
+        ItemIndex = 1
         TabOrder = 2
-        Text = '1'
+        Text = '2'
         OnChange = cBoxImpresora_PuertoChange
         Items.Strings = (
           '1'
@@ -288,8 +293,9 @@ object FPrincipal: TFPrincipal
         Width = 104
         Height = 21
         ItemHeight = 13
-        TabOrder = 3
-        Text = 'TM-U220AF'
+        ItemIndex = 1
+        TabOrder = 1
+        Text = 'P-330F'
         OnChange = cBoxImpresora_ModeloChange
         Items.Strings = (
           'TM-U220AF'
@@ -406,7 +412,8 @@ object FPrincipal: TFPrincipal
         're_producto,'
       
         '       col.nombre as nombre_color, mar.nombre_marca, med.medida ' +
-        'as nombre_medida'
+        'as nombre_medida,'
+      '       cd.porc_iva'
       'from comprobante_detalle cd'
       'left join producto pro on (cd.id_producto = pro.id_producto)'
       
@@ -465,6 +472,9 @@ object FPrincipal: TFPrincipal
     object ZQ_ItemsNOMBRE_MEDIDA: TStringField
       FieldName = 'NOMBRE_MEDIDA'
       Size = 30
+    end
+    object ZQ_ItemsPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
     end
   end
   object ZQ_FormaPago: TZQuery

@@ -82,6 +82,7 @@ type
     ZQ_FacturaID_TIPO_DOC: TIntegerField;
     Label6: TLabel;
     cBoxImpresora_Modelo: TComboBox;
+    ZQ_ItemsPORC_IVA: TFloatField;
     procedure FormCreate(Sender: TObject);
     procedure leerParametros();
     procedure leerArchivoIni();
@@ -111,6 +112,12 @@ type
     procedure configurarImpresora();
     procedure ejecutarComando();
     procedure cBoxImpresora_ModeloChange(Sender: TObject);
+    procedure HasarImpresoraNoResponde(ASender: TObject;
+      CantidadReintentos: Integer);
+    procedure HasarErrorFiscal(ASender: TObject; Flags: Integer);
+    procedure HasarErrorImpresora(ASender: TObject; Flags: Integer);
+    procedure HasarFaltaPapel(Sender: TObject);
+    procedure HasarImpresoraOcupada(Sender: TObject);
   private
     PrinterFiscal_Epson: _PrinterFiscalDisp;
     db_name, db_host, db_pass, db_user: string;
@@ -124,6 +131,7 @@ type
     puntoVenta: widestring;
     comando: widestring;
     ID_FISCAL: integer;
+    marcaOCX: string;
   public
   end;
 
@@ -150,9 +158,6 @@ end;
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 begin
-  //OBJETO PARA LA IMPRESORA EPSON
-  PrinterFiscal_Epson:= CreateComObject(CLASS_PrinterFiscal) as _PrinterFiscalDisp;
-
   //CONFIGURACION POR DEFECTO
   if_puerto:= '1';
   if_velocidad:= 9600;
@@ -177,6 +182,9 @@ end;
 procedure TFPrincipal.configurarImpresora();
 begin
   try
+    if UpperCase(marcaOCX) = 'EPSON' then
+      PrinterFiscal_Epson:= CreateComObject(CLASS_PrinterFiscal) as _PrinterFiscalDisp;
+
     tituloError:= 'ERROR MODULO FISCAL';
     ZQ_Config.Close;
     EKModelo.abrir(ZQ_Config);
@@ -230,11 +238,14 @@ begin
   db_host:= EKIni.Ini.ReadString('DB', 'db_host', '127.0.0.1');
   db_user:= EKIni.Ini.ReadString('DB', 'db_user', 'SYSDBA');
   db_pass:= EKIni.Ini.ReadString('DB', 'db_pass', 'masterkey');
+  marcaOCX:= EKIni.Ini.ReadString('OCX', 'marca', '');
 
+  conexion.Connected:= false;
   conexion.Database:= db_name;
   conexion.HostName:= db_host;
   conexion.Password:= db_pass;
   conexion.User:= db_user;
+  conexion.Connected:= true;
 
   EKIni.cerrar;
 end;
@@ -996,6 +1007,8 @@ begin
   Hasar.DescripcionesLargas:= false; //trunca las descripciones largas
   Hasar.Comenzar;
   Hasar.TratarDeCancelarTodo;
+//********************************
+  Hasar.BorrarFantasiaEncabezadoCola(false, false, true);
 
 //PASO 1: ABRIR FACTURA
   if (ZQ_FacturaNOMBRE.IsNull) or (trim(ZQ_FacturaNOMBRE.AsString) = '') then
@@ -1004,7 +1017,7 @@ begin
     NombreComprador:= LeftStr(ZQ_FacturaNOMBRE.AsString, 50);
 
   if (ZQ_FacturaNUMERO_DOC.IsNull) or (trim(ZQ_FacturaNUMERO_DOC.AsString) = '') then
-    NroDocComprador:= 'XXX'
+    NroDocComprador:= '0'
   else
     NroDocComprador:= LeftStr(ZQ_FacturaNUMERO_DOC.AsString, 11);
 
@@ -1020,7 +1033,7 @@ begin
 
   Hasar.DatosCliente(NombreComprador, NroDocComprador, HasarObtenerTipoDocumento(ZQ_FacturaID_TIPO_DOC.AsInteger), HasarObtenerTipoIVAComprador(ZQ_FacturaID_TIPO_IVA.AsInteger), DomicilioComprador);
 
-  Hasar.AbrirComprobanteFiscal(HasarObtenerTipoFactura(if_modelo, ZQ_FacturaID_TIPO_IVA.AsInteger));
+  Hasar.AbrirComprobanteFiscal(HasarObtenerTipoFactura(if_modelo, ZQ_FacturaTIPO_FACTURA.AsString));
 
 //PASO 2: CARGAR ITEMS
   descuento_redondeo:= 0;
@@ -1037,7 +1050,7 @@ begin
 
     Cantidad:= ZQ_ItemsCANTIDAD.AsFloat;
 
-    if (HasarObtenerTipoFactura(if_modelo, ZQ_FacturaID_TIPO_IVA.AsInteger) = FACTURA_A) and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
+    if (HasarObtenerTipoFactura(if_modelo, ZQ_FacturaTIPO_FACTURA.AsString) = FACTURA_A) and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
     begin
       PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
       PrecioUnitario:= RoundTo(PrecioUnitario, -2);
@@ -1050,8 +1063,11 @@ begin
       descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
     end;
 
-    TasaIva:= 21;
     ImpuestosInternos:= 0;
+    if ZQ_ItemsPORC_IVA.IsNull then
+      TasaIva:= 21
+    else
+      TasaIva:= ZQ_ItemsPORC_IVA.AsFloat * 100;
 
     Hasar.ImprimirItem(DescripcionProducto, Cantidad, PrecioUnitario, TasaIva, ImpuestosInternos);
 
@@ -1085,7 +1101,7 @@ begin
 
 //PASO 7: OBTENER NUMERO DE COMPROBANTE Y PUNTO DE VENTA
   numeroCpb:= Hasar.Respuesta[3];
-  Hasar.Enviar(Chr( 115 ));
+  Hasar.Enviar(Chr(115));
   puntoVenta:= Hasar.Respuesta[7];
   lblFactura.Caption:= LPad(puntoVenta, 4, '0') + '-' + LPad(numeroCpb, 8, '0');
 
@@ -1110,7 +1126,7 @@ begin
         mostrarError(mensajeError, tituloError);
       end
     end
-  end;
+  end;       
 end;
 
 
@@ -1171,7 +1187,7 @@ begin
 
   Hasar.DatosCliente(NombreComprador, NroDocComprador, HasarObtenerTipoDocumento(ZQ_FacturaID_TIPO_DOC.AsInteger), HasarObtenerTipoIVAComprador(ZQ_FacturaID_TIPO_IVA.AsInteger), DomicilioComprador);
 
-  Hasar.AbrirComprobanteFiscal(HasarObtenerTipoFactura(if_modelo, ZQ_FacturaID_TIPO_IVA.AsInteger));
+  Hasar.AbrirComprobanteFiscal(HasarObtenerTipoFactura(if_modelo, ZQ_FacturaTIPO_FACTURA.AsString));
 
 //PASO 2: CARGAR ITEMS
   descuento_redondeo:= 0;
@@ -1188,7 +1204,7 @@ begin
 
     Cantidad:= ZQ_ItemsCANTIDAD.AsFloat;
 
-    if (HasarObtenerTipoFactura(if_modelo, ZQ_FacturaID_TIPO_IVA.AsInteger) = TICKET_FACTURA_A) and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
+    if (HasarObtenerTipoFactura(if_modelo, ZQ_FacturaTIPO_FACTURA.AsString) = TICKET_FACTURA_A) and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
     begin
       PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
       PrecioUnitario:= RoundTo(PrecioUnitario, -2);
@@ -1201,8 +1217,11 @@ begin
       descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
     end;
 
-    TasaIva:= 21;
     ImpuestosInternos:= 0;
+    if ZQ_ItemsPORC_IVA.IsNull then
+      TasaIva:= 21
+    else
+      TasaIva:= ZQ_ItemsPORC_IVA.AsFloat * 100;
 
     Hasar.ImprimirItem(DescripcionProducto, Cantidad, PrecioUnitario, TasaIva, ImpuestosInternos);
 
@@ -1224,7 +1243,7 @@ begin
   end;
 
 //PASO 5: DESCUENTOS
-//  descuento_redondeo:= 200;
+//  descuento_redondeo:= 200;     //ver si no es un porcentaje
 //  if descuento_redondeo > 0 then
 //  begin
 //    DescripcionFPago:= 'DESCUENTO REDONDEO';
@@ -1265,6 +1284,90 @@ begin
 end;
 
 
+procedure TFPrincipal.HasarImpresoraNoResponde(ASender: TObject; CantidadReintentos: Integer);
+begin
+  if (Hasar.ReintentoConstante) And (Hasar.Reintentos = CantidadReintentos) Then
+    Hasar.Abortar;
+end;
 
+
+procedure TFPrincipal.HasarErrorFiscal(ASender: TObject; Flags: Integer);
+begin
+  ShowMessage('FISCAL '+hasar.DescripcionStatusFiscal(Flags));
+end;
+
+
+procedure TFPrincipal.HasarErrorImpresora(ASender: TObject;
+  Flags: Integer);
+begin
+  ShowMessage('IMPRESORA '+hasar.DescripcionStatusFiscal(Flags));
+end;
+
+
+procedure TFPrincipal.HasarFaltaPapel(Sender: TObject);
+begin
+  mensajeError:= 'La impresora fiscal no tiene papel.';
+  mostrarError(mensajeError, tituloError);
+end;
+
+
+procedure TFPrincipal.HasarImpresoraOcupada(Sender: TObject);
+begin
+  mensajeError:= 'La impresora fiscal esta ocupada.';
+  mostrarError(mensajeError, tituloError);
+end;
+
+
+
+//COMPROBANTE NO FISCAL
+//    HASAR1.AbrirComprobanteNoFiscal
+//    HASAR1.ImprimirTextoNoFiscal "Linea Texto No Fiscal..."
+//    HASAR1.CerrarComprobanteNoFiscal
+//FACTURA B
+//    HASAR1.DatosCliente "Cliente...", "99999999995", TIPO_CUIT, MONOTRIBUTO, "Domicilio..."
+//    HASAR1.AbrirComprobanteFiscal FACTURA_B
+//    HASAR1.ImprimirTextoFiscal "Texto Fiscal..."
+//    HASAR1.ImprimirItem "Producto Uno", 1, 100, 21, 0
+//    HASAR1.DescuentoUltimoItem "Oferta del Dia", 5, True
+//    HASAR1.DescuentoGeneral "Oferta Pago Efectivo", 25, True
+//    HASAR1.EspecificarPercepcionPorIVA "Percep IVA21", 100, 21
+//    HASAR1.EspecificarPercepcionGlobal "Percep. RG 0000", 125#
+//    HASAR1.ImprimirPago "Efectivo", 295#
+//    HASAR1.CerrarComprobanteFiscal
+//FACTURA A
+//    HASAR1.DatosCliente "Cliente...", "99999999995", TIPO_CUIT, RESPONSABLE_INSCRIPTO, "Domicilio..."
+//    HASAR1.AbrirComprobanteFiscal FACTURA_A
+//    HASAR1.ImprimirTextoFiscal "Texto Fiscal..."
+//    HASAR1.ImprimirItem "Producto Uno", 1, 100, 21, 0
+//    HASAR1.DescuentoUltimoItem "Oferta del Dia", 5, True
+//    HASAR1.DescuentoGeneral "Oferta Pago Efectivo", 25, True
+//    HASAR1.EspecificarPercepcionPorIVA "Percep IVA21", 100, 21
+//    HASAR1.EspecificarPercepcionGlobal "Percep. RG 0000", 125#
+//    HASAR1.ImprimirPago "Efectivo", 295#
+//    HASAR1.CerrarComprobanteFiscal
+//NOTA CREDITO A
+//    HASAR1.InformacionRemito(1) = "0000-00000000"
+//    HASAR1.DatosCliente "Cliente...", "99999999995", TIPO_CUIT, RESPONSABLE_INSCRIPTO, "Domicilio..."
+//    HASAR1.AbrirComprobanteNoFiscalHomologado NOTA_CREDITO_A
+//    HASAR1.ImprimirTextoFiscal "Texto Fiscal..."
+//    HASAR1.ImprimirItem "Producto Uno", 1, 100, 21, 0
+//    HASAR1.DescuentoUltimoItem "Oferta del Dia", 5, True
+//    HASAR1.DescuentoGeneral "Oferta Pago Efectivo", 25, True
+//    HASAR1.EspecificarPercepcionPorIVA "Percep IVA21", 100, 21
+//    HASAR1.EspecificarPercepcionGlobal "Percep. RG 0000", 125#
+//    HASAR1.ImprimirPago "Efectivo", 295#
+//    HASAR1.CerrarComprobanteNoFiscalHomologado
+//NOTA CREDITO B
+//    HASAR1.InformacionRemito(1) = "0000-00000000"
+//    HASAR1.DatosCliente "Cliente...", "99999999995", TIPO_DNI, CONSUMIDOR_FINAL, "Domicilio..."
+//    HASAR1.AbrirComprobanteNoFiscalHomologado NOTA_CREDITO_B
+//    HASAR1.ImprimirTextoFiscal "Texto Fiscal..."
+//    HASAR1.ImprimirItem "Producto Uno", 1, 100, 21, 0
+//    HASAR1.DescuentoUltimoItem "Oferta del Dia", 5, True
+//    HASAR1.DescuentoGeneral "Oferta Pago Efectivo", 25, True
+//    HASAR1.EspecificarPercepcionPorIVA "Percep IVA21", 100, 21
+//    HASAR1.EspecificarPercepcionGlobal "Percep. RG 0000", 125#
+//    HASAR1.ImprimirPago "Efectivo", 295#
+//    HASAR1.CerrarComprobanteNoFiscalHomologado
 end.
 
