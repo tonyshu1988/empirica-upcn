@@ -2,7 +2,7 @@ object FPrincipal: TFPrincipal
   Left = 395
   Top = 294
   Width = 611
-  Height = 309
+  Height = 464
   Caption = 'Modulo Impresi'#243'n Fiscal'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 0
     Width = 603
-    Height = 282
+    Height = 437
     Align = alClient
     TabOrder = 0
     object Label2: TLabel
@@ -32,7 +32,7 @@ object FPrincipal: TFPrincipal
     end
     object lblErrorDriver: TLabel
       Left = 1
-      Top = 263
+      Top = 418
       Width = 601
       Height = 18
       Align = alBottom
@@ -302,6 +302,21 @@ object FPrincipal: TFPrincipal
           'P-330F'
           'P-715F')
       end
+    end
+    object MemoLog: TMemo
+      Left = 10
+      Top = 266
+      Width = 585
+      Height = 150
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -9
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      ScrollBars = ssBoth
+      TabOrder = 15
+      WordWrap = False
     end
   end
   object conexion: TZConnection
