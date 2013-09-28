@@ -200,7 +200,6 @@ object FPrincipal: TFPrincipal
       OnImpresoraNoResponde = HasarImpresoraNoResponde
       OnErrorImpresora = HasarErrorImpresora
       OnErrorFiscal = HasarErrorFiscal
-      OnImpresoraOcupada = HasarImpresoraOcupada
       OnFaltaPapel = HasarFaltaPapel
       ControlData = {000300004F0300004F030000}
     end
