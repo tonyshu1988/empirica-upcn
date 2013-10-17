@@ -5146,8 +5146,8 @@ object FMovimientos: TFMovimientos
     end
     object QR_OrdenPago: TQuickRep
       Tag = 99
-      Left = 201
-      Top = -17
+      Left = 689
+      Top = 415
       Width = 952
       Height = 1347
       Frame.Color = clBlack
