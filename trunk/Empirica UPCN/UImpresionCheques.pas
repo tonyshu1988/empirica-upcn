@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, QuickRpt, QRCtrls, Grids, DBGrids, ExtCtrls, jpeg,
   dxBar, dxBarExtItems, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKBusquedaAvanzada, EKNumeroATexto, EKVistaPreviaQR, DBClient, ZSqlUpdate,
-  ZStoredProcedure, EKOrdenarGrilla;
+  ZStoredProcedure, EKOrdenarGrilla, cxClasses;
 
 type
   TFImpresionCheques = class(TForm)
@@ -26,8 +26,7 @@ type
     btnChequeCorriente: TdxBarLargeButton;
     GrupoVisualizando: TdxBarGroup;
     GrupoEditando: TdxBarGroup;
-    QRImageChequeCorriente: TQRImage;
-    QRDBText1: TQRDBText;
+    QRImageChequeCorriente1: TQRImage;
     ZQ_movimientos: TZQuery;
     ZQ_movimientosFECHA: TDateField;
     ZQ_movimientosFECHA_MDC: TDateField;
@@ -38,10 +37,9 @@ type
     EKBusquedaAvanzada1: TEKBusquedaAvanzada;
     DS_movimientos: TDataSource;
     EKVistaPreviaQR1: TEKVistaPreviaQR;
-    QRDBText4: TQRDBText;
     QRLabelNumeroLetraCorriente1: TQRLabel;
     QRDBText2: TQRDBText;
-    QRLabelmesCheque: TQRLabel;
+    QRLabelmesCheque1: TQRLabel;
     ZQ_movimientosIMPRESO: TStringField;
     ClientZQ_movimientos: TClientDataSet;
     ClientZQ_movimientosFecha_emision: TDateTimeField;
@@ -50,8 +48,8 @@ type
     ClientZQ_movimientosImporte: TFloatField;
     ClientZQ_movimientosorden_impresion: TIntegerField;
     ClientZQ_movimientosimpreso: TStringField;
-    QRLabelDiaCheque: TQRLabel;
-    QRLabelanioCheque: TQRLabel;
+    QRLabelDiaCheque1: TQRLabel;
+    QRLabelanioCheque1: TQRLabel;
     QRBandDiferido: TQRBand;
     QRImageChequeDiferido: TQRImage;
     QRDBText3: TQRDBText;
@@ -100,6 +98,32 @@ type
     ClientZQ_movimientosconcepto: TStringField;
     ClientZQ_movimientosdenominacion: TStringField;
     EKOrdenarGrilla1: TEKOrdenarGrilla;
+    QRLabelImporte1: TQRLabel;
+    QRImageChequeCorriente2: TQRImage;
+    QRLabelNumeroLetraCorriente2: TQRLabel;
+    QRDBText7: TQRDBText;
+    QRLabelmesCheque2: TQRLabel;
+    QRLabelDiaCheque2: TQRLabel;
+    QRLabelanioCheque2: TQRLabel;
+    QRLabelImporte2: TQRLabel;
+    QRLabelProveedor2: TQRLabel;
+    QRLabelProveedor1: TQRLabel;
+    QRImageChequeCorriente3: TQRImage;
+    QRLabelNumeroLetraCorriente3: TQRLabel;
+    QRDBText1: TQRDBText;
+    QRLabelmesCheque3: TQRLabel;
+    QRLabelDiaCheque3: TQRLabel;
+    QRLabelanioCheque3: TQRLabel;
+    QRLabelImporte3: TQRLabel;
+    QRLabelProveedor3: TQRLabel;
+    QRImageChequeCorriente4: TQRImage;
+    QRLabelNumeroLetraCorriente4: TQRLabel;
+    QRDBText4: TQRDBText;
+    QRLabelmesCheque4: TQRLabel;
+    QRLabelDiaCheque4: TQRLabel;
+    QRLabelanioCheque4: TQRLabel;
+    QRLabelImporte4: TQRLabel;
+    QRLabelProveedor4: TQRLabel;
     procedure btnChequeCorrienteClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -152,7 +176,11 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(transaccion_cheques, []) then
   begin
-    QRImageChequeCorriente.Enabled:= false;
+    QRImageChequeCorriente1.Enabled:= false;
+    QRImageChequeCorriente2.Enabled:= false;
+    QRImageChequeCorriente3.Enabled:= false;
+    QRImageChequeCorriente4.Enabled:= false;
+
     QRDBText2.Enabled:= false;
     RepChequesCorriente.Prepare;
     RepChequesCorriente.Print;
@@ -383,7 +411,12 @@ begin
     exit;
   end;
 
-  QRImageChequeCorriente.Enabled:= true;
+  QRImageChequeCorriente1.Enabled:= true;
+  QRImageChequeCorriente2.Enabled:= true;
+  QRImageChequeCorriente3.Enabled:= true;
+  QRImageChequeCorriente4.Enabled:= true;
+
+  ajustarMargenes;
   QRDBText2.Enabled:= true;
   EKVistaPreviaQR1.VistaPrevia;
   ClientZQ_movimientos.Filtered:= false;  
@@ -394,36 +427,76 @@ procedure TFImpresionCheques.ajustarMargenes();
 var
   i: integer;
   desplazarIzquierda, desplazarArriba,izq,der: integer;
+  AuxLabelMargenes : TQRLabel;
 begin
-  desplazarIzquierda:= 0;
-  desplazarArriba:= 0;
+//  desplazarIzquierda:= 0;
+//  desplazarArriba:= 0;
+//
+//  dm.ZQ_Configuracion.Close;
+//  dm.ZQ_Configuracion.Open;
+//
+//  if dm.ZQ_Configuracion.Locate('clave', VarArrayOf(['Cheque_AjustarIzq']), []) then //si existe la clave desplazarIzquierda se toma este valor para ajustar el margen izquierdo
+//    desplazarIzquierda:= (dm.ZQ_Configuracion.fieldbyname('nivel').AsInteger);
+//
+//  if dm.ZQ_Configuracion.Locate('clave', VarArrayOf(['Cheque_AjustarArriba']), []) then //si existe la clave desplazarArriba se toma este valor para ajustar el margen superior
+//    desplazarArriba:= (dm.ZQ_Configuracion.fieldbyname('nivel').AsInteger);
 
-  dm.ZQ_Configuracion.Close;
-  dm.ZQ_Configuracion.Open;
-
-  if dm.ZQ_Configuracion.Locate('clave', VarArrayOf(['Cheque_AjustarIzq']), []) then //si existe la clave desplazarIzquierda se toma este valor para ajustar el margen izquierdo
-    desplazarIzquierda:= (dm.ZQ_Configuracion.fieldbyname('nivel').AsInteger);
-
-  if dm.ZQ_Configuracion.Locate('clave', VarArrayOf(['Cheque_AjustarArriba']), []) then //si existe la clave desplazarArriba se toma este valor para ajustar el margen superior
-    desplazarArriba:= (dm.ZQ_Configuracion.fieldbyname('nivel').AsInteger);
-
-  for i := 0 to QRBandCorriente.ControlCount-1 do
+  for i := 1 to 4 do
   begin
-    if QRBandCorriente.Controls[i].Name <> 'QRImageChequeCorriente' then
-    begin
-      QRBandCorriente.Controls[i].Top:= QRBandCorriente.Controls[i].Top + desplazarArriba;
-      QRBandCorriente.Controls[i].Left:= QRBandCorriente.Controls[i].Left + desplazarIzquierda;
-    end;
+    desplazarIzquierda:= 0;
+    desplazarArriba:= 0;
+
+    dm.ZQ_Configuracion.Close;
+    dm.ZQ_Configuracion.Open;
+
+    if dm.ZQ_Configuracion.Locate('clave', VarArrayOf(['Cheque_Izq'+IntToStr(i)]), []) then //si existe la clave desplazarIzquierda se toma este valor para ajustar el margen izquierdo
+      desplazarIzquierda:= (dm.ZQ_Configuracion.fieldbyname('nivel').AsInteger);
+
+    if dm.ZQ_Configuracion.Locate('clave', VarArrayOf(['Cheque_Arriba'+IntToStr(i)]), []) then //si existe la clave desplazarArriba se toma este valor para ajustar el margen superior
+      desplazarArriba:= (dm.ZQ_Configuracion.fieldbyname('nivel').AsInteger);
+
+    AuxLabelMargenes := TQRLabel(FImpresionCheques.FindComponent('QRLabelNumeroLetraCorriente'+IntToStr(i)));
+    AuxLabelMargenes.Top := AuxLabelMargenes.Top + desplazarArriba;
+    AuxLabelMargenes.Left := AuxLabelMargenes.Left + desplazarIzquierda;
+
+    AuxLabelMargenes := TQRLabel(FImpresionCheques.FindComponent('QRLabelDiaCheque'+IntToStr(i)));
+    AuxLabelMargenes.Top := AuxLabelMargenes.Top + desplazarArriba;
+    AuxLabelMargenes.Left := AuxLabelMargenes.Left + desplazarIzquierda;
+
+    AuxLabelMargenes := TQRLabel(FImpresionCheques.FindComponent('QRLabelmesCheque'+IntToStr(i)));
+    AuxLabelMargenes.Top := AuxLabelMargenes.Top + desplazarArriba;
+    AuxLabelMargenes.Left := AuxLabelMargenes.Left + desplazarIzquierda;
+
+    AuxLabelMargenes := TQRLabel(FImpresionCheques.FindComponent('QRLabelanioCheque'+IntToStr(i)));
+    AuxLabelMargenes.Top := AuxLabelMargenes.Top + desplazarArriba;
+    AuxLabelMargenes.Left := AuxLabelMargenes.Left + desplazarIzquierda;
+
+    AuxLabelMargenes := TQRLabel(FImpresionCheques.FindComponent('QRLabelImporte'+IntToStr(i)));
+    AuxLabelMargenes.Top := AuxLabelMargenes.Top + desplazarArriba;
+    AuxLabelMargenes.Left := AuxLabelMargenes.Left + desplazarIzquierda;
+
+    AuxLabelMargenes := TQRLabel(FImpresionCheques.FindComponent('QRLabelProveedor'+IntToStr(i)));
+    AuxLabelMargenes.Top := AuxLabelMargenes.Top + desplazarArriba;
+    AuxLabelMargenes.Left := AuxLabelMargenes.Left + desplazarIzquierda;
   end;
 
-  for i := 0 to QRBandDiferido.ControlCount-1 do
-  begin
-    if QRBandDiferido.Controls[i].Name <> 'QRImageChequeDiferido' then
-    begin
-      QRBandDiferido.Controls[i].Top:= QRBandDiferido.Controls[i].Top + desplazarArriba;
-      QRBandDiferido.Controls[i].Left:= QRBandDiferido.Controls[i].Left + desplazarIzquierda;
-    end;
-  end;
+//  for i := 0 to QRBandCorriente.ControlCount-1 do
+//  begin
+//    if QRBandCorriente.Controls[i].Name <> 'QRImageChequeCorriente1' then
+//    begin
+//      QRBandCorriente.Controls[i].Top:= QRBandCorriente.Controls[i].Top + desplazarArriba;
+//      QRBandCorriente.Controls[i].Left:= QRBandCorriente.Controls[i].Left + desplazarIzquierda;
+//    end;
+//  end;
+//
+//  for i := 0 to QRBandDiferido.ControlCount-1 do
+//  begin
+//    if QRBandDiferido.Controls[i].Name <> 'QRImageChequeDiferido' then
+//    begin
+//      QRBandDiferido.Controls[i].Top:= QRBandDiferido.Controls[i].Top + desplazarArriba;
+//      QRBandDiferido.Controls[i].Left:= QRBandDiferido.Controls[i].Left + desplazarIzquierda;
+//    end;
+//  end;
 end;
 
 
@@ -431,14 +504,68 @@ procedure TFImpresionCheques.QRBandCorrienteBeforePrint(
   Sender: TQRCustomBand; var PrintBand: Boolean);
 var
   texto_numero: string;
-begin
-  EKNumeroALetras1.Numero := ClientZQ_movimientosImporte.AsFloat;
-  texto_numero:= UpperCase(EKNumeroALetras1.AsString)+'.--';
+  i : integer;
+  AuxLabel : TQRLabel;
 
-  QRLabelNumeroLetraCorriente1.Caption := '                          ' + texto_numero;
-  QRLabelDiaCheque.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_emision.AsDateTime);
-  QRLabelmesCheque.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_emision.AsDateTime);
-  QRLabelanioCheque.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_emision.AsDateTime);
+begin
+
+  for i := 1 to 4 do
+  begin
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelNumeroLetraCorriente'+IntToStr(i)));
+    AuxLabel.Enabled := false;
+
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelDiaCheque'+IntToStr(i)));
+    AuxLabel.Enabled := false;
+
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelmesCheque'+IntToStr(i)));
+    AuxLabel.Enabled := false;
+
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelanioCheque'+IntToStr(i)));
+    AuxLabel.Enabled := false;
+
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelImporte'+IntToStr(i)));
+    AuxLabel.Enabled := false;
+
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelProveedor'+IntToStr(i)));
+    AuxLabel.Enabled := false;
+  end;
+
+
+  ClientZQ_movimientos.First;
+  while Not(ClientZQ_movimientos.Eof) do
+  begin
+    texto_numero := '';
+    EKNumeroALetras1.Numero := ClientZQ_movimientosImporte.AsFloat;
+    texto_numero:= UpperCase(EKNumeroALetras1.AsString)+'.--';
+
+    i := ClientZQ_movimientosorden_impresion.AsInteger;
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelNumeroLetraCorriente'+IntToStr(i)));
+    AuxLabel.Enabled := true;
+    AuxLabel.Caption := '                          ' + texto_numero;
+
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelDiaCheque'+IntToStr(i)));
+    AuxLabel.Enabled := true;
+    AuxLabel.Caption := FormatDateTime('dd',ClientZQ_movimientosFecha_emision.AsDateTime);
+
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelmesCheque'+IntToStr(i)));
+    AuxLabel.Enabled := true;
+    AuxLabel.Caption := FormatDateTime('mmmm',ClientZQ_movimientosFecha_emision.AsDateTime);
+
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelanioCheque'+IntToStr(i)));
+    AuxLabel.Enabled := true;
+    AuxLabel.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_emision.AsDateTime);
+
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelImporte'+IntToStr(i)));
+    AuxLabel.Enabled := true;
+    AuxLabel.Caption := FormatFloat('$ ###,###,###,##0.00', ClientZQ_movimientosImporte.AsFloat);
+
+    AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLabelProveedor'+IntToStr(i)));
+    AuxLabel.Enabled := true;
+    AuxLabel.Caption := ClientZQ_movimientosproveedor.AsString;
+
+    
+    ClientZQ_movimientos.Next;
+  end;
 end;
 
 
