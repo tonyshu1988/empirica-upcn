@@ -185,8 +185,7 @@ var
   FImpresionCheques: TFImpresionCheques;
   orden_impresion : integer;
   tipocheque : string;
-  ImprimirDif : boolean;
-  ImprimirCorriente : Boolean;
+  ImprimirNumero: boolean;
 
 const
   transaccion_cheques = 'TRANSACCION CHEQUES';
@@ -215,8 +214,7 @@ begin
     QRImageChequeCorriente3.Enabled:= false;
     QRImageChequeCorriente4.Enabled:= false;
 
-    ImprimirCorriente := true;
-
+    ImprimirNumero:= false;
     RepChequesCorriente.Prepare;
     RepChequesCorriente.Print;
 
@@ -272,8 +270,6 @@ begin
   EKOrdenarGrilla1.CargarConfigColumnas;
   dm.EKModelo.abrir(ZQ_Cuenta);
   ClientZQ_movimientos.CreateDataSet;
-  ImprimirDif := false;
-  ImprimirCorriente := false;
   ajustarMargenes;
 end;
 
@@ -310,8 +306,7 @@ begin
     QRImageChequeDiferido3.Enabled:= false;
     QRImageChequeDiferido4.Enabled:= false;
 
-    ImprimirDif := true;
-
+    ImprimirNumero:= false;
     RepChequeDiferido.Prepare;
     RepChequeDiferido.Print;
 
@@ -412,6 +407,7 @@ begin
   QRImageChequeDiferido3.Enabled:= true;
   QRImageChequeDiferido4.Enabled:= true;
 
+  ImprimirNumero:= true;  
   EKVistaPreviaQR2.VistaPrevia;
   ClientZQ_movimientos.Filtered:= false;
 end;
@@ -433,6 +429,7 @@ begin
   QRImageChequeCorriente3.Enabled:= true;
   QRImageChequeCorriente4.Enabled:= true;
 
+  ImprimirNumero:= true;  
   EKVistaPreviaQR1.VistaPrevia;
   ClientZQ_movimientos.Filtered:= false;  
 end;
@@ -665,15 +662,11 @@ begin
     AuxLabel.Caption := ClientZQ_movimientosproveedor.AsString;
 
     AuxLabel := TQRLabel(FImpresionCheques.FindComponent('QRLNroCheque'+IntToStr(i)));
-    if not ImprimirCorriente then
-      AuxLabel.Enabled := true;
-
+    AuxLabel.Enabled:= ImprimirNumero;
     AuxLabel.Caption := ClientZQ_movimientosnro_cheque.AsString;
 
     ClientZQ_movimientos.Next;
   end;
-
-  ImprimirCorriente := false;  
 end;
 
 
@@ -764,14 +757,11 @@ begin
     AuxLabelDif.Caption := FormatDateTime('yyyy',ClientZQ_movimientosFecha_Pd.AsDateTime);
 
     AuxLabelDif := TQRLabel(FImpresionCheques.FindComponent('QRLNroChequeDif'+IntToStr(i)));
-    if not ImprimirDif then
-      AuxLabelDif.Enabled := true;
-    AuxLabelDif.Caption := ClientZQ_movimientosnro_cheque.AsString;
+    AuxLabelDif.Enabled:= ImprimirNumero;
+    AuxLabelDif.Caption:= ClientZQ_movimientosnro_cheque.AsString;
 
     ClientZQ_movimientos.Next;
   end;
-  ImprimirDif := false;
-  
 end;
 
 procedure TFImpresionCheques.FormClose(Sender: TObject;
