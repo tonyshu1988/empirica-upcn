@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 272
-  Top = 145
+  Left = 269
+  Top = 179
   Width = 966
   Height = 634
   Caption = 'Reimpresi'#243'n de Comprobantes'
@@ -15,7 +15,6 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   Position = poDefault
   Visible = True
   WindowState = wsMaximized
-  OnActivate = FormActivate
   OnClose = FormClose
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -1788,7 +1787,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       'from tipo_IVA')
     Params = <>
     Left = 493
-    Top = 304
+    Top = 312
     object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True

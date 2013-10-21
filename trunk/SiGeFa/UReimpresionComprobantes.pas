@@ -177,7 +177,6 @@ type
     procedure PopUpItemCambiarCliente1Click(Sender: TObject);
     procedure PopUpItemCambiarCuentaClick(Sender: TObject);
     procedure PopUpItemCambiarFPagoClick(Sender: TObject);
-    procedure FormActivate(Sender: TObject);
     procedure ZIBEventEventAlert(Sender: TObject;
       EventName: String; EventCount: Integer; var CancelAlerts: Boolean);
   Private
@@ -280,7 +279,8 @@ begin
 
   //Permiso para ver o no los filtros de Fiscal
   PanelFiltro.Visible:= dm.EKUsrLogin.PermisoAccion('NO_FISCAL');
-  BtnFiltro_Fiscal.Click;
+
+  //BtnFiltro_Fiscal.Click;
 
   btnEliminarComprob.Visible:= ivNever;
   if dm.EKUsrLogin.PermisoAccion('ELIMINAR_FACTURA') then
@@ -678,13 +678,6 @@ begin
         end
       end;
     end;
-end;
-
-
-procedure TFReimpresionComprobantes.FormActivate(Sender: TObject);
-begin
-  if not ZQ_Comprobante.IsEmpty then
-    ZQ_Comprobante.Refresh;
 end;
 
 
