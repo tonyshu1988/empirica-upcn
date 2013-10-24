@@ -683,11 +683,10 @@ begin
 
   if dm.EKModelo.iniciar_transaccion(Transaccion_Movimientos, [ZQ_Movimientos, ZQ_Cuenta_Movimiento]) then
   begin
-    ZQ_Movimientos.Append;
     ZQ_Cuenta_Movimiento.Append;
-
-    //Cargo los valores por defecto...
     ZQ_Cuenta_MovimientoID_CUENTA_EGRESO.AsInteger := ZQ_CuentasID_CUENTA.AsInteger;
+    //Cargo los valores por defecto...
+    ZQ_Movimientos.Append;
     ZQ_MovimientosID_OBJETO_MOVIMIENTO.AsInteger:= 3; //PONGO Q ES UN EGRESO
     ZQ_MovimientosFECHA.Value := dm.EKModelo.Fecha;
 //    ZQ_MovimientosNRO_PROVEEDOR.AsInteger:=ZQ_ProveedoresNRO_PROVEEDOR.AsInteger;
