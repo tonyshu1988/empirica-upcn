@@ -322,7 +322,7 @@ object FMovimientos: TFMovimientos
             52.916666666666670000
             1045.104166666667000000
             31.750000000000000000
-            679.979166666666700000)
+            679.979166666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1830,7 +1830,7 @@ object FMovimientos: TFMovimientos
             37.041666666666670000
             190.500000000000000000
             330.729166666666700000
-            121.708333333333400000)
+            121.708333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1894,7 +1894,7 @@ object FMovimientos: TFMovimientos
             37.041666666666670000
             1050.395833333333000000
             330.729166666666700000
-            121.708333333333400000)
+            121.708333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -3216,7 +3216,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            76.729166666666670000
+            76.729166666666680000
             156.104166666666700000
             171.979166666666700000)
           Alignment = taRightJustify
@@ -3578,7 +3578,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            76.729166666666670000
+            76.729166666666680000
             267.229166666666700000
             171.979166666666700000)
           Alignment = taLeftJustify
@@ -3943,7 +3943,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            997.479166666666700000
+            997.479166666666800000
             2.645833333333333000
             343.958333333333400000)
           Alignment = taCenter
@@ -5221,7 +5221,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          701.145833333333300000
+          701.145833333333200000
           1898.385416666667000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -5897,7 +5897,7 @@ object FMovimientos: TFMovimientos
             37.482638888888890000
             1100.225694444445000000
             66.145833333333340000
-            88.194444444444460000)
+            88.194444444444450000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -6810,7 +6810,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          41.892361111111110000
+          41.892361111111120000
           1898.385416666667000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -7459,7 +7459,6 @@ object FMovimientos: TFMovimientos
     Top = 169
     object ZQ_CuentasID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
-      Required = True
     end
     object ZQ_CuentasNOMBRE_CUENTA: TStringField
       FieldName = 'NOMBRE_CUENTA'
@@ -7502,7 +7501,6 @@ object FMovimientos: TFMovimientos
     Top = 105
     object ZQ_Medios_Cobro_PagoID_MEDIO: TIntegerField
       FieldName = 'ID_MEDIO'
-      Required = True
     end
     object ZQ_Medios_Cobro_PagoNOMBRE_MEDIO_COBRO_PAGO: TStringField
       FieldName = 'NOMBRE_MEDIO_COBRO_PAGO'
@@ -7644,14 +7642,12 @@ object FMovimientos: TFMovimientos
       end>
     object ZQ_MovimientosNRO_MOVIMIENTO: TIntegerField
       FieldName = 'NRO_MOVIMIENTO'
-      Required = True
     end
     object ZQ_MovimientosNRO_PROVEEDOR: TIntegerField
       FieldName = 'NRO_PROVEEDOR'
     end
     object ZQ_MovimientosID_CONCEPTO: TIntegerField
       FieldName = 'ID_CONCEPTO'
-      Required = True
     end
     object ZQ_MovimientosID_OBJETO_MOVIMIENTO: TIntegerField
       FieldName = 'ID_OBJETO_MOVIMIENTO'
