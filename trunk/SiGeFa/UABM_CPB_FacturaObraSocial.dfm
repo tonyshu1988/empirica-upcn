@@ -146,7 +146,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
             50.270833333333330000
             653.520833333333400000
             124.354166666666700000
-            592.666666666666700000)
+            592.666666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -176,8 +176,8 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            759.354166666666700000
-            68.791666666666670000
+            759.354166666666800000
+            68.791666666666680000
             378.354166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -1514,7 +1514,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
           Width = 373
           Height = 524
           Align = alClient
-          Color = 14606012
+          Color = 15269607
           DataSource = DS_VerCpb
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
           TabOrder = 0
@@ -1614,7 +1614,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
             Width = 525
             Height = 362
             Align = alClient
-            Color = 14606012
+            Color = 15269607
             DataSource = DS_VerCpb_Producto
             Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
             PopupMenu = PopupGridProducto
@@ -2113,11 +2113,15 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         end
         item
           Visible = True
-          ItemName = 'btnImprimirComprobante'
+          ItemName = 'btnImprimirRemito'
         end
         item
           Visible = True
           ItemName = 'btnImprimirListado'
+        end
+        item
+          Visible = True
+          ItemName = 'btFacturarFiscal'
         end
         item
           Visible = True
@@ -2505,13 +2509,22 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
-    object btnImprimirComprobante: TdxBarLargeButton
-      Caption = 'Comprobante'
+    object btnImprimirRemito: TdxBarLargeButton
+      Caption = 'Remito'
       Category = 0
-      Hint = 'Comprobante'
+      Hint = 'Remito'
       Visible = ivAlways
       LargeImageIndex = 28
-      OnClick = btnImprimirComprobanteClick
+      OnClick = btnImprimirRemitoClick
+      AutoGrayScale = False
+    end
+    object btFacturarFiscal: TdxBarLargeButton
+      Caption = 'Facturar'
+      Category = 0
+      Hint = 'Facturar'
+      Visible = ivAlways
+      LargeImageIndex = 28
+      OnClick = btFacturarFiscalClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -2524,7 +2537,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         'btnSalir'
         'btnImprimirListado'
         'btnConfirmar'
-        'btnImprimirComprobante')
+        'btnImprimirRemito')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
