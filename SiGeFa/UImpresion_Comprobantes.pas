@@ -952,6 +952,17 @@ type
     QRDBText209: TQRDBText;
     QRDBText211: TQRDBText;
     TabSheet13: TTabSheet;
+    ZQ_Producto_OS: TZQuery;
+    QRDBText205: TQRDBText;
+    ZQ_Producto_OSNRO_AFILIADO: TStringField;
+    ZQ_Producto_OSNOMBRE: TStringField;
+    ZQ_Producto_OSDETALLE: TStringField;
+    ZQ_Producto_OSCANTIDAD: TFloatField;
+    ZQ_Producto_OSIMPORTE_FINAL: TFloatField;
+    QRDBText207: TQRDBText;
+    EKDbSumaProductoOS: TEKDbSuma;
+    QRLabel330: TQRLabel;
+    QRLabel331: TQRLabel;
     procedure FormCreate(Sender: TObject);
     procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
@@ -1019,9 +1030,18 @@ begin
     ZQ_Fpago.Open;
     zq_fpago.Filtered:= false;
 
-    ZQ_Producto.Close;
-    ZQ_Producto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
-    ZQ_Producto.Open;
+    if ZQ_ComprobanteID_TIPO_CPB.AsInteger <> CPB_FACTURA_OSOCIAL then
+    begin
+      ZQ_Producto.Close;
+      ZQ_Producto.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+      ZQ_Producto.Open;
+    end
+    else
+    begin
+      ZQ_Producto_OS.Close;
+      ZQ_Producto_OS.ParamByName('id_comprobante').AsInteger:= id_comprobante;
+      ZQ_Producto_OS.Open;
+    end;
 
     case ZQ_ComprobanteID_TIPO_CPB.AsInteger of
       CPB_PRESUPUESTO:  begin //CPB_PRESUPUESTO
@@ -1262,7 +1282,7 @@ begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  cantidadProductos:= EKDbSumaProducto.SumCollection[0].sumvalue;
+  cantidadProductos:= EKDbSumaProductoOS.SumCollection[0].sumvalue;
   QRlblRemitoOS_CantidadTotal.Caption := 'CANTIDAD: '+FormatFloat('0.00', cantidadProductos);
 
   QRlblRemitoOS_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);

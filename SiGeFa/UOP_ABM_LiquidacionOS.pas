@@ -181,17 +181,13 @@ type
     ZQ_LiqFacturasID_OPTICA_LIQUIDACION_FACTURA: TIntegerField;
     ZQ_LiqFacturasID_OPTICA_LIQUIDACION: TIntegerField;
     ZQ_LiqFacturasID_COMPROBANTE: TIntegerField;
-    ZQ_LiqFacturasDETALLE: TStringField;
     ZQ_VerCpbIMPORTE: TFloatField;
     ZQ_LiquidacionIMPORTE: TFloatField;
     EKDbSuma: TEKDbSuma;
     ZQ_LiqFacturasID_SUCURSAL: TIntegerField;
-    ZQ_LiqFacturasCODIGO: TStringField;
     ZQ_LiqFacturasNUMERO_CPB: TIntegerField;
     ZQ_LiqFacturasPUNTO_VENTA: TIntegerField;
     ZQ_LiqFacturasFECHA: TDateTimeField;
-    ZQ_LiqFacturasIMPORTE_TOTAL: TFloatField;
-    ZQ_LiqFacturasID_OBRA_SOCIAL: TIntegerField;
     ZU_LiqFacturas: TZUpdateSQL;
     DS_VerLiqFacturas: TDataSource;
     CD_LiqFacturaid_liq_factura: TIntegerField;
@@ -216,6 +212,60 @@ type
     ZQ_VerCpbID_OS_1: TIntegerField;
     ZQ_VerCpbNOMBRE_TIPO_IVA: TStringField;
     ZQ_VerCpbNOMBRE_PROVINCIA: TStringField;
+    btFacturarFiscal: TdxBarLargeButton;
+    EKVistaPreviaLiqOS: TEKVistaPreviaQR;
+    ZQ_LiqFacturasNRO_AFILIADO: TStringField;
+    ZQ_LiqFacturasNOMBRE: TStringField;
+    ZQ_LiqFacturasIMPORTE_FINAL: TFloatField;
+    EKDbSumaLiqFactura: TEKDbSuma;
+    RepLiqOS: TQuickRep;
+    QRBand55: TQRBand;
+    QRLabel335: TQRLabel;
+    RepLiqOS_RENGLON4: TQRLabel;
+    RepLiqOS_RENGLON3: TQRLabel;
+    RepLiqOS_RENGLON2: TQRLabel;
+    RepLiqOS_TITULO: TQRLabel;
+    QRShape16: TQRShape;
+    QRLabel367: TQRLabel;
+    QRLabel370: TQRLabel;
+    RepLiqOS_RENGLON1: TQRLabel;
+    QRDBText208: TQRDBText;
+    QRDBText210: TQRDBText;
+    QRLabel372: TQRLabel;
+    QRDBImage4: TQRDBImage;
+    QRLabel373: TQRLabel;
+    QRBand56: TQRBand;
+    QRLabel376: TQRLabel;
+    QRLabel377: TQRLabel;
+    QRLabel380: TQRLabel;
+    QRDBText215: TQRDBText;
+    QRDBText216: TQRDBText;
+    QRDBText217: TQRDBText;
+    QRBand57: TQRBand;
+    QRLabel381: TQRLabel;
+    QRDBText220: TQRDBText;
+    QRChildBand26: TQRChildBand;
+    QRLabel382: TQRLabel;
+    QRChildBand27: TQRChildBand;
+    QRLabel383: TQRLabel;
+    QRLabel384: TQRLabel;
+    QRLabel385: TQRLabel;
+    QRLabel386: TQRLabel;
+    QRLabel387: TQRLabel;
+    QRLabel3: TQRLabel;
+    QRBand58: TQRBand;
+    QRlblLiqOS_CantidadTotal: TQRLabel;
+    QRBand59: TQRBand;
+    QRlblLiqOS_PiePagina: TQRLabel;
+    QRSubDetail23: TQRSubDetail;
+    QRDBText221: TQRDBText;
+    QRDBText222: TQRDBText;
+    QRDBText223: TQRDBText;
+    QRDBText224: TQRDBText;
+    QRDBText225: TQRDBText;
+    QRDBText1: TQRDBText;
+    CD_LiqFacturanro_afiliado: TStringField;
+    CD_LiqFacturaafiliado: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -323,7 +373,7 @@ begin
 
     lblCantidadRegistros.Visible:= true;
     StaticTxtBaja.Visible:= true;
-    lblTipoComprobante.Visible:= false;
+    lblTipoComprobante.Caption:= 'LIQUIDACION OBRA SOCIAL';
 
     GrupoEditando.Enabled:= true;
     GrupoGuardarCancelar.Enabled:= false;
@@ -799,18 +849,14 @@ var
   estado: Integer;
   obra_social: integer;
 begin
-//  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-//  if ((ZQ_VerCpb.IsEmpty) or (estado = ESTADO_ANULADO)) then
-//    exit;
-//
-//  obra_social:= -1;
-//  if not ZQ_VerCpbID_OBRA_SOCIAL.IsNull then
-//    obra_social:= ZQ_VerCpbID_OBRA_SOCIAL.AsInteger;
-//
-//  if not Assigned(FImpresion_Comprobantes) then
-//    FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
-//  FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, -1, -1, obra_social, false);
-//  FImpresion_Comprobantes.imprimir;
+  if ZQ_VerCpb.IsEmpty then
+    exit;
+
+  DM.VariablesComprobantes(RepLiqOS);
+  QRlblLiqOS_CantidadTotal.Caption := 'Total: '+FormatFloat('$ ##,###,##0.00', EKDbSumaLiqFactura.SumCollection[0].sumvalue);
+  QRlblLiqOS_PiePagina.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+
+  EKVistaPreviaLiqOS.VistaPrevia;  
 end;
 
 
@@ -892,6 +938,8 @@ begin
       CD_LiqFacturanumero_cpb.AsInteger:= vselFactura.ZQ_FacturasNUMERO_CPB.AsInteger;
       CD_LiqFacturafecha.AsDateTime:= vselFactura.ZQ_FacturasFECHA.AsDateTime;
       CD_LiqFacturaimporte.AsFloat:= vselFactura.ZQ_FacturasIMPORTE_TOTAL.AsFloat;
+      CD_LiqFacturanro_afiliado.AsString := vselFactura.ZQ_FacturasNRO_AFILIADO.AsString;
+      CD_LiqFacturaafiliado.AsString := vselFactura.ZQ_FacturasAFILIADO.AsString;
       CD_LiqFactura.Post;
     end
     else
@@ -931,6 +979,8 @@ begin
         CD_LiqFacturanumero_cpb.AsInteger:= vselFactura.ZQ_FacturasNUMERO_CPB.AsInteger;
         CD_LiqFacturafecha.AsDateTime:= vselFactura.ZQ_FacturasFECHA.AsDateTime;
         CD_LiqFacturaimporte.AsFloat:= vselFactura.ZQ_FacturasIMPORTE_TOTAL.AsFloat;
+        CD_LiqFacturanro_afiliado.AsString := vselFactura.ZQ_FacturasNRO_AFILIADO.AsString;
+        CD_LiqFacturaafiliado.AsString := vselFactura.ZQ_FacturasAFILIADO.AsString;
         CD_LiqFactura.Post;
       end;
 
@@ -970,9 +1020,11 @@ begin
     CD_LiqFacturapunto_venta.AsInteger:= ZQ_LiqFacturasPUNTO_VENTA.AsInteger;
     CD_LiqFacturanumero_cpb.AsInteger:= ZQ_LiqFacturasNUMERO_CPB.AsInteger;
     CD_LiqFacturafecha.AsDateTime:= ZQ_LiqFacturasFECHA.AsDateTime;
-    CD_LiqFacturaimporte.AsFloat:= ZQ_LiqFacturasIMPORTE_TOTAL.AsFloat;
+    CD_LiqFacturaimporte.AsFloat:= ZQ_LiqFacturasIMPORTE_FINAL.AsFloat;
     CD_LiqFacturaid_liquidacion.AsInteger:= ZQ_LiqFacturasID_OPTICA_LIQUIDACION.AsInteger;
-    CD_LiqFacturacodigo.AsString:= ZQ_LiqFacturasCODIGO.AsString;
+    CD_LiqFacturanro_afiliado.AsString := ZQ_LiqFacturasNRO_AFILIADO.AsString;
+    CD_LiqFacturaafiliado.AsString := ZQ_LiqFacturasNOMBRE.AsString;
+    //CD_LiqFacturacodigo.AsString:= ZQ_LiqFacturasCODIGO.AsString;
     CD_LiqFactura.Post;
 
     ZQ_LiqFacturas.Next;

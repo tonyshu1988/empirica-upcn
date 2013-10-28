@@ -290,13 +290,14 @@ type
     ZQ_VerCpb_ProductoNRO_AFILIADO: TStringField;
     ZQ_VerCpb_ProductoAFILIADO: TStringField;
     ZQ_VerCpb_ProductoID_DETALLE_OS: TIntegerField;
-    btnImprimirComprobante: TdxBarLargeButton;
+    btnImprimirRemito: TdxBarLargeButton;
     ZQ_VerCpbID_OBRA_SOCIAL: TIntegerField;
     CD_Producto_producto_imprimir: TStringField;
     ZQ_VerCpb_ProductoDETALLE_PROD_FACTURA: TStringField;
     ZQ_CpbProductoID_AUXILIAR: TIntegerField;
     StaticTxtLiquidado: TStaticText;
     ALiquidar: TAction;
+    btFacturarFiscal: TdxBarLargeButton;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -335,8 +336,9 @@ type
     procedure ZQ_CpbProductoCANTIDADChange(Sender: TField);
     procedure DBGridCpbActual_ProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnBajaClick(Sender: TObject);
-    procedure btnImprimirComprobanteClick(Sender: TObject);
+    procedure btnImprimirRemitoClick(Sender: TObject);
     procedure guardarFactura;
+    procedure btFacturarFiscalClick(Sender: TObject);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -413,7 +415,7 @@ begin
     StaticTxtBaja.Visible:= true;
     StaticTxtConfirmado.Visible:= true;
     StaticTxtLiquidado.Visible:= true;
-    lblTipoComprobante.Visible:= false;
+    lblTipoComprobante.Caption:= 'FACTURA OBRA SOCIAL';
 
     GrupoEditando.Enabled:= true;
     GrupoGuardarCancelar.Enabled:= false;
@@ -1201,7 +1203,7 @@ begin
 end;
 
 
-procedure TFABM_CPB_FacturaObraSocial.btnImprimirComprobanteClick(
+procedure TFABM_CPB_FacturaObraSocial.btnImprimirRemitoClick(
   Sender: TObject);
 var
   estado: Integer;
@@ -1219,6 +1221,12 @@ begin
     FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
   FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, -1, -1, obra_social, false);
   FImpresion_Comprobantes.imprimir;
+end;
+
+procedure TFABM_CPB_FacturaObraSocial.btFacturarFiscalClick(
+  Sender: TObject);
+begin
+  ShowMessage('Facturar Fiscal');
 end;
 
 end.

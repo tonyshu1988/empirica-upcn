@@ -8,7 +8,8 @@ uses
   Buttons, ComCtrls, ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, DBClient, EKListadoSQL,StrUtils,UDM, UPrincipal, UBuscarPersona,
   UBuscarProductoStock, Provider, Menus, ZSequence, EKDbSuma,
-  EKDBDateTimePicker, EKBusquedaAvanzada, EKOrdenarGrilla, ZSqlUpdate;
+  EKDBDateTimePicker, EKBusquedaAvanzada, EKOrdenarGrilla, ZSqlUpdate,
+  cxClasses;
 
 type
   TFOP_ABM_OrdenTecnica = class(TForm)
@@ -79,7 +80,7 @@ type
     BtCancelarOrden: TdxBarLargeButton;
     btsalir: TdxBarLargeButton;
     btCierreZ: TdxBarLargeButton;
-    BtCierreX: TdxBarLargeButton;
+    BtEntregado: TdxBarLargeButton;
     btDetallesOrden: TdxBarLargeButton;
     bt_Cargar_Orden: TdxBarLargeButton;
     GrupoGuardarCancelar: TdxBarGroup;
@@ -570,6 +571,7 @@ type
       State: TGridDrawState);
     procedure ZQ_OrdenAfterScroll(DataSet: TDataSet);
     procedure btDetallesOrdenClick(Sender: TObject);
+    procedure BtEntregadoClick(Sender: TObject);
   private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -1945,6 +1947,26 @@ begin
       PanelFPagoYProd.Visible:=true;
       Splitter2.Visible:=true;
      end
+end;
+
+procedure TFOP_ABM_OrdenTecnica.BtEntregadoClick(Sender: TObject);
+begin
+  if (ZQ_OrdenID_ESTADO.AsInteger = 3) or (ZQ_Orden.IsEmpty) then
+  exit;
+
+  if Application.MessageBox('Esta seguro que desea dar la orden por entregada?','Entregar Orden', MB_YESNO+MB_ICONQUESTION) = IDYES then
+  begin
+    if dm.EKModelo.iniciar_transaccion(abmOrden, [ZQ_Orden]) then
+    begin
+      ZQ_Orden.Edit;
+      ZQ_OrdenID_ESTADO.AsInteger := 3;
+      ZQ_Orden.Post;
+
+      if not dm.EKModelo.finalizar_transaccion(abmOrden) then
+        dm.EKModelo.cancelar_transaccion(abmOrden);
+    end;
+  end;
+  
 end;
 
 end.

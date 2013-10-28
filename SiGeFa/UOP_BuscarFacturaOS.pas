@@ -7,7 +7,7 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, ComCtrls, DBCtrls, StdCtrls,
   Mask, ZSqlUpdate,DateUtils, EKOrdenarGrilla, EKBusquedaAvanzada,
-  ActnList, XPStyleActnCtrls, ActnMan;
+  ActnList, XPStyleActnCtrls, ActnMan, cxClasses;
 
 type
   TFOP_BuscarFacturaOS = class(TForm)
@@ -39,6 +39,8 @@ type
     ZQ_FacturasSUCURSAL: TStringField;
     ZQ_FacturasCODIGO_1: TStringField;
     ZQ_FacturasNOMBRE: TStringField;
+    ZQ_FacturasNRO_AFILIADO: TStringField;
+    ZQ_FacturasAFILIADO: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
