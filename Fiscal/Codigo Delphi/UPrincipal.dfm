@@ -1,8 +1,8 @@
 object FPrincipal: TFPrincipal
   Left = 395
-  Top = 294
+  Top = 268
   Width = 611
-  Height = 464
+  Height = 507
   Caption = 'Modulo Impresi'#243'n Fiscal'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object FPrincipal: TFPrincipal
     Left = 0
     Top = 0
     Width = 603
-    Height = 437
+    Height = 480
     Align = alClient
     TabOrder = 0
     object Label2: TLabel
@@ -32,7 +32,7 @@ object FPrincipal: TFPrincipal
     end
     object lblErrorDriver: TLabel
       Left = 1
-      Top = 418
+      Top = 461
       Width = 601
       Height = 18
       Align = alBottom
@@ -48,6 +48,19 @@ object FPrincipal: TFPrincipal
     object lblFactura: TLabel
       Left = 256
       Top = 211
+      Width = 61
+      Height = 16
+      Caption = 'Factura:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object lblFactura_OS: TLabel
+      Left = 256
+      Top = 243
       Width = 61
       Height = 16
       Caption = 'Factura:'
@@ -184,24 +197,13 @@ object FPrincipal: TFPrincipal
     end
     object btnCancelarFactura: TButton
       Left = 9
-      Top = 236
+      Top = 274
       Width = 113
       Height = 25
       Caption = 'Cancelar Factura'
       TabOrder = 11
       Visible = False
       OnClick = btnCancelarFacturaClick
-    end
-    object Hasar: THASAR
-      Left = 200
-      Top = 120
-      Width = 32
-      Height = 32
-      OnImpresoraNoResponde = HasarImpresoraNoResponde
-      OnErrorImpresora = HasarErrorImpresora
-      OnErrorFiscal = HasarErrorFiscal
-      OnFaltaPapel = HasarFaltaPapel
-      ControlData = {000300004F0300004F030000}
     end
     object gBoxImpresora: TGroupBox
       Left = 248
@@ -304,7 +306,7 @@ object FPrincipal: TFPrincipal
     end
     object MemoLog: TMemo
       Left = 10
-      Top = 266
+      Top = 304
       Width = 585
       Height = 150
       Font.Charset = DEFAULT_CHARSET
@@ -314,342 +316,53 @@ object FPrincipal: TFPrincipal
       Font.Style = []
       ParentFont = False
       ScrollBars = ssBoth
-      TabOrder = 15
+      TabOrder = 14
       WordWrap = False
     end
-  end
-  object conexion: TZConnection
-    Protocol = 'firebird-1.5'
-    HostName = '127.0.0.1'
-    Database = 'C:\SISTEMAS\SiGeFa\Bases\SiGeFa.FDB'
-    User = 'sysdba'
-    Password = 'masterkey'
-    AutoCommit = False
-    Left = 536
-    Top = 80
-  end
-  object EKIni: TEKIni
-    Archivo = 'config.ini'
-    Left = 536
-    Top = 192
-  end
-  object EKModelo: TEKModeloTransaccion
-    Coneccion = conexion
-    Left = 536
-    Top = 136
-  end
-  object ZQ_Factura: TZQuery
-    Connection = conexion
-    SQL.Strings = (
-      
-        'select cpb.id_cliente, cli.nombre, tdoc.nombre_tipo_doc, cli.num' +
-        'ero_doc,'
-      '       cli.cuit_cuil, cli.direccion, cli.localidad,'
-      
-        '       cpb.id_tipo_iva, iva.nombre_tipo_iva, iva.letra as tipo_f' +
-        'actura,'
-      '       iva.fiscal as letra_fiscal, cli.id_tipo_doc'
-      'from comprobante cpb'
-      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
-      'left join tipo_iva iva on (cpb.id_tipo_iva = iva.id_tipo_iva)'
-      
-        'left join tipo_documento tdoc on (cli.id_tipo_doc = tdoc.id_tipo' +
-        '_doc)'
-      'where cpb.id_comprobante = :id_Comprobante')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_Comprobante'
-        ParamType = ptUnknown
-      end>
-    Left = 456
-    Top = 80
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_Comprobante'
-        ParamType = ptUnknown
-      end>
-    object ZQ_FacturaID_CLIENTE: TIntegerField
-      FieldName = 'ID_CLIENTE'
+    object btnFactura_OS: TButton
+      Left = 9
+      Top = 236
+      Width = 113
+      Height = 25
+      Caption = 'Factura OS'
+      TabOrder = 15
+      OnClick = btnFactura_OSClick
     end
-    object ZQ_FacturaNOMBRE: TStringField
-      FieldName = 'NOMBRE'
-      Size = 200
+    object editNumeroComprobante_OS: TEdit
+      Left = 128
+      Top = 238
+      Width = 121
+      Height = 21
+      TabOrder = 16
     end
-    object ZQ_FacturaNOMBRE_TIPO_DOC: TStringField
-      FieldName = 'NOMBRE_TIPO_DOC'
+    object Hasar: THASAR
+      Left = 168
+      Top = 120
+      Width = 32
+      Height = 32
+      OnImpresoraNoResponde = HasarImpresoraNoResponde
+      OnErrorImpresora = HasarErrorImpresora
+      OnErrorFiscal = HasarErrorFiscal
+      OnFaltaPapel = HasarFaltaPapel
+      ControlData = {000300004F0300004F030000}
     end
-    object ZQ_FacturaNUMERO_DOC: TStringField
-      FieldName = 'NUMERO_DOC'
-      Size = 50
-    end
-    object ZQ_FacturaCUIT_CUIL: TStringField
-      FieldName = 'CUIT_CUIL'
-      Size = 30
-    end
-    object ZQ_FacturaDIRECCION: TStringField
-      FieldName = 'DIRECCION'
-      Size = 200
-    end
-    object ZQ_FacturaLOCALIDAD: TStringField
-      FieldName = 'LOCALIDAD'
-      Size = 200
-    end
-    object ZQ_FacturaID_TIPO_IVA: TIntegerField
-      FieldName = 'ID_TIPO_IVA'
-    end
-    object ZQ_FacturaNOMBRE_TIPO_IVA: TStringField
-      FieldName = 'NOMBRE_TIPO_IVA'
-      Size = 50
-    end
-    object ZQ_FacturaTIPO_FACTURA: TStringField
-      FieldName = 'TIPO_FACTURA'
-      Size = 1
-    end
-    object ZQ_FacturaLETRA_FISCAL: TStringField
-      FieldName = 'LETRA_FISCAL'
-      Size = 1
-    end
-    object ZQ_FacturaID_TIPO_DOC: TIntegerField
-      FieldName = 'ID_TIPO_DOC'
+    object DBGrid1: TDBGrid
+      Left = 200
+      Top = 312
+      Width = 320
+      Height = 120
+      DataSource = DataSource1
+      TabOrder = 18
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
     end
   end
-  object ZQ_Items: TZQuery
-    Connection = conexion
-    SQL.Strings = (
-      
-        'select cd.id_producto, cd.cantidad, cd.importe_if, cd.importe_if' +
-        '_siniva,'
-      
-        '       cd.impuesto_interno, pro.codigo_barra, cab.nombre as nomb' +
-        're_producto,'
-      
-        '       col.nombre as nombre_color, mar.nombre_marca, med.medida ' +
-        'as nombre_medida,'
-      '       cd.porc_iva'
-      'from comprobante_detalle cd'
-      'left join producto pro on (cd.id_producto = pro.id_producto)'
-      
-        'left join producto_cabecera cab on (pro.id_prod_cabecera = cab.i' +
-        'd_prod_cabecera)'
-      'left join marca mar on (cab.id_marca = mar.id_marca)'
-      'left join color col on (cab.color = col.id_color)'
-      'left join medida med on (pro.id_medida = med.id_medida)'
-      'where cd.id_comprobante = :id_Comprobante'
-      'order by cd.id_comprobante_detalle')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_Comprobante'
-        ParamType = ptUnknown
-      end>
-    Left = 456
-    Top = 136
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_Comprobante'
-        ParamType = ptUnknown
-      end>
-    object ZQ_ItemsID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-    end
-    object ZQ_ItemsCANTIDAD: TFloatField
-      FieldName = 'CANTIDAD'
-    end
-    object ZQ_ItemsIMPORTE_IF: TFloatField
-      FieldName = 'IMPORTE_IF'
-    end
-    object ZQ_ItemsIMPORTE_IF_SINIVA: TFloatField
-      FieldName = 'IMPORTE_IF_SINIVA'
-    end
-    object ZQ_ItemsIMPUESTO_INTERNO: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object ZQ_ItemsCODIGO_BARRA: TStringField
-      FieldName = 'CODIGO_BARRA'
-      Size = 40
-    end
-    object ZQ_ItemsNOMBRE_PRODUCTO: TStringField
-      FieldName = 'NOMBRE_PRODUCTO'
-      Size = 100
-    end
-    object ZQ_ItemsNOMBRE_COLOR: TStringField
-      FieldName = 'NOMBRE_COLOR'
-      Size = 30
-    end
-    object ZQ_ItemsNOMBRE_MARCA: TStringField
-      FieldName = 'NOMBRE_MARCA'
-      Size = 50
-    end
-    object ZQ_ItemsNOMBRE_MEDIDA: TStringField
-      FieldName = 'NOMBRE_MEDIDA'
-      Size = 30
-    end
-    object ZQ_ItemsPORC_IVA: TFloatField
-      FieldName = 'PORC_IVA'
-    end
-  end
-  object ZQ_FormaPago: TZQuery
-    Connection = conexion
-    SQL.Strings = (
-      'select CASE'
-      '        WHEN (tf.descripcion like '#39'%EFECTIVO%'#39') THEN '#39'EFECTIVO'#39
-      '        ELSE (tf.descripcion)'
-      
-        '       END as forma_pago_nombre, sum(fp.importe_real) as forma_p' +
-        'ago_importe'
-      'from comprobante_forma_pago fp'
-      
-        'left join tipo_formapago tf on (fp.id_tipo_formapag = tf.id_tipo' +
-        '_formapago)'
-      'where fp.id_comprobante = :id_Comprobante'
-      '  and tf."IF" = '#39'S'#39
-      'group by 1')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_Comprobante'
-        ParamType = ptUnknown
-      end>
-    Left = 456
-    Top = 192
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_Comprobante'
-        ParamType = ptUnknown
-      end>
-    object ZQ_FormaPagoFORMA_PAGO_NOMBRE: TStringField
-      FieldName = 'FORMA_PAGO_NOMBRE'
-      Size = 50
-    end
-    object ZQ_FormaPagoFORMA_PAGO_IMPORTE: TFloatField
-      FieldName = 'FORMA_PAGO_IMPORTE'
-    end
-  end
-  object ZQ_UpdateFactura: TZQuery
-    Connection = conexion
-    SQL.Strings = (
-      'update comprobante c'
-      
-        'set c.numero_cpb=:numcpb,c.punto_venta=:pventa,c.fecha_impresa=:' +
-        'fimpresa'
-      
-        'where (c.id_comprobante=:idcpb)and(c.punto_venta is null)and(c.n' +
-        'umero_cpb is null)'
-      '')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'numcpb'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pventa'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'fimpresa'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'idcpb'
-        ParamType = ptUnknown
-      end>
-    Left = 368
-    Top = 80
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'numcpb'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'pventa'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'fimpresa'
-        ParamType = ptUnknown
-      end
-      item
-        DataType = ftUnknown
-        Name = 'idcpb'
-        ParamType = ptUnknown
-      end>
-  end
-  object ZQ_Config: TZQuery
-    Connection = conexion
-    SQL.Strings = (
-      'select c.clave, c.fecha, c.numero, c.texto'
-      'from configuracion_variables  c')
-    Params = <>
-    Left = 368
-    Top = 136
-    object ZQ_ConfigCLAVE: TStringField
-      FieldName = 'CLAVE'
-      Size = 50
-    end
-    object ZQ_ConfigFECHA: TDateField
-      FieldName = 'FECHA'
-    end
-    object ZQ_ConfigNUMERO: TFloatField
-      FieldName = 'NUMERO'
-    end
-    object ZQ_ConfigTEXTO: TStringField
-      FieldName = 'TEXTO'
-      Size = 100
-    end
-  end
-  object ZQ_Config_Fiscal: TZQuery
-    Connection = conexion
-    SQL.Strings = (
-      'select c.*'
-      'from configuracion_fiscal  c'
-      'where c.id = :id_fiscal')
-    Params = <
-      item
-        DataType = ftUnknown
-        Name = 'id_fiscal'
-        ParamType = ptUnknown
-      end>
-    Left = 368
-    Top = 192
-    ParamData = <
-      item
-        DataType = ftUnknown
-        Name = 'id_fiscal'
-        ParamType = ptUnknown
-      end>
-    object ZQ_Config_FiscalID: TIntegerField
-      FieldName = 'ID'
-      Required = True
-    end
-    object ZQ_Config_FiscalMARCA: TStringField
-      FieldName = 'MARCA'
-    end
-    object ZQ_Config_FiscalMODELO: TStringField
-      FieldName = 'MODELO'
-      Size = 50
-    end
-    object ZQ_Config_FiscalPUERTO: TStringField
-      FieldName = 'PUERTO'
-      Size = 10
-    end
-    object ZQ_Config_FiscalVELOCIDAD: TStringField
-      FieldName = 'VELOCIDAD'
-      Size = 10
-    end
-    object ZQ_Config_FiscalPREDETERMINADA: TStringField
-      FieldName = 'PREDETERMINADA'
-      Size = 1
-    end
+  object DataSource1: TDataSource
+    DataSet = DM.ZQ_ItemsOS
+    Left = 216
+    Top = 272
   end
 end

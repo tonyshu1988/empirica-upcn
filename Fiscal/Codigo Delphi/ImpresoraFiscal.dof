@@ -100,7 +100,7 @@ Conditionals=
 DebugSourceDirs=
 UsePackages=0
 [Parameters]
-RunParams=-l1138 -cF -id1
+RunParams=-l1123 -cO -id4 -p
 HostApplication=
 Launcher=
 UseLauncher=0

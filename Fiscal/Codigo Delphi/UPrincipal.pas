@@ -7,44 +7,15 @@ uses
   Dialogs, EKIni, ZConnection, EKModelo, StdCtrls, ExtCtrls, OleCtrls, StrUtils,
   DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   Buttons, ComCtrls, Grids, DBGrids, EPSON_Impresora_Fiscal_TLB, ComObj,
-  FiscalPrinterLib_TLB;
+  FiscalPrinterLib_TLB, UDM;
 
 type
   TFPrincipal = class(TForm)
-    conexion: TZConnection;
-    EKIni: TEKIni;
-    EKModelo: TEKModeloTransaccion;
     Panel1: TPanel;
     Panel2: TPanel;
     Label1: TLabel;
     Label2: TLabel;
     editParametros: TEdit;
-    ZQ_Factura: TZQuery;
-    ZQ_Items: TZQuery;
-    ZQ_FormaPago: TZQuery;
-    ZQ_FacturaID_CLIENTE: TIntegerField;
-    ZQ_FacturaNOMBRE: TStringField;
-    ZQ_FacturaNOMBRE_TIPO_DOC: TStringField;
-    ZQ_FacturaNUMERO_DOC: TStringField;
-    ZQ_FacturaCUIT_CUIL: TStringField;
-    ZQ_FacturaDIRECCION: TStringField;
-    ZQ_FacturaLOCALIDAD: TStringField;
-    ZQ_FacturaID_TIPO_IVA: TIntegerField;
-    ZQ_FacturaNOMBRE_TIPO_IVA: TStringField;
-    ZQ_FacturaTIPO_FACTURA: TStringField;
-    ZQ_FacturaLETRA_FISCAL: TStringField;
-    ZQ_ItemsID_PRODUCTO: TIntegerField;
-    ZQ_ItemsCANTIDAD: TFloatField;
-    ZQ_ItemsIMPORTE_IF: TFloatField;
-    ZQ_ItemsIMPORTE_IF_SINIVA: TFloatField;
-    ZQ_ItemsIMPUESTO_INTERNO: TFloatField;
-    ZQ_ItemsCODIGO_BARRA: TStringField;
-    ZQ_ItemsNOMBRE_PRODUCTO: TStringField;
-    ZQ_ItemsNOMBRE_COLOR: TStringField;
-    ZQ_ItemsNOMBRE_MARCA: TStringField;
-    ZQ_ItemsNOMBRE_MEDIDA: TStringField;
-    ZQ_FormaPagoFORMA_PAGO_NOMBRE: TStringField;
-    ZQ_FormaPagoFORMA_PAGO_IMPORTE: TFloatField;
     btnCierreZ: TButton;
     btnCierreX: TButton;
     btnAuditoria: TButton;
@@ -53,25 +24,11 @@ type
     lblErrorDriver: TLabel;
     btnAbrirPuerto: TBitBtn;
     btnCerrarPuerto: TBitBtn;
-    ZQ_UpdateFactura: TZQuery;
-    ZQ_Config: TZQuery;
     lblFactura: TLabel;
     DateTimeFechaDesde: TDateTimePicker;
     DateTimeFechaHasta: TDateTimePicker;
     ComboBoxTipoAuditoria: TComboBox;
-    ZQ_ConfigCLAVE: TStringField;
-    ZQ_ConfigFECHA: TDateField;
-    ZQ_ConfigNUMERO: TFloatField;
-    ZQ_ConfigTEXTO: TStringField;
-    ZQ_Config_Fiscal: TZQuery;
-    ZQ_Config_FiscalID: TIntegerField;
-    ZQ_Config_FiscalMARCA: TStringField;
-    ZQ_Config_FiscalMODELO: TStringField;
-    ZQ_Config_FiscalPUERTO: TStringField;
-    ZQ_Config_FiscalVELOCIDAD: TStringField;
-    ZQ_Config_FiscalPREDETERMINADA: TStringField;
     btnCancelarFactura: TButton;
-    Hasar: THASAR;
     gBoxImpresora: TGroupBox;
     Label3: TLabel;
     Label5: TLabel;
@@ -79,11 +36,15 @@ type
     cBoxImpresora_Velocidad: TComboBox;
     cBoxImpresora_Puerto: TComboBox;
     Label4: TLabel;
-    ZQ_FacturaID_TIPO_DOC: TIntegerField;
     Label6: TLabel;
     cBoxImpresora_Modelo: TComboBox;
-    ZQ_ItemsPORC_IVA: TFloatField;
     MemoLog: TMemo;
+    btnFactura_OS: TButton;
+    editNumeroComprobante_OS: TEdit;
+    lblFactura_OS: TLabel;
+    Hasar: THASAR;
+    DBGrid1: TDBGrid;
+    DataSource1: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure leerParametros();
     procedure leerArchivoIni();
@@ -92,6 +53,9 @@ type
     procedure facturar(marca: string);
     procedure facturaEpson(modelo: string);
     procedure facturaHasar(modelo: string);
+    procedure facturar_OS(marca: string);
+    procedure facturaEpson_OS(modelo: string);
+    procedure facturaHasar_OS(modelo: string);
     procedure auditoria();
     procedure btnCierreZClick(Sender: TObject);
     procedure btnCierreXClick(Sender: TObject);
@@ -111,11 +75,11 @@ type
     procedure configurarImpresora();
     procedure ejecutarComando();
     procedure cBoxImpresora_ModeloChange(Sender: TObject);
-    procedure HasarImpresoraNoResponde(ASender: TObject;
-      CantidadReintentos: Integer);
+    procedure HasarImpresoraNoResponde(ASender: TObject; CantidadReintentos: Integer);
     procedure HasarErrorFiscal(ASender: TObject; Flags: Integer);
     procedure HasarErrorImpresora(ASender: TObject; Flags: Integer);
     procedure HasarFaltaPapel(Sender: TObject);
+    procedure btnFactura_OSClick(Sender: TObject);
   private
     PrinterFiscal_Epson: _PrinterFiscalDisp;
     db_name, db_host, db_pass, db_user: string;
@@ -162,43 +126,50 @@ begin
   if_marca:= '';
   if_modelo:= '';
 
-  ZQ_Factura.Close;
-  ZQ_Items.Close;
-  ZQ_FormaPago.Close;
-
   leerArchivoIni();
   leerParametros();
   configurarImpresora();
   abrirImpresora();
   ejecutarComando();
 
-  DateTimeFechaDesde.Date:= StartOfTheMonth(EKModelo.Fecha);
-  DateTimeFechaHasta.Date:= EndOfTheMonth(EKModelo.Fecha);
+  DateTimeFechaDesde.Date:= StartOfTheMonth(DM.EKModelo.Fecha);
+  DateTimeFechaHasta.Date:= EndOfTheMonth(DM.EKModelo.Fecha);
+end;
+
+
+procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  MemoLog.Lines.SaveToFile(ExtractFilePath(Application.ExeName) + 'Log.txt');
+  Application.ProcessMessages;
+  cerrarImpresora();
 end;
 
 
 procedure TFPrincipal.leerArchivoIni();
 begin
-  EKIni.Path:= ExtractFilePath(Application.ExeName);
-  EKIni.abrir;
+  with DM do
+  begin
+    EKIni.Path:= ExtractFilePath(Application.ExeName);
+    EKIni.abrir;
 
-  db_name:= EKIni.Ini.ReadString('DB', 'db_name', '');
-  db_host:= EKIni.Ini.ReadString('DB', 'db_host', '127.0.0.1');
-  db_user:= EKIni.Ini.ReadString('DB', 'db_user', 'SYSDBA');
-  db_pass:= EKIni.Ini.ReadString('DB', 'db_pass', 'masterkey');
-  marcaOCX:= EKIni.Ini.ReadString('OCX', 'marca', '');
+    db_name:= EKIni.Ini.ReadString('DB', 'db_name', '');
+    db_host:= EKIni.Ini.ReadString('DB', 'db_host', '127.0.0.1');
+    db_user:= EKIni.Ini.ReadString('DB', 'db_user', 'SYSDBA');
+    db_pass:= EKIni.Ini.ReadString('DB', 'db_pass', 'masterkey');
+    marcaOCX:= EKIni.Ini.ReadString('OCX', 'marca', '');
 
-  conexion.Connected:= false;
-  conexion.Database:= db_name;
-  conexion.HostName:= db_host;
-  conexion.Password:= db_pass;
-  conexion.User:= db_user;
-  conexion.Connected:= true;
+    conexion.Connected:= false;
+    conexion.Database:= db_name;
+    conexion.HostName:= db_host;
+    conexion.Password:= db_pass;
+    conexion.User:= db_user;
+    conexion.Connected:= true;
 
-  EKIni.cerrar;
+    EKIni.cerrar;
 
-  MemoLog.Lines.Add('LeerArchivoIni();');
-  MemoLog.Lines.Add(' - conexion.Database:= '+db_name+' | conexion.HostName:= '+db_host);
+    MemoLog.Lines.Add('LeerArchivoIni();');
+    MemoLog.Lines.Add(' - conexion.Database:= ' + db_name + ' | conexion.HostName:= ' + db_host);
+  end
 end;
 
 
@@ -223,26 +194,20 @@ begin
     begin
       editParametros.Text:= editParametros.Text + ' ' + ParamStr(i);
 
-      if LeftStr(ParamStr(i), 2) = '-c' then //-c = Comando. Z(Cierre Z), X(Cierre X), A(Auditoria Z), F(Impresion de Factura)
+      if LeftStr(ParamStr(i), 2) = '-c' then //-c = Comando. Z(Cierre Z), X(Cierre X), A(Auditoria Z), F(Impresion de Factura), O(Factura Obra Social)
         comando:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-      else
-        if LeftStr(ParamStr(i), 2) = '-l' then //-l = Nro de comprobante a imprimir. Solo con comando F
-          id_cpb:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-        else
-          if LeftStr(ParamStr(i), 2) = '-t' then //-t = Tipo de auditoria Z (T=Total general; D=Detallado). Solo con comando A
-            audModo:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-          else
-            if LeftStr(ParamStr(i), 2) = '-d' then //-d = Fecha desde de la auditoria Z. Solo con comando A
-              audFDesde:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-            else
-              if LeftStr(ParamStr(i), 2) = '-h' then //-h = Fecha hasta de la auditoria Z. Solo con comando A
-                audFHasta:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
-              else
-                if LeftStr(ParamStr(i), 2) = '-p' then //-p = si se muestra el panel principal
-                  preview:= true
-                else
-                  if LeftStr(ParamStr(i), 3) = '-id' then //-id = id de la impresora seleccionada
-                    ID_FISCAL:= strtoint(RightStr(ParamStr(i), length(ParamStr(i)) - 3));
+      else if LeftStr(ParamStr(i), 2) = '-l' then //-l = Nro de comprobante a imprimir. Solo con comando F o O
+        id_cpb:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+      else if LeftStr(ParamStr(i), 2) = '-t' then //-t = Tipo de auditoria Z (T=Total general; D=Detallado). Solo con comando A
+        audModo:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+      else if LeftStr(ParamStr(i), 2) = '-d' then //-d = Fecha desde de la auditoria Z. Solo con comando A
+        audFDesde:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+      else if LeftStr(ParamStr(i), 2) = '-h' then //-h = Fecha hasta de la auditoria Z. Solo con comando A
+        audFHasta:= RightStr(ParamStr(i), length(ParamStr(i)) - 2)
+      else if LeftStr(ParamStr(i), 2) = '-p' then //-p = si se muestra el panel principal
+        preview:= true
+      else if LeftStr(ParamStr(i), 3) = '-id' then //-id = id de la impresora seleccionada
+        ID_FISCAL:= strtoint(RightStr(ParamStr(i), length(ParamStr(i)) - 3));
     end;
   end
   else //si ejecuto la aplicacion desde el exe sin parametros
@@ -251,18 +216,19 @@ begin
     Panel1.Enabled:= true;
     gBoxImpresora.Visible:= true;
     cBoxImpresora_MarcaChange(self);
-    cBoxImpresora_ModeloChange(self);    
+    cBoxImpresora_ModeloChange(self);
     cBoxImpresora_PuertoChange(self);
     cBoxImpresora_VelocidadChange(self);
   end;
 
   MemoLog.Lines.Add('LeerParametros();');
-  MemoLog.Lines.Add(' - comando:= '+comando+' | id_cpb:= '+id_cpb+' | audModo:= '+audModo+' | audFDesde:= '+audFDesde+' | audFHasta:= '+audFHasta+' | ID_FISCAL:= '+IntToStr(ID_FISCAL));
+  MemoLog.Lines.Add(' - comando:= ' + comando + ' | id_cpb:= ' + id_cpb + ' | audModo:= ' + audModo + ' | audFDesde:= ' + audFDesde + ' | audFHasta:= ' + audFHasta + ' | ID_FISCAL:= ' + IntToStr(ID_FISCAL));
 end;
 
 
 procedure TFPrincipal.configurarImpresora();
 begin
+  with DM do
   try
     if UpperCase(marcaOCX) = 'EPSON' then
       PrinterFiscal_Epson:= CreateComObject(CLASS_PrinterFiscal) as _PrinterFiscalDisp;
@@ -290,8 +256,7 @@ begin
         Application.Terminate;
       end;
     end
-    else
-    if not preview then
+    else if not preview then
     begin
       mensajeError:= 'No se ha configurado ninguna Impresora Fiscal.';
       mostrarError(mensajeError, tituloError);
@@ -310,7 +275,7 @@ begin
   end;
 
   MemoLog.Lines.Add('ConfigurarImpresora();');
-  MemoLog.Lines.Add(' - if_puerto:= '+if_puerto+' | if_velocidad:= '+IntToStr(if_velocidad)+' | if_marca:= '+if_marca+' | if_modelo:= '+if_modelo);
+  MemoLog.Lines.Add(' - if_puerto:= ' + if_puerto + ' | if_velocidad:= ' + IntToStr(if_velocidad) + ' | if_marca:= ' + if_marca + ' | if_modelo:= ' + if_modelo);
 end;
 
 
@@ -338,15 +303,14 @@ begin
     Hasar.Baudios:= if_velocidad;
     if (if_modelo = 'P-330F') then
       Hasar.Modelo:= MODELO_P330
-    else
-    if (if_modelo = 'P-715F') then
+    else if (if_modelo = 'P-715F') then
       Hasar.Modelo:= MODELO_715;
 
     Result:= 0;
   end;
 
   MemoLog.Lines.Add('AbrirImpresora();');
-  MemoLog.Lines.Add(' - '+if_marca+' '+if_modelo);  
+  MemoLog.Lines.Add(' - ' + if_marca + ' ' + if_modelo);
 end;
 
 
@@ -360,15 +324,14 @@ begin
     begin
       if comando = 'Z' then
         cierreZ()
-      else
-        if comando = 'X' then
-          cierreX()
-        else
-          if comando = 'F' then
-            facturar(if_marca)
-          else
-            if comando = 'A' then
-              auditoria();
+      else if comando = 'X' then
+        cierreX()
+      else if comando = 'F' then
+        facturar(if_marca)
+      else if comando = 'O' then
+        facturar_OS(if_marca)
+      else if comando = 'A' then
+        auditoria();
     end;
   except
     begin
@@ -396,10 +359,9 @@ begin
 end;
 
 
-///////////////////////////////////////////
-//              CIERRE Z
-///////////////////////////////////////////
-
+//************************************
+//  CIERRE Z
+//************************************
 procedure TFPrincipal.cierreZ;
 var
   auxTipo, auxImprimir, auxEstado: WideString;
@@ -433,10 +395,9 @@ begin
 end;
 
 
-///////////////////////////////////////////
-//              CIERRE X
-///////////////////////////////////////////
-
+//************************************
+//  CIERRE X
+//************************************
 procedure TFPrincipal.cierreX;
 var
   auxTipo, auxImprimir, auxEstado: WideString;
@@ -470,10 +431,9 @@ begin
 end;
 
 
-///////////////////////////////////////////
-//              AUDITORIA
-///////////////////////////////////////////
-
+//************************************
+//  AUDITORIA
+//************************************
 procedure TFPrincipal.auditoria;
 var
   auxEstado, auxMode, auxFdesde, auxFHasta, auxTipo: WideString;
@@ -492,7 +452,7 @@ begin
     auxFdesde:= audFDesde;
     auxFHasta:= audFHasta;
     auxEstado:= 'N';
-    MemoLog.Lines.Add(' - PrinterFiscal_Epson.Audit(F, '+auxMode+', '+auxFdesde+', '+auxFHasta+');');
+    MemoLog.Lines.Add(' - PrinterFiscal_Epson.Audit(F, ' + auxMode + ', ' + auxFdesde + ', ' + auxFHasta + ');');
     if PrinterFiscal_Epson.Audit(auxTipo, auxMode, auxFdesde, auxFHasta) then
       PrinterFiscal_Epson.Status(auxEstado);
   end;
@@ -515,56 +475,94 @@ begin
     Hasar.TratarDeCancelarTodo;
     if audModo = 'T' then //T = Reporte total general
     begin
-      MemoLog.Lines.Add(' - Hasar.ReporteZPorFechas('+auxFdesde+', '+auxFHasta+', false);');
+      MemoLog.Lines.Add(' - Hasar.ReporteZPorFechas(' + auxFdesde + ', ' + auxFHasta + ', false);');
       Hasar.ReporteZPorFechas(auxFDesdeD, auxFHastaD, false);
     end
-    else
-      if audModo = 'D' then //D = Reporte detallado
-      begin
-        MemoLog.Lines.Add(' - Hasar.ReporteZPorFechas('+auxFdesde+', '+auxFHasta+', true);');
-        Hasar.ReporteZPorFechas(auxFDesdeD, auxFHastaD, true);
-      end;
+    else if audModo = 'D' then //D = Reporte detallado
+    begin
+      MemoLog.Lines.Add(' - Hasar.ReporteZPorFechas(' + auxFdesde + ', ' + auxFHasta + ', true);');
+      Hasar.ReporteZPorFechas(auxFDesdeD, auxFHastaD, true);
+    end;
     MemoLog.Lines.Add(' - Hasar.Finalizar;');
     Hasar.Finalizar;
   end;
 end;
 
 
-///////////////////////////////////////////
-//              FACTURA
-///////////////////////////////////////////
-
+//************************************
+//  FACTURA
+//************************************
 procedure TFPrincipal.facturar(marca: string);
 begin
-  if if_marca = '' then
-    exit;
-
-  ZQ_Factura.Close;
-  ZQ_Factura.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
-  ZQ_Factura.Open;
-
-  ZQ_Items.Close;
-  ZQ_Items.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
-  ZQ_Items.Open;
-
-  ZQ_FormaPago.Close;
-  ZQ_FormaPago.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
-  ZQ_FormaPago.Open;
-
-  if ZQ_Factura.IsEmpty then
+  with DM do
   begin
-    mensajeError:= 'El Comprobante Código ' + rellenar(id_cpb, '0', 8) + ' es inexistente.';
-    mostrarError(mensajeError, tituloError);
-    exit;
-  end;
+    if if_marca = '' then
+      exit;
 
-  if (marca = 'EPSON') then
-    facturaEpson(if_modelo);
-  if (marca = 'HASAR') then
-    facturaHasar(if_modelo);
+    ZQ_Factura.Close;
+    ZQ_Factura.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
+    ZQ_Factura.Open;
+
+    ZQ_Items.Close;
+    ZQ_Items.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
+    ZQ_Items.Open;
+
+    ZQ_FormaPago.Close;
+    ZQ_FormaPago.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
+    ZQ_FormaPago.Open;
+
+    if ZQ_Factura.IsEmpty then
+    begin
+      mensajeError:= 'El Comprobante Código ' + rellenar(id_cpb, '0', 8) + ' es inexistente.';
+      mostrarError(mensajeError, tituloError);
+      exit;
+    end;
+
+    if (marca = 'EPSON') then
+      facturaEpson(if_modelo);
+    if (marca = 'HASAR') then
+      facturaHasar(if_modelo);
+  end
 end;
 
 
+//************************************
+//  FACTURA OS
+//************************************
+procedure TFPrincipal.facturar_OS(marca: string);
+begin
+  with DM do
+  begin
+    if if_marca = '' then
+      exit;
+
+    ZQ_FacturaOS.Close;
+    ZQ_FacturaOS.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
+    ZQ_FacturaOS.Open;
+
+    ZQ_ItemsOS.Close;
+    ZQ_ItemsOS.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
+    ZQ_ItemsOS.ParamByName('id_os').AsInteger:= ZQ_FacturaOSID_OBRA_SOCIAL.AsInteger;
+    ZQ_ItemsOS.Open;
+
+    if ZQ_FacturaOS.IsEmpty then
+    begin
+      mensajeError:= 'El Comprobante Código ' + rellenar(id_cpb, '0', 8) + ' es inexistente.';
+      mostrarError(mensajeError, tituloError);
+      exit;
+    end;
+
+    if (marca = 'EPSON') then
+      facturaEpson_OS(if_modelo);
+    if (marca = 'HASAR') then
+      facturaHasar_OS(if_modelo);
+  end
+end;
+
+
+//************************************
+//  CANCELAR IMPRESION
+//************************************
 procedure TFPrincipal.cancelarTicket(marca: string);
 var
   aux1, aux2, aux3: widestring;
@@ -589,17 +587,18 @@ begin
 end;
 
 
+//************************************
+//  COMPONENTES MODO GRAFICO
+//************************************
 procedure TFPrincipal.btnCierreZClick(Sender: TObject);
 begin
   cierreZ;
 end;
 
-
 procedure TFPrincipal.btnCierreXClick(Sender: TObject);
 begin
   cierreX;
 end;
-
 
 procedure TFPrincipal.btnAuditoriaClick(Sender: TObject);
 var
@@ -623,66 +622,60 @@ begin
   auditoria;
 end;
 
-
 procedure TFPrincipal.btnFacturaClick(Sender: TObject);
 begin
   id_cpb:= editNumeroComprobante.Text;
   facturar(if_marca);
 end;
 
+procedure TFPrincipal.btnFactura_OSClick(Sender: TObject);
+begin
+  id_cpb:= editNumeroComprobante_OS.Text;
+  facturar_OS(if_marca);
+end;
 
 procedure TFPrincipal.btnAbrirPuertoClick(Sender: TObject);
 begin
   abrirImpresora();
 end;
 
-
 procedure TFPrincipal.btnCerrarPuertoClick(Sender: TObject);
 begin
   cerrarImpresora();
 end;
-
-
-procedure TFPrincipal.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-  MemoLog.Lines.SaveToFile(ExtractFilePath(Application.ExeName)+'Log.txt');
-  Application.ProcessMessages;
-  cerrarImpresora();
-end;
-
 
 procedure TFPrincipal.btnCancelarFacturaClick(Sender: TObject);
 begin
   cancelarTicket(if_marca);
 end;
 
-
 procedure TFPrincipal.cBoxImpresora_MarcaChange(Sender: TObject);
 begin
   if_marca:= cBoxImpresora_Marca.Text;
 end;
-
 
 procedure TFPrincipal.cBoxImpresora_ModeloChange(Sender: TObject);
 begin
   if_modelo:= cBoxImpresora_Modelo.Text;
 end;
 
-
 procedure TFPrincipal.cBoxImpresora_PuertoChange(Sender: TObject);
 begin
   if_puerto:= cBoxImpresora_Puerto.Text;
 end;
 
-
 procedure TFPrincipal.cBoxImpresora_VelocidadChange(Sender: TObject);
 begin
   if_velocidad:= strtoint(cBoxImpresora_Velocidad.Text);
 end;
+//************************************
+//  FIN COMPONENTES MODO GRAFICO
+//************************************
 
-//--------------------
-//  EPSON
-//--------------------
+
+//************************************
+//  FACTURAR VENTAS EPSON
+//************************************
 procedure TFPrincipal.facturaEpson(modelo: string);
 var
   //VARIABLES PARA ABRIR FACTURA
@@ -745,201 +738,203 @@ var
   acumulado_item: double;
   acumulado_iva: double;
 begin
-  MemoLog.Lines.Add('EjecutarComando(facturaEpson);');
-  marca:= 'EPSON';
+  with DM do
+  begin
+    MemoLog.Lines.Add('EjecutarComando(facturaEpson);');
+    marca:= 'EPSON';
 
   //PASO 1: ABRIR FACTURA
-  TipoDocumento:= 'T'; // T = Ticket-factura
-  TipoPapel:= 'C'; //C = Formulario continuo
+    TipoDocumento:= 'T'; // T = Ticket-factura
+    TipoPapel:= 'C'; //C = Formulario continuo
 
   //TIPO DE FACTURA A, B o C
-  if (ZQ_FacturaTIPO_FACTURA.IsNull) or (trim(ZQ_FacturaTIPO_FACTURA.AsString) = '') then
-    TipoLetra:= 'B'
-  else
-    TipoLetra:= ZQ_FacturaTIPO_FACTURA.AsString;
+    if (ZQ_FacturaTIPO_FACTURA.IsNull) or (trim(ZQ_FacturaTIPO_FACTURA.AsString) = '') then
+      TipoLetra:= 'B'
+    else
+      TipoLetra:= ZQ_FacturaTIPO_FACTURA.AsString;
 
-  CantidadCopias:= '1';
-  TipoFormulario:= 'P'; //P = La impresora fiscal debe dibujar las líneas
-  TipoFuente:= '17';
-  TipoIVAEmisor:= 'I'; //I = Responsable Inscripto
+    CantidadCopias:= '1';
+    TipoFormulario:= 'P'; //P = La impresora fiscal debe dibujar las líneas
+    TipoFuente:= '17';
+    TipoIVAEmisor:= 'I'; //I = Responsable Inscripto
 
-  if (ZQ_FacturaLETRA_FISCAL.IsNull) or (trim(ZQ_FacturaLETRA_FISCAL.AsString) = '') then
-    TipoIVAComprador:= 'F' //por defecto consumidor final
-  else
-    TipoIVAComprador:= ZQ_FacturaLETRA_FISCAL.AsString;
+    if (ZQ_FacturaLETRA_FISCAL.IsNull) or (trim(ZQ_FacturaLETRA_FISCAL.AsString) = '') then
+      TipoIVAComprador:= 'F' //por defecto consumidor final
+    else
+      TipoIVAComprador:= ZQ_FacturaLETRA_FISCAL.AsString;
 
-  if (ZQ_FacturaNOMBRE.IsNull) or (trim(ZQ_FacturaNOMBRE.AsString) = '') then
-    NombreComprador1:= 'CONSUMIDOR FINAL'
-  else
-    NombreComprador1:= LeftStr(ZQ_FacturaNOMBRE.AsString, 40);
+    if (ZQ_FacturaNOMBRE.IsNull) or (trim(ZQ_FacturaNOMBRE.AsString) = '') then
+      NombreComprador1:= 'CONSUMIDOR FINAL'
+    else
+      NombreComprador1:= LeftStr(ZQ_FacturaNOMBRE.AsString, 40);
 
-  NombreComprador2:= char(127);
+    NombreComprador2:= char(127);
 
-  if (ZQ_FacturaNOMBRE_TIPO_DOC.IsNull) or (trim(ZQ_FacturaNOMBRE_TIPO_DOC.AsString) = '') then
-    TpoDocComprador:= 'DNI'
-  else
-    TpoDocComprador:= LeftStr(ZQ_FacturaNOMBRE_TIPO_DOC.AsString, 6);
+    if (ZQ_FacturaNOMBRE_TIPO_DOC.IsNull) or (trim(ZQ_FacturaNOMBRE_TIPO_DOC.AsString) = '') then
+      TpoDocComprador:= 'DNI'
+    else
+      TpoDocComprador:= LeftStr(ZQ_FacturaNOMBRE_TIPO_DOC.AsString, 6);
 
-  if (ZQ_FacturaNUMERO_DOC.IsNull) or (trim(ZQ_FacturaNUMERO_DOC.AsString) = '') then
-    NroDocComprador:= 'XXX'
-  else
-    NroDocComprador:= LeftStr(ZQ_FacturaNUMERO_DOC.AsString, 11);
+    if (ZQ_FacturaNUMERO_DOC.IsNull) or (trim(ZQ_FacturaNUMERO_DOC.AsString) = '') then
+      NroDocComprador:= 'XXX'
+    else
+      NroDocComprador:= LeftStr(ZQ_FacturaNUMERO_DOC.AsString, 11);
 
-  if not ((ZQ_FacturaCUIT_CUIL.IsNull) or (trim(ZQ_FacturaCUIT_CUIL.AsString) = '')) then
-  begin
-    if (TipoLetra = 'A') or (TipoIVAComprador = 'M') or (TipoIVAComprador = 'E') then
+    if not ((ZQ_FacturaCUIT_CUIL.IsNull) or (trim(ZQ_FacturaCUIT_CUIL.AsString) = '')) then
     begin
-      TpoDocComprador:= 'CUIT';
-      NroDocComprador:= LeftStr(ZQ_FacturaCUIT_CUIL.AsString, 11);
+      if (TipoLetra = 'A') or (TipoIVAComprador = 'M') or (TipoIVAComprador = 'E') then
+      begin
+        TpoDocComprador:= 'CUIT';
+        NroDocComprador:= LeftStr(ZQ_FacturaCUIT_CUIL.AsString, 11);
+      end;
     end;
-  end;
 
-  BienDeUso:= 'N';
+    BienDeUso:= 'N';
 
-  if (ZQ_FacturaDIRECCION.IsNull) or (trim(ZQ_FacturaDIRECCION.AsString) = '') then
-    DomicilioComprador1:= '(3000) SANTA FE'
-  else
-    DomicilioComprador1:= LeftStr(ZQ_FacturaDIRECCION.AsString, 40);
+    if (ZQ_FacturaDIRECCION.IsNull) or (trim(ZQ_FacturaDIRECCION.AsString) = '') then
+      DomicilioComprador1:= '(3000) SANTA FE'
+    else
+      DomicilioComprador1:= LeftStr(ZQ_FacturaDIRECCION.AsString, 40);
 
-  if (ZQ_FacturaLOCALIDAD.IsNull) or (trim(ZQ_FacturaLOCALIDAD.AsString) = '') then
-    DomicilioComprador2:= 'SANTA FE'
-  else
-    DomicilioComprador2:= LeftStr(ZQ_FacturaLOCALIDAD.AsString, 40);
+    if (ZQ_FacturaLOCALIDAD.IsNull) or (trim(ZQ_FacturaLOCALIDAD.AsString) = '') then
+      DomicilioComprador2:= 'SANTA FE'
+    else
+      DomicilioComprador2:= LeftStr(ZQ_FacturaLOCALIDAD.AsString, 40);
 
-  DomicilioComprador3:= char(127);
-  LineaVariable1:= '.';
-  LineaVariable2:= '.';
-  TipoTablaBien:= 'C';
+    DomicilioComprador3:= char(127);
+    LineaVariable1:= '.';
+    LineaVariable2:= '.';
+    TipoTablaBien:= 'C';
 
-  MemoLog.Lines.Add(' - PrinterFiscal_Epson.OpenInvoice('+TipoDocumento+', '+TipoPapel+', '+TipoLetra+', '+CantidadCopias+', '+TipoFormulario+', '+TipoFuente+', '+TipoIVAEmisor+', '+TipoIVAComprador+', '+NombreComprador1+', '+NombreComprador2+', '+TpoDocComprador+', '+NroDocComprador+', '+BienDeUso+', '+DomicilioComprador1+', '+DomicilioComprador2+', '+DomicilioComprador3+', '+LineaVariable1+', '+LineaVariable2+', '+TipoTablaBien+');');
-  resultado:= PrinterFiscal_Epson.OpenInvoice(TipoDocumento, TipoPapel, TipoLetra, CantidadCopias, TipoFormulario,
-    TipoFuente, TipoIVAEmisor, TipoIVAComprador, NombreComprador1, NombreComprador2,
-    TpoDocComprador, NroDocComprador, BienDeUso, DomicilioComprador1, DomicilioComprador2,
-    DomicilioComprador3, LineaVariable1, LineaVariable2, TipoTablaBien);
-  if not resultado then
-  begin
-    mensajeError:= DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
-      DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
-    mensajeError:= '1. OPEN INVOICE' + #13 + mensajeError;
-    mostrarError(mensajeError, tituloError);
-    cancelarTicket(marca);
-    exit;
-  end;
+    MemoLog.Lines.Add(' - PrinterFiscal_Epson.OpenInvoice(' + TipoDocumento + ', ' + TipoPapel + ', ' + TipoLetra + ', ' + CantidadCopias + ', ' + TipoFormulario + ', ' + TipoFuente + ', ' + TipoIVAEmisor + ', ' + TipoIVAComprador + ', ' + NombreComprador1 + ', ' + NombreComprador2 + ', ' + TpoDocComprador + ', ' + NroDocComprador + ', ' + BienDeUso + ', ' + DomicilioComprador1 + ', ' + DomicilioComprador2 + ', ' + DomicilioComprador3 + ', ' + LineaVariable1 + ', ' + LineaVariable2 + ', ' + TipoTablaBien + ');');
+    resultado:= PrinterFiscal_Epson.OpenInvoice(TipoDocumento, TipoPapel, TipoLetra, CantidadCopias, TipoFormulario,
+      TipoFuente, TipoIVAEmisor, TipoIVAComprador, NombreComprador1, NombreComprador2,
+      TpoDocComprador, NroDocComprador, BienDeUso, DomicilioComprador1, DomicilioComprador2,
+      DomicilioComprador3, LineaVariable1, LineaVariable2, TipoTablaBien);
+    if not resultado then
+    begin
+      mensajeError:= DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
+        DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+      mensajeError:= '1. OPEN INVOICE' + #13 + mensajeError;
+      mostrarError(mensajeError, tituloError);
+      cancelarTicket(marca);
+      exit;
+    end;
 
   //PASO 2: CARGAR ITEMS
-  descuento_redondeo:= 0;
-  acumulado_item:= 0;
-  ZQ_Items.First;
-  while not ZQ_Items.Eof do
-  begin
+    descuento_redondeo:= 0;
+    acumulado_item:= 0;
+    ZQ_Items.First;
+    while not ZQ_Items.Eof do
+    begin
     //Max de 20 caracteres
-    DescripcionProducto:= LeftStr(' ' + ZQ_ItemsNOMBRE_PRODUCTO.AsString, 20);
+      DescripcionProducto:= LeftStr(' ' + ZQ_ItemsNOMBRE_PRODUCTO.AsString, 20);
 
-    Cantidad:= ZQ_ItemsCANTIDAD.AsFloat;
-    CantidadWide:= FloatToStr(Cantidad * 1000);
+      Cantidad:= ZQ_ItemsCANTIDAD.AsFloat;
+      CantidadWide:= FloatToStr(Cantidad * 1000);
 
-    if (TipoLetra = 'A') and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
-    begin
-      PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-      PrecioUnitario:= RoundTo(PrecioUnitario, -2);
-      descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat, -2);
-    end
-    else
-    begin
-      PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-      PrecioUnitario:= RoundTo(PrecioUnitario, -2);
-      descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
+      if (TipoLetra = 'A') and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
+      begin
+        PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
+        PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+        descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat, -2);
+      end
+      else
+      begin
+        PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
+        PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+        descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
+      end;
+      PrecioUnitarioWide:= FloatToStr(PrecioUnitario * 100);
+      acumulado_item:= acumulado_item + (PrecioUnitario * Cantidad);
+
+      TasaIva:= 0.21;
+      TasaIvaWide:= FloatToStr(TasaIva * 10000);
+
+      CalificadorDeItem:= 'M';
+      CantidadDeBultos:= 1;
+      CantidadDeBultosWide:= FloatToStr(CantidadDeBultos);
+      ImpuestosInternos:= 0;
+      ImpuestosInternosWide:= FloatToStr(ImpuestosInternos);
+      LineaDescExtra1:= char(127);
+      LineaDescExtra2:= char(127);
+      LineaDescExtra3:= char(127);
+
+      if productoDetallado then
+      begin
+        LineaDescExtra1:= LeftStr(' Marca: ' + ZQ_ItemsNOMBRE_MARCA.AsString, 30);
+        LineaDescExtra2:= LeftStr(' Col.: ' + ZQ_ItemsNOMBRE_COLOR.AsString + ' / Med.: ' + ZQ_ItemsNOMBRE_MEDIDA.AsString, 30);
+      end;
+
+      TasaAcrecentamiento:= 0;
+      TasaAcrecentamientoWide:= FloatToStr(TasaAcrecentamiento);
+
+      if ZQ_ItemsIMPUESTO_INTERNO.IsNull then
+        ImpuestosIntFijos:= 0
+      else
+        ImpuestosIntFijos:= ZQ_ItemsIMPUESTO_INTERNO.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
+      ImpuestosIntFijosWide:= FloatToStr(ImpuestosIntFijos * 100000000);
+
+      MemoLog.Lines.Add(' - PrinterFiscal_Epson.SendInvoiceItem(' + DescripcionProducto + ', ' + CantidadWide + ', ' + PrecioUnitarioWide + ', ' + TasaIvaWide + ', ' + CalificadorDeItem + ', ' + CantidadDeBultosWide + ', ' + ImpuestosInternosWide + ', ' + LineaDescExtra1 + ', ' + LineaDescExtra2 + ', ' + LineaDescExtra3 + ', ' + TasaAcrecentamientoWide + ', ' + ImpuestosIntFijosWide + ');');
+      resultado:= PrinterFiscal_Epson.SendInvoiceItem(DescripcionProducto, CantidadWide, PrecioUnitarioWide, TasaIvaWide, CalificadorDeItem,
+        CantidadDeBultosWide, ImpuestosInternosWide, LineaDescExtra1, LineaDescExtra2,
+        LineaDescExtra3, TasaAcrecentamientoWide, ImpuestosIntFijosWide);
+      if not resultado then
+      begin
+        mensajeError:= DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
+          DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+        mensajeError:= '2. SEND INVOICE ITEM' + #13 + mensajeError;
+        mostrarError(mensajeError, tituloError);
+        cancelarTicket(marca);
+        exit;
+      end;
+
+      ZQ_Items.Next;
     end;
-    PrecioUnitarioWide:= FloatToStr(PrecioUnitario * 100);
-    acumulado_item:= acumulado_item + (PrecioUnitario*Cantidad);
-
-    TasaIva:= 0.21;
-    TasaIvaWide:= FloatToStr(TasaIva * 10000);
-
-    CalificadorDeItem:= 'M';
-    CantidadDeBultos:= 1;
-    CantidadDeBultosWide:= FloatToStr(CantidadDeBultos);
-    ImpuestosInternos:= 0;
-    ImpuestosInternosWide:= FloatToStr(ImpuestosInternos);
-    LineaDescExtra1:= char(127);
-    LineaDescExtra2:= char(127);
-    LineaDescExtra3:= char(127);
-
-    if productoDetallado then
-    begin
-      LineaDescExtra1:= LeftStr(' Marca: ' + ZQ_ItemsNOMBRE_MARCA.AsString, 30);
-      LineaDescExtra2:= LeftStr(' Col.: ' + ZQ_ItemsNOMBRE_COLOR.AsString + ' / Med.: ' + ZQ_ItemsNOMBRE_MEDIDA.AsString, 30);
-    end;
-
-    TasaAcrecentamiento:= 0;
-    TasaAcrecentamientoWide:= FloatToStr(TasaAcrecentamiento);
-
-    if ZQ_ItemsIMPUESTO_INTERNO.IsNull then
-      ImpuestosIntFijos:= 0
-    else
-      ImpuestosIntFijos:= ZQ_ItemsIMPUESTO_INTERNO.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-    ImpuestosIntFijosWide:= FloatToStr(ImpuestosIntFijos * 100000000);
-
-    MemoLog.Lines.Add(' - PrinterFiscal_Epson.SendInvoiceItem('+DescripcionProducto+', '+CantidadWide+', '+PrecioUnitarioWide+', '+TasaIvaWide+', '+CalificadorDeItem+', '+CantidadDeBultosWide+', '+ImpuestosInternosWide+', '+LineaDescExtra1+', '+LineaDescExtra2+', '+LineaDescExtra3+', '+TasaAcrecentamientoWide+', '+ImpuestosIntFijosWide+');');
-    resultado:= PrinterFiscal_Epson.SendInvoiceItem(DescripcionProducto, CantidadWide, PrecioUnitarioWide, TasaIvaWide, CalificadorDeItem,
-      CantidadDeBultosWide, ImpuestosInternosWide, LineaDescExtra1, LineaDescExtra2,
-      LineaDescExtra3, TasaAcrecentamientoWide, ImpuestosIntFijosWide);
-    if not resultado then
-    begin
-      mensajeError:= DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
-        DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
-      mensajeError:= '2. SEND INVOICE ITEM' + #13 + mensajeError;
-      mostrarError(mensajeError, tituloError);
-      cancelarTicket(marca);
-      exit;
-    end;
-
-    ZQ_Items.Next;
-  end;
 
   //PASO 3: SUBTOTAL
-  auxSubtotal1:= 'P';
-  auxSubtotal2:= 'SUBTOTAL';
-  MemoLog.Lines.Add(' - PrinterFiscal_Epson.GetInvoiceSubtotal('+auxSubtotal1+', '+auxSubtotal2+');');
-  resultado:= PrinterFiscal_Epson.GetInvoiceSubtotal(auxSubtotal1, auxSubtotal2);
-  if not resultado then
-  begin
-    mensajeError:= DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
-      DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
-    mensajeError:= '3. GET INVOICE SUBTOTAL' + #13 + mensajeError;
-    mostrarError(mensajeError, tituloError);
-    cancelarTicket(marca);
-    exit;
-  end;
-
-  //PASO 4: CARGAR FORMA PAGO
-  acumulado_fpago:= 0;
-  ZQ_FormaPago.First;
-  while not ZQ_FormaPago.Eof do
-  begin
-    DescripcionFPago:= LeftStr(ZQ_FormaPagoFORMA_PAGO_NOMBRE.AsString, 25);
-    MontoFPago:= ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat;
-    MontoFPagoWide:= FloatToStr(ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat * 100);
-    acumulado_fpago:= acumulado_fpago + MontoFPago;
-    CalificadorFPago:= 'T';
-    MemoLog.Lines.Add(' - PrinterFiscal_Epson.SendInvoicePayment('+DescripcionFPago+', '+MontoFPagoWide+', '+CalificadorFPago+');');
-    resultado:= PrinterFiscal_Epson.SendInvoicePayment(DescripcionFPago, MontoFPagoWide, CalificadorFPago);
+    auxSubtotal1:= 'P';
+    auxSubtotal2:= 'SUBTOTAL';
+    MemoLog.Lines.Add(' - PrinterFiscal_Epson.GetInvoiceSubtotal(' + auxSubtotal1 + ', ' + auxSubtotal2 + ');');
+    resultado:= PrinterFiscal_Epson.GetInvoiceSubtotal(auxSubtotal1, auxSubtotal2);
     if not resultado then
     begin
       mensajeError:= DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
         DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
-      mensajeError:= '4. SEND INVOICE PAYMENT (T)' + #13 + mensajeError;
+      mensajeError:= '3. GET INVOICE SUBTOTAL' + #13 + mensajeError;
       mostrarError(mensajeError, tituloError);
       cancelarTicket(marca);
       exit;
     end;
 
-    ZQ_FormaPago.Next;
-  end;
+  //PASO 4: CARGAR FORMA PAGO
+    acumulado_fpago:= 0;
+    ZQ_FormaPago.First;
+    while not ZQ_FormaPago.Eof do
+    begin
+      DescripcionFPago:= LeftStr(ZQ_FormaPagoFORMA_PAGO_NOMBRE.AsString, 25);
+      MontoFPago:= ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat;
+      MontoFPagoWide:= FloatToStr(ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat * 100);
+      acumulado_fpago:= acumulado_fpago + MontoFPago;
+      CalificadorFPago:= 'T';
+      MemoLog.Lines.Add(' - PrinterFiscal_Epson.SendInvoicePayment(' + DescripcionFPago + ', ' + MontoFPagoWide + ', ' + CalificadorFPago + ');');
+      resultado:= PrinterFiscal_Epson.SendInvoicePayment(DescripcionFPago, MontoFPagoWide, CalificadorFPago);
+      if not resultado then
+      begin
+        mensajeError:= DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
+          DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+        mensajeError:= '4. SEND INVOICE PAYMENT (T)' + #13 + mensajeError;
+        mostrarError(mensajeError, tituloError);
+        cancelarTicket(marca);
+        exit;
+      end;
 
-  acumulado_iva:= (acumulado_item * TasaIva);
-  descuento_redondeo:= (acumulado_item + acumulado_iva) - acumulado_fpago;
-  descuento_redondeo:= RoundTo((descuento_redondeo*-1), -4);
+      ZQ_FormaPago.Next;
+    end;
+
+    acumulado_iva:= (acumulado_item * TasaIva);
+    descuento_redondeo:= (acumulado_item + acumulado_iva) - acumulado_fpago;
+    descuento_redondeo:= RoundTo((descuento_redondeo * -1), -4);
 
 //  if descuento_redondeo <> 0 then
 //  begin
@@ -959,58 +954,62 @@ begin
 //  end;
 
   //PASO 5: CERRAR FACTURA
-  auxCerrar:= 'TOTAL';
-  MemoLog.Lines.Add(' - PrinterFiscal_Epson.CloseInvoice('+TipoDocumento+', '+TipoLetra+', '+auxCerrar+');');
-  resultado:= PrinterFiscal_Epson.CloseInvoice(TipoDocumento, TipoLetra, auxCerrar);
-  if not resultado then
-  begin
-    mensajeError:= DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
-      DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
-    mensajeError:= '5. CLOSE INVOICE' + #13 + mensajeError;
-    mostrarError(mensajeError, tituloError);
-    cancelarTicket(marca);
-    exit;
-  end;
+    auxCerrar:= 'TOTAL';
+    MemoLog.Lines.Add(' - PrinterFiscal_Epson.CloseInvoice(' + TipoDocumento + ', ' + TipoLetra + ', ' + auxCerrar + ');');
+    resultado:= PrinterFiscal_Epson.CloseInvoice(TipoDocumento, TipoLetra, auxCerrar);
+    if not resultado then
+    begin
+      mensajeError:= DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.PrinterStatus, 'PrinterCode') + #13 + #13 +
+        DecodificadorErrorFiscalEpson('$' + PrinterFiscal_Epson.FiscalStatus, 'FiscalCode');
+      mensajeError:= '5. CLOSE INVOICE' + #13 + mensajeError;
+      mostrarError(mensajeError, tituloError);
+      cancelarTicket(marca);
+      exit;
+    end;
 
   //PASO 7: OBTENER NUMERO DE COMPROBANTE Y PUNTO DE VENTA
-  numeroCpb:= PrinterFiscal_Epson.AnswerField_3;
+    numeroCpb:= PrinterFiscal_Epson.AnswerField_3;
     //Cambio el status para poder obtener el numero de Punto Venta. C = Información sobre el contribuyente
-  auxEstado:= 'C';
-  PrinterFiscal_Epson.Status(auxEstado);
-  puntoVenta:= PrinterFiscal_Epson.AnswerField_4;
+    auxEstado:= 'C';
+    PrinterFiscal_Epson.Status(auxEstado);
+    puntoVenta:= PrinterFiscal_Epson.AnswerField_4;
     //Vuelvo al estado Normal
-  auxEstado:= 'N';
-  resultado:= PrinterFiscal_Epson.Status(auxEstado);
-  lblFactura.Caption:= puntoVenta + '-' + numeroCpb;
+    auxEstado:= 'N';
+    resultado:= PrinterFiscal_Epson.Status(auxEstado);
+    lblFactura.Caption:= puntoVenta + '-' + numeroCpb;
 
   //PASO 8: INSERTAR EL NUMERO DE COMPROBANTE, PUNTO DE VENTA Y FECHA EN COMPROBANTE IMPRESO
-  if resultado then
-  begin
-    if EKModelo.iniciar_transaccion('UPDATE FACTURA', []) then
+    if resultado then
     begin
-      ZQ_UpdateFactura.Close;
-      ZQ_UpdateFactura.ParamByName('numcpb').AsInteger:= StrToInt(numeroCpb);
-      ZQ_UpdateFactura.ParamByName('pventa').AsInteger:= StrToInt(puntoVenta);
-      ZQ_UpdateFactura.ParamByName('fimpresa').AsDateTime:= EKModelo.FechayHora();
-      ZQ_UpdateFactura.ParamByName('idcpb').AsString:= id_cpb;
-      ZQ_UpdateFactura.ExecSQL;
-
-      if not EKModelo.finalizar_transaccion('UPDATE FACTURA') then
+      if EKModelo.iniciar_transaccion('UPDATE FACTURA', []) then
       begin
-        mensajeError:= 'Error al actualizar el PV y NUMERO del comprobante';
-        mostrarError(mensajeError, tituloError);
+        ZQ_UpdateFactura.Close;
+        ZQ_UpdateFactura.ParamByName('numcpb').AsInteger:= StrToInt(numeroCpb);
+        ZQ_UpdateFactura.ParamByName('pventa').AsInteger:= StrToInt(puntoVenta);
+        ZQ_UpdateFactura.ParamByName('fimpresa').AsDateTime:= EKModelo.FechayHora();
+        ZQ_UpdateFactura.ParamByName('idcpb').AsString:= id_cpb;
+        ZQ_UpdateFactura.ExecSQL;
+
+        if not EKModelo.finalizar_transaccion('UPDATE FACTURA') then
+        begin
+          mensajeError:= 'Error al actualizar el PV y NUMERO del comprobante';
+          mostrarError(mensajeError, tituloError);
+        end
       end
-    end
-  end;
+    end;
 
   //PASO 9: CORTO EL TIQUET
-  PrinterFiscal_Epson.CutPaper;
+    PrinterFiscal_Epson.CutPaper;
+  end
 end;
+//************************************
+//  FIN FACTURAR VENTAS EPSON
+//************************************
 
 
-//--------------------
-//  HASAR
-//--------------------
+//************************************
+//  FACTURAR VENTAS HASAR
+//************************************
 procedure TFPrincipal.facturaHasar(modelo: string);
 var
   //VARIABLES PARA ABRIR FACTURA
@@ -1039,120 +1038,121 @@ var
   pventa: OleVariant;
   tipoFactura: integer;
 begin
-  MemoLog.Lines.Add('EjecutarComando(facturaHasar('+modelo+'));');
-  resultado:= true;
-  marca:= 'HASAR';
-  CantidadCopias:= '1';
-  MemoLog.Lines.Add(' - Hasar.DescripcionesLargas:= false;');
-  Hasar.DescripcionesLargas:= false; //trunca las descripciones largas
-  MemoLog.Lines.Add(' - Hasar.Comenzar;');
-  Hasar.Comenzar;
-  MemoLog.Lines.Add(' - Hasar.TratarDeCancelarTodo;');
-  Hasar.TratarDeCancelarTodo;
-
-  if modelo = 'P-330F' then
+  with DM do
   begin
-    MemoLog.Lines.Add(' - Hasar.BorrarFantasiaEncabezadoCola(false, false, true);');
-    Hasar.BorrarFantasiaEncabezadoCola(false, false, true);
-  end;
+    MemoLog.Lines.Add('EjecutarComando(facturaHasar(' + modelo + '));');
+    resultado:= true;
+    marca:= 'HASAR';
+    CantidadCopias:= '1';
+    MemoLog.Lines.Add(' - Hasar.DescripcionesLargas:= false;');
+    Hasar.DescripcionesLargas:= false; //trunca las descripciones largas
+    MemoLog.Lines.Add(' - Hasar.Comenzar;');
+    Hasar.Comenzar;
+    MemoLog.Lines.Add(' - Hasar.TratarDeCancelarTodo;');
+    Hasar.TratarDeCancelarTodo;
 
-//PASO 1: ABRIR FACTURA
-  if (ZQ_FacturaNOMBRE.IsNull) or (trim(ZQ_FacturaNOMBRE.AsString) = '') then
-    NombreComprador:= 'CONSUMIDOR FINAL'
-  else
-    NombreComprador:= LeftStr(ZQ_FacturaNOMBRE.AsString, 50);
-
-  if (ZQ_FacturaNUMERO_DOC.IsNull) or (trim(ZQ_FacturaNUMERO_DOC.AsString) = '') then
-    NroDocComprador:= '0'
-  else
-    NroDocComprador:= LeftStr(ZQ_FacturaNUMERO_DOC.AsString, 11);
-
-  if (ZQ_FacturaLOCALIDAD.IsNull) or (trim(ZQ_FacturaLOCALIDAD.AsString) = '') then
-    localidad:= 'SANTA FE'
-  else
-    localidad:= LeftStr(ZQ_FacturaLOCALIDAD.AsString, 50);
-
-  if (ZQ_FacturaDIRECCION.IsNull) or (trim(ZQ_FacturaDIRECCION.AsString) = '') then
-    DomicilioComprador:= '(3000) SANTA FE'
-  else
-    DomicilioComprador:= LeftStr(ZQ_FacturaDIRECCION.AsString + ' ' + localidad, 50);
-
-  //si es una factura A paso siempre como tipo documento TIPO_CUIT
-  tipoFactura:= HasarObtenerTipoFactura(if_modelo, ZQ_FacturaTIPO_FACTURA.AsString);
-  if (tipoFactura = FACTURA_A) or (tipoFactura = TICKET_FACTURA_A) then
-  begin
-    NroDocComprador:= ZQ_FacturaCUIT_CUIL.AsString;
-    MemoLog.Lines.Add(' - Hasar.DatosCliente('+NombreComprador+', '+NroDocComprador+', '+IntToStr(TIPO_CUIT)+', '+IntToStr(HasarObtenerTipoIVAComprador(ZQ_FacturaID_TIPO_IVA.AsInteger))+', '+DomicilioComprador+');');
-    Hasar.DatosCliente(NombreComprador, NroDocComprador, TIPO_CUIT, HasarObtenerTipoIVAComprador(ZQ_FacturaID_TIPO_IVA.AsInteger), DomicilioComprador);
-  end
-  else
-  begin
-    MemoLog.Lines.Add(' - Hasar.DatosCliente('+NombreComprador+', '+NroDocComprador+', '+IntToStr(HasarObtenerTipoDocumento(ZQ_FacturaID_TIPO_DOC.AsInteger))+', '+IntToStr(HasarObtenerTipoIVAComprador(ZQ_FacturaID_TIPO_IVA.AsInteger))+', '+DomicilioComprador+');');
-    Hasar.DatosCliente(NombreComprador, NroDocComprador, HasarObtenerTipoDocumento(ZQ_FacturaID_TIPO_DOC.AsInteger), HasarObtenerTipoIVAComprador(ZQ_FacturaID_TIPO_IVA.AsInteger), DomicilioComprador);
-  end;
-
-  MemoLog.Lines.Add(' - Hasar.AbrirComprobanteFiscal('+IntToStr(tipoFactura)+');');
-  Hasar.AbrirComprobanteFiscal(tipoFactura);
-
-//PASO 2: CARGAR ITEMS
-  descuento_redondeo:= 0;
-  ZQ_Items.First;
-  while not ZQ_Items.Eof do
-  begin
-    if modelo = 'P-330F' then //Max de 50 caracteres
-      DescripcionProducto:= LeftStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString, 50)
-    else
-    if modelo = 'P-715F' then //Max de 20 caracteres
-      DescripcionProducto:= LeftStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString, 20);
-
-    if productoDetallado then
+    if modelo = 'P-330F' then
     begin
-      LineaDescExtra1:= LeftStr(' Marca: ' + ZQ_ItemsNOMBRE_MARCA.AsString, 30);
-      LineaDescExtra2:= LeftStr(' Col.: ' + ZQ_ItemsNOMBRE_COLOR.AsString + ' / Med.: ' + ZQ_ItemsNOMBRE_MEDIDA.AsString, 30);
+      MemoLog.Lines.Add(' - Hasar.BorrarFantasiaEncabezadoCola(false, false, true);');
+      Hasar.BorrarFantasiaEncabezadoCola(false, false, true);
     end;
 
-    Cantidad:= ZQ_ItemsCANTIDAD.AsFloat;
+//PASO 1: ABRIR FACTURA
+    if (ZQ_FacturaNOMBRE.IsNull) or (trim(ZQ_FacturaNOMBRE.AsString) = '') then
+      NombreComprador:= 'CONSUMIDOR FINAL'
+    else
+      NombreComprador:= LeftStr(ZQ_FacturaNOMBRE.AsString, 50);
 
-    if ((tipoFactura = FACTURA_A) or (tipoFactura = TICKET_FACTURA_A)) and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
+    if (ZQ_FacturaNUMERO_DOC.IsNull) or (trim(ZQ_FacturaNUMERO_DOC.AsString) = '') then
+      NroDocComprador:= '0'
+    else
+      NroDocComprador:= LeftStr(ZQ_FacturaNUMERO_DOC.AsString, 11);
+
+    if (ZQ_FacturaLOCALIDAD.IsNull) or (trim(ZQ_FacturaLOCALIDAD.AsString) = '') then
+      localidad:= 'SANTA FE'
+    else
+      localidad:= LeftStr(ZQ_FacturaLOCALIDAD.AsString, 50);
+
+    if (ZQ_FacturaDIRECCION.IsNull) or (trim(ZQ_FacturaDIRECCION.AsString) = '') then
+      DomicilioComprador:= '(3000) SANTA FE'
+    else
+      DomicilioComprador:= LeftStr(ZQ_FacturaDIRECCION.AsString + ' ' + localidad, 50);
+
+  //si es una factura A paso siempre como tipo documento TIPO_CUIT
+    tipoFactura:= HasarObtenerTipoFactura(if_modelo, ZQ_FacturaTIPO_FACTURA.AsString);
+    if (tipoFactura = FACTURA_A) or (tipoFactura = TICKET_FACTURA_A) then
     begin
-      PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-      PrecioUnitario:= RoundTo(PrecioUnitario, -2);
-      descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat, -2);
+      NroDocComprador:= ZQ_FacturaCUIT_CUIL.AsString;
+      MemoLog.Lines.Add(' - Hasar.DatosCliente(' + NombreComprador + ', ' + NroDocComprador + ', ' + IntToStr(TIPO_CUIT) + ', ' + IntToStr(HasarObtenerTipoIVAComprador(ZQ_FacturaID_TIPO_IVA.AsInteger)) + ', ' + DomicilioComprador + ');');
+      Hasar.DatosCliente(NombreComprador, NroDocComprador, TIPO_CUIT, HasarObtenerTipoIVAComprador(ZQ_FacturaID_TIPO_IVA.AsInteger), DomicilioComprador);
     end
     else
     begin
-      PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-      PrecioUnitario:= RoundTo(PrecioUnitario, -2);
-      descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
+      MemoLog.Lines.Add(' - Hasar.DatosCliente(' + NombreComprador + ', ' + NroDocComprador + ', ' + IntToStr(HasarObtenerTipoDocumento(ZQ_FacturaID_TIPO_DOC.AsInteger)) + ', ' + IntToStr(HasarObtenerTipoIVAComprador(ZQ_FacturaID_TIPO_IVA.AsInteger)) + ', ' + DomicilioComprador + ');');
+      Hasar.DatosCliente(NombreComprador, NroDocComprador, HasarObtenerTipoDocumento(ZQ_FacturaID_TIPO_DOC.AsInteger), HasarObtenerTipoIVAComprador(ZQ_FacturaID_TIPO_IVA.AsInteger), DomicilioComprador);
     end;
 
-    ImpuestosInternos:= 0;
-    if ZQ_ItemsPORC_IVA.IsNull then
-      TasaIva:= 21
-    else
-      TasaIva:= ZQ_ItemsPORC_IVA.AsFloat * 100;
+    MemoLog.Lines.Add(' - Hasar.AbrirComprobanteFiscal(' + IntToStr(tipoFactura) + ');');
+    Hasar.AbrirComprobanteFiscal(tipoFactura);
 
-    MemoLog.Lines.Add(' - Hasar.ImprimirItem('+DescripcionProducto+', '+FloatToStr(Cantidad)+', '+FloatToStr(PrecioUnitario)+', '+FloatToStr(TasaIva)+', '+FloatToStr(ImpuestosInternos)+');');
-    Hasar.ImprimirItem(DescripcionProducto, Cantidad, PrecioUnitario, TasaIva, ImpuestosInternos);
+//PASO 2: CARGAR ITEMS
+    descuento_redondeo:= 0;
+    ZQ_Items.First;
+    while not ZQ_Items.Eof do
+    begin
+      if modelo = 'P-330F' then //Max de 50 caracteres
+        DescripcionProducto:= LeftStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString, 50)
+      else if modelo = 'P-715F' then //Max de 20 caracteres
+        DescripcionProducto:= LeftStr(ZQ_ItemsNOMBRE_PRODUCTO.AsString, 20);
 
-    ZQ_Items.Next;
-  end;
+      if productoDetallado then
+      begin
+        LineaDescExtra1:= LeftStr(' Marca: ' + ZQ_ItemsNOMBRE_MARCA.AsString, 30);
+        LineaDescExtra2:= LeftStr(' Col.: ' + ZQ_ItemsNOMBRE_COLOR.AsString + ' / Med.: ' + ZQ_ItemsNOMBRE_MEDIDA.AsString, 30);
+      end;
+
+      Cantidad:= ZQ_ItemsCANTIDAD.AsFloat;
+
+      if ((tipoFactura = FACTURA_A) or (tipoFactura = TICKET_FACTURA_A)) and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
+      begin
+        PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
+        PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+        descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat, -2);
+      end
+      else
+      begin
+        PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
+        PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+        descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
+      end;
+
+      ImpuestosInternos:= 0;
+      if ZQ_ItemsPORC_IVA.IsNull then
+        TasaIva:= 21
+      else
+        TasaIva:= ZQ_ItemsPORC_IVA.AsFloat * 100;
+
+      MemoLog.Lines.Add(' - Hasar.ImprimirItem(' + DescripcionProducto + ', ' + FloatToStr(Cantidad) + ', ' + FloatToStr(PrecioUnitario) + ', ' + FloatToStr(TasaIva) + ', ' + FloatToStr(ImpuestosInternos) + ');');
+      Hasar.ImprimirItem(DescripcionProducto, Cantidad, PrecioUnitario, TasaIva, ImpuestosInternos);
+
+      ZQ_Items.Next;
+    end;
 
 //PASO 3: SUBTOTAL
-  MemoLog.Lines.Add(' - Hasar.Subtotal(true);');
-  Hasar.Subtotal(true);
+    MemoLog.Lines.Add(' - Hasar.Subtotal(true);');
+    Hasar.Subtotal(true);
 
 //PASO 4: CARGAR FORMA PAGO
-  ZQ_FormaPago.First;
-  while not ZQ_FormaPago.Eof do
-  begin
-    DescripcionFPago:= LeftStr(ZQ_FormaPagoFORMA_PAGO_NOMBRE.AsString, 50);
-    MontoFPago:= ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat;
+    ZQ_FormaPago.First;
+    while not ZQ_FormaPago.Eof do
+    begin
+      DescripcionFPago:= LeftStr(ZQ_FormaPagoFORMA_PAGO_NOMBRE.AsString, 50);
+      MontoFPago:= ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat;
 
-    MemoLog.Lines.Add(' - Hasar.ImprimirPago('+DescripcionFPago+', '+FloatToStr(MontoFPago)+', T);');
-    Hasar.ImprimirPago(DescripcionFPago, MontoFPago, 'T');
-    ZQ_FormaPago.Next;
-  end;
+      MemoLog.Lines.Add(' - Hasar.ImprimirPago(' + DescripcionFPago + ', ' + FloatToStr(MontoFPago) + ', T);');
+      Hasar.ImprimirPago(DescripcionFPago, MontoFPago, 'T');
+      ZQ_FormaPago.Next;
+    end;
 
 //PASO 5: DESCUENTOS
 //  descuento_redondeo:= 200;
@@ -1163,43 +1163,50 @@ begin
 //  end;
 
 //PASO 6: CERRAR FACTURA
-  MemoLog.Lines.Add(' - Hasar.CerrarComprobanteFiscal();');
-  Hasar.CerrarComprobanteFiscal(); //se puede pasar la cantidad de copias
+    MemoLog.Lines.Add(' - Hasar.CerrarComprobanteFiscal();');
+    Hasar.CerrarComprobanteFiscal(); //se puede pasar la cantidad de copias
 
 //PASO 7: OBTENER NUMERO DE COMPROBANTE Y PUNTO DE VENTA
-  numeroCpb:= Hasar.Respuesta[3];
-  Hasar.Enviar(Chr(115));
-  puntoVenta:= Hasar.Respuesta[7];
-  lblFactura.Caption:= LPad(puntoVenta, 4, '0') + '-' + LPad(numeroCpb, 8, '0');
+    numeroCpb:= Hasar.Respuesta[3];
+    Hasar.Enviar(Chr(115));
+    puntoVenta:= Hasar.Respuesta[7];
+    lblFactura.Caption:= LPad(puntoVenta, 4, '0') + '-' + LPad(numeroCpb, 8, '0');
 
   //cerramos la fiscal
-  Hasar.Finalizar;
+    Hasar.Finalizar;
 
 //PASO 8: INSERTAR EL NUMERO DE COMPROBANTE, PUNTO DE VENTA Y FECHA EN COMPROBANTE IMPRESO
-  if resultado then
-  begin
-    if EKModelo.iniciar_transaccion('UPDATE FACTURA', []) then
+    if resultado then
     begin
-      ZQ_UpdateFactura.Close;
-      ZQ_UpdateFactura.ParamByName('numcpb').AsInteger:= StrToInt(numeroCpb);
-      ZQ_UpdateFactura.ParamByName('pventa').AsInteger:= StrToInt(puntoVenta);
-      ZQ_UpdateFactura.ParamByName('fimpresa').AsDateTime:= EKModelo.FechayHora();
-      ZQ_UpdateFactura.ParamByName('idcpb').AsString:= id_cpb;
-      ZQ_UpdateFactura.ExecSQL;
-
-      if not EKModelo.finalizar_transaccion('UPDATE FACTURA') then
+      if EKModelo.iniciar_transaccion('UPDATE FACTURA', []) then
       begin
-        mensajeError:= 'Error al actualizar el PV y NUMERO del comprobante';
-        mostrarError(mensajeError, tituloError);
+        ZQ_UpdateFactura.Close;
+        ZQ_UpdateFactura.ParamByName('numcpb').AsInteger:= StrToInt(numeroCpb);
+        ZQ_UpdateFactura.ParamByName('pventa').AsInteger:= StrToInt(puntoVenta);
+        ZQ_UpdateFactura.ParamByName('fimpresa').AsDateTime:= EKModelo.FechayHora();
+        ZQ_UpdateFactura.ParamByName('idcpb').AsString:= id_cpb;
+        ZQ_UpdateFactura.ExecSQL;
+
+        if not EKModelo.finalizar_transaccion('UPDATE FACTURA') then
+        begin
+          mensajeError:= 'Error al actualizar el PV y NUMERO del comprobante';
+          mostrarError(mensajeError, tituloError);
+        end
       end
-    end
-  end;
+    end;
+  end
 end;
+//************************************
+//  FIN FACTURAR VENTAS HASAR
+//************************************
 
 
+//************************************
+//  PROCEDIMIENTOS VARIOS HASAR
+//************************************
 procedure TFPrincipal.HasarImpresoraNoResponde(ASender: TObject; CantidadReintentos: Integer);
 begin
-  if (Hasar.ReintentoConstante) And (Hasar.Reintentos = CantidadReintentos) Then
+  if (Hasar.ReintentoConstante) and (Hasar.Reintentos = CantidadReintentos) then
   begin
     MemoLog.Lines.Add(' - Hasar.Abortar();');
     Hasar.Abortar;
@@ -1209,13 +1216,13 @@ end;
 
 procedure TFPrincipal.HasarErrorFiscal(ASender: TObject; Flags: Integer);
 begin
-  MemoLog.Lines.Add('HASAR ERROR FISCAL: '+hasar.DescripcionStatusFiscal(Flags));
+  MemoLog.Lines.Add('HASAR ERROR FISCAL: ' + hasar.DescripcionStatusFiscal(Flags));
 end;
 
 
 procedure TFPrincipal.HasarErrorImpresora(ASender: TObject; Flags: Integer);
 begin
-  MemoLog.Lines.Add('HASAR ERROR IMPRESORA: '+hasar.DescripcionStatusFiscal(Flags));
+  MemoLog.Lines.Add('HASAR ERROR IMPRESORA: ' + hasar.DescripcionStatusFiscal(Flags));
 end;
 
 
@@ -1224,7 +1231,181 @@ begin
   mensajeError:= 'La impresora fiscal no tiene papel.';
   mostrarError(mensajeError, tituloError);
 end;
+//************************************
+//  FIN PROCEDIMIENTOS VARIOS HASAR
+//********************************
 
+
+//**********************************
+//  FACTURA DE OBRA SOCIAL HASAR
+//**********************************
+procedure TFPrincipal.facturaHasar_OS(modelo: string);
+var
+  //VARIABLES PARA ABRIR FACTURA
+  CantidadCopias: widestring; // Cantidad de copias que se deben imprimir (1 a 5)
+  NombreComprador: widestring; // Nombre comercial del comprador línea 1 (max 40 bytes)
+  NroDocComprador: widestring; // CUIT o Numero documento del comprador (max 11 bytes)
+  DomicilioComprador: widestring; // Domicilio del comprador, línea 1 (max 40 bytes)
+  localidad: widestring; // Localidad del comprador
+  //VARIABLES PARA ENVIAR ITEMS
+  DescripcionProducto: widestring; // Descripción del producto (max 20 bytes)
+  Cantidad: double;
+  PrecioUnitario: double;
+  TasaIva: double;
+  ImpuestosInternos: double;
+  LineaDescExtra1: widestring; // Linea 1 descripcion complementaria del item (max 30 bytes)
+  LineaDescExtra2: widestring; // Linea 2 descripcion complementaria del item (max 30 bytes)
+  //VARIABLES PARA ENVIAR FORMA PAGO
+  DescripcionFPago: widestring; // Texto con descripcion del pago (max 25 bytes)
+  MontoFPago: double;
+  descuento_redondeo: double;
+  //VARIABLES PARA ACTUALIZAR COMPROBANTE
+  numeroCpb: widestring;
+  //OTRAS
+  marca: string;
+  aux: OleVariant;
+  pventa: OleVariant;
+  tipoFactura: integer;
+begin
+  with DM do
+  begin
+    MemoLog.Lines.Add('EjecutarComando(facturaHasar_OS(' + modelo + '));');
+    resultado:= true;
+    marca:= 'HASAR';
+    CantidadCopias:= '1';
+    MemoLog.Lines.Add(' - Hasar.DescripcionesLargas:= false;');
+    Hasar.DescripcionesLargas:= false; //trunca las descripciones largas
+    MemoLog.Lines.Add(' - Hasar.Comenzar;');
+    Hasar.Comenzar;
+    MemoLog.Lines.Add(' - Hasar.TratarDeCancelarTodo;');
+    Hasar.TratarDeCancelarTodo;
+
+    if modelo = 'P-330F' then
+    begin
+      MemoLog.Lines.Add(' - Hasar.BorrarFantasiaEncabezadoCola(false, false, true);');
+      Hasar.BorrarFantasiaEncabezadoCola(false, false, true);
+    end;
+
+//PASO 1: ABRIR FACTURA
+    if (ZQ_FacturaOSNOMBRE.IsNull) or (trim(ZQ_FacturaOSNOMBRE.AsString) = '') then
+      NombreComprador:= 'CONSUMIDOR FINAL'
+    else
+      NombreComprador:= LeftStr(ZQ_FacturaNOMBRE.AsString, 50);
+
+    if (ZQ_FacturaOSCUIT_CUIL.IsNull) or (trim(ZQ_FacturaOSCUIT_CUIL.AsString) = '') then
+      NroDocComprador:= '0'
+    else
+      NroDocComprador:= LeftStr(ZQ_FacturaOSCUIT_CUIL.AsString, 11);
+
+    if (ZQ_FacturaOSLOCALIDAD.IsNull) or (trim(ZQ_FacturaOSLOCALIDAD.AsString) = '') then
+      localidad:= 'SANTA FE'
+    else
+      localidad:= LeftStr(ZQ_FacturaOSLOCALIDAD.AsString, 50);
+
+    if (ZQ_FacturaOSDIRECCION.IsNull) or (trim(ZQ_FacturaOSDIRECCION.AsString) = '') then
+      DomicilioComprador:= '(3000) SANTA FE'
+    else
+      DomicilioComprador:= LeftStr(ZQ_FacturaOSDIRECCION.AsString + ' ' + localidad, 50);
+
+    tipoFactura:= HasarObtenerTipoFactura(if_modelo, ZQ_FacturaOSTIPO_FACTURA.AsString);
+    NroDocComprador:= ZQ_FacturaOSCUIT_CUIL.AsString;
+    MemoLog.Lines.Add(' - Hasar.DatosCliente(' + NombreComprador + ', ' + NroDocComprador + ', ' + IntToStr(TIPO_CUIT) + ', ' + IntToStr(HasarObtenerTipoIVAComprador(ZQ_FacturaOSID_TIPO_IVA.AsInteger)) + ', ' + DomicilioComprador + ');');
+    Hasar.DatosCliente(NombreComprador, NroDocComprador, TIPO_CUIT, HasarObtenerTipoIVAComprador(ZQ_FacturaOSID_TIPO_IVA.AsInteger), DomicilioComprador);
+
+    MemoLog.Lines.Add(' - Hasar.AbrirComprobanteFiscal(' + IntToStr(tipoFactura) + ');');
+    Hasar.AbrirComprobanteFiscal(tipoFactura);
+
+//PASO 2: CARGAR ITEMS
+    descuento_redondeo:= 0;
+    ZQ_ItemsOS.First;
+    while not ZQ_ItemsOS.Eof do
+    begin
+      if modelo = 'P-330F' then //Max de 50 caracteres
+        DescripcionProducto:= LeftStr(ZQ_ItemsOSDETALLE.AsString, 50)
+      else if modelo = 'P-715F' then //Max de 20 caracteres
+        DescripcionProducto:= LeftStr(ZQ_ItemsOSDETALLE.AsString, 20);
+
+      Cantidad:= ZQ_ItemsOSCANTIDAD.AsFloat;
+
+//      if (tipoFactura = FACTURA_A) or (tipoFactura = TICKET_FACTURA_A) then
+//      begin
+//        PrecioUnitario:= (ZQ_ItemsOSIMPORTE_VENTA.AsFloat*(1-ZQ_ItemsOSPORC_IVA.AsFloat)) / ZQ_ItemsOSCANTIDAD.AsFloat;
+//        PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+//      end
+//      else
+//      begin
+        PrecioUnitario:= ZQ_ItemsOSIMPORTE_VENTA.AsFloat / ZQ_ItemsOSCANTIDAD.AsFloat;
+        PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+//      end;
+
+      ImpuestosInternos:= 0;
+      if ZQ_ItemsOSPORC_IVA.IsNull then
+        TasaIva:= 21
+      else
+        TasaIva:= ZQ_ItemsOSPORC_IVA.AsFloat * 100;
+
+      MemoLog.Lines.Add(' - Hasar.ImprimirItem(' + DescripcionProducto + ', ' + FloatToStr(Cantidad) + ', ' + FloatToStr(PrecioUnitario) + ', ' + FloatToStr(TasaIva) + ', ' + FloatToStr(ImpuestosInternos) + ');');
+      Hasar.ImprimirItem(DescripcionProducto, Cantidad, PrecioUnitario, TasaIva, ImpuestosInternos);
+
+      ZQ_ItemsOS.Next;
+    end;
+
+//PASO 3: SUBTOTAL
+    MemoLog.Lines.Add(' - Hasar.Subtotal(true);');
+    Hasar.Subtotal(true);
+
+//PASO 6: CERRAR FACTURA
+    MemoLog.Lines.Add(' - Hasar.CerrarComprobanteFiscal();');
+    Hasar.CerrarComprobanteFiscal(); //se puede pasar la cantidad de copias
+
+//PASO 7: OBTENER NUMERO DE COMPROBANTE Y PUNTO DE VENTA
+    numeroCpb:= Hasar.Respuesta[3];
+    Hasar.Enviar(Chr(115));
+    puntoVenta:= Hasar.Respuesta[7];
+    lblFactura.Caption:= LPad(puntoVenta, 4, '0') + '-' + LPad(numeroCpb, 8, '0');
+
+  //cerramos la fiscal
+    Hasar.Finalizar;
+
+//PASO 8: INSERTAR EL NUMERO DE COMPROBANTE, PUNTO DE VENTA Y FECHA EN COMPROBANTE IMPRESO
+    if resultado then
+    begin
+      if EKModelo.iniciar_transaccion('UPDATE FACTURA', []) then
+      begin
+        ZQ_UpdateFactura.Close;
+        ZQ_UpdateFactura.ParamByName('numcpb').AsInteger:= StrToInt(numeroCpb);
+        ZQ_UpdateFactura.ParamByName('pventa').AsInteger:= StrToInt(puntoVenta);
+        ZQ_UpdateFactura.ParamByName('fimpresa').AsDateTime:= EKModelo.FechayHora();
+        ZQ_UpdateFactura.ParamByName('idcpb').AsString:= id_cpb;
+        ZQ_UpdateFactura.ExecSQL;
+
+        if not EKModelo.finalizar_transaccion('UPDATE FACTURA') then
+        begin
+          mensajeError:= 'Error al actualizar el PV y NUMERO del comprobante';
+          mostrarError(mensajeError, tituloError);
+        end
+      end
+    end;
+  end
+end;
+//**********************************
+//  FIN FACTURA DE OBRA SOCIAL HASAR
+//**********************************
+
+
+//**********************************
+//  FACTURA DE OBRA SOCIAL EPSON
+//**********************************
+procedure TFPrincipal.facturaEpson_OS(modelo: string);
+begin
+//
+end;
+
+
+
+//**********************************
+//  FIN FACTURA DE OBRA SOCIAL EPSON
+//**********************************
 
 //COMPROBANTE NO FISCAL
 //    HASAR1.AbrirComprobanteNoFiscal
@@ -1276,5 +1457,6 @@ end;
 //    HASAR1.EspecificarPercepcionGlobal "Percep. RG 0000", 125#
 //    HASAR1.ImprimirPago "Efectivo", 295#
 //    HASAR1.CerrarComprobanteNoFiscalHomologado
+
 end.
 
