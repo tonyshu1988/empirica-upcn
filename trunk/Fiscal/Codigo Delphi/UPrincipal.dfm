@@ -346,23 +346,5 @@ object FPrincipal: TFPrincipal
       OnFaltaPapel = HasarFaltaPapel
       ControlData = {000300004F0300004F030000}
     end
-    object DBGrid1: TDBGrid
-      Left = 200
-      Top = 312
-      Width = 320
-      Height = 120
-      DataSource = DataSource1
-      TabOrder = 18
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'Verdana'
-      TitleFont.Style = []
-    end
-  end
-  object DataSource1: TDataSource
-    DataSet = DM.ZQ_ItemsOS
-    Left = 216
-    Top = 272
   end
 end
