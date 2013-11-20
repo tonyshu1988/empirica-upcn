@@ -1246,7 +1246,7 @@ begin
   if not ((ZQ_ComprobantePUNTO_VENTA.IsNull) and (ZQ_ComprobanteNUMERO_CPB.IsNull)) then
   begin
     Application.MessageBox(PChar('El comprobante seleccionado ya esta impreso.'), 'Reimpresión de Comprobantes', MB_OK + MB_ICONINFORMATION);
-//    Exit;
+    Exit;
   end;
 
   dm.ZQ_Fiscal.Close;
@@ -1262,7 +1262,7 @@ begin
     if fiscal_sistema = 'DELPHI' then //IMPRIMIR DESDE ELPHI
     begin
       ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-l'+IntToStr(ZQ_VerCpbID_COMPROBANTE.AsInteger)+' -cO'+' -id'+inttostr(ID_FISCAL)), nil, SW_SHOWNORMAL);
-      ShowMessage(pchar(fiscal_ruta)+' '+pchar('-l'+IntToStr(ZQ_VerCpbID_COMPROBANTE.AsInteger)+' -cO'+' -id'+inttostr(ID_FISCAL)));
+//      ShowMessage(pchar(fiscal_ruta)+' '+pchar('-l'+IntToStr(ZQ_VerCpbID_COMPROBANTE.AsInteger)+' -cO'+' -id'+inttostr(ID_FISCAL)));
     end;
   end;
 end;

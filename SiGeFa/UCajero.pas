@@ -1927,7 +1927,6 @@ begin
       ZQ_ComprobantePORC_DESCUENTO.AsFloat:= CD_ComprobantePORC_DESCUENTO.AsFloat / 100;
       ZQ_ComprobanteIMPORTE_DESCUENTO.AsFloat:= CD_ComprobanteIMPORTE_DESCUENTO.AsFloat;
       ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= CD_ComprobanteIMPORTE_VENTA.AsFloat;
-      ZQ_ComprobanteIMPORTE_IVA.AsFloat:= CD_ComprobanteIMPORTE_IVA.AsFloat;
       ZQ_ComprobanteENCABEZADO.AsString:= CD_ComprobanteENCABEZADO.AsString;
       ZQ_ComprobantePIE.AsString:= CD_ComprobantePIE.AsString;
       ZQ_ComprobanteID_TIPO_IVA.AsInteger:= CD_ComprobanteID_TIPO_IVA.AsInteger;
@@ -2051,7 +2050,7 @@ begin
     ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat:= CD_DetalleFacturaIMPORTE_IF.AsFloat;
     ZQ_ComprobanteDetalleIMPORTE_COSTO.AsFloat:= CD_DetalleFacturaIMPORTE_COSTO.AsFloat;
 
-    ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat * (1 - CD_DetalleFacturaPORC_IVA.AsFloat);
+    ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat / (1 + CD_DetalleFacturaPORC_IVA.AsFloat);
     ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= RoundTo(ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat, -2);
     ZQ_ComprobanteDetalleIMPORTE_IVA_IF.AsFloat:= RoundTo(ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat - ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat, -2);
 
@@ -2065,10 +2064,13 @@ begin
     end;
 
     ZQ_ComprobanteDetalle.Post;
-
     inc(i);
     CD_DetalleFactura.Next;
   end;
+
+//  ZQ_Comprobante.edit;
+//  ZQ_ComprobanteIMPORTE_IVA.AsFloat:= auxTotalIva;
+//  ZQ_Comprobante.post;
 end;
 
 
