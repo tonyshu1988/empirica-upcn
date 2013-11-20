@@ -540,7 +540,6 @@ begin
 
     ZQ_ItemsOS.Close;
     ZQ_ItemsOS.ParamByName('id_comprobante').AsInteger:= strtoint(id_cpb);
-    ZQ_ItemsOS.ParamByName('id_os').AsInteger:= ZQ_FacturaOSID_OBRA_SOCIAL.AsInteger;
     ZQ_ItemsOS.Open;
 
     if ZQ_FacturaOS.IsEmpty then

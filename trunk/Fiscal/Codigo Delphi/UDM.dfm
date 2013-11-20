@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 497
-  Top = 224
+  Left = 407
+  Top = 248
   Height = 419
   Width = 499
   object ZQ_UpdateFactura: TZQuery
@@ -339,13 +339,101 @@ object DM: TDM
     Top = 136
   end
   object ZQ_FacturaOS: TZQuery
-    Params = <>
+    Connection = conexion
+    SQL.Strings = (
+      
+        'select c.id_comprobante, c.id_obra_social, os.nombre, os.cuit_cu' +
+        'il, os.localidad,'
+      '       os.direccion, os.id_tipo_iva, iva.letra as tipo_factura'
+      'from comprobante c'
+      'left join optica_os os on c.id_obra_social = os.id_os'
+      'left join tipo_iva iva on os.id_tipo_iva = iva.id_tipo_iva'
+      'where c.id_tipo_cpb = 40'
+      '  and c.id_comprobante = :id_comprobante')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
     Left = 328
     Top = 24
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_FacturaOSID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+      Required = True
+    end
+    object ZQ_FacturaOSID_OBRA_SOCIAL: TIntegerField
+      FieldName = 'ID_OBRA_SOCIAL'
+    end
+    object ZQ_FacturaOSNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_FacturaOSCUIT_CUIL: TStringField
+      FieldName = 'CUIT_CUIL'
+      Size = 30
+    end
+    object ZQ_FacturaOSLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_FacturaOSDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 100
+    end
+    object ZQ_FacturaOSID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_FacturaOSTIPO_FACTURA: TStringField
+      FieldName = 'TIPO_FACTURA'
+      Size = 1
+    end
   end
   object ZQ_ItemsOS: TZQuery
-    Params = <>
+    Connection = conexion
+    SQL.Strings = (
+      
+        'select cd.id_comprobante_detalle, cd.detalle, cd.cantidad, cd.im' +
+        'porte_venta,'
+      '       cd.porc_iva'
+      'from comprobante_detalle cd'
+      'where cd.id_comprobante = :id_comprobante')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
     Left = 328
     Top = 80
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_comprobante'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ItemsOSID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+      Required = True
+    end
+    object ZQ_ItemsOSDETALLE: TStringField
+      FieldName = 'DETALLE'
+      Size = 200
+    end
+    object ZQ_ItemsOSCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_ItemsOSIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_ItemsOSPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
   end
 end

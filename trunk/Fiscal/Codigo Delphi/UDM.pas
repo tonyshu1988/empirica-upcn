@@ -54,6 +54,19 @@ type
     EKIni: TEKIni;
     ZQ_FacturaOS: TZQuery;
     ZQ_ItemsOS: TZQuery;
+    ZQ_FacturaOSID_COMPROBANTE: TIntegerField;
+    ZQ_FacturaOSID_OBRA_SOCIAL: TIntegerField;
+    ZQ_FacturaOSNOMBRE: TStringField;
+    ZQ_FacturaOSCUIT_CUIL: TStringField;
+    ZQ_FacturaOSLOCALIDAD: TStringField;
+    ZQ_FacturaOSDIRECCION: TStringField;
+    ZQ_FacturaOSID_TIPO_IVA: TIntegerField;
+    ZQ_FacturaOSTIPO_FACTURA: TStringField;
+    ZQ_ItemsOSID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_ItemsOSDETALLE: TStringField;
+    ZQ_ItemsOSCANTIDAD: TFloatField;
+    ZQ_ItemsOSIMPORTE_VENTA: TFloatField;
+    ZQ_ItemsOSPORC_IVA: TFloatField;
   private
     { Private declarations }
   public

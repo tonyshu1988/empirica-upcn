@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
   Left = 395
-  Top = 268
+  Top = 252
   Width = 611
   Height = 507
   Caption = 'Modulo Impresi'#243'n Fiscal'
