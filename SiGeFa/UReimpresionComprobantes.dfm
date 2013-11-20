@@ -1,8 +1,8 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 269
-  Top = 179
-  Width = 966
-  Height = 634
+  Left = 2
+  Top = 2
+  Width = 638
+  Height = 450
   Caption = 'Reimpresi'#243'n de Comprobantes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,39 +22,39 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 958
-    Height = 555
+    Width = 630
+    Height = 371
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 956
-      Height = 553
+      Width = 628
+      Height = 369
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 954
-        Height = 551
+        Width = 626
+        Height = 367
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object PanelComprobante: TPanel
           Left = 1
           Top = 33
-          Width = 952
-          Height = 395
+          Width = 624
+          Height = 211
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object lblTotalComprobantes: TLabel
             Left = 0
-            Top = 374
-            Width = 952
+            Top = 190
+            Width = 624
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -73,8 +73,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           end
           object Splitter1: TSplitter
             Left = 0
-            Top = 365
-            Width = 952
+            Top = 181
+            Width = 624
             Height = 9
             Cursor = crVSplit
             Align = alBottom
@@ -82,8 +82,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object DBGridComprobantes: TDBGrid
             Left = 0
             Top = 0
-            Width = 952
-            Height = 365
+            Width = 624
+            Height = 181
             Align = alClient
             Color = 14606012
             DataSource = DS_Comprobante
@@ -210,8 +210,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         end
         object PanelFPagoYProd: TPanel
           Left = 1
-          Top = 428
-          Width = 952
+          Top = 244
+          Width = 624
           Height = 122
           Align = alBottom
           BevelOuter = bvNone
@@ -225,7 +225,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object PanelProducto: TPanel
             Left = 612
             Top = 0
-            Width = 340
+            Width = 12
             Height = 122
             Align = alClient
             BevelOuter = bvNone
@@ -234,7 +234,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object lblTotalProducto: TLabel
               Left = 0
               Top = 101
-              Width = 340
+              Width = 12
               Height = 21
               Align = alBottom
               Alignment = taRightJustify
@@ -254,7 +254,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object DBGridListadoProductos: TDBGrid
               Left = 0
               Top = 0
-              Width = 340
+              Width = 12
               Height = 101
               Align = alClient
               Color = 14606012
@@ -457,7 +457,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         object PanelFiltro: TPanel
           Left = 1
           Top = 1
-          Width = 952
+          Width = 624
           Height = 32
           Align = alTop
           BevelOuter = bvNone
@@ -1032,9 +1032,6 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
         'mprobante)'
       
-        'join comprobante_detalle cd on (cd.id_comprobante = c.id_comprob' +
-        'ante)'
-      
         'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
         'formapag)'
       'join sucursal s on (c.id_sucursal = s.id_sucursal)'
@@ -1051,6 +1048,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
         'unto_venta,'
       '         c.numero_cpb, c.fecha, c.id_preventa, c.observacion'
+      ''
+      ''
       '')
     Params = <>
     IndexFieldNames = 'FECHA Desc;CODIGO Desc'
