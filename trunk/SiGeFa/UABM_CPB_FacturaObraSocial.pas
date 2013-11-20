@@ -10,7 +10,7 @@ uses
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
   EKDbSuma, DBClient, Menus, UOP_BuscarProductosOS, ZSqlUpdate, jpeg,
-  ExtDlgs, ZSequence, cxClasses;
+  ExtDlgs, ZSequence, cxClasses, ShellAPI;
 
 type
   TFABM_CPB_FacturaObraSocial = class(TForm)
@@ -98,7 +98,6 @@ type
     DBText17: TDBText;
     DBText18: TDBText;
     DBText19: TDBText;
-    DBText20: TDBText;
     DBText23: TDBText;
     DBText24: TDBText;
     DBText25: TDBText;
@@ -174,12 +173,8 @@ type
     ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
     ZQ_CpbProductoID_STOCK_PRODUCTO: TIntegerField;
     ZQ_CpbProductoIMPORTE_VENTA: TFloatField;
-    DBEditPuntoVenta: TDBEdit;
-    DBEditNumeroCpb: TDBEdit;
     Label12: TLabel;
     lblTituloFecha_Carga: TLabel;
-    Label19: TLabel;
-    Label23: TLabel;
     ZQ_CpbProductoBASE_IMPONIBLE: TFloatField;
     ZQ_CpbProductoPORC_IVA: TFloatField;
     ZQ_CpbProductoIMPORTE_IVA: TFloatField;
@@ -298,6 +293,19 @@ type
     StaticTxtLiquidado: TStaticText;
     ALiquidar: TAction;
     btFacturarFiscal: TdxBarLargeButton;
+    DBLCBoxCondIva: TDBLookupComboBox;
+    ZQ_Iva: TZQuery;
+    ZQ_IvaID_TIPO_IVA: TIntegerField;
+    ZQ_IvaNOMBRE_TIPO_IVA: TStringField;
+    ZQ_IvaABREVIATURA: TStringField;
+    ZQ_IvaDISCRIMINAR: TStringField;
+    ZQ_IvaLETRA: TStringField;
+    ZQ_IvaFISCAL: TStringField;
+    ZQ_IvaCOEFICIENTE: TFloatField;
+    ZQ_IvaVERIFICA_CUIT: TStringField;
+    DS_Iva: TDataSource;
+    ZQ_Fiscal: TZQuery;
+    ZQ_FiscalIMPORTE_FISCAL: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -441,7 +449,7 @@ begin
   //abro todos los recibos del sistema
   EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
-
+  dm.EKModelo.abrir(ZQ_Iva);
   CD_Producto.CreateDataSet;
 end;
 
@@ -798,6 +806,7 @@ begin
       if ZQ_Comprobante.State = dsBrowse then
         ZQ_Comprobante.Edit;
       ZQ_ComprobanteID_OBRA_SOCIAL.AsInteger:= ZQ_ObraSocialID_OS.AsInteger;
+      ZQ_ComprobanteID_TIPO_IVA.AsInteger:= ZQ_ObraSocialID_TIPO_IVA.AsInteger;
     end
   end;
 
@@ -870,6 +879,9 @@ begin
       ZQ_CpbProductoIMPORTE_FINAL.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
       ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
       ZQ_CpbProductoIMPORTE_VENTA.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
+      ZQ_CpbProductoPORC_IVA.AsFloat:= vselProducto.ZQ_ProductoIMPUESTO_IVA.AsFloat;
+      if (ZQ_CpbProductoPORC_IVA.AsFloat = 0) or (ZQ_CpbProductoPORC_IVA.IsNull) then
+        ZQ_CpbProductoPORC_IVA.AsFloat:= 0.21;        
     end
     else
       CD_Producto.Filtered:= false;
@@ -927,6 +939,9 @@ begin
         ZQ_CpbProductoIMPORTE_FINAL.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
         ZQ_CpbProductoIMPORTE_UNITARIO.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
         ZQ_CpbProductoIMPORTE_VENTA.AsFloat:= vselProducto.ZQ_ProductoMONTO_DESCONTADO.AsFloat;
+        ZQ_CpbProductoPORC_IVA.AsFloat:= vselProducto.ZQ_ProductoIMPUESTO_IVA.AsFloat;
+        if (ZQ_CpbProductoPORC_IVA.AsFloat = 0) or (ZQ_CpbProductoPORC_IVA.IsNull) then
+          ZQ_CpbProductoPORC_IVA.AsFloat:= 0.21;
       end;
 
       vselProducto.ZQ_Producto.Next;
@@ -1223,10 +1238,33 @@ begin
   FImpresion_Comprobantes.imprimir;
 end;
 
-procedure TFABM_CPB_FacturaObraSocial.btFacturarFiscalClick(
-  Sender: TObject);
+
+procedure TFABM_CPB_FacturaObraSocial.btFacturarFiscalClick(Sender: TObject);
+var
+  fiscal_Impresora, fiscal_ruta, fiscal_sistema: string;
 begin
-  ShowMessage('Facturar Fiscal');
+  if not ((ZQ_ComprobantePUNTO_VENTA.IsNull) and (ZQ_ComprobanteNUMERO_CPB.IsNull)) then
+  begin
+    Application.MessageBox(PChar('El comprobante seleccionado ya esta impreso.'), 'Reimpresión de Comprobantes', MB_OK + MB_ICONINFORMATION);
+//    Exit;
+  end;
+
+  dm.ZQ_Fiscal.Close;
+  dm.ZQ_Fiscal.ParamByName('id_fiscal').AsInteger:= ID_FISCAL;
+  dm.ZQ_Fiscal.Open;
+
+  fiscal_Impresora:= DM.ZQ_FiscalMODELO.AsString;
+  fiscal_ruta:= DM.ZQ_FiscalRUTA_ARCHIVO.AsString;
+  fiscal_sistema:= DM.ZQ_FiscalSISTEMA.AsString;
+
+  if (application.MessageBox(pchar('Desea Imprimir el Comprobante Nro:' + ZQ_VerCpbCODIGO_1.AsString + ' ?'), 'Impresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+  begin
+    if fiscal_sistema = 'DELPHI' then //IMPRIMIR DESDE ELPHI
+    begin
+      ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-l'+IntToStr(ZQ_VerCpbID_COMPROBANTE.AsInteger)+' -cO'+' -id'+inttostr(ID_FISCAL)), nil, SW_SHOWNORMAL);
+      ShowMessage(pchar(fiscal_ruta)+' '+pchar('-l'+IntToStr(ZQ_VerCpbID_COMPROBANTE.AsInteger)+' -cO'+' -id'+inttostr(ID_FISCAL)));
+    end;
+  end;
 end;
 
 end.

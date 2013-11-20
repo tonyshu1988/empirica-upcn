@@ -1,6 +1,6 @@
 object FConfiguracion: TFConfiguracion
   Left = 494
-  Top = 199
+  Top = 213
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Configuraci'#243'n General del Sistema'
@@ -24,7 +24,7 @@ object FConfiguracion: TFConfiguracion
     Top = 0
     Width = 552
     Height = 553
-    ActivePage = TabSheetGeneral
+    ActivePage = TabSheetFiscal
     Align = alClient
     TabOrder = 4
     OnChanging = PageControl1Changing
@@ -723,6 +723,14 @@ object FConfiguracion: TFConfiguracion
             TitleFont.Style = []
             OnDrawColumnCell = DBGridFiscalDrawColumnCell
             Columns = <
+              item
+                Expanded = False
+                FieldName = 'ID'
+                Title.Alignment = taCenter
+                Title.Caption = 'Id Fiscal'
+                Width = 56
+                Visible = True
+              end
               item
                 Expanded = False
                 FieldName = 'SISTEMA'

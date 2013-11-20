@@ -7,7 +7,7 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, ComCtrls, DBCtrls, StdCtrls,
   Mask, ZSqlUpdate,DateUtils, EKOrdenarGrilla, EKBusquedaAvanzada,
-  ActnList, XPStyleActnCtrls, ActnMan;
+  ActnList, XPStyleActnCtrls, ActnMan, cxClasses;
 
 type
   TFOP_BuscarProductosOS = class(TForm)
@@ -54,6 +54,7 @@ type
     ZQ_ProductoID_DETALLE_OS: TIntegerField;
     ZQ_ProductoID_PERSONA_AFILIADO: TIntegerField;
     ZQ_ProductoNRO_FACTURA: TStringField;
+    ZQ_ProductoIMPUESTO_IVA: TFloatField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
