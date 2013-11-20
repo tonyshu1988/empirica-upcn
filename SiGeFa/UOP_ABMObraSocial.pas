@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt, ComCtrls;
+  EKVistaPreviaQR, QRCtrls, QuickRpt, ComCtrls, cxClasses;
 
 type
   TFOP_ABMObraSocial = class(TForm)
@@ -143,6 +143,7 @@ type
     ZQ_AfiliadosID_PERSONA: TIntegerField;
     DBGridAfiliados: TDBGrid;
     EKOrdenarGrilla2: TEKOrdenarGrilla;
+    Label1: TLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -169,6 +170,7 @@ type
     procedure DBGridAfiliadosDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    function validarcampos():boolean;
   private
   public
   end;
@@ -181,7 +183,7 @@ const
 
 implementation
 
-uses UPrincipal, UDM;
+uses UPrincipal, UDM, UUtilidades;
 
 {$R *.dfm}
 
@@ -302,19 +304,8 @@ var
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
-  if (trim(DBEditCodigo.Text) = '') then
-  begin
-    Application.MessageBox('El campo "Código" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
-    DBEditCodigo.SetFocus;
+  if not validarcampos() then
     exit;
-  end;
-
-  if (trim(DBENombre.Text) = '') then
-  begin
-    Application.MessageBox('El campo "Marca" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
-    DBENombre.SetFocus;
-    exit;
-  end;
 
   try
     if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
@@ -354,6 +345,11 @@ procedure TFOP_ABMObraSocial.FormCreate(Sender: TObject);
 begin
   dm.EKModelo.abrir(ZQ_Provincia);
   dm.EKModelo.abrir(ZQ_Iva);
+
+
+  DBENombre.Color:= dm.colorCampoRequido;
+  DBLCBoxCondIva.Color:= dm.colorCampoRequido;
+  DBECuit_Cuil.Color:= dm.colorCampoRequido;
 
   EKOrdenarGrilla1.CargarConfigColumnas;
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
@@ -461,6 +457,42 @@ procedure TFOP_ABMObraSocial.DBGridAfiliadosDrawColumnCell(Sender: TObject;
   State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridAfiliados, Rect, DataCol, Column, State);
+end;
+
+
+function TFOP_ABMObraSocial.validarcampos():boolean;
+var
+  mensaje: string;
+begin
+  result:= true;
+  mensaje:= '';
+
+  if (ZQ_OP_ObraSocialNOMBRE.IsNull) or (trim(ZQ_OP_ObraSocialNOMBRE.AsString) = '') then
+  begin
+    mensaje:= 'El campo Nombre se encuentra vacío.';
+    result := false;
+  end;
+
+  if (ZQ_OP_ObraSocialID_TIPO_IVA.IsNull) then
+  begin
+    mensaje:= mensaje+#13+'El campo Condición IVA se encuentra vacío.';
+    result := false;
+  end;
+
+  //Verifica_CUIT es un campo de la tabla TIPO_CUIT, se configura ahí si se le exige el NroCUIT
+  if (ZQ_IvaVERIFICA_CUIT.AsString='S') then
+    if not EsCUITValido(ZQ_OP_ObraSocialCUIT_CUIL.AsString) then
+    begin
+      mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido.'+char(13)+'(sólo debe ingresar números, sin guiones)';
+      result := false;
+    end;
+
+  if Result = False then
+  begin
+    mensaje:= mensaje+#13#13+'Verifique.';
+    Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
+    DBENombre.SetFocus;
+  end;
 end;
 
 end.

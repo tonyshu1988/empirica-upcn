@@ -157,14 +157,9 @@ type
     procedure panelColorClick(Sender: TObject);
     procedure btNuevoClick(Sender: TObject);
     procedure Panel1DblClick(Sender: TObject);
-    procedure PageControl1Changing(Sender: TObject;
-      var AllowChange: Boolean);
-    procedure DBGridFiscalDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
-    procedure DBGridVariablesDrawColumnCell(Sender: TObject;
-      const Rect: TRect; DataCol: Integer; Column: TColumn;
-      State: TGridDrawState);
+    procedure PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
+    procedure DBGridFiscalDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure DBGridVariablesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnSeleccionarClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
   private
@@ -300,6 +295,8 @@ begin
     dbfuente1.Font.Name:=ZQ_GeneralCOMPROBANTE_FUENTE.AsString;
   if not ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.IsNull then
     dbfuente1.Font.Style:=TFontStyles(Byte(ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.AsInteger));
+
+  id_IFiscal:= ID_FISCAL;
 end;
 
 
@@ -428,7 +425,12 @@ end;
 
 procedure TFConfiguracion.DBGridFiscalDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  FPrincipal.PintarFilasGrillasConBajas(DBGridFiscal, ZQ_FiscalPREDETERMINADA.AsString, Rect, DataCol, Column, State);
+  if (ID_FISCAL = ZQ_FiscalID.AsInteger) then //si el registro esta dado de baja
+  begin
+    DBGridFiscal.Canvas.Brush.Color:= $006A6AFF;
+    DBGridFiscal.DefaultDrawColumnCell(Rect, datacol, column, state);
+  end;
+  DBGridFiscal.DefaultDrawColumnCell(Rect, datacol, column, state);
 end;
 
 
@@ -443,23 +445,9 @@ var
  recno: integer;
 begin
   if PageControl1.ActivePage = TabSheetFiscal then
-  begin
-    ZQ_Fiscal.DisableControls;
-    recno:= ZQ_Fiscal.RecNo;
-    ZQ_Fiscal.First;
-    while not ZQ_Fiscal.Eof do
-    begin
-      ZQ_Fiscal.Edit;
-      ZQ_FiscalPREDETERMINADA.AsString:= 'N';
-      ZQ_Fiscal.Next;
-    end;
-    ZQ_Fiscal.RecNo:= recno;
-    ZQ_Fiscal.Edit;
-    ZQ_FiscalPREDETERMINADA.AsString:= 'S';
     id_IFiscal:= ZQ_FiscalID.AsInteger;
-    ZQ_Fiscal.EnableControls;
-  end
 end;
+
 
 procedure TFConfiguracion.BitBtn1Click(Sender: TObject);
 begin
@@ -478,7 +466,6 @@ begin
     dbfuente1.Font.Name:=ZQ_GeneralCOMPROBANTE_FUENTE.AsString;
   if not ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.IsNull then
     dbfuente1.Font.Style:=TFontStyles(Byte(ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.AsInteger));
-
 end;
 
 end.

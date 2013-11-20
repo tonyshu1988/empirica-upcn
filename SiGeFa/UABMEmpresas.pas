@@ -10,7 +10,7 @@ uses
   ZStoredProcedure,ShellAPI, IdMessage, IdBaseComponent, IdComponent,
   IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, ActnList,
   XPStyleActnCtrls, ActnMan, EKListadoSQL, DBClient, Provider, QuickRpt,
-  QRCtrls, EKVistaPreviaQR, Buttons, EKDBDateTimePicker;
+  QRCtrls, EKVistaPreviaQR, Buttons, EKDBDateTimePicker, cxClasses;
 
 type
   TFABMEmpresas = class(TForm)
@@ -351,6 +351,8 @@ type
     QRSysData3: TQRSysData;
     QRLabel43: TQRLabel;
     QRlblPieDePaginaListado: TQRLabel;
+    ZQ_TipoIVACOEFICIENTE: TFloatField;
+    ZQ_TipoIVAVERIFICA_CUIT: TStringField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -418,50 +420,37 @@ const
 
 implementation
 
-uses UDM, UPrincipal, UMailEnviar;
+uses UDM, UPrincipal, UMailEnviar, UUtilidades;
 
 {$R *.dfm}
 
 function TFABMEmpresas.validarCampos():boolean;
 var
   mensaje: string;
-  color: TColor;
 begin
   result:= true;
   mensaje:= '';
-//  PageControl.ActivePageIndex:= 0;
-//
-//
-//  if (ZQ_PersonaNOMBRE.IsNull) then
-//  begin
-//    mensaje:= 'El campo Apellido y Nombre se encuentra vacío, Verifique';
-//    result := false;
-//  end;
-//
-//  if (ZQ_PersonaDIRECCION.IsNull) then
-//  begin
-//    mensaje:= mensaje+#13+'El campo Dirección se encuentra vacío, Verifique';
-//    result := false;
-//  end;
-//
-//  if (ZQ_PersonaID_TIPO_DOC.IsNull) then
-//  begin
-//    mensaje:= mensaje+#13+'El campo Tipo Documento se encuentra vacío, Verifique';
-//    result := false;
-//  end;
-//
-//  if (ZQ_PersonaID_TIPO_DOC.AsInteger <> 0) then
-//    if (ZQ_PersonaNUMERO_DOC.IsNull) then
-//    begin
-//      mensaje:= mensaje+#13+'El campo Número Documento se encuentra vacío, Verifique';
-//      result := false;
-//    end;
-//
-//  if Result = False then
-//  begin
-//    Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
-//    DBEApellidoNombre.SetFocus;
-//  end;
+
+  if (ZQ_EmpresaNOMBRE.IsNull) or (trim(ZQ_EmpresaNOMBRE.AsString) = '') then
+  begin
+    mensaje:= 'El campo Nombre se encuentra vacío.';
+    result := false;
+  end;
+
+  //Verifica_CUIT es un campo de la tabla TIPO_CUIT, se configura ahí si se le exige el NroCUIT
+  if (ZQ_TipoIVAVERIFICA_CUIT.AsString='S') then
+    if not EsCUITValido(ZQ_EmpresaCUIT_CUIL.AsString) then
+    begin
+      mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido.'+char(13)+'(sólo debe ingresar números, sin guiones)';
+      result := false;
+    end;
+
+  if Result = False then
+  begin
+    mensaje:= mensaje+#13#13+'Verifique.';
+    Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
+    dbNombre.SetFocus;
+  end;
 end;
 
 
@@ -730,6 +719,10 @@ begin
   EKBusquedaAvanzadaEmpresas.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Empresa, lblCantidadRegistros);
   permisosUsuario;
+
+  dbNombre.Color:= dm.colorCampoRequido;
+//  DBCBoxTipoIva.Color:= dm.colorCampoRequido;
+//  DBEditCuitCuil.Color:= dm.colorCampoRequido;
 end;
 
 

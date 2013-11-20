@@ -9,7 +9,7 @@ uses
   EKOrdenarGrilla, ZStoredProcedure, ComCtrls, EKDBDateTimePicker,
   StdCtrls, DBCtrls, Mask, ZSqlUpdate, EKFiltrarColumna, ActnList,
   XPStyleActnCtrls, ActnMan, EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons,
-  Menus, ShellAPI, EKListadoSQL;
+  Menus, ShellAPI, EKListadoSQL, cxClasses;
 
 type
   TFABM_Personas = class(TForm)
@@ -713,45 +713,46 @@ begin
 
   if (ZQ_PersonaNOMBRE.IsNull) then
   begin
-    mensaje:= 'El campo Apellido y Nombre se encuentra vacío, Verifique';
+    mensaje:= 'El campo Apellido y Nombre se encuentra vacío.';
     result := false;
   end;
 
   if (ZQ_PersonaDIRECCION.IsNull) then
   begin
-    mensaje:= mensaje+#13+'El campo Dirección se encuentra vacío, Verifique';
+    mensaje:= mensaje+#13+'El campo Dirección se encuentra vacío.';
     result := false;
   end;
 
   if (ZQ_PersonaID_TIPO_DOC.IsNull) then
   begin
-    mensaje:= mensaje+#13+'El campo Tipo Documento se encuentra vacío, Verifique';
+    mensaje:= mensaje+#13+'El campo Tipo Documento se encuentra vacío.';
     result := false;
   end;
 
   if (ZQ_PersonaID_TIPO_DOC.AsInteger <> 0) then
     if (ZQ_PersonaNUMERO_DOC.IsNull) then
     begin
-      mensaje:= mensaje+#13+'El campo Número Documento se encuentra vacío, Verifique';
+      mensaje:= mensaje+#13+'El campo Número Documento se encuentra vacío.';
       result := false;
     end;
 
   if (ZQ_PersonaID_TIPO_IVA.IsNull) then
   begin
-    mensaje:= mensaje+#13+'El campo Condición IVA se encuentra vacío, Verifique';
+    mensaje:= mensaje+#13+'El campo Condición IVA se encuentra vacío.';
     result := false;
   end;
 
   //Verifica_CUIT es un campo de la tabla TIPO_CUIT, se configura ahí si se le exige el NroCUIT
   if (ZQ_IvaVERIFICA_CUIT.AsString='S') then
-    if not sonTodosNumeros(ZQ_PersonaCUIT_CUIL.AsString) then
+    if not EsCUITValido(ZQ_PersonaCUIT_CUIL.AsString) then
     begin
-      mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido, Verifique'+char(13)+'(sólo debe ingresar números, sin guiones)';
+      mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido.'+char(13)+'(sólo debe ingresar números, sin guiones)';
       result := false;
     end;
 
   if Result = False then
   begin
+    mensaje:= mensaje+#13#13+'Verifique.';
     Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
     DBEApellidoNombre.SetFocus;
   end;
