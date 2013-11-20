@@ -819,8 +819,9 @@ begin
     end;
 
   //PASO 2: CARGAR ITEMS
-    descuento_redondeo:= 0;
+//    descuento_redondeo:= 0;
     acumulado_item:= 0;
+    acumulado_iva:= 0;
     ZQ_Items.First;
     while not ZQ_Items.Eof do
     begin
@@ -830,22 +831,30 @@ begin
       Cantidad:= ZQ_ItemsCANTIDAD.AsFloat;
       CantidadWide:= FloatToStr(Cantidad * 1000);
 
-      if (TipoLetra = 'A') and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
-      begin
-        PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-        PrecioUnitario:= RoundTo(PrecioUnitario, -2);
-        descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat, -2);
-      end
-      else
-      begin
-        PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-        PrecioUnitario:= RoundTo(PrecioUnitario, -2);
-        descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
-      end;
-      PrecioUnitarioWide:= FloatToStr(PrecioUnitario * 100);
-      acumulado_item:= acumulado_item + (PrecioUnitario * Cantidad);
+    if (TipoLetra = 'A') and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
+    begin
+      PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
+      PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+      descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat, -2);
+    end
+    else
+    begin
+      PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
+      PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+      descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
+    end;
+    PrecioUnitarioWide:= FloatToStr(PrecioUnitario * 100);
 
-      TasaIva:= 0.21;
+//      PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
+//      PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+//      PrecioUnitarioWide:= FloatToStr(PrecioUnitario * 100);
+//      descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
+
+
+      if ZQ_ItemsPORC_IVA.IsNull then
+        TasaIva:= 0.21
+      else
+        TasaIva:= ZQ_ItemsPORC_IVA.AsFloat;
       TasaIvaWide:= FloatToStr(TasaIva * 10000);
 
       CalificadorDeItem:= 'M';
@@ -886,6 +895,8 @@ begin
         exit;
       end;
 
+      acumulado_item:= acumulado_item + (PrecioUnitario * Cantidad);
+      acumulado_iva:= acumulado_iva + ((PrecioUnitario * Cantidad)/(1+TasaIva));
       ZQ_Items.Next;
     end;
 
@@ -929,10 +940,8 @@ begin
       ZQ_FormaPago.Next;
     end;
 
-    acumulado_iva:= (acumulado_item * TasaIva);
     descuento_redondeo:= (acumulado_item + acumulado_iva) - acumulado_fpago;
     descuento_redondeo:= RoundTo((descuento_redondeo * -1), -4);
-
 //  if descuento_redondeo <> 0 then
 //  begin
 //    descuento_redondeoWide:= FloatToStr(descuento_redondeo * 1000);
@@ -1110,18 +1119,9 @@ begin
 
       Cantidad:= ZQ_ItemsCANTIDAD.AsFloat;
 
-      if ((tipoFactura = FACTURA_A) or (tipoFactura = TICKET_FACTURA_A)) and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
-      begin
-        PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-        PrecioUnitario:= RoundTo(PrecioUnitario, -2);
-        descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat, -2);
-      end
-      else
-      begin
-        PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-        PrecioUnitario:= RoundTo(PrecioUnitario, -2);
-        descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
-      end;
+      PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
+      PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+      descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
 
       ImpuestosInternos:= 0;
       if ZQ_ItemsPORC_IVA.IsNull then
