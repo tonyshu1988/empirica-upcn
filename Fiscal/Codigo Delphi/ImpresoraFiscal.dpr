@@ -12,7 +12,7 @@ uses
 begin
   Application.Initialize;
   Application.Title := 'Modulo Impresión Fiscal';
-  Application.CreateForm(TDM, DM);
   Application.CreateForm(TFPrincipal, FPrincipal);
+  Application.CreateForm(TDM, DM);
   Application.Run;
 end.

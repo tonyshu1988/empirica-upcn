@@ -43,8 +43,6 @@ type
     editNumeroComprobante_OS: TEdit;
     lblFactura_OS: TLabel;
     Hasar: THASAR;
-    DBGrid1: TDBGrid;
-    DataSource1: TDataSource;
     procedure FormCreate(Sender: TObject);
     procedure leerParametros();
     procedure leerArchivoIni();
