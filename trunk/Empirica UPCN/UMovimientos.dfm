@@ -1,6 +1,6 @@
 object FMovimientos: TFMovimientos
-  Left = 170
-  Top = 130
+  Left = 293
+  Top = 128
   Width = 1118
   Height = 643
   Color = clBtnFace
@@ -322,7 +322,7 @@ object FMovimientos: TFMovimientos
             52.916666666666670000
             1045.104166666667000000
             31.750000000000000000
-            679.979166666666800000)
+            679.979166666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1830,7 +1830,7 @@ object FMovimientos: TFMovimientos
             37.041666666666670000
             190.500000000000000000
             330.729166666666700000
-            121.708333333333300000)
+            121.708333333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1894,7 +1894,7 @@ object FMovimientos: TFMovimientos
             37.041666666666670000
             1050.395833333333000000
             330.729166666666700000
-            121.708333333333300000)
+            121.708333333333400000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -3216,7 +3216,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            76.729166666666680000
+            76.729166666666670000
             156.104166666666700000
             171.979166666666700000)
           Alignment = taRightJustify
@@ -3578,7 +3578,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            76.729166666666680000
+            76.729166666666670000
             267.229166666666700000
             171.979166666666700000)
           Alignment = taLeftJustify
@@ -3943,7 +3943,7 @@ object FMovimientos: TFMovimientos
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            997.479166666666800000
+            997.479166666666900000
             2.645833333333333000
             343.958333333333400000)
           Alignment = taCenter
@@ -5221,7 +5221,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          701.145833333333200000
+          701.145833333333400000
           1898.385416666667000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -6810,7 +6810,7 @@ object FMovimientos: TFMovimientos
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          41.892361111111120000
+          41.892361111111110000
           1898.385416666667000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -8016,11 +8016,7 @@ object FMovimientos: TFMovimientos
         Titulo = 'Medio'
         Campo = 'medio'
         Tabla = 'ie'
-        TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Medios_Cobro_Pago
-        TipoComboSQLCampoVer = 'NOMBRE_MEDIO_COBRO_PAGO'
-        TipoComboSQLCampoReal = 'id_medio'
         TipoComboEditable = False
         TipoComboAncho = 200
         ItemIndex = -1
@@ -8124,11 +8120,11 @@ object FMovimientos: TFMovimientos
     DataSet = LIBRO_BANCO
     SQL.Strings = (
       'select ie.*'
-      'from ie_ver_libro_banco(:cuenta,:hasta,:desde,:ordenamiento)ie')
+      'from ie_ver_libro_banco(:cuenta,:hasta,:desde,:ordenamiento) ie')
     SQL_Select.Strings = (
       'select ie.*')
     SQL_From.Strings = (
-      'from ie_ver_libro_banco(:cuenta,:hasta,:desde,:ordenamiento)ie')
+      'from ie_ver_libro_banco(:cuenta,:hasta,:desde,:ordenamiento) ie')
     UsarWhereOriginal = EK_Con_Where
     Left = 56
     Top = 104
