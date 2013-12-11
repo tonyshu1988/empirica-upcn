@@ -1287,7 +1287,7 @@ begin
     if (ZQ_FacturaOSNOMBRE.IsNull) or (trim(ZQ_FacturaOSNOMBRE.AsString) = '') then
       NombreComprador:= 'CONSUMIDOR FINAL'
     else
-      NombreComprador:= LeftStr(ZQ_FacturaNOMBRE.AsString, 50);
+      NombreComprador:= LeftStr(ZQ_FacturaOSNOMBRE.AsString, 50);
 
     if (ZQ_FacturaOSCUIT_CUIL.IsNull) or (trim(ZQ_FacturaOSCUIT_CUIL.AsString) = '') then
       NroDocComprador:= '0'
