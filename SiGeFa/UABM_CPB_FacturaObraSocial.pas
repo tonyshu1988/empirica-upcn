@@ -10,7 +10,7 @@ uses
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
   EKDbSuma, DBClient, Menus, UOP_BuscarProductosOS, ZSqlUpdate, jpeg,
-  ExtDlgs, ZSequence, cxClasses, ShellAPI;
+  ExtDlgs, ZSequence, cxClasses, ShellAPI, ZIBEventAlerter;
 
 type
   TFABM_CPB_FacturaObraSocial = class(TForm)
@@ -229,7 +229,6 @@ type
     Label6: TLabel;
     ZQ_ComprobanteIMAGEN: TBlobField;
     ZQ_VerCpbIMAGEN: TBlobField;
-    ZQ_VerCpbCODIGO_1: TStringField;
     ZQ_VerCpbNOMBRE: TStringField;
     ZQ_VerCpbDIRECCION: TStringField;
     ZQ_VerCpbTELEFONO: TStringField;
@@ -306,6 +305,8 @@ type
     DS_Iva: TDataSource;
     ZQ_Fiscal: TZQuery;
     ZQ_FiscalIMPORTE_FISCAL: TFloatField;
+    ZQ_VerCpbCODIGO: TStringField;
+    ZIBEvent: TZIBEventAlerter;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -347,6 +348,8 @@ type
     procedure btnImprimirRemitoClick(Sender: TObject);
     procedure guardarFactura;
     procedure btFacturarFiscalClick(Sender: TObject);
+    procedure ZIBEventEventAlert(Sender: TObject; EventName: String;
+      EventCount: Integer; var CancelAlerts: Boolean);
   private
     confirmarComprobante: boolean;
     estadoPantalla: string;
@@ -546,8 +549,7 @@ var
   estado: integer;
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-  if ((ZQ_VerCpb.IsEmpty) or
-    ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO))) then
+  if ((ZQ_VerCpb.IsEmpty) or ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
     exit;
 
   confirmarComprobante:= false;
@@ -1050,8 +1052,7 @@ var
   recno, estado: Integer;
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-  if ((ZQ_VerCpb.IsEmpty) or
-    ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO))) then
+  if ((ZQ_VerCpb.IsEmpty) or ((estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO))) then
     exit;
 
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
@@ -1172,13 +1173,18 @@ var
   recno, estado: Integer;
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-  if ((ZQ_VerCpb.IsEmpty) or
-    ((estado = ESTADO_ALMACENADO) or (estado = ESTADO_ANULADO))) then
+  if ((ZQ_VerCpb.IsEmpty) or ((estado = ESTADO_ANULADO))) then
     exit;
+
+  if not ((ZQ_VerCpbPUNTO_VENTA.IsNull) and (ZQ_VerCpbNUMERO_CPB.IsNull)) then
+  begin
+    Application.MessageBox(PChar('El comprobante seleccionado ya esta Facturado y no puede Anularse.'), 'Anular Factura OS', MB_OK + MB_ICONINFORMATION);
+    Exit;
+  end;
 
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
-  if (application.MessageBox(pchar('¿Desea anular la Factura de Compra seleccionada?'), 'ABM Factura de Compra', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  if (application.MessageBox(pchar('¿Desea anular la Factura de OS seleccionada?'), 'ABM Factura OS', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
     if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
     begin
       ZQ_Comprobante.Close;
@@ -1205,7 +1211,7 @@ begin
           dm.EKModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
-          Application.MessageBox('No se pudo anular la Factura de Compra.', 'Atención', MB_OK + MB_ICONINFORMATION);
+          Application.MessageBox('No se pudo anular la Factura de OS.', 'Atención', MB_OK + MB_ICONINFORMATION);
           exit;
         end
       end;
@@ -1224,9 +1230,15 @@ var
   estado: Integer;
   obra_social: integer;
 begin
-  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-  if ((ZQ_VerCpb.IsEmpty) or (estado = ESTADO_ANULADO)) then
+  if ZQ_VerCpb.IsEmpty then
     exit;
+
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if (estado <> ESTADO_CONFIRMADO) then
+  begin
+    Application.MessageBox(PChar('No se puede hacer un Remito de un comprobante Sin Confirmar o Anulado.'), 'Remito OS', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
 
   obra_social:= -1;
   if not ZQ_VerCpbID_OBRA_SOCIAL.IsNull then
@@ -1242,10 +1254,21 @@ end;
 procedure TFABM_CPB_FacturaObraSocial.btFacturarFiscalClick(Sender: TObject);
 var
   fiscal_Impresora, fiscal_ruta, fiscal_sistema: string;
+  estado: Integer;
 begin
-  if not ((ZQ_ComprobantePUNTO_VENTA.IsNull) and (ZQ_ComprobanteNUMERO_CPB.IsNull)) then
+  if ZQ_VerCpb.IsEmpty then
+    exit;
+
+  estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
+  if (estado <> ESTADO_CONFIRMADO) then
   begin
-    Application.MessageBox(PChar('El comprobante seleccionado ya esta impreso.'), 'Reimpresión de Comprobantes', MB_OK + MB_ICONINFORMATION);
+    Application.MessageBox(PChar('No se puede Facturar un comprobante Sin Confirmar o Anulado.'), 'Facturación OS', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
+
+  if not ((ZQ_VerCpbPUNTO_VENTA.IsNull) and (ZQ_VerCpbNUMERO_CPB.IsNull)) then
+  begin
+    Application.MessageBox(PChar('El comprobante seleccionado ya esta Facturado.'), 'Facturación OS', MB_OK + MB_ICONINFORMATION);
     Exit;
   end;
 
@@ -1257,13 +1280,26 @@ begin
   fiscal_ruta:= DM.ZQ_FiscalRUTA_ARCHIVO.AsString;
   fiscal_sistema:= DM.ZQ_FiscalSISTEMA.AsString;
 
-  if (application.MessageBox(pchar('Desea Imprimir el Comprobante Nro:' + ZQ_VerCpbCODIGO_1.AsString + ' ?'), 'Impresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
+  if (application.MessageBox(pchar('Desea Imprimir el Comprobante Nro:' + ZQ_VerCpbCODIGO.AsString + ' ?'), 'Impresión de Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
   begin
     if fiscal_sistema = 'DELPHI' then //IMPRIMIR DESDE ELPHI
     begin
       ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-l'+IntToStr(ZQ_VerCpbID_COMPROBANTE.AsInteger)+' -cO'+' -id'+inttostr(ID_FISCAL)), nil, SW_SHOWNORMAL);
-//      ShowMessage(pchar(fiscal_ruta)+' '+pchar('-l'+IntToStr(ZQ_VerCpbID_COMPROBANTE.AsInteger)+' -cO'+' -id'+inttostr(ID_FISCAL)));
     end;
+  end;
+end;
+
+
+procedure TFABM_CPB_FacturaObraSocial.ZIBEventEventAlert(Sender: TObject;
+  EventName: String; EventCount: Integer; var CancelAlerts: Boolean);
+var
+  id_cpb: integer;
+begin
+  if EventName = 'FACTURA_IMPRESA' then
+  begin
+    id_cpb:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
+    ZQ_VerCpb.Refresh;
+    ZQ_VerCpb.Locate('ID_COMPROBANTE', VarArrayOf([id_cpb]), []);
   end;
 end;
 
