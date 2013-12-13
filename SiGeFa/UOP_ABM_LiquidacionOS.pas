@@ -247,25 +247,27 @@ type
     QRChildBand26: TQRChildBand;
     QRLabel382: TQRLabel;
     QRChildBand27: TQRChildBand;
-    QRLabel383: TQRLabel;
     QRLabel384: TQRLabel;
     QRLabel385: TQRLabel;
     QRLabel386: TQRLabel;
     QRLabel387: TQRLabel;
-    QRLabel3: TQRLabel;
     QRBand58: TQRBand;
     QRlblLiqOS_CantidadTotal: TQRLabel;
     QRBand59: TQRBand;
     QRlblLiqOS_PiePagina: TQRLabel;
     QRSubDetail23: TQRSubDetail;
     QRDBText221: TQRDBText;
-    QRDBText222: TQRDBText;
     QRDBText223: TQRDBText;
     QRDBText224: TQRDBText;
     QRDBText225: TQRDBText;
-    QRDBText1: TQRDBText;
     CD_LiqFacturanro_afiliado: TStringField;
     CD_LiqFacturaafiliado: TStringField;
+    QRLabel5: TQRLabel;
+    QRDBText5: TQRDBText;
+    ZQ_VerCpbNOMBRE_ESTADO: TStringField;
+    QRLabel3: TQRLabel;
+    QRDBText1: TQRDBText;
+    QRDBText7: TQRDBText;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -468,7 +470,7 @@ begin
     ZQ_Liquidacion.Append;
     ZQ_LiquidacionFECHA_LIQUIDACION.AsDateTime:= dm.EKModelo.FechayHora;
     ZQ_LiquidacionFECHA_ANULACION.Clear;
-    ZQ_LiquidacionESTADO.AsInteger:= 0;
+    ZQ_LiquidacionESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
 
     EKDBDateFechaLiq.SetFocus;
   end;
@@ -480,7 +482,7 @@ var
   estado: integer;
 begin
   estado:= ZQ_VerCpbESTADO.AsInteger;
-  if (ZQ_VerCpb.IsEmpty) or (estado = 1) or (estado = 2) then
+  if (ZQ_VerCpb.IsEmpty) or (estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO) then
     exit;
 
   if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion, ZQ_LiqFacturas]) then
@@ -737,7 +739,7 @@ var
   recno, estado: Integer;
 begin
   estado:= ZQ_VerCpbESTADO.AsInteger;
-  if (ZQ_VerCpb.IsEmpty) or (estado = 1) or (estado = 2) then
+  if (ZQ_VerCpb.IsEmpty) or (estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO) then
     exit;
 
   if (application.MessageBox(pchar('¿Desea confirmar la Liquidación seleccionada?'), 'ABM Liquidación', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -748,7 +750,7 @@ begin
       ZQ_Liquidacion.Open;
 
       ZQ_Liquidacion.Edit;
-      ZQ_LiquidacionESTADO.AsInteger:= 1;
+      ZQ_LiquidacionESTADO.AsInteger:= ESTADO_CONFIRMADO;
 
       try
         if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
@@ -780,14 +782,14 @@ end;
 
 procedure TFOP_ABM_LiquidacionOS.DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if (ZQ_VerCpbESTADO.AsInteger = 1) then //si el registro esta confirmado
+  if (ZQ_VerCpbESTADO.AsInteger = ESTADO_CONFIRMADO) then //si el registro esta confirmado
   begin
     DBGridListaCpb.Canvas.Brush.Color:= StaticTxtConfirmado.Color;
     if (gdFocused in State) or (gdSelected in State) then
       DBGridListaCpb.Canvas.Font.Style:= DBGridListaCpb.Canvas.Font.Style + [fsBold];
   end;
 
-  if (ZQ_VerCpbESTADO.AsInteger = 2) then //si el registro esta dado de baja
+  if (ZQ_VerCpbESTADO.AsInteger = ESTADO_ANULADO) then //si el registro esta dado de baja
   begin
     DBGridListaCpb.Canvas.Brush.Color:= StaticTxtBaja.Color;
     if (gdFocused in State) or (gdSelected in State) then
@@ -811,7 +813,7 @@ var
   recno, estado: Integer;
 begin
   estado:= ZQ_VerCpbESTADO.AsInteger;
-  if (ZQ_VerCpb.IsEmpty) or (estado = 2) then
+  if (ZQ_VerCpb.IsEmpty) or (estado = ESTADO_ANULADO) then
     exit;
 
   if (application.MessageBox(pchar('¿Desea anular la Liquidación seleccionada?'), 'ABM Liquidación', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
@@ -822,7 +824,7 @@ begin
       ZQ_Liquidacion.Open;
 
       ZQ_Liquidacion.Edit;
-      ZQ_LiquidacionESTADO.AsInteger:= 2;
+      ZQ_LiquidacionESTADO.AsInteger:= ESTADO_ANULADO;
       ZQ_LiquidacionFECHA_ANULACION.AsDateTime:= dm.EKModelo.FechayHora;
 
       try
@@ -907,7 +909,9 @@ begin
   if not Assigned(vselFactura) then
     vselFactura:= TFOP_BuscarFacturaOS.Create(nil);
 
-  vselFactura.EKBuscarFacturas.SQL_Where.ValueFromIndex[3]:= IntToStr(ZQ_LiquidacionID_OS.AsInteger);
+  vselFactura.EKBuscarFacturas.SQL_From.Text:= 'from BUSCAR_FACTURAS_NO_LIQUIDADAS('+IntToStr(ZQ_LiquidacionID_OS.AsInteger)+') F';
+//  SQL_Where.ValueFromIndex[3]:= IntToStr(ZQ_LiquidacionID_OS.AsInteger);
+
   vselFactura.ZQ_Facturas.Close;
   vselFactura.OnSeleccionar:= onSelFactura;
   vselFactura.OnSeleccionarTodos:= onSelTodosFactura;
@@ -933,7 +937,7 @@ begin
       CD_LiqFactura.Append;
       CD_LiqFacturaid_comprobante.AsInteger:= vselFactura.ZQ_FacturasID_COMPROBANTE.AsInteger;
       CD_LiqFacturaid_liq_factura.AsInteger:= id_liq_factura;
-      CD_LiqFacturacodigo.AsString:= vselFactura.ZQ_FacturasCODIGO.AsString;
+      CD_LiqFacturacodigo.AsString:= vselFactura.ZQ_FacturasCODIGO_CPB.AsString;
       CD_LiqFacturapunto_venta.AsInteger:= vselFactura.ZQ_FacturasPUNTO_VENTA.AsInteger;
       CD_LiqFacturanumero_cpb.AsInteger:= vselFactura.ZQ_FacturasNUMERO_CPB.AsInteger;
       CD_LiqFacturafecha.AsDateTime:= vselFactura.ZQ_FacturasFECHA.AsDateTime;
@@ -974,7 +978,7 @@ begin
         CD_LiqFactura.Append;
         CD_LiqFacturaid_comprobante.AsInteger:= vselFactura.ZQ_FacturasID_COMPROBANTE.AsInteger;
         CD_LiqFacturaid_liq_factura.AsInteger:= id_liq_factura;
-        CD_LiqFacturacodigo.AsString:= vselFactura.ZQ_FacturasCODIGO.AsString;
+        CD_LiqFacturacodigo.AsString:= vselFactura.ZQ_FacturasCODIGO_CPB.AsString;
         CD_LiqFacturapunto_venta.AsInteger:= vselFactura.ZQ_FacturasPUNTO_VENTA.AsInteger;
         CD_LiqFacturanumero_cpb.AsInteger:= vselFactura.ZQ_FacturasNUMERO_CPB.AsInteger;
         CD_LiqFacturafecha.AsDateTime:= vselFactura.ZQ_FacturasFECHA.AsDateTime;

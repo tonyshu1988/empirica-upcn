@@ -55,7 +55,7 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
         end
         item
           Expanded = False
-          FieldName = 'CODIGO'
+          FieldName = 'CODIGO_CPB'
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'digo Factura'
           Width = 151
@@ -82,6 +82,7 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
           FieldName = 'IMPORTE_TOTAL'
           Title.Alignment = taCenter
           Title.Caption = 'Importe'
+          Width = 64
           Visible = True
         end
         item
@@ -94,7 +95,7 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
         end
         item
           Expanded = False
-          FieldName = 'CODIGO_1'
+          FieldName = 'CODIGO_OS'
           Title.Alignment = taCenter
           Title.Caption = 'C'#243'd. OS'
           Width = 70
@@ -102,7 +103,7 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
         end
         item
           Expanded = False
-          FieldName = 'NOMBRE'
+          FieldName = 'NOMBRE_OS'
           Title.Alignment = taCenter
           Title.Caption = 'Nombre OS'
           Width = 182
@@ -802,72 +803,62 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
     Connection = DM.Conexion
     SQL.Strings = (
       
-        'select distinct cpb.id_comprobante, cpb.id_sucursal, cpb.codigo,' +
-        ' cpb.numero_cpb, cpb.punto_venta,'
+        'select F.ID_COMPROBANTE, F.ID_SUCURSAL, F.ID_OBRA_SOCIAL, F.CODI' +
+        'GO_CPB, F.NUMERO_CPB, F.PUNTO_VENTA, F.FECHA,'
       
-        '        cpb.fecha, cpb.importe_total, cpb.id_obra_social, suc.no' +
-        'mbre as sucursal,'
-      
-        '        os.codigo, os.nombre, op.nro_afiliado, p.nombre as afili' +
-        'ado'
-      'from comprobante cpb'
-      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
-      'left join optica_os os on (cpb.id_obra_social = os.id_os)'
-      
-        'left join comprobante_detalle cd on (cpb.id_comprobante = cd.id_' +
-        'comprobante)'
-      
-        'left join optica_detalle_os od_os on (cd.id_comprobante_detalle ' +
-        '= od_os.id_factura_os)'
-      'left join persona p on (cd.id_auxiliar = p.id_persona)'
-      
-        'left join optica_persona_os op on (cd.id_auxiliar = op.id_person' +
-        'a)'
-      'where (cpb.id_tipo_cpb = 40)'
-      '  and cpb.id_comp_estado = 1'
-      'order by cpb.fecha desc')
-    Params = <>
+        '       F.IMPORTE_TOTAL, F.SUCURSAL, F.CODIGO_OS, F.NOMBRE_OS, F.' +
+        'NRO_AFILIADO, F.AFILIADO'
+      'from BUSCAR_FACTURAS_NO_LIQUIDADAS(:ID_OS) F'
+      'order by f.fecha')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_OS'
+        ParamType = ptUnknown
+      end>
     Left = 200
     Top = 48
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_OS'
+        ParamType = ptUnknown
+      end>
     object ZQ_FacturasID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
-      Required = True
     end
     object ZQ_FacturasID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
-      Required = True
     end
-    object ZQ_FacturasCODIGO: TStringField
-      FieldName = 'CODIGO'
+    object ZQ_FacturasID_OBRA_SOCIAL: TIntegerField
+      FieldName = 'ID_OBRA_SOCIAL'
+    end
+    object ZQ_FacturasCODIGO_CPB: TStringField
+      FieldName = 'CODIGO_CPB'
       Size = 50
     end
     object ZQ_FacturasNUMERO_CPB: TIntegerField
       FieldName = 'NUMERO_CPB'
-      DisplayFormat = '00000000'
     end
     object ZQ_FacturasPUNTO_VENTA: TIntegerField
       FieldName = 'PUNTO_VENTA'
-      DisplayFormat = '0000'
     end
-    object ZQ_FacturasFECHA: TDateTimeField
+    object ZQ_FacturasFECHA: TDateField
       FieldName = 'FECHA'
     end
     object ZQ_FacturasIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
     end
-    object ZQ_FacturasID_OBRA_SOCIAL: TIntegerField
-      FieldName = 'ID_OBRA_SOCIAL'
-    end
     object ZQ_FacturasSUCURSAL: TStringField
       FieldName = 'SUCURSAL'
       Size = 200
     end
-    object ZQ_FacturasCODIGO_1: TStringField
-      FieldName = 'CODIGO_1'
+    object ZQ_FacturasCODIGO_OS: TStringField
+      FieldName = 'CODIGO_OS'
       Size = 100
     end
-    object ZQ_FacturasNOMBRE: TStringField
-      FieldName = 'NOMBRE'
+    object ZQ_FacturasNOMBRE_OS: TStringField
+      FieldName = 'NOMBRE_OS'
       Size = 200
     end
     object ZQ_FacturasNRO_AFILIADO: TStringField
@@ -936,8 +927,8 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
     CriteriosBusqueda = <
       item
         Titulo = 'C'#243'digo Factura'
-        Campo = 'codigo'
-        Tabla = 'cpb'
+        Campo = 'codigo_cpb'
+        Tabla = 'f'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -947,7 +938,7 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
       item
         Titulo = 'Punto Venta'
         Campo = 'punto_venta'
-        Tabla = 'cpb'
+        Tabla = 'f'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -957,7 +948,7 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
       item
         Titulo = 'Nro. Factura'
         Campo = 'numero_cpb'
-        Tabla = 'cpb'
+        Tabla = 'f'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
         TipoComboAncho = 200
@@ -966,8 +957,8 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
       end
       item
         Titulo = 'Fecha'
-        Campo = 'fecga'
-        Tabla = 'cpb'
+        Campo = 'fecha'
+        Tabla = 'f'
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
@@ -979,7 +970,7 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
       item
         Titulo = 'Importe'
         Campo = 'importe_total'
-        Tabla = 'cpb'
+        Tabla = 'f'
         TipoCampo = EK_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
@@ -992,80 +983,25 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
     DataSet = ZQ_Facturas
     SQL.Strings = (
       
-        'select distinct cpb.id_comprobante, cpb.id_sucursal, cpb.codigo,' +
-        ' cpb.numero_cpb, cpb.punto_venta,'
+        'select F.ID_COMPROBANTE, F.ID_SUCURSAL, F.ID_OBRA_SOCIAL, F.CODI' +
+        'GO_CPB, F.NUMERO_CPB, F.PUNTO_VENTA, F.FECHA,'
       
-        '        cpb.fecha, cpb.importe_total, cpb.id_obra_social, suc.no' +
-        'mbre as sucursal,'
-      
-        '        os.codigo, os.nombre, op.nro_afiliado, p.nombre as afili' +
-        'ado'
-      'from comprobante cpb'
-      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
-      'left join optica_os os on (cpb.id_obra_social = os.id_os)'
-      
-        'left join comprobante_detalle cd on (cpb.id_comprobante = cd.id_' +
-        'comprobante)'
-      
-        'left join optica_detalle_os od_os on (cd.id_comprobante_detalle ' +
-        '= od_os.id_factura_os)'
-      
-        'left join optica_liquidacion_factura olf on (cpb.id_comprobante ' +
-        '= olf.id_comprobante)'
-      
-        'left join optica_liquidacion ol on olf.id_optica_liquidacion = o' +
-        'l.id_optica_liquidacion'
-      'left join persona p on (cd.id_auxiliar = p.id_persona)'
-      
-        'left join optica_persona_os op on (cd.id_auxiliar = op.id_person' +
-        'a)'
-      'where (cpb.id_tipo_cpb = 40)'
-      '  and cpb.id_comp_estado = 1'
-      
-        '  and ((olf.id_optica_liquidacion_factura is null) or (ol.estado' +
-        ' = 2))'
-      '  and cpb.id_obra_social = '
-      'order by cpb.fecha desc')
+        '       F.IMPORTE_TOTAL, F.SUCURSAL, F.CODIGO_OS, F.NOMBRE_OS, F.' +
+        'NRO_AFILIADO, F.AFILIADO'
+      'from BUSCAR_FACTURAS_NO_LIQUIDADAS(:ID_OS) F'
+      'order by f.fecha')
     SQL_Select.Strings = (
       
-        'select distinct cpb.id_comprobante, cpb.id_sucursal, cpb.codigo,' +
-        ' cpb.numero_cpb, cpb.punto_venta,'
+        'select F.ID_COMPROBANTE, F.ID_SUCURSAL, F.ID_OBRA_SOCIAL, F.CODI' +
+        'GO_CPB, F.NUMERO_CPB, F.PUNTO_VENTA, F.FECHA,'
       
-        '        cpb.fecha, cpb.importe_total, cpb.id_obra_social, suc.no' +
-        'mbre as sucursal,'
-      
-        '        os.codigo, os.nombre, op.nro_afiliado, p.nombre as afili' +
-        'ado')
+        '       F.IMPORTE_TOTAL, F.SUCURSAL, F.CODIGO_OS, F.NOMBRE_OS, F.' +
+        'NRO_AFILIADO, F.AFILIADO')
     SQL_From.Strings = (
-      'from comprobante cpb'
-      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
-      'left join optica_os os on (cpb.id_obra_social = os.id_os)'
-      
-        'left join comprobante_detalle cd on (cpb.id_comprobante = cd.id_' +
-        'comprobante)'
-      
-        'left join optica_detalle_os od_os on (cd.id_comprobante_detalle ' +
-        '= od_os.id_factura_os)'
-      
-        'left join optica_liquidacion_factura olf on (cpb.id_comprobante ' +
-        '= olf.id_comprobante)'
-      
-        'left join optica_liquidacion ol on olf.id_optica_liquidacion = o' +
-        'l.id_optica_liquidacion'
-      'left join persona p on (cd.id_auxiliar = p.id_persona)'
-      
-        'left join optica_persona_os op on (cd.id_auxiliar = op.id_person' +
-        'a)')
-    SQL_Where.Strings = (
-      'where (cpb.id_tipo_cpb = 40)'
-      '  and cpb.id_comp_estado = 1'
-      
-        '  and ((olf.id_optica_liquidacion_factura is null) or (ol.estado' +
-        ' = 2))'
-      '  and cpb.id_obra_social = ')
+      'from BUSCAR_FACTURAS_NO_LIQUIDADAS(:ID_OS) F')
     SQL_Orden.Strings = (
-      'order by cpb.fecha desc')
-    UsarWhereOriginal = EK_Con_Where
+      'order by f.fecha')
+    UsarWhereOriginal = EK_Sin_Where
     Left = 200
     Top = 168
   end
