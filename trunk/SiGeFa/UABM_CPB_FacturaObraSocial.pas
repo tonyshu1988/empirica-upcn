@@ -194,11 +194,6 @@ type
     StaticTxtConfirmado: TStaticText;
     EKBuscar: TEKBusquedaAvanzada;
     RepListado: TQuickRep;
-    QRBand9: TQRBand;
-    QRDBLogo: TQRDBImage;
-    QRLabel17: TQRLabel;
-    RepListado_Subtitulo: TQRLabel;
-    RepListado_Titulo: TQRLabel;
     QRBand10: TQRBand;
     QRDBText19: TQRDBText;
     QRDBText1: TQRDBText;
@@ -210,8 +205,6 @@ type
     QRBand12: TQRBand;
     QRExpr18: TQRExpr;
     TitleBand2: TQRBand;
-    QRLabelCritBusqueda: TQRLabel;
-    QRLabel48: TQRLabel;
     ColumnHeaderBand2: TQRBand;
     QRLabel29: TQRLabel;
     QRLabel30: TQRLabel;
@@ -307,6 +300,20 @@ type
     ZQ_FiscalIMPORTE_FISCAL: TFloatField;
     ZQ_VerCpbCODIGO: TStringField;
     ZIBEvent: TZIBEventAlerter;
+    QRLabel5: TQRLabel;
+    QRDBText7: TQRDBText;
+    QRLabel6: TQRLabel;
+    QRDBText8: TQRDBText;
+    QRLabel7: TQRLabel;
+    QRDBText9: TQRDBText;
+    ZQ_VerCpbCODIGO_1: TStringField;
+    ChildBand1: TQRChildBand;
+    QRLabelCritBusqueda: TQRLabel;
+    QRLabel48: TQRLabel;
+    QRDBLogo: TQRDBImage;
+    QRLabel17: TQRLabel;
+    RepListado_Subtitulo: TQRLabel;
+    RepListado_Titulo: TQRLabel;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -1135,23 +1142,25 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.DBGridListaCpbDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
-  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) or (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ALMACENADO) then //si el registro esta dado de baja
+  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_CONFIRMADO) then //si el registro esta dado de baja
   begin
-    DBGridListaCpb.Canvas.Brush.Color:= StaticTxtConfirmado.Color;
-    if (gdFocused in State) or (gdSelected in State) then
-      DBGridListaCpb.Canvas.Font.Style:= DBGridListaCpb.Canvas.Font.Style + [fsBold];
+    if not ZQ_VerCpbPUNTO_VENTA.IsNull then //si tiene puento de venta esta facturada
+    begin
+      DBGridListaCpb.Canvas.Brush.Color:= StaticTxtLiquidado.Color;
+      if (gdFocused in State) or (gdSelected in State) then
+        DBGridListaCpb.Canvas.Font.Style:= DBGridListaCpb.Canvas.Font.Style + [fsBold];
+    end
+    else
+    begin
+      DBGridListaCpb.Canvas.Brush.Color:= StaticTxtConfirmado.Color;
+      if (gdFocused in State) or (gdSelected in State) then
+        DBGridListaCpb.Canvas.Font.Style:= DBGridListaCpb.Canvas.Font.Style + [fsBold];
+    end
   end;
 
   if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_ANULADO) then //si el registro esta dado de baja
   begin
     DBGridListaCpb.Canvas.Brush.Color:= StaticTxtBaja.Color;
-    if (gdFocused in State) or (gdSelected in State) then
-      DBGridListaCpb.Canvas.Font.Style:= DBGridListaCpb.Canvas.Font.Style + [fsBold];
-  end;
-
-  if (ZQ_VerCpbID_COMP_ESTADO.AsInteger = ESTADO_LIQUIDADO) then //si el registro esta dado de baja
-  begin
-    DBGridListaCpb.Canvas.Brush.Color:= StaticTxtLiquidado.Color;
     if (gdFocused in State) or (gdSelected in State) then
       DBGridListaCpb.Canvas.Font.Style:= DBGridListaCpb.Canvas.Font.Style + [fsBold];
   end;
