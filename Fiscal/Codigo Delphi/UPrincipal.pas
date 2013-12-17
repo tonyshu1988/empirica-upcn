@@ -339,7 +339,13 @@ begin
   end;
 
   if not visible then
+  begin
+    MemoLog.Lines.SaveToFile(ExtractFilePath(Application.ExeName) + 'Log.txt');
+    Application.ProcessMessages;
+    cerrarImpresora();
+
     Application.Terminate;
+  end;
 end;
 
 

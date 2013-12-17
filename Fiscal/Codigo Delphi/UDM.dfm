@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
   Left = 697
-  Top = 183
+  Top = 196
   Height = 419
   Width = 499
   object ZQ_UpdateFactura: TZQuery
