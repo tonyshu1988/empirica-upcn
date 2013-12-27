@@ -1,8 +1,8 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 2
-  Top = 2
-  Width = 638
-  Height = 450
+  Left = 296
+  Top = 174
+  Width = 953
+  Height = 618
   Caption = 'Reimpresi'#243'n de Comprobantes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,39 +22,39 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 630
-    Height = 371
+    Width = 945
+    Height = 539
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 628
-      Height = 369
+      Width = 943
+      Height = 537
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 626
-        Height = 367
+        Width = 941
+        Height = 535
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object PanelComprobante: TPanel
           Left = 1
           Top = 33
-          Width = 624
-          Height = 211
+          Width = 939
+          Height = 379
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object lblTotalComprobantes: TLabel
             Left = 0
-            Top = 190
-            Width = 624
+            Top = 358
+            Width = 939
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -73,8 +73,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           end
           object Splitter1: TSplitter
             Left = 0
-            Top = 181
-            Width = 624
+            Top = 349
+            Width = 939
             Height = 9
             Cursor = crVSplit
             Align = alBottom
@@ -82,8 +82,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object DBGridComprobantes: TDBGrid
             Left = 0
             Top = 0
-            Width = 624
-            Height = 181
+            Width = 939
+            Height = 349
             Align = alClient
             Color = 14606012
             DataSource = DS_Comprobante
@@ -210,8 +210,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         end
         object PanelFPagoYProd: TPanel
           Left = 1
-          Top = 244
-          Width = 624
+          Top = 412
+          Width = 939
           Height = 122
           Align = alBottom
           BevelOuter = bvNone
@@ -225,7 +225,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object PanelProducto: TPanel
             Left = 612
             Top = 0
-            Width = 12
+            Width = 327
             Height = 122
             Align = alClient
             BevelOuter = bvNone
@@ -234,7 +234,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object lblTotalProducto: TLabel
               Left = 0
               Top = 101
-              Width = 12
+              Width = 327
               Height = 21
               Align = alBottom
               Alignment = taRightJustify
@@ -254,7 +254,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object DBGridListadoProductos: TDBGrid
               Left = 0
               Top = 0
-              Width = 12
+              Width = 327
               Height = 101
               Align = alClient
               Color = 14606012
@@ -457,13 +457,16 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         object PanelFiltro: TPanel
           Left = 1
           Top = 1
-          Width = 624
+          Width = 939
           Height = 32
           Align = alTop
           BevelOuter = bvNone
           ParentShowHint = False
           ShowHint = False
           TabOrder = 2
+          DesignSize = (
+            939
+            32)
           object BtnFiltro_Todos: TSpeedButton
             Left = 55
             Top = 6
@@ -501,6 +504,20 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             Width = 25
             Height = 13
             Caption = 'Filtro:'
+          end
+          object StaticTxtLiquidado: TStaticText
+            Left = 839
+            Top = 15
+            Width = 99
+            Height = 16
+            Alignment = taCenter
+            Anchors = [akTop, akRight, akBottom]
+            AutoSize = False
+            BorderStyle = sbsSunken
+            Caption = 'FACTURADO'
+            Color = 13828006
+            ParentColor = False
+            TabOrder = 0
           end
         end
       end

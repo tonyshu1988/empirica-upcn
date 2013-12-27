@@ -287,6 +287,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 var
+  logo_fondo: string;
   i: integer;
   pertenece: boolean;
   cerrarSistema: integer; //si es 1 se cierra el sistema
@@ -327,15 +328,14 @@ begin
     end;
   end;
 
-  pertenece:= false;
-  SUCURSAL_LOGUEO:= -1;
-
   dm.ZQ_Configuracion.Close;
   dm.ZQ_Configuracion.Open;
-
+  pertenece:= false;
   if not dm.ZQ_ConfiguracionDB_SUCURSAL.IsNull then
   begin
-    SUCURSAL_LOGUEO:= dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger; //cargo la sucursal a la cual pertenece la base de datos
+    SUCURSAL_LOGUEO:= dm.EKIni.Ini.ReadInteger('SUCURSAL_LOGUEO', 'id_sucursal', -1);
+    if SUCURSAL_LOGUEO = -1 then
+      SUCURSAL_LOGUEO:= dm.ZQ_ConfiguracionID_SUCURSAL.AsInteger; //cargo la sucursal a la cual pertenece la base de datos
 
     if DM.EKUsrLogin.PermisoAccionValorGrupo('ACCESO') <> nil then
     begin

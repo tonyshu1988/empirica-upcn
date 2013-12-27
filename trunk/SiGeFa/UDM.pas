@@ -118,6 +118,7 @@ type
     ZQ_CPB_Estado: TZQuery;
     ZQ_CPB_EstadoID_COMP_ESTADO: TIntegerField;
     ZQ_CPB_EstadoDESCRIPCION: TStringField;
+    ZQ_ConfiguracionID_SUCURSAL: TIntegerField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);
@@ -292,6 +293,7 @@ var
   aux, logo_fondo: string;
   i: integer;
 begin
+  EKIni.abrir;
   SkinData1.Active:= true;
   Application.CreateForm(TFPrincipal, FPrincipal);
 
@@ -314,7 +316,6 @@ begin
   FPrincipal.Optica1.Visible := Optica;
 
   //cargo la imagen de fondo del sistema
-  EKIni.abrir;
   ID_FISCAL:= EKIni.Ini.ReadInteger('IMPRESORA_FISCAL', 'id_fiscal', -1);
   logo_fondo:= EKIni.Ini.ReadString('LOGO_FONDO', 'logo', '');
   try
