@@ -154,6 +154,7 @@ type
     ZQ_ComprobanteID_PREVENTA: TIntegerField;
     ZQ_ComprobanteOBSERVACION: TStringField;
     ZIBEvent: TZIBEventAlerter;
+    StaticTxtLiquidado: TStaticText;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
@@ -398,7 +399,7 @@ begin
   if not ((ZQ_ComprobantePUNTO_VENTA.IsNull) and (ZQ_ComprobanteNUMERO_CPB.IsNull)) then
   begin
     Application.MessageBox(PChar('El comprobante seleccionado ya esta impreso.'), 'Reimpresión de Comprobantes', MB_OK + MB_ICONINFORMATION);
-//    Exit;
+    Exit;
   end;
 
   leerConfigFiscal();
@@ -415,11 +416,17 @@ end;
 
 
 procedure TFReimpresionComprobantes.DBGridComprobantesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-var
-  vencida: string;
 begin
-  if ZQ_ComprobantePUNTO_VENTA.IsNull then vencida:= 'N' else vencida:= 'S';
-  FPrincipal.PintarFilasGrillasConBajas(DBGridComprobantes, vencida, Rect, DataCol, Column, State)
+  if (not ZQ_ComprobantePUNTO_VENTA.IsNull) then //si tiene punto de venta no nulo
+  begin
+    DBGridComprobantes.Canvas.Brush.Color:= StaticTxtLiquidado.Color;
+    if (gdFocused in State) or (gdSelected in State) then
+      DBGridComprobantes.Canvas.Font.Style:= DBGridComprobantes.Canvas.Font.Style + [fsBold];
+  end;
+
+  DBGridComprobantes.DefaultDrawColumnCell(rect, datacol, column, state);
+
+  FPrincipal.PintarFilasGrillas(DBGridComprobantes, Rect, DataCol, Column, State);
 end;
 
 

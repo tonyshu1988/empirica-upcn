@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
   Left = 525
-  Top = 239
+  Top = 255
   Height = 471
   Width = 396
   object Conexion: TZConnection
@@ -16,6 +16,7 @@ object DM: TDM
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
+    Connected = True
     SQLHourGlass = True
     Left = 38
     Top = 16
@@ -1485,6 +1486,9 @@ object DM: TDM
     end
     object ZQ_ConfiguracionULTIMA_FECHA: TDateTimeField
       FieldName = 'ULTIMA_FECHA'
+    end
+    object ZQ_ConfiguracionID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
     end
   end
   object ExcelNative: TmxNativeExcel
