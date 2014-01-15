@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 296
-  Top = 174
+  Left = 685
+  Top = 228
   Width = 953
   Height = 618
   Caption = 'Reimpresi'#243'n de Comprobantes'
@@ -2141,15 +2141,5 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         Name = 'id_comp_fpago'
         ParamType = ptUnknown
       end>
-  end
-  object ZIBEvent: TZIBEventAlerter
-    AutoRegister = True
-    Connection = DM.Conexion
-    Events.Strings = (
-      'FACTURA_IMPRESA')
-    Registered = True
-    OnEventAlert = ZIBEventEventAlert
-    Left = 635
-    Top = 83
   end
 end
