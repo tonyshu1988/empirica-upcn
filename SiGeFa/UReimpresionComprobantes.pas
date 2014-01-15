@@ -153,7 +153,6 @@ type
     ZQ_CambiarFPago: TZQuery;
     ZQ_ComprobanteID_PREVENTA: TIntegerField;
     ZQ_ComprobanteOBSERVACION: TStringField;
-    ZIBEvent: TZIBEventAlerter;
     StaticTxtLiquidado: TStaticText;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -178,8 +177,6 @@ type
     procedure PopUpItemCambiarCliente1Click(Sender: TObject);
     procedure PopUpItemCambiarCuentaClick(Sender: TObject);
     procedure PopUpItemCambiarFPagoClick(Sender: TObject);
-    procedure ZIBEventEventAlert(Sender: TObject;
-      EventName: String; EventCount: Integer; var CancelAlerts: Boolean);
   Private
     { Private declarations }
   Public
@@ -260,10 +257,10 @@ procedure TFReimpresionComprobantes.FormCreate(Sender: TObject);
 var
   anio, mes: integer;
 begin
-  EKOrdenarFacturas.CargarConfigColumnas;
-  EKOrdenarFPago.CargarConfigColumnas;
-  EKOrdenarProducto.CargarConfigColumnas;
-  cargarConfigPanel;
+//  EKOrdenarFacturas.CargarConfigColumnas;
+//  EKOrdenarFPago.CargarConfigColumnas;
+//  EKOrdenarProducto.CargarConfigColumnas;
+  //cargarConfigPanel;
 
   where:= '';
   PanelFPagoYProd.Visible:= False;
@@ -371,7 +368,7 @@ begin
   EKOrdenarFacturas.GuardarConfigColumnas;
   EKOrdenarProducto.GuardarConfigColumnas;
   EKOrdenarFPago.GuardarConfigColumnas;
-  guardarConfigPanel;
+  //guardarConfigPanel;
 end;
 
 
@@ -687,12 +684,6 @@ begin
     end;
 end;
 
-
-procedure TFReimpresionComprobantes.ZIBEventEventAlert(Sender: TObject; EventName: String; EventCount: Integer; var CancelAlerts: Boolean);
-begin
-  if EventName = 'FACTURA_IMPRESA' then
-    ZQ_Comprobante.Refresh;
-end;
 
 end.
 

@@ -8,7 +8,8 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
   StdCtrls, EKDbSuma, EKOrdenarGrilla, Buttons, mxNativeExcel, mxExport,
   ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls, EKVistaPreviaQR,
-  ZStoredProcedure, Series, TeEngine, TeeProcs, Chart, DbChart, Menus;
+  ZStoredProcedure, Series, TeEngine, TeeProcs, Chart, DbChart, Menus,
+  cxClasses;
 
 type
   TFEstadisticaVentas = class(TForm)
@@ -596,7 +597,7 @@ begin
   EKOrdenarFPago.GuardarConfigColumnas;
   EKOrdenarGrillaRanking.GuardarConfigColumnas;
   EKOrdenarGrillaTop20.GuardarConfigColumnas;
-  guardarConfigPanel;
+  
 end;
 
 
