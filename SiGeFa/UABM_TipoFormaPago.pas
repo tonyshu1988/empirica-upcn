@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt;
+  EKVistaPreviaQR, QRCtrls, QuickRpt, cxClasses;
 
 type
   TFABM_TipoFormaPago = class(TForm)
@@ -90,6 +90,16 @@ type
     btnExcel: TdxBarLargeButton;
     Label6: TLabel;
     DBComboBox2: TDBComboBox;
+    ZQ_TipoFPagoDESCUENTO: TIntegerField;
+    ZQ_TipoFPagoRETENCIONES: TIntegerField;
+    ZQ_TipoFPagoIVA_21: TIntegerField;
+    ZQ_TipoFPagoIVA_10: TIntegerField;
+    ZQ_TipoFPagoINT: TIntegerField;
+    ZQ_TipoFPagoGANANCIAS: TIntegerField;
+    ZQ_TipoFPagoIIBB: TIntegerField;
+    ZQ_TipoFPagoA_POS: TIntegerField;
+    ZQ_TipoFPagoA_NEG: TIntegerField;
+    ZQ_TipoFPagoOTROS_DESCUENTOS: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);

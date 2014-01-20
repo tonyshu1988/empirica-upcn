@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 685
-  Top = 228
+  Left = 353
+  Top = 192
   Width = 953
   Height = 618
   Caption = 'Reimpresi'#243'n de Comprobantes'

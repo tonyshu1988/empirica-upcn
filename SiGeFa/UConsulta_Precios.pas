@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DBCtrls, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, strutils, Mask, UBuscarProductoStock,
-  ActnList, XPStyleActnCtrls, ActnMan, EKListadoSQL;
+  ActnList, XPStyleActnCtrls, ActnMan, EKListadoSQL, cxClasses;
 
 type
   TFConsulta_Precios = class(TForm)
