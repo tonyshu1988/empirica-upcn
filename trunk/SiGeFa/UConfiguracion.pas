@@ -140,6 +140,10 @@ type
     dbfuente1: TDBText;
     ZQ_GeneralCOMPROBANTE_FUENTE: TStringField;
     ZQ_GeneralCOMPROBANTE_FUENTE_STYLE: TIntegerField;
+    BitBtn2: TBitBtn;
+    dbfuente2: TDBText;
+    ZQ_GeneralCOMPROBANTE_TITULO_FUENTE: TStringField;
+    ZQ_GeneralCOMPROBANTE_TITULO_STYLE: TIntegerField;
     procedure btnSalirClick(Sender: TObject);
     procedure habilitarCarga(flag: boolean);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -162,6 +166,7 @@ type
     procedure DBGridVariablesDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnSeleccionarClick(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
+    procedure BitBtn2Click(Sender: TObject);
   private
     id_IFiscal: integer;
   public
@@ -464,8 +469,27 @@ begin
 
    if not ZQ_GeneralCOMPROBANTE_FUENTE.IsNull then
     dbfuente1.Font.Name:=ZQ_GeneralCOMPROBANTE_FUENTE.AsString;
-  if not ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.IsNull then
+   if not ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.IsNull then
     dbfuente1.Font.Style:=TFontStyles(Byte(ZQ_GeneralCOMPROBANTE_FUENTE_STYLE.AsInteger));
+end;
+
+procedure TFConfiguracion.BitBtn2Click(Sender: TObject);
+begin
+ if not ZQ_GeneralCOMPROBANTE_TITULO_FUENTE.IsNull then
+    FontDialog1.Font.Name:=ZQ_GeneralCOMPROBANTE_TITULO_FUENTE.AsString;
+  if not ZQ_GeneralCOMPROBANTE_TITULO_STYLE.IsNull then
+    FontDialog1.Font.Style:=TFontStyles(Byte(ZQ_GeneralCOMPROBANTE_TITULO_STYLE.AsInteger));
+
+  if FontDialog1.Execute then
+   begin
+       ZQ_GeneralCOMPROBANTE_TITULO_FUENTE.AsString:=FontDialog1.Font.Name;
+       ZQ_GeneralCOMPROBANTE_TITULO_STYLE.AsInteger:=Byte(FontDialog1.Font.Style);
+   end;
+
+   if not ZQ_GeneralCOMPROBANTE_TITULO_FUENTE.IsNull then
+    dbfuente2.Font.Name:=ZQ_GeneralCOMPROBANTE_TITULO_FUENTE.AsString;
+   if not ZQ_GeneralCOMPROBANTE_TITULO_STYLE.IsNull then
+    dbfuente2.Font.Style:=TFontStyles(Byte(ZQ_GeneralCOMPROBANTE_TITULO_STYLE.AsInteger));
 end;
 
 end.
