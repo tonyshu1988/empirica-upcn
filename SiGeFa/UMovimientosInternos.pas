@@ -10,7 +10,7 @@ uses
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, ComCtrls,
-  EKDBDateTimePicker, EKListadoSQL, EKDbSuma, Buttons;
+  EKDBDateTimePicker, EKListadoSQL, EKDbSuma, Buttons, cxClasses;
 
 type
   TFMovimientosInternos = class(TForm)

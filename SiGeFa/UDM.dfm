@@ -1829,6 +1829,13 @@ object DM: TDM
     object ZQ_SucursalCOMPROBANTE_FUENTE_STYLE: TIntegerField
       FieldName = 'COMPROBANTE_FUENTE_STYLE'
     end
+    object ZQ_SucursalCOMPROBANTE_TITULO_FUENTE: TStringField
+      FieldName = 'COMPROBANTE_TITULO_FUENTE'
+      Size = 100
+    end
+    object ZQ_SucursalCOMPROBANTE_TITULO_STYLE: TIntegerField
+      FieldName = 'COMPROBANTE_TITULO_STYLE'
+    end
   end
   object ZQ_Configuracion_Variables: TZQuery
     Connection = Conexion

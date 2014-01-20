@@ -11,7 +11,8 @@ uses
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
-  EKDbSuma, DBClient, Menus, UBuscarProductoStock, UBuscarPersona;
+  EKDbSuma, DBClient, Menus, UBuscarProductoStock, UBuscarPersona,
+  cxClasses;
 
 type
   TFABM_CPB_Devolucion = class(TForm)

@@ -119,6 +119,8 @@ type
     ZQ_CPB_EstadoID_COMP_ESTADO: TIntegerField;
     ZQ_CPB_EstadoDESCRIPCION: TStringField;
     ZQ_ConfiguracionID_SUCURSAL: TIntegerField;
+    ZQ_SucursalCOMPROBANTE_TITULO_FUENTE: TStringField;
+    ZQ_SucursalCOMPROBANTE_TITULO_STYLE: TIntegerField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);
@@ -466,10 +468,10 @@ begin
   Form := Tform(Reporte.Owner);
   Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Titulo'));
   Etiqueta.Caption:= ZQ_SucursalCOMPROBANTE_TITULO.AsString;
-  if not ZQ_SucursalCOMPROBANTE_FUENTE.IsNull then
-    Etiqueta.Font.Name:=ZQ_SucursalCOMPROBANTE_FUENTE.AsString;
-  if not ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.IsNull then
-    Etiqueta.Font.Style:=TFontStyles(Byte(ZQ_SucursalCOMPROBANTE_FUENTE_STYLE.AsInteger));
+  if not ZQ_SucursalCOMPROBANTE_TITULO_FUENTE.IsNull then
+    Etiqueta.Font.Name:=ZQ_SucursalCOMPROBANTE_TITULO_FUENTE.AsString;
+  if not ZQ_SucursalCOMPROBANTE_TITULO_STYLE.IsNull then
+    Etiqueta.Font.Style:=TFontStyles(Byte(ZQ_SucursalCOMPROBANTE_TITULO_STYLE.AsInteger));
 
 
   Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Renglon1'));
