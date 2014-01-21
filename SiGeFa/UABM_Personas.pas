@@ -599,6 +599,14 @@ begin
       ZQ_RelacionClienteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
       ZQ_RelacionClienteID_EMPRESA.Clear;
     end
+    else //Es empleado
+     begin
+      ZQ_RelacionCliente.Append;
+      ZQ_RelacionClienteID_PERSONA.AsInteger:= id_persona;
+      ZQ_RelacionClienteID_RELACION.AsInteger:= RELACION_EMPLEADO; //cliente
+      ZQ_RelacionClienteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
+      ZQ_RelacionClienteID_EMPRESA.Clear;
+     end
   end
   else //si existe la relacion
   begin
