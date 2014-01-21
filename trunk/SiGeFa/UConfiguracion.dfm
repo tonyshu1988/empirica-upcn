@@ -1,6 +1,6 @@
 object FConfiguracion: TFConfiguracion
-  Left = 364
-  Top = 74
+  Left = 366
+  Top = 75
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Configuraci'#243'n General del Sistema'
