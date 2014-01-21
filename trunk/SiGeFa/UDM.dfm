@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 525
-  Top = 255
+  Left = 529
+  Top = 259
   Height = 471
   Width = 396
   object Conexion: TZConnection
@@ -16,7 +16,6 @@ object DM: TDM
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
-    Connected = True
     SQLHourGlass = True
     Left = 38
     Top = 16
@@ -1835,6 +1834,9 @@ object DM: TDM
     end
     object ZQ_SucursalCOMPROBANTE_TITULO_STYLE: TIntegerField
       FieldName = 'COMPROBANTE_TITULO_STYLE'
+    end
+    object ZQ_SucursalCOMPROBANTE_TITULO_SIZE: TIntegerField
+      FieldName = 'COMPROBANTE_TITULO_SIZE'
     end
   end
   object ZQ_Configuracion_Variables: TZQuery

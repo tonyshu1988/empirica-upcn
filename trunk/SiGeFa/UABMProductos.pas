@@ -310,6 +310,9 @@ type
     PopUpMenuProductos: TPopupMenu;
     PopUpItem_Agrandar: TMenuItem;
     PopUpItem_Reducir: TMenuItem;
+    PageControl1: TPageControl;
+    TabSheet1: TTabSheet;
+    TabSheet2: TTabSheet;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -951,6 +954,8 @@ begin
 //  LabelCodCorto.Enabled:= false;
 //  EDDCODCORTO.Enabled := false;
 ///////////////////////////////////////////////
+  grilla.Height:=1;
+  
   ZQ_Articulo.Refresh;
 
   ZQ_DetalleProducto.Append;
@@ -1002,7 +1007,7 @@ begin
   ZQ_DetalleProducto.Edit;
   LabelCodCorto.Enabled:= true;
   EDDCODCORTO.Enabled:= true;
-
+    grilla.Height:=1;
   PDatosDetalle.Visible:= true;
 
   campoQueCambia:= '';

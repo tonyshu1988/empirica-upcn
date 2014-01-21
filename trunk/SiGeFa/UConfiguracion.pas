@@ -144,6 +144,7 @@ type
     dbfuente2: TDBText;
     ZQ_GeneralCOMPROBANTE_TITULO_FUENTE: TStringField;
     ZQ_GeneralCOMPROBANTE_TITULO_STYLE: TIntegerField;
+    ZQ_GeneralCOMPROBANTE_TITULO_SIZE: TIntegerField;
     procedure btnSalirClick(Sender: TObject);
     procedure habilitarCarga(flag: boolean);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -479,17 +480,22 @@ begin
     FontDialog1.Font.Name:=ZQ_GeneralCOMPROBANTE_TITULO_FUENTE.AsString;
   if not ZQ_GeneralCOMPROBANTE_TITULO_STYLE.IsNull then
     FontDialog1.Font.Style:=TFontStyles(Byte(ZQ_GeneralCOMPROBANTE_TITULO_STYLE.AsInteger));
+    if not ZQ_GeneralCOMPROBANTE_TITULO_SIZE.IsNull then
+    FontDialog1.Font.Size:=Byte(ZQ_GeneralCOMPROBANTE_TITULO_SIZE.AsInteger);
 
   if FontDialog1.Execute then
    begin
        ZQ_GeneralCOMPROBANTE_TITULO_FUENTE.AsString:=FontDialog1.Font.Name;
        ZQ_GeneralCOMPROBANTE_TITULO_STYLE.AsInteger:=Byte(FontDialog1.Font.Style);
+       ZQ_GeneralCOMPROBANTE_TITULO_SIZE.AsInteger:=Byte(FontDialog1.Font.Size);
    end;
 
    if not ZQ_GeneralCOMPROBANTE_TITULO_FUENTE.IsNull then
     dbfuente2.Font.Name:=ZQ_GeneralCOMPROBANTE_TITULO_FUENTE.AsString;
    if not ZQ_GeneralCOMPROBANTE_TITULO_STYLE.IsNull then
     dbfuente2.Font.Style:=TFontStyles(Byte(ZQ_GeneralCOMPROBANTE_TITULO_STYLE.AsInteger));
+    if not ZQ_GeneralCOMPROBANTE_TITULO_SIZE.IsNull then
+    dbfuente2.Font.Size:=Byte(ZQ_GeneralCOMPROBANTE_TITULO_SIZE.AsInteger);
 end;
 
 end.

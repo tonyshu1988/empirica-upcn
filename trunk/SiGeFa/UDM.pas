@@ -121,6 +121,7 @@ type
     ZQ_ConfiguracionID_SUCURSAL: TIntegerField;
     ZQ_SucursalCOMPROBANTE_TITULO_FUENTE: TStringField;
     ZQ_SucursalCOMPROBANTE_TITULO_STYLE: TIntegerField;
+    ZQ_SucursalCOMPROBANTE_TITULO_SIZE: TIntegerField;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);
@@ -472,6 +473,8 @@ begin
     Etiqueta.Font.Name:=ZQ_SucursalCOMPROBANTE_TITULO_FUENTE.AsString;
   if not ZQ_SucursalCOMPROBANTE_TITULO_STYLE.IsNull then
     Etiqueta.Font.Style:=TFontStyles(Byte(ZQ_SucursalCOMPROBANTE_TITULO_STYLE.AsInteger));
+  if not ZQ_SucursalCOMPROBANTE_TITULO_SIZE.IsNull then
+    Etiqueta.Font.Size:=Byte(ZQ_SucursalCOMPROBANTE_TITULO_SIZE.AsInteger);
 
 
   Etiqueta:= TQRLabel(Form.FindComponent(reporte.Name+'_Renglon1'));
