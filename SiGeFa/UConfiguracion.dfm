@@ -1787,6 +1787,9 @@ object FConfiguracion: TFConfiguracion
     object ZQ_GeneralCOMPROBANTE_TITULO_STYLE: TIntegerField
       FieldName = 'COMPROBANTE_TITULO_STYLE'
     end
+    object ZQ_GeneralCOMPROBANTE_TITULO_SIZE: TIntegerField
+      FieldName = 'COMPROBANTE_TITULO_SIZE'
+    end
   end
   object DS_Variables: TDataSource
     DataSet = ZQ_Variables

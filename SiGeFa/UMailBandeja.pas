@@ -8,7 +8,8 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   IdMessage, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdMessageClient, IdPOP3, idsync, idglobal, Buttons, ImgList, Menus,
-  EKListadoSQL, cxClasses, IdAttachmentFile, IdText, EKIni, EKDBGrid;
+  EKListadoSQL, cxClasses, IdAttachmentFile, IdText, EKIni, EKDBGrid,
+  OleCtrls, SHDocVw;
 
 type
   TFMailBandeja = class(TForm)
@@ -110,6 +111,8 @@ type
     ItemPUEntrada_Responder: TMenuItem;
     ZQuery1: TZQuery;
     ListView1: TListView;
+    Splitter1: TSplitter;
+    Splitter2: TSplitter;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
