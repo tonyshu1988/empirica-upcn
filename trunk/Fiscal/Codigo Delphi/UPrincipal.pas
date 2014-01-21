@@ -874,8 +874,8 @@ begin
 
       if productoDetallado then
       begin
-        LineaDescExtra1:= LeftStr(' Marca: ' + ZQ_ItemsNOMBRE_MARCA.AsString, 30);
-        LineaDescExtra2:= LeftStr(' Col.: ' + ZQ_ItemsNOMBRE_COLOR.AsString + ' / Med.: ' + ZQ_ItemsNOMBRE_MEDIDA.AsString, 30);
+        LineaDescExtra1:= LeftStr(ZQ_ItemsNOMBRE_MARCA.AsString, 30);
+        LineaDescExtra2:= LeftStr(ZQ_ItemsNOMBRE_COLOR.AsString + ' | ' + ZQ_ItemsNOMBRE_MEDIDA.AsString, 30);
       end;
 
       TasaAcrecentamiento:= 0;
@@ -928,7 +928,7 @@ begin
     begin
       DescripcionFPago:= LeftStr(ZQ_FormaPagoFORMA_PAGO_NOMBRE.AsString, 25);
       MontoFPago:= ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat;
-      MontoFPagoWide:= FloatToStr(ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat * 100);
+      MontoFPagoWide:=rellenar(FloatToStr(ZQ_FormaPagoFORMA_PAGO_IMPORTE.AsFloat * 100), '0', 3);
       acumulado_fpago:= acumulado_fpago + MontoFPago;
       CalificadorFPago:= 'T';
       MemoLog.Lines.Add(' - PrinterFiscal_Epson.SendInvoicePayment(' + DescripcionFPago + ', ' + MontoFPagoWide + ', ' + CalificadorFPago + ');');
