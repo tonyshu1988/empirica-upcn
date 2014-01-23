@@ -41,7 +41,6 @@ type
     ZQ_Comprobante: TZQuery;
     ZQ_ComprobanteCODIGO: TStringField;
     ZQ_ComprobanteID_COMPROBANTE: TIntegerField;
-    ZQ_ComprobanteFECHA: TDateTimeField;
     ZQ_ComprobantePORC_IVA: TFloatField;
     ZQ_ComprobanteIMPORTEVENTA_: TFloatField;
     ZQ_ComprobanteSUC_: TStringField;
@@ -154,6 +153,7 @@ type
     ZQ_ComprobanteID_PREVENTA: TIntegerField;
     ZQ_ComprobanteOBSERVACION: TStringField;
     StaticTxtLiquidado: TStaticText;
+    ZQ_ComprobanteFECHA_COBRADA: TDateTimeField;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
