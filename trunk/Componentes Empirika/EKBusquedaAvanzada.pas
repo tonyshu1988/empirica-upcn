@@ -1318,7 +1318,7 @@ begin
   armarfecha:= Format('cast(' + txt_campo + ' as Date) ' + txt_condicion + ' %s', [QuotedStr(txt_fecha)]);
   if txt_condicion = 'Es Nulo' then
     armarfecha:= ' UPPER(' + txt_campo + ') IS NULL';
-  if txt_condicion = 'Es No Nulo' then;
+  if txt_condicion = 'Es No Nulo' then
     armarfecha:= ' UPPER(' + txt_campo + ') IS NOT NULL'
 end;
 
