@@ -24,7 +24,7 @@ object FConfiguracion: TFConfiguracion
     Top = 0
     Width = 710
     Height = 508
-    ActivePage = TabSheetGeneral
+    ActivePage = TabSheetFiscal
     Align = alClient
     TabOrder = 4
     OnChanging = PageControl1Changing

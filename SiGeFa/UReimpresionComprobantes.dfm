@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 353
-  Top = 192
+  Left = 268
+  Top = 189
   Width = 953
   Height = 618
   Caption = 'Reimpresi'#243'n de Comprobantes'
@@ -114,7 +114,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
               end
               item
                 Expanded = False
-                FieldName = 'FECHA'
+                FieldName = 'FECHA_COBRO'
                 Title.Alignment = taCenter
                 Title.Caption = 'Fecha'
                 Width = 72
@@ -1029,13 +1029,13 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   end
   object ZQ_Comprobante: TZQuery
     Connection = DM.Conexion
-    SortedFields = 'FECHA;CODIGO'
-    SortType = stDescending
+    SortedFields = 'FECHA_COBRADA Desc;CODIGO Asc'
+    SortType = stIgnored
     AfterScroll = ZQ_ComprobanteAfterScroll
     SQL.Strings = (
       
-        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
-        ' as Fecha, c.porc_iva,'
+        'select distinct c.codigo, c.id_comprobante, c.fecha_cobrada, c.p' +
+        'orc_iva,'
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
@@ -1046,16 +1046,19 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       '       c.fecha as fecha_hora, c.id_preventa, c.observacion'
       'from comprobante c'
       
-        'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
-        'mprobante)'
+        'inner join comprobante_forma_pago cfp on (cfp.id_comprobante = c' +
+        '.id_comprobante)'
       
-        'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
-        'formapag)'
-      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
-      'join persona p1 on (p1.id_persona = c.id_vendedor)'
-      'join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
-      'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
-      'join persona p2 on (p2.id_persona = c.id_cliente)'
+        'inner join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id' +
+        '_tipo_formapag)'
+      'inner join cuenta cta on (cfp.cuenta_ingreso = cta.id_cuenta)'
+      'inner join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'inner join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'inner join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      
+        'inner join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cp' +
+        'b)'
+      'inner join persona p2 on (p2.id_persona = c.id_cliente)'
       'where (c.id_tipo_cpb = 11)'
       
         'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
@@ -1065,11 +1068,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
         'unto_venta,'
       '         c.numero_cpb, c.fecha, c.id_preventa, c.observacion'
-      ''
-      ''
       '')
     Params = <>
-    IndexFieldNames = 'FECHA Desc;CODIGO Desc'
+    IndexFieldNames = 'FECHA_COBRADA Desc;CODIGO Asc'
     Left = 194
     Top = 80
     object ZQ_ComprobanteCODIGO: TStringField
@@ -1079,9 +1080,6 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     object ZQ_ComprobanteID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
       Required = True
-    end
-    object ZQ_ComprobanteFECHA: TDateTimeField
-      FieldName = 'FECHA'
     end
     object ZQ_ComprobantePORC_IVA: TFloatField
       FieldName = 'PORC_IVA'
@@ -1137,6 +1135,9 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     object ZQ_ComprobanteOBSERVACION: TStringField
       FieldName = 'OBSERVACION'
       Size = 1500
+    end
+    object ZQ_ComprobanteFECHA_COBRADA: TDateTimeField
+      FieldName = 'FECHA_COBRADA'
     end
   end
   object DS_Comprobante: TDataSource
@@ -1388,14 +1389,14 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       end
       item
         Titulo = 'Fecha'
-        Campo = 'fecha'
+        Campo = 'fecha_cobrada'
         Tabla = 'comprobante'
         TipoCampo = EK_Fecha
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
         TipoComboAncho = 200
-        ItemIndex = -1
+        ItemIndex = 0
         VaciarValorDespues = False
       end
       item
@@ -1502,24 +1503,14 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         TipoComboAncho = 200
         ItemIndex = -1
         VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Producto'
-        Campo = 'nombre'
-        Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
     Modelo = DM.EKModelo
     DataSet = ZQ_Comprobante
     SQL.Strings = (
       
-        'select distinct c.codigo, c.id_comprobante, cast(c.fecha_cobrada' +
-        ' as date) as Fecha, c.porc_iva,'
+        'select distinct c.codigo, c.id_comprobante, c.fecha_cobrada , c.' +
+        'porc_iva,'
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
@@ -1558,8 +1549,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       '')
     SQL_Select.Strings = (
       
-        'select distinct c.codigo, c.id_comprobante, cast(c.fecha_cobrada' +
-        ' as date) as Fecha, c.porc_iva,'
+        'select distinct c.codigo, c.id_comprobante, c.fecha_cobrada , c.' +
+        'porc_iva,'
       
         '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
         ' p1.nombre as Vendedor_,'
