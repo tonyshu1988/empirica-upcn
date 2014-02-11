@@ -20,7 +20,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
     Top = 0
     Width = 936
     Height = 564
-    ActivePage = TabSheet6
+    ActivePage = TabSheet10
     Align = alClient
     TabOrder = 0
     object TabSheet1: TTabSheet
@@ -3290,7 +3290,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            814.916666666666700000
+            814.916666666666800000
             1899.708333333333000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -3340,8 +3340,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               76.729166666666680000
-              42.333333333333330000
-              359.833333333333300000)
+              42.333333333333340000
+              359.833333333333400000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -4226,7 +4226,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               1203.854166666667000000
               219.604166666666700000
               619.125000000000000000)
@@ -4410,7 +4410,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333320000
+              97.895833333333340000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -4442,7 +4442,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333320000
+              97.895833333333340000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -5115,7 +5115,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel50: TQRLabel
-            Left = 241
+            Left = 233
             Top = 1
             Width = 52
             Height = 14
@@ -5126,7 +5126,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              637.645833333333200000
+              616.479166666666800000
               2.645833333333333000
               137.583333333333300000)
             Alignment = taLeftJustify
@@ -5147,7 +5147,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel51: TQRLabel
-            Left = 389
+            Left = 341
             Top = 1
             Width = 47
             Height = 14
@@ -5158,7 +5158,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1029.229166666667000000
+              902.229166666666800000
               2.645833333333333000
               124.354166666666700000)
             Alignment = taLeftJustify
@@ -5166,6 +5166,38 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AutoSize = True
             AutoStretch = False
             Caption = 'Medida'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRLabel335: TQRLabel
+            Left = 415
+            Top = 1
+            Width = 40
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1098.020833333333000000
+              2.645833333333333000
+              105.833333333333300000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = True
+            AutoStretch = False
+            Caption = 'Marca'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -5336,7 +5368,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               52.916666666666670000
               10.583333333333330000
               7.937500000000000000
-              351.895833333333300000)
+              351.895833333333400000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -5415,7 +5447,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           object QRDBText31: TQRDBText
             Left = 3
             Top = 1
-            Width = 234
+            Width = 230
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -5426,7 +5458,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               37.041666666666670000
               7.937500000000000000
               2.645833333333333000
-              619.125000000000000000)
+              608.541666666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -5446,9 +5478,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRDBText33: TQRDBText
-            Left = 241
+            Left = 233
             Top = 1
-            Width = 144
+            Width = 112
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -5457,9 +5489,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              637.645833333333200000
+              616.479166666666800000
               2.645833333333333000
-              381.000000000000000000)
+              296.333333333333400000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -5479,9 +5511,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRDBText34: TQRDBText
-            Left = 389
+            Left = 343
             Top = 1
-            Width = 88
+            Width = 44
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -5490,9 +5522,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1029.229166666667000000
+              907.520833333333400000
               2.645833333333333000
-              232.833333333333300000)
+              116.416666666666700000)
             Alignment = taCenter
             AlignToBand = False
             AutoSize = False
@@ -5599,6 +5631,39 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Color = clWhite
             DataSet = ZQ_Producto
             DataField = 'IMPORTE_VENTA'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = False
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRDBText208: TQRDBText
+            Left = 390
+            Top = 1
+            Width = 92
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1031.875000000000000000
+              2.645833333333333000
+              243.416666666666700000)
+            Alignment = taCenter
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Color = clWhite
+            DataSet = ZQ_Producto
+            DataField = 'MARCA'
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -6131,7 +6196,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               1203.854166666667000000
               219.604166666666700000
               619.125000000000000000)
@@ -6315,7 +6380,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333320000
+              97.895833333333340000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -6347,7 +6412,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333320000
+              97.895833333333340000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -6817,7 +6882,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               13.229166666666670000
-              58.208333333333320000
+              58.208333333333340000
               830.791666666666800000)
             Alignment = taLeftJustify
             AlignToBand = False
@@ -6892,7 +6957,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel15: TQRLabel
-            Left = 321
+            Left = 318
             Top = 1
             Width = 52
             Height = 14
@@ -6903,7 +6968,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              849.312500000000000000
+              841.375000000000000000
               2.645833333333333000
               137.583333333333300000)
             Alignment = taLeftJustify
@@ -6924,7 +6989,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel18: TQRLabel
-            Left = 469
+            Left = 528
             Top = 1
             Width = 47
             Height = 14
@@ -6935,7 +7000,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1240.895833333333000000
+              1397.000000000000000000
               2.645833333333333000
               124.354166666666700000)
             Alignment = taLeftJustify
@@ -6988,7 +7053,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel10: TQRLabel
-            Left = 561
+            Left = 593
             Top = 1
             Width = 35
             Height = 14
@@ -6999,7 +7064,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1484.312500000000000000
+              1568.979166666667000000
               2.645833333333333000
               92.604166666666680000)
             Alignment = taLeftJustify
@@ -7039,6 +7104,38 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AutoSize = True
             AutoStretch = False
             Caption = 'C'#243'd. Barra'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRLabel336: TQRLabel
+            Left = 447
+            Top = 1
+            Width = 40
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1182.687500000000000000
+              2.645833333333333000
+              105.833333333333300000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = True
+            AutoStretch = False
+            Caption = 'Marca'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -7184,7 +7281,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               50.270833333333330000
-              216.958333333333300000
+              216.958333333333400000
               293.687500000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -7316,9 +7413,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRDBText47: TQRDBText
-            Left = 321
+            Left = 318
             Top = 1
-            Width = 144
+            Width = 128
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -7327,9 +7424,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              849.312500000000000000
+              841.375000000000000000
               2.645833333333333000
-              381.000000000000000000)
+              338.666666666666700000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -7349,9 +7446,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRDBText48: TQRDBText
-            Left = 469
+            Left = 528
             Top = 1
-            Width = 88
+            Width = 61
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -7360,9 +7457,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1240.895833333333000000
+              1397.000000000000000000
               2.645833333333333000
-              232.833333333333300000)
+              161.395833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -7448,9 +7545,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRDBText52: TQRDBText
-            Left = 561
+            Left = 592
             Top = 1
-            Width = 91
+            Width = 60
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -7459,9 +7556,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1484.312500000000000000
+              1566.333333333333000000
               2.645833333333333000
-              240.770833333333300000)
+              158.750000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -7469,6 +7566,39 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Color = clWhite
             DataSet = ZQ_Producto
             DataField = 'COLOR'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = False
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRDBText210: TQRDBText
+            Left = 448
+            Top = 1
+            Width = 81
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1185.333333333333000000
+              2.645833333333333000
+              214.312500000000000000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Color = clWhite
+            DataSet = ZQ_Producto
+            DataField = 'MARCA'
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -8766,7 +8896,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel106: TQRLabel
-            Left = 321
+            Left = 313
             Top = 1
             Width = 52
             Height = 14
@@ -8777,7 +8907,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              849.312500000000000000
+              828.145833333333200000
               2.645833333333333000
               137.583333333333300000)
             Alignment = taLeftJustify
@@ -8798,7 +8928,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel115: TQRLabel
-            Left = 469
+            Left = 517
             Top = 1
             Width = 47
             Height = 14
@@ -8809,7 +8939,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1240.895833333333000000
+              1367.895833333333000000
               2.645833333333333000
               124.354166666666700000)
             Alignment = taLeftJustify
@@ -8862,7 +8992,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel117: TQRLabel
-            Left = 561
+            Left = 585
             Top = 1
             Width = 35
             Height = 14
@@ -8873,7 +9003,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1484.312500000000000000
+              1547.812500000000000000
               2.645833333333333000
               92.604166666666680000)
             Alignment = taLeftJustify
@@ -8913,6 +9043,70 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             AutoSize = True
             AutoStretch = False
             Caption = 'C'#243'd. Barra'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRLabel352: TQRLabel
+            Left = 517
+            Top = 1
+            Width = 47
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1367.895833333333000000
+              2.645833333333333000
+              124.354166666666700000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = True
+            AutoStretch = False
+            Caption = 'Medida'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRLabel363: TQRLabel
+            Left = 448
+            Top = 1
+            Width = 40
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1185.333333333333000000
+              2.645833333333333000
+              105.833333333333300000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = True
+            AutoStretch = False
+            Caption = 'Marca'
             Color = clWhite
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
@@ -9161,9 +9355,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRDBText27: TQRDBText
-            Left = 321
+            Left = 313
             Top = 1
-            Width = 144
+            Width = 132
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -9172,9 +9366,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              849.312500000000000000
+              828.145833333333200000
               2.645833333333333000
-              381.000000000000000000)
+              349.250000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -9194,9 +9388,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRDBText29: TQRDBText
-            Left = 469
+            Left = 520
             Top = 1
-            Width = 88
+            Width = 61
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -9205,9 +9399,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1240.895833333333000000
+              1375.833333333333000000
               2.645833333333333000
-              232.833333333333300000)
+              161.395833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -9293,9 +9487,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRDBText39: TQRDBText
-            Left = 561
+            Left = 584
             Top = 1
-            Width = 91
+            Width = 76
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -9304,9 +9498,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1484.312500000000000000
+              1545.166666666667000000
               2.645833333333333000
-              240.770833333333300000)
+              201.083333333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -9314,6 +9508,39 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Color = clWhite
             DataSet = ZQ_Producto
             DataField = 'COLOR'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = False
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
+          object QRDBText212: TQRDBText
+            Left = 448
+            Top = 1
+            Width = 73
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1185.333333333333000000
+              2.645833333333333000
+              193.145833333333300000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Color = clWhite
+            DataSet = ZQ_Producto
+            DataField = 'MARCA'
             Font.Charset = ANSI_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -14060,7 +14287,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
               39.687500000000000000
               7.937500000000000000
               2.645833333333333000
-              828.145833333333300000)
+              828.145833333333200000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -16262,7 +16489,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               1203.854166666667000000
               219.604166666666700000
               619.125000000000000000)
@@ -16447,7 +16674,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333320000
+              97.895833333333340000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -16479,7 +16706,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333320000
+              97.895833333333340000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -16988,7 +17215,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           ParentBand = QRChildBand11
           PrintOrder = cboAfterParent
           object QRLabel254: TQRLabel
-            Left = 186
+            Left = 178
             Top = 1
             Width = 59
             Height = 14
@@ -16999,7 +17226,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              492.125000000000000000
+              470.958333333333400000
               2.645833333333333000
               156.104166666666700000)
             Alignment = taLeftJustify
@@ -17020,7 +17247,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel256: TQRLabel
-            Left = 407
+            Left = 466
             Top = 1
             Width = 47
             Height = 14
@@ -17031,7 +17258,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1076.854166666667000000
+              1232.958333333333000000
               2.645833333333333000
               124.354166666666700000)
             Alignment = taLeftJustify
@@ -17052,9 +17279,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel257: TQRLabel
-            Left = 565
+            Left = 576
             Top = 1
-            Width = 51
+            Width = 40
             Height = 14
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -17063,9 +17290,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1494.895833333333000000
+              1524.000000000000000000
               2.645833333333333000
-              134.937500000000000000)
+              105.833333333333300000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -17084,7 +17311,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel258: TQRLabel
-            Left = 479
+            Left = 522
             Top = 1
             Width = 35
             Height = 14
@@ -17095,7 +17322,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1267.354166666667000000
+              1381.125000000000000000
               2.645833333333333000
               92.604166666666680000)
             Alignment = taLeftJustify
@@ -17116,7 +17343,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel259: TQRLabel
-            Left = 39
+            Left = 36
             Top = 1
             Width = 69
             Height = 14
@@ -17127,7 +17354,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              103.187500000000000000
+              95.250000000000000000
               2.645833333333333000
               182.562500000000000000)
             Alignment = taLeftJustify
@@ -17211,6 +17438,38 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             ExportAs = exptText
             FontSize = 8
           end
+          object QRLabel366: TQRLabel
+            Left = 398
+            Top = 1
+            Width = 40
+            Height = 14
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              37.041666666666670000
+              1053.041666666667000000
+              2.645833333333333000
+              105.833333333333300000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = True
+            AutoStretch = False
+            Caption = 'Marca'
+            Color = clWhite
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 8
+          end
         end
         object QRSubDetail8: TQRSubDetail
           Tag = 99
@@ -17239,9 +17498,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           PrintBefore = False
           PrintIfEmpty = True
           object QRDBText128: TQRDBText
-            Left = 186
+            Left = 178
             Top = 1
-            Width = 217
+            Width = 220
             Height = 13
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -17249,10 +17508,10 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
-              492.125000000000000000
+              34.395833333333340000
+              470.958333333333400000
               2.645833333333333000
-              574.145833333333300000)
+              582.083333333333400000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -17272,9 +17531,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 7
           end
           object QRDBText130: TQRDBText
-            Left = 407
+            Left = 465
             Top = 1
-            Width = 63
+            Width = 54
             Height = 13
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -17282,10 +17541,10 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
-              1076.854166666667000000
+              34.395833333333340000
+              1230.312500000000000000
               2.645833333333333000
-              166.687500000000000000)
+              142.875000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -17305,9 +17564,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 7
           end
           object QRDBText131: TQRDBText
-            Left = 565
+            Left = 576
             Top = 1
-            Width = 51
+            Width = 40
             Height = 13
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -17315,10 +17574,10 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
-              1494.895833333333000000
+              34.395833333333340000
+              1524.000000000000000000
               2.645833333333333000
-              134.937500000000000000)
+              105.833333333333300000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -17338,9 +17597,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 7
           end
           object QRDBText132: TQRDBText
-            Left = 39
+            Left = 36
             Top = 1
-            Width = 143
+            Width = 138
             Height = 13
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -17348,10 +17607,10 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
-              103.187500000000000000
+              34.395833333333340000
+              95.250000000000000000
               2.645833333333333000
-              378.354166666666700000)
+              365.125000000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -17371,9 +17630,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 7
           end
           object QRDBText133: TQRDBText
-            Left = 479
+            Left = 521
             Top = 1
-            Width = 82
+            Width = 57
             Height = 13
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -17381,10 +17640,10 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
-              1267.354166666667000000
+              34.395833333333340000
+              1378.479166666667000000
               2.645833333333333000
-              216.958333333333300000)
+              150.812500000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -17464,6 +17723,39 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Font.Style = []
             ParentFont = False
             Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 7
+          end
+          object QRDBText213: TQRDBText
+            Left = 398
+            Top = 1
+            Width = 68
+            Height = 13
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              34.395833333333340000
+              1053.041666666667000000
+              2.645833333333333000
+              179.916666666666700000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Color = clWhite
+            DataSet = ZQ_Producto
+            DataField = 'MARCA'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -9
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = False
             WordWrap = True
             ExportAs = exptText
             FontSize = 7
@@ -19701,7 +19993,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               1203.854166666667000000
               219.604166666666700000
               619.125000000000000000)
@@ -20861,7 +21153,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               1203.854166666667000000
               219.604166666666700000
               619.125000000000000000)
@@ -21046,7 +21338,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               1336.145833333333000000
-              97.895833333333320000
+              97.895833333333340000
               174.625000000000000000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -21078,7 +21370,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Size.Values = (
               37.041666666666670000
               515.937500000000000000
-              97.895833333333320000
+              97.895833333333340000
               177.270833333333300000)
             Alignment = taRightJustify
             AlignToBand = False
@@ -21388,7 +21680,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
           PrintBefore = False
           PrintIfEmpty = True
           object QRDBText174: TQRDBText
-            Left = 186
+            Left = 178
             Top = 1
             Width = 217
             Height = 13
@@ -21398,10 +21690,10 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
-              492.125000000000000000
+              34.395833333333340000
+              470.958333333333400000
               2.645833333333333000
-              574.145833333333300000)
+              574.145833333333400000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -21421,7 +21713,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 7
           end
           object QRDBText175: TQRDBText
-            Left = 407
+            Left = 448
             Top = 1
             Width = 63
             Height = 13
@@ -21431,8 +21723,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
-              1076.854166666667000000
+              34.395833333333340000
+              1185.333333333333000000
               2.645833333333333000
               166.687500000000000000)
             Alignment = taLeftJustify
@@ -21454,9 +21746,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 7
           end
           object QRDBText176: TQRDBText
-            Left = 565
+            Left = 577
             Top = 1
-            Width = 51
+            Width = 41
             Height = 13
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -21464,10 +21756,10 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
-              1494.895833333333000000
+              34.395833333333340000
+              1526.645833333333000000
               2.645833333333333000
-              134.937500000000000000)
+              108.479166666666700000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = False
@@ -21487,7 +21779,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 7
           end
           object QRDBText177: TQRDBText
-            Left = 39
+            Left = 35
             Top = 1
             Width = 143
             Height = 13
@@ -21497,8 +21789,8 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
-              103.187500000000000000
+              34.395833333333340000
+              92.604166666666680000
               2.645833333333333000
               378.354166666666700000)
             Alignment = taLeftJustify
@@ -21520,9 +21812,9 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 7
           end
           object QRDBText178: TQRDBText
-            Left = 479
+            Left = 511
             Top = 1
-            Width = 82
+            Width = 57
             Height = 13
             Frame.Color = clBlack
             Frame.DrawTop = False
@@ -21530,10 +21822,10 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
-              1267.354166666667000000
+              34.395833333333340000
+              1352.020833333333000000
               2.645833333333333000
-              216.958333333333300000)
+              150.812500000000000000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = False
@@ -21613,6 +21905,72 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Font.Style = []
             ParentFont = False
             Transparent = True
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 7
+          end
+          object QRDBText214: TQRDBText
+            Left = 448
+            Top = 1
+            Width = 63
+            Height = 13
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              34.395833333333340000
+              1185.333333333333000000
+              2.645833333333333000
+              166.687500000000000000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Color = clWhite
+            DataSet = ZQ_Producto
+            DataField = 'MEDIDA'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -9
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = False
+            WordWrap = True
+            ExportAs = exptText
+            FontSize = 7
+          end
+          object QRDBText215: TQRDBText
+            Left = 396
+            Top = 1
+            Width = 63
+            Height = 13
+            Frame.Color = clBlack
+            Frame.DrawTop = False
+            Frame.DrawBottom = False
+            Frame.DrawLeft = False
+            Frame.DrawRight = False
+            Size.Values = (
+              34.395833333333340000
+              1047.750000000000000000
+              2.645833333333333000
+              166.687500000000000000)
+            Alignment = taLeftJustify
+            AlignToBand = False
+            AutoSize = False
+            AutoStretch = False
+            Color = clWhite
+            DataSet = ZQ_Producto
+            DataField = 'MEDIDA'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -9
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+            Transparent = False
             WordWrap = True
             ExportAs = exptText
             FontSize = 7
@@ -21990,7 +22348,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel324: TQRLabel
-            Left = 479
+            Left = 510
             Top = 1
             Width = 35
             Height = 14
@@ -22001,7 +22359,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1267.354166666667000000
+              1349.375000000000000000
               2.645833333333333000
               92.604166666666680000)
             Alignment = taLeftJustify
@@ -22022,7 +22380,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             FontSize = 8
           end
           object QRLabel323: TQRLabel
-            Left = 565
+            Left = 566
             Top = 1
             Width = 51
             Height = 14
@@ -22033,7 +22391,7 @@ object FImpresion_Comprobantes: TFImpresion_Comprobantes
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              1494.895833333333000000
+              1497.541666666667000000
               2.645833333333333000
               134.937500000000000000)
             Alignment = taRightJustify
