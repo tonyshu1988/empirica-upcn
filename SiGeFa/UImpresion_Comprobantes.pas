@@ -963,6 +963,17 @@ type
     EKDbSumaProductoOS: TEKDbSuma;
     QRLabel330: TQRLabel;
     QRLabel331: TQRLabel;
+    QRLabel335: TQRLabel;
+    QRDBText208: TQRDBText;
+    QRLabel336: TQRLabel;
+    QRDBText210: TQRDBText;
+    QRLabel352: TQRLabel;
+    QRLabel363: TQRLabel;
+    QRDBText212: TQRDBText;
+    QRLabel366: TQRLabel;
+    QRDBText213: TQRDBText;
+    QRDBText214: TQRDBText;
+    QRDBText215: TQRDBText;
     procedure FormCreate(Sender: TObject);
     procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
