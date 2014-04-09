@@ -751,7 +751,7 @@ begin
   end;
 
   //Verifica_CUIT es un campo de la tabla TIPO_CUIT, se configura ahí si se le exige el NroCUIT
-  if (ZQ_IvaVERIFICA_CUIT.AsString='S') then
+//  if (ZQ_IvaVERIFICA_CUIT.AsString='S') then
     if not EsCUITValido(ZQ_PersonaCUIT_CUIL.AsString) then
     begin
       mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido.'+char(13)+'(sólo debe ingresar números, sin guiones)';

@@ -179,6 +179,8 @@ type
     ReporteOptica1: TMenuItem;
     AOP_ABMLiquidarOS: TAction;
     ABMLiquidacinObraSocial1: TMenuItem;
+    AEstadisticasLibroIVA: TAction;
+    EstadsticasLibroIVA1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -243,6 +245,7 @@ type
     procedure AOP_ABMFacturaOSExecute(Sender: TObject);
     procedure AOP_ReportesExecute(Sender: TObject);
     procedure AOP_ABMLiquidarOSExecute(Sender: TObject);
+    procedure AEstadisticasLibroIVAExecute(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -282,7 +285,8 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UConsulta_Precios, DateUtils, UCompararStock, UOP_ABMMedico,
   UOP_ABMObraSocial, UPreventa_Historico, UFichaEmpleado,
   UOP_ABMLaboratorio, UOP_ABMOrden_Tecnica, UCuentaCorrienteProveedor,
-  UABM_CPB_FacturaObraSocial, UOP_Reportes, UOP_ABM_LiquidacionOS;
+  UABM_CPB_FacturaObraSocial, UOP_Reportes, UOP_ABM_LiquidacionOS,
+  UEstadisticasLibroIVA;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -912,6 +916,11 @@ end;
 procedure TFPrincipal.AOP_ABMLiquidarOSExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFOP_ABM_LiquidacionOS, FOP_ABM_LiquidacionOS);
+end;
+
+procedure TFPrincipal.AEstadisticasLibroIVAExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFEstadisticasLibroIVA, FEstadisticasLibroIVA);
 end;
 
 end.

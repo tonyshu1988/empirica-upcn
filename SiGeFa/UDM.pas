@@ -513,15 +513,15 @@ end;
 procedure TDM.ExportarEXCEL(grilla: Tdbgrid);
 begin
   //seteo para exportar a excel
-//  ThousandSeparator:= #0;
-//  CurrencyString:= #0;
+//  ThousandSeparator:= '.';
+  CurrencyString:= '';
 //  CurrencyFormat := 0;
 
   ExcelExport.DBGrid:= grilla;
   ExcelExport.Select;
 
   //vuelvo a la configuracion original antes de exportar
-//  CurrencyString := '$';
+  CurrencyString := '$';
 //  CurrencyFormat := 2;
 //  ThousandSeparator := ',';
 end;

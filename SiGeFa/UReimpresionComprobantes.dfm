@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 268
-  Top = 189
+  Left = 269
+  Top = 182
   Width = 953
   Height = 618
   Caption = 'Reimpresi'#243'n de Comprobantes'
@@ -22,39 +22,39 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 945
-    Height = 539
+    Width = 937
+    Height = 528
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 943
-      Height = 537
+      Width = 935
+      Height = 526
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 941
-        Height = 535
+        Width = 933
+        Height = 524
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object PanelComprobante: TPanel
           Left = 1
           Top = 33
-          Width = 939
-          Height = 379
+          Width = 931
+          Height = 368
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object lblTotalComprobantes: TLabel
             Left = 0
-            Top = 358
-            Width = 939
+            Top = 347
+            Width = 931
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -73,8 +73,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           end
           object Splitter1: TSplitter
             Left = 0
-            Top = 349
-            Width = 939
+            Top = 338
+            Width = 931
             Height = 9
             Cursor = crVSplit
             Align = alBottom
@@ -82,8 +82,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object DBGridComprobantes: TDBGrid
             Left = 0
             Top = 0
-            Width = 939
-            Height = 349
+            Width = 931
+            Height = 338
             Align = alClient
             Color = 14606012
             DataSource = DS_Comprobante
@@ -210,8 +210,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         end
         object PanelFPagoYProd: TPanel
           Left = 1
-          Top = 412
-          Width = 939
+          Top = 401
+          Width = 931
           Height = 122
           Align = alBottom
           BevelOuter = bvNone
@@ -225,7 +225,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object PanelProducto: TPanel
             Left = 612
             Top = 0
-            Width = 327
+            Width = 319
             Height = 122
             Align = alClient
             BevelOuter = bvNone
@@ -234,7 +234,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object lblTotalProducto: TLabel
               Left = 0
               Top = 101
-              Width = 327
+              Width = 319
               Height = 21
               Align = alBottom
               Alignment = taRightJustify
@@ -254,7 +254,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object DBGridListadoProductos: TDBGrid
               Left = 0
               Top = 0
-              Width = 327
+              Width = 319
               Height = 101
               Align = alClient
               Color = 14606012
@@ -457,7 +457,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         object PanelFiltro: TPanel
           Left = 1
           Top = 1
-          Width = 939
+          Width = 931
           Height = 32
           Align = alTop
           BevelOuter = bvNone
@@ -465,7 +465,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           ShowHint = False
           TabOrder = 2
           DesignSize = (
-            939
+            931
             32)
           object BtnFiltro_Todos: TSpeedButton
             Left = 55
@@ -526,7 +526,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -614,7 +614,6 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     Categories.Visibles = (
       True)
     HideFloatingBarsWhenInactive = False
-    ImageOptions.Images = FPrincipal.Iconos_Barra_32
     ImageOptions.LargeImages = FPrincipal.Iconos_Barra_32
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
@@ -666,6 +665,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           BeginGroup = True
           Visible = True
           ItemName = 'btnImprimir'
+        end
+        item
+          Visible = True
+          ItemName = 'btnEliminarComprob'
         end
         item
           Visible = True
@@ -1005,10 +1008,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       AutoGrayScale = False
     end
     object btnEliminarComprob: TdxBarLargeButton
-      Caption = 'F3 - Eliminar'
+      Caption = 'Eliminar Comprobante'
       Category = 0
-      Hint = 'F3 - Eliminar'
-      Visible = ivAlways
+      Hint = 'Eliminar Comprobante'
+      Visible = ivNever
       LargeImageIndex = 9
       ShortCut = 114
       OnClick = btnEliminarComprobClick
