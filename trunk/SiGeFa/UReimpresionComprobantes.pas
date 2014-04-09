@@ -408,6 +408,7 @@ begin
     else
       if fiscal_sistema = 'DELPHI' then //IMPRIMIR DESDE ELPHI
         ShellExecute(FPrincipal.Handle, nil, pchar(fiscal_ruta), pchar('-l'+IntToStr(ZQ_ComprobanteID_COMPROBANTE.AsInteger)+' -cF'+' -id'+inttostr(ID_FISCAL)), nil, SW_SHOWNORMAL);
+
   end;
 end;
 
@@ -447,6 +448,12 @@ var
 begin
   if ZQ_Comprobante.IsEmpty then
     exit;
+
+  if not(ZQ_ComprobantePUNTO_VENTA.IsNull) then
+          begin
+            Application.MessageBox(PChar('No puede eliminarse un comprobante Fiscal ya impreso!'), 'Eliminar Comprobante', MB_OK + MB_ICONINFORMATION);
+            exit;
+          end;
 
   pregunta:= '¿Desea eliminar el Comprobante Venta Nº: ' + ZQ_ComprobanteCODIGO.AsString + '?';
   if not ((ZQ_ComprobanteID_PREVENTA.IsNull) or (ZQ_ComprobanteID_PREVENTA.AsInteger = 0)) then
