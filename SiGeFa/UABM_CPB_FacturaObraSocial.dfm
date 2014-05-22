@@ -1,6 +1,6 @@
 object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
-  Left = 225
-  Top = 248
+  Left = 224
+  Top = 81
   Width = 922
   Height = 632
   Caption = 'ABM Factura Obra Social'
@@ -26,8 +26,8 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 914
-    Height = 534
+    Width = 906
+    Height = 523
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -525,7 +525,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1023,7 +1023,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1072,7 +1072,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -1098,8 +1098,8 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 914
-      Height = 534
+      Width = 906
+      Height = 523
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -1113,12 +1113,12 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 904
+        Width = 896
         Height = 177
         Align = alTop
         TabOrder = 0
         DesignSize = (
-          904
+          896
           177)
         object btnBuscarObraSocial: TSpeedButton
           Left = 7
@@ -1435,14 +1435,14 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       object PanelEditar_Producto: TPanel
         Left = 5
         Top = 182
-        Width = 904
-        Height = 347
+        Width = 896
+        Height = 336
         Align = alClient
         TabOrder = 1
         object Label6: TLabel
           Left = 1
           Top = 1
-          Width = 902
+          Width = 894
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -1460,14 +1460,14 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         end
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
-          Top = 305
-          Width = 902
+          Top = 294
+          Width = 894
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            902
+            894
             41)
           object Label25: TLabel
             Left = 629
@@ -1552,8 +1552,8 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         object DBGridEditar_Producto: TDBGrid
           Left = 1
           Top = 14
-          Width = 902
-          Height = 291
+          Width = 894
+          Height = 280
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbProducto
@@ -1621,8 +1621,8 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 914
-      Height = 534
+      Width = 906
+      Height = 523
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -1634,25 +1634,25 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 378
+        Left = 370
         Top = 5
         Width = 6
-        Height = 524
+        Height = 513
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 373
-        Height = 524
+        Width = 365
+        Height = 513
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 373
-          Height = 524
+          Width = 365
+          Height = 513
           Align = alClient
           Color = 15269607
           DataSource = DS_VerCpb
@@ -1739,10 +1739,10 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         end
       end
       object PanelCpbActual: TPanel
-        Left = 384
+        Left = 376
         Top = 5
         Width = 525
-        Height = 524
+        Height = 513
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -1751,7 +1751,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
           Left = 0
           Top = 0
           Width = 525
-          Height = 362
+          Height = 351
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -1759,7 +1759,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
             Left = 0
             Top = 0
             Width = 525
-            Height = 362
+            Height = 351
             Align = alClient
             Color = 15269607
             DataSource = DS_VerCpb_Producto
@@ -1809,7 +1809,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 362
+          Top = 351
           Width = 525
           Height = 162
           Align = alBottom
@@ -2012,7 +2012,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 914
+    Width = 906
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -2050,7 +2050,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 804
+      Left = 796
       Top = 1
       Width = 109
       Height = 17
@@ -2064,7 +2064,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 695
+      Left = 687
       Top = 1
       Width = 109
       Height = 17
@@ -2078,7 +2078,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       TabOrder = 1
     end
     object StaticTxtLiquidado: TStaticText
-      Left = 586
+      Left = 578
       Top = 1
       Width = 109
       Height = 17
@@ -2095,7 +2095,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
