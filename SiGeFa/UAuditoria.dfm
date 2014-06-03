@@ -21,15 +21,15 @@ object FAuditoria: TFAuditoria
   object PanelFondoAuditoria: TPanel
     Left = 0
     Top = 0
-    Width = 884
-    Height = 539
+    Width = 892
+    Height = 550
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelGrilla: TPanel
       Left = 0
-      Top = 322
-      Width = 884
+      Top = 333
+      Width = 892
       Height = 217
       Align = alBottom
       BevelOuter = bvNone
@@ -44,7 +44,7 @@ object FAuditoria: TFAuditoria
       object DBGridAudDetallada: TDBGrid
         Left = 5
         Top = 5
-        Width = 874
+        Width = 882
         Height = 207
         Align = alClient
         Color = 16112578
@@ -106,8 +106,8 @@ object FAuditoria: TFAuditoria
     object Panel1: TPanel
       Left = 0
       Top = 32
-      Width = 884
-      Height = 290
+      Width = 892
+      Height = 301
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -116,8 +116,8 @@ object FAuditoria: TFAuditoria
       object DBGridAudGeneral: TDBGrid
         Left = 237
         Top = 5
-        Width = 642
-        Height = 184
+        Width = 650
+        Height = 195
         Align = alClient
         Color = 16112578
         DataSource = DS_AudGeneral
@@ -210,8 +210,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosTabla: TDBGrid
         Left = 5
-        Top = 205
-        Width = 874
+        Top = 216
+        Width = 882
         Height = 40
         Align = alBottom
         Color = 12779258
@@ -230,7 +230,7 @@ object FAuditoria: TFAuditoria
         Left = 5
         Top = 5
         Width = 232
-        Height = 184
+        Height = 195
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alLeft
         Color = 16112578
@@ -263,8 +263,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosProducto: TDBGrid
         Left = 5
-        Top = 245
-        Width = 874
+        Top = 256
+        Width = 882
         Height = 40
         Align = alBottom
         Color = 16112578
@@ -335,14 +335,14 @@ object FAuditoria: TFAuditoria
       end
       object Panel3: TPanel
         Left = 5
-        Top = 189
-        Width = 874
+        Top = 200
+        Width = 882
         Height = 16
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 4
         DesignSize = (
-          874
+          882
           16)
         object lblFiltro: TLabel
           Left = 235
@@ -367,7 +367,7 @@ object FAuditoria: TFAuditoria
     object Panel2: TPanel
       Left = 0
       Top = 0
-      Width = 884
+      Width = 892
       Height = 32
       Align = alTop
       BevelOuter = bvNone
@@ -476,14 +476,14 @@ object FAuditoria: TFAuditoria
   object PanelFondoXML: TPanel
     Left = 0
     Top = 0
-    Width = 884
-    Height = 539
+    Width = 892
+    Height = 550
     Align = alClient
     TabOrder = 5
     object PanelXML_Buscar: TPanel
       Left = 1
       Top = 1
-      Width = 882
+      Width = 890
       Height = 41
       Align = alTop
       BevelOuter = bvNone
@@ -507,14 +507,14 @@ object FAuditoria: TFAuditoria
     end
     object PanelXML_Resumen: TPanel
       Left = 1
-      Top = 524
-      Width = 882
+      Top = 535
+      Width = 890
       Height = 14
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 1
       object lblXML_TotalTablas: TLabel
-        Left = 504
+        Left = 512
         Top = 0
         Width = 378
         Height = 14
@@ -526,7 +526,7 @@ object FAuditoria: TFAuditoria
       object lblXML_TotalArchivo: TLabel
         Left = 0
         Top = 0
-        Width = 504
+        Width = 512
         Height = 14
         Align = alClient
         Alignment = taCenter
@@ -537,8 +537,8 @@ object FAuditoria: TFAuditoria
     object DBGridXML_Archivo: TDBGrid
       Left = 1
       Top = 42
-      Width = 503
-      Height = 482
+      Width = 511
+      Height = 493
       Align = alClient
       Color = 16112578
       DataSource = DS_XML
@@ -644,10 +644,10 @@ object FAuditoria: TFAuditoria
         end>
     end
     object DBGridXML_Tablas: TDBGrid
-      Left = 504
+      Left = 512
       Top = 42
       Width = 379
-      Height = 482
+      Height = 493
       Align = alRight
       Color = 16112578
       DataSource = DS_XMLTablas
@@ -708,7 +708,7 @@ object FAuditoria: TFAuditoria
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -988,54 +988,6 @@ object FAuditoria: TFAuditoria
       3333333333333333333333333333333333333333333333333333333333333333
       3333333333333333333333333333333333333333333333333333333333333333
       333333333333333333333333333333333333333333333333333333333300}
-    Bars = <
-      item
-        AllowClose = False
-        AllowCustomizing = False
-        AllowQuickCustomizing = False
-        BorderStyle = bbsNone
-        Caption = 'barra'
-        DockedDockingStyle = dsBottom
-        DockedLeft = 0
-        DockedTop = 0
-        DockingStyle = dsBottom
-        FloatLeft = 276
-        FloatTop = 216
-        FloatClientWidth = 39
-        FloatClientHeight = 38
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ItemLinks = <
-          item
-            Item = btnAuditoria_XML
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btnRefrescar
-            Visible = True
-          end
-          item
-            BeginGroup = True
-            Item = btnEliminarAuditoria
-            Visible = True
-          end
-          item
-            Item = btnSalir
-            Visible = True
-          end>
-        Name = 'barra'
-        OneOnRow = True
-        Row = 0
-        UseOwnFont = True
-        UseRecentItems = False
-        UseRestSpace = True
-        Visible = True
-        WholeRow = False
-      end>
     CanCustomize = False
     Categories.Strings = (
       'Edicion')
@@ -1044,7 +996,7 @@ object FAuditoria: TFAuditoria
     Categories.Visibles = (
       True)
     HideFloatingBarsWhenInactive = False
-    LargeImages = FPrincipal.Iconos_Barra_32
+    ImageOptions.LargeImages = FPrincipal.Iconos_Barra_32
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
     MenusShowRecentItemsFirst = False
@@ -1061,11 +1013,59 @@ object FAuditoria: TFAuditoria
       0
       0
       52)
+    object dxBarABMBar1: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      BorderStyle = bbsNone
+      Caption = 'barra'
+      CaptionButtons = <>
+      DockedDockingStyle = dsBottom
+      DockedLeft = 0
+      DockedTop = 0
+      DockingStyle = dsBottom
+      FloatLeft = 276
+      FloatTop = 216
+      FloatClientWidth = 39
+      FloatClientHeight = 38
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'btnAuditoria_XML'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btnRefrescar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btnEliminarAuditoria'
+        end
+        item
+          Visible = True
+          ItemName = 'btnSalir'
+        end>
+      OldName = 'barra'
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = True
+      UseRecentItems = False
+      UseRestSpace = True
+      Visible = True
+      WholeRow = False
+    end
     object btnRefrescar: TdxBarLargeButton
       Caption = 'Refrescar'
       Category = 0
       Visible = ivAlways
-      ImageIndex = 12
+      LargeImageIndex = 12
       OnClick = btnRefrescarClick
       AutoGrayScale = False
     end
@@ -1075,7 +1075,7 @@ object FAuditoria: TFAuditoria
       Category = 0
       Hint = 'Salir'
       Visible = ivAlways
-      ImageIndex = 6
+      LargeImageIndex = 6
       OnClick = btnSalirClick
       AutoGrayScale = False
     end
@@ -1084,7 +1084,7 @@ object FAuditoria: TFAuditoria
       Category = 0
       Hint = 'Eliminar'
       Visible = ivAlways
-      ImageIndex = 9
+      LargeImageIndex = 9
       OnClick = btnEliminarAuditoriaClick
       AutoGrayScale = False
     end
@@ -1093,7 +1093,7 @@ object FAuditoria: TFAuditoria
       Category = 0
       Hint = 'Ver Auditoria/XML'
       Visible = ivAlways
-      ImageIndex = 50
+      LargeImageIndex = 50
       OnClick = btnAuditoria_XMLClick
       AutoGrayScale = False
     end
@@ -1103,6 +1103,7 @@ object FAuditoria: TFAuditoria
     end
     object GrupoEditando: TdxBarGroup
       Enabled = False
+      Items = ()
     end
   end
   object ZQ_AudGeneral: TZQuery

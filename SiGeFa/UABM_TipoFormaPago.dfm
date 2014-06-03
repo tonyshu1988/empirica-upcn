@@ -925,8 +925,8 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           TabOrder = 4
         end
         object DBComboBox2: TDBComboBox
-          Left = 353
-          Top = 35
+          Left = 345
+          Top = 33
           Width = 47
           Height = 21
           DataField = 'GENERA_VUELTO'
@@ -1617,9 +1617,6 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
     object ZQ_TipoFPagoIVA_10: TIntegerField
       FieldName = 'IVA_10'
     end
-    object ZQ_TipoFPagoINT: TIntegerField
-      FieldName = 'INT'
-    end
     object ZQ_TipoFPagoGANANCIAS: TIntegerField
       FieldName = 'GANANCIAS'
     end
@@ -1634,6 +1631,9 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
     end
     object ZQ_TipoFPagoOTROS_DESCUENTOS: TIntegerField
       FieldName = 'OTROS_DESCUENTOS'
+    end
+    object ZQ_TipoFPagoINTR: TIntegerField
+      FieldName = 'INTR'
     end
   end
   object DS_TipoFPago: TDataSource

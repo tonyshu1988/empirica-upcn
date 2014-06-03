@@ -7,7 +7,7 @@ uses
   Dialogs, Grids, DBGrids, StdCtrls, DBCtrls, Mask, ExtCtrls, dxBar,
   dxBarExtItems, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKLlenarCombo, DBClient, ComCtrls, ZSqlUpdate, StrUtils, EKOrdenarGrilla,
-  Menus;
+  Menus, cxClasses;
 
 type
   TFAuditoria = class(TForm)
@@ -184,40 +184,40 @@ uses UPrincipal, UDM;
 
 procedure TFAuditoria.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColumnas;
-  EKOrdenarGrilla2.CargarConfigColumnas;
-  EKOrdenarGrilla3.CargarConfigColumnas;
-  EKOrdenarGrilla4.CargarConfigColumnas;
-  EKOrdenarGrilla5.CargarConfigColumnas;
-
-  PanelFondoXML.Visible:= false;
-  CD_XML.CreateDataSet;
-  CD_XMLTablas.CreateDataSet;
-  lblXML_TotalArchivo.Caption:= '';
-  lblXML_TotalTablas.Caption:= '';
-
-  lblFiltro.Caption:= '';
-  lblCantidad.Caption:= '';  
-
-  btnEliminarAuditoria.Visible:= ivNever;
-  if dm.EKUsrLogin.PermisoAccion('AUDITORIA_ELIMINAR') then
-    btnEliminarAuditoria.Visible:= ivAlways;
-
-//  ZQ_User.Connection:= dm.Conexion_User;
-//  ZQ_ComboUsuario.Connection:= dm.Conexion_User;
-
-  TStringGrid(DBGridTabla).Scrollbars:=ssVertical;
-  TStringGrid(DBGridDatosTabla).Scrollbars:=ssVertical;
-  TStringGrid(DBGridDatosProducto).Scrollbars:=ssVertical;
-  DateTimeFecha.Date:= dm.ekModelo.Fecha();
-//  ZQ_User.Close;
-//  ZQ_User.Open;
-
-  EKLlenarCombo1.CargarCombo;
-
-  CD_Tablas.Active := false;
-  CD_Tablas.CreateDataSet;
-  llenarGrillaTablas();
+//  EKOrdenarGrilla1.CargarConfigColumnas;
+//  EKOrdenarGrilla2.CargarConfigColumnas;
+//  EKOrdenarGrilla3.CargarConfigColumnas;
+//  EKOrdenarGrilla4.CargarConfigColumnas;
+//  EKOrdenarGrilla5.CargarConfigColumnas;
+//
+//  PanelFondoXML.Visible:= false;
+//  CD_XML.CreateDataSet;
+//  CD_XMLTablas.CreateDataSet;
+//  lblXML_TotalArchivo.Caption:= '';
+//  lblXML_TotalTablas.Caption:= '';
+//
+//  lblFiltro.Caption:= '';
+//  lblCantidad.Caption:= '';
+//
+//  btnEliminarAuditoria.Visible:= ivNever;
+//  if dm.EKUsrLogin.PermisoAccion('AUDITORIA_ELIMINAR') then
+//    btnEliminarAuditoria.Visible:= ivAlways;
+//
+////  ZQ_User.Connection:= dm.Conexion_User;
+////  ZQ_ComboUsuario.Connection:= dm.Conexion_User;
+//
+//  TStringGrid(DBGridTabla).Scrollbars:=ssVertical;
+//  TStringGrid(DBGridDatosTabla).Scrollbars:=ssVertical;
+//  TStringGrid(DBGridDatosProducto).Scrollbars:=ssVertical;
+//  DateTimeFecha.Date:= dm.ekModelo.Fecha();
+////  ZQ_User.Close;
+////  ZQ_User.Open;
+//
+//  EKLlenarCombo1.CargarCombo;
+//
+//  CD_Tablas.Active := false;
+//  CD_Tablas.CreateDataSet;
+//  llenarGrillaTablas();
 end;
 
 

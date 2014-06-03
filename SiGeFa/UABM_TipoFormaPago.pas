@@ -94,12 +94,12 @@ type
     ZQ_TipoFPagoRETENCIONES: TIntegerField;
     ZQ_TipoFPagoIVA_21: TIntegerField;
     ZQ_TipoFPagoIVA_10: TIntegerField;
-    ZQ_TipoFPagoINT: TIntegerField;
     ZQ_TipoFPagoGANANCIAS: TIntegerField;
     ZQ_TipoFPagoIIBB: TIntegerField;
     ZQ_TipoFPagoA_POS: TIntegerField;
     ZQ_TipoFPagoA_NEG: TIntegerField;
     ZQ_TipoFPagoOTROS_DESCUENTOS: TIntegerField;
+    ZQ_TipoFPagoINTR: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
