@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 126
-  Top = 17
+  Left = 264
+  Top = 66
   AutoScroll = False
   Caption = 'FABMProductos'
   ClientHeight = 711
@@ -190,7 +190,7 @@ object FABMProductos: TFABMProductos
           50.270833333333330000
           1232.958333333333000000
           124.354166666666700000
-          304.270833333333300000)
+          304.270833333333400000)
         Alignment = taCenter
         AlignToBand = True
         AutoSize = True
@@ -221,7 +221,7 @@ object FABMProductos: TFABMProductos
         Size.Values = (
           52.916666666666670000
           1116.541666666667000000
-          68.791666666666670000
+          68.791666666666680000
           537.104166666666700000)
         Alignment = taCenter
         AlignToBand = True
@@ -254,7 +254,7 @@ object FABMProductos: TFABMProductos
           52.916666666666670000
           1068.916666666667000000
           5.291666666666667000
-          632.354166666666700000)
+          632.354166666666800000)
         Alignment = taCenter
         AlignToBand = True
         AutoSize = True
@@ -296,7 +296,7 @@ object FABMProductos: TFABMProductos
       ForceNewPage = False
       ParentFont = False
       Size.Values = (
-        34.395833333333330000
+        34.395833333333340000
         2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -500,7 +500,7 @@ object FABMProductos: TFABMProductos
           52.916666666666670000
           10.583333333333330000
           7.937500000000000000
-          304.270833333333300000)
+          304.270833333333400000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -598,7 +598,7 @@ object FABMProductos: TFABMProductos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        58.208333333333330000
+        58.208333333333340000
         2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -648,7 +648,7 @@ object FABMProductos: TFABMProductos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        82.020833333333330000
+        82.020833333333340000
         2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -696,7 +696,7 @@ object FABMProductos: TFABMProductos
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          34.395833333333330000
+          34.395833333333340000
           13.229166666666670000
           5.291666666666667000
           333.375000000000000000)
@@ -914,7 +914,7 @@ object FABMProductos: TFABMProductos
           37.041666666666670000
           2000.250000000000000000
           5.291666666666667000
-          92.604166666666670000)
+          92.604166666666680000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -1257,7 +1257,7 @@ object FABMProductos: TFABMProductos
           29.104166666666670000
           603.250000000000000000
           2.645833333333333000
-          89.958333333333330000)
+          89.958333333333320000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -1432,7 +1432,7 @@ object FABMProductos: TFABMProductos
     BevelOuter = bvNone
     Caption = 'PContenedor'
     UseDockManager = False
-    TabOrder = 2
+    TabOrder = 1
     object Splitter1: TSplitter
       Left = 0
       Top = 385
@@ -2941,7 +2941,7 @@ object FABMProductos: TFABMProductos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

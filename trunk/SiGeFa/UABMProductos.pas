@@ -629,7 +629,6 @@ begin
   if (ZQ_ProductoCabeceraCOD_CORTO.IsNull) or (trim(ZQ_ProductoCabeceraCOD_CORTO.AsString) = '') then
   begin
     ZQ_ProductoCabeceraCOD_CORTO.AsString:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsString;
-    exit;
   end;
 
   if (ZQ_ProductoCabeceraNOMBRE.IsNull) then
@@ -680,6 +679,13 @@ begin
         result:= false;
         exit;
       end;
+  end;
+  if (ZQ_DetalleProducto.IsEmpty) then
+  begin
+    Application.MessageBox('Debe cargar al menos un detalle del Producto Cabecera (se detalla medida, costo, precio, medidas, etc), por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    grillaDetalle.SetFocus;
+    result:= false;
+    exit;
   end;
 end;
 
@@ -750,7 +756,7 @@ begin
     exit;
   end;
 
-  if (zq_preciosPRECIO_VENTA.IsNull) then
+  if ((zq_preciosPRECIO_VENTA.IsNull)or(zq_preciosPRECIO_VENTA.AsFloat<=0)) then
   begin
     Application.MessageBox('El campo Precio Venta se encuentra vacío, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
     //dpVenta.SetFocus;
