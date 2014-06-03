@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 913
-    Height = 502
+    Width = 921
+    Height = 514
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 531
-    Width = 913
+    Top = 543
+    Width = 921
     Height = 19
     Panels = <
       item
@@ -4719,13 +4719,13 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 913
+    Width = 921
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
-    ColorMap.HighlightColor = clWhite
+    ColorMap.HighlightColor = 14410210
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = clWhite
+    ColorMap.UnusedColor = 14410210
     ParentShowHint = False
     ShowHint = True
     Spacing = 0
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 913
-    Height = 502
+    Width = 921
+    Height = 514
     Align = alClient
     Color = 16053492
     TabOrder = 2
@@ -5389,14 +5389,14 @@ object FPrincipal: TFPrincipal
         object ABMMarcas1: TMenuItem
           Action = AABM_Marcas
         end
+        object ABMTipoArticulo1: TMenuItem
+          Action = AABM_TipoArticulo
+        end
         object N3: TMenuItem
           Caption = '-'
         end
         object ABMArticulo1: TMenuItem
           Action = AABM_Articulo
-        end
-        object ABMTipoArticulo1: TMenuItem
-          Action = AABM_TipoArticulo
         end
         object ABMArticulosMedida1: TMenuItem
           Action = AABM_ArticuloMedida
@@ -5442,10 +5442,6 @@ object FPrincipal: TFPrincipal
       end
       object N1: TMenuItem
         Caption = '-'
-      end
-      object Shutdown1: TMenuItem
-        Tag = 1
-        Action = AShutdown
       end
       object ConfigurarImpresora: TMenuItem
         Tag = 1
