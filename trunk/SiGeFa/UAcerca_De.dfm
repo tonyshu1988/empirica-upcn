@@ -9348,7 +9348,6 @@ object FAcerca_De: TFAcerca_De
       '')
     ParentFont = False
     TabOrder = 1
-    Visible = False
   end
   object ZQ_Config: TZQuery
     Connection = DM.Conexion
