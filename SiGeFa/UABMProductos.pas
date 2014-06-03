@@ -682,7 +682,7 @@ begin
   end;
   if (ZQ_DetalleProducto.IsEmpty) then
   begin
-    Application.MessageBox('Debe cargar al menos un detalle del Producto Cabecera (se detalla medida, costo, precio, medidas, etc), por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+    Application.MessageBox('Debe cargar al menos un detalle del Producto Cabecera (se detallan precio de costo, precio de venta, medidas, etc), por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
     grillaDetalle.SetFocus;
     result:= false;
     exit;

@@ -157,7 +157,6 @@ type
     ConsultaPrecios1: TMenuItem;
     N9: TMenuItem;
     AShutdown: TAction;
-    Shutdown1: TMenuItem;
     Optica1: TMenuItem;
     ABMObraSocial1: TMenuItem;
     ABMMedicos1: TMenuItem;
