@@ -1,10 +1,10 @@
 object FFichaEmpleado: TFFichaEmpleado
-  Left = 192
-  Top = 108
+  Left = 390
+  Top = 181
   BorderStyle = bsDialog
   Caption = 'Ficha Empleado'
-  ClientHeight = 760
-  ClientWidth = 1032
+  ClientHeight = 559
+  ClientWidth = 723
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -17,209 +17,6 @@ object FFichaEmpleado: TFFichaEmpleado
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
-  object panelContenedor: TPanel
-    Left = 0
-    Top = 0
-    Width = 1032
-    Height = 708
-    Align = alClient
-    BevelOuter = bvNone
-    TabOrder = 0
-    object panelFicha: TPanel
-      Left = 0
-      Top = 0
-      Width = 1032
-      Height = 144
-      Align = alTop
-      BevelOuter = bvNone
-      BorderWidth = 5
-      TabOrder = 0
-      object gBoxFechaYHora: TGroupBox
-        Left = 5
-        Top = 5
-        Width = 356
-        Height = 134
-        Align = alLeft
-        TabOrder = 0
-        object lblFecha: TLabel
-          Left = 2
-          Top = 15
-          Width = 352
-          Height = 18
-          Align = alTop
-          Alignment = taCenter
-          Caption = 'lblFecha'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object lblHora: TLabel
-          Left = 2
-          Top = 33
-          Width = 352
-          Height = 99
-          Align = alClient
-          Alignment = taCenter
-          Caption = '10:24'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -67
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-      end
-      object btnFicharIngreso: TBitBtn
-        Left = 373
-        Top = 16
-        Width = 280
-        Height = 53
-        Caption = 'Fichar Ingreso'
-        TabOrder = 1
-        OnClick = btnFicharIngresoClick
-      end
-      object btnFicharEgreso: TBitBtn
-        Left = 373
-        Top = 79
-        Width = 280
-        Height = 53
-        Caption = 'Fichar Egreso'
-        TabOrder = 2
-        OnClick = btnFicharEgresoClick
-      end
-    end
-    object panelHistoria: TPanel
-      Left = 0
-      Top = 144
-      Width = 1032
-      Height = 564
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 5
-      TabOrder = 1
-      object lblTituloHistorial: TLabel
-        Left = 5
-        Top = 5
-        Width = 1022
-        Height = 13
-        Align = alTop
-        Alignment = taCenter
-        Caption = 'Historial'
-        Color = clBlue
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-      end
-      object DBGridHistoria: TDBGrid
-        Left = 5
-        Top = 18
-        Width = 1022
-        Height = 485
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_Historial
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGridHistoriaDrawColumnCell
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'FECHA_INGRESO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Ingreso'
-            Width = 150
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FECHA_EGRESO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Egreso'
-            Width = 150
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = '_NombreEpleado'
-            Title.Alignment = taCenter
-            Title.Caption = 'Empleado'
-            Width = 159
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = '_sucursal'
-            Title.Alignment = taCenter
-            Title.Caption = 'Sucursal'
-            Width = 219
-            Visible = True
-          end>
-      end
-      object Panel1: TPanel
-        Left = 5
-        Top = 503
-        Width = 1022
-        Height = 56
-        Align = alBottom
-        BevelOuter = bvNone
-        Caption = 'Panel1'
-        TabOrder = 1
-        object Label1: TLabel
-          Left = 0
-          Top = 0
-          Width = 1022
-          Height = 13
-          Align = alTop
-          Caption = 
-            'Observaci'#243'n Ingreso:                                            ' +
-            '        Observaci'#243'n Egreso:'
-        end
-        object DBMemoDetalleIngreso: TDBMemo
-          Left = 0
-          Top = 13
-          Width = 328
-          Height = 43
-          Align = alLeft
-          DataField = 'DETALLE_INGRESO'
-          DataSource = DS_Historial
-          ReadOnly = True
-          TabOrder = 0
-        end
-        object DBMemoDetalleEgreso: TDBMemo
-          Left = 331
-          Top = 13
-          Width = 691
-          Height = 43
-          Align = alClient
-          DataField = 'DETALLE_EGRESO'
-          DataSource = DS_Historial
-          ReadOnly = True
-          TabOrder = 1
-        end
-        object Panel2: TPanel
-          Left = 328
-          Top = 13
-          Width = 3
-          Height = 43
-          Align = alLeft
-          BevelOuter = bvNone
-          TabOrder = 2
-        end
-      end
-    end
-  end
   object RepFicha: TQuickRep
     Tag = 99
     Left = -8
@@ -1050,6 +847,209 @@ object FFichaEmpleado: TFFichaEmpleado
         WordWrap = True
         ExportAs = exptText
         FontSize = 8
+      end
+    end
+  end
+  object panelContenedor: TPanel
+    Left = 0
+    Top = 0
+    Width = 723
+    Height = 507
+    Align = alClient
+    BevelOuter = bvNone
+    TabOrder = 0
+    object panelFicha: TPanel
+      Left = 0
+      Top = 0
+      Width = 723
+      Height = 144
+      Align = alTop
+      BevelOuter = bvNone
+      BorderWidth = 5
+      TabOrder = 0
+      object gBoxFechaYHora: TGroupBox
+        Left = 5
+        Top = 5
+        Width = 356
+        Height = 134
+        Align = alLeft
+        TabOrder = 0
+        object lblFecha: TLabel
+          Left = 2
+          Top = 15
+          Width = 352
+          Height = 18
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'lblFecha'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblHora: TLabel
+          Left = 2
+          Top = 33
+          Width = 352
+          Height = 99
+          Align = alClient
+          Alignment = taCenter
+          Caption = '10:24'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -67
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+      end
+      object btnFicharIngreso: TBitBtn
+        Left = 373
+        Top = 16
+        Width = 280
+        Height = 53
+        Caption = 'Fichar Ingreso'
+        TabOrder = 1
+        OnClick = btnFicharIngresoClick
+      end
+      object btnFicharEgreso: TBitBtn
+        Left = 373
+        Top = 79
+        Width = 280
+        Height = 53
+        Caption = 'Fichar Egreso'
+        TabOrder = 2
+        OnClick = btnFicharEgresoClick
+      end
+    end
+    object panelHistoria: TPanel
+      Left = 0
+      Top = 144
+      Width = 723
+      Height = 363
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 5
+      TabOrder = 1
+      object lblTituloHistorial: TLabel
+        Left = 5
+        Top = 5
+        Width = 713
+        Height = 13
+        Align = alTop
+        Alignment = taCenter
+        Caption = 'Historial'
+        Color = clBlue
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+      end
+      object DBGridHistoria: TDBGrid
+        Left = 5
+        Top = 18
+        Width = 713
+        Height = 284
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_Historial
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridHistoriaDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'FECHA_INGRESO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Ingreso'
+            Width = 150
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FECHA_EGRESO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Egreso'
+            Width = 150
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = '_NombreEpleado'
+            Title.Alignment = taCenter
+            Title.Caption = 'Empleado'
+            Width = 159
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = '_sucursal'
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal'
+            Width = 219
+            Visible = True
+          end>
+      end
+      object Panel1: TPanel
+        Left = 5
+        Top = 302
+        Width = 713
+        Height = 56
+        Align = alBottom
+        BevelOuter = bvNone
+        Caption = 'Panel1'
+        TabOrder = 1
+        object Label1: TLabel
+          Left = 0
+          Top = 0
+          Width = 713
+          Height = 13
+          Align = alTop
+          Caption = 
+            'Observaci'#243'n Ingreso:                                            ' +
+            '        Observaci'#243'n Egreso:'
+        end
+        object DBMemoDetalleIngreso: TDBMemo
+          Left = 0
+          Top = 13
+          Width = 328
+          Height = 43
+          Align = alLeft
+          DataField = 'DETALLE_INGRESO'
+          DataSource = DS_Historial
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object DBMemoDetalleEgreso: TDBMemo
+          Left = 331
+          Top = 13
+          Width = 382
+          Height = 43
+          Align = alClient
+          DataField = 'DETALLE_EGRESO'
+          DataSource = DS_Historial
+          ReadOnly = True
+          TabOrder = 1
+        end
+        object Panel2: TPanel
+          Left = 328
+          Top = 13
+          Width = 3
+          Height = 43
+          Align = alLeft
+          BevelOuter = bvNone
+          TabOrder = 2
+        end
       end
     end
   end
@@ -2046,7 +2046,7 @@ object FFichaEmpleado: TFFichaEmpleado
     combo = ComboBoxUsuarios
     CampoClave = 'ID_PERSONA'
     CampoVer = 'NOMBRE'
-    Left = 624
-    Top = 168
+    Left = 576
+    Top = 224
   end
 end
