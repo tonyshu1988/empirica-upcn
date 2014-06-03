@@ -142,8 +142,8 @@ begin
   lblFecha.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
   lblHora.Caption:= FormatDateTime('hh:nn:ss', dm.EKModelo.Hora);
 
-  FPrincipal.Iconos_Menu_32.GetBitmap(51, btnFicharIngreso.Glyph);
-  FPrincipal.Iconos_Menu_32.GetBitmap(52, btnFicharEgreso.Glyph);
+  FPrincipal.Iconos_Menu_32.GetBitmap(50, btnFicharIngreso.Glyph);
+  FPrincipal.Iconos_Menu_32.GetBitmap(51, btnFicharEgreso.Glyph);
 
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnRegistrarCancelar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnRegistrarAceptar.Glyph);
