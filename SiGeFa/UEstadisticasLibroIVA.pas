@@ -52,6 +52,7 @@ type
     procedure btnBuscarClick(Sender: TObject);
     procedure EKDbSuma1SumListChanged(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
+    procedure btnSalirClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -89,6 +90,11 @@ begin
     if not ZQ_Libro_IVA_Ventas.IsEmpty then
       dm.ExportarEXCEL(grillaVentas);
   end;
+end;
+
+procedure TFEstadisticasLibroIVA.btnSalirClick(Sender: TObject);
+begin
+close;
 end;
 
 end.

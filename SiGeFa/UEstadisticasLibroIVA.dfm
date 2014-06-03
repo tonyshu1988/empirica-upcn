@@ -630,6 +630,7 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
       LargeImageIndex = 6
+      OnClick = btnSalirClick
       AutoGrayScale = False
     end
     object btImprimir: TdxBarLargeButton
