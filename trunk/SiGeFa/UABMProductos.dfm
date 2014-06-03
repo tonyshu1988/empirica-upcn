@@ -1,8 +1,8 @@
 object FABMProductos: TFABMProductos
-  Left = 191
-  Top = 7
+  Left = 248
+  Top = 32
   AutoScroll = False
-  Caption = 'FABMProductos'
+  Caption = 'ABM Productos'
   ClientHeight = 711
   ClientWidth = 1014
   Color = clBtnFace
@@ -1257,7 +1257,7 @@ object FABMProductos: TFABMProductos
           29.104166666666670000
           603.250000000000000000
           2.645833333333333000
-          89.958333333333320000)
+          89.958333333333340000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -2110,7 +2110,7 @@ object FABMProductos: TFABMProductos
                 object Label9: TLabel
                   Left = 0
                   Top = 0
-                  Width = 152
+                  Width = 765
                   Height = 14
                   Align = alTop
                   Alignment = taCenter
@@ -3779,6 +3779,16 @@ object FABMProductos: TFABMProductos
         VaciarValorDespues = False
       end
       item
+        Titulo = 'Tipo Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'ta'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        TipoComboAncho = 200
+        ItemIndex = -1
+        VaciarValorDespues = False
+      end
+      item
         Titulo = 'Marca'
         Campo = 'nombre_marca'
         Tabla = 'm'
@@ -3833,6 +3843,9 @@ object FABMProductos: TFABMProductos
         'a)'
       'left join articulo a on (pc.id_articulo = a.id_articulo)'
       'left join marca m on (pc.id_marca = m.id_marca)'
+      
+        'left join tipo_articulo ta on (ta.id_tipo_articulo=a.id_tipo_art' +
+        'iculo)'
       '')
     SQL_Select.Strings = (
       'select distinct pc.*, a.descripcion, m.nombre_marca')
@@ -3842,7 +3855,10 @@ object FABMProductos: TFABMProductos
         'left join producto p on (pc.id_prod_cabecera = p.id_prod_cabecer' +
         'a)'
       'left join articulo a on (pc.id_articulo = a.id_articulo)'
-      'left join marca m on (pc.id_marca = m.id_marca)')
+      'left join marca m on (pc.id_marca = m.id_marca)'
+      
+        'left join tipo_articulo ta on (ta.id_tipo_articulo=a.id_tipo_art' +
+        'iculo)')
     SQL_Orden.Strings = (
       '')
     UsarWhereOriginal = EK_Sin_Where
