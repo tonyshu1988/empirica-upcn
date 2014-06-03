@@ -9342,9 +9342,9 @@ object FAcerca_De: TFAcerca_De
     Lines.Strings = (
       'GRUPO GUADALUPE S.RL.'
       ''
+      'www.grupoguadalupe.com.ar'
       '- E-mail: contacto@grupoguadalupe.com.ar'
-      '- Tel'#233'fono: 0342 4536444'
-      '- Horario de Atenci'#243'n: lunes a viernes de 8:30 a 13.30 hs.'
+      '- Tel'#233'fonos: (0342) 4536444 / 4019139 / 156128049'
       '')
     ParentFont = False
     TabOrder = 1

@@ -251,7 +251,6 @@ type
     cmbMarca: TDBLookupComboBox;
     edCodCorto: TDBEdit;
     cmbColor: TDBLookupComboBox;
-    Splitter1: TSplitter;
     PDatosdetalle: TPanel;
     PContenedorDetalle: TPanel;
     Label11: TLabel;
