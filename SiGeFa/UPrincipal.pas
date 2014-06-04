@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ToolWin, ActnMan, ActnCtrls, Menus, XPStyleActnCtrls, ActnList,
-  ComCtrls, ImgList, ExtCtrls, jpeg, QPrinters,
+  ComCtrls, ImgList, ExtCtrls, jpeg, QPrinters, ZDataset,
   Grids, DBGrids, EKImageList32, EKVentanas, EKInformacion, DB, StdCtrls, shellapi;
 
 type
@@ -253,6 +253,9 @@ type
     resaltado, resaltadoFocus: Tcolor;
     procedure PintarFilasGrillas(grilla: TDBGrid; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure PintarFilasGrillasConBajas(grilla: TDBGrid; valor: string; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure PintarFilasGrillasConColor(grilla: TDBGrid; valor: string; variable: string; color: Tcolor ;const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    function BajaReactivar(Query: TZQuery; Campo, Transaccion, Tipo: string): boolean;
+    function eliminarRegistro(Query: TZQuery; Transaccion: string): boolean;
     function cerrar_ventana(transaccion: string): boolean;
   end;
 
@@ -451,10 +454,9 @@ begin
   if grilla.DataSource.DataSet.IsEmpty then
     exit;
 
-  a:= Rect;
-
   if (THackDBGrid(grilla).DataLink.ActiveRecord + 1 = THackDBGrid(grilla).Row) then
   begin
+    a:= Rect;
     a.Top:= a.Top + 1;
     a.Bottom:= a.Bottom - 1;
 
@@ -465,15 +467,14 @@ begin
       grilla.Canvas.Brush.Color:= resaltadoFocus;
       grilla.Canvas.Font.Style:= grilla.Canvas.Font.Style + [fsBold];
     end;
-  end;
 
-  grilla.DefaultDrawColumnCell(a, datacol, column, state);
+    grilla.DefaultDrawColumnCell(a, datacol, column, state);
+  end;
 end;
 
 
 //PROCEDURE PARA PINTAR LAS FILAS DE LA GRILLA QUE SE PASA POR PARAMETROS.
 //Y SI EL PARAMETRO VALOR ES 'S' SE PINTA LA FILA EN ROJO
-
 procedure TFPrincipal.PintarFilasGrillasConBajas(grilla: TDBGrid; valor: string; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
 var
   a: TRect;
@@ -481,9 +482,46 @@ begin
   if grilla.DataSource.DataSet.IsEmpty then
     exit;
 
+  if (valor = 'S') then //si el registro esta dado de baja
+  begin
+    grilla.Canvas.Brush.Color:= baja;
+    grilla.DefaultDrawColumnCell(Rect, datacol, column, state);
+  end;
+
+  if (THackDBGrid(grilla).DataLink.ActiveRecord + 1 = THackDBGrid(grilla).Row) then
+  begin
+    a:= Rect;
+    a.Top:= a.Top + 1;
+    a.Bottom:= a.Bottom - 1;
+
+    grilla.Canvas.Font.Color:= clWhite;
+    grilla.Canvas.Brush.Color:= resaltado;
+    if (gdFocused in State) or (gdSelected in State) then
+    begin
+      grilla.Canvas.Brush.Color:= resaltadoFocus;
+      grilla.Canvas.Font.Style:= grilla.Canvas.Font.Style + [fsBold];
+    end;
+    grilla.DefaultDrawColumnCell(a, datacol, column, state);
+  end;
+end;
+
+
+//PROCEDURE PARA PINTAR LAS FILAS DE LA GRILLA QUE SE PASA POR PARAMETROS.
+//Y SI EL PARAMETRO VALOR ES 'S' SE PINTA LA FILA EN EL COLOR INDICADO
+procedure TFPrincipal.PintarFilasGrillasConColor(grilla: TDBGrid; valor: string; variable: string; color: Tcolor ;const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+var
+  a: TRect;
+begin
+  baja:= color;
+  resaltado:= $00818181;
+  resaltadoFocus:= $002E1701;
+
+  if grilla.DataSource.DataSet.IsEmpty then
+    exit;
+
   a:= Rect;
 
-  if (valor = 'S') then //si el registro esta dado de baja
+  if (valor = variable) then //si el registro esta dado de baja
   begin
     grilla.Canvas.Brush.Color:= baja;
     grilla.DefaultDrawColumnCell(a, datacol, column, state);
@@ -504,6 +542,72 @@ begin
     grilla.DefaultDrawColumnCell(a, datacol, column, state);
   end;
 end;
+
+
+function TFPrincipal.BajaReactivar(Query: TZQuery; Campo: string; Transaccion: string; Tipo: string) : boolean;
+var
+  recNo: integer;
+  mensaje: string;
+begin
+  Result := false;
+
+  if Tipo = 'N' then
+    mensaje:= '¿Desea reactivar el registro seleccionado?'
+  else
+    mensaje:= '¿Desea dar de Baja el registro seleccionado?';
+
+  if (Query.IsEmpty) or (Query.FieldByName(campo).AsString = tipo) then
+    exit;
+
+  if (application.MessageBox(pchar(mensaje), 'Atención!', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  begin
+    if dm.EKModelo.iniciar_transaccion(Transaccion, [Query]) then
+    begin
+      Query.Edit;
+      Query.FieldByName(campo).AsString:= tipo;
+    end
+    else
+      exit;
+
+    if (dm.EKModelo.finalizar_transaccion(Transaccion)) then
+      Result := true
+     else
+      dm.EKModelo.cancelar_transaccion(Transaccion);
+
+    recNo:= Query.RecNo;
+    Query.Refresh;
+    Query.RecNo:= recNo;
+  end;
+end;
+
+
+function TFPrincipal.eliminarRegistro(Query: TZQuery; Transaccion: string): boolean;
+begin
+  Result:= False;
+  if Query.IsEmpty then
+    exit;
+
+  if (application.MessageBox(pchar('Esta seguro que desea eliminar el registro seleccionado?'), 'Eliminar Registro', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+  begin
+    if dm.EKModelo.iniciar_transaccion(Transaccion, [Query]) then
+      Query.Delete
+    else
+      exit;
+    try
+      if not (dm.EKModelo.finalizar_transaccion(Transaccion)) then
+        dm.EKModelo.cancelar_transaccion(Transaccion);
+
+//      dm.mostrarCantidadRegistro(Query, lblCantidadRegistros);
+      Result:= True;
+    except
+      begin
+        Application.MessageBox('El registro seleccionado no se puede borrar porque depende de otras tablas', 'Atención', MB_OK + MB_ICONINFORMATION);
+        dm.EKModelo.cancelar_transaccion(Transaccion);
+      end
+    end;
+  end;
+end;
+
 
 
 procedure TFPrincipal.CambiarContraseniaClick(Sender: TObject);
