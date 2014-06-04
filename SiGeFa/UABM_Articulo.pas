@@ -8,7 +8,7 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKBusquedaAvanzada, EKOrdenarGrilla, EKListadoSQL, ActnList,
   XPStyleActnCtrls, ActnMan, QRCtrls, QuickRpt, EKVistaPreviaQR, Menus,
-  ZSqlUpdate;
+  ZSqlUpdate, cxClasses;
 
 type
   TFABM_Articulo = class(TForm)
