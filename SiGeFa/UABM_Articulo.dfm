@@ -1,6 +1,6 @@
 object FABM_Articulo: TFABM_Articulo
-  Left = 330
-  Top = 240
+  Left = 419
+  Top = 189
   Width = 870
   Height = 500
   Caption = 'ABM Art'#237'culo'
@@ -179,7 +179,7 @@ object FABM_Articulo: TFABM_Articulo
           Size.Values = (
             52.916666666666670000
             754.062500000000000000
-            68.791666666666680000
+            68.791666666666670000
             388.937500000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -210,7 +210,7 @@ object FABM_Articulo: TFABM_Articulo
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            735.541666666666800000
+            735.541666666666700000
             5.291666666666667000
             428.625000000000000000)
           Alignment = taCenter
