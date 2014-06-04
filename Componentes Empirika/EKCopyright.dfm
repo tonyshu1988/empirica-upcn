@@ -1,9 +1,9 @@
-object CopyRight: TCopyRight
+object FEKCopyRight: TFEKCopyRight
   Left = 510
   Top = 185
   Width = 597
   Height = 351
-  Caption = 'CopyRight'
+  Caption = 'FEKCopyRight'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

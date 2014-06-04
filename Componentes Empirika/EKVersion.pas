@@ -8,7 +8,7 @@ uses
   ComCtrls, ExtCtrls, Grids, DBGrids, ZAbstractDataset;
 
 type
-  TControl_version = class(TForm)
+  TFEKControlVersion = class(TForm)
     version: TZReadOnlyQuery;
     DataSource1: TDataSource;
     DBRichEdit1: TDBRichEdit;
@@ -41,19 +41,19 @@ type
   end;
 
 var
-  Control_version: TControl_version;
+  FEKControlVersion: TFEKControlVersion;
 
 implementation
 
 {$R *.dfm}
 
 
-procedure TControl_version.FormCreate(Sender: TObject);
+procedure TFEKControlVersion.FormCreate(Sender: TObject);
 begin;
 
 end;
 
-procedure TControl_version.bfinClick(Sender: TObject);
+procedure TFEKControlVersion.bfinClick(Sender: TObject);
 begin
   if txtincompatible.Caption <> '' then
     Application.Terminate
@@ -61,7 +61,7 @@ begin
     ModalResult := mrok;
 end;
 
-procedure TControl_version.Button1Click(Sender: TObject);
+procedure TFEKControlVersion.Button1Click(Sender: TObject);
 begin
 //  winexec('explorer http://muni.inter-sol.com.ar', SW_MAXIMIZE	);
   winexec('actualizar', SW_NORMAL	);
