@@ -128,9 +128,9 @@ end;
 
 procedure TEKUsrLogin.CambiarClave;
 begin
-  cambioclave:= Tcambioclave.Create(nil);
-  cambioclave.ShowModal;
-  cambioclave.Release;
+  FEKCambioClave:= TFEKCambioClave.Create(nil);
+  FEKCambioClave.ShowModal;
+  FEKCambioClave.Release;
 end;
 
 
@@ -436,11 +436,11 @@ begin
               //--- CAMBIO DE CONTRASEÑA FORZADO ---
               if EKSQLUsuarios.FieldByName('cambiarclave').AsString = 'S' then
               begin
-                cambioclave:= Tcambioclave.Create(nil);
-                cambioclave.usuario.Caption:= EKSQLUsuarios.fieldbyname('usuario').asstring;
-                cambioclave.nusuario.Caption:= EKSQLUsuarios.fieldbyname('nombre').asstring;
-                cambioclave.ShowModal;
-                cambioclave.Release;
+                FEKCambioClave:= TFEKCambioClave.Create(nil);
+                FEKCambioClave.usuario.Caption:= EKSQLUsuarios.fieldbyname('usuario').asstring;
+                FEKCambioClave.nusuario.Caption:= EKSQLUsuarios.fieldbyname('nombre').asstring;
+                FEKCambioClave.ShowModal;
+                FEKCambioClave.Release;
 
                 //verifico que el cambio de contraseña fue exitoso
                 if passwordsis <> oldpasswd then
@@ -637,11 +637,11 @@ begin
     //--- CONTROL DE VERSION ---
     if FControlVersion then
     begin
-      Application.CreateForm(TControl_version, Control_version);
+      Application.CreateForm(TFEKControlVersion, FEKControlVersion);
 
       sec:= FVersion;
 
-      with Control_version do
+      with FEKControlVersion do
       begin
         version.Connection:= FConeccion;
         version_db.Connection:= FConeccion;
@@ -689,7 +689,7 @@ begin
         end;
 
         if ((sec <> versionVERSION.AsInteger) or (versionVERSION_DB.asinteger <> version_dbVERSION_DB.asinteger))
-          and (not Control_version.Visible) then
+          and (not FEKControlVersion.Visible) then
         begin
           showmodal;
         end;
@@ -699,7 +699,7 @@ begin
           Application.Terminate
       end;
 
-      Control_version.Release;
+      FEKControlVersion.Release;
     end;
 
     if Assigned(FOnActivar) then

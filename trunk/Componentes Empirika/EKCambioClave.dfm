@@ -1,4 +1,4 @@
-object cambioclave: Tcambioclave
+object FEKCambioClave: TFEKCambioClave
   Left = 409
   Top = 261
   BorderIcons = []

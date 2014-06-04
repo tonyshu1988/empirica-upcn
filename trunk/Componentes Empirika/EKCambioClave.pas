@@ -8,7 +8,7 @@ uses
   Classes;
 
 type
-  Tcambioclave = class(TForm)
+  TFEKCambioClave = class(TForm)
     Label1: TLabel;
     ca: TEdit;
     Label2: TLabel;
@@ -33,14 +33,14 @@ type
   end;
 
 var
-  cambioclave: Tcambioclave;
+  FEKCambioClave: TFEKCambioClave;
 
 implementation
 
 {$R *.dfm}
 
 
-procedure Tcambioclave.Button1Click(Sender: TObject);
+procedure TFEKCambioClave.Button1Click(Sender: TObject);
 var
   nclv : string;
 begin
@@ -94,12 +94,12 @@ begin
 
 end;
 
-procedure Tcambioclave.btn_cancelarClick(Sender: TObject);
+procedure TFEKCambioClave.btn_cancelarClick(Sender: TObject);
 begin
   ModalResult := mrok;
 end;
 
-procedure Tcambioclave.FormCreate(Sender: TObject);
+procedure TFEKCambioClave.FormCreate(Sender: TObject);
 begin
   usuario.Caption := EKUsrLogin1.usuariosis;
   nusuario.Caption := EKUsrLogin1.nusuariosis;

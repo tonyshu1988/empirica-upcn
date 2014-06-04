@@ -1,6 +1,6 @@
-object Control_version: TControl_version
-  Left = 286
-  Top = 136
+object FEKControlVersion: TFEKControlVersion
+  Left = 487
+  Top = 324
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Control de Versi'#243'n'

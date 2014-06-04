@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls;
 
 type
-  TCopyRight = class(TForm)
+  TFEKCopyRight = class(TForm)
     Button1: TButton;
     Label1: TLabel;
     Label2: TLabel;
@@ -21,7 +21,7 @@ type
   end;
 
 var
-  CopyRight: TCopyRight;
+  FEKCopyRight: TFEKCopyRight;
 
 
 
@@ -30,7 +30,7 @@ implementation
 
 {$R *.dfm}
 
-procedure TCopyRight.Button1Click(Sender: TObject);
+procedure TFEKCopyRight.Button1Click(Sender: TObject);
 begin
 //  Release;
 end;
