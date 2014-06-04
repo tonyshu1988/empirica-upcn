@@ -770,6 +770,9 @@ begin
   else
     if Fconeccion.Protocol = 'postgresql' then
       sql.SQL.Text := 'Select current_timestamp as fechayhora';
+      else
+       if Fconeccion.Protocol = 'firebird-2.5' then
+    sql.SQL.Text := 'Select current_timestamp as fechayhora from RDB$DATABASE'
   sql.Active := true;
   result := sql.fieldbyname('fechayhora').AsDateTime;
   sql.Close;
