@@ -7,7 +7,7 @@ uses
   Dialogs, StdCtrls, ExtCtrls, ActnList, XPStyleActnCtrls, ActnMan;
 
 type
-  TFBusqueda = class(TForm)
+  TFEKBusqueda = class(TForm)
     c_nro: TComboBox;
     c_texto: TComboBox;
     c_yo: TComboBox;
@@ -35,35 +35,35 @@ type
   end;
 
 var
-  FBusqueda: TFBusqueda;
+  FEKBusqueda: TFEKBusqueda;
 
 implementation
 uses EKBusquedaAvanzada;
 {$R *.dfm}
 
-procedure TFBusqueda.BuscarClick(Sender: TObject);
+procedure TFEKBusqueda.BuscarClick(Sender: TObject);
 begin
   ModalResult := mrOK
 end;
 
-procedure TFBusqueda.SalirClick(Sender: TObject);
+procedure TFEKBusqueda.SalirClick(Sender: TObject);
 begin
   ModalResult := mrCancel;
 end;
 
-procedure TFBusqueda.ABuscarExecute(Sender: TObject);
+procedure TFEKBusqueda.ABuscarExecute(Sender: TObject);
 begin
   if Buscar.Visible then
     Buscar.Click;
 end;
 
-procedure TFBusqueda.AVaciarExecute(Sender: TObject);
+procedure TFEKBusqueda.AVaciarExecute(Sender: TObject);
 begin
   if Bot_Vaciar.Visible then
     Bot_Vaciar.Click;
 end;
 
-procedure TFBusqueda.ACancelarExecute(Sender: TObject);
+procedure TFEKBusqueda.ACancelarExecute(Sender: TObject);
 begin
   if Salir.Visible then
     Salir.Click;

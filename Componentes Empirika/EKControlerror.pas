@@ -18,11 +18,11 @@ uses EKerror;
 
 procedure control_errores_mensaje(titulo, error, detalle: string);
 begin
-  f_error.Caption:= titulo;
-  f_error.text_error.Caption:= error;
-  F_Error.error_c.Caption:= detalle;
-  F_Error.Visible:= False;
-  F_Error.ShowModal;
+  FEK_Error.Caption:= titulo;
+  FEK_Error.text_error.Caption:= error;
+  FEK_Error.error_c.Caption:= detalle;
+  FEK_Error.Visible:= False;
+  FEK_Error.ShowModal;
 end;
 
 
@@ -31,7 +31,7 @@ var
   d, h: integer;
   s: string;
 begin
-  F_Error.error_c.Caption:= e.Message;
+  FEK_Error.error_c.Caption:= e.Message;
   s:= 'Se produjo un Error inesperado, verifique que los datos estén cargados correctamente.'; //e.Message;
 
   // Si es un error generado por los Zeos
@@ -97,10 +97,10 @@ begin
           'Que se respete el formato indicado en los campos de carga' + #13 + #13 + error_nulo;
     end;
 
-    f_error.Caption:= 'ERROR EN BASE DE DATOS';
-    f_error.text_error.Caption:= s;
-    F_Error.Visible:= False;
-    F_Error.ShowModal;
+    FEK_Error.Caption:= 'ERROR EN BASE DE DATOS';
+    FEK_Error.text_error.Caption:= s;
+    FEK_Error.Visible:= False;
+    FEK_Error.ShowModal;
   end
   else
     //si es un error de base de datos
@@ -109,10 +109,10 @@ begin
       s:= StringReplace(s, 'Field', 'El campo', [rfReplaceAll]);
       s:= StringReplace(s, 'must have a value', 'No puede estar vacio', [rfReplaceAll]);
 
-      f_error.Caption:= 'ERROR EN BASE DE DATOS';
-      f_error.text_error.Caption:= s;
-      F_Error.Visible:= False;
-      F_Error.ShowModal;
+      FEK_Error.Caption:= 'ERROR EN BASE DE DATOS';
+      FEK_Error.text_error.Caption:= s;
+      FEK_Error.Visible:= False;
+      FEK_Error.ShowModal;
     end
     else // Otro tipo de Error
     begin
@@ -127,10 +127,10 @@ begin
       else if pos('is not a valid integer', e.Message) > 0 then
         s:= 'Un campo numérico entero no es válido o no fue ingresado';
 
-      f_error.Caption:= 'ERROR GENERAL';
-      f_error.text_error.Caption:= s;
-      F_Error.Visible:= False;
-      F_Error.ShowModal;
+      FEK_Error.Caption:= 'ERROR GENERAL';
+      FEK_Error.text_error.Caption:= s;
+      FEK_Error.Visible:= False;
+      FEK_Error.ShowModal;
     end;
 
   error_clave:= '';
