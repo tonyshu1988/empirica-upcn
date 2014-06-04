@@ -1,6 +1,6 @@
-object F_Error: TF_Error
-  Left = 826
-  Top = 400
+object FEK_Error: TFEK_Error
+  Left = 547
+  Top = 324
   BorderIcons = []
   BorderStyle = bsSingle
   Caption = 'Error en los Datos Ingresados'

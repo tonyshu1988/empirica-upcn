@@ -871,7 +871,7 @@ begin
   top:= 0;
   if FCriterios.Count > 0 then
   begin
-    Application.CreateForm(TFBusqueda, FBusqueda);
+    Application.CreateForm(TFEKBusqueda, FEKBusqueda);
     ofset:= 25;
     for i:= 0 to FCriterios.Count - 1 do
     begin
@@ -883,21 +883,21 @@ begin
         FNombreCampo.AutoSize:= False;
         FNombreCampo.Font.Style:= [fsBold];
         FNombreCampo.Alignment:= taRightJustify;
-        FNombreCampo.Parent:= Fbusqueda;
+        FNombreCampo.Parent:= FEKBusqueda;
         FNombreCampo.Caption:= FTitulo + ':';
         FNombreCampo.Top:= top + 3;
         FNombreCampo.Left:= 16;
 
         Fcondicion1:= TComboBox.Create(self);
-        Fcondicion1.Parent:= FBusqueda;
+        Fcondicion1.Parent:= FEKBusqueda;
         Fcondicion1.Style:= csDropDownList;
         Fcondicion1.Top:= top;
         Fcondicion1.Left:= 184;
         Fcondicion1.Width:= 73;
         if TipoCampo = EK_Texto then
-          Fcondicion1.Items:= FBusqueda.c_texto.Items;
+          Fcondicion1.Items:= FEKBusqueda.c_texto.Items;
         if ((TipoCampo = EK_Fecha) or (TipoCampo = EK_Numero) or (FTipoCampo = EK_Texto_Ordenado)) then
-          Fcondicion1.Items:= FBusqueda.c_nro.Items;
+          Fcondicion1.Items:= FEKBusqueda.c_nro.Items;
         if TipoCampo = EK_Blob then
           Fcondicion1.Items.Add('Contiene');
         Fcondicion1.ItemIndex:= FBacCondicion1;
@@ -907,7 +907,7 @@ begin
         if ((FTipoIngreso = EK_Edit)) then
         begin
           FTexto1:= TmaskEdit.Create(self);
-          FTexto1.parent:= Fbusqueda;
+          FTexto1.parent:= FEKBusqueda;
           FTexto1.Top:= top;
           FTexto1.Left:= 264;
           if FPantalla_reducida then
@@ -922,7 +922,7 @@ begin
         if FTipoIngreso = EK_Combo then
         begin
           FTextoCombo1:= TComboBox.Create(self);
-          FTextoCombo1.parent:= Fbusqueda;
+          FTextoCombo1.parent:= FEKBusqueda;
           FTextoCombo1.Top:= top;
           FTextoCombo1.Left:= 264;
           if FPantalla_reducida then
@@ -959,9 +959,9 @@ begin
         end;
 
         Fyo:= TComboBox.Create(self);
-        Fyo.parent:= Fbusqueda;
+        Fyo.parent:= FEKBusqueda;
         Fyo.Style:= csDropDownList;
-        fyo.Items:= FBusqueda.c_yo.Items;
+        fyo.Items:= FEKBusqueda.c_yo.Items;
         Fyo.Top:= top;
         Fyo.Left:= 400;
         Fyo.Width:= 49;
@@ -973,7 +973,7 @@ begin
           Fyo.Enabled:= false;
 
         Fcondicion2:= TComboBox.Create(self);
-        Fcondicion2.Parent:= FBusqueda;
+        Fcondicion2.Parent:= FEKBusqueda;
         Fcondicion2.Style:= csDropDownList;
         Fcondicion2.Top:= top;
         Fcondicion2.Left:= 464;
@@ -982,9 +982,9 @@ begin
           Fcondicion2.Enabled:= false;
 
         if TipoCampo = EK_Texto then
-          Fcondicion2.Items:= FBusqueda.c_texto.Items;
+          Fcondicion2.Items:= FEKBusqueda.c_texto.Items;
         if ((TipoCampo = EK_Fecha) or (TipoCampo = EK_Numero) or (FTipoCampo = EK_Texto_Ordenado)) then
-          Fcondicion2.Items:= FBusqueda.c_nro.Items;
+          Fcondicion2.Items:= FEKBusqueda.c_nro.Items;
         if TipoCampo = EK_Blob then
           Fcondicion2.Items.Add('Contiene');
         Fcondicion2.ItemIndex:= FBacCondicion2;
@@ -994,7 +994,7 @@ begin
         if FTipoIngreso = EK_Edit then
         begin
           FTexto2:= TMaskEdit.Create(self);
-          FTexto2.parent:= Fbusqueda;
+          FTexto2.parent:= FEKBusqueda;
           FTexto2.Top:= top;
           FTexto2.Left:= 544;
           FTexto2.Width:= 121;
@@ -1008,7 +1008,7 @@ begin
         if FTipoIngreso = EK_Combo then
         begin
           FTextoCombo2:= TComboBox.Create(self);
-          FTextoCombo2.parent:= Fbusqueda;
+          FTextoCombo2.parent:= FEKBusqueda;
           FTextoCombo2.Top:= top;
           FTextoCombo2.Left:= 544;
           FTextoCombo2.Width:= 121;
@@ -1040,7 +1040,7 @@ begin
 
         FOrdenar:= TCheckBox.Create(self);
         FOrdenar.Visible:= false;
-        FOrdenar.parent:= Fbusqueda;
+        FOrdenar.parent:= FEKBusqueda;
         FOrdenar.Top:= top;
         FOrdenar.Left:= 688;
         FOrdenar.Width:= 17;
@@ -1050,29 +1050,29 @@ begin
       end;
     end;
 
-    FBusqueda.Height:= top + 100;
-    FBusqueda.Bot_Vaciar.OnClick:= BlanquearDatosBusqueda;
+    FEKBusqueda.Height:= top + 100;
+    FEKBusqueda.Bot_Vaciar.OnClick:= BlanquearDatosBusqueda;
     if TEKCriterioBA(FCriterios.Items[0]).Fcondicion1.enabled then
-      FBusqueda.ActiveControl:= TEKCriterioBA(FCriterios.Items[0]).Fcondicion1
+      FEKBusqueda.ActiveControl:= TEKCriterioBA(FCriterios.Items[0]).Fcondicion1
     else
-      FBusqueda.ActiveControl:= TEKCriterioBA(FCriterios.Items[0]).FTexto1;
+      FEKBusqueda.ActiveControl:= TEKCriterioBA(FCriterios.Items[0]).FTexto1;
 
     if FPantalla_reducida then
     begin
-//      FBusqueda.Bot_Vaciar.Left := 136;
-//      FBusqueda.Salir.Left := 302;
-//      FBusqueda.Width := 409;
-      FBusqueda.Bot_Vaciar.Left:= 186;
-      FBusqueda.Salir.Left:= 402;
-      FBusqueda.Width:= 509;
-      FBusqueda.labelyo.Visible:= false;
-      FBusqueda.labelcondicion2.Visible:= false;
+//      FEKBusqueda.Bot_Vaciar.Left := 136;
+//      FEKBusqueda.Salir.Left := 302;
+//      FEKBusqueda.Width := 409;
+      FEKBusqueda.Bot_Vaciar.Left:= 186;
+      FEKBusqueda.Salir.Left:= 402;
+      FEKBusqueda.Width:= 509;
+      FEKBusqueda.labelyo.Visible:= false;
+      FEKBusqueda.labelcondicion2.Visible:= false;
     end;
 
     if not FMostrar_vaciar_valores then
-      FBusqueda.Bot_Vaciar.Visible:= false;
+      FEKBusqueda.Bot_Vaciar.Visible:= false;
 
-    if (not (mostrar) or (FBusqueda.ShowModal = mrOK)) then
+    if (not (mostrar) or (FEKBusqueda.ShowModal = mrOK)) then
     begin
       if not (CopiaGuardada) then
         ArmarConsulta; //lo llamo para que guarde la copia antes de armar la query
@@ -1154,7 +1154,7 @@ begin
     end
     else
       result:= false;
-    FBusqueda.Release;
+    FEKBusqueda.Release;
   end;
 end;
 

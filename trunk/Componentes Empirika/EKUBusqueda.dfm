@@ -1,4 +1,4 @@
-object FBusqueda: TFBusqueda
+object FEKBusqueda: TFEKBusqueda
   Left = 387
   Top = 236
   BorderIcons = []
