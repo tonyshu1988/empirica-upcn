@@ -89,12 +89,12 @@ begin
         ConsultaVirtual.Insert;
         if FEditarUpperCase then
           texto := UpperCase(texto);
-        FListadoSQL.SQL.FieldByName(FCampoBuscar).Value := texto;
+        FEKListadoSQL.SQL.FieldByName(FCampoBuscar).Value := texto;
         if FModelo.finalizar_transaccion('ABM') then
         begin
           ConsultaVirtual.Refresh;
-          FListadoSQL.C_sql.Refresh;
-          FListadoSQL.C_sql.Locate(FCampoBuscar,texto,[]);
+          FEKListadoSQL.C_sql.Refresh;
+          FEKListadoSQL.C_sql.Locate(FCampoBuscar,texto,[]);
         end
         else
           FModelo.cancelar_transaccion('ABM')
@@ -104,17 +104,17 @@ end;
 
 procedure TEKListadoSQL.bt_Eliminar(Sender: TObject);
 begin
-  if FListadoSQL.C_sql.IsEmpty then
+  if FEKListadoSQL.C_sql.IsEmpty then
     exit;
-  ConsultaVirtual.Locate(FCampoClave,FListadoSQL.C_sql.fieldbyname(FCampoClave).Value,[]) ;
+  ConsultaVirtual.Locate(FCampoClave,FEKListadoSQL.C_sql.fieldbyname(FCampoClave).Value,[]) ;
   if (application.MessageBox(pchar('Elimina el Registro'), 'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-      if FModelo.iniciar_transaccion('ABM', [FListadoSQL.SQL]) then
+      if FModelo.iniciar_transaccion('ABM', [FEKListadoSQL.SQL]) then
       begin
         ConsultaVirtual.delete;
         if FModelo.finalizar_transaccion('ABM') then
         begin
           ConsultaVirtual.Refresh;
-          FListadoSQL.C_sql.Refresh;
+          FEKListadoSQL.C_sql.Refresh;
         end
         else
           FModelo.cancelar_transaccion('ABM')
@@ -126,9 +126,9 @@ procedure TEKListadoSQL.bt_Modificar(Sender: TObject);
 var
   texto : string;
 begin
-  if FListadoSQL.C_sql.IsEmpty then
+  if FEKListadoSQL.C_sql.IsEmpty then
     exit;
-  ConsultaVirtual.Locate(FCampoClave,FListadoSQL.C_sql.fieldbyname(FCampoClave).Value,[]) ;
+  ConsultaVirtual.Locate(FCampoClave,FEKListadoSQL.C_sql.fieldbyname(FCampoClave).Value,[]) ;
   texto := ConsultaVirtual.fieldbyname(FCampoBuscar).Value;
   if InputQuery('Modificar','Descripción:', texto) then
     if texto <> '' then
@@ -141,8 +141,8 @@ begin
         if FModelo.finalizar_transaccion('ABM') then
         begin
           ConsultaVirtual.Refresh;
-          FListadoSQL.C_sql.Refresh;
-          FListadoSQL.C_sql.Locate(FCampoBuscar,texto,[]);
+          FEKListadoSQL.C_sql.Refresh;
+          FEKListadoSQL.C_sql.Locate(FCampoBuscar,texto,[]);
         end
         else
           FModelo.cancelar_transaccion('ABM')
@@ -155,79 +155,79 @@ var
 	f: string;
 	i, x: integer;
 begin
-  Application.CreateForm(TFListadoSQL, FListadoSQL);
+  Application.CreateForm(TFEKListadoSQL, FEKListadoSQL);
 
-  FListadoSQL.grilla.Color:= FColorGrilla;
+  FEKListadoSQL.grilla.Color:= FColorGrilla;
 
   if not (FTituloVentana = '') then
-    FListadoSQL.Caption:= FTituloVentana;
+    FEKListadoSQL.Caption:= FTituloVentana;
   if not (FTituloBuscar = '') then
-    FListadoSQL.lblBuscar.Caption:= FTituloBuscar;
+    FEKListadoSQL.lblBuscar.Caption:= FTituloBuscar;
   if not (FTituloBuscar2 = '') then
-    FListadoSQL.lblBuscar2.Caption:= FTituloBuscar2;
+    FEKListadoSQL.lblBuscar2.Caption:= FTituloBuscar2;
 
   //guardo en el form los campos a buscar en un label
-  FListadoSQL.campo_buscar.Caption:= FCampoBuscar;
-  FListadoSQL.campo_buscar2.Caption:= FCampoBuscar2;
+  FEKListadoSQL.campo_buscar.Caption:= FCampoBuscar;
+  FEKListadoSQL.campo_buscar2.Caption:= FCampoBuscar2;
 
   if Assigned(FSQLDataset) then
   begin
     ConsultaVirtual := FSQLDataset;
-    FListadoSQL.P_sql.DataSet := ConsultaVirtual;
+    FEKListadoSQL.P_sql.DataSet := ConsultaVirtual;
     if not ConsultaVirtual.Active then
       FModelo.abrir(ConsultaVirtual)
     else
       if SQLDatasetRefAuto then
         ConsultaVirtual.Refresh;
     ConsultaVirtual.First;
-    FListadoSQL.C_sql.Open;
+    FEKListadoSQL.C_sql.Open;
   end
   else
   begin
-    ConsultaVirtual := FListadoSQL.SQL;
-    FListadoSQL.P_sql.DataSet := ConsultaVirtual;    
+    ConsultaVirtual := FEKListadoSQL.SQL;
+    FEKListadoSQL.P_sql.DataSet := ConsultaVirtual;
     ConsultaVirtual.SQL.Clear;
     ConsultaVirtual.SQL.Assign(FSQL);
     ConsultaVirtual.Connection:= FModelo.Coneccion;
     FModelo.abrir(ConsultaVirtual);
     for x:= 0 to ConsultaVirtual.FieldCount - 1 do
       ConsultaVirtual.Fields[x].Required:= false;
-    FListadoSQL.C_sql.Open;
+    FEKListadoSQL.C_sql.Open;
   end;
-  FListadoSQL.grilla.Columns[0].FieldName:= FCampoClave;
-  FListadoSQL.grilla.Columns[0].Width:= FAnchoClave;
-  FListadoSQL.grilla.Columns[1].FieldName:= FCampoBuscar;
-  FListadoSQL.grilla.Columns[1].Width:= FAnchoBuscar1;
-  FListadoSQL.grilla.Columns[1].Title.Caption:= FListadoSQL.lblBuscar.Caption;
+  FEKListadoSQL.grilla.Columns[0].FieldName:= FCampoClave;
+  FEKListadoSQL.grilla.Columns[0].Width:= FAnchoClave;
+  FEKListadoSQL.grilla.Columns[1].FieldName:= FCampoBuscar;
+  FEKListadoSQL.grilla.Columns[1].Width:= FAnchoBuscar1;
+  FEKListadoSQL.grilla.Columns[1].Title.Caption:= FEKListadoSQL.lblBuscar.Caption;
 
-  FListadoSQL.bt_actualizar.OnClick:= bt_refrescar;
+  FEKListadoSQL.bt_actualizar.OnClick:= bt_refrescar;
 
   if FEditar then
   begin
-    FListadoSQL.panel_edicion.Visible:= true;
-    FListadoSQL.bt_nuevo.Enabled:= true;
-    FListadoSQL.Bt_modificar.Enabled:= true;
-    FListadoSQL.bt_eliminar.Enabled:= true;
-    FListadoSQL.bt_nuevo.OnClick:= bt_nuevoClick;
-    FListadoSQL.Bt_modificar.OnClick:= bt_Modificar;
-    FListadoSQL.bt_eliminar.OnClick:= bt_Eliminar;
+    FEKListadoSQL.panel_edicion.Visible:= true;
+    FEKListadoSQL.bt_nuevo.Enabled:= true;
+    FEKListadoSQL.Bt_modificar.Enabled:= true;
+    FEKListadoSQL.bt_eliminar.Enabled:= true;
+    FEKListadoSQL.bt_nuevo.OnClick:= bt_nuevoClick;
+    FEKListadoSQL.Bt_modificar.OnClick:= bt_Modificar;
+    FEKListadoSQL.bt_eliminar.OnClick:= bt_Eliminar;
   end;
 
   if FBuscarDoble then
   begin
-    FListadoSQL.grilla.Columns[2].Visible:= true;
-    FListadoSQL.grilla.Columns[2].FieldName:= FCampoBuscar2;
-    FListadoSQL.grilla.Columns[2].Width:= FAnchoBuscar2;
-    FListadoSQL.grilla.Columns[2].Title.Caption:= FListadoSQL.lblBuscar2.Caption;
-    FListadoSQL.Panel_Buscar2.Visible:= true;
+    FEKListadoSQL.grilla.Columns[2].Visible:= true;
+    FEKListadoSQL.grilla.Columns[2].FieldName:= FCampoBuscar2;
+    FEKListadoSQL.grilla.Columns[2].Width:= FAnchoBuscar2;
+    FEKListadoSQL.grilla.Columns[2].Title.Caption:= FEKListadoSQL.lblBuscar2.Caption;
+    FEKListadoSQL.Panel_Buscar2.Visible:= true;
   end;
 
-  if FListadoSQL.ShowModal = mrOK then
+  if FEKListadoSQL.ShowModal = mrOK then
   begin
-    Fresultado:= FListadoSQL.C_sql.fieldbyname(FCampoClave).AsString;
-    Fseleccion:= FListadoSQL.C_sql.fieldbyname(FCampoBuscar).AsString;
+    Fresultado:= FEKListadoSQL.C_sql.fieldbyname(FCampoClave).AsString;
+    Fseleccion:= FEKListadoSQL.C_sql.fieldbyname(FCampoBuscar).AsString;
     if FBuscarDoble and (FCampoBuscar2 <> '') then
-      Fseleccion2:= FListadoSQL.C_sql.fieldbyname(FCampoBuscar2).AsString;
+      Fseleccion2:= FEKListadoSQL.C_sql.fieldbyname(FCampoBuscar2).AsString;
     result:= True;
     if Assigned(FBuscarEnQuery) then
     begin
@@ -243,7 +243,7 @@ begin
     result:= false;
   end;
 
-  FListadoSQL.Release;
+  FEKListadoSQL.Release;
 end;
 
 
@@ -301,7 +301,7 @@ end;
 procedure TEKListadoSQL.bt_refrescar(Sender: TObject);
 begin
   ConsultaVirtual.Refresh;
-  FListadoSQL.C_sql.Refresh;
+  FEKListadoSQL.C_sql.Refresh;
 end;
 
 end.

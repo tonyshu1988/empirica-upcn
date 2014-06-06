@@ -9,7 +9,7 @@ uses
   XPStyleActnCtrls, ActnMan, ExtCtrls, EKOrdenarGrilla;
 
 type
-  TFListadoSQL = class(TForm)
+  TFEKListadoSQL = class(TForm)
     D_Datos: TDataSource;
     SQL: TZQuery;
     P_sql: TDataSetProvider;
@@ -56,7 +56,7 @@ type
   end;
 
 var
-  FListadoSQL: TFListadoSQL;
+  FEKListadoSQL: TFEKListadoSQL;
 
 type
   THackDBGrid = class(TDBGrid);
@@ -65,7 +65,7 @@ implementation
 
 {$R *.dfm}
 
-procedure TFListadoSQL.buscarKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TFEKListadoSQL.buscarKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if Length(buscar.Text) > 0 then
   begin
@@ -89,7 +89,7 @@ begin
 end;
 
 
-procedure TFListadoSQL.buscar2KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
+procedure TFEKListadoSQL.buscar2KeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if Length(buscar2.Text) > 0 then
   begin
@@ -113,19 +113,19 @@ begin
 end;
 
 
-procedure TFListadoSQL.grillaDblClick(Sender: TObject);
+procedure TFEKListadoSQL.grillaDblClick(Sender: TObject);
 begin
   bt_seleccionar.Click;
 end;
 
 
-procedure TFListadoSQL.Action1Execute(Sender: TObject);
+procedure TFEKListadoSQL.Action1Execute(Sender: TObject);
 begin
   bt_salir.Click;
 end;
 
 
-procedure TFListadoSQL.Action2Execute(Sender: TObject);
+procedure TFEKListadoSQL.Action2Execute(Sender: TObject);
 begin
   if buscar.Focused then
   begin
@@ -139,31 +139,31 @@ begin
 end;
 
 
-procedure TFListadoSQL.NuevoExecute(Sender: TObject);
+procedure TFEKListadoSQL.NuevoExecute(Sender: TObject);
 begin
   bt_nuevo.Click;
 end;
 
 
-procedure TFListadoSQL.ModificarExecute(Sender: TObject);
+procedure TFEKListadoSQL.ModificarExecute(Sender: TObject);
 begin
   Bt_modificar.Click;
 end;
 
 
-procedure TFListadoSQL.bt_eliminarClick(Sender: TObject);
+procedure TFEKListadoSQL.bt_eliminarClick(Sender: TObject);
 begin
   bt_eliminar.Click;
 end;
 
 
-procedure TFListadoSQL.setColorGrilla(color: TColor);
+procedure TFEKListadoSQL.setColorGrilla(color: TColor);
 begin
   grilla.Color:= color;
 end;
 
 
-procedure TFListadoSQL.grillaDrawColumnCell(Sender: TObject;
+procedure TFEKListadoSQL.grillaDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 var
