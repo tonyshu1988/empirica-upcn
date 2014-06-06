@@ -1,4 +1,4 @@
-object FListadoSQL: TFListadoSQL
+object FEKListadoSQL: TFEKListadoSQL
   Tag = 98
   Left = 434
   Top = 290
