@@ -2,8 +2,8 @@ object DM: TDM
   OldCreateOrder = False
   Left = 529
   Top = 259
-  Height = 471
-  Width = 396
+  Height = 492
+  Width = 438
   object Conexion: TZConnection
     Protocol = 'firebird-1.5'
     HostName = 'localhost'
@@ -14,9 +14,7 @@ object DM: TDM
       'rolename=base'
       'dialect=3')
     AutoCommit = False
-    ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
-    SQLHourGlass = True
     Left = 38
     Top = 16
   end
@@ -2034,8 +2032,6 @@ object DM: TDM
     Database = 'D:\SISTEMAS\EMPIRIKA\SiGeFa\Bases\USUARIOS.FDB'
     User = 'sysdba'
     Password = 'masterkey'
-    ReadOnly = True
-    SQLHourGlass = True
     Left = 40
     Top = 384
   end
