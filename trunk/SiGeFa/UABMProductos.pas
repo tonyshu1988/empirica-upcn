@@ -731,13 +731,13 @@ function TFABMProductos.validarcamposDetalle2(): Boolean;
 begin
   result:= true;
 
-  if (ZQ_PreciosCOEF_GANANCIA.AsFloat>1) then
-  begin
-    Application.MessageBox('El campo Coef. Ganancia es incorrecto, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
-    //dpCosto.SetFocus;
-    result:= false;
-    exit;
-  end;
+//  if (ZQ_PreciosCOEF_GANANCIA.AsFloat>1) then
+//  begin
+//    Application.MessageBox('El campo Coef. Ganancia es incorrecto, por favor Verifique', 'Validación', MB_OK + MB_ICONINFORMATION);
+//    //dpCosto.SetFocus;
+//    result:= false;
+//    exit;
+//  end;
 
   if (ZQ_PreciosCOEF_DESCUENTO.AsFloat>1) then
   begin
