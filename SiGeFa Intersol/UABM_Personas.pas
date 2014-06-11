@@ -9,7 +9,7 @@ uses
   EKOrdenarGrilla, ZStoredProcedure, ComCtrls, EKDBDateTimePicker,
   StdCtrls, DBCtrls, Mask, ZSqlUpdate, EKFiltrarColumna, ActnList,
   XPStyleActnCtrls, ActnMan, EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons,
-  Menus, ShellAPI, EKListadoSQL, cxClasses;
+  Menus, ShellAPI, EKListadoSQL, cxClasses, ISBusquedaAvanzada;
 
 type
   TFABM_Personas = class(TForm)
@@ -296,6 +296,7 @@ type
     ZQ_PersonaCLAVE: TStringField;
     ZQ_IvaCOEFICIENTE: TFloatField;
     ZQ_IvaVERIFICA_CUIT: TStringField;
+    ISBuscar: TISBusquedaAvanzada;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -435,7 +436,7 @@ end;
 
 procedure TFABM_Personas.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_Persona, lblCantidadRegistros);
 end;
 

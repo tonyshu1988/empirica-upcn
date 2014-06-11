@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 228
-  Top = 78
+  Left = 449
+  Top = 393
   Width = 972
   Height = 631
   Caption = 'ABM Personas'
@@ -5264,5 +5264,47 @@ object FABM_Personas: TFABM_Personas
       ImageIndex = 15
       OnClick = QuitarObraSocial1Click
     end
+  end
+  object ISBuscar: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Apellido y Nombre'
+        Campo = 'nombre'
+        Tabla = 'persona'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_Persona
+    SQL.Strings = (
+      
+        'select distinct cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv' +
+        '.nombre_provincia'
+      'from persona cl'
+      'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
+      'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
+      'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
+      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
+      'order by cl.nombre'
+      '')
+    SQL_Select.Strings = (
+      
+        'select distinct cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv' +
+        '.nombre_provincia')
+    SQL_From.Strings = (
+      'from persona cl'
+      'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
+      'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
+      'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
+      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)')
+    SQL_Orden.Strings = (
+      'order by cl.nombre'
+      '')
+    UsarWhereOriginal = IS_Sin_Where
+    Left = 152
+    Top = 248
   end
 end
