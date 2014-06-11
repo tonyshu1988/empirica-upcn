@@ -11,7 +11,7 @@ uses
   IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
   IdSMTPBase, IdExplicitTLSClientServerBase, StdCtrls, Graphics,
   IdIMAP4, Grids, DBGrids, ISModelo, ISIni, ISInformacion, ISUsrLogin,
-  ISAppEvnts, ISEventos, EKInformacion;
+  ISAppEvnts, ISEventos, EKInformacion, ZAbstractConnection;
 
 type
   TDM = class(TDataModule)
