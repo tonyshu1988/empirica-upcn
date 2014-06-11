@@ -1,22 +1,24 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 529
-  Top = 259
+  Left = 452
+  Top = 122
   Height = 656
   Width = 534
   object Conexion: TZConnection
-    Protocol = 'firebird-1.5'
-    HostName = 'localhost'
-    Database = 'E:\SIGEFA\Bases\SIGEFA.FDB'
-    User = 'sysdba'
-    Password = 'masterkey'
+    ControlsCodePage = cGET_ACP
+    UTF8StringsAsWideField = False
     Properties.Strings = (
       'rolename=base'
       'dialect=3')
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
-    SQLHourGlass = True
+    HostName = 'localhost'
+    Port = 3052
+    Database = 'E:\SIGEFA\Bases\SIGEFA.FDB'
+    User = 'sysdba'
+    Password = 'masterkey'
+    Protocol = 'firebird-2.5'
     Left = 46
     Top = 16
   end
@@ -1995,13 +1997,17 @@ object DM: TDM
     end
   end
   object Conexion_Usuario: TZConnection
-    Protocol = 'firebird-1.5'
+    ControlsCodePage = cGET_ACP
+    UTF8StringsAsWideField = False
+    AutoEncodeStrings = False
+    ReadOnly = True
+    SQLHourGlass = True
     HostName = 'localhost'
+    Port = 0
     Database = 'D:\SISTEMAS\EMPIRIKA\SiGeFa\Bases\USUARIOS.FDB'
     User = 'sysdba'
     Password = 'masterkey'
-    ReadOnly = True
-    SQLHourGlass = True
+    Protocol = 'firebird-1.5'
     Left = 40
     Top = 384
   end
