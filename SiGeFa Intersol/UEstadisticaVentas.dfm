@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 77
-  Top = 174
+  Left = 628
+  Top = 159
   Width = 997
   Height = 673
   Caption = 'Estadisticas Ventas'
@@ -494,7 +494,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
               Frame.DrawLeft = False
               Frame.DrawRight = False
               Size.Values = (
-                34.395833333333340000
+                34.395833333333330000
                 13.229166666666670000
                 5.291666666666667000
                 333.375000000000000000)
@@ -701,7 +701,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
                 37.041666666666670000
                 455.083333333333300000
                 5.291666666666667000
-                121.708333333333400000)
+                121.708333333333300000)
               Alignment = taLeftJustify
               AlignToBand = False
               AutoSize = True
