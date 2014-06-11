@@ -1,6 +1,6 @@
 object FEstadisticaStock: TFEstadisticaStock
-  Left = 367
-  Top = 298
+  Left = 403
+  Top = 194
   Width = 870
   Height = 500
   Caption = 'FEstadisticaStock'
