@@ -1361,7 +1361,7 @@ object FEstadisticaStock: TFEstadisticaStock
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
-      DefaultDrawing = False
+      DefaultDrawing = True
       Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
       TabOrder = 0
       TitleFont.Charset = ANSI_CHARSET
