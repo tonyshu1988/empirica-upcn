@@ -7,7 +7,7 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
   StdCtrls, EKDbSuma, mxNativeExcel, mxExport, EKOrdenarGrilla, QRCtrls,
-  QuickRpt, EKVistaPreviaQR, ActnList, XPStyleActnCtrls, ActnMan;
+  QuickRpt, EKVistaPreviaQR, ActnList, XPStyleActnCtrls, ActnMan, cxClasses;
 
 type
   TFEstadisticaStock = class(TForm)
