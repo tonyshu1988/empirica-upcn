@@ -313,12 +313,12 @@ begin
       dm.ZQ_ValidarFecha_Hora.Open;
 
       //calculo la cantidad de dias que pasaron desde el ultimo ingreso y hoy
-      i:= DaysBetween(dm.EKModelo.FechayHora, dm.ZQ_ValidarFecha_HoraDATE_TIME.AsDateTime);
+      i:= DaysBetween(dm.ISModelo.FechayHora, dm.ZQ_ValidarFecha_HoraDATE_TIME.AsDateTime);
 
       //si la fecha y hora del ultimo movimiento es mayo a la fecha y hora actual
       //o si la cantidad de dias transcurridos es mayor al valor establecido en la variable de configuracion
       //que indica cuantos dias pueden pasar desde el ultimo ingreso
-      if (dm.ZQ_ValidarFecha_HoraDATE_TIME.AsDateTime > dm.EKModelo.FechayHora)
+      if (dm.ZQ_ValidarFecha_HoraDATE_TIME.AsDateTime > dm.ISModelo.FechayHora)
         or (i > dm.ZQ_Configuracion_Variables.fieldbyname('numero').AsInteger) then
       begin
         //muestro un informe para que chequeen la hora del servidor
@@ -379,14 +379,14 @@ begin
 
   //valido si la demo no esta vencida
   cerrarSistema:= 0;
-  if dm.EKModelo.iniciar_transaccion('VALIDAR', [dm.ZQ_DemoSistema]) then
+  if dm.ISModelo.iniciar_transaccion('VALIDAR', [dm.ZQ_DemoSistema]) then
   begin
     dm.ZQ_DemoSistema.Close;
     dm.ZQ_DemoSistema.Open;
     cerrarSistema:= dm.ZQ_DemoSistemaRESULTADO.AsInteger;
 
-    if not (dm.EKModelo.finalizar_transaccion('VALIDAR')) then
-      dm.EKModelo.cancelar_transaccion('VALIDAR');
+    if not (dm.ISModelo.finalizar_transaccion('VALIDAR')) then
+      dm.ISModelo.cancelar_transaccion('VALIDAR');
   end;
   if cerrarSistema = 1 then
   begin
@@ -418,7 +418,7 @@ end;
 function cerrar_sistema: boolean;
 begin
   result:= true;
-  if dm.EKModelo.hay_transaccion then
+  if dm.ISModelo.hay_transaccion then
   begin
     if Application.MessageBox('Hay transacciones abiertas, Desea cerrar igualmente la aplicación', 'Atención', MB_YESNO) = IDYES then
       ExitProcess(0)
@@ -437,12 +437,12 @@ function TFPrincipal.cerrar_ventana(transaccion: string): boolean;
 begin
   Result:= True;
 
-  if DM.EKModelo.verificar_transaccion(transaccion) then
+  if DM.ISModelo.verificar_transaccion(transaccion) then
   begin
     if not (application.MessageBox(pchar('Si continua con el cierre se perderan los cambios realizados.' + #13 + #13 + '¿Salir de todos modos?'), 'Atención', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
       Result:= False
     else
-      DM.EKModelo.cancelar_transaccion(transaccion);
+      DM.ISModelo.cancelar_transaccion(transaccion);
   end;
 end;
 
@@ -563,7 +563,7 @@ begin
 
   if (application.MessageBox(pchar(mensaje), 'Atención!', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(Transaccion, [Query]) then
+    if dm.ISModelo.iniciar_transaccion(Transaccion, [Query]) then
     begin
       Query.Edit;
       Query.FieldByName(campo).AsString:= tipo;
@@ -571,10 +571,10 @@ begin
     else
       exit;
 
-    if (dm.EKModelo.finalizar_transaccion(Transaccion)) then
+    if (dm.ISModelo.finalizar_transaccion(Transaccion)) then
       Result := true
      else
-      dm.EKModelo.cancelar_transaccion(Transaccion);
+      dm.ISModelo.cancelar_transaccion(Transaccion);
 
     recNo:= Query.RecNo;
     Query.Refresh;
@@ -591,20 +591,20 @@ begin
 
   if (application.MessageBox(pchar('Esta seguro que desea eliminar el registro seleccionado?'), 'Eliminar Registro', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(Transaccion, [Query]) then
+    if dm.ISModelo.iniciar_transaccion(Transaccion, [Query]) then
       Query.Delete
     else
       exit;
     try
-      if not (dm.EKModelo.finalizar_transaccion(Transaccion)) then
-        dm.EKModelo.cancelar_transaccion(Transaccion);
+      if not (dm.ISModelo.finalizar_transaccion(Transaccion)) then
+        dm.ISModelo.cancelar_transaccion(Transaccion);
 
 //      dm.mostrarCantidadRegistro(Query, lblCantidadRegistros);
       Result:= True;
     except
       begin
         Application.MessageBox('El registro seleccionado no se puede borrar porque depende de otras tablas', 'Atención', MB_OK + MB_ICONINFORMATION);
-        dm.EKModelo.cancelar_transaccion(Transaccion);
+        dm.ISModelo.cancelar_transaccion(Transaccion);
       end
     end;
   end;

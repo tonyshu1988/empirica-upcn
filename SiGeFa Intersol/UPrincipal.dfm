@@ -5486,8 +5486,8 @@ object FPrincipal: TFPrincipal
     DrawingStyle = dsTransparent
     Width = 24
     Height = 24
-    Left = 192
-    Top = 272
+    Left = 200
+    Top = 264
     Bitmap = {
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000

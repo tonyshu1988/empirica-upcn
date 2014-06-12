@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 449
-  Top = 393
+  Left = 287
+  Top = 157
   Width = 972
   Height = 631
   Caption = 'ABM Personas'
@@ -3256,7 +3256,7 @@ object FABM_Personas: TFABM_Personas
           object DBGridTelMail: TDBGrid
             Left = 0
             Top = 0
-            Width = 946
+            Width = 938
             Height = 172
             Align = alClient
             Color = 14606012
@@ -3300,7 +3300,7 @@ object FABM_Personas: TFABM_Personas
           object DBMemoDetalle: TDBMemo
             Left = 0
             Top = 0
-            Width = 938
+            Width = 930
             Height = 164
             Align = alClient
             DataField = 'DESCRIPCION'
@@ -3314,7 +3314,7 @@ object FABM_Personas: TFABM_Personas
           object DBGridRol: TDBGrid
             Left = 0
             Top = 0
-            Width = 946
+            Width = 938
             Height = 172
             Align = alClient
             Color = 14606012
@@ -3510,7 +3510,7 @@ object FABM_Personas: TFABM_Personas
           object DBGridObraSocial: TDBGrid
             Left = 0
             Top = 0
-            Width = 946
+            Width = 938
             Height = 172
             Align = alClient
             Color = 14606012
@@ -4231,7 +4231,7 @@ object FABM_Personas: TFABM_Personas
       'order by cl.nombre')
     Params = <>
     Left = 64
-    Top = 72
+    Top = 280
     object ZQ_PersonaID_PERSONA: TIntegerField
       FieldName = 'ID_PERSONA'
     end
@@ -4519,7 +4519,7 @@ object FABM_Personas: TFABM_Personas
     SQL_Orden.Strings = (
       'order by cl.nombre')
     UsarWhereOriginal = EK_Sin_Where
-    Left = 160
+    Left = 136
     Top = 72
   end
   object ZQ_Provincia: TZQuery
@@ -5247,8 +5247,8 @@ object FABM_Personas: TFABM_Personas
     AnchoClave = 80
     AnchoBuscar1 = 500
     AnchoBuscar2 = 500
-    Left = 489
-    Top = 286
+    Left = 497
+    Top = 270
   end
   object PopupMenuObraSocial: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
@@ -5277,7 +5277,6 @@ object FABM_Personas: TFABM_Personas
         ItemIndex = -1
       end>
     CriteriosLocate = <>
-    Modelo = DM.ISModelo
     DataSet = ZQ_Persona
     SQL.Strings = (
       
