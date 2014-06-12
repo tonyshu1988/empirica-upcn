@@ -10,7 +10,7 @@ uses
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
   EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona, ZSqlUpdate,jpeg,
-  ExtDlgs,UBuscarComprobante;
+  ExtDlgs,UBuscarComprobante, cxClasses;
 
 type
   TFABM_CPB_FacturaCompra = class(TForm)
@@ -674,7 +674,7 @@ begin
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
-  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.ISImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
   FPrincipal.EKImageMenu24.GetBitmap(42, btnBuscarNP.Glyph); //cargo la imagen del boton buscar entidad
 
   FPrincipal.Iconos_Menu_32.GetBitmap(10, btnAplicarActualizar.Glyph);

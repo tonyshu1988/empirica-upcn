@@ -608,8 +608,8 @@ begin
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
-  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
-  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.ISImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.ISImage_ABM_Comprobantes.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
 
   FPrincipal.Iconos_Menu_32.GetBitmap(10, btnAplicarActualizar.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarActualizar.Glyph);

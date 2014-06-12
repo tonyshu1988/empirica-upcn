@@ -10,7 +10,7 @@ uses
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure, jpeg,
   EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona, ExtDlgs, UBuscarComprobante,
-  ZSqlUpdate;
+  ZSqlUpdate, cxClasses;
 
 type
   TFABM_CPB_OrdenPago = class(TForm)
@@ -491,10 +491,10 @@ begin
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
-  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
-  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(2, btnAgregarFactura.Glyph); //cargo la imagen del boton buscar entidad
-  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(3, btnQuitarFactura.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.ISImage_ABM_Comprobantes.GetBitmap(0, btnBuscarEmpresa.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.ISImage_ABM_Comprobantes.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.ISImage_ABM_Comprobantes.GetBitmap(2, btnAgregarFactura.Glyph); //cargo la imagen del boton buscar entidad
+  FPrincipal.ISImage_ABM_Comprobantes.GetBitmap(3, btnQuitarFactura.Glyph); //cargo la imagen del boton buscar entidad
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
     TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;

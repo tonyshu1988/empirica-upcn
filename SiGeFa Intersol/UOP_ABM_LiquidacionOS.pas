@@ -391,7 +391,7 @@ begin
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
-  FPrincipal.EKImage_ABM_Comprobantes.GetBitmap(4, btnBuscarOSLiquidar.Glyph); //cargo la imagen del boton buscar OS
+  FPrincipal.ISImage_ABM_Comprobantes.GetBitmap(4, btnBuscarOSLiquidar.Glyph); //cargo la imagen del boton buscar OS
 
 //  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
 //    TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
