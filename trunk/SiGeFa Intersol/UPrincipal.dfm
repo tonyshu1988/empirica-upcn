@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 134
-  Top = 155
+  Left = 283
+  Top = 118
   Width = 929
   Height = 608
   Caption = 'SiGeFa - Sistema de Gesti'#243'n y Facturaci'#243'n'
@@ -5486,8 +5486,8 @@ object FPrincipal: TFPrincipal
     DrawingStyle = dsTransparent
     Width = 24
     Height = 24
-    Left = 288
-    Top = 320
+    Left = 192
+    Top = 272
     Bitmap = {
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -18599,14 +18599,6 @@ object FPrincipal: TFPrincipal
       F8F4F4FFE2D7D5FFDCD4D3FFD9CCCC3F00000000000000000000000000000000
       000000000000000000000000E8E2E1FFF0EDECFFEEECECFFF0EBEBFFEEE8E7FF
       E6DEDDFFD2C8C7FFDED4D33F0000000000000000000000000000000000000000}
-  end
-  object EKVentanas1: TEKVentanas
-    PanelTapa = PanelTapa
-    AccionManager = ActionPrincipal
-    AbrirEstado = wsMaximized
-    PonerCaption = True
-    Left = 288
-    Top = 197
   end
   object Iconos_Barra_32: TImageList
     DrawingStyle = dsTransparent
@@ -32361,12 +32353,12 @@ object FPrincipal: TFPrincipal
       80FFF80FE07FF83FC3FFFFFFF03FF83F00000000000000000000000000000000
       000000000000}
   end
-  object EKImage_ABM_Comprobantes: TEKImageList32
+  object ISImage_ABM_Comprobantes: TIS32bitImageList
     DisabledStyle = dsGrayScale
     Width = 24
     Height = 24
-    Left = 80
-    Top = 389
+    Left = 344
+    Top = 373
     Bitmap = {
       0000000000000000000000000000000000000000000000000000000000000000
       000000000000000000000000544C3C01443C2F054F4637020000000000000000
@@ -32728,5 +32720,14 @@ object FPrincipal: TFPrincipal
       494E80014D538C014F5484044F52740C43434313434343194444441A4343431A
       4343431A4444441A4343431A4444441A4343431A4343431A4343431A4444441A
       4343431A4343431A434343164343430F4F527307535992010000000000000000}
+  end
+  object ISVentanas1: TISVentanas
+    PanelTapa = PanelTapa
+    AccionManager = ActionPrincipal
+    AbrirEstado = wsMaximized
+    PonerCaption = True
+    ReleaseForm = True
+    Left = 368
+    Top = 197
   end
 end
