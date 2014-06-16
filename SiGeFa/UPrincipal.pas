@@ -180,6 +180,8 @@ type
     ABMLiquidacinObraSocial1: TMenuItem;
     AEstadisticasLibroIVA: TAction;
     EstadsticasLibroIVA1: TMenuItem;
+    AImportarAfiliado: TAction;
+    AImportarAfiliado1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -245,6 +247,7 @@ type
     procedure AOP_ReportesExecute(Sender: TObject);
     procedure AOP_ABMLiquidarOSExecute(Sender: TObject);
     procedure AEstadisticasLibroIVAExecute(Sender: TObject);
+    procedure AImportarAfiliadoExecute(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -288,7 +291,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UOP_ABMObraSocial, UPreventa_Historico, UFichaEmpleado,
   UOP_ABMLaboratorio, UOP_ABMOrden_Tecnica, UCuentaCorrienteProveedor,
   UABM_CPB_FacturaObraSocial, UOP_Reportes, UOP_ABM_LiquidacionOS,
-  UEstadisticasLibroIVA;
+  UEstadisticasLibroIVA, UImportarAfiliado;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -1024,6 +1027,11 @@ end;
 procedure TFPrincipal.AEstadisticasLibroIVAExecute(Sender: TObject);
 begin
   EKVentanas1.Abrir(Sender, TFEstadisticasLibroIVA, FEstadisticasLibroIVA);
+end;
+
+procedure TFPrincipal.AImportarAfiliadoExecute(Sender: TObject);
+begin
+  EKVentanas1.Abrir(Sender, TFUImportarAfiliado, FUImportarAfiliado);
 end;
 
 end.
