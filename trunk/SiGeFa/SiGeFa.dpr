@@ -81,7 +81,7 @@ uses
   UOP_BuscarFacturaOS in 'UOP_BuscarFacturaOS.pas' {FOP_BuscarFacturaOS},
   UOP_ABM_LiquidacionOS in 'UOP_ABM_LiquidacionOS.pas' {FOP_ABM_LiquidacionOS},
   UEstadisticasLibroIVA in 'UEstadisticasLibroIVA.pas' {FEstadisticasLibroIVA},
-  UImportarAfiliado in 'UImportarAfiliado.pas' {FUImportarAfiliado};
+  UImportarAfiliado in 'UImportarAfiliado.pas' {FImportarAfiliado};
 
 {$R *.res}
 
