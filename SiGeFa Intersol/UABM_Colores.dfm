@@ -3,7 +3,7 @@ object FABM_Colores: TFABM_Colores
   Top = 169
   Width = 870
   Height = 500
-  Caption = '+'
+  Caption = 'ABM Colores'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,8 +22,8 @@ object FABM_Colores: TFABM_Colores
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 854
-    Height = 391
+    Width = 862
+    Height = 402
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -140,7 +140,7 @@ object FABM_Colores: TFABM_Colores
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            836.083333333333300000
+            836.083333333333400000
             124.354166666666700000
             227.541666666666700000)
           Alignment = taCenter
@@ -173,8 +173,8 @@ object FABM_Colores: TFABM_Colores
           Size.Values = (
             52.916666666666670000
             777.875000000000000000
-            68.791666666666670000
-            343.958333333333300000)
+            68.791666666666680000
+            343.958333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -206,7 +206,7 @@ object FABM_Colores: TFABM_Colores
             52.916666666666670000
             762.000000000000000000
             5.291666666666667000
-            375.708333333333300000)
+            375.708333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -469,7 +469,7 @@ object FABM_Colores: TFABM_Colores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -519,7 +519,7 @@ object FABM_Colores: TFABM_Colores
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -567,7 +567,7 @@ object FABM_Colores: TFABM_Colores
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -712,8 +712,8 @@ object FABM_Colores: TFABM_Colores
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 854
-      Height = 391
+      Width = 862
+      Height = 402
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -727,8 +727,8 @@ object FABM_Colores: TFABM_Colores
       object DBGridColor: TDBGrid
         Left = 5
         Top = 5
-        Width = 844
-        Height = 353
+        Width = 852
+        Height = 364
         Align = alClient
         Color = 14606012
         DataSource = DS_Colores
@@ -772,8 +772,8 @@ object FABM_Colores: TFABM_Colores
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 358
-        Width = 844
+        Top = 369
+        Width = 852
         Height = 28
         Align = alBottom
         BevelOuter = bvNone
@@ -871,7 +871,7 @@ object FABM_Colores: TFABM_Colores
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 854
+    Width = 862
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -893,7 +893,7 @@ object FABM_Colores: TFABM_Colores
       Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
-      Left = 744
+      Left = 752
       Top = 1
       Width = 109
       Height = 17
@@ -910,7 +910,7 @@ object FABM_Colores: TFABM_Colores
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

@@ -6,8 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt;
+  ActnList, XPStyleActnCtrls, ActnMan,QRCtrls, QuickRpt, ISVistaPreviaQR,
+  ISBusquedaAvanzada,cxClasses, ISOrdenarGrilla;
 
 type
   TFABM_Marcas = class(TForm)
@@ -38,7 +38,6 @@ type
     PanelEdicion: TPanel;
     Label1: TLabel;
     DBENombre: TDBEdit;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_MarcasCODIGO_MARCA: TIntegerField;
     Label2: TLabel;
     DBECodigo: TDBEdit;
@@ -53,7 +52,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
     RepMarca: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -77,8 +75,10 @@ type
     QRLabel29: TQRLabel;
     QRLabel30: TQRLabel;
     QRLabel1: TQRLabel;
-    EKVistaPrevia: TEKVistaPreviaQR;
     btnExcel: TdxBarLargeButton;
+    ISBuscar: TISBusquedaAvanzada;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -131,14 +131,14 @@ end;
 
 procedure TFABM_Marcas.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
 end;
 
 
 procedure TFABM_Marcas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
   begin
     DBGridMarca.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -165,7 +165,7 @@ begin
   if (ZQ_Marcas.IsEmpty) or (ZQ_MarcasID_MARCA.AsInteger = 0) then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
   begin
     DBGridMarca.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -197,7 +197,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja la "Marca" seleccionada?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
     begin
       ZQ_Marcas.Edit;
       ZQ_MarcasBAJA.AsString:='S';
@@ -205,8 +205,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_Marcas.RecNo;
     ZQ_Marcas.Refresh;
@@ -224,7 +224,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar la "Marca" seleccionada?'), 'ABM Marcas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Marcas]) then
     begin
       ZQ_Marcas.Edit;
       ZQ_MarcasBAJA.AsString:='N';
@@ -232,8 +232,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_Marcas.RecNo;
     ZQ_Marcas.Refresh;
@@ -263,7 +263,7 @@ begin
   end;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       DBGridMarca.Enabled:= true;
       DBGridMarca.SetFocus;
@@ -287,7 +287,7 @@ end;
 
 procedure TFABM_Marcas.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     DBGridMarca.Enabled:=true;
     DBGridMarca.SetFocus;
@@ -303,7 +303,7 @@ begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  EKBuscar.Abrir;
+  //ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Marcas, lblCantidadRegistros);
 end;
 
@@ -374,9 +374,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepMarca);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 procedure TFABM_Marcas.btnExcelClick(Sender: TObject);
