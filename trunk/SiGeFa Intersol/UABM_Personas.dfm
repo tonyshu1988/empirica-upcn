@@ -2876,7 +2876,7 @@ object FABM_Personas: TFABM_Personas
         Top = 0
         Width = 946
         Height = 200
-        ActivePage = TabSheetObraSocial
+        ActivePage = TabSheetCtaCte
         Align = alClient
         TabOrder = 0
         object TabSheetDatos: TTabSheet
@@ -3127,23 +3127,6 @@ object FABM_Personas: TFABM_Personas
             ParentFont = False
             TabOrder = 7
           end
-          object EKDBFechaNacimiento: TEKDBDateTimePicker
-            Left = 120
-            Top = 140
-            Width = 153
-            Height = 21
-            Date = 40616.799864351850000000
-            Time = 40616.799864351850000000
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 6
-            DataField = 'FECHA_NACIMIENTO'
-            DataSource = DS_Persona
-          end
           object DBLCBoxTipoDoc: TDBLookupComboBox
             Left = 550
             Top = 62
@@ -3248,6 +3231,23 @@ object FABM_Personas: TFABM_Personas
               ShowHint = True
               TabOrder = 0
             end
+          end
+          object ISDBDateTimePicker1: TISDBDateTimePicker
+            Left = 120
+            Top = 140
+            Width = 161
+            Height = 21
+            Date = 41806.883453078710000000
+            Time = 41806.883453078710000000
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 6
+            DataField = 'FECHA_NACIMIENTO'
+            DataSource = DS_Persona
           end
         end
         object TabSheetTelMail: TTabSheet
@@ -3385,23 +3385,6 @@ object FABM_Personas: TFABM_Personas
               Height = 13
               Caption = 'Fecha Baja:'
             end
-            object EKDBFechaCtaCte: TEKDBDateTimePicker
-              Left = 115
-              Top = 18
-              Width = 153
-              Height = 21
-              Date = 40793.391464837970000000
-              Time = 40793.391464837970000000
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-              TabOrder = 0
-              DataField = 'FECHA_ALTA'
-              DataSource = DS_CtaCte
-            end
             object DBEditLimiteDeuda: TDBEdit
               Left = 115
               Top = 75
@@ -3415,14 +3398,14 @@ object FABM_Personas: TFABM_Personas
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 1
+              TabOrder = 0
             end
             object btnCtaCte_Aceptar: TBitBtn
               Left = 21
               Top = 135
               Width = 40
               Height = 29
-              TabOrder = 2
+              TabOrder = 1
               OnClick = btnCtaCte_AceptarClick
             end
             object btnCtaCte_Cancelar: TBitBtn
@@ -3430,7 +3413,7 @@ object FABM_Personas: TFABM_Personas
               Top = 135
               Width = 40
               Height = 29
-              TabOrder = 3
+              TabOrder = 2
               OnClick = btnCtaCte_CancelarClick
             end
             object DBEditVencimDia: TDBEdit
@@ -3446,16 +3429,32 @@ object FABM_Personas: TFABM_Personas
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 4
+              TabOrder = 3
             end
-            object EKDBDateTimePicker1: TEKDBDateTimePicker
+            object ISDBFechaCtaCte: TISDBDateTimePicker
+              Left = 115
+              Top = 18
+              Width = 150
+              Height = 21
+              Date = 41806.884660497690000000
+              Time = 41806.884660497690000000
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 4
+              DataField = 'FECHA_ALTA'
+              DataSource = DS_CtaCte
+            end
+            object ISDBDateTimePicker3: TISDBDateTimePicker
               Left = 115
               Top = 46
-              Width = 153
+              Width = 150
               Height = 21
-              Date = 40793.391464837970000000
-              Time = 40793.391464837970000000
-              Enabled = False
+              Date = 41806.884660497690000000
+              Time = 41806.884660497690000000
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3463,7 +3462,7 @@ object FABM_Personas: TFABM_Personas
               Font.Style = [fsBold]
               ParentFont = False
               TabOrder = 5
-              DataField = 'FECHA_BAJA'
+              DataField = 'FECHA_ALTA'
               DataSource = DS_CtaCte
             end
           end
@@ -3560,10 +3559,9 @@ object FABM_Personas: TFABM_Personas
       object lblCantidadRegistros: TLabel
         Left = 0
         Top = 0
-        Width = 134
+        Width = 4
         Height = 15
         Align = alLeft
-        Caption = 'lblCantidadRegistros'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clNavy
         Font.Height = -11
@@ -4322,206 +4320,6 @@ object FABM_Personas: TFABM_Personas
     Left = 64
     Top = 120
   end
-  object EKBuscar: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Relaci'#243'n'
-        Campo = 'id_relacion'
-        Tabla = 'persona_relacion'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndice = 1
-        TipoCampoIndiceVer = 'Igual'
-        TipoComboSQL = ZQ_TipoRelacion
-        TipoComboSQLCampoVer = 'DESCRIPCION'
-        TipoComboSQLCampoReal = 'ID_TIPO_RELACION'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Apellido y Nombre'
-        Campo = 'NOMBRE'
-        Tabla = 'PERSONA'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Direcci'#243'n'
-        Campo = 'DIRECCION'
-        Tabla = 'PERSONA'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Localidad'
-        Campo = 'LOCALIDAD'
-        Tabla = 'PERSONA'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'C'#243'digo Postal'
-        Campo = 'CODIGO_POSTAL'
-        Tabla = 'PERSONA'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Provincia'
-        Campo = 'ID_PROVINCIA'
-        Tabla = 'PERSONA'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Provincia
-        TipoComboSQLCampoVer = 'NOMBRE_PROVINCIA'
-        TipoComboSQLCampoReal = 'ID_PROVINCIA'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha Nac.'
-        Campo = 'FECHA_NACIMIENTO'
-        Tabla = 'PERSONA'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Sexo'
-        Campo = 'SEXO'
-        Tabla = 'PERSONA'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboValoresVer.Strings = (
-          'MASCULINO'
-          'FEMENINO'
-          'NINGUNO')
-        TipoComboValoresReales.Strings = (
-          'M'
-          'F'
-          'N')
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Tipo Documento'
-        Campo = 'ID_TIPO_DOC'
-        Tabla = 'PERSONA'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Documento
-        TipoComboSQLCampoVer = 'NOMBRE_TIPO_DOC'
-        TipoComboSQLCampoReal = 'ID_TIPO_DOC'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Nro. Documento'
-        Campo = 'NUMERO_DOC'
-        Tabla = 'PERSONA'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Condicion IVA'
-        Campo = 'ID_TIPO_IVA'
-        Tabla = 'PERSONA'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Iva
-        TipoComboSQLCampoVer = 'NOMBRE_TIPO_IVA'
-        TipoComboSQLCampoReal = 'ID_TIPO_IVA'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Cuit/Cuil'
-        Campo = 'CUIT_CUIL'
-        Tabla = 'PERSONA'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Baja'
-        Campo = 'BAJA'
-        Tabla = 'PERSONA'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboValoresVer.Strings = (
-          'SI'
-          'NO')
-        TipoComboValoresReales.Strings = (
-          'S'
-          'N')
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_Persona
-    SQL.Strings = (
-      
-        'select distinct cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv' +
-        '.nombre_provincia'
-      'from persona cl'
-      'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
-      'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
-      'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
-      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
-      ''
-      'order by cl.nombre')
-    SQL_Select.Strings = (
-      
-        'select distinct cl.*, td.nombre_tipo_doc, ti.nombre_tipo_iva, pv' +
-        '.nombre_provincia')
-    SQL_From.Strings = (
-      'from persona cl'
-      'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
-      'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
-      'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
-      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)')
-    SQL_Where.Strings = (
-      '')
-    SQL_Orden.Strings = (
-      'order by cl.nombre')
-    UsarWhereOriginal = EK_Sin_Where
-    Left = 48
-    Top = 56
-  end
   object ZQ_Provincia: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -4889,18 +4687,6 @@ object FABM_Personas: TFABM_Personas
       ShortCut = 123
       OnExecute = ACancelarExecute
     end
-  end
-  object EKVistaPreviaListado: TEKVistaPreviaQR
-    Reporte = RepPersonaListado
-    ShowModal = False
-    Left = 770
-    Top = 225
-  end
-  object EKVistaPreviaDetalle: TEKVistaPreviaQR
-    Reporte = RepPersonaDetalle
-    ShowModal = False
-    Left = 778
-    Top = 265
   end
   object ZQ_RelacionCliente: TZQuery
     Connection = DM.Conexion

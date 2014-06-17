@@ -4,13 +4,12 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids,
-  EKBusquedaAvanzada, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ZStoredProcedure, ComCtrls, EKDBDateTimePicker,
-  StdCtrls, DBCtrls, Mask, ZSqlUpdate, EKFiltrarColumna, ActnList,
-  XPStyleActnCtrls, ActnMan, EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons,
-  Menus, ShellAPI, EKListadoSQL, cxClasses, ISBusquedaAvanzada,
-  ISVistaPreviaQR, ISListadoSQL, ISOrdenarGrilla;
+  Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, ISOrdenarGrilla,
+  ISVistaPreviaQR, ISListadoSQL, ISBusquedaAvanzada, Menus, ActnList,
+  XPStyleActnCtrls, ActnMan, ZSqlUpdate, ZStoredProcedure,
+  cxClasses, StdCtrls, Buttons, DBCtrls, ComCtrls, Mask, QRCtrls, QuickRpt,
+  DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  ShellAPI, ISDBDateTimePicker;
 
 type
   TFABM_Personas = class(TForm)
@@ -31,7 +30,6 @@ type
     DBGridClientes: TDBGrid;
     ZQ_Persona: TZQuery;
     DS_Persona: TDataSource;
-    EKBuscar: TEKBusquedaAvanzada;
     ZQ_Provincia: TZQuery;
     DS_Provincia: TDataSource;
     ZQ_Iva: TZQuery;
@@ -90,7 +88,6 @@ type
     Label13: TLabel;
     Label14: TLabel;
     DBCBoxSexo: TDBComboBox;
-    EKDBFechaNacimiento: TEKDBDateTimePicker;
     DBLCBoxTipoDoc: TDBLookupComboBox;
     Label2: TLabel;
     DBECuit_Cuil: TDBEdit;
@@ -189,8 +186,6 @@ type
     QRLabel3: TQRLabel;
     QRLabel4: TQRLabel;
     QRLabel5: TQRLabel;
-    EKVistaPreviaListado: TEKVistaPreviaQR;
-    EKVistaPreviaDetalle: TEKVistaPreviaQR;
     QRSubDetail1: TQRSubDetail;
     QRDBText21: TQRDBText;
     QRDBText22: TQRDBText;
@@ -232,7 +227,6 @@ type
     gBoxCuentaCorriente: TGroupBox;
     btnCtaCte_Alta: TButton;
     Label15: TLabel;
-    EKDBFechaCtaCte: TEKDBDateTimePicker;
     Label12: TLabel;
     DBEditLimiteDeuda: TDBEdit;
     btnCtaCte_Aceptar: TBitBtn;
@@ -258,7 +252,6 @@ type
     btnCtaCte_Baja: TButton;
     ZQ_CtaCteID_PROVEEDOR: TIntegerField;
     ZQ_CtaCteVENCIMIENTO_DIAS: TIntegerField;
-    EKDBDateTimePicker1: TEKDBDateTimePicker;
     Label4: TLabel;
     btnExcel: TdxBarLargeButton;
     btnEMail: TdxBarLargeButton;
@@ -300,6 +293,9 @@ type
     ISVistaPreviaListado: TISVistaPreviaQR;
     ISVistaPreviaDetalle: TISVistaPreviaQR;
     ISOrdenar: TISOrdenarGrilla;
+    ISDBDateTimePicker1: TISDBDateTimePicker;
+    ISDBFechaCtaCte: TISDBDateTimePicker;
+    ISDBDateTimePicker3: TISDBDateTimePicker;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -357,7 +353,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal, EKModelo, RegExpr, UUtilidades, UMailEnviar;
+uses UDM, UPrincipal, RegExpr, UUtilidades, UMailEnviar;
 
 {$R *.dfm}
 
@@ -394,7 +390,7 @@ procedure TFABM_Personas.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   QRDBLogo2.DataSet:= DM.ZQ_Sucursal;
-    
+
   habilitarCtaCte(false);
 
   ISOrdenar.CargarConfigColunmas;
@@ -408,12 +404,12 @@ begin
   PageControl.ActivePage:= TabSheetDatos;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  dm.EKModelo.abrir(ZQ_Provincia);
-  dm.EKModelo.abrir(ZQ_Iva);
-  dm.EKModelo.abrir(ZQ_Documento);
-  dm.EKModelo.abrir(ZQ_TipoRelacion);
+  dm.ISModelo.abrir(ZQ_Provincia);
+  dm.ISModelo.abrir(ZQ_Iva);
+  dm.ISModelo.abrir(ZQ_Documento);
+  dm.ISModelo.abrir(ZQ_TipoRelacion);
 
-  //EKBuscar.Abrir;
+  //ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Persona, lblCantidadRegistros);
   permisosUsuario;
 end;
@@ -452,7 +448,7 @@ end;
 
 procedure TFABM_Personas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono, ZQ_PersonaObraSocial]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono, ZQ_PersonaObraSocial]) then
   begin
     existeRelacionCliente:= false;
     tieneCuentaCorriente:= false;
@@ -498,7 +494,7 @@ begin
   if ZQ_Persona.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono, ZQ_PersonaObraSocial]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono, ZQ_PersonaObraSocial]) then
   begin
     DBGridClientes.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -538,7 +534,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el Cliente seleccionado?'), 'ABM Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona]) then
     begin
       ZQ_Persona.Edit;
       ZQ_PersonaBAJA.AsString:='S';
@@ -546,8 +542,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMPersona)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABMPersona);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABMPersona)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABMPersona);
 
     recNo:= ZQ_Persona.RecNo;
     ZQ_Persona.Refresh;
@@ -565,7 +561,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar el Cliente seleccionado?'), 'ABM Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABMPersona, [ZQ_Persona]) then
     begin
       ZQ_Persona.Edit;
       ZQ_PersonaBAJA.AsString:='N';
@@ -573,8 +569,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMPersona)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABMPersona);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABMPersona)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABMPersona);
 
     recNo:= ZQ_Persona.RecNo;
     ZQ_Persona.Refresh;
@@ -638,7 +634,7 @@ begin
   ZQ_PersonaCLAVE.AsString:=trim(ZQ_PersonaCLAVE.AsString);
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABMPersona) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABMPersona) then
     begin
       DBGridClientes.Enabled := true;
       TabSheetDatos.Enabled:= False;
@@ -672,7 +668,7 @@ end;
 procedure TFABM_Personas.btnCancelarClick(Sender: TObject);
 begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Personas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.cancelar_transaccion(transaccion_ABMPersona) then
+    if dm.ISModelo.cancelar_transaccion(transaccion_ABMPersona) then
     begin
       TabSheetDatos.Enabled:= false;
       TabSheetCtaCte.Enabled:= false;
@@ -698,8 +694,8 @@ begin
     exit;
 
   DM.VariablesReportes(RepPersonaDetalle);
-  QRlblPieDePaginaDetalle.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  EKVistaPreviaDetalle.VistaPrevia;
+  QRlblPieDePaginaDetalle.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  ISVistaPreviaDetalle.VistaPrevia;
 end;
 
 
@@ -709,9 +705,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepPersonaListado);
-  QRlblPieDePaginaListado.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPreviaListado.VistaPrevia;
+  QRlblPieDePaginaListado.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPreviaListado.VistaPrevia;
 end;
 
 
@@ -955,14 +951,14 @@ begin
     ZQ_CtaCte.Append;
     ZQ_CtaCteID_PERSONA.AsInteger:= id_persona;
     ZQ_CtaCteID_PROVEEDOR.Clear;
-    ZQ_CtaCteFECHA_ALTA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_CtaCteFECHA_ALTA.AsDateTime:= dm.ISModelo.FechayHora;
     ZQ_CtaCteFECHA_BAJA.Clear;
     ZQ_CtaCteLIMITE_DEUDA.AsFloat:= ctacte_credito; //por defecto lo de la configuracion
     ZQ_CtaCteVENCIMIENTO_DIAS.AsInteger:= ctacte_diasVencimiento; //por defecto lo de la configuracion
     ZQ_CtaCteSALDO.AsFloat:= 0;
     ZQ_CtaCteBAJA.AsString:= 'N';
 
-    EKDBFechaCtaCte.SetFocus;
+    ISDBFechaCtaCte.SetFocus;
     GrupoGuardarCancelar.Enabled:= false;
   end;
 
@@ -973,7 +969,7 @@ begin
 
     habilitarCtaCte(true);
     ZQ_CtaCte.Edit;
-    EKDBFechaCtaCte.SetFocus;
+    ISDBFechaCtaCte.SetFocus;
     GrupoGuardarCancelar.Enabled:= false;
   end;
 
@@ -986,7 +982,7 @@ begin
     begin
       ZQ_CtaCte.Edit;
       ZQ_CtaCteBAJA.AsString:= 'S';
-      ZQ_CtaCteFECHA_BAJA.AsDateTime:= dm.EKModelo.FechayHora;
+      ZQ_CtaCteFECHA_BAJA.AsDateTime:= dm.ISModelo.FechayHora;
     end;
   end;
 
