@@ -1031,7 +1031,7 @@ end;
 
 procedure TFPrincipal.AImportarAfiliadoExecute(Sender: TObject);
 begin
-  EKVentanas1.Abrir(Sender, TFUImportarAfiliado, FUImportarAfiliado);
+  EKVentanas1.Abrir(Sender, TFImportarAfiliado, FImportarAfiliado);
 end;
 
 end.

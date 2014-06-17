@@ -201,7 +201,7 @@ procedure TFImportarAfiliado.cargarDataSet;
 var
   i, j: integer;
 begin
-  DBGrid1.Enabled:= false;
+  DBGridBD.Enabled:= false;
   ProgressBar.Visible:= true;
   ProgressBar.Max := XLSImport.MaxRow - 1;
   ProgressBar.Position := 0;
@@ -222,7 +222,7 @@ begin
   ProgressBar.Visible:= false;
   CD_Afiliados.EnableControls;
   CD_Afiliados.First;
-  DBGrid1.Enabled:= true;
+  DBGridBD.Enabled:= true;
 end;
 
 
