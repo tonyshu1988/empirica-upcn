@@ -5,12 +5,13 @@ object DM: TDM
   Height = 656
   Width = 534
   object Conexion: TZConnection
-    ControlsCodePage = cGET_ACP
+    ControlsCodePage = cCP_UTF8
     UTF8StringsAsWideField = False
     AutoEncodeStrings = False
     Properties.Strings = (
       'rolename=base'
-      'dialect=3')
+      'dialect=3'
+      'controls_cp=CP_UTF8')
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted

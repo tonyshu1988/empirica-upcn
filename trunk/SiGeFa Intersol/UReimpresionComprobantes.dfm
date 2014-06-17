@@ -1,7 +1,7 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 269
-  Top = 182
-  Width = 953
+  Left = 259
+  Top = 109
+  Width = 988
   Height = 618
   Caption = 'Reimpresi'#243'n de Comprobantes'
   Color = clBtnFace
@@ -22,7 +22,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 937
+    Width = 972
     Height = 528
     Align = alClient
     Caption = 'PanelContenedor'
@@ -30,7 +30,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 935
+      Width = 970
       Height = 526
       Align = alClient
       Caption = 'Panel5'
@@ -38,7 +38,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 933
+        Width = 968
         Height = 524
         Align = alClient
         Caption = 'Panel1'
@@ -46,7 +46,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         object PanelComprobante: TPanel
           Left = 1
           Top = 33
-          Width = 931
+          Width = 966
           Height = 368
           Align = alClient
           BevelOuter = bvNone
@@ -54,7 +54,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object lblTotalComprobantes: TLabel
             Left = 0
             Top = 347
-            Width = 931
+            Width = 966
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -74,7 +74,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object Splitter1: TSplitter
             Left = 0
             Top = 338
-            Width = 931
+            Width = 966
             Height = 9
             Cursor = crVSplit
             Align = alBottom
@@ -82,7 +82,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object DBGridComprobantes: TDBGrid
             Left = 0
             Top = 0
-            Width = 931
+            Width = 966
             Height = 338
             Align = alClient
             Color = 14606012
@@ -211,7 +211,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         object PanelFPagoYProd: TPanel
           Left = 1
           Top = 401
-          Width = 931
+          Width = 966
           Height = 122
           Align = alBottom
           BevelOuter = bvNone
@@ -225,7 +225,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object PanelProducto: TPanel
             Left = 612
             Top = 0
-            Width = 319
+            Width = 354
             Height = 122
             Align = alClient
             BevelOuter = bvNone
@@ -234,7 +234,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object lblTotalProducto: TLabel
               Left = 0
               Top = 101
-              Width = 319
+              Width = 354
               Height = 21
               Align = alBottom
               Alignment = taRightJustify
@@ -254,7 +254,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object DBGridListadoProductos: TDBGrid
               Left = 0
               Top = 0
-              Width = 319
+              Width = 354
               Height = 101
               Align = alClient
               Color = 14606012
@@ -457,7 +457,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         object PanelFiltro: TPanel
           Left = 1
           Top = 1
-          Width = 931
+          Width = 966
           Height = 32
           Align = alTop
           BevelOuter = bvNone
@@ -465,7 +465,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           ShowHint = False
           TabOrder = 2
           DesignSize = (
-            931
+            966
             32)
           object BtnFiltro_Todos: TSpeedButton
             Left = 55
@@ -506,7 +506,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             Caption = 'Filtro:'
           end
           object StaticTxtLiquidado: TStaticText
-            Left = 839
+            Left = 874
             Top = 15
             Width = 99
             Height = 16
@@ -1375,429 +1375,14 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     Left = 493
     Top = 127
   end
-  object EKBuscarComprobantes: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Sucursal'
-        Campo = 'id_sucursal'
-        Tabla = 'sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 350
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha'
-        Campo = 'fecha_cobrada'
-        Tabla = 'comprobante'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = 0
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'C'#243'digo'
-        Campo = 'codigo'
-        Tabla = 'comprobante'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Nro Comprobante'
-        Campo = 'numero_cpb'
-        Tabla = 'comprobante'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Punto de Venta'
-        Campo = 'punto_venta'
-        Tabla = 'comprobante'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Tipo Iva'
-        Campo = 'ID_TIPO_IVA'
-        Tabla = 'tipo_iva'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_TipoIVA
-        TipoComboSQLCampoVer = 'NOMBRE_TIPO_IVA'
-        TipoComboSQLCampoReal = 'ID_TIPO_IVA'
-        TipoComboEditable = False
-        TipoComboAncho = 350
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Cliente'
-        Campo = 'nombre'
-        Tabla = 'p2'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Detalle Cliente'
-        Campo = 'OBSERVACION'
-        Tabla = 'COMPROBANTE'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Vendedor'
-        Campo = 'nombre'
-        Tabla = 'p1'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Importe'
-        Campo = 'importe_venta'
-        Tabla = 'comprobante'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Cuenta'
-        Campo = 'nombre_cuenta'
-        Tabla = 'cuenta'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Forma Pago'
-        Campo = 'descripcion'
-        Tabla = 'tipo_formapago'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_Comprobante
-    SQL.Strings = (
-      
-        'select distinct c.codigo, c.id_comprobante, c.fecha_cobrada , c.' +
-        'porc_iva,'
-      
-        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
-        ' p1.nombre as Vendedor_,'
-      '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
-      
-        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
-        'c.punto_venta, c.numero_cpb,'
-      '       c.fecha as fecha_hora, c.id_preventa, c.observacion'
-      'from comprobante c'
-      
-        'inner join comprobante_forma_pago cfp on (cfp.id_comprobante = c' +
-        '.id_comprobante)'
-      
-        'inner join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id' +
-        '_tipo_formapag)'
-      'inner join cuenta cta on (cfp.cuenta_ingreso = cta.id_cuenta)'
-      'inner join sucursal s on (c.id_sucursal = s.id_sucursal)'
-      'inner join persona p1 on (p1.id_persona = c.id_vendedor)'
-      'inner join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
-      
-        'inner join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cp' +
-        'b)'
-      'inner join persona p2 on (p2.id_persona = c.id_cliente)'
-      ''
-      ''
-      ''
-      'where (c.id_tipo_cpb = 11)'
-      
-        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
-        'total,'
-      '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
-      
-        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
-        'unto_venta,'
-      '         c.numero_cpb, c.fecha, c.id_preventa, c.observacion'
-      '')
-    SQL_Select.Strings = (
-      
-        'select distinct c.codigo, c.id_comprobante, c.fecha_cobrada , c.' +
-        'porc_iva,'
-      
-        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
-        ' p1.nombre as Vendedor_,'
-      '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
-      
-        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
-        'c.punto_venta, c.numero_cpb,'
-      '       c.fecha as fecha_hora, c.id_preventa, c.observacion')
-    SQL_From.Strings = (
-      'from comprobante c'
-      
-        'inner join comprobante_forma_pago cfp on (cfp.id_comprobante = c' +
-        '.id_comprobante)'
-      
-        'inner join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id' +
-        '_tipo_formapag)'
-      'inner join cuenta cta on (cfp.cuenta_ingreso = cta.id_cuenta)'
-      'inner join sucursal s on (c.id_sucursal = s.id_sucursal)'
-      'inner join persona p1 on (p1.id_persona = c.id_vendedor)'
-      'inner join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
-      
-        'inner join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cp' +
-        'b)'
-      'inner join persona p2 on (p2.id_persona = c.id_cliente)'
-      ''
-      ''
-      '')
-    SQL_Where.Strings = (
-      'where (c.id_tipo_cpb = 11)')
-    SQL_Orden.Strings = (
-      
-        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
-        'total,'
-      '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
-      
-        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
-        'unto_venta,'
-      '         c.numero_cpb, c.fecha, c.id_preventa, c.observacion'
-      '')
-    UsarWhereOriginal = EK_Con_Where
-    Left = 56
-    Top = 79
-  end
-  object EKDbSumaComprobante: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'importeVenta_'
-      end>
-    DataSet = ZQ_Comprobante
-    SumListChanged = EKDbSumaComprobanteSumListChanged
-    Left = 197
-    Top = 247
-  end
-  object EKDbSumaFpago: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE_REAL'
-      end>
-    DataSet = ZQ_Comprobante_FormaPago
-    Left = 322
-    Top = 245
-  end
-  object EKDbSumaProducto: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE_VENTA'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE_IF'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE_NOFISCAL'
-      end>
-    DataSet = ZQ_ComprobanteDetalle
-    Left = 490
-    Top = 246
-  end
-  object EKOrdenarFacturas: TEKOrdenarGrilla
-    Grilla = DBGridComprobantes
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'digo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha y Hora'
-        Visible = True
-      end
-      item
-        TituloColumna = 'N'#250'mero'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Pto. Venta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cliente'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Detalle Cliente'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe Venta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sucursal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Vendedor'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'digo Preventa'
-        Visible = True
-      end>
-    NombreGuardar = 'DBGridComprobantes'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    PopUpGrilla = PopupMenuFacturas
-    Left = 194
-    Top = 192
-  end
-  object EKOrdenarFPago: TEKOrdenarGrilla
-    Grilla = DBGridFormaPago
-    Filtros = <
-      item
-        TituloColumna = 'Cuenta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Forma de Pago'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end
-      item
-        TituloColumna = 'MDP Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Banco'
-        Visible = True
-      end
-      item
-        TituloColumna = 'N'#250'mero'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end>
-    NombreGuardar = 'DBGridFormaPago'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    PopUpGrilla = PopupMenuFPago
-    Left = 322
-    Top = 184
-  end
-  object EKOrdenarProducto: TEKOrdenarGrilla
-    Grilla = DBGridListadoProductos
-    Filtros = <
-      item
-        TituloColumna = 'Id'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Producto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cant.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Barra'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Color'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Marca'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Id Stock Producto'
-        Visible = True
-      end>
-    NombreGuardar = 'DBGridListadoProductos'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 490
-    Top = 184
-  end
   object ZQ_TipoIVA: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
       'select *'
       'from tipo_IVA')
     Params = <>
-    Left = 493
-    Top = 312
+    Left = 325
+    Top = 432
     object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True
@@ -1834,8 +1419,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       'where s.id_sucursal > 0'
       'order by s.nombre')
     Params = <>
-    Left = 324
-    Top = 310
+    Left = 260
+    Top = 430
     object ZQ_SucursalID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
     end
@@ -1917,8 +1502,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         Name = 'id'
         ParamType = ptUnknown
       end>
-    Left = 196
-    Top = 310
+    Left = 188
+    Top = 430
     ParamData = <
       item
         DataType = ftUnknown
@@ -1939,8 +1524,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         ParamType = ptInput
       end>
     StoredProcName = 'ELIMINAR_COMPROBANTE'
-    Left = 59
-    Top = 139
+    Left = 195
+    Top = 307
     ParamData = <
       item
         DataType = ftInteger
@@ -2019,24 +1604,6 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         ParamType = ptUnknown
       end>
   end
-  object EKListadoCliente: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select p.id_persona, p.nombre'
-      'from persona p'
-      'where p.baja = '#39'N'#39)
-    CampoBuscar = 'nombre'
-    CampoClave = 'id_persona'
-    TituloVentana = 'Buscar Cliente'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 635
-    Top = 259
-  end
   object ZQ_CambiarCuenta: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -2068,43 +1635,6 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         ParamType = ptUnknown
       end>
   end
-  object EKListadoCuenta: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select c.id_cuenta, c.nombre_cuenta'
-      'from cuenta c'
-      'where c.baja = '#39'N'#39)
-    CampoBuscar = 'nombre_cuenta'
-    CampoClave = 'id_cuenta'
-    TituloVentana = 'Buscar Cuenta'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 771
-    Top = 258
-  end
-  object EKListadoFPago: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select f.id_tipo_formapago, f.descripcion'
-      'from tipo_formapago f'
-      'where f.baja = '#39'N'#39
-      '')
-    CampoBuscar = 'descripcion'
-    CampoClave = 'id_tipo_formapago'
-    TituloVentana = 'Buscar Forma Pago'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 875
-    Top = 259
-  end
   object ZQ_CambiarFPago: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -2135,5 +1665,465 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         Name = 'id_comp_fpago'
         ParamType = ptUnknown
       end>
+  end
+  object ISBuscarComprobantes: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Sucursal'
+        Campo = 'id_sucursal'
+        Tabla = 's'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Cobro'
+        Campo = 'fecha_cobrada'
+        Tabla = 'c'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'digo'
+        Campo = 'codigo'
+        Tabla = 'c'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nro. Comprobante'
+        Campo = 'numero_cpb'
+        Tabla = 'c'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Pto. de Venta'
+        Campo = 'punto_venta'
+        Tabla = 'c'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo IVA'
+        Campo = 'id_tipo_iva'
+        Tabla = 'c'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_TipoIVA
+        TipoCombollenarCampo = 'nombre_tipo_iva'
+        TipoCombollenarCampoReal = 'id_tipo_iva'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Cliente'
+        Campo = 'nombre'
+        Tabla = 'p2'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Vendedor'
+        Campo = 'nombre'
+        Tabla = 'p1'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Importe'
+        Campo = 'importe_venta'
+        Tabla = 'c'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Cuenta'
+        Campo = 'nombre_cuenta'
+        Tabla = 'cta'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Forma de Pago'
+        Campo = 'descripcion'
+        Tabla = 'tfp'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Observaciones'
+        Campo = 'observacion'
+        Tabla = 'c'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_Comprobante
+    SQL.Strings = (
+      
+        'select distinct c.codigo, c.id_comprobante, c.fecha_cobrada , c.' +
+        'porc_iva,'
+      
+        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
+        ' p1.nombre as Vendedor_,'
+      '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
+      
+        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
+        'c.punto_venta, c.numero_cpb,'
+      '       c.fecha as fecha_hora, c.id_preventa, c.observacion'
+      ''
+      'from comprobante c'
+      
+        'inner join comprobante_forma_pago cfp on (cfp.id_comprobante = c' +
+        '.id_comprobante)'
+      
+        'inner join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id' +
+        '_tipo_formapag)'
+      'inner join cuenta cta on (cfp.cuenta_ingreso = cta.id_cuenta)'
+      'inner join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'inner join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'inner join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      
+        'inner join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cp' +
+        'b)'
+      'inner join persona p2 on (p2.id_persona = c.id_cliente)'
+      'where (c.id_tipo_cpb = 11)'
+      ''
+      ''
+      ''
+      
+        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
+        'total,'
+      '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
+      
+        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
+        'unto_venta,'
+      '         c.numero_cpb, c.fecha, c.id_preventa, c.observacion'
+      ''
+      '')
+    SQL_Select.Strings = (
+      
+        'select distinct c.codigo, c.id_comprobante, c.fecha_cobrada , c.' +
+        'porc_iva,'
+      
+        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
+        ' p1.nombre as Vendedor_,'
+      '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
+      
+        '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
+        'c.punto_venta, c.numero_cpb,'
+      '       c.fecha as fecha_hora, c.id_preventa, c.observacion'
+      '')
+    SQL_From.Strings = (
+      'from comprobante c'
+      
+        'inner join comprobante_forma_pago cfp on (cfp.id_comprobante = c' +
+        '.id_comprobante)'
+      
+        'inner join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id' +
+        '_tipo_formapag)'
+      'inner join cuenta cta on (cfp.cuenta_ingreso = cta.id_cuenta)'
+      'inner join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'inner join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'inner join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      
+        'inner join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cp' +
+        'b)'
+      'inner join persona p2 on (p2.id_persona = c.id_cliente)')
+    SQL_Where.Strings = (
+      'where (c.id_tipo_cpb = 11)'
+      ''
+      ''
+      '')
+    SQL_Orden.Strings = (
+      
+        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
+        'total,'
+      '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
+      
+        '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre, c.p' +
+        'unto_venta,'
+      '         c.numero_cpb, c.fecha, c.id_preventa, c.observacion'
+      ''
+      '')
+    UsarWhereOriginal = IS_Con_Where
+    Left = 59
+    Top = 83
+  end
+  object ISDbSumaComprobante: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTEVENTA_'
+      end
+      item
+        Operacion = goCount
+        NombreCampo = 'ID_COMPROBANTE'
+      end>
+    DataSet = ZQ_Comprobante
+    SumListChanged = EKDbSumaComprobanteSumListChanged
+    Left = 195
+    Top = 251
+  end
+  object ISDbSumaFpago: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_REAL'
+      end>
+    DataSet = ZQ_Comprobante_FormaPago
+    Left = 315
+    Top = 243
+  end
+  object ISDbSumaProducto: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_VENTA'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_IF'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_NOFISCAL'
+      end>
+    DataSet = ZQ_ComprobanteDetalle
+    Left = 467
+    Top = 235
+  end
+  object ISOrdenarFacturas: TISOrdenarGrilla
+    Grilla = DBGridComprobantes
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha y Hora'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'mero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Pto. Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Vendedor'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo Preventa'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'DBGridComprobantes'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 163
+    Top = 187
+  end
+  object ISOrdenarFPago: TISOrdenarGrilla
+    Grilla = DBGridFormaPago
+    Filtros = <
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Forma de Pago'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'MDP Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Banco'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'mero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'DBGridFormaPago'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 323
+    Top = 187
+  end
+  object ISOrdenarProducto: TISOrdenarGrilla
+    Grilla = DBGridListadoProductos
+    Filtros = <
+      item
+        TituloColumna = 'Id'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cant.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Id Stock Producto'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'EKOrdenarProducto'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 467
+    Top = 187
+  end
+  object ISListadoCliente: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select p.id_persona, p.nombre'
+      'from persona p'
+      'where p.baja = '#39'N'#39
+      '')
+    CampoBuscar = 'nombre'
+    CampoClave = 'id_persona'
+    TituloVentana = 'Buscar Cliente'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 568
+    Top = 272
+  end
+  object ISListadoCuenta: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select c.id_cuenta, c.nombre_cuenta'
+      'from cuenta c'
+      'where c.baja = '#39'N'#39
+      '')
+    CampoBuscar = 'nombre_cuenta'
+    CampoClave = 'id_cuenta'
+    TituloVentana = 'Buscar Cuenta'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 680
+    Top = 272
+  end
+  object ISListadoFPago: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select f.id_tipo_formapago, f.descripcion'
+      'from tipo_formapago f'
+      'where f.baja = '#39'N'#39
+      ''
+      '')
+    CampoBuscar = 'descripcion'
+    CampoClave = 'id_tipo_formapago'
+    TituloVentana = 'Buscar Forma Pago'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 816
+    Top = 320
   end
 end
