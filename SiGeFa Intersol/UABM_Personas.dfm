@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 287
-  Top = 157
+  Left = 216
+  Top = 128
   Width = 972
   Height = 631
   Caption = 'ABM Personas'
@@ -81,7 +81,7 @@ object FABM_Personas: TFABM_Personas
       PrinterSettings.Collate = 0
       PrinterSettings.ColorOption = 0
       PrintIfEmpty = True
-      ReportTitle = '+'
+      ReportTitle = #39'//'
       SnapToGrid = True
       Units = MM
       Zoom = 100
@@ -1728,7 +1728,7 @@ object FABM_Personas: TFABM_Personas
       PrinterSettings.Collate = 0
       PrinterSettings.ColorOption = 0
       PrintIfEmpty = True
-      ReportTitle = '+'
+      ReportTitle = 'ISVistaPreviaListado'
       SnapToGrid = True
       Units = MM
       Zoom = 100
@@ -2876,7 +2876,7 @@ object FABM_Personas: TFABM_Personas
         Top = 0
         Width = 946
         Height = 200
-        ActivePage = TabSheetDatos
+        ActivePage = TabSheetObraSocial
         Align = alClient
         TabOrder = 0
         object TabSheetDatos: TTabSheet
@@ -4519,8 +4519,8 @@ object FABM_Personas: TFABM_Personas
     SQL_Orden.Strings = (
       'order by cl.nombre')
     UsarWhereOriginal = EK_Sin_Where
-    Left = 136
-    Top = 72
+    Left = 48
+    Top = 56
   end
   object ZQ_Provincia: TZQuery
     Connection = DM.Conexion
@@ -4609,66 +4609,6 @@ object FABM_Personas: TFABM_Personas
   object DS_Documento: TDataSource
     DataSet = ZQ_Documento
     Left = 408
-    Top = 120
-  end
-  object EKOrdenar: TEKOrdenarGrilla
-    Grilla = DBGridClientes
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Corto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Apellido y Nombre'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Direcci'#243'n'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C.P.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Localidad'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Provincia'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Nac.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo Doc.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nro. Doc.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sexo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cuit/Cuil'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_Personas'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 160
     Top = 120
   end
   object Nro_Persona: TZStoredProc
@@ -4953,14 +4893,14 @@ object FABM_Personas: TFABM_Personas
   object EKVistaPreviaListado: TEKVistaPreviaQR
     Reporte = RepPersonaListado
     ShowModal = False
-    Left = 522
-    Top = 121
+    Left = 770
+    Top = 225
   end
   object EKVistaPreviaDetalle: TEKVistaPreviaQR
     Reporte = RepPersonaDetalle
     ShowModal = False
-    Left = 522
-    Top = 177
+    Left = 778
+    Top = 265
   end
   object ZQ_RelacionCliente: TZQuery
     Connection = DM.Conexion
@@ -5128,8 +5068,8 @@ object FABM_Personas: TFABM_Personas
   end
   object DS_EntidadTelefono: TDataSource
     DataSet = ZQ_EntidadTelefono
-    Left = 648
-    Top = 232
+    Left = 736
+    Top = 176
   end
   object PopupMenuTelmail: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
@@ -5232,28 +5172,10 @@ object FABM_Personas: TFABM_Personas
       Size = 200
     end
   end
-  object EKListadoObraSocial: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select op.id_os, (op.codigo||'#39' - '#39'||op.nombre) as ObraSocial'
-      'from optica_os op'
-      'where op.baja = '#39'N'#39)
-    CampoBuscar = 'ObraSocial'
-    CampoClave = 'id_os'
-    TituloVentana = 'Obra Social'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 497
-    Top = 270
-  end
   object PopupMenuObraSocial: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
-    Left = 345
-    Top = 294
+    Left = 265
+    Top = 278
     object AgregarObraSocial1: TMenuItem
       Caption = 'Agregar Obra Social'
       ImageIndex = 14
@@ -5268,6 +5190,20 @@ object FABM_Personas: TFABM_Personas
   object ISBuscar: TISBusquedaAvanzada
     CriteriosBusqueda = <
       item
+        Titulo = 'Relaci'#243'n'
+        Campo = 'id_relacion'
+        Tabla = 'persona_relacion'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoCombollenarSQL = ZQ_TipoRelacion
+        TipoCombollenarCampo = 'descripcion'
+        TipoCombollenarCampoReal = 'ID_TIPO_RELACION'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Apellido y Nombre'
         Campo = 'nombre'
         Tabla = 'persona'
@@ -5275,8 +5211,84 @@ object FABM_Personas: TFABM_Personas
         TipoComboEditable = False
         CambiarCondicion = False
         ItemIndex = -1
+      end
+      item
+        Titulo = 'Direcci'#243'n'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Localidad'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'CP'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Provincia'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Nacimiento'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sexo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Doc.'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nro. Doc.'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Condic. IVA'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Cuit/Cuil'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'persona'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'S'
+          'N')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'S'
+          'N')
+        ItemIndex = -1
       end>
     CriteriosLocate = <>
+    Modelo = DM.ISModelo
     DataSet = ZQ_Persona
     SQL.Strings = (
       
@@ -5303,7 +5315,99 @@ object FABM_Personas: TFABM_Personas
       'order by cl.nombre'
       '')
     UsarWhereOriginal = IS_Sin_Where
-    Left = 152
-    Top = 248
+    Left = 104
+    Top = 64
+  end
+  object ISListadoObraSocial: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select op.id_os, (op.codigo||'#39' - '#39'||op.nombre) as ObraSocial'
+      'from optica_os op'
+      'where op.baja = '#39'N'#39
+      '')
+    CampoBuscar = 'ObraSocial'
+    CampoClave = 'id_os'
+    TituloVentana = 'Obra Social'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 528
+    Top = 264
+  end
+  object ISVistaPreviaListado: TISVistaPreviaQR
+    Reporte = RepPersonaListado
+    ShowModal = False
+    Left = 872
+    Top = 224
+  end
+  object ISVistaPreviaDetalle: TISVistaPreviaQR
+    Reporte = RepPersonaDetalle
+    ShowModal = False
+    Left = 880
+    Top = 272
+  end
+  object ISOrdenar: TISOrdenarGrilla
+    Grilla = DBGridClientes
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Corto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Apellido y Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C.P.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Provincia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Nac.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Doc.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Doc.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sexo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuit/Cuil'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_Personas'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 160
+    Top = 240
   end
 end

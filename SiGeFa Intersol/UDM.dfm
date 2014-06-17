@@ -7,6 +7,7 @@ object DM: TDM
   object Conexion: TZConnection
     ControlsCodePage = cGET_ACP
     UTF8StringsAsWideField = False
+    AutoEncodeStrings = False
     Properties.Strings = (
       'rolename=base'
       'dialect=3')
