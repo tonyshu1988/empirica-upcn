@@ -532,6 +532,9 @@ end;
 
 procedure TDM.mostrarCantidadRegistro(query: TDataSet; var etiqueta: TLabel);
 begin
+ if query.State = dsInactive then
+   etiqueta.Caption:= '    Cantidad de Registros: 0'
+ else
   etiqueta.Caption:= '    Cantidad de Registros: '+inttostr(query.RecordCount);
 end;
 

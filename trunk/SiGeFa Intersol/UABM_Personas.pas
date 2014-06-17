@@ -9,7 +9,8 @@ uses
   EKOrdenarGrilla, ZStoredProcedure, ComCtrls, EKDBDateTimePicker,
   StdCtrls, DBCtrls, Mask, ZSqlUpdate, EKFiltrarColumna, ActnList,
   XPStyleActnCtrls, ActnMan, EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons,
-  Menus, ShellAPI, EKListadoSQL, cxClasses, ISBusquedaAvanzada;
+  Menus, ShellAPI, EKListadoSQL, cxClasses, ISBusquedaAvanzada,
+  ISVistaPreviaQR, ISListadoSQL, ISOrdenarGrilla;
 
 type
   TFABM_Personas = class(TForm)
@@ -47,7 +48,6 @@ type
     ZQ_IvaFISCAL: TStringField;
     ZQ_DocumentoID_TIPO_DOC: TIntegerField;
     ZQ_DocumentoNOMBRE_TIPO_DOC: TStringField;
-    EKOrdenar: TEKOrdenarGrilla;
     Nro_Persona: TZStoredProc;
     ZQ_PersonaID_PERSONA: TIntegerField;
     ZQ_PersonaID_PROVINCIA: TIntegerField;
@@ -278,7 +278,6 @@ type
     ZQ_ObraSocialNOMBRE: TStringField;
     ZQ_PersonaObraSocialcodigo: TStringField;
     ZQ_PersonaObraSocialobra_social: TStringField;
-    EKListadoObraSocial: TEKListadoSQL;
     PopupMenuObraSocial: TPopupMenu;
     AgregarObraSocial1: TMenuItem;
     QuitarObraSocial1: TMenuItem;
@@ -297,6 +296,10 @@ type
     ZQ_IvaCOEFICIENTE: TFloatField;
     ZQ_IvaVERIFICA_CUIT: TStringField;
     ISBuscar: TISBusquedaAvanzada;
+    ISListadoObraSocial: TISListadoSQL;
+    ISVistaPreviaListado: TISVistaPreviaQR;
+    ISVistaPreviaDetalle: TISVistaPreviaQR;
+    ISOrdenar: TISOrdenarGrilla;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -394,7 +397,7 @@ begin
     
   habilitarCtaCte(false);
 
-  EKOrdenar.CargarConfigColumnas;
+  ISOrdenar.CargarConfigColunmas;
 
   DBEApellidoNombre.Color:= dm.colorCampoRequido;
   DBEDireccion.Color:= dm.colorCampoRequido;
@@ -410,7 +413,7 @@ begin
   dm.EKModelo.abrir(ZQ_Documento);
   dm.EKModelo.abrir(ZQ_TipoRelacion);
 
-  EKBuscar.Abrir;
+  //EKBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Persona, lblCantidadRegistros);
   permisosUsuario;
 end;
@@ -418,7 +421,7 @@ end;
 
 procedure TFABM_Personas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenar.GuardarConfigColumnas;
+  ISOrdenar.GuardarConfigColumnas;
 end;
 
 
@@ -1092,12 +1095,12 @@ end;
 procedure TFABM_Personas.AgregarObraSocial1Click(Sender: TObject);
 begin
 
-  if EKListadoObraSocial.Buscar then
+  if ISListadoObraSocial.Buscar then
   begin
-    if (EKListadoObraSocial.Resultado<>'') then
+    if (ISListadoObraSocial.Resultado<>'') then
     begin
         ZQ_PersonaObraSocial.Append;
-        ZQ_PersonaObraSocialID_OS.AsInteger := StrToInt(EKListadoObraSocial.Resultado);
+        ZQ_PersonaObraSocialID_OS.AsInteger := StrToInt(ISListadoObraSocial.Resultado);
         ZQ_PersonaObraSocialID_PERSONA.AsInteger := ZQ_PersonaID_PERSONA.AsInteger;
 
         ZQ_PersonaObraSocialNRO_AFILIADO.AsString := InputBox('Nro Afiliado', 'Ingrese un Nro de Afiliado', '');
