@@ -1,6 +1,6 @@
 object FABM_ArticuloMedida: TFABM_ArticuloMedida
-  Left = 421
-  Top = 233
+  Left = 423
+  Top = 227
   Width = 870
   Height = 525
   Caption = 'ABM Articulo Medida'
@@ -22,8 +22,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 435
+    Width = 862
+    Height = 446
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -140,7 +140,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            838.729166666666700000
+            838.729166666666800000
             124.354166666666700000
             222.250000000000000000)
           Alignment = taCenter
@@ -173,8 +173,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Size.Values = (
             52.916666666666670000
             762.000000000000000000
-            68.791666666666670000
-            375.708333333333300000)
+            68.791666666666680000
+            375.708333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -442,7 +442,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -492,7 +492,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -540,7 +540,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -653,9 +653,9 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     object PageControlEdicion: TPageControl
       Left = 0
       Top = 0
-      Width = 854
-      Height = 435
-      ActivePage = TabABMMedidas
+      Width = 862
+      Height = 446
+      ActivePage = TabMedidaArticuloUnico
       Align = alClient
       TabOrder = 0
       OnChange = PageControlEdicionChange
@@ -665,8 +665,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object DBGridMedidas: TDBGrid
           Left = 0
           Top = 18
-          Width = 846
-          Height = 356
+          Width = 854
+          Height = 367
           Align = alClient
           Color = 14606012
           DataSource = DS_Medida
@@ -691,7 +691,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object PBusqueda: TPanel
           Left = 0
           Top = 0
-          Width = 846
+          Width = 854
           Height = 18
           Align = alTop
           ParentShowHint = False
@@ -712,7 +712,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             ParentFont = False
           end
           object StaticTxtBaja: TStaticText
-            Left = 736
+            Left = 744
             Top = 1
             Width = 109
             Height = 16
@@ -728,8 +728,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         end
         object PanelEdicion: TPanel
           Left = 0
-          Top = 374
-          Width = 846
+          Top = 385
+          Width = 854
           Height = 33
           Align = alBottom
           BevelOuter = bvNone
@@ -773,13 +773,13 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object Splitter1: TSplitter
           Left = 487
           Top = 0
-          Height = 407
+          Height = 418
         end
         object DBGridMedida: TDBGrid
           Left = 490
           Top = 0
-          Width = 356
-          Height = 407
+          Width = 364
+          Height = 418
           Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
           Color = 13431031
@@ -809,7 +809,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Left = 0
           Top = 0
           Width = 487
-          Height = 407
+          Height = 418
           Hint = 'Presione el boton derecho del mouse para cargar un articulo'
           Align = alLeft
           Color = 14606012
@@ -842,7 +842,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object PanelSeleccionarArticulo: TPanel
           Left = 0
           Top = 0
-          Width = 846
+          Width = 854
           Height = 39
           Align = alTop
           BevelOuter = bvNone
@@ -876,8 +876,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object DBGridMedidaARticulo: TDBGrid
           Left = 0
           Top = 39
-          Width = 846
-          Height = 368
+          Width = 854
+          Height = 379
           Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
           Color = 14606012
@@ -909,7 +909,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

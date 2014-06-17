@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, UBuscarPersona, StdCtrls,
-  Mask, DBCtrls, EKBusquedaAvanzada, ZSqlUpdate;
+  Mask, DBCtrls, ZSqlUpdate, cxClasses;
 
 type
   TFABM_PersonasPuntos = class(TForm)
@@ -62,7 +62,6 @@ type
     DBEdit2: TDBEdit;
     Label13: TLabel;
     DBEdit3: TDBEdit;
-    EKBusquedaAvanzadaBuscarPersonasPtos: TEKBusquedaAvanzada;
     ZUpdateSQL1: TZUpdateSQL;
     ZQ_Personas_PuntosID_PERSONA_PUNTO: TIntegerField;
     DBEdit4: TDBEdit;
@@ -71,8 +70,6 @@ type
     procedure btnNuevoClick(Sender: TObject);
     procedure ZQ_Personas_PuntosAfterScroll(DataSet: TDataSet);
     procedure btnGuardarClick(Sender: TObject);
-    procedure btBuscarPersonaClick(Sender: TObject);
-    procedure btnBuscarClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure btnBajaClick(Sender: TObject);
@@ -139,7 +136,7 @@ end;
 
 procedure TFABM_PersonasPuntos.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM_PersonaPtos, [ZQ_Personas_Puntos]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM_PersonaPtos, [ZQ_Personas_Puntos]) then
   begin
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -149,13 +146,7 @@ begin
     ZQ_Personas_Puntos.Append;
     ZQ_Personas_PuntosBAJA.AsString := 'N';
 
-    if not Assigned(vsel2) then
-    vsel2:= TFBuscarPersona.Create(nil);
 
-    vsel2.configRelacion(RELACION_CLIENTE,True);
-    vsel2.EKBusqueda.Abrir;
-    vsel2.OnSeleccionar := OnSelPers;
-    vsel2.ShowModal;
 
   end;
 end;
@@ -168,7 +159,7 @@ end;
 
 procedure TFABM_PersonasPuntos.btnGuardarClick(Sender: TObject);
 begin
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM_PersonaPtos) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM_PersonaPtos) then
     begin
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
@@ -178,25 +169,9 @@ begin
     end;
 end;
 
-procedure TFABM_PersonasPuntos.btBuscarPersonaClick(Sender: TObject);
-begin
-    if not Assigned(vsel2) then
-    vsel2:= TFBuscarPersona.Create(nil);
-
-    vsel2.configRelacion(RELACION_CLIENTE,True);
-    vsel2.EKBusqueda.Abrir;
-    vsel2.OnSeleccionar := OnSelPers;
-    vsel2.ShowModal;
-end;
-
-procedure TFABM_PersonasPuntos.btnBuscarClick(Sender: TObject);
-begin
-EKBusquedaAvanzadaBuscarPersonasPtos.Buscar;
-end;
-
 procedure TFABM_PersonasPuntos.btnModificarClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM_PersonaPtos, [ZQ_Personas_Puntos]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM_PersonaPtos, [ZQ_Personas_Puntos]) then
   begin
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
@@ -209,7 +184,7 @@ end;
 
 procedure TFABM_PersonasPuntos.btnCancelarClick(Sender: TObject);
 begin
-    if DM.EKModelo.cancelar_transaccion(transaccion_ABM_PersonaPtos) then
+    if DM.ISModelo.cancelar_transaccion(transaccion_ABM_PersonaPtos) then
     begin
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
@@ -226,7 +201,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el Sistema de Puntos Para la persona seleccionada?'), 'ABM Personas Puntos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM_PersonaPtos, [ZQ_Personas_Puntos]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM_PersonaPtos, [ZQ_Personas_Puntos]) then
     begin
       ZQ_Personas_Puntos.Edit;
       ZQ_Personas_PuntosBAJA.AsString:='S';
@@ -234,10 +209,10 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM_PersonaPtos)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM_PersonaPtos);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM_PersonaPtos)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM_PersonaPtos);
 
-    EKBusquedaAvanzadaBuscarPersonasPtos.Abrir;
+//    EKBusquedaAvanzadaBuscarPersonasPtos.Abrir;
   end;  
 
 end;
@@ -249,7 +224,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea Reactivar el Sistema de Puntos?'), 'ABM Personas Puntos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM_PersonaPtos, [ZQ_Personas_Puntos]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM_PersonaPtos, [ZQ_Personas_Puntos]) then
     begin
       ZQ_Personas_Puntos.Edit;
       ZQ_Personas_PuntosBAJA.AsString:='N';
@@ -257,10 +232,10 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM_PersonaPtos)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM_PersonaPtos);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM_PersonaPtos)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM_PersonaPtos);
 
-    EKBusquedaAvanzadaBuscarPersonasPtos.Abrir;
+//    EKBusquedaAvanzadaBuscarPersonasPtos.Abrir;
   end;
 end;
 
