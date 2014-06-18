@@ -1,10 +1,10 @@
 object FABMProductos: TFABMProductos
-  Left = 248
-  Top = 32
+  Left = 273
+  Top = 111
   AutoScroll = False
   Caption = 'ABM Productos'
   ClientHeight = 711
-  ClientWidth = 1014
+  ClientWidth = 981
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -21,12 +21,12 @@ object FABMProductos: TFABMProductos
   OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   DesignSize = (
-    1014
+    981
     711)
   PixelsPerInch = 96
   TextHeight = 13
   object panelImprimirListado: TPanel
-    Left = 386
+    Left = 370
     Top = 418
     Width = 233
     Height = 100
@@ -190,7 +190,7 @@ object FABMProductos: TFABMProductos
           50.270833333333330000
           1232.958333333333000000
           124.354166666666700000
-          304.270833333333300000)
+          304.270833333333400000)
         Alignment = taCenter
         AlignToBand = True
         AutoSize = True
@@ -221,7 +221,7 @@ object FABMProductos: TFABMProductos
         Size.Values = (
           52.916666666666670000
           1116.541666666667000000
-          68.791666666666670000
+          68.791666666666680000
           537.104166666666700000)
         Alignment = taCenter
         AlignToBand = True
@@ -254,7 +254,7 @@ object FABMProductos: TFABMProductos
           52.916666666666670000
           1068.916666666667000000
           5.291666666666667000
-          632.354166666666700000)
+          632.354166666666800000)
         Alignment = taCenter
         AlignToBand = True
         AutoSize = True
@@ -296,7 +296,7 @@ object FABMProductos: TFABMProductos
       ForceNewPage = False
       ParentFont = False
       Size.Values = (
-        34.395833333333330000
+        34.395833333333340000
         2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -598,7 +598,7 @@ object FABMProductos: TFABMProductos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        58.208333333333330000
+        58.208333333333340000
         2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -648,7 +648,7 @@ object FABMProductos: TFABMProductos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        82.020833333333330000
+        82.020833333333340000
         2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -1426,7 +1426,7 @@ object FABMProductos: TFABMProductos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1014
+    Width = 981
     Height = 659
     Align = alClient
     BevelOuter = bvNone
@@ -1436,7 +1436,7 @@ object FABMProductos: TFABMProductos
     object PCabeceraProducto: TPanel
       Left = 0
       Top = 0
-      Width = 1014
+      Width = 981
       Height = 389
       Align = alClient
       BevelOuter = bvNone
@@ -1446,7 +1446,7 @@ object FABMProductos: TFABMProductos
       object PanelCabecera: TPanel
         Left = 0
         Top = 0
-        Width = 1014
+        Width = 981
         Height = 19
         Align = alTop
         BevelOuter = bvNone
@@ -1454,10 +1454,9 @@ object FABMProductos: TFABMProductos
         object lblResultadoBusqueda: TLabel
           Left = 0
           Top = 0
-          Width = 144
+          Width = 4
           Height = 19
           Align = alLeft
-          Caption = 'lblResultadoBusqueda'
           Font.Charset = ANSI_CHARSET
           Font.Color = clNavy
           Font.Height = -11
@@ -1467,7 +1466,7 @@ object FABMProductos: TFABMProductos
           Layout = tlCenter
         end
         object StaticTxtBaja: TStaticText
-          Left = 905
+          Left = 872
           Top = 0
           Width = 109
           Height = 19
@@ -1481,106 +1480,10 @@ object FABMProductos: TFABMProductos
           TabOrder = 0
         end
       end
-      object Grilla: TEKDBGrid
-        Left = 0
-        Top = 19
-        Width = 1014
-        Height = 215
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_ProductoCabecera
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        ParentFont = False
-        TabOrder = 0
-        TitleFont.Charset = ANSI_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = GrillaDrawColumnCell
-        Cellstyle = csNone
-        DefaultRowHeight = 50
-        TitleHeight = 17
-        Columns = <
-          item
-            Color = 15461334
-            Expanded = False
-            FieldName = 'COD_CORTO'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'digo Cabecera'
-            Width = 110
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nombre'
-            Width = 212
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'IMAGEN'
-            Title.Alignment = taCenter
-            Title.Caption = 'Imagen'
-            Width = 104
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = '_marca'
-            Title.Alignment = taCenter
-            Title.Caption = 'Marca'
-            Width = 183
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = '_tipoArticulo'
-            Title.Alignment = taCenter
-            Title.Caption = 'Tipo Art'#237'culo'
-            Width = 200
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = '_articulo'
-            Title.Alignment = taCenter
-            Title.Caption = 'Art'#237'culo'
-            Width = 245
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = '_color'
-            Title.Alignment = taCenter
-            Title.Caption = 'Color'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DESCRIPCION'
-            Title.Alignment = taCenter
-            Title.Caption = 'Descripci'#243'n'
-            Width = 381
-            Visible = True
-          end>
-      end
       object PProducto: TPanel
         Left = 0
         Top = 234
-        Width = 1014
+        Width = 981
         Height = 155
         Align = alBottom
         BevelOuter = bvNone
@@ -1693,7 +1596,7 @@ object FABMProductos: TFABMProductos
         object Label11: TLabel
           Left = 0
           Top = 0
-          Width = 1014
+          Width = 981
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -1838,18 +1741,111 @@ object FABMProductos: TFABMProductos
           OnKeyUp = cmbColorKeyUp
         end
       end
+      object Grilla: TISDBGrid
+        Left = 0
+        Top = 19
+        Width = 981
+        Height = 215
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_ProductoCabecera
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = GrillaDrawColumnCell
+        Cellstyle = csNone
+        DefaultRowHeight = 50
+        TitleHeight = 17
+        Columns = <
+          item
+            Color = 15461334
+            Expanded = False
+            FieldName = 'COD_CORTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'digo Cabecera'
+            Width = 140
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'NOMBRE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nombre'
+            Width = 285
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'IMAGEN'
+            Title.Alignment = taCenter
+            Title.Caption = 'Imagen'
+            Width = 122
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = '_marca'
+            Title.Alignment = taCenter
+            Title.Caption = 'Marca'
+            Width = 231
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = '_tipoArticulo'
+            Title.Alignment = taCenter
+            Title.Caption = 'Tipo Art'#237'culo'
+            Width = 198
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = '_articulo'
+            Title.Alignment = taCenter
+            Title.Caption = 'Art'#237'culo'
+            Width = 275
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = '_color'
+            Title.Alignment = taCenter
+            Title.Caption = 'Color'
+            Width = 119
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'DESCRIPCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Descripci'#243'n'
+            Width = 381
+            Visible = True
+          end>
+      end
     end
     object PanelDetalle: TPanel
       Left = 0
       Top = 389
-      Width = 1014
+      Width = 981
       Height = 270
       Align = alBottom
       TabOrder = 1
       object grillaDetalle: TEKDBGrid
         Left = 1
         Top = 1
-        Width = 1012
+        Width = 979
         Height = 97
         Align = alClient
         Color = 14606012
@@ -1861,6 +1857,7 @@ object FABMProductos: TFABMProductos
         Font.Style = []
         Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         ParentFont = False
+        PopupMenu = PopupMenuDetalleProd
         TabOrder = 0
         TitleFont.Charset = ANSI_CHARSET
         TitleFont.Color = clWindowText
@@ -2024,7 +2021,7 @@ object FABMProductos: TFABMProductos
       object PDatosdetalle: TPanel
         Left = 1
         Top = 98
-        Width = 1012
+        Width = 979
         Height = 171
         Align = alBottom
         Caption = 'PDatosdetalle'
@@ -2033,13 +2030,13 @@ object FABMProductos: TFABMProductos
         object PContenedorDetalle: TPanel
           Left = 1
           Top = 1
-          Width = 911
+          Width = 878
           Height = 169
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object PMedidas: TPanel
-            Left = 773
+            Left = 740
             Top = 0
             Width = 138
             Height = 169
@@ -2091,7 +2088,7 @@ object FABMProductos: TFABMProductos
           object PContenedorDetallePrecios: TPanel
             Left = 0
             Top = 0
-            Width = 773
+            Width = 740
             Height = 169
             Align = alClient
             BevelOuter = bvNone
@@ -2100,9 +2097,9 @@ object FABMProductos: TFABMProductos
             object PageControl1: TPageControl
               Left = 0
               Top = 0
-              Width = 773
+              Width = 740
               Height = 169
-              ActivePage = TabSheet2
+              ActivePage = TabSheet1
               Align = alClient
               TabOrder = 0
               object TabSheet1: TTabSheet
@@ -2110,7 +2107,7 @@ object FABMProductos: TFABMProductos
                 object Label9: TLabel
                   Left = 0
                   Top = 0
-                  Width = 765
+                  Width = 732
                   Height = 14
                   Align = alTop
                   Alignment = taCenter
@@ -2129,14 +2126,14 @@ object FABMProductos: TFABMProductos
                 object PDetalle_Prod: TPanel
                   Left = 0
                   Top = 14
-                  Width = 765
+                  Width = 732
                   Height = 127
                   Align = alClient
                   BevelOuter = bvNone
                   UseDockManager = False
                   TabOrder = 0
                   DesignSize = (
-                    765
+                    732
                     127)
                   object LabelCodCorto: TLabel
                     Left = 8
@@ -2256,7 +2253,7 @@ object FABMProductos: TFABMProductos
                   object DBMemo1: TDBMemo
                     Left = 392
                     Top = 15
-                    Width = 364
+                    Width = 331
                     Height = 103
                     Anchors = [akLeft, akTop, akRight, akBottom]
                     DataField = 'DESCRIPCION'
@@ -2337,7 +2334,7 @@ object FABMProductos: TFABMProductos
                 object PPrecios: TPanel
                   Left = 0
                   Top = 0
-                  Width = 765
+                  Width = 732
                   Height = 141
                   Align = alClient
                   BevelOuter = bvNone
@@ -2549,7 +2546,7 @@ object FABMProductos: TFABMProductos
                   object Label7: TLabel
                     Left = 0
                     Top = 0
-                    Width = 765
+                    Width = 732
                     Height = 14
                     Align = alTop
                     Alignment = taCenter
@@ -2804,7 +2801,7 @@ object FABMProductos: TFABMProductos
           end
         end
         object Panel2: TPanel
-          Left = 912
+          Left = 879
           Top = 1
           Width = 99
           Height = 169
@@ -2930,7 +2927,7 @@ object FABMProductos: TFABMProductos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3298,10 +3295,6 @@ object FABMProductos: TFABMProductos
         end
         item
           BeginGroup = True
-          Visible = True
-          ItemName = 'btBuscarEnGoogle'
-        end
-        item
           Visible = True
           ItemName = 'btnSalir'
         end>
@@ -3714,203 +3707,6 @@ object FABMProductos: TFABMProductos
         'btnCancelar')
     end
   end
-  object EKBuscar: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Cod. Barra'
-        Campo = 'codigo_barra'
-        Tabla = 'producto'
-        TipoCampoIndice = 1
-        TipoCampoIndiceVer = 'Igual'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'C'#243'digo Corto'
-        Campo = 'cod_corto'
-        Tabla = 'producto'
-        TipoCampoIndice = 1
-        TipoCampoIndiceVer = 'Igual'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'C'#243'digo Cabecera'
-        Campo = 'cod_corto'
-        Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Nombre'
-        Campo = 'nombre'
-        Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Descripci'#243'n'
-        Campo = 'descripcion'
-        Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Art'#237'culo'
-        Campo = 'descripcion'
-        Tabla = 'a'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Tipo Art'#237'culo'
-        Campo = 'descripcion'
-        Tabla = 'ta'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Marca'
-        Campo = 'nombre_marca'
-        Tabla = 'm'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Color'
-        Campo = 'color'
-        Tabla = 'producto_cabecera'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndice = 1
-        TipoCampoIndiceVer = 'Igual'
-        TipoComboSQL = ZQ_Color
-        TipoComboSQLCampoVer = 'NOMBRE'
-        TipoComboSQLCampoReal = 'ID_COLOR'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Baja'
-        Campo = 'baja'
-        Tabla = 'producto_cabecera'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboValoresVer.Strings = (
-          'SI'
-          'NO')
-        TipoComboValoresReales.Strings = (
-          'S'
-          'N')
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_ProductoCabecera
-    SQL.Strings = (
-      'select distinct pc.*, a.descripcion, m.nombre_marca'
-      'from producto_cabecera pc'
-      
-        'left join producto p on (pc.id_prod_cabecera = p.id_prod_cabecer' +
-        'a)'
-      'left join articulo a on (pc.id_articulo = a.id_articulo)'
-      'left join marca m on (pc.id_marca = m.id_marca)'
-      
-        'left join tipo_articulo ta on (ta.id_tipo_articulo=a.id_tipo_art' +
-        'iculo)'
-      '')
-    SQL_Select.Strings = (
-      'select distinct pc.*, a.descripcion, m.nombre_marca')
-    SQL_From.Strings = (
-      'from producto_cabecera pc'
-      
-        'left join producto p on (pc.id_prod_cabecera = p.id_prod_cabecer' +
-        'a)'
-      'left join articulo a on (pc.id_articulo = a.id_articulo)'
-      'left join marca m on (pc.id_marca = m.id_marca)'
-      
-        'left join tipo_articulo ta on (ta.id_tipo_articulo=a.id_tipo_art' +
-        'iculo)')
-    SQL_Orden.Strings = (
-      '')
-    UsarWhereOriginal = EK_Sin_Where
-    PantallaReducida = True
-    Left = 40
-    Top = 96
-  end
-  object EKOrdenar: TEKOrdenarGrilla
-    Grilla = Grilla
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'digo Cabecera'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nombre'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Imagen'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Marca'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo Art'#237'culo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Art'#237'culo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Color'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Descripci'#243'n'
-        Visible = True
-      end>
-    NombreGuardar = 'ABMProductos_Cabeceras'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    PopUpGrilla = PopUpMenuProductos
-    Left = 96
-    Top = 96
-  end
   object ZQ_DetalleProducto: TZQuery
     Connection = DM.Conexion
     SortedFields = 'COD_CORTO'
@@ -4141,8 +3937,8 @@ object FABMProductos: TFABMProductos
   end
   object DS_Marca: TDataSource
     DataSet = ZQ_Marca
-    Left = 752
-    Top = 216
+    Left = 800
+    Top = 152
   end
   object PopupMenuDetalleProd: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
@@ -4247,8 +4043,8 @@ object FABMProductos: TFABMProductos
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_PRODUCTO_ID'
-    Left = 328
-    Top = 208
+    Left = 672
+    Top = 40
     ParamData = <
       item
         DataType = ftInteger
@@ -4268,8 +4064,8 @@ object FABMProductos: TFABMProductos
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_PRODUCTO_CABECERA_ID'
-    Left = 184
-    Top = 208
+    Left = 824
+    Top = 40
     ParamData = <
       item
         DataType = ftInteger
@@ -4285,51 +4081,7 @@ object FABMProductos: TFABMProductos
       'Bitmaps (*.bmp)  y  Jpg (*.jpg)|*.bmp; *.jpg|Jpg (*.jpg)|*.jpg|B' +
       'itmaps (*.bmp)|*.bmp'
     Left = 40
-    Top = 216
-  end
-  object EKListadoMarca: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      
-        'select m.id_marca, lpad(m.codigo_marca,4,'#39'0'#39')||'#39' - '#39'||m.nombre_m' +
-        'arca as busqueda'
-      'from marca m'
-      'where m.baja = '#39'N'#39
-      'order by m.codigo_marca, m.nombre_marca')
-    CampoBuscar = 'busqueda'
-    CampoClave = 'ID_MARCA'
-    BuscarEnQuery = ZQ_Marca
-    TituloVentana = 'Buscar Marca'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 453
-    Top = 216
-  end
-  object EKListadoArticulo: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select a.*, t.descripcion||'#39' - '#39'||a.descripcion as busqueda'
-      'from articulo a'
-      
-        'left join tipo_articulo t on (a.id_tipo_articulo = t.id_tipo_art' +
-        'iculo)'
-      'where a.baja = '#39'N'#39)
-    CampoBuscar = 'BUSQUEDA'
-    CampoClave = 'ID_ARTICULO'
-    BuscarEnQuery = ZQ_Articulo
-    TituloVentana = 'Buscar Art'#237'culo'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 541
-    Top = 216
+    Top = 48
   end
   object PopMenuMedidas: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
@@ -4373,8 +4125,8 @@ object FABMProductos: TFABMProductos
     IndexFieldNames = 'medida'
     Params = <>
     StoreDefs = True
-    Left = 96
-    Top = 216
+    Left = 112
+    Top = 48
     Data = {
       470000009619E0BD01000000180000000200000000000300000047000969645F
       6D65646964610400010000000000066D65646964610100490000000100055749
@@ -4388,30 +4140,8 @@ object FABMProductos: TFABMProductos
   end
   object DS_Medidas: TDataSource
     DataSet = CDMedidas
-    Left = 648
-    Top = 216
-  end
-  object EKListadoMedidas: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      ''
-      ''
-      ''
-      ''
-      ''
-      ''
-      ''
-      '')
-    CampoBuscar = 'medida'
-    CampoClave = 'id_medida'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 756
-    Top = 152
+    Left = 736
+    Top = 160
   end
   object ZQ_Color: TZQuery
     Connection = DM.Conexion
@@ -4423,8 +4153,8 @@ object FABMProductos: TFABMProductos
       'from Color c'
       'where c.baja = '#39'N'#39)
     Params = <>
-    Left = 853
-    Top = 152
+    Left = 837
+    Top = 96
     object ZQ_ColorID_COLOR: TIntegerField
       FieldName = 'ID_COLOR'
       Required = True
@@ -4454,28 +4184,7 @@ object FABMProductos: TFABMProductos
   object DS_Color: TDataSource
     DataSet = ZQ_Color
     Left = 848
-    Top = 216
-  end
-  object EKListadoColor: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      
-        'select c.*, (lpad(c.codigo_color,4,'#39'0'#39')||'#39' - '#39'||c.nombre) as res' +
-        'umen'
-      'from Color c'
-      'where c.baja = '#39'N'#39)
-    CampoBuscar = 'resumen'
-    CampoClave = 'id_color'
-    BuscarEnQuery = ZQ_Color
-    TituloVentana = 'Buscar Art'#237'culo'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 845
-    Top = 96
+    Top = 152
   end
   object ZQ_ExisteCodigo: TZQuery
     Connection = DM.Conexion
@@ -4543,8 +4252,8 @@ object FABMProductos: TFABMProductos
     end
   end
   object ATeclasRapidas: TActionManager
-    Left = 936
-    Top = 98
+    Left = 928
+    Top = 154
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -4585,123 +4294,6 @@ object FABMProductos: TFABMProductos
       ShortCut = 123
       OnExecute = ACancelarExecute
     end
-  end
-  object EKVistaPreviaListado: TEKVistaPreviaQR
-    Reporte = RepProductoListado
-    ShowModal = False
-    Left = 936
-    Top = 152
-  end
-  object EKVistaPreviaQR2: TEKVistaPreviaQR
-    ShowModal = False
-    Left = 936
-    Top = 208
-  end
-  object EKVistaPreviaQR3: TEKVistaPreviaQR
-    ShowModal = False
-    Left = 936
-    Top = 264
-  end
-  object EKOrdenarDetalle: TEKOrdenarGrilla
-    Grilla = grillaDetalle
-    Filtros = <
-      item
-        TituloColumna = 'ID'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Corto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Descripci'#243'n'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Barras'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Precio Costo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Impuesto Interno'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Impuesto IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'IMPUESTO_ADICIONAL1'
-        Visible = False
-      end
-      item
-        TituloColumna = 'IMPUESTO_ADICIONAL2'
-        Visible = False
-      end
-      item
-        TituloColumna = 'Precio Costo c/Imp.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Coef. Ganancia'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Coef. Descuento'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Precio Venta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Stock M'#225'ximo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Stock M'#237'nimo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Llevar Stock'
-        Visible = True
-      end
-      item
-        TituloColumna = 'PRECIO1'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO2'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO3'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO4'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO5'
-        Visible = False
-      end>
-    NombreGuardar = 'ABMProductos_Detalles'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    PopUpGrilla = PopupMenuDetalleProd
-    Left = 488
-    Top = 280
   end
   object ZQ_Precios: TZQuery
     Connection = DM.Conexion
@@ -4908,8 +4500,8 @@ object FABMProductos: TFABMProductos
       'from medida')
     Params = <>
     IndexFieldNames = 'MEDIDA Asc'
-    Left = 34
-    Top = 272
+    Left = 42
+    Top = 96
     object ZQ_TodasMedidasID_MEDIDA: TIntegerField
       FieldName = 'ID_MEDIDA'
       Required = True
@@ -5037,8 +4629,8 @@ object FABMProductos: TFABMProductos
         ParamType = ptInput
       end>
     StoredProcName = 'ASOCIAR_PRODUCTO_PTO_SALIDA'
-    Left = 656
-    Top = 272
+    Left = 536
+    Top = 40
     ParamData = <
       item
         DataType = ftInteger
@@ -5066,16 +4658,381 @@ object FABMProductos: TFABMProductos
         ParamType = ptInput
       end>
   end
-  object PopUpMenuProductos: TPopupMenu
-    Left = 97
-    Top = 41
-    object PopUpItem_Agrandar: TMenuItem
-      Caption = 'Agrandar'
-      OnClick = PopUpItem_AgrandarClick
-    end
-    object PopUpItem_Reducir: TMenuItem
-      Caption = 'Reducir'
-      OnClick = PopUpItem_ReducirClick
-    end
+  object ISBuscar: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'C'#243'digo Corto'
+        Campo = 'cod_corto'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'digo Cabecera'
+        Campo = 'cod_corto'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Barras'
+        Campo = 'codigo_barra'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nombre'
+        Campo = 'nombre'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Descripci'#243'n'
+        Campo = 'descripcion'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'a'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'ta'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Marca'
+        Campo = 'nombre_marca'
+        Tabla = 'm'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Color'
+        Campo = 'color'
+        Tabla = 'pc'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoCombollenarSQL = ZQ_Color
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_color'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'pc'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'N'
+          'S')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'N'
+          'S')
+        ItemIndex = 0
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_ProductoCabecera
+    SQL.Strings = (
+      'select distinct pc.*, a.descripcion, m.nombre_marca'
+      'from producto_cabecera pc'
+      
+        'left join producto p on (pc.id_prod_cabecera = p.id_prod_cabecer' +
+        'a)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      'left join marca m on (pc.id_marca = m.id_marca)'
+      
+        'left join tipo_articulo ta on (ta.id_tipo_articulo=a.id_tipo_art' +
+        'iculo)')
+    SQL_Select.Strings = (
+      'select distinct pc.*, a.descripcion, m.nombre_marca')
+    SQL_From.Strings = (
+      'from producto_cabecera pc'
+      
+        'left join producto p on (pc.id_prod_cabecera = p.id_prod_cabecer' +
+        'a)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      'left join marca m on (pc.id_marca = m.id_marca)'
+      
+        'left join tipo_articulo ta on (ta.id_tipo_articulo=a.id_tipo_art' +
+        'iculo)')
+    UsarWhereOriginal = IS_Con_Where
+    PantallaReducida = True
+    Left = 32
+    Top = 426
+  end
+  object ISOrdenar: TISOrdenarGrilla
+    Grilla = Grilla
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo Cabecera'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Imagen'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Descripci'#243'n'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABMProductos_Cabeceras'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 400
+    Top = 429
+  end
+  object ISListadoMarca: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      
+        'select m.id_marca, lpad(m.codigo_marca,4,'#39'0'#39')||'#39' - '#39'||m.nombre_m' +
+        'arca as busqueda'
+      'from marca m'
+      'where m.baja = '#39'N'#39
+      'order by m.codigo_marca, m.nombre_marca'
+      '')
+    CampoBuscar = 'busqueda'
+    CampoClave = 'ID_MARCA'
+    BuscarEnQuery = ZQ_Marca
+    TituloVentana = 'Buscar Marca'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 224
+    Top = 378
+  end
+  object ISListadoArticulo: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select a.*, t.descripcion||'#39' - '#39'||a.descripcion as busqueda'
+      'from articulo a'
+      
+        'left join tipo_articulo t on (a.id_tipo_articulo = t.id_tipo_art' +
+        'iculo)'
+      'where a.baja = '#39'N'#39
+      '')
+    CampoBuscar = 'busqueda'
+    CampoClave = 'ID_ARTICULO'
+    BuscarEnQuery = ZQ_Articulo
+    TituloVentana = 'Buscar Art'#237'culo'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 480
+    Top = 378
+  end
+  object ISListadoColor: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      
+        'select c.*, (lpad(c.codigo_color,4,'#39'0'#39')||'#39' - '#39'||c.nombre) as res' +
+        'umen'
+      'from Color c'
+      'where c.baja = '#39'N'#39
+      '')
+    CampoBuscar = 'resumen'
+    CampoClave = 'id_color'
+    BuscarEnQuery = ZQ_Color
+    TituloVentana = 'Buscar Color'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 304
+    Top = 370
+  end
+  object ISListadoMedidas: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      '')
+    CampoBuscar = 'medida'
+    CampoClave = 'id_medida'
+    TituloVentana = 'Buscar Medida'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 392
+    Top = 378
+  end
+  object ISOrdenarDetalle: TISOrdenarGrilla
+    Grilla = grillaDetalle
+    Filtros = <
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Corto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Descripci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barras'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Costo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Impuesto Interno'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Impuesto IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IMPUESTO_ADICIONAL1'
+        Visible = False
+      end
+      item
+        TituloColumna = 'IMPUESTO_ADICIONAL2'
+        Visible = False
+      end
+      item
+        TituloColumna = 'Precio Costo c/Imp.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Coef. Ganancia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Coef. Descuento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Stock M'#225'ximo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Stock M'#237'nimo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Llevar Stock'
+        Visible = True
+      end
+      item
+        TituloColumna = 'PRECIO1'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO2'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO3'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO4'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO5'
+        Visible = False
+      end>
+    NombreGuardarConfig = 'ABMProductos_Detalles'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 488
+    Top = 429
+  end
+  object ISVistaPreviaListado: TISVistaPreviaQR
+    Reporte = RepProductoListado
+    ShowModal = False
+    Left = 672
+    Top = 429
   end
 end

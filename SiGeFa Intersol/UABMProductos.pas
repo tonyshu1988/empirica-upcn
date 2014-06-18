@@ -9,7 +9,8 @@ uses
   DBCtrls, Mask, EKBusquedaAvanzada, EKOrdenarGrilla, EKLlenarCombo, Menus,
   Buttons, ZStoredProcedure, jpeg, ExtDlgs, EKListadoSQL, DBClient,
   EKVistaPreviaQR, ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls,
-  qrFramelines, shellapi, ZSqlUpdate, cxClasses;
+  qrFramelines, shellapi, ZSqlUpdate, cxClasses, ISOrdenarGrilla,
+  ISBusquedaAvanzada, ISListadoSQL, ISVistaPreviaQR, ISDBGrid;
 
 type
   TFABMProductos = class(TForm)
@@ -22,7 +23,6 @@ type
     ZQ_ProductoCabeceraBAJA: TStringField;
     ZQ_ProductoCabeceraID_ARTICULO: TIntegerField;
     DS_ProductoCabecera: TDataSource;
-    Grilla: TEKDBGrid;
     dxBarABM: TdxBarManager;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
@@ -36,8 +36,6 @@ type
     GrupoVisualizando: TdxBarGroup;
     GrupoEditando: TdxBarGroup;
     PanelCabecera: TPanel;
-    EKBuscar: TEKBusquedaAvanzada;
-    EKOrdenar: TEKOrdenarGrilla;
     ZQ_DetalleProducto: TZQuery;
     DS_DetalleProducto: TDataSource;
     ZQ_Articulo: TZQuery;
@@ -72,8 +70,6 @@ type
     ZQ_ArticuloBAJA: TStringField;
     ZQ_ArticuloBUSQUEDA: TStringField;
     ZQ_MarcaBAJA: TStringField;
-    EKListadoMarca: TEKListadoSQL;
-    EKListadoArticulo: TEKListadoSQL;
     ZQ_ArticuloTIPO_ARTICULO: TStringField;
     ZQ_ProductoCabecera_tipoArticulo: TStringField;
     PopMenuMedidas: TPopupMenu;
@@ -83,11 +79,9 @@ type
     CDMedidasid_medida: TIntegerField;
     CDMedidasmedida: TStringField;
     DS_Medidas: TDataSource;
-    EKListadoMedidas: TEKListadoSQL;
     ZQ_Color: TZQuery;
     ZQ_ProductoCabeceraCOLOR: TIntegerField;
     DS_Color: TDataSource;
-    EKListadoColor: TEKListadoSQL;
     ZQ_MarcaCODIGO_MARCA: TIntegerField;
     ZQ_MarcaBUSQUEDA: TStringField;
     ZQ_ExisteCodigo: TZQuery;
@@ -115,9 +109,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKVistaPreviaListado: TEKVistaPreviaQR;
-    EKVistaPreviaQR2: TEKVistaPreviaQR;
-    EKVistaPreviaQR3: TEKVistaPreviaQR;
     RepProductoListado: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -165,7 +156,6 @@ type
     QRFrameline2: TQRFrameline;
     QRFrameline3: TQRFrameline;
     QRFrameline4: TQRFrameline;
-    EKOrdenarDetalle: TEKOrdenarGrilla;
     QRLabel10: TQRLabel;
     panelImprimirListado: TPanel;
     Panel1: TPanel;
@@ -306,12 +296,18 @@ type
     DBEditPrecio3: TDBEdit;
     DBEditPrecio4: TDBEdit;
     DBEditPrecio5: TDBEdit;
-    PopUpMenuProductos: TPopupMenu;
-    PopUpItem_Agrandar: TMenuItem;
-    PopUpItem_Reducir: TMenuItem;
     PageControl1: TPageControl;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
+    ISBuscar: TISBusquedaAvanzada;
+    ISOrdenar: TISOrdenarGrilla;
+    ISListadoMarca: TISListadoSQL;
+    ISListadoArticulo: TISListadoSQL;
+    ISListadoColor: TISListadoSQL;
+    ISListadoMedidas: TISListadoSQL;
+    ISOrdenarDetalle: TISOrdenarGrilla;
+    ISVistaPreviaListado: TISVistaPreviaQR;
+    Grilla: TISDBGrid;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -328,7 +324,6 @@ type
     procedure ZQ_ProductoCabeceraAfterScroll(DataSet: TDataSet);
     procedure ZQ_ArticuloAfterScroll(DataSet: TDataSet);
     procedure edImagenDblClick(Sender: TObject);
-    procedure GrillaDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     function validarcampos(): Boolean;
     function validarcamposDetalle(): Boolean;
     procedure CargaImagenProporcionado(Archivo: string);
@@ -378,6 +373,8 @@ type
     procedure HabilitarPopMenu(estado: integer);
     procedure PopUpItem_AgrandarClick(Sender: TObject);
     procedure PopUpItem_ReducirClick(Sender: TObject);
+    procedure GrillaDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
   private
     campoQueCambia: string; //guardo que campo se tiene que recalcular automatica// cuando cambio el precio de costo
   public
@@ -533,7 +530,7 @@ end;
 
 procedure TFABMProductos.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_ProductoCabecera, lblResultadoBusqueda);
 end;
 
@@ -546,8 +543,8 @@ end;
 
 procedure TFABMProductos.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenar.GuardarConfigColumnas;
-  EKOrdenarDetalle.GuardarConfigColumnas;
+  ISOrdenar.GuardarConfigColumnas;
+  ISOrdenarDetalle.GuardarConfigColumnas;
   dm.ISIni.EsribirRegEntero('ABM_PRODUCTOS_GrillaPrinciparl.AltoFila', Grilla.DefaultRowHeight);
 end;
 
@@ -565,8 +562,8 @@ begin
   FPrincipal.Iconos_Menu_32.GetBitmap(1, btnGrupoAceptar.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(0, btnGrupoCancelar.Glyph);
 
-  EKOrdenar.CargarConfigColumnas;
-  EKOrdenarDetalle.CargarConfigColumnas;
+  ISOrdenar.CargarConfigColunmas;
+  ISOrdenarDetalle.CargarConfigColunmas;
   if dm.ISIni.LeerRegnumero('ABM_PRODUCTOS_GrillaPrinciparl.AltoFila') <> 0 then
     Grilla.DefaultRowHeight:= dm.ISIni.LeerRegnumero('ABM_PRODUCTOS_GrillaPrinciparl.AltoFila');
 
@@ -575,11 +572,11 @@ begin
   panelImprimirListado.Visible:= false;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  dm.EKModelo.abrir(ZQ_Articulo);
-  dm.EKModelo.abrir(ZQ_Marca);
-  dm.EKModelo.abrir(ZQ_Color);
-  dm.EKModelo.abrir(ZQ_MedidaArticulo);
-  dm.EKModelo.abrir(ZQ_TodasMedidas);
+  dm.ISModelo.abrir(ZQ_Articulo);
+  dm.ISModelo.abrir(ZQ_Marca);
+  dm.ISModelo.abrir(ZQ_Color);
+  dm.ISModelo.abrir(ZQ_MedidaArticulo);
+  dm.ISModelo.abrir(ZQ_TodasMedidas);
 
   HabilitarPopMenu(2); //solo ver bajas y ver activos
   lblResultadoBusqueda.Caption:= '';
@@ -590,7 +587,7 @@ end;
 
 procedure TFABMProductos.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera, ZQ_DetalleProducto, ZQ_Precios]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera, ZQ_DetalleProducto, ZQ_Precios]) then
   begin
     HabilitarPopMenu(4); //solo agregar detalle
     //PCabeceraProducto.Height:= 221;
@@ -783,7 +780,7 @@ begin
     exit;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABMProductos) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABMProductos) then
     begin
       HabilitarPopMenu(2); //solo ver bajas y activos
       GrupoEditando.Enabled:= false;
@@ -812,7 +809,7 @@ begin
     begin
       if (asociar_pto_salida_id > 0) then
       begin
-        if dm.EKModelo.iniciar_transaccion('ASOCIAR', []) then
+        if dm.ISModelo.iniciar_transaccion('ASOCIAR', []) then
         begin
           ZQ_DetalleProducto.First;
           while not ZQ_DetalleProducto.Eof do
@@ -828,8 +825,8 @@ begin
             ZQ_DetalleProducto.Next;
           end;
 
-          if not (dm.EKModelo.finalizar_transaccion('ASOCIAR')) then
-            dm.EKModelo.cancelar_transaccion('ASOCIAR');
+          if not (dm.ISModelo.finalizar_transaccion('ASOCIAR')) then
+            dm.ISModelo.cancelar_transaccion('ASOCIAR');
         end;
       end
       else
@@ -842,7 +839,7 @@ end;
 procedure TFABMProductos.btnCancelarClick(Sender: TObject);
 begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos) then
+    if dm.ISModelo.cancelar_transaccion(transaccion_ABMProductos) then
     begin
       HabilitarPopMenu(2); //solo ver bajas y activos
       GrupoVisualizando.Enabled:= true;
@@ -864,7 +861,7 @@ begin
   if ZQ_ProductoCabecera.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera, ZQ_DetalleProducto, ZQ_Precios]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera, ZQ_DetalleProducto, ZQ_Precios]) then
   begin
     HabilitarPopMenu(0); //todos activos
     ZQ_ProductoCabecera.edit;
@@ -889,7 +886,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el Producto seleccionado?'), 'ABM Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera, ZQ_DetalleProducto]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera, ZQ_DetalleProducto]) then
     begin
       ZQ_ProductoCabecera.Edit;
       ZQ_ProductoCabeceraBAJA.AsString:= 'S';
@@ -908,8 +905,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMProductos)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABMProductos)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABMProductos);
 
     recNo:= ZQ_ProductoCabecera.RecNo;
     ZQ_ProductoCabecera.Refresh;
@@ -927,7 +924,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar el Producto seleccionado?'), 'ABM Productos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera, ZQ_DetalleProducto]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABMProductos, [ZQ_ProductoCabecera, ZQ_DetalleProducto]) then
     begin
       ZQ_ProductoCabecera.Edit;
       ZQ_ProductoCabeceraBAJA.AsString:= 'N';
@@ -950,8 +947,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMProductos)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABMProductos);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABMProductos)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABMProductos);
 
     recNo:= ZQ_ProductoCabecera.RecNo;
     ZQ_ProductoCabecera.Refresh;
@@ -997,7 +994,7 @@ begin
   ZQ_PreciosIMPUESTO_ADICIONAL2.AsFloat:= 0;
 
   PMedidas.Visible:= True;
-  EKOrdenarDetalle.PopUpGrilla:= nil;
+  grillaDetalle.PopupMenu:= nil;
   grillaDetalle.Enabled:= False;
   GrupoEditando.Enabled:= false;
 
@@ -1022,7 +1019,7 @@ begin
     exit;
 
   PMedidas.Visible:= False;
-  EKOrdenarDetalle.PopUpGrilla:= nil;
+  grillaDetalle.PopupMenu:= nil;
   grillaDetalle.Enabled:= false;
   GrupoEditando.Enabled:= false;
   ZQ_DetalleProducto.Edit;
@@ -1038,7 +1035,7 @@ begin
     ZQ_Precios.Close;
     ZQ_Precios.ParamByName('id_producto').AsInteger:= ZQ_DetalleProductoID_PRODUCTO.AsInteger;
     ZQ_Precios.ParamByName('sucursal').AsInteger:= SUCURSAL_LOGUEO;
-    dm.EKModelo.abrir(ZQ_Precios);
+    dm.ISModelo.abrir(ZQ_Precios);
     ZQ_Precios.Edit;
   end
   else
@@ -1055,7 +1052,7 @@ begin
   ZQ_DetalleProducto.Close;
   ZQ_DetalleProducto.ParamByName('prod').AsInteger:= ZQ_ProductoCabeceraID_PROD_CABECERA.AsInteger;
   ZQ_DetalleProducto.ParamByName('sucursal').AsInteger:= SUCURSAL_LOGUEO;
-  dm.EKModelo.abrir(ZQ_DetalleProducto);
+  dm.ISModelo.abrir(ZQ_DetalleProducto);
 end;
 
 
@@ -1063,16 +1060,16 @@ procedure TFABMProductos.ZQ_ArticuloAfterScroll(DataSet: TDataSet);
 begin
   ZQ_MedidaArticulo.Close;
   ZQ_MedidaArticulo.ParamByName('artic').AsInteger:= ZQ_ProductoCabeceraID_ARTICULO.AsInteger;
-  dm.EKModelo.abrir(ZQ_MedidaArticulo);
+  dm.ISModelo.abrir(ZQ_MedidaArticulo);
   ZQ_MedidaArticulo.First;
 
-  if dm.EKModelo.verificar_transaccion(transaccion_ABMProductos) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABMProductos) then
   begin
         //Traigo las medidas que correspondan a un tipo de articulo
     CDMedidas.EmptyDataSet;
     ZQ_MedidaArticulo.Close;
     ZQ_MedidaArticulo.ParamByName('artic').AsInteger:= ZQ_ProductoCabeceraID_ARTICULO.AsInteger;
-    dm.EKModelo.abrir(ZQ_MedidaArticulo);
+    dm.ISModelo.abrir(ZQ_MedidaArticulo);
     ZQ_MedidaArticulo.First;
 
     while not (ZQ_MedidaArticulo.Eof) do
@@ -1099,7 +1096,7 @@ var
   jpg: TJpegImage;
 begin
   try
-    if dm.EKModelo.verificar_transaccion(transaccion_ABMProductos) then
+    if dm.ISModelo.verificar_transaccion(transaccion_ABMProductos) then
     //si esta activa la transaccion
       if buscarImagen.Execute then //abro para buscar la imagen
       begin
@@ -1201,10 +1198,10 @@ end;
 procedure TFABMProductos.cmbMarcaKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if key = 112 then
-    if EKListadoMarca.Buscar then
+    if ISListadoMarca.Buscar then
     begin
       ZQ_ProductoCabecera.Edit;
-      ZQ_ProductoCabeceraID_MARCA.AsInteger:= StrToInt(EKListadoMarca.Resultado);
+      ZQ_ProductoCabeceraID_MARCA.AsInteger:= StrToInt(ISListadoMarca.Resultado);
       cmbMarca.setfocus;
     end;
 end;
@@ -1213,10 +1210,10 @@ end;
 procedure TFABMProductos.cmbArticuloKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if key = 112 then
-    if EKListadoArticulo.Buscar then
+    if ISListadoArticulo.Buscar then
     begin
       ZQ_ProductoCabecera.Edit;
-      ZQ_ProductoCabeceraID_ARTICULO.AsInteger:= StrToInt(EKListadoArticulo.Resultado);
+      ZQ_ProductoCabeceraID_ARTICULO.AsInteger:= StrToInt(ISListadoArticulo.Resultado);
       cmbArticulo.setfocus;
     end;
 end;
@@ -1224,14 +1221,14 @@ end;
 
 procedure TFABMProductos.MenuItem1Click(Sender: TObject);
 begin
-  EKListadoMedidas.SQL.Clear;
-  EKListadoMedidas.SQL.Add(Format('select m.* from medida_articulo ma ' +
+  ISListadoMedidas.SQL.Clear;
+  ISListadoMedidas.SQL.Add(Format('select m.* from medida_articulo ma ' +
     'join medida m on (ma.id_medida=m.id_medida)' +
     'where (ma.id_articulo=%d)and(ma.baja<>%s)' +
     ' order by m.medida', [ZQ_ArticuloID_ARTICULO.AsInteger, QuotedStr('S')]));
-  if EKListadoMedidas.Buscar then
+  if ISListadoMedidas.Buscar then
   begin
-    CDMedidas.Filter:= 'id_medida = ' + EKListadoMedidas.Resultado;
+    CDMedidas.Filter:= 'id_medida = ' + ISListadoMedidas.Resultado;
     CDMedidas.Filtered:= true;
     if not CDMedidas.IsEmpty then
     begin
@@ -1241,8 +1238,8 @@ begin
     end;
     CDMedidas.Filtered:= false;
     CDMedidas.Append;
-    CDMedidasid_medida.AsString:= EKListadoMedidas.Resultado;
-    CDMedidasmedida.AsString:= EKListadoMedidas.Seleccion;
+    CDMedidasid_medida.AsString:= ISListadoMedidas.Resultado;
+    CDMedidasmedida.AsString:= ISListadoMedidas.Seleccion;
     CDMedidas.Post;
   end;
 end;
@@ -1292,10 +1289,10 @@ procedure TFABMProductos.cmbColorKeyUp(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key = 112 then
-    if EKListadoColor.Buscar then
+    if ISListadoColor.Buscar then
     begin
       ZQ_ProductoCabecera.Edit;
-      ZQ_ProductoCabeceraCOLOR.AsInteger:= StrToInt(EKListadoColor.Resultado);
+      ZQ_ProductoCabeceraCOLOR.AsInteger:= StrToInt(ISListadoColor.Resultado);
       cmbColor.setfocus;
     end;
 end;
@@ -1384,9 +1381,9 @@ begin
   end;
 
   DM.VariablesReportes(RepProductoListado);
-  QRlblPieDePaginaListado.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption:= EKBuscar.ParametrosBuscados;
-  EKVistaPreviaListado.VistaPrevia;
+  QRlblPieDePaginaListado.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption:= ISBuscar.ParametrosBuscados;
+  ISVistaPreviaListado.VistaPrevia;
 
   panelImprimirListado.Visible:= false;
   GrupoVisualizando.Enabled:= true;
@@ -1734,7 +1731,7 @@ begin
     ZQ_DetalleProducto.Post;
   end;
 
-  EKOrdenarDetalle.PopUpGrilla:= PopupMenuDetalleProd;
+  grillaDetalle.PopupMenu:= PopupMenuDetalleProd;
   grillaDetalle.Enabled:= True;
   GrupoEditando.Enabled:= true;
   PDatosDetalle.Visible:= false;
@@ -1749,7 +1746,7 @@ end;
 
 procedure TFABMProductos.btnGrupoCancelarClick(Sender: TObject);
 begin
-  EKOrdenarDetalle.PopUpGrilla:= PopupMenuDetalleProd;
+  grillaDetalle.PopupMenu:= PopupMenuDetalleProd;
   ZQ_DetalleProducto.RevertRecord;
   GrupoEditando.Enabled:= true;
   grillaDetalle.Enabled:= True;
@@ -1887,7 +1884,7 @@ begin
     NewSize:= 509;
 
 
-  if dm.EKModelo.verificar_transaccion(transaccion_ABMProductos) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABMProductos) then
     Accept:= false
   else
     Accept:= true;
@@ -1904,6 +1901,8 @@ procedure TFABMProductos.PopUpItem_ReducirClick(Sender: TObject);
 begin
   Grilla.DefaultRowHeight:= Grilla.DefaultRowHeight - 5;
 end;
+
+
 
 end.
 

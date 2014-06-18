@@ -337,11 +337,12 @@ begin
   dm.ZQ_Configuracion.Close;
   dm.ZQ_Configuracion.Open;
   pertenece:= false;
+  SUCURSAL_LOGUEO:= 1;
   if not dm.ZQ_ConfiguracionDB_SUCURSAL.IsNull then
   begin
-//    SUCURSAL_LOGUEO:= dm.ISIni.Ini.ReadInteger('SUCURSAL_LOGUEO', 'id_sucursal', -1);
-//    if SUCURSAL_LOGUEO = -1 then
-//      SUCURSAL_LOGUEO:= dm.ZQ_ConfiguracionID_SUCURSAL.AsInteger; //cargo la sucursal a la cual pertenece la base de datos
+    SUCURSAL_LOGUEO:= dm.ISIni.Ini.ReadInteger('SUCURSAL_LOGUEO', 'id_sucursal', -1);
+    if SUCURSAL_LOGUEO = -1 then
+      SUCURSAL_LOGUEO:= dm.ZQ_ConfiguracionID_SUCURSAL.AsInteger; //cargo la sucursal a la cual pertenece la base de datos
 
     if DM.ISUsrLogin.PermisoAccionValor('SUCURSALES') <> '' then
     begin
@@ -355,7 +356,7 @@ begin
 //    end;
   end;
 
-  SUCURSAL_LOGUEO:= 1;
+
 
 //  if not pertenece then //si no selecciono ninguna sucursal o el
 //  begin
