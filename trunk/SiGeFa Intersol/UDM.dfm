@@ -1,17 +1,17 @@
 object DM: TDM
   OldCreateOrder = False
-  Left = 452
-  Top = 122
+  Left = 676
+  Top = 152
   Height = 656
   Width = 534
   object Conexion: TZConnection
-    ControlsCodePage = cCP_UTF8
+    ControlsCodePage = cGET_ACP
     UTF8StringsAsWideField = False
     AutoEncodeStrings = False
     Properties.Strings = (
       'rolename=base'
       'dialect=3'
-      'controls_cp=CP_UTF8')
+      'controls_cp=GET_ACP')
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
@@ -1944,7 +1944,7 @@ object DM: TDM
       'where zt.user_name <> '#39'SINCRO'#39
       'order by zt.id desc')
     Params = <>
-    Left = 288
+    Left = 280
     Top = 328
     object ZQ_ValidarFecha_HoraID: TLargeintField
       FieldName = 'ID'
