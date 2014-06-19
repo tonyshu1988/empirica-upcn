@@ -2546,7 +2546,7 @@ object FABMProductos: TFABMProductos
                   object Label7: TLabel
                     Left = 0
                     Top = 0
-                    Width = 732
+                    Width = 100
                     Height = 14
                     Align = alTop
                     Alignment = taCenter
@@ -4754,7 +4754,6 @@ object FABMProductos: TFABMProductos
         ItemIndex = 0
       end>
     CriteriosLocate = <>
-    Modelo = DM.ISModelo
     DataSet = ZQ_ProductoCabecera
     SQL.Strings = (
       'select distinct pc.*, a.descripcion, m.nombre_marca'
@@ -4830,7 +4829,6 @@ object FABMProductos: TFABMProductos
     Top = 429
   end
   object ISListadoMarca: TISListadoSQL
-    Modelo = DM.ISModelo
     SQL.Strings = (
       
         'select m.id_marca, lpad(m.codigo_marca,4,'#39'0'#39')||'#39' - '#39'||m.nombre_m' +
@@ -4853,7 +4851,6 @@ object FABMProductos: TFABMProductos
     Top = 378
   end
   object ISListadoArticulo: TISListadoSQL
-    Modelo = DM.ISModelo
     SQL.Strings = (
       'select a.*, t.descripcion||'#39' - '#39'||a.descripcion as busqueda'
       'from articulo a'
@@ -4876,7 +4873,6 @@ object FABMProductos: TFABMProductos
     Top = 378
   end
   object ISListadoColor: TISListadoSQL
-    Modelo = DM.ISModelo
     SQL.Strings = (
       
         'select c.*, (lpad(c.codigo_color,4,'#39'0'#39')||'#39' - '#39'||c.nombre) as res' +
@@ -4898,7 +4894,6 @@ object FABMProductos: TFABMProductos
     Top = 370
   end
   object ISListadoMedidas: TISListadoSQL
-    Modelo = DM.ISModelo
     SQL.Strings = (
       ''
       ''
