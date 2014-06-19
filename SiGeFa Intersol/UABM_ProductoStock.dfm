@@ -1,7 +1,7 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 284
-  Top = 162
-  Width = 1173
+  Left = 424
+  Top = 102
+  Width = 937
   Height = 602
   Caption = 'ABM Producto Stock'
   Color = clBtnFace
@@ -22,8 +22,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 1157
-    Height = 512
+    Width = 929
+    Height = 523
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -31,29 +31,29 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelAsociar: TPanel
       Left = 5
       Top = 5
-      Width = 1147
-      Height = 502
+      Width = 919
+      Height = 513
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object Splitter1: TSplitter
         Left = 423
         Top = 21
-        Height = 481
+        Height = 492
       end
       object PanelAsociar_Producto: TPanel
         Left = 426
         Top = 21
-        Width = 721
-        Height = 481
+        Width = 493
+        Height = 492
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 721
-          Height = 481
+          Width = 493
+          Height = 492
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -149,7 +149,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Left = 0
         Top = 21
         Width = 423
-        Height = 481
+        Height = 492
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -157,7 +157,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Left = 0
           Top = 0
           Width = 423
-          Height = 481
+          Height = 492
           Align = alClient
           Color = 14606012
           DataSource = DS_Sucursal
@@ -185,7 +185,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 1147
+        Width = 919
         Height = 21
         Align = alTop
         BevelOuter = bvNone
@@ -198,277 +198,11 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelCarga: TPanel
       Left = 5
       Top = 5
-      Width = 1147
-      Height = 502
+      Width = 919
+      Height = 513
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      object DBGridStock: TDBGrid
-        Left = 0
-        Top = 0
-        Width = 1147
-        Height = 482
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_Stock
-        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGridStockDrawColumnCell
-        OnKeyDown = DBGridStockKeyDown
-        Columns = <
-          item
-            Alignment = taRightJustify
-            Expanded = False
-            FieldName = 'COD_CORTO_PRODUCTO'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Corto'
-            Width = 94
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Producto'
-            Width = 211
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'MEDIDA'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Medida'
-            Width = 113
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE_MARCA'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Marca'
-            Width = 150
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'TIPO_ARTICULO'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Tipo Art'#237'culo'
-            Width = 136
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE_ARTICULO'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Art'#237'culo'
-            Width = 133
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'COLOR'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Color'
-            Visible = True
-          end
-          item
-            Color = 15921894
-            Expanded = False
-            FieldName = 'STOCK_ACTUAL'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            Title.Alignment = taCenter
-            Title.Caption = 'Actual'
-            Width = 100
-            Visible = True
-          end
-          item
-            Color = 11140856
-            Expanded = False
-            FieldName = 'STOCK_MIN'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            Title.Alignment = taCenter
-            Title.Caption = 'Minimo'
-            Width = 100
-            Visible = True
-          end
-          item
-            Color = 11796403
-            Expanded = False
-            FieldName = 'STOCK_MAX'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            Title.Alignment = taCenter
-            Title.Caption = 'Maximo'
-            Width = 100
-            Visible = True
-          end
-          item
-            Color = 5197823
-            Expanded = False
-            FieldName = 'STOCK_REPEDIDO'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            Title.Alignment = taCenter
-            Title.Caption = 'Pto Repedido'
-            Width = 100
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'STOCK_MIN_ALARMA'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            PickList.Strings = (
-              'S'
-              'N')
-            Title.Alignment = taCenter
-            Title.Caption = 'Alarma'
-            Width = 100
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SUCURSAL'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Sucursal'
-            Width = 138
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SECCION'
-            ReadOnly = True
-            Title.Caption = 'Secci'#243'n'
-            Width = 108
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'SECTOR'
-            ReadOnly = True
-            Title.Caption = 'Sector'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'FILA'
-            ReadOnly = True
-            Title.Caption = 'Fila'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'COLUMNA'
-            ReadOnly = True
-            Title.Caption = 'Columna'
-            Visible = True
-          end
-          item
-            Alignment = taRightJustify
-            Expanded = False
-            FieldName = 'COD_CORTO_CABECERA'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Cabecera'
-            Visible = True
-          end
-          item
-            Alignment = taRightJustify
-            Expanded = False
-            FieldName = 'CODIGO_BARRA'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Barra'
-            Width = 100
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'BAJA'
-            ReadOnly = True
-            Title.Alignment = taCenter
-            Title.Caption = 'Baja'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ID_STOCK_PRODUCTO'
-            Title.Alignment = taRightJustify
-            Title.Caption = 'Id Stock Producto'
-            Visible = True
-          end>
-      end
-      object Panel2: TPanel
-        Left = 0
-        Top = 482
-        Width = 1147
-        Height = 20
-        Align = alBottom
-        TabOrder = 1
-        object lblResumen: TLabel
-          Left = 1070
-          Top = 1
-          Width = 76
-          Height = 18
-          Align = alRight
-          Alignment = taCenter
-          Caption = 'lblResumen'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object lblCant: TLabel
-          Left = 1
-          Top = 1
-          Width = 46
-          Height = 18
-          Align = alLeft
-          Alignment = taCenter
-          Caption = 'lblCant'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-      end
       object RepProductoStock: TQuickRep
         Tag = 99
         Left = -119
@@ -584,7 +318,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               50.270833333333330000
               1232.958333333333000000
               124.354166666666700000
-              304.270833333333300000)
+              304.270833333333400000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -615,7 +349,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Size.Values = (
               52.916666666666670000
               1132.416666666667000000
-              68.791666666666670000
+              68.791666666666680000
               505.354166666666700000)
             Alignment = taCenter
             AlignToBand = True
@@ -648,7 +382,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               52.916666666666670000
               1087.437500000000000000
               5.291666666666667000
-              592.666666666666700000)
+              592.666666666666800000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -690,7 +424,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewPage = False
           ParentFont = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -1041,7 +775,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333330000
+            58.208333333333340000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -1060,7 +794,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               37.041666666666670000
               10.583333333333330000
               10.583333333333330000
-              558.270833333333300000)
+              558.270833333333400000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -1093,7 +827,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               37.041666666666670000
               1973.791666666667000000
               10.583333333333330000
-              775.229166666666700000)
+              775.229166666666800000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = True
@@ -1130,7 +864,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333330000
+            82.020833333333340000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -1178,7 +912,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333330000
+              34.395833333333340000
               13.229166666666670000
               5.291666666666667000
               333.375000000000000000)
@@ -1330,7 +1064,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              923.395833333333300000
+              923.395833333333400000
               5.291666666666667000
               105.833333333333300000)
             Alignment = taLeftJustify
@@ -1428,7 +1162,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               37.041666666666670000
               1939.395833333333000000
               5.291666666666667000
-              92.604166666666670000)
+              92.604166666666680000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -1492,7 +1226,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               37.041666666666670000
               2550.583333333333000000
               5.291666666666667000
-              216.958333333333300000)
+              216.958333333333400000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -1512,12 +1246,279 @@ object FABM_ProductoStock: TFABM_ProductoStock
           end
         end
       end
+      object DBGridStock: TDBGrid
+        Left = 0
+        Top = 0
+        Width = 919
+        Height = 493
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_Stock
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        PopupMenu = Popup_Producto
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridStockDrawColumnCell
+        OnKeyDown = DBGridStockKeyDown
+        Columns = <
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'COD_CORTO_PRODUCTO'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Corto'
+            Width = 94
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Producto'
+            Width = 211
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'MEDIDA'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Medida'
+            Width = 113
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_MARCA'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Marca'
+            Width = 150
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TIPO_ARTICULO'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Tipo Art'#237'culo'
+            Width = 136
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE_ARTICULO'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Art'#237'culo'
+            Width = 133
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLOR'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Color'
+            Visible = True
+          end
+          item
+            Color = 15921894
+            Expanded = False
+            FieldName = 'STOCK_ACTUAL'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            Title.Alignment = taCenter
+            Title.Caption = 'Actual'
+            Width = 100
+            Visible = True
+          end
+          item
+            Color = 11140856
+            Expanded = False
+            FieldName = 'STOCK_MIN'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            Title.Alignment = taCenter
+            Title.Caption = 'Minimo'
+            Width = 100
+            Visible = True
+          end
+          item
+            Color = 11796403
+            Expanded = False
+            FieldName = 'STOCK_MAX'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            Title.Alignment = taCenter
+            Title.Caption = 'Maximo'
+            Width = 100
+            Visible = True
+          end
+          item
+            Color = 5197823
+            Expanded = False
+            FieldName = 'STOCK_REPEDIDO'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            Title.Alignment = taCenter
+            Title.Caption = 'Pto Repedido'
+            Width = 100
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'STOCK_MIN_ALARMA'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            PickList.Strings = (
+              'S'
+              'N')
+            Title.Alignment = taCenter
+            Title.Caption = 'Alarma'
+            Width = 100
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SUCURSAL'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Sucursal'
+            Width = 138
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SECCION'
+            ReadOnly = True
+            Title.Caption = 'Secci'#243'n'
+            Width = 108
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'SECTOR'
+            ReadOnly = True
+            Title.Caption = 'Sector'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'FILA'
+            ReadOnly = True
+            Title.Caption = 'Fila'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLUMNA'
+            ReadOnly = True
+            Title.Caption = 'Columna'
+            Visible = True
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'COD_CORTO_CABECERA'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Cabecera'
+            Visible = True
+          end
+          item
+            Alignment = taRightJustify
+            Expanded = False
+            FieldName = 'CODIGO_BARRA'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Barra'
+            Width = 100
+            Visible = True
+          end
+          item
+            Alignment = taCenter
+            Expanded = False
+            FieldName = 'BAJA'
+            ReadOnly = True
+            Title.Alignment = taCenter
+            Title.Caption = 'Baja'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'ID_STOCK_PRODUCTO'
+            Title.Alignment = taRightJustify
+            Title.Caption = 'Id Stock Producto'
+            Visible = True
+          end>
+      end
+      object Panel2: TPanel
+        Left = 0
+        Top = 493
+        Width = 919
+        Height = 20
+        Align = alBottom
+        TabOrder = 1
+        object lblResumen: TLabel
+          Left = 842
+          Top = 1
+          Width = 76
+          Height = 18
+          Align = alRight
+          Alignment = taCenter
+          Caption = 'lblResumen'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object lblCant: TLabel
+          Left = 1
+          Top = 1
+          Width = 46
+          Height = 18
+          Align = alLeft
+          Alignment = taCenter
+          Caption = 'lblCant'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+      end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2317,417 +2318,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
     Left = 152
     Top = 192
   end
-  object EKOrdenarGrillaStock: TEKOrdenarGrilla
-    Grilla = DBGridStock
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Corto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Producto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Marca'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo Art'#237'culo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Art'#237'culo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Color'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Actual'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Minimo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Maximo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Pto Repedido'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Alarma'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sucursal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Secci'#243'n'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sector'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fila'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Columna'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Cabecera'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Barra'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Baja'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Id Stock Producto'
-        Visible = True
-      end>
-    NombreGuardar = 'ABMProductoStock_Stock'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    PopUpGrilla = PopUpDesasociar
-    Left = 56
-    Top = 136
-  end
-  object EKBuscarStock: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'C'#243'd. Corto'
-        Campo = 'cod_corto'
-        Tabla = 'producto'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'C'#243'd. Barra'
-        Campo = 'codigo_barra'
-        Tabla = 'producto'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'C'#243'd. Cabecera'
-        Campo = 'cod_corto'
-        Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Nombre Producto'
-        Campo = 'nombre'
-        Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Medida'
-        Campo = 'medida'
-        Tabla = 'medida'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Marca'
-        Campo = 'nombre_marca'
-        Tabla = 'marca'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Tipo Art'#237'culo'
-        Campo = 'descripcion'
-        Tabla = 'tipo_articulo'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Art'#237'culo'
-        Campo = 'descripcion'
-        Tabla = 'articulo'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Color'
-        Campo = 'nombre'
-        Tabla = 'color'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Stock Actual'
-        Campo = 'stock_actual'
-        Tabla = 'stock_producto'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Stock Minimo'
-        Campo = 'stock_min'
-        Tabla = 'stock_producto'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Stock Maximo'
-        Campo = 'stock_max'
-        Tabla = 'stock_producto'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Llevar Stock'
-        Campo = 'llevar_stock'
-        Tabla = 'producto'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboValoresVer.Strings = (
-          'SI'
-          'NO')
-        TipoComboValoresReales.Strings = (
-          'S'
-          'N')
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Sucursal'
-        Campo = 'id_sucursal'
-        Tabla = 'sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Sucursal
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Secci'#243'n'
-        Campo = 'Seccion'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_SeccionSuc
-        TipoComboSQLCampoVer = 'Seccion'
-        TipoComboSQLCampoReal = 'Seccion'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Sector'
-        Campo = 'sector'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fila'
-        Campo = 'Fila'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Columna'
-        Campo = 'columna'
-        Tabla = 'posicion_sucursal'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Baja'
-        Campo = 'baja'
-        Tabla = 'producto_cabecera'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboValoresVer.Strings = (
-          'NO'
-          'SI')
-        TipoComboValoresReales.Strings = (
-          'N'
-          'S')
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_Stock
-    SQL.Strings = (
-      
-        'select sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.s' +
-        'tock_max,'
-      '       sp.stock_repedido, sp.stock_min_alarma,'
-      '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
-      '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
-      '       md.medida, mc.nombre_marca, pc.baja,'
-      
-        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
-        '_articulo,'
-      
-        '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
-        'umna,'
-      '       c.nombre as color, su.id_sucursal,'
-      '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
-      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
-      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
-      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
-      
-        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
-        'al'
-      ''
-      ''
-      ''
-      'from stock_producto sp'
-      'left join producto pr on (sp.id_producto =  pr.id_producto)'
-      'left join medida md on (pr.id_medida = md.id_medida)'
-      
-        'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
-        'prod_cabecera)'
-      'left join marca mc on (pc.id_marca = mc.id_marca)'
-      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
-      
-        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
-        'articulo)'
-      
-        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
-        'id_posicion_sucursal)'
-      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
-      'left join color c on (pc.color = c.id_color)'
-      ''
-      ''
-      'where (pr.baja <> '#39'S'#39') and (pc.baja <> '#39'S'#39')')
-    SQL_Select.Strings = (
-      
-        'select sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.s' +
-        'tock_max,'
-      '       sp.stock_repedido, sp.stock_min_alarma,'
-      '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
-      '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
-      '       md.medida, mc.nombre_marca, pc.baja,'
-      
-        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
-        '_articulo,'
-      
-        '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
-        'umna,'
-      '       c.nombre as color, su.id_sucursal,'
-      '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
-      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
-      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
-      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
-      
-        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
-        'al'
-      ''
-      ''
-      '')
-    SQL_From.Strings = (
-      'from stock_producto sp'
-      'left join producto pr on (sp.id_producto =  pr.id_producto)'
-      'left join medida md on (pr.id_medida = md.id_medida)'
-      
-        'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
-        'prod_cabecera)'
-      'left join marca mc on (pc.id_marca = mc.id_marca)'
-      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
-      
-        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
-        'articulo)'
-      
-        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
-        'id_posicion_sucursal)'
-      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
-      'left join color c on (pc.color = c.id_color)'
-      ''
-      '')
-    SQL_Where.Strings = (
-      'where (pr.baja <> '#39'S'#39') and (pc.baja <> '#39'S'#39')')
-    UsarWhereOriginal = EK_Con_Where
-    Left = 56
-    Top = 192
-  end
   object Popup_Sucursal: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     Left = 288
@@ -2780,33 +2370,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
     DataSet = CD_Sucursal
     Left = 288
     Top = 184
-  end
-  object EKListado_Sucursal: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'SELECT ps.id_posicion_sucursal, '#39'Sucursal: '#39'||s.nombre||'#39' '#39'||'
-      'COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
-      'COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
-      'COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
-      'COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS Busqueda'
-      'FROM posicion_sucursal ps'
-      'LEFT JOIN sucursal s ON (s.id_sucursal=ps.id_sucursal)'
-      'WHERE s.id_sucursal <> 0'
-      ''
-      ''
-      ''
-      '')
-    CampoBuscar = 'Busqueda'
-    CampoClave = 'id_posicion_sucursal'
-    TituloVentana = 'Buscar Sucursal'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 288
-    Top = 240
   end
   object DS_Producto: TDataSource
     DataSet = CD_Producto
@@ -2948,70 +2511,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
       OnExecute = AVolverExecute
     end
   end
-  object EKOrdenarGrillaProducto: TEKOrdenarGrilla
-    Grilla = DBGridProducto
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Producto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Producto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Color'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Marca'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo Art'#237'culo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Art'#237'culo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Barra'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Cabecera'
-        Visible = True
-      end>
-    NombreGuardar = 'ABMProductoStock_Producto'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    PopUpGrilla = Popup_Producto
-    Left = 400
-    Top = 344
-  end
-  object EKDbSuma1: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'STOCK_ACTUAL'
-      end
-      item
-        Operacion = goCount
-        NombreCampo = 'ID_STOCK_PRODUCTO'
-      end>
-    DataSet = ZQ_Stock
-    SumListChanged = EKDbSuma1SumListChanged
-    Left = 149
-    Top = 245
-  end
   object PopUpDesasociar: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     Left = 152
@@ -3026,12 +2525,6 @@ object FABM_ProductoStock: TFABM_ProductoStock
       ImageIndex = 0
       OnClick = PopUpStock_DesasociarTodosClick
     end
-  end
-  object EKVistaPreviaQR1: TEKVistaPreviaQR
-    Reporte = RepProductoStock
-    ShowModal = False
-    Left = 685
-    Top = 37
   end
   object ZQ_Sucursal: TZQuery
     Connection = DM.Conexion
@@ -3114,5 +2607,480 @@ object FABM_ProductoStock: TFABM_ProductoStock
     Params = <>
     Left = 56
     Top = 360
+  end
+  object ISBuscarStock: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'C'#243'digo Corto'
+        Campo = 'cod_corto'
+        Tabla = 'pr'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'digo Cabecera'
+        Campo = 'cod_corto'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Barras'
+        Campo = 'codigo_barra'
+        Tabla = 'pr'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nombre'
+        Campo = 'nombre'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Medida'
+        Campo = 'medida'
+        Tabla = 'md'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Marca'
+        Campo = 'nombre_marca'
+        Tabla = 'mc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'ta'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Color'
+        Campo = 'color'
+        Tabla = 'pc'
+        TipoCampoIndice = 1
+        TipoCampoIndiceVer = 'Igual'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'ar'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Descripci'#243'n'
+        Campo = 'descripcion'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Stock Actual'
+        Campo = 'stock_producto'
+        Tabla = 'sp'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Stock M'#237'nimo'
+        Campo = 'stock_min'
+        Tabla = 'sp'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Stock M'#225'ximo'
+        Campo = 'stock_max'
+        Tabla = 'sp'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Llevar Stock'
+        Campo = 'llevar_stock'
+        Tabla = 'pr'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'S'
+          'N')
+        TipoComboEditable = False
+        CambiarCondicion = False
+        TipoComboValoresReales.Strings = (
+          'S'
+          'N')
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        Campo = 'id_sucursal'
+        Tabla = 'su'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Sucursal
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Secci'#243'n'
+        Campo = 'seccion'
+        Tabla = 'ps'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sector'
+        Campo = 'sector'
+        Tabla = 'ps'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fila'
+        Campo = 'fila'
+        Tabla = 'ps'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Columna'
+        Campo = 'columna'
+        Tabla = 'ps'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'pc'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'N'
+          'S')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'N'
+          'S')
+        ItemIndex = 0
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_Stock
+    SQL.Strings = (
+      
+        'select sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.s' +
+        'tock_max,'
+      '       sp.stock_repedido, sp.stock_min_alarma,'
+      '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
+      '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
+      '       md.medida, mc.nombre_marca, pc.baja,'
+      
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      
+        '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
+        'umna,'
+      '       c.nombre as color, su.id_sucursal,'
+      '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
+      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      
+        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
+        'al'
+      ''
+      ''
+      'from stock_producto sp'
+      'left join producto pr on (sp.id_producto =  pr.id_producto)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
+      
+        'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
+        'prod_cabecera)'
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      
+        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
+        'id_posicion_sucursal)'
+      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'left join color c on (pc.color = c.id_color)'
+      'where (pr.baja <> '#39'S'#39') and (pc.baja <> '#39'S'#39')')
+    SQL_Select.Strings = (
+      
+        'select sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.s' +
+        'tock_max,'
+      '       sp.stock_repedido, sp.stock_min_alarma,'
+      '       pc.nombre, pc.cod_corto as cod_corto_cabecera,'
+      '       pr.cod_corto as cod_corto_producto, pr.codigo_barra,'
+      '       md.medida, mc.nombre_marca, pc.baja,'
+      
+        '       ar.descripcion as nombre_articulo, ta.descripcion as tipo' +
+        '_articulo,'
+      
+        '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
+        'umna,'
+      '       c.nombre as color, su.id_sucursal,'
+      '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
+      '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      '        COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      
+        '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
+        'al'
+      ''
+      '')
+    SQL_From.Strings = (
+      'from stock_producto sp'
+      'left join producto pr on (sp.id_producto =  pr.id_producto)'
+      'left join medida md on (pr.id_medida = md.id_medida)'
+      
+        'left join producto_cabecera pc on (pr.id_prod_cabecera =  pc.id_' +
+        'prod_cabecera)'
+      'left join marca mc on (pc.id_marca = mc.id_marca)'
+      'left join articulo ar on (pc.id_articulo = ar.id_articulo)'
+      
+        'left join tipo_articulo ta on (ar.id_tipo_articulo = ta.id_tipo_' +
+        'articulo)'
+      
+        'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
+        'id_posicion_sucursal)'
+      'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'left join color c on (pc.color = c.id_color)')
+    SQL_Where.Strings = (
+      'where (pr.baja <> '#39'S'#39') and (pc.baja <> '#39'S'#39')')
+    UsarWhereOriginal = IS_Con_Where
+    PantallaReducida = True
+    Left = 528
+    Top = 330
+  end
+  object ISListado_Sucursal: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'SELECT ps.id_posicion_sucursal, '#39'Sucursal: '#39'||s.nombre||'#39' '#39'||'
+      'COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Sector: '#39' || ps.sector,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Fila: '#39' || ps.fila,'#39#39')||'#39' '#39'||'
+      'COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS Busqueda'
+      'FROM posicion_sucursal ps'
+      'LEFT JOIN sucursal s ON (s.id_sucursal=ps.id_sucursal)'
+      'WHERE s.id_sucursal <> 0'
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      '')
+    CampoBuscar = 'Busqueda'
+    CampoClave = 'id_posicion_sucursal'
+    TituloVentana = 'Buscar Sucursal'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 621
+    Top = 357
+  end
+  object ISOrdenarGrillaProducto: TISOrdenarGrilla
+    Grilla = DBGridProducto
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Cabecera'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABMProductoStock_Producto'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 773
+    Top = 301
+  end
+  object ISOrdenarGrillaStock: TISOrdenarGrilla
+    Grilla = DBGridStock
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Corto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Art'#237'culo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Actual'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Minimo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Maximo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Pto Repedido'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Alarma'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Secci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sector'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fila'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Columna'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Cabecera'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Baja'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Id Stock Producto'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABMProductoStock_Stock'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 773
+    Top = 357
+  end
+  object ISVistaPreviaQR1: TISVistaPreviaQR
+    Reporte = RepProductoStock
+    ShowModal = False
+    Left = 845
+    Top = 229
+  end
+  object ISDbSuma1: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'STOCK_ACTUAL'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'ID_STOCK_PRODUCTO'
+      end>
+    DataSet = ZQ_Stock
+    SumListChanged = ISDbSuma1SumListChanged
+    Left = 645
+    Top = 181
   end
 end

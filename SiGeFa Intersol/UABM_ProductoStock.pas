@@ -6,10 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, DB,
   ZAbstractRODataset, ZAbstractDataset, ZStoredProcedure, ZSqlUpdate,
-  ZDataset, EKDBGrid, EKOrdenarGrilla, EKBusquedaAvanzada, Menus,
-  EKListadoSQL, DBClient, UBuscarProducto, ZSqlProcessor, ActnList,
-  XPStyleActnCtrls, ActnMan, StdCtrls, EKDbSuma, QRCtrls, QuickRpt,
-  EKVistaPreviaQR, cxClasses;
+  ZDataset, Menus, DBClient, UBuscarProducto, ZSqlProcessor, ActnList,
+  XPStyleActnCtrls, ActnMan, StdCtrls, QRCtrls, QuickRpt,
+  cxClasses, ISBusquedaAvanzada, ISOrdenarGrilla,
+  ISListadoSQL, ISVistaPreviaQR, ISDbSuma;
 
 type
   TFABM_ProductoStock = class(TForm)
@@ -31,8 +31,6 @@ type
     ZU_Stock: TZUpdateSQL;
     DS_Stock: TDataSource;
     DBGridStock: TDBGrid;
-    EKOrdenarGrillaStock: TEKOrdenarGrilla;
-    EKBuscarStock: TEKBusquedaAvanzada;
     PanelCarga: TPanel;
     PanelAsociar: TPanel;
     PanelAsociar_Producto: TPanel;
@@ -50,7 +48,6 @@ type
     CD_Sucursal_nombre: TStringField;
     CD_Sucursal_idSucursal: TIntegerField;
     DS_Sucursal: TDataSource;
-    EKListado_Sucursal: TEKListadoSQL;
     DS_Producto: TDataSource;
     CD_Producto: TClientDataSet;
     CD_Producto_idProducto: TIntegerField;
@@ -101,10 +98,8 @@ type
     ZQ_StockPOSICSUCURSAL: TStringField;
     CD_Producto_color: TStringField;
     PopItemProducto_QuitarTodos: TMenuItem;
-    EKOrdenarGrillaProducto: TEKOrdenarGrilla;
     Panel2: TPanel;
     lblResumen: TLabel;
-    EKDbSuma1: TEKDbSuma;
     AVolver: TAction;
     PopUpDesasociar: TPopupMenu;
     PopUpStock_Desasociar: TMenuItem;
@@ -146,7 +141,6 @@ type
     QRDBText9: TQRDBText;
     QRLabel1: TQRLabel;
     QRLabel7: TQRLabel;
-    EKVistaPreviaQR1: TEKVistaPreviaQR;
     ZQ_Sucursal: TZQuery;
     ZQ_SucursalID_SUCURSAL: TIntegerField;
     ZQ_SucursalNOMBRE: TStringField;
@@ -168,6 +162,12 @@ type
     btRepedido: TdxBarLargeButton;
     lblCant: TLabel;
     QRExpr1: TQRExpr;
+    ISBuscarStock: TISBusquedaAvanzada;
+    ISListado_Sucursal: TISListadoSQL;
+    ISOrdenarGrillaProducto: TISOrdenarGrilla;
+    ISOrdenarGrillaStock: TISOrdenarGrilla;
+    ISVistaPreviaQR1: TISVistaPreviaQR;
+    ISDbSuma1: TISDbSuma;
     procedure btnModificarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnGuardarClick(Sender: TObject);
@@ -197,13 +197,13 @@ type
     procedure PopUpStock_DesasociarTodosClick(Sender: TObject);
     procedure DBGridProductoDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure DBGridSucursalDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure EKDbSuma1SumListChanged(Sender: TObject);
     procedure DBGridStockKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure validarSucursal(Sender: TField);
     procedure validarPermisosUsuario;
     procedure btnExcelClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
     procedure btRepedidoClick(Sender: TObject);
+    procedure ISDbSuma1SumListChanged(Sender: TObject);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -231,8 +231,8 @@ uses UDM, UPrincipal, UUtilidades;
 
 procedure TFABM_ProductoStock.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
-  EKOrdenarGrillaStock.GuardarConfigColumnas;
-  EKOrdenarGrillaProducto.GuardarConfigColumnas;
+  ISOrdenarGrillaStock.GuardarConfigColumnas;
+  ISOrdenarGrillaProducto.GuardarConfigColumnas;
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABMStock);
 end;
 
@@ -242,12 +242,12 @@ begin
   if ZQ_Stock.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMStock, [ZQ_Stock]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABMStock, [ZQ_Stock]) then
   begin
     GrupoEditando.Enabled:= false;
     GrupoGuardarCancelar.Enabled:= true;
 
-    EKOrdenarGrillaStock.PopUpGrilla:= nil;
+    DBGridStock.PopupMenu:= nil;
     DBGridStock.ReadOnly:= false;
   end;
 end;
@@ -257,14 +257,14 @@ procedure TFABM_ProductoStock.btnGuardarClick(Sender: TObject);
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABMStock) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABMStock) then
     begin
       GrupoEditando.Enabled:= true;
       GrupoGuardarCancelar.Enabled:= false;
       ZQ_Stock.Refresh;
       DBGridStock.ReadOnly:= true;
 
-      EKOrdenarGrillaStock.PopUpGrilla:= PopUpDesasociar;
+      DBGridStock.PopupMenu:= PopUpDesasociar;
     end
   except
     begin
@@ -280,14 +280,14 @@ begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Producto Stock', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
     exit;
 
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABMStock) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABMStock) then
   begin
     GrupoEditando.Enabled:= true;
     GrupoGuardarCancelar.Enabled:= false;
 
     DBGridStock.ReadOnly:= true;
 
-    EKOrdenarGrillaStock.PopUpGrilla:= PopUpDesasociar;
+    DBGridStock.PopupMenu:= PopUpDesasociar;
   end;
 end;
 
@@ -305,8 +305,8 @@ begin
   PanelAsociar.Visible:= false;
   lblResumen.Caption:= '';
 
-  EKOrdenarGrillaStock.CargarConfigColumnas;
-  EKOrdenarGrillaProducto.CargarConfigColumnas;
+  ISOrdenarGrillaStock.CargarConfigColunmas;
+  ISOrdenarGrillaProducto.CargarConfigColunmas;
 
   CD_Sucursal.CreateDataSet;
   CD_Producto.CreateDataSet;
@@ -314,7 +314,7 @@ begin
   ZQ_Sucursal.Close;
   ZQ_Sucursal.Open;
   if ZQ_Sucursal.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBuscarStock.CriteriosBusqueda.Items[13]).ItemIndex:= ZQ_Sucursal.RecNo - 1;
+    TISCriterioBA(ISBuscarStock.CriteriosBusqueda.Items[13]).ItemIndex:= ZQ_Sucursal.RecNo - 1;
 
   ZQ_SeccionSuc.Close;
   ZQ_SeccionSuc.Open;
@@ -323,7 +323,7 @@ end;
 
 procedure TFABM_ProductoStock.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscarStock.Buscar;
+  ISBuscarStock.Buscar;
 end;
 
 
@@ -428,9 +428,9 @@ end;
 
 procedure TFABM_ProductoStock.PopItemSucursal_AgregarClick(Sender: TObject);
 begin
-  if EKListado_Sucursal.Buscar then
+  if ISListado_Sucursal.Buscar then
   begin
-    CD_Sucursal.Filter:= 'idSucursal = ' + EKListado_Sucursal.Resultado;
+    CD_Sucursal.Filter:= 'idSucursal = ' + ISListado_Sucursal.Resultado;
     CD_Sucursal.Filtered:= true;
     if not CD_Sucursal.IsEmpty then
     begin
@@ -441,8 +441,8 @@ begin
 
     CD_Sucursal.Filtered:= false;
     CD_Sucursal.Append;
-    CD_Sucursal_idSucursal.AsString:= EKListado_Sucursal.Resultado;
-    CD_Sucursal_nombre.AsString:= EKListado_Sucursal.Seleccion;
+    CD_Sucursal_idSucursal.AsString:= ISListado_Sucursal.Resultado;
+    CD_Sucursal_nombre.AsString:= ISListado_Sucursal.Seleccion;
   end;
 end;
 
@@ -468,7 +468,7 @@ begin
     exit;
   end;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_Asociar, [ZQ_TempSucursal, ZQ_TempProducto]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_Asociar, [ZQ_TempSucursal, ZQ_TempProducto]) then
   begin
     CD_Sucursal.First;
     while not CD_Sucursal.Eof do
@@ -487,20 +487,20 @@ begin
     end;
 
     //finalizo la transaccion
-    if DM.EKModelo.finalizar_transaccion(transaccion_Asociar) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_Asociar) then
       estado:= true //si pudo llenar las tablas temporales entonces seteo que esta todo bien hasta el momento
     else
-      DM.EKModelo.cancelar_transaccion(transaccion_Asociar);
+      DM.ISModelo.cancelar_transaccion(transaccion_Asociar);
   end;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_Asociar, []) and estado then
+  if dm.ISModelo.iniciar_transaccion(transaccion_Asociar, []) and estado then
   begin
     //genero el stock en 0 para los productos cargados recientemente
     ZQ_GenerarStock.close;
     ZQ_GenerarStock.ExecSQL;
 
     //finalizo la transaccion
-    if DM.EKModelo.finalizar_transaccion(transaccion_Asociar) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_Asociar) then
     begin
       ShowMessage('La Asociación se realizó correctamente');
 
@@ -514,7 +514,7 @@ begin
       PanelCarga.Visible:= true;
     end
     else
-      DM.EKModelo.cancelar_transaccion(transaccion_Asociar);
+      DM.ISModelo.cancelar_transaccion(transaccion_Asociar);
   end;
 end;
 
@@ -587,8 +587,8 @@ end;
 
 procedure TFABM_ProductoStock.btnVolverClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_Asociar) then
-    dm.EKModelo.cancelar_transaccion(transaccion_Asociar);
+  if dm.ISModelo.verificar_transaccion(transaccion_Asociar) then
+    dm.ISModelo.cancelar_transaccion(transaccion_Asociar);
 
   if not CD_Sucursal.IsEmpty then
     CD_Sucursal.EmptyDataSet;
@@ -624,7 +624,7 @@ begin
     exit;
   end;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMStock, [ZQ_Stock]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABMStock, [ZQ_Stock]) then
   begin
     sucursal:= ZQ_StockSUCURSAL.AsString;
     if not ZQ_StockSECCION.IsNull then
@@ -639,8 +639,8 @@ begin
 
     ZQ_Stock.Delete;
 
-    if not DM.EKModelo.finalizar_transaccion(transaccion_ABMStock) then
-      DM.EKModelo.cancelar_transaccion(transaccion_ABMStock);
+    if not DM.ISModelo.finalizar_transaccion(transaccion_ABMStock) then
+      DM.ISModelo.cancelar_transaccion(transaccion_ABMStock);
   end;
 end;
 
@@ -655,7 +655,7 @@ begin
 
   tieneStock:= false;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMStock, [ZQ_Stock]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABMStock, [ZQ_Stock]) then
   begin
     sucursal:= ZQ_StockSUCURSAL.AsString;
     if not ZQ_StockSECCION.IsNull then
@@ -674,15 +674,15 @@ begin
       if ZQ_StockSTOCK_ACTUAL.AsFloat <> 0 then
       begin
         Application.MessageBox('No se puede completar la acción porque un producto de la lista actualmente tiene stock, por favor verifique.', 'Validación', MB_OK + MB_ICONINFORMATION);
-        DM.EKModelo.cancelar_transaccion(transaccion_ABMStock);
+        DM.ISModelo.cancelar_transaccion(transaccion_ABMStock);
         exit;
       end;
 
       ZQ_Stock.Delete;
     end;
 
-    if not DM.EKModelo.finalizar_transaccion(transaccion_ABMStock) then
-      DM.EKModelo.cancelar_transaccion(transaccion_ABMStock);
+    if not DM.ISModelo.finalizar_transaccion(transaccion_ABMStock) then
+      DM.ISModelo.cancelar_transaccion(transaccion_ABMStock);
   end;
 end;
 
@@ -698,12 +698,6 @@ procedure TFABM_ProductoStock.DBGridSucursalDrawColumnCell(Sender: TObject;
   State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillas(DBGridSucursal, Rect, DataCol, Column, State);
-end;
-
-procedure TFABM_ProductoStock.EKDbSuma1SumListChanged(Sender: TObject);
-begin
-  lblResumen.Caption:= 'Total Stock: ' + FloatToStr(EKDbSuma1.SumCollection.Items[0].SumValue);
-   lblCant.Caption:= FloatToStr(EKDbSuma1.SumCollection.Items[1].SumValue)+' productos.';
 end;
 
 procedure TFABM_ProductoStock.DBGridStockKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -727,7 +721,7 @@ begin
         ZQ_Stock.Next
       else //si estoy en la ultima fila
         if ZQ_Stock.State = dsEdit then //y estoy en modo edicion
-          ZQ_Stock.Post; //hago un post para que recalcule el EKDBSuma
+          ZQ_Stock.Post; //hago un post para que recalcule el ISDBSuma
       DBGridStock.SelectedField:= DBGridStock.Fields[campo]; //sigo en la misma columna
     end;
   end;
@@ -811,8 +805,8 @@ begin
 
 
   DM.VariablesReportes(RepProductoStock);
-  QRLabelCritBusqueda.Caption:= EKBuscarStock.ParametrosBuscados;
-  EKVistaPreviaQR1.VistaPrevia;
+  QRLabelCritBusqueda.Caption:= ISBuscarStock.ParametrosBuscados;
+  ISVistaPreviaQR1.VistaPrevia;
 end;
 
 procedure TFABM_ProductoStock.btRepedidoClick(Sender: TObject);
@@ -829,6 +823,12 @@ begin
     ZQ_Stock.Filtered:= false;
     DBGridStock.Color:= $00DEDEBC;
   end;
+end;
+
+procedure TFABM_ProductoStock.ISDbSuma1SumListChanged(Sender: TObject);
+begin
+ lblResumen.Caption:= 'Total Stock: ' + FloatToStr(ISDbSuma1.SumCollection.Items[0].SumValue);
+   lblCant.Caption:= FloatToStr(ISDbSuma1.SumCollection.Items[1].SumValue)+' productos.';
 end;
 
 end.
