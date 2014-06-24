@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Buttons, Grids, DBGrids, StdCtrls, ExtCtrls, dxBar,
   dxBarExtItems, ComCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, EKDbSuma, QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla;
+  ZDataset, QRCtrls, QuickRpt,ISVistaPreviaQR, cxClasses, ISDbSuma, ISOrdenarGrilla;
 
 type
   TFArqueo_Caja = class(TForm)
@@ -24,13 +24,11 @@ type
     DS_Arqueo_Movimientos: TDataSource;
     DateTimePicker1: TDateTimePicker;
     DS_Comprobante_FormaPago: TDataSource;
-    EKDbSuma_ArqueoFpago: TEKDbSuma;
     RepArqueo: TQuickRep;
     QRBand14: TQRBand;
     RepArqueo_Titulo: TQRLabel;
     RepArqueo_Subtitulo: TQRLabel;
     qrlblTitulo: TQRLabel;
-    EKVistaPreviaDetalle: TEKVistaPreviaQR;
     QRSubDetail1: TQRSubDetail;
     QRSubDetail2: TQRSubDetail;
     QRSubDetail3: TQRSubDetail;
@@ -47,7 +45,6 @@ type
     QRSubDetail4: TQRSubDetail;
     QRLabelImporteventa: TQRLabel;
     QRLabelImporteTotal: TQRLabel;
-    EKDbSuma_ArqueoMov: TEKDbSuma;
     ZQ_Arqueo_MovimientosIMPORTE_VENTA: TFloatField;
     ZQ_Arqueo_MovimientosCODIGO: TStringField;
     ZQ_Arqueo_MovimientosFECHA: TDateTimeField;
@@ -57,7 +54,6 @@ type
     ZQ_Arqueo_MovimientosNOMBRE_ENTIDAD: TStringField;
     ZQ_Arqueo_MovimientosID_COMPROBANTE: TIntegerField;
     ZQ_Arqueo_MovimientosCANT_VENDIDA: TFloatField;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_Arqueo_MovimientosIMPORTE_TRANSFERIDO: TFloatField;
     ZQ_Arqueo_Fpago: TZQuery;
     ZQ_Arqueo_FpagoTIPO_FPAGO: TStringField;
@@ -65,7 +61,6 @@ type
     ZQ_Arqueo_FpagoCUENTA: TStringField;
     ZQ_Arqueo_FpagoIMPORTE_VENTA: TFloatField;
     ZQ_Arqueo_FpagoIMPORTE_TRANSFERIDO: TFloatField;
-    EKOrdenarGrilla2: TEKOrdenarGrilla;
     QRDBText8: TQRDBText;
     QRDBText9: TQRDBText;
     PageFooterBand1: TQRBand;
@@ -117,7 +112,6 @@ type
     QRLabel14: TQRLabel;
     QRLabel15: TQRLabel;
     QRDBLogo2: TQRDBImage;
-    EKVistaPreviaSaldo: TEKVistaPreviaQR;
     PageControl1: TPageControl;
     TabSheetMovimientos: TTabSheet;
     TabSheetCuentas: TTabSheet;
@@ -128,6 +122,12 @@ type
     DBGridArqueoMovimiento: TDBGrid;
     DBGridFormaPago: TDBGrid;
     DBGrid1: TDBGrid;
+    ISVistaPreviaDetalle: TISVistaPreviaQR;
+    ISVistaPreviaSaldo: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISOrdenarGrilla2: TISOrdenarGrilla;
+    ISDbSuma_ArqueoMov: TISDbSuma;
+    ISDbSuma_ArqueoFpago: TISDbSuma;
     procedure DateTimePicker1Change(Sender: TObject);
     procedure EKDbSuma_ArqueoFpagoSumListChanged(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -182,9 +182,9 @@ begin
   QRDBLogo.DataSet:= dm.ZQ_Sucursal;
   QRDBLogo2.DataSet:= dm.ZQ_Sucursal;
 
-  EKOrdenarGrilla1.CargarConfigColumnas;
-  EKOrdenarGrilla2.CargarConfigColumnas;
-  DateTimePicker1.Date:=dm.EKModelo.Fecha();
+  ISOrdenarGrilla1.CargarConfigColunmas;
+  ISOrdenarGrilla2.CargarConfigColunmas;
+  DateTimePicker1.Date:=dm.ISModelo.Fecha();
   DateTimePicker1Change(self);
 end;
 
@@ -204,17 +204,17 @@ begin
 
   qrlblTitulo.Caption:= 'ARQUEO CAJA DIA ' + FormatDateTime('dd/mm/yyyy', DateTimePicker1.DateTime);
   QRLblTituloSaldo.Caption:= 'DETALLE CUENTAS DIA ' + FormatDateTime('dd/mm/yyyy', DateTimePicker1.DateTime);
-  QRLabelImporteventa.Caption:= FormatFloat('Total: $ ##,###,##0.00', EKDbSuma_ArqueoMov.SumCollection[0].SumValue);
-  QRLabelImporteventa.Caption:= QRLabelImporteventa.Caption + FormatFloat('  /  Transferido: $ ##,###,##0.00  ', EKDbSuma_ArqueoMov.SumCollection[1].SumValue);
+  QRLabelImporteventa.Caption:= FormatFloat('Total: $ ##,###,##0.00', ISDbSuma_ArqueoMov.SumCollection[0].SumValue);
+  QRLabelImporteventa.Caption:= QRLabelImporteventa.Caption + FormatFloat('  /  Transferido: $ ##,###,##0.00  ', ISDbSuma_ArqueoMov.SumCollection[1].SumValue);
 
-  QRLabelImporteTotal.Caption:= FormatFloat('Total: $ ##,###,##0.00', EKDbSuma_ArqueoFpago.SumCollection[0].SumValue);
-  QRLabelImporteTotal.Caption:= QRLabelImporteTotal.Caption + FormatFloat('  /  Transferido: $ ##,###,##0.00  ', EKDbSuma_ArqueoFpago.SumCollection[1].SumValue);
-  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  QRlblRepSaldo_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
+  QRLabelImporteTotal.Caption:= FormatFloat('Total: $ ##,###,##0.00', ISDbSuma_ArqueoFpago.SumCollection[0].SumValue);
+  QRLabelImporteTotal.Caption:= QRLabelImporteTotal.Caption + FormatFloat('  /  Transferido: $ ##,###,##0.00  ', ISDbSuma_ArqueoFpago.SumCollection[1].SumValue);
+  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
+  QRlblRepSaldo_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
   DM.VariablesReportes(RepArqueo);
   DM.VariablesReportes(RepSaldo);
-  EKVistaPreviaDetalle.VistaPrevia;
-  EKVistaPreviaSaldo.VistaPrevia;
+  ISVistaPreviaDetalle.VistaPrevia;
+  ISVistaPreviaSaldo.VistaPrevia;
 
   ZQ_Arqueo_Movimientos.SortedFields:= 'FECHA';  
 end;
@@ -235,22 +235,22 @@ end;
 
 procedure TFArqueo_Caja.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
-  EKOrdenarGrilla2.GuardarConfigColumnas;  
+  ISOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla2.GuardarConfigColumnas;
 end;
 
 
 procedure TFArqueo_Caja.EKDbSuma_ArqueoMovSumListChanged(Sender: TObject);
 begin
-  lblTotalMovimientos.Caption:= FormatFloat('Total: $ ##,###,##0.00', EKDbSuma_ArqueoMov.SumCollection[0].SumValue);
-  lblTotalMovimientos.Caption:= lblTotalMovimientos.Caption + FormatFloat('  /  Transferido: $ ##,###,##0.00   ', EKDbSuma_ArqueoMov.SumCollection[1].SumValue);
+  lblTotalMovimientos.Caption:= FormatFloat('Total: $ ##,###,##0.00', ISDbSuma_ArqueoMov.SumCollection[0].SumValue);
+  lblTotalMovimientos.Caption:= lblTotalMovimientos.Caption + FormatFloat('  /  Transferido: $ ##,###,##0.00   ', ISDbSuma_ArqueoMov.SumCollection[1].SumValue);
 end;
 
 
 procedure TFArqueo_Caja.EKDbSuma_ArqueoFpagoSumListChanged(Sender: TObject);
 begin
-  lblTotalFPago.Caption:= FormatFloat('Total: $ ##,###,##0.00', EKDbSuma_ArqueoFpago.SumCollection[0].SumValue);
-  lblTotalFPago.Caption:= lblTotalFPago.Caption + FormatFloat('  /  Transferido: $ ##,###,##0.00   ', EKDbSuma_ArqueoFpago.SumCollection[1].SumValue);
+  lblTotalFPago.Caption:= FormatFloat('Total: $ ##,###,##0.00', ISDbSuma_ArqueoFpago.SumCollection[0].SumValue);
+  lblTotalFPago.Caption:= lblTotalFPago.Caption + FormatFloat('  /  Transferido: $ ##,###,##0.00   ', ISDbSuma_ArqueoFpago.SumCollection[1].SumValue);
 end;
 
 procedure TFArqueo_Caja.DBGrid1DrawColumnCell(Sender: TObject;
