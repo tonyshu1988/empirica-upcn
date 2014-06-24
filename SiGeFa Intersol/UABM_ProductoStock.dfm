@@ -1,6 +1,6 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 424
-  Top = 102
+  Left = 357
+  Top = 147
   Width = 937
   Height = 602
   Caption = 'ABM Producto Stock'

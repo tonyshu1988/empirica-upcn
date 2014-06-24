@@ -9,7 +9,7 @@ uses
   ZStoredProcedure, ZSqlUpdate, EKOrdenarGrilla, mxNativeExcel, mxExport, UBuscarPersona,
   QRCtrls, QuickRpt, EKVistaPreviaQR, DBClient, Provider, ShellApi,
   ComCtrls, EKUsrPermisos, EKIni, ActnList, XPStyleActnCtrls, ActnMan,
-  Buttons, ZSqlProcessor, cxClasses;
+  Buttons, ZSqlProcessor, cxClasses, ISBusquedaAvanzada;
 
 type
   TFABM_Precios = class(TForm)
@@ -221,6 +221,7 @@ type
     ZP_UpdateInsert_Precios: TZStoredProc;
     ZP_UpdateInsert_PreciosCANT_U: TIntegerField;
     ZP_UpdateInsert_PreciosCANT_I: TIntegerField;
+    ISBusquedaAvanzada1: TISBusquedaAvanzada;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
