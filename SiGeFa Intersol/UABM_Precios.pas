@@ -6,10 +6,11 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
-  ZStoredProcedure, ZSqlUpdate, EKOrdenarGrilla, mxNativeExcel, mxExport, UBuscarPersona,
-  QRCtrls, QuickRpt, EKVistaPreviaQR, DBClient, Provider, ShellApi,
-  ComCtrls, EKUsrPermisos, EKIni, ActnList, XPStyleActnCtrls, ActnMan,
-  Buttons, ZSqlProcessor, cxClasses, ISBusquedaAvanzada;
+  ZStoredProcedure, ZSqlUpdate,  mxNativeExcel, mxExport, UBuscarPersona,
+  QRCtrls, QuickRpt, DBClient, Provider, ShellApi,
+  ComCtrls, ActnList, XPStyleActnCtrls, ActnMan,
+  Buttons, ZSqlProcessor, cxClasses, ISBusquedaAvanzada, ISOrdenarGrilla,
+  ISVistaPreviaQR;
 
 type
   TFABM_Precios = class(TForm)
@@ -44,10 +45,8 @@ type
     ZQ_ProductosIMPUESTO_IVA: TFloatField;
     ZQ_ProductosCOD_CORTO: TStringField;
     ZQ_ProductosCODIGO_BARRA: TStringField;
-    EKBusquedaAvanzada1: TEKBusquedaAvanzada;
     ZQ_ProductosID_PRODUCTO: TIntegerField;
     PanelEdicion: TPanel;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_Clientes: TZQuery;
     RepListaPrecios: TQuickRep;
     QRBand5: TQRBand;
@@ -76,7 +75,6 @@ type
     QRDBText6: TQRDBText;
     QRDBText7: TQRDBText;
     QRDBText5: TQRDBText;
-    EKVistaPreviaListaPrecios: TEKVistaPreviaQR;
     QRDBText8: TQRDBText;
     ZQ_Productosimporte_venta_cliente: TFloatField;
     ZQ_ClientesNOMBRE: TStringField;
@@ -222,6 +220,8 @@ type
     ZP_UpdateInsert_PreciosCANT_U: TIntegerField;
     ZP_UpdateInsert_PreciosCANT_I: TIntegerField;
     ISBusquedaAvanzada1: TISBusquedaAvanzada;
+    ISVistaPreviaListaPrecios: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnEditarGrillaClick(Sender: TObject);
@@ -387,7 +387,7 @@ end;
 
 procedure TFABM_Precios.btnBuscarClick(Sender: TObject);
 begin
-  if EKBusquedaAvanzada1.Buscar then
+  if ISBusquedaAvanzada1.Buscar then
     dm.mostrarCantidadRegistro(ZQ_Productos, lblCantidadRegistros);
 end;
 
@@ -406,7 +406,7 @@ begin
   if not (dgEditing	in DBGridProductos.Options) then
     DBGridProductos.Options := DBGridProductos.Options + [dgEditing];
 
-//  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, [ZQ_Productos]) then
+//  if dm.ISModelo.iniciar_transaccion(Transaccion_ABMImportes, [ZQ_Productos]) then
   begin
     ZQ_Productos.Edit;
     DBGridProductos.SetFocus;
@@ -478,7 +478,7 @@ begin
     exit;
   end;
 
-//  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, []) then
+//  if dm.ISModelo.iniciar_transaccion(Transaccion_ABMImportes, []) then
   begin
     GrupoEditando.Enabled := false;
     btnGuardar.Enabled:= true;
@@ -520,7 +520,7 @@ begin
     DBGridProductos.Options := DBGridProductos.Options - [dgEditing];
 
   try
-    if DM.EKModelo.finalizar_transaccion(Transaccion_ABMImportes) then
+    if DM.ISModelo.finalizar_transaccion(Transaccion_ABMImportes) then
     begin
       DBGridProductos.Enabled:= true;
       GrupoEditando.Enabled:= true;
@@ -545,7 +545,7 @@ begin
     end                                                 
   except
     begin
-      dm.EKModelo.cancelar_transaccion(Transaccion_ABMImportes);
+      dm.ISModelo.cancelar_transaccion(Transaccion_ABMImportes);
       Application.MessageBox('No se pudo finalizar la modificación de precios.', 'Atención',MB_OK+MB_ICONINFORMATION);
     end
   end;
@@ -563,7 +563,7 @@ begin
     DBGridProductos.Options:= DBGridProductos.Options - [dgEditing];
 
   try
-    if dm.EKModelo.cancelar_transaccion(Transaccion_ABMImportes) then
+    if dm.ISModelo.cancelar_transaccion(Transaccion_ABMImportes) then
     begin
       DBGridProductos.Enabled:= true;
       GrupoEditando.Enabled:= true;
@@ -711,7 +711,7 @@ begin
     QRChildBandCleinte.Enabled:= true;
 
     DM.VariablesReportes(RepListaPrecios);
-    EKVistaPreviaListaPrecios.VistaPrevia;
+    ISVistaPreviaListaPrecios.VistaPrevia;
   end
   else
   begin
@@ -725,8 +725,8 @@ begin
     QRChildBandCleinte.Enabled := false;
 
     DM.VariablesReportes(RepListaPrecios);
-    QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-    EKVistaPreviaListaPrecios.VistaPrevia;
+    QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+    ISVistaPreviaListaPrecios.VistaPrevia;
   end;
 
   CDSZQ_Productos.EmptyDataSet;
@@ -744,16 +744,16 @@ begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
 
   CDSZQ_Productos.CreateDataSet;
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
   lblCantidadRegistros.Caption:= '';
   lblModoSeleccion.Caption:= '';
   GBoxIncDecImportes.Width:= 250;
   GboxImpuestos.Width:= 97;
   HabilitarCampos;
 
-  dm.EKModelo.abrir(ZQ_Sucursal);
+  dm.ISModelo.abrir(ZQ_Sucursal);
   if ZQ_Sucursal.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBusquedaAvanzada1.CriteriosBusqueda.Items[0]).ItemIndex:= ZQ_Sucursal.RecNo - 1;
+    TISCriterioBA(ISBusquedaAvanzada1.CriteriosBusqueda.Items[0]).ItemIndex:= ZQ_Sucursal.RecNo - 1;
 
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnArchivoCancelar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnArchivoAceptar.Glyph);
@@ -774,7 +774,7 @@ end;
 
 procedure TFABM_Precios.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 procedure TFABM_Precios.ZQ_ProductosIMPUESTO_IVAChange(Sender: TField);
@@ -927,7 +927,7 @@ var
   id_suc: integer;
   suc: string;
 begin
-  if dm.EKModelo.iniciar_transaccion(Transaccion_ImprimirEtiquetas, [ZQ_ImprimirEtiquetas]) then
+  if dm.ISModelo.iniciar_transaccion(Transaccion_ImprimirEtiquetas, [ZQ_ImprimirEtiquetas]) then
   begin
     ZQ_Productos.First;
     id_suc:= ZQ_ProductosID_SUCURSAL.AsInteger;
@@ -943,7 +943,7 @@ begin
       ZQ_Productos.Next;
     end;
 
-    if dm.EKModelo.finalizar_transaccion(Transaccion_ImprimirEtiquetas) then
+    if dm.ISModelo.finalizar_transaccion(Transaccion_ImprimirEtiquetas) then
     begin
       FPrincipal.AImprimirEtiqueta.Execute;
       FImprimirEtiquetas.btnEditar.Click;
@@ -1135,7 +1135,7 @@ begin
      end;
    end;
 
-  if dm.EKModelo.iniciar_transaccion('Importar Lista Precios',[]) then
+  if dm.ISModelo.iniciar_transaccion('Importar Lista Precios',[]) then
   begin
    idSuc:=dm.ZQ_SucursalID_SUCURSAL.AsInteger;
    CD_Precios.First;
@@ -1164,7 +1164,7 @@ begin
      CD_Precios.Next;
    end;
 
-   if dm.EKModelo.finalizar_transaccion('Importar Lista Precios') then
+   if dm.ISModelo.finalizar_transaccion('Importar Lista Precios') then
     begin
         Application.MessageBox(PChar(Format('Se importaron con éxito %d productos',[cant])),'Importación Lista de Precios',MB_OK+MB_ICONINFORMATION);
         Result:=True;
@@ -1236,7 +1236,7 @@ begin
   if ZQ_Productos.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMImportes, [ZQ_Productos]) then
+  if dm.ISModelo.iniciar_transaccion(Transaccion_ABMImportes, [ZQ_Productos]) then
   begin
     habilitarModificar(true);
     RadioGroupTipoUpdate.ItemIndex:= 0;
@@ -1284,7 +1284,7 @@ begin
   cantI:= 0;
   if MessageDlg('Esta seguro que desea agregar/actualizar los precios buscados en la sucursal '+dm.ZQ_SucursalNOMBRE.AsString+'?', mtConfirmation, [mbYes, mbNo], 0,) = mrYes then
   begin
-    if dm.EKModelo.iniciar_transaccion('UPDATE/INSERT PRECIOS',[]) then
+    if dm.ISModelo.iniciar_transaccion('UPDATE/INSERT PRECIOS',[]) then
     begin
       ZQ_Productos.DisableControls;
       DBGridProductos.Enabled:= false;
@@ -1316,13 +1316,13 @@ begin
       GrupoGuardarCancelar.Enabled:= true;
 
       try
-        if DM.EKModelo.finalizar_transaccion('UPDATE/INSERT PRECIOS') then
+        if DM.ISModelo.finalizar_transaccion('UPDATE/INSERT PRECIOS') then
         begin
           Application.MessageBox(PChar(Format('Se Agregaron %d nuevos precios y se Actualizaron %d Precios existentes',[cantI, cantU])),'Agrega/Actualizar Precios',MB_OK+MB_ICONINFORMATION);
         end
       except
         begin
-          dm.EKModelo.cancelar_transaccion('UPDATE/INSERT PRECIOS');
+          dm.ISModelo.cancelar_transaccion('UPDATE/INSERT PRECIOS');
           Application.MessageBox(PChar('Se produjo un error al Agrega/Actualizar Precios'),'Agrega/Actualizar Precios',MB_OK+MB_ICONWARNING);
         end
       end;

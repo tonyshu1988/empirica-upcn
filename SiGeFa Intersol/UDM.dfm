@@ -17,7 +17,7 @@ object DM: TDM
     TransactIsolationLevel = tiReadCommitted
     HostName = 'localhost'
     Port = 3052
-    Database = 'E:\SIGEFA\Bases\SIGEFA.FDB'
+    Database = 'C:\SISTEMAS\SiGeFa Intersol\Bases\SIGEFA.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Protocol = 'firebird-2.5'
