@@ -1,11 +1,11 @@
 object DM: TDM
   OldCreateOrder = False
   Left = 529
-  Top = 259
+  Top = 289
   Height = 492
   Width = 438
   object Conexion: TZConnection
-    Protocol = 'firebird-1.5'
+    Protocol = 'firebird-2.1'
     HostName = 'localhost'
     Database = 'E:\SIGEFA\Bases\SIGEFA.FDB'
     User = 'sysdba'
@@ -2027,7 +2027,7 @@ object DM: TDM
     end
   end
   object Conexion_Usuario: TZConnection
-    Protocol = 'firebird-1.5'
+    Protocol = 'firebird-2.1'
     HostName = 'localhost'
     Database = 'D:\SISTEMAS\EMPIRIKA\SiGeFa\Bases\USUARIOS.FDB'
     User = 'sysdba'

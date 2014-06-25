@@ -9,7 +9,7 @@ uses
   ZStoredProcedure, ZSqlUpdate, EKOrdenarGrilla, mxNativeExcel, mxExport, UBuscarPersona,
   QRCtrls, QuickRpt, EKVistaPreviaQR, DBClient, Provider, ShellApi,
   ComCtrls, EKUsrPermisos, EKIni, ActnList, XPStyleActnCtrls, ActnMan,
-  Buttons, ZSqlProcessor;
+  Buttons, ZSqlProcessor, cxClasses;
 
 type
   TFABM_Precios = class(TForm)
