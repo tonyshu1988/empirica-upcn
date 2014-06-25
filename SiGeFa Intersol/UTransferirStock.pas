@@ -5,10 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB, DBClient, UBuscarProductoStock,
-  EKLlenarCombo, ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls,
-  EKListadoSQL, ComCtrls, ZSqlUpdate, ZStoredProcedure, EKOrdenarGrilla,
-  EKDbSuma, ActnList, XPStyleActnCtrls, ActnMan, Buttons,
-  EKBusquedaAvanzada;
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls,
+   ISDbSuma, ISListadoSQL, ISOrdenarGrilla, ZSqlUpdate,
+  ActnList, XPStyleActnCtrls, ActnMan, ZStoredProcedure, cxClasses,
+  Buttons, ComCtrls, ISBusquedaAvanzada;
 
 type
   TFTransferirStock = class(TForm)
@@ -42,7 +42,6 @@ type
     DBGridProducto: TDBGrid;
     CD_Producto_stockactual: TFloatField;
     CD_Producto_cantidad: TFloatField;
-    EKListado_Sucursal: TEKListadoSQL;
     ZQ_Sucursal: TZQuery;
     ZQ_SucursalID_POSICION_SUCURSAL: TIntegerField;
     ZQ_SucursalBUSQUEDA: TStringField;
@@ -151,15 +150,11 @@ type
     ZQ_ProcesarStock: TZQuery;
     Label1: TLabel;
     EditSucursal: TEdit;
-    EKOrdenarGrillaProductos: TEKOrdenarGrilla;
-    EKOrdenarGrillaNotaPedidoDetalle: TEKOrdenarGrilla;
     Label25: TLabel;
     editTotalProductos: TEdit;
-    EKSumaTransferir: TEKDbSuma;
     PanelNotaPedidoDetalle: TPanel;
     Label2: TLabel;
     editTotalAlmacenar: TEdit;
-    EKSumaNotaPedido: TEKDbSuma;
     ZQ_VerCpbID_TIPO_IVA: TIntegerField;
     ZQ_VerCpbID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_VerCpbIMPORTE_VENTA: TFloatField;
@@ -253,8 +248,6 @@ type
     ZQ_Historico_DetalleCANTIDAD: TFloatField;
     Label3: TLabel;
     Label4: TLabel;
-    EKOrdenarHistorico_Cpb: TEKOrdenarGrilla;
-    EKOrdenarHistorico_Detalle: TEKOrdenarGrilla;
     ZQ_VerificarProducto: TZQuery;
     ZQ_VerificarProductoID_STOCK_PRODUCTO: TIntegerField;
     ZQ_VerificarProductoID_PRODUCTO: TIntegerField;
@@ -271,7 +264,14 @@ type
     ZUpdateSQLHistoricoCpb: TZUpdateSQL;
     Splitter1: TSplitter;
     StaticText1: TStaticText;
-    EKBusquedaHistorico: TEKBusquedaAvanzada;
+    ISOrdenarGrillaProductos: TISOrdenarGrilla;
+    ISOrdenarGrillaNotaPedidoDetalle: TISOrdenarGrilla;
+    ISListado_Sucursal: TISListadoSQL;
+    ISSumaNotaPedido: TISDbSuma;
+    ISSumaTransferir: TISDbSuma;
+    ISOrdenarHistorico_Detalle: TISOrdenarGrilla;
+    ISOrdenarHistorico_Cpb: TISOrdenarGrilla;
+    ISBusquedaHistorico: TISBusquedaAvanzada;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure btnTransferirClick(Sender: TObject);
@@ -327,7 +327,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal, UUtilidades, UImpresion_Comprobantes, EKModelo;
+uses UDM, UPrincipal, UUtilidades, UImpresion_Comprobantes, ISModelo;
 
 {$R *.dfm}
 procedure TFTransferirStock.onSelProducto;
@@ -445,10 +445,10 @@ begin
   CD_Producto.CreateDataSet;
   CD_ListaProductos.CreateDataSet;
 
-  EKOrdenarGrillaProductos.CargarConfigColumnas;
-  EKOrdenarGrillaNotaPedidoDetalle.CargarConfigColumnas;
-  EKOrdenarHistorico_Cpb.CargarConfigColumnas;
-  EKOrdenarHistorico_Detalle.CargarConfigColumnas;
+  ISOrdenarGrillaProductos.CargarConfigColunmas;
+  ISOrdenarGrillaNotaPedidoDetalle.CargarConfigColunmas;
+  ISOrdenarHistorico_Cpb.CargarConfigColunmas;
+  ISOrdenarHistorico_Detalle.CargarConfigColunmas;
 
   ZQ_VerCpb.Close;
   ZQ_VerCpb.ParamByName('id_tipo_np').AsInteger:= CPB_NOTA_PEDIDO;
@@ -682,12 +682,12 @@ begin
         PanelNotaPedidoDetalle.Visible:= False;
         ZQ_VerCpb.Refresh;
         CD_ListaProductos.EmptyDataSet;
-        EKSumaNotaPedido.RecalcAll;
+        ISSumaNotaPedido.RecalcAll;
 
       end;
 
       CD_Producto.EmptyDataSet;
-      EKSumaTransferir.RecalcAll;
+      ISSumaTransferir.RecalcAll;
     end;
   except
     begin
@@ -713,7 +713,7 @@ begin
       PanelNotaPedidoDetalle.Visible:= False;
       ZQ_VerCpb.Refresh;
       CD_ListaProductos.EmptyDataSet;
-      EKSumaNotaPedido.RecalcAll;
+      ISSumaNotaPedido.RecalcAll;
     end;
   end;
 end;
@@ -834,10 +834,10 @@ end;
 
 procedure TFTransferirStock.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
-  EKOrdenarGrillaProductos.GuardarConfigColumnas;
-  EKOrdenarGrillaNotaPedidoDetalle.GuardarConfigColumnas;
-  EKOrdenarHistorico_Cpb.GuardarConfigColumnas;
-  EKOrdenarHistorico_Detalle.GuardarConfigColumnas;
+  ISOrdenarGrillaProductos.GuardarConfigColumnas;
+  ISOrdenarGrillaNotaPedidoDetalle.GuardarConfigColumnas;
+  ISOrdenarHistorico_Cpb.GuardarConfigColumnas;
+  ISOrdenarHistorico_Detalle.GuardarConfigColumnas;
 
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_TransferirStock);
 end;
@@ -847,10 +847,10 @@ procedure TFTransferirStock.FormKeyDown(Sender: TObject; var Key: Word; Shift: T
 begin
   if key = 112 then
   begin
-    if EKListado_Sucursal.Buscar then
+    if ISListado_Sucursal.Buscar then
     begin
-      id_pos_sucursal := StrToInt(EKListado_Sucursal.Resultado);
-      EditSucursal.Text := EKListado_Sucursal.Seleccion;
+      id_pos_sucursal := StrToInt(ISListado_Sucursal.Resultado);
+      EditSucursal.Text := ISListado_Sucursal.Seleccion;
     end;
   end;
 end;
@@ -886,7 +886,7 @@ procedure TFTransferirStock.EKSumaTransferirSumListChanged(Sender: TObject);
 var
   cantidad: string;
 begin
-  cantidad:= FormatFloat('###,###,###,##0.00', EKSumaTransferir.SumCollection[0].SumValue);
+  cantidad:= FormatFloat('###,###,###,##0.00', ISSumaTransferir.SumCollection[0].SumValue);
   editTotalProductos.Text:= cantidad;
 end;
 
@@ -895,7 +895,7 @@ procedure TFTransferirStock.EKSumaNotaPedidoSumListChanged(Sender: TObject);
 var
   cantidad: string;
 begin
-  cantidad:= FormatFloat('###,###,###,##0.00', EKSumaNotaPedido.SumCollection[0].SumValue);
+  cantidad:= FormatFloat('###,###,###,##0.00', ISSumaNotaPedido.SumCollection[0].SumValue);
   editTotalAlmacenar.Text:= cantidad;
 end;
 
@@ -1081,10 +1081,10 @@ end;
 
 procedure TFTransferirStock.btDestinoClick(Sender: TObject);
 begin
-  if EKListado_Sucursal.Buscar then
+  if ISListado_Sucursal.Buscar then
   begin
-    id_pos_sucursal := StrToInt(EKListado_Sucursal.Resultado);
-    EditSucursal.Text := EKListado_Sucursal.Seleccion;
+    id_pos_sucursal := StrToInt(ISListado_Sucursal.Resultado);
+    EditSucursal.Text := ISListado_Sucursal.Seleccion;
   end;
 end;
 
@@ -1115,18 +1115,18 @@ end;
 
 procedure TFTransferirStock.btnBuscarHistoricoClick(Sender: TObject);
 begin
-  if not EKBusquedaHistorico.Buscar then exit; 
+  if not ISBusquedaHistorico.Buscar then exit;
 
   ZQ_Historico_Cpb.Filtered:= false;
 
-  if EKBusquedaHistorico.ParametrosSeleccionados1[5] = 'SI' then
+  if ISBusquedaHistorico.ParametrosSeleccionados1[5] = 'SI' then
   begin
     ZQ_Historico_Cpb.Filter:= 'fecha_impresa is not null';
     ZQ_Historico_Cpb.Filtered:= true;
   end
   else
   begin
-    if EKBusquedaHistorico.ParametrosSeleccionados1[5] = 'NO' then
+    if ISBusquedaHistorico.ParametrosSeleccionados1[5] = 'NO' then
     begin
       ZQ_Historico_Cpb.Filter:= 'fecha_impresa is null';
       ZQ_Historico_Cpb.Filtered:= true;
