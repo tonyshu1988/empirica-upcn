@@ -1,6 +1,6 @@
 object FABM_Precios: TFABM_Precios
-  Left = 387
-  Top = 116
+  Left = 373
+  Top = 185
   Width = 999
   Height = 580
   Caption = 'ABM Precios'
@@ -2366,8 +2366,8 @@ object FABM_Precios: TFABM_Precios
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 384
-    Top = 176
+    Left = 264
+    Top = 56
     DockControlHeights = (
       0
       0
@@ -3054,321 +3054,6 @@ object FABM_Precios: TFABM_Precios
     Left = 168
     Top = 176
   end
-  object EKBusquedaAvanzada1: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Sucursal'
-        Campo = 'id_sucursal'
-        Tabla = 's'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Sucursal
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'C'#243'd. Barra'
-        Campo = 'codigo_barra'
-        Tabla = 'producto'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Cod. Corto'
-        Campo = 'cod_corto'
-        Tabla = 'producto'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Nombre Producto'
-        Campo = 'nombre'
-        Tabla = 'producto_cabecera'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Medida'
-        Campo = 'medida'
-        Tabla = 'medida'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Color'
-        Campo = 'nombre'
-        Tabla = 'color'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Marca'
-        Campo = 'nombre_marca'
-        Tabla = 'marca'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Tipo Articulo'
-        Campo = 'descripcion'
-        Tabla = 'tipo_articulo'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Articulo'
-        Campo = 'descripcion'
-        Tabla = 'articulo'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Precio Costo'
-        Campo = 'precio_costo'
-        Tabla = 'producto'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Precio Venta'
-        Campo = 'precio_venta'
-        Tabla = 'producto'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Coef. Ganancia'
-        Campo = 'coef_ganancia'
-        Tabla = 'producto'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_Productos
-    SQL.Strings = (
-      
-        'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
-        'articulo,'
-      
-        '       ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_pro' +
-        'ducto, p.cod_corto,'
-      
-        '       p.descripcion, pr.precio_costo, pr.precio_venta, pr.coef_' +
-        'ganancia,'
-      '       pr.coef_descuento, pr.impuesto_interno, pr.impuesto_iva,'
-      
-        '       p.codigo_barra, pr.precio_costo_cimpuestos, pr.impuesto_a' +
-        'dicional1,'
-      
-        '       pr.impuesto_adicional2, pr.precio1, pr.precio2, pr.precio' +
-        '3, pr.precio4,'
-      
-        '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio, p' +
-        'r.id_sucursal'
-      'from producto p'
-      'left join medida m on (p.id_medida = m.id_medida)'
-      
-        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
-        'od_cabecera)'
-      'left join articulo a on (pc.id_articulo = a.id_articulo)'
-      
-        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
-        'rticulo)'
-      'left join marca ma on (pc.id_marca = ma.id_marca)'
-      'left join color co on (pc.color = co.id_color)'
-      'left join precio pr on (p.id_producto = pr.id_producto)'
-      'left join sucursal s on (pr.id_sucursal = s.id_sucursal)'
-      'where (pc.baja <> '#39'S'#39')'
-      '  and  (p.Baja <> '#39'S'#39')'
-      '  and pr.id_sucursal is not null')
-    SQL_Select.Strings = (
-      
-        'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
-        'articulo,'
-      
-        '       ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_pro' +
-        'ducto, p.cod_corto,'
-      
-        '       p.descripcion, pr.precio_costo, pr.precio_venta, pr.coef_' +
-        'ganancia,'
-      '       pr.coef_descuento, pr.impuesto_interno, pr.impuesto_iva,'
-      
-        '       p.codigo_barra, pr.precio_costo_cimpuestos, pr.impuesto_a' +
-        'dicional1,'
-      
-        '       pr.impuesto_adicional2, pr.precio1, pr.precio2, pr.precio' +
-        '3, pr.precio4,'
-      
-        '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio, p' +
-        'r.id_sucursal')
-    SQL_From.Strings = (
-      'from producto p'
-      'left join medida m on (p.id_medida = m.id_medida)'
-      
-        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
-        'od_cabecera)'
-      'left join articulo a on (pc.id_articulo = a.id_articulo)'
-      
-        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
-        'rticulo)'
-      'left join marca ma on (pc.id_marca = ma.id_marca)'
-      'left join color co on (pc.color = co.id_color)'
-      'left join precio pr on (p.id_producto = pr.id_producto)'
-      'left join sucursal s on (pr.id_sucursal = s.id_sucursal)')
-    SQL_Where.Strings = (
-      'where (pc.baja <> '#39'S'#39')'
-      '  and  (p.Baja <> '#39'S'#39')'
-      '  and pr.id_sucursal is not null')
-    UsarWhereOriginal = EK_Con_Where
-    PantallaReducida = True
-    Left = 56
-    Top = 64
-  end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridProductos
-    Filtros = <
-      item
-        TituloColumna = 'Cod. Corto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nombre Producto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo Articulo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Articulo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Marca'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Precio Costo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Coef. IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Imp. Interno'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Imp. Adicional 1'
-        Visible = False
-      end
-      item
-        TituloColumna = 'Imp. Adicional 2'
-        Visible = False
-      end
-      item
-        TituloColumna = 'Precio Costo c/Imp.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Coef. Ganancia'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Coef. Descuento'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Precio Venta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'PRECIO1'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO2'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO3'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO4'
-        Visible = False
-      end
-      item
-        TituloColumna = 'PRECIO5'
-        Visible = False
-      end
-      item
-        TituloColumna = 'Color'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sucursal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Barra'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_Precios'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 384
-    Top = 120
-  end
   object ZQ_Clientes: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -3441,12 +3126,6 @@ object FABM_Precios: TFABM_Precios
       Size = 30
     end
   end
-  object EKVistaPreviaListaPrecios: TEKVistaPreviaQR
-    Reporte = RepListaPrecios
-    ShowModal = False
-    Left = 57
-    Top = 177
-  end
   object CDSZQ_Productos: TClientDataSet
     Aggregates = <>
     Params = <>
@@ -3490,8 +3169,8 @@ object FABM_Precios: TFABM_Precios
       'select *'
       'from imprimir_etiquetas ie')
     Params = <>
-    Left = 264
-    Top = 232
+    Left = 584
+    Top = 120
     object ZQ_ImprimirEtiquetasID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
     end
@@ -3549,8 +3228,8 @@ object FABM_Precios: TFABM_Precios
       'WHERE'
       '  PRECIO.ID_PRECIO = :OLD_ID_PRECIO')
     UseSequenceFieldForRefreshSQL = False
-    Left = 168
-    Top = 232
+    Left = 480
+    Top = 192
     ParamData = <
       item
         DataType = ftUnknown
@@ -3629,8 +3308,8 @@ object FABM_Precios: TFABM_Precios
       end>
   end
   object ATeclasRapidas: TActionManager
-    Left = 56
-    Top = 234
+    Left = 616
+    Top = 186
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -3660,8 +3339,8 @@ object FABM_Precios: TFABM_Precios
       'from sucursal s'
       'where (s.baja <> '#39'S'#39') and (s.id_sucursal > 0)')
     Params = <>
-    Left = 560
-    Top = 64
+    Left = 368
+    Top = 56
     object ZQ_SucursalNOMBRE: TStringField
       FieldName = 'NOMBRE'
       Size = 200
@@ -3833,8 +3512,8 @@ object FABM_Precios: TFABM_Precios
     Active = True
     Aggregates = <>
     Params = <>
-    Left = 648
-    Top = 112
+    Left = 472
+    Top = 120
     Data = {
       5B0100009619E0BD01000000180000000F0000000000030000005B010B69645F
       70726F647563746F04000100000000000C70726563696F5F636F73746F080004
@@ -3898,7 +3577,7 @@ object FABM_Precios: TFABM_Precios
     Filter = 'XML|*.xml'
     InitialDir = 'C:\'
     Title = 'Exportar Lista de Precios'
-    Left = 648
+    Left = 376
     Top = 184
   end
   object AbrirArchivo: TOpenDialog
@@ -3906,7 +3585,7 @@ object FABM_Precios: TFABM_Precios
     Filter = 'XML|*.xml'
     InitialDir = 'C:\'
     Title = 'Importar Lista de Precios'
-    Left = 648
+    Left = 472
     Top = 56
   end
   object ZQ_ActualizarPrecios: TZQuery
@@ -4012,8 +3691,8 @@ object FABM_Precios: TFABM_Precios
         Name = 'precio5'
         ParamType = ptUnknown
       end>
-    Left = 536
-    Top = 128
+    Left = 368
+    Top = 120
     ParamData = <
       item
         DataType = ftUnknown
@@ -4125,8 +3804,8 @@ object FABM_Precios: TFABM_Precios
         ParamType = ptInput
       end>
     StoredProcName = 'COPIAR_PRECIOS_SUCURSAL'
-    Left = 528
-    Top = 184
+    Left = 64
+    Top = 176
     ParamData = <
       item
         DataType = ftInteger
@@ -4163,12 +3842,322 @@ object FABM_Precios: TFABM_Precios
     end
   end
   object ISBusquedaAvanzada1: TISBusquedaAvanzada
-    CriteriosBusqueda = <>
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Sucursal'
+        Campo = 'id_sucursal'
+        Tabla = 's'
+        TipoCampo = IS_Numero
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = '='
+        TipoCombollenarSQL = ZQ_Sucursal
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Barras'
+        Campo = 'codigo_barra'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'digo Corto'
+        Campo = 'cod_corto'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'digo Cabecera'
+        Campo = 'cod_corto'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nombre'
+        Campo = 'nombre'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Medida'
+        Campo = 'medida'
+        Tabla = 'm'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Color'
+        Campo = 'nombre'
+        Tabla = 'co'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Marca'
+        Campo = 'nombre_marca'
+        Tabla = 'ma'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'ta'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'a'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Precio Costo'
+        Campo = 'precio_costo'
+        Tabla = 'pr'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Precio Venta'
+        Campo = 'precio_venta'
+        Tabla = 'pr'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Coef. Ganancia'
+        Campo = 'coef_ganancia'
+        Tabla = 'pr'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = 0
+        VaciarValor = False
+      end>
     CriteriosLocate = <>
     Modelo = DM.ISModelo
     DataSet = ZQ_Productos
+    SQL.Strings = (
+      
+        'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
+        'articulo,'
+      
+        '       ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_pro' +
+        'ducto, p.cod_corto,'
+      
+        '       p.descripcion, pr.precio_costo, pr.precio_venta, pr.coef_' +
+        'ganancia,'
+      '       pr.coef_descuento, pr.impuesto_interno, pr.impuesto_iva,'
+      
+        '       p.codigo_barra, pr.precio_costo_cimpuestos, pr.impuesto_a' +
+        'dicional1,'
+      
+        '       pr.impuesto_adicional2, pr.precio1, pr.precio2, pr.precio' +
+        '3, pr.precio4,'
+      
+        '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio, p' +
+        'r.id_sucursal'
+      ''
+      ''
+      'from producto p'
+      'left join medida m on (p.id_medida = m.id_medida)'
+      
+        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
+        'od_cabecera)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      
+        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
+        'rticulo)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'left join color co on (pc.color = co.id_color)'
+      'left join precio pr on (p.id_producto = pr.id_producto)'
+      'left join sucursal s on (pr.id_sucursal = s.id_sucursal)'
+      ''
+      ''
+      'where (pc.baja <> '#39'S'#39')'
+      '  and  (p.Baja <> '#39'S'#39')'
+      '  and pr.id_sucursal is not null'
+      '')
+    SQL_Select.Strings = (
+      
+        'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
+        'articulo,'
+      
+        '       ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_pro' +
+        'ducto, p.cod_corto,'
+      
+        '       p.descripcion, pr.precio_costo, pr.precio_venta, pr.coef_' +
+        'ganancia,'
+      '       pr.coef_descuento, pr.impuesto_interno, pr.impuesto_iva,'
+      
+        '       p.codigo_barra, pr.precio_costo_cimpuestos, pr.impuesto_a' +
+        'dicional1,'
+      
+        '       pr.impuesto_adicional2, pr.precio1, pr.precio2, pr.precio' +
+        '3, pr.precio4,'
+      
+        '       pr.precio5, co.nombre as Color, s.nombre, pr.id_precio, p' +
+        'r.id_sucursal'
+      ''
+      '')
+    SQL_From.Strings = (
+      'from producto p'
+      'left join medida m on (p.id_medida = m.id_medida)'
+      
+        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
+        'od_cabecera)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      
+        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
+        'rticulo)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'left join color co on (pc.color = co.id_color)'
+      'left join precio pr on (p.id_producto = pr.id_producto)'
+      'left join sucursal s on (pr.id_sucursal = s.id_sucursal)'
+      ''
+      '')
+    SQL_Where.Strings = (
+      'where (pc.baja <> '#39'S'#39')'
+      '  and  (p.Baja <> '#39'S'#39')'
+      '  and pr.id_sucursal is not null'
+      '')
     UsarWhereOriginal = IS_Con_Where
+    PantallaReducida = True
     Left = 56
-    Top = 120
+    Top = 66
+  end
+  object ISVistaPreviaListaPrecios: TISVistaPreviaQR
+    Reporte = RepListaPrecios
+    ShowModal = False
+    Left = 696
+    Top = 72
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
+    Grilla = DBGridProductos
+    Filtros = <
+      item
+        TituloColumna = 'Cod. Corto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Articulo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Articulo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Costo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Coef. IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Imp. Interno'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Imp. Adicional 1'
+        Visible = False
+      end
+      item
+        TituloColumna = 'Imp. Adicional 2'
+        Visible = False
+      end
+      item
+        TituloColumna = 'Precio Costo c/Imp.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Coef. Ganancia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Coef. Descuento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'PRECIO1'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO2'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO3'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO4'
+        Visible = False
+      end
+      item
+        TituloColumna = 'PRECIO5'
+        Visible = False
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_Precios'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 584
+    Top = 64
   end
 end

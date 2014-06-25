@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 273
-  Top = 111
+  Left = 506
+  Top = 144
   AutoScroll = False
   Caption = 'ABM Productos'
   ClientHeight = 711
@@ -221,7 +221,7 @@ object FABMProductos: TFABMProductos
         Size.Values = (
           52.916666666666670000
           1116.541666666667000000
-          68.791666666666680000
+          68.791666666666670000
           537.104166666666700000)
         Alignment = taCenter
         AlignToBand = True
@@ -254,7 +254,7 @@ object FABMProductos: TFABMProductos
           52.916666666666670000
           1068.916666666667000000
           5.291666666666667000
-          632.354166666666800000)
+          632.354166666666700000)
         Alignment = taCenter
         AlignToBand = True
         AutoSize = True
