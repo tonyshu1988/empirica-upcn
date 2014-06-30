@@ -1,6 +1,6 @@
 object FOP_ABMObraSocial: TFOP_ABMObraSocial
-  Left = 323
-  Top = 203
+  Left = 383
+  Top = 201
   Width = 826
   Height = 480
   Caption = 'ABM Obra Social'
@@ -1643,8 +1643,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 136
-    Top = 120
+    Left = 144
+    Top = 112
     DockControlHeights = (
       0
       0
@@ -2209,62 +2209,6 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     Left = 48
     Top = 120
   end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridObraSocial
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'digo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nombre'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Direcci'#243'n'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C.Postal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Localidad'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Provincia'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tel'#233'fonos'
-        Visible = True
-      end
-      item
-        TituloColumna = 'eMail'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Condici'#243'n IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cuit/Cuil'
-        Visible = True
-      end
-      item
-        TituloColumna = 'ID'
-        Visible = True
-      end>
-    NombreGuardar = 'EkOG_ABMObraSocial'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 232
-    Top = 67
-  end
   object ATeclasRapidas: TActionManager
     Left = 336
     Top = 66
@@ -2308,62 +2252,6 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       ShortCut = 123
       OnExecute = ACancelarExecute
     end
-  end
-  object EKBuscar: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'C'#243'digo'
-        Campo = 'codigo'
-        Tabla = 'OPTICA_OS'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Nombre'
-        Campo = 'nombre'
-        Tabla = 'OPTICA_OS'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Direcci'#243'n'
-        Campo = 'direccion'
-        Tabla = 'OPTICA_OS'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_OP_ObraSocial
-    SQL.Strings = (
-      'select *'
-      'from OPTICA_OS os'
-      'order by os.nombre')
-    SQL_Select.Strings = (
-      'select *')
-    SQL_From.Strings = (
-      'from OPTICA_OS os')
-    SQL_Orden.Strings = (
-      'order by os.nombre')
-    UsarWhereOriginal = EK_Sin_Where
-    PantallaReducida = True
-    Left = 136
-    Top = 67
-  end
-  object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = RepObraSocial
-    ShowModal = False
-    Left = 336
-    Top = 112
   end
   object ZQ_Provincia: TZQuery
     Connection = DM.Conexion
@@ -2471,7 +2359,175 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     Left = 608
     Top = 112
   end
-  object EKOrdenarGrilla2: TEKOrdenarGrilla
+  object ISBuscar: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'C'#243'digo'
+        Campo = 'codigo'
+        Tabla = 'os'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nombre'
+        Campo = 'nombre'
+        Tabla = 'os'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Direcci'#243'n'
+        Campo = 'direccion'
+        Tabla = 'os'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Localidad'
+        Campo = 'localidad'
+        Tabla = 'os'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tel'#233'fono'
+        Campo = 'telefono'
+        Tabla = 'os'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'CUIT/CUIL'
+        Campo = 'cuit_cuil'
+        Tabla = 'os'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Condic. IVA'
+        Campo = 'ID_TIPO_IVA'
+        Tabla = 'os'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Iva
+        TipoCombollenarCampo = 'NOMBRE_TIPO_IVA'
+        TipoCombollenarCampoReal = 'ID_TIPO_IVA'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'os'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'N'
+          'S')
+        TipoComboEditable = False
+        CambiarCondicion = False
+        TipoComboValoresReales.Strings = (
+          'N'
+          'S')
+        ItemIndex = 0
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_OP_ObraSocial
+    SQL.Strings = (
+      'select os.*'
+      ''
+      ''
+      'from OPTICA_OS os'
+      ''
+      ''
+      ''
+      'order by os.nombre')
+    SQL_Select.Strings = (
+      'select os.*'
+      '')
+    SQL_From.Strings = (
+      ''
+      'from OPTICA_OS os'
+      ''
+      '')
+    SQL_Orden.Strings = (
+      ''
+      'order by os.nombre')
+    UsarWhereOriginal = IS_Sin_Where
+    Left = 216
+    Top = 67
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
+    Grilla = DBGridObraSocial
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C.Postal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Provincia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tel'#233'fonos'
+        Visible = True
+      end
+      item
+        TituloColumna = 'eMail'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Condici'#243'n IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuit/Cuil'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'EkOG_ABMObraSocial'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 240
+    Top = 123
+  end
+  object ISVistaPrevia: TISVistaPreviaQR
+    Reporte = RepObraSocial
+    ShowModal = False
+    Left = 336
+    Top = 123
+  end
+  object ISOrdenarGrilla2: TISOrdenarGrilla
     Grilla = DBGridAfiliados
     Filtros = <
       item
@@ -2486,13 +2542,14 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         TituloColumna = 'Id Persona'
         Visible = True
       end>
-    NombreGuardar = 'EkOG_ABMObraSocialAfiliados'
+    NombreGuardarConfig = 'EkOG_ABMObraSocialAfiliados'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = False
-    PermitirFiltrar = False
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
     Left = 696
-    Top = 59
+    Top = 115
   end
 end

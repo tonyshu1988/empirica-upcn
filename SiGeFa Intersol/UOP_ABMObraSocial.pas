@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt, ComCtrls, cxClasses;
+   ActnList, XPStyleActnCtrls, ActnMan, 
+   QRCtrls, QuickRpt, ComCtrls, cxClasses, ISVistaPreviaQR,
+  ISOrdenarGrilla, ISBusquedaAvanzada;
 
 type
   TFOP_ABMObraSocial = class(TForm)
@@ -33,7 +34,6 @@ type
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
     PanelEdicion: TPanel;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -43,7 +43,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
     RepObraSocial: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -67,7 +66,6 @@ type
     QRLabel29: TQRLabel;
     QRLabel30: TQRLabel;
     QRLabel1: TQRLabel;
-    EKVistaPrevia: TEKVistaPreviaQR;
     btnExcel: TdxBarLargeButton;
     ZQ_OP_ObraSocialID_OS: TIntegerField;
     ZQ_OP_ObraSocialCODIGO: TStringField;
@@ -142,8 +140,11 @@ type
     ZQ_AfiliadosNOMBRE: TStringField;
     ZQ_AfiliadosID_PERSONA: TIntegerField;
     DBGridAfiliados: TDBGrid;
-    EKOrdenarGrilla2: TEKOrdenarGrilla;
     Label1: TLabel;
+    ISBuscar: TISBusquedaAvanzada;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrdenarGrilla2: TISOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -202,14 +203,14 @@ end;
 
 procedure TFOP_ABMObraSocial.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_OP_ObraSocial, lblCantidadRegistros);
 end;
 
 
 procedure TFOP_ABMObraSocial.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
   begin
     DBGridObraSocial.Enabled := false;
 
@@ -230,7 +231,7 @@ begin
   if (ZQ_OP_ObraSocial.IsEmpty) then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
   begin
     DBGridObraSocial.Enabled := false;
 
@@ -253,7 +254,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja la "Obra Social" seleccionada?'), 'ABM Obra Social', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
     begin
       ZQ_OP_ObraSocial.Edit;
       ZQ_OP_ObraSocialBAJA.AsString:='S';
@@ -261,8 +262,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_OP_ObraSocial.RecNo;
     ZQ_OP_ObraSocial.Refresh;
@@ -280,7 +281,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar la "Obra Social" seleccionada?'), 'ABM Obra Social', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
     begin
       ZQ_OP_ObraSocial.Edit;
       ZQ_OP_ObraSocialBAJA.AsString:='N';
@@ -288,8 +289,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_OP_ObraSocial.RecNo;
     ZQ_OP_ObraSocial.Refresh;
@@ -308,7 +309,7 @@ begin
     exit;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       DBGridObraSocial.Enabled:= true;
       DBGridObraSocial.SetFocus;
@@ -331,7 +332,7 @@ end;
 
 procedure TFOP_ABMObraSocial.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     DBGridObraSocial.Enabled:=true;
     DBGridObraSocial.SetFocus;
@@ -343,20 +344,20 @@ end;
 
 procedure TFOP_ABMObraSocial.FormCreate(Sender: TObject);
 begin
-  dm.EKModelo.abrir(ZQ_Provincia);
-  dm.EKModelo.abrir(ZQ_Iva);
+  dm.ISModelo.abrir(ZQ_Provincia);
+  dm.ISModelo.abrir(ZQ_Iva);
 
 
   DBENombre.Color:= dm.colorCampoRequido;
   DBLCBoxCondIva.Color:= dm.colorCampoRequido;
   DBECuit_Cuil.Color:= dm.colorCampoRequido;
 
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
   PageControl1.ActivePageIndex:= 0;
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_OP_ObraSocial, lblCantidadRegistros);
 end;
 
@@ -423,9 +424,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepObraSocial);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 procedure TFOP_ABMObraSocial.btnExcelClick(Sender: TObject);
@@ -437,7 +438,7 @@ end;
 procedure TFOP_ABMObraSocial.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 procedure TFOP_ABMObraSocial.ZQ_OP_ObraSocialAfterScroll(
