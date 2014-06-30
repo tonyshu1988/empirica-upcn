@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt;
+   ActnList, XPStyleActnCtrls, ActnMan,
+   QRCtrls, QuickRpt, ISVistaPreviaQR, ISBusquedaAvanzada,
+  cxClasses, ISOrdenarGrilla;
 
 type
   TFOP_ABMMedico = class(TForm)
@@ -35,7 +36,6 @@ type
     PanelEdicion: TPanel;
     Label1: TLabel;
     DBENombre: TDBEdit;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -45,7 +45,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
     RepMedico: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -67,7 +66,6 @@ type
     ColumnHeaderBand2: TQRBand;
     QRLabel30: TQRLabel;
     QRLabel1: TQRLabel;
-    EKVistaPrevia: TEKVistaPreviaQR;
     btnExcel: TdxBarLargeButton;
     ZQ_MedicoID_MEDICO: TIntegerField;
     ZQ_MedicoNOMBRE: TStringField;
@@ -87,6 +85,9 @@ type
     QRLabel2: TQRLabel;
     QRLabel3: TQRLabel;
     QRLabel4: TQRLabel;
+    ISBuscar: TISBusquedaAvanzada;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -140,7 +141,7 @@ end;
 
 procedure TFOP_ABMMedico.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_Medico, lblCantidadRegistros);
 end;
 
@@ -282,11 +283,11 @@ end;
 
 procedure TFOP_ABMMedico.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Medico, lblCantidadRegistros);
 end;
 
@@ -356,8 +357,8 @@ begin
 
   DM.VariablesReportes(RepMedico);
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 procedure TFOP_ABMMedico.btnExcelClick(Sender: TObject);
@@ -369,7 +370,7 @@ end;
 procedure TFOP_ABMMedico.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.
