@@ -7,8 +7,9 @@ uses
   Dialogs, dxBar, dxBarExtItems, jpeg, QRCtrls, QuickRpt, StdCtrls,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Grids, DBGrids, ZStoredProcedure, UBuscarProducto,
-  ZSqlProcessor, EKVistaPreviaQR, EKCodigoBarra,
-  EKOrdenarGrilla, Menus, EKListadoSQL, ZSqlUpdate;
+  ZSqlProcessor,
+   Menus,  ZSqlUpdate, ISOrdenarGrilla,
+  ISVistaPreviaQR, ISBarcode, ISListadoSQL, cxClasses;
 
 type
   TFImprimirEtiquetas = class(TForm)
@@ -26,7 +27,6 @@ type
     btnEliminarLinea: TdxBarLargeButton;
     btnCancelar: TdxBarLargeButton;
     btnConPrecio: TdxBarLargeButton;
-    EKVistaPrevia_Opcion1: TEKVistaPreviaQR;
     QROpcion1_Band: TQRBand;
     QROpcion1_ShapeTapa: TQRShape;
     QROpcion1_CodigoBarra1: TQRImage;
@@ -39,16 +39,11 @@ type
     QROpcion1_DBPrecio3: TQRDBText;
     QROpcion1_DBPrecio1: TQRDBText;
     Label1: TLabel;
-    EKCodigoBarra1: TEKCodigoBarra;
-    EKCodigoBarra2: TEKCodigoBarra;
-    EKCodigoBarra3: TEKCodigoBarra;
     btnEditar: TdxBarLargeButton;
     Popup_Producto: TPopupMenu;
     PopItemProducto_Agregar: TMenuItem;
     PopItemProducto_Quitar: TMenuItem;
     PopItemProducto_QuitarTodos: TMenuItem;
-    EKOrdenarGrilla: TEKOrdenarGrilla;
-    EKListado_Sucursal: TEKListadoSQL;
     btnEliminarTodos: TdxBarLargeButton;
     ZU_Etiquetas: TZUpdateSQL;
     ZQ_EtiquetasID_PRODUCTO: TIntegerField;
@@ -85,13 +80,19 @@ type
     QROpcion2_CodigoBarra4: TQRImage;
     QROpcion2_DBPrecio4: TQRDBText;
     QROpcion2_DBArticulo4: TQRDBText;
-    EKVistaPrevia_Opcion2: TEKVistaPreviaQR;
-    EKCodigoBarra4: TEKCodigoBarra;
     QRShape1: TQRShape;
     QRShape2: TQRShape;
     QRShape3: TQRShape;
     QRShape4: TQRShape;
     QRShape5: TQRShape;
+    ISListado_Sucursal: TISListadoSQL;
+    ISCodigoBarra1: TISBarcode;
+    ISVistaPrevia_Opcion1: TISVistaPreviaQR;
+    ISVistaPrevia_Opcion2: TISVistaPreviaQR;
+    ISOrdenarGrilla: TISOrdenarGrilla;
+    ISCodigoBarra2: TISBarcode;
+    ISCodigoBarra3: TISBarcode;
+    ISCodigoBarra4: TISBarcode;
     procedure FormCreate(Sender: TObject);
     procedure DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
@@ -140,7 +141,7 @@ begin
   opcion:= imprimirEtiqueta_opcionReporte;
   long_descripcion:= 60;
   
-  EKOrdenarGrilla.PopUpGrilla:= nil;
+  DBGridEtiquetas.PopupMenu:= nil;
   GrupoEditando.Enabled:= False;
   GrupoVisualizando.Enabled:= True;
 end;
@@ -154,7 +155,7 @@ end;
 
 procedure TFImprimirEtiquetas.DBGridEtiquetasKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_Etiquetas) then
+  if dm.ISModelo.verificar_transaccion(transaccion_Etiquetas) then
     if key = 112 then
       agregarProducto;
 end;
@@ -216,10 +217,10 @@ end;
 
 procedure TFImprimirEtiquetas.SP_ImprimirEtiquetasAfterScroll(DataSet: TDataSet);
 begin
-  EKCodigoBarra1.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
-  EKCodigoBarra2.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
-  EKCodigoBarra3.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
-  EKCodigoBarra4.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+  ISCodigoBarra1.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+  ISCodigoBarra2.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+  ISCodigoBarra3.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
+  ISCodigoBarra4.Text:= SP_ImprimirEtiquetasCODIGOBARRA.AsString;
 
   centrarCodigo;
 end;
@@ -275,20 +276,20 @@ begin
 
   case opcion of
   1: begin
-        if EKCodigoBarra1.Width < 241 then
+        if ISCodigoBarra1.Width < 241 then
         begin
-          QROpcion1_CodigoBarra1.Left:= (QROpcion1_DBPrecio1.Left) + ((241-EKCodigoBarra1.Width) div 2);
-          QROpcion1_CodigoBarra2.Left:= (QROpcion1_DBPrecio2.Left) + ((241-EKCodigoBarra2.Width) div 2);
-          QROpcion1_CodigoBarra3.Left:= (QROpcion1_DBPrecio3.Left) + ((241-EKCodigoBarra3.Width) div 2);
+          QROpcion1_CodigoBarra1.Left:= (QROpcion1_DBPrecio1.Left) + ((241-ISCodigoBarra1.Width) div 2);
+          QROpcion1_CodigoBarra2.Left:= (QROpcion1_DBPrecio2.Left) + ((241-ISCodigoBarra2.Width) div 2);
+          QROpcion1_CodigoBarra3.Left:= (QROpcion1_DBPrecio3.Left) + ((241-ISCodigoBarra3.Width) div 2);
         end;
      end;
   2: begin
-        if EKCodigoBarra1.Width < 170 then
+        if ISCodigoBarra1.Width < 170 then
         begin
-          QROpcion2_CodigoBarra1.Left:= (QROpcion2_DBPrecio1.Left) + ((170-EKCodigoBarra1.Width) div 2);
-          QROpcion2_CodigoBarra2.Left:= (QROpcion2_DBPrecio2.Left) + ((170-EKCodigoBarra2.Width) div 2);
-          QROpcion2_CodigoBarra3.Left:= (QROpcion2_DBPrecio3.Left) + ((170-EKCodigoBarra3.Width) div 2);
-          QROpcion2_CodigoBarra4.Left:= (QROpcion2_DBPrecio4.Left) + ((170-EKCodigoBarra4.Width) div 2);
+          QROpcion2_CodigoBarra1.Left:= (QROpcion2_DBPrecio1.Left) + ((170-ISCodigoBarra1.Width) div 2);
+          QROpcion2_CodigoBarra2.Left:= (QROpcion2_DBPrecio2.Left) + ((170-ISCodigoBarra2.Width) div 2);
+          QROpcion2_CodigoBarra3.Left:= (QROpcion2_DBPrecio3.Left) + ((170-ISCodigoBarra3.Width) div 2);
+          QROpcion2_CodigoBarra4.Left:= (QROpcion2_DBPrecio4.Left) + ((170-ISCodigoBarra4.Width) div 2);
         end;
      end;
   end;
@@ -307,9 +308,9 @@ begin
   borrar.Execute;
   btnEliminarTodos.click;
 
-  if dm.EKModelo.finalizar_transaccion(transaccion_Etiquetas) then
+  if dm.ISModelo.finalizar_transaccion(transaccion_Etiquetas) then
   begin
-    EKOrdenarGrilla.PopUpGrilla:= nil;
+    DBGridEtiquetas.PopupMenu:= nil;
 
     DBGridEtiquetas.Enabled:= false;
 
@@ -339,7 +340,7 @@ begin
     end;
   end;
 
-  dm.EKModelo.aplicar_modificaciones(transaccion_Etiquetas);
+  dm.ISModelo.aplicar_modificaciones(transaccion_Etiquetas);
   mostrarPrecio(false);
   
   SP_ImprimirEtiquetas.Active := false;
@@ -348,8 +349,8 @@ begin
   SP_ImprimirEtiquetas.Active := true;
 
   case opcion of
-    1: EKVistaPrevia_Opcion1.VistaPrevia;
-    2: EKVistaPrevia_Opcion2.VistaPrevia;
+    1: ISVistaPrevia_Opcion1.VistaPrevia;
+    2: ISVistaPrevia_Opcion2.VistaPrevia;
   end
 end;
 
@@ -372,7 +373,7 @@ begin
     end;
   end;
 
-  dm.EKModelo.aplicar_modificaciones(transaccion_Etiquetas);
+  dm.ISModelo.aplicar_modificaciones(transaccion_Etiquetas);
   mostrarPrecio(true);
 
   SP_ImprimirEtiquetas.Active := false;
@@ -381,20 +382,20 @@ begin
   SP_ImprimirEtiquetas.Active := true;
 
   case opcion of
-    1: EKVistaPrevia_Opcion1.VistaPrevia;
-    2: EKVistaPrevia_Opcion2.VistaPrevia;
+    1: ISVistaPrevia_Opcion1.VistaPrevia;
+    2: ISVistaPrevia_Opcion2.VistaPrevia;
   end
 end;
 
 
 procedure TFImprimirEtiquetas.btnEditarClick(Sender: TObject);
 begin
-  if not dm.EKModelo.iniciar_transaccion(transaccion_Etiquetas, [ZQ_Etiquetas]) then
+  if not dm.ISModelo.iniciar_transaccion(transaccion_Etiquetas, [ZQ_Etiquetas]) then
     exit;
 
   borrar.Execute;
 
-  EKOrdenarGrilla.PopUpGrilla:= Popup_Producto;
+  DBGridEtiquetas.PopupMenu:= Popup_Producto;
 
   DBGridEtiquetas.Enabled:= true;
   DBGridEtiquetas.SetFocus;
@@ -455,19 +456,19 @@ procedure TFImprimirEtiquetas.mostrarPrecio(flag: boolean);
 begin
   case opcion of
   1:  begin
-        EKCodigoBarra1.QRCodigo:= QROpcion1_CodigoBarra1;
-        EKCodigoBarra2.QRCodigo:= QROpcion1_CodigoBarra2;
-        EKCodigoBarra3.QRCodigo:= QROpcion1_CodigoBarra3;
+        ISCodigoBarra1.QRCodigo:= QROpcion1_CodigoBarra1;
+        ISCodigoBarra2.QRCodigo:= QROpcion1_CodigoBarra2;
+        ISCodigoBarra3.QRCodigo:= QROpcion1_CodigoBarra3;
 
         QROpcion1_DBPrecio1.Enabled := flag;
         QROpcion1_DBPrecio2.Enabled := flag;
         QROpcion1_DBPrecio3.Enabled := flag;
       end;
   2:  begin
-        EKCodigoBarra1.QRCodigo:= QROpcion2_CodigoBarra1;
-        EKCodigoBarra2.QRCodigo:= QROpcion2_CodigoBarra2;
-        EKCodigoBarra3.QRCodigo:= QROpcion2_CodigoBarra3;
-        EKCodigoBarra4.QRCodigo:= QROpcion2_CodigoBarra4;
+        ISCodigoBarra1.QRCodigo:= QROpcion2_CodigoBarra1;
+        ISCodigoBarra2.QRCodigo:= QROpcion2_CodigoBarra2;
+        ISCodigoBarra3.QRCodigo:= QROpcion2_CodigoBarra3;
+        ISCodigoBarra4.QRCodigo:= QROpcion2_CodigoBarra4;
 
         QROpcion2_DBPrecio1.Enabled := flag;
         QROpcion2_DBPrecio2.Enabled := flag;
