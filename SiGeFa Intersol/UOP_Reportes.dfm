@@ -1,8 +1,8 @@
 object FOP_Reportes: TFOP_Reportes
-  Left = 198
-  Top = 67
+  Left = 249
+  Top = 125
   Width = 1024
-  Height = 698
+  Height = 616
   Caption = 'Reportes Optica'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -23,14 +23,14 @@ object FOP_Reportes: TFOP_Reportes
     Left = 0
     Top = 0
     Width = 1008
-    Height = 608
+    Height = 526
     Align = alClient
     TabOrder = 4
     object PageControlReportes: TPageControl
       Left = 1
       Top = 1
       Width = 1006
-      Height = 606
+      Height = 524
       ActivePage = TabReporteMedico
       Align = alClient
       TabOrder = 0
@@ -1279,7 +1279,7 @@ object FOP_Reportes: TFOP_Reportes
           Left = 0
           Top = 367
           Width = 998
-          Height = 211
+          Height = 129
           Align = alClient
           Caption = 'POrdenDetalle'
           TabOrder = 2
@@ -1306,7 +1306,7 @@ object FOP_Reportes: TFOP_Reportes
             Left = 1
             Top = 14
             Width = 996
-            Height = 163
+            Height = 81
             Align = alClient
             Color = 14606012
             DataSource = DS_OrdenDetalle
@@ -1352,7 +1352,7 @@ object FOP_Reportes: TFOP_Reportes
           end
           object POrdenDetalleTotales: TPanel
             Left = 1
-            Top = 177
+            Top = 95
             Width = 996
             Height = 33
             Align = alBottom
@@ -1485,7 +1485,7 @@ object FOP_Reportes: TFOP_Reportes
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 448
+    Left = 496
     Top = 192
     DockControlHeights = (
       0
@@ -1948,7 +1948,7 @@ object FOP_Reportes: TFOP_Reportes
       'left join optica_medico om on (oo.id_medico = om.id_medico)'
       'left join persona pe on (oo.id_cliente = pe.id_persona)')
     Params = <>
-    Left = 437
+    Left = 485
     Top = 81
     object ZQ_OrdenID_ORDEN: TIntegerField
       FieldName = 'ID_ORDEN'
@@ -1978,115 +1978,10 @@ object FOP_Reportes: TFOP_Reportes
       Size = 200
     end
   end
-  object EKVistaPreviaReporteMedicos: TEKVistaPreviaQR
-    Reporte = ReporteMedicos
-    ShowModal = False
-    Left = 285
-    Top = 73
-  end
   object DS_Orden: TDataSource
     DataSet = ZQ_Orden
-    Left = 517
+    Left = 605
     Top = 81
-  end
-  object EKBusquedaReporteMedicos: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Medico:'
-        Campo = 'nombre'
-        Tabla = 'om'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'C'#243'digo:'
-        Campo = 'codigo_cli'
-        Tabla = 'oo'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha Orden'
-        Campo = 'fecha_orden'
-        Tabla = 'oo'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndice = 6
-        TipoCampoIndiceVer = 'Es Nulo'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Afiliado'
-        Campo = 'nombre'
-        Tabla = 'pe'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Monto Total:'
-        Campo = 'monto_total'
-        Tabla = 'oo'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Monto Reconocido:'
-        Campo = 'monto_reconocido'
-        Tabla = 'oo'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_Orden
-    SQL.Strings = (
-      
-        'select distinct oo.id_orden, oo.codigo_cli, oo.fecha_orden, oo.m' +
-        'onto_total, oo.monto_reconocido, om.nombre as medico, pe.nombre'
-      'from optica_orden oo'
-      'left join optica_orden_detalle od on (oo.id_orden = od.id_orden)'
-      'left join producto p on (od.id_producto = p.id_producto)'
-      
-        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
-        'od_cabecera)'
-      'left join optica_medico om on (oo.id_medico = om.id_medico)'
-      'left join persona pe on (oo.id_cliente = pe.id_persona)')
-    SQL_Select.Strings = (
-      
-        'select distinct oo.id_orden, oo.codigo_cli, oo.fecha_orden, oo.m' +
-        'onto_total, oo.monto_reconocido, om.nombre as medico, pe.nombre')
-    SQL_From.Strings = (
-      'from optica_orden oo'
-      'left join optica_orden_detalle od on (oo.id_orden = od.id_orden)'
-      'left join producto p on (od.id_producto = p.id_producto)'
-      
-        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
-        'od_cabecera)'
-      'left join optica_medico om on (oo.id_medico = om.id_medico)'
-      'left join persona pe on (oo.id_cliente = pe.id_persona)')
-    UsarWhereOriginal = EK_Sin_Where
-    Left = 85
-    Top = 73
   end
   object ZQ_OrdenDetalle: TZQuery
     Connection = DM.Conexion
@@ -2119,7 +2014,7 @@ object FOP_Reportes: TFOP_Reportes
         Name = 'ID_ORDEN'
         ParamType = ptUnknown
       end>
-    Left = 437
+    Left = 493
     Top = 137
     ParamData = <
       item
@@ -2145,12 +2040,12 @@ object FOP_Reportes: TFOP_Reportes
   end
   object DS_OrdenDetalle: TDataSource
     DataSet = ZQ_OrdenDetalle
-    Left = 533
+    Left = 605
     Top = 129
   end
   object ATeclasRapidas: TActionManager
-    Left = 436
-    Top = 244
+    Left = 604
+    Top = 188
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -2163,7 +2058,95 @@ object FOP_Reportes: TFOP_Reportes
       OnExecute = AImprimirExecute
     end
   end
-  object EKOrdenarGrillaOrden: TEKOrdenarGrilla
+  object ISBusquedaReporteMedicos: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'M'#233'dico'
+        Campo = 'nombre'
+        Tabla = 'om'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'digo'
+        Campo = 'codigo_cli'
+        Tabla = 'oo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Orden'
+        Campo = 'fecha_orden'
+        Tabla = 'oo'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Afiliado'
+        Campo = 'nombre'
+        Tabla = 'pe'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Monto Total:'
+        Campo = 'monto_total'
+        Tabla = 'oo'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Monto Reconocido'
+        Campo = 'monto_reconocido'
+        Tabla = 'oo'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_Orden
+    SQL.Strings = (
+      
+        'select distinct oo.id_orden, oo.codigo_cli, oo.fecha_orden, oo.m' +
+        'onto_total, oo.monto_reconocido, om.nombre as medico, pe.nombre'
+      'from optica_orden oo'
+      'left join optica_orden_detalle od on (oo.id_orden = od.id_orden)'
+      'left join producto p on (od.id_producto = p.id_producto)'
+      
+        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
+        'od_cabecera)'
+      'left join optica_medico om on (oo.id_medico = om.id_medico)'
+      'left join persona pe on (oo.id_cliente = pe.id_persona)'
+      '')
+    SQL_Select.Strings = (
+      
+        'select distinct oo.id_orden, oo.codigo_cli, oo.fecha_orden, oo.m' +
+        'onto_total, oo.monto_reconocido, om.nombre as medico, pe.nombre')
+    SQL_From.Strings = (
+      'from optica_orden oo'
+      'left join optica_orden_detalle od on (oo.id_orden = od.id_orden)'
+      'left join producto p on (od.id_producto = p.id_producto)'
+      
+        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
+        'od_cabecera)'
+      'left join optica_medico om on (oo.id_medico = om.id_medico)'
+      'left join persona pe on (oo.id_cliente = pe.id_persona)'
+      '')
+    UsarWhereOriginal = IS_Sin_Where
+    Left = 77
+    Top = 73
+  end
+  object ISOrdenarGrillaOrden: TISOrdenarGrilla
     Grilla = DBGridOrden
     Filtros = <
       item
@@ -2190,16 +2173,17 @@ object FOP_Reportes: TFOP_Reportes
         TituloColumna = 'Total OS'
         Visible = True
       end>
-    NombreGuardar = 'OGOrden'
+    NombreGuardarConfig = 'OGOrden'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 85
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 77
     Top = 137
   end
-  object EKOrdenarGrillaOrdenDetalle: TEKOrdenarGrilla
+  object ISOrdenarGrillaOrdenDetalle: TISOrdenarGrilla
     Grilla = DBGridOrdenDetalle
     Filtros = <
       item
@@ -2218,16 +2202,17 @@ object FOP_Reportes: TFOP_Reportes
         TituloColumna = 'Importe OS'
         Visible = True
       end>
-    NombreGuardar = 'OGOrdenDetalle'
+    NombreGuardarConfig = 'OGOrdenDetalle'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
     Left = 77
-    Top = 193
+    Top = 201
   end
-  object EKDbSumaOrden: TEKDbSuma
+  object ISDbSumaOrden: TISDbSuma
     SumCollection = <
       item
         Operacion = goSum
@@ -2238,10 +2223,10 @@ object FOP_Reportes: TFOP_Reportes
         NombreCampo = 'monto_reconocido'
       end>
     DataSet = ZQ_Orden
-    Left = 277
-    Top = 132
+    Left = 229
+    Top = 137
   end
-  object EKDbSumaOrdenDetalle: TEKDbSuma
+  object ISDbSumaOrdenDetalle: TISDbSuma
     SumCollection = <
       item
         Operacion = goSum
@@ -2252,7 +2237,13 @@ object FOP_Reportes: TFOP_Reportes
         NombreCampo = 'importe_reconocido'
       end>
     DataSet = ZQ_OrdenDetalle
-    Left = 269
-    Top = 188
+    Left = 237
+    Top = 201
+  end
+  object ISVistaPreviaReporteMedicos: TISVistaPreviaQR
+    Reporte = ReporteMedicos
+    ShowModal = False
+    Left = 221
+    Top = 81
   end
 end
