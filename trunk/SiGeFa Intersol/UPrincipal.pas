@@ -293,9 +293,8 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
 var
-  logo_fondo: string;
   i: integer;
-  pertenece: boolean;
+  //pertenece: boolean;
   cerrarSistema: integer; //si es 1 se cierra el sistema
 begin
   dm.ZQ_Configuracion_Variables.Close;
@@ -336,7 +335,7 @@ begin
 
   dm.ZQ_Configuracion.Close;
   dm.ZQ_Configuracion.Open;
-  pertenece:= false;
+  //pertenece:= false;
   SUCURSAL_LOGUEO:= 1;
   if not dm.ZQ_ConfiguracionDB_SUCURSAL.IsNull then
   begin
@@ -613,8 +612,6 @@ end;
 
                 
 procedure TFPrincipal.CambiarContraseniaClick(Sender: TObject);
-var
-  i: integer;
 begin
   dm.ISUsrLogin.CambiarClave;
 end;
