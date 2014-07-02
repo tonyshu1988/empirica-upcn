@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt;
+   ActnList, XPStyleActnCtrls, ActnMan,
+   QRCtrls, QuickRpt, ISOrdenarGrilla, ISVistaPreviaQR, ISBusquedaAvanzada,
+  cxClasses;
 
 type
   TFOP_ABMLaboratorio = class(TForm)
@@ -35,7 +36,6 @@ type
     PanelEdicion: TPanel;
     Label1: TLabel;
     DBENombre: TDBEdit;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -45,7 +45,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
     RepLab: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -65,7 +64,6 @@ type
     QRLabel48: TQRLabel;
     ColumnHeaderBand2: TQRBand;
     QRLabel30: TQRLabel;
-    EKVistaPrevia: TEKVistaPreviaQR;
     btnExcel: TdxBarLargeButton;
     Label2: TLabel;
     DBEDireccion: TDBEdit;
@@ -85,6 +83,9 @@ type
     ZQ_LaboratorioTELEFONO: TStringField;
     ZQ_LaboratorioCODIGO: TStringField;
     ZQ_LaboratorioBAJA: TStringField;
+    ISBuscar: TISBusquedaAvanzada;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -138,14 +139,14 @@ end;
 
 procedure TFOP_ABMLaboratorio.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_Laboratorio, lblCantidadRegistros);
 end;
 
 
 procedure TFOP_ABMLaboratorio.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Laboratorio]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Laboratorio]) then
   begin
     DBGrid.Enabled := false;
 
@@ -164,7 +165,7 @@ begin
   if (ZQ_Laboratorio.IsEmpty) then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Laboratorio]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Laboratorio]) then
   begin
     DBGrid.Enabled := false;
 
@@ -186,7 +187,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el "Laboratorio" seleccionado'), 'ABM Laboratorio', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Laboratorio]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Laboratorio]) then
     begin
       ZQ_Laboratorio.Edit;
       ZQ_LaboratorioBAJA.AsString:='S';
@@ -194,8 +195,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_Laboratorio.RecNo;
     ZQ_Laboratorio.Refresh;
@@ -213,7 +214,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar el "Laboratorio" seleccionado?'), 'ABM Laboratorio', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Laboratorio]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Laboratorio]) then
     begin
       ZQ_Laboratorio.Edit;
       ZQ_LaboratorioBAJA.AsString:='N';
@@ -221,8 +222,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_Laboratorio.RecNo;
     ZQ_Laboratorio.Refresh;
@@ -245,7 +246,7 @@ begin
   end;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       DBGrid.Enabled:= true;
       DBGrid.SetFocus;
@@ -268,7 +269,7 @@ end;
 
 procedure TFOP_ABMLaboratorio.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     DBGrid.Enabled:=true;
     DBGrid.SetFocus;
@@ -280,11 +281,11 @@ end;
 
 procedure TFOP_ABMLaboratorio.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Laboratorio, lblCantidadRegistros);
 end;
 
@@ -350,9 +351,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepLab);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 
@@ -365,7 +366,7 @@ end;
 procedure TFOP_ABMLaboratorio.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 end.

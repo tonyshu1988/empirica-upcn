@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, StdCtrls, ExtCtrls, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
-  ActnList, XPStyleActnCtrls, ActnMan;
+  ActnList, XPStyleActnCtrls, ActnMan, ISBusquedaAvanzada, cxClasses;
 
 type
   TFOP_CargarOrden = class(TForm)
@@ -38,12 +38,12 @@ type
     ZQ_Optica_OrdenENTREGADO: TStringField;
     ZQ_Optica_OrdenFACTURADO: TStringField;
     ZQ_Optica_OrdenESTADO: TStringField;
-    EKBusquedaAvanzadaOrden: TEKBusquedaAvanzada;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ASeccionar: TAction;
     ZQ_Optica_OrdenAVISAR: TStringField;
     ZQ_Optica_OrdenMONTO_RECONOCIDO: TFloatField;
+    ISBusquedaAvanzadaOrden: TISBusquedaAvanzada;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -67,7 +67,7 @@ uses UDM;
 
 procedure TFOP_CargarOrden.btnBuscarClick(Sender: TObject);
 begin
-EKBusquedaAvanzadaOrden.Buscar;
+ISBusquedaAvanzadaOrden.Buscar;
 end;
 
 procedure TFOP_CargarOrden.btnSeleccionarClick(Sender: TObject);

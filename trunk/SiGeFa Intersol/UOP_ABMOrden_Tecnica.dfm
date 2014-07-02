@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 217
-  Top = 162
+  Left = 345
+  Top = 115
   Width = 1026
   Height = 709
   Caption = 'ABM Orden T'#233'cnica'
@@ -18,6 +18,1728 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
+  object PanelContenedorDerecha: TPanel
+    Left = 114
+    Top = 0
+    Width = 904
+    Height = 630
+    Align = alClient
+    Caption = 'PanelContenedorDerecha'
+    TabOrder = 0
+    object PanelProductosYFPago: TPanel
+      Left = 1
+      Top = 194
+      Width = 902
+      Height = 435
+      Align = alClient
+      Caption = 'PanelProductosYFPago'
+      TabOrder = 0
+      object PanelListadoProducto: TPanel
+        Left = 1
+        Top = 1
+        Width = 900
+        Height = 266
+        Align = alClient
+        Caption = 'PanelListadoProducto'
+        TabOrder = 0
+        object Splitter1: TSplitter
+          Left = 581
+          Top = 1
+          Width = 5
+          Height = 224
+          Align = alRight
+        end
+        object Panel6: TPanel
+          Left = 1
+          Top = 225
+          Width = 898
+          Height = 40
+          Align = alBottom
+          BevelOuter = bvLowered
+          TabOrder = 0
+          DesignSize = (
+            898
+            40)
+          object lblCantProductos: TLabel
+            Left = 1
+            Top = 27
+            Width = 896
+            Height = 12
+            Align = alBottom
+            Alignment = taRightJustify
+            AutoSize = False
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object btQuitarProducto: TButton
+            Left = 9
+            Top = 5
+            Width = 133
+            Height = 20
+            Caption = 'Quitar Prod/Servic.'
+            TabOrder = 0
+            OnClick = btQuitarProductoClick
+          end
+          object btQuitarOS: TButton
+            Left = 796
+            Top = 5
+            Width = 83
+            Height = 20
+            Anchors = [akTop, akRight]
+            Caption = 'Quitar OS'
+            TabOrder = 1
+            OnClick = btQuitarOSClick
+          end
+        end
+        object POs: TPanel
+          Left = 586
+          Top = 1
+          Width = 313
+          Height = 224
+          Align = alRight
+          BevelOuter = bvNone
+          TabOrder = 1
+          object Label1: TLabel
+            Left = 0
+            Top = 42
+            Width = 313
+            Height = 13
+            Align = alTop
+            Alignment = taCenter
+            Caption = 'Obras Sociales'
+            Color = 12648448
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
+          object DBGridListadoOS: TDBGrid
+            Left = 0
+            Top = 55
+            Width = 313
+            Height = 169
+            Align = alClient
+            Color = 15527129
+            DataSource = DS_OrdenDetalleOS
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            PopupMenu = PopupMenuOS
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'ID_OS'
+                ReadOnly = True
+                Title.Caption = 'Id'
+                Width = 35
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'os_detalle'
+                Title.Caption = 'Detalle'
+                Width = 156
+                Visible = True
+              end
+              item
+                Color = 10485759
+                Expanded = False
+                FieldName = 'MONTO_DESCONTADO'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = [fsBold]
+                Title.Caption = 'Importe'
+                Width = 61
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'OBSERVACIONES'
+                Title.Caption = 'Observaciones'
+                Width = 200
+                Visible = True
+              end>
+          end
+          object Panel1: TPanel
+            Left = 0
+            Top = 0
+            Width = 313
+            Height = 42
+            Align = alTop
+            BevelOuter = bvNone
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+            object Label33: TLabel
+              Left = 0
+              Top = 0
+              Width = 313
+              Height = 13
+              Align = alTop
+              Alignment = taCenter
+              Caption = 'Laboratorio'
+              Color = 12648448
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWhite
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentColor = False
+              ParentFont = False
+              Transparent = False
+              Layout = tlCenter
+            end
+            object DBText2: TDBText
+              Left = 0
+              Top = 21
+              Width = 305
+              Height = 13
+              Alignment = taCenter
+              DataField = 'prod_laboratorio'
+              DataSource = DS_OrdenDetalle
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              Transparent = True
+            end
+          end
+        end
+        object PProductos: TPanel
+          Left = 1
+          Top = 1
+          Width = 580
+          Height = 224
+          Align = alClient
+          BevelOuter = bvNone
+          TabOrder = 2
+          object Label11: TLabel
+            Left = 0
+            Top = 0
+            Width = 580
+            Height = 13
+            Align = alTop
+            Alignment = taCenter
+            Caption = 'Listado de Productos/Servicios a Cobrar'
+            Color = 12648448
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
+          object DBGridListadoProductos: TDBGrid
+            Left = 0
+            Top = 13
+            Width = 580
+            Height = 211
+            Align = alClient
+            Color = 15527129
+            DataSource = DS_OrdenDetalle
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+            ParentFont = False
+            PopupMenu = Popup_Producto
+            TabOrder = 0
+            TitleFont.Charset = DEFAULT_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'MS Sans Serif'
+            TitleFont.Style = []
+            OnKeyUp = DBGridListadoProductosKeyUp
+            Columns = <
+              item
+                Expanded = False
+                FieldName = 'ID_PRODUCTO'
+                ReadOnly = True
+                Title.Caption = 'ID'
+                Width = 60
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'prod_detalle'
+                ReadOnly = True
+                Title.Caption = 'Detalle Producto/Servicio'
+                Width = 300
+                Visible = True
+              end
+              item
+                Color = clCream
+                Expanded = False
+                FieldName = 'IMPORTE_UNITARIO'
+                ReadOnly = True
+                Title.Caption = 'Precio Unit.'
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'CANTIDAD'
+                Title.Caption = 'Cant.'
+                Width = 34
+                Visible = True
+              end
+              item
+                Color = 10485759
+                Expanded = False
+                FieldName = 'IMPORTE_TOTAL'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'MS Sans Serif'
+                Font.Style = [fsBold]
+                Title.Caption = 'Total'
+                Width = 106
+                Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'OBSERVACIONES'
+                Title.Caption = 'Observaciones'
+                Width = 2000
+                Visible = True
+              end>
+          end
+        end
+      end
+      object PPieBoleta: TPanel
+        Left = 1
+        Top = 393
+        Width = 900
+        Height = 41
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 2
+        object lblTotAPagar: TLabel
+          Left = 0
+          Top = 0
+          Width = 900
+          Height = 41
+          Align = alClient
+          Alignment = taRightJustify
+          AutoSize = False
+          Caption = 'Total Orden: $ 0.00 '
+          Color = 12648448
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -21
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+      end
+      object PanelFormaPago: TPanel
+        Left = 1
+        Top = 267
+        Width = 900
+        Height = 126
+        Align = alBottom
+        Caption = 'PVarios'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        object PObservaciones: TPanel
+          Left = 1
+          Top = 1
+          Width = 898
+          Height = 124
+          Align = alClient
+          TabOrder = 1
+          object Label2: TLabel
+            Left = 1
+            Top = 1
+            Width = 896
+            Height = 16
+            Align = alTop
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'Observaciones'
+            Color = 12648448
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object dbObsOrden: TDBRichEdit
+            Left = 1
+            Top = 17
+            Width = 896
+            Height = 106
+            Align = alClient
+            Color = clCream
+            DataField = 'OBSERVACIONES'
+            DataSource = DS_Orden
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            ScrollBars = ssBoth
+            TabOrder = 0
+          end
+        end
+        object PReceta: TPanel
+          Left = 1
+          Top = 1
+          Width = 898
+          Height = 124
+          Align = alClient
+          BevelOuter = bvLowered
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          object Label3: TLabel
+            Left = 256
+            Top = 50
+            Width = 24
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Esf.'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label4: TLabel
+            Left = 314
+            Top = 50
+            Width = 20
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Cil.'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label5: TLabel
+            Left = 370
+            Top = 50
+            Width = 21
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Eje'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label6: TLabel
+            Left = 219
+            Top = 69
+            Width = 18
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'OD'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label8: TLabel
+            Left = 222
+            Top = 92
+            Width = 15
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'OI'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label9: TLabel
+            Left = 1
+            Top = 1
+            Width = 896
+            Height = 16
+            Align = alTop
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'Codificaci'#243'n RP'
+            Color = 12648448
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object Label19: TLabel
+            Left = 301
+            Top = 27
+            Width = 42
+            Height = 16
+            Caption = 'Cerca'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            Layout = tlCenter
+          end
+          object Label20: TLabel
+            Left = 50
+            Top = 50
+            Width = 24
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Esf.'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label27: TLabel
+            Left = 108
+            Top = 50
+            Width = 20
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Cil.'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label29: TLabel
+            Left = 164
+            Top = 50
+            Width = 21
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Eje'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label30: TLabel
+            Left = 13
+            Top = 69
+            Width = 18
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'OD'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label31: TLabel
+            Left = 16
+            Top = 92
+            Width = 15
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'OI'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label32: TLabel
+            Left = 95
+            Top = 27
+            Width = 39
+            Height = 16
+            Caption = 'Lejos'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            Layout = tlCenter
+          end
+          object Label46: TLabel
+            Left = 627
+            Top = 29
+            Width = 79
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Oftalm'#243'logo'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label52: TLabel
+            Left = 627
+            Top = 71
+            Width = 118
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'N'#186' Historia Cl'#237'nica'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label54: TLabel
+            Left = 456
+            Top = 50
+            Width = 24
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Esf.'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label56: TLabel
+            Left = 514
+            Top = 50
+            Width = 20
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Cil.'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label57: TLabel
+            Left = 570
+            Top = 50
+            Width = 21
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'Eje'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label59: TLabel
+            Left = 419
+            Top = 69
+            Width = 18
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'OD'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label60: TLabel
+            Left = 422
+            Top = 92
+            Width = 15
+            Height = 13
+            Alignment = taRightJustify
+            Caption = 'OI'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object Label66: TLabel
+            Left = 485
+            Top = 27
+            Width = 81
+            Height = 16
+            Caption = 'Intermedio'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            Layout = tlCenter
+          end
+          object DBEdit6: TDBEdit
+            Left = 241
+            Top = 65
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'ESF_CD'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 0
+          end
+          object DBEdit7: TDBEdit
+            Left = 241
+            Top = 88
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'ESF_CI'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 1
+          end
+          object DBEdit8: TDBEdit
+            Left = 297
+            Top = 65
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'CIL_CD'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 2
+          end
+          object DBEdit18: TDBEdit
+            Left = 297
+            Top = 88
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'CIL_CI'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 3
+          end
+          object DBEdit19: TDBEdit
+            Left = 353
+            Top = 65
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'EJE_CD'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 4
+          end
+          object DBEdit20: TDBEdit
+            Left = 353
+            Top = 88
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'EJE_CI'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 5
+          end
+          object DBEdit21: TDBEdit
+            Left = 35
+            Top = 65
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'ESF_LD'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 6
+          end
+          object DBEdit22: TDBEdit
+            Left = 35
+            Top = 88
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'ESF_LI'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 7
+          end
+          object DBEdit23: TDBEdit
+            Left = 91
+            Top = 65
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'CIL_LD'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 8
+          end
+          object DBEdit24: TDBEdit
+            Left = 91
+            Top = 88
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'CIL_LI'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 9
+          end
+          object DBEdit25: TDBEdit
+            Left = 147
+            Top = 65
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'EJE_LD'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 10
+          end
+          object DBEdit26: TDBEdit
+            Left = 147
+            Top = 88
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'EJE_LI'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 11
+          end
+          object DBEdit5: TDBEdit
+            Left = 627
+            Top = 87
+            Width = 226
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'NRO_HISTCLINICA'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 12
+          end
+          object DBLookupComboBox1: TDBLookupComboBox
+            Left = 627
+            Top = 44
+            Width = 226
+            Height = 21
+            Color = 15527129
+            DataField = 'ID_MEDICO'
+            DataSource = DS_CodifRP
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            KeyField = 'ID_MEDICO'
+            ListField = 'DETALLE'
+            ListSource = DS_Medico
+            NullValueKey = 46
+            ParentFont = False
+            TabOrder = 13
+          end
+          object DBEdit1: TDBEdit
+            Left = 441
+            Top = 65
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'ESF_ID'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 14
+          end
+          object DBEdit27: TDBEdit
+            Left = 441
+            Top = 88
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'ESF_II'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 15
+          end
+          object DBEdit28: TDBEdit
+            Left = 497
+            Top = 65
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'CIL_ID'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 16
+          end
+          object DBEdit29: TDBEdit
+            Left = 497
+            Top = 88
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'CIL_II'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 17
+          end
+          object DBEdit30: TDBEdit
+            Left = 553
+            Top = 65
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'EJE_ID'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 18
+          end
+          object DBEdit31: TDBEdit
+            Left = 553
+            Top = 88
+            Width = 54
+            Height = 21
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            Color = 15527129
+            DataField = 'EJE_II'
+            DataSource = DS_CodifRP
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 19
+          end
+        end
+        object PFormaPago: TPanel
+          Left = 1
+          Top = 1
+          Width = 898
+          Height = 124
+          Align = alClient
+          TabOrder = 0
+          object Label36: TLabel
+            Left = 1
+            Top = 1
+            Width = 896
+            Height = 16
+            Align = alTop
+            Alignment = taCenter
+            AutoSize = False
+            Caption = 'Entregas [F7]'
+            Color = 12648448
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object PieGrilla: TPanel
+            Left = 1
+            Top = 91
+            Width = 896
+            Height = 32
+            Align = alBottom
+            BevelOuter = bvLowered
+            TabOrder = 0
+            object btnQuitarPago: TButton
+              Left = 8
+              Top = 3
+              Width = 105
+              Height = 20
+              Caption = 'Quitar Entrega'
+              TabOrder = 0
+              OnClick = btnQuitarPagoClick
+            end
+          end
+          object DBGridFormaPago: TDBGrid
+            Left = 1
+            Top = 17
+            Width = 896
+            Height = 74
+            Align = alClient
+            Color = 15527129
+            DataSource = DS_Orden_Entrega
+            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+            TabOrder = 1
+            TitleFont.Charset = ANSI_CHARSET
+            TitleFont.Color = clWindowText
+            TitleFont.Height = -11
+            TitleFont.Name = 'Verdana'
+            TitleFont.Style = []
+            Columns = <
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'CUENTA_INGRESO'
+                Title.Caption = 'C'#243'd'
+                Width = 30
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = '_ctaIngreso'
+                Title.Caption = 'Cuenta'
+                Width = 150
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'ID_TIPO_FORMAPAG'
+                Title.Caption = 'MP'
+                Width = 29
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'medioPago'
+                Title.Caption = 'Medio Pago'
+                Width = 226
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'IMPORTE'
+                Title.Caption = 'Importe'
+                Width = 59
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'MDCP_FECHA'
+                Title.Caption = 'Fecha'
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'MDCP_BANCO'
+                Title.Caption = 'Banco'
+                Width = 103
+                Visible = True
+              end
+              item
+                Color = 16772332
+                Expanded = False
+                FieldName = 'MDCP_CHEQUE'
+                Title.Caption = 'N'#250'mero'
+                Width = 97
+                Visible = True
+              end>
+          end
+        end
+      end
+    end
+    object PanelDetalles: TPanel
+      Left = 1
+      Top = 31
+      Width = 902
+      Height = 163
+      Align = alTop
+      TabOrder = 1
+      object PanelDetalleCliente: TPanel
+        Left = 1
+        Top = 94
+        Width = 900
+        Height = 68
+        Align = alBottom
+        BevelOuter = bvLowered
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+        object Label12: TLabel
+          Left = 1
+          Top = 1
+          Width = 898
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Detalles Cliente  [F3]'
+          Color = 12648448
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object Label13: TLabel
+          Left = 21
+          Top = 22
+          Width = 48
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'C'#243'digo:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label16: TLabel
+          Left = 149
+          Top = 22
+          Width = 73
+          Height = 13
+          Caption = 'CUIT/CUIL:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label17: TLabel
+          Left = 422
+          Top = 21
+          Width = 36
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Edad:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label21: TLabel
+          Left = 510
+          Top = 21
+          Width = 89
+          Height = 13
+          Caption = 'Tel'#233'fono/Cel:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label28: TLabel
+          Left = 14
+          Top = 45
+          Width = 55
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Nombre:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label_DetalleCliente: TLabel
+          Left = 393
+          Top = 45
+          Width = 65
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Direcci'#243'n:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object DBEdit9: TDBEdit
+          Left = 70
+          Top = 41
+          Width = 302
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'pers_nombre'
+          DataSource = DS_Orden
+          ReadOnly = True
+          TabOrder = 2
+        end
+        object DBEdit10: TDBEdit
+          Left = 70
+          Top = 18
+          Width = 71
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'pers_cod'
+          DataSource = DS_Orden
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object DBEdit11: TDBEdit
+          Left = 224
+          Top = 18
+          Width = 148
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'pers_cuit'
+          DataSource = DS_Orden
+          ReadOnly = True
+          TabOrder = 1
+        end
+        object DBEdit12: TDBEdit
+          Left = 600
+          Top = 17
+          Width = 161
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'pers_telefono'
+          DataSource = DS_Orden
+          ReadOnly = True
+          TabOrder = 4
+        end
+        object DBEdit14: TDBEdit
+          Left = 462
+          Top = 17
+          Width = 43
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'pers_edad'
+          DataSource = DS_Orden
+          ReadOnly = True
+          TabOrder = 3
+        end
+        object DBEdit_DetalleCliente: TDBEdit
+          Left = 462
+          Top = 41
+          Width = 302
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'pers_direccion'
+          DataSource = DS_Orden
+          ReadOnly = True
+          TabOrder = 5
+        end
+      end
+      object PDetalleOrden: TPanel
+        Left = 1
+        Top = 1
+        Width = 561
+        Height = 93
+        Align = alClient
+        BevelOuter = bvLowered
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 0
+        object Label22: TLabel
+          Left = 22
+          Top = 24
+          Width = 81
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Nro Factura:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label23: TLabel
+          Left = 6
+          Top = 68
+          Width = 97
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Entregado por:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Visible = False
+        end
+        object Label24: TLabel
+          Left = 268
+          Top = 46
+          Width = 71
+          Height = 13
+          Caption = 'Prometido:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label25: TLabel
+          Left = 60
+          Top = 46
+          Width = 43
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Fecha:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label7: TLabel
+          Left = 1
+          Top = 1
+          Width = 559
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Detalles Orden T'#233'cnica'
+          Color = 12648448
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object DBEdit2: TDBEdit
+          Left = 108
+          Top = 20
+          Width = 141
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'NRO_FACTURA'
+          DataSource = DS_Orden
+          TabOrder = 0
+        end
+        object DBEdit3: TDBEdit
+          Left = 108
+          Top = 64
+          Width = 365
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'ENTREGADO_POR'
+          DataSource = DS_Orden
+          TabOrder = 4
+          Visible = False
+        end
+        object dbAvisar: TDBCheckBox
+          Left = 403
+          Top = 22
+          Width = 73
+          Height = 17
+          Caption = 'Avisar'
+          DataField = 'AVISAR'
+          DataSource = DS_Orden
+          TabOrder = 1
+          ValueChecked = 'S'
+          ValueUnchecked = 'N'
+        end
+        object dbFecha: TISDBDateTimePicker
+          Left = 108
+          Top = 42
+          Width = 142
+          Height = 21
+          Date = 41822.428961354170000000
+          Time = 41822.428961354170000000
+          Color = 15527129
+          TabOrder = 2
+          DataField = 'FECHA_ORDEN'
+          DataSource = DS_Orden
+        end
+        object ISDBDateTimePicker1: TISDBDateTimePicker
+          Left = 347
+          Top = 42
+          Width = 129
+          Height = 21
+          Date = 41822.428961354170000000
+          Time = 41822.428961354170000000
+          Color = 15527129
+          TabOrder = 3
+          DataField = 'FECHA_ORDEN'
+          DataSource = DS_Orden
+        end
+      end
+      object PMedico: TPanel
+        Left = 562
+        Top = 1
+        Width = 339
+        Height = 93
+        Align = alRight
+        BevelOuter = bvLowered
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+        object Label10: TLabel
+          Left = 1
+          Top = 1
+          Width = 337
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Detalles M'#233'dico'
+          Color = 12648448
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object Label14: TLabel
+          Left = 13
+          Top = 21
+          Width = 64
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Matr'#237'cula:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label15: TLabel
+          Left = 12
+          Top = 68
+          Width = 65
+          Height = 13
+          Caption = 'Direcci'#243'n:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label18: TLabel
+          Left = 22
+          Top = 44
+          Width = 55
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Nombre:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object DBEdit13: TDBEdit
+          Left = 86
+          Top = 64
+          Width = 227
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'med_direccion'
+          DataSource = DS_Orden
+          ReadOnly = True
+          TabOrder = 2
+        end
+        object DBEdit15: TDBEdit
+          Left = 86
+          Top = 17
+          Width = 227
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'med_matricula'
+          DataSource = DS_Orden
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object DBEdit16: TDBEdit
+          Left = 86
+          Top = 40
+          Width = 227
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'med_nombre'
+          DataSource = DS_Orden
+          ReadOnly = True
+          TabOrder = 1
+        end
+      end
+    end
+    object PanelStatusBar: TPanel
+      Left = 1
+      Top = 1
+      Width = 902
+      Height = 30
+      Align = alTop
+      BevelOuter = bvLowered
+      TabOrder = 2
+      object DBText7: TDBText
+        Left = 557
+        Top = 1
+        Width = 344
+        Height = 28
+        Align = alRight
+        Alignment = taCenter
+        Color = 16729670
+        DataField = '_estado'
+        DataSource = DS_Orden
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -19
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+      end
+      object DBText5: TDBText
+        Left = 1
+        Top = 1
+        Width = 344
+        Height = 28
+        Align = alLeft
+        Color = 16729670
+        DataField = '_vendedor'
+        DataSource = DS_Orden
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -19
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+      end
+    end
+  end
   object PCargaProd: TPanel
     Left = 307
     Top = 248
@@ -2842,1748 +4564,25 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       OnKeyDown = codBarrasKeyDown
     end
   end
-  object PanelContenedorDerecha: TPanel
-    Left = 114
-    Top = 0
-    Width = 896
-    Height = 619
-    Align = alClient
-    Caption = 'PanelContenedorDerecha'
-    TabOrder = 0
-    object PanelProductosYFPago: TPanel
-      Left = 1
-      Top = 194
-      Width = 894
-      Height = 424
-      Align = alClient
-      Caption = 'PanelProductosYFPago'
-      TabOrder = 0
-      object PanelListadoProducto: TPanel
-        Left = 1
-        Top = 1
-        Width = 892
-        Height = 255
-        Align = alClient
-        Caption = 'PanelListadoProducto'
-        TabOrder = 0
-        object Splitter1: TSplitter
-          Left = 573
-          Top = 1
-          Width = 5
-          Height = 213
-          Align = alRight
-        end
-        object Panel6: TPanel
-          Left = 1
-          Top = 214
-          Width = 890
-          Height = 40
-          Align = alBottom
-          BevelOuter = bvLowered
-          TabOrder = 0
-          DesignSize = (
-            890
-            40)
-          object lblCantProductos: TLabel
-            Left = 1
-            Top = 27
-            Width = 888
-            Height = 12
-            Align = alBottom
-            Alignment = taRightJustify
-            AutoSize = False
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object btQuitarProducto: TButton
-            Left = 9
-            Top = 5
-            Width = 133
-            Height = 20
-            Caption = 'Quitar Prod/Servic.'
-            TabOrder = 0
-            OnClick = btQuitarProductoClick
-          end
-          object btQuitarOS: TButton
-            Left = 796
-            Top = 5
-            Width = 83
-            Height = 20
-            Anchors = [akTop, akRight]
-            Caption = 'Quitar OS'
-            TabOrder = 1
-            OnClick = btQuitarOSClick
-          end
-        end
-        object POs: TPanel
-          Left = 578
-          Top = 1
-          Width = 313
-          Height = 213
-          Align = alRight
-          BevelOuter = bvNone
-          TabOrder = 1
-          object Label1: TLabel
-            Left = 0
-            Top = 42
-            Width = 313
-            Height = 13
-            Align = alTop
-            Alignment = taCenter
-            Caption = 'Obras Sociales'
-            Color = 12648448
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-          end
-          object DBGridListadoOS: TDBGrid
-            Left = 0
-            Top = 55
-            Width = 313
-            Height = 158
-            Align = alClient
-            Color = 15527129
-            DataSource = DS_OrdenDetalleOS
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-            PopupMenu = PopupMenuOS
-            TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'ID_OS'
-                ReadOnly = True
-                Title.Caption = 'Id'
-                Width = 35
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'os_detalle'
-                Title.Caption = 'Detalle'
-                Width = 156
-                Visible = True
-              end
-              item
-                Color = 10485759
-                Expanded = False
-                FieldName = 'MONTO_DESCONTADO'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'Verdana'
-                Font.Style = [fsBold]
-                Title.Caption = 'Importe'
-                Width = 61
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'OBSERVACIONES'
-                Title.Caption = 'Observaciones'
-                Width = 200
-                Visible = True
-              end>
-          end
-          object Panel1: TPanel
-            Left = 0
-            Top = 0
-            Width = 313
-            Height = 42
-            Align = alTop
-            BevelOuter = bvNone
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 1
-            object Label33: TLabel
-              Left = 0
-              Top = 0
-              Width = 313
-              Height = 13
-              Align = alTop
-              Alignment = taCenter
-              Caption = 'Laboratorio'
-              Color = 12648448
-              Font.Charset = ANSI_CHARSET
-              Font.Color = clWhite
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentColor = False
-              ParentFont = False
-              Transparent = False
-              Layout = tlCenter
-            end
-            object DBText2: TDBText
-              Left = 0
-              Top = 21
-              Width = 305
-              Height = 13
-              Alignment = taCenter
-              DataField = 'prod_laboratorio'
-              DataSource = DS_OrdenDetalle
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-              Transparent = True
-            end
-          end
-        end
-        object PProductos: TPanel
-          Left = 1
-          Top = 1
-          Width = 572
-          Height = 213
-          Align = alClient
-          BevelOuter = bvNone
-          TabOrder = 2
-          object Label11: TLabel
-            Left = 0
-            Top = 0
-            Width = 572
-            Height = 13
-            Align = alTop
-            Alignment = taCenter
-            Caption = 'Listado de Productos/Servicios a Cobrar'
-            Color = 12648448
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-          end
-          object DBGridListadoProductos: TDBGrid
-            Left = 0
-            Top = 13
-            Width = 572
-            Height = 200
-            Align = alClient
-            Color = 15527129
-            DataSource = DS_OrdenDetalle
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-            ParentFont = False
-            PopupMenu = Popup_Producto
-            TabOrder = 0
-            TitleFont.Charset = DEFAULT_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'MS Sans Serif'
-            TitleFont.Style = []
-            OnKeyUp = DBGridListadoProductosKeyUp
-            Columns = <
-              item
-                Expanded = False
-                FieldName = 'ID_PRODUCTO'
-                ReadOnly = True
-                Title.Caption = 'ID'
-                Width = 60
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'prod_detalle'
-                ReadOnly = True
-                Title.Caption = 'Detalle Producto/Servicio'
-                Width = 300
-                Visible = True
-              end
-              item
-                Color = clCream
-                Expanded = False
-                FieldName = 'IMPORTE_UNITARIO'
-                ReadOnly = True
-                Title.Caption = 'Precio Unit.'
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'CANTIDAD'
-                Title.Caption = 'Cant.'
-                Width = 34
-                Visible = True
-              end
-              item
-                Color = 10485759
-                Expanded = False
-                FieldName = 'IMPORTE_TOTAL'
-                Font.Charset = DEFAULT_CHARSET
-                Font.Color = clWindowText
-                Font.Height = -11
-                Font.Name = 'MS Sans Serif'
-                Font.Style = [fsBold]
-                Title.Caption = 'Total'
-                Width = 106
-                Visible = True
-              end
-              item
-                Expanded = False
-                FieldName = 'OBSERVACIONES'
-                Title.Caption = 'Observaciones'
-                Width = 2000
-                Visible = True
-              end>
-          end
-        end
-      end
-      object PPieBoleta: TPanel
-        Left = 1
-        Top = 382
-        Width = 892
-        Height = 41
-        Align = alBottom
-        BevelOuter = bvNone
-        TabOrder = 2
-        object lblTotAPagar: TLabel
-          Left = 0
-          Top = 0
-          Width = 892
-          Height = 41
-          Align = alClient
-          Alignment = taRightJustify
-          AutoSize = False
-          Caption = 'Total Orden: $ 0.00 '
-          Color = 12648448
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -21
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-      end
-      object PanelFormaPago: TPanel
-        Left = 1
-        Top = 256
-        Width = 892
-        Height = 126
-        Align = alBottom
-        Caption = 'PVarios'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ParentFont = False
-        TabOrder = 1
-        object PObservaciones: TPanel
-          Left = 1
-          Top = 1
-          Width = 890
-          Height = 124
-          Align = alClient
-          TabOrder = 1
-          object Label2: TLabel
-            Left = 1
-            Top = 1
-            Width = 888
-            Height = 16
-            Align = alTop
-            Alignment = taCenter
-            AutoSize = False
-            Caption = 'Observaciones'
-            Color = 12648448
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object dbObsOrden: TDBRichEdit
-            Left = 1
-            Top = 17
-            Width = 888
-            Height = 106
-            Align = alClient
-            Color = clCream
-            DataField = 'OBSERVACIONES'
-            DataSource = DS_Orden
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            ScrollBars = ssBoth
-            TabOrder = 0
-          end
-        end
-        object PReceta: TPanel
-          Left = 1
-          Top = 1
-          Width = 890
-          Height = 124
-          Align = alClient
-          BevelOuter = bvLowered
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 2
-          object Label3: TLabel
-            Left = 256
-            Top = 50
-            Width = 24
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'Esf.'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label4: TLabel
-            Left = 314
-            Top = 50
-            Width = 20
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'Cil.'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label5: TLabel
-            Left = 370
-            Top = 50
-            Width = 21
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'Eje'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label6: TLabel
-            Left = 219
-            Top = 69
-            Width = 18
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'OD'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label8: TLabel
-            Left = 222
-            Top = 92
-            Width = 15
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'OI'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label9: TLabel
-            Left = 1
-            Top = 1
-            Width = 888
-            Height = 16
-            Align = alTop
-            Alignment = taCenter
-            AutoSize = False
-            Caption = 'Codificaci'#243'n RP'
-            Color = 12648448
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object Label19: TLabel
-            Left = 301
-            Top = 27
-            Width = 42
-            Height = 16
-            Caption = 'Cerca'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            Transparent = True
-            Layout = tlCenter
-          end
-          object Label20: TLabel
-            Left = 50
-            Top = 50
-            Width = 24
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'Esf.'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label27: TLabel
-            Left = 108
-            Top = 50
-            Width = 20
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'Cil.'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label29: TLabel
-            Left = 164
-            Top = 50
-            Width = 21
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'Eje'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label30: TLabel
-            Left = 13
-            Top = 69
-            Width = 18
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'OD'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label31: TLabel
-            Left = 16
-            Top = 92
-            Width = 15
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'OI'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label32: TLabel
-            Left = 95
-            Top = 27
-            Width = 39
-            Height = 16
-            Caption = 'Lejos'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            Transparent = True
-            Layout = tlCenter
-          end
-          object Label46: TLabel
-            Left = 627
-            Top = 29
-            Width = 79
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'Oftalm'#243'logo'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label52: TLabel
-            Left = 627
-            Top = 71
-            Width = 118
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'N'#186' Historia Cl'#237'nica'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label54: TLabel
-            Left = 456
-            Top = 50
-            Width = 24
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'Esf.'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label56: TLabel
-            Left = 514
-            Top = 50
-            Width = 20
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'Cil.'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label57: TLabel
-            Left = 570
-            Top = 50
-            Width = 21
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'Eje'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label59: TLabel
-            Left = 419
-            Top = 69
-            Width = 18
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'OD'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label60: TLabel
-            Left = 422
-            Top = 92
-            Width = 15
-            Height = 13
-            Alignment = taRightJustify
-            Caption = 'OI'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object Label66: TLabel
-            Left = 485
-            Top = 27
-            Width = 81
-            Height = 16
-            Caption = 'Intermedio'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            Transparent = True
-            Layout = tlCenter
-          end
-          object DBEdit6: TDBEdit
-            Left = 241
-            Top = 65
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'ESF_CD'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 0
-          end
-          object DBEdit7: TDBEdit
-            Left = 241
-            Top = 88
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'ESF_CI'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 1
-          end
-          object DBEdit8: TDBEdit
-            Left = 297
-            Top = 65
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'CIL_CD'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 2
-          end
-          object DBEdit18: TDBEdit
-            Left = 297
-            Top = 88
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'CIL_CI'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 3
-          end
-          object DBEdit19: TDBEdit
-            Left = 353
-            Top = 65
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'EJE_CD'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 4
-          end
-          object DBEdit20: TDBEdit
-            Left = 353
-            Top = 88
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'EJE_CI'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 5
-          end
-          object DBEdit21: TDBEdit
-            Left = 35
-            Top = 65
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'ESF_LD'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 6
-          end
-          object DBEdit22: TDBEdit
-            Left = 35
-            Top = 88
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'ESF_LI'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 7
-          end
-          object DBEdit23: TDBEdit
-            Left = 91
-            Top = 65
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'CIL_LD'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 8
-          end
-          object DBEdit24: TDBEdit
-            Left = 91
-            Top = 88
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'CIL_LI'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 9
-          end
-          object DBEdit25: TDBEdit
-            Left = 147
-            Top = 65
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'EJE_LD'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 10
-          end
-          object DBEdit26: TDBEdit
-            Left = 147
-            Top = 88
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'EJE_LI'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 11
-          end
-          object DBEdit5: TDBEdit
-            Left = 627
-            Top = 87
-            Width = 226
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'NRO_HISTCLINICA'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 12
-          end
-          object DBLookupComboBox1: TDBLookupComboBox
-            Left = 627
-            Top = 44
-            Width = 226
-            Height = 21
-            Color = 15527129
-            DataField = 'ID_MEDICO'
-            DataSource = DS_CodifRP
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            KeyField = 'ID_MEDICO'
-            ListField = 'DETALLE'
-            ListSource = DS_Medico
-            NullValueKey = 46
-            ParentFont = False
-            TabOrder = 13
-          end
-          object DBEdit1: TDBEdit
-            Left = 441
-            Top = 65
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'ESF_ID'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 14
-          end
-          object DBEdit27: TDBEdit
-            Left = 441
-            Top = 88
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'ESF_II'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 15
-          end
-          object DBEdit28: TDBEdit
-            Left = 497
-            Top = 65
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'CIL_ID'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 16
-          end
-          object DBEdit29: TDBEdit
-            Left = 497
-            Top = 88
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'CIL_II'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 17
-          end
-          object DBEdit30: TDBEdit
-            Left = 553
-            Top = 65
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'EJE_ID'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 18
-          end
-          object DBEdit31: TDBEdit
-            Left = 553
-            Top = 88
-            Width = 54
-            Height = 21
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            Color = 15527129
-            DataField = 'EJE_II'
-            DataSource = DS_CodifRP
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 19
-          end
-        end
-        object PFormaPago: TPanel
-          Left = 1
-          Top = 1
-          Width = 890
-          Height = 124
-          Align = alClient
-          TabOrder = 0
-          object Label36: TLabel
-            Left = 1
-            Top = 1
-            Width = 888
-            Height = 16
-            Align = alTop
-            Alignment = taCenter
-            AutoSize = False
-            Caption = 'Entregas [F7]'
-            Color = 12648448
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object PieGrilla: TPanel
-            Left = 1
-            Top = 91
-            Width = 888
-            Height = 32
-            Align = alBottom
-            BevelOuter = bvLowered
-            TabOrder = 0
-            object btnQuitarPago: TButton
-              Left = 8
-              Top = 3
-              Width = 105
-              Height = 20
-              Caption = 'Quitar Entrega'
-              TabOrder = 0
-              OnClick = btnQuitarPagoClick
-            end
-          end
-          object DBGridFormaPago: TDBGrid
-            Left = 1
-            Top = 17
-            Width = 888
-            Height = 74
-            Align = alClient
-            Color = 15527129
-            DataSource = DS_Orden_Entrega
-            Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-            TabOrder = 1
-            TitleFont.Charset = ANSI_CHARSET
-            TitleFont.Color = clWindowText
-            TitleFont.Height = -11
-            TitleFont.Name = 'Verdana'
-            TitleFont.Style = []
-            Columns = <
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'CUENTA_INGRESO'
-                Title.Caption = 'C'#243'd'
-                Width = 30
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = '_ctaIngreso'
-                Title.Caption = 'Cuenta'
-                Width = 150
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'ID_TIPO_FORMAPAG'
-                Title.Caption = 'MP'
-                Width = 29
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'medioPago'
-                Title.Caption = 'Medio Pago'
-                Width = 226
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'IMPORTE'
-                Title.Caption = 'Importe'
-                Width = 59
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'MDCP_FECHA'
-                Title.Caption = 'Fecha'
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'MDCP_BANCO'
-                Title.Caption = 'Banco'
-                Width = 103
-                Visible = True
-              end
-              item
-                Color = 16772332
-                Expanded = False
-                FieldName = 'MDCP_CHEQUE'
-                Title.Caption = 'N'#250'mero'
-                Width = 97
-                Visible = True
-              end>
-          end
-        end
-      end
-    end
-    object PanelDetalles: TPanel
-      Left = 1
-      Top = 31
-      Width = 894
-      Height = 163
-      Align = alTop
-      TabOrder = 1
-      object PanelDetalleCliente: TPanel
-        Left = 1
-        Top = 94
-        Width = 892
-        Height = 68
-        Align = alBottom
-        BevelOuter = bvLowered
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 1
-        object Label12: TLabel
-          Left = 1
-          Top = 1
-          Width = 890
-          Height = 13
-          Align = alTop
-          Alignment = taCenter
-          Caption = 'Detalles Cliente  [F3]'
-          Color = 12648448
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-        object Label13: TLabel
-          Left = 21
-          Top = 22
-          Width = 48
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'C'#243'digo:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label16: TLabel
-          Left = 149
-          Top = 22
-          Width = 73
-          Height = 13
-          Caption = 'CUIT/CUIL:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label17: TLabel
-          Left = 422
-          Top = 21
-          Width = 36
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Edad:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label21: TLabel
-          Left = 510
-          Top = 21
-          Width = 89
-          Height = 13
-          Caption = 'Tel'#233'fono/Cel:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label28: TLabel
-          Left = 14
-          Top = 45
-          Width = 55
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Nombre:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label_DetalleCliente: TLabel
-          Left = 393
-          Top = 45
-          Width = 65
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Direcci'#243'n:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object DBEdit9: TDBEdit
-          Left = 70
-          Top = 41
-          Width = 302
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'pers_nombre'
-          DataSource = DS_Orden
-          ReadOnly = True
-          TabOrder = 2
-        end
-        object DBEdit10: TDBEdit
-          Left = 70
-          Top = 18
-          Width = 71
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'pers_cod'
-          DataSource = DS_Orden
-          ReadOnly = True
-          TabOrder = 0
-        end
-        object DBEdit11: TDBEdit
-          Left = 224
-          Top = 18
-          Width = 148
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'pers_cuit'
-          DataSource = DS_Orden
-          ReadOnly = True
-          TabOrder = 1
-        end
-        object DBEdit12: TDBEdit
-          Left = 600
-          Top = 17
-          Width = 161
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'pers_telefono'
-          DataSource = DS_Orden
-          ReadOnly = True
-          TabOrder = 5
-        end
-        object DBEdit14: TDBEdit
-          Left = 462
-          Top = 17
-          Width = 43
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'pers_edad'
-          DataSource = DS_Orden
-          ReadOnly = True
-          TabOrder = 4
-        end
-        object DBEdit_DetalleCliente: TDBEdit
-          Left = 462
-          Top = 41
-          Width = 302
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'pers_direccion'
-          DataSource = DS_Orden
-          ReadOnly = True
-          TabOrder = 3
-        end
-      end
-      object PDetalleOrden: TPanel
-        Left = 1
-        Top = 1
-        Width = 553
-        Height = 93
-        Align = alClient
-        BevelOuter = bvLowered
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 0
-        object Label22: TLabel
-          Left = 10
-          Top = 24
-          Width = 81
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Nro Factura:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label23: TLabel
-          Left = 20
-          Top = 48
-          Width = 71
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Entregado:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Visible = False
-        end
-        object Label24: TLabel
-          Left = 272
-          Top = 48
-          Width = 71
-          Height = 13
-          Caption = 'Prometido:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label25: TLabel
-          Left = 300
-          Top = 24
-          Width = 43
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Fecha:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label7: TLabel
-          Left = 1
-          Top = 1
-          Width = 551
-          Height = 13
-          Align = alTop
-          Alignment = taCenter
-          Caption = 'Detalles Orden T'#233'cnica'
-          Color = 12648448
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-        object DBEdit2: TDBEdit
-          Left = 92
-          Top = 20
-          Width = 141
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'NRO_FACTURA'
-          DataSource = DS_Orden
-          TabOrder = 0
-        end
-        object DBEdit3: TDBEdit
-          Left = 92
-          Top = 44
-          Width = 163
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'ENTREGADO_POR'
-          DataSource = DS_Orden
-          TabOrder = 1
-          Visible = False
-        end
-        object dbAvisar: TDBCheckBox
-          Left = 92
-          Top = 69
-          Width = 73
-          Height = 17
-          Caption = 'Avisar'
-          DataField = 'AVISAR'
-          DataSource = DS_Orden
-          TabOrder = 2
-          ValueChecked = 'S'
-          ValueUnchecked = 'N'
-        end
-        object EKDBDateTimePicker1: TEKDBDateTimePicker
-          Left = 345
-          Top = 20
-          Width = 129
-          Height = 21
-          Date = 41324.403722569440000000
-          Time = 41324.403722569440000000
-          Color = 15527129
-          TabOrder = 3
-          DataField = 'FECHA_ORDEN'
-          DataSource = DS_Orden
-        end
-        object EKDBDateTimePicker2: TEKDBDateTimePicker
-          Left = 345
-          Top = 44
-          Width = 129
-          Height = 21
-          Date = 41324.403722569440000000
-          Time = 41324.403722569440000000
-          Checked = False
-          Color = 15527129
-          TabOrder = 4
-          DataField = 'FECHA_PROMETIDO'
-          DataSource = DS_Orden
-        end
-      end
-      object PMedico: TPanel
-        Left = 554
-        Top = 1
-        Width = 339
-        Height = 93
-        Align = alRight
-        BevelOuter = bvLowered
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 2
-        object Label10: TLabel
-          Left = 1
-          Top = 1
-          Width = 337
-          Height = 13
-          Align = alTop
-          Alignment = taCenter
-          Caption = 'Detalles M'#233'dico'
-          Color = 12648448
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-        object Label14: TLabel
-          Left = 13
-          Top = 21
-          Width = 64
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Matr'#237'cula:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label15: TLabel
-          Left = 12
-          Top = 68
-          Width = 65
-          Height = 13
-          Caption = 'Direcci'#243'n:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object Label18: TLabel
-          Left = 22
-          Top = 44
-          Width = 55
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Nombre:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object DBEdit13: TDBEdit
-          Left = 86
-          Top = 64
-          Width = 227
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'med_direccion'
-          DataSource = DS_Orden
-          ReadOnly = True
-          TabOrder = 0
-        end
-        object DBEdit15: TDBEdit
-          Left = 86
-          Top = 17
-          Width = 227
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'med_matricula'
-          DataSource = DS_Orden
-          ReadOnly = True
-          TabOrder = 1
-        end
-        object DBEdit16: TDBEdit
-          Left = 86
-          Top = 40
-          Width = 227
-          Height = 21
-          BevelInner = bvNone
-          BevelOuter = bvNone
-          Color = 15527129
-          DataField = 'med_nombre'
-          DataSource = DS_Orden
-          ReadOnly = True
-          TabOrder = 2
-        end
-      end
-    end
-    object PanelStatusBar: TPanel
-      Left = 1
-      Top = 1
-      Width = 894
-      Height = 30
-      Align = alTop
-      BevelOuter = bvLowered
-      TabOrder = 2
-      object DBText7: TDBText
-        Left = 549
-        Top = 1
-        Width = 344
-        Height = 28
-        Align = alRight
-        Alignment = taCenter
-        Color = 16729670
-        DataField = '_estado'
-        DataSource = DS_Orden
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -19
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-      object DBText5: TDBText
-        Left = 1
-        Top = 1
-        Width = 344
-        Height = 28
-        Align = alLeft
-        Color = 16729670
-        DataField = '_vendedor'
-        DataSource = DS_Orden
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clBlack
-        Font.Height = -19
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-      end
-    end
-  end
   object PListado: TPanel
     Left = 114
     Top = 0
-    Width = 896
-    Height = 619
+    Width = 904
+    Height = 630
     Align = alClient
     TabOrder = 9
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 894
-      Height = 617
+      Width = 902
+      Height = 628
       Align = alClient
       Caption = 'Panel1'
       TabOrder = 0
       object Splitter2: TSplitter
         Left = 1
-        Top = 488
-        Width = 892
+        Top = 499
+        Width = 900
         Height = 6
         Cursor = crVSplit
         Align = alBottom
@@ -4592,15 +4591,15 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       object PanelComprobante: TPanel
         Left = 1
         Top = 1
-        Width = 892
-        Height = 487
+        Width = 900
+        Height = 498
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object lblTotalOrdenes: TLabel
           Left = 0
-          Top = 466
-          Width = 892
+          Top = 477
+          Width = 900
           Height = 21
           Align = alBottom
           Alignment = taRightJustify
@@ -4620,8 +4619,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object DBGridComprobantes: TDBGrid
           Left = 0
           Top = 17
-          Width = 892
-          Height = 449
+          Width = 900
+          Height = 460
           Align = alClient
           Color = 15527129
           DataSource = DS_Orden
@@ -4775,13 +4774,13 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object Panel3: TPanel
           Left = 0
           Top = 0
-          Width = 892
+          Width = 900
           Height = 17
           Align = alTop
           BevelOuter = bvLowered
           TabOrder = 1
           object lblEstado: TStaticText
-            Left = 672
+            Left = 680
             Top = 1
             Width = 219
             Height = 15
@@ -4797,13 +4796,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
             ParentColor = False
             ParentFont = False
             TabOrder = 0
+            Transparent = False
           end
         end
       end
       object PanelFPagoYProd: TPanel
         Left = 1
-        Top = 494
-        Width = 892
+        Top = 505
+        Width = 900
         Height = 122
         Align = alBottom
         BevelOuter = bvNone
@@ -4818,7 +4818,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         object PanelProducto: TPanel
           Left = 518
           Top = 0
-          Width = 374
+          Width = 382
           Height = 122
           Align = alClient
           BevelOuter = bvNone
@@ -4827,7 +4827,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object lblTotalProducto: TLabel
             Left = 0
             Top = 101
-            Width = 374
+            Width = 382
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -4847,7 +4847,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
           object DBGrid1: TDBGrid
             Left = 0
             Top = 0
-            Width = 374
+            Width = 382
             Height = 101
             Align = alClient
             Color = 15527129
@@ -5016,7 +5016,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -5314,8 +5314,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 168
-    Top = 248
+    Left = 912
+    Top = 208
     DockControlHeights = (
       114
       0
@@ -7632,8 +7632,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       '')
     Params = <>
     IndexFieldNames = 'FECHA_ORDEN Desc;ID_ORDEN Desc'
-    Left = 658
-    Top = 47
+    Left = 762
+    Top = 79
     object ZQ_OrdenID_ORDEN: TIntegerField
       FieldName = 'ID_ORDEN'
     end
@@ -7839,8 +7839,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     MasterFields = 'ID_ORDEN'
     MasterSource = DS_Orden
     LinkedFields = 'ID_ORDEN'
-    Left = 329
-    Top = 302
+    Left = 313
+    Top = 294
     object ZQ_OrdenDetalleID_ORDEN_DETALLE: TIntegerField
       FieldName = 'ID_ORDEN_DETALLE'
     end
@@ -7960,48 +7960,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     Left = 933
     Top = 388
   end
-  object EKListadoProducto: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select sp.id_producto,'
-      '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
-      
-        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
-        #39#39'),'#39#39')||'
-      '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
-      '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39')||'
-      '        COALESCE ('#39' - Secci'#243'n: '#39' || ps.seccion,'#39#39')||'
-      '        COALESCE ('#39' - Sector: '#39' || ps.sector,'#39#39')||'
-      '        COALESCE ('#39' - Fila: '#39' || ps.fila,'#39#39')||'
-      
-        '        COALESCE ('#39' - Columna: '#39' || ps.columna,'#39#39'))as varchar(10' +
-        '00))'
-      '         AS posicSucursal'
-      'from producto_cabecera pc'
-      'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
-      'join stock_producto sp on (sp.id_producto =  pr.id_producto)'
-      
-        'join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.id_po' +
-        'sicion_sucursal)'
-      'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
-      'join configuracion c on (c.id_sucursal=su.id_sucursal)'
-      'left join medida m on (pr.id_medida=m.id_medida)'
-      
-        'where (ps.punto_salida='#39'S'#39')and(pr.baja<>'#39'S'#39')and(pc.baja<>'#39'S'#39')and' +
-        '(sp.stock_actual>0)'
-      'order by 2')
-    CampoBuscar = 'posicSucursal'
-    CampoClave = 'id_producto'
-    TituloVentana = 'Buscar Producto'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 424
-    Top = 248
-  end
   object ZQ_Productos: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -8048,7 +8006,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         ParamType = ptUnknown
       end>
     Left = 424
-    Top = 304
+    Top = 360
     ParamData = <
       item
         DataType = ftUnknown
@@ -8202,8 +8160,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'left join tipo_iva ti on (ti.id_tipo_iva=p.id_tipo_iva)'
       '')
     Params = <>
-    Left = 525
-    Top = 250
+    Left = 653
+    Top = 418
     object ZQ_PersonasID_PERSONA: TIntegerField
       FieldName = 'ID_PERSONA'
       Required = True
@@ -8307,13 +8265,13 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DS_Orden: TDataSource
     DataSet = ZQ_Orden
-    Left = 248
-    Top = 248
+    Left = 432
+    Top = 304
   end
   object DS_OrdenDetalle: TDataSource
     DataSet = ZQ_OrdenDetalle
-    Left = 520
-    Top = 104
+    Left = 768
+    Top = 200
   end
   object ZQ_Laboratorios: TZQuery
     Connection = DM.Conexion
@@ -8410,55 +8368,10 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       Size = 362
     end
   end
-  object EKListadoMedico: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      
-        'select MED.ID_MEDICO, coalesce('#39'Matr: '#39'||MED.MATRICULA||'#39' - '#39'||M' +
-        'ED.NOMBRE||'#39' - '#39'||MED.DIRECCION,'#39'Matr: '#39'||MED.MATRICULA||'#39' - '#39'||' +
-        'MED.NOMBRE,MED.NOMBRE) as detalle'
-      'from OPTICA_MEDICO MED'
-      'where med.baja='#39'N'#39)
-    CampoBuscar = 'DETALLE'
-    CampoClave = 'id_MEDICO'
-    BuscarEnQuery = ZQ_Medico
-    TituloVentana = 'Buscar M'#233'dico'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 816
-    Top = 56
-  end
-  object EKListadoOS: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      
-        'select OO.ID_OS,coalesce(OO.CODIGO||'#39' - '#39'||OO.NOMBRE||'#39' - '#39'||OO.' +
-        'descripcion,OO.CODIGO||'#39' - '#39'||OO.NOMBRE) as detalle'
-      'from OPTICA_OS OO'
-      'left join optica_persona_os opos on (opos.id_os=oo.id_os)'
-      'where (oo.baja='#39'N'#39')'
-      'and opos.id_persona=:idp'
-      '')
-    CampoBuscar = 'DETALLE'
-    CampoClave = 'id_OS'
-    TituloVentana = 'Buscar Obra Social'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 928
-    Top = 336
-  end
   object Popup_Producto: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
-    Left = 168
-    Top = 303
+    Left = 328
+    Top = 407
     object PopItemProducto_Agregar: TMenuItem
       Caption = 'Agregar Producto'
       ImageIndex = 14
@@ -8644,14 +8557,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object ZQ_GenOrdenDetalle: TZSequence
     Connection = DM.Conexion
     SequenceName = 'GEN_OPTICA_ORDEN_DETALLE_ID'
-    Left = 165
-    Top = 356
+    Left = 181
+    Top = 292
   end
   object ZQ_GenOrden: TZSequence
     Connection = DM.Conexion
     SequenceName = 'GEN_OPTICA_ORDEN_ID'
-    Left = 661
-    Top = 108
+    Left = 773
+    Top = 140
   end
   object ZQ_OS: TZQuery
     Connection = DM.Conexion
@@ -8666,8 +8579,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       ''
       '')
     Params = <>
-    Left = 680
-    Top = 361
+    Left = 768
+    Top = 353
     object ZQ_OSID_OS: TIntegerField
       FieldName = 'ID_OS'
       Required = True
@@ -8693,35 +8606,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       OnClick = MenuItem2Click
     end
   end
-  object EKDbSumaProd: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE_TOTAL'
-      end
-      item
-        Operacion = goCount
-        NombreCampo = 'id_producto'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'importe_reconocido'
-      end>
-    DataSet = ZQ_OrdenDetalle
-    SumListChanged = EKDbSumaProdSumListChanged
-    Left = 428
-    Top = 366
-  end
-  object EKDbSumaOS: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'monto_descontado'
-      end>
-    DataSet = ZQ_OrdenDetalleOS
-    Left = 852
-    Top = 246
-  end
   object ZQ_CodifRP: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -8733,7 +8617,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     MasterFields = 'ID_ORDEN'
     MasterSource = DS_Orden
     LinkedFields = 'ID_ORDEN'
-    Left = 608
+    Left = 664
     Top = 353
     object ZQ_CodifRPID_RECETA: TIntegerField
       FieldName = 'ID_RECETA'
@@ -8824,12 +8708,12 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object DS_CodifRP: TDataSource
     DataSet = ZQ_CodifRP
     Left = 248
-    Top = 304
+    Top = 224
   end
   object DS_Medico: TDataSource
     DataSet = ZQ_Medico
-    Left = 328
-    Top = 248
+    Left = 536
+    Top = 408
   end
   object ZQ_Orden_Entrega: TZQuery
     Connection = DM.Conexion
@@ -8841,8 +8725,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     MasterFields = 'ID_ORDEN'
     MasterSource = DS_Orden
     LinkedFields = 'ID_ORDEN'
-    Left = 433
-    Top = 465
+    Left = 441
+    Top = 409
     object ZQ_Orden_EntregaID_ENTREGA: TIntegerField
       FieldName = 'ID_ENTREGA'
     end
@@ -8958,53 +8842,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   end
   object DS_Orden_Entrega: TDataSource
     DataSet = ZQ_Orden_Entrega
-    Left = 569
-    Top = 489
-  end
-  object EKListadoCuenta: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select cta.*, tipo.descripcion,'
-      
-        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
-        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
-      'from cuenta cta'
-      
-        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
-        'po_formapago)'
-      'where cta.baja = '#39'N'#39
-      'order by cta.nombre_cuenta')
-    CampoBuscar = 'busqueda'
-    CampoClave = 'id_cuenta'
-    TituloVentana = 'Buscar Cuenta'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 757
-    Top = 489
-  end
-  object EKListadoMedio: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select tipo.*'
-      'from tipo_formapago tipo'
-      'where tipo.baja = '#39'N'#39
-      '  and tipo.id_tipo_formapago > 1'
-      'order by tipo.descripcion')
-    CampoBuscar = 'descripcion'
-    CampoClave = 'id_tipo_formapago'
-    TituloVentana = 'Buscar Medio'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 845
-    Top = 489
+    Left = 665
+    Top = 153
   end
   object ZQ_ColsPrecios: TZQuery
     Connection = DM.Conexion
@@ -9025,8 +8864,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'from tipo_formapago'
       'order by descripcion,cod_corto')
     Params = <>
-    Left = 749
-    Top = 442
+    Left = 765
+    Top = 410
     object ZQ_FormasPagoID_TIPO_FORMAPAGO: TIntegerField
       FieldName = 'ID_TIPO_FORMAPAGO'
       Required = True
@@ -9069,8 +8908,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'where baja='#39'N'#39
       'order by cta.nombre_cuenta,cta.codigo')
     Params = <>
-    Left = 309
-    Top = 465
+    Left = 317
+    Top = 353
     object ZQ_CuentasID_CUENTA: TIntegerField
       FieldName = 'ID_CUENTA'
     end
@@ -9110,200 +8949,20 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     end
   end
   object DS_Totales: TDataSource
-    Left = 677
+    Left = 669
     Top = 300
-  end
-  object EKBuscarOrdenes: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'ID'
-        Campo = 'id_orden'
-        Tabla = 'OPTICA_ORDEN'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 350
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'C'#243'digo'
-        Campo = 'CODIGO_CLI'
-        Tabla = 'OPTICA_ORDEN'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Nombre Cliente'
-        Campo = 'nombre'
-        Tabla = 'persona'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha Orden'
-        Campo = 'fecha_orden'
-        Tabla = 'OPTICA_ORDEN'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha Prometido'
-        Campo = 'fecha_prometido'
-        Tabla = 'OPTICA_ORDEN'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'M'#233'dico'
-        Campo = 'nombre'
-        Tabla = 'optica_medico'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Monto Total'
-        Campo = 'monto_total'
-        Tabla = 'OPTICA_ORDEN'
-        TipoCampo = EK_Numero
-        TipoCampoIndice = 2
-        TipoCampoIndiceVer = '>='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Monto Reconocido'
-        Campo = 'monto_reconocido'
-        Tabla = 'OPTICA_ORDEN'
-        TipoCampo = EK_Numero
-        TipoCampoIndice = 2
-        TipoCampoIndiceVer = '>='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Monto Entregado'
-        Campo = 'monto_entregado'
-        Tabla = 'OPTICA_ORDEN'
-        TipoCampo = EK_Numero
-        TipoCampoIndice = 2
-        TipoCampoIndiceVer = '>='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Saldo'
-        Campo = 'saldo'
-        Tabla = 'OPTICA_ORDEN'
-        TipoCampo = EK_Numero
-        TipoCampoIndice = 2
-        TipoCampoIndiceVer = '>='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Estado Orden'
-        Campo = 'id_estado'
-        Tabla = 'optica_orden'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_EstadoOrden
-        TipoComboSQLCampoVer = 'descripcion'
-        TipoComboSQLCampoReal = 'id_estado'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = 0
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Observaciones'
-        Campo = 'observaciones'
-        Tabla = 'OPTICA_ORDEN'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_Orden
-    SQL.Strings = (
-      'select oo.*,'
-      
-        'p.nombre as nombre_cli,p.direccion as direcc_cli,om.nombre as no' +
-        'mbre_med,om.matricula as matric_med,'
-      'oe.descripcion as o_estado'
-      ''
-      ''
-      ''
-      'from OPTICA_ORDEN oo'
-      'join persona p on (oo.id_cliente=p.id_persona)'
-      'left join optica_medico om on (om.id_medico=oo.id_medico)'
-      'left join optica_estado oe on (oe.id_estado=oo.id_estado)'
-      ''
-      ''
-      'order by oo.fecha_orden desc, oo.id_orden desc')
-    SQL_Select.Strings = (
-      'select oo.*,'
-      
-        'p.nombre as nombre_cli,p.direccion as direcc_cli,om.nombre as no' +
-        'mbre_med,om.matricula as matric_med,'
-      'oe.descripcion as o_estado'
-      ''
-      ''
-      '')
-    SQL_From.Strings = (
-      'from OPTICA_ORDEN oo'
-      'join persona p on (oo.id_cliente=p.id_persona)'
-      'left join optica_medico om on (om.id_medico=oo.id_medico)'
-      'left join optica_estado oe on (oe.id_estado=oo.id_estado)'
-      ''
-      '')
-    SQL_Orden.Strings = (
-      'order by oo.fecha_orden desc, oo.id_orden desc')
-    UsarWhereOriginal = EK_Sin_Where
-    Left = 192
-    Top = 119
   end
   object ZQ_GenOrdenEntrega: TZSequence
     Connection = DM.Conexion
     SequenceName = 'GEN_OPTICA_ENTREGA'
     Left = 181
-    Top = 428
+    Top = 348
   end
   object ZQ_GenOrdenDetalleOS: TZSequence
     Connection = DM.Conexion
     SequenceName = 'GEN_OPTICA_DETALLE_OS_ID'
-    Left = 189
-    Top = 484
+    Left = 181
+    Top = 404
   end
   object ZQ_EstadoOrden: TZQuery
     Connection = DM.Conexion
@@ -9329,135 +8988,6 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       FieldName = 'DESCRIPCION'
       Size = 100
     end
-  end
-  object EKDbSumaEntregas: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'importe'
-      end>
-    DataSet = ZQ_Orden_Entrega
-    SumListChanged = EKDbSumaEntregasSumListChanged
-    Left = 660
-    Top = 478
-  end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridComprobantes
-    Filtros = <
-      item
-        TituloColumna = 'ID'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'digo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Cliente'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nombre Cliente'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cuit Cliente'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Direcci'#243'n'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Orden'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Prometido'
-        Visible = True
-      end
-      item
-        TituloColumna = 'M'#233'dico'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Monto Total'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Monto Reconocido OS'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Monto Entregado'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Saldo Pendiente'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Matr'#237'cula M'#233'dico'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Estado Orden'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Avisar'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Vendedor'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Observaciones'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Facturado Por'
-        Visible = True
-      end
-      item
-        TituloColumna = 'NRO_FACTURA'
-        Visible = True
-      end>
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 388
-    Top = 104
-  end
-  object EKDbSumaOrdenes: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'monto_total'
-      end
-      item
-        Operacion = goCount
-        NombreCampo = 'monto_entregado'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'monto_reconocido'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'saldo'
-      end
-      item
-        Operacion = goCount
-        NombreCampo = 'id_orden'
-      end>
-    DataSet = ZQ_Orden
-    SumListChanged = EKDbSumaOrdenesSumListChanged
-    Left = 516
-    Top = 174
   end
   object ZU_Orden: TZUpdateSQL
     DeleteSQL.Strings = (
@@ -9511,8 +9041,8 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'WHERE'
       '  OPTICA_ORDEN.ID_ORDEN = :OLD_ID_ORDEN')
     UseSequenceFieldForRefreshSQL = False
-    Left = 532
-    Top = 50
+    Left = 652
+    Top = 90
     ParamData = <
       item
         DataType = ftUnknown
@@ -9615,7 +9145,424 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         ParamType = ptUnknown
       end>
   end
-  object EKDbSuma1: TEKDbSuma
+  object ISBuscarOrdenes: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'ID'
+        Campo = 'id_orden'
+        Tabla = 'oo'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'digo'
+        Campo = 'CODIGO_CLI'
+        Tabla = 'oo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nombre Cliente'
+        Campo = 'nombre'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Orden'
+        Campo = 'fecha_orden'
+        Tabla = 'oo'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Prometido'
+        Campo = 'fecha_prometido'
+        Tabla = 'oo'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'M'#233'dico'
+        Campo = 'nombre'
+        Tabla = 'om'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Monto Total'
+        Campo = 'monto_total'
+        Tabla = 'oo'
+        TipoCampo = IS_Numero
+        TipoCampoIndice = 2
+        TipoCampoIndiceVer = '>='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Monto Reconocido'
+        Campo = 'monto_reconocido'
+        Tabla = 'oo'
+        TipoCampo = IS_Numero
+        TipoCampoIndice = 2
+        TipoCampoIndiceVer = '>='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Monto Entregado'
+        Campo = 'monto_entregado'
+        Tabla = 'oo'
+        TipoCampo = IS_Numero
+        TipoCampoIndice = 2
+        TipoCampoIndiceVer = '>='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Saldo'
+        Campo = 'saldo'
+        Tabla = 'oo'
+        TipoCampo = IS_Numero
+        TipoCampoIndice = 2
+        TipoCampoIndiceVer = '>='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Estado Orden'
+        Campo = 'id_estado'
+        Tabla = 'oo'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_EstadoOrden
+        TipoCombollenarCampo = 'descripcion'
+        TipoCombollenarCampoReal = 'id_estado'
+        TipoComboEditable = False
+        ItemIndex = 0
+      end
+      item
+        Titulo = 'Observaciones'
+        Campo = 'observaciones'
+        Tabla = 'oo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_Orden
+    SQL.Strings = (
+      'select oo.*,'
+      
+        'p.nombre as nombre_cli,p.direccion as direcc_cli,om.nombre as no' +
+        'mbre_med,om.matricula as matric_med,'
+      'oe.descripcion as o_estado'
+      'from OPTICA_ORDEN oo'
+      'join persona p on (oo.id_cliente=p.id_persona)'
+      'left join optica_medico om on (om.id_medico=oo.id_medico)'
+      'left join optica_estado oe on (oe.id_estado=oo.id_estado)'
+      ''
+      ''
+      'order by oo.fecha_orden desc, oo.id_orden desc')
+    SQL_Select.Strings = (
+      'select oo.*,'
+      
+        'p.nombre as nombre_cli,p.direccion as direcc_cli,om.nombre as no' +
+        'mbre_med,om.matricula as matric_med,'
+      'oe.descripcion as o_estado')
+    SQL_From.Strings = (
+      'from OPTICA_ORDEN oo'
+      'join persona p on (oo.id_cliente=p.id_persona)'
+      'left join optica_medico om on (om.id_medico=oo.id_medico)'
+      'left join optica_estado oe on (oe.id_estado=oo.id_estado)'
+      '')
+    SQL_Orden.Strings = (
+      ''
+      'order by oo.fecha_orden desc, oo.id_orden desc')
+    UsarWhereOriginal = IS_Sin_Where
+    Left = 156
+    Top = 50
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
+    Grilla = DBGridComprobantes
+    Filtros = <
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuit Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Orden'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Prometido'
+        Visible = True
+      end
+      item
+        TituloColumna = 'M'#233'dico'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Monto Total'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Monto Reconocido OS'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Monto Entregado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Saldo Pendiente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Matr'#237'cula M'#233'dico'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Estado Orden'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Avisar'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Vendedor'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Observaciones'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Facturado Por'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NRO_FACTURA'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 156
+    Top = 106
+  end
+  object ISListadoProducto: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select sp.id_producto,'
+      '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
+      
+        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
+        #39#39'),'#39#39')||'
+      '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
+      '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39')||'
+      '        COALESCE ('#39' - Secci'#243'n: '#39' || ps.seccion,'#39#39')||'
+      '        COALESCE ('#39' - Sector: '#39' || ps.sector,'#39#39')||'
+      '        COALESCE ('#39' - Fila: '#39' || ps.fila,'#39#39')||'
+      
+        '        COALESCE ('#39' - Columna: '#39' || ps.columna,'#39#39'))as varchar(10' +
+        '00))'
+      '         AS posicSucursal'
+      'from producto_cabecera pc'
+      'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
+      'join stock_producto sp on (sp.id_producto =  pr.id_producto)'
+      
+        'join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.id_po' +
+        'sicion_sucursal)'
+      'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'join configuracion c on (c.id_sucursal=su.id_sucursal)'
+      'left join medida m on (pr.id_medida=m.id_medida)'
+      
+        'where (ps.punto_salida='#39'S'#39')and(pr.baja<>'#39'S'#39')and(pc.baja<>'#39'S'#39')and' +
+        '(sp.stock_actual>0)'
+      'order by 2'
+      '')
+    CampoBuscar = 'posicSucursal'
+    CampoClave = 'id_producto'
+    TituloVentana = 'Buscar Producto'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 156
+    Top = 162
+  end
+  object ISListadoCuenta: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select cta.*, tipo.descripcion,'
+      
+        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
+        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
+      'from cuenta cta'
+      
+        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
+        'po_formapago)'
+      'where cta.baja = '#39'N'#39
+      'order by cta.nombre_cuenta'
+      '')
+    CampoBuscar = 'busqueda'
+    CampoClave = 'id_cuenta'
+    TituloVentana = 'Buscar Cuenta'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 156
+    Top = 218
+  end
+  object ISListadoMedio: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select tipo.*'
+      'from tipo_formapago tipo'
+      'where tipo.baja = '#39'N'#39
+      '  and tipo.id_tipo_formapago > 1'
+      'order by tipo.descripcion'
+      '')
+    CampoBuscar = 'descripcion'
+    CampoClave = 'id_tipo_formapago'
+    TituloVentana = 'Buscar Medio'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 252
+    Top = 50
+  end
+  object ISListadoMedico: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      
+        'select MED.ID_MEDICO, coalesce('#39'Matr: '#39'||MED.MATRICULA||'#39' - '#39'||M' +
+        'ED.NOMBRE||'#39' - '#39'||MED.DIRECCION,'#39'Matr: '#39'||MED.MATRICULA||'#39' - '#39'||' +
+        'MED.NOMBRE,MED.NOMBRE) as detalle'
+      'from OPTICA_MEDICO MED'
+      'where med.baja='#39'N'#39
+      '')
+    CampoBuscar = 'DETALLE'
+    CampoClave = 'id_MEDICO'
+    BuscarEnQuery = ZQ_Medico
+    TituloVentana = 'Buscar M'#233'dico'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 252
+    Top = 106
+  end
+  object ISListadoOS: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      
+        'select OO.ID_OS,coalesce(OO.CODIGO||'#39' - '#39'||OO.NOMBRE||'#39' - '#39'||OO.' +
+        'descripcion,OO.CODIGO||'#39' - '#39'||OO.NOMBRE) as detalle'
+      'from OPTICA_OS OO'
+      'left join optica_persona_os opos on (opos.id_os=oo.id_os)'
+      'where (oo.baja='#39'N'#39')'
+      'and opos.id_persona=:idp'
+      ''
+      '')
+    CampoBuscar = 'DETALLE'
+    CampoClave = 'id_OS'
+    TituloVentana = 'Buscar Obra Social'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 252
+    Top = 162
+  end
+  object ISDbSumaEntregas: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'importe'
+      end>
+    DataSet = ZQ_Orden_Entrega
+    SumListChanged = EKDbSumaEntregasSumListChanged
+    Left = 428
+    Top = 50
+  end
+  object ISDbSumaOrdenes: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'monto_total'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'monto_entregado'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'monto_reconocido'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'saldo'
+      end
+      item
+        Operacion = goCount
+        NombreCampo = 'id_orden'
+      end>
+    DataSet = ZQ_Orden
+    SumListChanged = EKDbSumaOrdenesSumListChanged
+    Left = 428
+    Top = 98
+  end
+  object ISDbSuma1: TISDbSuma
     SumCollection = <
       item
         Operacion = goSum
@@ -9630,7 +9577,36 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
         NombreCampo = 'importe_reconocido'
       end>
     DataSet = ZQ_OrdenDetalle
-    Left = 356
-    Top = 366
+    Left = 516
+    Top = 58
+  end
+  object ISDbSumaProd: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_TOTAL'
+      end
+      item
+        Operacion = goCount
+        NombreCampo = 'id_producto'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'importe_reconocido'
+      end>
+    DataSet = ZQ_OrdenDetalle
+    SumListChanged = EKDbSumaProdSumListChanged
+    Left = 516
+    Top = 114
+  end
+  object ISDbSumaOS: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'monto_descontado'
+      end>
+    DataSet = ZQ_OrdenDetalleOS
+    Left = 524
+    Top = 170
   end
 end
