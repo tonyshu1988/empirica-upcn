@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, ComCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKVistaPreviaQR,
   EKBusquedaAvanzada, QuickRpt, QRCtrls, ActnList, XPStyleActnCtrls,
-  ActnMan, EKOrdenarGrilla, StdCtrls, EKDbSuma;
+  ActnMan, EKOrdenarGrilla, StdCtrls, EKDbSuma, cxClasses;
 
 type
   TFOP_Reportes = class(TForm)
