@@ -5,9 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, ComCtrls, Grids, DBGrids, DB,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset, EKVistaPreviaQR,
-  EKBusquedaAvanzada, QuickRpt, QRCtrls, ActnList, XPStyleActnCtrls,
-  ActnMan, EKOrdenarGrilla, StdCtrls, EKDbSuma, cxClasses;
+  ZAbstractRODataset, ZAbstractDataset, ZDataset,
+   QuickRpt, QRCtrls, ActnList, XPStyleActnCtrls,
+  ActnMan,  StdCtrls, cxClasses, ISVistaPreviaQR,
+  ISDbSuma, ISOrdenarGrilla, ISBusquedaAvanzada;
 
 type
   TFOP_Reportes = class(TForm)
@@ -30,9 +31,7 @@ type
     TabReporteMedico: TTabSheet;
     DBGridOrdenDetalle: TDBGrid;
     ZQ_Orden: TZQuery;
-    EKVistaPreviaReporteMedicos: TEKVistaPreviaQR;
     DS_Orden: TDataSource;
-    EKBusquedaReporteMedicos: TEKBusquedaAvanzada;
     Splitter1: TSplitter;
     DBGridOrden: TDBGrid;
     ZQ_OrdenDetalle: TZQuery;
@@ -87,8 +86,6 @@ type
     ZQ_OrdenNOMBRE: TStringField;
     QRLabel1: TQRLabel;
     QRDBText7: TQRDBText;
-    EKOrdenarGrillaOrden: TEKOrdenarGrilla;
-    EKOrdenarGrillaOrdenDetalle: TEKOrdenarGrilla;
     POrden: TPanel;
     POrdenDetalle: TPanel;
     Label7: TLabel;
@@ -97,8 +94,12 @@ type
     lblTotalOrden: TLabel;
     POrdenDetalleTotales: TPanel;
     lblTotalOrdenDetalle: TLabel;
-    EKDbSumaOrden: TEKDbSuma;
-    EKDbSumaOrdenDetalle: TEKDbSuma;
+    ISBusquedaReporteMedicos: TISBusquedaAvanzada;
+    ISOrdenarGrillaOrden: TISOrdenarGrilla;
+    ISOrdenarGrillaOrdenDetalle: TISOrdenarGrilla;
+    ISDbSumaOrden: TISDbSuma;
+    ISDbSumaOrdenDetalle: TISDbSuma;
+    ISVistaPreviaReporteMedicos: TISVistaPreviaQR;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
@@ -132,11 +133,11 @@ begin
   case PageControlReportes.ActivePageIndex of
     0: //Reporte Medicos
       begin
-        EKBusquedaReporteMedicos.Buscar;
-        EKDbSumaOrden.RecalcAll;
-        EKDbSumaOrdenDetalle.RecalcAll;
-        lblTotalOrden.Caption:= 'Total Importe: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrden.SumCollection[0].SumValue) + ' - Total OS: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrden.SumCollection[1].SumValue);
-        lblTotalOrdenDetalle.Caption:= 'Total Importe: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrdenDetalle.SumCollection[0].SumValue) + ' - Total OS: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrdenDetalle.SumCollection[1].SumValue);
+        ISBusquedaReporteMedicos.Buscar;
+        ISDbSumaOrden.RecalcAll;
+        ISDbSumaOrdenDetalle.RecalcAll;
+        lblTotalOrden.Caption:= 'Total Importe: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaOrden.SumCollection[0].SumValue) + ' - Total OS: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaOrden.SumCollection[1].SumValue);
+        lblTotalOrdenDetalle.Caption:= 'Total Importe: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaOrdenDetalle.SumCollection[0].SumValue) + ' - Total OS: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaOrdenDetalle.SumCollection[1].SumValue);
       end;
 
   end;
@@ -157,7 +158,7 @@ begin
           exit;
 
         DM.VariablesReportes(ReporteMedicos);
-        EKVistaPreviaReporteMedicos.VistaPrevia;
+        ISVistaPreviaReporteMedicos.VistaPrevia;
       end;
 
   end;
@@ -169,8 +170,8 @@ begin
   ZQ_OrdenDetalle.ParamByName('ID_ORDEN').AsInteger := ZQ_OrdenID_ORDEN.AsInteger;
   ZQ_OrdenDetalle.Open;
 
-  EKDbSumaOrdenDetalle.RecalcAll;
-  lblTotalOrdenDetalle.Caption:= 'Total Importe: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrdenDetalle.SumCollection[0].SumValue) + ' - Total OS: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaOrdenDetalle.SumCollection[1].SumValue);
+  ISDbSumaOrdenDetalle.RecalcAll;
+  lblTotalOrdenDetalle.Caption:= 'Total Importe: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaOrdenDetalle.SumCollection[0].SumValue) + ' - Total OS: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaOrdenDetalle.SumCollection[1].SumValue);
 end;
 
 procedure TFOP_Reportes.ABuscarExecute(Sender: TObject);
@@ -199,15 +200,15 @@ end;
 
 procedure TFOP_Reportes.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrillaOrden.CargarConfigColumnas;
-  EKOrdenarGrillaOrdenDetalle.CargarConfigColumnas;
+  ISOrdenarGrillaOrden.CargarConfigColunmas;
+  ISOrdenarGrillaOrdenDetalle.CargarConfigColunmas;
 end;
 
 procedure TFOP_Reportes.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
-  EKOrdenarGrillaOrden.GuardarConfigColumnas;
-  EKOrdenarGrillaOrdenDetalle.GuardarConfigColumnas;
+  ISOrdenarGrillaOrden.GuardarConfigColumnas;
+  ISOrdenarGrillaOrdenDetalle.GuardarConfigColumnas;
 end;
 
 end.
