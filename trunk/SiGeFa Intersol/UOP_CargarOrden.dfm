@@ -1,6 +1,6 @@
 object FOP_CargarOrden: TFOP_CargarOrden
-  Left = 601
-  Top = 187
+  Left = 252
+  Top = 169
   Width = 870
   Height = 581
   Caption = 'Cargar Orden'
@@ -17,15 +17,15 @@ object FOP_CargarOrden: TFOP_CargarOrden
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 502
+    Width = 854
+    Height = 491
     Align = alClient
     TabOrder = 0
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
-      Width = 860
-      Height = 500
+      Width = 852
+      Height = 489
       Align = alClient
       Color = 15527129
       DataSource = DS_Optica_Orden
@@ -152,7 +152,7 @@ object FOP_CargarOrden: TFOP_CargarOrden
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, ComCtrls, DBCtrls, StdCtrls,
-  Mask, ZSqlUpdate,DateUtils, EKOrdenarGrilla, EKBusquedaAvanzada,
-  ActnList, XPStyleActnCtrls, ActnMan, cxClasses;
+  Mask, ZSqlUpdate,DateUtils,
+  ActnList, XPStyleActnCtrls, ActnMan, cxClasses, ISBusquedaAvanzada,
+  ISOrdenarGrilla;
 
 type
   TFOP_BuscarFacturaOS = class(TForm)
@@ -19,8 +20,6 @@ type
     btnSeleccionar: TdxBarLargeButton;
     ZQ_Facturas: TZQuery;
     DS_Facturas: TDataSource;
-    EKOrdenarGrilla: TEKOrdenarGrilla;
-    EKBuscarFacturas: TEKBusquedaAvanzada;
     btnSeleccinarYSalir: TdxBarLargeButton;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
@@ -41,6 +40,8 @@ type
     ZQ_FacturasNOMBRE_OS: TStringField;
     ZQ_FacturasNRO_AFILIADO: TStringField;
     ZQ_FacturasAFILIADO: TStringField;
+    ISOrdenarGrilla: TISOrdenarGrilla;
+    ISBuscarFacturas: TISBusquedaAvanzada;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
@@ -80,7 +81,7 @@ end;
 
 procedure TFOP_BuscarFacturaOS.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscarFacturas.Buscar;
+  ISBuscarFacturas.Buscar;
 end;
 
 
@@ -136,13 +137,13 @@ end;
 
 procedure TFOP_BuscarFacturaOS.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla.CargarConfigColumnas;
+  ISOrdenarGrilla.CargarConfigColunmas;
 end;
 
 
 procedure TFOP_BuscarFacturaOS.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla.GuardarConfigColumnas;
+  ISOrdenarGrilla.GuardarConfigColumnas;
 end;
 
 

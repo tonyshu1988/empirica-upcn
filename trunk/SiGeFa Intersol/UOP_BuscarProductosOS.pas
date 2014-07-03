@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, ComCtrls, DBCtrls, StdCtrls,
-  Mask, ZSqlUpdate,DateUtils, EKOrdenarGrilla, EKBusquedaAvanzada,
-  ActnList, XPStyleActnCtrls, ActnMan, cxClasses;
+  Mask, ZSqlUpdate,DateUtils,
+  ActnList, XPStyleActnCtrls, ActnMan, cxClasses, ISBusquedaAvanzada,
+  ISOrdenarGrilla;
 
 type
   TFOP_BuscarProductosOS = class(TForm)
@@ -19,8 +20,6 @@ type
     btnSeleccionar: TdxBarLargeButton;
     ZQ_Producto: TZQuery;
     DS_Producto: TDataSource;
-    EKOrdenarGrilla: TEKOrdenarGrilla;
-    EKBuscarProducto: TEKBusquedaAvanzada;
     btnSeleccinarYSalir: TdxBarLargeButton;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
@@ -55,6 +54,8 @@ type
     ZQ_ProductoID_PERSONA_AFILIADO: TIntegerField;
     ZQ_ProductoNRO_FACTURA: TStringField;
     ZQ_ProductoIMPUESTO_IVA: TFloatField;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISBuscarProducto: TISBusquedaAvanzada;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
@@ -94,7 +95,7 @@ end;
 
 procedure TFOP_BuscarProductosOS.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscarProducto.Buscar;
+  ISBuscarProducto.Buscar;
 end;
 
 
@@ -149,13 +150,13 @@ end;
 
 procedure TFOP_BuscarProductosOS.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
 end;
 
 
 procedure TFOP_BuscarProductosOS.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas  ;
 end;
 
 

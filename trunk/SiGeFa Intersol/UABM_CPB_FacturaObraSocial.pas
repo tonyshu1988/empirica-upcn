@@ -978,7 +978,7 @@ begin
   if not Assigned(vselProducto) then
     vselProducto:= TFOP_BuscarProductosOS.Create(nil);
 
-  vselProducto.EKBuscarProducto.SQL_Where.ValueFromIndex[2]:= IntToStr(ZQ_ComprobanteID_OBRA_SOCIAL.AsInteger);
+  vselProducto.ISBuscarProducto.SQL_Where.ValueFromIndex[2]:= IntToStr(ZQ_ComprobanteID_OBRA_SOCIAL.AsInteger);
   vselProducto.ZQ_Producto.Close;
   vselProducto.OnSeleccionar:= onSelProducto;
   vselProducto.OnSeleccionarTodos:= onSelTodosProducto;

@@ -1,6 +1,6 @@
 object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
-  Left = 347
-  Top = 195
+  Left = 454
+  Top = 189
   Width = 733
   Height = 426
   Caption = 'Buscar Facturas a Liquidar'
@@ -20,15 +20,15 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 725
-    Height = 347
+    Width = 717
+    Height = 336
     Align = alClient
     TabOrder = 0
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
-      Width = 723
-      Height = 345
+      Width = 715
+      Height = 334
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -82,7 +82,6 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
           FieldName = 'IMPORTE_TOTAL'
           Title.Alignment = taCenter
           Title.Caption = 'Importe'
-          Width = 64
           Visible = True
         end
         item
@@ -122,7 +121,7 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -420,8 +419,8 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 72
-    Top = 104
+    Left = 392
+    Top = 112
     DockControlHeights = (
       0
       0
@@ -816,8 +815,8 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
         Name = 'ID_OS'
         ParamType = ptUnknown
       end>
-    Left = 200
-    Top = 48
+    Left = 304
+    Top = 56
     ParamData = <
       item
         DataType = ftUnknown
@@ -872,10 +871,35 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
   end
   object DS_Facturas: TDataSource
     DataSet = ZQ_Facturas
-    Left = 200
+    Left = 304
     Top = 104
   end
-  object EKOrdenarGrilla: TEKOrdenarGrilla
+  object ATeclasRapidas: TActionManager
+    Left = 400
+    Top = 58
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ASeleccionar: TAction
+      Caption = 'ASeleccionar'
+      ShortCut = 113
+      OnExecute = ASeleccionarExecute
+    end
+    object ASelTodos: TAction
+      Caption = 'ASelTodos'
+      ShortCut = 114
+      OnExecute = ASelTodosExecute
+    end
+    object ASalir: TAction
+      Caption = 'ASalir'
+      ShortCut = 27
+      OnExecute = ASalirExecute
+    end
+  end
+  object ISOrdenarGrilla: TISOrdenarGrilla
     Grilla = DBGrid
     Filtros = <
       item
@@ -914,16 +938,17 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
         TituloColumna = 'Id CPB'
         Visible = True
       end>
-    NombreGuardar = 'BuscarProductoOS'
+    NombreGuardarConfig = 'BuscarProductoOS'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 72
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 168
     Top = 48
   end
-  object EKBuscarFacturas: TEKBusquedaAvanzada
+  object ISBuscarFacturas: TISBusquedaAvanzada
     CriteriosBusqueda = <
       item
         Titulo = 'C'#243'digo Factura'
@@ -931,9 +956,7 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
         Tabla = 'f'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Punto Venta'
@@ -941,9 +964,7 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
         Tabla = 'f'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Nro. Factura'
@@ -951,35 +972,29 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
         Tabla = 'f'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha'
         Campo = 'fecha'
         Tabla = 'f'
-        TipoCampo = EK_Fecha
+        TipoCampo = IS_Fecha
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Importe'
         Campo = 'importe_total'
         Tabla = 'f'
-        TipoCampo = EK_Numero
+        TipoCampo = IS_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
-    Modelo = DM.EKModelo
+    Modelo = DM.ISModelo
     DataSet = ZQ_Facturas
     SQL.Strings = (
       
@@ -988,46 +1003,29 @@ object FOP_BuscarFacturaOS: TFOP_BuscarFacturaOS
       
         '       F.IMPORTE_TOTAL, F.SUCURSAL, F.CODIGO_OS, F.NOMBRE_OS, F.' +
         'NRO_AFILIADO, F.AFILIADO'
+      ''
       'from BUSCAR_FACTURAS_NO_LIQUIDADAS(:ID_OS) F'
-      'order by f.fecha')
+      ''
+      ''
+      'order by f.fecha'
+      '')
     SQL_Select.Strings = (
       
         'select F.ID_COMPROBANTE, F.ID_SUCURSAL, F.ID_OBRA_SOCIAL, F.CODI' +
         'GO_CPB, F.NUMERO_CPB, F.PUNTO_VENTA, F.FECHA,'
       
         '       F.IMPORTE_TOTAL, F.SUCURSAL, F.CODIGO_OS, F.NOMBRE_OS, F.' +
-        'NRO_AFILIADO, F.AFILIADO')
+        'NRO_AFILIADO, F.AFILIADO'
+      '')
     SQL_From.Strings = (
-      'from BUSCAR_FACTURAS_NO_LIQUIDADAS(:ID_OS) F')
+      'from BUSCAR_FACTURAS_NO_LIQUIDADAS(:ID_OS) F'
+      '')
     SQL_Orden.Strings = (
-      'order by f.fecha')
-    UsarWhereOriginal = EK_Sin_Where
-    Left = 200
-    Top = 168
-  end
-  object ATeclasRapidas: TActionManager
-    Left = 72
-    Top = 162
-    StyleName = 'XP Style'
-    object ABuscar: TAction
-      Caption = 'ABuscar'
-      ShortCut = 112
-      OnExecute = ABuscarExecute
-    end
-    object ASeleccionar: TAction
-      Caption = 'ASeleccionar'
-      ShortCut = 113
-      OnExecute = ASeleccionarExecute
-    end
-    object ASelTodos: TAction
-      Caption = 'ASelTodos'
-      ShortCut = 114
-      OnExecute = ASelTodosExecute
-    end
-    object ASalir: TAction
-      Caption = 'ASalir'
-      ShortCut = 27
-      OnExecute = ASalirExecute
-    end
+      ''
+      'order by f.fecha'
+      '')
+    UsarWhereOriginal = IS_Sin_Where
+    Left = 64
+    Top = 48
   end
 end
