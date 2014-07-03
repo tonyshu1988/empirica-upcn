@@ -7,7 +7,6 @@ object DM: TDM
   object Conexion: TZConnection
     ControlsCodePage = cGET_ACP
     UTF8StringsAsWideField = False
-    AutoEncodeStrings = False
     Properties.Strings = (
       'rolename=base'
       'dialect=3'
@@ -17,7 +16,7 @@ object DM: TDM
     TransactIsolationLevel = tiReadCommitted
     HostName = 'localhost'
     Port = 3052
-    Database = 'C:\SISTEMAS\SiGeFa Intersol\Bases\SIGEFA.FDB'
+    Database = 'E:\Empirica\empirica-upcn\SiGeFa Intersol\Bases\SIGEFA.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Protocol = 'firebird-2.5'

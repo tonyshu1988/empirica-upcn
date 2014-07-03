@@ -6,11 +6,13 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
-  ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
-  EKDbSuma, DBClient, Menus, UOP_BuscarProductosOS, ZSqlUpdate, jpeg,
-  ExtDlgs, ZSequence, UOP_BuscarFacturaOS, cxClasses;
+   ActnList, XPStyleActnCtrls, ActnMan,
+   QRCtrls, QuickRpt, Buttons, ImgList,
+  ComCtrls,  ZStoredProcedure,
+   DBClient, Menus, UOP_BuscarProductosOS, ZSqlUpdate, jpeg,
+  ExtDlgs, ZSequence, UOP_BuscarFacturaOS, cxClasses, ISListadoSQL,
+  ISOrdenarGrilla, ISVistaPreviaQR, ISBusquedaAvanzada, ISDbSuma,
+  ISDBDateTimePicker;
 
 type
   TFOP_ABM_LiquidacionOS = class(TForm)
@@ -49,7 +51,6 @@ type
     DS_VerCpb: TDataSource;
     DBGridListaCpb: TDBGrid;
     DBGridFacturas: TDBGrid;
-    EKOrd_VerCpb: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
     Label24: TLabel;
     DBTxtMonto: TDBText;
@@ -57,7 +58,6 @@ type
     DBText1: TDBText;
     Label1: TLabel;
     lblTipoComprobante: TLabel;
-    EKListadoEntidad: TEKListadoSQL;
     ZQ_ObraSocial: TZQuery;
     DS_ObraSocial: TDataSource;
     ZQ_BuscarMail: TZQuery;
@@ -69,7 +69,6 @@ type
     DBText4: TDBText;
     Label31: TLabel;
     DBText5: TDBText;
-    EKBuscar: TEKBusquedaAvanzada;
     RepListado: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -97,7 +96,6 @@ type
     QRDBText4: TQRDBText;
     QRLabel4: TQRLabel;
     QRDBText6: TQRDBText;
-    EKVistaPrevia: TEKVistaPreviaQR;
     lblAnulado: TLabel;
     DBTxtFechaAnulado: TDBText;
     ZQ_ObraSocialID: TIntegerField;
@@ -141,7 +139,6 @@ type
     Label11: TLabel;
     Panel4: TPanel;
     Label27: TLabel;
-    EKDBDateFechaLiq: TEKDBDateTimePicker;
     ALiquidar: TAction;
     Panel1: TPanel;
     Label13: TLabel;
@@ -183,7 +180,6 @@ type
     ZQ_LiqFacturasID_COMPROBANTE: TIntegerField;
     ZQ_VerCpbIMPORTE: TFloatField;
     ZQ_LiquidacionIMPORTE: TFloatField;
-    EKDbSuma: TEKDbSuma;
     ZQ_LiqFacturasID_SUCURSAL: TIntegerField;
     ZQ_LiqFacturasNUMERO_CPB: TIntegerField;
     ZQ_LiqFacturasPUNTO_VENTA: TIntegerField;
@@ -195,7 +191,6 @@ type
     ZQ_LiquidacionESTADO: TIntegerField;
     ZQ_VerCpbESTADO: TIntegerField;
     StaticTxtConfirmado: TStaticText;
-    EKOrd_VerCpb_Facturas: TEKOrdenarGrilla;
     ZQ_VerCpbCODIGO: TStringField;
     ZQ_VerCpbNOMBRE: TStringField;
     ZQ_VerCpbDIRECCION: TStringField;
@@ -213,11 +208,9 @@ type
     ZQ_VerCpbNOMBRE_TIPO_IVA: TStringField;
     ZQ_VerCpbNOMBRE_PROVINCIA: TStringField;
     btFacturarFiscal: TdxBarLargeButton;
-    EKVistaPreviaLiqOS: TEKVistaPreviaQR;
     ZQ_LiqFacturasNRO_AFILIADO: TStringField;
     ZQ_LiqFacturasNOMBRE: TStringField;
     ZQ_LiqFacturasIMPORTE_FINAL: TFloatField;
-    EKDbSumaLiqFactura: TEKDbSuma;
     RepLiqOS: TQuickRep;
     QRBand55: TQRBand;
     QRLabel335: TQRLabel;
@@ -268,6 +261,16 @@ type
     QRLabel3: TQRLabel;
     QRDBText1: TQRDBText;
     QRDBText7: TQRDBText;
+    ISVistaPreviaLiqOS: TISVistaPreviaQR;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrd_VerCpb_Facturas: TISOrdenarGrilla;
+    ISGridListaCpb: TISOrdenarGrilla;
+    ISListadoEntidad: TISListadoSQL;
+    ISDbSumaLiqFactura: TISDbSuma;
+    ISDbSuma: TISDbSuma;
+    ISBuscar: TISBusquedaAvanzada;
+    ISOrdenarGrillaFacturasLiq: TISOrdenarGrilla;
+    ISDBDateFechaLiq: TISDBDateTimePicker;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -330,7 +333,7 @@ const
 
 implementation
 
-uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar, UVerImagen;
+uses UPrincipal, UDM, ISModelo, UImpresion_Comprobantes, UMailEnviar, UVerImagen;
 
 {$R *.dfm}
 
@@ -385,8 +388,8 @@ end;
 
 procedure TFOP_ABM_LiquidacionOS.FormCreate(Sender: TObject);
 begin
-  EKOrd_VerCpb.CargarConfigColumnas;
-  EKOrd_VerCpb_Facturas.CargarConfigColumnas;
+  ISOrdenarGrillaFacturasLiq.CargarConfigColunmas;
+  ISOrd_VerCpb_Facturas.CargarConfigColunmas;
 //  EKOrd_EditarProducto.CargarConfigColumnas;
 
   modoEdicion(false);
@@ -397,7 +400,7 @@ begin
 //    TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
 
   //abro todos los recibos del sistema
-  EKBuscar.Abrir;
+  //ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 
   CD_LiqFactura.CreateDataSet;
@@ -421,7 +424,7 @@ end;
 
 procedure TFOP_ABM_LiquidacionOS.btnBuscarClick(Sender: TObject);
 begin
-  if EKbuscar.buscar then
+  if ISbuscar.buscar then
   begin
     ZQ_VerCpb.Refresh;
     dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
@@ -452,7 +455,7 @@ end;
 
 procedure TFOP_ABM_LiquidacionOS.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion, ZQ_LiqFacturas]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion, ZQ_LiqFacturas]) then
   begin
     nuevo:= true;
     modoEdicion(true);
@@ -468,11 +471,11 @@ begin
     CD_LiqFactura.EmptyDataSet;
 
     ZQ_Liquidacion.Append;
-    ZQ_LiquidacionFECHA_LIQUIDACION.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_LiquidacionFECHA_LIQUIDACION.AsDateTime:= dm.ISModelo.FechayHora;
     ZQ_LiquidacionFECHA_ANULACION.Clear;
     ZQ_LiquidacionESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
 
-    EKDBDateFechaLiq.SetFocus;
+    ISDBDateFechaLiq.SetFocus;
   end;
 end;
 
@@ -485,7 +488,7 @@ begin
   if (ZQ_VerCpb.IsEmpty) or (estado = ESTADO_CONFIRMADO) or (estado = ESTADO_ANULADO) then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion, ZQ_LiqFacturas]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion, ZQ_LiqFacturas]) then
   begin
     nuevo:= false;
     modoEdicion(true);
@@ -509,7 +512,7 @@ begin
 
     ZQ_Liquidacion.Edit;
 
-    EKDBDateFechaLiq.SetFocus;
+    ISDBDateFechaLiq.SetFocus;
   end;
 end;
 
@@ -523,7 +526,7 @@ begin
   if ZQ_LiquidacionID_OS.IsNull then
   begin
     Application.MessageBox('Debe asociar una Obra Social a la Liquidacion, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-    EKDBDateFechaLiq.SetFocus;
+    ISDBDateFechaLiq.SetFocus;
     exit;
   end;
 
@@ -560,12 +563,12 @@ begin
     end
   end;
 
-  EKDbSuma.RecalcAll; //el importe del comprobante es igual a la suma del importe de todos los productos
-  EKDbSuma.RecalcAll;
-  ZQ_LiquidacionIMPORTE.AsFloat:= EKDbSuma.SumCollection[0].SumValue;
+  ISDbSuma.RecalcAll; //el importe del comprobante es igual a la suma del importe de todos los productos
+
+  ZQ_LiquidacionIMPORTE.AsFloat:= ISDbSuma.SumCollection[0].SumValue;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       modoEdicion(false);
       DBGridListaCpb.SetFocus;
@@ -588,7 +591,7 @@ end;
 procedure TFOP_ABM_LiquidacionOS.btnCancelarClick(Sender: TObject);
 begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+    if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
     begin
       modoEdicion(false);
       DBGridListaCpb.SetFocus;
@@ -602,9 +605,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepListado);
-  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption:= EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption:= ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 
@@ -634,7 +637,7 @@ end;
 
 procedure TFOP_ABM_LiquidacionOS.AModificarExecute(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
   begin
     agregarFactura;
   end;
@@ -743,7 +746,7 @@ begin
     exit;
 
   if (application.MessageBox(pchar('¿Desea confirmar la Liquidación seleccionada?'), 'ABM Liquidación', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion]) then
     begin
       ZQ_Liquidacion.Close;
       ZQ_Liquidacion.ParamByName('id_liquidacion').AsInteger:= ZQ_VerCpbID_OPTICA_LIQUIDACION.AsInteger;
@@ -753,8 +756,8 @@ begin
       ZQ_LiquidacionESTADO.AsInteger:= ESTADO_CONFIRMADO;
 
       try
-        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+        if not DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.ISModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
           Application.MessageBox('No se pudo confirmar la Liquidación.', 'Atención', MB_OK + MB_ICONINFORMATION);
@@ -774,8 +777,8 @@ end;
 
 procedure TFOP_ABM_LiquidacionOS.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrd_VerCpb.GuardarConfigColumnas;
-  EKOrd_VerCpb_Facturas.GuardarConfigColumnas;
+  ISOrdenarGrillaFacturasLiq.GuardarConfigColumnas;
+  ISOrd_VerCpb_Facturas.GuardarConfigColumnas;
 //  EKOrd_EditarProducto.GuardarConfigColumnas;
 end;
 
@@ -817,7 +820,7 @@ begin
     exit;
 
   if (application.MessageBox(pchar('¿Desea anular la Liquidación seleccionada?'), 'ABM Liquidación', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Liquidacion]) then
     begin
       ZQ_Liquidacion.Close;
       ZQ_Liquidacion.ParamByName('id_liquidacion').AsInteger:= ZQ_VerCpbID_OPTICA_LIQUIDACION.AsInteger;
@@ -825,11 +828,11 @@ begin
 
       ZQ_Liquidacion.Edit;
       ZQ_LiquidacionESTADO.AsInteger:= ESTADO_ANULADO;
-      ZQ_LiquidacionFECHA_ANULACION.AsDateTime:= dm.EKModelo.FechayHora;
+      ZQ_LiquidacionFECHA_ANULACION.AsDateTime:= dm.ISModelo.FechayHora;
 
       try
-        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+        if not DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.ISModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
           Application.MessageBox('No se pudo anular la Liquidación.', 'Atención', MB_OK + MB_ICONINFORMATION);
@@ -855,10 +858,10 @@ begin
     exit;
 
   DM.VariablesComprobantes(RepLiqOS);
-  QRlblLiqOS_CantidadTotal.Caption := 'Total: '+FormatFloat('$ ##,###,##0.00', EKDbSumaLiqFactura.SumCollection[0].sumvalue);
-  QRlblLiqOS_PiePagina.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblLiqOS_CantidadTotal.Caption := 'Total: '+FormatFloat('$ ##,###,##0.00', ISDbSumaLiqFactura.SumCollection[0].sumvalue);
+  QRlblLiqOS_PiePagina.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
 
-  EKVistaPreviaLiqOS.VistaPrevia;  
+  ISVistaPreviaLiqOS.VistaPrevia;
 end;
 
 
@@ -867,9 +870,9 @@ procedure TFOP_ABM_LiquidacionOS.btnBuscarOSLiquidarClick(
 var
   sql: string;
 begin
-  if EKListadoEntidad.Buscar then
+  if ISListadoEntidad.Buscar then
   begin
-    if (EKListadoEntidad.Resultado <> '') then
+    if (ISListadoEntidad.Resultado <> '') then
     begin
       if not CD_LiqFactura.IsEmpty then
         CD_LiqFactura.EmptyDataSet;
@@ -878,7 +881,7 @@ begin
       PanelDatosOSLiquidacion.BringToFront;
 
       ZQ_ObraSocial.Close;
-      ZQ_ObraSocial.ParamByName('id_os').AsInteger:= StrToInt(EKListadoEntidad.Resultado);
+      ZQ_ObraSocial.ParamByName('id_os').AsInteger:= StrToInt(ISListadoEntidad.Resultado);
       ZQ_ObraSocial.Open;
 
       if ZQ_Liquidacion.State = dsBrowse then
@@ -887,7 +890,7 @@ begin
     end
   end;
 
-  EKDBDateFechaLiq.SetFocus;
+  ISDBDateFechaLiq.SetFocus;
 end;
 
 
@@ -909,7 +912,7 @@ begin
   if not Assigned(vselFactura) then
     vselFactura:= TFOP_BuscarFacturaOS.Create(nil);
 
-  vselFactura.EKBuscarFacturas.SQL_From.Text:= 'from BUSCAR_FACTURAS_NO_LIQUIDADAS('+IntToStr(ZQ_LiquidacionID_OS.AsInteger)+') F';
+  vselFactura.ISBuscarFacturas.SQL_From.Text:= 'from BUSCAR_FACTURAS_NO_LIQUIDADAS('+IntToStr(ZQ_LiquidacionID_OS.AsInteger)+') F';
 //  SQL_Where.ValueFromIndex[3]:= IntToStr(ZQ_LiquidacionID_OS.AsInteger);
 
   vselFactura.ZQ_Facturas.Close;
@@ -1040,8 +1043,8 @@ procedure TFOP_ABM_LiquidacionOS.EKDbSumaSumListChanged(Sender: TObject);
 var
   cantidad, total: string;
 begin
-  cantidad:= FormatFloat('###,###,###,##0.00', EKDbSuma.SumCollection[1].SumValue);
-  total:= FormatFloat('$ ###,###,###,##0.00', EKDbSuma.SumCollection[0].SumValue);
+  cantidad:= FormatFloat('###,###,###,##0.00', ISDbSuma.SumCollection[1].SumValue);
+  total:= FormatFloat('$ ###,###,###,##0.00', ISDbSuma.SumCollection[0].SumValue);
 
   editCantidadFacturas.Text:= cantidad;
   EditImporteFinal.Text:= total;

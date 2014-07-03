@@ -1,6 +1,6 @@
 object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
-  Left = 333
-  Top = 234
+  Left = 335
+  Top = 348
   Width = 852
   Height = 426
   Caption = 
@@ -22,15 +22,15 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 844
-    Height = 347
+    Width = 836
+    Height = 336
     Align = alClient
     TabOrder = 0
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
-      Width = 842
-      Height = 345
+      Width = 834
+      Height = 334
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -211,7 +211,7 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -509,8 +509,8 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 72
-    Top = 104
+    Left = 400
+    Top = 56
     DockControlHeights = (
       0
       0
@@ -947,8 +947,8 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
       'where (orden.id_estado <> 4)'
       '  and osdet.id_factura_os is null')
     Params = <>
-    Left = 200
-    Top = 48
+    Left = 304
+    Top = 56
     object ZQ_ProductoID_OS: TIntegerField
       FieldName = 'ID_OS'
     end
@@ -1048,10 +1048,35 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
   end
   object DS_Producto: TDataSource
     DataSet = ZQ_Producto
-    Left = 200
+    Left = 304
     Top = 104
   end
-  object EKOrdenarGrilla: TEKOrdenarGrilla
+  object ATeclasRapidas: TActionManager
+    Left = 400
+    Top = 106
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ASeleccionar: TAction
+      Caption = 'ASeleccionar'
+      ShortCut = 113
+      OnExecute = ASeleccionarExecute
+    end
+    object ASelTodos: TAction
+      Caption = 'ASelTodos'
+      ShortCut = 114
+      OnExecute = ASelTodosExecute
+    end
+    object ASalir: TAction
+      Caption = 'ASalir'
+      ShortCut = 27
+      OnExecute = ASalirExecute
+    end
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
     Grilla = DBGrid
     Filtros = <
       item
@@ -1134,48 +1159,43 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
         TituloColumna = 'Id Afiliado'
         Visible = True
       end>
-    NombreGuardar = 'BuscarProductoOS'
+    NombreGuardarConfig = 'BuscarProductoOS'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 72
-    Top = 48
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 176
+    Top = 56
   end
-  object EKBuscarProducto: TEKBusquedaAvanzada
+  object ISBuscarProducto: TISBusquedaAvanzada
     CriteriosBusqueda = <
       item
         Titulo = 'Nro. Afiliado'
         Campo = 'nro_afiliado'
-        Tabla = 'optica_persona_os'
+        Tabla = 'peros'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Afiliado'
         Campo = 'nombre'
-        Tabla = 'persona'
+        Tabla = 'per'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
-        Titulo = 'Fecha Orden'
+        Titulo = 'Fecha'
         Campo = 'fecha_orden'
-        Tabla = 'optica_orden'
-        TipoCampo = EK_Fecha
+        Tabla = 'orden'
+        TipoCampo = IS_Fecha
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'digo Orden'
@@ -1183,104 +1203,85 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
         Tabla = 'orden'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Cantidad'
         Campo = 'cantidad'
-        Tabla = 'optica_orden_detalle'
-        TipoCampo = EK_Numero
+        Tabla = 'ordet'
+        TipoCampo = IS_Numero
+        Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Monto'
         Campo = 'monto_descontado'
-        Tabla = 'optica_detalle_os'
-        TipoCampo = EK_Numero
+        Tabla = 'osdet'
+        TipoCampo = IS_Numero
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Prod. Nombre'
         Campo = 'nombre'
-        Tabla = 'producto_cabecera'
+        Tabla = 'pcab'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Prod. C'#243'd. Corto'
         Campo = 'cod_corto'
-        Tabla = 'producto'
+        Tabla = 'prod'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Prod. C'#243'd. Barra'
         Campo = 'codigo_barra'
-        Tabla = 'producto'
+        Tabla = 'prod'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Prod. Medida'
         Campo = 'medida'
-        Tabla = 'medida'
+        Tabla = 'md'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Prod. Marca'
         Campo = 'nombre_marca'
-        Tabla = 'marca'
+        Tabla = 'mc'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Prod. Art'#237'culo'
         Campo = 'descripcion'
-        Tabla = 'articulo'
+        Tabla = 'ar'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Prod. Tipo Art'#237'culo'
         Campo = 'descripcion'
-        Tabla = 'tipo_articulo'
+        Tabla = 'ta'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
-    Modelo = DM.EKModelo
+    Modelo = DM.ISModelo
     DataSet = ZQ_Producto
     SQL.Strings = (
       
@@ -1308,6 +1309,9 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
       
         '       per.id_persona as id_persona_afiliado, orden.nro_factura,' +
         ' pr.impuesto_iva'
+      ''
+      ''
+      ''
       'from optica_orden orden'
       
         'inner join optica_orden_detalle ordet on (orden.id_orden = ordet' +
@@ -1336,9 +1340,11 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
       
         'inner join precio pr on (pr.id_producto = prod.id_producto) and ' +
         '(orden.id_sucursal = pr.id_sucursal)'
+      ''
       'where (orden.id_estado <> 4)'
       'and osdet.id_factura_os is null'
-      'and osdet.id_os = ')
+      'and osdet.id_os = '
+      '')
     SQL_Select.Strings = (
       
         'select os.id_os, osdet.id_detalle_os, os.codigo as os_codigo, os' +
@@ -1364,8 +1370,11 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
         'olor,'
       
         '       per.id_persona as id_persona_afiliado, orden.nro_factura,' +
-        ' pr.impuesto_iva')
+        ' pr.impuesto_iva'
+      ''
+      '')
     SQL_From.Strings = (
+      ''
       'from optica_orden orden'
       
         'inner join optica_orden_detalle ordet on (orden.id_orden = ordet' +
@@ -1393,38 +1402,15 @@ object FOP_BuscarProductosOS: TFOP_BuscarProductosOS
       'inner join color co on (pcab.color = co.id_color)'
       
         'inner join precio pr on (pr.id_producto = prod.id_producto) and ' +
-        '(orden.id_sucursal = pr.id_sucursal)')
+        '(orden.id_sucursal = pr.id_sucursal)'
+      '')
     SQL_Where.Strings = (
       'where (orden.id_estado <> 4)'
       'and osdet.id_factura_os is null'
-      'and osdet.id_os = ')
-    UsarWhereOriginal = EK_Con_Where
-    Left = 200
-    Top = 168
-  end
-  object ATeclasRapidas: TActionManager
-    Left = 72
-    Top = 162
-    StyleName = 'XP Style'
-    object ABuscar: TAction
-      Caption = 'ABuscar'
-      ShortCut = 112
-      OnExecute = ABuscarExecute
-    end
-    object ASeleccionar: TAction
-      Caption = 'ASeleccionar'
-      ShortCut = 113
-      OnExecute = ASeleccionarExecute
-    end
-    object ASelTodos: TAction
-      Caption = 'ASelTodos'
-      ShortCut = 114
-      OnExecute = ASelTodosExecute
-    end
-    object ASalir: TAction
-      Caption = 'ASalir'
-      ShortCut = 27
-      OnExecute = ASalirExecute
-    end
+      'and osdet.id_os = '
+      '')
+    UsarWhereOriginal = IS_Con_Where
+    Left = 176
+    Top = 112
   end
 end
