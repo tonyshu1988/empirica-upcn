@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DBCtrls, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, strutils, Mask, UBuscarProductoStock,
-  ActnList, XPStyleActnCtrls, ActnMan, EKListadoSQL, cxClasses;
+  ActnList, XPStyleActnCtrls, ActnMan, cxClasses,
+  ISListadoSQL;
 
 type
   TFConsulta_Precios = class(TForm)
@@ -86,7 +87,7 @@ type
     ZQ_ProductosID_PRODUCTO_1: TIntegerField;
     ZQ_ProductosPOSICSUCURSAL: TStringField;
     DBMemo3: TDBMemo;
-    EKListadoProducto: TEKListadoSQL;
+    ISListadoProducto: TISListadoSQL;
     procedure codbarrasKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormActivate(Sender: TObject);
@@ -250,11 +251,11 @@ end;
 
 procedure TFConsulta_Precios.btnBuscarClick(Sender: TObject);
 begin
-  if EKListadoProducto.Buscar then
-    if (EKListadoProducto.Resultado <> '') then
+  if ISListadoProducto.Buscar then
+    if (ISListadoProducto.Resultado <> '') then
     begin
       //Traigo el ID_producto_stock
-      codBarras.Text:= 'I' + EKListadoProducto.Resultado;
+      codBarras.Text:= 'I' + ISListadoProducto.Resultado;
       LeerCodigo('I', codBarras.Text);
       //IdentificarCodigo;
       codbarras.Clear;
