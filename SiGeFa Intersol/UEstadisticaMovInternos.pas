@@ -8,7 +8,8 @@ uses
   DbChart, ExtCtrls, Grids, DBGrids, DB, ZAbstractRODataset,
   ZAbstractDataset, ZDataset, Series, StdCtrls, EKDbSuma,
   EKBusquedaAvanzada, ZStoredProcedure, EKOrdenarGrilla, ActnList,
-  XPStyleActnCtrls, ActnMan, EKVistaPreviaQR, QRCtrls, QuickRpt;
+  XPStyleActnCtrls, ActnMan, EKVistaPreviaQR, QRCtrls, QuickRpt,
+  ISVistaPreviaQR, cxClasses, ISOrdenarGrilla, ISDbSuma, ISBusquedaAvanzada;
 
 type
   TFEstadisticaMovInternos = class(TForm)
@@ -50,12 +51,8 @@ type
     Series1: TPieSeries;
     lblTotalEgresos: TLabel;
     lblTotalIngresos: TLabel;
-    EKDbSuma_Ingresos: TEKDbSuma;
-    EKDbSuma_Egresos: TEKDbSuma;
     lblMov_TotalEgresos: TLabel;
-    EKDbSuma_Mov: TEKDbSuma;
     lblMov_TotalIngresos: TLabel;
-    EKBuscar_Mov: TEKBusquedaAvanzada;
     ZQ_Sucursal: TZQuery;
     ZQ_SucursalID_SUCURSAL: TIntegerField;
     ZQ_SucursalNOMBRE: TStringField;
@@ -93,17 +90,13 @@ type
     ZS_BalanceSALDO: TFloatField;
     ZS_BalanceSALDODIARIO: TFloatField;
     DS_Balance: TDataSource;
-    EKSuma_Balance: TEKDbSuma;
     ZS_CalcSaldos: TZStoredProc;
-    EKOrdenarGrillaBalance: TEKOrdenarGrilla;
     EKBuscarBalance: TEKBusquedaAvanzada;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     Panel4: TPanel;
     lblBalanceSucursal: TLabel;
     lblBalanceFecha: TLabel;
-    EKVistaBalance: TEKVistaPreviaQR;
-    EKVistaListado: TEKVistaPreviaQR;
     DBChartBalance: TDBChart;
     Series4: TFastLineSeries;
     Series2: TPointSeries;
@@ -193,7 +186,15 @@ type
     QRLabel44: TQRLabel;
     QRLabel45: TQRLabel;
     ZQ_MovimientosSUCURSAL: TStringField;
-    EKOrdenarGrillaMovimientos: TEKOrdenarGrilla;
+    ISVistaListado: TISVistaPreviaQR;
+    ISVistaBalance: TISVistaPreviaQR;
+    ISOrdenarGrillaMovimientos: TISOrdenarGrilla;
+    ISOrdenarGrillaBalance: TISOrdenarGrilla;
+    ISDbSuma_Mov: TISDbSuma;
+    ISDbSuma_Ingresos: TISDbSuma;
+    ISDbSuma_Egresos: TISDbSuma;
+    ISSuma_Balance: TISDbSuma;
+    ISBuscar_Mov: TISBusquedaAvanzada;
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_EgresosAfterScroll(DataSet: TDataSet);
     procedure pintarTortas(Serie: TChartSeries; cantidad: integer);
@@ -319,8 +320,8 @@ procedure TFEstadisticaMovInternos.FormCreate(Sender: TObject);
 var
   anio, mes, indice_suc: integer;
 begin
-  EKOrdenarGrillaBalance.CargarConfigColumnas;
-  EKOrdenarGrillaMovimientos.CargarConfigColumnas;
+  IsOrdenarGrillaBalance.CargarConfigColunmas;
+  IsOrdenarGrillaMovimientos.CargarConfigColunmas;
 
   QRRepListadoDBLogo.DataSet:= dm.ZQ_Sucursal;
   QRRepBalanceDBLogo.DataSet:= dm.ZQ_Sucursal;
@@ -343,7 +344,7 @@ begin
   anio:= YearOf(dm.EKModelo.Fecha);
 
   TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[2]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
-  TEKCriterioBA(EKBuscar_Mov.CriteriosBusqueda.Items[2]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TISCriterioBA(ISBuscar_Mov.CriteriosBusqueda.Items[2]).TipoCombollenarSQL:= dm.ZQ_SucursalesVisibles;
   TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[2]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
@@ -355,9 +356,9 @@ begin
   TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
   TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
 
-  TEKCriterioBA(EKBuscar_Mov.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
-  TEKCriterioBA(EKBuscar_Mov.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
-  TEKCriterioBA(EKBuscar_Mov.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
+  TISCriterioBA(ISBuscar_Mov.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
+  TISCriterioBA(ISBuscar_Mov.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.ISModelo.FechayHora);
+  TISCriterioBA(ISBuscar_Mov.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
 
   TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
   TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
@@ -377,20 +378,20 @@ end;
 
 procedure TFEstadisticaMovInternos.EKDbSuma_IngresosSumListChanged(Sender: TObject);
 begin
-  lblTotalIngresos.Caption:= 'TOTAL: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma_Ingresos.SumCollection.Items[0].SumValue);
+  lblTotalIngresos.Caption:= 'TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ISDbSuma_Ingresos.SumCollection.Items[0].SumValue);
 end;
 
 
 procedure TFEstadisticaMovInternos.EKDbSuma_EgresosSumListChanged(Sender: TObject);
 begin
-  lblTotalEgresos.Caption:= 'TOTAL: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma_Egresos.SumCollection.Items[0].SumValue);
+  lblTotalEgresos.Caption:= 'TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ISDbSuma_Egresos.SumCollection.Items[0].SumValue);
 end;
 
 
 procedure TFEstadisticaMovInternos.EKDbSuma_MovSumListChanged(Sender: TObject);
 begin
-  lblMov_TotalIngresos.Caption:= 'Total Ingresos: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma_Mov.SumCollection.Items[0].SumValue);
-  lblMov_TotalEgresos.Caption:= 'Total Egresos: '+FormatFloat('$ ###,###,###,##0.00', EKDbSuma_Mov.SumCollection.Items[1].SumValue);
+  lblMov_TotalIngresos.Caption:= 'Total Ingresos: '+FormatFloat('$ ###,###,###,##0.00', ISDbSuma_Mov.SumCollection.Items[0].SumValue);
+  lblMov_TotalEgresos.Caption:= 'Total Egresos: '+FormatFloat('$ ###,###,###,##0.00', ISDbSuma_Mov.SumCollection.Items[1].SumValue);
 end;
 
 procedure TFEstadisticaMovInternos.btnBuscarClick(Sender: TObject);
@@ -426,8 +427,8 @@ begin
     lblMovFecha.Caption:= '';
     lblMovSucursal.Caption:= '';
 
-    if  EKBuscar_Mov.BuscarSinEjecutar then
-      if (EKBuscar_Mov.ParametrosSeleccionados1[0] = '') or (EKBuscar_Mov.ParametrosSeleccionados1[1] = '') then
+    if  ISBuscar_Mov.BuscarSinEjecutar then
+      if (ISBuscar_Mov.ParametrosSeleccionados1[0] = '') or (ISBuscar_Mov.ParametrosSeleccionados1[1] = '') then
       begin
         Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
@@ -435,31 +436,31 @@ begin
       else
       begin
         ZQ_Movimientos.Close;
-        ZQ_Movimientos.ParamByName('fecha_desde').AsDate:= StrToDate(EKBuscar_Mov.ParametrosSeleccionados1[0]);
-        ZQ_Movimientos.ParamByName('fecha_hasta').AsDate:= StrToDate(EKBuscar_Mov.ParametrosSeleccionados1[1]);
-        if EKBuscar_Mov.ParametrosSeleccionados1[2] = '0' then
+        ZQ_Movimientos.ParamByName('fecha_desde').AsDate:= StrToDate(ISBuscar_Mov.ParametrosSeleccionados1[0]);
+        ZQ_Movimientos.ParamByName('fecha_hasta').AsDate:= StrToDate(ISBuscar_Mov.ParametrosSeleccionados1[1]);
+        if ISBuscar_Mov.ParametrosSeleccionados1[2] = '0' then
           ZQ_Movimientos.ParamByName('id_sucursal').AsInteger:= -1
         else
-          ZQ_Movimientos.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscar_Mov.ParametrosSeleccionados1[2]);
+          ZQ_Movimientos.ParamByName('id_sucursal').AsInteger:= StrToInt(ISBuscar_Mov.ParametrosSeleccionados1[2]);
         ZQ_Movimientos.Open;
 
         filtro:= '(1 = 1)';
-        if EKBuscar_Mov.ParametrosSelecReales1[3] <> '' then
-          filtro:= filtro + ' and NOMBRE_MOVIMIENTO LIKE ''*'+UpperCase(EKBuscar_Mov.ParametrosSelecReales1[3])+'*''';
+        if ISBuscar_Mov.ParametrosSelecReales1[3] <> '' then
+          filtro:= filtro + ' and NOMBRE_MOVIMIENTO LIKE ''*'+UpperCase(ISBuscar_Mov.ParametrosSelecReales1[3])+'*''';
 
-        if EKBuscar_Mov.ParametrosSelecReales1[4] <> '' then
-          filtro:= filtro + ' and ID_TIPO_CPB = '+EKBuscar_Mov.ParametrosSeleccionados1[4];
+        if ISBuscar_Mov.ParametrosSelecReales1[4] <> '' then
+          filtro:= filtro + ' and ID_TIPO_CPB = '+ISBuscar_Mov.ParametrosSeleccionados1[4];
 
-        condicionImporte:= EKBuscar_Mov.ParametrosSelecCondicion1[5];
-        if EKBuscar_Mov.ParametrosSelecReales1[5] <> '' then
-          if EKBuscar_Mov.ParametrosSelecReales1[4] = '' then //si no filtro por tipo
-            filtro:= filtro + ' and ((ingresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+') or '+
-                      '(egresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+'))'
+        condicionImporte:= ISBuscar_Mov.ParametrosSelecCondicion1[5];
+        if ISBuscar_Mov.ParametrosSelecReales1[5] <> '' then
+          if ISBuscar_Mov.ParametrosSelecReales1[4] = '' then //si no filtro por tipo
+            filtro:= filtro + ' and ((ingresos '+condicionImporte+' '+ISBuscar_Mov.ParametrosSelecReales1[5]+') or '+
+                      '(egresos '+condicionImporte+' '+ISBuscar_Mov.ParametrosSelecReales1[5]+'))'
           else //si filtre por tipo
-            if EKBuscar_Mov.ParametrosSeleccionados1[4] = '16' then //si no filtro por tipo
-              filtro:= filtro + ' and (ingresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+')'
+            if ISBuscar_Mov.ParametrosSeleccionados1[4] = '16' then //si no filtro por tipo
+              filtro:= filtro + ' and (ingresos '+condicionImporte+' '+ISBuscar_Mov.ParametrosSelecReales1[5]+')'
             else
-              filtro:= filtro + ' and (egresos '+condicionImporte+' '+EKBuscar_Mov.ParametrosSelecReales1[5]+')';
+              filtro:= filtro + ' and (egresos '+condicionImporte+' '+ISBuscar_Mov.ParametrosSelecReales1[5]+')';
 
         if filtro <> '(1 = 1)' then
         begin
@@ -469,8 +470,8 @@ begin
         else
           ZQ_Movimientos.Filtered:= false;
 
-        lblMovFecha.Caption:= 'Movimientos Internos desde el '+EKBuscar_Mov.ParametrosSeleccionados1[0]+' al '+EKBuscar_Mov.ParametrosSeleccionados1[1];
-        lblMovSucursal.Caption:= 'Sucursal: '+EKBuscar_Mov.ParametrosSelecReales1[2];
+        lblMovFecha.Caption:= 'Movimientos Internos desde el '+ISBuscar_Mov.ParametrosSeleccionados1[0]+' al '+ISBuscar_Mov.ParametrosSeleccionados1[1];
+        lblMovSucursal.Caption:= 'Sucursal: '+ISBuscar_Mov.ParametrosSelecReales1[2];
       end;
   end;
 
@@ -562,10 +563,10 @@ begin
   final:= ZS_CalcSaldosSALDO.AsFloat;
   ZS_CalcSaldos.Close;
 
-  EKSuma_Balance.RecalcAll;
+  ISSuma_Balance.RecalcAll;
 
-  lblBalanceTotalIngresos.Caption:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Balance.SumCollection[0].SumValue);
-  lblBalanceTotalEgresos.Caption:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Balance.SumCollection[1].SumValue);
+  lblBalanceTotalIngresos.Caption:= FormatFloat('$ ###,###,###,##0.00', ISSuma_Balance.SumCollection[0].SumValue);
+  lblBalanceTotalEgresos.Caption:= FormatFloat('$ ###,###,###,##0.00', ISSuma_Balance.SumCollection[1].SumValue);
   lblBalanceSaldoInicial.Caption:= FormatFloat('$ ###,###,###,##0.00', inicial);
   lblBalanceSaldoFinal.Caption:= FormatFloat('$ ###,###,###,##0.00', final);
 end;
@@ -601,7 +602,7 @@ begin
     QRlblRepBalance_Ingresos.Caption:= lblBalanceTotalIngresos.Caption;
     QRlblRepBalance_Egresos.Caption:= lblBalanceTotalEgresos.Caption;
 
-    EKVistaBalance.VistaPrevia;
+    ISVistaBalance.VistaPrevia;
   end;
 
 //LISTA MOVIMIENTOS
@@ -612,12 +613,12 @@ begin
 
     DM.VariablesReportes(RepListado);
     QRlblRepListado_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-    QRlblRepListado_CritBusqueda.Caption := EKBuscar_Mov.ParametrosBuscados;
+    QRlblRepListado_CritBusqueda.Caption := ISBuscar_Mov.ParametrosBuscados;
 
     QRlblRepListado_Ingresos.Caption:= lblMov_TotalIngresos.Caption;
     QRlblRepListado_Egresos.Caption:= lblMov_TotalEgresos.Caption;
 
-    EKVistaListado.VistaPrevia;
+    IsVistaListado.VistaPrevia;
   end;
 end;
 
@@ -643,8 +644,8 @@ end;
 
 procedure TFEstadisticaMovInternos.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrillaBalance.GuardarConfigColumnas;
-  EKOrdenarGrillaMovimientos.GuardarConfigColumnas;
+  ISOrdenarGrillaBalance.GuardarConfigColumnas;
+  IsOrdenarGrillaMovimientos.GuardarConfigColumnas;
 end;
 
 end.
