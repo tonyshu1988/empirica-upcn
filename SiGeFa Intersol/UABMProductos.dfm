@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 506
-  Top = 144
+  Left = 229
+  Top = 132
   AutoScroll = False
   Caption = 'ABM Productos'
   ClientHeight = 711
@@ -190,7 +190,7 @@ object FABMProductos: TFABMProductos
           50.270833333333330000
           1232.958333333333000000
           124.354166666666700000
-          304.270833333333400000)
+          304.270833333333300000)
         Alignment = taCenter
         AlignToBand = True
         AutoSize = True
@@ -296,7 +296,7 @@ object FABMProductos: TFABMProductos
       ForceNewPage = False
       ParentFont = False
       Size.Values = (
-        34.395833333333340000
+        34.395833333333330000
         2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -500,7 +500,7 @@ object FABMProductos: TFABMProductos
           52.916666666666670000
           10.583333333333330000
           7.937500000000000000
-          304.270833333333400000)
+          304.270833333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -598,7 +598,7 @@ object FABMProductos: TFABMProductos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        58.208333333333340000
+        58.208333333333330000
         2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -648,7 +648,7 @@ object FABMProductos: TFABMProductos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        82.020833333333340000
+        82.020833333333330000
         2770.187500000000000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -696,7 +696,7 @@ object FABMProductos: TFABMProductos
         Frame.DrawLeft = False
         Frame.DrawRight = False
         Size.Values = (
-          34.395833333333340000
+          34.395833333333330000
           13.229166666666670000
           5.291666666666667000
           333.375000000000000000)
@@ -914,7 +914,7 @@ object FABMProductos: TFABMProductos
           37.041666666666670000
           2000.250000000000000000
           5.291666666666667000
-          92.604166666666680000)
+          92.604166666666670000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -1257,7 +1257,7 @@ object FABMProductos: TFABMProductos
           29.104166666666670000
           603.250000000000000000
           2.645833333333333000
-          89.958333333333340000)
+          89.958333333333330000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -2927,7 +2927,7 @@ object FABMProductos: TFABMProductos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4754,6 +4754,7 @@ object FABMProductos: TFABMProductos
         ItemIndex = 0
       end>
     CriteriosLocate = <>
+    Modelo = DM.ISModelo
     DataSet = ZQ_ProductoCabecera
     SQL.Strings = (
       'select distinct pc.*, a.descripcion, m.nombre_marca'
