@@ -1,6 +1,6 @@
 object FConsulta_Precios: TFConsulta_Precios
-  Left = 170
-  Top = 156
+  Left = 360
+  Top = 153
   Width = 1242
   Height = 647
   Caption = 'Consulta Precios'
@@ -397,7 +397,7 @@ object FConsulta_Precios: TFConsulta_Precios
         object Label1: TLabel
           Left = 14
           Top = 26
-          Width = 163
+          Width = 157
           Height = 18
           Anchors = [akLeft, akRight, akBottom]
           Caption = 'C'#243'digo de Barras:'
@@ -1115,8 +1115,8 @@ object FConsulta_Precios: TFConsulta_Precios
       Size = 3000
     end
   end
-  object EKListadoProducto: TEKListadoSQL
-    Modelo = DM.EKModelo
+  object ISListadoProducto: TISListadoSQL
+    Modelo = DM.ISModelo
     SQL.Strings = (
       
         'select sp.id_stock_producto,cast((  COALESCE ('#39'Secci'#243'n: '#39' || ps.' +
@@ -1145,19 +1145,19 @@ object FConsulta_Precios: TFConsulta_Precios
       'join configuracion c on (c.id_sucursal=su.id_sucursal)'
       'left join medida m on (pr.id_medida=m.id_medida)'
       'where (ps.punto_salida='#39'S'#39')and(pc.baja<>'#39'S'#39')'
-      'order by 3')
+      'order by 3'
+      '')
     CampoBuscar = 'posicSucursal'
     CampoBuscar2 = 'secc'
     CampoClave = 'id_stock_producto'
     TituloVentana = 'Buscar Producto'
     TituloBuscar = 'Detalle Producto:'
     TituloBuscar2 = 'Ubicaci'#243'n:'
-    BuscarDoble = True
     ColorGrilla = 14606012
     AnchoClave = 80
     AnchoBuscar1 = 3000
     AnchoBuscar2 = 1000
-    Left = 144
+    Left = 50
     Top = 304
   end
 end
