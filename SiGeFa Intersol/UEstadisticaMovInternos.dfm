@@ -3792,51 +3792,6 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       FieldName = 'SALDODIARIO'
     end
   end
-  object EKBuscarBalance: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Fecha Desde'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValor = False
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha Hasta'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValor = False
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndice = 1
-        TipoCampoIndiceVer = 'Igual'
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    UsarWhereOriginal = EK_Sin_Where
-    PantallaReducida = True
-    Left = 588
-    Top = 240
-  end
   object ATeclasRapidas: TActionManager
     Left = 216
     Top = 274
@@ -3846,51 +3801,6 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
       ShortCut = 112
       OnExecute = ABuscarExecute
     end
-  end
-  object EKBuscaIngEgr: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Fecha Desde'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValor = False
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha Hasta'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValor = False
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndice = 1
-        TipoCampoIndiceVer = 'Igual'
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    UsarWhereOriginal = EK_Sin_Where
-    PantallaReducida = True
-    Left = 212
-    Top = 224
   end
   object ISVistaListado: TISVistaPreviaQR
     Reporte = RepListado
@@ -4090,5 +4000,85 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
     PantallaReducida = True
     Left = 52
     Top = 216
+  end
+  object ISBuscaIngEgr: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Fecha Desde'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValor = False
+      end
+      item
+        Titulo = 'Fecha Hasta'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValor = False
+      end
+      item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValor = False
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    UsarWhereOriginal = IS_Sin_Where
+    PantallaReducida = True
+    Left = 214
+    Top = 220
+  end
+  object ISBuscarBalance: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Fecha Desde'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValor = False
+      end
+      item
+        Titulo = 'Fecha Hasta'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValor = False
+      end
+      item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+        VaciarValor = False
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    UsarWhereOriginal = IS_Sin_Where
+    PantallaReducida = True
+    Left = 590
+    Top = 232
   end
 end

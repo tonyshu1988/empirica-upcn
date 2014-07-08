@@ -91,7 +91,6 @@ type
     ZS_BalanceSALDODIARIO: TFloatField;
     DS_Balance: TDataSource;
     ZS_CalcSaldos: TZStoredProc;
-    EKBuscarBalance: TEKBusquedaAvanzada;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     Panel4: TPanel;
@@ -102,7 +101,6 @@ type
     Series2: TPointSeries;
     Series5: TFastLineSeries;
     Series3: TPointSeries;
-    EKBuscaIngEgr: TEKBusquedaAvanzada;
     Panel1: TPanel;
     lblMovSucursal: TLabel;
     lblMovFecha: TLabel;
@@ -195,6 +193,8 @@ type
     ISDbSuma_Egresos: TISDbSuma;
     ISSuma_Balance: TISDbSuma;
     ISBuscar_Mov: TISBusquedaAvanzada;
+    ISBuscaIngEgr: TISBusquedaAvanzada;
+    ISBuscarBalance: TISBusquedaAvanzada;
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_EgresosAfterScroll(DataSet: TDataSet);
     procedure pintarTortas(Serie: TChartSeries; cantidad: integer);
@@ -343,26 +343,26 @@ begin
   mes:= MonthOf(dm.EKModelo.Fecha);
   anio:= YearOf(dm.EKModelo.Fecha);
 
-  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[2]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TISCriterioBA(ISBuscarBalance.CriteriosBusqueda.Items[2]).TipoCombollenarSQL:= dm.ZQ_SucursalesVisibles;
   TISCriterioBA(ISBuscar_Mov.CriteriosBusqueda.Items[2]).TipoCombollenarSQL:= dm.ZQ_SucursalesVisibles;
-  TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[2]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TISCriterioBA(ISBuscaIngEgr.CriteriosBusqueda.Items[2]).TipoCombollenarSQL:= dm.ZQ_SucursalesVisibles;
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
     indice_suc:= dm.ZQ_SucursalesVisibles.RecNo - 1
   else
     indice_suc:= 0;
 
-  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
-  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
-  TEKCriterioBA(EKBuscarBalance.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
+  TISCriterioBA(ISBuscarBalance.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
+  TISCriterioBA(ISBuscarBalance.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.ISModelo.FechayHora);
+  TISCriterioBA(ISBuscarBalance.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
 
   TISCriterioBA(ISBuscar_Mov.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
   TISCriterioBA(ISBuscar_Mov.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.ISModelo.FechayHora);
   TISCriterioBA(ISBuscar_Mov.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
 
-  TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
-  TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
-  TEKCriterioBA(EKBuscaIngEgr.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
+  TISCriterioBA(ISBuscaIngEgr.CriteriosBusqueda.Items[0]).Valor := (DateToStr(EncodeDate(anio, mes, 1)));
+  TISCriterioBA(ISBuscaIngEgr.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.ISModelo.FechayHora);
+  TISCriterioBA(ISBuscaIngEgr.CriteriosBusqueda.Items[2]).ItemIndex:= indice_suc;
 end;
 
 
@@ -405,19 +405,19 @@ begin
     lblBalanceFecha.Caption:= '';
     lblBalanceSucursal.Caption:= '';
 
-    if  EKBuscarBalance.BuscarSinEjecutar then
-      if (EKBuscarBalance.ParametrosSeleccionados1[0] = '') or (EKBuscarBalance.ParametrosSeleccionados1[1] = '') then
+    if  ISBuscarBalance.BuscarSinEjecutar then
+      if (ISBuscarBalance.ParametrosSeleccionados1[0] = '') or (ISBuscarBalance.ParametrosSeleccionados1[1] = '') then
       begin
         Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
       end
       else
       begin
-        lblBalanceSucursal.Caption:= 'Sucursal: '+EKBuscarBalance.ParametrosSelecReales1[2];
-        if EKBuscarBalance.ParametrosSeleccionados1[2] = '0' then
-          abrirBalance(StrToDate(EKBuscarBalance.ParametrosSeleccionados1[0]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[1]), -1)
+        lblBalanceSucursal.Caption:= 'Sucursal: '+ISBuscarBalance.ParametrosSelecReales1[2];
+        if ISBuscarBalance.ParametrosSeleccionados1[2] = '0' then
+          abrirBalance(StrToDate(ISBuscarBalance.ParametrosSeleccionados1[0]), StrToDate(ISBuscarBalance.ParametrosSeleccionados1[1]), -1)
         else
-          abrirBalance(StrToDate(EKBuscarBalance.ParametrosSeleccionados1[0]), StrToDate(EKBuscarBalance.ParametrosSeleccionados1[1]), StrToInt(EKBuscarBalance.ParametrosSeleccionados1[2]));
+          abrirBalance(StrToDate(ISBuscarBalance.ParametrosSeleccionados1[0]), StrToDate(ISBuscarBalance.ParametrosSeleccionados1[1]), StrToInt(ISBuscarBalance.ParametrosSeleccionados1[2]));
       end;
   end;
 
@@ -481,8 +481,8 @@ begin
     lblIngEgrFecha.Caption:= '';
     lblIngEgrSucursal.Caption:= '';
 
-    if  EKBuscaIngEgr.BuscarSinEjecutar then
-      if (EKBuscaIngEgr.ParametrosSeleccionados1[0] = '') or (EKBuscaIngEgr.ParametrosSeleccionados1[1] = '') then
+    if  ISBuscaIngEgr.BuscarSinEjecutar then
+      if (ISBuscaIngEgr.ParametrosSeleccionados1[0] = '') or (ISBuscaIngEgr.ParametrosSeleccionados1[1] = '') then
       begin
         Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
@@ -493,23 +493,23 @@ begin
         Query_Ingresos:= false;
 
         idSucursal:= -1;
-        if EKBuscaIngEgr.ParametrosSeleccionados1[2] <> '0' then
-          idSucursal:= StrToInt(EKBuscaIngEgr.ParametrosSeleccionados1[2]);
+        if ISBuscaIngEgr.ParametrosSeleccionados1[2] <> '0' then
+          idSucursal:= StrToInt(ISBuscaIngEgr.ParametrosSeleccionados1[2]);
 
         ZQ_Ingresos.Close;
-        ZQ_Ingresos.ParamByName('fecha_desde').AsDate:= StrToDate(EKBuscaIngEgr.ParametrosSeleccionados1[0]);
-        ZQ_Ingresos.ParamByName('fecha_hasta').AsDate:= StrToDate(EKBuscaIngEgr.ParametrosSeleccionados1[1]);
+        ZQ_Ingresos.ParamByName('fecha_desde').AsDate:= StrToDate(ISBuscaIngEgr.ParametrosSeleccionados1[0]);
+        ZQ_Ingresos.ParamByName('fecha_hasta').AsDate:= StrToDate(ISBuscaIngEgr.ParametrosSeleccionados1[1]);
         ZQ_Ingresos.ParamByName('id_sucursal').AsInteger:= idSucursal;
         ZQ_Ingresos.Open;
 
         ZQ_Egresos.Close;
-        ZQ_Egresos.ParamByName('fecha_desde').AsDate:= StrToDate(EKBuscaIngEgr.ParametrosSeleccionados1[0]);
-        ZQ_Egresos.ParamByName('fecha_hasta').AsDate:= StrToDate(EKBuscaIngEgr.ParametrosSeleccionados1[1]);
+        ZQ_Egresos.ParamByName('fecha_desde').AsDate:= StrToDate(ISBuscaIngEgr.ParametrosSeleccionados1[0]);
+        ZQ_Egresos.ParamByName('fecha_hasta').AsDate:= StrToDate(ISBuscaIngEgr.ParametrosSeleccionados1[1]);
         ZQ_Egresos.ParamByName('id_sucursal').AsInteger:= idSucursal;
         ZQ_Egresos.Open;
 
-        lblIngEgrFecha.Caption:= 'Ingresos y Egresos desde el '+EKBuscaIngEgr.ParametrosSeleccionados1[0]+' al '+EKBuscaIngEgr.ParametrosSeleccionados1[1];
-        lblIngEgrSucursal.Caption:= 'Sucursal: '+EKBuscaIngEgr.ParametrosSelecReales1[2];
+        lblIngEgrFecha.Caption:= 'Ingresos y Egresos desde el '+ISBuscaIngEgr.ParametrosSeleccionados1[0]+' al '+ISBuscaIngEgr.ParametrosSeleccionados1[1];
+        lblIngEgrSucursal.Caption:= 'Sucursal: '+ISBuscaIngEgr.ParametrosSelecReales1[2];
 
         Query_Egresos:= true;
         Query_Ingresos:= true;
@@ -595,7 +595,7 @@ begin
 
     DM.VariablesReportes(RepBalance);
     QRlblRepBalance_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-    QRlblRepBalance_CritBusqueda.Caption := EKBuscarBalance.ParametrosBuscados;
+    QRlblRepBalance_CritBusqueda.Caption := ISBuscarBalance.ParametrosBuscados;
 
     QRlblRepBalance_SaldoIni.Caption:= lblBalanceSaldoInicial.Caption;
     QRlblRepBalance_SaldoFinal.Caption:= lblBalanceSaldoFinal.Caption;
