@@ -6,11 +6,13 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, ComCtrls, Grids, DBGrids,
   DBCtrls, StdCtrls, Mask, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla, Menus,UBuscarPersona,
+  ZDataset, Menus,UBuscarPersona,
   ZStoredProcedure,ShellAPI, IdMessage, IdBaseComponent, IdComponent,
   IdTCPConnection, IdTCPClient, IdMessageClient, IdSMTP, ActnList,
-  XPStyleActnCtrls, ActnMan, EKListadoSQL, DBClient, Provider, QuickRpt,
-  QRCtrls, EKVistaPreviaQR, Buttons, EKDBDateTimePicker, cxClasses;
+  XPStyleActnCtrls, ActnMan, DBClient, Provider, QuickRpt,
+  QRCtrls, Buttons, cxClasses,
+  ISVistaPreviaQR, ISBusquedaAvanzada, ISListadoSQL, ISOrdenarGrilla,
+  ISDBDateTimePicker,UDM;
 
 type
   TFABMEmpresas = class(TForm)
@@ -73,13 +75,11 @@ type
     ZQ_Empresaprovincia: TStringField;
     ZQ_Empresatipo_empresa: TStringField;
     ZQ_Empresatipo_IVA: TStringField;
-    EKBusquedaAvanzadaEmpresas: TEKBusquedaAvanzada;
     ZQ_EmpresaID_EMPRESA: TIntegerField;
     ZQ_EmpresaID_TIPO_EMPRESA: TIntegerField;
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
-    EKOrdenarEmpresas: TEKOrdenarGrilla;
     PopupMenuContactos: TPopupMenu;
     AgregarContacto1: TMenuItem;
     QuitarContacto1: TMenuItem;
@@ -197,7 +197,6 @@ type
     Panel3: TPanel;
     Label14: TLabel;
     ZQ_EmpresaMarcaDESCRIPCION: TStringField;
-    EKListadoMarca: TEKListadoSQL;
     DataSetProvider1: TDataSetProvider;
     RepListaEmpresas: TQuickRep;
     QRBand5: TQRBand;
@@ -218,7 +217,6 @@ type
     QRSysData2: TQRSysData;
     QRBand1: TQRBand;
     QRExpr15: TQRExpr;
-    EKVistaPreviaListaEmpresas: TEKVistaPreviaQR;
     RepDetalleEmpresa: TQuickRep;
     QRBand2: TQRBand;
     QRDBLogo2: TQRDBImage;
@@ -268,11 +266,8 @@ type
     QRLabel27: TQRLabel;
     QRDBText18: TQRDBText;
     btImprimirDetalle: TdxBarLargeButton;
-    EKVistaPreviaDetalleEmpresa: TEKVistaPreviaQR;
     QRDBText19: TQRDBText;
     QRLabel28: TQRLabel;
-    EKOrdenarContactos: TEKOrdenarGrilla;
-    EKOrdenarViajantes: TEKOrdenarGrilla;
     DBGridContactoTelMail: TDBGrid;
     ZQ_EntidadTelefonoContacto: TZQuery;
     ZQ_EntidadTelefonoContactoID_ENTIDAD_TELEFONO: TIntegerField;
@@ -318,12 +313,10 @@ type
     Label8: TLabel;
     Label16: TLabel;
     Label17: TLabel;
-    EKDBFechaCtaCte: TEKDBDateTimePicker;
     DBEditLimiteDeuda: TDBEdit;
     btnCtaCte_Aceptar: TBitBtn;
     btnCtaCte_Cancelar: TBitBtn;
     DBEditVencimDia: TDBEdit;
-    EKDBDateTimePicker1: TEKDBDateTimePicker;
     ZQ_CtaCte: TZQuery;
     ZQ_CtaCteID_CTA_CTE: TIntegerField;
     ZQ_CtaCteID_PERSONA: TIntegerField;
@@ -353,6 +346,15 @@ type
     QRlblPieDePaginaListado: TQRLabel;
     ZQ_TipoIVACOEFICIENTE: TFloatField;
     ZQ_TipoIVAVERIFICA_CUIT: TStringField;
+    ISVistaPreviaDetalleEmpresa: TISVistaPreviaQR;
+    ISVistaPreviaListaEmpresas: TISVistaPreviaQR;
+    ISOrdenarViajantes: TISOrdenarGrilla;
+    ISOrdenarEmpresas: TISOrdenarGrilla;
+    ISOrdenarContactos: TISOrdenarGrilla;
+    ISListadoMarca: TISListadoSQL;
+    ISBusquedaAvanzadaEmpresas: TISBusquedaAvanzada;
+    ISDBFechaCtaCte: TISDBDateTimePicker;
+    ISDBFechaCtaCte2: TISDBDateTimePicker;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);
@@ -420,7 +422,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal, UMailEnviar, UUtilidades;
+uses UPrincipal, UMailEnviar, UUtilidades;
 
 {$R *.dfm}
 
@@ -456,7 +458,7 @@ end;
 
 procedure TFABMEmpresas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca, ZQ_EntidadTelefonoEmpresa, ZQ_CtaCte]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca, ZQ_EntidadTelefonoEmpresa, ZQ_CtaCte]) then
   begin
     tieneCuentaCorriente:= false;
     
@@ -470,8 +472,8 @@ begin
     ZPID_Empresa.Active := true;
     ZQ_EmpresaID_EMPRESA.AsInteger := ZPID_EmpresaID.AsInteger;    
 
-    EKOrdenarViajantes.PopUpGrilla := PopupMenuViajantes;
-    EKOrdenarContactos.PopUpGrilla := PopupMenuContactos;
+    DBGridViajantes.PopupMenu := PopupMenuViajantes;
+    DBGridContactos.PopupMenu := PopupMenuContactos;
     GrillaMarcas.PopupMenu := PopupMenuMarcas;
     DBGridEntidadTelefonoEmpresa.PopupMenu:=PopupMenuTelmail;
 
@@ -488,15 +490,15 @@ begin
   if (ZQ_Empresa.IsEmpty) or (ZQ_EmpresaBAJA.AsString = 'S') then
    exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca, ZQ_EntidadTelefonoEmpresa, ZQ_CtaCte]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa,ZQ_PersonaRelacionContacto, ZQ_PersonaRelacionViajante, ZQ_EmpresaMarca, ZQ_EntidadTelefonoEmpresa, ZQ_CtaCte]) then
   begin
     DBGridEmpresas.Enabled:=false;
     ZQ_Empresa.Edit;
     GrupoVisualizando.Enabled := false;
     GrupoEditando.Enabled:=true;
 
-    EKOrdenarViajantes.PopUpGrilla := PopupMenuViajantes;
-    EKOrdenarContactos.PopUpGrilla := PopupMenuContactos;
+    DBGridViajantes.PopupMenu := PopupMenuViajantes;
+    DBGridContactos.PopupMenu := PopupMenuContactos;
     GrillaMarcas.PopupMenu := PopupMenuMarcas;
     DBGridEntidadTelefonoEmpresa.PopupMenu:=PopupMenuTelmail;
 
@@ -514,7 +516,7 @@ begin
   if validarcampos() then
   begin
 
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABMEmpresas) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABMEmpresas) then
     begin
       DBGridEmpresas.Enabled:=true;
       GrupoVisualizando.Enabled:=true;
@@ -524,8 +526,8 @@ begin
       ZQ_Empresa.RecNo:=recno;
       DBGridEmpresas.SetFocus;
 
-      EKOrdenarViajantes.PopUpGrilla := nil;
-      EKOrdenarContactos.PopUpGrilla := nil;
+      DBGridViajantes.PopupMenu := nil;
+      DBGridContactos.PopupMenu := nil;
       GrillaMarcas.PopupMenu := nil;
       DBGridEntidadTelefonoEmpresa.PopupMenu:=nil;
 
@@ -568,14 +570,14 @@ begin
        ZQ_EmpresaMarca.CancelUpdates;
   end;
 
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABMEmpresas) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABMEmpresas) then
   begin
     GrupoVisualizando.Enabled:=true;
     GrupoEditando.Enabled:=false;
     DBGridEmpresas.SetFocus;
 
-    EKOrdenarViajantes.PopUpGrilla := nil;
-    EKOrdenarContactos.PopUpGrilla := nil;
+    DBGridViajantes.PopupMenu := nil;
+    DBGridContactos.PopupMenu := nil;
     GrillaMarcas.PopupMenu := nil;
     DBGridEntidadTelefonoEmpresa.PopupMenu:=nil;
 
@@ -601,9 +603,9 @@ end;
 procedure TFABMEmpresas.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
-  EKOrdenarEmpresas.GuardarConfigColumnas;
-  EKOrdenarContactos.GuardarConfigColumnas;
-  EKOrdenarViajantes.GuardarConfigColumnas;
+  ISOrdenarEmpresas.GuardarConfigColumnas;
+  ISOrdenarContactos.GuardarConfigColumnas;
+  ISOrdenarViajantes.GuardarConfigColumnas;
 
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABMEmpresas);
 end;
@@ -611,7 +613,7 @@ end;
 
 procedure TFABMEmpresas.btnBuscarClick(Sender: TObject);
 begin
-  if EKBusquedaAvanzadaEmpresas.Buscar then
+  if ISBusquedaAvanzadaEmpresas.Buscar then
     dm.mostrarCantidadRegistro(ZQ_Empresa, lblCantidadRegistros);
 end;
 
@@ -625,7 +627,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja la "Empresa" seleccionado?'), 'ABM Empresas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa]) then
     begin
       ZQ_Empresa.Edit;
       ZQ_EmpresaBAJA.AsString:='S';
@@ -633,8 +635,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMEmpresas)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABMEmpresas);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABMEmpresas)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABMEmpresas);
 
     recNo:= ZQ_Empresa.RecNo;
     ZQ_Empresa.Refresh;
@@ -652,7 +654,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar la "Empresa" seleccionado?'), 'ABM Empresas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABMEmpresas, [ZQ_Empresa]) then
     begin
       ZQ_Empresa.Edit;
       ZQ_EmpresaBAJA.AsString:='N';
@@ -660,8 +662,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMEmpresas)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABMEmpresas);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABMEmpresas)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABMEmpresas);
 
     recNo:= ZQ_Empresa.RecNo;
     ZQ_Empresa.Refresh;
@@ -703,26 +705,25 @@ begin
   TabCtaCte.Enabled:= false;
   habilitarCtaCte(false);
 
-  EKOrdenarEmpresas.CargarConfigColumnas;
-  EKOrdenarContactos.CargarConfigColumnas;
-  EKOrdenarViajantes.CargarConfigColumnas;
+  ISOrdenarEmpresas.CargarConfigColunmas;
+  ISOrdenarContactos.CargarConfigColunmas;
+  ISOrdenarViajantes.CargarConfigColunmas;
 
-  EKOrdenarContactos.PopUpGrilla:= nil;
-  EKOrdenarViajantes.PopUpGrilla:= nil;
+  DBGridContactos.PopupMenu:= nil;
+  DBGridViajantes.PopupMenu:= nil;
 
   StaticTxtBaja.Color:= FPrincipal.baja;
-  dm.EKModelo.abrir(ZQ_Marcas);
-  dm.EKModelo.abrir(ZQ_Personas);
+  dm.ISModelo.abrir(ZQ_Marcas);
+  dm.ISModelo.abrir(ZQ_Personas);
 
   PageControlEdicion.TabIndex:=0;
 
-  EKBusquedaAvanzadaEmpresas.Abrir;
+  ISBusquedaAvanzadaEmpresas.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Empresa, lblCantidadRegistros);
   permisosUsuario;
 
   dbNombre.Color:= dm.colorCampoRequido;
-//  DBCBoxTipoIva.Color:= dm.colorCampoRequido;
-//  DBEditCuitCuil.Color:= dm.colorCampoRequido;
+
 end;
 
 
@@ -924,8 +925,6 @@ end;
 
 
 procedure TFABMEmpresas.llamar1Click(Sender: TObject);
-var
-  telefono : string;
 begin
   btnSkype.Click;
 end;
@@ -1038,7 +1037,7 @@ end;
 
 procedure TFABMEmpresas.AgregarMarcaClick(Sender: TObject);
 begin
-  if EKListadoMarca.Buscar then
+  if ISListadoMarca.Buscar then
   begin
     ZQ_EmpresaMarca.Filter:= 'id_marca = '+ZQ_MarcasID_MARCA.AsString;
     ZQ_EmpresaMarca.Filtered := true;
@@ -1072,9 +1071,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepListaEmpresas);
-  QRlblPieDePaginaListado.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBusquedaAvanzadaEmpresas.ParametrosBuscados;
-  EKVistaPreviaListaEmpresas.VistaPrevia;
+  QRlblPieDePaginaListado.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBusquedaAvanzadaEmpresas.ParametrosBuscados;
+  ISVistaPreviaListaEmpresas.VistaPrevia;
 end;
 
 procedure TFABMEmpresas.btImprimirDetalleClick(Sender: TObject);
@@ -1086,7 +1085,7 @@ begin
   ZQ_RelacionEmpresa.ParamByName('ID_EMPRESA').AsInteger := ZQ_EmpresaID_EMPRESA.AsInteger;
   ZQ_RelacionEmpresa.Open;
 
-  EKVistaPreviaDetalleEmpresa.VistaPrevia;  
+  ISVistaPreviaDetalleEmpresa.VistaPrevia;
 end;
 
 procedure TFABMEmpresas.ZQ_PersonaRelacionContactoAfterScroll(
@@ -1209,14 +1208,14 @@ begin
     ZQ_CtaCte.Append;
     ZQ_CtaCteID_PERSONA.Clear;
     ZQ_CtaCteID_PROVEEDOR.AsInteger:= ZQ_EmpresaID_EMPRESA.AsInteger;
-    ZQ_CtaCteFECHA_ALTA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_CtaCteFECHA_ALTA.AsDateTime:= dm.ISModelo.FechayHora;
     ZQ_CtaCteFECHA_BAJA.Clear;
     ZQ_CtaCteLIMITE_DEUDA.AsFloat:= ctacte_credito; //por defecto lo de la configuracion
     ZQ_CtaCteVENCIMIENTO_DIAS.AsInteger:= ctacte_diasVencimiento; //por defecto lo de la configuracion
     ZQ_CtaCteSALDO.AsFloat:= 0;
     ZQ_CtaCteBAJA.AsString:= 'N';
 
-    EKDBFechaCtaCte.SetFocus;
+    ISDBFechaCtaCte.SetFocus;
     GrupoEditando.Enabled:= false;
   end;
 
@@ -1227,7 +1226,7 @@ begin
 
     habilitarCtaCte(true);
     ZQ_CtaCte.Edit;
-    EKDBFechaCtaCte.SetFocus;
+    ISDBFechaCtaCte.SetFocus;
     GrupoEditando.Enabled:= false;
   end;
 
@@ -1240,7 +1239,7 @@ begin
     begin
       ZQ_CtaCte.Edit;
       ZQ_CtaCteBAJA.AsString:= 'S';
-      ZQ_CtaCteFECHA_BAJA.AsDateTime:= dm.EKModelo.FechayHora;
+      ZQ_CtaCteFECHA_BAJA.AsDateTime:= dm.ISModelo.FechayHora;
     end;
   end;
 
