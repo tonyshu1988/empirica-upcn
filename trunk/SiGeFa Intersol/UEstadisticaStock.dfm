@@ -2284,7 +2284,6 @@ object FEstadisticaStock: TFEstadisticaStock
         Tabla = 'sucursal'
         TipoCampoIngreso = EK_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = DM.ZQ_SucursalesVisibles
         TipoComboSQLCampoVer = 'nombre'
         TipoComboSQLCampoReal = 'id_sucursal'
         TipoComboEditable = False
@@ -2433,29 +2432,23 @@ object FEstadisticaStock: TFEstadisticaStock
     Left = 48
     Top = 32
   end
-  object EKDbSuma_Totales: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'precio_costo'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'precio_venta'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'preciocostostock'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'precioventastock'
-      end>
-    DataSet = ZQ_Stock
-    Left = 45
-    Top = 177
+  object ATeclasRapidas: TActionManager
+    Left = 136
+    Top = 82
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
   end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
+  object ISVistaPreviaQR1: TISVistaPreviaQR
+    Reporte = RepStock
+    ShowModal = False
+    Left = 48
+    Top = 288
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
     Grilla = DBGridStock
     Filtros = <
       item
@@ -2538,29 +2531,126 @@ object FEstadisticaStock: TFEstadisticaStock
         TituloColumna = 'Baja'
         Visible = True
       end>
-    NombreGuardar = 'EstadisticaStock'
+    NombreGuardarConfig = 'EstadisticaStock'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
     Left = 48
     Top = 232
   end
-  object EKVistaPreviaQR1: TEKVistaPreviaQR
-    Reporte = RepStock
-    ShowModal = False
+  object ISDbSuma_Totales: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'precio_costo'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'precio_venta'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'preciocostostock'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'precioventastock'
+      end>
+    DataSet = ZQ_Stock
     Left = 48
-    Top = 288
+    Top = 176
   end
-  object ATeclasRapidas: TActionManager
-    Left = 136
-    Top = 82
-    StyleName = 'XP Style'
-    object ABuscar: TAction
-      Caption = 'ABuscar'
-      ShortCut = 112
-      OnExecute = ABuscarExecute
-    end
+  object ISBuscarStock: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'C'#243'd. Corto'
+        Campo = 'cod_corto'
+        Tabla = 'pr'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Barra'
+        Campo = 'codigo_barra'
+        Tabla = 'pr'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Cabecera'
+        Campo = 'cod_corto'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nombre Producto'
+        Campo = 'nombre'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Medida'
+        Campo = 'medida'
+        Tabla = 'md'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Marca'
+        Campo = 'nombre_marca'
+        Tabla = 'mc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'ta'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'ar'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Color'
+        Campo = 'nombre'
+        Tabla = 'c'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Stock Actual'
+        Campo = 'stock_actual'
+        Tabla = 'sp'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_Stock
+    UsarWhereOriginal = IS_Con_Where
+    Left = 232
+    Top = 48
   end
 end
