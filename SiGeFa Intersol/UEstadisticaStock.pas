@@ -7,7 +7,8 @@ uses
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
   StdCtrls, EKDbSuma, mxNativeExcel, mxExport, EKOrdenarGrilla, QRCtrls,
-  QuickRpt, EKVistaPreviaQR, ActnList, XPStyleActnCtrls, ActnMan, cxClasses;
+  QuickRpt, EKVistaPreviaQR, ActnList, XPStyleActnCtrls, ActnMan, cxClasses,
+  ISDbSuma, ISOrdenarGrilla, ISVistaPreviaQR, ISBusquedaAvanzada;
 
 type
   TFEstadisticaStock = class(TForm)
@@ -47,8 +48,6 @@ type
     ZQ_Stockprecioventastock: TFloatField;
     Panel2: TPanel;
     lblTotales: TLabel;
-    EKDbSuma_Totales: TEKDbSuma;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     RepStock: TQuickRep;
     QRBand5: TQRBand;
     QRLabel11: TQRLabel;
@@ -69,7 +68,6 @@ type
     QRDBText4: TQRDBText;
     QRDBText8: TQRDBText;
     QRExpr1: TQRExpr;
-    EKVistaPreviaQR1: TEKVistaPreviaQR;
     QRLabel8: TQRLabel;
     QRLabel10: TQRLabel;
     QRlblPieDePagina: TQRLabel;
@@ -94,6 +92,10 @@ type
     QRExpr2: TQRExpr;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
+    ISVistaPreviaQR1: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISDbSuma_Totales: TISDbSuma;
+    ISBuscarStock: TISBusquedaAvanzada;
     procedure ZQ_StockCalcFields(DataSet: TDataSet);
     procedure btnBuscarClick(Sender: TObject);
     procedure DBGridStockDrawColumnCell(Sender: TObject; const Rect: TRect;
@@ -130,7 +132,7 @@ end;
 procedure TFEstadisticaStock.btnBuscarClick(Sender: TObject);
 begin
   EKBuscarStock.Buscar;
-  lblTotales.Caption:= ' Precio Costo Stock Total: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_Totales.SumCollection.Items[2].SumValue)+'          Precio Venta Stock Total: '+FormatFloat('$ ###,###,##0.00', EKDbSuma_Totales.SumCollection.Items[3].SumValue);
+  lblTotales.Caption:= ' Precio Costo Stock Total: '+FormatFloat('$ ###,###,##0.00', ISDbSuma_Totales.SumCollection.Items[2].SumValue)+'          Precio Venta Stock Total: '+FormatFloat('$ ###,###,##0.00', ISDbSuma_Totales.SumCollection.Items[3].SumValue);
 end;
 
 
@@ -150,7 +152,7 @@ end;
 procedure TFEstadisticaStock.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
 
   //busqueda por comprobante
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
@@ -160,7 +162,7 @@ end;
 
 procedure TFEstadisticaStock.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 
@@ -178,7 +180,7 @@ begin
   DM.VariablesReportes(RepStock);
   QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscarStock.ParametrosBuscados;
-  EKVistaPreviaQR1.VistaPrevia;
+  ISVistaPreviaQR1.VistaPrevia;
 end;
 
 procedure TFEstadisticaStock.ABuscarExecute(Sender: TObject);
