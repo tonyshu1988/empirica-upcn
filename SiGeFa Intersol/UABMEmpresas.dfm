@@ -1,6 +1,6 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 234
-  Top = 64
+  Left = 344
+  Top = 149
   Width = 1006
   Height = 663
   Caption = 'ABM Empresas'
@@ -22,8 +22,8 @@ object FABMEmpresas: TFABMEmpresas
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 990
-    Height = 573
+    Width = 998
+    Height = 584
     Align = alClient
     TabOrder = 0
     object RepDetalleEmpresa: TQuickRep
@@ -138,7 +138,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            759.354166666666700000
+            759.354166666666800000
             124.354166666666700000
             381.000000000000000000)
           Alignment = taCenter
@@ -170,8 +170,8 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            685.270833333333300000
-            68.791666666666670000
+            685.270833333333400000
+            68.791666666666680000
             529.166666666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -202,9 +202,9 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            645.583333333333300000
+            645.583333333333400000
             5.291666666666667000
-            605.895833333333300000)
+            605.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -434,7 +434,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333330000
+          42.333333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -482,7 +482,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -1525,7 +1525,7 @@ object FABMEmpresas: TFABMEmpresas
             50.270833333333330000
             1209.145833333333000000
             124.354166666666700000
-            351.895833333333300000)
+            351.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1556,7 +1556,7 @@ object FABMEmpresas: TFABMEmpresas
           Size.Values = (
             52.916666666666670000
             1129.770833333333000000
-            68.791666666666670000
+            68.791666666666680000
             508.000000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -1589,7 +1589,7 @@ object FABMEmpresas: TFABMEmpresas
             52.916666666666670000
             1090.083333333333000000
             5.291666666666667000
-            590.020833333333300000)
+            590.020833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1933,7 +1933,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -2114,7 +2114,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -2434,10 +2434,10 @@ object FABMEmpresas: TFABMEmpresas
     end
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 366
-      Width = 988
+      Top = 377
+      Width = 996
       Height = 206
-      ActivePage = TabEmpresa
+      ActivePage = TabMarcas
       Align = alBottom
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
@@ -2710,7 +2710,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridEntidadTelefonoEmpresa: TDBGrid
           Left = 0
           Top = 0
-          Width = 998
+          Width = 988
           Height = 178
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
@@ -2760,7 +2760,7 @@ object FABMEmpresas: TFABMEmpresas
         Caption = 'Contactos'
         ImageIndex = 18
         object Splitter1: TSplitter
-          Left = 536
+          Left = 526
           Top = 0
           Width = 8
           Height = 104
@@ -2769,7 +2769,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridContactos: TDBGrid
           Left = 0
           Top = 0
-          Width = 536
+          Width = 526
           Height = 104
           Hint = 'Haga click derecho para agregar o quitar un Contacto'
           Align = alClient
@@ -2828,7 +2828,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel1: TPanel
           Left = 0
           Top = 104
-          Width = 998
+          Width = 988
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -2837,7 +2837,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label12: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 986
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -2846,7 +2846,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoContactos: TDBMemo
           Left = 0
           Top = 123
-          Width = 998
+          Width = 988
           Height = 55
           Align = alBottom
           Color = clWhite
@@ -2862,7 +2862,7 @@ object FABMEmpresas: TFABMEmpresas
           TabOrder = 2
         end
         object DBGridContactoTelMail: TDBGrid
-          Left = 544
+          Left = 534
           Top = 0
           Width = 454
           Height = 104
@@ -2917,7 +2917,7 @@ object FABMEmpresas: TFABMEmpresas
         Caption = 'Viajantes'
         ImageIndex = 9
         object Splitter2: TSplitter
-          Left = 528
+          Left = 518
           Top = 0
           Width = 8
           Height = 104
@@ -2926,7 +2926,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBGridViajantes: TDBGrid
           Left = 0
           Top = 0
-          Width = 528
+          Width = 518
           Height = 104
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
@@ -2985,7 +2985,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoViajantes: TDBMemo
           Left = 0
           Top = 123
-          Width = 998
+          Width = 988
           Height = 55
           Align = alBottom
           Color = clWhite
@@ -2997,7 +2997,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel2: TPanel
           Left = 0
           Top = 104
-          Width = 998
+          Width = 988
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -3006,14 +3006,14 @@ object FABMEmpresas: TFABMEmpresas
           object Label13: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 986
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
           end
         end
         object DBGridViajanteTelMail: TDBGrid
-          Left = 536
+          Left = 526
           Top = 0
           Width = 462
           Height = 104
@@ -3070,7 +3070,7 @@ object FABMEmpresas: TFABMEmpresas
         object GrillaMarcas: TDBGrid
           Left = 0
           Top = 0
-          Width = 998
+          Width = 988
           Height = 104
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
@@ -3112,7 +3112,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemo1: TDBMemo
           Left = 0
           Top = 123
-          Width = 998
+          Width = 988
           Height = 55
           Align = alBottom
           Color = clWhite
@@ -3130,7 +3130,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel3: TPanel
           Left = 0
           Top = 104
-          Width = 998
+          Width = 988
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -3139,7 +3139,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label14: TLabel
             Left = 1
             Top = 5
-            Width = 106
+            Width = 986
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -3153,7 +3153,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemoDescripcion: TDBMemo
           Left = 0
           Top = 0
-          Width = 992
+          Width = 982
           Height = 172
           Align = alClient
           DataField = 'DESCRIPCION_PRIVADA'
@@ -3242,23 +3242,6 @@ object FABMEmpresas: TFABMEmpresas
             Height = 13
             Caption = 'Fecha Baja:'
           end
-          object EKDBFechaCtaCte: TEKDBDateTimePicker
-            Left = 115
-            Top = 18
-            Width = 153
-            Height = 21
-            Date = 40793.391464837970000000
-            Time = 40793.391464837970000000
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
-            TabOrder = 0
-            DataField = 'FECHA_ALTA'
-            DataSource = DS_CtaCte
-          end
           object DBEditLimiteDeuda: TDBEdit
             Left = 115
             Top = 75
@@ -3272,14 +3255,14 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 1
+            TabOrder = 0
           end
           object btnCtaCte_Aceptar: TBitBtn
             Left = 21
             Top = 135
             Width = 40
             Height = 29
-            TabOrder = 2
+            TabOrder = 1
             OnClick = btnCtaCte_AceptarClick
           end
           object btnCtaCte_Cancelar: TBitBtn
@@ -3287,7 +3270,7 @@ object FABMEmpresas: TFABMEmpresas
             Top = 135
             Width = 40
             Height = 29
-            TabOrder = 3
+            TabOrder = 2
             OnClick = btnCtaCte_CancelarClick
           end
           object DBEditVencimDia: TDBEdit
@@ -3303,16 +3286,32 @@ object FABMEmpresas: TFABMEmpresas
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 4
+            TabOrder = 3
           end
-          object EKDBDateTimePicker1: TEKDBDateTimePicker
+          object ISDBFechaCtaCte: TISDBDateTimePicker
+            Left = 115
+            Top = 18
+            Width = 150
+            Height = 21
+            Date = 41806.884660497700000000
+            Time = 41806.884660497700000000
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 4
+            DataField = 'FECHA_ALTA'
+            DataSource = DS_CtaCte
+          end
+          object ISDBFechaCtaCte2: TISDBDateTimePicker
             Left = 115
             Top = 46
-            Width = 153
+            Width = 150
             Height = 21
-            Date = 40793.391464837970000000
-            Time = 40793.391464837970000000
-            Enabled = False
+            Date = 41806.884660497700000000
+            Time = 41806.884660497700000000
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clWindowText
             Font.Height = -11
@@ -3329,8 +3328,8 @@ object FABMEmpresas: TFABMEmpresas
     object DBGridEmpresas: TDBGrid
       Left = 1
       Top = 20
-      Width = 988
-      Height = 346
+      Width = 996
+      Height = 357
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -3428,7 +3427,7 @@ object FABMEmpresas: TFABMEmpresas
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 988
+      Width = 996
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -3449,7 +3448,7 @@ object FABMEmpresas: TFABMEmpresas
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 878
+        Left = 886
         Top = 1
         Width = 109
         Height = 17
@@ -3467,7 +3466,7 @@ object FABMEmpresas: TFABMEmpresas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3765,8 +3764,8 @@ object FABMEmpresas: TFABMEmpresas
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 92
-    Top = 208
+    Left = 932
+    Top = 184
     DockControlHeights = (
       0
       0
@@ -4331,7 +4330,7 @@ object FABMEmpresas: TFABMEmpresas
       'from empresa e'
       'order by e.nombre')
     Params = <>
-    Left = 264
+    Left = 296
     Top = 56
     object ZQ_EmpresaCUIT_CUIL: TStringField
       FieldName = 'CUIT_CUIL'
@@ -4424,7 +4423,7 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_Empresa: TDataSource
     DataSet = ZQ_Empresa
-    Left = 264
+    Left = 296
     Top = 120
   end
   object ZQ_Provincia: TZQuery
@@ -4517,146 +4516,11 @@ object FABMEmpresas: TFABMEmpresas
     Left = 560
     Top = 120
   end
-  object EKBusquedaAvanzadaEmpresas: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Nombre Empresa'
-        Campo = 'nombre'
-        Tabla = 'e'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Direcci'#243'n'
-        Campo = 'direccion'
-        Tabla = 'e'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Cuit/Cuil'
-        Campo = 'cuit_cuil'
-        Tabla = 'e'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Tel'#233'fono'
-        Campo = 'telefono'
-        Tabla = 'e'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Email'
-        Campo = 'email'
-        Tabla = 'e'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Baja'
-        Campo = 'baja'
-        Tabla = 'e'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboValoresVer.Strings = (
-          'SI'
-          'NO')
-        TipoComboValoresReales.Strings = (
-          'S'
-          'N')
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_Empresa
-    SQL.Strings = (
-      'select *'
-      'from empresa e'
-      'order by e.nombre')
-    SQL_Select.Strings = (
-      'select *')
-    SQL_From.Strings = (
-      'from empresa e')
-    SQL_Orden.Strings = (
-      'order by e.nombre')
-    UsarWhereOriginal = EK_Sin_Where
-    PantallaReducida = True
-    Left = 88
-    Top = 56
-  end
-  object EKOrdenarEmpresas: TEKOrdenarGrilla
-    Grilla = DBGridEmpresas
-    Filtros = <
-      item
-        TituloColumna = 'Nombre Empresa'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Direcci'#243'n'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo I.V.A'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cuit/Cuil'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Provincia'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Localidad'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cod.Postal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Pag.Web'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo Empresa'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_Empresa'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 88
-    Top = 104
-  end
   object PopupMenuContactos: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
-    Left = 316
-    Top = 396
+    Left = 644
+    Top = 308
     object AgregarContacto1: TMenuItem
       Caption = 'Agregar Contacto'
       Hint = 'Agregar un contacto al listado de contactos'
@@ -4689,8 +4553,8 @@ object FABMEmpresas: TFABMEmpresas
         Name = 'id_empresa'
         ParamType = ptUnknown
       end>
-    Left = 781
-    Top = 394
+    Left = 845
+    Top = 242
     ParamData = <
       item
         DataType = ftUnknown
@@ -4859,18 +4723,18 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_PersonaRelacionContacto: TDataSource
     DataSet = ZQ_PersonaRelacionContacto
-    Left = 781
-    Top = 442
+    Left = 845
+    Top = 370
   end
   object DS_PersonaRelacionViajante: TDataSource
     DataSet = ZQ_PersonaRelacionViajante
-    Left = 629
-    Top = 442
+    Left = 653
+    Top = 370
   end
   object PopupMenuViajantes: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
-    Left = 436
-    Top = 396
+    Left = 844
+    Top = 300
     object AgregarViajante1: TMenuItem
       Caption = 'Agregar Viajante'
       ImageIndex = 14
@@ -4901,8 +4765,8 @@ object FABMEmpresas: TFABMEmpresas
         Name = 'id_empresa'
         ParamType = ptUnknown
       end>
-    Left = 629
-    Top = 394
+    Left = 933
+    Top = 298
     ParamData = <
       item
         DataType = ftUnknown
@@ -5012,7 +4876,7 @@ object FABMEmpresas: TFABMEmpresas
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_EMPRESA_ID'
-    Left = 264
+    Left = 296
     Top = 184
     ParamData = <
       item
@@ -5025,8 +4889,8 @@ object FABMEmpresas: TFABMEmpresas
     end
   end
   object PopupMenuSkypeMail: TPopupMenu
-    Left = 196
-    Top = 396
+    Left = 500
+    Top = 180
     object llamar1: TMenuItem
       Caption = 'Llamar por Skype'
       OnClick = llamar1Click
@@ -5037,8 +4901,8 @@ object FABMEmpresas: TFABMEmpresas
     end
   end
   object ATeclasRapidas: TActionManager
-    Left = 88
-    Top = 154
+    Left = 848
+    Top = 186
     StyleName = 'XP Style'
     object ABuscar: TAction
       Caption = 'ABuscar'
@@ -5083,8 +4947,8 @@ object FABMEmpresas: TFABMEmpresas
   object PopupMenuMarcas: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
-    Left = 84
-    Top = 396
+    Left = 500
+    Top = 236
     object AgregarMarca: TMenuItem
       Caption = 'Agregar Marca'
       ImageIndex = 14
@@ -5179,38 +5043,10 @@ object FABMEmpresas: TFABMEmpresas
     Left = 744
     Top = 120
   end
-  object EKListadoMarca: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      
-        'select m.id_marca, lpad(m.codigo_marca,4,'#39'0'#39')||'#39' - '#39'||m.nombre_m' +
-        'arca as busqueda'
-      'from marca m'
-      'where m.baja = '#39'N'#39
-      'order by m.codigo_marca, m.nombre_marca')
-    CampoBuscar = 'busqueda'
-    CampoClave = 'ID_MARCA'
-    BuscarEnQuery = ZQ_Marcas
-    TituloVentana = 'Buscar Marca'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 837
-    Top = 120
-  end
   object DataSetProvider1: TDataSetProvider
     DataSet = ZQ_EmpresaMarca
     Left = 837
-    Top = 180
-  end
-  object EKVistaPreviaListaEmpresas: TEKVistaPreviaQR
-    Reporte = RepListaEmpresas
-    ShowModal = False
-    Left = 397
-    Top = 184
+    Top = 116
   end
   object ZQ_RelacionEmpresa: TZQuery
     Connection = DM.Conexion
@@ -5262,70 +5098,6 @@ object FABMEmpresas: TFABMEmpresas
       Size = 30
     end
   end
-  object EKVistaPreviaDetalleEmpresa: TEKVistaPreviaQR
-    Reporte = RepDetalleEmpresa
-    ShowModal = False
-    Left = 565
-    Top = 184
-  end
-  object EKOrdenarContactos: TEKOrdenarGrilla
-    Grilla = DBGridContactos
-    Filtros = <
-      item
-        TituloColumna = 'Nombre y Apellido'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Direcci'#243'n'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Localidad'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cod.Postal'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_EmpresaContactos'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    PopUpGrilla = PopupMenuContactos
-    Left = 317
-    Top = 445
-  end
-  object EKOrdenarViajantes: TEKOrdenarGrilla
-    Grilla = DBGridViajantes
-    Filtros = <
-      item
-        TituloColumna = 'Nombre y Apellido'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Direcci'#243'n'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Localidad'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cod.Postal'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_EmpresaViajantes'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    PopUpGrilla = PopupMenuViajantes
-    Left = 197
-    Top = 445
-  end
   object ZQ_EntidadTelefonoContacto: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -5338,8 +5110,8 @@ object FABMEmpresas: TFABMEmpresas
         Name = 'ID_PERSONA'
         ParamType = ptUnknown
       end>
-    Left = 600
-    Top = 256
+    Left = 648
+    Top = 192
     ParamData = <
       item
         DataType = ftUnknown
@@ -5370,8 +5142,8 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_EntidadTelefonoContacto: TDataSource
     DataSet = ZQ_EntidadTelefonoContacto
-    Left = 600
-    Top = 304
+    Left = 640
+    Top = 248
   end
   object ZQ_EntidadTelefonoEmpresa: TZQuery
     Connection = DM.Conexion
@@ -5386,8 +5158,8 @@ object FABMEmpresas: TFABMEmpresas
         Name = 'ID_ENTIDAD'
         ParamType = ptUnknown
       end>
-    Left = 72
-    Top = 512
+    Left = 504
+    Top = 288
     ParamData = <
       item
         DataType = ftUnknown
@@ -5418,14 +5190,14 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_EntidadTelefonoEmpresa: TDataSource
     DataSet = ZQ_EntidadTelefonoEmpresa
-    Left = 72
-    Top = 560
+    Left = 752
+    Top = 304
   end
   object PopupMenuTelmail: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
-    Left = 204
-    Top = 516
+    Left = 612
+    Top = 460
     object AgregarTelMail: TMenuItem
       Caption = 'Agregar Telefono/Mail'
       ImageIndex = 14
@@ -5453,8 +5225,8 @@ object FABMEmpresas: TFABMEmpresas
         Name = 'ID_PERSONA'
         ParamType = ptUnknown
       end>
-    Left = 768
-    Top = 256
+    Left = 752
+    Top = 192
     ParamData = <
       item
         DataType = ftUnknown
@@ -5486,8 +5258,8 @@ object FABMEmpresas: TFABMEmpresas
   end
   object DS_EntidadTelefonoViajantes: TDataSource
     DataSet = ZQ_EntidadTelefonoViajantes
-    Left = 768
-    Top = 304
+    Left = 928
+    Top = 240
   end
   object ZQ_CtaCte: TZQuery
     Connection = DM.Conexion
@@ -5543,5 +5315,229 @@ object FABMEmpresas: TFABMEmpresas
     DataSet = ZQ_CtaCte
     Left = 936
     Top = 104
+  end
+  object ISVistaPreviaDetalleEmpresa: TISVistaPreviaQR
+    Reporte = RepDetalleEmpresa
+    ShowModal = False
+    Left = 288
+    Top = 240
+  end
+  object ISVistaPreviaListaEmpresas: TISVistaPreviaQR
+    Reporte = RepListaEmpresas
+    ShowModal = False
+    Left = 288
+    Top = 296
+  end
+  object ISOrdenarViajantes: TISOrdenarGrilla
+    Grilla = DBGridViajantes
+    Filtros = <
+      item
+        TituloColumna = 'Nombre y Apellido'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod.Postal'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_EmpresaViajantes'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 96
+    Top = 112
+  end
+  object ISOrdenarEmpresas: TISOrdenarGrilla
+    Grilla = DBGridEmpresas
+    Filtros = <
+      item
+        TituloColumna = 'Nombre Empresa'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo I.V.A'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuit/Cuil'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Provincia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod.Postal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Pag.Web'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Empresa'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_Empresa'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 96
+    Top = 224
+  end
+  object ISOrdenarContactos: TISOrdenarGrilla
+    Grilla = DBGridContactos
+    Filtros = <
+      item
+        TituloColumna = 'Nombre y Apellido'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod.Postal'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_EmpresaContactos'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 96
+    Top = 168
+  end
+  object ISListadoMarca: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      
+        'select m.id_marca, lpad(m.codigo_marca,4,'#39'0'#39')||'#39' - '#39'||m.nombre_m' +
+        'arca as busqueda'
+      'from marca m'
+      'where m.baja = '#39'N'#39
+      'order by m.codigo_marca, m.nombre_marca'
+      '')
+    CampoBuscar = 'busqueda'
+    CampoClave = 'ID_MARCA'
+    BuscarEnQuery = ZQ_Marcas
+    TituloVentana = 'Buscar Marca'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 480
+    AnchoBuscar2 = 500
+    Left = 96
+    Top = 280
+  end
+  object ISBusquedaAvanzadaEmpresas: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Nombre Empresa'
+        Campo = 'nombre'
+        Tabla = 'e'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Direcci'#243'n'
+        Campo = 'direccion'
+        Tabla = 'e'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'CUIT/CUIL'
+        Campo = 'cuit_cuil'
+        Tabla = 'e'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tel'#233'fono'
+        Campo = 'telefono'
+        Tabla = 'e'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'E-mail'
+        Campo = 'email'
+        Tabla = 'e'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'e'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'N'
+          'S')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'N'
+          'S')
+        ItemIndex = 0
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_Empresa
+    SQL.Strings = (
+      'select E.*'
+      ''
+      ''
+      'from empresa e'
+      ''
+      ''
+      'order by e.nombre')
+    SQL_Select.Strings = (
+      'select E.*'
+      '')
+    SQL_From.Strings = (
+      ''
+      'from empresa e'
+      '')
+    SQL_Orden.Strings = (
+      ''
+      'order by e.nombre')
+    UsarWhereOriginal = IS_Sin_Where
+    Left = 96
+    Top = 56
   end
 end
