@@ -1,6 +1,6 @@
 object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
-  Left = 211
-  Top = 192
+  Left = 252
+  Top = 457
   Width = 1030
   Height = 500
   Caption = 'Libro IVA'
@@ -14,6 +14,8 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
   OldCreateOrder = False
   Position = poDefault
   Visible = True
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object tabs: TPageControl
@@ -753,43 +755,156 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
     Left = 188
     Top = 152
   end
-  object EKBuscarComprobantes: TEKBusquedaAvanzada
+  object ZQ_TipoIVA: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from tipo_IVA')
+    Params = <>
+    Left = 517
+    Top = 80
+    object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+      Required = True
+    end
+    object ZQ_TipoIVANOMBRE_TIPO_IVA: TStringField
+      FieldName = 'NOMBRE_TIPO_IVA'
+      Size = 50
+    end
+    object ZQ_TipoIVAABREVIATURA: TStringField
+      FieldName = 'ABREVIATURA'
+      Size = 10
+    end
+    object ZQ_TipoIVADISCRIMINAR: TStringField
+      FieldName = 'DISCRIMINAR'
+      Size = 1
+    end
+    object ZQ_TipoIVALETRA: TStringField
+      FieldName = 'LETRA'
+      Size = 1
+    end
+    object ZQ_TipoIVAFISCAL: TStringField
+      FieldName = 'FISCAL'
+      Size = 1
+    end
+    object ZQ_TipoIVACOEFICIENTE: TFloatField
+      FieldName = 'COEFICIENTE'
+    end
+  end
+  object ISOrdenarGrillaVentas: TISOrdenarGrilla
+    Grilla = grillaVentas
+    Filtros = <
+      item
+        TituloColumna = 'Fecha/Hora'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Cpb.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'CUIT/CUIL'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Factura'
+        Visible = True
+      end
+      item
+        TituloColumna = 'No Grav.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Neto S/IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = '% IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Total'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ISOrdenarGrillaVentas'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 316
+    Top = 96
+  end
+  object ISDbSuma: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goCount
+        NombreCampo = 'codigo'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IF_SIVA'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IF_IVA'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IF_TOT'
+      end>
+    DataSet = ZQ_Libro_IVA_Ventas
+    Left = 316
+    Top = 168
+  end
+  object ISBuscarComprobantes: TISBusquedaAvanzada
     CriteriosBusqueda = <
       item
         Titulo = 'Sucursal'
         Campo = 'id_sucursal'
-        Tabla = 'sucursal'
-        TipoCampoIngreso = EK_Combo
+        Tabla = 's'
+        TipoCampoIngreso = IS_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = DM.ZQ_Sucursal
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoCombollenarSQL = DM.ZQ_Sucursal
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
         TipoComboEditable = False
-        TipoComboAncho = 350
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha'
         Campo = 'fecha_cobrada'
-        Tabla = 'comprobante'
-        TipoCampo = EK_Fecha
+        Tabla = 'c'
+        TipoCampo = IS_Fecha
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Nro. Cpb'
         Campo = 'numero_cpb'
-        Tabla = 'comprobante'
+        Tabla = 'c'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'C'#243'digo Cpb'
@@ -797,9 +912,7 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
         Tabla = 'c'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Cliente'
@@ -807,9 +920,7 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'CUIT/CUIL'
@@ -817,9 +928,7 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
         Tabla = 'p'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Ticket Tipo'
@@ -827,26 +936,22 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
         Tabla = 'ti'
         TipoCampoIndiceVer = 'Contiene'
         TipoComboEditable = False
-        TipoComboAncho = 200
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Tipo Iva'
         Campo = 'ID_TIPO_IVA'
-        Tabla = 'tipo_iva'
-        TipoCampoIngreso = EK_Combo
+        Tabla = 'ti'
+        TipoCampoIngreso = IS_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_TipoIVA
-        TipoComboSQLCampoVer = 'NOMBRE_TIPO_IVA'
-        TipoComboSQLCampoReal = 'ID_TIPO_IVA'
+        TipoCombollenarSQL = ZQ_TipoIVA
+        TipoCombollenarCampo = 'NOMBRE_TIPO_IVA'
+        TipoCombollenarCampoReal = 'ID_TIPO_IVA'
         TipoComboEditable = False
-        TipoComboAncho = 350
         ItemIndex = -1
-        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
-    Modelo = DM.EKModelo
+    Modelo = DM.ISModelo
     DataSet = ZQ_Libro_IVA_Ventas
     SQL.Strings = (
       
@@ -903,126 +1008,8 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
       
         'group by c.fecha_cobrada,tc.nombre_tipo_cpb,c.numero_cpb,c.codig' +
         'o,p.nombre,p.cuit_cuil,c.porc_iva,ti.abreviatura,ti.letra')
-    UsarWhereOriginal = EK_Con_Where
-    Left = 64
-    Top = 95
-  end
-  object ZQ_TipoIVA: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select *'
-      'from tipo_IVA')
-    Params = <>
-    Left = 517
-    Top = 80
-    object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
-      FieldName = 'ID_TIPO_IVA'
-      Required = True
-    end
-    object ZQ_TipoIVANOMBRE_TIPO_IVA: TStringField
-      FieldName = 'NOMBRE_TIPO_IVA'
-      Size = 50
-    end
-    object ZQ_TipoIVAABREVIATURA: TStringField
-      FieldName = 'ABREVIATURA'
-      Size = 10
-    end
-    object ZQ_TipoIVADISCRIMINAR: TStringField
-      FieldName = 'DISCRIMINAR'
-      Size = 1
-    end
-    object ZQ_TipoIVALETRA: TStringField
-      FieldName = 'LETRA'
-      Size = 1
-    end
-    object ZQ_TipoIVAFISCAL: TStringField
-      FieldName = 'FISCAL'
-      Size = 1
-    end
-    object ZQ_TipoIVACOEFICIENTE: TFloatField
-      FieldName = 'COEFICIENTE'
-    end
-  end
-  object EKDbSuma1: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goCount
-        NombreCampo = 'codigo'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'IF_SIVA'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'IF_IVA'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'IF_TOT'
-      end>
-    DataSet = ZQ_Libro_IVA_Ventas
-    SumListChanged = EKDbSuma1SumListChanged
-    Left = 284
-    Top = 176
-  end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = grillaVentas
-    Filtros = <
-      item
-        TituloColumna = 'Fecha/Hora'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nro. Cpb.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'digo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cliente'
-        Visible = True
-      end
-      item
-        TituloColumna = 'CUIT/CUIL'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo Factura'
-        Visible = True
-      end
-      item
-        TituloColumna = 'No Grav.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Neto S/IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = '% IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Total'
-        Visible = True
-      end>
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 348
-    Top = 144
+    UsarWhereOriginal = IS_Con_Where
+    Left = 68
+    Top = 160
   end
 end
