@@ -8,7 +8,8 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, UBuscarPersona, EKEdit, Buttons,
-  EKDbSuma, ComCtrls, EKDBDateTimePicker, Menus, ZStoredProcedure;
+  EKDbSuma, ComCtrls, EKDBDateTimePicker, Menus, ZStoredProcedure,
+  ISOrdenarGrilla, ISVistaPreviaQR, cxClasses;
 
 type
   TFCuentaCorriente = class(TForm)
@@ -68,8 +69,6 @@ type
     DS_CtaCte_Gral: TDataSource;
     ZQ_CtaCte_Cliente: TZQuery;
     DS_CtaCte_Cliente: TDataSource;
-    EKOrdenar_CtaCteGral: TEKOrdenarGrilla;
-    EKOrdenar_CtaCteCliente: TEKOrdenarGrilla;
     PanelFiltro: TPanel;
     BtnFiltro_Todos: TSpeedButton;
     BtnFiltro_Hoy: TSpeedButton;
@@ -148,7 +147,6 @@ type
     QRCtasCtes_TotalHaber: TQRLabel;
     QRCtasCtes_TotalDebe: TQRLabel;
     QRLabel8: TQRLabel;
-    EKVistaCtasCtes: TEKVistaPreviaQR;
     btnImprimir: TdxBarLargeButton;
     RepCliente: TQuickRep;
     QRBand1: TQRBand;
@@ -209,7 +207,6 @@ type
     QRClienteSaldo: TQRLabel;
     QRLabel7: TQRLabel;
     QRDBText8: TQRDBText;
-    EKVistaClientes: TEKVistaPreviaQR;
     btnExcel: TdxBarLargeButton;
     btnSaldoInicial: TdxBarLargeButton;
     ZQ_Insert_SaldoIni: TZQuery;
@@ -313,7 +310,6 @@ type
     ZQ_ReciboDetalleIMPORTE_VENTA: TFloatField;
     ZQ_ReciboDetalleDESCRIPCION: TStringField;
     ZQ_ReciboDetalleIMPORTE_REAL: TFloatField;
-    EKOrdenar_DetalleRecibo: TEKOrdenarGrilla;
     btnAltaRecibo: TdxBarLargeButton;
     PanelDetalleMov: TPanel;
     DBGridDetalle_Recibo: TDBGrid;
@@ -333,8 +329,14 @@ type
     ZQ_ComprobanteFPagoIMPORTE: TFloatField;
     ZQ_ComprobanteFPagoNOMBRE_CUENTA: TStringField;
     ZQ_ComprobanteFPagoDESCRIPCION: TStringField;
-    EKOrdenar_DetalleFPago: TEKOrdenarGrilla;
     StaticTextDeuda: TStaticText;
+    ISVistaClientes: TISVistaPreviaQR;
+    ISVistaCtasCtes: TISVistaPreviaQR;
+    ISOrdenar_CtaCteGral: TISOrdenarGrilla;
+    ISOrdenar_CtaCteCliente: TISOrdenarGrilla;
+    ISOrdenar_DetalleRecibo: TISOrdenarGrilla;
+    ISOrdenar_DetalleFPago: TISOrdenarGrilla;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
