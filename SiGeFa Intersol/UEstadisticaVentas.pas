@@ -5,11 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
-  StdCtrls, EKDbSuma, EKOrdenarGrilla, Buttons, mxNativeExcel, mxExport,
-  ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls, EKVistaPreviaQR,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls, Buttons, mxNativeExcel, mxExport,
+  ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls,
   ZStoredProcedure, Series, TeEngine, TeeProcs, Chart, DbChart, Menus,
-  cxClasses;
+  cxClasses, ISVistaPreviaQR, ISOrdenarGrilla, ISDbSuma, ISBusquedaAvanzada;
 
 type
   TFEstadisticaVentas = class(TForm)
@@ -43,8 +42,6 @@ type
     ZQ_ComprobanteDetalleID_STOCK_PRODUCTO: TIntegerField;
     ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField;
     lblTotalComprobantes: TLabel;
-    EKDbSumaComprobante: TEKDbSuma;
-    EKBuscarComprobantes: TEKBusquedaAvanzada;
     DBGridListadoProductos: TDBGrid;
     DBGridFormaPago: TDBGrid;
     ZQ_TipoIVA: TZQuery;
@@ -58,9 +55,6 @@ type
     PanelFacturacion: TPanel;
     ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField;
     ZQ_ComprobanteDetalleDETALLE_PROD: TStringField;
-    EKOrdenarFacturas: TEKOrdenarGrilla;
-    EKOrdenarProducto: TEKOrdenarGrilla;
-    EKOrdenarFPago: TEKOrdenarGrilla;
     ZQ_Comprobante_FormaPagoID_COMPROB_FP: TIntegerField;
     ZQ_Comprobante_FormaPagoID_COMPROBANTE: TIntegerField;
     ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG: TIntegerField;
@@ -101,8 +95,6 @@ type
     ZQ_ComprobanteDetalleCOLOR: TStringField;
     ZQ_ComprobanteDetalleMEDIDA: TStringField;
     ZQ_ComprobanteDetalleIMPORTE_NOFISCAL: TFloatField;
-    EKDbSumaFpago: TEKDbSuma;
-    EKDbSumaProducto: TEKDbSuma;
     RepDetalleMov: TQuickRep;
     QRBand2: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -140,7 +132,6 @@ type
     ZQ_SucursalCOMPROBANTE_RENGLON2: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
-    EKVistaPrevia: TEKVistaPreviaQR;
     ColumnHeaderBand1: TQRBand;
     QRLabel25: TQRLabel;
     QRLabel28: TQRLabel;
@@ -160,19 +151,11 @@ type
     lblHorarioFecha: TLabel;
     lblHorarioSucursal: TLabel;
     lblHorarioIntervalo: TLabel;
-    ZP_Horario: TZStoredProc;
-    ZP_HorarioHORA_DESDE: TTimeField;
-    ZP_HorarioHORA_HASTA: TTimeField;
-    ZP_HorarioCANTIDAD: TIntegerField;
-    ZP_HorarioIMPORTE: TFloatField;
     DS_Horario: TDataSource;
-    EKBuscarHorario: TEKBusquedaAvanzada;
     TabHorarioGrafico: TTabSheet;
     DBChartHorario: TDBChart;
     Series5: TFastLineSeries;
     Series3: TPointSeries;
-    ZP_HorarioHORA_PERIODO: TTimeField;
-    ZP_HorarioPERIODO: TIntegerField;
     Series1: TFastLineSeries;
     ZQ_ProductosVendidos: TZQuery;
     DS_ProductosVendidos: TDataSource;
@@ -181,7 +164,6 @@ type
     BtnFiltro_Fiscal: TSpeedButton;
     BtnFiltro_NoFiscal: TSpeedButton;
     Label39: TLabel;
-    EKDbSumaProdsVendidos: TEKDbSuma;
     DBChart1: TDBChart;
     FastLineSeries2: TBarSeries;
     Splitter4: TSplitter;
@@ -198,11 +180,9 @@ type
     ZQ_ProductosVendidosAGRUPAM: TIntegerField;
     ZQ_ProductosVendidosCANTIDAD: TIntegerField;
     ZQ_ProductosVendidosDETALLE_PROD: TStringField;
-    EKOrdenarGrillaRanking: TEKOrdenarGrilla;
     Panel6: TPanel;
     Splitter3: TSplitter;
     grillaTop20: TDBGrid;
-    EKBusquedaRanking: TEKBusquedaAvanzada;
     ZQ_Totales: TZQuery;
     DS_Top20: TDataSource;
     ZQ_TotalesSUMAVENTA: TFloatField;
@@ -211,14 +191,12 @@ type
     ZQ_TotalesCANTIDAD: TIntegerField;
     ZQ_TotalesDETALLE_PROD: TStringField;
     Label2: TLabel;
-    EKOrdenarGrillaTop20: TEKOrdenarGrilla;
     DBChart2: TDBChart;
     Series2: THorizBarSeries;
     btVer: TdxBarLargeButton;
     Panel1: TPanel;
     Label3: TLabel;
     lblProdsVendidos: TLabel;
-    EKDbSumaTotales: TEKDbSuma;
     lblTotales: TLabel;
     Splitter6: TSplitter;
     ZQ_Comprobante_FormaPagoNOMBRE_CUENTA: TStringField;
@@ -232,7 +210,6 @@ type
     Panel2: TPanel;
     lblTotVarias: TLabel;
     gridVarias: TDBGrid;
-    EKBusquedaVarias: TEKBusquedaAvanzada;
     ZQ_Consultas: TZQuery;
     ZQ_ConsultasID_CONSULTA: TIntegerField;
     ZQ_ConsultasDESCRIPCION: TStringField;
@@ -243,8 +220,6 @@ type
     ZQ_EstadVariasCANTIDAD: TIntegerField;
     DS_EstadVarias: TDataSource;
     ZQ_ConsultasSQL_TABLA_FILTRO: TStringField;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
-    EKDbSumaVarias: TEKDbSuma;
     ZQ_EstadVariasAGRUPAM: TStringField;
     ReporteEstadVarias: TQuickRep;
     QRBand4: TQRBand;
@@ -268,7 +243,6 @@ type
     QRBand10: TQRBand;
     QRExprImporte: TQRExpr;
     QRExpr2: TQRExpr;
-    EKVistaPreviaVarias: TEKVistaPreviaQR;
     QRLabel4: TQRLabel;
     PanelFiltroV: TPanel;
     BtnFiltro_TodosV: TSpeedButton;
@@ -302,7 +276,6 @@ type
     QRExpr1: TQRExpr;
     QRExpr3: TQRExpr;
     QRLabel16: TQRLabel;
-    EKVistaPreviaVariasCostos: TEKVistaPreviaQR;
     QRLabel17: TQRLabel;
     QRLabel19: TQRLabel;
     QRDBText4: TQRDBText;
@@ -311,7 +284,6 @@ type
     QRExpr5: TQRExpr;
     ZQ_ComprobanteHORA: TTimeField;
     lblTotHorarios: TLabel;
-    EKDbSumaHorarios: TEKDbSuma;
     ReporteRanking: TQuickRep;
     QRBand17: TQRBand;
     QRDBImage3: TQRDBImage;
@@ -337,7 +309,6 @@ type
     QRLabel30: TQRLabel;
     QRLabel1: TQRLabel;
     QRDBText12: TQRDBText;
-    EKVistaPreviaRanking: TEKVistaPreviaQR;
     QRLabel48: TQRLabel;
     QRLabelCritBusquedaEstadVarias: TQRLabel;
     QRLabel2: TQRLabel;
@@ -369,7 +340,29 @@ type
     QRExpr8: TQRExpr;
     QRExpr9: TQRExpr;
     QRLabel41: TQRLabel;
-    EKVistaPreviaRankingTotales: TEKVistaPreviaQR;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISVistaPreviaRanking: TISVistaPreviaQR;
+    ISVistaPreviaRankingTotales: TISVistaPreviaQR;
+    ISVistaPreviaVarias: TISVistaPreviaQR;
+    ISVistaPreviaVariasCostos: TISVistaPreviaQR;
+    ISOrdenarFacturas: TISOrdenarGrilla;
+    ISOrdenarFPago: TISOrdenarGrilla;
+    ISOrdenarProducto: TISOrdenarGrilla;
+    ISOrdenarGrillaRanking: TISOrdenarGrilla;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISOrdenarGrillaTop20: TISOrdenarGrilla;
+    ISDbSumaComprobante: TISDbSuma;
+    ISDbSumaFpago: TISDbSuma;
+    ISDbSumaProducto: TISDbSuma;
+    ISDbSumaProdsVendidos: TISDbSuma;
+    ISDbSumaTotales: TISDbSuma;
+    ISDbSumaHorarios: TISDbSuma;
+    ISDbSumaVarias: TISDbSuma;
+    ISBuscarComprobantes: TISBusquedaAvanzada;
+    ISBusquedaVarias: TISBusquedaAvanzada;
+    ISBuscarHorario: TISBusquedaAvanzada;
+    ISBusquedaRanking: TISBusquedaAvanzada;
+    ZP_Horario: TZStoredProc;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -416,11 +409,11 @@ var
 begin
   QRDBLogo.DataSet:= dm.ZQ_Sucursal;
 
-  EKOrdenarFacturas.CargarConfigColumnas;
-  EKOrdenarFPago.CargarConfigColumnas;
-  EKOrdenarProducto.CargarConfigColumnas;
-  EKOrdenarGrillaRanking.CargarConfigColumnas;
-  EKOrdenarGrillaTop20.CargarConfigColumnas;
+  ISOrdenarFacturas.CargarConfigColunmas;
+  ISOrdenarFPago.CargarConfigColunmas;
+  ISOrdenarProducto.CargarConfigColunmas;
+  ISOrdenarGrillaRanking.CargarConfigColunmas;
+  ISOrdenarGrillaTop20.CargarConfigColunmas;
 
   cargarConfigPanel;
 
@@ -434,37 +427,37 @@ begin
   lblHorarioSucursal.Caption := '';
   lblHorarioIntervalo.Caption := '';
 
-  mes:= MonthOf(dm.EKModelo.Fecha);
-  anio:= YearOf(dm.EKModelo.Fecha);
+  mes:= MonthOf(dm.ISModelo.Fecha);
+  anio:= YearOf(dm.ISModelo.Fecha);
 
-  TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
-  TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
-  TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
-  TEKCriterioBA(EKBusquedaVarias.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TISCriterioBA(ISBusquedaRanking.CriteriosBusqueda.Items[0]).TipoCombollenarSQL:= dm.ZQ_SucursalesVisibles;
+  TISCriterioBA(ISBuscarHorario.CriteriosBusqueda.Items[0]).TipoCombollenarSQL:= dm.ZQ_SucursalesVisibles;
+  TISCriterioBA(ISBuscarComprobantes.CriteriosBusqueda.Items[0]).TipoCombollenarSQL:= dm.ZQ_SucursalesVisibles;
+  TISCriterioBA(ISBusquedaVarias.CriteriosBusqueda.Items[0]).TipoCombollenarSQL:= dm.ZQ_SucursalesVisibles;
 
   //busqueda por horario
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
-  TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[1]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
-  TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[2]).Valor:= DateToStr(dm.EKModelo.Fecha);
-  TEKCriterioBA(EKBuscarHorario.CriteriosBusqueda.Items[3]).Valor:= IntToStr(30);
+    TISCriterioBA(ISBuscarHorario.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+  TISCriterioBA(ISBuscarHorario.CriteriosBusqueda.Items[1]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
+  TISCriterioBA(ISBuscarHorario.CriteriosBusqueda.Items[2]).Valor:= DateToStr(dm.ISModelo.Fecha);
+  TISCriterioBA(ISBuscarHorario.CriteriosBusqueda.Items[3]).Valor:= IntToStr(30);
 
   //busqueda por comprobante
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
-  TEKCriterioBA(EKBuscarComprobantes.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.EKModelo.Fecha);
+    TISCriterioBA(ISBuscarComprobantes.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+  TISCriterioBA(ISBuscarComprobantes.CriteriosBusqueda.Items[1]).Valor:= DateToStr(dm.IsModelo.Fecha);
 
   //busqueda por ranking
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
-  TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[1]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
-  TEKCriterioBA(EKBusquedaRanking.CriteriosBusqueda.Items[2]).Valor:= DateToStr(dm.EKModelo.Fecha);
+    TISCriterioBA(ISBusquedaRanking.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+  TISCriterioBA(ISBusquedaRanking.CriteriosBusqueda.Items[1]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
+  TISCriterioBA(ISBusquedaRanking.CriteriosBusqueda.Items[2]).Valor:= DateToStr(dm.ISModelo.Fecha);
 
   //busqueda varias
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBusquedaVarias.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
-  TEKCriterioBA(EKBusquedaVarias.CriteriosBusqueda.Items[2]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
-  TEKCriterioBA(EKBusquedaVarias.CriteriosBusqueda.Items[3]).Valor:= DateToStr(dm.EKModelo.Fecha);
+    TISCriterioBA(ISBusquedaVarias.CriteriosBusqueda.Items[0]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+  TISCriterioBA(ISBusquedaVarias.CriteriosBusqueda.Items[2]).Valor:= (DateToStr(EncodeDate(anio, mes, 1)));
+  TISCriterioBA(ISBusquedaVarias.CriteriosBusqueda.Items[3]).Valor:= DateToStr(dm.ISModelo.Fecha);
 
   //Visibilidad de los paneles de filtro
   PanelFiltro.Visible:= dm.ISUsrLogin.PermisoAccion('NO_FISCAL');
@@ -522,10 +515,10 @@ begin
     ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
     ZQ_ComprobanteDetalle.Open;
 
-    EKDbSumaFpago.RecalcAll;
-    EKDbSumaProducto.RecalcAll;
-    lblTotalFPago.Caption := FormatFloat('Total Forma Pago: $ ##,###,##0.00 ', EKDbSumaFpago.SumCollection[0].SumValue);
-    lblTotalProducto.Caption := FormatFloat('Total Producto: $ ##,###,##0.00 ', EKDbSumaProducto.SumCollection[indice].SumValue);
+    ISDbSumaFpago.RecalcAll;
+    ISDbSumaProducto.RecalcAll;
+    lblTotalFPago.Caption := FormatFloat('Total Forma Pago: $ ##,###,##0.00 ', ISDbSumaFpago.SumCollection[0].SumValue);
+    lblTotalProducto.Caption := FormatFloat('Total Producto: $ ##,###,##0.00 ', ISDbSumaProducto.SumCollection[indice].SumValue);
  end;
    Application.ProcessMessages;
 end;
@@ -533,7 +526,7 @@ end;
 
 procedure TFEstadisticaVentas.EKDbSumaComprobanteSumListChanged(Sender: TObject);
 begin
-  lblTotalComprobantes.Caption := FormatFloat('Total Comprobante: $ ##,###,##0.00 ', EKDbSumaComprobante.SumCollection[0].SumValue);
+  lblTotalComprobantes.Caption := FormatFloat('Total Comprobante: $ ##,###,##0.00 ', ISDbSumaComprobante.SumCollection[0].SumValue);
 end;
 
 
@@ -577,14 +570,14 @@ begin
 
   if (Fiscal='T') then
   begin
-  lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue);
-  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Costo: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[4].SumValue);
-  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ganancia: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[1].SumValue);
+  lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', ISDbSumaVarias.SumCollection[0].SumValue);
+  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Costo: $ ##,###,##0.00 ', ISDbSumaVarias.SumCollection[4].SumValue);
+  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ganancia: $ ##,###,##0.00 ', ISDbSumaVarias.SumCollection[1].SumValue);
   end
   else if (Fiscal='N') then
-   lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[3].SumValue)
+   lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', ISDbSumaVarias.SumCollection[3].SumValue)
    else if (Fiscal='S') then
-     lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[2].SumValue);
+     lblTotVarias.Caption := FormatFloat('Total Ventas: $ ##,###,##0.00 ', ISDbSumaVarias.SumCollection[2].SumValue);
 
   btnBuscar.Click;
 end;
@@ -592,11 +585,11 @@ end;
 
 procedure TFEstadisticaVentas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarFacturas.GuardarConfigColumnas;
-  EKOrdenarProducto.GuardarConfigColumnas;
-  EKOrdenarFPago.GuardarConfigColumnas;
-  EKOrdenarGrillaRanking.GuardarConfigColumnas;
-  EKOrdenarGrillaTop20.GuardarConfigColumnas;
+  ISOrdenarFacturas.GuardarConfigColumnas;
+  ISOrdenarProducto.GuardarConfigColumnas;
+  ISOrdenarFPago.GuardarConfigColumnas;
+  ISOrdenarGrillaRanking.GuardarConfigColumnas;
+  ISOrdenarGrillaTop20.GuardarConfigColumnas;
   
 end;
 
@@ -650,21 +643,21 @@ begin
   //FACTURACION
   if PageControl.ActivePage = TabFacturacion then
   begin
-    EKBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
+    ISBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
 
     if PanelFPagoYProd.Visible then
      btVer.Click;
 
-    if EKBuscarComprobantes.Buscar then
+    if ISBuscarComprobantes.Buscar then
       ZQ_Comprobante.First;
   end;
 
   //RANKING DE VENTA
   if PageControl.ActivePage = TabRanking then
   begin
-    if EKBusquedaRanking.BuscarSinEjecutar then
+    if ISBusquedaRanking.BuscarSinEjecutar then
       begin
-        if (EKBusquedaRanking.ParametrosSeleccionados1[1] = '') or (EKBusquedaRanking.ParametrosSeleccionados1[2] = '') then
+        if (ISBusquedaRanking.ParametrosSeleccionados1[1] = '') or (ISBusquedaRanking.ParametrosSeleccionados1[2] = '') then
           begin
             Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
             btnBuscar.Click;
@@ -673,25 +666,25 @@ begin
 
         ZQ_ProductosVendidos.close;
         ZQ_Totales.close;
-        if EKBusquedaRanking.ParametrosSeleccionados1[0] = '0' then
+        if ISBusquedaRanking.ParametrosSeleccionados1[0] = '0' then
         begin
           ZQ_ProductosVendidos.ParamByName('id_sucursal').AsInteger:= -1;
           ZQ_Totales.ParamByName('id_sucursal').AsInteger:= -1;
         end
         else
         begin
-          ZQ_ProductosVendidos.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBusquedaRanking.ParametrosSeleccionados1[0]);
-          ZQ_Totales.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBusquedaRanking.ParametrosSeleccionados1[0]);
+          ZQ_ProductosVendidos.ParamByName('id_sucursal').AsInteger:= StrToInt(ISBusquedaRanking.ParametrosSeleccionados1[0]);
+          ZQ_Totales.ParamByName('id_sucursal').AsInteger:= StrToInt(ISBusquedaRanking.ParametrosSeleccionados1[0]);
         end;
 
-        ZQ_ProductosVendidos.ParamByName('f1').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[1]);
-        ZQ_ProductosVendidos.ParamByName('f2').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[2]);
+        ZQ_ProductosVendidos.ParamByName('f1').AsDate:=StrToDate(ISBusquedaRanking.ParametrosSeleccionados1[1]);
+        ZQ_ProductosVendidos.ParamByName('f2').AsDate:=StrToDate(ISBusquedaRanking.ParametrosSeleccionados1[2]);
         //ZQ_ProductosVendidos.SQL.SaveToFile('TEXT.TXT');
         ZQ_ProductosVendidos.Open;
 
 
-        ZQ_Totales.ParamByName('f1').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[1]);
-        ZQ_Totales.ParamByName('f2').AsDate:=StrToDate(EKBusquedaRanking.ParametrosSeleccionados1[2]);
+        ZQ_Totales.ParamByName('f1').AsDate:=StrToDate(ISBusquedaRanking.ParametrosSeleccionados1[1]);
+        ZQ_Totales.ParamByName('f2').AsDate:=StrToDate(ISBusquedaRanking.ParametrosSeleccionados1[2]);
         ZQ_Totales.Open;
       end;
   end;
@@ -703,16 +696,16 @@ begin
     lblHorarioSucursal.Caption := '';
     lblHorarioIntervalo.Caption := '';
 
-    if  EKBuscarHorario.BuscarSinEjecutar then
+    if  ISBuscarHorario.BuscarSinEjecutar then
     begin
-      if (EKBuscarHorario.ParametrosSeleccionados1[1] = '') or (EKBuscarHorario.ParametrosSeleccionados1[2] = '') then
+      if (ISBuscarHorario.ParametrosSeleccionados1[1] = '') or (ISBuscarHorario.ParametrosSeleccionados1[2] = '') then
       begin
         Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
         exit;
       end;
 
-      if (EKBuscarHorario.ParametrosSeleccionados1[3] = '') then
+      if (ISBuscarHorario.ParametrosSeleccionados1[3] = '') then
       begin
         Application.MessageBox('No se ha cargado el intervalo', 'Verifique', MB_OK + MB_ICONINFORMATION);
         btnBuscar.Click;
@@ -720,22 +713,22 @@ begin
       end;
 
       ZP_Horario.Close;
-      if EKBuscarHorario.ParametrosSeleccionados1[0] = '0' then
+      if ISBuscarHorario.ParametrosSeleccionados1[0] = '0' then
       begin
         ZP_Horario.ParamByName('ID_SUCURSAL').AsInteger:= -1;
       end
       else
       begin
-        lblHorarioSucursal.Caption:= 'Sucursal: '+EKBuscarHorario.ParametrosSelecReales1[0];
-        ZP_Horario.ParamByName('ID_SUCURSAL').AsInteger:= StrToInt(EKBuscarHorario.ParametrosSeleccionados1[0]);
+        lblHorarioSucursal.Caption:= 'Sucursal: '+ISBuscarHorario.ParametrosSelecReales1[0];
+        ZP_Horario.ParamByName('ID_SUCURSAL').AsInteger:= StrToInt(ISBuscarHorario.ParametrosSeleccionados1[0]);
       end;
-      ZP_Horario.ParamByName('fecha_desde').AsDate :=StrToDate(EKBuscarHorario.ParametrosSeleccionados1[1]);
-      ZP_Horario.ParamByName('fecha_hasta').AsDate :=StrToDate(EKBuscarHorario.ParametrosSeleccionados1[2]);
-      ZP_Horario.ParamByName('intervalo').AsInteger :=StrToInt(EKBuscarHorario.ParametrosSeleccionados1[3]);
+      ZP_Horario.ParamByName('fecha_desde').AsDate :=StrToDate(ISBuscarHorario.ParametrosSeleccionados1[1]);
+      ZP_Horario.ParamByName('fecha_hasta').AsDate :=StrToDate(ISBuscarHorario.ParametrosSeleccionados1[2]);
+      ZP_Horario.ParamByName('intervalo').AsInteger :=StrToInt(ISBuscarHorario.ParametrosSeleccionados1[3]);
       ZP_Horario.Open;
 
-      lblHorarioFecha.Caption:= 'Ventas desde el '+EKBuscarHorario.ParametrosSeleccionados1[1]+' al '+EKBuscarHorario.ParametrosSeleccionados1[2];
-      lblHorarioIntervalo.Caption:= 'Intervalo '+EKBuscarHorario.ParametrosSeleccionados1[3]+' minutos';
+      lblHorarioFecha.Caption:= 'Ventas desde el '+ISBuscarHorario.ParametrosSeleccionados1[1]+' al '+ISBuscarHorario.ParametrosSeleccionados1[2];
+      lblHorarioIntervalo.Caption:= 'Intervalo '+ISBuscarHorario.ParametrosSeleccionados1[3]+' minutos';
 
       DBChartHorario.Title.Text[0]:= lblHorarioFecha.Caption;
       if lblHorarioSucursal.Caption <> '' then
@@ -748,18 +741,18 @@ begin
   //Estadísticas Varias
   if (PageControl.ActivePage = TabVarios) then
   begin
-   dm.EKModelo.abrir(ZQ_Consultas);
+   dm.ISModelo.abrir(ZQ_Consultas);
 
-   if EKBusquedaVarias.BuscarSinEjecutar then
+   if ISBusquedaVarias.BuscarSinEjecutar then
    begin
-        if (EKBusquedaVarias.ParametrosSeleccionados1[2] = '') or (EKBusquedaVarias.ParametrosSeleccionados1[3] = '') then
+        if (ISBusquedaVarias.ParametrosSeleccionados1[2] = '') or (ISBusquedaVarias.ParametrosSeleccionados1[3] = '') then
           begin
             Application.MessageBox('No se ha cargado una de las fechas', 'Verifique', MB_OK + MB_ICONINFORMATION);
             btnBuscar.Click;
             exit;
           end;
 
-        if (EKBusquedaVarias.ParametrosSeleccionados1[1] = '')  then
+        if (ISBusquedaVarias.ParametrosSeleccionados1[1] = '')  then
           begin
             Application.MessageBox('No se ha seleccionado el Tipo de Estadística', 'Verifique', MB_OK + MB_ICONINFORMATION);
             btnBuscar.Click;
@@ -767,28 +760,28 @@ begin
           end;
 
         ZQ_EstadVarias.Close;
-        ZQ_Consultas.Locate('id_consulta',StrToInt(EKBusquedaVarias.ParametrosSeleccionados1[1]),[]);
+        ZQ_Consultas.Locate('id_consulta',StrToInt(ISBusquedaVarias.ParametrosSeleccionados1[1]),[]);
         ZQ_EstadVarias.SQL.Text:=ZQ_ConsultasSQL.Value;
 
-        if EKBusquedaVarias.ParametrosSeleccionados1[0] = '0' then
+        if ISBusquedaVarias.ParametrosSeleccionados1[0] = '0' then
           begin
             ZQ_EstadVarias.ParamByName('id_sucursal').AsInteger:= -1;
           end
         else
           begin
-            ZQ_EstadVarias.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBusquedaVarias.ParametrosSeleccionados1[0]);
+            ZQ_EstadVarias.ParamByName('id_sucursal').AsInteger:= StrToInt(ISBusquedaVarias.ParametrosSeleccionados1[0]);
           end;
 
-        ZQ_EstadVarias.ParamByName('f1').AsDate:=StrToDate(EKBusquedaVarias.ParametrosSeleccionados1[2]);
-        ZQ_EstadVarias.ParamByName('f2').AsDate:=StrToDate(EKBusquedaVarias.ParametrosSeleccionados1[3]);
+        ZQ_EstadVarias.ParamByName('f1').AsDate:=StrToDate(ISBusquedaVarias.ParametrosSeleccionados1[2]);
+        ZQ_EstadVarias.ParamByName('f2').AsDate:=StrToDate(ISBusquedaVarias.ParametrosSeleccionados1[3]);
 
         ZQ_EstadVarias.Filtered:=False;
-        if (EKBusquedaVarias.ParametrosSeleccionados1[4]<>'') then
+        if (ISBusquedaVarias.ParametrosSeleccionados1[4]<>'') then
          begin
-          ZQ_EstadVarias.Filter:=Format('DESCRIPCION = %s',[QuotedStr(UpperCase(EKBusquedaVarias.ParametrosSeleccionados1[4]))]);
+          ZQ_EstadVarias.Filter:=Format('DESCRIPCION = %s',[QuotedStr(UpperCase(ISBusquedaVarias.ParametrosSeleccionados1[4]))]);
           ZQ_EstadVarias.Filtered:=True;
          end;
-        dm.EKModelo.abrir(ZQ_EstadVarias);
+        dm.ISModelo.abrir(ZQ_EstadVarias);
    end;
 
   end;
@@ -805,10 +798,10 @@ begin
     if ZQ_Comprobante.IsEmpty then
       exit;
     DM.VariablesReportes(RepDetalleMov);
-    QRlblRepDetMov_CritBusqueda.Caption := EKBuscarComprobantes.ParametrosBuscados;
-    QRlblRepDetalleMov_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    QRlblRepDetMov_CritBusqueda.Caption := ISBuscarComprobantes.ParametrosBuscados;
+    QRlblRepDetalleMov_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
     QRlblImporteTotal.Caption:= lblTotalComprobantes.Caption;
-    EKVistaPrevia.VistaPrevia;
+    ISVistaPrevia.VistaPrevia;
   end;
 
  //Ranking Ventas Diarias
@@ -829,15 +822,15 @@ begin
         if btRankingVended.Down then
           tipoRanking:=btRankingVended.Caption;
 
-    QRLabelCritBusquedaEstadRankingFecha.Caption := EKBusquedaRanking.ParametrosBuscados;
+    QRLabelCritBusquedaEstadRankingFecha.Caption := ISBusquedaRanking.ParametrosBuscados;
     qrTipoRanking.Caption:='Estadística Ranking de '+tipoRanking+' por Fecha';
-    ReporteEstadRanking_piedePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-    EKVistaPreviaRanking.VistaPrevia;
+    ReporteEstadRanking_piedePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+    ISVistaPreviaRanking.VistaPrevia;
 
-    QRLabelCritBusquedaEstadRankingTotales.Caption := EKBusquedaRanking.ParametrosBuscados;
+    QRLabelCritBusquedaEstadRankingTotales.Caption := ISBusquedaRanking.ParametrosBuscados;
     qrTipoRankingTotal.Caption:='Estadística Ranking de '+tipoRanking+' Totales';
-    ReporteEstadRanking_piedePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-    EKVistaPreviaRankingTotales.VistaPrevia;
+    ReporteEstadRanking_piedePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+    ISVistaPreviaRankingTotales.VistaPrevia;
   end;
 
 
@@ -853,11 +846,11 @@ begin
 //      QRLabelCritBusquedaEstadVariasCosto.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
 //                            EKBusquedaVarias.ParametrosSeleccionados1[3],EKBusquedaVarias.ParametrosSeleccionados1[4]]);
 
-      QRLabelCritBusquedaEstadVariasCosto.Caption:= EKBusquedaVarias.ParametrosBuscados;
-      qrTipoEstad2.Caption:='Estadística según '+EKBusquedaVarias.ParametrosSelecReales1[1];
+      QRLabelCritBusquedaEstadVariasCosto.Caption:= ISBusquedaVarias.ParametrosBuscados;
+      qrTipoEstad2.Caption:='Estadística según '+ISBusquedaVarias.ParametrosSelecReales1[1];
 
-      ReporteEstadVariasCostos_piedePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-      EKVistaPreviaVariasCostos.VistaPrevia;
+      ReporteEstadVariasCostos_piedePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+      ISVistaPreviaVariasCostos.VistaPrevia;
      end
     else
      begin
@@ -866,11 +859,11 @@ begin
 //      QRLabelCritBusquedaEstadVarias.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
 //                            EKBusquedaVarias.ParametrosSeleccionados1[3],EKBusquedaVarias.ParametrosSeleccionados1[4]]);
 
-      QRLabelCritBusquedaEstadVarias.Caption:= EKBusquedaVarias.ParametrosBuscados;
-      qrTipoEstad.Caption:='Estadística según '+EKBusquedaVarias.ParametrosSelecReales1[1];
+      QRLabelCritBusquedaEstadVarias.Caption:= ISBusquedaVarias.ParametrosBuscados;
+      qrTipoEstad.Caption:='Estadística según '+ISBusquedaVarias.ParametrosSelecReales1[1];
 
-      ReporteEstadVarias_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-      EKVistaPreviaVarias.VistaPrevia;
+      ReporteEstadVarias_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+      ISVistaPreviaVarias.VistaPrevia;
      end;
   end;
 
@@ -979,13 +972,13 @@ end;
 
 procedure TFEstadisticaVentas.EKDbSumaProdsVendidosSumListChanged(Sender: TObject);
 begin
-  lblProdsVendidos.Caption:=Format('Cantidad: %f ',[EKDbSumaProdsVendidos.SumCollection[1].SumValue])+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaProdsVendidos.SumCollection[0].SumValue);
+  lblProdsVendidos.Caption:=Format('Cantidad: %f ',[ISDbSumaProdsVendidos.SumCollection[1].SumValue])+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', ISDbSumaProdsVendidos.SumCollection[0].SumValue);
 end;
 
 
 procedure TFEstadisticaVentas.EKDbSumaTotalesSumListChanged(Sender: TObject);
 begin
-  lblTotales.Caption:=Format('Cantidad: %f ',[EKDbSumaProdsVendidos.SumCollection[1].SumValue])+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaTotales.SumCollection[0].SumValue);
+  lblTotales.Caption:=Format('Cantidad: %f ',[ISDbSumaProdsVendidos.SumCollection[1].SumValue])+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', ISDbSumaTotales.SumCollection[0].SumValue);
 end;
 
 procedure TFEstadisticaVentas.ZQ_EstadVariasAfterScroll(DataSet: TDataSet);
@@ -997,24 +990,24 @@ end;
 procedure TFEstadisticaVentas.EKDbSumaVariasSumListChanged(
   Sender: TObject);
 begin
-  lblTotVarias.Caption := Format('Cantidad: %f ',[EKDbSumaVarias.SumCollection[5].SumValue]);
+  lblTotVarias.Caption := Format('Cantidad: %f ',[ISDbSumaVarias.SumCollection[5].SumValue]);
   if (Fiscal='T') then
   begin
-  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[0].SumValue);
-  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Costo: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[4].SumValue);
-  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ganancia: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[1].SumValue);
+  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', ISDbSumaVarias.SumCollection[0].SumValue);
+  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Costo: $ ##,###,##0.00 ', ISDbSumaVarias.SumCollection[4].SumValue);
+  lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ganancia: $ ##,###,##0.00 ', ISDbSumaVarias.SumCollection[1].SumValue);
   end
   else if (Fiscal='N') then
-   lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[3].SumValue)
+   lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', ISDbSumaVarias.SumCollection[3].SumValue)
    else if (Fiscal='S') then
-     lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[2].SumValue);
+     lblTotVarias.Caption := lblTotVarias.Caption+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', ISDbSumaVarias.SumCollection[2].SumValue);
 end;
 
 
 procedure TFEstadisticaVentas.EKDbSumaHorariosSumListChanged(
   Sender: TObject);
 begin
- lblTotHorarios.Caption:=Format('Cantidad: %f ',[EKDbSumaHorarios.SumCollection[1].SumValue])+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', EKDbSumaHorarios.SumCollection[0].SumValue);
+ lblTotHorarios.Caption:=Format('Cantidad: %f ',[ISDbSumaHorarios.SumCollection[1].SumValue])+FormatFloat('| Total Ventas: $ ##,###,##0.00 ', ISDbSumaHorarios.SumCollection[0].SumValue);
 end;
 
 

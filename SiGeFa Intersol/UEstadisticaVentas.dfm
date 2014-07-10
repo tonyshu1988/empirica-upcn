@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 128
-  Top = 67
+  Left = 277
+  Top = 318
   Width = 997
   Height = 673
   Caption = 'Estadisticas Ventas'
@@ -25,7 +25,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Top = 0
     Width = 981
     Height = 583
-    ActivePage = TabFacturacion
+    ActivePage = TabHorarioVentas
     Align = alClient
     TabOrder = 4
     OnChange = PageControlChange
@@ -1344,15 +1344,15 @@ object FEstadisticaVentas: TFEstadisticaVentas
       object PanelMes: TPanel
         Left = 0
         Top = 0
-        Width = 981
-        Height = 566
+        Width = 973
+        Height = 555
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object lblTotHorarios: TLabel
           Left = 0
-          Top = 546
-          Width = 981
+          Top = 535
+          Width = 973
           Height = 20
           Align = alBottom
           Alignment = taRightJustify
@@ -1372,8 +1372,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object DBGridHorario: TDBGrid
           Left = 0
           Top = 46
-          Width = 981
-          Height = 500
+          Width = 973
+          Height = 489
           Align = alClient
           Color = 14606012
           DataSource = DS_Horario
@@ -1424,7 +1424,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object Panel5: TPanel
           Left = 0
           Top = 0
-          Width = 981
+          Width = 973
           Height = 46
           Align = alTop
           BevelOuter = bvNone
@@ -1433,7 +1433,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioFecha: TLabel
             Left = 4
             Top = 4
-            Width = 102
+            Width = 965
             Height = 13
             Align = alTop
             Caption = 'lblHorarioFecha'
@@ -1447,7 +1447,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioSucursal: TLabel
             Left = 4
             Top = 17
-            Width = 120
+            Width = 965
             Height = 13
             Align = alTop
             Caption = 'lblHorarioSucursal'
@@ -1461,7 +1461,7 @@ object FEstadisticaVentas: TFEstadisticaVentas
           object lblHorarioIntervalo: TLabel
             Left = 4
             Top = 30
-            Width = 126
+            Width = 965
             Height = 13
             Align = alTop
             Caption = 'lblHorarioIntervalo'
@@ -1530,7 +1530,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
         object Series1: TFastLineSeries
           Marks.ArrowLength = 8
           Marks.Visible = False
-          DataSource = ZP_Horario
           SeriesColor = clRed
           ShowInLegend = False
           XLabelsSource = 'HORA_DESDE'
@@ -1551,7 +1550,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Marks.ArrowLength = 8
           Marks.Style = smsValue
           Marks.Visible = False
-          DataSource = ZP_Horario
           SeriesColor = clBlue
           ShowInLegend = False
           Title = 'horario linea'
@@ -1572,7 +1570,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Marks.ArrowLength = 8
           Marks.Style = smsXValue
           Marks.Visible = False
-          DataSource = ZP_Horario
           SeriesColor = clLime
           ShowInLegend = False
           Title = 'horario ptos'
@@ -1639,7 +1636,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
           Marks.ArrowLength = 8
           Marks.Style = smsValue
           Marks.Visible = False
-          DataSource = ZP_Horario
           SeriesColor = clBlue
           ShowInLegend = False
           Title = 'horario linea'
@@ -5730,179 +5726,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Left = 389
     Top = 143
   end
-  object EKDbSumaComprobante: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'importeVenta_'
-      end>
-    DataSet = ZQ_Comprobante
-    SumListChanged = EKDbSumaComprobanteSumListChanged
-    Left = 61
-    Top = 303
-  end
-  object EKBuscarComprobantes: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Sucursal'
-        Campo = 'id_sucursal'
-        Tabla = 'sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 350
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha'
-        Campo = 'fecha'
-        Tabla = 'comprobante'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'C'#243'digo'
-        Campo = 'codigo'
-        Tabla = 'comprobante'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Forma de Pago'
-        Campo = 'descripcion'
-        Tabla = 'tipo_formapago'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Tipo Iva'
-        Campo = 'ID_TIPO_IVA'
-        Tabla = 'tipo_iva'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_TipoIVA
-        TipoComboSQLCampoVer = 'NOMBRE_TIPO_IVA'
-        TipoComboSQLCampoReal = 'ID_TIPO_IVA'
-        TipoComboEditable = False
-        TipoComboAncho = 350
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Cliente'
-        Campo = 'nombre'
-        Tabla = 'p2'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Vendedor'
-        Campo = 'nombre'
-        Tabla = 'p1'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Importe'
-        Campo = 'importe_venta'
-        Tabla = 'comprobante'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_Comprobante
-    SQL.Strings = (
-      
-        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
-        ' as Fecha, c.porc_iva,'
-      
-        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
-        ' p1.nombre as Vendedor_,'
-      
-        '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,cast(c.fech' +
-        'a_cobrada as time) as Hora,'
-      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
-      ''
-      'from comprobante c'
-      
-        'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
-        'mprobante)'
-      
-        'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
-        'formapag)'
-      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
-      'join persona p1 on (p1.id_persona = c.id_vendedor)'
-      'join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
-      'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
-      'join persona p2 on (p2.id_persona = c.id_cliente)'
-      'where (c.id_tipo_cpb = 11)'
-      
-        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
-        'total,'
-      '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
-      '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
-    SQL_Select.Strings = (
-      
-        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
-        ' as Fecha, c.porc_iva,'
-      
-        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
-        ' p1.nombre as Vendedor_,'
-      
-        '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,cast(c.fech' +
-        'a_cobrada as time) as Hora,'
-      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
-      '')
-    SQL_From.Strings = (
-      'from comprobante c'
-      
-        'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
-        'mprobante)'
-      
-        'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
-        'formapag)'
-      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
-      'join persona p1 on (p1.id_persona = c.id_vendedor)'
-      'join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
-      'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
-      'join persona p2 on (p2.id_persona = c.id_cliente)')
-    SQL_Where.Strings = (
-      'where (c.id_tipo_cpb = 11)')
-    SQL_Orden.Strings = (
-      
-        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
-        'total,'
-      '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
-      '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
-    UsarWhereOriginal = EK_Con_Where
-    Left = 64
-    Top = 95
-  end
   object ZQ_TipoIVA: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -5938,138 +5761,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
     object ZQ_TipoIVACOEFICIENTE: TFloatField
       FieldName = 'COEFICIENTE'
     end
-  end
-  object EKOrdenarFacturas: TEKOrdenarGrilla
-    Grilla = DBGridComprobantes
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'digo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Hora'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cliente'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe Venta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sucursal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo IVA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Vendedor'
-        Visible = True
-      end>
-    NombreGuardar = 'DBGridComprobantes'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 58
-    Top = 248
-  end
-  object EKOrdenarProducto: TEKOrdenarGrilla
-    Grilla = DBGridListadoProductos
-    Filtros = <
-      item
-        TituloColumna = 'Id'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Producto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cant.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Barra'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Color'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Marca'
-        Visible = True
-      end>
-    NombreGuardar = 'DBGridListadoProductos'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 386
-    Top = 192
-  end
-  object EKOrdenarFPago: TEKOrdenarGrilla
-    Grilla = DBGridFormaPago
-    Filtros = <
-      item
-        TituloColumna = 'Cuenta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Forma de Pago'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end
-      item
-        TituloColumna = 'MDP Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Banco'
-        Visible = True
-      end
-      item
-        TituloColumna = 'N'#250'mero'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end>
-    NombreGuardar = 'DBGridFormaPago'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 218
-    Top = 192
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
@@ -6578,34 +6269,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
       OnExecute = ABuscarExecute
     end
   end
-  object EKDbSumaFpago: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE_REAL'
-      end>
-    DataSet = ZQ_Comprobante_FormaPago
-    Left = 218
-    Top = 245
-  end
-  object EKDbSumaProducto: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE_VENTA'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE_IF'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE_NOFISCAL'
-      end>
-    DataSet = ZQ_ComprobanteDetalle
-    Left = 386
-    Top = 254
-  end
   object ZQ_Sucursal: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -6678,177 +6341,10 @@ object FEstadisticaVentas: TFEstadisticaVentas
       Size = 50
     end
   end
-  object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = RepDetalleMov
-    ShowModal = False
-    Left = 62
-    Top = 351
-  end
-  object ZP_Horario: TZStoredProc
-    Connection = DM.Conexion
-    Params = <
-      item
-        DataType = ftTime
-        Name = 'HORA_DESDE'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftTime
-        Name = 'HORA_HASTA'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftInteger
-        Name = 'CANTIDAD'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'IMPORTE'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftInteger
-        Name = 'INTERVALO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'FECHA_DESDE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'FECHA_HASTA'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ID_SUCURSAL'
-        ParamType = ptInput
-      end>
-    StoredProcName = 'ESTADISTICA_VENTAS_POR_HORA'
-    Left = 628
-    Top = 96
-    ParamData = <
-      item
-        DataType = ftTime
-        Name = 'HORA_DESDE'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftTime
-        Name = 'HORA_HASTA'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftInteger
-        Name = 'CANTIDAD'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftFloat
-        Name = 'IMPORTE'
-        ParamType = ptResult
-      end
-      item
-        DataType = ftInteger
-        Name = 'INTERVALO'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'FECHA_DESDE'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftDate
-        Name = 'FECHA_HASTA'
-        ParamType = ptInput
-      end
-      item
-        DataType = ftInteger
-        Name = 'ID_SUCURSAL'
-        ParamType = ptInput
-      end>
-    object ZP_HorarioHORA_DESDE: TTimeField
-      FieldName = 'HORA_DESDE'
-      DisplayFormat = 'hh:mm'
-    end
-    object ZP_HorarioHORA_HASTA: TTimeField
-      FieldName = 'HORA_HASTA'
-      DisplayFormat = 'hh:mm'
-    end
-    object ZP_HorarioCANTIDAD: TIntegerField
-      FieldName = 'CANTIDAD'
-    end
-    object ZP_HorarioIMPORTE: TFloatField
-      FieldName = 'IMPORTE'
-      DisplayFormat = '$ ##,###,##0.00'
-    end
-    object ZP_HorarioHORA_PERIODO: TTimeField
-      FieldName = 'HORA_PERIODO'
-    end
-    object ZP_HorarioPERIODO: TIntegerField
-      FieldName = 'PERIODO'
-    end
-  end
   object DS_Horario: TDataSource
     DataSet = ZP_Horario
     Left = 628
     Top = 152
-  end
-  object EKBuscarHorario: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha Desde'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fechas Hasta'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Intervalo (Min)'
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    UsarWhereOriginal = EK_Con_Where
-    PantallaReducida = True
-    Left = 622
-    Top = 217
   end
   object ZQ_ProductosVendidos: TZQuery
     Connection = DM.Conexion
@@ -6947,97 +6443,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Left = 740
     Top = 144
   end
-  object EKDbSumaProdsVendidos: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'SUMAVENTA'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'cantidad'
-      end>
-    DataSet = ZQ_ProductosVendidos
-    SumListChanged = EKDbSumaProdsVendidosSumListChanged
-    Left = 738
-    Top = 206
-  end
-  object EKOrdenarGrillaRanking: TEKOrdenarGrilla
-    Grilla = grillaRanking
-    Filtros = <
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Detalle'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cant'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end>
-    NombreGuardar = 'EKOrdenarGrillaRanking'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = False
-    PermitirFiltrar = True
-    Left = 740
-    Top = 328
-  end
-  object EKBusquedaRanking: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Sucursal'
-        Campo = 'id_sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Sucursal
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha Desde'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = 0
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fechas Hasta'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = 1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      '')
-    SQL_From.Strings = (
-      '')
-    UsarWhereOriginal = EK_Con_Where
-    PantallaReducida = True
-    Left = 878
-    Top = 329
-  end
   object ZQ_Totales: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -7130,165 +6535,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
     DataSet = ZQ_Totales
     Left = 876
     Top = 152
-  end
-  object EKOrdenarGrillaTop20: TEKOrdenarGrilla
-    Grilla = grillaTop20
-    Filtros = <
-      item
-        TituloColumna = 'Cant'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Detalle'
-        Visible = True
-      end>
-    NombreGuardar = 'EKOrdenarGrillaTop20'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = False
-    PermitirFiltrar = True
-    Left = 884
-    Top = 264
-  end
-  object EKDbSumaTotales: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'SUMAVENTA'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'cantidad'
-      end>
-    DataSet = ZQ_Totales
-    SumListChanged = EKDbSumaTotalesSumListChanged
-    Left = 882
-    Top = 214
-  end
-  object EKBusquedaVarias: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Sucursal
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Tipo de Estad'#237'stica'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQL = ZQ_Consultas
-        TipoComboSQLCampoVer = 'descripcion'
-        TipoComboSQLCampoReal = 'id_consulta'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = 0
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha Desde'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = 0
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fechas Hasta'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = 1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Filtro B'#250'squeda'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQLCampoVer = 'descripcion'
-        TipoComboSQLCampoReal = 'descripcion'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select sum(cd.importe_venta) as sumaVenta,'
-      
-        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
-        'chaC,'
-      
-        '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
-        '.cod_corto||'#39' - '#39'||pc.nombre||coalesce('#39' -  M: '#39'||m.medida,'#39#39')||' +
-        'coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.co' +
-        'digo_barra,'#39#39') DETALLE_PROD'
-      'from comprobante_detalle cd'
-      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
-      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
-      'join persona vend on (c.id_vendedor=vend.id_persona)'
-      'join persona cli on (c.id_cliente=cli.id_persona)'
-      'left join producto p on (cd.id_producto=p.id_producto)'
-      'left join medida m on (p.id_medida=m.id_medida)'
-      
-        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
-        '_cabecera)'
-      ''
-      ''
-      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)'
-      'group by 4,3,6'
-      'order by 3 desc,5 desc,1 desc,2 desc')
-    SQL_Select.Strings = (
-      'select sum(cd.importe_venta) as sumaVenta,'
-      
-        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
-        'chaC,'
-      
-        '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
-        '.cod_corto||'#39' - '#39'||pc.nombre||coalesce('#39' -  M: '#39'||m.medida,'#39#39')||' +
-        'coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.co' +
-        'digo_barra,'#39#39') DETALLE_PROD')
-    SQL_From.Strings = (
-      'from comprobante_detalle cd'
-      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
-      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
-      'join persona vend on (c.id_vendedor=vend.id_persona)'
-      'join persona cli on (c.id_cliente=cli.id_persona)'
-      'left join producto p on (cd.id_producto=p.id_producto)'
-      'left join medida m on (p.id_medida=m.id_medida)'
-      
-        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
-        '_cabecera)'
-      ''
-      '')
-    SQL_Where.Strings = (
-      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)'
-      'group by 4,3,6'
-      'order by 3 desc,5 desc,1 desc,2 desc')
-    UsarWhereOriginal = EK_Con_Where
-    PantallaReducida = True
-    Left = 446
-    Top = 393
   end
   object ZQ_Consultas: TZQuery
     Connection = DM.Conexion
@@ -7442,7 +6688,201 @@ object FEstadisticaVentas: TFEstadisticaVentas
     Left = 541
     Top = 391
   end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
+  object ISVistaPrevia: TISVistaPreviaQR
+    Reporte = RepDetalleMov
+    ShowModal = False
+    Left = 70
+    Top = 355
+  end
+  object ISVistaPreviaRanking: TISVistaPreviaQR
+    Reporte = ReporteRanking
+    ShowModal = False
+    Left = 198
+    Top = 379
+  end
+  object ISVistaPreviaRankingTotales: TISVistaPreviaQR
+    Reporte = ReporteRankingTotal
+    ShowModal = False
+    Left = 198
+    Top = 455
+  end
+  object ISVistaPreviaVarias: TISVistaPreviaQR
+    Reporte = ReporteEstadVarias
+    ShowModal = False
+    Left = 334
+    Top = 363
+  end
+  object ISVistaPreviaVariasCostos: TISVistaPreviaQR
+    Reporte = ReporteEstadVariasCostos
+    ShowModal = False
+    Left = 342
+    Top = 443
+  end
+  object ISOrdenarFacturas: TISOrdenarGrilla
+    Grilla = DBGridComprobantes
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Hora'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Vendedor'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'DBGridComprobantes'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 62
+    Top = 251
+  end
+  object ISOrdenarFPago: TISOrdenarGrilla
+    Grilla = DBGridFormaPago
+    Filtros = <
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Forma de Pago'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'MDP Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Banco'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'mero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'DBGridFormaPago'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 214
+    Top = 195
+  end
+  object ISOrdenarProducto: TISOrdenarGrilla
+    Grilla = DBGridListadoProductos
+    Filtros = <
+      item
+        TituloColumna = 'Id'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cant.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Marca'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'DBGridListadoProductos'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 390
+    Top = 195
+  end
+  object ISOrdenarGrillaRanking: TISOrdenarGrilla
+    Grilla = grillaRanking
+    Filtros = <
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cant'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ISOrdenarGrillaRanking'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 742
+    Top = 299
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
     Grilla = gridVarias
     Filtros = <
       item
@@ -7465,16 +6905,126 @@ object FEstadisticaVentas: TFEstadisticaVentas
         TituloColumna = 'Ganancia'
         Visible = True
       end>
-    NombreGuardar = 'EKOrdenarGrillaVarias'
+    NombreGuardarConfig = 'ISOrdenarGrillaVarias'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = False
-    PermitirFiltrar = True
-    Left = 740
-    Top = 400
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 734
+    Top = 371
   end
-  object EKDbSumaVarias: TEKDbSuma
+  object ISOrdenarGrillaTop20: TISOrdenarGrilla
+    Grilla = grillaTop20
+    Filtros = <
+      item
+        TituloColumna = 'Cant'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ISOrdenarGrillaTop20'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 878
+    Top = 267
+  end
+  object ISDbSumaComprobante: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'importeVenta_'
+      end>
+    DataSet = ZQ_Comprobante
+    SumListChanged = EKDbSumaComprobanteSumListChanged
+    Left = 70
+    Top = 299
+  end
+  object ISDbSumaFpago: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_REAL'
+      end>
+    DataSet = ZQ_Comprobante_FormaPago
+    Left = 214
+    Top = 254
+  end
+  object ISDbSumaProducto: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_VENTA'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_IF'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_NOFISCAL'
+      end>
+    DataSet = ZQ_ComprobanteDetalle
+    Left = 398
+    Top = 259
+  end
+  object ISDbSumaProdsVendidos: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'SUMAVENTA'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'cantidad'
+      end>
+    DataSet = ZQ_ProductosVendidos
+    SumListChanged = EKDbSumaProdsVendidosSumListChanged
+    Left = 742
+    Top = 211
+  end
+  object ISDbSumaTotales: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'SUMAVENTA'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'cantidad'
+      end>
+    DataSet = ZQ_Totales
+    SumListChanged = EKDbSumaTotalesSumListChanged
+    Left = 878
+    Top = 211
+  end
+  object ISDbSumaHorarios: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'CANTIDAD'
+      end>
+    DataSet = ZP_Horario
+    SumListChanged = EKDbSumaHorariosSumListChanged
+    Left = 675
+    Top = 471
+  end
+  object ISDbSumaVarias: TISDbSuma
     SumCollection = <
       item
         Operacion = goSum
@@ -7502,46 +7052,585 @@ object FEstadisticaVentas: TFEstadisticaVentas
       end>
     DataSet = ZQ_EstadVarias
     SumListChanged = EKDbSumaVariasSumListChanged
-    Left = 866
-    Top = 390
+    Left = 867
+    Top = 391
   end
-  object EKVistaPreviaVarias: TEKVistaPreviaQR
-    Reporte = ReporteEstadVarias
-    ShowModal = False
-    Left = 330
-    Top = 385
-  end
-  object EKVistaPreviaVariasCostos: TEKVistaPreviaQR
-    Reporte = ReporteEstadVariasCostos
-    ShowModal = False
-    Left = 330
-    Top = 481
-  end
-  object EKDbSumaHorarios: TEKDbSuma
-    SumCollection = <
+  object ISBuscarComprobantes: TISBusquedaAvanzada
+    CriteriosBusqueda = <
       item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE'
+        Titulo = 'Sucursal'
+        Campo = 'id_sucursal'
+        Tabla = 's'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        ItemIndex = -1
       end
       item
-        Operacion = goSum
-        NombreCampo = 'CANTIDAD'
+        Titulo = 'Fecha'
+        Campo = 'fecha'
+        Tabla = 'c'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'digo'
+        Campo = 'codigo'
+        Tabla = 'c'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Forma de Pago'
+        Campo = 'descripcion'
+        Tabla = 'tfp'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Iva'
+        Campo = 'ID_TIPO_IVA'
+        Tabla = 'iva'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_TipoIVA
+        TipoCombollenarCampo = 'NOMBRE_TIPO_IVA'
+        TipoCombollenarCampoReal = 'ID_TIPO_IVA'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Cliente'
+        Campo = 'nombre'
+        Tabla = 'p2'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Vendedor'
+        Campo = 'nombre'
+        Tabla = 'p1'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Importe'
+        Campo = 'importe_venta'
+        Tabla = 'c'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
       end>
-    DataSet = ZP_Horario
-    SumListChanged = EKDbSumaHorariosSumListChanged
-    Left = 738
-    Top = 462
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_Comprobante
+    SQL.Strings = (
+      
+        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
+        ' as Fecha, c.porc_iva,'
+      
+        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
+        ' p1.nombre as Vendedor_,'
+      
+        '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,cast(c.fech' +
+        'a_cobrada as time) as Hora,'
+      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
+      ''
+      'from comprobante c'
+      
+        'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
+        'mprobante)'
+      
+        'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
+        'formapag)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
+      'join persona p2 on (p2.id_persona = c.id_cliente)'
+      'where (c.id_tipo_cpb = 11)'
+      
+        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
+        'total,'
+      '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
+      '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
+    SQL_Select.Strings = (
+      
+        'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
+        ' as Fecha, c.porc_iva,'
+      
+        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
+        ' p1.nombre as Vendedor_,'
+      
+        '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,cast(c.fech' +
+        'a_cobrada as time) as Hora,'
+      '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_'
+      '')
+    SQL_From.Strings = (
+      'from comprobante c'
+      
+        'join comprobante_forma_pago cfp on (cfp.id_comprobante = c.id_co' +
+        'mprobante)'
+      
+        'join tipo_formapago tfp on (tfp.id_tipo_formapago = cfp.id_tipo_' +
+        'formapag)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona p1 on (p1.id_persona = c.id_vendedor)'
+      'join tipo_iva iva on (iva.id_tipo_iva = c.id_tipo_iva)'
+      'join tipo_comprobante tc on (tc.id_tipo_cpb = c.id_tipo_cpb)'
+      'join persona p2 on (p2.id_persona = c.id_cliente)')
+    SQL_Where.Strings = (
+      'where (c.id_tipo_cpb = 11)')
+    SQL_Orden.Strings = (
+      
+        'group by c.codigo, c.id_comprobante, c.fecha_cobrada, c.importe_' +
+        'total,'
+      '         c.porc_iva, s.nombre, p1.nombre, iva.abreviatura,'
+      '         iva.nombre_tipo_iva, tc.nombre_tipo_cpb, p2.nombre')
+    UsarWhereOriginal = IS_Con_Where
+    Left = 62
+    Top = 96
   end
-  object EKVistaPreviaRanking: TEKVistaPreviaQR
-    Reporte = ReporteRanking
-    ShowModal = False
-    Left = 186
-    Top = 441
+  object ISBusquedaVarias: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Sucursal
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo de Estad'#237'stica'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Consultas
+        TipoCombollenarCampo = 'descripcion'
+        TipoCombollenarCampoReal = 'id_consulta'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = 0
+      end
+      item
+        Titulo = 'Fecha Desde'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = 0
+      end
+      item
+        Titulo = 'Fecha Hasta'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = 1
+      end
+      item
+        Titulo = 'Filtro B'#250'squeda'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarCampo = 'descripcion'
+        TipoCombollenarCampoReal = 'descripcion'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select sum(cd.importe_venta) as sumaVenta,'
+      
+        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
+        'chaC,'
+      
+        '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
+        '.cod_corto||'#39' - '#39'||pc.nombre||coalesce('#39' -  M: '#39'||m.medida,'#39#39')||' +
+        'coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.co' +
+        'digo_barra,'#39#39') DETALLE_PROD'
+      'from comprobante_detalle cd'
+      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona vend on (c.id_vendedor=vend.id_persona)'
+      'join persona cli on (c.id_cliente=cli.id_persona)'
+      'left join producto p on (cd.id_producto=p.id_producto)'
+      'left join medida m on (p.id_medida=m.id_medida)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
+        '_cabecera)'
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)'
+      'group by 4,3,6'
+      'order by 3 desc,5 desc,1 desc,2 desc')
+    SQL_Select.Strings = (
+      'select sum(cd.importe_venta) as sumaVenta,'
+      
+        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
+        'chaC,'
+      
+        '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
+        '.cod_corto||'#39' - '#39'||pc.nombre||coalesce('#39' -  M: '#39'||m.medida,'#39#39')||' +
+        'coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.co' +
+        'digo_barra,'#39#39') DETALLE_PROD')
+    SQL_From.Strings = (
+      'from comprobante_detalle cd'
+      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona vend on (c.id_vendedor=vend.id_persona)'
+      'join persona cli on (c.id_cliente=cli.id_persona)'
+      'left join producto p on (cd.id_producto=p.id_producto)'
+      'left join medida m on (p.id_medida=m.id_medida)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
+        '_cabecera)'
+      ''
+      ''
+      ''
+      '')
+    SQL_Where.Strings = (
+      ''
+      ''
+      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)')
+    SQL_Orden.Strings = (
+      'group by 4,3,6'
+      'order by 3 desc,5 desc,1 desc,2 desc')
+    UsarWhereOriginal = IS_Con_Where
+    PantallaReducida = True
+    Left = 438
+    Top = 403
   end
-  object EKVistaPreviaRankingTotales: TEKVistaPreviaQR
-    Reporte = ReporteRankingTotal
-    ShowModal = False
-    Left = 197
-    Top = 506
+  object ISBuscarHorario: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Sucursal'
+        Campo = 'id_sucursal'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Sucursal
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Desde'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = 0
+      end
+      item
+        Titulo = 'Fecha Hasta'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = 1
+      end
+      item
+        Titulo = 'Intervalo (Min)'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select sum(cd.importe_venta) as sumaVenta,'
+      
+        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
+        'chaC,'
+      
+        '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
+        '.cod_corto||'#39' - '#39'||pc.nombre||coalesce('#39' -  M: '#39'||m.medida,'#39#39')||' +
+        'coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.co' +
+        'digo_barra,'#39#39') DETALLE_PROD'
+      'from comprobante_detalle cd'
+      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona vend on (c.id_vendedor=vend.id_persona)'
+      'join persona cli on (c.id_cliente=cli.id_persona)'
+      'left join producto p on (cd.id_producto=p.id_producto)'
+      'left join medida m on (p.id_medida=m.id_medida)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
+        '_cabecera)'
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)'
+      'group by 4,3,6'
+      'order by 3 desc,5 desc,1 desc,2 desc')
+    SQL_Select.Strings = (
+      'select sum(cd.importe_venta) as sumaVenta,'
+      
+        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
+        'chaC,'
+      
+        '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
+        '.cod_corto||'#39' - '#39'||pc.nombre||coalesce('#39' -  M: '#39'||m.medida,'#39#39')||' +
+        'coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.co' +
+        'digo_barra,'#39#39') DETALLE_PROD')
+    SQL_From.Strings = (
+      'from comprobante_detalle cd'
+      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona vend on (c.id_vendedor=vend.id_persona)'
+      'join persona cli on (c.id_cliente=cli.id_persona)'
+      'left join producto p on (cd.id_producto=p.id_producto)'
+      'left join medida m on (p.id_medida=m.id_medida)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
+        '_cabecera)'
+      ''
+      ''
+      ''
+      '')
+    SQL_Where.Strings = (
+      ''
+      ''
+      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)')
+    SQL_Orden.Strings = (
+      'group by 4,3,6'
+      'order by 3 desc,5 desc,1 desc,2 desc')
+    UsarWhereOriginal = IS_Con_Where
+    PantallaReducida = True
+    Left = 638
+    Top = 219
+  end
+  object ISBusquedaRanking: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Sucursal'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarSQL = ZQ_Sucursal
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Desde'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = 0
+      end
+      item
+        Titulo = 'Fechas Hasta'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = 1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select sum(cd.importe_venta) as sumaVenta,'
+      
+        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
+        'chaC,'
+      
+        '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
+        '.cod_corto||'#39' - '#39'||pc.nombre||coalesce('#39' -  M: '#39'||m.medida,'#39#39')||' +
+        'coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.co' +
+        'digo_barra,'#39#39') DETALLE_PROD'
+      'from comprobante_detalle cd'
+      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona vend on (c.id_vendedor=vend.id_persona)'
+      'join persona cli on (c.id_cliente=cli.id_persona)'
+      'left join producto p on (cd.id_producto=p.id_producto)'
+      'left join medida m on (p.id_medida=m.id_medida)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
+        '_cabecera)'
+      ''
+      ''
+      ''
+      ''
+      ''
+      ''
+      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)'
+      'group by 4,3,6'
+      'order by 3 desc,5 desc,1 desc,2 desc')
+    SQL_Select.Strings = (
+      'select sum(cd.importe_venta) as sumaVenta,'
+      
+        'sum(cd.importe_if) as sumaIF,cast(c.fecha_cobrada as date) as fe' +
+        'chaC,'
+      
+        '(cd.id_producto) as agrupam,count(cd.id_producto) as cantidad,pc' +
+        '.cod_corto||'#39' - '#39'||pc.nombre||coalesce('#39' -  M: '#39'||m.medida,'#39#39')||' +
+        'coalesce('#39'  -  C'#243'd:'#39'||p.cod_corto,'#39#39')||coalesce('#39'  -  CB:'#39'||p.co' +
+        'digo_barra,'#39#39') DETALLE_PROD')
+    SQL_From.Strings = (
+      'from comprobante_detalle cd'
+      'join comprobante c on (cd.id_comprobante=c.id_comprobante)'
+      'join sucursal s on (c.id_sucursal = s.id_sucursal)'
+      'join persona vend on (c.id_vendedor=vend.id_persona)'
+      'join persona cli on (c.id_cliente=cli.id_persona)'
+      'left join producto p on (cd.id_producto=p.id_producto)'
+      'left join medida m on (p.id_medida=m.id_medida)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
+        '_cabecera)'
+      ''
+      ''
+      ''
+      '')
+    SQL_Where.Strings = (
+      ''
+      ''
+      'where (c.id_tipo_cpb = 11)and(c.fecha_cobrada is not null)')
+    SQL_Orden.Strings = (
+      'group by 4,3,6'
+      'order by 3 desc,5 desc,1 desc,2 desc')
+    UsarWhereOriginal = IS_Con_Where
+    PantallaReducida = True
+    Left = 870
+    Top = 323
+  end
+  object ZP_Horario: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'INTERVALO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_DESDE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_HASTA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_SUCURSAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTime
+        Name = 'HORA_DESDE'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftTime
+        Name = 'HORA_HASTA'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CANTIDAD'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPORTE'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftTime
+        Name = 'HORA_PERIODO'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'PERIODO'
+        ParamType = ptOutput
+      end>
+    StoredProcName = 'ESTADISTICA_VENTAS_POR_HORA'
+    Left = 620
+    Top = 96
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'INTERVALO'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_DESDE'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftDate
+        Name = 'FECHA_HASTA'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftInteger
+        Name = 'ID_SUCURSAL'
+        ParamType = ptInput
+      end
+      item
+        DataType = ftTime
+        Name = 'HORA_DESDE'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftTime
+        Name = 'HORA_HASTA'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'CANTIDAD'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftFloat
+        Name = 'IMPORTE'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftTime
+        Name = 'HORA_PERIODO'
+        ParamType = ptOutput
+      end
+      item
+        DataType = ftInteger
+        Name = 'PERIODO'
+        ParamType = ptOutput
+      end>
   end
 end
