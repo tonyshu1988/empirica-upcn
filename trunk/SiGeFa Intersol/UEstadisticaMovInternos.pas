@@ -6,9 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, dxBar, dxBarExtItems, TeeProcs, TeEngine, Chart,
   DbChart, ExtCtrls, Grids, DBGrids, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, Series, StdCtrls, EKDbSuma,
-  EKBusquedaAvanzada, ZStoredProcedure, EKOrdenarGrilla, ActnList,
-  XPStyleActnCtrls, ActnMan, EKVistaPreviaQR, QRCtrls, QuickRpt,
+  ZAbstractDataset, ZDataset, Series, StdCtrls, 
+  ZStoredProcedure, ActnList,
+  XPStyleActnCtrls, ActnMan, QRCtrls, QuickRpt,
   ISVistaPreviaQR, cxClasses, ISOrdenarGrilla, ISDbSuma, ISBusquedaAvanzada;
 
 type
@@ -340,8 +340,8 @@ begin
 
   ZQ_Sucursal.open;
 
-  mes:= MonthOf(dm.EKModelo.Fecha);
-  anio:= YearOf(dm.EKModelo.Fecha);
+  mes:= MonthOf(dm.ISModelo.Fecha);
+  anio:= YearOf(dm.ISModelo.Fecha);
 
   TISCriterioBA(ISBuscarBalance.CriteriosBusqueda.Items[2]).TipoCombollenarSQL:= dm.ZQ_SucursalesVisibles;
   TISCriterioBA(ISBuscar_Mov.CriteriosBusqueda.Items[2]).TipoCombollenarSQL:= dm.ZQ_SucursalesVisibles;
@@ -594,7 +594,7 @@ begin
       exit;
 
     DM.VariablesReportes(RepBalance);
-    QRlblRepBalance_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    QRlblRepBalance_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
     QRlblRepBalance_CritBusqueda.Caption := ISBuscarBalance.ParametrosBuscados;
 
     QRlblRepBalance_SaldoIni.Caption:= lblBalanceSaldoInicial.Caption;
@@ -612,7 +612,7 @@ begin
       exit;
 
     DM.VariablesReportes(RepListado);
-    QRlblRepListado_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    QRlblRepListado_PieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
     QRlblRepListado_CritBusqueda.Caption := ISBuscar_Mov.ParametrosBuscados;
 
     QRlblRepListado_Ingresos.Caption:= lblMov_TotalIngresos.Caption;

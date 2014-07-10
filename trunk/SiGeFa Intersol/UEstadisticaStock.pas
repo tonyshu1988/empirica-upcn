@@ -5,9 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
-  StdCtrls, EKDbSuma, mxNativeExcel, mxExport, EKOrdenarGrilla, QRCtrls,
-  QuickRpt, EKVistaPreviaQR, ActnList, XPStyleActnCtrls, ActnMan, cxClasses,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  StdCtrls, mxNativeExcel, mxExport, QRCtrls,
+  QuickRpt, ActnList, XPStyleActnCtrls, ActnMan, cxClasses,
   ISDbSuma, ISOrdenarGrilla, ISVistaPreviaQR, ISBusquedaAvanzada;
 
 type
@@ -23,7 +23,6 @@ type
     DBGridStock: TDBGrid;
     ZQ_Stock: TZQuery;
     DS_Stock: TDataSource;
-    EKBuscarStock: TEKBusquedaAvanzada;
     ZQ_StockPRECIO_COSTO: TFloatField;
     ZQ_StockPRECIO_VENTA: TFloatField;
     ZQ_StockID_STOCK_PRODUCTO: TIntegerField;
@@ -131,7 +130,7 @@ end;
 
 procedure TFEstadisticaStock.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscarStock.Buscar;
+  ISBuscarStock.Buscar;
   lblTotales.Caption:= ' Precio Costo Stock Total: '+FormatFloat('$ ###,###,##0.00', ISDbSuma_Totales.SumCollection.Items[2].SumValue)+'          Precio Venta Stock Total: '+FormatFloat('$ ###,###,##0.00', ISDbSuma_Totales.SumCollection.Items[3].SumValue);
 end;
 
@@ -156,7 +155,7 @@ begin
 
   //busqueda por comprobante
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBuscarStock.CriteriosBusqueda.Items[10]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+    TISCriterioBA(ISBuscarStock.CriteriosBusqueda.Items[10]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
 end;
 
 
@@ -178,8 +177,8 @@ begin
     exit;
 
   DM.VariablesReportes(RepStock);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscarStock.ParametrosBuscados;
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscarStock.ParametrosBuscados;
   ISVistaPreviaQR1.VistaPrevia;
 end;
 

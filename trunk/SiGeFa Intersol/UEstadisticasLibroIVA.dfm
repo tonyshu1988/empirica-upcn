@@ -871,6 +871,7 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
         NombreCampo = 'IF_TOT'
       end>
     DataSet = ZQ_Libro_IVA_Ventas
+    SumListChanged = EKDbSuma1SumListChanged
     Left = 316
     Top = 168
   end

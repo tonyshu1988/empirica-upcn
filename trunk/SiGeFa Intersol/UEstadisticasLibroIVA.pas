@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, cxClasses, StdCtrls, Grids, DBGrids, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,UDM,
-  EKBusquedaAvanzada, EKOrdenarGrilla, EKDbSuma, ISOrdenarGrilla, ISDbSuma,
+  ISOrdenarGrilla, ISDbSuma,
   ISBusquedaAvanzada;
 
 type

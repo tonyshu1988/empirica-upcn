@@ -3895,6 +3895,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         NombreCampo = 'egresos'
       end>
     DataSet = ZQ_Movimientos
+    SumListChanged = EKDbSuma_MovSumListChanged
     Left = 52
     Top = 168
   end
@@ -3905,6 +3906,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         NombreCampo = 'sum'
       end>
     DataSet = ZQ_Ingresos
+    SumListChanged = EKDbSuma_IngresosSumListChanged
     Left = 156
     Top = 168
   end
@@ -3915,6 +3917,7 @@ object FEstadisticaMovInternos: TFEstadisticaMovInternos
         NombreCampo = 'sum'
       end>
     DataSet = ZQ_Egresos
+    SumListChanged = EKDbSuma_EgresosSumListChanged
     Left = 276
     Top = 168
   end
