@@ -1,6 +1,6 @@
 object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
-  Left = 283
-  Top = 133
+  Left = 369
+  Top = 335
   Width = 892
   Height = 609
   Caption = 'ABM Devoluci'#243'n'
@@ -4065,130 +4065,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     Left = 593
     Top = 72
   end
-  object EKOrd_VerCpb: TEKOrdenarGrilla
-    Grilla = DBGridListaCpb
-    Filtros = <
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'PV'
-        Visible = True
-      end
-      item
-        TituloColumna = 'N'#250'mero'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sucursal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cliente'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end
-      item
-        TituloColumna = 'ID'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_Cpb_VerCpb'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 50
-    Top = 120
-  end
-  object EKOrd_VerCpb_Fpago: TEKOrdenarGrilla
-    Grilla = DBGridCpbActual_FPago
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Cta.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cuenta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'C'#243'd. Cta.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cuenta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Banco'
-        Visible = True
-      end
-      item
-        TituloColumna = 'N'#250'm. Medio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_Cpb_VerFpago'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = False
-    Left = 817
-    Top = 120
-  end
-  object EKOrd_VerCpb_Devolucion: TEKOrdenarGrilla
-    Grilla = DBGridCpbActual_Devolucion
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Barra'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Producto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cantidad'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe Final'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_Cpb_VerDevolucion'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 593
-    Top = 120
-  end
   object ZQ_Cliente: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -4752,17 +4628,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       FieldName = 'ID'
     end
   end
-  object EKSuma_FPago: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE'
-      end>
-    DataSet = ZQ_CpbFormaPago
-    SumListChanged = EKSuma_FPagoSumListChanged
-    Left = 53
-    Top = 401
-  end
   object CD_Devolucion: TClientDataSet
     Aggregates = <>
     Params = <>
@@ -4871,272 +4736,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       FieldName = 'EMAIL'
       Size = 100
     end
-  end
-  object EKSuma_Devolucion: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'cantidad'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE_VENTA'
-      end>
-    DataSet = ZQ_CpbDevolucion
-    SumListChanged = EKSuma_DevolucionSumListChanged
-    Left = 328
-    Top = 185
-  end
-  object EKOrd_EditarDevolucion: TEKOrdenarGrilla
-    Grilla = DBGridEditar_Devolucion
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Barra'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nombre'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Color'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cantidad'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Precio Unitario'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Precio Final'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Detalle'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_Cpb_EditarDevolucion'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = False
-    PopUpGrilla = Popup_Devolucion
-    Left = 328
-    Top = 235
-  end
-  object EKOrd_EditarFpago: TEKOrdenarGrilla
-    Grilla = DBGridEditar_FPago
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'd.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cuenta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'M. Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'M. Banco'
-        Visible = True
-      end
-      item
-        TituloColumna = 'M. Nro.'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_Cpb_EditarFPago'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = False
-    Left = 53
-    Top = 448
-  end
-  object EKBuscar: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Fecha'
-        Campo = 'FECHA'
-        Tabla = 'comprobante '
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'PV'
-        Campo = 'PUNTO_VENTA'
-        Tabla = 'comprobante '
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'N'#250'mero'
-        Campo = 'NUMERO_CPB'
-        Tabla = 'comprobante '
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Sucursal'
-        Campo = 'id_sucursal'
-        Tabla = 'sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Cliente'
-        Campo = 'nombre'
-        Tabla = 'persona'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Proveedor'
-        Campo = 'nombre'
-        Tabla = 'empresa'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Importe Final'
-        Campo = 'IMPORTE_TOTAL'
-        Tabla = 'comprobante '
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Tipo'
-        Campo = 'id_tipo_cpb'
-        Tabla = 'comprobante'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboValoresVer.Strings = (
-          'DEVOLUCION'
-          'DEVOLUCION CREDITO'
-          'DEVOLUCION DEBITO')
-        TipoComboValoresReales.Strings = (
-          '12'
-          '27'
-          '28')
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Detalle'
-        Campo = 'observacion'
-        Tabla = 'comprobante'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_VerCpb
-    SQL.Strings = (
-      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
-      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
-      
-        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
-        'iente_cuil,'
-      '        est.descripcion as estado,'
-      '        CASE'
-      '            when (cpb.id_tipo_cpb = 12) then '#39'DEVOLUCION'#39
-      '            when (cpb.id_tipo_cpb = 27) then '#39'DEV. CREDITO'#39
-      '            when (cpb.id_tipo_cpb = 28) then '#39'DEV. DEBITO'#39
-      '        END AS nombre_cpb'
-      'from comprobante cpb'
-      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
-      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
-      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
-      
-        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
-        '_comp_estado)'
-      
-        'where ((cpb.id_tipo_cpb = 27) or (cpb.id_tipo_cpb = 28) or (cpb.' +
-        'id_tipo_cpb = 12))'
-      'order by cpb.fecha desc')
-    SQL_Select.Strings = (
-      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
-      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
-      
-        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
-        'iente_cuil,'
-      '        est.descripcion as estado,'
-      '        CASE'
-      '            when (cpb.id_tipo_cpb = 12) then '#39'DEVOLUCION'#39
-      '            when (cpb.id_tipo_cpb = 27) then '#39'DEV. CREDITO'#39
-      '            when (cpb.id_tipo_cpb = 28) then '#39'DEV. DEBITO'#39
-      '        END AS nombre_cpb')
-    SQL_From.Strings = (
-      'from comprobante cpb'
-      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
-      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
-      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
-      
-        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
-        '_comp_estado)')
-    SQL_Where.Strings = (
-      
-        'where ((cpb.id_tipo_cpb = 27) or (cpb.id_tipo_cpb = 28) or (cpb.' +
-        'id_tipo_cpb = 12))')
-    SQL_Orden.Strings = (
-      'order by cpb.fecha desc')
-    UsarWhereOriginal = EK_Con_Where
-    Left = 349
-    Top = 24
   end
   object DS_CpbEntrega: TDataSource
     DataSet = ZQ_CpbEntrega
@@ -5335,66 +4934,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       OnClick = PopItemEntrega_QuitarClick
     end
   end
-  object EKOrd_EditarEntrega: TEKOrdenarGrilla
-    Grilla = DBGridEditar_Entrega
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Barra'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nombre'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Color'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cantidad'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Precio Unitario'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Precio Final'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Detalle'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_Cpb_EditarEntrega'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = False
-    PopUpGrilla = Popup_Entrega
-    Left = 328
-    Top = 339
-  end
-  object EKSuma_Entrega: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'cantidad'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE_VENTA'
-      end>
-    DataSet = ZQ_CpbEntrega
-    SumListChanged = EKSuma_EntregaSumListChanged
-    Left = 328
-    Top = 289
-  end
   object ZQ_VerCpb_Entrega: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -5549,38 +5088,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     DataSet = ZQ_VerCpb_Entrega
     Left = 713
     Top = 72
-  end
-  object EKOrd_VerCpb_Entrega: TEKOrdenarGrilla
-    Grilla = DBGridCpbActual_Entrega
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'd. Barra'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Producto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medida'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cantidad'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe Final'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_Cpb_VerEntrega'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 713
-    Top = 120
   end
   object ZQ_TipoFPago: TZQuery
     Connection = DM.Conexion
@@ -5949,5 +5456,471 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       FieldName = 'INSERT_MANUAL'
       Size = 1
     end
+  end
+  object ISOrd_EditarFpago: TISOrdenarGrilla
+    Grilla = DBGridEditar_FPago
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'M. Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'M. Banco'
+        Visible = True
+      end
+      item
+        TituloColumna = 'M. Nro.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_Cpb_EditarFPago'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 53
+    Top = 449
+  end
+  object ISOrd_VerCpb: TISOrdenarGrilla
+    Grilla = DBGridListaCpb
+    Filtros = <
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'PV'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'mero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_Cpb_VerCpb'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 45
+    Top = 119
+  end
+  object ISOrd_EditarDevolucion: TISOrdenarGrilla
+    Grilla = DBGridEditar_Devolucion
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Unitario'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Final'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_Cpb_EditarDevolucion'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 332
+    Top = 235
+  end
+  object ISOrd_EditarEntrega: TISOrdenarGrilla
+    Grilla = DBGridEditar_Entrega
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Color'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Unitario'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Final'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_Cpb_EditarEntrega'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 328
+    Top = 345
+  end
+  object ISOrd_VerCpb_Devolucion: TISOrdenarGrilla
+    Grilla = DBGridCpbActual_Devolucion
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Final'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_Cpb_VerDevolucion'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 597
+    Top = 126
+  end
+  object ISOrd_VerCpb_Entrega: TISOrdenarGrilla
+    Grilla = DBGridCpbActual_Entrega
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Barra'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medida'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cantidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe Final'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_Cpb_VerEntrega'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 717
+    Top = 126
+  end
+  object ISOrd_VerCpb_Fpago: TISOrdenarGrilla
+    Grilla = DBGridCpbActual_FPago
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'd. Cta.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Cta.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Banco'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'm. Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_Cpb_VerFpago'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 813
+    Top = 126
+  end
+  object ISSuma_FPago: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE'
+      end>
+    DataSet = ZQ_CpbFormaPago
+    Left = 45
+    Top = 393
+  end
+  object ISSuma_Entrega: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'cantidad'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_VENTA'
+      end>
+    DataSet = ZQ_CpbEntrega
+    Left = 332
+    Top = 291
+  end
+  object ISSuma_Devolucion: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'cantidad'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE_VENTA'
+      end>
+    DataSet = ZQ_CpbDevolucion
+    Left = 340
+    Top = 187
+  end
+  object ISBuscar: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Fecha'
+        Campo = 'FECHA'
+        Tabla = 'cpb'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'PV'
+        Campo = 'PUNTO_VENTA'
+        Tabla = 'cpb'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'N'#250'mero'
+        Campo = 'NUMERO_CPB'
+        Tabla = 'cpb'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        Campo = 'id_sucursal'
+        Tabla = 'suc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Cliente'
+        Campo = 'nombre'
+        Tabla = 'cli'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Proveedor'
+        Campo = 'nombre'
+        Tabla = 'pro'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Importe Final'
+        Campo = 'IMPORTE_TOTAL'
+        Tabla = 'cpb'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo'
+        Campo = 'id_tipo_cpb'
+        Tabla = 'cpb'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Detalle'
+        Campo = 'observacion'
+        Tabla = 'cpb'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_VerCpb
+    SQL.Strings = (
+      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
+      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
+      
+        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
+        'iente_cuil,'
+      '        est.descripcion as estado,'
+      '        CASE'
+      '            when (cpb.id_tipo_cpb = 12) then '#39'DEVOLUCION'#39
+      '            when (cpb.id_tipo_cpb = 27) then '#39'DEV. CREDITO'#39
+      '            when (cpb.id_tipo_cpb = 28) then '#39'DEV. DEBITO'#39
+      '        END AS nombre_cpb'
+      'from comprobante cpb'
+      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
+      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
+      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
+      
+        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
+        '_comp_estado)'
+      
+        'where ((cpb.id_tipo_cpb = 27) or (cpb.id_tipo_cpb = 28) or (cpb.' +
+        'id_tipo_cpb = 12))'
+      'order by cpb.fecha desc')
+    SQL_Select.Strings = (
+      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
+      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
+      
+        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
+        'iente_cuil,'
+      '        est.descripcion as estado,'
+      '        CASE'
+      '            when (cpb.id_tipo_cpb = 12) then '#39'DEVOLUCION'#39
+      '            when (cpb.id_tipo_cpb = 27) then '#39'DEV. CREDITO'#39
+      '            when (cpb.id_tipo_cpb = 28) then '#39'DEV. DEBITO'#39
+      '        END AS nombre_cpb')
+    SQL_From.Strings = (
+      'from comprobante cpb'
+      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
+      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
+      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
+      
+        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
+        '_comp_estado)')
+    SQL_Where.Strings = (
+      
+        'where ((cpb.id_tipo_cpb = 27) or (cpb.id_tipo_cpb = 28) or (cpb.' +
+        'id_tipo_cpb = 12))')
+    SQL_Orden.Strings = (
+      'order by cpb.fecha desc')
+    UsarWhereOriginal = IS_Con_Where
+    Left = 367
+    Top = 26
   end
 end
