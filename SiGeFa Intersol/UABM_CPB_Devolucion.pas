@@ -12,7 +12,7 @@ uses
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
   EKDbSuma, DBClient, Menus, UBuscarProductoStock, UBuscarPersona,
-  cxClasses;
+  cxClasses, ISOrdenarGrilla, ISDbSuma, ISBusquedaAvanzada;
 
 type
   TFABM_CPB_Devolucion = class(TForm)
@@ -65,9 +65,6 @@ type
     DBGridListaCpb: TDBGrid;
     DBGridCpbActual_Devolucion: TDBGrid;
     DBGridCpbActual_FPago: TDBGrid;
-    EKOrd_VerCpb: TEKOrdenarGrilla;
-    EKOrd_VerCpb_Fpago: TEKOrdenarGrilla;
-    EKOrd_VerCpb_Devolucion: TEKOrdenarGrilla;
     ZQ_VerCpb_FpagoID_COMPROB_FP: TIntegerField;
     ZQ_VerCpb_FpagoID_COMPROBANTE: TIntegerField;
     ZQ_VerCpb_FpagoID_TIPO_FORMAPAG: TIntegerField;
@@ -201,7 +198,6 @@ type
     ZQ_NumeroCpbSIGNO_STOCK: TIntegerField;
     ZQ_NumeroCpbSIGNO_CTA_CTE: TIntegerField;
     ZQ_NumeroCpbBAJA: TStringField;
-    EKSuma_FPago: TEKDbSuma;
     CD_Devolucion: TClientDataSet;
     CD_Devolucion_idProducto: TIntegerField;
     CD_Devolucion_producto: TStringField;
@@ -254,9 +250,6 @@ type
     btnConfirmar: TdxBarLargeButton;
     ZQ_CpbDevolucionCANTIDAD_RECIBIDA: TFloatField;
     ZQ_CpbDevolucionCANTIDAD_ALMACENADA: TFloatField;
-    EKSuma_Devolucion: TEKDbSuma;
-    EKOrd_EditarDevolucion: TEKOrdenarGrilla;
-    EKOrd_EditarFpago: TEKOrdenarGrilla;
     ZQ_ComprobanteID_TIPO_IVA: TIntegerField;
     ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
@@ -270,15 +263,12 @@ type
     btnEliminarDevolucion: TButton;
     DBGridEditar_Devolucion: TDBGrid;
     StaticTxtConfirmado: TStaticText;
-    EKBuscar: TEKBusquedaAvanzada;
     ZQ_CpbDevolucionIMPORTE_IVA: TFloatField;
     DS_CpbEntrega: TDataSource;
     ZQ_CpbEntrega: TZQuery;
     Popup_Entrega: TPopupMenu;
     PopItemEntrega_Agregar: TMenuItem;
     PopItemEntrega_Quitar: TMenuItem;
-    EKOrd_EditarEntrega: TEKOrdenarGrilla;
-    EKSuma_Entrega: TEKDbSuma;
     ZQ_VerCpbID_COMPROBANTE: TIntegerField;
     ZQ_VerCpbID_SUCURSAL: TIntegerField;
     ZQ_VerCpbID_PROVEEDOR: TIntegerField;
@@ -322,7 +312,6 @@ type
     ZQ_CpbEntrega_Medida: TStringField;
     ZQ_CpbEntrega_Color: TStringField;
     DS_VerCpb_Entrega: TDataSource;
-    EKOrd_VerCpb_Entrega: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
     lblDatos_Cliente: TLabel;
     DBTxtDatos_Cliente: TDBText;
@@ -520,6 +509,17 @@ type
     ZQ_ListadoMedioGENERA_VUELTO: TStringField;
     ZQ_ListadoMedioCOLUMNA_PRECIO: TIntegerField;
     ZQ_ListadoMedioMODIFICABLE: TStringField;
+    ISOrd_EditarFpago: TISOrdenarGrilla;
+    ISOrd_VerCpb: TISOrdenarGrilla;
+    ISOrd_EditarDevolucion: TISOrdenarGrilla;
+    ISOrd_EditarEntrega: TISOrdenarGrilla;
+    ISOrd_VerCpb_Devolucion: TISOrdenarGrilla;
+    ISOrd_VerCpb_Entrega: TISOrdenarGrilla;
+    ISOrd_VerCpb_Fpago: TISOrdenarGrilla;
+    ISSuma_FPago: TISDbSuma;
+    ISSuma_Entrega: TISDbSuma;
+    ISSuma_Devolucion: TISDbSuma;
+    ISBuscar: TISBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -681,13 +681,13 @@ end;
 
 procedure TFABM_CPB_Devolucion.FormCreate(Sender: TObject);
 begin
-  EKOrd_VerCpb.CargarConfigColumnas;
-  EKOrd_VerCpb_Fpago.CargarConfigColumnas;
-  EKOrd_VerCpb_Devolucion.CargarConfigColumnas;
-  EKOrd_VerCpb_Entrega.CargarConfigColumnas;
-  EKOrd_EditarDevolucion.CargarConfigColumnas;
-  EKOrd_EditarEntrega.CargarConfigColumnas;
-  EKOrd_EditarFpago.CargarConfigColumnas;
+  ISOrd_VerCpb.CargarConfigColunmas;
+  ISOrd_VerCpb_Fpago.CargarConfigColunmas;
+  ISOrd_VerCpb_Devolucion.CargarConfigColunmas;
+  ISOrd_VerCpb_Entrega.CargarConfigColunmas;
+  ISOrd_EditarDevolucion.CargarConfigColunmas;
+  ISOrd_EditarEntrega.CargarConfigColunmas;
+  ISOrd_EditarFpago.CargarConfigColunmas;
 
   DBGridEditar_Devolucion.Color:= DBGridCpbActual_Devolucion.Color;
   DBGridEditar_Entrega.Color:= DBGridCpbActual_Entrega.Color;
@@ -697,9 +697,9 @@ begin
   FPrincipal.ISImage_ABM_Comprobantes.GetBitmap(1, btnBuscarPersona.Glyph); //cargo la imagen del boton buscar entidad
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[3]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+    TISCriterioBA(ISBuscar.CriteriosBusqueda.Items[3]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 
   dm.EKModelo.abrir(ZQ_Cuenta); //abro las cuentas bancarias
@@ -725,7 +725,7 @@ end;
 
 procedure TFABM_CPB_Devolucion.btnBuscarClick(Sender: TObject);
 begin
-  if EKbuscar.buscar then
+  if ISbuscar.buscar then
   begin
     ZQ_VerCpb.Refresh;
     dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
@@ -932,7 +932,7 @@ procedure TFABM_CPB_Devolucion.guardarComprobante;
 var
   recNo: integer;
 begin
-  EKSuma_FPago.RecalcAll;
+  ISSuma_FPago.RecalcAll;
 
   //verifico si tiene saldo la devolucion y si todavia no se cargo ninguna forma de pago
   if (saldoFormaCobroPago <> 0) and (ZQ_CpbFormaPago.IsEmpty) then
@@ -955,10 +955,10 @@ begin
     end;
 
   //verifico si el saldo de la devolucion es distinto a la forma de pago cargada
-  if (abs(saldoFormaCobroPago) <> EKSuma_FPago.SumCollection[0].SumValue) then
+  if (abs(saldoFormaCobroPago) <> ISSuma_FPago.SumCollection[0].SumValue) then
     //aviso de esta situacion y pregunto si se quiere continuar
     if Application.MessageBox(pchar('El Monto a abonar es diferente al Saldo de la devolución' + #13 +
-      '(Saldo: ' + FloatToStr(abs(saldoFormaCobroPago)) + ' <> Monto: ' + FloatToStr(EKSuma_FPago.SumCollection[0].SumValue) + ')' + #13 +
+      '(Saldo: ' + FloatToStr(abs(saldoFormaCobroPago)) + ' <> Monto: ' + FloatToStr(ISSuma_FPago.SumCollection[0].SumValue) + ')' + #13 +
       '¿Desea continuar con la devolución?')
       , 'Atención', MB_YESNO) = IDNO then
     begin
@@ -1476,15 +1476,15 @@ begin
 
     DBGridEditar_Fpago.SetFocus;
 
-    EKSuma_FPago.RecalcAll;
+    ISSuma_FPago.RecalcAll;
   end;
 end;
 
 
 procedure TFABM_CPB_Devolucion.EKSuma_FPagoSumListChanged(Sender: TObject);
 begin
-  editTotalFpago.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
-  restaPagar:= abs(saldoFormaCobroPago) - EKSuma_FPago.SumCollection[0].SumValue;
+  editTotalFpago.Text:= FormatFloat('$ ###,###,###,##0.00', ISSuma_FPago.SumCollection[0].SumValue);
+  restaPagar:= abs(saldoFormaCobroPago) - ISSuma_FPago.SumCollection[0].SumValue;
   if restaPagar < 0 then
     restaPagar:= 0;
 end;
@@ -1836,10 +1836,10 @@ end;
 
 procedure TFABM_CPB_Devolucion.EKSuma_DevolucionSumListChanged(Sender: TObject);
 begin
-  editCantidadDevuelto.Text:= FormatFloat('###,###,###,##0.00', EKSuma_Devolucion.SumCollection[0].SumValue);
-  editTotalDevuelto.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Devolucion.SumCollection[1].SumValue);
+  editCantidadDevuelto.Text:= FormatFloat('###,###,###,##0.00', ISSuma_Devolucion.SumCollection[0].SumValue);
+  editTotalDevuelto.Text:= FormatFloat('$ ###,###,###,##0.00', ISSuma_Devolucion.SumCollection[1].SumValue);
 
-  totalDevuelto:= EKSuma_Devolucion.SumCollection[1].SumValue;
+  totalDevuelto:= ISSuma_Devolucion.SumCollection[1].SumValue;
   saldoFormaCobroPago:= totalDevuelto + totalEntrega;
   editSaldoFpago.Text:= FormatFloat('$ ###,###,###,##0.00', abs(saldoFormaCobroPago));
 
@@ -1857,7 +1857,7 @@ begin
       lblSaldoFPago.Caption:= 'DEBITO:'
     end;
 
-  restaPagar:= abs(saldoFormaCobroPago) - EKSuma_FPago.SumCollection[0].SumValue;
+  restaPagar:= abs(saldoFormaCobroPago) - ISSuma_FPago.SumCollection[0].SumValue;
   if restaPagar < 0 then
     restaPagar:= 0;  
 end;
@@ -1868,10 +1868,10 @@ begin
   debito:= false;
   credito:= false;
 
-  editCantidadEntregado.Text:= FormatFloat('###,###,###,##0.00', EKSuma_Entrega.SumCollection[0].SumValue);
-  editTotalEntregado.Text:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Entrega.SumCollection[1].SumValue);
+  editCantidadEntregado.Text:= FormatFloat('###,###,###,##0.00', ISSuma_Entrega.SumCollection[0].SumValue);
+  editTotalEntregado.Text:= FormatFloat('$ ###,###,###,##0.00', ISSuma_Entrega.SumCollection[1].SumValue);
 
-  totalEntrega:= EKSuma_Entrega.SumCollection[1].SumValue;
+  totalEntrega:= ISSuma_Entrega.SumCollection[1].SumValue;
   saldoFormaCobroPago:= totalDevuelto + totalEntrega;
   editSaldoFpago.Text:= FormatFloat('$ ###,###,###,##0.00', abs(saldoFormaCobroPago));
 
@@ -1889,7 +1889,7 @@ begin
       lblSaldoFPago.Caption:= 'DEBITO:'
     end;
 
-  restaPagar:= abs(saldoFormaCobroPago) - EKSuma_FPago.SumCollection[0].SumValue;
+  restaPagar:= abs(saldoFormaCobroPago) - ISSuma_FPago.SumCollection[0].SumValue;
   if restaPagar < 0 then
     restaPagar:= 0;
 end;
@@ -1897,13 +1897,13 @@ end;
 
 procedure TFABM_CPB_Devolucion.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrd_VerCpb.GuardarConfigColumnas;
-  EKOrd_VerCpb_Fpago.GuardarConfigColumnas;
-  EKOrd_VerCpb_Devolucion.GuardarConfigColumnas;
-  EKOrd_VerCpb_Entrega.GuardarConfigColumnas;
-  EKOrd_EditarDevolucion.GuardarConfigColumnas;
-  EKOrd_EditarEntrega.GuardarConfigColumnas;
-  EKOrd_EditarFpago.GuardarConfigColumnas;
+  ISOrd_VerCpb.GuardarConfigColumnas;
+  ISOrd_VerCpb_Fpago.GuardarConfigColumnas;
+  ISOrd_VerCpb_Devolucion.GuardarConfigColumnas;
+  ISOrd_VerCpb_Entrega.GuardarConfigColumnas;
+  ISOrd_EditarDevolucion.GuardarConfigColumnas;
+  ISOrd_EditarEntrega.GuardarConfigColumnas;
+  ISOrd_EditarFpago.GuardarConfigColumnas;
 end;
 
 
