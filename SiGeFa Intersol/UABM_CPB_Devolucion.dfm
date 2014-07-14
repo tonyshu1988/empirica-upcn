@@ -1,6 +1,6 @@
 object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
-  Left = 369
-  Top = 335
+  Left = 291
+  Top = 234
   Width = 892
   Height = 609
   Caption = 'ABM Devoluci'#243'n'
@@ -785,17 +785,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
               Font.Style = []
               ParentFont = False
             end
-            object EKDBDateEmision: TEKDBDateTimePicker
-              Left = 11
-              Top = 19
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA'
-              DataSource = DS_Comprobante
-            end
           end
           object DBMemoCPB_Observacion: TDBMemo
             Left = 127
@@ -1086,6 +1075,17 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             Font.Style = [fsBold]
             ParentFont = False
           end
+        end
+        object ISDBDateEmision: TISDBDateTimePicker
+          Left = 77
+          Top = 98
+          Width = 105
+          Height = 21
+          Date = 41831.531922442130000000
+          Time = 41831.531922442130000000
+          TabOrder = 2
+          DataField = 'FECHA'
+          DataSource = DS_Comprobante
         end
       end
       object PanelEditar_Entrega: TPanel
@@ -1801,13 +1801,13 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         Font.Style = []
         ParentFont = False
       end
-      object EKDBDateTimeFechaVencimiento: TEKDBDateTimePicker
-        Left = 658
+      object ISDBDateTimeFechaVencimiento: TISDBDateTimePicker
+        Left = 659
         Top = 3
         Width = 105
         Height = 21
-        Date = 40717.702273252320000000
-        Time = 40717.702273252320000000
+        Date = 41834.369330717590000000
+        Time = 41834.369330717590000000
         TabOrder = 0
         DataField = 'FECHA_VENCIMIENTO'
         DataSource = DS_Comprobante
@@ -4467,31 +4467,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     Left = 41
     Top = 233
   end
-  object EKListadoCuenta: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select cta.*, tipo.descripcion,'
-      
-        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
-        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
-      'from cuenta cta'
-      
-        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
-        'po_formapago)'
-      'where cta.baja = '#39'N'#39
-      '  and cta.id_cuenta > 1')
-    CampoBuscar = 'busqueda'
-    CampoClave = 'id_cuenta'
-    TituloVentana = 'Buscar Cuenta'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 413
-    Top = 401
-  end
   object ZQ_ListadoCuenta: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -4534,25 +4509,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       FieldName = 'BAJA'
       Size = 1
     end
-  end
-  object EKListadoMedio: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select tipo.*'
-      'from tipo_formapago tipo'
-      'where tipo.baja = '#39'N'#39
-      '')
-    CampoBuscar = 'descripcion'
-    CampoClave = 'id_tipo_formapago'
-    TituloVentana = 'Buscar Medio'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 509
-    Top = 401
   end
   object ZQ_ListadoMedio: TZQuery
     Connection = DM.Conexion
@@ -5755,6 +5711,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         NombreCampo = 'IMPORTE'
       end>
     DataSet = ZQ_CpbFormaPago
+    SumListChanged = EKSuma_FPagoSumListChanged
     Left = 45
     Top = 393
   end
@@ -5769,6 +5726,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         NombreCampo = 'IMPORTE_VENTA'
       end>
     DataSet = ZQ_CpbEntrega
+    SumListChanged = EKSuma_EntregaSumListChanged
     Left = 332
     Top = 291
   end
@@ -5783,6 +5741,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         NombreCampo = 'IMPORTE_VENTA'
       end>
     DataSet = ZQ_CpbDevolucion
+    SumListChanged = EKSuma_DevolucionSumListChanged
     Left = 340
     Top = 187
   end
@@ -5868,7 +5827,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         ItemIndex = -1
       end>
     CriteriosLocate = <>
-    Modelo = DM.ISModelo
     DataSet = ZQ_VerCpb
     SQL.Strings = (
       'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
@@ -5922,5 +5880,47 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     UsarWhereOriginal = IS_Con_Where
     Left = 367
     Top = 26
+  end
+  object ISListadoCuenta: TISListadoSQL
+    SQL.Strings = (
+      'select cta.*, tipo.descripcion,'
+      
+        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
+        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
+      'from cuenta cta'
+      
+        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
+        'po_formapago)'
+      'where cta.baja = '#39'N'#39
+      '  and cta.id_cuenta > 1')
+    CampoBuscar = 'busqueda'
+    CampoClave = 'id_cuenta'
+    TituloVentana = 'Buscar Cuenta'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = clWindow
+    AnchoClave = 80
+    AnchoBuscar1 = 480
+    AnchoBuscar2 = 480
+    Left = 416
+    Top = 393
+  end
+  object ISListadoMedio: TISListadoSQL
+    SQL.Strings = (
+      'select tipo.*'
+      'from tipo_formapago tipo'
+      'where tipo.baja = '#39'N'#39
+      '')
+    CampoBuscar = 'descripcion'
+    CampoClave = 'id_tipo_formapago'
+    TituloVentana = 'Buscar Medio'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = clWindow
+    AnchoClave = 80
+    AnchoBuscar1 = 480
+    AnchoBuscar2 = 480
+    Left = 512
+    Top = 393
   end
 end
