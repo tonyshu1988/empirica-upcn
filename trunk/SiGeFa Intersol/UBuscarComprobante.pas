@@ -7,7 +7,8 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, ComCtrls, DBCtrls, StdCtrls,
   Mask, ZSqlUpdate, DateUtils, EKOrdenarGrilla, EKBusquedaAvanzada,
-  ActnList, XPStyleActnCtrls, ActnMan, EKDbSuma;
+  ActnList, XPStyleActnCtrls, ActnMan, EKDbSuma, ISDbSuma, cxClasses,
+  ISOrdenarGrilla, ISBusquedaAvanzada;
 
 type
   TFBuscarComprobante = class(TForm)
@@ -18,8 +19,6 @@ type
     btnSalir: TdxBarLargeButton;
     btnSeleccionar: TdxBarLargeButton;
     ZQ_Factura_Venta: TZQuery;
-    EKOrdenarGrilla: TEKOrdenarGrilla;
-    EKBuscarFacturaVenta: TEKBusquedaAvanzada;
     btnSeleccinarYSalir: TdxBarLargeButton;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
@@ -45,7 +44,6 @@ type
     ZQ_DetalleCOD_CORTO_CAB: TStringField;
     ZQ_DetalleNOMBRE: TStringField;
     ZQ_DetalleIMPORTE_VENTA: TFloatField;
-    EKBuscarFacturaCompra: TEKBusquedaAvanzada;
     ZQ_Factura_CompraID_COMPROBANTE: TIntegerField;
     ZQ_Factura_CompraID_PROVEEDOR: TIntegerField;
     ZQ_Factura_CompraCODIGO: TStringField;
@@ -62,10 +60,13 @@ type
     Panel2: TPanel;
     lblDetalleFactura: TLabel;
     lblSaldoTotal: TLabel;
-    EKDbSumaVenta: TEKDbSuma;
-    EKDbSumaCompra: TEKDbSuma;
     ZQ_SaldoNotaCredito: TZQuery;
     ZQ_SaldoNotaCreditoSALDO: TFloatField;
+    ISDbSumaVenta: TISDbSuma;
+    ISDbSumaCompra: TISDbSuma;
+    ISOrdenarGrilla: TISOrdenarGrilla;
+    ISBuscarFacturaVenta: TISBusquedaAvanzada;
+    ISBuscarFacturaCompra: TISBusquedaAvanzada;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
@@ -112,9 +113,9 @@ var
 begin
   if facturaVenta then
   begin
-    if EKBuscarFacturaVenta.Buscar then
+    if ISBuscarFacturaVenta.Buscar then
     begin
-      saldo:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSumaVenta.SumCollection[0].SumValue);
+      saldo:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', ISDbSumaVenta.SumCollection[0].SumValue);
       notaCredito:= 'Nota Credito: '+FormatFloat('$ ###,###,###,##0.00', ZQ_SaldoNotaCreditoSALDO.AsFloat);
       lblSaldoTotal.Caption:= saldo+' || '+notaCredito+' ';
     end;
@@ -122,9 +123,9 @@ begin
   else
     if facturaCompra then
     begin
-      if EKBuscarFacturaCompra.Buscar then
+      if ISBuscarFacturaCompra.Buscar then
       begin
-        lblSaldoTotal.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', EKDbSumaCompra.SumCollection[0].SumValue) + '  ';
+        lblSaldoTotal.Caption:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', ISDbSumaCompra.SumCollection[0].SumValue) + '  ';
       end;
     end;
 
@@ -176,7 +177,7 @@ begin
   saldo:= 'Saldo Total: '+FormatFloat('$ ###,###,###,##0.00', 0);
   notaCredito:= 'Nota Credito: '+FormatFloat('$ ###,###,###,##0.00', 0);
   lblSaldoTotal.Caption:= saldo+' || '+notaCredito+' ';
-  //EKOrdenarGrilla.CargarConfigColumnas;
+  //ISOrdenarGrilla.CargarConfigColumnas;
 end;
 
 
@@ -219,7 +220,7 @@ begin
   if facturaVenta then //si es una factura de venta
   begin
     query:= ZQ_Factura_Venta;
-    EKBuscarFacturaVenta.SQL_Where[4]:= 'and c.id_cliente = ' + IntToStr(id);
+    ISBuscarFacturaVenta.SQL_Where[4]:= 'and c.id_cliente = ' + IntToStr(id);
 
     ZQ_Entidad.Close;
     ZQ_Entidad.SQL.Text:= 'select nombre from persona where id_persona = ' + IntToStr(id);
@@ -234,7 +235,7 @@ begin
     if facturaCompra then
     begin
       query:= ZQ_Factura_Compra;
-      EKBuscarFacturaCompra.SQL_Where[3]:= 'and c.id_proveedor = ' + IntToStr(id);
+      ISBuscarFacturaCompra.SQL_Where[3]:= 'and c.id_proveedor = ' + IntToStr(id);
 
       ZQ_Entidad.Close;
       ZQ_Entidad.SQL.Text:= 'select nombre from empresa where id_empresa = ' + IntToStr(id);

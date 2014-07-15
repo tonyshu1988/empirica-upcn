@@ -8,7 +8,7 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   ActnList, XPStyleActnCtrls, ActnMan,   QRCtrls, QuickRpt, Buttons, ImgList, 
   ComCtrls, ZStoredProcedure,
-  EKDbSuma, DBClient, Menus, UOP_BuscarProductosOS, ZSqlUpdate, jpeg,
+  DBClient, Menus, UOP_BuscarProductosOS, ZSqlUpdate, jpeg,
   ExtDlgs, ZSequence, cxClasses, ShellAPI, ZIBEventAlerter,
   ISOrdenarGrilla, ISVistaPreviaQR, ISDbSuma, ISListadoSQL,
   ISBusquedaAvanzada, ISDBDateTimePicker;
