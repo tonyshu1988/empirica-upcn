@@ -6,11 +6,12 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
-  ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
+  ActnList, XPStyleActnCtrls, ActnMan,   QRCtrls, QuickRpt, Buttons, ImgList, 
+  ComCtrls, ZStoredProcedure,
   EKDbSuma, DBClient, Menus, UOP_BuscarProductosOS, ZSqlUpdate, jpeg,
-  ExtDlgs, ZSequence, cxClasses, ShellAPI, ZIBEventAlerter;
+  ExtDlgs, ZSequence, cxClasses, ShellAPI, ZIBEventAlerter,
+  ISOrdenarGrilla, ISVistaPreviaQR, ISDbSuma, ISListadoSQL,
+  ISBusquedaAvanzada, ISDBDateTimePicker;
 
 type
   TFABM_CPB_FacturaObraSocial = class(TForm)
@@ -71,8 +72,6 @@ type
     ZQ_VerCpbESTADO: TStringField;
     DBGridListaCpb: TDBGrid;
     DBGridCpbActual_Producto: TDBGrid;
-    EKOrd_VerCpb: TEKOrdenarGrilla;
-    EKOrd_VerCpb_Producto: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
     Label24: TLabel;
     DBTxtMonto: TDBText;
@@ -82,7 +81,6 @@ type
     ZQ_VerCpbPUNTO_VENTA: TIntegerField;
     ZQ_VerCpbNUMERO_CPB: TIntegerField;
     lblTipoComprobante: TLabel;
-    EKListadoEntidad: TEKListadoSQL;
     PanelEditar_DatosGralProveedor: TPanel;
     ZQ_ObraSocial: TZQuery;
     DS_ObraSocial: TDataSource;
@@ -160,14 +158,11 @@ type
     PopUpItem_ProductoOcultarDetalle: TMenuItem;
     PanelFechas: TPanel;
     PanelFechaEmision: TPanel;
-    EKDBDateCarga: TEKDBDateTimePicker;
     ZQ_BuscarMail: TZQuery;
     ZQ_BuscarMailEMAIL: TStringField;
     btnConfirmar: TdxBarLargeButton;
     ZQ_CpbProductoCANTIDAD_RECIBIDA: TFloatField;
     ZQ_CpbProductoCANTIDAD_ALMACENADA: TFloatField;
-    EKSuma_Productos: TEKDbSuma;
-    EKOrd_EditarProducto: TEKOrdenarGrilla;
     ZQ_ComprobanteID_TIPO_IVA: TIntegerField;
     ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
@@ -192,7 +187,6 @@ type
     DBText5: TDBText;
     DBText32: TDBText;
     StaticTxtConfirmado: TStaticText;
-    EKBuscar: TEKBusquedaAvanzada;
     RepListado: TQuickRep;
     QRBand10: TQRBand;
     QRDBText19: TQRDBText;
@@ -216,7 +210,6 @@ type
     QRDBText5: TQRDBText;
     QRLabel4: TQRLabel;
     QRDBText6: TQRDBText;
-    EKVistaPrevia: TEKVistaPreviaQR;
     lblAnulado: TLabel;
     DBTxtFechaAnulado: TDBText;
     Label6: TLabel;
@@ -314,6 +307,14 @@ type
     QRLabel17: TQRLabel;
     RepListado_Subtitulo: TQRLabel;
     RepListado_Titulo: TQRLabel;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrd_VerCpb: TISOrdenarGrilla;
+    ISOrd_EditarProducto: TISOrdenarGrilla;
+    ISOrd_VerCpb_Producto: TISOrdenarGrilla;
+    ISSuma_Productos: TISDbSuma;
+    ISListadoEntidad: TISListadoSQL;
+    ISBuscar: TISBusquedaAvanzada;
+    ISDBDateCarga: TISDBDateTimePicker;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -384,7 +385,7 @@ const
 
 implementation
 
-uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar, UVerImagen;
+uses UPrincipal, UDM, UImpresion_Comprobantes, UMailEnviar, UVerImagen;
 
 {$R *.dfm}
 
@@ -445,21 +446,21 @@ procedure TFABM_CPB_FacturaObraSocial.FormCreate(Sender: TObject);
 begin
   tipoComprobante:= CPB_FACTURA_OSOCIAL;
 
-  EKOrd_VerCpb.CargarConfigColumnas;
-  EKOrd_VerCpb_Producto.CargarConfigColumnas;
-  EKOrd_EditarProducto.CargarConfigColumnas;
+  ISOrd_VerCpb.CargarConfigColunmas;
+  ISOrd_VerCpb_Producto.CargarConfigColunmas;
+  ISOrd_EditarProducto.CargarConfigColunmas;
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
   FPrincipal.ISImage_ABM_Comprobantes.GetBitmap(4, btnBuscarObraSocial.Glyph); //cargo la imagen del boton buscar OS
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+    TISCriterioBA(ISBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
 
   //abro todos los recibos del sistema
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
-  dm.EKModelo.abrir(ZQ_Iva);
+  dm.ISModelo.abrir(ZQ_Iva);
   CD_Producto.CreateDataSet;
 end;
 
@@ -478,7 +479,7 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.btnBuscarClick(Sender: TObject);
 begin
-  if EKbuscar.buscar then
+  if ISbuscar.buscar then
   begin
     ZQ_VerCpb.Refresh;
     dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
@@ -509,7 +510,7 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
   begin
     modoEdicion(true);
     confirmarComprobante:= false;
@@ -539,14 +540,14 @@ begin
     ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
     ZQ_ComprobantePUNTO_VENTA.Clear;
     ZQ_ComprobanteNUMERO_CPB.Clear;
-    ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_ComprobanteFECHA.AsDateTime:= dm.ISModelo.FechayHora;
     ZQ_ComprobanteFECHA_COBRADA.Clear;
     ZQ_ComprobanteFECHA_ENVIADA.Clear;
     ZQ_ComprobanteFECHA_IMPRESA.Clear;
     ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
     ZQ_ComprobanteFECHA_ANULADO.Clear;
 
-    EKDBDateCarga.SetFocus;
+    ISDBDateCarga.SetFocus;
   end;
 end;
 
@@ -562,7 +563,7 @@ begin
   confirmarComprobante:= false;
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
   begin
     modoEdicion(true);
 
@@ -588,7 +589,7 @@ begin
 
     ZQ_Comprobante.Edit;
 
-    EKDBDateCarga.SetFocus;
+    ISDBDateCarga.SetFocus;
   end;
 end;
 
@@ -602,16 +603,16 @@ begin
   if ZQ_ComprobanteID_OBRA_SOCIAL.IsNull then
   begin
     Application.MessageBox('Debe asociar una Obra Social al Comprobante, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-    EKDBDateCarga.SetFocus;
+    ISDBDateCarga.SetFocus;
     exit;
   end;
 
-  EKSuma_Productos.RecalcAll; //el importe del comprobante es igual a la suma del importe de todos los productos
-  EKSuma_Productos.RecalcAll;
-  ZQ_ComprobanteBASE_IMPONIBLE.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
-  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
-  ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
-  ZQ_ComprobanteSALDO.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
+  ISSuma_Productos.RecalcAll; //el importe del comprobante es igual a la suma del importe de todos los productos
+  ISSuma_Productos.RecalcAll;
+  ZQ_ComprobanteBASE_IMPONIBLE.AsFloat:= ISSuma_Productos.SumCollection[1].SumValue;
+  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= ISSuma_Productos.SumCollection[1].SumValue;
+  ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ISSuma_Productos.SumCollection[1].SumValue;
+  ZQ_ComprobanteSALDO.AsFloat:= ISSuma_Productos.SumCollection[1].SumValue;
 
   if confirmarComprobante then
     ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO
@@ -637,7 +638,7 @@ begin
   end;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       modoEdicion(false);
       DBGridListaCpb.SetFocus;
@@ -665,7 +666,7 @@ end;
 procedure TFABM_CPB_FacturaObraSocial.btnCancelarClick(Sender: TObject);
 begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+    if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
     begin
       modoEdicion(false);
       DBGridListaCpb.SetFocus;
@@ -679,9 +680,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepListado);
-  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption:= EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption:= ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 
@@ -711,7 +712,7 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.AModificarExecute(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
   begin
     agregarProducto;
   end;
@@ -787,9 +788,9 @@ begin
   if confirmarComprobante then
     exit;
 
-  if EKListadoEntidad.Buscar then
+  if ISListadoEntidad.Buscar then
   begin
-    if (EKListadoEntidad.Resultado <> '') then
+    if (ISListadoEntidad.Resultado <> '') then
     begin
       if not ZQ_CpbProducto.IsEmpty then
       begin
@@ -809,7 +810,7 @@ begin
       PanelEditar_DatosGralProveedor.BringToFront;
 
       ZQ_ObraSocial.Close;
-      ZQ_ObraSocial.ParamByName('id_os').AsInteger:= StrToInt(EKListadoEntidad.Resultado);
+      ZQ_ObraSocial.ParamByName('id_os').AsInteger:= StrToInt(ISListadoEntidad.Resultado);
       ZQ_ObraSocial.Open;
 
       if ZQ_Comprobante.State = dsBrowse then
@@ -819,7 +820,7 @@ begin
     end
   end;
 
-  EKDBDateCarga.SetFocus;
+  ISDBDateCarga.SetFocus;
 end;
 
 
@@ -1065,7 +1066,7 @@ begin
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
   if (application.MessageBox(pchar('¿Desea confirmar la Factura de Obra Social seleccionada?'), 'ABM Factura de Obra Social', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
     begin
       ZQ_Comprobante.Close;
       ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
@@ -1075,8 +1076,8 @@ begin
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
 
       try
-        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+        if not DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.ISModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
           Application.MessageBox('No se pudo confirmar la Factura de Obra Social.', 'Atención', MB_OK + MB_ICONINFORMATION);
@@ -1118,8 +1119,8 @@ procedure TFABM_CPB_FacturaObraSocial.EKSuma_ProductosSumListChanged(Sender: TOb
 var
   cantidad, total: string;
 begin
-  cantidad:= FormatFloat('###,###,###,##0.00', EKSuma_Productos.SumCollection[0].SumValue);
-  total:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Productos.SumCollection[1].SumValue);
+  cantidad:= FormatFloat('###,###,###,##0.00', ISSuma_Productos.SumCollection[0].SumValue);
+  total:= FormatFloat('$ ###,###,###,##0.00', ISSuma_Productos.SumCollection[1].SumValue);
 
   editTotalProductos.Text:= cantidad;
   editTotalFinal.Text:= total;
@@ -1128,9 +1129,9 @@ end;
 
 procedure TFABM_CPB_FacturaObraSocial.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrd_VerCpb.GuardarConfigColumnas;
-  EKOrd_VerCpb_Producto.GuardarConfigColumnas;
-  EKOrd_EditarProducto.GuardarConfigColumnas;
+  ISOrd_VerCpb.GuardarConfigColumnas;
+  ISOrd_VerCpb_Producto.GuardarConfigColumnas;
+  ISOrd_EditarProducto.GuardarConfigColumnas;
 end;
 
 
@@ -1194,7 +1195,7 @@ begin
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
   if (application.MessageBox(pchar('¿Desea anular la Factura de OS seleccionada?'), 'ABM Factura OS', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
     begin
       ZQ_Comprobante.Close;
       ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
@@ -1202,7 +1203,7 @@ begin
 
       ZQ_Comprobante.Edit;
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
-      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
+      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.ISModelo.FechayHora;
 
       ZQ_VerCpb_Producto.First;
       while not ZQ_VerCpb_Producto.Eof do
@@ -1216,8 +1217,8 @@ begin
       end;
 
       try
-        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+        if not DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.ISModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
           Application.MessageBox('No se pudo anular la Factura de OS.', 'Atención', MB_OK + MB_ICONINFORMATION);

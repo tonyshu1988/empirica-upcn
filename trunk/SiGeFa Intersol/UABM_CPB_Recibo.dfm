@@ -1,6 +1,6 @@
 object FABM_CPB_Recibo: TFABM_CPB_Recibo
-  Left = 295
-  Top = 161
+  Left = 315
+  Top = 310
   Width = 892
   Height = 586
   Caption = 'ABM Recibos'
@@ -1377,13 +1377,13 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
               Font.Style = []
               ParentFont = False
             end
-            object EKDBDateEmision: TEKDBDateTimePicker
+            object ISDBDateEmision: TISDBDateTimePicker
               Left = 11
               Top = 16
               Width = 105
               Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
+              Date = 41835.386583206020000000
+              Time = 41835.386583206020000000
               TabOrder = 0
               DataField = 'FECHA'
               DataSource = DS_Comprobante
@@ -3994,68 +3994,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     Left = 34
     Top = 100
   end
-  object EKOrd_VerCpb: TEKOrdenarGrilla
-    Grilla = DBGridListaCpb
-    Filtros = <
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'PV'
-        Visible = True
-      end
-      item
-        TituloColumna = 'N'#250'mero'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sucursal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Proveedor'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cliente'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end
-      item
-        TituloColumna = 'ID'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_RC_VerCpb'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 34
-    Top = 152
-  end
-  object EKListadoEntidad: TEKListadoSQL
-    Modelo = DM.EKModelo
-    CampoBuscar = 'busqueda'
-    CampoClave = 'id'
-    TituloVentana = 'Buscar'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 469
-    Top = 32
-  end
   object ZQ_Proveedor: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -4641,31 +4579,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     Left = 445
     Top = 417
   end
-  object EKListadoCuenta: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select cta.*, tipo.descripcion,'
-      
-        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
-        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
-      'from cuenta cta'
-      
-        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
-        'po_formapago)'
-      'where cta.baja = '#39'N'#39
-      'and cta.id_cuenta > 1')
-    CampoBuscar = 'busqueda'
-    CampoClave = 'id_cuenta'
-    TituloVentana = 'Buscar Cuenta'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 533
-    Top = 369
-  end
   object ZQ_ListadoCuenta: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -4708,25 +4621,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       FieldName = 'BAJA'
       Size = 1
     end
-  end
-  object EKListadoMedio: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select tipo.*'
-      'from tipo_formapago tipo'
-      'where tipo.baja = '#39'N'#39
-      'and tipo.id_tipo_formapago > 1')
-    CampoBuscar = 'descripcion'
-    CampoClave = 'id_tipo_formapago'
-    TituloVentana = 'Buscar Medio'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 621
-    Top = 369
   end
   object ZQ_ListadoMedio: TZQuery
     Connection = DM.Conexion
@@ -4781,17 +4675,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       FieldName = 'ID'
     end
   end
-  object EKSuma_FPago: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE'
-      end>
-    DataSet = ZQ_CpbFormaPago
-    SumListChanged = EKSuma_FPagoSumListChanged
-    Left = 141
-    Top = 369
-  end
   object ZQ_BuscarMail: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -4804,42 +4687,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
       FieldName = 'EMAIL'
       Size = 100
     end
-  end
-  object EKOrd_EditarFpago: TEKOrdenarGrilla
-    Grilla = DBGridEditar_Fpago
-    Filtros = <
-      item
-        TituloColumna = 'Cuenta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Medio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Banco Medio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'N'#250'mero Medio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_RC_EditarFPago'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = False
-    PermitirMover = False
-    PermitirFiltrar = False
-    Left = 141
-    Top = 416
   end
   object ZQ_VerCpb_Fpago: TZQuery
     Connection = DM.Conexion
@@ -4927,191 +4774,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     Left = 769
     Top = 244
   end
-  object EKOrd_VerCpb_Fpago: TEKOrdenarGrilla
-    Grilla = DBGridCpbActual_FPago
-    Filtros = <
-      item
-        TituloColumna = 'Cuenta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Medio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Banco'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nro. Medio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Importe'
-        Visible = True
-      end>
-    NombreGuardar = 'ABM_RC_VerFpago'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 769
-    Top = 296
-  end
-  object EKBuscar: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Tipo'
-        Campo = 'id_tipo_cpb'
-        Tabla = 'comprobante'
-        TipoCampo = EK_Numero
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboValoresVer.Strings = (
-          'RECIBO'
-          'RECIBO CTA. CTE.')
-        TipoComboValoresReales.Strings = (
-          '19'
-          '22')
-        TipoComboAncho = 200
-        CambiarCondicion = False
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha'
-        Campo = 'FECHA'
-        Tabla = 'comprobante '
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'PV'
-        Campo = 'PUNTO_VENTA'
-        Tabla = 'comprobante '
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'N'#250'mero'
-        Campo = 'NUMERO_CPB'
-        Tabla = 'comprobante '
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Sucursal'
-        Campo = 'id_sucursal'
-        Tabla = 'sucursal'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Cliente'
-        Campo = 'nombre'
-        Tabla = 'persona'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Proveedor'
-        Campo = 'nombre'
-        Tabla = 'empresa'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Importe Final'
-        Campo = 'IMPORTE_TOTAL'
-        Tabla = 'comprobante '
-        TipoCampo = EK_Numero
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_VerCpb
-    SQL.Strings = (
-      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
-      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
-      
-        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
-        'iente_cuil,'
-      '        est.descripcion as estado,'
-      '        CASE'
-      '            when (cpb.id_tipo_cpb = 19) then '#39'RECIBO'#39
-      '            when (cpb.id_tipo_cpb = 22) then '#39'RECIBO CTA CTE'#39
-      '        END AS nombre_cpb'
-      'from comprobante cpb'
-      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
-      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
-      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
-      
-        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
-        '_comp_estado)'
-      'where ((cpb.id_tipo_cpb = 19) or (cpb.id_tipo_cpb = 22))'
-      'order by cpb.fecha desc')
-    SQL_Select.Strings = (
-      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
-      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
-      
-        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
-        'iente_cuil,'
-      '        est.descripcion as estado,'
-      '        CASE'
-      '            when (cpb.id_tipo_cpb = 19) then '#39'RECIBO'#39
-      '            when (cpb.id_tipo_cpb = 22) then '#39'RECIBO CTA CTE'#39
-      '        END AS nombre_cpb')
-    SQL_From.Strings = (
-      'from comprobante cpb'
-      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
-      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
-      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
-      
-        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
-        '_comp_estado)')
-    SQL_Where.Strings = (
-      'where ((cpb.id_tipo_cpb = 19) or (cpb.id_tipo_cpb = 22))')
-    SQL_Orden.Strings = (
-      'order by cpb.fecha desc')
-    UsarWhereOriginal = EK_Con_Where
-    Left = 29
-    Top = 272
-  end
   object CD_Facturas: TClientDataSet
     Aggregates = <>
     Params = <>
@@ -5166,21 +4828,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     DataSet = CD_Facturas
     Left = 302
     Top = 217
-  end
-  object EKSuma_Factura: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = '_importeCancelar'
-      end
-      item
-        Operacion = goSum
-        NombreCampo = '_saldoComprobante'
-      end>
-    DataSet = CD_Facturas
-    SumListChanged = EKSuma_FacturaSumListChanged
-    Left = 390
-    Top = 169
   end
   object ZQ_PagosFactura: TZQuery
     Connection = DM.Conexion
@@ -5446,17 +5093,6 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     Left = 413
     Top = 305
   end
-  object EKSuma_FPagoNCredito: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE'
-      end>
-    DataSet = ZQ_CpbFormaPago_NotaCredito
-    SumListChanged = EKSuma_FPagoNCreditoSumListChanged
-    Left = 557
-    Top = 304
-  end
   object ZQ_VerCpb_NCredito: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -5543,7 +5179,81 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
     Left = 593
     Top = 110
   end
-  object EKOrd_VerCpb_NCredito: TEKOrdenarGrilla
+  object ISOrd_EditarFpago: TISOrdenarGrilla
+    Grilla = DBGridEditar_Fpago
+    Filtros = <
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Banco Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'mero Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_RC_EditarFPago'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 141
+    Top = 414
+  end
+  object ISOrd_VerCpb_Fpago: TISOrdenarGrilla
+    Grilla = DBGridCpbActual_FPago
+    Filtros = <
+      item
+        TituloColumna = 'Cuenta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Banco'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Medio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_RC_VerFpago'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 773
+    Top = 313
+  end
+  object ISOrd_VerCpb_NCredito: TISOrdenarGrilla
     Grilla = DBGridCpbActual_NCredito
     Filtros = <
       item
@@ -5570,13 +5280,287 @@ object FABM_CPB_Recibo: TFABM_CPB_Recibo
         TituloColumna = 'Importe'
         Visible = True
       end>
-    NombreGuardar = 'ABM_RC_VerNCredito'
+    NombreGuardarConfig = 'ABM_RC_VerNCredito'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 353
-    Top = 112
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 357
+    Top = 109
+  end
+  object ISOrd_VerCpb: TISOrdenarGrilla
+    Grilla = DBGridListaCpb
+    Filtros = <
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'PV'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#250'mero'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Proveedor'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cliente'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Importe'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABM_RC_VerCpb'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 37
+    Top = 157
+  end
+  object ISSuma_FPagoNCredito: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE'
+      end>
+    DataSet = ZQ_CpbFormaPago_NotaCredito
+    SumListChanged = EKSuma_FPagoNCreditoSumListChanged
+    Left = 573
+    Top = 305
+  end
+  object ISSuma_FPago: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE'
+      end>
+    DataSet = ZQ_CpbFormaPago
+    SumListChanged = EKSuma_FPagoSumListChanged
+    Left = 149
+    Top = 369
+  end
+  object ISSuma_Factura: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = '_importeCancelar'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = '_saldoComprobante'
+      end>
+    DataSet = CD_Facturas
+    SumListChanged = EKSuma_FacturaSumListChanged
+    Left = 385
+    Top = 185
+  end
+  object ISListadoCuenta: TISListadoSQL
+    SQL.Strings = (
+      'select cta.*, tipo.descripcion,'
+      
+        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
+        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
+      'from cuenta cta'
+      
+        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
+        'po_formapago)'
+      'where cta.baja = '#39'N'#39
+      'and cta.id_cuenta > 1')
+    CampoBuscar = 'busqueda'
+    CampoClave = 'id_cuenta'
+    TituloVentana = 'Buscar Cuenta'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 480
+    AnchoBuscar2 = 480
+    Left = 517
+    Top = 361
+  end
+  object ISListadoMedio: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select tipo.*'
+      'from tipo_formapago tipo'
+      'where tipo.baja = '#39'N'#39
+      'and tipo.id_tipo_formapago > 1')
+    CampoBuscar = 'descripcion'
+    CampoClave = 'id_tipo_formapago'
+    TituloVentana = 'Buscar Medio'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 480
+    AnchoBuscar2 = 480
+    Left = 621
+    Top = 361
+  end
+  object ISListadoEntidad: TISListadoSQL
+    Modelo = DM.ISModelo
+    CampoBuscar = 'busqueda'
+    CampoClave = 'id'
+    TituloVentana = 'Buscar'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 480
+    AnchoBuscar2 = 480
+    Left = 487
+    Top = 39
+  end
+  object ISBuscar: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Tipo'
+        Campo = 'id_tipo_cpb'
+        Tabla = 'cpb'
+        TipoCampo = IS_Numero
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = '='
+        TipoComboValores.Strings = (
+          'ORDEN PAGO'
+          'ORDEN PAGO CTA. CTE.')
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha'
+        Campo = 'FECHA'
+        Tabla = 'cpb'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'PV'
+        Campo = 'PUNTO_VENTA'
+        Tabla = 'cpb'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'N'#250'mero'
+        Campo = 'NUMERO_CPB'
+        Tabla = 'cpb'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Sucursal'
+        Campo = 'id_sucursal'
+        Tabla = 'suc'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Cliente'
+        Campo = 'nombre'
+        Tabla = 'cli'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Proveedor'
+        Campo = 'nombre'
+        Tabla = 'pro'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Importe Final'
+        Campo = 'IMPORTE_TOTAL'
+        Tabla = 'cpb'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_VerCpb
+    SQL.Strings = (
+      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
+      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
+      
+        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
+        'iente_cuil,'
+      '        est.descripcion as estado,'
+      '        CASE'
+      '            when (cpb.id_tipo_cpb = 19) then '#39'RECIBO'#39
+      '            when (cpb.id_tipo_cpb = 22) then '#39'RECIBO CTA CTE'#39
+      '        END AS nombre_cpb'
+      'from comprobante cpb'
+      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
+      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
+      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
+      
+        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
+        '_comp_estado)'
+      'where ((cpb.id_tipo_cpb = 19) or (cpb.id_tipo_cpb = 22))'
+      'order by cpb.fecha desc')
+    SQL_Select.Strings = (
+      'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
+      '        pro.cuit_cuil as cuit_proveedor, cli.nombre as cliente,'
+      
+        '        cli.numero_doc as cliente_documento, cli.cuit_cuil as cl' +
+        'iente_cuil,'
+      '        est.descripcion as estado,'
+      '        CASE'
+      '            when (cpb.id_tipo_cpb = 19) then '#39'RECIBO'#39
+      '            when (cpb.id_tipo_cpb = 22) then '#39'RECIBO CTA CTE'#39
+      '        END AS nombre_cpb')
+    SQL_From.Strings = (
+      'from comprobante cpb'
+      'left join sucursal suc on (cpb.id_sucursal = suc.id_sucursal)'
+      'left join empresa pro on (cpb.id_proveedor = pro.id_empresa)'
+      'left join persona cli on (cpb.id_cliente = cli.id_persona)'
+      
+        'left join comprobante_estado est on (cpb.id_comp_estado = est.id' +
+        '_comp_estado)')
+    SQL_Where.Strings = (
+      'where ((cpb.id_tipo_cpb = 19) or (cpb.id_tipo_cpb = 22))')
+    SQL_Orden.Strings = (
+      'order by cpb.fecha desc')
+    UsarWhereOriginal = IS_Con_Where
+    Left = 29
+    Top = 272
   end
 end

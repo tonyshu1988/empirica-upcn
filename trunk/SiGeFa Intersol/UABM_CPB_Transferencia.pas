@@ -6,9 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
-  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, EKListadoSQL,
-  ComCtrls, EKDBDateTimePicker;
+  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, 
+  QRCtrls, QuickRpt, ComCtrls, ISOrdenarGrilla, ISVistaPreviaQR, cxClasses,
+  ISListadoSQL, ISBusquedaAvanzada, ISDBDateTimePicker;
 
 type
   TFABM_CPB_Transferencia = class(TForm)
@@ -38,8 +38,6 @@ type
     AConfirmar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
-    EKVistaPrevia: TEKVistaPreviaQR;
     RepTransf: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -127,7 +125,6 @@ type
     ZQ_CpbFormaPagoFECHA_FP: TDateTimeField;
     ZQ_CpbFormaPagoIMPORTE_REAL: TFloatField;
     DS_CpbFormaPago: TDataSource;
-    EKListadoCuenta: TEKListadoSQL;
     ZQ_ListadoCuenta: TZQuery;
     ZQ_ListadoCuentaID_CUENTA: TIntegerField;
     ZQ_ListadoCuentaMEDIO_DEFECTO: TIntegerField;
@@ -145,7 +142,6 @@ type
     ZQ_CuentaDESCRIPCION: TStringField;
     ZQ_CuentaBUSQUEDA: TStringField;
     DS_Cuenta: TDataSource;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZP_CpbID: TZStoredProc;
     ZP_CpbIDID: TIntegerField;
     ZQ_NumeroCpb: TZQuery;
@@ -158,7 +154,6 @@ type
     ZQ_NumeroCpbBAJA: TStringField;
     ZQ_VerCpb_Fpago: TZQuery;
     DS_VerCpb_Fpago: TDataSource;
-    EKDBDateTimePicker1: TEKDBDateTimePicker;
     StaticTxtBaja: TStaticText;
     StaticTxtConfirmado: TStaticText;
     QRLabel4: TQRLabel;
@@ -178,6 +173,11 @@ type
     QRDBText6: TQRDBText;
     QRLabel5: TQRLabel;
     ZQ_VerCpb_FpagoFECHA_ANULADO: TDateField;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISListadoCuenta: TISListadoSQL;
+    ISBuscar: TISBusquedaAvanzada;
+    ISDBDateTimePicker1: TISDBDateTimePicker;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -230,7 +230,7 @@ begin
   if ZQ_ComprobanteFECHA.IsNull then
   begin
     Application.MessageBox('El campo "Fecha" se encuentra Vacio, verifique', 'Validar', MB_OK + MB_ICONINFORMATION);
-    EKDBDateTimePicker1.SetFocus;
+    ISDBDateTimePicker1.SetFocus;
     result:= false;
     Exit;
   end;
@@ -284,11 +284,11 @@ begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   tipoComprobante:= CPB_TRANSFERENCIA;
 
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
 
-  dm.EKModelo.abrir(ZQ_Cuenta);
+  dm.ISModelo.abrir(ZQ_Cuenta);
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb_Fpago, lblCantidadRegistros);
 end;
 
@@ -296,7 +296,7 @@ end;
 procedure TFABM_CPB_Transferencia.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 
@@ -308,7 +308,7 @@ end;
 
 procedure TFABM_CPB_Transferencia.btnBuscarClick(Sender: TObject);
 begin
-  if EKbuscar.buscar then
+  if ISbuscar.buscar then
   begin
     ZQ_VerCpb_Fpago.Refresh;
     dm.mostrarCantidadRegistro(ZQ_VerCpb_Fpago, lblCantidadRegistros);
@@ -318,7 +318,7 @@ end;
 
 procedure TFABM_CPB_Transferencia.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_NumeroCpb]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_NumeroCpb]) then
   begin
     DBGridTransferencia.Enabled:= false;
     PanelEdicion.Visible:= true;
@@ -339,14 +339,14 @@ begin
     ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
     ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
     ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
-    ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_ComprobanteFECHA.AsDateTime:= dm.ISModelo.FechayHora;
 
     ZQ_CpbFormaPago.Append;
     ZQ_CpbFormaPagoID_COMPROBANTE.AsInteger:= id_comprobante;
     ZQ_CpbFormaPagoID_TIPO_FORMAPAG.AsInteger:= FP_TRANSFERENCIA;
     ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
 
-    EKDBDateTimePicker1.SetFocus;
+    ISDBDateTimePicker1.SetFocus;
 
     GrupoEditando.Enabled:= false;
     GrupoGuardarCancelar.Enabled:= true;
@@ -365,7 +365,7 @@ begin
 
   id_comprobante:= ZQ_VerCpb_FpagoID_COMPROBANTE.AsInteger;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
   begin
     DBGridTransferencia.Enabled:= false;
     PanelEdicion.Visible:= true;
@@ -381,7 +381,7 @@ begin
     ZQ_Comprobante.Edit;
     ZQ_CpbFormaPago.Edit;
 
-    EKDBDateTimePicker1.SetFocus;
+    ISDBDateTimePicker1.SetFocus;
 
     GrupoEditando.Enabled:= false;
     GrupoGuardarCancelar.Enabled:= true;
@@ -400,7 +400,7 @@ begin
   id_comprobante:= ZQ_VerCpb_FpagoID_COMPROBANTE.AsInteger;
 
   if (application.MessageBox(pchar('¿Desea anular la Transferencia seleccionada?'), 'ABM Transferencia', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
     begin
       ZQ_Comprobante.Close;
       ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
@@ -408,11 +408,11 @@ begin
 
       ZQ_Comprobante.Edit;
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
-      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
+      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.ISModelo.FechayHora;
 
       try
-        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+        if not DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.ISModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
           Application.MessageBox('No se pudo anular la Transferencia.', 'Atención', MB_OK + MB_ICONINFORMATION);
@@ -462,7 +462,7 @@ begin
   ZQ_CpbFormaPagoFECHA_FP.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //y le pongo la fecha de fp igual a la del comprobante
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       PanelEdicion.Visible:= false;
       DBGridTransferencia.Enabled:= true;
@@ -487,7 +487,7 @@ end;
 
 procedure TFABM_CPB_Transferencia.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     PanelEdicion.Visible:= false;
     DBGridTransferencia.Enabled:= true;
@@ -505,9 +505,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepTransf);
-  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption:= EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption:= ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 
@@ -588,10 +588,10 @@ end;
 procedure TFABM_CPB_Transferencia.DBLookupCBoxEgresoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if key = 112 then
-    if EKListadoCuenta.Buscar then
+    if ISListadoCuenta.Buscar then
     begin
       ZQ_CpbFormaPago.Edit;
-      ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= StrToInt(EKListadoCuenta.Resultado);
+      ZQ_CpbFormaPagoCUENTA_EGRESO.AsInteger:= StrToInt(ISListadoCuenta.Resultado);
       EditCodCtaEgreso.Text:= ZQ_CuentaCODIGO.AsString;
       DBLookupCBoxEgreso.setfocus;
     end;
@@ -601,10 +601,10 @@ end;
 procedure TFABM_CPB_Transferencia.DBLookupCBoxIngresoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
   if key = 112 then
-    if EKListadoCuenta.Buscar then
+    if ISListadoCuenta.Buscar then
     begin
       ZQ_CpbFormaPago.Edit;
-      ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= StrToInt(EKListadoCuenta.Resultado);
+      ZQ_CpbFormaPagoCUENTA_INGRESO.AsInteger:= StrToInt(ISListadoCuenta.Resultado);
       EditCodCtaIngreso.Text:= ZQ_CuentaCODIGO.AsString;
       DBLookupCBoxIngreso.setfocus;
     end;
@@ -658,7 +658,7 @@ begin
   id_comprobante:= ZQ_VerCpb_FpagoID_COMPROBANTE.AsInteger;
 
   if (application.MessageBox(pchar('¿Desea confirmar la Transferencia seleccionada?'), 'ABM Transferencia', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
     begin
       ZQ_Comprobante.Close;
       ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
@@ -668,8 +668,8 @@ begin
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
 
       try
-        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+        if not DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.ISModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
           Application.MessageBox('No se pudo confirmar la Transferencia.', 'Atención', MB_OK + MB_ICONINFORMATION);

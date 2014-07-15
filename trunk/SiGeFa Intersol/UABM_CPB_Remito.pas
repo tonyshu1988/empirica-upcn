@@ -6,11 +6,12 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
-  ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
-  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona, ExtDlgs, jpeg,
-  cxClasses;
+  ActnList, XPStyleActnCtrls, ActnMan, 
+  QRCtrls, QuickRpt, Buttons, ImgList, 
+  ComCtrls, ZStoredProcedure,
+  DBClient, Menus, UBuscarProducto, UBuscarPersona, ExtDlgs, jpeg,
+  cxClasses, ISOrdenarGrilla, ISDbSuma, ISListadoSQL, ISBusquedaAvanzada,
+  ISDBDateTimePicker, EKDBDateTimePicker;
 
 type
   TFABM_CPB_Remito = class(TForm)
@@ -97,15 +98,12 @@ type
     ZQ_VerCpb_ProductoARTICULO: TStringField;
     ZQ_VerCpb_ProductoTIPO_ARTICULO: TStringField;
     ZQ_VerCpb_ProductoCOD_PRODUCTO: TStringField;
-    EKOrd_VerCpb: TEKOrdenarGrilla;
-    EKOrd_VerCpb_Producto: TEKOrdenarGrilla;
     GroupBoxCpbActual_Info: TGroupBox;
     PanelCpbActual_ProductoDetalle: TPanel;
     DBMemoCpbActual_Info: TDBMemo;
     ZQ_VerCpbPUNTO_VENTA: TIntegerField;
     ZQ_VerCpbNUMERO_CPB: TIntegerField;
     lblTipoComprobante: TLabel;
-    EKListadoEntidad: TEKListadoSQL;
     PanelEditar_DatosGralCliente: TPanel;
     PanelEditar_DatosGralProveedor: TPanel;
     ZQ_Proveedor: TZQuery;
@@ -291,8 +289,6 @@ type
     ZQ_BuscarMail: TZQuery;
     ZQ_BuscarMailEMAIL: TStringField;
     btnConfirmar: TdxBarLargeButton;
-    EKSuma_Productos: TEKDbSuma;
-    EKOrd_EditarProducto: TEKOrdenarGrilla;
     ZQ_ComprobanteID_TIPO_IVA: TIntegerField;
     ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField;
     ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
@@ -326,7 +322,6 @@ type
     Label31: TLabel;
     DBText34: TDBText;
     StaticTxtConfirmado: TStaticText;
-    EKBuscar: TEKBusquedaAvanzada;
     GroupBox2: TGroupBox;
     DBMemoCpbActual_Producto: TDBMemo;
     Panel2: TPanel;
@@ -429,7 +424,6 @@ type
     Panel14: TPanel;
     Panel15: TPanel;
     Label63: TLabel;
-    EKDBDateTimePicker1: TEKDBDateTimePicker;
     edImagen: TDBImage;
     PanelEditar_FPago: TPanel;
     Label64: TLabel;
@@ -457,6 +451,13 @@ type
     ZQ_VerCpbIMAGEN: TBlobField;
     btnBuscarEmpresa: TSpeedButton;
     btnBuscarPersona: TSpeedButton;
+    ISOrd_VerCpb_Producto: TISOrdenarGrilla;
+    ISOrd_EditarProducto: TISOrdenarGrilla;
+    ISOrd_VerCpb: TISOrdenarGrilla;
+    ISSuma_Productos: TISDbSuma;
+    ISListadoEntidad: TISListadoSQL;
+    ISBuscar: TISBusquedaAvanzada;
+    ISDBDateEmision: TISDBDateTimePicker;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -534,7 +535,7 @@ const
 
 implementation
 
-uses UPrincipal, UDM, EKModelo, UImpresion_Comprobantes, UMailEnviar,
+uses UPrincipal, UDM, UImpresion_Comprobantes, UMailEnviar,
   UVerImagen;
 
 {$R *.dfm}
@@ -578,9 +579,9 @@ procedure TFABM_CPB_Remito.FormCreate(Sender: TObject);
 begin
   tipoComprobante:= CPB_REMITO_VENTA;
 
-  EKOrd_VerCpb.CargarConfigColumnas;
-  EKOrd_VerCpb_Producto.CargarConfigColumnas;
-  EKOrd_EditarProducto.CargarConfigColumnas;
+  ISOrd_VerCpb.CargarConfigColunmas;
+  ISOrd_VerCpb_Producto.CargarConfigColunmas;
+  ISOrd_EditarProducto.CargarConfigColunmas;
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
@@ -589,10 +590,10 @@ begin
 
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+    TISCriterioBA(ISBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
 
   //abro todos los recibos del sistema
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
 
   CD_Producto.CreateDataSet;
@@ -618,7 +619,7 @@ end;
 
 procedure TFABM_CPB_Remito.btnBuscarClick(Sender: TObject);
 begin
-  if EKbuscar.buscar then
+  if ISbuscar.buscar then
   begin
     ZQ_VerCpb.Refresh;
     dm.mostrarCantidadRegistro(ZQ_VerCpb, lblCantidadRegistros);
@@ -649,7 +650,7 @@ end;
 
 procedure TFABM_CPB_Remito.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_NumeroCpb]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_NumeroCpb]) then
   begin
     modoEdicion(true);
 
@@ -683,14 +684,14 @@ begin
     ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
     ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
     ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
-    ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_ComprobanteFECHA.AsDateTime:= dm.ISModelo.FechayHora;
     ZQ_ComprobanteFECHA_COBRADA.Clear;
     ZQ_ComprobanteFECHA_IMPRESA.Clear;
     ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
     ZQ_ComprobanteFECHA_ANULADO.Clear;
-    ZQ_ComprobanteFECHA_ENVIADA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_ComprobanteFECHA_ENVIADA.AsDateTime:= dm.ISModelo.FechayHora;
 
-    EKDBDateEmision.SetFocus;
+    ISDBDateEmision.SetFocus;
   end;
 end;
 
@@ -712,7 +713,7 @@ begin
 
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbProducto]) then
   begin
     modoEdicion(true);
 
@@ -751,7 +752,7 @@ begin
 
     ZQ_Comprobante.Edit;
 
-    EKDBDateEmision.SetFocus;
+    ISDBDateEmision.SetFocus;
   end;
 end;
 
@@ -765,7 +766,7 @@ begin
   if ZQ_ComprobanteID_PROVEEDOR.IsNull and ZQ_ComprobanteID_CLIENTE.IsNull then
   begin
     Application.MessageBox('Debe asociar una Persona o Empresa al Comprobante, por favor Verifique', 'Validar Datos', MB_OK + MB_ICONINFORMATION);
-    EKDBDateEmision.SetFocus;
+    ISDBDateEmision.SetFocus;
     exit;
   end;
 
@@ -787,13 +788,13 @@ begin
     ZQ_NumeroCpbULTIMO_NUMERO.AsInteger:= ZQ_ComprobanteNUMERO_CPB.AsInteger;
   end;
 
-  EKSuma_Productos.RecalcAll; //el importe del comprobante es igual a la suma del importe de los productos
-  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= EKSuma_Productos.SumCollection[1].SumValue;
+  ISSuma_Productos.RecalcAll; //el importe del comprobante es igual a la suma del importe de los productos
+  ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= ISSuma_Productos.SumCollection[1].SumValue;
   ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ZQ_ComprobanteIMPORTE_TOTAL.AsFloat;
   ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       modoEdicion(false);
       DBGridListaCpb.SetFocus;
@@ -815,7 +816,7 @@ end;
 procedure TFABM_CPB_Remito.btnCancelarClick(Sender: TObject);
 begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+    if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
     begin
       modoEdicion(false);
       DBGridListaCpb.SetFocus;
@@ -962,21 +963,21 @@ begin
     'where emp.baja = %s ' +
     'order by emp.nombre', [QuotedStr(' - '), QuotedStr(''), QuotedStr('N')]);
 
-  EKListadoEntidad.SQL.Text:= sql;
+  ISListadoEntidad.SQL.Text:= sql;
 
-  if EKListadoEntidad.Buscar then
+  if ISListadoEntidad.Buscar then
   begin
-    if (EKListadoEntidad.Resultado <> '') then
+    if (ISListadoEntidad.Resultado <> '') then
     begin
       CD_Producto.EmptyDataSet;
       ZQ_CpbProducto.CancelUpdates;
-      EKSuma_Productos.RecalcAll;
+      ISSuma_Productos.RecalcAll;
       btnBuscarEmpresa.Down:= true;
       ZQ_Cliente.Close;
       PanelEditar_DatosGralProveedor.BringToFront;
 
       ZQ_Proveedor.Close;
-      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= StrToInt(EKListadoEntidad.Resultado);
+      ZQ_Proveedor.ParamByName('id_empresa').AsInteger:= StrToInt(ISListadoEntidad.Resultado);
       ZQ_Proveedor.Open;
 
       if ZQ_Comprobante.State = dsBrowse then
@@ -992,7 +993,7 @@ begin
     if not ZQ_ComprobanteID_CLIENTE.IsNull then
       btnBuscarPersona.Down:= true;
 
-  EKDBDateEmision.SetFocus;
+  ISDBDateEmision.SetFocus;
 end;
 
 
@@ -1012,7 +1013,7 @@ begin
   begin
     CD_Producto.EmptyDataSet;
       ZQ_CpbProducto.CancelUpdates;
-      EKSuma_Productos.RecalcAll;
+      ISSuma_Productos.RecalcAll;
     btnBuscarPersona.Down:= true;
     ZQ_Proveedor.Close;
     PanelEditar_DatosGralCliente.BringToFront;
@@ -1030,7 +1031,7 @@ begin
     if not ZQ_ComprobanteID_PROVEEDOR.IsNull then
       btnBuscarEmpresa.Down:= true;
 
-  EKDBDateEmision.SetFocus;
+  ISDBDateEmision.SetFocus;
 
   vselPersona.Close;
 end;
@@ -1163,7 +1164,7 @@ end;
 
 procedure TFABM_CPB_Remito.DBGridEditar_ProductoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
   begin
     if key = 114 then
       agregarProducto;
@@ -1292,7 +1293,7 @@ begin
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
   if (application.MessageBox(pchar('¿Desea confirmar el Remito seleccionada?'), 'ABM Remito', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
     begin
       ZQ_Comprobante.Close;
       ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
@@ -1302,8 +1303,8 @@ begin
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
 
       try
-        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+        if not DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.ISModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
           Application.MessageBox('No se pudo confirmar el Remito.', 'Atención', MB_OK + MB_ICONINFORMATION);
@@ -1350,8 +1351,8 @@ procedure TFABM_CPB_Remito.EKSuma_ProductosSumListChanged(Sender: TObject);
 var
   cantidad, precio: string;
 begin
-  cantidad:= FormatFloat('###,###,###,##0.00', EKSuma_Productos.SumCollection[0].SumValue);
-  precio:= FormatFloat('$ ###,###,###,##0.00', EKSuma_Productos.SumCollection[1].SumValue);
+  cantidad:= FormatFloat('###,###,###,##0.00', ISSuma_Productos.SumCollection[0].SumValue);
+  precio:= FormatFloat('$ ###,###,###,##0.00', ISSuma_Productos.SumCollection[1].SumValue);
 
   editTotalProductos.Text:= cantidad;
   editTotalFinal.Text:= precio;
@@ -1360,9 +1361,9 @@ end;
 
 procedure TFABM_CPB_Remito.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrd_VerCpb.GuardarConfigColumnas;
-  EKOrd_VerCpb_Producto.GuardarConfigColumnas;
-  EKOrd_EditarProducto.GuardarConfigColumnas;
+  ISOrd_VerCpb.GuardarConfigColumnas;
+  ISOrd_VerCpb_Producto.GuardarConfigColumnas;
+  ISOrd_EditarProducto.GuardarConfigColumnas;
 end;
 
 
@@ -1413,7 +1414,7 @@ begin
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
 
   if (application.MessageBox(pchar('¿Desea anular el Remito seleccionado?'), 'ABM Remito', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante]) then
     begin
       ZQ_Comprobante.Close;
       ZQ_Comprobante.ParamByName('id_comprobante').AsInteger:= id_comprobante;
@@ -1421,11 +1422,11 @@ begin
 
       ZQ_Comprobante.Edit;
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_ANULADO;
-      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.EKModelo.FechayHora;
+      ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= dm.ISModelo.FechayHora;
 
       try
-        if not DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
-          dm.EKModelo.cancelar_transaccion(transaccion_ABM)
+        if not DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
+          dm.ISModelo.cancelar_transaccion(transaccion_ABM)
       except
         begin
           Application.MessageBox('No se pudo anular el Remito.', 'Atención', MB_OK + MB_ICONINFORMATION);
@@ -1461,7 +1462,7 @@ var
   jpg: TJpegImage;
 begin
   try
-    if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+    if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
       //si esta activa la transaccion
       if buscarImagen.Execute then //abro para buscar la imagen
       begin
@@ -1478,7 +1479,7 @@ var
   jpg: TJpegImage;
 begin
   try
-    if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+    if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
       //si esta activa la transaccion
       if buscarImagen.Execute then //abro para buscar la imagen
       begin
