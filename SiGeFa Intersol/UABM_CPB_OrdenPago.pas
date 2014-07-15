@@ -1455,7 +1455,7 @@ begin
   vselFactura.configFactura(false, true, ZQ_ComprobanteID_PROVEEDOR.AsInteger);
   vselFactura.OnSeleccionar:= onSelFactura;
   vselFactura.OnSeleccionarTodos:= onSelTodasFactura;
-  vselFactura.EKBuscarFacturaVenta.VerConsultaOriginal;
+  vselFactura.ISBuscarFacturaVenta.VerConsultaOriginal;
   vselFactura.ShowModal;
 end;
 
