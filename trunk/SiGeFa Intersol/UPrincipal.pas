@@ -281,7 +281,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UEstadisticaDisponibilidades, UArqueo_Caja, Types, UEstadisticaStock,
   UABM_CPB_Recibo, UABM_CPB_OrdenPago, UABM_CPB_Remito,
   UABM_CPB_Presupuesto, UABM_CPB_NotaPedido, UABM_Preventa,
-  UCuentaCorriente_Proveedor, UABM_CPB_FacturaCompra, UAuditoria,
+  UABM_CPB_FacturaCompra, UAuditoria,
   UConfiguracion, UABM_CPB_Transferencia, UABM_CPB_Devolucion, UDebugging,
   UEstadisticaVentas, UReimpresionComprobantes, UABM_PersonasPuntos,
   UConsulta_Precios, DateUtils, UCompararStock, UOP_ABMMedico,
@@ -887,7 +887,6 @@ end;
 
 procedure TFPrincipal.ACtaCte_ProveedorExecute(Sender: TObject);
 begin
-//  ISVentanas1.Abrir(Sender, TFCuentaCorriente_Proveedor, FCuentaCorriente_Proveedor);
   ISVentanas1.Abrir(Sender, TFCuentaCorrienteProveedor, FCuentaCorrienteProveedor);
 end;
 
