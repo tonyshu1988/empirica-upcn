@@ -8,9 +8,11 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
-  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, ComCtrls,
-  EKDBDateTimePicker, EKListadoSQL, EKDbSuma, Buttons, cxClasses;
+  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan,
+  QRCtrls, QuickRpt, ComCtrls,
+  Buttons, cxClasses, ISDbSuma,
+  ISOrdenarGrilla, ISVistaPreviaQR, ISListadoSQL, ISBusquedaAvanzada,
+  ISDBDateTimePicker;
 
 type
   TFMovimientosInternos = class(TForm)
@@ -33,7 +35,6 @@ type
     AAnular: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKVistaPrevia: TEKVistaPreviaQR;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
     QRLabel17: TQRLabel;
@@ -73,7 +74,6 @@ type
     Label5: TLabel;
     PanelDia_Cuentas: TPanel;
     DBGridFPago_Egreso: TDBGrid;
-    EKDBDateTimePicker1: TEKDBDateTimePicker;
     DBEdit1: TDBEdit;
     RadioButtonEgreso: TRadioButton;
     RadioButtonIngreso: TRadioButton;
@@ -145,8 +145,6 @@ type
     ZQ_ListadoMedioID_TIPO_FORMAPAGO: TIntegerField;
     ZQ_ListadoMedioDESCRIPCION: TStringField;
     ZQ_ListadoMedioBAJA: TStringField;
-    EKListadoMedio: TEKListadoSQL;
-    EKListadoCuenta: TEKListadoSQL;
     ZQ_ListadoCuenta: TZQuery;
     ZQ_ListadoCuentaID_CUENTA: TIntegerField;
     ZQ_ListadoCuentaMEDIO_DEFECTO: TIntegerField;
@@ -186,7 +184,6 @@ type
     ZQ_CpbFormaPago_CuentaEgreso_Nombre: TStringField;
     ZQ_CpbFormaPago_CuentaEgreso_Codigo: TStringField;
     ZQ_CpbFormaPago_TipoFormaPago: TStringField;
-    EKSuma_FPago: TEKDbSuma;
     Panel1: TPanel;
     Label6: TLabel;
     lblTotalFormaPago: TLabel;
@@ -208,16 +205,11 @@ type
     ZQ_ComprobanteIMPORTE_VENTA: TFloatField;
     ZQ_ComprobanteIMAGEN: TBlobField;
     DBGridFPago_Ingreso: TDBGrid;
-    EKOrdenarGrilla_Dia: TEKOrdenarGrilla;
-    EKOrdenarGrillaFPago_Egreso: TEKOrdenarGrilla;
-    EKOrdenarGrillaFPago_Ingreso: TEKOrdenarGrilla;
     ZQ_MovHoyINGRESOS: TFloatField;
     ZQ_MovHoyEGRESOS: TFloatField;
-    EKSuma_Mov: TEKDbSuma;
     Panel3: TPanel;
     lblMov_TotalEgresos: TLabel;
     lblMov_TotalIngresos: TLabel;
-    EKBuscar: TEKBusquedaAvanzada;
     btnExcel: TdxBarLargeButton;
     ZQ_MovHoyNOMBRE: TStringField;
     btn_ImprimirComprobante: TdxBarLargeButton;
@@ -240,7 +232,6 @@ type
     QRLabel8: TQRLabel;
     QRLabel9: TQRLabel;
     QRLabel10: TQRLabel;
-    EKVistaPreviaRepCpb: TEKVistaPreviaQR;
     ChildBand1: TQRChildBand;
     QRDBText5: TQRDBText;
     QRDBText6: TQRDBText;
@@ -251,6 +242,16 @@ type
     ChildBand2: TQRChildBand;
     QRLabel14: TQRLabel;
     QRExpr1: TQRExpr;
+    ISOrdenarGrilla_Dia: TISOrdenarGrilla;
+    ISOrdenarGrillaFPago_Egreso: TISOrdenarGrilla;
+    ISOrdenarGrillaFPago_Ingreso: TISOrdenarGrilla;
+    ISSuma_Mov: TISDbSuma;
+    ISSuma_FPago: TISDbSuma;
+    ISVistaPreviaRepCpb: TISVistaPreviaQR;
+    ISListadoCuenta: TISListadoSQL;
+    ISListadoMedio: TISListadoSQL;
+    ISBuscar: TISBusquedaAvanzada;
+    ISDBDateTimePicker1: TISDBDateTimePicker;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -306,8 +307,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal, UUtilidades, DateUtils, UEstadisticaMovInternos,
-  EKModelo;
+uses UDM, UPrincipal, UUtilidades, DateUtils, UEstadisticaMovInternos;
 
 {$R *.dfm}
 
@@ -328,9 +328,9 @@ end;
 
 procedure TFMovimientosInternos.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
-  EKOrdenarGrilla_Dia.GuardarConfigColumnas;
-  EKOrdenarGrillaFPago_Egreso.GuardarConfigColumnas;
-  EKOrdenarGrillaFPago_Ingreso.GuardarConfigColumnas;
+  ISOrdenarGrilla_Dia.GuardarConfigColumnas;
+  ISOrdenarGrillaFPago_Egreso.GuardarConfigColumnas;
+  ISOrdenarGrillaFPago_Ingreso.GuardarConfigColumnas;
 
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
 end;
@@ -352,7 +352,7 @@ end;
 
 procedure TFMovimientosInternos.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_NumeroCpb]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_NumeroCpb]) then
   begin
     lblTotalFormaPago.Caption:= '$ 0.00';
     tipoComprobante:= CPB_OTROS_INGRESOS;
@@ -374,7 +374,7 @@ begin
     ZQ_ComprobanteID_COMPROBANTE.AsInteger:= id_comprobante;
     ZQ_ComprobanteID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
     ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
-    ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_ComprobanteFECHA.AsDateTime:= dm.ISModelo.FechayHora;
     ZQ_ComprobanteFECHA_COBRADA.Clear;
     ZQ_ComprobanteFECHA_ENVIADA.Clear;
     ZQ_ComprobanteFECHA_IMPRESA.Clear;
@@ -390,7 +390,7 @@ begin
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
     RadioButtonIngreso.Checked:= true;
-    EKDBDateTimePicker1.SetFocus;
+    ISDBDateTimePicker1.SetFocus;
   end;
 end;
 
@@ -400,7 +400,7 @@ begin
   if ZQ_MovHoy.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago]) then
   begin
     PanelDia_Movimiento.Enabled:= true;
     PanelDia_Lista.Enabled:= false;
@@ -410,7 +410,7 @@ begin
 
     id_comprobante:= ZQ_MovHoyID_COMPROBANTE.AsInteger;
 
-    EKDBDateTimePicker1.SetFocus;
+    ISDBDateTimePicker1.SetFocus;
 
     ZQ_Comprobante.Edit;
   end;
@@ -429,7 +429,7 @@ begin
                                     ' - $ '+ZQ_ComprobanteIMPORTE_TOTAL.AsString+
                                     ')'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_CpbFormaPago, ZQ_Comprobante]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_CpbFormaPago, ZQ_Comprobante]) then
     begin
       ZQ_Comprobante.Edit;
       ZQ_ComprobanteFECHA_ANULADO.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime;
@@ -438,8 +438,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
   end;
 
   ZQ_MovHoy.Refresh;
@@ -530,15 +530,15 @@ begin
     ZQ_NumeroCpbULTIMO_NUMERO.AsInteger:= ZQ_ComprobanteNUMERO_CPB.AsInteger;
   end;
 
-  EKSuma_FPago.RecalcAll;
-  EKSuma_FPago.RecalcAll;
-  ZQ_ComprobanteBASE_IMPONIBLE.AsFloat:= EKSuma_FPago.SumCollection[0].SumValue;
+  ISSuma_FPago.RecalcAll;
+  ISSuma_FPago.RecalcAll;
+  ZQ_ComprobanteBASE_IMPONIBLE.AsFloat:= ISSuma_FPago.SumCollection[0].SumValue;
   ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= ZQ_ComprobanteBASE_IMPONIBLE.AsFloat;
   ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= ZQ_ComprobanteBASE_IMPONIBLE.AsFloat;
 
   fechaActual:= ZQ_ComprobanteFECHA.AsDateTime;
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       PanelDia_Movimiento.Enabled:= false;
       PanelDia_Lista.Enabled:= true;
@@ -567,7 +567,7 @@ begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - Movimientos Internos', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
     exit;
 
- if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+ if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     PanelDia_Movimiento.Enabled:= false;
     PanelDia_Lista.Enabled:= true;
@@ -582,22 +582,22 @@ end;
 
 procedure TFMovimientosInternos.btnBuscarClick(Sender: TObject);
 begin
-  if  EKBuscar.BuscarSinEjecutar then
-    if (EKBuscar.ParametrosSeleccionados1[1] = '') then
+  if  ISBuscar.BuscarSinEjecutar then
+    if (ISBuscar.ParametrosSeleccionados1[1] = '') then
     begin
       Application.MessageBox('No se ha cargado la fecha', 'Verifique', MB_OK + MB_ICONINFORMATION);
       btnBuscar.Click;
     end
     else
     begin
-      fechaActual:= StrToDate(EKBuscar.ParametrosSeleccionados1[1]);
+      fechaActual:= StrToDate(ISBuscar.ParametrosSeleccionados1[1]);
       tituloFecha(fechaActual);
       ZQ_MovHoy.Close;
       ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
-      if EKBuscar.ParametrosSeleccionados1[0] = '0' then
+      if ISBuscar.ParametrosSeleccionados1[0] = '0' then
         ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= -1
       else
-        ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= StrToInt(EKBuscar.ParametrosSeleccionados1[0]);
+        ZQ_MovHoy.ParamByName('id_sucursal').AsInteger:= StrToInt(ISBuscar.ParametrosSeleccionados1[0]);
       id_sucursalBusqueda:= ZQ_MovHoy.ParamByName('id_sucursal').AsInteger;
       ZQ_MovHoy.Open;
       ZQ_MovHoy.Refresh;
@@ -609,34 +609,34 @@ procedure TFMovimientosInternos.FormCreate(Sender: TObject);
 var
   indice_suc: integer;
 begin
-  EKOrdenarGrilla_Dia.CargarConfigColumnas;
-  EKOrdenarGrillaFPago_Egreso.CargarConfigColumnas;
-  EKOrdenarGrillaFPago_Ingreso.CargarConfigColumnas;
+  ISOrdenarGrilla_Dia.CargarConfigColunmas;
+  ISOrdenarGrillaFPago_Egreso.CargarConfigColunmas;
+  ISOrdenarGrillaFPago_Ingreso.CargarConfigColunmas;
 
 
-  TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[0]).TipoComboSQL:= dm.ZQ_SucursalesVisibles;
+  TISCriterioBA(ISBuscar.CriteriosBusqueda.Items[0]).TipoCombollenarSQL:= dm.ZQ_SucursalesVisibles;
 
   if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
     indice_suc:= dm.ZQ_SucursalesVisibles.RecNo - 1
   else
     indice_suc:= 0;
 
-  TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[0]).ItemIndex:= indice_suc;
-  TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.EKModelo.FechayHora);
+  TISCriterioBA(ISBuscar.CriteriosBusqueda.Items[0]).ItemIndex:= indice_suc;
+  TISCriterioBA(ISBuscar.CriteriosBusqueda.Items[1]).Valor := DateToStr(dm.ISModelo.FechayHora);
 
   configFormaPago(CPB_OTROS_INGRESOS);
   RadioButtonIngreso.Checked:= true;
   RadioButtonEgreso.Checked:= false;
 
-  fechaActual:= dm.EKModelo.Fecha;
+  fechaActual:= dm.ISModelo.Fecha;
 
   PanelDia_Movimiento.Enabled:= false;
   PanelDia_Lista.Enabled:= true;
 
-  dm.EKModelo.abrir(ZQ_TipoMovimiento);
-  EKDBDateTimePicker1.DateTime:= dm.EKModelo.FechayHora;
+  dm.ISModelo.abrir(ZQ_TipoMovimiento);
+  ISDBDateTimePicker1.DateTime:= dm.ISModelo.FechayHora;
 
-  fechaActual:= dm.EKModelo.FechayHora;
+  fechaActual:= dm.ISModelo.FechayHora;
   tituloFecha(fechaActual);
   ZQ_MovHoy.Close;
   ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
@@ -704,8 +704,8 @@ begin
   ZQ_CpbFormaPago.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
   ZQ_CpbFormaPago.Open;
 
-  EKSuma_FPago.RecalcAll;
-  lblTotalFormaPago.Caption:= FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
+  ISSuma_FPago.RecalcAll;
+  lblTotalFormaPago.Caption:= FormatFloat('$ ###,###,###,##0.00', ISSuma_FPago.SumCollection[0].SumValue);
 
   case ZQ_ComprobanteID_TIPO_CPB.AsInteger of
     CPB_OTROS_INGRESOS: begin //Usa la cuenta de ingreso
@@ -722,7 +722,7 @@ end;
 
 procedure TFMovimientosInternos.configFormaPago(tipo: integer);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
     ZQ_ComprobanteID_TIPO_CPB.AsInteger:= tipo;
 
   case tipo of
@@ -760,7 +760,7 @@ end;
 
 procedure TFMovimientosInternos.DBGridFPago_EgresoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
   begin
     if key = 112 then
     begin
@@ -768,12 +768,12 @@ begin
       if (((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Codigo') or
           ((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Nombre')) then
       begin
-        EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(2, true);
-        if EKListadoCuenta.Buscar then
+        ISListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(2, true);
+        if ISListadoCuenta.Buscar then
         begin
-          if EKListadoCuenta.Resultado <> '' then
+          if ISListadoCuenta.Resultado <> '' then
           begin
-            id_cuenta_fpago:= StrToInt(EKListadoCuenta.Resultado);
+            id_cuenta_fpago:= StrToInt(ISListadoCuenta.Resultado);
             ZQ_ListadoCuenta.Close;
             ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= id_cuenta_fpago;
             ZQ_ListadoCuenta.Open;
@@ -794,12 +794,12 @@ begin
       if (((sender as tdbgrid).SelectedField.FullName = '_CuentaEgreso_Codigo') or
           ((sender as tdbgrid).SelectedField.FullName = '_CuentaEgreso_Nombre')) then
       begin
-        EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(2, true);
-        if EKListadoCuenta.Buscar then
+        ISListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(2, true);
+        if ISListadoCuenta.Buscar then
         begin
-          if EKListadoCuenta.Resultado <> '' then
+          if ISListadoCuenta.Resultado <> '' then
           begin
-            id_cuenta_fpago:= StrToInt(EKListadoCuenta.Resultado);
+            id_cuenta_fpago:= StrToInt(ISListadoCuenta.Resultado);
             ZQ_ListadoCuenta.Close;
             ZQ_ListadoCuenta.ParamByName('id_cuenta').AsInteger:= id_cuenta_fpago;
             ZQ_ListadoCuenta.Open;
@@ -823,8 +823,8 @@ begin
         if ZQ_CpbFormaPagoCUENTA_EGRESO.IsNull and ZQ_CpbFormaPagoCUENTA_INGRESO.IsNull then
           exit;
 
-        EKListadoMedio.SQL.Clear;
-        EKListadoMedio.SQL.Add(Format('select tipo.* '+
+        ISListadoMedio.SQL.Clear;
+        ISListadoMedio.SQL.Add(Format('select tipo.* '+
                                       'from tipo_formapago tipo '+
                                       'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago = ctfp.id_tipo_formapago) '+
                                       'where tipo.baja = %s ' +
@@ -832,12 +832,12 @@ begin
                                       'order by tipo.descripcion',
                                       [QuotedStr('N'), id_cuenta_fpago]));
 
-        if EKListadoMedio.Buscar then
+        if ISListadoMedio.Buscar then
         begin
-          if EKListadoMedio.Resultado <> '' then
+          if ISListadoMedio.Resultado <> '' then
           begin
             ZQ_ListadoMedio.Close;
-            ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= StrToInt(EKListadoMedio.Resultado);
+            ZQ_ListadoMedio.ParamByName('id_tipo').AsInteger:= StrToInt(ISListadoMedio.Resultado);
             ZQ_ListadoMedio.Open;
 
             if ZQ_CpbFormaPagoID_COMPROBANTE.IsNull then
@@ -857,8 +857,8 @@ end;
 
 procedure TFMovimientosInternos.EKSuma_FPagoSumListChanged(Sender: TObject);
 begin
-  if EKSuma_FPago.SumCollection[0].SumValue <> 0 then
-    lblTotalFormaPago.Caption:= FormatFloat('$ ###,###,###,##0.00', EKSuma_FPago.SumCollection[0].SumValue);
+  if ISSuma_FPago.SumCollection[0].SumValue <> 0 then
+    lblTotalFormaPago.Caption:= FormatFloat('$ ###,###,###,##0.00', ISSuma_FPago.SumCollection[0].SumValue);
 end;
 
 
@@ -903,7 +903,7 @@ end;
 
 procedure TFMovimientosInternos.ZQ_ComprobanteID_TIPO_CPBChange(Sender: TField);
 begin
-  if ZQ_CpbFormaPago.IsEmpty or (not dm.EKModelo.verificar_transaccion(transaccion_ABM))then
+  if ZQ_CpbFormaPago.IsEmpty or (not dm.ISModelo.verificar_transaccion(transaccion_ABM))then
     exit;
 
   ZQ_CpbFormaPago.First;
@@ -943,10 +943,10 @@ end;
 //--------------------------------------------
 procedure TFMovimientosInternos.SpeedBtn_HoyClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
     exit;
 
-  fechaActual:= dm.EKModelo.Fecha;
+  fechaActual:= dm.ISModelo.Fecha;
   tituloFecha(fechaActual);
   ZQ_MovHoy.Close;
   ZQ_MovHoy.ParamByName('fecha').AsDateTime:= fechaActual;
@@ -958,7 +958,7 @@ end;
 
 procedure TFMovimientosInternos.SpeedBtn_MesAnteriorClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
     exit;
 
   fechaActual:= IncMonth(fechaActual, -1);
@@ -973,7 +973,7 @@ end;
 
 procedure TFMovimientosInternos.SpeedBtn_MesSiguienteClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
     exit;
 
   fechaActual:= IncMonth(fechaActual, 1);
@@ -988,7 +988,7 @@ end;
 
 procedure TFMovimientosInternos.SpeedBtn_DiaAnteriorClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
     exit;
 
   fechaActual:= IncDay(fechaActual, -1);
@@ -1003,7 +1003,7 @@ end;
 
 procedure TFMovimientosInternos.SpeedBtn_DiaSiguienteClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
     exit;
 
   fechaActual:= IncDay(fechaActual, 1);
@@ -1018,8 +1018,8 @@ end;
                               
 procedure TFMovimientosInternos.EKSuma_MovSumListChanged(Sender: TObject);
 begin
-  lblMov_TotalIngresos.Caption:= 'Total Ingresos: '+FormatFloat('$ ###,###,###,##0.00', EKSuma_Mov.SumCollection[0].SumValue);
-  lblMov_TotalEgresos.Caption:= 'Total Egresos: '+FormatFloat('$ ###,###,###,##0.00', EKSuma_Mov.SumCollection[1].SumValue);
+  lblMov_TotalIngresos.Caption:= 'Total Ingresos: '+FormatFloat('$ ###,###,###,##0.00', ISSuma_Mov.SumCollection[0].SumValue);
+  lblMov_TotalEgresos.Caption:= 'Total Egresos: '+FormatFloat('$ ###,###,###,##0.00', ISSuma_Mov.SumCollection[1].SumValue);
 end;
 
 procedure TFMovimientosInternos.btnExcelClick(Sender: TObject);
@@ -1043,7 +1043,7 @@ begin
   end;
 
 DM.VariablesReportes(RepComprobante);
-EKVistaPreviaRepCpb.VistaPrevia;
+ISVistaPreviaRepCpb.VistaPrevia;
 end;
 
 end.
