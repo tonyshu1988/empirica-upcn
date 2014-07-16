@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt;
+  ActnList, XPStyleActnCtrls, ActnMan, 
+  QRCtrls, QuickRpt, cxClasses, ISVistaPreviaQR,
+  ISOrdenarGrilla, ISBusquedaAvanzada;
 
 type
   TFABM_TipoComprobante = class(TForm)
@@ -35,7 +36,6 @@ type
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -45,7 +45,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
     RepTipoCpb: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -67,7 +66,6 @@ type
     ColumnHeaderBand2: TQRBand;
     QRLabel29: TQRLabel;
     QRLabel1: TQRLabel;
-    EKVistaPrevia: TEKVistaPreviaQR;
     ZQ_TipoComprobanteID_TIPO_CPB: TIntegerField;
     ZQ_TipoComprobanteNOMBRE_TIPO_CPB: TStringField;
     ZQ_TipoComprobanteSIGNO_COBRO_PAGO: TIntegerField;
@@ -92,6 +90,9 @@ type
     QRDBText4: TQRDBText;
     QRDBText5: TQRDBText;
     btnExcel: TdxBarLargeButton;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISBuscar: TISBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -134,7 +135,7 @@ uses UPrincipal, UDM;
 procedure TFABM_TipoComprobante.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
 end;
 
@@ -147,14 +148,14 @@ end;
 
 procedure TFABM_TipoComprobante.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_TipoComprobante, lblCantidadRegistros);  
 end;
 
 
 procedure TFABM_TipoComprobante.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
   begin
     DBGridTipo.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -173,7 +174,7 @@ begin
   if ZQ_TipoComprobante.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
   begin
     DBGridTipo.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -195,7 +196,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el "Tipo Comprobante" seleccionado?'), 'ABM Tipo Comprobante', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
     begin
       ZQ_TipoComprobante.Edit;
       ZQ_TipoComprobanteBAJA.AsString:='S';
@@ -203,8 +204,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_TipoComprobante.RecNo;
     ZQ_TipoComprobante.Refresh;
@@ -222,7 +223,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar el "Tipo Comprobante" seleccionado?'), 'ABM Tipo Comprobante', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoComprobante]) then
     begin
       ZQ_TipoComprobante.Edit;
       ZQ_TipoComprobanteBAJA.AsString:='N';
@@ -230,8 +231,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_TipoComprobante.RecNo;
     ZQ_TipoComprobante.Refresh;
@@ -254,7 +255,7 @@ begin
   end;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       DBGridTipo.Enabled:= true;
       DBGridTipo.SetFocus;
@@ -278,7 +279,7 @@ end;
 
 procedure TFABM_TipoComprobante.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     DBGridTipo.Enabled:=true;
     DBGridTipo.SetFocus;
@@ -292,11 +293,11 @@ end;
 procedure TFABM_TipoComprobante.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
 
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_TipoComprobante, lblCantidadRegistros);
 end;
 
@@ -367,9 +368,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepTipoCpb);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 procedure TFABM_TipoComprobante.btnExcelClick(Sender: TObject);
