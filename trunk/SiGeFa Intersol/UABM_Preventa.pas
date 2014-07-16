@@ -5,10 +5,11 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Mask, DBCtrls, StdCtrls, Grids, DBGrids,
-  ExtCtrls, Menus, ActnList, XPStyleActnCtrls, ActnMan, jpeg, EKEdit, DB,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset, EKListadoSQL,
-  ZStoredProcedure, DBClient, EKDbSuma,
-  UBuscarProductoStock, UBuscarPersona, Buttons, ComCtrls, cxClasses;
+  ExtCtrls, Menus, ActnList, XPStyleActnCtrls, ActnMan, jpeg, DB,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset,
+  ZStoredProcedure, DBClient,
+  UBuscarProductoStock, UBuscarPersona, Buttons, ComCtrls, cxClasses,
+  ISDbSuma, ISListadoSQL;
 
 type
   TFABM_Preventa = class(TForm)
@@ -122,8 +123,6 @@ type
     ZSP_Comprobante: TZStoredProc;
     ZSP_ComprobanteID: TIntegerField;
     ZSP_ComprobanteCODIGO: TStringField;
-    EKListadoIVA: TEKListadoSQL;
-    EKDbSuma1: TEKDbSuma;
     ZQ_DetalleProd: TZQuery;
     StringField1: TStringField;
     StringField2: TStringField;
@@ -351,8 +350,6 @@ type
     ZQ_FormasPagoGENERA_VUELTO: TStringField;
     ZQ_FormasPagoCOLUMNA_PRECIO: TIntegerField;
     ZQ_FormasPagoMODIFICABLE: TStringField;
-    EKListadoCuenta: TEKListadoSQL;
-    EKListadoMedio: TEKListadoSQL;
     ZQ_Cuentas: TZQuery;
     ZQ_CuentasID_CUENTA: TIntegerField;
     ZQ_CuentasMEDIO_DEFECTO: TIntegerField;
@@ -390,7 +387,11 @@ type
     ZQ_ProductosBAJA: TStringField;
     ZQ_ProductosSECCION: TStringField;
     DBEdit16: TDBEdit;
-    EKListadoProducto: TEKListadoSQL;
+    ISListadoProducto: TISListadoSQL;
+    ISListadoIVA: TISListadoSQL;
+    ISListadoMedio: TISListadoSQL;
+    ISListadoCuenta: TISListadoSQL;
+    ISDbSuma1: TISDbSuma;
     procedure btBuscProdClick(Sender: TObject);
     procedure VerLectorCB(sino: Boolean);
     procedure IdentificarCodigo();
@@ -428,7 +429,6 @@ type
     procedure edImporteFinalKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure BtCancelarPagoClick(Sender: TObject);
     procedure BtAceptarPagoClick(Sender: TObject);
-    procedure EKDbSuma1SumListChanged(Sender: TObject);
     function guardarComprobante(): Boolean;
     procedure btnCancelarVentaClick(Sender: TObject);
     procedure Prorrateo();
@@ -455,6 +455,7 @@ type
     procedure AGuardarExecute(Sender: TObject);
     procedure ACancelarExecute(Sender: TObject);
     procedure ACargarSeniaExecute(Sender: TObject);
+    procedure ISDbSuma1SumListChanged(Sender: TObject);
   Private
     { Private declarations }
     vsel: TFBuscarProductoStock;
@@ -479,7 +480,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal, strutils, EKModelo, Math, UUtilidades, DateUtils;
+uses UDM, UPrincipal, strutils, Math, UUtilidades, DateUtils;
 
 {$R *.dfm}
 
@@ -500,10 +501,10 @@ begin
     exit;
   end;
 
-  if EKListadoProducto.Buscar then
-    if (EKListadoProducto.Resultado <> '') then
+  if ISListadoProducto.Buscar then
+    if (ISListadoProducto.Resultado <> '') then
     begin
-      codBarras.Text:= 'I' + EKListadoProducto.Resultado;
+      codBarras.Text:= 'I' + ISListadoProducto.Resultado;
       LeerCodigo('I', codBarras.Text);
       //IdentificarCodigo;
     end
@@ -521,7 +522,7 @@ end;
 
 procedure TFABM_Preventa.IdentificarCodigo();
 var
-  cod, num: string;
+  cod: string;
 begin
   cod:= codBarras.Text;
   try
@@ -697,7 +698,7 @@ begin
   idSucursal:= dm.ZQ_ConfiguracionDB_SUCURSAL.AsInteger;
   CD_Comprobante.CreateDataSet;
   CD_DetalleFactura.CreateDataSet;
-  dm.EKModelo.abrir(ZQ_DetalleProd);
+  dm.ismodelo.abrir(ZQ_DetalleProd);
   Cliente:= -1;
   IdVendedor:= -1;
   descCliente:= 0;
@@ -719,8 +720,8 @@ begin
   FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarVenta.Glyph);
   PABM_FormaPago.Visible:= False;
 
-  dm.EKModelo.abrir(ZQ_Cuentas);
-  dm.EKModelo.abrir(ZQ_FormasPago);
+  dm.ismodelo.abrir(ZQ_Cuentas);
+  dm.ismodelo.abrir(ZQ_FormasPago);
 end;
 
 
@@ -734,8 +735,8 @@ begin
   RelojStock.Enabled:= false;
   lblMaxVenta.Visible:= False;
   //lblSinStock.Visible:=False;
-  EKDbSuma1.SumCollection[0].SumValue:= 0;
-  EKDbSuma1.SumCollection[1].SumValue:= 0;
+  ISDbSuma1.SumCollection[0].SumValue:= 0;
+  ISDbSuma1.SumCollection[1].SumValue:= 0;
 
   Cliente:= -1;
 //  IdVendedor:= -1;
@@ -750,7 +751,7 @@ begin
   CD_ComprobanteID_TIPO_CPB.AsInteger:= 10; //PREVENTA
   CD_ComprobanteID_VENDEDOR.AsInteger:= IdVendedor;
   CD_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
-  CD_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora();
+  CD_ComprobanteFECHA.AsDateTime:= dm.ismodelo.FechayHora();
   CD_ComprobanteOBSERVACION.AsString:= '';
   CD_ComprobanteBASE_IMPONIBLE.AsFloat:= 0;
   CD_ComprobanteSALDO.AsFloat:= 0;
@@ -767,7 +768,7 @@ begin
   CD_ComprobanteFECHA_COBRADA.Clear;
   CD_ComprobanteFECHA_ENVIADA.Clear;
   CD_ComprobanteFECHA_IMPRESA.Clear;
-  CD_ComprobanteFECHA_VENCIMIENTO.AsDateTime:= dm.EKModelo.Fecha();
+  CD_ComprobanteFECHA_VENCIMIENTO.AsDateTime:= dm.ismodelo.Fecha();
 
   lblCantProductos.Caption:= 'Cantidad Productos: ' + inttostr(CD_DetalleFactura.RecordCount);
 end;
@@ -1158,8 +1159,8 @@ procedure TFABM_Preventa.btIVAClick(Sender: TObject);
 begin
   if (CD_DetalleFactura.State = dsBrowse) then
     if (CD_Comprobante.State = dsInsert) then
-      if EKListadoIVA.Buscar then
-        CD_ComprobanteID_TIPO_IVA.AsInteger:= StrToInt(EKListadoIVA.Resultado);
+      if ISListadoIVA.Buscar then
+        CD_ComprobanteID_TIPO_IVA.AsInteger:= StrToInt(ISListadoIVA.Resultado);
 end;
 
 
@@ -1201,8 +1202,8 @@ procedure TFABM_Preventa.BtAceptarPagoClick(Sender: TObject);
 begin
   if validarBoleta() then
   begin
-    if not (dm.EKModelo.verificar_transaccion(abmComprobante)) then //si no hay ninguna transaccion abierta
-      if dm.EKModelo.iniciar_transaccion(abmComprobante, [ZQ_Comprobante, ZQ_ComprobanteDetalle, ZQ_Comprobante_FormaPago]) then
+    if not (dm.ismodelo.verificar_transaccion(abmComprobante)) then //si no hay ninguna transaccion abierta
+      if dm.ismodelo.iniciar_transaccion(abmComprobante, [ZQ_Comprobante, ZQ_ComprobanteDetalle, ZQ_Comprobante_FormaPago]) then
       begin //una vez iniciada la transaccion
         ZQ_Comprobante_FormaPago.Close;
 
@@ -1217,28 +1218,6 @@ begin
           edPorcDctoTotal.SetFocus;
       end;
   end;
-end;
-
-
-procedure TFABM_Preventa.EKDbSuma1SumListChanged(Sender: TObject);
-begin
-  acumulado:= EKDbSuma1.SumCollection[0].SumValue;
-  acumuladoIVA:= EKDbSuma1.SumCollection[1].SumValue;
-  lblTotAPagar.Caption:= 'Total Venta: ' + FormatFloat('$ ##,###,##0.00 ', acumulado);
-
-  if (CD_Comprobante.state = dsInsert) then
-    CD_ComprobanteBASE_IMPONIBLE.AsFloat:= acumulado;
-
-  if acumulado > MONTO_MAX_VENTA then
-  begin
-    lblTotAPagar.Color:= clRed;
-    lblMaxVenta.Visible:= true;
-  end
-  else
-  begin
-    lblTotAPagar.Color:= $00C10000;
-    lblMaxVenta.Visible:= false;
-  end
 end;
 
 
@@ -1292,9 +1271,9 @@ begin
 
   try
     begin
-      if not (dm.EKModelo.finalizar_transaccion(abmComprobante)) then
+      if not (dm.ismodelo.finalizar_transaccion(abmComprobante)) then
       begin
-        dm.EKModelo.cancelar_transaccion(abmComprobante);
+        dm.ismodelo.cancelar_transaccion(abmComprobante);
         Application.MessageBox('No se pudo crear el Comprobante', 'Atención',MB_ICONINFORMATION);
       end
       else
@@ -1326,8 +1305,8 @@ end;
 
 procedure TFABM_Preventa.btnCancelarVentaClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(abmComprobante) then
-    if dm.EKModelo.cancelar_transaccion(abmComprobante) then
+  if dm.ismodelo.verificar_transaccion(abmComprobante) then
+    if dm.ismodelo.cancelar_transaccion(abmComprobante) then
     begin
       CD_Comprobante.Edit;
       PConfirmarVenta.Visible:= False;
@@ -1488,7 +1467,7 @@ end;
 
 procedure TFABM_Preventa.cancelarProducto;
 begin
-  dm.EKModelo.abrir(ZQ_DetalleProd);
+  dm.ismodelo.abrir(ZQ_DetalleProd);
   Cliente:= -1;
   descCliente:= 0;
   ClienteIVA:= 0;
@@ -1530,12 +1509,12 @@ var
 begin
   if key = 118 then
   begin
-    EKListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(2, true); //mayor a nota credito
-    if EKListadoCuenta.Buscar then
+    ISListadoCuenta.SQL.Text:=dm.sql_cuentas_fpago_suc(2, true); //mayor a nota credito
+    if ISListadoCuenta.Buscar then
     begin
-      if EKListadoCuenta.Resultado <> '' then
+      if ISListadoCuenta.Resultado <> '' then
       begin
-        id_cuenta_fpago:= StrToInt(EKListadoCuenta.Resultado);
+        id_cuenta_fpago:= StrToInt(ISListadoCuenta.Resultado);
         ZQ_Cuentas.Locate('ID_CUENTA', id_cuenta_fpago, []);
         ZQ_Comprobante_FormaPagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
         ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger:= ZQ_CuentasMEDIO_DEFECTO.AsInteger;
@@ -1552,8 +1531,8 @@ begin
   if key = 118 then
   begin
     id_cuenta_fpago:= ZQ_Comprobante_FormaPagoCUENTA_INGRESO.AsInteger;
-    EKListadoMedio.SQL.Clear;
-    EKListadoMedio.SQL.Add(Format('select tipo.* ' +
+    ISListadoMedio.SQL.Clear;
+    ISListadoMedio.SQL.Add(Format('select tipo.* ' +
       'from tipo_formapago tipo ' +
       'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago = ctfp.id_tipo_formapago) ' +
       'where tipo.baja = %s ' +
@@ -1561,11 +1540,11 @@ begin
       'order by tipo.descripcion',
       [QuotedStr('N'), id_cuenta_fpago]));
 
-    if EKListadoMedio.Buscar then
+    if ISListadoMedio.Buscar then
     begin
-      if EKListadoMedio.Resultado <> '' then
+      if ISListadoMedio.Resultado <> '' then
       begin
-        ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger:= StrToInt(EKListadoMedio.Resultado);
+        ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG.AsInteger:= StrToInt(ISListadoMedio.Resultado);
       end;
     end;
   end;
@@ -1685,6 +1664,27 @@ begin
     btnCargarSenia.Click;
 end;
 
+
+procedure TFABM_Preventa.ISDbSuma1SumListChanged(Sender: TObject);
+begin
+  acumulado:= ISDbSuma1.SumCollection[0].SumValue;
+  acumuladoIVA:= ISDbSuma1.SumCollection[1].SumValue;
+  lblTotAPagar.Caption:= 'Total Venta: ' + FormatFloat('$ ##,###,##0.00 ', acumulado);
+
+  if (CD_Comprobante.state = dsInsert) then
+    CD_ComprobanteBASE_IMPONIBLE.AsFloat:= acumulado;
+
+  if acumulado > MONTO_MAX_VENTA then
+  begin
+    lblTotAPagar.Color:= clRed;
+    lblMaxVenta.Visible:= true;
+  end
+  else
+  begin
+    lblTotAPagar.Color:= $00C10000;
+    lblMaxVenta.Visible:= false;
+  end
+end;
 
 end.
 
