@@ -7,9 +7,10 @@ uses
    StdCtrls, Buttons, ComCtrls, IdException, DB, ZAbstractRODataset,
    ZAbstractDataset, ZDataset, ExtCtrls, dxBar, dxBarExtItems, Mask, DBCtrls,
    IdSMTP, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
-   IdMessageClient, IdPOP3, EKLlenarCombo, cxClasses, IdSMTPBase,
+   IdMessageClient, IdPOP3, cxClasses, IdSMTPBase,
    IdExplicitTLSClientServerBase, IdIOHandler, IdIOHandlerSocket,
-   IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdSSLOpenSSLHeaders;
+   IdIOHandlerStack, IdSSL, IdSSLOpenSSL, IdSSLOpenSSLHeaders,
+  ISLlenarCombo;
 
 type
    TFMailConfigurar = class(TForm)
@@ -54,7 +55,6 @@ type
     DBEditPOPPassword: TDBEdit;
     DS_Cuentas: TDataSource;
     DBEditEmail: TDBEdit;
-    EKLlenarCombo: TEKLlenarCombo;
     ComboBoxCuenta: TComboBox;
     validarPOP3: TIdPOP3;
     validarSMTP: TIdSMTP;
@@ -82,6 +82,7 @@ type
     POPAuthType: TComboBox;
     Label10: TLabel;
     ZQ_CuentasPOP3_AUTENTICACION: TStringField;
+    ISLlenarCombo: TISLlenarCombo;
     procedure FormCreate(Sender: TObject);
     procedure conectarSMTP();
     procedure conectarPOP3();
@@ -99,12 +100,12 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnPrincipalClick(Sender: TObject);
     procedure ZQ_CuentasAfterScroll(DataSet: TDataSet);
-    procedure EKLlenarComboCambio(valor: String);
     procedure DBEditEmailExit(Sender: TObject);
     procedure validarSMTPStatus(ASender: TObject; const AStatus: TIdStatus;
       const AStatusText: String);
     procedure validarPOP3Status(ASender: TObject; const AStatus: TIdStatus;
       const AStatusText: String);
+    procedure ISLlenarComboCambio(valor: String);
    private
     { Private declarations }
    public
@@ -188,8 +189,8 @@ begin
 
   cargarDatos;
 
-  EKLlenarCombo.CargarCombo;
-  EKLlenarCombo.SetItem(0);
+  ISLlenarCombo.CargarCombo;
+  ISLlenarCombo.SetItem(0);
 
   MemoSMTP.Clear;
   MemoPOP3.Clear;
@@ -403,7 +404,7 @@ end;
 
 procedure TFMailConfigurar.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_Mail, [ZQ_Cuentas]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_Mail, [ZQ_Cuentas]) then
   begin
     PanelPOP3.Enabled:= true;
     PanelSMTP.Enabled:= true;
@@ -428,7 +429,7 @@ end;
 
 procedure TFMailConfigurar.btnModificarClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_Mail, [ZQ_Cuentas]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_Mail, [ZQ_Cuentas]) then
   begin
     PanelPOP3.Enabled:= true;
     PanelSMTP.Enabled:= true;
@@ -451,7 +452,7 @@ end;
 
 procedure TFMailConfigurar.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_Mail) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_Mail) then
   begin
     PanelPOP3.Enabled:= false;
     PanelSMTP.Enabled:= false;
@@ -515,9 +516,9 @@ begin
      3: ZQ_CuentasPOP3_SSL.AsString:= 'utUseRequireTLS';
   end;
 
-  recNo:= EKLlenarCombo.combo.ItemIndex;
+  recNo:= ISLlenarCombo.combo.ItemIndex;
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_Mail) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_Mail) then
     begin
       PanelPOP3.Enabled:= false;
       PanelSMTP.Enabled:= false;
@@ -533,8 +534,8 @@ begin
 
       ComboBoxCuenta.SetFocus;
 
-      EKLlenarCombo.CargarCombo;
-      EKLlenarCombo.SetItem(recNo);
+      ISLlenarCombo.CargarCombo;
+      ISLlenarCombo.SetItem(recNo);
       //ZQ_Cuentas.RecNo:= recNo;
     end
   except
@@ -554,7 +555,7 @@ begin
   begin
     recNo:= ZQ_Cuentas.RecNo;
 
-    if dm.EKModelo.iniciar_transaccion(transaccion_Mail, [ZQ_Cuentas]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_Mail, [ZQ_Cuentas]) then
     begin
       ZQ_Cuentas.First;
       while not ZQ_Cuentas.Eof do
@@ -570,8 +571,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_Mail)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_Mail);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_Mail)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_Mail);
 
     ZQ_Cuentas.RecNo:= recNo;
     dm.configMail('CUENTA', ZQ_CuentasID_CUENTA.AsInteger);
@@ -589,7 +590,33 @@ begin
 end;
 
 
-procedure TFMailConfigurar.EKLlenarComboCambio(valor: String);
+procedure TFMailConfigurar.DBEditEmailExit(Sender: TObject);
+var
+  tamanio: integer;
+begin
+//  tamanio:= Length(DBEditEmail.Text);
+//
+//  if (trim(DBEditEmail.Text) <> '') and (DBEditEmail.Text[tamanio] <> ';') then
+//    DBEditEmail.Text:= DBEditEmail.Text + ';';
+end;
+
+
+procedure TFMailConfigurar.validarSMTPStatus(ASender: TObject;
+  const AStatus: TIdStatus; const AStatusText: String);
+begin
+  MemoSMTP.Lines.Insert(0,'Estado SMTP: ' + AStatusText);
+  Application.ProcessMessages;
+end;
+
+
+procedure TFMailConfigurar.validarPOP3Status(ASender: TObject;
+  const AStatus: TIdStatus; const AStatusText: String);
+begin
+  MemoPOP3.Lines.Insert(0,'Estado POP3: ' + AStatusText);
+  Application.ProcessMessages;
+end;
+
+procedure TFMailConfigurar.ISLlenarComboCambio(valor: String);
 begin
   if ZQ_CuentasSMTP_AUTENTICACION.AsString = 'satDefault' then
     SMTPAuthType.ItemIndex := 0
@@ -643,33 +670,6 @@ begin
           POP3UseTLS.ItemIndex := 3
         else
           POP3UseTLS.ItemIndex := -1;
-end;
-
-
-procedure TFMailConfigurar.DBEditEmailExit(Sender: TObject);
-var
-  tamanio: integer;
-begin
-//  tamanio:= Length(DBEditEmail.Text);
-//
-//  if (trim(DBEditEmail.Text) <> '') and (DBEditEmail.Text[tamanio] <> ';') then
-//    DBEditEmail.Text:= DBEditEmail.Text + ';';
-end;
-
-
-procedure TFMailConfigurar.validarSMTPStatus(ASender: TObject;
-  const AStatus: TIdStatus; const AStatusText: String);
-begin
-  MemoSMTP.Lines.Insert(0,'Estado SMTP: ' + AStatusText);
-  Application.ProcessMessages;
-end;
-
-
-procedure TFMailConfigurar.validarPOP3Status(ASender: TObject;
-  const AStatus: TIdStatus; const AStatusText: String);
-begin
-  MemoPOP3.Lines.Insert(0,'Estado POP3: ' + AStatusText);
-  Application.ProcessMessages;
 end;
 
 end.
