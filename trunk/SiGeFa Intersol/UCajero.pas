@@ -947,7 +947,7 @@ end;
 
 procedure TFCajero.IdentificarCodigo();
 var
-  cod, num: string;
+  cod: string;
 begin
   cod:= codBarras.Text;
   try
@@ -1008,10 +1008,6 @@ end;
 
 
 procedure TFCajero.LeerCodigo(id: string; cod: string);
-var
-  f1, f2, fecha: tdate;
-  punit: double;
-  diasm: integer;
 begin
   RelojStock.Enabled:= false;
   lblMaxVenta.Visible:= False;
@@ -1076,8 +1072,6 @@ end;
 
 
 procedure TFCajero.accionBtnBuscar(Sender: TObject);
-var
-  prueba: integer;
 begin
   if modoCargaPrevia or modoCargaOrden then
   begin
@@ -1413,7 +1407,7 @@ end;
 
 procedure TFCajero.calcularMonto();
 var
-  desc, importe: double;
+  desc: double;
 begin
   if not (ZQ_Productos.IsEmpty) then
   begin
@@ -2019,7 +2013,7 @@ end;
 
 procedure TFCajero.grabarDetallesFactura;
 var
-  redondeo, parcial, auxTotalIva: Double;
+  parcial, auxTotalIva: Double;
   i, cant: integer;
 begin
   Prorrateo();
