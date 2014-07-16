@@ -22,8 +22,8 @@ object FDebugging: TFDebugging
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 987
-    Height = 464
+    Width = 979
+    Height = 453
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -35,13 +35,13 @@ object FDebugging: TFDebugging
     ParentFont = False
     TabOrder = 0
     DesignSize = (
-      987
-      464)
+      979
+      453)
     object DBGrid: TDBGrid
       Left = 5
       Top = 73
-      Width = 792
-      Height = 386
+      Width = 784
+      Height = 375
       Align = alClient
       Color = 16112578
       DataSource = DataSource
@@ -56,7 +56,7 @@ object FDebugging: TFDebugging
     object Panel2: TPanel
       Left = 5
       Top = 5
-      Width = 977
+      Width = 969
       Height = 68
       Align = alTop
       BevelOuter = bvNone
@@ -94,10 +94,10 @@ object FDebugging: TFDebugging
       end
     end
     object Panel4: TPanel
-      Left = 797
+      Left = 789
       Top = 73
       Width = 185
-      Height = 386
+      Height = 375
       Align = alRight
       Caption = 'Panel4'
       TabOrder = 2
@@ -105,7 +105,7 @@ object FDebugging: TFDebugging
         Left = 1
         Top = 1
         Width = 183
-        Height = 313
+        Height = 302
         Align = alClient
         Color = 16112578
         Lines.Strings = (
@@ -115,7 +115,7 @@ object FDebugging: TFDebugging
       end
       object Panel3: TPanel
         Left = 1
-        Top = 314
+        Top = 303
         Width = 183
         Height = 71
         Align = alBottom
@@ -202,7 +202,7 @@ object FDebugging: TFDebugging
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -482,44 +482,6 @@ object FDebugging: TFDebugging
       3333333333333333333333333333333333333333333333333333333333333333
       3333333333333333333333333333333333333333333333333333333333333333
       333333333333333333333333333333333333333333333333333333333300}
-    Bars = <
-      item
-        AllowClose = False
-        AllowCustomizing = False
-        AllowQuickCustomizing = False
-        BorderStyle = bbsNone
-        Caption = 'barra'
-        DockedDockingStyle = dsBottom
-        DockedLeft = 0
-        DockedTop = 0
-        DockingStyle = dsBottom
-        FloatLeft = 276
-        FloatTop = 216
-        FloatClientWidth = 39
-        FloatClientHeight = 38
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        ItemLinks = <
-          item
-            Item = btnEjecutarActualizar
-            Visible = True
-          end
-          item
-            Item = bt_salir
-            Visible = True
-          end>
-        Name = 'barra'
-        OneOnRow = True
-        Row = 0
-        UseOwnFont = True
-        UseRecentItems = False
-        UseRestSpace = True
-        Visible = True
-        WholeRow = False
-      end>
     CanCustomize = False
     Categories.Strings = (
       'Edicion')
@@ -528,7 +490,7 @@ object FDebugging: TFDebugging
     Categories.Visibles = (
       True)
     HideFloatingBarsWhenInactive = False
-    LargeImages = FPrincipal.Iconos_Barra_32
+    ImageOptions.LargeImages = FPrincipal.Iconos_Barra_32
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = False
     MenusShowRecentItemsFirst = False
@@ -545,6 +507,44 @@ object FDebugging: TFDebugging
       0
       0
       52)
+    object dxBarABMBar1: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      BorderStyle = bbsNone
+      Caption = 'barra'
+      CaptionButtons = <>
+      DockedDockingStyle = dsBottom
+      DockedLeft = 0
+      DockedTop = 0
+      DockingStyle = dsBottom
+      FloatLeft = 276
+      FloatTop = 216
+      FloatClientWidth = 39
+      FloatClientHeight = 38
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'btnEjecutarActualizar'
+        end
+        item
+          Visible = True
+          ItemName = 'bt_salir'
+        end>
+      OldName = 'barra'
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = True
+      UseRecentItems = False
+      UseRestSpace = True
+      Visible = True
+      WholeRow = False
+    end
     object btnCorregirParte: TdxBarLargeButton
       Caption = 'Corregir Parte'
       Category = 0
@@ -552,7 +552,7 @@ object FDebugging: TFDebugging
         'Corregir el saldo de cierre del parte diario pasado como paramet' +
         'ro'
       Visible = ivAlways
-      ImageIndex = 70
+      LargeImageIndex = 70
       OnClick = btnCorregirParteClick
       AutoGrayScale = False
     end
@@ -563,7 +563,7 @@ object FDebugging: TFDebugging
         'Corrige todas las fechas de la tabla CUENTA MOVIMIENTO fijandose' +
         ' en las anulaciones '
       Visible = ivAlways
-      ImageIndex = 70
+      LargeImageIndex = 70
       OnClick = btnCorregirFechasClick
       AutoGrayScale = False
     end
@@ -572,7 +572,7 @@ object FDebugging: TFDebugging
       Category = 0
       Hint = 'Corrige el saldo de todas las Notas de Creditos'
       Visible = ivAlways
-      ImageIndex = 7
+      LargeImageIndex = 7
       ShortCut = 117
       OnClick = btnCorregirNCClick
       AutoGrayScale = False
@@ -584,7 +584,7 @@ object FDebugging: TFDebugging
         'Recalcular los saldos de los comprobantes y ordenes de pago para' +
         ' el a'#241'o seleccionado'
       Visible = ivAlways
-      ImageIndex = 54
+      LargeImageIndex = 54
       OnClick = btnRecalcularSaldosClick
       AutoGrayScale = False
     end
@@ -593,7 +593,7 @@ object FDebugging: TFDebugging
       Category = 0
       Hint = 'Buscar posibles errores de comprobantes, ordenes y recibos'
       Visible = ivAlways
-      ImageIndex = 57
+      LargeImageIndex = 57
       OnClick = btnBuscarErroresClick
       AutoGrayScale = False
     end
@@ -603,7 +603,7 @@ object FDebugging: TFDebugging
       Category = 0
       Hint = 'Salir'
       Visible = ivAlways
-      ImageIndex = 6
+      LargeImageIndex = 6
       OnClick = bt_salirClick
       AutoGrayScale = False
     end
@@ -612,7 +612,7 @@ object FDebugging: TFDebugging
       Category = 0
       Hint = 'Ejecutar el procedimiento ACTUALIZAR BASE'
       Visible = ivAlways
-      ImageIndex = 15
+      LargeImageIndex = 15
       OnClick = btnEjecutarActualizarClick
       AutoGrayScale = False
     end
@@ -621,7 +621,7 @@ object FDebugging: TFDebugging
       Category = 0
       Hint = 'Corregir la Fecha de alta o de anulacion de la OP seleccionada'
       Visible = ivAlways
-      ImageIndex = 70
+      LargeImageIndex = 70
       OnClick = btnFechaOPClick
       AutoGrayScale = False
     end
@@ -632,7 +632,7 @@ object FDebugging: TFDebugging
         'Corregir la Fecha de alta o de anulacion del COMPROBANTE selecci' +
         'onado'
       Visible = ivAlways
-      ImageIndex = 70
+      LargeImageIndex = 70
       OnClick = btnFechaCpbClick
       AutoGrayScale = False
     end
@@ -641,7 +641,7 @@ object FDebugging: TFDebugging
       Category = 0
       Hint = 'Vaciar Auditoria'
       Visible = ivAlways
-      ImageIndex = 4
+      LargeImageIndex = 4
       AutoGrayScale = False
     end
   end

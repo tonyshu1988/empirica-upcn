@@ -21,15 +21,15 @@ object FAuditoria: TFAuditoria
   object PanelFondoAuditoria: TPanel
     Left = 0
     Top = 0
-    Width = 892
-    Height = 550
+    Width = 884
+    Height = 539
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelGrilla: TPanel
       Left = 0
-      Top = 333
-      Width = 892
+      Top = 322
+      Width = 884
       Height = 217
       Align = alBottom
       BevelOuter = bvNone
@@ -44,7 +44,7 @@ object FAuditoria: TFAuditoria
       object DBGridAudDetallada: TDBGrid
         Left = 5
         Top = 5
-        Width = 882
+        Width = 874
         Height = 207
         Align = alClient
         Color = 16112578
@@ -106,8 +106,8 @@ object FAuditoria: TFAuditoria
     object Panel1: TPanel
       Left = 0
       Top = 32
-      Width = 892
-      Height = 301
+      Width = 884
+      Height = 290
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -116,8 +116,8 @@ object FAuditoria: TFAuditoria
       object DBGridAudGeneral: TDBGrid
         Left = 237
         Top = 5
-        Width = 650
-        Height = 195
+        Width = 642
+        Height = 184
         Align = alClient
         Color = 16112578
         DataSource = DS_AudGeneral
@@ -210,8 +210,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosTabla: TDBGrid
         Left = 5
-        Top = 216
-        Width = 882
+        Top = 205
+        Width = 874
         Height = 40
         Align = alBottom
         Color = 12779258
@@ -230,7 +230,7 @@ object FAuditoria: TFAuditoria
         Left = 5
         Top = 5
         Width = 232
-        Height = 195
+        Height = 184
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alLeft
         Color = 16112578
@@ -263,8 +263,8 @@ object FAuditoria: TFAuditoria
       end
       object DBGridDatosProducto: TDBGrid
         Left = 5
-        Top = 256
-        Width = 882
+        Top = 245
+        Width = 874
         Height = 40
         Align = alBottom
         Color = 16112578
@@ -335,14 +335,14 @@ object FAuditoria: TFAuditoria
       end
       object Panel3: TPanel
         Left = 5
-        Top = 200
-        Width = 882
+        Top = 189
+        Width = 874
         Height = 16
         Align = alBottom
         BevelOuter = bvNone
         TabOrder = 4
         DesignSize = (
-          882
+          874
           16)
         object lblFiltro: TLabel
           Left = 235
@@ -367,7 +367,7 @@ object FAuditoria: TFAuditoria
     object Panel2: TPanel
       Left = 0
       Top = 0
-      Width = 892
+      Width = 884
       Height = 32
       Align = alTop
       BevelOuter = bvNone
@@ -476,14 +476,14 @@ object FAuditoria: TFAuditoria
   object PanelFondoXML: TPanel
     Left = 0
     Top = 0
-    Width = 892
-    Height = 550
+    Width = 884
+    Height = 539
     Align = alClient
     TabOrder = 5
     object PanelXML_Buscar: TPanel
       Left = 1
       Top = 1
-      Width = 890
+      Width = 882
       Height = 41
       Align = alTop
       BevelOuter = bvNone
@@ -507,14 +507,14 @@ object FAuditoria: TFAuditoria
     end
     object PanelXML_Resumen: TPanel
       Left = 1
-      Top = 535
-      Width = 890
+      Top = 524
+      Width = 882
       Height = 14
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 1
       object lblXML_TotalTablas: TLabel
-        Left = 512
+        Left = 504
         Top = 0
         Width = 378
         Height = 14
@@ -526,7 +526,7 @@ object FAuditoria: TFAuditoria
       object lblXML_TotalArchivo: TLabel
         Left = 0
         Top = 0
-        Width = 512
+        Width = 504
         Height = 14
         Align = alClient
         Alignment = taCenter
@@ -537,8 +537,8 @@ object FAuditoria: TFAuditoria
     object DBGridXML_Archivo: TDBGrid
       Left = 1
       Top = 42
-      Width = 511
-      Height = 493
+      Width = 503
+      Height = 482
       Align = alClient
       Color = 16112578
       DataSource = DS_XML
@@ -644,10 +644,10 @@ object FAuditoria: TFAuditoria
         end>
     end
     object DBGridXML_Tablas: TDBGrid
-      Left = 512
+      Left = 504
       Top = 42
       Width = 379
-      Height = 493
+      Height = 482
       Align = alRight
       Color = 16112578
       DataSource = DS_XMLTablas
@@ -708,7 +708,7 @@ object FAuditoria: TFAuditoria
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1475,15 +1475,6 @@ object FAuditoria: TFAuditoria
         ParamType = ptUnknown
       end>
   end
-  object EKLlenarCombo1: TEKLlenarCombo
-    dataset = ZQ_ComboUsuario
-    combo = cBoxUsuarios
-    OnCambio = EKLlenarCombo1Cambio
-    CampoClave = 'user_name'
-    CampoVer = 'user_name'
-    Left = 480
-    Top = 120
-  end
   object ZQ_DatosStock: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -1624,55 +1615,6 @@ object FAuditoria: TFAuditoria
       Required = True
     end
   end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridAudGeneral
-    Filtros = <
-      item
-        TituloColumna = 'Tabla'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Operacion'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Usuario DB'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Usuario'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nombre'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Campo Clave'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Valor Clave'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Lote Sincro'
-        Visible = True
-      end>
-    NombreGuardar = 'DBGridAudGeneral'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = False
-    PopUpGrilla = PopupMenu
-    Left = 576
-    Top = 64
-  end
   object PopupMenu: TPopupMenu
     Left = 576
     Top = 120
@@ -1684,86 +1626,6 @@ object FAuditoria: TFAuditoria
       Caption = 'Quitar Filtro'
       OnClick = pUpItem_QuitarFiltroClick
     end
-  end
-  object EKOrdenarGrilla2: TEKOrdenarGrilla
-    Grilla = DBGridAudDetallada
-    Filtros = <
-      item
-        TituloColumna = 'Campo Tabla'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Valor Viejo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Valor Nuevo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Valor Ref Viejo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Valor Ref Nuevo'
-        Visible = True
-      end>
-    NombreGuardar = 'DBGridAudDetallada'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = False
-    Left = 56
-    Top = 389
-  end
-  object EKOrdenarGrilla3: TEKOrdenarGrilla
-    Grilla = DBGridDatosProducto
-    Filtros = <
-      item
-        TituloColumna = 'ID_PRODUCTO'
-        Visible = True
-      end
-      item
-        TituloColumna = 'COD_CABECERA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'NOMBRE'
-        Visible = True
-      end
-      item
-        TituloColumna = 'MEDIDA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'NOMBRE_MARCA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'COLOR'
-        Visible = True
-      end
-      item
-        TituloColumna = 'COD_PRODUCTO'
-        Visible = True
-      end
-      item
-        TituloColumna = 'CODIGO_BARRA'
-        Visible = True
-      end
-      item
-        TituloColumna = 'ARTICULO'
-        Visible = True
-      end>
-    NombreGuardar = 'DBGridDatosProducto'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 328
-    Top = 225
   end
   object CD_XML: TClientDataSet
     Aggregates = <>
@@ -1849,7 +1711,177 @@ object FAuditoria: TFAuditoria
     Left = 640
     Top = 320
   end
-  object EKOrdenarGrilla4: TEKOrdenarGrilla
+  object CD_XMLTablas: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 745
+    Top = 318
+    object CD_XMLTablas_Tabla: TStringField
+      FieldName = '_Tabla'
+      Size = 67
+    end
+    object CD_XMLTablas_CampoClave: TStringField
+      FieldName = '_CampoClave'
+      Size = 67
+    end
+    object CD_XMLTablas_Clave: TStringField
+      DisplayWidth = 255
+      FieldName = '_Clave'
+      Size = 67
+    end
+    object CD_XMLTablas_Operacion: TStringField
+      FieldName = '_Operacion'
+      Size = 1
+    end
+    object CD_XMLTablas_Fecha: TDateTimeField
+      FieldName = '_Fecha'
+    end
+    object CD_XMLTablas_Id: TStringField
+      FieldName = '_Id'
+      Size = 40
+    end
+    object CD_XMLTablas_Usuario: TStringField
+      FieldName = '_Usuario'
+      Size = 67
+    end
+  end
+  object DS_XMLTablas: TDataSource
+    DataSet = CD_XMLTablas
+    Left = 745
+    Top = 366
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
+    Grilla = DBGridAudGeneral
+    Filtros = <
+      item
+        TituloColumna = 'Tabla'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Operacion'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Usuario DB'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Usuario'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Campo Clave'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Valor Clave'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Lote Sincro'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'DBGridAudGeneral'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 576
+    Top = 64
+  end
+  object ISOrdenarGrilla2: TISOrdenarGrilla
+    Grilla = DBGridAudDetallada
+    Filtros = <
+      item
+        TituloColumna = 'Campo Tabla'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Valor Viejo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Valor Nuevo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Valor Ref Viejo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Valor Ref Nuevo'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'DBGridAudDetallada'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 56
+    Top = 416
+  end
+  object ISOrdenarGrilla3: TISOrdenarGrilla
+    Grilla = DBGridDatosProducto
+    Filtros = <
+      item
+        TituloColumna = 'ID_PRODUCTO'
+        Visible = True
+      end
+      item
+        TituloColumna = 'COD_CABECERA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NOMBRE'
+        Visible = True
+      end
+      item
+        TituloColumna = 'MEDIDA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'NOMBRE_MARCA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'COLOR'
+        Visible = True
+      end
+      item
+        TituloColumna = 'COD_PRODUCTO'
+        Visible = True
+      end
+      item
+        TituloColumna = 'CODIGO_BARRA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ARTICULO'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'DBGridDatosProducto'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 328
+    Top = 224
+  end
+  object ISOrdenarGrilla4: TISOrdenarGrilla
     Grilla = DBGridXML_Archivo
     Filtros = <
       item
@@ -1912,55 +1944,17 @@ object FAuditoria: TFAuditoria
         TituloColumna = 'FBLOB_NEW_BLOB_VALUE'
         Visible = True
       end>
-    NombreGuardar = 'DBGridXML_Archivo'
+    NombreGuardarConfig = 'DBGridXML_Archivo'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
     Left = 552
     Top = 424
   end
-  object CD_XMLTablas: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 745
-    Top = 318
-    object CD_XMLTablas_Tabla: TStringField
-      FieldName = '_Tabla'
-      Size = 67
-    end
-    object CD_XMLTablas_CampoClave: TStringField
-      FieldName = '_CampoClave'
-      Size = 67
-    end
-    object CD_XMLTablas_Clave: TStringField
-      DisplayWidth = 255
-      FieldName = '_Clave'
-      Size = 67
-    end
-    object CD_XMLTablas_Operacion: TStringField
-      FieldName = '_Operacion'
-      Size = 1
-    end
-    object CD_XMLTablas_Fecha: TDateTimeField
-      FieldName = '_Fecha'
-    end
-    object CD_XMLTablas_Id: TStringField
-      FieldName = '_Id'
-      Size = 40
-    end
-    object CD_XMLTablas_Usuario: TStringField
-      FieldName = '_Usuario'
-      Size = 67
-    end
-  end
-  object DS_XMLTablas: TDataSource
-    DataSet = CD_XMLTablas
-    Left = 745
-    Top = 366
-  end
-  object EKOrdenarGrilla5: TEKOrdenarGrilla
+  object ISOrdenarGrilla5: TISOrdenarGrilla
     Grilla = DBGridXML_Tablas
     Filtros = <
       item
@@ -1991,13 +1985,24 @@ object FAuditoria: TFAuditoria
         TituloColumna = '_Usuario'
         Visible = True
       end>
-    NombreGuardar = 'DBGridXML_Tablas'
+    NombreGuardarConfig = 'DBGridXML_Tablas'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
     Left = 744
     Top = 424
+  end
+  object ISLlenarCombo1: TISLlenarCombo
+    dataset = ZQ_ComboUsuario
+    combo = cBoxUsuarios
+    OnCambio = ISLlenarCombo1Cambio
+    CampoClave = 'user_name'
+    CampoVer = 'user_name'
+    ItemsAdicInicio = False
+    Left = 480
+    Top = 128
   end
 end
