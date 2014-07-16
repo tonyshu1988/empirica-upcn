@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
   EKVistaPreviaQR, QRCtrls, QuickRpt, jpeg, ExtCtrls, EKNumeroATexto,
-  EKDbSuma, QRPDFFilt, grimgctrl;
+  EKDbSuma, QRPDFFilt, grimgctrl, ISNumeroATexto, ISVistaPreviaQR, ISDbSuma;
 
 type
   TFImpresion_Comprobantes = class(TForm)
@@ -182,8 +182,6 @@ type
     QRDBText84: TQRDBText;
     QRLabel100: TQRLabel;
     QRlblRecibo_ImporteTotal: TQRLabel;
-    EKDbSumaFpago: TEKDbSuma;
-    EKNumeroALetras: TEKNumeroALetras;
     QRLblRecibo_ImporteEnLetras: TQRLabel;
     ChildBand4: TQRChildBand;
     QRLabel99: TQRLabel;
@@ -221,7 +219,6 @@ type
     QRLabel51: TQRLabel;
     QRLabel54: TQRLabel;
     QRDBText17: TQRDBText;
-    EKDbSumaProducto: TEKDbSuma;
     QRDBLogo1: TQRDBImage;
     QRDBLogo2: TQRDBImage;
     QRDBLogo4: TQRDBImage;
@@ -372,7 +369,6 @@ type
     QRLabel25: TQRLabel;
     QRLabel66: TQRLabel;
     QRLabel90: TQRLabel;
-    EKVistaPrevia: TEKVistaPreviaQR;
     TabSheet7: TTabSheet;
     QuickRep1: TQuickRep;
     QRBand23: TQRBand;
@@ -685,7 +681,6 @@ type
     ZQ_PagosFacturaIMPORTE_VENTA: TFloatField;
     ZQ_PagosFacturaDESCRIPCION: TStringField;
     ZQ_PagosFacturaIMPORTE_REAL: TFloatField;
-    EKDbSuma_Factura: TEKDbSuma;
     RepOrdenPagoCtaCte: TQuickRep;
     QRBand28: TQRBand;
     QRLabel231: TQRLabel;
@@ -960,7 +955,6 @@ type
     ZQ_Producto_OSCANTIDAD: TFloatField;
     ZQ_Producto_OSIMPORTE_FINAL: TFloatField;
     QRDBText207: TQRDBText;
-    EKDbSumaProductoOS: TEKDbSuma;
     QRLabel330: TQRLabel;
     QRLabel331: TQRLabel;
     QRLabel335: TQRLabel;
@@ -974,6 +968,12 @@ type
     QRDBText213: TQRDBText;
     QRDBText214: TQRDBText;
     QRDBText215: TQRDBText;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISNumeroALetras: TISNumeroALetras;
+    ISDbSumaFpago: TISDbSuma;
+    ISDbSumaProducto: TISDbSuma;
+    ISDbSuma_Factura: TISDbSuma;
+    ISDbSumaProductoOS: TISDbSuma;
     procedure FormCreate(Sender: TObject);
     procedure QRSubDetail8BeforePrint(Sender: TQRCustomBand;
       var PrintBand: Boolean);
@@ -1117,7 +1117,7 @@ end;
 procedure TFImpresion_Comprobantes.imprimir();
 begin
   if not noImprimir then
-    EKVistaPrevia.VistaPrevia;
+    ISVistaPrevia.VistaPrevia;
 end;
 
 
@@ -1140,15 +1140,15 @@ begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  cantidadProductos:= EKDbSumaProducto.SumCollection[0].sumvalue;
+  cantidadProductos:= ISDbSumaProducto.SumCollection[0].sumvalue;
   QRlblTransferirStock_CantidadTotal.Caption := 'CANTIDAD: '+FormatFloat('0.00', cantidadProductos);
 
-  QRlblTransfStock_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblTransfStock_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
 
 
-  QRLabelFecha.Caption := FormatDateTime('dd/mm/yyyy ',dm.EKModelo.Fecha);
+  QRLabelFecha.Caption := FormatDateTime('dd/mm/yyyy ',dm.ISModelo.Fecha);
   DM.VariablesComprobantes(RepTransferirStock);
-  EKVistaPrevia.Reporte:= RepTransferirStock;
+  ISVistaPrevia.Reporte:= RepTransferirStock;
 end;
 
 //NOTA CREDITO
@@ -1164,13 +1164,13 @@ begin
 
   if not ZQ_Fpago.IsEmpty then //si es una nota de credito
   begin
-    ImporteTotal:= EKDbSumaFpago.SumCollection[0].sumvalue;
-    EKNumeroALetras.Numero := ImporteTotal;
-    QRLblNotaCredito_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
+    ImporteTotal:= ISDbSumaFpago.SumCollection[0].sumvalue;
+    ISNumeroALetras.Numero := ImporteTotal;
+    QRLblNotaCredito_ImporteEnLetras.Caption := UpperCase(ISNumeroALetras.AsString)+'.--';
     QRlblNotaCredito_CantidadTotal.Caption := 'Total Nota Credito: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
-    QRlblNotaCredito_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+    QRlblNotaCredito_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
     DM.VariablesComprobantes(RepNotaCredito);
-    EKVistaPrevia.Reporte:= RepNotaCredito;
+    ISVistaPrevia.Reporte:= RepNotaCredito;
   end
   else
   begin
@@ -1192,16 +1192,16 @@ begin
   ZQ_PagosFactura.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
   ZQ_PagosFactura.Open;
 
-  ImporteFPago:= EKDbSumaFpago.SumCollection[0].sumvalue;
-  ImporteFactura:= EKDbSuma_Factura.SumCollection[0].sumvalue;
-  EKNumeroALetras.Numero := ImporteFPago;
-  QRLblReciboCtaCte_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
+  ImporteFPago:= ISDbSumaFpago.SumCollection[0].sumvalue;
+  ImporteFactura:= ISDbSuma_Factura.SumCollection[0].sumvalue;
+  ISNumeroALetras.Numero := ImporteFPago;
+  QRLblReciboCtaCte_ImporteEnLetras.Caption := UpperCase(ISNumeroALetras.AsString)+'.--';
   QRlblReciboCtaCte_ImporteFacturas.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteFactura);
   QRlblReciboCtaCte_ImporteFPago.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteFPago);
 
-  QRlblReciboCtaCte_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblReciboCtaCte_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   DM.VariablesComprobantes(RepReciboCtaCte);
-  EKVistaPrevia.Reporte:= RepReciboCtaCte;
+  ISVistaPrevia.Reporte:= RepReciboCtaCte;
 end;
 
 
@@ -1218,16 +1218,16 @@ begin
   ZQ_PagosFactura.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
   ZQ_PagosFactura.Open;
 
-  ImporteFPago:= EKDbSumaFpago.SumCollection[0].sumvalue;
-  ImporteFactura:= EKDbSuma_Factura.SumCollection[0].sumvalue;
-  EKNumeroALetras.Numero := ImporteFPago;
-  QRLblOrdenPagoCtaCte_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
+  ImporteFPago:= ISDbSumaFpago.SumCollection[0].sumvalue;
+  ImporteFactura:= ISDbSuma_Factura.SumCollection[0].sumvalue;
+  ISNumeroALetras.Numero := ImporteFPago;
+  QRLblOrdenPagoCtaCte_ImporteEnLetras.Caption := UpperCase(ISNumeroALetras.AsString)+'.--';
   QRlblOrdenPagoCtaCte_ImporteFacturas.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteFactura);
   QRlblOrdenPagoCtaCte_ImporteFPago.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteFPago);
 
-  QRlblOrdenPagoCtaCte_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblOrdenPagoCtaCte_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   DM.VariablesComprobantes(RepOrdenPagoCtaCte);
-  EKVistaPrevia.Reporte:= RepOrdenPagoCtaCte;
+  ISVistaPrevia.Reporte:= RepOrdenPagoCtaCte;
 end;
 
 
@@ -1239,14 +1239,14 @@ begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  ImporteTotal:= EKDbSumaFpago.SumCollection[0].sumvalue;
-  EKNumeroALetras.Numero := ImporteTotal;
-  QRLblRecibo_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
+  ImporteTotal:= ISDbSumaFpago.SumCollection[0].sumvalue;
+  ISNumeroALetras.Numero := ImporteTotal;
+  QRLblRecibo_ImporteEnLetras.Caption := UpperCase(ISNumeroALetras.AsString)+'.--';
   QRlblRecibo_ImporteTotal.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
 
-  QRlblRecibo_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblRecibo_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   DM.VariablesComprobantes(RepRecibo);
-  EKVistaPrevia.Reporte:= RepRecibo;
+  ISVistaPrevia.Reporte:= RepRecibo;
 end;
 
 
@@ -1258,13 +1258,13 @@ begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  cantidad:= EKDbSumaProducto.SumCollection[0].sumvalue;
-  ImporteTotal:= EKDbSumaProducto.SumCollection[1].sumvalue;
+  cantidad:= ISDbSumaProducto.SumCollection[0].sumvalue;
+  ImporteTotal:= ISDbSumaProducto.SumCollection[1].sumvalue;
   QRlblPresupuesto_ImporteTotal.Caption := 'CANTIDAD: '+FormatFloat('0.00', cantidad)+' - IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
 
-  QRlblPresupuesto_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblPresupuesto_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   DM.VariablesComprobantes(RepPresupuesto);
-  EKVistaPrevia.Reporte:= RepPresupuesto;
+  ISVistaPrevia.Reporte:= RepPresupuesto;
 end;
 
 
@@ -1276,12 +1276,12 @@ begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  cantidadProductos:= EKDbSumaProducto.SumCollection[0].sumvalue;
+  cantidadProductos:= ISDbSumaProducto.SumCollection[0].sumvalue;
   QRlblRemito_CantidadTotal.Caption := 'CANTIDAD: '+FormatFloat('0.00', cantidadProductos);
 
-  QRlblRemito_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblRemito_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   DM.VariablesComprobantes(RepRemito);
-  EKVistaPrevia.Reporte:= RepRemito;
+  ISVistaPrevia.Reporte:= RepRemito;
 end;
 
 
@@ -1293,12 +1293,12 @@ begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  cantidadProductos:= EKDbSumaProductoOS.SumCollection[0].sumvalue;
+  cantidadProductos:= ISDbSumaProductoOS.SumCollection[0].sumvalue;
   QRlblRemitoOS_CantidadTotal.Caption := 'CANTIDAD: '+FormatFloat('0.00', cantidadProductos);
 
-  QRlblRemitoOS_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblRemitoOS_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   DM.VariablesComprobantes(RepRemitoOS);
-  EKVistaPrevia.Reporte:= RepRemitoOS;
+  ISVistaPrevia.Reporte:= RepRemitoOS;
 end;
 
 
@@ -1310,12 +1310,12 @@ begin
   if ZQ_Comprobante.IsEmpty then
     exit;
 
-  cantidadProductos:= EKDbSumaProducto.SumCollection[0].sumvalue;
+  cantidadProductos:= ISDbSumaProducto.SumCollection[0].sumvalue;
   QRlblNotaPedido_CantidadTotal.Caption := 'CANTIDAD: '+FormatFloat('0.00', cantidadProductos);
 
-  QRlblNotaPedido_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblNotaPedido_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   DM.VariablesComprobantes(RepNotaPedido);
-  EKVistaPrevia.Reporte:= RepNotaPedido;
+  ISVistaPrevia.Reporte:= RepNotaPedido;
 end;
 
 
@@ -1327,14 +1327,14 @@ begin
   if ZQ_Comprobante.IsEmpty then
     exit;
                               
-  ImporteTotal:= EKDbSumaFpago.SumCollection[0].sumvalue;
-  EKNumeroALetras.Numero := ImporteTotal;
-  QRlblOrdenPago_ImporteEnLetras.Caption := UpperCase(EKNumeroALetras.AsString)+'.--';
+  ImporteTotal:= ISDbSumaFpago.SumCollection[0].sumvalue;
+  ISNumeroALetras.Numero := ImporteTotal;
+  QRlblOrdenPago_ImporteEnLetras.Caption := UpperCase(ISNumeroALetras.AsString)+'.--';
   QRlblOrdenPago_ImporteTotal.Caption := 'IMPORTE TOTAL: '+FormatFloat('$ ###,###,###,##0.00', ImporteTotal);
 
-  QRlblOrdenPago_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblOrdenPago_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   DM.VariablesComprobantes(RepOrdenPago);
-  EKVistaPrevia.Reporte:= RepOrdenPago;
+  ISVistaPrevia.Reporte:= RepOrdenPago;
 end;
 
 
@@ -1373,9 +1373,9 @@ begin
   if ZQ_Destino.IsEmpty then
     exit;
 
-  QRlblDevolucion_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblDevolucion_PiePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   DM.VariablesComprobantes(RepDevolucion);
-  EKVistaPrevia.Reporte:= RepDevolucion;
+  ISVistaPrevia.Reporte:= RepDevolucion;
 end;
 
 
