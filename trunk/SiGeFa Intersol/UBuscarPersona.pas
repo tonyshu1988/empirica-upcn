@@ -327,7 +327,7 @@ end;
 
 procedure TFBuscarPersona.btnCrearPersonaClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(Transaccion_CrearPersona,[ZQ_Personas, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono]) then
+  if dm.ISModelo.iniciar_transaccion(Transaccion_CrearPersona,[ZQ_Personas, ZQ_RelacionCliente, ZQ_CtaCte, ZQ_EntidadTelefono]) then
   begin
     GrupoVisualizando.Enabled:=false;
     GrupoEditando.Enabled:=true;
@@ -385,7 +385,7 @@ begin
     end;
 
   id:= ZQ_PersonasID_PERSONA.AsInteger;
-  if DM.EKModelo.finalizar_transaccion(Transaccion_CrearPersona) then
+  if DM.ISModelo.finalizar_transaccion(Transaccion_CrearPersona) then
   begin
     DBGridPersonas.Enabled:=true;
     GrupoVisualizando.Enabled:=true;
@@ -408,7 +408,7 @@ begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Personas', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-    if dm.EKModelo.cancelar_transaccion(Transaccion_CrearPersona) then
+    if dm.ISModelo.cancelar_transaccion(Transaccion_CrearPersona) then
     begin
       DBGridPersonas.Enabled:=true;
       GrupoVisualizando.Enabled:=true;
@@ -577,7 +577,7 @@ begin
     ZQ_CtaCte.Append;
     ZQ_CtaCteID_PERSONA.AsInteger:= id_persona;
     ZQ_CtaCteID_PROVEEDOR.Clear;
-    ZQ_CtaCteFECHA_ALTA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_CtaCteFECHA_ALTA.AsDateTime:= dm.ISModelo.FechayHora;
     ZQ_CtaCteFECHA_BAJA.Clear;
     ZQ_CtaCteLIMITE_DEUDA.AsFloat:= ctacte_credito; //por defecto lo de la configuracion
     ZQ_CtaCteVENCIMIENTO_DIAS.AsInteger:= ctacte_diasVencimiento; //por defecto lo de la configuracion
@@ -608,7 +608,7 @@ begin
     begin
       ZQ_CtaCte.Edit;
       ZQ_CtaCteBAJA.AsString:= 'S';
-      ZQ_CtaCteFECHA_BAJA.AsDateTime:= dm.EKModelo.FechayHora;
+      ZQ_CtaCteFECHA_BAJA.AsDateTime:= dm.ISModelo.FechayHora;
     end;
   end;
 
