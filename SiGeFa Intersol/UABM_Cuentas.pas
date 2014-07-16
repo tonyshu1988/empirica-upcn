@@ -6,9 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
-  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, Menus, EKListadoSQL,
-  EKLlenarCombo;
+  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan,
+  QRCtrls, QuickRpt, EKVistaPreviaQR, Menus,
+   ISListadoSQL, ISBusquedaAvanzada, ISVistaPreviaQR,
+  ISOrdenarGrilla, cxClasses, EKBusquedaAvanzada;
 
 type
   TFABM_Cuentas = class(TForm)
@@ -48,8 +49,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
-    EKVistaPrevia: TEKVistaPreviaQR;
     RepCuentas: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -77,7 +76,6 @@ type
     DBENro_Cuenta: TDBEdit;
     ZQ_MedioPago: TZQuery;
     ZQ_Cuentas_medio: TStringField;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     QRDBText3: TQRDBText;
     QRLabel2: TQRLabel;
     QRLabel3: TQRLabel;
@@ -98,8 +96,6 @@ type
     ZQ_CuentasMODIFICABLE: TStringField;
     btnExcel: TdxBarLargeButton;
     DBGridFPago: TDBGrid;
-    EKOrdenarGrilla_FPago: TEKOrdenarGrilla;
-    EKListadoMedio: TEKListadoSQL;
     PopupMenu_FPago: TPopupMenu;
     popUpItem_AgregarMedioCobroPago: TMenuItem;
     popUpItem_QuitarMedioCobroPago: TMenuItem;
@@ -138,6 +134,16 @@ type
     DBLookupCBoxSucursal: TDBLookupComboBox;
     DS_Sucursales: TDataSource;
     ZQ_Cuentas_sucursal: TStringField;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISOrdenarGrilla_FPago: TISOrdenarGrilla;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISBuscar: TISBusquedaAvanzada;
+    ISListadoMedio: TISListadoSQL;
+    ZQ_TipoMedioPago: TZQuery;
+    IntegerField1: TIntegerField;
+    IntegerField2: TIntegerField;
+    IntegerField3: TIntegerField;
+    StringField1: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -180,8 +186,8 @@ uses UDM, UPrincipal, UUtilidades;
 procedure TFABM_Cuentas.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
-  EKOrdenarGrilla1.GuardarConfigColumnas;
-  EKOrdenarGrilla_FPago.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla_FPago.GuardarConfigColumnas;
 end;
 
 
@@ -196,7 +202,7 @@ begin
   if ZQ_Cuentas.IsEmpty or (ZQ_CuentasMODIFICABLE.AsString = 'N') then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas, ZQ_MedioPago]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas, ZQ_MedioPago]) then
   begin
     DBGridCuentas.Enabled:= false;
     PanelEdicion.Visible:= true;
@@ -216,7 +222,7 @@ begin
     GrupoEditando.Enabled:= false;
     GrupoGuardarCancelar.Enabled:= true;
 
-    EKOrdenarGrilla_FPago.PopUpGrilla:= PopupMenu_FPago;
+    DBGridFPago.PopupMenu:= PopupMenu_FPago;
   end;
 end;
 
@@ -230,7 +236,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja la Cuenta seleccionada?'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
     begin
       ZQ_Cuentas.Edit;
       ZQ_CuentasBAJA.AsString:= 'S';
@@ -238,8 +244,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_Cuentas.RecNo;
     ZQ_Cuentas.Refresh;
@@ -276,7 +282,7 @@ begin
 //  end;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       DBGridCuentas.Enabled:= true;
       DBGridCuentas.SetFocus;
@@ -287,7 +293,7 @@ begin
       ZQ_Cuentas.Refresh;
       ZQ_Cuentas.RecNo:= recNo;
 
-      EKOrdenarGrilla_FPago.PopUpGrilla:= nil;
+      DBGridFPago.PopupMenu:= nil;
     end
   except
     begin
@@ -302,7 +308,7 @@ end;
 
 procedure TFABM_Cuentas.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     DBGridCuentas.Enabled:= true;
     DBGridCuentas.SetFocus;
@@ -310,7 +316,7 @@ begin
     GrupoGuardarCancelar.Enabled:= false;
     PanelEdicion.Visible:= false;
 
-    EKOrdenarGrilla_FPago.PopUpGrilla:= nil;
+    DBGridFPago.PopupMenu:= nil;
   end;
 end;
 
@@ -324,7 +330,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar la Cuenta seleccionada?'), 'ABM Cuenta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
     begin
       ZQ_Cuentas.Edit;
       ZQ_CuentasBAJA.AsString:= 'N';
@@ -332,8 +338,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_Cuentas.RecNo;
     ZQ_Cuentas.Refresh;
@@ -344,14 +350,14 @@ end;
 
 procedure TFABM_Cuentas.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
 end;
 
 
 procedure TFABM_Cuentas.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Cuentas]) then
   begin
     DBGridCuentas.Enabled:= false;
     PanelEdicion.Visible:= true;
@@ -375,7 +381,7 @@ begin
     GrupoEditando.Enabled:= false;
     GrupoGuardarCancelar.Enabled:= true;
 
-    EKOrdenarGrilla_FPago.PopUpGrilla:= PopupMenu_FPago;
+    DBGridFPago.PopupMenu:= PopupMenu_FPago;
   end;
 end;
 
@@ -383,10 +389,10 @@ end;
 procedure TFABM_Cuentas.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
-  EKOrdenarGrilla1.CargarConfigColumnas;
-  EKOrdenarGrilla_FPago.CargarConfigColumnas;
-
-  EKBuscar.Abrir;
+  ISOrdenarGrilla1.CargarConfigColunmas;
+  ISOrdenarGrilla_FPago.CargarConfigColunmas;
+  dm.ISModelo.abrir(ZQ_TipoMedioPago);
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Cuentas, lblCantidadRegistros);
 end;
 
@@ -458,9 +464,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepCuentas);
-  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption:= EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption:= ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 procedure TFABM_Cuentas.btnExcelClick(Sender: TObject);
@@ -491,9 +497,9 @@ end;
 
 procedure TFABM_Cuentas.popUpItem_AgregarMedioCobroPagoClick(Sender: TObject);
 begin
-  if EKListadoMedio.Buscar then
+  if ISListadoMedio.Buscar then
   begin
-    ZQ_MedioPago.Filter:= format('(id_tipo_formapago = %s) ', [EKListadoMedio.Resultado]);
+    ZQ_MedioPago.Filter:= format('(id_tipo_formapago = %s) ', [ISListadoMedio.Resultado]);
     ZQ_MedioPago.Filtered:= true;
     if not ZQ_MedioPago.IsEmpty then
     begin
@@ -506,7 +512,7 @@ begin
 
     ZQ_MedioPago.Append;
     ZQ_MedioPagoID_CUENTA.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
-    ZQ_MedioPagoID_TIPO_FORMAPAGO.AsInteger:= StrToInt(EKListadoMedio.Resultado);
+    ZQ_MedioPagoID_TIPO_FORMAPAGO.AsInteger:= StrToInt(ISListadoMedio.Resultado);
     ZQ_MedioPago.post;
   end;
 end;
