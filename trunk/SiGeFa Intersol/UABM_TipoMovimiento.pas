@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt;
+  ActnList, XPStyleActnCtrls, ActnMan, 
+  QRCtrls, QuickRpt, cxClasses, ISOrdenarGrilla,
+  ISVistaPreviaQR, ISBusquedaAvanzada;
 
 type
   TFABM_TipoMovimiento = class(TForm)
@@ -35,7 +36,6 @@ type
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -45,7 +45,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
     RepTipoMov: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -67,7 +66,6 @@ type
     ColumnHeaderBand2: TQRBand;
     QRLabel29: TQRLabel;
     QRLabel1: TQRLabel;
-    EKVistaPrevia: TEKVistaPreviaQR;
     QRLabel2: TQRLabel;
     QRLabel3: TQRLabel;
     QRLabel4: TQRLabel;
@@ -78,6 +76,9 @@ type
     ZQ_TipoMovBAJA: TStringField;
     ZQ_TipoMovNOMBRE_MOVIMIENTO: TStringField;
     btnExcel: TdxBarLargeButton;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISBuscar: TISBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -132,14 +133,14 @@ end;
 
 procedure TFABM_TipoMovimiento.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_TipoMov, lblCantidadRegistros);
 end;
 
 
 procedure TFABM_TipoMovimiento.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoMov]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoMov]) then
   begin
     DBGridTipo.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -159,7 +160,7 @@ begin
   if ZQ_TipoMov.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoMov]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoMov]) then
   begin
     DBGridTipo.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -186,7 +187,7 @@ begin
   end;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       DBGridTipo.Enabled:= true;
       DBGridTipo.SetFocus;
@@ -210,7 +211,7 @@ end;
 
 procedure TFABM_TipoMovimiento.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     DBGridTipo.Enabled:=true;
     DBGridTipo.SetFocus;
@@ -227,7 +228,7 @@ begin
   StaticTxtBaja.Visible:= false;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_TipoMov, lblCantidadRegistros);
 end;
 
@@ -297,9 +298,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepTipoMov);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 
@@ -312,7 +313,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el "Tipo Movimiento" seleccionado?'), 'ABM Tipo Movimiento', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoMov]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoMov]) then
     begin
       ZQ_TipoMov.Edit;
       ZQ_TipoMovBAJA.AsString:='S';
@@ -320,8 +321,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_TipoMov.RecNo;
     ZQ_TipoMov.Refresh;
@@ -339,7 +340,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar el "Tipo Movimiento" seleccionado?'), 'ABM Tipo Movimiento', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoMov]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoMov]) then
     begin
       ZQ_TipoMov.Edit;
       ZQ_TipoMovBAJA.AsString:='N';
@@ -347,8 +348,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_TipoMov.RecNo;
     ZQ_TipoMov.Refresh;
