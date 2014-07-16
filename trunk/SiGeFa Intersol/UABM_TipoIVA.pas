@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt;
+  ActnList, XPStyleActnCtrls, ActnMan,
+  QRCtrls, QuickRpt, ISOrdenarGrilla, ISVistaPreviaQR,
+  cxClasses, ISBusquedaAvanzada;
 
 type
   TFABM_TipoIVA = class(TForm)
@@ -35,7 +36,6 @@ type
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -45,7 +45,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
     RepTipoIva: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -67,7 +66,6 @@ type
     ColumnHeaderBand2: TQRBand;
     QRLabel29: TQRLabel;
     QRLabel1: TQRLabel;
-    EKVistaPrevia: TEKVistaPreviaQR;
     ZQ_TipoIvaID_TIPO_IVA: TIntegerField;
     ZQ_TipoIvaNOMBRE_TIPO_IVA: TStringField;
     ZQ_TipoIvaABREVIATURA: TStringField;
@@ -95,6 +93,9 @@ type
     ZQ_TipoIvaVERIFICA_CUIT: TStringField;
     Label7: TLabel;
     DBComboBox1: TDBComboBox;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    IsBuscar: TISBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -133,7 +134,7 @@ uses UPrincipal, UDM;
 procedure TFABM_TipoIVA.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
 end;
 
@@ -146,14 +147,14 @@ end;
 
 procedure TFABM_TipoIVA.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_TipoIva, lblCantidadRegistros);
 end;
 
 
 procedure TFABM_TipoIVA.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoIva]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoIva]) then
   begin
     DBGridTipoIva.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -171,7 +172,7 @@ begin
   if ZQ_TipoIva.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoIva]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoIva]) then
   begin
     DBGridTipoIva.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -200,7 +201,7 @@ if ZQ_TipoIvaCOEFICIENTE.IsNull then ZQ_TipoIvaCOEFICIENTE.AsFloat:=0;
 //  end;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       DBGridTipoIva.Enabled:= true;
       DBGridTipoIva.SetFocus;
@@ -224,7 +225,7 @@ end;
 
 procedure TFABM_TipoIVA.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     DBGridTipoIva.Enabled:=true;
     DBGridTipoIva.SetFocus;
@@ -238,12 +239,12 @@ end;
 procedure TFABM_TipoIVA.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
 
   StaticTxtBaja.Visible:= false;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_TipoIva, lblCantidadRegistros);
 end;
 
@@ -299,9 +300,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepTipoIva);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 procedure TFABM_TipoIVA.btnExcelClick(Sender: TObject);
