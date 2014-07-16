@@ -6,9 +6,11 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt, UBuscarPersona, EKEdit, Buttons,
-  EKDbSuma, ComCtrls, EKDBDateTimePicker, Menus, ZStoredProcedure;
+  ActnList, XPStyleActnCtrls, ActnMan, 
+  QRCtrls, QuickRpt, UBuscarPersona, Buttons,
+  ComCtrls, Menus, ZStoredProcedure,
+  ISOrdenarGrilla, ISVistaPreviaQR, cxClasses, ISDbSuma, ISBusquedaAvanzada,
+  ISEdit, ISDBDateTimePicker;
 
 type
   TFCuentaCorrienteProveedor = class(TForm)
@@ -62,8 +64,6 @@ type
     DS_CtaCte_Gral: TDataSource;
     ZQ_CtaCte_Proveedor: TZQuery;
     DS_CtaCte_Proveedor: TDataSource;
-    EKOrdenar_CtaCteGral: TEKOrdenarGrilla;
-    EKOrdenar_CtaCteProveedor: TEKOrdenarGrilla;
     PanelFiltro: TPanel;
     BtnFiltro_Todos: TSpeedButton;
     BtnFiltro_Hoy: TSpeedButton;
@@ -71,43 +71,28 @@ type
     BtnFiltro_EsteMes: TSpeedButton;
     BtnFiltro_EsteAnio: TSpeedButton;
     Label39: TLabel;
-    EKDbSumaCtaCte_Proveedor: TEKDbSuma;
     BtnFiltro_PorFecha: TSpeedButton;
     PanelFiltroFechas: TPanel;
     Label18: TLabel;
     Label19: TLabel;
     Label20: TLabel;
-    EKDBDateTime_FiltroDesde: TEKDBDateTimePicker;
-    EKDBDateTime_FiltroHasta: TEKDBDateTimePicker;
     btnFiltroFecha_Aceptar: TBitBtn;
     btnFiltroFecha_Cancelar: TBitBtn;
     lblFiltro_Fechas: TLabel;
-    EKDbSumaCtaCte_Gral: TEKDbSuma;
     Panel1: TPanel;
-    EKEditResumen_Saldo: TEKEdit;
     Label23: TLabel;
     Label22: TLabel;
-    EKEditResumen_Haber: TEKEdit;
-    EKEditResumen_Debe: TEKEdit;
     Label24: TLabel;
     Label25: TLabel;
-    EKEditResumen_Cantidad: TEKEdit;
     PanelProveedor_ResumenFiltro: TPanel;
     Label21: TLabel;
     Label26: TLabel;
     Label27: TLabel;
     Label28: TLabel;
-    EKEdit_SaldoFiltro: TEKEdit;
-    EKEdit_HaberFiltro: TEKEdit;
-    EKEdit_DebeFiltro: TEKEdit;
-    EKEdit_CantidadFiltro: TEKEdit;
     PanelProveedor_ResumenTotales: TPanel;
     Label15: TLabel;
     Label16: TLabel;
     Label17: TLabel;
-    EKEdit_SaldoTotal: TEKEdit;
-    EKEdit_HaberTotal: TEKEdit;
-    EKEdit_DebeTotal: TEKEdit;
     RepCtasCtes: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -141,7 +126,6 @@ type
     QRCtasCtes_TotalHaber: TQRLabel;
     QRCtasCtes_TotalDebe: TQRLabel;
     QRLabel8: TQRLabel;
-    EKVistaCtasCtes: TEKVistaPreviaQR;
     btnImprimir: TdxBarLargeButton;
     RepProveedor: TQuickRep;
     QRBand1: TQRBand;
@@ -198,7 +182,6 @@ type
     QRSaldo: TQRLabel;
     QRLabel7: TQRLabel;
     QRDBText8: TQRDBText;
-    EKVistaProveedor: TEKVistaPreviaQR;
     btnExcel: TdxBarLargeButton;
     btnSaldoInicial: TdxBarLargeButton;
     ZQ_Insert_SaldoIni: TZQuery;
@@ -226,7 +209,6 @@ type
     ZQ_ComprobanteDetalleMEDIDA: TStringField;
     ZQ_ComprobanteDetalleNOMBRE_MARCA: TStringField;
     ZQ_ComprobanteDetalleCANTIDAD: TFloatField;
-    EKOrdenar_DetalleProducto: TEKOrdenarGrilla;
     btnVerDetalleFactura: TdxBarLargeButton;
     ZQ_CtaCte_GralID_CLIENTE_OUT: TIntegerField;
     ZQ_CtaCte_GralLIMITE_DEUDA: TFloatField;
@@ -270,7 +252,6 @@ type
     ZQ_OrdenPagoDetalleIMPORTE_VENTA: TFloatField;
     ZQ_OrdenPagoDetalleDESCRIPCION: TStringField;
     ZQ_OrdenPagoDetalleIMPORTE_REAL: TFloatField;
-    EKOrdenar_DetalleRecibo: TEKOrdenarGrilla;
     btnAltaRecibo: TdxBarLargeButton;
     PanelDetalleMov: TPanel;
     DBGridDetalle_OP: TDBGrid;
@@ -288,7 +269,6 @@ type
     ZQ_ComprobanteFPagoIMPORTE: TFloatField;
     ZQ_ComprobanteFPagoNOMBRE_CUENTA: TStringField;
     ZQ_ComprobanteFPagoDESCRIPCION: TStringField;
-    EKOrdenar_DetalleFPago: TEKOrdenarGrilla;
     StaticTextDeuda: TStaticText;
     ZQ_Proveedor: TZQuery;
     ZQ_ProveedorID_EMPRESA: TIntegerField;
@@ -319,12 +299,34 @@ type
     ZQ_ProveedorFECHA_ALTA: TDateField;
     ZQ_ProveedorFECHA_BAJA: TDateField;
     DS_Proveedor: TDataSource;
-    EKBuscarProveedor: TEKBusquedaAvanzada;
     ZQ_ComprobanteDetalleIMPORTE_UNITARIO: TFloatField;
     ZQ_ComprobanteDetallePORC_IVA: TFloatField;
     ZQ_ComprobanteDetalleBASE_IMPONIBLE: TFloatField;
     ZQ_OrdenPagoDetalleDESC_REC: TFloatField;
     lblDeudor: TLabel;
+    ISVistaCtasCtes: TISVistaPreviaQR;
+    ISVistaProveedor: TISVistaPreviaQR;
+    ISOrdenar_DetalleRecibo: TISOrdenarGrilla;
+    ISOrdenar_DetalleFPago: TISOrdenarGrilla;
+    ISOrdenar_DetalleProducto: TISOrdenarGrilla;
+    ISOrdenar_CtaCteProveedor: TISOrdenarGrilla;
+    ISOrdenar_CtaCteGral: TISOrdenarGrilla;
+    ISDbSumaCtaCte_Proveedor: TISDbSuma;
+    ISDbSumaCtaCte_Gral: TISDbSuma;
+    ISBuscarProveedor: TISBusquedaAvanzada;
+    ISEdit_CantidadFiltro: TISEdit;
+    ISEdit_DebeFiltro: TISEdit;
+    ISEdit_HaberFiltro: TISEdit;
+    ISEdit_SaldoFiltro: TISEdit;
+    ISEdit_DebeTotal: TISEdit;
+    ISEdit_HaberTotal: TISEdit;
+    ISEdit_SaldoTotal: TISEdit;
+    ISEditResumen_Cantidad: TISEdit;
+    ISEditResumen_Debe: TISEdit;
+    ISEditResumen_Haber: TISEdit;
+    ISEditResumen_Saldo: TISEdit;
+    ISDBDateTime_FiltroDesde: TISDBDateTimePicker;
+    ISDBDateTime_FiltroHasta: TISDBDateTimePicker;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -378,11 +380,11 @@ uses UPrincipal, UDM, DateUtils, UImpresion_Comprobantes,
 
 procedure TFCuentaCorrienteProveedor.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
-  EKOrdenar_CtaCteGral.GuardarConfigColumnas;
-  EKOrdenar_CtaCteProveedor.GuardarConfigColumnas;
-  EKOrdenar_DetalleProducto.GuardarConfigColumnas;
-  EKOrdenar_DetalleRecibo.GuardarConfigColumnas;
-  EKOrdenar_DetalleFPago.GuardarConfigColumnas;  
+  ISOrdenar_CtaCteGral.GuardarConfigColumnas;
+  ISOrdenar_CtaCteProveedor.GuardarConfigColumnas;
+  ISOrdenar_DetalleProducto.GuardarConfigColumnas;
+  ISOrdenar_DetalleRecibo.GuardarConfigColumnas;
+  ISOrdenar_DetalleFPago.GuardarConfigColumnas;  
 
   CanClose:= FPrincipal.cerrar_ventana(transaccion);
 end;
@@ -396,7 +398,7 @@ end;
 
 procedure TFCuentaCorrienteProveedor.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscarProveedor.Buscar then
+  if ISBuscarProveedor.Buscar then
   begin
     dm.mostrarCantidadRegistro(ZQ_CtaCte_Gral, lblCantidadRegistros);
     calcularTotales('GENERAL');
@@ -455,11 +457,11 @@ begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   QRDBLogo2.DataSet:= DM.ZQ_Sucursal;
 
-  EKOrdenar_CtaCteGral.CargarConfigColumnas;
-  EKOrdenar_CtaCteProveedor.CargarConfigColumnas;
-  EKOrdenar_DetalleProducto.CargarConfigColumnas;
-  EKOrdenar_DetalleRecibo.CargarConfigColumnas;
-  EKOrdenar_DetalleFPago.CargarConfigColumnas;  
+  ISOrdenar_CtaCteGral.CargarConfigColunmas;
+  ISOrdenar_CtaCteProveedor.CargarConfigColunmas;
+  ISOrdenar_DetalleProducto.CargarConfigColunmas;
+  ISOrdenar_DetalleRecibo.CargarConfigColunmas;
+  ISOrdenar_DetalleFPago.CargarConfigColunmas;  
 
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnFiltroFecha_Cancelar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnFiltroFecha_Aceptar.Glyph);
@@ -467,8 +469,8 @@ begin
   FPrincipal.Iconos_Menu_16.GetBitmap(0, btnSaldoInicial_Cancelar.Glyph);
   FPrincipal.Iconos_Menu_16.GetBitmap(1, btnSaldoInicial_Aceptar.Glyph);
 
-  EKDBDateTime_FiltroDesde.Date:= dm.EKModelo.Fecha;
-  EKDBDateTime_FiltroHasta.Date:= dm.EKModelo.Fecha;
+  ISDBDateTime_FiltroDesde.Date:= dm.ISModelo.Fecha;
+  ISDBDateTime_FiltroHasta.Date:= dm.ISModelo.Fecha;
 
   PanelResumen.BringToFront;
   viendoResumen:= true;
@@ -531,7 +533,7 @@ begin
   PanelDetalleMov.Visible:= false;
   viendoDetalleCpb:= false;
 
-  hoy:= dm.EKModelo.Fecha;
+  hoy:= dm.ISModelo.Fecha;
 
   ZQ_CtaCte_Proveedor.ParamByName('id_cliente').Clear;
   ZQ_CtaCte_Proveedor.ParamByName('id_proveedor').AsInteger:= ZQ_CtaCte_GralID_PROVEEDOR_OUT.AsInteger;
@@ -577,7 +579,7 @@ begin
     PanelFiltroFechas.BringToFront;
     PanelFiltroFechas.Visible:= true;
 
-    EKDBDateTime_FiltroDesde.SetFocus;
+    ISDBDateTime_FiltroDesde.SetFocus;
     GrupoEditando.Enabled:= false;
     exit;
   end;
@@ -601,19 +603,19 @@ var
 begin
   if tipo = 'GENERAL' then
   begin
-    EKDbSumaCtaCte_Gral.RecalcAll;
-    EKEditResumen_Cantidad.Text:= IntToStr(ZQ_CtaCte_Gral.RecordCount);
-    EKEditResumen_Debe.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[0].SumValue);
-    EKEditResumen_Haber.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[1].SumValue);
-    EKEditResumen_Saldo.Text:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[2].SumValue);
+    ISDbSumaCtaCte_Gral.RecalcAll;
+    ISEditResumen_Cantidad.Text:= IntToStr(ZQ_CtaCte_Gral.RecordCount);
+    ISEditResumen_Debe.Text:= FormatFloat('$ ###,###,##0.00', ISDbSumaCtaCte_Gral.SumCollection.Items[0].SumValue);
+    ISEditResumen_Haber.Text:= FormatFloat('$ ###,###,##0.00', ISDbSumaCtaCte_Gral.SumCollection.Items[1].SumValue);
+    ISEditResumen_Saldo.Text:= FormatFloat('$ ###,###,##0.00', ISDbSumaCtaCte_Gral.SumCollection.Items[2].SumValue);
   end;
 
   if tipo = 'PROVEEDOR' then
   begin
-    EKDbSumaCtaCte_Proveedor.RecalcAll;
+    ISDbSumaCtaCte_Proveedor.RecalcAll;
 
-    debeFilro:= EKDbSumaCtaCte_Proveedor.SumCollection.Items[0].SumValue;
-    haberFiltro:= EKDbSumaCtaCte_Proveedor.SumCollection.Items[1].SumValue;
+    debeFilro:= ISDbSumaCtaCte_Proveedor.SumCollection.Items[0].SumValue;
+    haberFiltro:= ISDbSumaCtaCte_Proveedor.SumCollection.Items[1].SumValue;
     saldoFiltro:= debeFilro - haberFiltro;
 
     ZQ_CtaCte_Gral.Locate('ID_PROVEEDOR_OUT', ZQ_CtaCte_Proveedor.ParamByName('id_proveedor').AsInteger, []);
@@ -623,14 +625,14 @@ begin
 
     //ojoDeudor(saldoTotal>ZQ_CtaCte_GralLIMITE_DEUDA.AsFloat);
 
-    EKEdit_CantidadFiltro.Text:= IntToStr(ZQ_CtaCte_Proveedor.RecordCount);
-    EKEdit_DebeFiltro.Text:= FormatFloat('$ ###,###,##0.00', debeFilro);
-    EKEdit_HaberFiltro.Text:= FormatFloat('$ ###,###,##0.00', haberFiltro);
-    EKEdit_SaldoFiltro.Text:= FormatFloat('$ ###,###,##0.00', saldoFiltro);
+    ISEdit_CantidadFiltro.Text:= IntToStr(ZQ_CtaCte_Proveedor.RecordCount);
+    ISEdit_DebeFiltro.Text:= FormatFloat('$ ###,###,##0.00', debeFilro);
+    ISEdit_HaberFiltro.Text:= FormatFloat('$ ###,###,##0.00', haberFiltro);
+    ISEdit_SaldoFiltro.Text:= FormatFloat('$ ###,###,##0.00', saldoFiltro);
 
-    EKEdit_DebeTotal.Text:= FormatFloat('$ ###,###,##0.00', debeTotal);
-    EKEdit_HaberTotal.Text:= FormatFloat('$ ###,###,##0.00', haberTotal);
-    EKEdit_SaldoTotal.Text:= FormatFloat('$ ###,###,##0.00', saldoTotal);
+    ISEdit_DebeTotal.Text:= FormatFloat('$ ###,###,##0.00', debeTotal);
+    ISEdit_HaberTotal.Text:= FormatFloat('$ ###,###,##0.00', haberTotal);
+    ISEdit_SaldoTotal.Text:= FormatFloat('$ ###,###,##0.00', saldoTotal);
   end;
 end;
 
@@ -645,8 +647,8 @@ end;
 
 procedure TFCuentaCorrienteProveedor.btnFiltroFecha_AceptarClick(Sender: TObject);
 begin
-  ZQ_CtaCte_Proveedor.ParamByName('fecha_desde').AsDate:= EKDBDateTime_FiltroDesde.Date;
-  ZQ_CtaCte_Proveedor.ParamByName('fecha_hasta').AsDate:= EKDBDateTime_FiltroHasta.Date;
+  ZQ_CtaCte_Proveedor.ParamByName('fecha_desde').AsDate:= ISDBDateTime_FiltroDesde.Date;
+  ZQ_CtaCte_Proveedor.ParamByName('fecha_hasta').AsDate:= ISDBDateTime_FiltroHasta.Date;
   ZQ_CtaCte_Proveedor.Close;
   ZQ_CtaCte_Proveedor.Open;
 
@@ -678,14 +680,14 @@ begin
       exit;
 
     DM.VariablesReportes(RepCtasCtes);
-    QRlblPieDePaginaCtasCtes.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-    QRLabelCritBusquedaCtasCtes.Caption:= EKBuscarProveedor.ParametrosBuscados;
+    QRlblPieDePaginaCtasCtes.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
+    QRLabelCritBusquedaCtasCtes.Caption:= ISBuscarProveedor.ParametrosBuscados;
 
-    QRCtasCtes_TotalDebe.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[0].SumValue);
-    QRCtasCtes_TotalHaber.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[1].SumValue);
-    QRCtasCtes_TotalSaldo.Caption:= FormatFloat('$ ###,###,##0.00', EKDbSumaCtaCte_Gral.SumCollection.Items[2].SumValue);
+    QRCtasCtes_TotalDebe.Caption:= FormatFloat('$ ###,###,##0.00', ISDbSumaCtaCte_Gral.SumCollection.Items[0].SumValue);
+    QRCtasCtes_TotalHaber.Caption:= FormatFloat('$ ###,###,##0.00', ISDbSumaCtaCte_Gral.SumCollection.Items[1].SumValue);
+    QRCtasCtes_TotalSaldo.Caption:= FormatFloat('$ ###,###,##0.00', ISDbSumaCtaCte_Gral.SumCollection.Items[2].SumValue);
 
-    EKVistaCtasCtes.VistaPrevia;
+    ISVistaCtasCtes.VistaPrevia;
   end
   else
   begin
@@ -693,19 +695,19 @@ begin
       exit;
 
     DM.VariablesReportes(RepProveedor);
-    QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
+    QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
 
     QRlblFiltro.Caption:= lblFiltro_Fechas.Caption;
 
-    QRDebeFiltro.Caption:= EKEdit_DebeFiltro.Text;
-    QRHaberFiltro.Caption:= EKEdit_HaberFiltro.Text;
-    QRSaldoFiltro.Caption:= EKEdit_SaldoFiltro.Text;
+    QRDebeFiltro.Caption:= ISEdit_DebeFiltro.Text;
+    QRHaberFiltro.Caption:= ISEdit_HaberFiltro.Text;
+    QRSaldoFiltro.Caption:= ISEdit_SaldoFiltro.Text;
 
-    QRDebe.Caption:= EKEdit_DebeTotal.Text;
-    QRHaber.Caption:= EKEdit_HaberTotal.Text;
-    QRSaldo.Caption:= EKEdit_SaldoTotal.Text;
+    QRDebe.Caption:= ISEdit_DebeTotal.Text;
+    QRHaber.Caption:= ISEdit_HaberTotal.Text;
+    QRSaldo.Caption:= ISEdit_SaldoTotal.Text;
 
-    EKVistaProveedor.VistaPrevia;
+    ISVistaProveedor.VistaPrevia;
   end
 
 end;
@@ -769,7 +771,7 @@ begin
 
   if ZQ_SaldoIni.IsEmpty then
   begin
-    DateTimePicker_FechaSaldo.DateTime:= dm.EKModelo.FechayHora;
+    DateTimePicker_FechaSaldo.DateTime:= dm.ISModelo.FechayHora;
     EditSaldiIni_Importe.Text:= '0';
   end
   else
@@ -798,7 +800,7 @@ begin
   try
     saldo_ini:= StrToFloat(EditSaldiIni_Importe.Text);
 
-    if dm.EKModelo.iniciar_transaccion(transaccion, []) then
+    if dm.ISModelo.iniciar_transaccion(transaccion, []) then
     begin
       ZQ_Insert_SaldoIni.Close;
       ZQ_Insert_SaldoIni.ParamByName('id_cliente').Clear;
@@ -808,8 +810,8 @@ begin
       ZQ_Insert_SaldoIni.ParamByName('fecha').AsDateTime:= DateTimePicker_FechaSaldo.DateTime;
       ZQ_Insert_SaldoIni.ExecSQL;
 
-      if not DM.EKModelo.finalizar_transaccion(transaccion) then
-        DM.EKModelo.cancelar_transaccion(transaccion)
+      if not DM.ISModelo.finalizar_transaccion(transaccion) then
+        DM.ISModelo.cancelar_transaccion(transaccion)
     end;
 
     PanelSaldoInicial.Visible:= false;
@@ -924,7 +926,7 @@ end;
 procedure TFCuentaCorrienteProveedor.btnAltaReciboClick(Sender: TObject);
 begin
   FPrincipal.AABM_CPB_OrdenPago.Execute;
-  if not dm.EKModelo.verificar_transaccion('ABM ORDEN PAGO') then
+  if not dm.ISModelo.verificar_transaccion('ABM ORDEN PAGO') then
     FABM_CPB_OrdenPago.alta_orden_pago_cta_cte_desde_afuera(ZQ_ProveedorID_EMPRESA.AsInteger)
   else
     ShowMessage('Hay un alta de Orden de Pago en curso, verifique');
