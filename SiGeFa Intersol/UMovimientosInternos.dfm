@@ -1,8 +1,8 @@
 object FMovimientosInternos: TFMovimientosInternos
-  Left = 257
-  Top = 102
+  Left = 310
+  Top = 273
   Width = 954
-  Height = 655
+  Height = 679
   Caption = 'Movimientos Internos'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -132,9 +132,9 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           50.270833333333330000
-          788.458333333333400000
+          788.458333333333300000
           124.354166666666700000
-          320.145833333333400000)
+          320.145833333333300000)
         Alignment = taCenter
         AlignToBand = True
         AutoSize = True
@@ -164,8 +164,8 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          703.791666666666800000
-          68.791666666666680000
+          703.791666666666700000
+          68.791666666666670000
           492.125000000000000000)
         Alignment = taCenter
         AlignToBand = True
@@ -196,7 +196,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          664.104166666666800000
+          664.104166666666700000
           5.291666666666667000
           571.500000000000000000)
         Alignment = taCenter
@@ -436,7 +436,7 @@ object FMovimientosInternos: TFMovimientosInternos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        58.208333333333340000
+        58.208333333333330000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -567,9 +567,9 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           37.041666666666670000
-          947.208333333333400000
+          947.208333333333300000
           5.291666666666667000
-          216.958333333333400000)
+          216.958333333333300000)
         Alignment = taLeftJustify
         AlignToBand = False
         AutoSize = True
@@ -756,7 +756,7 @@ object FMovimientosInternos: TFMovimientosInternos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        42.333333333333340000
+        42.333333333333330000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -998,7 +998,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           50.270833333333330000
-          836.083333333333400000
+          836.083333333333300000
           124.354166666666700000
           224.895833333333300000)
         Alignment = taCenter
@@ -1019,7 +1019,7 @@ object FMovimientosInternos: TFMovimientosInternos
         FontSize = 12
       end
       object RepCuentas_Subtitulo: TQRLabel
-        Left = -67
+        Left = 284
         Top = 26
         Width = 150
         Height = 20
@@ -1030,8 +1030,8 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          751.416666666666800000
-          68.791666666666680000
+          751.416666666666700000
+          68.791666666666670000
           396.875000000000000000)
         Alignment = taCenter
         AlignToBand = True
@@ -1051,7 +1051,7 @@ object FMovimientosInternos: TFMovimientosInternos
         FontSize = 9
       end
       object RepCuentas_Titulo: TQRLabel
-        Left = -76
+        Left = 275
         Top = 2
         Width = 168
         Height = 20
@@ -1062,7 +1062,7 @@ object FMovimientosInternos: TFMovimientosInternos
         Frame.DrawRight = False
         Size.Values = (
           52.916666666666670000
-          727.604166666666800000
+          727.604166666666700000
           5.291666666666667000
           444.500000000000000000)
         Alignment = taCenter
@@ -1376,7 +1376,7 @@ object FMovimientosInternos: TFMovimientosInternos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        58.208333333333340000
+        58.208333333333330000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -1426,7 +1426,7 @@ object FMovimientosInternos: TFMovimientosInternos
       ForceNewColumn = False
       ForceNewPage = False
       Size.Values = (
-        82.020833333333340000
+        82.020833333333330000
         1899.708333333333000000)
       PreCaluculateBandHeight = False
       KeepOnOnePage = False
@@ -1683,8 +1683,8 @@ object FMovimientosInternos: TFMovimientosInternos
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 946
-    Height = 576
+    Width = 938
+    Height = 589
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -1699,14 +1699,14 @@ object FMovimientosInternos: TFMovimientosInternos
       Tag = 99
       Left = 5
       Top = 5
-      Width = 936
+      Width = 928
       Height = 25
       Align = alTop
       BevelOuter = bvNone
       Color = 16628859
       TabOrder = 0
       DesignSize = (
-        936
+        928
         25)
       object PanelManejoCalendario: TPanel
         Tag = 99
@@ -1812,8 +1812,8 @@ object FMovimientosInternos: TFMovimientosInternos
     object PanelDia: TPanel
       Left = 5
       Top = 30
-      Width = 936
-      Height = 541
+      Width = 928
+      Height = 554
       Align = alClient
       BevelOuter = bvNone
       Caption = 'PanelDia'
@@ -1821,15 +1821,15 @@ object FMovimientosInternos: TFMovimientosInternos
       object PanelDia_Lista: TPanel
         Left = 0
         Top = 217
-        Width = 936
-        Height = 324
+        Width = 928
+        Height = 337
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object PanelDia_InfoLista: TPanel
           Left = 0
           Top = 0
-          Width = 936
+          Width = 928
           Height = 28
           Align = alTop
           BevelOuter = bvNone
@@ -1837,7 +1837,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object lblFechaHoy: TLabel
             Left = 0
             Top = 0
-            Width = 936
+            Width = 928
             Height = 15
             Align = alClient
             Alignment = taCenter
@@ -1852,13 +1852,13 @@ object FMovimientosInternos: TFMovimientosInternos
           object Panel2: TPanel
             Left = 0
             Top = 15
-            Width = 936
+            Width = 928
             Height = 13
             Align = alBottom
             BevelOuter = bvNone
             TabOrder = 0
             object Label10: TLabel
-              Left = 792
+              Left = 784
               Top = 0
               Width = 144
               Height = 13
@@ -1876,7 +1876,7 @@ object FMovimientosInternos: TFMovimientosInternos
               ParentFont = False
             end
             object Label13: TLabel
-              Left = 504
+              Left = 496
               Top = 0
               Width = 144
               Height = 13
@@ -1894,7 +1894,7 @@ object FMovimientosInternos: TFMovimientosInternos
               ParentFont = False
             end
             object Label14: TLabel
-              Left = 648
+              Left = 640
               Top = 0
               Width = 144
               Height = 13
@@ -1916,8 +1916,8 @@ object FMovimientosInternos: TFMovimientosInternos
         object DBGrid_Dia: TDBGrid
           Left = 0
           Top = 28
-          Width = 936
-          Height = 265
+          Width = 928
+          Height = 278
           Align = alClient
           Color = 14606012
           DataSource = DS_MovHoy
@@ -1981,8 +1981,8 @@ object FMovimientosInternos: TFMovimientosInternos
         end
         object Panel3: TPanel
           Left = 0
-          Top = 293
-          Width = 936
+          Top = 306
+          Width = 928
           Height = 31
           Align = alBottom
           BevelOuter = bvNone
@@ -1990,7 +1990,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object lblMov_TotalEgresos: TLabel
             Left = 0
             Top = 3
-            Width = 936
+            Width = 928
             Height = 14
             Align = alBottom
             Alignment = taRightJustify
@@ -2005,7 +2005,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object lblMov_TotalIngresos: TLabel
             Left = 0
             Top = 17
-            Width = 936
+            Width = 928
             Height = 14
             Align = alBottom
             Alignment = taRightJustify
@@ -2022,7 +2022,7 @@ object FMovimientosInternos: TFMovimientosInternos
       object PanelDia_Movimiento: TPanel
         Left = 0
         Top = 0
-        Width = 936
+        Width = 928
         Height = 217
         Align = alTop
         BevelOuter = bvNone
@@ -2030,7 +2030,7 @@ object FMovimientosInternos: TFMovimientosInternos
         object PanelDia_InfoMovimiento: TPanel
           Left = 0
           Top = 0
-          Width = 936
+          Width = 928
           Height = 14
           Align = alTop
           BevelOuter = bvNone
@@ -2038,7 +2038,7 @@ object FMovimientosInternos: TFMovimientosInternos
           object Label2: TLabel
             Left = 0
             Top = 0
-            Width = 936
+            Width = 928
             Height = 14
             Align = alClient
             Alignment = taCenter
@@ -2054,7 +2054,7 @@ object FMovimientosInternos: TFMovimientosInternos
         object GroupBox1: TGroupBox
           Left = 0
           Top = 14
-          Width = 936
+          Width = 928
           Height = 203
           Align = alClient
           TabOrder = 0
@@ -2095,7 +2095,7 @@ object FMovimientosInternos: TFMovimientosInternos
             Anchors = [akLeft, akTop, akRight, akBottom]
             BevelOuter = bvNone
             BorderWidth = 2
-            TabOrder = 5
+            TabOrder = 4
             object DBGridFPago_Egreso: TDBGrid
               Left = 2
               Top = 2
@@ -2257,17 +2257,6 @@ object FMovimientosInternos: TFMovimientosInternos
               end
             end
           end
-          object EKDBDateTimePicker1: TEKDBDateTimePicker
-            Left = 83
-            Top = 11
-            Width = 150
-            Height = 21
-            Date = 0.843744895842974100
-            Time = 0.843744895842974100
-            TabOrder = 0
-            DataField = 'FECHA'
-            DataSource = DS_Comprobante
-          end
           object DBEdit1: TDBEdit
             Left = 336
             Top = 35
@@ -2275,7 +2264,7 @@ object FMovimientosInternos: TFMovimientosInternos
             Height = 21
             DataField = 'OBSERVACION'
             DataSource = DS_Comprobante
-            TabOrder = 4
+            TabOrder = 3
           end
           object RadioButtonEgreso: TRadioButton
             Left = 170
@@ -2283,7 +2272,7 @@ object FMovimientosInternos: TFMovimientosInternos
             Width = 70
             Height = 17
             Caption = 'Egreso'
-            TabOrder = 3
+            TabOrder = 2
             OnClick = RadioButtonEgresoClick
           end
           object RadioButtonIngreso: TRadioButton
@@ -2293,7 +2282,7 @@ object FMovimientosInternos: TFMovimientosInternos
             Height = 17
             Caption = 'Ingreso'
             Checked = True
-            TabOrder = 2
+            TabOrder = 1
             TabStop = True
             OnClick = RadioButtonIngresoClick
           end
@@ -2307,7 +2296,18 @@ object FMovimientosInternos: TFMovimientosInternos
             KeyField = 'ID_TIPO_MOVIMIENTO'
             ListField = 'NOMBRE_MOVIMIENTO'
             ListSource = DS_TipoMovimiento
-            TabOrder = 1
+            TabOrder = 0
+          end
+          object ISDBDateTimePicker1: TISDBDateTimePicker
+            Left = 88
+            Top = 11
+            Width = 150
+            Height = 21
+            Date = 41836.390865520840000000
+            Time = 41836.390865520840000000
+            TabOrder = 5
+            DataField = 'FECHA'
+            DataSource = DS_Comprobante
           end
         end
       end
@@ -2316,7 +2316,7 @@ object FMovimientosInternos: TFMovimientosInternos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2913,11 +2913,6 @@ object FMovimientosInternos: TFMovimientosInternos
       OnExecute = ACancelarExecute
     end
   end
-  object EKVistaPrevia: TEKVistaPreviaQR
-    ShowModal = False
-    Left = 595
-    Top = 168
-  end
   object ZQ_TipoMovimiento: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -3284,54 +3279,6 @@ object FMovimientosInternos: TFMovimientosInternos
       Size = 1
     end
   end
-  object EKListadoMedio: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select tipo.*'
-      'from tipo_formapago tipo'
-      
-        'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago ' +
-        '= ctfp.id_tipo_formapago)'
-      'where tipo.baja = '#39'N'#39
-      '  and ctfp.id_cuenta = :id_cuenta'
-      'order by tipo.descripcion')
-    CampoBuscar = 'descripcion'
-    CampoClave = 'id_tipo_formapago'
-    TituloVentana = 'Buscar Medio'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 597
-    Top = 321
-  end
-  object EKListadoCuenta: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select cta.*, tipo.descripcion,'
-      
-        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
-        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
-      'from cuenta cta'
-      
-        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
-        'po_formapago)'
-      'where cta.baja = '#39'N'#39
-      '  and cta.id_cuenta > 2')
-    CampoBuscar = 'busqueda'
-    CampoClave = 'id_cuenta'
-    TituloVentana = 'Buscar Cuenta'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 509
-    Top = 321
-  end
   object ZQ_ListadoCuenta: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -3570,18 +3517,7 @@ object FMovimientosInternos: TFMovimientosInternos
       FieldName = 'IMPORTE_REAL'
     end
   end
-  object EKSuma_FPago: TEKDbSuma
-    SumCollection = <
-      item
-        Operacion = goSum
-        NombreCampo = 'IMPORTE'
-      end>
-    DataSet = ZQ_CpbFormaPago
-    SumListChanged = EKSuma_FPagoSumListChanged
-    Left = 117
-    Top = 321
-  end
-  object EKOrdenarGrilla_Dia: TEKOrdenarGrilla
+  object ISOrdenarGrilla_Dia: TISOrdenarGrilla
     Grilla = DBGrid_Dia
     Filtros = <
       item
@@ -3608,16 +3544,17 @@ object FMovimientosInternos: TFMovimientosInternos
         TituloColumna = 'Egresos'
         Visible = True
       end>
-    NombreGuardar = 'EKOrdenarGrilla_Dia'
+    NombreGuardarConfig = 'EKOrdenarGrilla_Dia'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = False
-    PermitirFiltrar = False
-    Left = 95
-    Top = 372
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 85
+    Top = 383
   end
-  object EKOrdenarGrillaFPago_Egreso: TEKOrdenarGrilla
+  object ISOrdenarGrillaFPago_Egreso: TISOrdenarGrilla
     Grilla = DBGridFPago_Egreso
     Filtros = <
       item
@@ -3636,16 +3573,17 @@ object FMovimientosInternos: TFMovimientosInternos
         TituloColumna = 'Importe'
         Visible = True
       end>
-    NombreGuardar = 'EKOrdenarGrillaFPago_Egreso'
+    NombreGuardarConfig = 'EKOrdenarGrillaFPago_Egreso'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = False
-    PermitirMover = False
-    PermitirFiltrar = False
-    Left = 727
-    Top = 316
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 725
+    Top = 319
   end
-  object EKOrdenarGrillaFPago_Ingreso: TEKOrdenarGrilla
+  object ISOrdenarGrillaFPago_Ingreso: TISOrdenarGrilla
     Grilla = DBGridFPago_Ingreso
     Filtros = <
       item
@@ -3664,16 +3602,17 @@ object FMovimientosInternos: TFMovimientosInternos
         TituloColumna = 'Importe'
         Visible = True
       end>
-    NombreGuardar = 'EKOrdenarGrillaFPago_Ingreso'
+    NombreGuardarConfig = 'EKOrdenarGrillaFPago_Ingreso'
     AltoTituloColumna = 15
     FuenteNormal = []
-    PermitirOrdenar = False
-    PermitirMover = False
-    PermitirFiltrar = False
-    Left = 727
-    Top = 372
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 725
+    Top = 375
   end
-  object EKSuma_Mov: TEKDbSuma
+  object ISSuma_Mov: TISDbSuma
     SumCollection = <
       item
         Operacion = goSum
@@ -3685,45 +3624,100 @@ object FMovimientosInternos: TFMovimientosInternos
       end>
     DataSet = ZQ_MovHoy
     SumListChanged = EKSuma_MovSumListChanged
-    Left = 34
+    Left = 37
     Top = 319
   end
-  object EKBuscar: TEKBusquedaAvanzada
+  object ISSuma_FPago: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'IMPORTE'
+      end>
+    DataSet = ZQ_CpbFormaPago
+    SumListChanged = EKSuma_FPagoSumListChanged
+    Left = 117
+    Top = 319
+  end
+  object ISVistaPreviaRepCpb: TISVistaPreviaQR
+    Reporte = RepComprobante
+    ShowModal = False
+    Left = 798
+    Top = 138
+  end
+  object ISListadoCuenta: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select cta.*, tipo.descripcion,'
+      
+        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
+        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
+      'from cuenta cta'
+      
+        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
+        'po_formapago)'
+      'where cta.baja = '#39'N'#39
+      '  and cta.id_cuenta > 2')
+    CampoBuscar = 'busqueda'
+    CampoClave = 'id_cuenta'
+    TituloVentana = 'Buscar Cuenta'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 480
+    AnchoBuscar2 = 480
+    Left = 509
+    Top = 319
+  end
+  object ISListadoMedio: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select tipo.*'
+      'from tipo_formapago tipo'
+      
+        'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago ' +
+        '= ctfp.id_tipo_formapago)'
+      'where tipo.baja = '#39'N'#39
+      '  and ctfp.id_cuenta = :id_cuenta'
+      'order by tipo.descripcion')
+    CampoBuscar = 'descripcion'
+    CampoClave = 'id_tipo_formapago'
+    TituloVentana = 'Buscar Medio'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 480
+    AnchoBuscar2 = 480
+    Left = 597
+    Top = 319
+  end
+  object ISBuscar: TISBusquedaAvanzada
     CriteriosBusqueda = <
       item
         Titulo = 'Sucursal'
-        TipoCampoIngreso = EK_Combo
+        TipoCampoIngreso = IS_Combo
         TipoCampoIndiceVer = 'Contiene'
-        TipoComboSQLCampoVer = 'nombre'
-        TipoComboSQLCampoReal = 'id_sucursal'
+        TipoCombollenarCampo = 'nombre'
+        TipoCombollenarCampoReal = 'id_sucursal'
         TipoComboEditable = False
-        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
-        VaciarValorDespues = False
       end
       item
         Titulo = 'Fecha'
-        TipoCampo = EK_Fecha
+        TipoCampo = IS_Fecha
         Mascara = '##/##/####'
         TipoCampoIndiceVer = '='
         TipoComboEditable = False
-        TipoComboAncho = 200
         CambiarCondicion = False
         ItemIndex = -1
         VaciarValor = False
-        VaciarValorDespues = False
       end>
     CriteriosLocate = <>
-    UsarWhereOriginal = EK_Sin_Where
-    PantallaReducida = True
-    Left = 68
-    Top = 152
-  end
-  object EKVistaPreviaRepCpb: TEKVistaPreviaQR
-    Reporte = RepComprobante
-    ShowModal = False
-    Left = 853
-    Top = 60
+    Modelo = DM.ISModelo
+    UsarWhereOriginal = IS_Con_Where
+    Left = 78
+    Top = 146
   end
 end
