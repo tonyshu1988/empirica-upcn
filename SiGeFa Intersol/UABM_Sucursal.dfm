@@ -2494,6 +2494,16 @@ object FABM_Sucursal: TFABM_Sucursal
     CriteriosLocate = <>
     Modelo = DM.ISModelo
     DataSet = ZQ_Sucursal
+    SQL.Strings = (
+      'select s.*'
+      'from Sucursal s'
+      'order by s.nombre')
+    SQL_Select.Strings = (
+      'select s.*')
+    SQL_From.Strings = (
+      'from Sucursal s')
+    SQL_Orden.Strings = (
+      'order by s.nombre')
     UsarWhereOriginal = IS_Sin_Where
     PantallaReducida = True
     Left = 640
