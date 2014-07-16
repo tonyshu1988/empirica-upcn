@@ -6,9 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  IdBaseComponent, IdMessage, IdException, ComCtrls, Buttons, EKListadoSQL,
+  IdBaseComponent, IdMessage, IdException, ComCtrls, Buttons,
   ZStoredProcedure, cxClasses, IdAttachmentFile, ImgList, ActnList,
-  XPStyleActnCtrls, ActnMan;
+  XPStyleActnCtrls, ActnMan, ISListadoSQL;
 
 type
   TFMailEnviar = class(TForm)
@@ -51,7 +51,6 @@ type
     Label6: TLabel;
     DS_Cuentas: TDataSource;
     DBTextCuenta: TDBText;
-    EKListadoCuentas: TEKListadoSQL;
     ZQ_Cuentas: TZQuery;
     ZQ_CuentasID_CUENTA: TIntegerField;
     ZQ_CuentasID_SUCURSAL: TIntegerField;
@@ -91,7 +90,6 @@ type
     BitBtnBuscarPara: TBitBtn;
     BitBtnBuscarCC: TBitBtn;
     BitBtnBuscarBCC: TBitBtn;
-    EKListadoMail: TEKListadoSQL;
     ZQ_ListaMails: TZQuery;
     ZQ_ListaMailsID_ENTIDAD_TELEFONO: TIntegerField;
     ZQ_ListaMailsID_ENTIDAD: TIntegerField;
@@ -103,6 +101,8 @@ type
     ABuscar_Para: TAction;
     ABuscar_CC: TAction;
     ABuscar_BCC: TAction;
+    ISListadoMail: TISListadoSQL;
+    ISListadoCuentas: TISListadoSQL;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -239,8 +239,8 @@ begin
   conectado:= false;
   id_mensaje:= -1;
 
-  dm.EKModelo.abrir(ZQ_ListaMails);
-  
+  dm.ISModelo.abrir(ZQ_ListaMails);
+
   //busco todas las cuentas de la sucursal
   ZQ_Cuentas.Close;
   ZQ_Cuentas.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
@@ -458,7 +458,7 @@ var
   indice: integer;
 begin
   try
-    if dm.EKModelo.iniciar_transaccion('ENVIANDO MAIL', [ZQ_Mail, ZQ_Adjunto]) then
+    if dm.ISModelo.iniciar_transaccion('ENVIANDO MAIL', [ZQ_Mail, ZQ_Adjunto]) then
     begin
       if not reenviando then //si se esta enviando por primera vez
       begin
@@ -500,8 +500,8 @@ begin
   //      ZQ_AdjuntoUBICACION_ARCHIVO.AsString:= listaAdjuntos.Items[0].SubItems.Text;
   //    end;
 
-      if not (dm.EKModelo.finalizar_transaccion('ENVIANDO MAIL')) then
-        dm.EKModelo.cancelar_transaccion('ENVIANDO MAIL');
+      if not (dm.ISModelo.finalizar_transaccion('ENVIANDO MAIL')) then
+        dm.ISModelo.cancelar_transaccion('ENVIANDO MAIL');
     end
   except
     begin
@@ -514,7 +514,7 @@ end;
 
 procedure TFMailEnviar.marcarEnvio(enviado: boolean);
 begin
-  if dm.EKModelo.iniciar_transaccion('ENVIANDO MAIL', [ZQ_Mail]) then
+  if dm.ISModelo.iniciar_transaccion('ENVIANDO MAIL', [ZQ_Mail]) then
   begin
     ZQ_Mail.Close;
     ZQ_Mail.ParamByName('id_mensaje').AsInteger:= id_mensaje;
@@ -526,8 +526,8 @@ begin
     else
       ZQ_MailENVIADO.AsString:= 'N';
 
-    if not (dm.EKModelo.finalizar_transaccion('ENVIANDO MAIL')) then
-      dm.EKModelo.cancelar_transaccion('ENVIANDO MAIL');
+    if not (dm.ISModelo.finalizar_transaccion('ENVIANDO MAIL')) then
+      dm.ISModelo.cancelar_transaccion('ENVIANDO MAIL');
   end;
 
   enviandoMail:= false;
@@ -574,22 +574,22 @@ procedure TFMailEnviar.btnCambiarCuentaClick(Sender: TObject);
 begin
   ZQ_Cuentas.Filtered:= false;
 
-  EKListadoCuentas.SQL.Text:= 'select c.* '+
+  ISListadoCuentas.SQL.Text:= 'select c.* '+
                               'from mail_cuentas c '+
                               'where id_sucursal = '+IntToStr(SUCURSAL_LOGUEO);
 
-  if EKListadoCuentas.Buscar then
+  if ISListadoCuentas.Buscar then
   begin
-    dm.configMail('CUENTA', StrToInt(EKListadoCuentas.Resultado));
+    dm.configMail('CUENTA', StrToInt(ISListadoCuentas.Resultado));
   end;
 end;
 
 
 procedure TFMailEnviar.BitBtnBuscarParaClick(Sender: TObject);
 begin
-  if EKListadoMail.Buscar then
+  if ISListadoMail.Buscar then
   begin
-    if EKListadoMail.Resultado <> '' then
+    if ISListadoMail.Resultado <> '' then
     begin
       if ExecRegExpr ('^[A-Za-z][A-Za-z0-9_.\-]*@[A-Za-z0-9_\-]+\.[A-Za-z0-9_.]+[A-za-z]', ZQ_ListaMailsMAIL.AsString) then
         EditPara.Text:= EditPara.Text+ZQ_ListaMailsMAIL.AsString+'; '
@@ -602,9 +602,9 @@ end;
 
 procedure TFMailEnviar.BitBtnBuscarCCClick(Sender: TObject);
 begin
-  if EKListadoMail.Buscar then
+  if ISListadoMail.Buscar then
   begin
-    if EKListadoMail.Resultado <> '' then
+    if ISListadoMail.Resultado <> '' then
     begin
       if ExecRegExpr ('^[A-Za-z][A-Za-z0-9_.\-]*@[A-Za-z0-9_\-]+\.[A-Za-z0-9_.]+[A-za-z]', ZQ_ListaMailsMAIL.AsString) then
         EditCC.Text:= EditCC.Text+ZQ_ListaMailsMAIL.AsString+'; '
@@ -617,9 +617,9 @@ end;
 
 procedure TFMailEnviar.BitBtnBuscarBCCClick(Sender: TObject);
 begin
-  if EKListadoMail.Buscar then
+  if ISListadoMail.Buscar then
   begin
-    if EKListadoMail.Resultado <> '' then
+    if ISListadoMail.Resultado <> '' then
     begin
       if ExecRegExpr ('^[A-Za-z][A-Za-z0-9_.\-]*@[A-Za-z0-9_\-]+\.[A-Za-z0-9_.]+[A-za-z]', ZQ_ListaMailsMAIL.AsString) then
         EditBCC.Text:= EditBCC.Text+ZQ_ListaMailsMAIL.AsString+'; '
