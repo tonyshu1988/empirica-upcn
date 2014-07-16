@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt;
+  ActnList, XPStyleActnCtrls, ActnMan, 
+  QRCtrls, QuickRpt, ISVistaPreviaQR, cxClasses,
+  ISOrdenarGrilla, ISBusquedaAvanzada;
 
 type
   TFABM_TipoArticulo = class(TForm)
@@ -38,7 +39,6 @@ type
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -48,7 +48,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
     RepTipoArticulo: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -70,8 +69,10 @@ type
     ColumnHeaderBand2: TQRBand;
     QRLabel29: TQRLabel;
     QRLabel1: TQRLabel;
-    EKVistaPrevia: TEKVistaPreviaQR;
     btnExcel: TdxBarLargeButton;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISBuscar: TISBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -126,14 +127,14 @@ end;
 
 procedure TFABM_TipoArticulo.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_TipoArt, lblCantidadRegistros);
 end;
 
 
 procedure TFABM_TipoArticulo.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
   begin
     DBGridTipoArticulo.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -152,7 +153,7 @@ begin
   if ZQ_TipoArt.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
   begin
     DBGridTipoArticulo.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -174,7 +175,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el "Tipo Artículo" seleccionado?'), 'ABM Tipo Artículo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
     begin
       ZQ_TipoArt.Edit;
       ZQ_TipoArtBAJA.AsString:='S';
@@ -182,8 +183,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_TipoArt.RecNo;
     ZQ_TipoArt.Refresh;
@@ -201,7 +202,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar el "Tipo Artículo" seleccionado?'), 'ABM Tipo Artículo', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoArt]) then
     begin
       ZQ_TipoArt.Edit;
       ZQ_TipoArtBAJA.AsString:='N';
@@ -209,8 +210,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_TipoArt.RecNo;
     ZQ_TipoArt.Refresh;
@@ -233,7 +234,7 @@ begin
   end;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       DBGridTipoArticulo.Enabled:= true;
       DBGridTipoArticulo.SetFocus;
@@ -257,7 +258,7 @@ end;
 
 procedure TFABM_TipoArticulo.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     DBGridTipoArticulo.Enabled:=true;
     DBGridTipoArticulo.SetFocus;
@@ -273,7 +274,7 @@ begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_TipoArt, lblCantidadRegistros);  
 end;
 
@@ -339,9 +340,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepTipoArticulo);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 procedure TFABM_TipoArticulo.btnExcelClick(Sender: TObject);

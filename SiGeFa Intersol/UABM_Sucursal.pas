@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls, UBuscarPersona,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, ExtDlgs, jpeg,
-  EKBusquedaAvanzada, QRCtrls, QuickRpt, EKVistaPreviaQR, ComCtrls, Menus;
+  ActnList, XPStyleActnCtrls, ActnMan, ExtDlgs, jpeg,
+  QRCtrls, QuickRpt, ComCtrls, Menus,
+  cxClasses, ISVistaPreviaQR, ISOrdenarGrilla, ISBusquedaAvanzada;
 
 type
   TFABM_Sucursal = class(TForm)
@@ -36,7 +37,6 @@ type
     ZQ_SucursalEMAIL: TStringField;
     ZQ_SucursalBAJA: TStringField;
     DS_Sucursal: TDataSource;
-    EKOrdenarSucursal: TEKOrdenarGrilla;
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
@@ -51,10 +51,8 @@ type
     ACancelar: TAction;
     buscarImagen: TOpenPictureDialog;
     ZQ_SucursalLOGO: TBlobField;
-    EKBuscar: TEKBusquedaAvanzada;
     ZQ_SucursalREPORTE_TITULO: TStringField;
     ZQ_SucursalREPORTE_SUBTITULO: TStringField;
-    EKVistaPrevia: TEKVistaPreviaQR;
     RepSucursal: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -158,8 +156,11 @@ type
     DBMemoVendedor: TDBMemo;
     DBGridVendedor: TDBGrid;
     Label15: TLabel;
-    EKOrdenarEmpleado: TEKOrdenarGrilla;
     btnExcel: TdxBarLargeButton;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrdenarSucursal: TISOrdenarGrilla;
+    ISOrdenarEmpleado: TISOrdenarGrilla;
+    ISBuscar: TISBusquedaAvanzada;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
@@ -211,14 +212,14 @@ uses  UDM, UPrincipal;
 
 procedure TFABM_Sucursal.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
 end;
 
 
 procedure TFABM_Sucursal.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal, ZQ_PersonaRelacionVendedor]) then
+  if dm.ISModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal, ZQ_PersonaRelacionVendedor]) then
   begin
     DBGridSucursal.Enabled := false;
     PageControl1.Visible:= true;
@@ -231,8 +232,6 @@ begin
     DBEApellidoNombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
-
-    EKOrdenarEmpleado.PopUpGrilla:= PopupMenuVendedor;
   end;
 end;
 
@@ -242,7 +241,7 @@ begin
   if ZQ_Sucursal.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal, ZQ_PersonaRelacionVendedor]) then
+  if dm.ISModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal, ZQ_PersonaRelacionVendedor]) then
   begin
     DBGridSucursal.Enabled := false;
     PageControl1.Visible:= true;
@@ -252,8 +251,6 @@ begin
     DBEApellidoNombre.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
-
-    EKOrdenarEmpleado.PopUpGrilla:= PopupMenuVendedor;
   end;
 end;
 
@@ -268,14 +265,13 @@ begin
     exit;
   end;
 
-  if DM.EKModelo.finalizar_transaccion(Transaccion_ABMSucursal) then
+  if DM.ISModelo.finalizar_transaccion(Transaccion_ABMSucursal) then
   begin
     DBGridSucursal.Enabled:=true;
     GrupoEditando.Enabled:=true;
     GrupoGuardarCancelar.Enabled:=false;
     DBGridSucursal.SetFocus;
     PageControl1.Visible := false;
-    EKOrdenarEmpleado.PopUpGrilla:= nil;
   end;
 
   dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
@@ -294,14 +290,13 @@ begin
        ZQ_PersonaRelacionVendedor.CancelUpdates;
   end;
 
-  if dm.EKModelo.cancelar_transaccion(Transaccion_ABMSucursal) then
+  if dm.ISModelo.cancelar_transaccion(Transaccion_ABMSucursal) then
   begin
     DBGridSucursal.Enabled:=true;
     DBGridSucursal.SetFocus;
     GrupoEditando.Enabled:=true;
     GrupoGuardarCancelar.Enabled:=false;
     PageControl1.Visible := false;
-    EKOrdenarEmpleado.PopUpGrilla:= nil;
   end;
 end;
 
@@ -315,8 +310,8 @@ end;
 procedure TFABM_Sucursal.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
-  EKOrdenarSucursal.GuardarConfigColumnas;
-  EKOrdenarEmpleado.GuardarConfigColumnas;
+  ISOrdenarSucursal.GuardarConfigColumnas;
+  ISOrdenarEmpleado.GuardarConfigColumnas;
 
   CanClose:= FPrincipal.cerrar_ventana(Transaccion_ABMSucursal);
 end;
@@ -339,7 +334,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja la "Sucursal" seleccionada?'), 'ABM Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal]) then
+    if dm.ISModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal]) then
     begin
       ZQ_Sucursal.Edit;
       ZQ_SucursalBAJA.AsString:='S';
@@ -347,8 +342,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABMSucursal)) then
-      dm.EKModelo.cancelar_transaccion(Transaccion_ABMSucursal);
+    if not (dm.ISModelo.finalizar_transaccion(Transaccion_ABMSucursal)) then
+      dm.ISModelo.cancelar_transaccion(Transaccion_ABMSucursal);
 
     recNo:= ZQ_Sucursal.RecNo;
     ZQ_Sucursal.Refresh;
@@ -366,7 +361,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar la "Sucursal" seleccionada?'), 'ABM Sucursal', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal]) then
+    if dm.ISModelo.iniciar_transaccion(Transaccion_ABMSucursal, [ZQ_Sucursal]) then
     begin
       ZQ_Sucursal.Edit;
       ZQ_SucursalBAJA.AsString:='N';
@@ -374,8 +369,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABMSucursal)) then
-      dm.EKModelo.cancelar_transaccion(Transaccion_ABMSucursal);
+    if not (dm.ISModelo.finalizar_transaccion(Transaccion_ABMSucursal)) then
+      dm.ISModelo.cancelar_transaccion(Transaccion_ABMSucursal);
 
     recNo:= ZQ_Sucursal.RecNo;
     ZQ_Sucursal.Refresh;
@@ -387,17 +382,15 @@ end;
 procedure TFABM_Sucursal.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
-  
-  EKOrdenarSucursal.CargarConfigColumnas;
-  EKOrdenarEmpleado.CargarConfigColumnas;
 
-  EKOrdenarEmpleado.PopUpGrilla:= nil;
+  ISOrdenarSucursal.CargarConfigColunmas;
+  ISOrdenarEmpleado.CargarConfigColunmas;
 
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  dm.EKModelo.abrir(ZQ_Personas);
+  dm.ISModelo.abrir(ZQ_Personas);
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_Sucursal, lblCantidadRegistros);
   PageControl1.ActivePageIndex:= 0;
 end;
@@ -456,7 +449,7 @@ var
   jpg: TJpegImage;
 begin
   try
-   if dm.EKModelo.verificar_transaccion(Transaccion_ABMSucursal) then
+   if dm.ISModelo.verificar_transaccion(Transaccion_ABMSucursal) then
     //si esta activa la transaccion
     if buscarImagen.Execute then //abro para buscar la imagen
      begin
@@ -542,9 +535,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepSucursal);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 procedure TFABM_Sucursal.AgregarContacto1Click(Sender: TObject);
