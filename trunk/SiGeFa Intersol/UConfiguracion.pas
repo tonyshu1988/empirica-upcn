@@ -7,7 +7,7 @@ uses
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, StdCtrls, Mask, DBCtrls,
   Buttons, Grids, DBGrids, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, ComCtrls, ZStoredProcedure, ExtDlgs, ZSqlUpdate, DBClient, STRUTILS,
-  EKOrdenarGrilla, EKDBDateTimePicker, cxClasses;
+  cxClasses, ISOrdenarGrilla, ISDBDateTimePicker;
 
 type
   TFConfiguracion = class(TForm)
@@ -53,8 +53,6 @@ type
     DBMemo2: TDBMemo;
     Label4: TLabel;
     DBMemo1: TDBMemo;
-    EKDBDateTimePicker1: TEKDBDateTimePicker;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     panelColor: TPanel;
     ZQ_VariablesCLAVE: TStringField;
     ZQ_VariablesFECHA: TDateField;
@@ -145,6 +143,8 @@ type
     ZQ_GeneralCOMPROBANTE_TITULO_FUENTE: TStringField;
     ZQ_GeneralCOMPROBANTE_TITULO_STYLE: TIntegerField;
     ZQ_GeneralCOMPROBANTE_TITULO_SIZE: TIntegerField;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISDBDateTimePicker1: TISDBDateTimePicker;
     procedure btnSalirClick(Sender: TObject);
     procedure habilitarCarga(flag: boolean);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -207,8 +207,6 @@ end;
 
 
 procedure TFConfiguracion.cargarDatosGeneral();
-var
-  auxString: string;
 begin
 //  cargarTexto('clave', 'municipio', municipio);
 //  cargarTexto('clave', 'direccion', direccion);
@@ -269,32 +267,32 @@ end;
 
 procedure TFConfiguracion.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
-  if dm.EKModelo.verificar_transaccion(abmConfiguracion) then
+  if dm.ISModelo.verificar_transaccion(abmConfiguracion) then
   begin
     if not (application.MessageBox(pchar('La Transacción esta activa, hay cambios sin guardar. Los Cancela ?'),'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
       canClose := False
     else
-      dm.EKModelo.cancelar_transaccion(abmConfiguracion);
+      dm.ISModelo.cancelar_transaccion(abmConfiguracion);
   end;
 end;
 
 
 procedure TFConfiguracion.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
   PageControl1.ActivePageIndex:= 0;
 
   ZQ_General.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
-  dm.EKModelo.abrir(ZQ_General);
+  dm.ISModelo.abrir(ZQ_General);
 
   ZQ_Logo.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
-  dm.EKModelo.abrir(ZQ_Logo);
+  dm.ISModelo.abrir(ZQ_Logo);
 
-  dm.EKModelo.abrir(ZQ_Variables);
+  dm.ISModelo.abrir(ZQ_Variables);
   ZQ_Variables.Filter:= format('clave <> %s', [QuotedStr('demoSistema')]);
   ZQ_Variables.Filtered:= true;
 
-  dm.EKModelo.abrir(ZQ_Fiscal);
+  dm.ISModelo.abrir(ZQ_Fiscal);
   habilitarCarga(false);
 
    if not ZQ_GeneralCOMPROBANTE_FUENTE.IsNull then
@@ -308,7 +306,7 @@ end;
 
 procedure TFConfiguracion.DBLogoClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(abmConfiguracion) then
+  if dm.ISModelo.verificar_transaccion(abmConfiguracion) then
     if BuscarLogo.Execute then
     begin
       DBLogo.Picture.LoadFromFile(BuscarLogo.FileName);
@@ -318,9 +316,9 @@ end;
 
 procedure TFConfiguracion.BtGuardarClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(abmConfiguracion) then
+  if dm.ISModelo.verificar_transaccion(abmConfiguracion) then
   begin
-    dm.EKModelo.finalizar_transaccion(abmConfiguracion);
+    dm.ISModelo.finalizar_transaccion(abmConfiguracion);
 
     //configuro la impresora fiscal por defecto
     DM.ISIni.abrir;
@@ -337,9 +335,9 @@ end;
 
 procedure TFConfiguracion.BtCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(abmConfiguracion) then
+  if dm.ISModelo.verificar_transaccion(abmConfiguracion) then
   begin
-    dm.EKModelo.cancelar_transaccion(abmConfiguracion);
+    dm.ISModelo.cancelar_transaccion(abmConfiguracion);
 
     habilitarCarga(false);
   end;
@@ -348,7 +346,7 @@ end;
 
 procedure TFConfiguracion.BtModificarClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(abmConfiguracion,[ZQ_General, ZQ_Variables, ZQ_Logo, ZQ_Fiscal]) then
+  if dm.ISModelo.iniciar_transaccion(abmConfiguracion,[ZQ_General, ZQ_Variables, ZQ_Logo, ZQ_Fiscal]) then
   begin
     habilitarCarga(true);
 
@@ -362,7 +360,7 @@ end;
 
 procedure TFConfiguracion.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 
@@ -387,7 +385,7 @@ end;
 
 procedure TFConfiguracion.panelColorClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(abmConfiguracion) then
+  if dm.ISModelo.verificar_transaccion(abmConfiguracion) then
     if ColorDialog.Execute then
     begin
       panelColor.Color:= ColorDialog.Color;
@@ -424,7 +422,7 @@ end;
 procedure TFConfiguracion.PageControl1Changing(Sender: TObject; var AllowChange: Boolean);
 begin
   AllowChange:= true;
-  if dm.EKModelo.verificar_transaccion(abmConfiguracion) then
+  if dm.ISModelo.verificar_transaccion(abmConfiguracion) then
     AllowChange:= false;
 end;
 
@@ -447,8 +445,6 @@ end;
 
 
 procedure TFConfiguracion.btnSeleccionarClick(Sender: TObject);
-var
- recno: integer;
 begin
   if PageControl1.ActivePage = TabSheetFiscal then
     id_IFiscal:= ZQ_FiscalID.AsInteger;

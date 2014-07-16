@@ -1,6 +1,6 @@
 object FConfiguracion: TFConfiguracion
-  Left = 366
-  Top = 75
+  Left = 355
+  Top = 272
   BorderIcons = []
   BorderStyle = bsDialog
   Caption = 'Configuraci'#243'n General del Sistema'
@@ -24,7 +24,7 @@ object FConfiguracion: TFConfiguracion
     Top = 0
     Width = 710
     Height = 508
-    ActivePage = TabSheetFiscal
+    ActivePage = TabSheetVariables
     Align = alClient
     TabOrder = 4
     OnChanging = PageControl1Changing
@@ -669,17 +669,6 @@ object FConfiguracion: TFConfiguracion
               ParentFont = False
               TabOrder = 5
             end
-            object EKDBDateTimePicker1: TEKDBDateTimePicker
-              Left = 94
-              Top = 33
-              Width = 131
-              Height = 21
-              Date = 40798.805124953700000000
-              Time = 40798.805124953700000000
-              TabOrder = 1
-              DataField = 'FECHA'
-              DataSource = DS_Variables
-            end
             object panelColor: TPanel
               Tag = 99
               Left = 452
@@ -688,6 +677,17 @@ object FConfiguracion: TFConfiguracion
               Height = 36
               TabOrder = 4
               OnClick = panelColorClick
+            end
+            object ISDBDateTimePicker1: TISDBDateTimePicker
+              Left = 94
+              Top = 33
+              Width = 131
+              Height = 21
+              Date = 41836.456837627320000000
+              Time = 41836.456837627320000000
+              TabOrder = 1
+              DataField = 'FECHA'
+              DataSource = DS_Variables
             end
           end
         end
@@ -971,7 +971,7 @@ object FConfiguracion: TFConfiguracion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1865,34 +1865,6 @@ object FConfiguracion: TFConfiguracion
       FieldName = 'GRAFICO'
     end
   end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridVariables
-    Filtros = <
-      item
-        TituloColumna = 'Clave'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha'
-        Visible = True
-      end
-      item
-        TituloColumna = 'N'#250'mero'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Texto'
-        Visible = True
-      end>
-    NombreGuardar = 'Configuracion'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 180
-    Top = 178
-  end
   object DS_General: TDataSource
     DataSet = ZQ_General
     Left = 324
@@ -1953,7 +1925,19 @@ object FConfiguracion: TFConfiguracion
     Font.Name = 'Verdana'
     Font.Style = []
     Options = [fdNoSizeSel]
-    Left = 284
-    Top = 430
+    Left = 532
+    Top = 230
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
+    Filtros = <>
+    NombreGuardarConfig = 'Configuracion'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 180
+    Top = 168
   end
 end
