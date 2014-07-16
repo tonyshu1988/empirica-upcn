@@ -488,7 +488,7 @@ begin
       if CD_Producto.IsEmpty then
         exit;
 
-      if dm.EKModelo.iniciar_transaccion(Transaccion_TransferirStock, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_NumeroCpb]) then
+      if dm.ISModelo.iniciar_transaccion(Transaccion_TransferirStock, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_NumeroCpb]) then
       begin
         asociarStockProducto();
 
@@ -511,7 +511,7 @@ begin
       if CD_ListaProductos.IsEmpty then
         exit;
 
-      if dm.EKModelo.iniciar_transaccion(Transaccion_TransferirStock, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_NumeroCpb]) then
+      if dm.ISModelo.iniciar_transaccion(Transaccion_TransferirStock, [ZQ_Comprobante, ZQ_CpbProducto, ZQ_NumeroCpb]) then
       begin
         asociarNotaPedido();
 
@@ -547,7 +547,7 @@ begin
   ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
   ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
   ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
-  ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
+  ZQ_ComprobanteFECHA.AsDateTime:= dm.ISModelo.FechayHora;
 
   CD_ListaProductos.First;
   while not(CD_ListaProductos.Eof) do
@@ -625,7 +625,7 @@ begin
   ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_CONFIRMADO;
   ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
   ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
-  ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
+  ZQ_ComprobanteFECHA.AsDateTime:= dm.ISModelo.FechayHora;
 
   CD_Producto.First;
   while not(CD_Producto.Eof) do
@@ -657,7 +657,7 @@ end;
 procedure TFTransferirStock.btnGuardarClick(Sender: TObject);
 begin
   try
-    if dm.EKModelo.finalizar_transaccion(Transaccion_TransferirStock) then
+    if dm.ISModelo.finalizar_transaccion(Transaccion_TransferirStock) then
     begin
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
@@ -666,15 +666,15 @@ begin
       if PageControlTransferir.ActivePage = TabSAsociarNotaPedido then
       begin
 
-        if dm.EKModelo.iniciar_transaccion('Update Estado', []) then
+        if dm.ISModelo.iniciar_transaccion('Update Estado', []) then
         begin
           ZQ_Cpb_UpdateEstado.Close;
           ZQ_Cpb_UpdateEstado.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
           ZQ_Cpb_UpdateEstado.ParamByName('ID_ESTADO').AsInteger := ESTADO_ALMACENADO;
           ZQ_Cpb_UpdateEstado.ExecSQL;
 
-          if not DM.EKModelo.finalizar_transaccion('Update Estado') then
-            DM.EKModelo.cancelar_transaccion('Update Estado')
+          if not DM.ISModelo.finalizar_transaccion('Update Estado') then
+            DM.ISModelo.cancelar_transaccion('Update Estado')
         end;
 
         DBGridNotaPedido.Visible:= true;
@@ -700,7 +700,7 @@ end;
 
 procedure TFTransferirStock.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(Transaccion_TransferirStock) then
+  if dm.ISModelo.cancelar_transaccion(Transaccion_TransferirStock) then
   begin
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
@@ -877,7 +877,7 @@ end;
 procedure TFTransferirStock.PageControlTransferirChanging(Sender: TObject; var AllowChange: Boolean);
 begin
   AllowChange:= true;
-  if (dm.EKModelo.verificar_transaccion(Transaccion_TransferirStock)) or (DBGridNotaPedido.Visible = false) then
+  if (dm.ISModelo.verificar_transaccion(Transaccion_TransferirStock)) or (DBGridNotaPedido.Visible = false) then
     AllowChange:= False;
 end;
 
@@ -924,7 +924,7 @@ begin
         CD_ListaProductos.Next
       else //si estoy en la ultima fila
         if CD_ListaProductos.State = dsEdit then //y estoy en modo edicion
-          CD_ListaProductos.Post; //hago un post para que recalcule el EKDBSuma
+          CD_ListaProductos.Post; //hago un post para que recalcule el ISDBSuma
       DBGridNotaPedidoDetalle.SelectedField:= DBGridNotaPedidoDetalle.Fields[campo]; //sigo en la misma columna
     end;
   end;
@@ -948,7 +948,7 @@ begin
         CD_Producto.Next
       else //si estoy en la ultima fila
         if CD_Producto.State = dsEdit then //y estoy en modo edicion
-          CD_Producto.Post; //hago un post para que recalcule el EKDBSuma
+          CD_Producto.Post; //hago un post para que recalcule el ISDBSuma
       DBGridProducto.SelectedField:= DBGridProducto.Fields[campo]; //sigo en la misma columna
     end;
   end;
@@ -1102,13 +1102,13 @@ begin
   if not ZQ_Historico_CpbFECHA_IMPRESA.IsNull then
     exit;
 
-  if DM.EKModelo.iniciar_transaccion('IMPRESO' ,[ZQ_Historico_Cpb]) then
+  if DM.ISModelo.iniciar_transaccion('IMPRESO' ,[ZQ_Historico_Cpb]) then
   Begin
     ZQ_Historico_Cpb.Edit;
-    ZQ_Historico_CpbFECHA_IMPRESA.AsDateTime := dm.EKModelo.Fecha;
+    ZQ_Historico_CpbFECHA_IMPRESA.AsDateTime := dm.ISModelo.Fecha;
 
-   if not DM.EKModelo.finalizar_transaccion('IMPRESO') then
-     DM.EKModelo.cancelar_transaccion('IMPRESO');
+   if not DM.ISModelo.finalizar_transaccion('IMPRESO') then
+     DM.ISModelo.cancelar_transaccion('IMPRESO');
   end; 
 
 end;

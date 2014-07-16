@@ -1674,7 +1674,7 @@ var
 begin
   //  query:= ((sender as tdbgrid).DataSource.DataSet) as TZQuery;
   //
-  //  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then //SI ESTOY DANDO DE ALTA O EDITANDO
+  //  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then //SI ESTOY DANDO DE ALTA O EDITANDO
   //  begin
   //    if  (((sender as tdbgrid).SelectedField.FullName = '_CodBarra')
   //     or ((sender as tdbgrid).SelectedField.FullName = '_Nombre')) then
