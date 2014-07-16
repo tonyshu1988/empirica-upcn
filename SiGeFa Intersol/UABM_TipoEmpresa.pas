@@ -4,10 +4,11 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, DBCtrls, ComCtrls, EKDBDateTimePicker, Mask, dxBar,
+  Dialogs, StdCtrls, DBCtrls, ComCtrls, Mask, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, EKOrdenarGrilla, ActnList, XPStyleActnCtrls,
-  ActnMan, EKBusquedaAvanzada, QRCtrls, QuickRpt, EKVistaPreviaQR;
+  ZAbstractDataset, ZDataset, ActnList, XPStyleActnCtrls,
+  ActnMan,  QRCtrls, QuickRpt,
+  ISBusquedaAvanzada, ISVistaPreviaQR, ISOrdenarGrilla, cxClasses;
 
 type
   TFABM_TipoEmpresa = class(TForm)
@@ -37,7 +38,6 @@ type
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -47,8 +47,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
-    EKVistaPrevia: TEKVistaPreviaQR;
     RepTipoEmpresa: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -71,6 +69,9 @@ type
     QRLabel29: TQRLabel;
     QRLabel1: TQRLabel;
     btnExcel: TdxBarLargeButton;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISBuscar: TISBusquedaAvanzada;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -112,14 +113,14 @@ uses UDM, UPrincipal;
 
 procedure TFABM_TipoEmpresa.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_TipoEmpresa, lblCantidadRegistros);
 end;
 
 
 procedure TFABM_TipoEmpresa.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa, [ZQ_TipoEmpresa]) then
+  if dm.ISModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa, [ZQ_TipoEmpresa]) then
   begin
     DBGridTipoEmpresa.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -138,7 +139,7 @@ begin
   if ZQ_TipoEmpresa.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa, [ZQ_TipoEmpresa]) then
+  if dm.ISModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa, [ZQ_TipoEmpresa]) then
   begin
     DBGridTipoEmpresa.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -165,7 +166,7 @@ begin
     end;
 
   try
-    if DM.EKModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa) then
+    if DM.ISModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa) then
     begin
       DBGridTipoEmpresa.Enabled:= true;
       DBGridTipoEmpresa.SetFocus;
@@ -189,7 +190,7 @@ end;
 
 procedure TFABM_TipoEmpresa.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(Transaccion_ABM_TipoEmpresa) then
+  if dm.ISModelo.cancelar_transaccion(Transaccion_ABM_TipoEmpresa) then
   begin
     DBGridTipoEmpresa.Enabled:=true;
     DBGridTipoEmpresa.SetFocus;
@@ -215,7 +216,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el "Tipo Empresa" seleccionado?'), 'ABM Tipo Empresa', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa, [ZQ_TipoEmpresa]) then
+    if dm.ISModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa, [ZQ_TipoEmpresa]) then
     begin
       ZQ_TipoEmpresa.Edit;
       ZQ_TipoEmpresaBAJA.AsString:='S';
@@ -223,8 +224,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa)) then
-      dm.EKModelo.cancelar_transaccion(Transaccion_ABM_TipoEmpresa);
+    if not (dm.ISModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa)) then
+      dm.ISModelo.cancelar_transaccion(Transaccion_ABM_TipoEmpresa);
 
     recNo:= ZQ_TipoEmpresa.RecNo;
     ZQ_TipoEmpresa.Refresh;
@@ -242,7 +243,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar el "Tipo Empresa" seleccionado?'), 'ABM Tipo Empresa', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa, [ZQ_TipoEmpresa]) then
+    if dm.ISModelo.iniciar_transaccion(Transaccion_ABM_TipoEmpresa, [ZQ_TipoEmpresa]) then
     begin
       ZQ_TipoEmpresa.Edit;
       ZQ_TipoEmpresaBAJA.AsString:='N';
@@ -250,8 +251,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa)) then
-      dm.EKModelo.cancelar_transaccion(Transaccion_ABM_TipoEmpresa);
+    if not (dm.ISModelo.finalizar_transaccion(Transaccion_ABM_TipoEmpresa)) then
+      dm.ISModelo.cancelar_transaccion(Transaccion_ABM_TipoEmpresa);
 
     recNo:= ZQ_TipoEmpresa.RecNo;
     ZQ_TipoEmpresa.Refresh;
@@ -280,7 +281,7 @@ begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_TipoEmpresa, lblCantidadRegistros);
 end;
 
@@ -340,9 +341,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepTipoEmpresa);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 procedure TFABM_TipoEmpresa.btnExcelClick(Sender: TObject);
