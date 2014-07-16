@@ -420,7 +420,7 @@ begin
   result:= true;
   if dm.ISModelo.hay_transaccion then
   begin
-    if Application.MessageBox('Hay transacciones abiertas, Desea cerrar igualmente la aplicación', 'Atención', MB_YESNO) = IDYES then
+    if Application.MessageBox('Hay transacciones abiertas, ¿Desea cerrar igualmente la aplicación?', 'Atención', MB_YESNO) = IDYES then
       ExitProcess(0)
     else
       result:= false;
