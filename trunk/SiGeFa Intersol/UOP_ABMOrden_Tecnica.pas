@@ -1036,7 +1036,7 @@ begin
       vsel2:= TFBuscarPersona.Create(nil);
 
     vsel2.configRelacion(RELACION_CLIENTE, True);
-    vsel2.EKBusqueda.Abrir;
+    vsel2.ISBusqueda.Abrir;
     vsel2.OnSeleccionar:= OnSelPers;
     vsel2.ShowModal;
   end;
@@ -1678,7 +1678,7 @@ begin
       vsel3:= TFBuscarPersona.Create(nil);
 
     vsel3.configRelacion(RELACION_EMPLEADO, false);
-    vsel3.EKBusqueda.Abrir;
+    vsel3.ISBusqueda.Abrir;
     vsel3.OnSeleccionar:= OnSelVendedor;
     vsel3.ShowModal;
 end;

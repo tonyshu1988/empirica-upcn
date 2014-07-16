@@ -396,7 +396,7 @@ begin
 
    //valido si DEBE o nó cerrarse por causas anormales (;-P)
 //  cerrarSistema:= 0;
-//  if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
+//  if dm.ISModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
 //  begin
 //    dm.ZQ_Configuracion_Variables.Open;
 //    dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'shutdown', []);
@@ -404,8 +404,8 @@ begin
 //    if (dm.ZQ_Configuracion_VariablesTEXTO.AsString = 'SI') then
 //      cerrarSistema:= 1;
 //
-//    if not (dm.EKModelo.finalizar_transaccion('shutdown')) then
-//      dm.EKModelo.cancelar_transaccion('shutdown');
+//    if not (dm.ISModelo.finalizar_transaccion('shutdown')) then
+//      dm.ISModelo.cancelar_transaccion('shutdown');
 //  end;
 //  if cerrarSistema = 1 then
 //  begin
@@ -942,7 +942,7 @@ procedure TFPrincipal.AShutdownExecute(Sender: TObject);
 var
 Ruta : string;
 begin
-//  if dm.EKModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
+//  if dm.ISModelo.iniciar_transaccion('shutdown', [dm.ZQ_Configuracion_Variables]) then
 //  begin
 //    dm.ZQ_Configuracion_Variables.Open;
 //    dm.ZQ_Configuracion_Variables.Locate('CLAVE', 'shutdown', []);
@@ -951,8 +951,8 @@ begin
 //    dm.ZQ_Configuracion_VariablesTEXTO.AsString:= 'SI';
 //    dm.ZQ_Configuracion_Variables.Post;
 //
-//    if not (dm.EKModelo.finalizar_transaccion('shutdown')) then
-//      dm.EKModelo.cancelar_transaccion('shutdown');
+//    if not (dm.ISModelo.finalizar_transaccion('shutdown')) then
+//      dm.ISModelo.cancelar_transaccion('shutdown');
 //  end;
 //
 //  WinExec(Pchar(

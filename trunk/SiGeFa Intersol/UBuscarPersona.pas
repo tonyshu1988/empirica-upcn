@@ -6,9 +6,10 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, ExtCtrls, dxBar, dxBarExtItems, ComCtrls,
   StdCtrls, Mask, DBCtrls, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, EKBusquedaAvanzada, EKOrdenarGrilla,
-  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKDBDateTimePicker,
-  Menus, Buttons, cxClasses;
+  ZAbstractDataset, ZDataset, 
+  ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan,
+  Menus, Buttons, cxClasses, ISBusquedaAvanzada, ISOrdenarGrilla,
+  ISDBDateTimePicker;
 
 type
   TFBuscarPersona = class(TForm)
@@ -64,8 +65,6 @@ type
     DS_TipoDoc: TDataSource;
     ZQ_TipoDocID_TIPO_DOC: TIntegerField;
     ZQ_TipoDocNOMBRE_TIPO_DOC: TStringField;
-    EKBusqueda: TEKBusquedaAvanzada;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     Nro_Persona: TZStoredProc;
     Nro_PersonaID: TIntegerField;
     ATeclasRapidas: TActionManager;
@@ -109,7 +108,6 @@ type
     DBEDireccion: TDBEdit;
     DBECodPostal: TDBEdit;
     DBCBoxSexo: TDBComboBox;
-    EKDBFechaNacimiento: TEKDBDateTimePicker;
     DBLCBoxTipoDoc: TDBLookupComboBox;
     DBECuit_Cuil: TDBEdit;
     DBEditCodigo: TDBEdit;
@@ -124,12 +122,10 @@ type
     Label12: TLabel;
     Label3: TLabel;
     Label4: TLabel;
-    EKDBFechaCtaCte: TEKDBDateTimePicker;
     DBEditLimiteDeuda: TDBEdit;
     btnCtaCte_Aceptar: TBitBtn;
     btnCtaCte_Cancelar: TBitBtn;
     DBEditVencimDia: TDBEdit;
-    EKDBDateTimePicker1: TEKDBDateTimePicker;
     btnCtaCte_Alta: TButton;
     btnCtaCte_Modificar: TButton;
     btnCtaCte_Reactivar: TButton;
@@ -158,6 +154,11 @@ type
     DS_CtaCte: TDataSource;
     ZQ_PersonasCODIGO_BARRA: TStringField;
     ZQ_PersonasCLAVE: TStringField;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISBusqueda: TISBusquedaAvanzada;
+    ISDBFechaNacimiento: TISDBDateTimePicker;
+    ISDBFechaCtaCte: TISDBDateTimePicker;
+    ISDBDateTimePicker1: TISDBDateTimePicker;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -283,7 +284,7 @@ end;
 
 procedure TFBuscarPersona.btnBuscarClick(Sender: TObject);
 begin
-  EKBusqueda.Buscar;
+  ISBusqueda.Buscar;
 end;
 
 
@@ -295,18 +296,18 @@ end;
 
 procedure TFBuscarPersona.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
 
-  EKBusqueda.SQL_Select.Text:= 'select p.*';
-  EKBusqueda.SQL_From.Text:= 'from persona p';
-  EKBusqueda.SQL_Where.Text:= format('where p.baja <> %s', [QuotedStr('S')]);
-  EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
+  ISBusqueda.SQL_Select.Text:= 'select p.*';
+  ISBusqueda.SQL_From.Text:= 'from persona p';
+  ISBusqueda.SQL_Where.Text:= format('where p.baja <> %s', [QuotedStr('S')]);
+  ISBusqueda.SQL_Orden.Text:= 'order by p.nombre';
 
   PanelEdicion.Visible:= false;
 
-  DM.EKModelo.abrir(ZQ_Provincia);
-  DM.EKModelo.abrir(ZQ_TipoIVA);
-  DM.EKModelo.abrir(ZQ_TipoDoc);
+  DM.ISModelo.abrir(ZQ_Provincia);
+  DM.ISModelo.abrir(ZQ_TipoIVA);
+  DM.ISModelo.abrir(ZQ_TipoDoc);
 
   DBEApellidoNombre.Color:= dm.colorCampoRequido;
   DBEDireccion.Color:= dm.colorCampoRequido;
@@ -430,10 +431,10 @@ begin
     btnCancelar.Visible:= ivAlways;
   end;
 
-  EKBusqueda.SQL_Select.Text:= 'select p.*';
-  EKBusqueda.SQL_From.Text:= 'from persona p left join persona_relacion pr on (p.id_persona = pr.id_persona)';
-  EKBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d)', [QuotedStr('S'), relacion]);
-  EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
+  ISBusqueda.SQL_Select.Text:= 'select p.*';
+  ISBusqueda.SQL_From.Text:= 'from persona p left join persona_relacion pr on (p.id_persona = pr.id_persona)';
+  ISBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d)', [QuotedStr('S'), relacion]);
+  ISBusqueda.SQL_Orden.Text:= 'order by p.nombre';
 
   id_relacion:= relacion;
   case relacion of
@@ -444,7 +445,7 @@ begin
                     end;
   RELACION_EMPLEADO:begin
                       FBuscarPersona.Caption:= 'Buscar Empleado';
-                      EKBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d) and (pr.id_sucursal = %d)', [QuotedStr('S'), relacion, SUCURSAL_LOGUEO]);
+                      ISBusqueda.SQL_Where.Text:= format('where (p.baja <> %s) and (pr.id_relacion = %d) and (pr.id_sucursal = %d)', [QuotedStr('S'), relacion, SUCURSAL_LOGUEO]);
                     end;
   RELACION_VIAJANTE:begin
                       FBuscarPersona.Caption:= 'Buscar Viejante';
@@ -463,10 +464,10 @@ begin
   btnGuardar.Visible:= ivNever;
   btnCancelar.Visible:= ivNever;
 
-  EKBusqueda.SQL_Select.Text:= 'select p.*, cc.*';
-  EKBusqueda.SQL_From.Text:= 'from persona p left join cuenta_corriente cc on (p.id_persona = cc.id_persona)';
-  EKBusqueda.SQL_Where.Text:= 'where cc.id_cta_cte is not null';
-  EKBusqueda.SQL_Orden.Text:= 'order by p.nombre';
+  ISBusqueda.SQL_Select.Text:= 'select p.*, cc.*';
+  ISBusqueda.SQL_From.Text:= 'from persona p left join cuenta_corriente cc on (p.id_persona = cc.id_persona)';
+  ISBusqueda.SQL_Where.Text:= 'where cc.id_cta_cte is not null';
+  ISBusqueda.SQL_Orden.Text:= 'order by p.nombre';
 end;
 
 
@@ -503,7 +504,7 @@ end;
 
 procedure TFBuscarPersona.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
 
@@ -583,7 +584,7 @@ begin
     ZQ_CtaCteSALDO.AsFloat:= 0;
     ZQ_CtaCteBAJA.AsString:= 'N';
 
-    EKDBFechaCtaCte.SetFocus;
+    ISDBFechaCtaCte.SetFocus;
     GrupoEditando.Enabled:= false;
   end;
 
@@ -594,7 +595,7 @@ begin
 
     habilitarCtaCte(true);
     ZQ_CtaCte.Edit;
-    EKDBFechaCtaCte.SetFocus;
+    ISDBFechaCtaCte.SetFocus;
     GrupoEditando.Enabled:= false;
   end;
 

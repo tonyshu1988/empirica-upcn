@@ -1,8 +1,8 @@
 object FBuscarPersona: TFBuscarPersona
-  Left = 312
-  Top = 206
+  Left = 454
+  Top = 234
   Width = 869
-  Height = 434
+  Height = 478
   Caption = 'Buscar Personas'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -19,8 +19,8 @@ object FBuscarPersona: TFBuscarPersona
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 853
-    Height = 344
+    Width = 861
+    Height = 399
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -28,8 +28,8 @@ object FBuscarPersona: TFBuscarPersona
     object DBGridPersonas: TDBGrid
       Left = 3
       Top = 3
-      Width = 847
-      Height = 137
+      Width = 855
+      Height = 192
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas
@@ -120,8 +120,8 @@ object FBuscarPersona: TFBuscarPersona
     end
     object PanelEdicion: TPanel
       Left = 3
-      Top = 140
-      Width = 847
+      Top = 195
+      Width = 855
       Height = 201
       Align = alBottom
       BevelOuter = bvNone
@@ -130,7 +130,7 @@ object FBuscarPersona: TFBuscarPersona
       object PageControl: TPageControl
         Left = 0
         Top = 0
-        Width = 847
+        Width = 855
         Height = 201
         ActivePage = TabSheetDatos
         Align = alClient
@@ -279,7 +279,7 @@ object FBuscarPersona: TFBuscarPersona
             ListField = 'NOMBRE_TIPO_IVA'
             ListSource = DS_TipoIVA
             ParentFont = False
-            TabOrder = 10
+            TabOrder = 9
           end
           object DBEApellidoNombre: TDBEdit
             Left = 120
@@ -311,7 +311,7 @@ object FBuscarPersona: TFBuscarPersona
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 9
+            TabOrder = 8
           end
           object DBELocalidad: TDBEdit
             Left = 120
@@ -380,24 +380,7 @@ object FBuscarPersona: TFBuscarPersona
               'F'
               'N')
             ParentFont = False
-            TabOrder = 7
-          end
-          object EKDBFechaNacimiento: TEKDBDateTimePicker
-            Left = 120
-            Top = 140
-            Width = 153
-            Height = 21
-            Date = 40616.799864351850000000
-            Time = 40616.799864351850000000
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentFont = False
             TabOrder = 6
-            DataField = 'FECHA_NACIMIENTO'
-            DataSource = DS_Personas
           end
           object DBLCBoxTipoDoc: TDBLookupComboBox
             Left = 550
@@ -415,7 +398,7 @@ object FBuscarPersona: TFBuscarPersona
             ListField = 'NOMBRE_TIPO_DOC'
             ListSource = DS_TipoDoc
             ParentFont = False
-            TabOrder = 8
+            TabOrder = 7
           end
           object DBECuit_Cuil: TDBEdit
             Left = 550
@@ -430,7 +413,7 @@ object FBuscarPersona: TFBuscarPersona
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 11
+            TabOrder = 10
           end
           object DBEditCodigo: TDBEdit
             Left = 120
@@ -461,7 +444,7 @@ object FBuscarPersona: TFBuscarPersona
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
             ParentFont = False
-            TabOrder = 12
+            TabOrder = 11
           end
           object RadioGroupRelacionCliente: TRadioGroup
             Left = 438
@@ -474,8 +457,25 @@ object FBuscarPersona: TFBuscarPersona
             Items.Strings = (
               'No Es Cliente'
               'Es Cliente')
-            TabOrder = 13
+            TabOrder = 12
             OnClick = RadioGroupRelacionClienteClick
+          end
+          object ISDBFechaNacimiento: TISDBDateTimePicker
+            Left = 120
+            Top = 139
+            Width = 153
+            Height = 21
+            Date = 41836.368507719900000000
+            Time = 41836.368507719900000000
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            TabOrder = 13
+            DataField = 'FECHA_NACIMIENTO'
+            DataSource = DS_Personas
           end
         end
         object TabSheetTelMail: TTabSheet
@@ -502,18 +502,21 @@ object FBuscarPersona: TFBuscarPersona
               item
                 Expanded = False
                 FieldName = 'DESCRIPCION'
+                Title.Caption = 'Descripci'#243'n'
                 Width = 252
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'TELEFONO'
+                Title.Caption = 'Tel'#233'fono'
                 Width = 250
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'MAIL'
+                Title.Caption = 'E-Mail'
                 Width = 250
                 Visible = True
               end>
@@ -578,23 +581,6 @@ object FBuscarPersona: TFBuscarPersona
               Height = 13
               Caption = 'Fecha Baja:'
             end
-            object EKDBFechaCtaCte: TEKDBDateTimePicker
-              Left = 115
-              Top = 18
-              Width = 153
-              Height = 21
-              Date = 40793.391464837970000000
-              Time = 40793.391464837970000000
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = [fsBold]
-              ParentFont = False
-              TabOrder = 0
-              DataField = 'FECHA_ALTA'
-              DataSource = DS_CtaCte
-            end
             object DBEditLimiteDeuda: TDBEdit
               Left = 115
               Top = 75
@@ -608,14 +594,14 @@ object FBuscarPersona: TFBuscarPersona
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 1
+              TabOrder = 0
             end
             object btnCtaCte_Aceptar: TBitBtn
               Left = 21
               Top = 135
               Width = 40
               Height = 29
-              TabOrder = 2
+              TabOrder = 1
               OnClick = btnCtaCte_AceptarClick
             end
             object btnCtaCte_Cancelar: TBitBtn
@@ -623,7 +609,7 @@ object FBuscarPersona: TFBuscarPersona
               Top = 135
               Width = 40
               Height = 29
-              TabOrder = 3
+              TabOrder = 2
               OnClick = btnCtaCte_CancelarClick
             end
             object DBEditVencimDia: TDBEdit
@@ -639,17 +625,35 @@ object FBuscarPersona: TFBuscarPersona
               Font.Name = 'Verdana'
               Font.Style = [fsBold]
               ParentFont = False
-              TabOrder = 4
+              TabOrder = 3
             end
-            object EKDBDateTimePicker1: TEKDBDateTimePicker
+            object ISDBFechaCtaCte: TISDBDateTimePicker
+              Left = 115
+              Top = 18
+              Width = 153
+              Height = 21
+              Date = 41836.368507719900000000
+              Time = 41836.368507719900000000
+              Enabled = False
+              Font.Charset = ANSI_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 4
+              DataField = 'FECHA_ALTA'
+              DataSource = DS_CtaCte
+            end
+            object ISDBDateTimePicker1: TISDBDateTimePicker
               Left = 115
               Top = 46
               Width = 153
               Height = 21
-              Date = 40793.391464837970000000
-              Time = 40793.391464837970000000
+              Date = 41836.368507719900000000
+              Time = 41836.368507719900000000
               Enabled = False
-              Font.Charset = DEFAULT_CHARSET
+              Font.Charset = ANSI_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
               Font.Name = 'Verdana'
@@ -703,7 +707,7 @@ object FBuscarPersona: TFBuscarPersona
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1646,147 +1650,6 @@ object FBuscarPersona: TFBuscarPersona
     Left = 528
     Top = 69
   end
-  object EKBusqueda: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Nombre y Apellido'
-        Campo = 'nombre'
-        Tabla = 'p'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Direcci'#243'n'
-        Campo = 'direccion'
-        Tabla = 'p'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Email'
-        Campo = 'email'
-        Tabla = 'p'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Tel'#233'fono'
-        Campo = 'telefono'
-        Tabla = 'p'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Fecha Nacimiento'
-        Campo = 'fecha_nacimiento'
-        Tabla = 'p'
-        TipoCampo = EK_Fecha
-        Mascara = '##/##/####'
-        TipoCampoIndiceVer = '='
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end
-      item
-        Titulo = 'Baja'
-        Campo = 'baja'
-        Tabla = 'p'
-        TipoCampoIngreso = EK_Combo
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboValoresVer.Strings = (
-          'SI'
-          'NO')
-        TipoComboValoresReales.Strings = (
-          'S'
-          'N')
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_Personas
-    SQL.Strings = (
-      'select *'
-      'from persona p'
-      'where p.baja <> '#39'S'#39
-      'order by p.nombre')
-    SQL_Select.Strings = (
-      'select *')
-    SQL_From.Strings = (
-      'from persona p')
-    SQL_Where.Strings = (
-      'where p.baja <> '#39'S'#39)
-    SQL_Orden.Strings = (
-      'order by p.nombre')
-    UsarWhereOriginal = EK_Con_Where
-    PantallaReducida = True
-    VaciarValorDespues = True
-    Left = 112
-    Top = 69
-  end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridPersonas
-    Filtros = <
-      item
-        TituloColumna = 'Apellido y Nombre'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Direcci'#243'n'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Nro. Documento'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Localidad'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cod. Postal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tel'#233'fono'
-        Visible = True
-      end
-      item
-        TituloColumna = 'eMail'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Cuit/Cuil'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Fecha Nac.'
-        Visible = True
-      end>
-    NombreGuardar = 'BuscarPersonas'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 184
-    Top = 69
-  end
   object Nro_Persona: TZStoredProc
     Connection = DM.Conexion
     Params = <
@@ -2010,5 +1873,135 @@ object FBuscarPersona: TFBuscarPersona
     DataSet = ZQ_CtaCte
     Left = 32
     Top = 69
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
+    Grilla = DBGridPersonas
+    Filtros = <
+      item
+        TituloColumna = 'Apellido y Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Nro. Documento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cod. Postal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tel'#233'fono'
+        Visible = True
+      end
+      item
+        TituloColumna = 'eMail'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Cuit/Cuil'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Fecha Nac.'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'BuscarPersonas'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 112
+    Top = 80
+  end
+  object ISBusqueda: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Nombre y Apellido'
+        Campo = 'nombre'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Direcci'#243'n'
+        Campo = 'direccion'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'E-Mail'
+        Campo = 'email'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tel'#233'fono'
+        Campo = 'telefono'
+        Tabla = 'p'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Fecha Nacimiento'
+        Campo = 'fecha_nacimiento'
+        Tabla = 'p'
+        TipoCampo = IS_Fecha
+        Mascara = '##/##/####'
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'p'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'N'
+          'S')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'N'
+          'S')
+        ItemIndex = 0
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_Personas
+    SQL.Strings = (
+      'from persona p'
+      ''
+      'where p.baja <> '#39'S'#39
+      ''
+      'order by p.nombre')
+    SQL_From.Strings = (
+      'from persona p'
+      '')
+    SQL_Where.Strings = (
+      'where p.baja <> '#39'S'#39
+      '')
+    SQL_Orden.Strings = (
+      'order by p.nombre')
+    UsarWhereOriginal = IS_Con_Where
+    PantallaReducida = True
+    Left = 184
+    Top = 80
   end
 end
