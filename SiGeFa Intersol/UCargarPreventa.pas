@@ -4,9 +4,9 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, Grids, DBGrids, EKBusquedaAvanzada, dxBar, dxBarExtItems,
-  ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, StdCtrls, ActnList, XPStyleActnCtrls, ActnMan;
+  Dialogs, Grids, DBGrids, ISBusquedaAvanzada, ISOrdenarGrilla, ActnList,
+  XPStyleActnCtrls, ActnMan, DB, ZAbstractRODataset, ZAbstractDataset,
+  ZDataset, dxBar, dxBarExtItems, cxClasses, StdCtrls, ExtCtrls;
 
 type
   TFPreventa = class(TForm)
@@ -17,11 +17,9 @@ type
     btnSeleccinarYSalir: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
     btnSeleccionarTodos: TdxBarLargeButton;
-    EKBuscarPresupuesto: TEKBusquedaAvanzada;
     DBGrid: TDBGrid;
     ZQ_Comprobante: TZQuery;
     DS_Comprobante: TDataSource;
-    EKOrdenarGrilla: TEKOrdenarGrilla;
     ZQ_ComprobanteID_COMPROBANTE: TIntegerField;
     ZQ_ComprobanteID_SUCURSAL: TIntegerField;
     ZQ_ComprobanteID_PROVEEDOR: TIntegerField;
@@ -62,6 +60,8 @@ type
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ASeccionar: TAction;
+    ISOrdenarGrilla: TISOrdenarGrilla;
+    ISBuscarPresupuesto: TISBusquedaAvanzada;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -110,7 +110,7 @@ end;
 
 procedure TFPreventa.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla.CargarConfigColumnas;
+  ISOrdenarGrilla.CargarConfigColunmas;
 
   if ZQ_Comprobante.IsEmpty then
   begin
@@ -123,13 +123,13 @@ end;
 
 procedure TFPreventa.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla.GuardarConfigColumnas;
+  ISOrdenarGrilla.GuardarConfigColumnas;
 end;
 
 
 procedure TFPreventa.btnBuscarClick(Sender: TObject);
 begin
-  EKBuscarPresupuesto.Buscar;
+  ISBuscarPresupuesto.Buscar;
 end;
 
 
