@@ -1901,33 +1901,6 @@ object FFichaEmpleado: TFFichaEmpleado
     Left = 56
     Top = 256
   end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridHistoria
-    Filtros = <
-      item
-        TituloColumna = 'Ingreso'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Egreso'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Empleado'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Sucursal'
-        Visible = True
-      end>
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = False
-    PermitirMover = False
-    PermitirFiltrar = False
-    Left = 56
-    Top = 308
-  end
   object ZQ_VerificarIngresoEgreso: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -1996,12 +1969,6 @@ object FFichaEmpleado: TFFichaEmpleado
       Size = 200
     end
   end
-  object EKVistaPreviaQR1: TEKVistaPreviaQR
-    Reporte = RepFicha
-    ShowModal = False
-    Left = 488
-    Top = 336
-  end
   object ZQ_Usuarios: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -2041,12 +2008,47 @@ object FFichaEmpleado: TFFichaEmpleado
     Left = 552
     Top = 168
   end
-  object EKLlenarComboUsuarios: TEKLlenarCombo
+  object ISVistaPreviaQR1: TISVistaPreviaQR
+    Reporte = RepFicha
+    ShowModal = False
+    Left = 504
+    Top = 344
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
+    Grilla = DBGridHistoria
+    Filtros = <
+      item
+        TituloColumna = 'Ingreso'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Egreso'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Empleado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sucursal'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 56
+    Top = 320
+  end
+  object ISLlenarComboUsuarios: TISLlenarCombo
     dataset = ZQ_Usuarios
     combo = ComboBoxUsuarios
     CampoClave = 'ID_PERSONA'
     CampoVer = 'NOMBRE'
+    ItemsAdicInicio = False
     Left = 576
-    Top = 224
+    Top = 248
   end
 end

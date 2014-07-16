@@ -6,8 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, Grids, DBGrids, StdCtrls, DBCtrls, Mask, ExtCtrls, dxBar,
   dxBarExtItems, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKLlenarCombo, DBClient, ComCtrls, ZSqlUpdate, StrUtils, EKOrdenarGrilla,
-  Menus, cxClasses;
+  DBClient, ComCtrls, ZSqlUpdate, StrUtils, 
+  Menus, cxClasses, ISOrdenarGrilla, ISLlenarCombo;
 
 type
   TFAuditoria = class(TForm)
@@ -66,7 +66,6 @@ type
     btnEliminarAuditoria: TdxBarLargeButton;
     ZQ_EliminarAuditoria: TZQuery;
     btnActivarFecha: TButton;
-    EKLlenarCombo1: TEKLlenarCombo;
     DBGridDatosProducto: TDBGrid;
     ZQ_DatosStock: TZQuery;
     DS_DatosProducto: TDataSource;
@@ -89,11 +88,8 @@ type
     ZQ_DatosProductoARTICULO: TStringField;
     ZQ_DatosProductoID_PRODUCTO: TIntegerField;
     ZQ_DatosStockID_PRODUCTO: TIntegerField;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_AudGeneralID_SINCRO_LOTE: TIntegerField;
     PopupMenu: TPopupMenu;
-    EKOrdenarGrilla2: TEKOrdenarGrilla;
-    EKOrdenarGrilla3: TEKOrdenarGrilla;
     pUpItem_FiltrarClave: TMenuItem;
     pUpItem_QuitarFiltro: TMenuItem;
     Panel3: TPanel;
@@ -126,7 +122,6 @@ type
     CD_XMLFBLOB_NEW_BLOB_VALUE: TBlobField;
     DS_XML: TDataSource;
     OpenFileXML: TOpenDialog;
-    EKOrdenarGrilla4: TEKOrdenarGrilla;
     CD_XMLTablas: TClientDataSet;
     CD_XMLTablas_Tabla: TStringField;
     CD_XMLTablas_CampoClave: TStringField;
@@ -136,8 +131,13 @@ type
     CD_XMLTablas_Id: TStringField;
     CD_XMLTablas_Usuario: TStringField;
     DS_XMLTablas: TDataSource;
-    EKOrdenarGrilla5: TEKOrdenarGrilla;
     btnAuditoria_XML: TdxBarLargeButton;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISOrdenarGrilla2: TISOrdenarGrilla;
+    ISOrdenarGrilla3: TISOrdenarGrilla;
+    ISOrdenarGrilla4: TISOrdenarGrilla;
+    ISOrdenarGrilla5: TISOrdenarGrilla;
+    ISLlenarCombo1: TISLlenarCombo;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure ZQ_AudGeneralAfterScroll(DataSet: TDataSet);
@@ -158,7 +158,6 @@ type
     procedure buscarProducto();
     procedure pUpItem_QuitarFiltroClick(Sender: TObject);
     procedure pUpItem_FiltrarClaveClick(Sender: TObject);
-    procedure EKLlenarCombo1Cambio(valor: String);
     procedure btnXML_AbrirClick(Sender: TObject);
     procedure btnAuditoria_XMLClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -184,11 +183,11 @@ uses UPrincipal, UDM;
 
 procedure TFAuditoria.FormCreate(Sender: TObject);
 begin
-//  EKOrdenarGrilla1.CargarConfigColumnas;
-//  EKOrdenarGrilla2.CargarConfigColumnas;
-//  EKOrdenarGrilla3.CargarConfigColumnas;
-//  EKOrdenarGrilla4.CargarConfigColumnas;
-//  EKOrdenarGrilla5.CargarConfigColumnas;
+//  ISOrdenarGrilla1.CargarConfigColumnas;
+//  ISOrdenarGrilla2.CargarConfigColumnas;
+//  ISOrdenarGrilla3.CargarConfigColumnas;
+//  ISOrdenarGrilla4.CargarConfigColumnas;
+//  ISOrdenarGrilla5.CargarConfigColumnas;
 //
 //  PanelFondoXML.Visible:= false;
 //  CD_XML.CreateDataSet;
@@ -200,7 +199,7 @@ begin
 //  lblCantidad.Caption:= '';
 //
 //  btnEliminarAuditoria.Visible:= ivNever;
-//  if dm.EKUsrLogin.PermisoAccion('AUDITORIA_ELIMINAR') then
+//  if dm.ISUsrLogin.PermisoAccion('AUDITORIA_ELIMINAR') then
 //    btnEliminarAuditoria.Visible:= ivAlways;
 //
 ////  ZQ_User.Connection:= dm.Conexion_User;
@@ -209,11 +208,11 @@ begin
 //  TStringGrid(DBGridTabla).Scrollbars:=ssVertical;
 //  TStringGrid(DBGridDatosTabla).Scrollbars:=ssVertical;
 //  TStringGrid(DBGridDatosProducto).Scrollbars:=ssVertical;
-//  DateTimeFecha.Date:= dm.ekModelo.Fecha();
+//  DateTimeFecha.Date:= dm.ISModelo.Fecha();
 ////  ZQ_User.Close;
 ////  ZQ_User.Open;
 //
-//  EKLlenarCombo1.CargarCombo;
+//  ISLlenarCombo1.CargarCombo;
 //
 //  CD_Tablas.Active := false;
 //  CD_Tablas.CreateDataSet;
@@ -391,7 +390,7 @@ begin
   else
   begin
     ZQ_AudGeneral.ParamByName('todos_usuario').Clear;
-    ZQ_AudGeneral.ParamByName('usuario').AsString:= UpperCase(EKLlenarCombo1.SelectClave);
+    ZQ_AudGeneral.ParamByName('usuario').AsString:= UpperCase(ISLlenarCombo1.SelectClave);
   end;
 
   //TABLA
@@ -489,7 +488,7 @@ begin
   if (application.MessageBox(pchar('¿Desea eliminar la auditoria seleccionada?'), 'Auditoria', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDNO) then
    exit;
 
-  if dm.ekModelo.iniciar_transaccion(Transaccion_Audit, []) then
+  if dm.ISModelo.iniciar_transaccion(Transaccion_Audit, []) then
   begin
     try
       ZQ_EliminarAuditoria.Close;
@@ -515,7 +514,7 @@ begin
       else
       begin
         ZQ_EliminarAuditoria.ParamByName('no_usuario').Clear;
-        ZQ_EliminarAuditoria.ParamByName('usuario').AsString:= UpperCase(EKLlenarCombo1.SelectClave);
+        ZQ_EliminarAuditoria.ParamByName('usuario').AsString:= UpperCase(ISLlenarCombo1.SelectClave);
       end;
 
       //Parametro OPERACION
@@ -544,9 +543,9 @@ begin
 
       ZQ_EliminarAuditoria.ExecSQL;
     finally //si se produce una excepcion cierro la transaccion y pongo en false la variable triggerActivo
-      if not dm.ekModelo.finalizar_transaccion(Transaccion_Audit) then
+      if not dm.ISModelo.finalizar_transaccion(Transaccion_Audit) then
       begin
-          dm.ekModelo.cancelar_transaccion(Transaccion_Audit);
+          dm.ISModelo.cancelar_transaccion(Transaccion_Audit);
           ShowMessage('No se pudo eliminar la Auditoria!');
       end
       else
@@ -609,12 +608,6 @@ end;
 
 
 
-procedure TFAuditoria.EKLlenarCombo1Cambio(valor: String);
-begin
-  buscarAudotoria();
-end;
-
-
 procedure TFAuditoria.btnXML_AbrirClick(Sender: TObject);
 begin
   if OpenFileXML.Execute then
@@ -671,11 +664,11 @@ end;
 
 procedure TFAuditoria.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
-  EKOrdenarGrilla2.GuardarConfigColumnas;
-  EKOrdenarGrilla3.GuardarConfigColumnas;
-  EKOrdenarGrilla4.GuardarConfigColumnas;
-  EKOrdenarGrilla5.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla2.GuardarConfigColumnas;
+  ISOrdenarGrilla3.GuardarConfigColumnas;
+  ISOrdenarGrilla4.GuardarConfigColumnas;
+  ISOrdenarGrilla5.GuardarConfigColumnas;
 end;
 
 end.

@@ -11,8 +11,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, dxBar, dxBarExtItems, ExtCtrls, Buttons, Grids,
   DBGrids, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls,
-  EKOrdenarGrilla, QRCtrls, QuickRpt, EKVistaPreviaQR, EKLlenarCombo,
-  cxClasses;
+  QRCtrls, QuickRpt, 
+  cxClasses, ISVistaPreviaQR, ISOrdenarGrilla, ISLlenarCombo;
 
 type
   TFFichaEmpleado = class(TForm)
@@ -36,7 +36,6 @@ type
     Panel1: TPanel;
     DBMemoDetalleIngreso: TDBMemo;
     Label1: TLabel;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ZQ_VerificarIngresoEgreso: TZQuery;
     panelRegistrarIngresoEgreso: TPanel;
     lblTituloRegistrar: TLabel;
@@ -52,7 +51,6 @@ type
     ZQ_VerificarIngresoEgresoFECHA_INGRESO: TDateTimeField;
     ZQ_VerificarIngresoEgresoFECHA_EGRESO: TDateTimeField;
     RepFicha: TQuickRep;
-    EKVistaPreviaQR1: TEKVistaPreviaQR;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
     QRLabel17: TQRLabel;
@@ -87,7 +85,6 @@ type
     QRLabel4: TQRLabel;
     DS_Usuarios: TDataSource;
     ComboBoxUsuarios: TComboBox;
-    EKLlenarComboUsuarios: TEKLlenarCombo;
     ZQ_UsuariosID_PERSONA: TIntegerField;
     ZQ_UsuariosNOMBRE: TStringField;
     ZQ_HistorialID_HISTORIAL_FICHA: TIntegerField;
@@ -101,6 +98,9 @@ type
     ZQ_UsuariosCLAVE: TStringField;
     ZQ_VerificarIngresoEgresoID_EMPLEADO: TIntegerField;
     ZQ_Historial_NombreEpleado: TStringField;
+    ISVistaPreviaQR1: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISLlenarComboUsuarios: TISLlenarCombo;
     procedure FormCreate(Sender: TObject);
     procedure Timer1Timer(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -138,9 +138,9 @@ begin
 
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   tipoFicha:= '';
-  fecha:= dm.EKModelo.Fecha;
-  lblFecha.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  lblHora.Caption:= FormatDateTime('hh:nn:ss', dm.EKModelo.Hora);
+  fecha:= dm.ISModelo.Fecha;
+  lblFecha.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
+  lblHora.Caption:= FormatDateTime('hh:nn:ss', dm.ISModelo.Hora);
 
   FPrincipal.Iconos_Menu_32.GetBitmap(50, btnFicharIngreso.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(51, btnFicharEgreso.Glyph);
@@ -150,18 +150,18 @@ begin
 
   viendoSucursal:= 'PROPIA';
   btnVerSucursales.Caption:= 'Ver Sucursal Propia / Todas';
-  lblTituloHistorial.Caption:= 'HISTORICO '+dm.ZQ_SucursalNOMBRE.AsString+' - '+DateToStr(dm.EKModelo.Fecha);
+  lblTituloHistorial.Caption:= 'HISTORICO '+dm.ZQ_SucursalNOMBRE.AsString+' - '+DateToStr(dm.ISModelo.Fecha);
 
   ZQ_Usuarios.Close;
   ZQ_Usuarios.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
   ZQ_Usuarios.Open;
 
   ZQ_Historial.Close;
-  ZQ_Historial.ParamByName('fecha').AsDate:= dm.EKModelo.Fecha;
+  ZQ_Historial.ParamByName('fecha').AsDate:= dm.ISModelo.Fecha;
   ZQ_Historial.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
   ZQ_Historial.Open;
 
-  EKLlenarComboUsuarios.CargarCombo;
+  ISLlenarComboUsuarios.CargarCombo;
 
   btnVerSucursales.Visible:= ivNever;
   if dm.ISUsrLogin.PermisoAccion('FICHAEMP_VERSUCURSAL') then
@@ -171,9 +171,9 @@ end;
 
 procedure TFFichaEmpleado.Timer1Timer(Sender: TObject);
 begin
-  if fecha <> dm.EKModelo.Fecha then
-    lblFecha.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  lblHora.Caption:= FormatDateTime('hh:nn:ss', dm.EKModelo.Hora);
+  if fecha <> dm.ISModelo.Fecha then
+    lblFecha.Caption:= FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
+  lblHora.Caption:= FormatDateTime('hh:nn:ss', dm.ISModelo.Hora);
 end;
 
 
@@ -226,7 +226,7 @@ var
   fechaGuardar: TDateTime;
   repetir: boolean;
 begin
-  fechaGuardar:= dm.EKModelo.FechayHora;
+  fechaGuardar:= dm.ISModelo.FechayHora;
   repetir:= false;
 
   if trim(ComboBoxUsuarios.Text) = '' then
@@ -252,7 +252,7 @@ begin
       //para un EGRESO:  que haya un ingreso previo sin fecha de egreso.
       ZQ_VerificarIngresoEgreso.Close;
       ZQ_VerificarIngresoEgreso.ParamByName('fecha').AsDate:= DateOf(fechaGuardar);
-      ZQ_VerificarIngresoEgreso.ParamByName('ID_empleado').AsInteger:=StrToInt(EKLlenarComboUsuarios.SelectClave);
+      ZQ_VerificarIngresoEgreso.ParamByName('ID_empleado').AsInteger:=StrToInt(ISLlenarComboUsuarios.SelectClave);
       ZQ_VerificarIngresoEgreso.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
       ZQ_VerificarIngresoEgreso.Open;
       if tipoFicha = 'INGRESO' then
@@ -276,13 +276,13 @@ begin
         end;
 
   //guardo la fecha
-      if dm.EKModelo.iniciar_transaccion('FICHA EMPLEADO', [ZQ_Historial, ZQ_VerificarIngresoEgreso]) then
+      if dm.ISModelo.iniciar_transaccion('FICHA EMPLEADO', [ZQ_Historial, ZQ_VerificarIngresoEgreso]) then
       begin
         if tipoFicha = 'INGRESO' then
         begin
           ZQ_Historial.Append;
           ZQ_HistorialID_SUCURSAL.AsInteger:= SUCURSAL_LOGUEO;
-          ZQ_HistorialID_EMPLEADO.AsInteger:= StrToInt(EKLlenarComboUsuarios.SelectClave); //editRegistrarUsuario.Text;
+          ZQ_HistorialID_EMPLEADO.AsInteger:= StrToInt(ISLlenarComboUsuarios.SelectClave); //editRegistrarUsuario.Text;
           ZQ_HistorialFECHA_INGRESO.AsDateTime:= fechaGuardar;
           ZQ_HistorialFECHA_EGRESO.Clear;
           ZQ_HistorialDETALLE_INGRESO.AsString:= memoRegistrarDetalle.Text;
@@ -297,13 +297,13 @@ begin
           end;
 
         try
-          if DM.EKModelo.finalizar_transaccion('FICHA EMPLEADO') then
+          if DM.ISModelo.finalizar_transaccion('FICHA EMPLEADO') then
           begin
             btnRegistrarCancelar.Click; //limpio todos y oculto la pantalla
             ZQ_Historial.Refresh;
           end
           else
-            dm.EKModelo.cancelar_transaccion('FICHA EMPLEADO')
+            dm.ISModelo.cancelar_transaccion('FICHA EMPLEADO')
         except
           begin
             Application.MessageBox('No se pudo registrar el fichaje del Usuario', 'Atención', MB_OK + MB_ICONINFORMATION);
@@ -321,21 +321,21 @@ begin
   if viendoSucursal = 'PROPIA' then
   begin
     ZQ_Historial.Close;
-    ZQ_Historial.ParamByName('fecha').AsDate:= dm.EKModelo.Fecha;
+    ZQ_Historial.ParamByName('fecha').AsDate:= dm.ISModelo.Fecha;
     ZQ_Historial.ParamByName('id_sucursal').AsInteger:= -1;
     ZQ_Historial.Open;
     viendoSucursal:= 'TODAS';
-    lblTituloHistorial.Caption:= 'HISTORICO SUCURSALES - '+DateToStr(dm.EKModelo.Fecha);
+    lblTituloHistorial.Caption:= 'HISTORICO SUCURSALES - '+DateToStr(dm.ISModelo.Fecha);
     //btnVerSucursales.Caption:= 'Ver Sucursal Propia';
   end
   else
   begin
     ZQ_Historial.Close;
-    ZQ_Historial.ParamByName('fecha').AsDate:= dm.EKModelo.Fecha;
+    ZQ_Historial.ParamByName('fecha').AsDate:= dm.ISModelo.Fecha;
     ZQ_Historial.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
     ZQ_Historial.Open;
     viendoSucursal:= 'PROPIA';
-    lblTituloHistorial.Caption:= 'HISTORICO '+dm.ZQ_SucursalNOMBRE.AsString+' - '+DateToStr(dm.EKModelo.Fecha);
+    lblTituloHistorial.Caption:= 'HISTORICO '+dm.ZQ_SucursalNOMBRE.AsString+' - '+DateToStr(dm.ISModelo.Fecha);
     //btnVerSucursales.Caption:= 'Ver Todas las Sucursales';
   end;
 end;
@@ -353,9 +353,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepFicha);
-  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.EKModelo.Fecha);
-  QRLblFechaFicha.Caption:= FormatDateTime('dd/mm/yyyy ', dm.EKModelo.Fecha);
-  EKVistaPreviaQR1.VistaPrevia;
+  QRlblPieDePagina.Caption:= TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ', dm.ISModelo.Fecha);
+  QRLblFechaFicha.Caption:= FormatDateTime('dd/mm/yyyy ', dm.ISModelo.Fecha);
+  ISVistaPreviaQR1.VistaPrevia;
 end;
 
 end.

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, StdCtrls, ExtCtrls, DBCtrls, Mask, Grids,
   DBGrids, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  ZSqlProcessor, Buttons, IBDatabaseInfo, IBDatabase;
+  ZSqlProcessor, Buttons, IBDatabaseInfo, IBDatabase, cxClasses;
 
 type
   TFDebugging = class(TForm)
@@ -103,12 +103,12 @@ procedure TFDebugging.FormCloseQuery(Sender: TObject;
 begin
   btnActivar.Click;
 
-  if dm.EKModelo.verificar_transaccion(Transaccion_Debug) then
+  if dm.ISModelo.verificar_transaccion(Transaccion_Debug) then
   begin
     if not (application.MessageBox(pchar('La Transacción esta activa, hay cambios sin guardar. Los Cancela?'), 'Pregunta', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON1) = IDYES) then
       canClose:= False
     else
-      dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
+      dm.ISModelo.cancelar_transaccion(Transaccion_Debug);
   end;
 end;
 
@@ -329,7 +329,7 @@ begin
   if triggerActivo then //si los trigger estan activados salgo
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(Transaccion_Debug, []) then
+  if dm.ISModelo.iniciar_transaccion(Transaccion_Debug, []) then
   begin
     try
       triggerActivo:= true;
@@ -339,16 +339,16 @@ begin
       ZQ_ActivarT.ParamByName('TIPO').AsString:= 'T';
       ZQ_ActivarT.ExecSQL;
 
-      if not dm.EKModelo.finalizar_transaccion(Transaccion_Debug) then
+      if not dm.ISModelo.finalizar_transaccion(Transaccion_Debug) then
       begin
-        dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
+        dm.ISModelo.cancelar_transaccion(Transaccion_Debug);
       end;
 
     except //si se produce una excepcion cierro la transaccion y pongo en true la variable triggerActivo
-      if not dm.EKModelo.finalizar_transaccion(Transaccion_Debug) then
+      if not dm.ISModelo.finalizar_transaccion(Transaccion_Debug) then
       begin
         triggerActivo:= false;
-        dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
+        dm.ISModelo.cancelar_transaccion(Transaccion_Debug);
       end;
     end;
   end;
@@ -381,7 +381,7 @@ end;
 
 procedure TFDebugging.btnAceptarTriggerClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(Transaccion_Debug, []) then
+  if dm.ISModelo.iniciar_transaccion(Transaccion_Debug, []) then
   begin
     try
       triggerActivo:= false;
@@ -403,17 +403,17 @@ begin
       end;
       ZQ_DesactivarT.ExecSQL;
       panelTriggers.Visible:= false;
-      if not dm.EKModelo.finalizar_transaccion(Transaccion_Debug) then
+      if not dm.ISModelo.finalizar_transaccion(Transaccion_Debug) then
       begin
-        dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
+        dm.ISModelo.cancelar_transaccion(Transaccion_Debug);
       end;
 
     except //si se produce una excepcion cierro la transaccion y pongo en false la variable triggerActivo
-      if not dm.EKModelo.finalizar_transaccion(Transaccion_Debug) then
+      if not dm.ISModelo.finalizar_transaccion(Transaccion_Debug) then
       begin
         triggerActivo:= true;
         panelTriggers.Visible:= false;
-        dm.EKModelo.cancelar_transaccion(Transaccion_Debug);
+        dm.ISModelo.cancelar_transaccion(Transaccion_Debug);
       end;
     end;
   end;
