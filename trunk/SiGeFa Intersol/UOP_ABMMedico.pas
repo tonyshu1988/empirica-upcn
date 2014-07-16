@@ -148,7 +148,7 @@ end;
 
 procedure TFOP_ABMMedico.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
   begin
     DBGridMedico.Enabled := false;
 
@@ -167,7 +167,7 @@ begin
   if (ZQ_Medico.IsEmpty) then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
   begin
     DBGridMedico.Enabled := false;
 
@@ -189,7 +189,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el "Medico" seleccionado'), 'ABM Medico', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
     begin
       ZQ_Medico.Edit;
       ZQ_MedicoBAJA.AsString:='S';
@@ -197,8 +197,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_Medico.RecNo;
     ZQ_Medico.Refresh;
@@ -216,7 +216,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar el "Medico" seleccionado?'), 'ABM Medico', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Medico]) then
     begin
       ZQ_Medico.Edit;
       ZQ_MedicoBAJA.AsString:='N';
@@ -224,8 +224,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_Medico.RecNo;
     ZQ_Medico.Refresh;
@@ -248,7 +248,7 @@ begin
   end;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       DBGridMedico.Enabled:= true;
       DBGridMedico.SetFocus;
@@ -271,7 +271,7 @@ end;
 
 procedure TFOP_ABMMedico.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     DBGridMedico.Enabled:=true;
     DBGridMedico.SetFocus;
@@ -356,7 +356,7 @@ begin
     exit;
 
   DM.VariablesReportes(RepMedico);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
   ISVistaPrevia.VistaPrevia;
 end;
