@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, Grids, DBGrids, DBCtrls, StdCtrls, Mask,
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
-  EKVistaPreviaQR, QRCtrls, QuickRpt, cxClasses;
+  ActnList, XPStyleActnCtrls, ActnMan,
+  QRCtrls, QuickRpt, cxClasses, ISVistaPreviaQR,
+  ISBusquedaAvanzada, ISOrdenarGrilla;
 
 type
   TFABM_TipoFormaPago = class(TForm)
@@ -29,13 +30,9 @@ type
     ZQ_TipoFPago: TZQuery;
     DS_TipoFPago: TDataSource;
     DBGridTipoFPago: TDBGrid;
-    PanelEdicion: TPanel;
-    Label1: TLabel;
-    DBENombre: TDBEdit;
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
     StaticTxtBaja: TStaticText;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -45,7 +42,6 @@ type
     AReactivar: TAction;
     AGuardar: TAction;
     ACancelar: TAction;
-    EKBuscar: TEKBusquedaAvanzada;
     RepTipoFPago: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
@@ -67,14 +63,9 @@ type
     ColumnHeaderBand2: TQRBand;
     QRLabel29: TQRLabel;
     QRLabel1: TQRLabel;
-    EKVistaPrevia: TEKVistaPreviaQR;
     ZQ_TipoFPagoID_TIPO_FORMAPAGO: TIntegerField;
     ZQ_TipoFPagoDESCRIPCION: TStringField;
     ZQ_TipoFPagoBAJA: TStringField;
-    Label3: TLabel;
-    DBECodigo: TDBEdit;
-    Label2: TLabel;
-    DBEditDescRec: TDBEdit;
     ZQ_TipoFPagoIF: TStringField;
     ZQ_TipoFPagoDESC_REC: TFloatField;
     ZQ_TipoFPagoCOD_CORTO: TIntegerField;
@@ -83,13 +74,7 @@ type
     ZQ_TipoFPagoGENERA_VUELTO: TStringField;
     ZQ_TipoFPagoCOLUMNA_PRECIO: TIntegerField;
     ZQ_TipoFPagoMODIFICABLE: TStringField;
-    Label4: TLabel;
-    DBComboBoxVuelto: TDBComboBox;
-    Label5: TLabel;
-    DBComboBox1: TDBComboBox;
     btnExcel: TdxBarLargeButton;
-    Label6: TLabel;
-    DBComboBox2: TDBComboBox;
     ZQ_TipoFPagoDESCUENTO: TIntegerField;
     ZQ_TipoFPagoRETENCIONES: TIntegerField;
     ZQ_TipoFPagoIVA_21: TIntegerField;
@@ -100,6 +85,9 @@ type
     ZQ_TipoFPagoA_NEG: TIntegerField;
     ZQ_TipoFPagoOTROS_DESCUENTOS: TIntegerField;
     ZQ_TipoFPagoINTR: TIntegerField;
+    ISVistaPrevia: TISVistaPreviaQR;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
+    ISBuscar: TISBusquedaAvanzada;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -142,7 +130,7 @@ uses UPrincipal, UDM;
 procedure TFABM_TipoFormaPago.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
 begin
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla1.GuardarConfigColumnas;
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
 end;
 
@@ -155,18 +143,16 @@ end;
 
 procedure TFABM_TipoFormaPago.btnBuscarClick(Sender: TObject);
 begin
-  if EKBuscar.Buscar then
+  if ISBuscar.Buscar then
     dm.mostrarCantidadRegistro(ZQ_TipoFPago, lblCantidadRegistros);
 end;
 
 
 procedure TFABM_TipoFormaPago.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
   begin
-    DBGridTipoFPago.Enabled := false;
-    PanelEdicion.Visible:= true;
-
+    DBGridTipoFPago.Enabled:=true;
     ZQ_UltimoNro.Close;
     ZQ_UltimoNro.Open;
 
@@ -182,7 +168,7 @@ begin
     else
       ZQ_TipoFPagoCOD_CORTO.AsInteger:= ZQ_UltimoNroCOD_CORTO.AsInteger + 1;
 
-    DBENombre.SetFocus;
+    
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -194,10 +180,8 @@ begin
   if (ZQ_TipoFPago.IsEmpty) or (ZQ_TipoFPagoMODIFICABLE.AsString = 'N') then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
   begin
-    DBGridTipoFPago.Enabled := false;
-    PanelEdicion.Visible:= true;
 
     ZQ_TipoFPago.Edit;
     if ZQ_TipoFPagoCOD_CORTO.IsNull then
@@ -210,7 +194,7 @@ begin
         ZQ_TipoFPagoCOD_CORTO.AsInteger:= ZQ_UltimoNroCOD_CORTO.AsInteger + 1;
     end;
 
-    DBENombre.SetFocus;
+    DBGridTipoFPago.Enabled:=true;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
   end;
@@ -226,7 +210,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el "Tipo Medio Pago" seleccionado?'), 'ABM Tipo Medio Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
     begin
       ZQ_TipoFPago.Edit;
       ZQ_TipoFPagoBAJA.AsString:='S';
@@ -234,8 +218,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_TipoFPago.RecNo;
     ZQ_TipoFPago.Refresh;
@@ -253,7 +237,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar el "Tipo Medio Pago" seleccionado?'), 'ABM Tipo Medio Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
     begin
       ZQ_TipoFPago.Edit;
       ZQ_TipoFPagoBAJA.AsString:='N';
@@ -261,8 +245,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
     recNo:= ZQ_TipoFPago.RecNo;
     ZQ_TipoFPago.Refresh;
@@ -277,21 +261,19 @@ var
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
-  if (trim(DBENombre.Text) = '') then
+  if (ZQ_TipoFPagoID_TIPO_FORMAPAGO.IsNull) then
   begin
     Application.MessageBox('El campo "Tipo Medio Pago" se encuentra vacío, por favor Verifique','Validar Datos',MB_OK+MB_ICONINFORMATION);
-    DBENombre.SetFocus;
+    DBGridTipoFPago.SetFocus;
     exit;
   end;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
-      DBGridTipoFPago.Enabled:= true;
       DBGridTipoFPago.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
-      PanelEdicion.Visible := false;
       recNo:= ZQ_TipoFPago.RecNo;
       ZQ_TipoFPago.Refresh;
       ZQ_TipoFPago.RecNo:= recNo;
@@ -309,13 +291,13 @@ end;
 
 procedure TFABM_TipoFormaPago.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
   begin
     DBGridTipoFPago.Enabled:=true;
     DBGridTipoFPago.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
-    PanelEdicion.Visible := false;
+
   end;
 end;
 
@@ -323,11 +305,11 @@ end;
 procedure TFABM_TipoFormaPago.FormCreate(Sender: TObject);
 begin
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
-  EKOrdenarGrilla1.CargarConfigColumnas;
+  ISOrdenarGrilla1.CargarConfigColunmas;
 
   StaticTxtBaja.Color:= FPrincipal.baja;
 
-  EKBuscar.Abrir;
+  ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_TipoFPago, lblCantidadRegistros);
 end;
 
@@ -395,9 +377,9 @@ begin
     exit;
 
   DM.VariablesReportes(RepTipoFPago);
-  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
-  QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
-  EKVistaPrevia.VistaPrevia;
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  QRLabelCritBusqueda.Caption := ISBuscar.ParametrosBuscados;
+  ISVistaPrevia.VistaPrevia;
 end;
 
 procedure TFABM_TipoFormaPago.btnExcelClick(Sender: TObject);
