@@ -1,8 +1,8 @@
 object FABM_TipoFormaPago: TFABM_TipoFormaPago
-  Left = 386
-  Top = 196
-  Width = 807
-  Height = 503
+  Left = 335
+  Top = 243
+  Width = 843
+  Height = 514
   Caption = 'ABM Tipo Forma Pago'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,8 +22,8 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 799
-    Height = 405
+    Width = 835
+    Height = 416
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -173,7 +173,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
           Size.Values = (
             52.916666666666670000
             732.895833333333400000
-            68.791666666666670000
+            68.791666666666680000
             433.916666666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -461,7 +461,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            724.958333333333300000)
+            724.958333333333200000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -653,8 +653,8 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 799
-      Height = 405
+      Width = 835
+      Height = 416
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -668,12 +668,12 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
       object DBGridTipoFPago: TDBGrid
         Left = 5
         Top = 5
-        Width = 789
-        Height = 339
+        Width = 825
+        Height = 406
         Align = alClient
         Color = 14606012
         DataSource = DS_TipoFPago
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -684,272 +684,138 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
         Columns = <
           item
             Expanded = False
-            FieldName = 'COD_CORTO'
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'digo'
-            Width = 87
+            FieldName = 'ID_TIPO_FORMAPAGO'
+            Title.Caption = 'ID'
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'DESCRIPCION'
-            Title.Alignment = taCenter
-            Title.Caption = 'Tipo Medio Pago'
-            Width = 246
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DESC_REC'
-            Title.Alignment = taCenter
-            Title.Caption = 'Descuento/Recargo'
-            Width = 128
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'COLUMNA_PRECIO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Lista Precio'
-            Width = 115
+            Title.Caption = 'Descripci'#243'n'
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'IF'
-            Title.Alignment = taCenter
-            Width = 27
+            PickList.Strings = (
+              'S'
+              'N')
+            Width = 37
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DESC_REC'
+            Title.Caption = 'Descuento/Recargo'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COD_CORTO'
+            Title.Caption = 'C'#243'd. Corto'
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'GENERA_VUELTO'
-            Title.Alignment = taCenter
+            PickList.Strings = (
+              'S'
+              'N')
             Title.Caption = 'Genera Vuelto'
-            Width = 99
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COLUMNA_PRECIO'
+            PickList.Strings = (
+              '0'
+              '1'
+              '2'
+              '3'
+              '4'
+              '5')
+            Title.Caption = 'Columna Precio'
             Visible = True
           end
           item
             Expanded = False
             FieldName = 'MODIFICABLE'
-            Title.Alignment = taCenter
+            PickList.Strings = (
+              'S'
+              'N')
             Title.Caption = 'Modificable'
-            Width = 83
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DESCUENTO'
+            Title.Caption = 'Descuento'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'RETENCIONES'
+            Title.Caption = 'Retenciones'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'IVA_21'
+            Title.Caption = 'IVA 21%'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'IVA_10'
+            Title.Caption = 'IVA 10%'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'GANANCIAS'
+            Title.Caption = 'Ganancias'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'IIBB'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'A_POS'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'A_NEG'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'OTROS_DESCUENTOS'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'INTR'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'BAJA'
+            PickList.Strings = (
+              'N'
+              'S')
             Visible = True
           end>
-      end
-      object PanelEdicion: TPanel
-        Left = 5
-        Top = 344
-        Width = 789
-        Height = 56
-        Align = alBottom
-        BevelOuter = bvNone
-        TabOrder = 1
-        Visible = False
-        object Label1: TLabel
-          Left = 171
-          Top = 11
-          Width = 50
-          Height = 13
-          Caption = 'Nombre:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label3: TLabel
-          Left = 16
-          Top = 11
-          Width = 45
-          Height = 13
-          Caption = 'C'#243'digo:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label2: TLabel
-          Left = 17
-          Top = 38
-          Width = 152
-          Height = 13
-          Caption = 'Coef. Descuento/Recargo:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label4: TLabel
-          Left = 255
-          Top = 38
-          Width = 87
-          Height = 13
-          Caption = 'Genera Vuelto:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label5: TLabel
-          Left = 416
-          Top = 38
-          Width = 70
-          Height = 13
-          Caption = 'Lista Precio:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label6: TLabel
-          Left = 568
-          Top = 38
-          Width = 16
-          Height = 13
-          Caption = 'IF:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object DBENombre: TDBEdit
-          Left = 223
-          Top = 6
-          Width = 474
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'DESCRIPCION'
-          DataSource = DS_TipoFPago
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 1
-        end
-        object DBECodigo: TDBEdit
-          Left = 63
-          Top = 6
-          Width = 97
-          Height = 21
-          CharCase = ecUpperCase
-          Color = clMenuBar
-          DataField = 'COD_CORTO'
-          DataSource = DS_TipoFPago
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 0
-        end
-        object DBEditDescRec: TDBEdit
-          Left = 172
-          Top = 33
-          Width = 59
-          Height = 21
-          Hint = 
-            'Ej: Recargo del 10% se carga 0.1; Descuento del 10% se carga -0.' +
-            '1.'
-          CharCase = ecUpperCase
-          DataField = 'DESC_REC'
-          DataSource = DS_TipoFPago
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 2
-        end
-        object DBComboBoxVuelto: TDBComboBox
-          Left = 586
-          Top = 33
-          Width = 47
-          Height = 21
-          DataField = 'IF'
-          DataSource = DS_TipoFPago
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ItemHeight = 13
-          Items.Strings = (
-            'N'
-            'S')
-          ParentFont = False
-          TabOrder = 3
-        end
-        object DBComboBox1: TDBComboBox
-          Left = 489
-          Top = 33
-          Width = 47
-          Height = 21
-          DataField = 'COLUMNA_PRECIO'
-          DataSource = DS_TipoFPago
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ItemHeight = 13
-          Items.Strings = (
-            '1'
-            '2'
-            '3'
-            '4'
-            '5')
-          ParentFont = False
-          TabOrder = 4
-        end
-        object DBComboBox2: TDBComboBox
-          Left = 345
-          Top = 33
-          Width = 47
-          Height = 21
-          DataField = 'GENERA_VUELTO'
-          DataSource = DS_TipoFPago
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ItemHeight = 13
-          Items.Strings = (
-            'N'
-            'S')
-          ParentFont = False
-          TabOrder = 5
-        end
       end
     end
   end
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 799
+    Width = 835
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -970,7 +836,7 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 689
+      Left = 725
       Top = 1
       Width = 109
       Height = 17
@@ -1641,46 +1507,6 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
     Left = 48
     Top = 128
   end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridTipoFPago
-    Filtros = <
-      item
-        TituloColumna = 'C'#243'digo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Tipo Medio Pago'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Descuento/Recargo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Lista Precio'
-        Visible = True
-      end
-      item
-        TituloColumna = 'IF'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Genera Vuelto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Modificable'
-        Visible = True
-      end>
-    NombreGuardar = 'ABMTipoFPago'
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = False
-    PermitirFiltrar = True
-    Left = 48
-    Top = 243
-  end
   object ATeclasRapidas: TActionManager
     Left = 48
     Top = 298
@@ -1725,42 +1551,6 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
       OnExecute = ACancelarExecute
     end
   end
-  object EKBuscar: TEKBusquedaAvanzada
-    CriteriosBusqueda = <
-      item
-        Titulo = 'Tipo Medio Pago'
-        Campo = 'DESCRIPCION'
-        Tabla = 'TIPO_FORMAPAGO'
-        TipoCampoIndiceVer = 'Contiene'
-        TipoComboEditable = False
-        TipoComboAncho = 200
-        ItemIndex = -1
-        VaciarValorDespues = False
-      end>
-    CriteriosLocate = <>
-    Modelo = DM.EKModelo
-    DataSet = ZQ_TipoFPago
-    SQL.Strings = (
-      'select *'
-      'from tipo_formapago'
-      'order by DESCRIPCION')
-    SQL_Select.Strings = (
-      'select *')
-    SQL_From.Strings = (
-      'from tipo_formapago')
-    SQL_Orden.Strings = (
-      'order by DESCRIPCION')
-    UsarWhereOriginal = EK_Sin_Where
-    PantallaReducida = True
-    Left = 136
-    Top = 75
-  end
-  object EKVistaPrevia: TEKVistaPreviaQR
-    Reporte = RepTipoFPago
-    ShowModal = False
-    Left = 136
-    Top = 128
-  end
   object ZQ_UltimoNro: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -1768,10 +1558,137 @@ object FABM_TipoFormaPago: TFABM_TipoFormaPago
       'from tipo_formapago t'
       'order by t.cod_corto desc')
     Params = <>
-    Left = 136
-    Top = 187
+    Left = 48
+    Top = 243
     object ZQ_UltimoNroCOD_CORTO: TIntegerField
       FieldName = 'COD_CORTO'
     end
+  end
+  object ISVistaPrevia: TISVistaPreviaQR
+    Reporte = RepTipoFPago
+    ShowModal = False
+    Left = 232
+    Top = 131
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
+    Grilla = DBGridTipoFPago
+    Filtros = <
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Descripci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IF'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Descuento/Recargo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Corto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Genera Vuelto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Columna Precio'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Modificable'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Descuento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Retenciones'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IVA 21%'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IVA 10%'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Ganancias'
+        Visible = True
+      end
+      item
+        TituloColumna = 'IIBB'
+        Visible = True
+      end
+      item
+        TituloColumna = 'A_POS'
+        Visible = True
+      end
+      item
+        TituloColumna = 'A_NEG'
+        Visible = True
+      end
+      item
+        TituloColumna = 'OTROS_DESCUENTOS'
+        Visible = True
+      end
+      item
+        TituloColumna = 'INTR'
+        Visible = True
+      end
+      item
+        TituloColumna = 'BAJA'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ABMTipoFPago'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 232
+    Top = 187
+  end
+  object ISBuscar: TISBusquedaAvanzada
+    CriteriosBusqueda = <>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_TipoFPago
+    SQL.Strings = (
+      'select tf.*'
+      ''
+      ''
+      ''
+      'from tipo_formapago tf'
+      ''
+      ''
+      'order by tf.DESCRIPCION'
+      '')
+    SQL_Select.Strings = (
+      'select tf.*'
+      ''
+      '')
+    SQL_From.Strings = (
+      ''
+      'from tipo_formapago tf'
+      ''
+      '')
+    SQL_Orden.Strings = (
+      'order by tf.DESCRIPCION'
+      '')
+    UsarWhereOriginal = IS_Sin_Where
+    PantallaReducida = True
+    Left = 232
+    Top = 75
   end
 end
