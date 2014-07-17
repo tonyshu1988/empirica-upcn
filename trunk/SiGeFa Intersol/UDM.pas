@@ -4,20 +4,19 @@ interface
 
 uses
   Forms, SysUtils, Classes, ZConnection, WinSkinData, DB, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset, EKModelo,
+  ZAbstractDataset, ZDataset,
   QRCtrls, QuickRpt, MidasLib, mxExport,
   mxNativeExcel, IdBaseComponent, IdComponent, IdTCPConnection,
   IdTCPClient, IdMessageClient, IdSMTP, IdPOP3, IdMessage, ExtCtrls,
   IdIOHandler, IdIOHandlerSocket, IdIOHandlerStack, IdSSL, IdSSLOpenSSL,
   IdSMTPBase, IdExplicitTLSClientServerBase, StdCtrls, Graphics,
   IdIMAP4, Grids, DBGrids, ISModelo, ISIni, ISInformacion, ISUsrLogin,
-  ISAppEvnts, ISEventos, EKInformacion, ZAbstractConnection;
+  ISAppEvnts, ISEventos,  ZAbstractConnection;
 
 type
   TDM = class(TDataModule)
     Conexion: TZConnection;
     SkinData1: TSkinData;
-    EKModelo: TEKModeloTransaccion;
     ZQ_Configuracion: TZQuery;
     ExcelNative: TmxNativeExcel;
     ExcelExport: TmxDBGridExport;
@@ -124,7 +123,6 @@ type
     ISUsrLogin: TISUsrLogin;
     ISEventos1: TISEventos;
     ISInformacion1: TISInformacion;
-    EKInformacion1: TEKInformacion;
     procedure LoginLogin(Sender: TObject);
     procedure VariablesReportes(Reporte: TQuickRep);
     procedure VariablesComprobantes(Reporte: TQuickRep);
@@ -304,10 +302,10 @@ begin
   Application.CreateForm(TFPrincipal, FPrincipal);
 
 //  Conexion_Usuario.HostName:= ISUsrLogin.ConeccionUsuario.HostName;
-//  Conexion_Usuario.Database:= EKUsrLogin.ConeccionUsuario.Database;
-//  Conexion_Usuario.User:= EKUsrLogin.ConeccionUsuario.User;
-//  Conexion_Usuario.Password:= EKUsrLogin.ConeccionUsuario.Password;
-//  Conexion_Usuario.Protocol:= EKUsrLogin.ConeccionUsuario.Protocol;
+//  Conexion_Usuario.Database:= ISUsrLogin.ConeccionUsuario.Database;
+//  Conexion_Usuario.User:= ISUsrLogin.ConeccionUsuario.User;
+//  Conexion_Usuario.Password:= ISUsrLogin.ConeccionUsuario.Password;
+//  Conexion_Usuario.Protocol:= ISUsrLogin.ConeccionUsuario.Protocol;
 
   auxDecimalSeparator:= DecimalSeparator;
   auxCurrencyDecimals:= CurrencyDecimals;
@@ -597,7 +595,7 @@ begin
 
   ZQ_VerificarCtaCte.Close;
   ZQ_VerificarCtaCte.ParamByName('id_cliente').AsInteger:= id_cliente;
-  dm.EKModelo.abrir(ZQ_VerificarCtaCte);
+  dm.ismodelo.abrir(ZQ_VerificarCtaCte);
   if ZQ_VerificarCtaCte.IsEmpty then
     Result:= false;
 end;

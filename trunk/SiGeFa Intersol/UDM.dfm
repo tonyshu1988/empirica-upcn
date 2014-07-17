@@ -1442,11 +1442,6 @@ object DM: TDM
       70D547B4AFB98B0049B43467EFF9CE40A3F2EFD2E6D28F7993F1DF6C057E28DB
       00AFA553B8F98743B4F9A4B7DD2A51E59C16EF070BB6437423BA651E}
   end
-  object EKModelo: TEKModeloTransaccion
-    Coneccion = Conexion
-    Left = 400
-    Top = 16
-  end
   object ZQ_Configuracion: TZQuery
     Connection = Conexion
     SQL.Strings = (
@@ -2118,13 +2113,5 @@ object DM: TDM
     IndiceVersion = 1
     Left = 120
     Top = 82
-  end
-  object EKInformacion1: TEKInformacion
-    StatusBar = FPrincipal.StatusBar1
-    IndiceUsuario = 0
-    IndiceTransaccion = 2
-    IndiceVersion = 1
-    Left = 400
-    Top = 72
   end
 end
