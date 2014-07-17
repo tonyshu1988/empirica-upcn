@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, Grids, DBGrids, DB,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset, EKBusquedaAvanzada,
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, 
   ZStoredProcedure, ZSqlUpdate,  mxNativeExcel, mxExport, UBuscarPersona,
   QRCtrls, QuickRpt, DBClient, Provider, ShellApi,
   ComCtrls, ActnList, XPStyleActnCtrls, ActnMan,
