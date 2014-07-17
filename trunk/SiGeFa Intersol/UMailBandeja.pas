@@ -8,8 +8,7 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
   IdMessage, IdBaseComponent, IdComponent, IdTCPConnection, IdTCPClient,
   IdMessageClient, IdPOP3, idsync, idglobal, Buttons, ImgList, Menus,
-  EKListadoSQL, cxClasses, IdAttachmentFile, IdText, EKIni, EKDBGrid,
-  OleCtrls, SHDocVw;
+  cxClasses, IdAttachmentFile, IdText, OleCtrls, SHDocVw, ISListadoSQL;
 
 type
   TFMailBandeja = class(TForm)
@@ -66,7 +65,6 @@ type
     Panel1: TPanel;
     Label6: TLabel;
     DBTxtCuenta: TDBText;
-    EKListadoCuentas: TEKListadoSQL;
     ZQ_Cuentas: TZQuery;
     ZQ_CuentasID_CUENTA: TIntegerField;
     ZQ_CuentasID_SUCURSAL: TIntegerField;
@@ -113,6 +111,7 @@ type
     ListView1: TListView;
     Splitter1: TSplitter;
     Splitter2: TSplitter;
+    ISListadoCuentas: TISListadoSQL;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -624,13 +623,13 @@ begin
   desconectar;
   ZQ_Cuentas.Filtered:= false;
 
-  EKListadoCuentas.SQL.Text:= 'select c.* '+
+  ISListadoCuentas.SQL.Text:= 'select c.* '+
                               'from mail_cuentas c '+
                               'where id_sucursal = '+IntToStr(SUCURSAL_LOGUEO);
 
-  if EKListadoCuentas.Buscar then
+  if ISListadoCuentas.Buscar then
   begin
-    dm.configMail('CUENTA', StrToInt(EKListadoCuentas.Resultado));
+    dm.configMail('CUENTA', StrToInt(ISListadoCuentas.Resultado));
 
     ZQ_MailSalida.Close;
     ZQ_MailSalida.ParamByName('id_cuenta').AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;

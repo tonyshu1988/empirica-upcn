@@ -22,8 +22,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 862
-    Height = 446
+    Width = 854
+    Height = 435
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -140,7 +140,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            838.729166666666800000
+            838.729166666666700000
             124.354166666666700000
             222.250000000000000000)
           Alignment = taCenter
@@ -173,8 +173,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
           Size.Values = (
             52.916666666666670000
             762.000000000000000000
-            68.791666666666680000
-            375.708333333333400000)
+            68.791666666666670000
+            375.708333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -442,7 +442,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -492,7 +492,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -653,8 +653,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
     object PageControlEdicion: TPageControl
       Left = 0
       Top = 0
-      Width = 862
-      Height = 446
+      Width = 854
+      Height = 435
       ActivePage = TabMedidaArticuloUnico
       Align = alClient
       TabOrder = 0
@@ -701,7 +701,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
             Left = 1
             Top = 1
             Width = 134
-            Height = 16
+            Height = 13
             Align = alLeft
             Caption = 'lblCantidadRegistros'
             Font.Charset = ANSI_CHARSET
@@ -842,7 +842,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object PanelSeleccionarArticulo: TPanel
           Left = 0
           Top = 0
-          Width = 854
+          Width = 846
           Height = 39
           Align = alTop
           BevelOuter = bvNone
@@ -876,8 +876,8 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
         object DBGridMedidaARticulo: TDBGrid
           Left = 0
           Top = 39
-          Width = 854
-          Height = 379
+          Width = 846
+          Height = 368
           Hint = 'Presione el boton derecho del mouse para cargar una medida'
           Align = alClient
           Color = 14606012
@@ -909,7 +909,7 @@ object FABM_ArticuloMedida: TFABM_ArticuloMedida
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
