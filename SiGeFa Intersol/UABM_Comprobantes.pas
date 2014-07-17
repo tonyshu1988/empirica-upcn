@@ -32,7 +32,7 @@ uses
   EKOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   EKVistaPreviaQR, QRCtrls, QuickRpt, Buttons, ImgList, EKListadoSQL,
   ComCtrls, EKDBDateTimePicker, EKFiltrarColumna, ZStoredProcedure,
-  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona;
+  EKDbSuma, DBClient, Menus, UBuscarProducto, UBuscarPersona, cxClasses;
 
 type
   TFABM_Comprobantes = class(TForm)
@@ -645,8 +645,8 @@ begin
   agrandarPanelFPago:=false;
   agrandarPanelProducto:=false;
 
-  dm.EKModelo.abrir(ZQ_Cuenta); //abro las cuentas bancarias
-  dm.EKModelo.abrir(ZQ_TipoFPago); //abro los tipos de forma de pago
+  dm.ISModelo.abrir(ZQ_Cuenta); //abro las cuentas bancarias
+  dm.ISModelo.abrir(ZQ_TipoFPago); //abro los tipos de forma de pago
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
@@ -879,7 +879,7 @@ end;
 
 procedure TFABM_Comprobantes.btnTipoCpb_AceptarClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbProducto, ZQ_NumeroCpb]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbProducto, ZQ_NumeroCpb]) then
   begin
     PanelTipoCpb.Visible:= false;
     modoEdicion(true);
@@ -930,7 +930,7 @@ begin
 
     ZQ_ComprobantePUNTO_VENTA.AsInteger:= 1;
     ZQ_ComprobanteNUMERO_CPB.AsInteger:= ZQ_NumeroCpbULTIMO_NUMERO.AsInteger + 1;
-    ZQ_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_ComprobanteFECHA.AsDateTime:= dm.ISModelo.FechayHora;
     ZQ_ComprobanteFECHA_COBRADA.Clear;
     ZQ_ComprobanteFECHA_ENVIADA.Clear;
     ZQ_ComprobanteFECHA_IMPRESA.Clear;
@@ -938,19 +938,19 @@ begin
     ZQ_ComprobanteFECHA_ANULADO.Clear;
     case tipoComprobante of
       CPB_PRESUPUESTO:  begin //CPB_PRESUPUESTO
-                          ZQ_ComprobanteFECHA_VENCIMIENTO.AsDateTime:= dm.EKModelo.FechayHora;
+                          ZQ_ComprobanteFECHA_VENCIMIENTO.AsDateTime:= dm.ISModelo.FechayHora;
                         end;
       CPB_NOTA_PEDIDO:  begin //CPB_NOTA_PEDIDO
-                          ZQ_ComprobanteFECHA_ENVIADA.AsDateTime:= dm.EKModelo.FechayHora;
+                          ZQ_ComprobanteFECHA_ENVIADA.AsDateTime:= dm.ISModelo.FechayHora;
                         end;
       CPB_REMITO_VENTA: begin //CPB_REMITO_VENTA
-                          ZQ_ComprobanteFECHA_ENVIADA.AsDateTime:= dm.EKModelo.FechayHora;
+                          ZQ_ComprobanteFECHA_ENVIADA.AsDateTime:= dm.ISModelo.FechayHora;
                         end;
       CPB_RECIBO_COBRO: begin //CPB_RECIBO_COBRO
-                          //ZQ_ComprobanteFECHA_ENVIADA.AsDateTime:= dm.EKModelo.FechayHora;
+                          //ZQ_ComprobanteFECHA_ENVIADA.AsDateTime:= dm.ISModelo.FechayHora;
                         end;
       CPB_ORDEN_PAGO:   begin //CPB_ORDEN_PAGO
-                          //ZQ_ComprobanteFECHA_ENVIADA.AsDateTime:= dm.EKModelo.FechayHora;
+                          //ZQ_ComprobanteFECHA_ENVIADA.AsDateTime:= dm.ISModelo.FechayHora;
                         end;
     end;
 
@@ -982,7 +982,7 @@ begin
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   tipoComprobante:= ZQ_VerCpbID_TIPO_CPB.AsInteger;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbProducto]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbProducto]) then
   begin
     PanelTipoCpb.Visible:= false;
     modoEdicion(true);
@@ -1052,7 +1052,7 @@ begin
 //
 //  if (application.MessageBox(pchar('¿Desea dar de baja el "Tipo Medio Pago" seleccionado?'), 'ABM Tipo Medio Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
 //  begin
-//    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
+//    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
 //    begin
 //      ZQ_TipoFPago.Edit;
 //      ZQ_TipoFPagoBAJA.AsString:='S';
@@ -1060,8 +1060,8 @@ begin
 //    else
 //      exit;
 //
-//    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-//      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+//    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+//      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 //
 //    recNo:= ZQ_TipoFPago.RecNo;
 //    ZQ_TipoFPago.Refresh;
@@ -1079,7 +1079,7 @@ begin
 //
 //  if (application.MessageBox(pchar('¿Desea reactivar el "Tipo Medio Pago" seleccionado?'), 'ABM Tipo Medio Pago', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
 //  begin
-//    if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
+//    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_TipoFPago]) then
 //    begin
 //      ZQ_TipoFPago.Edit;
 //      ZQ_TipoFPagoBAJA.AsString:='N';
@@ -1087,8 +1087,8 @@ begin
 //    else
 //      exit;
 //
-//    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABM)) then
-//      dm.EKModelo.cancelar_transaccion(transaccion_ABM);
+//    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
+//      dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 //
 //    recNo:= ZQ_TipoFPago.RecNo;
 //    ZQ_TipoFPago.Refresh;
@@ -1163,7 +1163,7 @@ begin
       ZQ_ComprobanteID_COMP_ESTADO.AsInteger:= ESTADO_SIN_CONFIRMAR;
 
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABM) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
     begin
       modoEdicion(false);
       DBGridListaCpb.SetFocus;
@@ -1185,7 +1185,7 @@ end;
 procedure TFABM_Comprobantes.btnCancelarClick(Sender: TObject);
 begin
   if (application.MessageBox(pchar('¿Seguro que desea cancelar? Se perderan los cambios realizados.'), 'ATENCION - ABM Comprobantes', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABM) then
     begin
       modoEdicion(false);
       DBGridListaCpb.SetFocus;
@@ -1441,7 +1441,7 @@ end;
 //----------------------
 procedure TFABM_Comprobantes.DBGridEditar_FpagoColExit(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then //SI ESTOY DANDO DE ALTA O EDITANDO
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then //SI ESTOY DANDO DE ALTA O EDITANDO
   begin
       //PARA LOS RECIBOS - CUENTA INGRESO
       if (((sender as tdbgrid).SelectedField.FullName = '_CuentaIngreso_Codigo') or
@@ -1527,7 +1527,7 @@ end;
 
 procedure TFABM_Comprobantes.DBGridEditar_FpagoKeyUp(Sender: TObject; var Key: Word; Shift: TShiftState);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
   begin
     if key = 112 then
     begin
@@ -1613,7 +1613,7 @@ end;
 
 procedure TFABM_Comprobantes.btnEliminarFPagoClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
   begin
     if not ZQ_CpbFormaPago.IsEmpty then
       ZQ_CpbFormaPago.Delete;
@@ -1808,7 +1808,7 @@ end;
 procedure TFABM_Comprobantes.DBGridEditar_ProductoKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
-  if dm.EKModelo.verificar_transaccion(transaccion_ABM) then
+  if dm.ISModelo.verificar_transaccion(transaccion_ABM) then
   begin
     if key = 112 then
       agregarProducto;
@@ -2070,7 +2070,7 @@ begin
   id_comprobante:= ZQ_VerCpbID_COMPROBANTE.AsInteger;
   tipoComprobante:= ZQ_VerCpbID_TIPO_CPB.AsInteger;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbProducto]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_Comprobante, ZQ_CpbFormaPago, ZQ_CpbProducto]) then
   begin
     PanelTipoCpb.Visible:= false;
     modoEdicion(true);
@@ -2116,7 +2116,7 @@ begin
     confirmarCpb(tipoComprobante);
 
     ZQ_Comprobante.Edit;
-    ZQ_ComprobanteFECHA_IMPRESA.AsDateTime:= dm.EKModelo.FechayHora;
+    ZQ_ComprobanteFECHA_IMPRESA.AsDateTime:= dm.ISModelo.FechayHora;
 
     EKDBDateImpreso.SetFocus;
   end;

@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ToolWin, ActnMan, ActnCtrls, Menus, XPStyleActnCtrls, ActnList,
   ComCtrls, ImgList, ExtCtrls, jpeg, QPrinters, ZDataset,
-  Grids, DBGrids, EKImageList32, EKVentanas, EKInformacion, DB, StdCtrls, shellapi,
+  Grids, DBGrids, EKImageList32,   DB, StdCtrls, shellapi,
   ISInformacion, ISVentanas, MCoP32bitImageList;
 
 type
@@ -180,6 +180,7 @@ type
     EstadsticasLibroIVA1: TMenuItem;
     ISImage_ABM_Comprobantes: TIS32bitImageList;
     ISVentanas1: TISVentanas;
+    ISImageMenu24: TIS32bitImageList;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);

@@ -251,9 +251,9 @@ begin
   StaticTxtBaja.Color:= FPrincipal.baja;
 
   EKOrdenar.CargarConfigColumnas;
-  dm.EKModelo.abrir(ZQ_Provincia);
-  dm.EKModelo.abrir(ZQ_Iva);
-  dm.EKModelo.abrir(ZQ_Documento);
+  dm.ISModelo.abrir(ZQ_Provincia);
+  dm.ISModelo.abrir(ZQ_Iva);
+  dm.ISModelo.abrir(ZQ_Documento);
 
   EKBuscar.Abrir;
 end;
@@ -291,7 +291,7 @@ end;
 
 procedure TFABMClientes.btnNuevoClick(Sender: TObject);
 begin
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMCliente, [ZQ_Clientes, ZQ_RelacionCliente]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABMCliente, [ZQ_Clientes, ZQ_RelacionCliente]) then
   begin
     DBGridClientes.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -326,7 +326,7 @@ begin
   if ZQ_Clientes.IsEmpty then
     exit;
 
-  if dm.EKModelo.iniciar_transaccion(transaccion_ABMCliente, [ZQ_Clientes]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABMCliente, [ZQ_Clientes]) then
   begin
     DBGridClientes.Enabled := false;
     PanelEdicion.Visible:= true;
@@ -352,7 +352,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea dar de baja el Cliente seleccionado?'), 'ABM Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABMCliente, [ZQ_Clientes]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABMCliente, [ZQ_Clientes]) then
     begin
       ZQ_Clientes.Edit;
       ZQ_ClientesBAJA.AsString:='S';
@@ -360,8 +360,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMCliente)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABMCliente);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABMCliente)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABMCliente);
 
     recNo:= ZQ_Clientes.RecNo;
     ZQ_Clientes.Refresh;
@@ -379,7 +379,7 @@ begin
 
   if (application.MessageBox(pchar('¿Desea reactivar el Cliente seleccionado?'), 'ABM Cliente', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.EKModelo.iniciar_transaccion(transaccion_ABMCliente, [ZQ_Clientes]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABMCliente, [ZQ_Clientes]) then
     begin
       ZQ_Clientes.Edit;
       ZQ_ClientesBAJA.AsString:='N';
@@ -387,8 +387,8 @@ begin
     else
       exit;
 
-    if not (dm.EKModelo.finalizar_transaccion(transaccion_ABMCliente)) then
-      dm.EKModelo.cancelar_transaccion(transaccion_ABMCliente);
+    if not (dm.ISModelo.finalizar_transaccion(transaccion_ABMCliente)) then
+      dm.ISModelo.cancelar_transaccion(transaccion_ABMCliente);
 
     recNo:= ZQ_Clientes.RecNo;
     ZQ_Clientes.Refresh;
@@ -407,7 +407,7 @@ begin
     exit;
   
   try
-    if DM.EKModelo.finalizar_transaccion(transaccion_ABMCliente) then
+    if DM.ISModelo.finalizar_transaccion(transaccion_ABMCliente) then
     begin
       DBGridClientes.Enabled := true;
       TabSheetDatos.Enabled:= False;
@@ -428,7 +428,7 @@ end;
 
 procedure TFABMClientes.btnCancelarClick(Sender: TObject);
 begin
-  if dm.EKModelo.cancelar_transaccion(transaccion_ABMCliente) then
+  if dm.ISModelo.cancelar_transaccion(transaccion_ABMCliente) then
   begin
     TabSheetDatos.Enabled:= false;
     DBGridClientes.Enabled := true;
@@ -444,7 +444,7 @@ begin
     exit;
 
   DM.VariablesReportes(RepClientesListado);
-  QRlblPieDePaginaListado.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblPieDePaginaListado.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   QRLabelCritBusqueda.Caption := EKBuscar.ParametrosBuscados;
   EKVistaPreviaListado.VistaPrevia;
 end;
@@ -456,7 +456,7 @@ begin
     exit;
 
   DM.VariablesReportes(RepClientesDetalle);
-  QRlblPieDePaginaDetalle.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.EKModelo.Fecha);
+  QRlblPieDePaginaDetalle.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
   EKVistaPreviaDetalle.VistaPrevia;
 end;
 
