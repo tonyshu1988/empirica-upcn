@@ -6,8 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, ComCtrls, DBCtrls, StdCtrls,
-  Mask, ZSqlUpdate,DateUtils, EKOrdenarGrilla, EKBusquedaAvanzada,
-  ActnList, XPStyleActnCtrls, ActnMan, cxClasses;
+  Mask, ZSqlUpdate,DateUtils,
+  ActnList, XPStyleActnCtrls, ActnMan, cxClasses, ISBusquedaAvanzada,
+  ISOrdenarGrilla;
 
 type
   TFBuscarProductoStock = class(TForm)
@@ -16,13 +17,11 @@ type
     btnBuscar: TdxBarLargeButton;
     btnSalir: TdxBarLargeButton;
     btnSeleccionar: TdxBarLargeButton;
-    EKOrdenarGrilla: TEKOrdenarGrilla;
     btnSeleccinarYSalir: TdxBarLargeButton;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ASeleccionar: TAction;
     ASalir: TAction;
-    EKBuscarStock: TEKBusquedaAvanzada;
     ZQ_Stock: TZQuery;
     ZQ_StockID_STOCK_PRODUCTO: TIntegerField;
     ZQ_StockSTOCK_ACTUAL: TFloatField;
@@ -92,6 +91,8 @@ type
     ZQ_SucursalCOMPROBANTE_RENGLON3: TStringField;
     ZQ_SucursalCOMPROBANTE_RENGLON4: TStringField;
     ZQ_SeccionSuc: TZQuery;
+    ISOrdenarGrilla: TISOrdenarGrilla;
+    ISBuscarStock: TISBusquedaAvanzada;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure FormActivate(Sender: TObject);
@@ -139,23 +140,23 @@ begin
 
   if (usaDevolucion = 'S') then
   begin
-   EKBuscarStock.SQL_Where.Clear;
+   ISBuscarStock.SQL_Where.Clear;
    //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo sino del que esté habilitado
    sql:= Format('where (pc.baja <> ''S'') and (pr.baja <> ''S'') and (sucursal.id_sucursal = %d) '
                +' and (posicion_sucursal.PUNTO_SALIDA = %s)', [SUCURSAL_LOGUEO, QuotedStr('S')]);
    //              , [SUCURSAL_LOGUEO]);
-   EKBuscarStock.SQL_Where.Text:=sql;
+   ISBuscarStock.SQL_Where.Text:=sql;
    ZQ_Stock.SQL[22]:=sql;
   end;
 
   if (usaCajero = 'S') then
   begin
-   EKBuscarStock.SQL_Where.Clear;
+   ISBuscarStock.SQL_Where.Clear;
    //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo sino del que esté habilitado
    sql:= Format('where (pc.baja <> ''S'') and (pr.baja <> ''S'') and (sucursal.id_sucursal = %d) '
                +' and (posicion_sucursal.PUNTO_SALIDA = %s) and (stock_producto.STOCK_ACTUAL > 0)',[SUCURSAL_LOGUEO, QuotedStr('S')]);
               // +' and (stock_producto.STOCK_ACTUAL > 0)',[SUCURSAL_LOGUEO]);
-   EKBuscarStock.SQL_Where.Text:=sql;
+   ISBuscarStock.SQL_Where.Text:=sql;
    ZQ_Stock.SQL[22]:=sql;
   end;
 
@@ -164,14 +165,14 @@ begin
     //si no tengo permiso para transferir stock pertenecientes a otras sucursales
     if not dm.ISUsrLogin.PermisoAccion('TRANSF_STOCK_AJENO') then
     begin   //entonces traigo solamente los productos de mi sucursal
-      EKBuscarStock.SQL_Where.Clear;
+      ISBuscarStock.SQL_Where.Clear;
       sql:= Format('where (pc.baja <> ''S'') and (pr.baja <> ''S'') and (sucursal.id_sucursal = %d) ',[SUCURSAL_LOGUEO]);
-      EKBuscarStock.SQL_Where.Text:=sql;
+      ISBuscarStock.SQL_Where.Text:=sql;
       ZQ_Stock.SQL[22]:=sql;
     end;
   end;
 
-  EKBuscarStock.Buscar;
+  ISBuscarStock.Buscar;
 end;
 
 
@@ -241,17 +242,17 @@ end;
 
 procedure TFBuscarProductoStock.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla.GuardarConfigColumnas;
+  ISOrdenarGrilla.GuardarConfigColumnas;
 end;
 
 procedure TFBuscarProductoStock.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla.CargarConfigColumnas;
+  ISOrdenarGrilla.CargarConfigColunmas;
   
   ZQ_Sucursal.Close;
   ZQ_Sucursal.Open;
   if ZQ_Sucursal.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-    TEKCriterioBA(EKBuscarStock.CriteriosBusqueda.Items[13]).ItemIndex:= ZQ_Sucursal.RecNo - 1;
+    TISCriterioBA(ISBuscarStock.CriteriosBusqueda.Items[13]).ItemIndex:= ZQ_Sucursal.RecNo - 1;
 
   ZQ_SeccionSuc.Close;
   ZQ_SeccionSuc.Open;
