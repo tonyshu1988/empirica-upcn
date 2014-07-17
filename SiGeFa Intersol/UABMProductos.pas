@@ -5,10 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, ComCtrls,
-  ExtCtrls, Grids, DBGrids, EKDBGrid, dxBar, dxBarExtItems, StdCtrls,
-  DBCtrls, Mask, EKBusquedaAvanzada, EKOrdenarGrilla, EKLlenarCombo, Menus,
-  Buttons, ZStoredProcedure, jpeg, ExtDlgs, EKListadoSQL, DBClient,
-  EKVistaPreviaQR, ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls,
+  ExtCtrls, Grids, DBGrids, dxBar, dxBarExtItems, StdCtrls,
+  DBCtrls, Mask, Menus,
+  Buttons, ZStoredProcedure, jpeg, ExtDlgs, DBClient,
+  ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls,
   qrFramelines, shellapi, ZSqlUpdate, cxClasses, ISOrdenarGrilla,
   ISBusquedaAvanzada, ISListadoSQL, ISVistaPreviaQR, ISDBGrid;
 
@@ -219,7 +219,6 @@ type
     ZQ_TodasMedidasBAJA: TStringField;
     ZUpdateSQL2: TZUpdateSQL;
     Asociar_producto_pto_salida: TZStoredProc;
-    grillaDetalle: TEKDBGrid;
     PanelDetalle: TPanel;
     PCabeceraProducto: TPanel;
     PContenedor: TPanel;
@@ -308,6 +307,7 @@ type
     ISOrdenarDetalle: TISOrdenarGrilla;
     ISVistaPreviaListado: TISVistaPreviaQR;
     Grilla: TISDBGrid;
+    grillaDetalle: TDBGrid;
     procedure btnBuscarClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

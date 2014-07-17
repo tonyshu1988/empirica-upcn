@@ -21,16 +21,16 @@ object FMailBandeja: TFMailBandeja
   object PanelFondo: TPanel
     Left = 0
     Top = 36
-    Width = 840
-    Height = 512
+    Width = 832
+    Height = 501
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 840
-      Height = 512
+      Width = 832
+      Height = 501
       Align = alClient
       BevelOuter = bvNone
       Font.Charset = DEFAULT_CHARSET
@@ -43,9 +43,9 @@ object FMailBandeja: TFMailBandeja
       object PageControlBandeja: TPageControl
         Left = 0
         Top = 0
-        Width = 840
-        Height = 512
-        ActivePage = TabBandejaEntrada
+        Width = 832
+        Height = 501
+        ActivePage = TabBandejaSalida
         Align = alClient
         TabOrder = 0
         object TabBandejaSalida: TTabSheet
@@ -54,7 +54,7 @@ object FMailBandeja: TFMailBandeja
           object Splitter2: TSplitter
             Left = 0
             Top = 189
-            Width = 832
+            Width = 824
             Height = 20
             Cursor = crVSplit
             Align = alTop
@@ -62,14 +62,14 @@ object FMailBandeja: TFMailBandeja
           object pSalidaCabecera: TPanel
             Left = 0
             Top = 0
-            Width = 832
+            Width = 824
             Height = 189
             Align = alTop
             TabOrder = 0
             object DBGridMailSalida: TDBGrid
               Left = 1
               Top = 1
-              Width = 830
+              Width = 822
               Height = 168
               Align = alClient
               Color = 14606012
@@ -147,7 +147,7 @@ object FMailBandeja: TFMailBandeja
               Tag = 99
               Left = 1
               Top = 169
-              Width = 830
+              Width = 822
               Height = 19
               Panels = <
                 item
@@ -164,21 +164,21 @@ object FMailBandeja: TFMailBandeja
           object pSalidaMensaje: TPanel
             Left = 0
             Top = 209
-            Width = 832
-            Height = 275
+            Width = 824
+            Height = 264
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
             object pSalidaMsjCabecera: TPanel
               Left = 0
               Top = 0
-              Width = 832
+              Width = 824
               Height = 73
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 0
               object pSalidaMsjCabDerecha: TPanel
-                Left = 483
+                Left = 475
                 Top = 0
                 Width = 349
                 Height = 73
@@ -204,14 +204,14 @@ object FMailBandeja: TFMailBandeja
               object pSalidaMsjCabIzquierda: TPanel
                 Left = 0
                 Top = 0
-                Width = 483
+                Width = 475
                 Height = 73
                 Align = alClient
                 BevelInner = bvRaised
                 BevelOuter = bvNone
                 TabOrder = 1
                 DesignSize = (
-                  483
+                  475
                   73)
                 object Label5: TLabel
                   Left = 32
@@ -244,7 +244,7 @@ object FMailBandeja: TFMailBandeja
                 object DBTxtDe: TDBText
                   Left = 55
                   Top = 9
-                  Width = 407
+                  Width = 399
                   Height = 13
                   Anchors = [akLeft, akTop, akRight]
                   DataField = 'EMAIL'
@@ -259,7 +259,7 @@ object FMailBandeja: TFMailBandeja
                 object DBTxtPara: TDBText
                   Left = 55
                   Top = 24
-                  Width = 407
+                  Width = 399
                   Height = 13
                   Anchors = [akLeft, akTop, akRight]
                   DataField = 'CABECERA_PARA'
@@ -274,7 +274,7 @@ object FMailBandeja: TFMailBandeja
                 object DBTxtFecha: TDBText
                   Left = 55
                   Top = 39
-                  Width = 407
+                  Width = 399
                   Height = 13
                   Anchors = [akLeft, akTop, akRight]
                   DataField = 'FECHA_Y_HORA'
@@ -289,7 +289,7 @@ object FMailBandeja: TFMailBandeja
                 object DBTxtAsunto: TDBText
                   Left = 55
                   Top = 54
-                  Width = 407
+                  Width = 399
                   Height = 13
                   Anchors = [akLeft, akTop, akRight]
                   DataField = 'CABECERA_ASUNTO'
@@ -306,8 +306,8 @@ object FMailBandeja: TFMailBandeja
             object pSalidaMsjCuerpo: TPanel
               Left = 0
               Top = 73
-              Width = 832
-              Height = 202
+              Width = 824
+              Height = 191
               Align = alClient
               BevelOuter = bvNone
               BorderWidth = 5
@@ -315,8 +315,8 @@ object FMailBandeja: TFMailBandeja
               object DBMemoMensajeSalida: TDBMemo
                 Left = 5
                 Top = 5
-                Width = 822
-                Height = 192
+                Width = 814
+                Height = 181
                 Align = alClient
                 DataField = 'CUERPO'
                 DataSource = DS_MailSalida
@@ -330,7 +330,7 @@ object FMailBandeja: TFMailBandeja
           object Splitter1: TSplitter
             Left = 0
             Top = 189
-            Width = 832
+            Width = 824
             Height = 12
             Cursor = crVSplit
             Align = alTop
@@ -338,14 +338,14 @@ object FMailBandeja: TFMailBandeja
           object pEntradaCabecera: TPanel
             Left = 0
             Top = 0
-            Width = 832
+            Width = 824
             Height = 189
             Align = alTop
             TabOrder = 0
             object listaBandejaEntrada: TListView
               Left = 1
               Top = 1
-              Width = 830
+              Width = 822
               Height = 168
               Align = alClient
               Color = 14606012
@@ -387,7 +387,7 @@ object FMailBandeja: TFMailBandeja
               Tag = 99
               Left = 1
               Top = 169
-              Width = 830
+              Width = 822
               Height = 19
               Panels = <
                 item
@@ -404,21 +404,21 @@ object FMailBandeja: TFMailBandeja
           object pEntradaMensaje: TPanel
             Left = 0
             Top = 201
-            Width = 832
-            Height = 283
+            Width = 824
+            Height = 272
             Align = alClient
             BevelOuter = bvNone
             TabOrder = 1
             object pEntradaMsjCabecera: TPanel
               Left = 0
               Top = 0
-              Width = 832
+              Width = 824
               Height = 73
               Align = alTop
               BevelOuter = bvNone
               TabOrder = 0
               object pEntradaMsjCabDerecha: TPanel
-                Left = 483
+                Left = 475
                 Top = 0
                 Width = 349
                 Height = 73
@@ -470,14 +470,14 @@ object FMailBandeja: TFMailBandeja
               object pEntradaMsjCabIzquierda: TPanel
                 Left = 0
                 Top = 0
-                Width = 483
+                Width = 475
                 Height = 73
                 Align = alClient
                 BevelInner = bvRaised
                 BevelOuter = bvNone
                 TabOrder = 1
                 DesignSize = (
-                  483
+                  475
                   73)
                 object Label1: TLabel
                   Left = 32
@@ -572,8 +572,8 @@ object FMailBandeja: TFMailBandeja
             object pEntradaMsjCuerpo: TPanel
               Left = 0
               Top = 73
-              Width = 832
-              Height = 210
+              Width = 824
+              Height = 199
               Align = alClient
               BevelOuter = bvNone
               BorderWidth = 5
@@ -581,8 +581,8 @@ object FMailBandeja: TFMailBandeja
               object memoMensajeEntrada: TMemo
                 Left = 5
                 Top = 5
-                Width = 822
-                Height = 200
+                Width = 814
+                Height = 189
                 Align = alClient
                 BevelInner = bvNone
                 BevelOuter = bvNone
@@ -601,7 +601,7 @@ object FMailBandeja: TFMailBandeja
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 840
+    Width = 832
     Height = 36
     Align = alTop
     TabOrder = 1
@@ -667,7 +667,7 @@ object FMailBandeja: TFMailBandeja
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1745,24 +1745,6 @@ object FMailBandeja: TFMailBandeja
       OnClick = ItemPUEntrada_ResponderClick
     end
   end
-  object EKListadoCuentas: TEKListadoSQL
-    Modelo = DM.EKModelo
-    SQL.Strings = (
-      'select c.*'
-      'from mail_cuentas c'
-      'where id_sucursal = :id_sucursal')
-    CampoBuscar = 'EMAIL'
-    CampoClave = 'ID_CUENTA'
-    BuscarEnQuery = ZQ_Cuentas
-    TituloVentana = 'Seleccionar Cuenta'
-    TituloBuscar = 'Campo Busqueda:'
-    TituloBuscar2 = 'Campo Busqueda 2:'
-    ColorGrilla = 14606012
-    AnchoClave = 80
-    AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 416
-  end
   object ZQ_Cuentas: TZQuery
     Connection = DM.Conexion
     Filter = 'cuenta_principal = '#39'S'#39
@@ -1926,5 +1908,24 @@ object FMailBandeja: TFMailBandeja
     Params = <>
     Left = 92
     Top = 378
+  end
+  object ISListadoCuentas: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select c.*'
+      'from mail_cuentas c'
+      'where id_sucursal = :id_sucursal')
+    CampoBuscar = 'EMAIL'
+    CampoClave = 'ID_CUENTA'
+    BuscarEnQuery = ZQ_Cuentas
+    TituloVentana = 'Seleccionar Cuenta'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = clWindow
+    AnchoClave = 80
+    AnchoBuscar1 = 480
+    AnchoBuscar2 = 480
+    Left = 484
+    Top = 108
   end
 end

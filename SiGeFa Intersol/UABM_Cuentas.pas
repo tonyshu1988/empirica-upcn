@@ -7,9 +7,9 @@ uses
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, StdCtrls, Mask, DBCtrls, Grids, DBGrids, ExtCtrls,
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan,
-  QRCtrls, QuickRpt, EKVistaPreviaQR, Menus,
+  QRCtrls, QuickRpt, Menus,
    ISListadoSQL, ISBusquedaAvanzada, ISVistaPreviaQR,
-  ISOrdenarGrilla, cxClasses, EKBusquedaAvanzada;
+  ISOrdenarGrilla, cxClasses;
 
 type
   TFABM_Cuentas = class(TForm)

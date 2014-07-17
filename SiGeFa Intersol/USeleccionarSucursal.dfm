@@ -114,12 +114,13 @@ object FSeleccionarSucursal: TFSeleccionarSucursal
       Size = 1
     end
   end
-  object EKLlenarCombo: TEKLlenarCombo
+  object ISLlenarCombo: TISLlenarCombo
     dataset = ZQ_Sucursal
     combo = cBoxSucursales
     CampoClave = 'id_sucursal'
     CampoVer = 'nombre'
     SelectClave = '0'
+    ItemsAdicInicio = False
     Left = 328
     Top = 8
   end

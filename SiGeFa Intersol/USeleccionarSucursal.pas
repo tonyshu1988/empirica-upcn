@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, StdCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKLlenarCombo;
+  ISLlenarCombo;
 
 type
   TFSeleccionarSucursal = class(TForm)
@@ -21,8 +21,8 @@ type
     ZQ_SucursalTELEFONO: TStringField;
     ZQ_SucursalEMAIL: TStringField;
     ZQ_SucursalBAJA: TStringField;
-    EKLlenarCombo: TEKLlenarCombo;
     btnSalir: TButton;
+    ISLlenarCombo: TISLlenarCombo;
     procedure FormCreate(Sender: TObject);
     procedure btnAceptarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
@@ -49,16 +49,16 @@ begin
 //    StringReplace(sucursales, '/', ' or id_sucursal = ', [rfReplaceAll, rfIgnoreCase])
 //  else
 
-  EKLlenarCombo.CargarCombo;
-  EKLlenarCombo.SetItem(0);
+  ISLlenarCombo.CargarCombo;
+  ISLlenarCombo.SetItem(0);
 end;
 
 
 procedure TFSeleccionarSucursal.btnAceptarClick(Sender: TObject);
 begin
-  if EKLlenarCombo.SelectClave <> '' then
+  if ISLlenarCombo.SelectClave <> '' then
   begin
-    SUCURSAL_LOGUEO:= StrToInt(EKLlenarCombo.SelectClave);
+    SUCURSAL_LOGUEO:= StrToInt(IsLlenarCombo.SelectClave);
     ModalResult:= mrOk;
   end
   else

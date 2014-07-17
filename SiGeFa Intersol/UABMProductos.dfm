@@ -1,6 +1,6 @@
 object FABMProductos: TFABMProductos
-  Left = 229
-  Top = 132
+  Left = 265
+  Top = 192
   AutoScroll = False
   Caption = 'ABM Productos'
   ClientHeight = 711
@@ -1842,182 +1842,6 @@ object FABMProductos: TFABMProductos
       Height = 270
       Align = alBottom
       TabOrder = 1
-      object grillaDetalle: TEKDBGrid
-        Left = 1
-        Top = 1
-        Width = 979
-        Height = 97
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_DetalleProducto
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = []
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        ParentFont = False
-        PopupMenu = PopupMenuDetalleProd
-        TabOrder = 0
-        TitleFont.Charset = ANSI_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = grillaDetalleDrawColumnCell
-        Cellstyle = csNone
-        DefaultRowHeight = 20
-        TitleHeight = 17
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'ID_PRODUCTO'
-            Title.Alignment = taCenter
-            Title.Caption = 'ID'
-            Visible = True
-          end
-          item
-            Color = 15132364
-            Expanded = False
-            FieldName = 'COD_CORTO'
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Corto'
-            Width = 90
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = '_medida'
-            Title.Alignment = taCenter
-            Title.Caption = 'Medida'
-            Width = 47
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DESCRIPCION'
-            Title.Alignment = taCenter
-            Title.Caption = 'Descripci'#243'n'
-            Width = 434
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'CODIGO_BARRA'
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'd. Barras'
-            Width = 158
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'PRECIO_COSTO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Precio Costo'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'IMPUESTO_INTERNO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Impuesto Interno'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'IMPUESTO_IVA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Impuesto IVA'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'IMPUESTO_ADICIONAL1'
-            Title.Alignment = taCenter
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'IMPUESTO_ADICIONAL2'
-            Title.Alignment = taCenter
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'PRECIO_COSTO_CIMPUESTOS'
-            Title.Alignment = taCenter
-            Title.Caption = 'Precio Costo c/Imp.'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'COEF_GANANCIA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Coef. Ganancia'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'COEF_DESCUENTO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Coef. Descuento'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'PRECIO_VENTA'
-            Title.Alignment = taCenter
-            Title.Caption = 'Precio Venta'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'STOCK_MAX'
-            Title.Alignment = taCenter
-            Title.Caption = 'Stock M'#225'ximo'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'STOCK_MIN'
-            Title.Alignment = taCenter
-            Title.Caption = 'Stock M'#237'nimo'
-            Visible = True
-          end
-          item
-            Alignment = taCenter
-            Expanded = False
-            FieldName = 'LLEVAR_STOCK'
-            Title.Alignment = taCenter
-            Title.Caption = 'Llevar Stock'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'PRECIO1'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'PRECIO2'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'PRECIO3'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'PRECIO4'
-            Visible = False
-          end
-          item
-            Expanded = False
-            FieldName = 'PRECIO5'
-            Visible = False
-          end>
-      end
       object PDatosdetalle: TPanel
         Left = 1
         Top = 98
@@ -2025,7 +1849,7 @@ object FABMProductos: TFABMProductos
         Height = 171
         Align = alBottom
         Caption = 'PDatosdetalle'
-        TabOrder = 1
+        TabOrder = 0
         Visible = False
         object PContenedorDetalle: TPanel
           Left = 1
@@ -2830,6 +2654,169 @@ object FABMProductos: TFABMProductos
             Layout = blGlyphTop
           end
         end
+      end
+      object grillaDetalle: TDBGrid
+        Left = 1
+        Top = 1
+        Width = 979
+        Height = 97
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_DetalleProducto
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        PopupMenu = PopupMenuDetalleProd
+        TabOrder = 1
+        TitleFont.Charset = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = grillaDetalleDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'ID_PRODUCTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'ID'
+            Visible = True
+          end
+          item
+            Color = 15132364
+            Expanded = False
+            FieldName = 'COD_CORTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Corto'
+            Width = 117
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = '_medida'
+            Title.Alignment = taCenter
+            Title.Caption = 'Medida'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DESCRIPCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Descripci'#243'n'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'CODIGO_BARRA'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'd. Barras'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PRECIO_COSTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Precio Costo'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'IMPUESTO_INTERNO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Impuesto Interno'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'IMPUESTO_IVA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Impuesto IVA'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'IMPUESTO_ADICIONAL1'
+            Title.Alignment = taCenter
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'IMPUESTO_ADICIONAL2'
+            Title.Alignment = taCenter
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'PRECIO_COSTO_CIMPUESTOS'
+            Title.Alignment = taCenter
+            Title.Caption = 'Precio Costo c/Imp.'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COEF_GANANCIA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Coef. Ganancia'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'COEF_DESCUENTO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Coef. Descuento'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PRECIO_VENTA'
+            Title.Alignment = taCenter
+            Title.Caption = 'Precio Venta'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'STOCK_MAX'
+            Title.Alignment = taCenter
+            Title.Caption = 'Stock M'#225'ximo'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'STOCK_MIN'
+            Title.Alignment = taCenter
+            Title.Caption = 'Stock M'#237'nimo'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'LLEVAR_STOCK'
+            Title.Alignment = taCenter
+            Title.Caption = 'Llevar Stock'
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'PRECIO1'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'PRECIO2'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'PRECIO3'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'PRECIO4'
+            Visible = False
+          end
+          item
+            Expanded = False
+            FieldName = 'PRECIO5'
+            Visible = False
+          end>
       end
     end
   end
@@ -4830,6 +4817,7 @@ object FABMProductos: TFABMProductos
     Top = 429
   end
   object ISListadoMarca: TISListadoSQL
+    Modelo = DM.ISModelo
     SQL.Strings = (
       
         'select m.id_marca, lpad(m.codigo_marca,4,'#39'0'#39')||'#39' - '#39'||m.nombre_m' +
@@ -4852,6 +4840,7 @@ object FABMProductos: TFABMProductos
     Top = 378
   end
   object ISListadoArticulo: TISListadoSQL
+    Modelo = DM.ISModelo
     SQL.Strings = (
       'select a.*, t.descripcion||'#39' - '#39'||a.descripcion as busqueda'
       'from articulo a'
@@ -4874,6 +4863,7 @@ object FABMProductos: TFABMProductos
     Top = 378
   end
   object ISListadoColor: TISListadoSQL
+    Modelo = DM.ISModelo
     SQL.Strings = (
       
         'select c.*, (lpad(c.codigo_color,4,'#39'0'#39')||'#39' - '#39'||c.nombre) as res' +
@@ -4895,6 +4885,7 @@ object FABMProductos: TFABMProductos
     Top = 370
   end
   object ISListadoMedidas: TISListadoSQL
+    Modelo = DM.ISModelo
     SQL.Strings = (
       ''
       ''

@@ -650,13 +650,13 @@ procedure TFABM_ArticuloMedida.CBArticuloKeyUp(Sender: TObject;
   var Key: Word; Shift: TShiftState);
 begin
 //  if key = 112 then
-//    if EKListadoArticulo.Buscar then
+//    if ISListadoArticulo.Buscar then
 //    begin
 //      ZQ_MedidaArticulo.Close;
-//      ZQ_MedidaArticulo.ParamByName('ID_ARTICULO').AsInteger := strtoint(EKListadoArticulo.Resultado);
+//      ZQ_MedidaArticulo.ParamByName('ID_ARTICULO').AsInteger := strtoint(ISListadoArticulo.Resultado);
 //      ZQ_MedidaArticulo.Open;
 //
-//      CBArticulo.Text:= EKListadoArticulo.Seleccion;
+//      CBArticulo.Text:= ISListadoArticulo.Seleccion;
 //    end;
 end;
 
