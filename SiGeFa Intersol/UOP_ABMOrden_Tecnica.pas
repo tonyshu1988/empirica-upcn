@@ -6,10 +6,9 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, DBCtrls, Grids, DBGrids, StdCtrls, Mask,
   Buttons, ComCtrls, ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, DBClient, EKListadoSQL,StrUtils,UDM, UPrincipal, UBuscarPersona,
+  ZDataset, DBClient, StrUtils,UDM, UPrincipal, UBuscarPersona,
   UBuscarProductoStock, Provider, Menus, ZSequence,
-     ZSqlUpdate,
-  cxClasses, ISBusquedaAvanzada, ISListadoSQL, ISOrdenarGrilla, ISDbSuma,
+  ZSqlUpdate,cxClasses, ISBusquedaAvanzada, ISListadoSQL, ISOrdenarGrilla, ISDbSuma,
   ISDBDateTimePicker;
 
 type
@@ -683,18 +682,6 @@ begin
   acumPrecio4:= 0;
   acumPrecio5:= 0;
   IdProd:= '';
-
-//  EKDbSuma1.SumCollection[0].SumValue:= 0;
-//  EKDbSuma1.SumCollection[1].SumValue:= 0;
-//  EKDbSuma1.SumCollection[2].SumValue:= 0;
-//  EKDbSuma1.SumCollection[3].SumValue:= 0;
-//  EKDbSuma1.SumCollection[4].SumValue:= 0;
-//  EKDbSuma1.SumCollection[5].SumValue:= 0;
-//  EKDbSuma1.SumCollection[6].SumValue:= 0;
-//  EKDbSuma1.SumCollection[7].SumValue:= 0;
-//
-//  EKDbSuma2.SumCollection[0].SumValue:= 0;
-//  EKDbSuma2.SumCollection[1].SumValue:= 0;
 
   Cliente:= -1;
   IdVendedor:= -1;
