@@ -6,10 +6,11 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, dxBar, dxBarExtItems, StdCtrls, DB,
   ZAbstractRODataset, ZAbstractDataset, ZDataset, DBCtrls, Grids, DBGrids,
-  EKEdit, UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
-  XPStyleActnCtrls, ActnMan, EKListadoSQL, EKDbSuma,
+  UBuscarProductoStock, Mask, Provider, DBClient, ActnList,
+  XPStyleActnCtrls, ActnMan,
   ZStoredProcedure, UBuscarPersona, Buttons, jpeg, Menus, UCargarPreventa,
-  ComCtrls, IniFiles, ShellAPI, dxBarExtDBItems, UOP_CargarOrden, cxClasses;
+  ComCtrls, IniFiles, ShellAPI, dxBarExtDBItems, UOP_CargarOrden, cxClasses,
+  ISDbSuma, ISListadoSQL;
 
 type
   TFCajero = class(TForm)
@@ -42,7 +43,6 @@ type
     ZQ_FormasPagoDESCRIPCION: TStringField;
     ZQ_FormasPagoBAJA: TStringField;
     CD_FpagomedioPago: TStringField;
-    EKDbSumaFPago: TEKDbSuma;
     ZQ_Cuentas: TZQuery;
     ZQ_CuentasID_CUENTA: TIntegerField;
     ZQ_CuentasMEDIO_DEFECTO: TIntegerField;
@@ -225,8 +225,6 @@ type
     ZQ_TipoIVADISCRIMINAR: TStringField;
     ZQ_TipoIVALETRA: TStringField;
     ZQ_TipoIVAFISCAL: TStringField;
-    EKListadoIVA: TEKListadoSQL;
-    EKDbSumaDetalleFactura: TEKDbSuma;
     ZSP_Comprobante: TZStoredProc;
     ZSP_ComprobanteID: TIntegerField;
     ZSP_ComprobanteCODIGO: TStringField;
@@ -440,7 +438,6 @@ type
     CD_VentaFinalimporteDescuento: TFloatField;
     DS_VentaFinal: TDataSource;
     CD_VentaFinalid: TIntegerField;
-    EKDbSumaVentaFinal: TEKDbSuma;
     CD_VentaFinalgenera_vuelto: TStringField;
     lblCantProductos: TLabel;
     lblMontoProds: TLabel;
@@ -538,8 +535,6 @@ type
     btnEfectivoF: TBitBtn;
     Image3: TImage;
     AVentaRapida: TAction;
-    EKListadoMedio: TEKListadoSQL;
-    EKListadoCuenta: TEKListadoSQL;
     ZQ_SaldoNotaCredito: TZQuery;
     ZQ_SaldoNotaCreditoSALDO: TFloatField;
     edDetalleMDP: TDBEdit;
@@ -655,7 +650,13 @@ type
     DBEdit25: TDBEdit;
     ZQ_ProductosSECCION: TStringField;
     DBEdit26: TDBEdit;
-    EKListadoProducto: TEKListadoSQL;
+    ISListadoMedio: TISListadoSQL;
+    ISListadoCuenta: TISListadoSQL;
+    ISListadoIVA: TISListadoSQL;
+    ISListadoProducto: TISListadoSQL;
+    ISDbSumaFPago: TISDbSuma;
+    ISDbSumaDetalleFactura: TISDbSuma;
+    ISDbSumaVentaFinal: TISDbSuma;
     procedure btsalirClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
     procedure FormCreate(Sender: TObject);
@@ -672,8 +673,6 @@ type
     procedure crearComprobante();
     procedure btIVAClick(Sender: TObject);
     procedure APagoExecute(Sender: TObject);
-    procedure EKDbSumaDetalleFacturaSumListChanged(Sender: TObject);
-    procedure EKDbSumaFPagoSumListChanged(Sender: TObject);
     function validarFPago(): Boolean;
     procedure grabarPagos();
     procedure grabarDetallesFactura();
@@ -757,6 +756,8 @@ type
     procedure btnCargarOrdenTecnicaClick(Sender: TObject);
     procedure cargarOrden();
     procedure accionBtnBuscar(Sender: TObject);
+    procedure ISDbSumaFPagoSumListChanged(Sender: TObject);
+    procedure ISDbSumaDetalleFacturaSumListChanged(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -795,7 +796,7 @@ const
 
 implementation
 
-uses UDM, UPrincipal, strutils, EKModelo, Math, UUtilidades, DateUtils;
+uses UDM, UPrincipal, strutils, ismodelo, Math, UUtilidades, DateUtils;
 
 {$R *.dfm}
 
@@ -825,9 +826,9 @@ begin
   CD_Fpago.CreateDataSet;
   CD_VentaFinal.CreateDataSet;
 
-  dm.EKModelo.abrir(ZQ_FormasPago);
-  dm.EKModelo.abrir(ZQ_Cuentas);
-  dm.EKModelo.abrir(ZQ_DetalleProd);
+  dm.ismodelo.abrir(ZQ_FormasPago);
+  dm.ismodelo.abrir(ZQ_Cuentas);
+  dm.ismodelo.abrir(ZQ_DetalleProd);
 
   Cliente:= -1;
   IdVendedor:= -1;
@@ -860,7 +861,7 @@ begin
   if dm.ISUsrLogin.PermisoAccion('CAJA_CAMBIAR_FECHA') then
   begin
     PanelCambiarFecha.Visible:= true;
-    DateTimePicker_FechaCarga.DateTime:= dm.EKModelo.FechayHora;
+    DateTimePicker_FechaCarga.DateTime:= dm.ismodelo.FechayHora;
   end;
 
   if not (dm.ISUsrLogin.PermisoAccion('NO_FISCAL')) then
@@ -1096,11 +1097,11 @@ begin
 
   if TdxBarLargeButton(Sender).Name = 'btnBuscarProductoListado' then
   begin
-    if EKListadoProducto.Buscar then
-      if (EKListadoProducto.Resultado <> '') then
+    if ISListadoProducto.Buscar then
+      if (ISListadoProducto.Resultado <> '') then
       begin
       //Traigo el ID_producto_stock
-        codBarras.Text:= 'I' + EKListadoProducto.Resultado;
+        codBarras.Text:= 'I' + ISListadoProducto.Resultado;
         LeerCodigo('I', codBarras.Text);
       //IdentificarCodigo;
       end
@@ -1206,9 +1207,9 @@ begin
 
   if (CD_DetalleFactura.State = dsBrowse) then
     if (CD_Comprobante.State = dsInsert) then
-      if EKListadoIVA.Buscar then
+      if ISListadoIVA.Buscar then
       begin
-        IdClienteIVA:= StrToInt(EKListadoIVA.Resultado);
+        IdClienteIVA:= StrToInt(ISListadoIVA.Resultado);
         CD_ComprobanteID_TIPO_IVA.AsInteger:= IDClienteIVA;
         ClienteIVA:= ZQ_PersonasCOEFIVA.AsFloat;
         CD_ComprobantePORC_IVA.AsFloat:= ClienteIVA;
@@ -1366,8 +1367,8 @@ begin
   PanelAuditoriaCierreZ.Visible:= true;
   PanelAuditoriaCierreZ.BringToFront;
   dm.centrarPanel(FCajero, PanelAuditoriaCierreZ);
-  DateTimeFechaDesde.Date:= StartOfTheMonth(dm.EKModelo.Fecha);
-  DateTimeFechaHasta.Date:= EndOfTheMonth(dm.EKModelo.Fecha);
+  DateTimeFechaDesde.Date:= StartOfTheMonth(dm.ismodelo.Fecha);
+  DateTimeFechaHasta.Date:= EndOfTheMonth(dm.ismodelo.Fecha);
 end;
 
 
@@ -1480,17 +1481,17 @@ begin
   RelojStock.Enabled:= false;
   lblMaxVenta.Visible:= False;
 
-  EKDbSumaDetalleFactura.SumCollection[0].SumValue:= 0;
-  EKDbSumaDetalleFactura.SumCollection[1].SumValue:= 0;
-  EKDbSumaDetalleFactura.SumCollection[2].SumValue:= 0;
-  EKDbSumaDetalleFactura.SumCollection[3].SumValue:= 0;
-  EKDbSumaDetalleFactura.SumCollection[4].SumValue:= 0;
-  EKDbSumaDetalleFactura.SumCollection[5].SumValue:= 0;
-  EKDbSumaDetalleFactura.SumCollection[6].SumValue:= 0;
-  EKDbSumaDetalleFactura.SumCollection[7].SumValue:= 0;
+  ISDbSumaDetalleFactura.SumCollection[0].SumValue:= 0;
+  ISDbSumaDetalleFactura.SumCollection[1].SumValue:= 0;
+  ISDbSumaDetalleFactura.SumCollection[2].SumValue:= 0;
+  ISDbSumaDetalleFactura.SumCollection[3].SumValue:= 0;
+  ISDbSumaDetalleFactura.SumCollection[4].SumValue:= 0;
+  ISDbSumaDetalleFactura.SumCollection[5].SumValue:= 0;
+  ISDbSumaDetalleFactura.SumCollection[6].SumValue:= 0;
+  ISDbSumaDetalleFactura.SumCollection[7].SumValue:= 0;
 
-  EKDbSumaFPago.SumCollection[0].SumValue:= 0;
-  EKDbSumaFPago.SumCollection[1].SumValue:= 0;
+  ISDbSumaFPago.SumCollection[0].SumValue:= 0;
+  ISDbSumaFPago.SumCollection[1].SumValue:= 0;
 
   Cliente:= -1;
   IdVendedor:= -1;
@@ -1510,7 +1511,7 @@ begin
   if CheckBoxCambiarFecha.Checked then
     CD_ComprobanteFECHA.AsDateTime:= DateTimePicker_FechaCarga.DateTime
   else
-    CD_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora();
+    CD_ComprobanteFECHA.AsDateTime:= dm.ismodelo.FechayHora();
 
   CD_ComprobanteOBSERVACION.AsString:= '';
   CD_ComprobanteBASE_IMPONIBLE.AsFloat:= 0;
@@ -1532,7 +1533,7 @@ begin
   CD_ComprobanteFECHA_VENCIMIENTO.Clear;
 
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
-  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaDetalleFactura.SumCollection[0].SumValue);
+  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
   lblTotAPagar.Caption:= 'Total Venta: ' + FormatFloat('$ ##,###,##0.00 ', 0);
   modoCargaPrevia:= False;
   modoCargaOrden:= false;
@@ -1678,7 +1679,7 @@ begin
       CD_DetalleFactura.Post;
 
       lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
-      lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaDetalleFactura.SumCollection[0].SumValue);
+      lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
       modoLecturaProd();
 
       if DBGridListadoProductos.Enabled then
@@ -1768,52 +1769,7 @@ end;
 procedure TFCajero.CD_DetalleFacturaAfterScroll(DataSet: TDataSet);
 begin
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
-  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaDetalleFactura.SumCollection[0].SumValue);
-end;
-
-
-procedure TFCajero.EKDbSumaDetalleFacturaSumListChanged(Sender: TObject);
-begin
-  acumulado:= EKDbSumaDetalleFactura.SumCollection[0].SumValue;
-  acumuladoProd:= EKDbSumaDetalleFactura.SumCollection[7].SumValue;
-  if (acumuladoProd = 0) then
-    acumuladoProd:= acumulado;
-
-  acumuladoIVA:= EKDbSumaDetalleFactura.SumCollection[1].SumValue;
-  acumPrecio1:= EKDbSumaDetalleFactura.SumCollection[2].SumValue;
-  acumPrecio2:= EKDbSumaDetalleFactura.SumCollection[3].SumValue;
-  acumPrecio3:= EKDbSumaDetalleFactura.SumCollection[4].SumValue;
-  acumPrecio4:= EKDbSumaDetalleFactura.SumCollection[5].SumValue;
-  acumPrecio5:= EKDbSumaDetalleFactura.SumCollection[6].SumValue;
-
-  coefPrecio1:= 1;
-  coefPrecio2:= 1;
-  coefPrecio3:= 1;
-  coefPrecio4:= 1;
-  coefPrecio5:= 1;
-
-  if (acumulado > 0) then
-  begin
-    coefPrecio1:= acumPrecio1 / acumuladoProd;
-    coefPrecio2:= acumPrecio2 / acumuladoProd;
-    coefPrecio3:= acumPrecio3 / acumuladoProd;
-    coefPrecio4:= acumPrecio4 / acumuladoProd;
-    coefPrecio5:= acumPrecio5 / acumuladoProd;
-  end;
-
-  if coefPrecio1 < 0 then
-    coefPrecio1:= 1;
-  if coefPrecio2 < 0 then
-    coefPrecio2:= 1;
-  if coefPrecio3 < 0 then
-    coefPrecio3:= 1;
-  if coefPrecio4 < 0 then
-    coefPrecio4:= 1;
-  if coefPrecio5 < 0 then
-    coefPrecio5:= 1;
-
-  //lblTotAPagar.Caption :='Total a Pagar: '+ FormatFloat('$ ##,###,##0.00 ', acumulado);
-  //lblTotAPagar.Caption :='Total a Pagar: '+ FormatFloat('$ ##,###,##0.00 ', acumFpagoReal);
+  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
 end;
 
 
@@ -1829,7 +1785,7 @@ begin
   begin
     CD_DetalleFactura.Delete;
     lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
-    lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaDetalleFactura.SumCollection[0].SumValue);
+    lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
   end;
 end;
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -1842,7 +1798,7 @@ begin
     exit;
 
   CD_Fpago.Delete;
-  EKDbSumaFPago.RecalcAll;
+  ISDbSumaFPago.RecalcAll;
 end;
 
 
@@ -1892,8 +1848,8 @@ begin
   Result:= False;
   //Hacer las validaciones correspondientes
 
-  if not (dm.EKModelo.verificar_transaccion(abmComprobante)) then
-    if dm.EKModelo.iniciar_transaccion(abmComprobante, [ZQ_Comprobante, ZQ_Comprobante_FormaPago, ZQ_ComprobanteDetalle, ZQ_ComprobPreventa, ZQ_Optica_Orden]) then
+  if not (dm.ismodelo.verificar_transaccion(abmComprobante)) then
+    if dm.ismodelo.iniciar_transaccion(abmComprobante, [ZQ_Comprobante, ZQ_Comprobante_FormaPago, ZQ_ComprobanteDetalle, ZQ_ComprobPreventa, ZQ_Optica_Orden]) then
     begin
       CD_Comprobante.Post;
       ZQ_Comprobante.Append;
@@ -1911,7 +1867,7 @@ begin
       ZQ_ComprobanteID_COMP_ESTADO.Value:= CD_ComprobanteID_COMP_ESTADO.Value;
 
       ZQ_ComprobanteFECHA.AsDateTime:= CD_ComprobanteFECHA.AsDateTime;
-      ZQ_ComprobanteFECHA_COBRADA.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //antes tenia la del DM.EKMODELO
+      ZQ_ComprobanteFECHA_COBRADA.AsDateTime:= ZQ_ComprobanteFECHA.AsDateTime; //antes tenia la del DM.ismodelo
       ZQ_ComprobanteOBSERVACION.Value:= CD_ComprobanteOBSERVACION.Value;
       ZQ_ComprobanteBASE_IMPONIBLE.Value:= CD_ComprobanteBASE_IMPONIBLE.Value;
       ZQ_ComprobanteSALDO.AsFloat:= CD_ComprobanteSALDO.Value;
@@ -1933,7 +1889,7 @@ begin
       if modoCargaPrevia then
       begin
         ZQ_ComprobPreventa.Edit;
-        ZQ_ComprobPreventaFECHA_COBRADA.AsDateTime:= dm.EKModelo.FechayHora();
+        ZQ_ComprobPreventaFECHA_COBRADA.AsDateTime:= dm.ismodelo.FechayHora();
         ZQ_ComprobPreventaID_COMP_ESTADO.AsInteger:= ESTADO_ALMACENADO;
         ZQ_ComprobPreventa.Post;
       end;
@@ -1941,7 +1897,7 @@ begin
       if modoCargaOrden then
       begin
         ZQ_Optica_Orden.Edit;
-        //ZQ_Optica_OrdenFECHA_ORDEN.AsDateTime:= dm.EKModelo.FechayHora();
+        //ZQ_Optica_OrdenFECHA_ORDEN.AsDateTime:= dm.ismodelo.FechayHora();
         ZQ_Optica_OrdenID_ESTADO.AsInteger:= 2;
         ZQ_Optica_OrdenFACTURADO_POR.AsInteger:= ZQ_ComprobanteID_VENDEDOR.AsInteger;
         ZQ_Optica_OrdenID_COMPROBANTE.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
@@ -1955,11 +1911,11 @@ begin
 
   try
     begin
-      if not (dm.EKModelo.finalizar_transaccion(abmComprobante)) then
+      if not (dm.ismodelo.finalizar_transaccion(abmComprobante)) then
       begin
-        dm.EKModelo.cancelar_transaccion(abmComprobante);
+        dm.ismodelo.cancelar_transaccion(abmComprobante);
         Application.MessageBox('No se pudo crear el Comprobante', 'Atención', MB_ICONINFORMATION);
-        dm.EKModelo.cancelar_transaccion(abmComprobante);
+        dm.ismodelo.cancelar_transaccion(abmComprobante);
       end
       else
       begin
@@ -1999,8 +1955,8 @@ end;
 
 procedure TFCajero.btnCancelarVentaClick(Sender: TObject);
 begin
-  if dm.EKModelo.verificar_transaccion(abmComprobante) then
-    dm.EKModelo.cancelar_transaccion(abmComprobante);
+  if dm.ismodelo.verificar_transaccion(abmComprobante) then
+    dm.ismodelo.cancelar_transaccion(abmComprobante);
   CD_Comprobante.Edit;
   PConfirmarVenta.Visible:= False;
   PanelContenedorDerecha.Enabled:= not (PConfirmarVenta.Visible);
@@ -2178,14 +2134,14 @@ begin
   CD_VentaFinal.EmptyDataSet;
   CD_Fpago.First;
 
-  EKDbSumaVentaFinal.SumCollection[1].SumValue:= 0;
+  ISDbSumaVentaFinal.SumCollection[1].SumValue:= 0;
 
   //Agrupo las formas de Pago iguales
   sacarRepetidosFP();
 
   RecalcularMontoPago();
 
-  EKDbSumaVentaFinal.RecalcAll;
+  ISDbSumaVentaFinal.RecalcAll;
   calcularEfectivo();
   importeVenta:= CD_ComprobanteIMPORTE_VENTA.AsFloat;
 end;
@@ -2257,12 +2213,6 @@ begin
 end;
 
 
-procedure TFCajero.EKDbSumaFPagoSumListChanged(Sender: TObject);
-begin
-  recalcularMontoPago();
-end;
-
-
 function TFCajero.validarFPago: Boolean;
 begin
   Result:= True;
@@ -2312,9 +2262,9 @@ end;
 
 procedure TFCajero.RecalcularMontoPago();
 begin
-  acumFpago:= EKDbSumaFPago.SumCollection[0].SumValue;
+  acumFpago:= ISDbSumaFPago.SumCollection[0].SumValue;
 
-  acumFpagoReal:= EKDbSumaFPago.SumCollection[1].SumValue;
+  acumFpagoReal:= ISDbSumaFPago.SumCollection[1].SumValue;
   lblTotAPagar.Caption:= 'Total a Pagar: ' + FormatFloat('$ ##,###,##0.00 ', acumFpagoReal);
 
 
@@ -2561,7 +2511,7 @@ begin
     end;
 
     lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
-    lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaDetalleFactura.SumCollection[0].SumValue);
+    lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
 
     //Permite que no se modifique la venta
     modoCargaPrevia:= True;
@@ -2591,9 +2541,9 @@ end;
 
 procedure TFCajero.cancelarProducto;
 begin
-  dm.EKModelo.abrir(ZQ_FormasPago);
-  dm.EKModelo.abrir(ZQ_DetalleProd);
-  dm.EKModelo.abrir(ZQ_Cuentas);
+  dm.ismodelo.abrir(ZQ_FormasPago);
+  dm.ismodelo.abrir(ZQ_DetalleProd);
+  dm.ismodelo.abrir(ZQ_Cuentas);
   Cliente:= -1;
   IdVendedor:= -1;
   descCliente:= 0;
@@ -2603,7 +2553,7 @@ begin
   CD_Fpago.EmptyDataSet;
   crearComprobante();
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
-  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaDetalleFactura.SumCollection[0].SumValue);
+  lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
   cargarClientePorDefecto();
   modoCargaPrevia:= False;
   modoCargaOrden:= false;
@@ -2620,7 +2570,7 @@ begin
   if CheckBoxCambiarFecha.Checked then
     CD_ComprobanteFECHA.AsDateTime:= DateTimePicker_FechaCarga.DateTime
   else
-    CD_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora();
+    CD_ComprobanteFECHA.AsDateTime:= dm.ismodelo.FechayHora();
 end;
 
 
@@ -2630,7 +2580,7 @@ begin
   if CheckBoxCambiarFecha.Checked then
     CD_ComprobanteFECHA.AsDateTime:= DateTimePicker_FechaCarga.DateTime
   else
-    CD_ComprobanteFECHA.AsDateTime:= dm.EKModelo.FechayHora();
+    CD_ComprobanteFECHA.AsDateTime:= dm.ismodelo.FechayHora();
 end;
 
 
@@ -3004,12 +2954,12 @@ procedure TFCajero.buscarCuenta(Sender: TObject; var Key: Word; Shift: TShiftSta
 begin
   if key = 112 then
   begin
-    EKListadoCuenta.SQL.Text:= dm.sql_cuentas_fpago_suc(0, true); //todas las cuentas de la suc
-    if EKListadoCuenta.Buscar then
+    ISListadoCuenta.SQL.Text:= dm.sql_cuentas_fpago_suc(0, true); //todas las cuentas de la suc
+    if ISListadoCuenta.Buscar then
     begin
-      if EKListadoCuenta.Resultado <> '' then
+      if ISListadoCuenta.Resultado <> '' then
       begin
-        id_cuenta_fpago:= StrToInt(EKListadoCuenta.Resultado);
+        id_cuenta_fpago:= StrToInt(ISListadoCuenta.Resultado);
         ZQ_Cuentas.Locate('ID_CUENTA', id_cuenta_fpago, []);
         CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
       end;
@@ -3023,8 +2973,8 @@ begin
   if key = 112 then
   begin
     id_cuenta_fpago:= CD_FpagoCUENTA_INGRESO.AsInteger;
-    EKListadoMedio.SQL.Clear;
-    EKListadoMedio.SQL.Add(Format('select tipo.* ' +
+    ISListadoMedio.SQL.Clear;
+    ISListadoMedio.SQL.Add(Format('select tipo.* ' +
       'from tipo_formapago tipo ' +
       'left join cuenta_tipo_formapago ctfp on (tipo.id_tipo_formapago = ctfp.id_tipo_formapago) ' +
       'where tipo.baja = %s ' +
@@ -3032,11 +2982,11 @@ begin
       'order by tipo.descripcion',
       [QuotedStr('N'), id_cuenta_fpago]));
 
-    if EKListadoMedio.Buscar then
+    if ISListadoMedio.Buscar then
     begin
-      if EKListadoMedio.Resultado <> '' then
+      if ISListadoMedio.Resultado <> '' then
       begin
-        CD_FpagoID_TIPO_FORMAPAG.AsInteger:= StrToInt(EKListadoMedio.Resultado);
+        CD_FpagoID_TIPO_FORMAPAG.AsInteger:= StrToInt(ISListadoMedio.Resultado);
       end;
     end;
   end;
@@ -3077,7 +3027,7 @@ procedure TFCajero.ultimoIDPago;
 begin
   ZQ_UltimoCPB.Close;
   ZQ_UltimoCPB.ParamByName('id_sucursal').AsInteger:= SUCURSAL_LOGUEO;
-  dm.EKModelo.abrir(ZQ_UltimoCPB);
+  dm.ismodelo.abrir(ZQ_UltimoCPB);
   lblNroCPB.Caption:= Format(' Nº CPB: %d', [ZQ_UltimoCPBNUMERO_CPB.AsInteger + 1]);
 end;
 
@@ -3203,7 +3153,7 @@ begin
       CD_DetalleFactura.Post;
 
       lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
-      lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', EKDbSumaDetalleFactura.SumCollection[0].SumValue);
+      lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
 
       //Permite que no se modifique la venta
       modoCargaOrden:= True;
@@ -3256,6 +3206,53 @@ begin
     PanelDetalleOrdenOptica.Visible:= false;
     PanelDetalles.Height:= 160 - PanelDetalleOrdenOptica.Height;
   end
+end;
+
+procedure TFCajero.ISDbSumaFPagoSumListChanged(Sender: TObject);
+begin
+  recalcularMontoPago();
+end;
+
+procedure TFCajero.ISDbSumaDetalleFacturaSumListChanged(Sender: TObject);
+begin
+acumulado:= ISDbSumaDetalleFactura.SumCollection[0].SumValue;
+  acumuladoProd:= ISDbSumaDetalleFactura.SumCollection[7].SumValue;
+  if (acumuladoProd = 0) then
+    acumuladoProd:= acumulado;
+
+  acumuladoIVA:= ISDbSumaDetalleFactura.SumCollection[1].SumValue;
+  acumPrecio1:= ISDbSumaDetalleFactura.SumCollection[2].SumValue;
+  acumPrecio2:= ISDbSumaDetalleFactura.SumCollection[3].SumValue;
+  acumPrecio3:= ISDbSumaDetalleFactura.SumCollection[4].SumValue;
+  acumPrecio4:= ISDbSumaDetalleFactura.SumCollection[5].SumValue;
+  acumPrecio5:= ISDbSumaDetalleFactura.SumCollection[6].SumValue;
+
+  coefPrecio1:= 1;
+  coefPrecio2:= 1;
+  coefPrecio3:= 1;
+  coefPrecio4:= 1;
+  coefPrecio5:= 1;
+
+  if (acumulado > 0) then
+  begin
+    coefPrecio1:= acumPrecio1 / acumuladoProd;
+    coefPrecio2:= acumPrecio2 / acumuladoProd;
+    coefPrecio3:= acumPrecio3 / acumuladoProd;
+    coefPrecio4:= acumPrecio4 / acumuladoProd;
+    coefPrecio5:= acumPrecio5 / acumuladoProd;
+  end;
+
+  if coefPrecio1 < 0 then
+    coefPrecio1:= 1;
+  if coefPrecio2 < 0 then
+    coefPrecio2:= 1;
+  if coefPrecio3 < 0 then
+    coefPrecio3:= 1;
+  if coefPrecio4 < 0 then
+    coefPrecio4:= 1;
+  if coefPrecio5 < 0 then
+    coefPrecio5:= 1;
+
 end;
 
 end.
