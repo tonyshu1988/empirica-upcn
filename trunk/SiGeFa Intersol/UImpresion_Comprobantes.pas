@@ -5,8 +5,8 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  EKVistaPreviaQR, QRCtrls, QuickRpt, jpeg, ExtCtrls, EKNumeroATexto,
-  EKDbSuma, QRPDFFilt, grimgctrl, ISNumeroATexto, ISVistaPreviaQR, ISDbSuma;
+   QRCtrls, QuickRpt, jpeg, ExtCtrls, 
+   QRPDFFilt, grimgctrl, ISNumeroATexto, ISVistaPreviaQR, ISDbSuma;
 
 type
   TFImpresion_Comprobantes = class(TForm)
