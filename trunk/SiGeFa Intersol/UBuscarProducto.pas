@@ -6,8 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, ComCtrls, DBCtrls, StdCtrls,
-  Mask, ZSqlUpdate,DateUtils, EKOrdenarGrilla, EKBusquedaAvanzada,
-  ActnList, XPStyleActnCtrls, ActnMan;
+  Mask, ZSqlUpdate,DateUtils,   ActnList, XPStyleActnCtrls, ActnMan, ISOrdenarGrilla, cxClasses,
+  ISBusquedaAvanzada;
 
 type
   TFBuscarProducto = class(TForm)
@@ -19,8 +19,6 @@ type
     btnSeleccionar: TdxBarLargeButton;
     ZQ_Producto: TZQuery;
     DS_Producto: TDataSource;
-    EKOrdenarGrilla: TEKOrdenarGrilla;
-    EKBuscarProducto: TEKBusquedaAvanzada;
     btnSeleccinarYSalir: TdxBarLargeButton;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
@@ -29,7 +27,6 @@ type
     btnSeleccionarTodos: TdxBarLargeButton;
     ASelTodos: TAction;
     ZQ_ProductosProveedor: TZQuery;
-    EKBuscarProductoEmpresa: TEKBusquedaAvanzada;
     ZQ_EmpresaMarca: TZQuery;
     ZQ_EmpresaMarcaID: TIntegerField;
     ZQ_EmpresaMarcaID_EMPRESA: TIntegerField;
@@ -71,6 +68,9 @@ type
     ZQ_ProductosProveedorIMPUESTO_IVA: TFloatField;
     ZQ_ProductoID_PRECIO: TIntegerField;
     ZQ_ProductosProveedorID_PRECIO: TIntegerField;
+    ISOrdenarGrilla: TISOrdenarGrilla;
+    ISBuscarProducto: TISBusquedaAvanzada;
+    ISBuscarProductoEmpresa: TISBusquedaAvanzada;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSeleccionarClick(Sender: TObject);
@@ -122,16 +122,16 @@ begin
   end;
 
   buscarDeEmpresas:= true;
-  EKBuscarProductoEmpresa.SQL_Where.ValueFromIndex[2]:= IntToStr(idEmpresa);
+  ISBuscarProductoEmpresa.SQL_Where.ValueFromIndex[2]:= IntToStr(idEmpresa);
 end;
 
 
 procedure TFBuscarProducto.btnBuscarClick(Sender: TObject);
 begin
   if buscarDeEmpresas then
-    EKBuscarProductoEmpresa.Buscar
+    ISBuscarProductoEmpresa.Buscar
   else
-    EKBuscarProducto.Buscar;
+    ISBuscarProducto.Buscar;
 end;
 
 
@@ -180,17 +180,17 @@ end;
 
 procedure TFBuscarProducto.FormCreate(Sender: TObject);
 begin
-  EKOrdenarGrilla.CargarConfigColumnas;
+  ISOrdenarGrilla.CargarConfigColunmas;
   buscarDeEmpresas:= false;
 
-  EKBuscarProducto.SQL_Where.ValueFromIndex[1]:= IntToStr(SUCURSAL_LOGUEO);
-  EKBuscarProductoEmpresa.SQL_Where.ValueFromIndex[1]:= IntToStr(SUCURSAL_LOGUEO);
+  ISBuscarProducto.SQL_Where.ValueFromIndex[1]:= IntToStr(SUCURSAL_LOGUEO);
+  ISBuscarProductoEmpresa.SQL_Where.ValueFromIndex[1]:= IntToStr(SUCURSAL_LOGUEO);
 end;
 
 
 procedure TFBuscarProducto.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  EKOrdenarGrilla.GuardarConfigColumnas;
+  ISOrdenarGrilla.GuardarConfigColumnas;
 end;
 
 
