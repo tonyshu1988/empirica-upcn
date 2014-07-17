@@ -6,8 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset, dxBar,
   dxBarExtItems, Grids, DBGrids, ExtCtrls, ComCtrls, DBCtrls, StdCtrls,
-  Mask, ZSqlUpdate, DateUtils, EKOrdenarGrilla, EKBusquedaAvanzada,
-  ActnList, XPStyleActnCtrls, ActnMan, EKDbSuma, ISDbSuma, cxClasses,
+  Mask, ZSqlUpdate, DateUtils, 
+  ActnList, XPStyleActnCtrls, ActnMan, ISDbSuma, cxClasses,
   ISOrdenarGrilla, ISBusquedaAvanzada;
 
 type

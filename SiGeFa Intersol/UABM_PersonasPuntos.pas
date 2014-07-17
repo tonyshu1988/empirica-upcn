@@ -212,7 +212,7 @@ begin
     if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM_PersonaPtos)) then
       dm.ISModelo.cancelar_transaccion(transaccion_ABM_PersonaPtos);
 
-//    EKBusquedaAvanzadaBuscarPersonasPtos.Abrir;
+//    ISBusquedaAvanzadaBuscarPersonasPtos.Abrir;
   end;  
 
 end;
@@ -235,7 +235,7 @@ begin
     if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM_PersonaPtos)) then
       dm.ISModelo.cancelar_transaccion(transaccion_ABM_PersonaPtos);
 
-//    EKBusquedaAvanzadaBuscarPersonasPtos.Abrir;
+//    ISBusquedaAvanzadaBuscarPersonasPtos.Abrir;
   end;
 end;
 

@@ -634,7 +634,7 @@ begin
 
   modoListado();
 //
-//  if not (dm.EKUsrLogin.PermisoAccion('NO_FISCAL')) then
+//  if not (dm.ISUsrLogin.PermisoAccion('NO_FISCAL')) then
 //  begin
 //    ZQ_FormasPago.Filtered:= False;
 //    ZQ_FormasPago.Filter:= Format('IF = %s', [QuotedStr('S')]);

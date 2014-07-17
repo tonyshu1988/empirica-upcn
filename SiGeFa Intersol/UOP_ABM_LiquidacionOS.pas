@@ -390,14 +390,14 @@ procedure TFOP_ABM_LiquidacionOS.FormCreate(Sender: TObject);
 begin
   ISOrdenarGrillaFacturasLiq.CargarConfigColunmas;
   ISOrd_VerCpb_Facturas.CargarConfigColunmas;
-//  EKOrd_EditarProducto.CargarConfigColumnas;
+//  ISOrd_EditarProducto.CargarConfigColumnas;
 
   modoEdicion(false);
   StaticTxtBaja.Color:= FPrincipal.baja;
   FPrincipal.ISImage_ABM_Comprobantes.GetBitmap(4, btnBuscarOSLiquidar.Glyph); //cargo la imagen del boton buscar OS
 
 //  if dm.ZQ_SucursalesVisibles.Locate('id_sucursal', VarArrayOf([SUCURSAL_LOGUEO]), []) then
-//    TEKCriterioBA(EKBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
+//    TISCriterioBA(ISBuscar.CriteriosBusqueda.Items[4]).ItemIndex:= dm.ZQ_SucursalesVisibles.RecNo - 1;
 
   //abro todos los recibos del sistema
   //ISBuscar.Abrir;
@@ -779,7 +779,7 @@ procedure TFOP_ABM_LiquidacionOS.FormClose(Sender: TObject; var Action: TCloseAc
 begin
   ISOrdenarGrillaFacturasLiq.GuardarConfigColumnas;
   ISOrd_VerCpb_Facturas.GuardarConfigColumnas;
-//  EKOrd_EditarProducto.GuardarConfigColumnas;
+//  ISOrd_EditarProducto.GuardarConfigColumnas;
 end;
 
 
