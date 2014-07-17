@@ -258,9 +258,9 @@ procedure TFReimpresionComprobantes.FormCreate(Sender: TObject);
 var
   anio, mes: integer;
 begin
-//  EKOrdenarFacturas.CargarConfigColumnas;
-//  EKOrdenarFPago.CargarConfigColumnas;
-//  EKOrdenarProducto.CargarConfigColumnas;
+//  ISOrdenarFacturas.CargarConfigColumnas;
+//  ISOrdenarFPago.CargarConfigColumnas;
+//  ISOrdenarProducto.CargarConfigColumnas;
   //cargarConfigPanel;
 
   where:= '';

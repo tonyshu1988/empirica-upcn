@@ -843,8 +843,8 @@ begin
      begin
       DM.VariablesReportes(ReporteEstadVariasCostos);
 
-//      QRLabelCritBusquedaEstadVariasCosto.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
-//                            EKBusquedaVarias.ParametrosSeleccionados1[3],EKBusquedaVarias.ParametrosSeleccionados1[4]]);
+//      QRLabelCritBusquedaEstadVariasCosto.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[ISBusquedaVarias.ParametrosSelecReales1[0],ISBusquedaVarias.ParametrosSeleccionados1[2],
+//                            ISBusquedaVarias.ParametrosSeleccionados1[3],ISBusquedaVarias.ParametrosSeleccionados1[4]]);
 
       QRLabelCritBusquedaEstadVariasCosto.Caption:= ISBusquedaVarias.ParametrosBuscados;
       qrTipoEstad2.Caption:='Estadística según '+ISBusquedaVarias.ParametrosSelecReales1[1];
@@ -856,8 +856,8 @@ begin
      begin
       DM.VariablesReportes(ReporteEstadVarias);
 
-//      QRLabelCritBusquedaEstadVarias.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[EKBusquedaVarias.ParametrosSelecReales1[0],EKBusquedaVarias.ParametrosSeleccionados1[2],
-//                            EKBusquedaVarias.ParametrosSeleccionados1[3],EKBusquedaVarias.ParametrosSeleccionados1[4]]);
+//      QRLabelCritBusquedaEstadVarias.Caption :=Format('Sucursal: %s - FDesde: %s - FHasta: %s - Filtro Búsqueda: %s',[ISBusquedaVarias.ParametrosSelecReales1[0],IsBusquedaVarias.ParametrosSeleccionados1[2],
+//                            IsBusquedaVarias.ParametrosSeleccionados1[3],ISBusquedaVarias.ParametrosSeleccionados1[4]]);
 
       QRLabelCritBusquedaEstadVarias.Caption:= ISBusquedaVarias.ParametrosBuscados;
       qrTipoEstad.Caption:='Estadística según '+ISBusquedaVarias.ParametrosSelecReales1[1];
@@ -984,7 +984,7 @@ end;
 procedure TFEstadisticaVentas.ZQ_EstadVariasAfterScroll(DataSet: TDataSet);
 begin
 
-// lblTotVarias.Caption := lblTotVarias.Caption + FormatFloat('/ Total Ganancia: $ ##,###,##0.00 ', EKDbSumaVarias.SumCollection[1].SumValue);
+// lblTotVarias.Caption := lblTotVarias.Caption + FormatFloat('/ Total Ganancia: $ ##,###,##0.00 ', ISDbSumaVarias.SumCollection[1].SumValue);
 end;
 
 procedure TFEstadisticaVentas.EKDbSumaVariasSumListChanged(

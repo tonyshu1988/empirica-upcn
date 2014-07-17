@@ -824,6 +824,80 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
           ParentFont = False
           Transparent = True
         end
+        object PanelFechas: TPanel
+          Left = 64
+          Top = 82
+          Width = 637
+          Height = 42
+          BevelOuter = bvNone
+          TabOrder = 2
+          object PanelFechaEnviado: TPanel
+            Left = 127
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 1
+            object lblTituloFecha_Enviado: TLabel
+              Left = 11
+              Top = 1
+              Width = 45
+              Height = 13
+              Caption = 'Enviado'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+          end
+          object PanelFechaEmision: TPanel
+            Left = 0
+            Top = 0
+            Width = 127
+            Height = 42
+            Align = alLeft
+            BevelOuter = bvNone
+            TabOrder = 0
+            object lblTituloFecha_Emision: TLabel
+              Left = 12
+              Top = 1
+              Width = 44
+              Height = 13
+              Caption = 'Emisi'#243'n'
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = []
+              ParentFont = False
+            end
+          end
+          object ISDBDateEmision: TISDBDateTimePicker
+            Left = 13
+            Top = 15
+            Width = 105
+            Height = 21
+            Date = 41837.423000879630000000
+            Time = 41837.423000879630000000
+            TabOrder = 2
+            DataField = 'FECHA'
+            DataSource = DS_Comprobante
+          end
+          object ISDBDateEnviado: TISDBDateTimePicker
+            Left = 139
+            Top = 15
+            Width = 105
+            Height = 21
+            Date = 41837.425273738420000000
+            Time = 41837.425273738420000000
+            TabOrder = 3
+            DataField = 'FECHA_ENVIADA'
+            DataSource = DS_Comprobante
+          end
+        end
         object PanelEditar_DatosGralProveedor: TPanel
           Left = 66
           Top = 7
@@ -1366,80 +1440,6 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
           DataSource = DS_Comprobante
           ScrollBars = ssVertical
           TabOrder = 3
-        end
-        object PanelFechas: TPanel
-          Left = 64
-          Top = 82
-          Width = 637
-          Height = 42
-          BevelOuter = bvNone
-          TabOrder = 2
-          object PanelFechaEnviado: TPanel
-            Left = 127
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 1
-            object lblTituloFecha_Enviado: TLabel
-              Left = 11
-              Top = 1
-              Width = 45
-              Height = 13
-              Caption = 'Enviado'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateEnviado: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA_ENVIADA'
-              DataSource = DS_Comprobante
-            end
-          end
-          object PanelFechaEmision: TPanel
-            Left = 0
-            Top = 0
-            Width = 127
-            Height = 42
-            Align = alLeft
-            BevelOuter = bvNone
-            TabOrder = 0
-            object lblTituloFecha_Emision: TLabel
-              Left = 12
-              Top = 1
-              Width = 44
-              Height = 13
-              Caption = 'Emisi'#243'n'
-              Font.Charset = DEFAULT_CHARSET
-              Font.Color = clWindowText
-              Font.Height = -11
-              Font.Name = 'Verdana'
-              Font.Style = []
-              ParentFont = False
-            end
-            object EKDBDateEmision: TEKDBDateTimePicker
-              Left = 11
-              Top = 14
-              Width = 105
-              Height = 21
-              Date = 40717.702273252320000000
-              Time = 40717.702273252320000000
-              TabOrder = 0
-              DataField = 'FECHA'
-              DataSource = DS_Comprobante
-            end
-          end
         end
         object Panel5: TPanel
           Left = 1
@@ -2014,6 +2014,47 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
                 ParentFont = False
                 OnClick = btnBuscarPersonaClick
               end
+              object Panel14: TPanel
+                Left = 64
+                Top = 82
+                Width = 637
+                Height = 42
+                BevelOuter = bvNone
+                TabOrder = 2
+                object Panel15: TPanel
+                  Left = 0
+                  Top = 0
+                  Width = 127
+                  Height = 42
+                  Align = alLeft
+                  BevelOuter = bvNone
+                  TabOrder = 0
+                  object Label63: TLabel
+                    Left = 12
+                    Top = 1
+                    Width = 44
+                    Height = 13
+                    Caption = 'Emisi'#243'n'
+                    Font.Charset = DEFAULT_CHARSET
+                    Font.Color = clWindowText
+                    Font.Height = -11
+                    Font.Name = 'Verdana'
+                    Font.Style = []
+                    ParentFont = False
+                  end
+                  object ISDBDateTimePicker1: TISDBDateTimePicker
+                    Left = 12
+                    Top = 16
+                    Width = 105
+                    Height = 21
+                    Date = 41835.429147500000000000
+                    Time = 41835.429147500000000000
+                    TabOrder = 0
+                    DataField = 'FECHA'
+                    DataSource = DS_Comprobante
+                  end
+                end
+              end
               object Panel12: TPanel
                 Left = 66
                 Top = 7
@@ -2556,47 +2597,6 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
                 DataSource = DS_Comprobante
                 ScrollBars = ssVertical
                 TabOrder = 3
-              end
-              object Panel14: TPanel
-                Left = 64
-                Top = 82
-                Width = 637
-                Height = 42
-                BevelOuter = bvNone
-                TabOrder = 2
-                object Panel15: TPanel
-                  Left = 0
-                  Top = 0
-                  Width = 127
-                  Height = 42
-                  Align = alLeft
-                  BevelOuter = bvNone
-                  TabOrder = 0
-                  object Label63: TLabel
-                    Left = 12
-                    Top = 1
-                    Width = 44
-                    Height = 13
-                    Caption = 'Emisi'#243'n'
-                    Font.Charset = DEFAULT_CHARSET
-                    Font.Color = clWindowText
-                    Font.Height = -11
-                    Font.Name = 'Verdana'
-                    Font.Style = []
-                    ParentFont = False
-                  end
-                  object ISDBDateEmision: TISDBDateTimePicker
-                    Left = 12
-                    Top = 16
-                    Width = 105
-                    Height = 21
-                    Date = 41835.429147500000000000
-                    Time = 41835.429147500000000000
-                    TabOrder = 0
-                    DataField = 'FECHA'
-                    DataSource = DS_Comprobante
-                  end
-                end
               end
               object edImagen: TDBImage
                 Left = 707

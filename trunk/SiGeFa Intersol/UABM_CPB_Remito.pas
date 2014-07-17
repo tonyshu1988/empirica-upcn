@@ -11,7 +11,7 @@ uses
   ComCtrls, ZStoredProcedure,
   DBClient, Menus, UBuscarProducto, UBuscarPersona, ExtDlgs, jpeg,
   cxClasses, ISOrdenarGrilla, ISDbSuma, ISListadoSQL, ISBusquedaAvanzada,
-  ISDBDateTimePicker, EKDBDateTimePicker;
+  ISDBDateTimePicker;
 
 type
   TFABM_CPB_Remito = class(TForm)
@@ -282,9 +282,7 @@ type
     PanelFechas: TPanel;
     PanelFechaEnviado: TPanel;
     PanelFechaEmision: TPanel;
-    EKDBDateEmision: TEKDBDateTimePicker;
     lblTituloFecha_Emision: TLabel;
-    EKDBDateEnviado: TEKDBDateTimePicker;
     lblTituloFecha_Enviado: TLabel;
     ZQ_BuscarMail: TZQuery;
     ZQ_BuscarMailEMAIL: TStringField;
@@ -457,7 +455,9 @@ type
     ISSuma_Productos: TISDbSuma;
     ISListadoEntidad: TISListadoSQL;
     ISBuscar: TISBusquedaAvanzada;
+    ISDBDateTimePicker1: TISDBDateTimePicker;
     ISDBDateEmision: TISDBDateTimePicker;
+    ISDBDateEnviado: TISDBDateTimePicker;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);

@@ -7,7 +7,8 @@ uses
   Dialogs, dxBar, dxBarExtItems, ExtCtrls, StdCtrls, Mask, DBCtrls,
   Buttons, Grids, DBGrids, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, ComCtrls, ZStoredProcedure, ExtDlgs, ZSqlUpdate, DBClient, STRUTILS,
-  EKOrdenarGrilla, EKDBDateTimePicker, QuickRpt, QRCtrls, EKVistaPreviaQR;
+  QuickRpt, QRCtrls, 
+  cxClasses, ISVistaPreviaQR;
 
 type
   TFVerImagen = class(TForm)
@@ -23,10 +24,10 @@ type
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     QuickRep1: TQuickRep;
-    EKVistaPreviaQR1: TEKVistaPreviaQR;
     PageHeaderBand1: TQRBand;
     TitleBand1: TQRBand;
     QRDBImage1: TQRDBImage;
+    ISVistaPreviaQR1: TISVistaPreviaQR;
     procedure cargarImagenProducto(id_producto: integer);
     procedure cargarImagenComprobante(id_comprobante: integer);
     procedure btnSalirClick(Sender: TObject);
@@ -73,7 +74,7 @@ end;
 
 procedure TFVerImagen.btnImprimirClick(Sender: TObject);
 begin
-  EKVistaPreviaQR1.VistaPrevia;
+  ISVistaPreviaQR1.VistaPrevia;
 end;
 
 end.

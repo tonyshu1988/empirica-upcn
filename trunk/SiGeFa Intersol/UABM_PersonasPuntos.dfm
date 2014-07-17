@@ -19,15 +19,15 @@ object FABM_PersonasPuntos: TFABM_PersonasPuntos
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1016
-    Height = 689
+    Width = 1008
+    Height = 678
     Align = alClient
     TabOrder = 0
     object DBGridPersonasPtos: TDBGrid
       Left = 1
       Top = 1
-      Width = 1014
-      Height = 584
+      Width = 1006
+      Height = 573
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas_Puntos
@@ -114,8 +114,8 @@ object FABM_PersonasPuntos: TFABM_PersonasPuntos
     end
     object PEdicion: TPanel
       Left = 1
-      Top = 585
-      Width = 1014
+      Top = 574
+      Width = 1006
       Height = 103
       Align = alBottom
       TabOrder = 1
@@ -151,7 +151,7 @@ object FABM_PersonasPuntos: TFABM_PersonasPuntos
       object GroupBox1: TGroupBox
         Left = 1
         Top = 1
-        Width = 1012
+        Width = 1004
         Height = 72
         Align = alTop
         Caption = ' Datos Persona '
@@ -286,7 +286,7 @@ object FABM_PersonasPuntos: TFABM_PersonasPuntos
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
