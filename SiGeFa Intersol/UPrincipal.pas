@@ -24,9 +24,9 @@ type
     AAcerca_de: TAction;
     AcercaDe: TMenuItem;
     LogoFondo: TImage;
-    EKImageMenu24: TEKImageList32;
-    Iconos_Menu_32: TEKImageList32;
-    Iconos_Menu_16: TEKImageList32;
+    EKImageMenu24: TIS32bitImageList;
+    Iconos_Menu_32: TIS32bitImageList;
+    Iconos_Menu_16: TIS32bitImageList;
     Productos1: TMenuItem;
     ABMProductos1: TMenuItem;
     Clientes1: TMenuItem;
@@ -180,7 +180,6 @@ type
     EstadsticasLibroIVA1: TMenuItem;
     ISImage_ABM_Comprobantes: TIS32bitImageList;
     ISVentanas1: TISVentanas;
-    ISImageMenu24: TIS32bitImageList;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
