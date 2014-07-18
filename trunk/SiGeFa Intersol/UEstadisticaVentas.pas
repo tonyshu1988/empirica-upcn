@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ComCtrls, ExtCtrls, dxBar, dxBarExtItems, Grids, DBGrids, DB,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset, StdCtrls, Buttons, mxNativeExcel, mxExport,
+  ZAbstractRODataset, ZAbstractDataset,UDM, ZDataset, StdCtrls, Buttons, mxNativeExcel, mxExport,
   ActnList, XPStyleActnCtrls, ActnMan, QuickRpt, QRCtrls,
   ZStoredProcedure, Series, TeEngine, TeeProcs, Chart, DbChart, Menus,
   cxClasses, ISVistaPreviaQR, ISOrdenarGrilla, ISDbSuma, ISBusquedaAvanzada;
@@ -399,7 +399,7 @@ var
   Fiscal:String;
 implementation
 
-uses UDM, UPrincipal, UUtilidades, DateUtils;
+uses  UPrincipal, UUtilidades, DateUtils;
 
 {$R *.dfm}
 
