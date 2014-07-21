@@ -8,7 +8,7 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
    ActnList, XPStyleActnCtrls, ActnMan, 
    QRCtrls, QuickRpt, ComCtrls, cxClasses, ISVistaPreviaQR,
-  ISOrdenarGrilla, ISBusquedaAvanzada;
+  ISOrdenarGrilla, ISBusquedaAvanzada, Buttons;
 
 type
   TFOP_ABMObraSocial = class(TForm)
@@ -28,7 +28,7 @@ type
     btnSalir: TdxBarLargeButton;
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
-    ZQ_OP_ObraSocial: TZQuery;
+    ZQ_OP_PLAN: TZQuery;
     DS_OP_ObraSocial: TDataSource;
     PBusqueda: TPanel;
     lblCantidadRegistros: TLabel;
@@ -67,13 +67,6 @@ type
     QRLabel30: TQRLabel;
     QRLabel1: TQRLabel;
     btnExcel: TdxBarLargeButton;
-    ZQ_OP_ObraSocialID_OS: TIntegerField;
-    ZQ_OP_ObraSocialCODIGO: TStringField;
-    ZQ_OP_ObraSocialNOMBRE: TStringField;
-    ZQ_OP_ObraSocialDIRECCION: TStringField;
-    ZQ_OP_ObraSocialTELEFONO: TStringField;
-    ZQ_OP_ObraSocialDESCRIPCION: TStringField;
-    ZQ_OP_ObraSocialBAJA: TStringField;
     QRLabel2: TQRLabel;
     QRDBText3: TQRDBText;
     QRLabel3: TQRLabel;
@@ -117,15 +110,6 @@ type
     ZQ_IvaVERIFICA_CUIT: TStringField;
     DS_Iva: TDataSource;
     DS_Provincia: TDataSource;
-    ZQ_OP_ObraSocialCUIT_CUIL: TStringField;
-    ZQ_OP_ObraSocialLOCALIDAD: TStringField;
-    ZQ_OP_ObraSocialCODIGO_POSTAL: TStringField;
-    ZQ_OP_ObraSocialEMAIL: TStringField;
-    ZQ_OP_ObraSocialID_TIPO_IVA: TIntegerField;
-    ZQ_OP_ObraSocialID_PROVINCIA: TIntegerField;
-    ZQ_OP_ObraSocial_tipoIva: TStringField;
-    ZQ_OP_ObraSocial_provincia: TStringField;
-    ZQ_OP_ObraSocialFACTURA_AUTOMATICA: TStringField;
     DBCheckBoxFacturaAuto: TDBCheckBox;
     QRLabel4: TQRLabel;
     QRDBText5: TQRDBText;
@@ -145,6 +129,49 @@ type
     ISOrdenarGrilla1: TISOrdenarGrilla;
     ISVistaPrevia: TISVistaPreviaQR;
     ISOrdenarGrilla2: TISOrdenarGrilla;
+    TabSheet3: TTabSheet;
+    ZQ_OS_CABECERA: TZQuery;
+    StringField11: TStringField;
+    StringField12: TStringField;
+    DS_OP_PLAN: TDataSource;
+    ZQ_OS_CABECERAID_OPTICA_OS_CABECERA: TIntegerField;
+    ZQ_OS_CABECERATELEFONO1: TStringField;
+    ZQ_OS_CABECERATELEFONO2: TStringField;
+    Label2: TLabel;
+    DBEdit1: TDBEdit;
+    DBGrid1: TDBGrid;
+    Panel1: TPanel;
+    Label3: TLabel;
+    Label4: TLabel;
+    Label14: TLabel;
+    Label15: TLabel;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    DBEdit4: TDBEdit;
+    DBEdit5: TDBEdit;
+    DBCheckBox1: TDBCheckBox;
+    btnPlanAceptar: TBitBtn;
+    btnPlanCancelar: TBitBtn;
+    ZQ_OP_PLANID_OS: TIntegerField;
+    ZQ_OP_PLANCODIGO: TStringField;
+    ZQ_OP_PLANNOMBRE: TStringField;
+    ZQ_OP_PLANDESCRIPCION: TStringField;
+    ZQ_OP_PLANBAJA: TStringField;
+    ZQ_OP_PLANFACTURA_AUTOMATICA: TStringField;
+    ZQ_OP_PLANID_OPTICA_OS_CABECERA: TIntegerField;
+    ZQ_OP_PLANDESCUENTO: TFloatField;
+    ZQ_OS_CABECERACODIGO: TStringField;
+    ZQ_OS_CABECERANOMBRE: TStringField;
+    ZQ_OS_CABECERADIRECCION: TStringField;
+    ZQ_OS_CABECERADESCRIPCION: TStringField;
+    ZQ_OS_CABECERABAJA: TStringField;
+    ZQ_OS_CABECERACUIT_CUIL: TStringField;
+    ZQ_OS_CABECERALOCALIDAD: TStringField;
+    ZQ_OS_CABECERACODIGO_POSTAL: TStringField;
+    ZQ_OS_CABECERAEMAIL: TStringField;
+    ZQ_OS_CABECERAID_PROVINCIA: TIntegerField;
+    ZQ_OS_CABECERAID_TIPO_IVA: TIntegerField;
+    ZQ_OS_CABECERAFACTURA_AUTOMATICA: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -167,7 +194,7 @@ type
     procedure btnImprimirClick(Sender: TObject);
     procedure btnExcelClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure ZQ_OP_ObraSocialAfterScroll(DataSet: TDataSet);
+    procedure ZQ_OP_PLANAfterScroll(DataSet: TDataSet);
     procedure DBGridAfiliadosDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
@@ -204,19 +231,19 @@ end;
 procedure TFOP_ABMObraSocial.btnBuscarClick(Sender: TObject);
 begin
   if ISBuscar.Buscar then
-    dm.mostrarCantidadRegistro(ZQ_OP_ObraSocial, lblCantidadRegistros);
+    dm.mostrarCantidadRegistro(ZQ_OS_CABECERA, lblCantidadRegistros);
 end;
 
 
 procedure TFOP_ABMObraSocial.btnNuevoClick(Sender: TObject);
 begin
-  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OS_CABECERA,ZQ_OP_PLAN]) then
   begin
     DBGridObraSocial.Enabled := false;
 
-    ZQ_OP_ObraSocial.Append;
-    ZQ_OP_ObraSocialBAJA.AsString:= 'N';
-    ZQ_OP_ObraSocialFACTURA_AUTOMATICA.AsString:= 'N';
+    ZQ_OS_CABECERA.Append;
+    ZQ_OS_CABECERABAJA.AsString:= 'N';
+    ZQ_OS_CABECERAFACTURA_AUTOMATICA.AsString:= 'N';
 
     PageControl1.ActivePageIndex:= 0;
     DBEditCodigo.SetFocus;
@@ -228,14 +255,14 @@ end;
 
 procedure TFOP_ABMObraSocial.btnModificarClick(Sender: TObject);
 begin
-  if (ZQ_OP_ObraSocial.IsEmpty) then
+  if (ZQ_OS_CABECERA.IsEmpty) then
     exit;
 
-  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OS_CABECERA]) then
   begin
     DBGridObraSocial.Enabled := false;
 
-    ZQ_OP_ObraSocial.Edit;
+    ZQ_OS_CABECERA.Edit;
 
     PageControl1.ActivePageIndex:= 0;
     DBEditCodigo.SetFocus;
@@ -249,15 +276,15 @@ procedure TFOP_ABMObraSocial.btnBajaClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_OP_ObraSocial.IsEmpty) OR (ZQ_OP_ObraSocialBAJA.AsString <> 'N')then
+  if (ZQ_OS_CABECERA.IsEmpty) OR (ZQ_OS_CABECERABAJA.AsString <> 'N')then
     exit;
 
   if (application.MessageBox(pchar('¿Desea dar de baja la "Obra Social" seleccionada?'), 'ABM Obra Social', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OS_CABECERA]) then
     begin
-      ZQ_OP_ObraSocial.Edit;
-      ZQ_OP_ObraSocialBAJA.AsString:='S';
+      ZQ_OS_CABECERA.Edit;
+      ZQ_OS_CABECERABAJA.AsString:='S';
     end
     else
       exit;
@@ -265,9 +292,9 @@ begin
     if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
-    recNo:= ZQ_OP_ObraSocial.RecNo;
-    ZQ_OP_ObraSocial.Refresh;
-    ZQ_OP_ObraSocial.RecNo:= recNo;
+    recNo:= ZQ_OS_CABECERA.RecNo;
+    ZQ_OS_CABECERA.Refresh;
+    ZQ_OS_CABECERA.RecNo:= recNo;
   end;
 end;
 
@@ -276,15 +303,15 @@ procedure TFOP_ABMObraSocial.btnReactivarClick(Sender: TObject);
 var
   recNo: integer;
 begin
-  if (ZQ_OP_ObraSocial.IsEmpty) OR (ZQ_OP_ObraSocialBAJA.AsString <> 'S') then
+  if (ZQ_OS_CABECERA.IsEmpty) OR (ZQ_OS_CABECERABAJA.AsString <> 'S') then
     exit;
 
   if (application.MessageBox(pchar('¿Desea reactivar la "Obra Social" seleccionada?'), 'ABM Obra Social', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
   begin
-    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OP_ObraSocial]) then
+    if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OS_CABECERA]) then
     begin
-      ZQ_OP_ObraSocial.Edit;
-      ZQ_OP_ObraSocialBAJA.AsString:='N';
+      ZQ_OS_CABECERA.Edit;
+      ZQ_OS_CABECERABAJA.AsString:='N';
     end
     else
       exit;
@@ -292,9 +319,9 @@ begin
     if not (dm.ISModelo.finalizar_transaccion(transaccion_ABM)) then
       dm.ISModelo.cancelar_transaccion(transaccion_ABM);
 
-    recNo:= ZQ_OP_ObraSocial.RecNo;
-    ZQ_OP_ObraSocial.Refresh;
-    ZQ_OP_ObraSocial.RecNo:= recNo;
+    recNo:= ZQ_OS_CABECERA.RecNo;
+    ZQ_OS_CABECERA.Refresh;
+    ZQ_OS_CABECERA.RecNo:= recNo;
   end;
 end;
 
@@ -315,9 +342,9 @@ begin
       DBGridObraSocial.SetFocus;
       GrupoEditando.Enabled := true;
       GrupoGuardarCancelar.Enabled := false;
-      recNo:= ZQ_OP_ObraSocial.RecNo;
-      ZQ_OP_ObraSocial.Refresh;
-      ZQ_OP_ObraSocial.RecNo:= recNo;
+      recNo:= ZQ_OS_CABECERA.RecNo;
+      ZQ_OS_CABECERA.Refresh;
+      ZQ_OS_CABECERA.RecNo:= recNo;
     end
   except
     begin
@@ -326,7 +353,7 @@ begin
     end
   end;
 
-  dm.mostrarCantidadRegistro(ZQ_OP_ObraSocial, lblCantidadRegistros);
+  dm.mostrarCantidadRegistro(ZQ_OS_CABECERA, lblCantidadRegistros);
 end;
 
 
@@ -358,7 +385,7 @@ begin
   PageControl1.ActivePageIndex:= 0;
 
   ISBuscar.Abrir;
-  dm.mostrarCantidadRegistro(ZQ_OP_ObraSocial, lblCantidadRegistros);
+  dm.mostrarCantidadRegistro(ZQ_OS_CABECERA, lblCantidadRegistros);
 end;
 
 
@@ -366,7 +393,7 @@ procedure TFOP_ABMObraSocial.DBGridObraSocialDrawColumnCell(Sender: TObject;
   const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
 begin
-  FPrincipal.PintarFilasGrillasConBajas(DBGridObraSocial, ZQ_OP_ObraSocialBAJA.AsString, Rect, DataCol, Column, State);
+  FPrincipal.PintarFilasGrillasConBajas(DBGridObraSocial, ZQ_OS_CABECERABAJA.AsString, Rect, DataCol, Column, State);
 end;
 
 
@@ -420,7 +447,7 @@ end;
 
 procedure TFOP_ABMObraSocial.btnImprimirClick(Sender: TObject);
 begin
-  if ZQ_OP_ObraSocial.IsEmpty then
+  if ZQ_OS_CABECERA.IsEmpty then
     exit;
 
   DM.VariablesReportes(RepObraSocial);
@@ -431,7 +458,7 @@ end;
 
 procedure TFOP_ABMObraSocial.btnExcelClick(Sender: TObject);
 begin
-  if not ZQ_OP_ObraSocial.IsEmpty then
+  if not ZQ_OS_CABECERA.IsEmpty then
     dm.ExportarEXCEL(DBGridObraSocial);
 end;
 
@@ -441,16 +468,16 @@ begin
   ISOrdenarGrilla1.GuardarConfigColumnas;
 end;
 
-procedure TFOP_ABMObraSocial.ZQ_OP_ObraSocialAfterScroll(
+procedure TFOP_ABMObraSocial.ZQ_OP_PLANAfterScroll(
   DataSet: TDataSet);
 begin
-  ZQ_Afiliados.Close;
-
-  if ZQ_OP_ObraSocial.IsEmpty then
-    exit;
-
-  ZQ_Afiliados.ParamByName('ID_OS').AsInteger:= ZQ_OP_ObraSocialID_OS.AsInteger;
-  ZQ_Afiliados.Open;
+//  ZQ_Afiliados.Close;
+//
+//  if ZQ_OP_ObraSocial.IsEmpty then
+//    exit;
+//
+//  ZQ_Afiliados.ParamByName('ID_OS').AsInteger:= ZQ_OP_ObraSocialID_OS.AsInteger;
+//  ZQ_Afiliados.Open;
 end;
 
 procedure TFOP_ABMObraSocial.DBGridAfiliadosDrawColumnCell(Sender: TObject;
@@ -468,13 +495,13 @@ begin
   result:= true;
   mensaje:= '';
 
-  if (ZQ_OP_ObraSocialNOMBRE.IsNull) or (trim(ZQ_OP_ObraSocialNOMBRE.AsString) = '') then
+  if (ZQ_OS_CABECERANOMBRE.IsNull) or (trim(ZQ_OS_CABECERANOMBRE.AsString) = '') then
   begin
     mensaje:= 'El campo Nombre se encuentra vacío.';
     result := false;
   end;
 
-  if (ZQ_OP_ObraSocialID_TIPO_IVA.IsNull) then
+  if (ZQ_OS_CABECERAID_TIPO_IVA.IsNull) then
   begin
     mensaje:= mensaje+#13+'El campo Condición IVA se encuentra vacío.';
     result := false;
@@ -482,7 +509,7 @@ begin
 
   //Verifica_CUIT es un campo de la tabla TIPO_CUIT, se configura ahí si se le exige el NroCUIT
   if (ZQ_IvaVERIFICA_CUIT.AsString='S') then
-    if not EsCUITValido(ZQ_OP_ObraSocialCUIT_CUIL.AsString) then
+    if not EsCUITValido(ZQ_OS_CABECERACUIT_CUIL.AsString) then
     begin
       mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido.'+char(13)+'(sólo debe ingresar números, sin guiones)';
       result := false;

@@ -1,9 +1,9 @@
 object FOP_ABMObraSocial: TFOP_ABMObraSocial
-  Left = 383
-  Top = 201
-  Width = 826
-  Height = 480
-  Caption = 'ABM Obra Social'
+  Left = 363
+  Top = 229
+  Width = 881
+  Height = 527
+  Caption = 'ABM Obra Social / Planes'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -23,8 +23,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 818
-    Height = 382
+    Width = 873
+    Height = 429
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -39,7 +39,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       Frame.DrawBottom = False
       Frame.DrawLeft = False
       Frame.DrawRight = False
-      DataSet = ZQ_OP_ObraSocial
+      DataSet = ZQ_OP_PLAN
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -174,7 +174,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Size.Values = (
             52.916666666666670000
             1164.166666666667000000
-            68.791666666666680000
+            68.791666666666670000
             439.208333333333400000)
           Alignment = taCenter
           AlignToBand = True
@@ -274,7 +274,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_ObraSocial
+          DataSet = ZQ_OP_PLAN
           DataField = 'CODIGO'
           Transparent = False
           WordWrap = True
@@ -301,7 +301,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_ObraSocial
+          DataSet = ZQ_OP_PLAN
           DataField = 'NOMBRE'
           Transparent = False
           WordWrap = True
@@ -328,7 +328,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_ObraSocial
+          DataSet = ZQ_OP_PLAN
           DataField = 'TELEFONO'
           Transparent = False
           WordWrap = True
@@ -355,7 +355,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_ObraSocial
+          DataSet = ZQ_OP_PLAN
           DataField = 'DIRECCION'
           Transparent = False
           WordWrap = True
@@ -382,7 +382,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_ObraSocial
+          DataSet = ZQ_OP_PLAN
           DataField = 'LOCALIDAD'
           Transparent = False
           WordWrap = True
@@ -409,7 +409,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_ObraSocial
+          DataSet = ZQ_OP_PLAN
           DataField = '_provincia'
           Transparent = False
           WordWrap = True
@@ -436,7 +436,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_ObraSocial
+          DataSet = ZQ_OP_PLAN
           DataField = '_tipoIva'
           Transparent = False
           WordWrap = True
@@ -463,7 +463,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_ObraSocial
+          DataSet = ZQ_OP_PLAN
           DataField = 'CUIT_CUIL'
           Transparent = False
           WordWrap = True
@@ -624,7 +624,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            592.666666666666800000)
+            592.666666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -1008,8 +1008,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 818
-      Height = 382
+      Width = 873
+      Height = 429
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -1023,8 +1023,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       object DBGridObraSocial: TDBGrid
         Left = 5
         Top = 5
-        Width = 808
-        Height = 187
+        Width = 863
+        Height = 234
         Align = alClient
         Color = 14606012
         DataSource = DS_OP_ObraSocial
@@ -1050,7 +1050,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             FieldName = 'NOMBRE'
             Title.Alignment = taCenter
             Title.Caption = 'Nombre'
-            Width = 177
+            Width = 186
             Visible = True
           end
           item
@@ -1128,8 +1128,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 192
-        Width = 808
+        Top = 239
+        Width = 863
         Height = 185
         Align = alBottom
         BevelOuter = bvNone
@@ -1137,7 +1137,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         object PageControl1: TPageControl
           Left = 0
           Top = 0
-          Width = 808
+          Width = 863
           Height = 185
           ActivePage = TabSheet1
           Align = alClient
@@ -1145,8 +1145,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           object TabSheet1: TTabSheet
             Caption = 'Datos Obra Social'
             object Label9: TLabel
-              Left = 387
-              Top = 88
+              Left = 401
+              Top = 62
               Width = 57
               Height = 13
               Alignment = taRightJustify
@@ -1154,8 +1154,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               Transparent = True
             end
             object Label8: TLabel
-              Left = 415
-              Top = 62
+              Left = 429
+              Top = 36
               Width = 29
               Height = 13
               Alignment = taRightJustify
@@ -1204,7 +1204,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               Transparent = True
             end
             object Label11: TLabel
-              Left = 389
+              Left = 403
               Top = 138
               Width = 55
               Height = 13
@@ -1228,17 +1228,17 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               Transparent = True
             end
             object Label6: TLabel
-              Left = 51
+              Left = 35
               Top = 113
-              Width = 49
+              Width = 65
               Height = 13
               Alignment = taRightJustify
-              Caption = 'Telefono'
+              Caption = 'Telefono 1:'
               Transparent = True
             end
             object Label13: TLabel
-              Left = 410
-              Top = 113
+              Left = 424
+              Top = 88
               Width = 34
               Height = 13
               Alignment = taRightJustify
@@ -1246,7 +1246,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               Transparent = True
             end
             object Label1: TLabel
-              Left = 643
+              Left = 657
               Top = 138
               Width = 74
               Height = 13
@@ -1254,9 +1254,18 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               Caption = '(sin guiones)'
               Transparent = True
             end
+            object Label2: TLabel
+              Left = 393
+              Top = 113
+              Width = 65
+              Height = 13
+              Alignment = taRightJustify
+              Caption = 'Telefono 2:'
+              Transparent = True
+            end
             object DBLCBoxProvincia: TDBLookupComboBox
-              Left = 447
-              Top = 84
+              Left = 461
+              Top = 58
               Width = 270
               Height = 21
               DataField = 'ID_PROVINCIA'
@@ -1339,8 +1348,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               TabOrder = 2
             end
             object DBECodPostal: TDBEdit
-              Left = 447
-              Top = 58
+              Left = 461
+              Top = 32
               Width = 67
               Height = 21
               CharCase = ecUpperCase
@@ -1355,7 +1364,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               TabOrder = 3
             end
             object DBECuit_Cuil: TDBEdit
-              Left = 447
+              Left = 461
               Top = 134
               Width = 191
               Height = 21
@@ -1391,7 +1400,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               Width = 270
               Height = 21
               CharCase = ecUpperCase
-              DataField = 'TELEFONO'
+              DataField = 'TELEFONO1'
               DataSource = DS_OP_ObraSocial
               Font.Charset = DEFAULT_CHARSET
               Font.Color = clWindowText
@@ -1402,8 +1411,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               TabOrder = 6
             end
             object DBEMail: TDBEdit
-              Left = 447
-              Top = 109
+              Left = 461
+              Top = 84
               Width = 270
               Height = 21
               DataField = 'EMAIL'
@@ -1417,9 +1426,9 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               TabOrder = 7
             end
             object DBCheckBoxFacturaAuto: TDBCheckBox
-              Left = 447
+              Left = 534
               Top = 34
-              Width = 322
+              Width = 217
               Height = 17
               TabStop = False
               Caption = 'Facturar Sobre Automaticamente'
@@ -1429,6 +1438,232 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               ValueChecked = 'S'
               ValueUnchecked = 'N'
             end
+            object DBEdit1: TDBEdit
+              Left = 461
+              Top = 109
+              Width = 270
+              Height = 21
+              CharCase = ecUpperCase
+              DataField = 'TELEFONO1'
+              DataSource = DS_OP_ObraSocial
+              Font.Charset = DEFAULT_CHARSET
+              Font.Color = clWindowText
+              Font.Height = -11
+              Font.Name = 'Verdana'
+              Font.Style = [fsBold]
+              ParentFont = False
+              TabOrder = 11
+            end
+          end
+          object TabSheet3: TTabSheet
+            Caption = 'Detalle Plan'
+            ImageIndex = 3
+            object DBGrid1: TDBGrid
+              Left = 0
+              Top = 0
+              Width = 456
+              Height = 157
+              Align = alClient
+              Color = 14606012
+              DataSource = DS_OP_PLAN
+              Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+              TabOrder = 0
+              TitleFont.Charset = DEFAULT_CHARSET
+              TitleFont.Color = clWindowText
+              TitleFont.Height = -11
+              TitleFont.Name = 'Verdana'
+              TitleFont.Style = []
+              OnDrawColumnCell = DBGridAfiliadosDrawColumnCell
+              Columns = <
+                item
+                  Expanded = False
+                  FieldName = 'CODIGO'
+                  Title.Caption = 'C'#243'digo'
+                  Width = 58
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'NOMBRE'
+                  Title.Caption = 'Nombre'
+                  Width = 259
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'DESCUENTO'
+                  Title.Caption = '% Dcto.'
+                  Width = 51
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'FACTURA_AUTOMATICA'
+                  Title.Caption = 'FAutom.'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'DESCRIPCION'
+                  Title.Caption = 'Descripci'#243'n'
+                  Visible = True
+                end
+                item
+                  Expanded = False
+                  FieldName = 'ID_OS'
+                  Title.Caption = 'ID'
+                  Width = 56
+                  Visible = True
+                end>
+            end
+            object Panel1: TPanel
+              Left = 456
+              Top = 0
+              Width = 399
+              Height = 157
+              Align = alRight
+              BevelOuter = bvNone
+              TabOrder = 1
+              object Label3: TLabel
+                Left = 29
+                Top = 67
+                Width = 71
+                Height = 13
+                Alignment = taRightJustify
+                Caption = 'Descripci'#243'n:'
+                Transparent = True
+              end
+              object Label4: TLabel
+                Left = 19
+                Top = 93
+                Width = 81
+                Height = 13
+                Alignment = taRightJustify
+                Caption = '% Descuento:'
+                Transparent = True
+              end
+              object Label14: TLabel
+                Left = 50
+                Top = 41
+                Width = 50
+                Height = 13
+                Alignment = taRightJustify
+                Caption = 'Nombre:'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = []
+                ParentFont = False
+                Transparent = True
+              end
+              object Label15: TLabel
+                Left = 19
+                Top = 16
+                Width = 81
+                Height = 13
+                Alignment = taRightJustify
+                Caption = 'Codigo Corto:'
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clBlack
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = []
+                ParentFont = False
+                Transparent = True
+              end
+              object DBEdit2: TDBEdit
+                Left = 104
+                Top = 37
+                Width = 270
+                Height = 21
+                CharCase = ecUpperCase
+                DataField = 'NOMBRE'
+                DataSource = DS_OP_PLAN
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = [fsBold]
+                ParentFont = False
+                TabOrder = 0
+              end
+              object DBEdit3: TDBEdit
+                Left = 104
+                Top = 89
+                Width = 105
+                Height = 21
+                CharCase = ecUpperCase
+                DataField = 'DESCUENTO'
+                DataSource = DS_OP_PLAN
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = [fsBold]
+                ParentFont = False
+                TabOrder = 1
+              end
+              object DBEdit4: TDBEdit
+                Left = 104
+                Top = 63
+                Width = 270
+                Height = 21
+                CharCase = ecUpperCase
+                DataField = 'DESCRIPCION'
+                DataSource = DS_OP_PLAN
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = [fsBold]
+                ParentFont = False
+                TabOrder = 2
+              end
+              object DBEdit5: TDBEdit
+                Left = 104
+                Top = 12
+                Width = 105
+                Height = 21
+                CharCase = ecUpperCase
+                DataField = 'CODIGO'
+                DataSource = DS_OP_PLAN
+                Font.Charset = DEFAULT_CHARSET
+                Font.Color = clWindowText
+                Font.Height = -11
+                Font.Name = 'Verdana'
+                Font.Style = [fsBold]
+                ParentFont = False
+                TabOrder = 3
+              end
+              object DBCheckBox1: TDBCheckBox
+                Left = 219
+                Top = 91
+                Width = 155
+                Height = 17
+                TabStop = False
+                Caption = 'Facturar Sobre Autom.'
+                DataField = 'FACTURA_AUTOMATICA'
+                DataSource = DS_OP_PLAN
+                TabOrder = 4
+                ValueChecked = 'S'
+                ValueUnchecked = 'N'
+              end
+              object btnPlanAceptar: TBitBtn
+                Left = 29
+                Top = 120
+                Width = 40
+                Height = 29
+                TabOrder = 5
+              end
+              object btnPlanCancelar: TBitBtn
+                Left = 334
+                Top = 120
+                Width = 40
+                Height = 29
+                TabOrder = 6
+              end
+            end
           end
           object TabSheet2: TTabSheet
             Caption = 'Descripci'#243'n'
@@ -1436,7 +1671,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             object GroupBox1: TGroupBox
               Left = 0
               Top = 0
-              Width = 800
+              Width = 855
               Height = 157
               Align = alClient
               Caption = '  Descripci'#243'n  '
@@ -1444,7 +1679,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               object DBMemo1: TDBMemo
                 Left = 2
                 Top = 15
-                Width = 796
+                Width = 851
                 Height = 140
                 Align = alClient
                 DataField = 'DESCRIPCION'
@@ -1459,7 +1694,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             object DBGridAfiliados: TDBGrid
               Left = 0
               Top = 0
-              Width = 800
+              Width = 855
               Height = 157
               Align = alClient
               Color = 14606012
@@ -1505,7 +1740,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 818
+    Width = 873
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1527,7 +1762,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
-      Left = 708
+      Left = 763
       Top = 1
       Width = 109
       Height = 17
@@ -1643,8 +1878,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 144
-    Top = 112
+    Left = 696
+    Top = 56
     DockControlHeights = (
       0
       0
@@ -2121,92 +2356,51 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         'btnCancelar')
     end
   end
-  object ZQ_OP_ObraSocial: TZQuery
+  object ZQ_OP_PLAN: TZQuery
     Connection = DM.Conexion
-    AfterScroll = ZQ_OP_ObraSocialAfterScroll
+    AfterScroll = ZQ_OP_PLANAfterScroll
     SQL.Strings = (
       'select *'
       'from OPTICA_OS os'
       'order by os.nombre')
     Params = <>
-    Left = 48
-    Top = 64
-    object ZQ_OP_ObraSocialID_OS: TIntegerField
+    Left = 160
+    Top = 56
+    object ZQ_OP_PLANID_OS: TIntegerField
       FieldName = 'ID_OS'
+      Required = True
     end
-    object ZQ_OP_ObraSocialCODIGO: TStringField
+    object ZQ_OP_PLANCODIGO: TStringField
       FieldName = 'CODIGO'
       Size = 100
     end
-    object ZQ_OP_ObraSocialNOMBRE: TStringField
+    object ZQ_OP_PLANNOMBRE: TStringField
       FieldName = 'NOMBRE'
       Size = 200
     end
-    object ZQ_OP_ObraSocialDIRECCION: TStringField
-      FieldName = 'DIRECCION'
-      Size = 100
-    end
-    object ZQ_OP_ObraSocialTELEFONO: TStringField
-      FieldName = 'TELEFONO'
-      Size = 100
-    end
-    object ZQ_OP_ObraSocialDESCRIPCION: TStringField
+    object ZQ_OP_PLANDESCRIPCION: TStringField
       FieldName = 'DESCRIPCION'
       Size = 1000
     end
-    object ZQ_OP_ObraSocialBAJA: TStringField
+    object ZQ_OP_PLANBAJA: TStringField
       FieldName = 'BAJA'
       Size = 1
     end
-    object ZQ_OP_ObraSocialCUIT_CUIL: TStringField
-      FieldName = 'CUIT_CUIL'
-      Size = 30
-    end
-    object ZQ_OP_ObraSocialLOCALIDAD: TStringField
-      FieldName = 'LOCALIDAD'
-      Size = 200
-    end
-    object ZQ_OP_ObraSocialCODIGO_POSTAL: TStringField
-      FieldName = 'CODIGO_POSTAL'
-    end
-    object ZQ_OP_ObraSocialEMAIL: TStringField
-      FieldName = 'EMAIL'
-      Size = 100
-    end
-    object ZQ_OP_ObraSocialID_TIPO_IVA: TIntegerField
-      FieldName = 'ID_TIPO_IVA'
-    end
-    object ZQ_OP_ObraSocialID_PROVINCIA: TIntegerField
-      FieldName = 'ID_PROVINCIA'
-    end
-    object ZQ_OP_ObraSocial_provincia: TStringField
-      FieldKind = fkLookup
-      FieldName = '_provincia'
-      LookupDataSet = ZQ_Provincia
-      LookupKeyFields = 'ID_PROVINCIA'
-      LookupResultField = 'NOMBRE_PROVINCIA'
-      KeyFields = 'ID_PROVINCIA'
-      Size = 100
-      Lookup = True
-    end
-    object ZQ_OP_ObraSocial_tipoIva: TStringField
-      FieldKind = fkLookup
-      FieldName = '_tipoIva'
-      LookupDataSet = ZQ_Iva
-      LookupKeyFields = 'ID_TIPO_IVA'
-      LookupResultField = 'NOMBRE_TIPO_IVA'
-      KeyFields = 'ID_TIPO_IVA'
-      Size = 100
-      Lookup = True
-    end
-    object ZQ_OP_ObraSocialFACTURA_AUTOMATICA: TStringField
+    object ZQ_OP_PLANFACTURA_AUTOMATICA: TStringField
       FieldName = 'FACTURA_AUTOMATICA'
       Size = 1
     end
+    object ZQ_OP_PLANID_OPTICA_OS_CABECERA: TIntegerField
+      FieldName = 'ID_OPTICA_OS_CABECERA'
+      Required = True
+    end
+    object ZQ_OP_PLANDESCUENTO: TFloatField
+      FieldName = 'DESCUENTO'
+    end
   end
   object DS_OP_ObraSocial: TDataSource
-    DataSet = ZQ_OP_ObraSocial
-    Left = 48
+    DataSet = ZQ_OS_CABECERA
+    Left = 56
     Top = 120
   end
   object ATeclasRapidas: TActionManager
@@ -2438,8 +2632,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         ItemIndex = 0
       end>
     CriteriosLocate = <>
-    Modelo = DM.ISModelo
-    DataSet = ZQ_OP_ObraSocial
+    DataSet = ZQ_OS_CABECERA
     SQL.Strings = (
       'select os.*'
       ''
@@ -2461,8 +2654,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       ''
       'order by os.nombre')
     UsarWhereOriginal = IS_Sin_Where
-    Left = 216
-    Top = 67
+    Left = 272
+    Top = 59
   end
   object ISOrdenarGrilla1: TISOrdenarGrilla
     Grilla = DBGridObraSocial
@@ -2518,7 +2711,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     MoverColumna = True
     FiltrarColumna = True
     GuardarAncho = True
-    Left = 240
+    Left = 256
     Top = 123
   end
   object ISVistaPrevia: TISVistaPreviaQR
@@ -2550,6 +2743,101 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     FiltrarColumna = True
     GuardarAncho = True
     Left = 696
+    Top = 115
+  end
+  object ZQ_OS_CABECERA: TZQuery
+    Connection = DM.Conexion
+    AfterScroll = ZQ_OP_PLANAfterScroll
+    SQL.Strings = (
+      'select *'
+      'from OPTICA_OS_CABECERA os'
+      'order by os.nombre')
+    Params = <>
+    Left = 56
+    Top = 56
+    object StringField11: TStringField
+      FieldKind = fkLookup
+      FieldName = '_provincia'
+      LookupDataSet = ZQ_Provincia
+      LookupKeyFields = 'ID_PROVINCIA'
+      LookupResultField = 'NOMBRE_PROVINCIA'
+      KeyFields = 'ID_PROVINCIA'
+      Size = 100
+      Lookup = True
+    end
+    object StringField12: TStringField
+      FieldKind = fkLookup
+      FieldName = '_tipoIva'
+      LookupDataSet = ZQ_Iva
+      LookupKeyFields = 'ID_TIPO_IVA'
+      LookupResultField = 'NOMBRE_TIPO_IVA'
+      KeyFields = 'ID_TIPO_IVA'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_OS_CABECERAID_OPTICA_OS_CABECERA: TIntegerField
+      FieldName = 'ID_OPTICA_OS_CABECERA'
+      Required = True
+    end
+    object ZQ_OS_CABECERATELEFONO1: TStringField
+      FieldName = 'TELEFONO1'
+      Size = 100
+    end
+    object ZQ_OS_CABECERATELEFONO2: TStringField
+      FieldName = 'TELEFONO2'
+      Size = 100
+    end
+    object ZQ_OS_CABECERACODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 100
+    end
+    object ZQ_OS_CABECERANOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_OS_CABECERADIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 100
+    end
+    object ZQ_OS_CABECERADESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
+    end
+    object ZQ_OS_CABECERABAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_OS_CABECERACUIT_CUIL: TStringField
+      FieldName = 'CUIT_CUIL'
+      Size = 30
+    end
+    object ZQ_OS_CABECERALOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_OS_CABECERACODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_OS_CABECERAEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_OS_CABECERAID_PROVINCIA: TIntegerField
+      FieldName = 'ID_PROVINCIA'
+      Required = True
+    end
+    object ZQ_OS_CABECERAID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+      Required = True
+    end
+    object ZQ_OS_CABECERAFACTURA_AUTOMATICA: TStringField
+      FieldName = 'FACTURA_AUTOMATICA'
+      Size = 1
+    end
+  end
+  object DS_OP_PLAN: TDataSource
+    DataSet = ZQ_OP_PLAN
+    Left = 168
     Top = 115
   end
 end

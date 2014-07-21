@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 359
-  Top = 111
+  Left = 346
+  Top = 123
   Width = 972
   Height = 631
   Caption = 'ABM Personas'
@@ -173,8 +173,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            687.916666666666800000
-            68.791666666666680000
+            687.916666666666700000
+            68.791666666666670000
             521.229166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -207,7 +207,7 @@ object FABM_Personas: TFABM_Personas
             52.916666666666670000
             645.583333333333400000
             5.291666666666667000
-            608.541666666666800000)
+            608.541666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -656,7 +656,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            941.916666666666800000
+            941.916666666666700000
             198.437500000000000000
             92.604166666666680000)
           Alignment = taLeftJustify
@@ -1821,7 +1821,7 @@ object FABM_Personas: TFABM_Personas
           Size.Values = (
             52.916666666666670000
             1121.833333333333000000
-            68.791666666666680000
+            68.791666666666670000
             523.875000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -2727,7 +2727,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            902.229166666666800000
+            902.229166666666700000
             2.645833333333333000
             293.687500000000000000)
           Alignment = taLeftJustify
@@ -3543,6 +3543,12 @@ object FABM_Personas: TFABM_Personas
                 Title.Caption = 'Obra Social'
                 Width = 453
                 Visible = True
+              end
+              item
+                Expanded = False
+                FieldName = 'DESCUENTO'
+                Title.Caption = '% dcto.'
+                Visible = True
               end>
           end
         end
@@ -3687,7 +3693,7 @@ object FABM_Personas: TFABM_Personas
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 616
+    Left = 688
     Top = 120
     DockControlHeights = (
       0
@@ -4326,8 +4332,8 @@ object FABM_Personas: TFABM_Personas
       'select *'
       'from provincia')
     Params = <>
-    Left = 256
-    Top = 72
+    Left = 248
+    Top = 64
     object ZQ_ProvinciaID_PROVINCIA: TIntegerField
       FieldName = 'ID_PROVINCIA'
       Required = True
@@ -4339,7 +4345,7 @@ object FABM_Personas: TFABM_Personas
   end
   object DS_Provincia: TDataSource
     DataSet = ZQ_Provincia
-    Left = 256
+    Left = 272
     Top = 120
   end
   object ZQ_Iva: TZQuery
@@ -4348,8 +4354,8 @@ object FABM_Personas: TFABM_Personas
       'select *'
       'from tipo_iva')
     Params = <>
-    Left = 328
-    Top = 72
+    Left = 341
+    Top = 64
     object ZQ_IvaID_TIPO_IVA: TIntegerField
       FieldName = 'ID_TIPO_IVA'
       Required = True
@@ -4384,7 +4390,7 @@ object FABM_Personas: TFABM_Personas
   end
   object DS_Iva: TDataSource
     DataSet = ZQ_Iva
-    Left = 328
+    Left = 376
     Top = 120
   end
   object ZQ_Documento: TZQuery
@@ -4393,8 +4399,8 @@ object FABM_Personas: TFABM_Personas
       'select *'
       'from tipo_documento')
     Params = <>
-    Left = 408
-    Top = 72
+    Left = 433
+    Top = 64
     object ZQ_DocumentoID_TIPO_DOC: TIntegerField
       FieldName = 'ID_TIPO_DOC'
       Required = True
@@ -4406,7 +4412,7 @@ object FABM_Personas: TFABM_Personas
   end
   object DS_Documento: TDataSource
     DataSet = ZQ_Documento
-    Left = 408
+    Left = 480
     Top = 120
   end
   object Nro_Persona: TZStoredProc
@@ -4418,8 +4424,8 @@ object FABM_Personas: TFABM_Personas
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_PERSONA_ID'
-    Left = 160
-    Top = 176
+    Left = 156
+    Top = 64
     ParamData = <
       item
         DataType = ftInteger
@@ -4607,7 +4613,7 @@ object FABM_Personas: TFABM_Personas
         Name = 'id_persona'
         ParamType = ptUnknown
       end>
-    Left = 256
+    Left = 246
     Top = 176
     ParamData = <
       item
@@ -4641,8 +4647,8 @@ object FABM_Personas: TFABM_Personas
   end
   object DS_VerRelacionPersona: TDataSource
     DataSet = ZQ_VerRelacionPersona
-    Left = 256
-    Top = 224
+    Left = 225
+    Top = 226
   end
   object ATeclasRapidas: TActionManager
     Left = 64
@@ -4700,7 +4706,7 @@ object FABM_Personas: TFABM_Personas
         Name = 'idRelacion'
         ParamType = ptUnknown
       end>
-    Left = 408
+    Left = 428
     Top = 176
     ParamData = <
       item
@@ -4731,8 +4737,8 @@ object FABM_Personas: TFABM_Personas
       'from persona p'
       'order by p.codigo_corto desc')
     Params = <>
-    Left = 616
-    Top = 67
+    Left = 618
+    Top = 64
     object ZQ_UltimoNroCODIGO_CORTO: TIntegerField
       FieldName = 'CODIGO_CORTO'
     end
@@ -4743,8 +4749,8 @@ object FABM_Personas: TFABM_Personas
       'select id_tipo_relacion, descripcion'
       'from tipo_relacion')
     Params = <>
-    Left = 520
-    Top = 72
+    Left = 526
+    Top = 64
     object ZQ_TipoRelacionID_TIPO_RELACION: TIntegerField
       FieldName = 'ID_TIPO_RELACION'
       Required = True
@@ -4766,8 +4772,8 @@ object FABM_Personas: TFABM_Personas
         Name = 'id_persona'
         ParamType = ptUnknown
       end>
-    Left = 704
-    Top = 72
+    Left = 711
+    Top = 64
     ParamData = <
       item
         DataType = ftUnknown
@@ -4806,7 +4812,7 @@ object FABM_Personas: TFABM_Personas
   end
   object DS_CtaCte: TDataSource
     DataSet = ZQ_CtaCte
-    Left = 704
+    Left = 584
     Top = 120
   end
   object ZQ_EntidadTelefono: TZQuery
@@ -4822,7 +4828,7 @@ object FABM_Personas: TFABM_Personas
         Name = 'ID_PERSONA'
         ParamType = ptUnknown
       end>
-    Left = 640
+    Left = 610
     Top = 176
     ParamData = <
       item
@@ -4854,14 +4860,14 @@ object FABM_Personas: TFABM_Personas
   end
   object DS_EntidadTelefono: TDataSource
     DataSet = ZQ_EntidadTelefono
-    Left = 736
+    Left = 792
     Top = 176
   end
   object PopupMenuTelmail: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
     MenuAnimation = [maLeftToRight]
-    Left = 412
-    Top = 236
+    Left = 387
+    Top = 226
     object AgregarTelMail: TMenuItem
       Caption = 'Agregar Telefono/Mail'
       ImageIndex = 14
@@ -4890,27 +4896,14 @@ object FABM_Personas: TFABM_Personas
         Name = 'ID_PERSONA'
         ParamType = ptUnknown
       end>
-    Left = 792
-    Top = 72
+    Left = 803
+    Top = 64
     ParamData = <
       item
         DataType = ftUnknown
         Name = 'ID_PERSONA'
         ParamType = ptUnknown
       end>
-    object ZQ_PersonaObraSocialID_PERSONA_OS: TIntegerField
-      FieldName = 'ID_PERSONA_OS'
-    end
-    object ZQ_PersonaObraSocialNRO_AFILIADO: TStringField
-      FieldName = 'NRO_AFILIADO'
-      Size = 100
-    end
-    object ZQ_PersonaObraSocialID_OS: TIntegerField
-      FieldName = 'ID_OS'
-    end
-    object ZQ_PersonaObraSocialID_PERSONA: TIntegerField
-      FieldName = 'ID_PERSONA'
-    end
     object ZQ_PersonaObraSocialcodigo: TStringField
       FieldKind = fkLookup
       FieldName = 'codigo'
@@ -4931,6 +4924,25 @@ object FABM_Personas: TFABM_Personas
       Size = 200
       Lookup = True
     end
+    object ZQ_PersonaObraSocialDESCUENTO: TFloatField
+      FieldName = 'DESCUENTO'
+    end
+    object ZQ_PersonaObraSocialID_PERSONA_OS: TIntegerField
+      FieldName = 'ID_PERSONA_OS'
+      Required = True
+    end
+    object ZQ_PersonaObraSocialNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
+      Size = 100
+    end
+    object ZQ_PersonaObraSocialID_OS: TIntegerField
+      FieldName = 'ID_OS'
+      Required = True
+    end
+    object ZQ_PersonaObraSocialID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+      Required = True
+    end
   end
   object DS_PersonaObraSocial: TDataSource
     DataSet = ZQ_PersonaObraSocial
@@ -4940,28 +4952,36 @@ object FABM_Personas: TFABM_Personas
   object ZQ_ObraSocial: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'Select *'
-      'from Optica_os')
+      
+        'Select oss.ID_OS,oss.codigo,(osc.nombre ||'#39' - '#39'|| oss.nombre) as' +
+        ' nombre'
+      'from Optica_os oss'
+      
+        'join optica_os_cabecera osc on (oss.id_optica_os_cabecera=osc.id' +
+        '_optica_os_cabecera)'
+      ''
+      '')
     Params = <>
-    Left = 880
-    Top = 72
-    object ZQ_ObraSocialID_OS: TIntegerField
-      FieldName = 'ID_OS'
-      Required = True
-    end
+    Left = 608
+    Top = 280
     object ZQ_ObraSocialCODIGO: TStringField
       FieldName = 'CODIGO'
       Size = 100
     end
     object ZQ_ObraSocialNOMBRE: TStringField
       FieldName = 'NOMBRE'
-      Size = 200
+      ReadOnly = True
+      Size = 403
+    end
+    object ZQ_ObraSocialID_OS: TIntegerField
+      FieldName = 'ID_OS'
+      Required = True
     end
   end
   object PopupMenuObraSocial: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
-    Left = 265
-    Top = 278
+    Left = 336
+    Top = 280
     object AgregarObraSocial1: TMenuItem
       Caption = 'Agregar Obra Social'
       ImageIndex = 14
@@ -5140,39 +5160,43 @@ object FABM_Personas: TFABM_Personas
       'order by cl.nombre'
       '')
     UsarWhereOriginal = IS_Sin_Where
-    Left = 104
+    Left = 64
     Top = 64
   end
   object ISListadoObraSocial: TISListadoSQL
     Modelo = DM.ISModelo
     SQL.Strings = (
-      'select op.id_os, (op.codigo||'#39' - '#39'||op.nombre) as ObraSocial'
+      
+        'select op.id_os, (op.codigo||'#39' - '#39'||op.nombre) as ObraSocial,op.' +
+        'descuento'
       'from optica_os op'
       'where op.baja = '#39'N'#39
       '')
     CampoBuscar = 'ObraSocial'
+    CampoBuscar2 = 'descuento'
     CampoClave = 'id_os'
     TituloVentana = 'Obra Social'
     TituloBuscar = 'Campo Busqueda:'
     TituloBuscar2 = 'Campo Busqueda 2:'
+    BuscarDoble = True
     ColorGrilla = 14606012
     AnchoClave = 80
     AnchoBuscar1 = 500
-    AnchoBuscar2 = 500
-    Left = 528
-    Top = 264
+    AnchoBuscar2 = 100
+    Left = 548
+    Top = 226
   end
   object ISVistaPreviaListado: TISVistaPreviaQR
     Reporte = RepPersonaListado
     ShowModal = False
     Left = 872
-    Top = 224
+    Top = 226
   end
   object ISVistaPreviaDetalle: TISVistaPreviaQR
     Reporte = RepPersonaDetalle
     ShowModal = False
     Left = 880
-    Top = 272
+    Top = 280
   end
   object ISOrdenar: TISOrdenarGrilla
     Grilla = DBGridClientes
@@ -5232,7 +5256,17 @@ object FABM_Personas: TFABM_Personas
     MoverColumna = True
     FiltrarColumna = True
     GuardarAncho = True
-    Left = 160
-    Top = 240
+    Left = 168
+    Top = 120
+  end
+  object ISIngresarPorcentaje: TISMensajeMasDato
+    TipoDato = ftFloat
+    Mensaje = 'Ingrese el procentaje de Dcto.'
+    TituloForm = 'Datos Afiliado'
+    TituloCampo = '%'
+    FormHeight = 123
+    FormWidth = 433
+    Left = 710
+    Top = 226
   end
 end

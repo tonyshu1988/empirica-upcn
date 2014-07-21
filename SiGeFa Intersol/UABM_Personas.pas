@@ -9,7 +9,7 @@ uses
   XPStyleActnCtrls, ActnMan, ZSqlUpdate, ZStoredProcedure,
   cxClasses, StdCtrls, Buttons, DBCtrls, ComCtrls, Mask, QRCtrls, QuickRpt,
   DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
-  ShellAPI, ISDBDateTimePicker;
+  ShellAPI, ISDBDateTimePicker, ISMensajeMasDato;
 
 type
   TFABM_Personas = class(TForm)
@@ -260,15 +260,8 @@ type
     TabSheetObraSocial: TTabSheet;
     DBGridObraSocial: TDBGrid;
     ZQ_PersonaObraSocial: TZQuery;
-    ZQ_PersonaObraSocialID_PERSONA_OS: TIntegerField;
-    ZQ_PersonaObraSocialNRO_AFILIADO: TStringField;
-    ZQ_PersonaObraSocialID_OS: TIntegerField;
-    ZQ_PersonaObraSocialID_PERSONA: TIntegerField;
     DS_PersonaObraSocial: TDataSource;
     ZQ_ObraSocial: TZQuery;
-    ZQ_ObraSocialID_OS: TIntegerField;
-    ZQ_ObraSocialCODIGO: TStringField;
-    ZQ_ObraSocialNOMBRE: TStringField;
     ZQ_PersonaObraSocialcodigo: TStringField;
     ZQ_PersonaObraSocialobra_social: TStringField;
     PopupMenuObraSocial: TPopupMenu;
@@ -296,6 +289,15 @@ type
     ISDBDateTimePicker1: TISDBDateTimePicker;
     ISDBFechaCtaCte: TISDBDateTimePicker;
     ISDBDateTimePicker3: TISDBDateTimePicker;
+    ZQ_PersonaObraSocialDESCUENTO: TFloatField;
+    ISIngresarPorcentaje: TISMensajeMasDato;
+    ZQ_PersonaObraSocialID_PERSONA_OS: TIntegerField;
+    ZQ_PersonaObraSocialNRO_AFILIADO: TStringField;
+    ZQ_PersonaObraSocialID_OS: TIntegerField;
+    ZQ_PersonaObraSocialID_PERSONA: TIntegerField;
+    ZQ_ObraSocialCODIGO: TStringField;
+    ZQ_ObraSocialNOMBRE: TStringField;
+    ZQ_ObraSocialID_OS: TIntegerField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -1098,8 +1100,10 @@ begin
         ZQ_PersonaObraSocial.Append;
         ZQ_PersonaObraSocialID_OS.AsInteger := StrToInt(ISListadoObraSocial.Resultado);
         ZQ_PersonaObraSocialID_PERSONA.AsInteger := ZQ_PersonaID_PERSONA.AsInteger;
-
         ZQ_PersonaObraSocialNRO_AFILIADO.AsString := InputBox('Nro Afiliado', 'Ingrese un Nro de Afiliado', '');
+
+//        ISIngresarPorcentaje.setTexto(ISListadoObraSocial.Seleccion2);
+//        ISIngresarPorcentaje.mostrarFormulario;
     end;
   end;
 
