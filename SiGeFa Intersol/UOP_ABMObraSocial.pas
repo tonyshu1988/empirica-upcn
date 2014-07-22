@@ -8,7 +8,7 @@ uses
   ExtCtrls, DB, ZAbstractRODataset, ZAbstractDataset, ZDataset,
    ActnList, XPStyleActnCtrls, ActnMan, 
    QRCtrls, QuickRpt, ComCtrls, cxClasses, ISVistaPreviaQR,
-  ISOrdenarGrilla, ISBusquedaAvanzada, Buttons;
+  ISOrdenarGrilla, ISBusquedaAvanzada, Buttons, Menus;
 
 type
   TFOP_ABMObraSocial = class(TForm)
@@ -139,16 +139,16 @@ type
     ZQ_OS_CABECERATELEFONO2: TStringField;
     Label2: TLabel;
     DBEdit1: TDBEdit;
-    DBGrid1: TDBGrid;
-    Panel1: TPanel;
+    grillaPlanes: TDBGrid;
+    PPlan: TPanel;
     Label3: TLabel;
     Label4: TLabel;
     Label14: TLabel;
     Label15: TLabel;
-    DBEdit2: TDBEdit;
-    DBEdit3: TDBEdit;
+    dbNombrePlan: TDBEdit;
+    dbDctoPlan: TDBEdit;
     DBEdit4: TDBEdit;
-    DBEdit5: TDBEdit;
+    dbCodPlan: TDBEdit;
     DBCheckBox1: TDBCheckBox;
     btnPlanAceptar: TBitBtn;
     btnPlanCancelar: TBitBtn;
@@ -172,6 +172,12 @@ type
     ZQ_OS_CABECERAID_PROVINCIA: TIntegerField;
     ZQ_OS_CABECERAID_TIPO_IVA: TIntegerField;
     ZQ_OS_CABECERAFACTURA_AUTOMATICA: TStringField;
+    PopupMenuPlan: TPopupMenu;
+    AgregarObraSocial1: TMenuItem;
+    QuitarObraSocial1: TMenuItem;
+    BajaPlanOs: TMenuItem;
+    ReactivarPlanOs: TMenuItem;
+    ZQ_AfiliadosNPLAN: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -199,6 +205,19 @@ type
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
     function validarcampos():boolean;
+    procedure habilitarPlanes(flag: boolean);
+    procedure PageControl1Changing(Sender: TObject;
+      var AllowChange: Boolean);
+    procedure AgregarObraSocial1Click(Sender: TObject);
+    procedure QuitarObraSocial1Click(Sender: TObject);
+    procedure btnPlanAceptarClick(Sender: TObject);
+    procedure btnPlanCancelarClick(Sender: TObject);
+    function validarcampos2():boolean;
+    procedure BajaPlanOsClick(Sender: TObject);
+    procedure ReactivarPlanOsClick(Sender: TObject);
+    procedure grillaPlanesDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
   public
   end;
@@ -214,6 +233,24 @@ implementation
 uses UPrincipal, UDM, UUtilidades;
 
 {$R *.dfm}
+
+procedure TFOP_ABMObraSocial.habilitarPlanes(flag: boolean);
+begin
+  PPlan.Enabled:= flag;
+  if flag then
+  begin
+    FPrincipal.Iconos_Menu_16.GetBitmap(0, btnPlanCancelar.Glyph);
+    FPrincipal.Iconos_Menu_16.GetBitmap(1, btnPlanAceptar.Glyph);
+  end
+  else
+  begin
+    btnPlanAceptar.Glyph:= nil;
+    btnPlanCancelar.Glyph:= nil;
+  end;
+  grillaPlanes.Enabled:=not flag;
+
+  
+end;
 
 procedure TFOP_ABMObraSocial.FormCloseQuery(Sender: TObject;
   var CanClose: Boolean);
@@ -249,6 +286,7 @@ begin
     DBEditCodigo.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
+    grillaPlanes.PopupMenu:=PopupMenuPlan;
   end;
 end;
 
@@ -258,7 +296,7 @@ begin
   if (ZQ_OS_CABECERA.IsEmpty) then
     exit;
 
-  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OS_CABECERA]) then
+  if dm.ISModelo.iniciar_transaccion(transaccion_ABM, [ZQ_OS_CABECERA,ZQ_OP_PLAN]) then
   begin
     DBGridObraSocial.Enabled := false;
 
@@ -268,6 +306,7 @@ begin
     DBEditCodigo.SetFocus;
     GrupoEditando.Enabled := false;
     GrupoGuardarCancelar.Enabled := true;
+    grillaPlanes.PopupMenu:=PopupMenuPlan;
   end;
 end;
 
@@ -345,6 +384,7 @@ begin
       recNo:= ZQ_OS_CABECERA.RecNo;
       ZQ_OS_CABECERA.Refresh;
       ZQ_OS_CABECERA.RecNo:= recNo;
+      grillaPlanes.PopupMenu:=nil;
     end
   except
     begin
@@ -365,6 +405,7 @@ begin
     DBGridObraSocial.SetFocus;
     GrupoEditando.Enabled := true;
     GrupoGuardarCancelar.Enabled := false;
+    grillaPlanes.PopupMenu:=nil;
   end;
 end;
 
@@ -374,15 +415,16 @@ begin
   dm.ISModelo.abrir(ZQ_Provincia);
   dm.ISModelo.abrir(ZQ_Iva);
 
-
-  DBENombre.Color:= dm.colorCampoRequido;
-  DBLCBoxCondIva.Color:= dm.colorCampoRequido;
-  DBECuit_Cuil.Color:= dm.colorCampoRequido;
+  dbCodPlan.Color:= dm.colorCampoRequido;
+  dbNombrePlan.Color:= dm.colorCampoRequido;
+  dbDctoPlan.Color:= dm.colorCampoRequido;
 
   ISOrdenarGrilla1.CargarConfigColunmas;
   QRDBLogo.DataSet:= DM.ZQ_Sucursal;
   StaticTxtBaja.Color:= FPrincipal.baja;
   PageControl1.ActivePageIndex:= 0;
+  grillaPlanes.PopupMenu:=nil;
+  habilitarPlanes(false);
 
   ISBuscar.Abrir;
   dm.mostrarCantidadRegistro(ZQ_OS_CABECERA, lblCantidadRegistros);
@@ -471,13 +513,17 @@ end;
 procedure TFOP_ABMObraSocial.ZQ_OP_PLANAfterScroll(
   DataSet: TDataSet);
 begin
-//  ZQ_Afiliados.Close;
-//
-//  if ZQ_OP_ObraSocial.IsEmpty then
-//    exit;
-//
-//  ZQ_Afiliados.ParamByName('ID_OS').AsInteger:= ZQ_OP_ObraSocialID_OS.AsInteger;
-//  ZQ_Afiliados.Open;
+
+ZQ_OP_PLAN.Close;ZQ_Afiliados.Close;
+
+if ZQ_OS_CABECERA.IsEmpty then
+    exit;
+
+ZQ_Afiliados.ParamByName('ID_OS').AsInteger:= ZQ_OS_CABECERAID_OPTICA_OS_CABECERA.AsInteger;
+ZQ_Afiliados.Open;
+ZQ_OP_PLAN.ParamByName('ID').AsInteger:= ZQ_OS_CABECERAID_OPTICA_OS_CABECERA.AsInteger;
+ZQ_OP_PLAN.Open;
+
 end;
 
 procedure TFOP_ABMObraSocial.DBGridAfiliadosDrawColumnCell(Sender: TObject;
@@ -494,7 +540,6 @@ var
 begin
   result:= true;
   mensaje:= '';
-
   if (ZQ_OS_CABECERANOMBRE.IsNull) or (trim(ZQ_OS_CABECERANOMBRE.AsString) = '') then
   begin
     mensaje:= 'El campo Nombre se encuentra vacío.';
@@ -519,8 +564,132 @@ begin
   begin
     mensaje:= mensaje+#13#13+'Verifique.';
     Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
+    PageControl1.ActivePageIndex:=0;
     DBENombre.SetFocus;
   end;
+end;
+
+procedure TFOP_ABMObraSocial.PageControl1Changing(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+if (ZQ_OP_PLAN.state = dsInsert) or (ZQ_OP_PLAN.state = dsEdit) then
+    AllowChange:= False;
+end;
+
+procedure TFOP_ABMObraSocial.AgregarObraSocial1Click(Sender: TObject);
+begin
+    habilitarPlanes(true);
+
+    ZQ_OP_PLAN.Append;
+    ZQ_OP_PLANID_OPTICA_OS_CABECERA.AsInteger:= ZQ_OS_CABECERAID_OPTICA_OS_CABECERA.AsInteger;
+    ZQ_OP_PLANBAJA.AsString:='N';
+    ZQ_OP_PLANFACTURA_AUTOMATICA.AsString:=ZQ_OS_CABECERAFACTURA_AUTOMATICA.AsString;
+    ZQ_OP_PLANDESCUENTO.AsFloat:=0;
+
+    if dbCodPlan.Enabled then dbCodPlan.SetFocus;
+
+    GrupoGuardarCancelar.Enabled:= false;
+end;
+
+procedure TFOP_ABMObraSocial.QuitarObraSocial1Click(Sender: TObject);
+begin
+    ZQ_OP_PLAN.Delete;
+end;
+
+
+function TFOP_ABMObraSocial.validarcampos2():boolean;
+var
+  mensaje: string;
+begin
+  PageControl1.ActivePageIndex:= 1;
+  result:= true;
+  mensaje:= '';
+
+  if (ZQ_OP_PLANCODIGO.IsNull) then
+  begin
+    mensaje:= 'El campo Código Corto se encuentra vacío.';
+    result := false;
+  end;
+
+  if (ZQ_OP_PLANNOMBRE.IsNull) then
+  begin
+    mensaje:= mensaje+#13+'El campo Nombre se encuentra vacío.';
+    result := false;
+  end;
+
+  if (ZQ_OP_PLANDESCUENTO.IsNull) then
+  begin
+    mensaje:= mensaje+#13+'El campo Descuento se encuentra vacío.';
+    result := false;
+  end;
+
+  if (ZQ_OP_PLANDESCUENTO.AsFloat<0) then
+  begin
+    mensaje:= mensaje+#13+'El campo Descuento debe ser mayor a 0.';
+    result := false;
+  end;
+
+  if Result = False then
+  begin
+    mensaje:= mensaje+#13#13+'Verifique.';
+    Application.MessageBox(pchar(mensaje), 'Validación', MB_OK+MB_ICONINFORMATION);
+    dbCodPlan.SetFocus;
+  end;
+
+end;
+
+procedure TFOP_ABMObraSocial.btnPlanAceptarClick(Sender: TObject);
+begin
+ if validarcampos2 then
+  begin
+   ZQ_OP_PLAN.Post;
+   habilitarPlanes(false);
+   GrupoGuardarCancelar.Enabled:= true;
+  end;
+end;
+
+procedure TFOP_ABMObraSocial.btnPlanCancelarClick(Sender: TObject);
+begin
+  ZQ_OP_PLAN.RevertRecord;
+  habilitarPlanes(false);
+  GrupoGuardarCancelar.Enabled:= true;
+end;
+
+procedure TFOP_ABMObraSocial.BajaPlanOsClick(Sender: TObject);
+begin
+if (ZQ_OP_PLAN.IsEmpty) OR (ZQ_OP_PLANBAJA.AsString <> 'N')then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea dar de baja el Plan seleccionado?'), 'ABM Plan Obra Social', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+   begin
+     ZQ_OP_PLAN.Edit;
+     ZQ_OP_PLANBAJA.AsString:='S';
+     ZQ_OP_PLAN.Post;
+   end
+    else
+      exit;
+end;
+
+procedure TFOP_ABMObraSocial.ReactivarPlanOsClick(Sender: TObject);
+begin
+if (ZQ_OP_PLAN.IsEmpty) OR (ZQ_OP_PLANBAJA.AsString <> 'S')then
+    exit;
+
+  if (application.MessageBox(pchar('¿Desea reactivar el Plan seleccionado?'), 'ABM Plan Obra Social', MB_YESNO + MB_ICONQUESTION + MB_DEFBUTTON2) = IDYES) then
+   begin
+     ZQ_OP_PLAN.Edit;
+     ZQ_OP_PLANBAJA.AsString:='N';
+     ZQ_OP_PLAN.Post;
+   end
+    else
+      exit;
+end;
+
+procedure TFOP_ABMObraSocial.grillaPlanesDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+  FPrincipal.PintarFilasGrillasConBajas(grillaPlanes, ZQ_OP_PLANBAJA.AsString, Rect, DataCol, Column, State);
 end;
 
 end.

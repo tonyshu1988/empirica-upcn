@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 346
-  Top = 123
+  Left = 348
+  Top = 183
   Width = 972
   Height = 631
   Caption = 'ABM Personas'
@@ -173,8 +173,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            687.916666666666700000
-            68.791666666666670000
+            687.916666666666800000
+            68.791666666666680000
             521.229166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -207,7 +207,7 @@ object FABM_Personas: TFABM_Personas
             52.916666666666670000
             645.583333333333400000
             5.291666666666667000
-            608.541666666666700000)
+            608.541666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -656,7 +656,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            941.916666666666700000
+            941.916666666666800000
             198.437500000000000000
             92.604166666666680000)
           Alignment = taLeftJustify
@@ -1821,7 +1821,7 @@ object FABM_Personas: TFABM_Personas
           Size.Values = (
             52.916666666666670000
             1121.833333333333000000
-            68.791666666666670000
+            68.791666666666680000
             523.875000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -2727,7 +2727,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            902.229166666666700000
+            902.229166666666800000
             2.645833333333333000
             293.687500000000000000)
           Alignment = taLeftJustify
@@ -2879,6 +2879,7 @@ object FABM_Personas: TFABM_Personas
         ActivePage = TabSheetObraSocial
         Align = alClient
         TabOrder = 0
+        OnChanging = PageControlChanging
         object TabSheetDatos: TTabSheet
           Caption = ' Datos Generales '
           Enabled = False
@@ -3256,7 +3257,7 @@ object FABM_Personas: TFABM_Personas
           object DBGridTelMail: TDBGrid
             Left = 0
             Top = 0
-            Width = 938
+            Width = 946
             Height = 172
             Align = alClient
             Color = 14606012
@@ -3504,7 +3505,7 @@ object FABM_Personas: TFABM_Personas
           end
         end
         object TabSheetObraSocial: TTabSheet
-          Caption = 'Obras Sociales'
+          Caption = 'Planes Obras Sociales'
           ImageIndex = 5
           object DBGridObraSocial: TDBGrid
             Left = 0
@@ -3534,13 +3535,13 @@ object FABM_Personas: TFABM_Personas
                 Expanded = False
                 FieldName = 'codigo'
                 Title.Caption = 'C'#243'digo'
-                Width = 166
+                Width = 60
                 Visible = True
               end
               item
                 Expanded = False
                 FieldName = 'obra_social'
-                Title.Caption = 'Obra Social'
+                Title.Caption = 'Plan Obra Social'
                 Width = 453
                 Visible = True
               end
@@ -4954,12 +4955,12 @@ object FABM_Personas: TFABM_Personas
     SQL.Strings = (
       
         'Select oss.ID_OS,oss.codigo,(osc.nombre ||'#39' - '#39'|| oss.nombre) as' +
-        ' nombre'
+        ' nombre,oss.descuento'
       'from Optica_os oss'
       
         'join optica_os_cabecera osc on (oss.id_optica_os_cabecera=osc.id' +
         '_optica_os_cabecera)'
-      ''
+      'where oss.baja='#39'N'#39
       '')
     Params = <>
     Left = 608
@@ -4976,6 +4977,9 @@ object FABM_Personas: TFABM_Personas
     object ZQ_ObraSocialID_OS: TIntegerField
       FieldName = 'ID_OS'
       Required = True
+    end
+    object ZQ_ObraSocialDESCUENTO: TFloatField
+      FieldName = 'DESCUENTO'
     end
   end
   object PopupMenuObraSocial: TPopupMenu
@@ -5167,21 +5171,22 @@ object FABM_Personas: TFABM_Personas
     Modelo = DM.ISModelo
     SQL.Strings = (
       
-        'select op.id_os, (op.codigo||'#39' - '#39'||op.nombre) as ObraSocial,op.' +
-        'descuento'
-      'from optica_os op'
-      'where op.baja = '#39'N'#39
-      '')
-    CampoBuscar = 'ObraSocial'
-    CampoBuscar2 = 'descuento'
+        'Select oss.ID_OS,(osc.nombre ||'#39' : '#39'||oss.codigo||'#39' - '#39'|| oss.no' +
+        'mbre) as nombre'
+      'from Optica_os oss'
+      
+        'join optica_os_cabecera osc on (oss.id_optica_os_cabecera=osc.id' +
+        '_optica_os_cabecera)'
+      'where oss.baja='#39'N'#39)
+    CampoBuscar = 'nombre'
     CampoClave = 'id_os'
+    BuscarEnQuery = ZQ_ObraSocial
     TituloVentana = 'Obra Social'
     TituloBuscar = 'Campo Busqueda:'
     TituloBuscar2 = 'Campo Busqueda 2:'
-    BuscarDoble = True
     ColorGrilla = 14606012
     AnchoClave = 80
-    AnchoBuscar1 = 500
+    AnchoBuscar1 = 1000
     AnchoBuscar2 = 100
     Left = 548
     Top = 226
