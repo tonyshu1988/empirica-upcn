@@ -298,6 +298,7 @@ type
     ZQ_ObraSocialCODIGO: TStringField;
     ZQ_ObraSocialNOMBRE: TStringField;
     ZQ_ObraSocialID_OS: TIntegerField;
+    ZQ_ObraSocialDESCUENTO: TFloatField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -340,6 +341,8 @@ type
     procedure btnSkypeClick(Sender: TObject);
     procedure AgregarObraSocial1Click(Sender: TObject);
     procedure QuitarObraSocial1Click(Sender: TObject);
+    procedure PageControlChanging(Sender: TObject;
+      var AllowChange: Boolean);
   private
     id_persona: integer;
   public
@@ -1070,7 +1073,7 @@ begin
     Telefono:= '"callto://+'+ZQ_EntidadTelefonoTELEFONO.AsString+'"';
 
     if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
-      Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+      Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada.', 'Atención', MB_ICONINFORMATION);
   end;
 
 
@@ -1086,7 +1089,7 @@ begin
     end;
 
     if ShellExecute(0, 0, pchar(Telefono), 0, 0, SW_SHOWNORMAL) <= 32 then
-      Application.MessageBox('No se pudo ejecutar la aplicación verifique que este instalada', 'Atención', MB_ICONINFORMATION);
+      Application.MessageBox('No se pudo ejecutar la aplicación verifique que esté instalada.', 'Atención', MB_ICONINFORMATION);
   end;
 end;
 
@@ -1102,8 +1105,20 @@ begin
         ZQ_PersonaObraSocialID_PERSONA.AsInteger := ZQ_PersonaID_PERSONA.AsInteger;
         ZQ_PersonaObraSocialNRO_AFILIADO.AsString := InputBox('Nro Afiliado', 'Ingrese un Nro de Afiliado', '');
 
-//        ISIngresarPorcentaje.setTexto(ISListadoObraSocial.Seleccion2);
-//        ISIngresarPorcentaje.mostrarFormulario;
+        //Si tiene permiso puede modificar el % descuento sinó le pone el de la Os
+        if dm.ISUsrLogin.PermisoAccion('PERSONA_PORC_DCTO') then
+          begin
+              ISIngresarPorcentaje.setTexto(ZQ_ObraSocialDESCUENTO.AsString);
+
+              if ISIngresarPorcentaje.mostrarFormulario then
+                 ZQ_PersonaObraSocialDESCUENTO.AsFloat:=ISIngresarPorcentaje.DatoFloat
+          end
+        else
+           ZQ_PersonaObraSocialDESCUENTO.AsFloat:=ZQ_ObraSocialDESCUENTO.AsFloat;
+
+        if ZQ_PersonaObraSocialDESCUENTO.IsNull then
+           ZQ_PersonaObraSocialDESCUENTO.AsFloat:=0;
+           
     end;
   end;
 
@@ -1114,9 +1129,16 @@ begin
   if ZQ_PersonaObraSocial.IsEmpty then
   exit;
 
-  if Application.MessageBox('Esta seguro que desea borrar esta obra social?','Obra social', MB_YESNO+MB_ICONINFORMATION) = IDYES then
-    ZQ_PersonaObraSocial.Delete;
+  if Application.MessageBox('¿Esta seguro que desea borrar esta obra social?','Obra social', MB_YESNO+MB_ICONINFORMATION) = IDYES then
+     ZQ_PersonaObraSocial.Delete;
 
+end;
+
+procedure TFABM_Personas.PageControlChanging(Sender: TObject;
+  var AllowChange: Boolean);
+begin
+if (ZQ_CtaCte.state = dsInsert) or (ZQ_CtaCte.state = dsEdit) then
+    AllowChange:= False;
 end;
 
 end.
