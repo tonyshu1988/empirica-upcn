@@ -77,7 +77,8 @@ uses
   UOP_Reportes in 'UOP_Reportes.pas' {FOP_Reportes},
   UOP_BuscarFacturaOS in 'UOP_BuscarFacturaOS.pas' {FOP_BuscarFacturaOS},
   UOP_ABM_LiquidacionOS in 'UOP_ABM_LiquidacionOS.pas' {FOP_ABM_LiquidacionOS},
-  UEstadisticasLibroIVA in 'UEstadisticasLibroIVA.pas' {FEstadisticasLibroIVA};
+  UEstadisticasLibroIVA in 'UEstadisticasLibroIVA.pas' {FEstadisticasLibroIVA},
+  UOP_ReconocimProds in 'UOP_ReconocimProds.pas' {FOP_ReconocimientoProds};
 
 {$R *.res}
 
