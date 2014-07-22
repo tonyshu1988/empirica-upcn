@@ -1,6 +1,6 @@
 object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
-  Left = 491
-  Top = 256
+  Left = 392
+  Top = 381
   Width = 870
   Height = 500
   Caption = 'ABM Laboratorio'
