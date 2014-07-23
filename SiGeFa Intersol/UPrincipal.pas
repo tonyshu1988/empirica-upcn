@@ -180,6 +180,10 @@ type
     EstadsticasLibroIVA1: TMenuItem;
     ISImage_ABM_Comprobantes: TIS32bitImageList;
     ISVentanas1: TISVentanas;
+    AOP_PlanesProductos: TAction;
+    CoberturaPlanes1: TMenuItem;
+    N12: TMenuItem;
+    N13: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -245,6 +249,7 @@ type
     procedure AOP_ReportesExecute(Sender: TObject);
     procedure AOP_ABMLiquidarOSExecute(Sender: TObject);
     procedure AEstadisticasLibroIVAExecute(Sender: TObject);
+    procedure AOP_PlanesProductosExecute(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -288,7 +293,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UOP_ABMObraSocial, UPreventa_Historico, UFichaEmpleado,
   UOP_ABMLaboratorio, UOP_ABMOrden_Tecnica, UCuentaCorrienteProveedor,
   UABM_CPB_FacturaObraSocial, UOP_Reportes, UOP_ABM_LiquidacionOS,
-  UEstadisticasLibroIVA;
+  UEstadisticasLibroIVA, UOP_ReconocimProds;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -1022,6 +1027,11 @@ end;
 procedure TFPrincipal.AEstadisticasLibroIVAExecute(Sender: TObject);
 begin
   ISVentanas1.Abrir(Sender, TFEstadisticasLibroIVA, FEstadisticasLibroIVA);
+end;
+
+procedure TFPrincipal.AOP_PlanesProductosExecute(Sender: TObject);
+begin
+  ISVentanas1.Abrir(Sender, TFOP_ReconocimientoProds, FOP_ReconocimientoProds);
 end;
 
 end.
