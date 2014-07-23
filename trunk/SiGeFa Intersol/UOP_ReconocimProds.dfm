@@ -1,7 +1,7 @@
 object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
-  Left = 436
-  Top = 273
-  Width = 815
+  Left = 199
+  Top = 194
+  Width = 1192
   Height = 469
   Caption = 'Reconocimiento de Productos seg'#250'n Plan'
   Color = clBtnFace
@@ -10,18 +10,22 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  FormStyle = fsMDIChild
   OldCreateOrder = False
+  Position = poDefault
   Scaled = False
+  Visible = True
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 807
+    Width = 1184
     Height = 371
     Align = alClient
     BevelOuter = bvNone
-    TabOrder = 4
+    TabOrder = 3
     object RepLab: TQuickRep
       Tag = 99
       Left = 24
@@ -166,8 +170,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            791.104166666666800000
-            68.791666666666680000
+            791.104166666666700000
+            68.791666666666670000
             314.854166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -761,7 +765,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 807
+      Width = 1184
       Height = 371
       Align = alClient
       BevelOuter = bvNone
@@ -774,18 +778,19 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 225
+        Left = 529
         Top = 5
         Height = 361
       end
       object grillaPlanes: TDBGrid
         Left = 5
         Top = 5
-        Width = 220
+        Width = 524
         Height = 361
         Align = alLeft
         Color = 14606012
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        DataSource = DS_Planes
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -796,52 +801,34 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           item
             Expanded = False
             FieldName = 'CODIGO'
-            Title.Alignment = taCenter
             Title.Caption = 'C'#243'digo'
-            Width = 77
+            Width = 59
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'NOMBRE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nombre'
-            Width = 232
+            FieldName = 'NOMBREPLAN'
+            Title.Caption = 'Plan'
+            Width = 221
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'DIRECCION'
-            Title.Alignment = taCenter
-            Title.Caption = 'Direcci'#243'n'
-            Width = 269
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'TELEFONO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Telefono'
-            Width = 236
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ID_LABORATORIO'
-            Title.Alignment = taCenter
-            Title.Caption = 'ID'
-            Width = 77
+            FieldName = 'NOMBREOSS'
+            Title.Caption = 'Obra Social'
+            Width = 234
             Visible = True
           end>
       end
       object grillaProductos: TDBGrid
-        Left = 228
+        Left = 532
         Top = 5
-        Width = 574
+        Width = 647
         Height = 361
         Align = alClient
         Color = 14606012
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        DataSource = DS_PlanProducto
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
         TabOrder = 1
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -851,42 +838,28 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         Columns = <
           item
             Expanded = False
-            FieldName = 'CODIGO'
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'digo'
-            Width = 77
+            FieldName = '_nombreProd'
+            ReadOnly = True
+            Title.Caption = 'Producto'
+            Width = 485
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'NOMBRE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nombre'
-            Width = 232
+            FieldName = '_pventa'
+            ReadOnly = True
+            Title.Caption = 'Precio Venta'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'DIRECCION'
-            Title.Alignment = taCenter
-            Title.Caption = 'Direcci'#243'n'
-            Width = 269
+            FieldName = 'MONTO_RECONOCIDO'
+            Title.Caption = 'Monto Reconocido [$]'
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'TELEFONO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Telefono'
-            Width = 236
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ID_LABORATORIO'
-            Title.Alignment = taCenter
-            Title.Caption = 'ID'
-            Width = 77
+            FieldName = 'ID_PRODUCTO'
             Visible = True
           end>
       end
@@ -895,7 +868,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 807
+    Width = 1184
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -917,7 +890,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
-      Left = 697
+      Left = 1074
       Top = 1
       Width = 109
       Height = 17
@@ -1033,8 +1006,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 40
-    Top = 176
+    Left = 128
+    Top = 80
     DockControlHeights = (
       0
       0
@@ -1063,25 +1036,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       ItemLinks = <
         item
           Visible = True
-          ItemName = 'btnBuscar'
-        end
-        item
-          BeginGroup = True
-          Visible = True
-          ItemName = 'btnNuevo'
-        end
-        item
-          Visible = True
           ItemName = 'btnModificar'
-        end
-        item
-          BeginGroup = True
-          Visible = True
-          ItemName = 'btnBaja'
-        end
-        item
-          Visible = True
-          ItemName = 'btnReactivar'
         end
         item
           BeginGroup = True
@@ -1422,6 +1377,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
       LargeImageIndex = 1
+      OnClick = btnModificarClick
       AutoGrayScale = False
     end
     object btnBaja: TdxBarLargeButton
@@ -1447,6 +1403,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Hint = 'Guarda los cambios'
       Visible = ivAlways
       LargeImageIndex = 3
+      OnClick = btnGuardarClick
       AutoGrayScale = False
     end
     object btnCancelar: TdxBarLargeButton
@@ -1456,6 +1413,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Hint = 'Cancela los cambios'
       Visible = ivAlways
       LargeImageIndex = 4
+      OnClick = btnCancelarClick
       AutoGrayScale = False
     end
     object btnImprimir: TdxBarLargeButton
@@ -1472,6 +1430,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Hint = 'Salir sin seleccionar'
       Visible = ivAlways
       LargeImageIndex = 6
+      OnClick = btnSalirClick
       AutoGrayScale = False
     end
     object btnExcel: TdxBarLargeButton
@@ -1500,5 +1459,214 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         'btnGuardar'
         'btnCancelar')
     end
+  end
+  object PopupProductos: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    Left = 680
+    Top = 95
+    object PopItemProducto_Agregar: TMenuItem
+      Caption = 'Agregar Producto'
+      ImageIndex = 14
+      OnClick = PopItemProducto_AgregarClick
+    end
+    object PopItemProducto_Quitar: TMenuItem
+      Caption = 'Quitar Producto'
+      ImageIndex = 15
+    end
+  end
+  object ZQ_Productos: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select distinct sp.id_producto,'
+      '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
+      
+        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
+        #39#39'),'#39#39')||'
+      '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
+      '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39')||'
+      '        COALESCE ('#39' - Art'#237'culo: '#39' || a.descripcion,'#39#39')||'
+      
+        '        COALESCE ('#39' - Tipo: '#39' || ta.descripcion,'#39#39'))as varchar(1' +
+        '000))'
+      '         AS posicSucursal,prec.precio_venta'
+      'from producto_cabecera pc'
+      'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
+      'join articulo a on (a.id_articulo=pc.id_articulo)'
+      
+        'join tipo_articulo ta on (ta.id_tipo_articulo=a.id_tipo_articulo' +
+        ')'
+      'join stock_producto sp on (sp.id_producto =  pr.id_producto)'
+      
+        'join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.id_po' +
+        'sicion_sucursal)'
+      'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'join configuracion c on (c.id_sucursal=su.id_sucursal)'
+      'left join medida m on (pr.id_medida=m.id_medida)'
+      
+        'join precio prec on ((prec.id_producto=pr.id_producto)and(prec.i' +
+        'd_sucursal=c.id_sucursal))'
+      'where (pr.baja<>'#39'S'#39')and(pc.baja<>'#39'S'#39')'
+      'order by 2'
+      ''
+      ''
+      ''
+      ''
+      '')
+    Params = <>
+    Left = 680
+    Top = 152
+    object ZQ_ProductosID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_ProductosPOSICSUCURSAL: TStringField
+      FieldName = 'POSICSUCURSAL'
+      ReadOnly = True
+      Size = 1000
+    end
+    object ZQ_ProductosPRECIO_VENTA: TFloatField
+      FieldName = 'PRECIO_VENTA'
+    end
+  end
+  object ZQ_Planes: TZQuery
+    Connection = DM.Conexion
+    AfterScroll = ZQ_PlanesAfterScroll
+    SQL.Strings = (
+      
+        'Select oss.ID_OS,oss.codigo,oss.nombre as nombrePlan,osc.nombre ' +
+        'as nombreOss'
+      'from Optica_os oss'
+      
+        'join optica_os_cabecera osc on (oss.id_optica_os_cabecera=osc.id' +
+        '_optica_os_cabecera)'
+      'where oss.baja='#39'N'#39)
+    Params = <>
+    Left = 136
+    Top = 139
+    object ZQ_PlanesID_OS: TIntegerField
+      FieldName = 'ID_OS'
+      Required = True
+    end
+    object ZQ_PlanesCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 100
+    end
+    object ZQ_PlanesNOMBREPLAN: TStringField
+      FieldName = 'NOMBREPLAN'
+      Size = 200
+    end
+    object ZQ_PlanesNOMBREOSS: TStringField
+      FieldName = 'NOMBREOSS'
+      Size = 200
+    end
+  end
+  object DS_Planes: TDataSource
+    DataSet = ZQ_Planes
+    Left = 128
+    Top = 219
+  end
+  object ZQ_PlanProducto: TZQuery
+    Connection = DM.Conexion
+    BeforePost = ZQ_PlanProductoBeforePost
+    SQL.Strings = (
+      'select opr.*'
+      'from optica_productos_reconocidos opr'
+      'where opr.id_os=:id')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    Left = 584
+    Top = 203
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object ZQ_PlanProductoID_PRODUCTOS_RECONOCIDOS: TIntegerField
+      FieldName = 'ID_PRODUCTOS_RECONOCIDOS'
+      Required = True
+    end
+    object ZQ_PlanProductoMONTO_RECONOCIDO: TFloatField
+      FieldName = 'MONTO_RECONOCIDO'
+    end
+    object ZQ_PlanProductoID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_PlanProductoID_OS: TIntegerField
+      FieldName = 'ID_OS'
+      Required = True
+    end
+    object ZQ_PlanProducto_nombreProd: TStringField
+      FieldKind = fkLookup
+      FieldName = '_nombreProd'
+      LookupDataSet = ZQ_Productos
+      LookupKeyFields = 'ID_PRODUCTO'
+      LookupResultField = 'POSICSUCURSAL'
+      KeyFields = 'ID_PRODUCTO'
+      Size = 500
+      Lookup = True
+    end
+    object ZQ_PlanProducto_pventa: TFloatField
+      FieldKind = fkLookup
+      FieldName = '_pventa'
+      LookupDataSet = ZQ_Productos
+      LookupKeyFields = 'ID_PRODUCTO'
+      LookupResultField = 'PRECIO_VENTA'
+      KeyFields = 'ID_PRODUCTO'
+      currency = True
+      Lookup = True
+    end
+  end
+  object DS_PlanProducto: TDataSource
+    DataSet = ZQ_PlanProducto
+    Left = 584
+    Top = 147
+  end
+  object ISListadoProducto: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select distinct sp.id_producto,'
+      '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
+      
+        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
+        #39#39'),'#39#39')||'
+      '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
+      '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39')||'
+      '        COALESCE ('#39' - Art'#237'culo: '#39' || a.descripcion,'#39#39')||'
+      
+        '        COALESCE ('#39' - Tipo: '#39' || ta.descripcion,'#39#39'))as varchar(1' +
+        '000))'
+      '         AS posicSucursal'
+      'from producto_cabecera pc'
+      'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
+      'join articulo a on (a.id_articulo=pc.id_articulo)'
+      
+        'join tipo_articulo ta on (ta.id_tipo_articulo=a.id_tipo_articulo' +
+        ')'
+      'join stock_producto sp on (sp.id_producto =  pr.id_producto)'
+      
+        'join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.id_po' +
+        'sicion_sucursal)'
+      'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'join configuracion c on (c.id_sucursal=su.id_sucursal)'
+      'left join medida m on (pr.id_medida=m.id_medida)'
+      'where (pr.baja<>'#39'S'#39')and(pc.baja<>'#39'S'#39')'
+      'order by 2')
+    CampoBuscar = 'posicSucursal'
+    CampoClave = 'id_producto'
+    TituloVentana = 'Buscar Producto'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 684
+    Top = 202
   end
 end

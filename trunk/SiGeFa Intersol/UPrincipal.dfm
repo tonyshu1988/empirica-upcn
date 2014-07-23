@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 341
-  Top = 241
+  Left = 347
+  Top = 176
   Width = 929
   Height = 483
   Caption = 'SiGeFa - Sistema de Gesti'#243'n y Facturaci'#243'n'
@@ -5163,6 +5163,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 29
       OnExecute = AOP_ABMOrdenTExecute
     end
+    object AOP_PlanesProductos: TAction
+      Caption = 'Cobertura Planes'
+      ImageIndex = 35
+      OnExecute = AOP_PlanesProductosExecute
+    end
     object AOP_ABMLab: TAction
       Caption = 'ABM Laboratorios'
       ImageIndex = 2
@@ -5175,7 +5180,7 @@ object FPrincipal: TFPrincipal
     end
     object AOP_Reportes: TAction
       Caption = 'Reportes Optica'
-      ImageIndex = 59
+      ImageIndex = 28
       OnExecute = AOP_ReportesExecute
     end
     object AOP_ABMLiquidarOS: TAction
@@ -5349,6 +5354,13 @@ object FPrincipal: TFPrincipal
       object AOPABMLab1: TMenuItem
         Action = AOP_ABMLab
       end
+      object CoberturaPlanes1: TMenuItem
+        Tag = 1
+        Action = AOP_PlanesProductos
+      end
+      object N12: TMenuItem
+        Caption = '-'
+      end
       object ABMOrdenTcnica1: TMenuItem
         Action = AOP_ABMOrdenT
       end
@@ -5356,13 +5368,16 @@ object FPrincipal: TFPrincipal
         Tag = 1
         Action = AOP_ABMFacturaOS
       end
-      object ReporteOptica1: TMenuItem
-        Tag = 1
-        Action = AOP_Reportes
-      end
       object ABMLiquidacinObraSocial1: TMenuItem
         Tag = 1
         Action = AOP_ABMLiquidarOS
+      end
+      object N13: TMenuItem
+        Caption = '-'
+      end
+      object ReporteOptica1: TMenuItem
+        Tag = 1
+        Action = AOP_Reportes
       end
     end
     object ABM1: TMenuItem
