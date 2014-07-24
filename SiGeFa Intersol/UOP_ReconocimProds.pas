@@ -6,7 +6,7 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls, Grids, DBGrids, QRCtrls, QuickRpt, dxBar,
   dxBarExtItems, cxClasses, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Menus, ISListadoSQL;
+  ZDataset, Menus, ISListadoSQL, ISLlenarCombo,UBuscarProducto;
 
 type
   TFOP_ReconocimientoProds = class(TForm)
@@ -52,18 +52,13 @@ type
     QRLabel3: TQRLabel;
     QRLabel4: TQRLabel;
     PanelGrilla: TPanel;
-    grillaPlanes: TDBGrid;
     PBusqueda: TPanel;
-    lblCantidadRegistros: TLabel;
-    StaticTxtBaja: TStaticText;
     grillaProductos: TDBGrid;
-    Splitter1: TSplitter;
     PopupProductos: TPopupMenu;
     PopItemProducto_Agregar: TMenuItem;
     PopItemProducto_Quitar: TMenuItem;
     ZQ_Productos: TZQuery;
     ZQ_Planes: TZQuery;
-    ZQ_PlanesID_OS: TIntegerField;
     DS_Planes: TDataSource;
     ZQ_PlanProducto: TZQuery;
     DS_PlanProducto: TDataSource;
@@ -72,15 +67,20 @@ type
     ZQ_PlanProductoID_PRODUCTO: TIntegerField;
     ZQ_PlanProductoID_OS: TIntegerField;
     ISListadoProducto: TISListadoSQL;
-    ZQ_PlanesCODIGO: TStringField;
-    ZQ_PlanesNOMBREPLAN: TStringField;
-    ZQ_PlanesNOMBREOSS: TStringField;
     ZQ_PlanProducto_nombreProd: TStringField;
     ZQ_PlanProducto_pventa: TFloatField;
     ZQ_ProductosID_PRODUCTO: TIntegerField;
     ZQ_ProductosPOSICSUCURSAL: TStringField;
     ZQ_ProductosPRECIO_VENTA: TFloatField;
-    procedure ZQ_PlanesAfterScroll(DataSet: TDataSet);
+    Label1: TLabel;
+    ISLlenarCombo1: TISLlenarCombo;
+    ComboBox1: TComboBox;
+    ZQ_PlanesID_OS: TIntegerField;
+    ZQ_PlanesCODIGO: TStringField;
+    ZQ_PlanesNOMBREPLAN: TStringField;
+    ZQ_PlanesNOMBREOSS: TStringField;
+    ZQ_PlanesDETALLE: TStringField;
+    lblCantidadRegistros: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -88,8 +88,11 @@ type
     procedure PopItemProducto_AgregarClick(Sender: TObject);
     procedure btnCancelarClick(Sender: TObject);
     procedure ZQ_PlanProductoBeforePost(DataSet: TDataSet);
+    procedure ISLlenarCombo1Cambio(valor: String);
   private
-    { Private declarations }
+    vsel: TFBuscarProducto;
+    procedure onSelProducto;
+    procedure onSelTodosProducto;
   public
     { Public declarations }
   end;
@@ -106,21 +109,13 @@ uses UDM;
 
 {$R *.dfm}
 
-procedure TFOP_ReconocimientoProds.ZQ_PlanesAfterScroll(DataSet: TDataSet);
-begin
-
- if ZQ_Planes.IsEmpty then exit;
-
-  ZQ_PlanProducto.Close;
-  ZQ_PlanProducto.ParamByName('id').AsInteger:=ZQ_PlanesID_OS.AsInteger;
-  dm.ISModelo.abrir(ZQ_PlanProducto);
-end;
-
 procedure TFOP_ReconocimientoProds.FormCreate(Sender: TObject);
 begin
    dm.ISModelo.abrir(ZQ_Planes);
+   dm.ISModelo.abrir(ZQ_Productos);
    grillaProductos.PopupMenu:=nil;
-   grillaPlanes.Enabled:=true;
+   ISLlenarCombo1.CargarCombo;
+
    GrupoEditando.Enabled:=true;
    GrupoGuardarCancelar.Enabled:=false;
 end;
@@ -141,7 +136,6 @@ begin
 
       grillaProductos.Enabled:=true;
       grillaProductos.PopupMenu:=PopupProductos;
-      grillaPlanes.Enabled:=false;
       GrupoEditando.Enabled:=false;
       GrupoGuardarCancelar.Enabled:=true;
 
@@ -159,7 +153,6 @@ begin
               dm.ISModelo.cancelar_transaccion(transaccion_coberturaPlan);
 
        grillaProductos.PopupMenu:=nil;
-       grillaPlanes.Enabled:=true;
        GrupoEditando.Enabled:=true;
        GrupoGuardarCancelar.Enabled:=false;
    end;
@@ -169,15 +162,84 @@ end;
 procedure TFOP_ReconocimientoProds.PopItemProducto_AgregarClick(
   Sender: TObject);
 begin
-  if ISListadoProducto.Buscar then
-   if (ISListadoProducto.Resultado<>'') then
-    begin
-       ZQ_PlanProducto.Append;
-       ZQ_PlanProductoID_OS.AsInteger:=ZQ_PlanesID_OS.AsInteger;
-       ZQ_PlanProductoID_PRODUCTO.AsInteger:=StrToInt(ISListadoProducto.Resultado);
-       ZQ_PlanProductoMONTO_RECONOCIDO.AsFloat:=0;
-    end
+//  if ISListadoProducto.Buscar then
+//   if (ISListadoProducto.Resultado<>'') then
+//    begin
+//       ZQ_PlanProducto.Append;
+//       ZQ_PlanProductoID_OS.AsInteger:=ZQ_PlanesID_OS.AsInteger;
+//       ZQ_PlanProductoID_PRODUCTO.AsInteger:=StrToInt(ISListadoProducto.Resultado);
+//       ZQ_PlanProductoMONTO_RECONOCIDO.AsFloat:=0;
+//    end
 
+if not Assigned(vsel) then
+    vsel:= TFBuscarProducto.Create(nil);
+  vsel.OnSeleccionar:= onSelProducto;
+  vsel.OnSeleccionarTodos:= onSelTodosProducto;
+  vsel.btnSeleccionarTodos.Visible:= ivAlways;
+  vsel.SeleccionarYSalir:= false;
+  vsel.ShowModal;
+
+end;
+
+
+procedure TFOP_ReconocimientoProds.onSelProducto;
+begin
+  if not vsel.ZQ_Producto.IsEmpty then
+  begin
+
+    ZQ_PlanProducto.Filter:= 'id_producto = ' + vsel.ZQ_ProductoID_PRODUCTO.AsString;
+    ZQ_PlanProducto.Filtered:= true;
+
+    if not ZQ_PlanProducto.IsEmpty then
+    begin
+      ZQ_PlanProducto.Filtered:= false;
+      Application.MessageBox('El Producto seleccionado ya fue cargado', 'Carga Producto', MB_OK + MB_ICONINFORMATION);
+      exit;
+    end;
+
+    ZQ_PlanProducto.Filtered:= false;
+    ZQ_PlanProducto.Append;
+    ZQ_PlanProductoID_PRODUCTO.AsInteger:= vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
+    ZQ_PlanProductoID_OS.AsInteger:= ZQ_PlanesID_OS.AsInteger;
+    ZQ_PlanProductoMONTO_RECONOCIDO.AsFloat:=0;
+    ZQ_PlanProducto.Post;
+
+  end;
+
+  if vsel.SeleccionarYSalir then
+     vsel.Close;
+end;
+
+
+procedure TFOP_ReconocimientoProds.onSelTodosProducto;
+begin
+  if not vsel.ZQ_Producto.IsEmpty then
+  begin
+    vsel.ZQ_Producto.First;
+    while not vsel.ZQ_Producto.Eof do
+    begin
+      ZQ_PlanProducto.Filter:= 'id_producto = ' + vsel.ZQ_ProductoID_PRODUCTO.AsString;
+      ZQ_PlanProducto.Filtered:= true;
+
+      if not ZQ_PlanProducto.IsEmpty then
+      begin
+        ZQ_PlanProducto.Filtered:= false;
+        Application.MessageBox('El Producto seleccionado ya fue cargado', 'Carga Producto', MB_OK + MB_ICONINFORMATION);
+        exit;
+      end;
+
+      ZQ_PlanProducto.Filtered:= false;
+      ZQ_PlanProducto.Append;
+      ZQ_PlanProductoID_PRODUCTO.AsInteger:= vsel.ZQ_ProductoID_PRODUCTO.AsInteger;
+      ZQ_PlanProductoID_OS.AsInteger:= ZQ_PlanesID_OS.AsInteger;
+      ZQ_PlanProductoMONTO_RECONOCIDO.AsFloat:=0;
+      ZQ_PlanProducto.Post;
+
+      vsel.ZQ_Producto.Next;
+    end;
+  end;
+
+  vsel.Close;
 end;
 
 procedure TFOP_ReconocimientoProds.btnCancelarClick(Sender: TObject);
@@ -187,7 +249,6 @@ begin
        dm.ISModelo.cancelar_transaccion(transaccion_coberturaPlan);
 
        grillaProductos.PopupMenu:=nil;
-       grillaPlanes.Enabled:=true;
        GrupoEditando.Enabled:=true;
        GrupoGuardarCancelar.Enabled:=false;
    end;
@@ -197,6 +258,16 @@ procedure TFOP_ReconocimientoProds.ZQ_PlanProductoBeforePost(
   DataSet: TDataSet);
 begin
   if ZQ_PlanProductoID_PRODUCTO.IsNull then ZQ_PlanProducto.Delete;
+end;
+
+procedure TFOP_ReconocimientoProds.ISLlenarCombo1Cambio(valor: String);
+begin
+  if ZQ_Planes.IsEmpty then exit;
+
+  ZQ_PlanProducto.Close;
+  ZQ_PlanProducto.ParamByName('id').AsInteger:=ZQ_PlanesID_OS.AsInteger;
+  dm.ISModelo.abrir(ZQ_PlanProducto);
+  dm.mostrarCantidadRegistro(ZQ_PlanProducto, lblCantidadRegistros);
 end;
 
 end.

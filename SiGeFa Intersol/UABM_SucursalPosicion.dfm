@@ -23,8 +23,8 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object PContenedor: TPanel
     Left = 0
     Top = 19
-    Width = 965
-    Height = 440
+    Width = 973
+    Height = 451
     Align = alClient
     BorderWidth = 5
     TabOrder = 0
@@ -141,7 +141,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            693.208333333333300000
+            693.208333333333200000
             124.354166666666700000
             510.645833333333300000)
           Alignment = taCenter
@@ -173,9 +173,9 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            717.020833333333300000
-            68.791666666666670000
-            463.020833333333300000)
+            717.020833333333200000
+            68.791666666666680000
+            463.020833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -205,7 +205,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            687.916666666666700000
+            687.916666666666800000
             5.291666666666667000
             523.875000000000000000)
           Alignment = taCenter
@@ -551,7 +551,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -601,7 +601,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -649,7 +649,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -737,7 +737,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            653.520833333333300000
+            653.520833333333400000
             5.291666666666667000
             134.937500000000000000)
           Alignment = taLeftJustify
@@ -867,7 +867,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
             37.041666666666670000
             1460.500000000000000000
             5.291666666666667000
-            66.145833333333330000)
+            66.145833333333340000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -890,8 +890,8 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     object DBGridPosicionSucursal: TDBGrid
       Left = 6
       Top = 6
-      Width = 953
-      Height = 322
+      Width = 961
+      Height = 333
       Align = alClient
       Color = 14606012
       DataSource = DS_PosicionSucursal
@@ -958,8 +958,8 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
     end
     object PanelEdicion: TPanel
       Left = 6
-      Top = 328
-      Width = 953
+      Top = 339
+      Width = 961
       Height = 106
       Align = alBottom
       BevelOuter = bvNone
@@ -1136,7 +1136,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 965
+    Width = 973
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1157,7 +1157,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 855
+      Left = 863
       Top = 1
       Width = 109
       Height = 17
@@ -1171,7 +1171,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
       TabOrder = 0
     end
     object StaticTxtPuntoSalida: TStaticText
-      Left = 746
+      Left = 754
       Top = 1
       Width = 109
       Height = 17
@@ -1188,7 +1188,7 @@ object FABM_SucursalPosicion: TFABM_SucursalPosicion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
