@@ -1,8 +1,8 @@
 object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
-  Left = 199
-  Top = 194
-  Width = 1192
-  Height = 469
+  Left = 187
+  Top = 104
+  Width = 1024
+  Height = 610
   Caption = 'Reconocimiento de Productos seg'#250'n Plan'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,12 +20,12 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   TextHeight = 13
   object PanelFondo: TPanel
     Left = 0
-    Top = 19
-    Width = 1184
-    Height = 371
+    Top = 22
+    Width = 1016
+    Height = 509
     Align = alClient
     BevelOuter = bvNone
-    TabOrder = 3
+    TabOrder = 2
     object RepLab: TQuickRep
       Tag = 99
       Left = 24
@@ -765,8 +765,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 1184
-      Height = 371
+      Width = 1016
+      Height = 509
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -777,59 +777,16 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Font.Style = []
       ParentFont = False
       TabOrder = 0
-      object Splitter1: TSplitter
-        Left = 529
-        Top = 5
-        Height = 361
-      end
-      object grillaPlanes: TDBGrid
+      object grillaProductos: TDBGrid
         Left = 5
         Top = 5
-        Width = 524
-        Height = 361
-        Align = alLeft
-        Color = 14606012
-        DataSource = DS_Planes
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'CODIGO'
-            Title.Caption = 'C'#243'digo'
-            Width = 59
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBREPLAN'
-            Title.Caption = 'Plan'
-            Width = 221
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBREOSS'
-            Title.Caption = 'Obra Social'
-            Width = 234
-            Visible = True
-          end>
-      end
-      object grillaProductos: TDBGrid
-        Left = 532
-        Top = 5
-        Width = 647
-        Height = 361
+        Width = 1006
+        Height = 499
         Align = alClient
         Color = 14606012
         DataSource = DS_PlanProducto
         Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 1
+        TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
         TitleFont.Height = -11
@@ -840,8 +797,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
             Expanded = False
             FieldName = '_nombreProd'
             ReadOnly = True
-            Title.Caption = 'Producto'
-            Width = 485
+            Title.Caption = ' Producto'
+            Width = 800
             Visible = True
           end
           item
@@ -852,8 +809,14 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
             Visible = True
           end
           item
+            Color = 8454143
             Expanded = False
             FieldName = 'MONTO_RECONOCIDO'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
             Title.Caption = 'Monto Reconocido [$]'
             Visible = True
           end
@@ -868,39 +831,61 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 1184
-    Height = 19
+    Width = 1016
+    Height = 22
     Align = alTop
+    BevelOuter = bvNone
     ParentShowHint = False
     ShowHint = False
     TabOrder = 5
-    object lblCantidadRegistros: TLabel
-      Left = 1
-      Top = 1
-      Width = 134
-      Height = 17
+    object Label1: TLabel
+      Left = 0
+      Top = 0
+      Width = 104
+      Height = 22
       Align = alLeft
+      Alignment = taRightJustify
+      AutoSize = False
+      Caption = ' Obra Social:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+      Layout = tlCenter
+    end
+    object lblCantidadRegistros: TLabel
+      Left = 864
+      Top = 0
+      Width = 152
+      Height = 22
+      Align = alRight
+      AutoSize = False
       Caption = 'lblCantidadRegistros'
       Font.Charset = ANSI_CHARSET
       Font.Color = clNavy
-      Font.Height = -11
+      Font.Height = -9
       Font.Name = 'Verdana'
       Font.Style = [fsBold, fsItalic]
       ParentFont = False
       Layout = tlCenter
     end
-    object StaticTxtBaja: TStaticText
-      Left = 1074
+    object ComboBox1: TComboBox
+      Left = 112
       Top = 1
-      Width = 109
-      Height = 17
-      Align = alRight
-      Alignment = taCenter
-      AutoSize = False
-      BorderStyle = sbsSunken
-      Caption = 'Dado de Baja'
-      Color = 6974207
-      ParentColor = False
+      Width = 553
+      Height = 21
+      Style = csDropDownList
+      DropDownCount = 15
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ItemHeight = 13
+      ParentFont = False
       TabOrder = 0
     end
   end
@@ -1037,6 +1022,15 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         item
           Visible = True
           ItemName = 'btnModificar'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btnBuscar'
+        end
+        item
+          Visible = True
+          ItemName = 'btnVerDetalle'
         end
         item
           BeginGroup = True
@@ -1372,7 +1366,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
-      Caption = 'F3 - Modificar'
+      Caption = 'F3 - Modificar Plan'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
@@ -1482,12 +1476,12 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       
         '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
         #39#39'),'#39#39')||'
+      '       COALESCE ('#39' - Art'#237'culo: '#39' || a.descripcion,'#39#39')||'
+      '       COALESCE ('#39' - Tipo: '#39' || ta.descripcion,'#39#39')||'
       '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
-      '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39')||'
-      '        COALESCE ('#39' - Art'#237'culo: '#39' || a.descripcion,'#39#39')||'
       
-        '        COALESCE ('#39' - Tipo: '#39' || ta.descripcion,'#39#39'))as varchar(1' +
-        '000))'
+        '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39'))as varchar(100' +
+        '0))'
       '         AS posicSucursal,prec.precio_venta'
       'from producto_cabecera pc'
       'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
@@ -1511,6 +1505,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       ''
       ''
       ''
+      ''
       '')
     Params = <>
     Left = 680
@@ -1530,18 +1525,19 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   end
   object ZQ_Planes: TZQuery
     Connection = DM.Conexion
-    AfterScroll = ZQ_PlanesAfterScroll
     SQL.Strings = (
       
         'Select oss.ID_OS,oss.codigo,oss.nombre as nombrePlan,osc.nombre ' +
-        'as nombreOss'
+        'as nombreOss,(osc.nombre ||'#39' : '#39'||oss.codigo||'#39' - '#39'|| oss.nombre' +
+        ') as detalle'
       'from Optica_os oss'
       
         'join optica_os_cabecera osc on (oss.id_optica_os_cabecera=osc.id' +
         '_optica_os_cabecera)'
-      'where oss.baja='#39'N'#39)
+      'where oss.baja='#39'N'#39
+      '')
     Params = <>
-    Left = 136
+    Left = 120
     Top = 139
     object ZQ_PlanesID_OS: TIntegerField
       FieldName = 'ID_OS'
@@ -1559,11 +1555,16 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       FieldName = 'NOMBREOSS'
       Size = 200
     end
+    object ZQ_PlanesDETALLE: TStringField
+      FieldName = 'DETALLE'
+      ReadOnly = True
+      Size = 506
+    end
   end
   object DS_Planes: TDataSource
     DataSet = ZQ_Planes
     Left = 128
-    Top = 219
+    Top = 187
   end
   object ZQ_PlanProducto: TZQuery
     Connection = DM.Conexion
@@ -1602,13 +1603,14 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Required = True
     end
     object ZQ_PlanProducto_nombreProd: TStringField
+      DisplayWidth = 800
       FieldKind = fkLookup
       FieldName = '_nombreProd'
       LookupDataSet = ZQ_Productos
       LookupKeyFields = 'ID_PRODUCTO'
       LookupResultField = 'POSICSUCURSAL'
       KeyFields = 'ID_PRODUCTO'
-      Size = 500
+      Size = 800
       Lookup = True
     end
     object ZQ_PlanProducto_pventa: TFloatField
@@ -1668,5 +1670,15 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     AnchoBuscar2 = 500
     Left = 684
     Top = 202
+  end
+  object ISLlenarCombo1: TISLlenarCombo
+    dataset = ZQ_Planes
+    combo = ComboBox1
+    OnCambio = ISLlenarCombo1Cambio
+    CampoClave = 'ID_OS'
+    CampoVer = 'DETALLE'
+    ItemsAdicInicio = False
+    Left = 216
+    Top = 81
   end
 end
