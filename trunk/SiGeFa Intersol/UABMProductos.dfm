@@ -2821,7 +2821,6 @@ object FABMProductos: TFABMProductos
     end
   end
   object ZQ_ProductoCabecera: TZQuery
-    Connection = DM.Conexion
     SortedFields = 'ID_MARCA'
     AfterScroll = ZQ_ProductoCabeceraAfterScroll
     UpdateObject = ZUpdateSQL2
@@ -3695,7 +3694,6 @@ object FABMProductos: TFABMProductos
     end
   end
   object ZQ_DetalleProducto: TZQuery
-    Connection = DM.Conexion
     SortedFields = 'COD_CORTO'
     Filter = 'baja <> '#39'S'#39
     Filtered = True
@@ -3845,7 +3843,6 @@ object FABMProductos: TFABMProductos
     Top = 152
   end
   object ZQ_Articulo: TZQuery
-    Connection = DM.Conexion
     AfterScroll = ZQ_ArticuloAfterScroll
     SQL.Strings = (
       
@@ -3890,7 +3887,6 @@ object FABMProductos: TFABMProductos
     Top = 152
   end
   object ZQ_Marca: TZQuery
-    Connection = DM.Conexion
     SQL.Strings = (
       
         'select m.*,  lpad(m.codigo_marca,4,'#39'0'#39')||'#39' - '#39'||m.nombre_marca a' +
@@ -3981,7 +3977,6 @@ object FABMProductos: TFABMProductos
     end
   end
   object ZQ_MedidaArticulo: TZQuery
-    Connection = DM.Conexion
     SortedFields = 'MEDIDA'
     SQL.Strings = (
       'select ma.id_articulo,ma.id_medida,m.medida, ma.baja'
@@ -4022,7 +4017,6 @@ object FABMProductos: TFABMProductos
     Top = 152
   end
   object ZSP_GenerarIDProdDeralle: TZStoredProc
-    Connection = DM.Conexion
     Params = <
       item
         DataType = ftInteger
@@ -4043,7 +4037,6 @@ object FABMProductos: TFABMProductos
     end
   end
   object ZSP_GenerarIDProdCabecera: TZStoredProc
-    Connection = DM.Conexion
     Params = <
       item
         DataType = ftInteger
@@ -4131,7 +4124,6 @@ object FABMProductos: TFABMProductos
     Top = 160
   end
   object ZQ_Color: TZQuery
-    Connection = DM.Conexion
     AfterScroll = ZQ_ColorAfterScroll
     SQL.Strings = (
       
@@ -4174,7 +4166,6 @@ object FABMProductos: TFABMProductos
     Top = 152
   end
   object ZQ_ExisteCodigo: TZQuery
-    Connection = DM.Conexion
     SQL.Strings = (
       'select *'
       'from producto_cabecera pc'
@@ -4283,7 +4274,6 @@ object FABMProductos: TFABMProductos
     end
   end
   object ZQ_Precios: TZQuery
-    Connection = DM.Conexion
     SQL.Strings = (
       'select pr.*'
       'from precio pr'
@@ -4480,7 +4470,6 @@ object FABMProductos: TFABMProductos
       end>
   end
   object ZQ_TodasMedidas: TZQuery
-    Connection = DM.Conexion
     SortedFields = 'MEDIDA'
     SQL.Strings = (
       'select id_medida, medida, baja'
@@ -4588,7 +4577,6 @@ object FABMProductos: TFABMProductos
       end>
   end
   object Asociar_producto_pto_salida: TZStoredProc
-    Connection = DM.Conexion
     Params = <
       item
         DataType = ftInteger
@@ -4741,7 +4729,6 @@ object FABMProductos: TFABMProductos
         ItemIndex = 0
       end>
     CriteriosLocate = <>
-    Modelo = DM.ISModelo
     DataSet = ZQ_ProductoCabecera
     SQL.Strings = (
       'select distinct pc.*, a.descripcion, m.nombre_marca'
@@ -4817,7 +4804,6 @@ object FABMProductos: TFABMProductos
     Top = 429
   end
   object ISListadoMarca: TISListadoSQL
-    Modelo = DM.ISModelo
     SQL.Strings = (
       
         'select m.id_marca, lpad(m.codigo_marca,4,'#39'0'#39')||'#39' - '#39'||m.nombre_m' +
@@ -4840,7 +4826,6 @@ object FABMProductos: TFABMProductos
     Top = 378
   end
   object ISListadoArticulo: TISListadoSQL
-    Modelo = DM.ISModelo
     SQL.Strings = (
       'select a.*, t.descripcion||'#39' - '#39'||a.descripcion as busqueda'
       'from articulo a'
@@ -4863,7 +4848,6 @@ object FABMProductos: TFABMProductos
     Top = 378
   end
   object ISListadoColor: TISListadoSQL
-    Modelo = DM.ISModelo
     SQL.Strings = (
       
         'select c.*, (lpad(c.codigo_color,4,'#39'0'#39')||'#39' - '#39'||c.nombre) as res' +
@@ -4885,7 +4869,6 @@ object FABMProductos: TFABMProductos
     Top = 370
   end
   object ISListadoMedidas: TISListadoSQL
-    Modelo = DM.ISModelo
     SQL.Strings = (
       ''
       ''
