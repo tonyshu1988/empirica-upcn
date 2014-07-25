@@ -1419,7 +1419,7 @@ begin
   begin
     campoQueCambia:= 'PRECIO_VENTA';
     costo_con_impuestos:= costo_neto + (costo_neto * imp_adicional_1) + (costo_neto * imp_adicional_2) + (costo_neto * imp_iva) + impuesto_interno;
-    precio_venta:= RoundTo(costo_con_impuestos * (1 + coef_ganancia), -2);
+    precio_venta:= RoundTo(costo_con_impuestos * (coef_ganancia), -2);
 
 
     ZQ_PreciosPRECIO_COSTO_CIMPUESTOS.AsFloat:= costo_con_impuestos;
