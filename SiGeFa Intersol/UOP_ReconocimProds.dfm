@@ -21,11 +21,11 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object PanelFondo: TPanel
     Left = 0
     Top = 22
-    Width = 1016
-    Height = 509
+    Width = 1008
+    Height = 498
     Align = alClient
     BevelOuter = bvNone
-    TabOrder = 2
+    TabOrder = 1
     object RepLab: TQuickRep
       Tag = 99
       Left = 24
@@ -138,7 +138,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            756.708333333333400000
+            756.708333333333300000
             124.354166666666700000
             386.291666666666700000)
           Alignment = taCenter
@@ -202,7 +202,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            780.520833333333400000
+            780.520833333333300000
             5.291666666666667000
             338.666666666666700000)
           Alignment = taCenter
@@ -490,7 +490,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -509,7 +509,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            486.833333333333400000)
+            486.833333333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -540,7 +540,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -588,7 +588,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -765,8 +765,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 1016
-      Height = 509
+      Width = 1008
+      Height = 498
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -780,8 +780,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       object grillaProductos: TDBGrid
         Left = 5
         Top = 5
-        Width = 1006
-        Height = 499
+        Width = 998
+        Height = 488
         Align = alClient
         Color = 14606012
         DataSource = DS_PlanProducto
@@ -831,7 +831,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 1016
+    Width = 1008
     Height = 22
     Align = alTop
     BevelOuter = bvNone
@@ -841,12 +841,12 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     object Label1: TLabel
       Left = 0
       Top = 0
-      Width = 104
+      Width = 137
       Height = 22
       Align = alLeft
       Alignment = taRightJustify
       AutoSize = False
-      Caption = ' Obra Social:'
+      Caption = ' Plan Obra Social:'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
@@ -857,7 +857,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Layout = tlCenter
     end
     object lblCantidadRegistros: TLabel
-      Left = 864
+      Left = 856
       Top = 0
       Width = 152
       Height = 22
@@ -872,10 +872,10 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       ParentFont = False
       Layout = tlCenter
     end
-    object ComboBox1: TComboBox
-      Left = 112
+    object cmbPlan: TComboBox
+      Left = 144
       Top = 1
-      Width = 553
+      Width = 521
       Height = 21
       Style = csDropDownList
       DropDownCount = 15
@@ -892,7 +892,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1026,11 +1026,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         item
           BeginGroup = True
           Visible = True
-          ItemName = 'btnBuscar'
-        end
-        item
-          Visible = True
-          ItemName = 'btnVerDetalle'
+          ItemName = 'btnActualizar'
         end
         item
           BeginGroup = True
@@ -1340,19 +1336,20 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C
         4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C4C00}
     end
-    object btnBuscar: TdxBarLargeButton
-      Caption = 'F1 - Buscar'
+    object btnActualizar: TdxBarLargeButton
+      Caption = 'F2 - Actualizar Plan'
       Category = 0
-      Hint = 'F1 - Buscar'
+      Hint = 'F2 - Actualizar Plan'
       Visible = ivAlways
-      LargeImageIndex = 29
+      LargeImageIndex = 12
+      OnClick = btnActualizarClick
       AutoGrayScale = False
     end
     object btnVerDetalle: TdxBarLargeButton
       Align = iaRight
-      Caption = 'Ver Detalle'
+      Caption = 'F3'
       Category = 0
-      Hint = 'Ver Detalle'
+      Hint = 'F3'
       Visible = ivAlways
       LargeImageIndex = 69
       AutoGrayScale = False
@@ -1366,7 +1363,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       AutoGrayScale = False
     end
     object btnModificar: TdxBarLargeButton
-      Caption = 'F3 - Modificar Plan'
+      Caption = 'F1 - Modificar Plan'
       Category = 0
       Hint = 'Modifica el registro actual'
       Visible = ivAlways
@@ -1439,13 +1436,13 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Items = (
         'btnNuevo'
         'btnModificar'
-        'btnBuscar'
         'btnVerDetalle'
         'btnBaja'
         'btnSalir'
         'btnReactivar'
         'btnImprimir'
-        'btnExcel')
+        'btnExcel'
+        'btnActualizar')
     end
     object GrupoGuardarCancelar: TdxBarGroup
       Enabled = False
@@ -1673,12 +1670,35 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   end
   object ISLlenarCombo1: TISLlenarCombo
     dataset = ZQ_Planes
-    combo = ComboBox1
+    combo = cmbPlan
     OnCambio = ISLlenarCombo1Cambio
     CampoClave = 'ID_OS'
     CampoVer = 'DETALLE'
     ItemsAdicInicio = False
     Left = 216
     Top = 81
+  end
+  object ISBusquedaAvanzada1: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'Actualizar seg'#250'n $'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Actualizar seg'#250'n %'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    UsarWhereOriginal = IS_Sin_Where
+    PantallaReducida = True
+    Left = 312
+    Top = 230
   end
 end

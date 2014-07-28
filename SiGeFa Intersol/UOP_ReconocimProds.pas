@@ -6,13 +6,14 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, ExtCtrls, StdCtrls, Grids, DBGrids, QRCtrls, QuickRpt, dxBar,
   dxBarExtItems, cxClasses, DB, ZAbstractRODataset, ZAbstractDataset,
-  ZDataset, Menus, ISListadoSQL, ISLlenarCombo,UBuscarProducto;
+  ZDataset, Menus, ISListadoSQL, ISLlenarCombo,UBuscarProducto,
+  ISBusquedaAvanzada;
 
 type
   TFOP_ReconocimientoProds = class(TForm)
     dxBarABM: TdxBarManager;
     dxBarABMBar1: TdxBar;
-    btnBuscar: TdxBarLargeButton;
+    btnActualizar: TdxBarLargeButton;
     btnVerDetalle: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
@@ -74,13 +75,14 @@ type
     ZQ_ProductosPRECIO_VENTA: TFloatField;
     Label1: TLabel;
     ISLlenarCombo1: TISLlenarCombo;
-    ComboBox1: TComboBox;
+    cmbPlan: TComboBox;
     ZQ_PlanesID_OS: TIntegerField;
     ZQ_PlanesCODIGO: TStringField;
     ZQ_PlanesNOMBREPLAN: TStringField;
     ZQ_PlanesNOMBREOSS: TStringField;
     ZQ_PlanesDETALLE: TStringField;
     lblCantidadRegistros: TLabel;
+    ISBusquedaAvanzada1: TISBusquedaAvanzada;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -89,6 +91,7 @@ type
     procedure btnCancelarClick(Sender: TObject);
     procedure ZQ_PlanProductoBeforePost(DataSet: TDataSet);
     procedure ISLlenarCombo1Cambio(valor: String);
+    procedure btnActualizarClick(Sender: TObject);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
@@ -133,7 +136,7 @@ begin
   if dm.ISModelo.iniciar_transaccion(transaccion_coberturaPlan, [ZQ_PlanProducto]) then
   begin
       ZQ_PlanProducto.Edit;
-
+      cmbPlan.Enabled:=False;
       grillaProductos.Enabled:=true;
       grillaProductos.PopupMenu:=PopupProductos;
       GrupoEditando.Enabled:=false;
@@ -151,7 +154,7 @@ begin
 
        if not dm.ISModelo.finalizar_transaccion(transaccion_coberturaPlan) then
               dm.ISModelo.cancelar_transaccion(transaccion_coberturaPlan);
-
+       cmbPlan.Enabled:=True;
        grillaProductos.PopupMenu:=nil;
        GrupoEditando.Enabled:=true;
        GrupoGuardarCancelar.Enabled:=false;
@@ -247,7 +250,7 @@ begin
   if dm.ISModelo.verificar_transaccion(transaccion_coberturaPlan) then
    begin
        dm.ISModelo.cancelar_transaccion(transaccion_coberturaPlan);
-
+       cmbPlan.Enabled:=true;
        grillaProductos.PopupMenu:=nil;
        GrupoEditando.Enabled:=true;
        GrupoGuardarCancelar.Enabled:=false;
@@ -257,7 +260,16 @@ end;
 procedure TFOP_ReconocimientoProds.ZQ_PlanProductoBeforePost(
   DataSet: TDataSet);
 begin
-  if ZQ_PlanProductoID_PRODUCTO.IsNull then ZQ_PlanProducto.Delete;
+  if ZQ_PlanProductoID_PRODUCTO.IsNull then
+   begin
+    ZQ_PlanProducto.Delete;
+    exit;
+   end;
+  if (ZQ_PlanProductoMONTO_RECONOCIDO.AsFloat>ZQ_PlanProducto_pventa.AsFloat ) then
+   Application.MessageBox('El monto reconocido no debe ser superior al monto de Venta del producto!.', 'Atención', MB_OK + MB_ICONINFORMATION);
+   ZQ_PlanProducto.CancelUpdates;
+   exit;
+
 end;
 
 procedure TFOP_ReconocimientoProds.ISLlenarCombo1Cambio(valor: String);
@@ -268,6 +280,43 @@ begin
   ZQ_PlanProducto.ParamByName('id').AsInteger:=ZQ_PlanesID_OS.AsInteger;
   dm.ISModelo.abrir(ZQ_PlanProducto);
   dm.mostrarCantidadRegistro(ZQ_PlanProducto, lblCantidadRegistros);
+end;
+
+procedure TFOP_ReconocimientoProds.btnActualizarClick(Sender: TObject);
+var
+porc,importe:Double;
+begin
+  if ZQ_PlanProducto.IsEmpty then exit;
+
+  try
+    if ISBusquedaAvanzada1.BuscarSinEjecutar then
+     begin
+        if (ISBusquedaAvanzada1.ParametrosSeleccionados1[0]<>'')and(ISBusquedaAvanzada1.ParametrosSeleccionados1[1]<>'')then
+         begin
+          Application.MessageBox('Debe ingresar sólo uno de los dos parámetros.', 'Atención', MB_OK + MB_ICONINFORMATION);
+          exit;
+         end;
+
+        if ISBusquedaAvanzada1.ParametrosSeleccionados1[0]<>'' then
+         begin
+             importe:=StrToFloat(ISBusquedaAvanzada1.ParametrosSeleccionados1[0]);
+             //hacer proceso
+         end;
+        if ISBusquedaAvanzada1.ParametrosSeleccionados1[1]<>'' then
+         begin
+             porc:=StrToFloat(ISBusquedaAvanzada1.ParametrosSeleccionados1[1]);
+             //hacer proceso
+         end;
+     end;
+  except
+      begin
+         Application.MessageBox('Verifique que los parámetros ingresados sean correctos.', 'Atención', MB_OK + MB_ICONINFORMATION);
+         exit;
+      end
+  end;
+
+
+
 end;
 
 end.
