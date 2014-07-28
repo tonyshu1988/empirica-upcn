@@ -7,14 +7,15 @@ uses
   Dialogs, ExtCtrls, StdCtrls, Grids, DBGrids, QRCtrls, QuickRpt, dxBar,
   dxBarExtItems, cxClasses, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Menus, ISListadoSQL, ISLlenarCombo,UBuscarProducto,
-  ISBusquedaAvanzada;
+  ISBusquedaAvanzada, ISAlmacenSQL, ZSqlUpdate, ISVistaPreviaQR,
+  ISOrdenarGrilla;
 
 type
   TFOP_ReconocimientoProds = class(TForm)
     dxBarABM: TdxBarManager;
     dxBarABMBar1: TdxBar;
     btnActualizar: TdxBarLargeButton;
-    btnVerDetalle: TdxBarLargeButton;
+    btnBuscarProds: TdxBarLargeButton;
     btnNuevo: TdxBarLargeButton;
     btnModificar: TdxBarLargeButton;
     btnBaja: TdxBarLargeButton;
@@ -27,17 +28,16 @@ type
     GrupoEditando: TdxBarGroup;
     GrupoGuardarCancelar: TdxBarGroup;
     PanelFondo: TPanel;
-    RepLab: TQuickRep;
+    RepProds: TQuickRep;
     QRBand9: TQRBand;
     QRDBLogo: TQRDBImage;
     QRLabel17: TQRLabel;
-    RepLab_Subtitulo: TQRLabel;
-    RepLab_Titulo: TQRLabel;
+    RepProds_Subtitulo: TQRLabel;
+    RepProds_Titulo: TQRLabel;
     QRBand10: TQRBand;
     QRDBText1: TQRDBText;
     QRDBText3: TQRDBText;
     QRDBText4: TQRDBText;
-    QRDBText5: TQRDBText;
     QRBand11: TQRBand;
     QRlblPieDePagina: TQRLabel;
     QRLabel43: TQRLabel;
@@ -45,13 +45,11 @@ type
     QRBand12: TQRBand;
     QRExpr18: TQRExpr;
     TitleBand2: TQRBand;
-    QRLabelCritBusqueda: TQRLabel;
-    QRLabel48: TQRLabel;
+    qrPlan: TQRLabel;
     ColumnHeaderBand2: TQRBand;
     QRLabel30: TQRLabel;
     QRLabel2: TQRLabel;
     QRLabel3: TQRLabel;
-    QRLabel4: TQRLabel;
     PanelGrilla: TPanel;
     PBusqueda: TPanel;
     grillaProductos: TDBGrid;
@@ -83,6 +81,13 @@ type
     ZQ_PlanesDETALLE: TStringField;
     lblCantidadRegistros: TLabel;
     ISBusquedaAvanzada1: TISBusquedaAvanzada;
+    ISBuscarProducto: TISBusquedaAvanzada;
+    ISConsultas: TISAlmacenSQL;
+    ZU_PlanProducto: TZUpdateSQL;
+    ISVistaPreviaQR1: TISVistaPreviaQR;
+    QRExpr1: TQRExpr;
+    QRExpr2: TQRExpr;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -92,10 +97,15 @@ type
     procedure ZQ_PlanProductoBeforePost(DataSet: TDataSet);
     procedure ISLlenarCombo1Cambio(valor: String);
     procedure btnActualizarClick(Sender: TObject);
+    procedure aplicarActualizacion(importe,coef,porc:Double);
+    procedure btnBuscarProdsClick(Sender: TObject);
+    procedure btnExcelClick(Sender: TObject);
+    procedure btnImprimirClick(Sender: TObject);
   private
     vsel: TFBuscarProducto;
     procedure onSelProducto;
     procedure onSelTodosProducto;
+
   public
     { Public declarations }
   end;
@@ -105,6 +115,7 @@ var
 
 const
   transaccion_coberturaPlan = 'COBERTURA_PLAN';
+  transaccion_coberturaPlan2 = 'ACTUALIZACION_PLAN';
 
 implementation
 
@@ -266,10 +277,11 @@ begin
     exit;
    end;
   if (ZQ_PlanProductoMONTO_RECONOCIDO.AsFloat>ZQ_PlanProducto_pventa.AsFloat ) then
+   begin
    Application.MessageBox('El monto reconocido no debe ser superior al monto de Venta del producto!.', 'Atención', MB_OK + MB_ICONINFORMATION);
    ZQ_PlanProducto.CancelUpdates;
    exit;
-
+   end;
 end;
 
 procedure TFOP_ReconocimientoProds.ISLlenarCombo1Cambio(valor: String);
@@ -277,37 +289,96 @@ begin
   if ZQ_Planes.IsEmpty then exit;
 
   ZQ_PlanProducto.Close;
-  ZQ_PlanProducto.ParamByName('id').AsInteger:=ZQ_PlanesID_OS.AsInteger;
+  ZQ_PlanProducto.SQL.Text:=ISConsultas.verConsultaSQL(0);
+  ZQ_PlanProducto.ParamByName('id').AsInteger:= ZQ_PlanesID_OS.AsInteger;
   dm.ISModelo.abrir(ZQ_PlanProducto);
+
+  ISBuscarProducto.SQL_Where.Text:=Format('where (pr.baja<>''S'')and(pc.baja<>''S'')and(opr.id_os=%d)',[ZQ_PlanesID_OS.AsInteger]);
+
   dm.mostrarCantidadRegistro(ZQ_PlanProducto, lblCantidadRegistros);
+end;
+
+procedure TFOP_ReconocimientoProds.aplicarActualizacion(importe,coef,porc:Double);
+begin
+ if ZQ_PlanProducto.IsEmpty then exit;
+ ZQ_PlanProducto.First;
+ while not ZQ_PlanProducto.Eof do
+  begin
+     ZQ_PlanProducto.Edit;
+
+     if (abs(importe)>0) then
+         ZQ_PlanProductoMONTO_RECONOCIDO.AsFloat:=ZQ_PlanProductoMONTO_RECONOCIDO.AsFloat+importe
+     else if (abs(coef)>0) then
+         ZQ_PlanProductoMONTO_RECONOCIDO.AsFloat:=ZQ_PlanProductoMONTO_RECONOCIDO.AsFloat*(1+coef/100)
+       else if (abs(porc)>0) then
+         ZQ_PlanProductoMONTO_RECONOCIDO.AsFloat:=ZQ_PlanProducto_pventa.AsFloat*(porc/100);
+
+     ZQ_PlanProducto.Post;
+
+     ZQ_PlanProducto.Next;
+  end;
+
 end;
 
 procedure TFOP_ReconocimientoProds.btnActualizarClick(Sender: TObject);
 var
 porc,importe:Double;
 begin
-  if ZQ_PlanProducto.IsEmpty then exit;
-
+ if ZQ_PlanProducto.IsEmpty then exit;
+ if MessageDlg('¿Esta seguro que desea agregar/actualizar los montos reconocidos del Plan seleccionado?', mtConfirmation, [mbYes, mbNo], 0,) = mrYes then
   try
     if ISBusquedaAvanzada1.BuscarSinEjecutar then
-     begin
-        if (ISBusquedaAvanzada1.ParametrosSeleccionados1[0]<>'')and(ISBusquedaAvanzada1.ParametrosSeleccionados1[1]<>'')then
+      begin
+        if ((ISBusquedaAvanzada1.ParametrosSeleccionados1[0]<>'')and(ISBusquedaAvanzada1.ParametrosSeleccionados1[1]<>''))or
+            ((ISBusquedaAvanzada1.ParametrosSeleccionados1[0]<>'')and(ISBusquedaAvanzada1.ParametrosSeleccionados1[2]<>''))or
+             ((ISBusquedaAvanzada1.ParametrosSeleccionados1[2]<>'')and(ISBusquedaAvanzada1.ParametrosSeleccionados1[1]<>''))or
+              ((ISBusquedaAvanzada1.ParametrosSeleccionados1[0]<>'')and(ISBusquedaAvanzada1.ParametrosSeleccionados1[1]<>'')and(ISBusquedaAvanzada1.ParametrosSeleccionados1[1]<>''))
+         then
          begin
-          Application.MessageBox('Debe ingresar sólo uno de los dos parámetros.', 'Atención', MB_OK + MB_ICONINFORMATION);
+          Application.MessageBox('Debe ingresar sólo uno de los parámetros disponibles.', 'Atención', MB_OK + MB_ICONINFORMATION);
           exit;
          end;
 
         if ISBusquedaAvanzada1.ParametrosSeleccionados1[0]<>'' then
          begin
              importe:=StrToFloat(ISBusquedaAvanzada1.ParametrosSeleccionados1[0]);
-             //hacer proceso
-         end;
-        if ISBusquedaAvanzada1.ParametrosSeleccionados1[1]<>'' then
-         begin
-             porc:=StrToFloat(ISBusquedaAvanzada1.ParametrosSeleccionados1[1]);
-             //hacer proceso
-         end;
-     end;
+             if dm.ISModelo.iniciar_transaccion(transaccion_coberturaPlan2,[ZQ_PlanProducto]) then
+                aplicarActualizacion(importe,0,0);
+         end
+         else
+           if ISBusquedaAvanzada1.ParametrosSeleccionados1[1]<>'' then
+           begin
+               if abs(StrToFloat(ISBusquedaAvanzada1.ParametrosSeleccionados1[1]))>100 then
+                begin
+                   Application.MessageBox('Debe ingresar un porcentaje no mayor a 100%.', 'Atención', MB_OK + MB_ICONINFORMATION);
+                   exit;
+                end;
+
+               porc:=StrToFloat(ISBusquedaAvanzada1.ParametrosSeleccionados1[1]);
+               if dm.ISModelo.iniciar_transaccion(transaccion_coberturaPlan2,[ZQ_PlanProducto]) then
+                  aplicarActualizacion(0,porc,0);
+           end
+            else
+             if ISBusquedaAvanzada1.ParametrosSeleccionados1[2]<>'' then
+             begin
+                 if abs(StrToFloat(ISBusquedaAvanzada1.ParametrosSeleccionados1[2]))>100 then
+                  begin
+                     Application.MessageBox('Debe ingresar un porcentaje no mayor a 100%.', 'Atención', MB_OK + MB_ICONINFORMATION);
+                     exit;
+                  end;
+
+                 porc:=StrToFloat(ISBusquedaAvanzada1.ParametrosSeleccionados1[2]);
+                 if dm.ISModelo.iniciar_transaccion(transaccion_coberturaPlan2,[ZQ_PlanProducto]) then
+                    aplicarActualizacion(0,0,porc);
+             end;
+
+         if not dm.ISModelo.finalizar_transaccion(transaccion_coberturaPlan2) then
+          begin
+            dm.ISModelo.cancelar_transaccion(transaccion_coberturaPlan2);
+            Application.MessageBox('No pudo actualizarse correctamente el Plan seleccionado.', 'Atención', MB_OK + MB_ICONINFORMATION);
+            exit;
+          end
+      end;
   except
       begin
          Application.MessageBox('Verifique que los parámetros ingresados sean correctos.', 'Atención', MB_OK + MB_ICONINFORMATION);
@@ -317,6 +388,34 @@ begin
 
 
 
+end;
+
+procedure TFOP_ReconocimientoProds.btnBuscarProdsClick(Sender: TObject);
+begin
+  if ZQ_Planes.IsEmpty then exit;
+
+  ISBuscarProducto.Buscar;
+
+
+end;
+
+procedure TFOP_ReconocimientoProds.btnExcelClick(Sender: TObject);
+begin
+  if ZQ_PlanProducto.IsEmpty then exit;
+
+  dm.ExcelExport.EXCEL.Header:=ZQ_PlanesDETALLE.AsString;
+  DM.ExportarEXCEL(grillaProductos);
+  dm.ExcelExport.EXCEL.Header:='';
+end;
+
+procedure TFOP_ReconocimientoProds.btnImprimirClick(Sender: TObject);
+begin
+ if ZQ_PlanProducto.IsEmpty then exit;
+
+  DM.VariablesReportes(RepProds);
+  QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
+  qrPlan.Caption :='Plan: '+ZQ_PlanesDETALLE.AsString;
+  ISVistaPreviaQR1.VistaPrevia;
 end;
 
 end.

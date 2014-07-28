@@ -1,6 +1,6 @@
 object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
-  Left = 187
-  Top = 104
+  Left = 326
+  Top = 161
   Width = 1024
   Height = 610
   Caption = 'Reconocimiento de Productos seg'#250'n Plan'
@@ -21,22 +21,23 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object PanelFondo: TPanel
     Left = 0
     Top = 22
-    Width = 1008
-    Height = 498
+    Width = 1016
+    Height = 509
     Align = alClient
     BevelOuter = bvNone
-    TabOrder = 1
-    object RepLab: TQuickRep
+    TabOrder = 0
+    object RepProds: TQuickRep
       Tag = 99
-      Left = 24
-      Top = 32
-      Width = 794
-      Height = 1123
+      Left = -136
+      Top = 40
+      Width = 1123
+      Height = 794
       Frame.Color = clBlack
       Frame.DrawTop = False
       Frame.DrawBottom = False
       Frame.DrawLeft = False
       Frame.DrawRight = False
+      DataSet = ZQ_PlanProducto
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -52,13 +53,13 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         #39#39)
       Options = [FirstPageHeader, LastPageFooter]
       Page.Columns = 1
-      Page.Orientation = poPortrait
+      Page.Orientation = poLandscape
       Page.PaperSize = A4
       Page.Values = (
         100.000000000000000000
-        2970.000000000000000000
-        100.000000000000000000
         2100.000000000000000000
+        100.000000000000000000
+        2970.000000000000000000
         100.000000000000000000
         100.000000000000000000
         0.000000000000000000)
@@ -90,8 +91,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         Tag = 99
         Left = 38
         Top = 38
-        Width = 718
-        Height = 72
+        Width = 1047
+        Height = 76
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
@@ -103,8 +104,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          190.500000000000000000
-          1899.708333333333000000)
+          201.083333333333300000
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageHeader
@@ -124,12 +125,13 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
             5.291666666666667000
             169.333333333333300000)
           DataField = 'LOGO'
+          DataSet = DM.ZQ_Sucursal
           Stretch = True
         end
         object QRLabel17: TQRLabel
-          Left = 286
-          Top = 47
-          Width = 146
+          Left = 342
+          Top = 48
+          Width = 362
           Height = 19
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -138,14 +140,14 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            756.708333333333300000
-            124.354166666666700000
-            386.291666666666700000)
+            904.875000000000000000
+            127.000000000000000000
+            957.791666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'LABORATORIOS'
+          Caption = 'Reconocimiento de Productos seg'#250'n Plan'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -158,10 +160,10 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           ExportAs = exptText
           FontSize = 12
         end
-        object RepLab_Subtitulo: TQRLabel
-          Left = 299
+        object RepProds_Subtitulo: TQRLabel
+          Left = 457
           Top = 26
-          Width = 119
+          Width = 133
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -169,15 +171,15 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            791.104166666666700000
-            68.791666666666670000
-            314.854166666666700000)
+            52.916666666666660000
+            1209.145833333333000000
+            68.791666666666680000
+            351.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepLab_Subtitulo'
+          Caption = 'RepProds_Subtitulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -190,10 +192,10 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           ExportAs = exptText
           FontSize = 9
         end
-        object RepLab_Titulo: TQRLabel
-          Left = 295
+        object RepProds_Titulo: TQRLabel
+          Left = 450
           Top = 2
-          Width = 128
+          Width = 147
           Height = 20
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -201,15 +203,15 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
-            780.520833333333300000
+            52.916666666666660000
+            1190.625000000000000000
             5.291666666666667000
-            338.666666666666700000)
+            388.937500000000000000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
           AutoStretch = False
-          Caption = 'RepLab_Titulo'
+          Caption = 'RepProds_Titulo'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -226,8 +228,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       object QRBand10: TQRBand
         Tag = 99
         Left = 38
-        Top = 159
-        Width = 718
+        Top = 173
+        Width = 1047
         Height = 14
         Frame.Color = clSilver
         Frame.DrawTop = False
@@ -247,14 +249,14 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         ParentFont = False
         Size.Values = (
           37.041666666666670000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbDetail
         object QRDBText1: TQRDBText
-          Left = 88
+          Left = 5
           Top = 0
-          Width = 237
+          Width = 796
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -262,25 +264,26 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.041666666666670000
-            232.833333333333400000
+            36.380208333333340000
+            13.229166666666670000
             0.000000000000000000
-            627.062500000000000000)
+            2106.744791666667000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataField = 'NOMBRE'
+          DataSet = ZQ_PlanProducto
+          DataField = '_nombreProd'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
         object QRDBText3: TQRDBText
-          Left = 329
+          Left = 810
           Top = 0
-          Width = 210
+          Width = 90
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -288,25 +291,26 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.041666666666670000
-            870.479166666666800000
+            36.380208333333340000
+            2143.125000000000000000
             0.000000000000000000
-            555.625000000000000000)
-          Alignment = taLeftJustify
+            238.125000000000000000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataField = 'DIRECCION'
+          DataSet = ZQ_PlanProducto
+          DataField = '_pventa'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
           FontSize = 7
         end
         object QRDBText4: TQRDBText
-          Left = 544
+          Left = 900
           Top = 0
-          Width = 171
+          Width = 139
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -314,42 +318,17 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.041666666666670000
-            1439.333333333333000000
+            36.380208333333340000
+            2381.250000000000000000
             0.000000000000000000
-            452.437500000000000000)
-          Alignment = taLeftJustify
+            367.109375000000000000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataField = 'TELEFONO'
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-        object QRDBText5: TQRDBText
-          Left = 3
-          Top = 0
-          Width = 78
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            7.937500000000000000
-            0.000000000000000000
-            206.375000000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Color = clWhite
-          DataField = 'CODIGO'
+          DataSet = ZQ_PlanProducto
+          DataField = 'MONTO_RECONOCIDO'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -359,8 +338,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       object QRBand11: TQRBand
         Tag = 99
         Left = 38
-        Top = 195
-        Width = 718
+        Top = 209
+        Width = 1047
         Height = 24
         Frame.Color = clBlack
         Frame.DrawTop = True
@@ -374,13 +353,13 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         ForceNewPage = False
         Size.Values = (
           63.500000000000000000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbPageFooter
         object QRlblPieDePagina: TQRLabel
           Left = 4
-          Top = 3
+          Top = 2
           Width = 81
           Height = 20
           Frame.Color = clBlack
@@ -389,9 +368,9 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
+            52.916666666666660000
             10.583333333333330000
-            7.937500000000000000
+            5.291666666666667000
             214.312500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -412,7 +391,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         end
         object QRLabel43: TQRLabel
           Left = 629
-          Top = 3
+          Top = 2
           Width = 39
           Height = 20
           Frame.Color = clBlack
@@ -421,9 +400,9 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666670000
+            52.916666666666660000
             1664.229166666667000000
-            7.937500000000000000
+            5.291666666666667000
             103.187500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
@@ -476,8 +455,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       object QRBand12: TQRBand
         Tag = 99
         Left = 38
-        Top = 173
-        Width = 718
+        Top = 187
+        Width = 1047
         Height = 22
         Frame.Color = clBlack
         Frame.DrawTop = True
@@ -490,15 +469,15 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
-          1899.708333333333000000)
+          58.208333333333340000
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbSummary
         object QRExpr18: TQRExpr
           Left = 4
           Top = 4
-          Width = 184
+          Width = 215
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -509,16 +488,92 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            486.833333333333300000)
+            568.854166666666800000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
           Color = clWhite
+          ParentFont = False
           ResetAfterPrint = False
           Transparent = False
           WordWrap = True
-          Expression = #39'Cantidad de Medicos: '#39'+COUNT'
+          Expression = #39'Cantidad de Productos: '#39'+COUNT'
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRExpr1: TQRExpr
+          Left = 897
+          Top = 4
+          Width = 144
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2373.312500000000000000
+            10.583333333333330000
+            381.000000000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = True
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          Color = clWhite
+          ParentFont = False
+          ResetAfterPrint = False
+          Transparent = False
+          WordWrap = True
+          Expression = 
+            'FORMATNUMERIC('#39'$ ###,###,###,##0.00'#39',SUM(ZQ_PlanProducto.MONTO_R' +
+            'ECONOCIDO))'
+          ExportAs = exptText
+          FontSize = 8
+        end
+        object QRExpr2: TQRExpr
+          Left = 756
+          Top = 4
+          Width = 144
+          Height = 14
+          Frame.Color = clBlack
+          Frame.DrawTop = False
+          Frame.DrawBottom = False
+          Frame.DrawLeft = False
+          Frame.DrawRight = False
+          Size.Values = (
+            37.041666666666670000
+            2000.250000000000000000
+            10.583333333333330000
+            381.000000000000000000)
+          Alignment = taRightJustify
+          AlignToBand = False
+          AutoSize = False
+          AutoStretch = True
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          Color = clWhite
+          ParentFont = False
+          ResetAfterPrint = False
+          Transparent = False
+          WordWrap = True
+          Expression = 
+            'FORMATNUMERIC('#39'$ ###,###,###,##0.00'#39',SUM(ZQ_PlanProducto._pventa' +
+            '))'
           ExportAs = exptText
           FontSize = 8
         end
@@ -526,9 +581,9 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       object TitleBand2: TQRBand
         Tag = 99
         Left = 38
-        Top = 110
-        Width = 718
-        Height = 31
+        Top = 114
+        Width = 1047
+        Height = 41
         Frame.Color = clBlack
         Frame.DrawTop = False
         Frame.DrawBottom = False
@@ -540,81 +595,49 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
-          1899.708333333333000000)
+          108.479166666666700000
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbTitle
-        object QRLabelCritBusqueda: TQRLabel
-          Left = 5
-          Top = 16
-          Width = 692
-          Height = 13
+        object qrPlan: TQRLabel
+          Left = 15
+          Top = 11
+          Width = 91
+          Height = 19
           Frame.Color = clBlack
           Frame.DrawTop = False
           Frame.DrawBottom = False
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
-            13.229166666666670000
-            42.333333333333330000
-            1830.916666666667000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = True
-          Caption = 'QRLabelCritBusqueda'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -9
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = False
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 7
-        end
-        object QRLabel48: TQRLabel
-          Left = 5
-          Top = 2
-          Width = 126
-          Height = 13
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            34.395833333333330000
-            13.229166666666670000
-            5.291666666666667000
-            333.375000000000000000)
+            50.270833333333330000
+            39.687500000000000000
+            29.104166666666670000
+            240.770833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
           AutoStretch = False
-          Caption = 'Criterios de Busqueda:'
+          Caption = 'Plan: XXXX'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
-          Font.Height = -9
+          Font.Height = -15
           Font.Name = 'Verdana'
-          Font.Style = [fsBold, fsItalic]
+          Font.Style = [fsBold]
           ParentFont = False
           Transparent = False
           WordWrap = False
           ExportAs = exptText
-          FontSize = 7
+          FontSize = 11
         end
       end
       object ColumnHeaderBand2: TQRBand
         Tag = 99
         Left = 38
-        Top = 141
-        Width = 718
+        Top = 155
+        Width = 1047
         Height = 18
         Frame.Color = clBlack
         Frame.DrawTop = True
@@ -628,12 +651,12 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         ForceNewPage = False
         Size.Values = (
           47.625000000000000000
-          1899.708333333333000000)
+          2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
         BandType = rbColumnHeader
         object QRLabel30: TQRLabel
-          Left = 88
+          Left = 5
           Top = 2
           Width = 213
           Height = 14
@@ -644,14 +667,14 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawRight = False
           Size.Values = (
             37.041666666666670000
-            232.833333333333400000
+            13.229166666666670000
             5.291666666666667000
             563.562500000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Nombre'
+          Caption = 'Detalle'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -665,9 +688,9 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           FontSize = 8
         end
         object QRLabel2: TQRLabel
-          Left = 329
+          Left = 812
           Top = 2
-          Width = 210
+          Width = 84
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -675,15 +698,15 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.041666666666670000
-            870.479166666666800000
-            5.291666666666667000
-            555.625000000000000000)
-          Alignment = taLeftJustify
+            36.380208333333340000
+            2149.739583333333000000
+            6.614583333333332000
+            221.588541666666700000)
+          Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'Direcci'#243'n'
+          Caption = 'Precio Venta'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -697,9 +720,9 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           FontSize = 8
         end
         object QRLabel3: TQRLabel
-          Left = 544
+          Left = 900
           Top = 2
-          Width = 141
+          Width = 142
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -707,47 +730,15 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            37.041666666666670000
-            1439.333333333333000000
-            5.291666666666667000
-            373.062500000000000000)
-          Alignment = taLeftJustify
-          AlignToBand = False
-          AutoSize = False
-          AutoStretch = False
-          Caption = 'Tel'#233'fono'
-          Color = clWhite
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          WordWrap = True
-          ExportAs = exptText
-          FontSize = 8
-        end
-        object QRLabel4: TQRLabel
-          Left = 3
-          Top = 2
-          Width = 46
-          Height = 14
-          Frame.Color = clBlack
-          Frame.DrawTop = False
-          Frame.DrawBottom = False
-          Frame.DrawLeft = False
-          Frame.DrawRight = False
-          Size.Values = (
-            37.041666666666670000
-            7.937500000000000000
-            5.291666666666667000
-            121.708333333333400000)
+            36.380208333333340000
+            2381.250000000000000000
+            6.614583333333332000
+            377.031250000000000000)
           Alignment = taRightJustify
           AlignToBand = False
           AutoSize = False
           AutoStretch = False
-          Caption = 'C'#243'digo'
+          Caption = 'Monto Reconocido'
           Color = clWhite
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
@@ -765,8 +756,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 1008
-      Height = 498
+      Width = 1016
+      Height = 509
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -780,8 +771,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       object grillaProductos: TDBGrid
         Left = 5
         Top = 5
-        Width = 998
-        Height = 488
+        Width = 1006
+        Height = 499
         Align = alClient
         Color = 14606012
         DataSource = DS_PlanProducto
@@ -817,12 +808,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
             Font.Height = -11
             Font.Name = 'Verdana'
             Font.Style = [fsBold]
-            Title.Caption = 'Monto Reconocido [$]'
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'ID_PRODUCTO'
+            Title.Caption = 'Monto Reconocido'
             Visible = True
           end>
       end
@@ -831,7 +817,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 1008
+    Width = 1016
     Height = 22
     Align = alTop
     BevelOuter = bvNone
@@ -857,7 +843,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Layout = tlCenter
     end
     object lblCantidadRegistros: TLabel
-      Left = 856
+      Left = 864
       Top = 0
       Width = 152
       Height = 22
@@ -866,7 +852,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Caption = 'lblCantidadRegistros'
       Font.Charset = ANSI_CHARSET
       Font.Color = clNavy
-      Font.Height = -9
+      Font.Height = -11
       Font.Name = 'Verdana'
       Font.Style = [fsBold, fsItalic]
       ParentFont = False
@@ -892,7 +878,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1027,6 +1013,10 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           BeginGroup = True
           Visible = True
           ItemName = 'btnActualizar'
+        end
+        item
+          Visible = True
+          ItemName = 'btnBuscarProds'
         end
         item
           BeginGroup = True
@@ -1341,17 +1331,18 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Category = 0
       Hint = 'F2 - Actualizar Plan'
       Visible = ivAlways
-      LargeImageIndex = 12
+      LargeImageIndex = 78
       OnClick = btnActualizarClick
       AutoGrayScale = False
     end
-    object btnVerDetalle: TdxBarLargeButton
+    object btnBuscarProds: TdxBarLargeButton
       Align = iaRight
-      Caption = 'F3'
+      Caption = 'F3 - Buscar Productos'
       Category = 0
-      Hint = 'F3'
+      Hint = 'F3 - Buscar Productos'
       Visible = ivAlways
-      LargeImageIndex = 69
+      LargeImageIndex = 79
+      OnClick = btnBuscarProdsClick
       AutoGrayScale = False
     end
     object btnNuevo: TdxBarLargeButton
@@ -1408,11 +1399,12 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       AutoGrayScale = False
     end
     object btnImprimir: TdxBarLargeButton
-      Caption = 'Imprimir'
+      Caption = 'Listado'
       Category = 0
-      Hint = 'Imprimir'
+      Hint = 'Listado'
       Visible = ivAlways
       LargeImageIndex = 28
+      OnClick = btnImprimirClick
     end
     object btnSalir: TdxBarLargeButton
       Align = iaRight
@@ -1430,13 +1422,14 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Hint = 'Exportar a Excel'
       Visible = ivAlways
       LargeImageIndex = 77
+      OnClick = btnExcelClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
       Items = (
         'btnNuevo'
         'btnModificar'
-        'btnVerDetalle'
+        'btnBuscarProds'
         'btnBaja'
         'btnSalir'
         'btnReactivar'
@@ -1467,6 +1460,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   end
   object ZQ_Productos: TZQuery
     Connection = DM.Conexion
+    SortedFields = 'ID_PRODUCTO'
     SQL.Strings = (
       'select distinct sp.id_producto,'
       '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
@@ -1505,6 +1499,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       ''
       '')
     Params = <>
+    IndexFieldNames = 'ID_PRODUCTO Asc'
     Left = 680
     Top = 152
     object ZQ_ProductosID_PRODUCTO: TIntegerField
@@ -1560,11 +1555,13 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   end
   object DS_Planes: TDataSource
     DataSet = ZQ_Planes
-    Left = 128
-    Top = 187
+    Left = 120
+    Top = 195
   end
   object ZQ_PlanProducto: TZQuery
     Connection = DM.Conexion
+    SortedFields = 'ID_PRODUCTO'
+    UpdateObject = ZU_PlanProducto
     BeforePost = ZQ_PlanProductoBeforePost
     SQL.Strings = (
       'select opr.*'
@@ -1576,6 +1573,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         Name = 'id'
         ParamType = ptUnknown
       end>
+    IndexFieldNames = 'ID_PRODUCTO Asc'
     Left = 584
     Top = 203
     ParamData = <
@@ -1590,6 +1588,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     end
     object ZQ_PlanProductoMONTO_RECONOCIDO: TFloatField
       FieldName = 'MONTO_RECONOCIDO'
+      currency = True
     end
     object ZQ_PlanProductoID_PRODUCTO: TIntegerField
       FieldName = 'ID_PRODUCTO'
@@ -1627,7 +1626,6 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     Top = 147
   end
   object ISListadoProducto: TISListadoSQL
-    Modelo = DM.ISModelo
     SQL.Strings = (
       'select distinct sp.id_producto,'
       '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
@@ -1675,30 +1673,315 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     CampoClave = 'ID_OS'
     CampoVer = 'DETALLE'
     ItemsAdicInicio = False
-    Left = 216
+    Left = 224
     Top = 81
   end
   object ISBusquedaAvanzada1: TISBusquedaAvanzada
     CriteriosBusqueda = <
       item
         Titulo = 'Actualizar seg'#250'n $'
-        TipoCampoIndiceVer = 'Contiene'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
         TipoComboEditable = False
         CambiarCondicion = False
         ItemIndex = -1
       end
       item
         Titulo = 'Actualizar seg'#250'n %'
-        TipoCampoIndiceVer = 'Contiene'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        CambiarCondicion = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Seg'#250'n % Precio Venta'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
         TipoComboEditable = False
         CambiarCondicion = False
         ItemIndex = -1
       end>
     CriteriosLocate = <>
-    Modelo = DM.ISModelo
     UsarWhereOriginal = IS_Sin_Where
     PantallaReducida = True
-    Left = 312
-    Top = 230
+    TituloVentana = 'Buscar'
+    Left = 224
+    Top = 142
+  end
+  object ISBuscarProducto: TISBusquedaAvanzada
+    CriteriosBusqueda = <
+      item
+        Titulo = 'C'#243'd. Corto'
+        Campo = 'cod_corto'
+        Tabla = 'pr'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Cabecera'
+        Campo = 'cod_corto'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'C'#243'd. Barra'
+        Campo = 'codigo_barra'
+        Tabla = 'pr'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Nombre Producto'
+        Campo = 'nombre'
+        Tabla = 'pc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Medida'
+        Campo = 'medida'
+        Tabla = 'md'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Marca'
+        Campo = 'nombre_marca'
+        Tabla = 'mc'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Tipo Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'ta'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Art'#237'culo'
+        Campo = 'descripcion'
+        Tabla = 'ar'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Color'
+        Campo = 'nombre '
+        Tabla = 'co'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Precio de Venta'
+        Campo = 'precio_venta'
+        Tabla = 'prec'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Monto Reconocido'
+        Campo = 'monto_reconocido'
+        Tabla = 'opr'
+        TipoCampo = IS_Numero
+        TipoCampoIndiceVer = '='
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
+        Titulo = 'Baja'
+        Campo = 'baja'
+        Tabla = 'pc'
+        TipoCampoIngreso = IS_Combo
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboValores.Strings = (
+          'NO'
+          'SI')
+        TipoComboEditable = False
+        TipoComboValoresReales.Strings = (
+          'N'
+          'S')
+        ItemIndex = -1
+      end>
+    CriteriosLocate = <>
+    Modelo = DM.ISModelo
+    DataSet = ZQ_PlanProducto
+    SQL.Strings = (
+      'select distinct opr.*,sp.id_producto,'
+      '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
+      
+        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
+        #39#39'),'#39#39')||'
+      '       COALESCE ('#39' - Art'#237'culo: '#39' || a.descripcion,'#39#39')||'
+      '       COALESCE ('#39' - Tipo: '#39' || ta.descripcion,'#39#39')||'
+      '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
+      
+        '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39'))as varchar(100' +
+        '0))'
+      '         AS posicSucursal,prec.precio_venta'
+      'from producto_cabecera pc'
+      'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
+      
+        'join optica_productos_reconocidos opr on (opr.id_producto=pr.id_' +
+        'producto)'
+      'join articulo a on (a.id_articulo=pc.id_articulo)'
+      
+        'join tipo_articulo ta on (ta.id_tipo_articulo=a.id_tipo_articulo' +
+        ')'
+      'join stock_producto sp on (sp.id_producto =  pr.id_producto)'
+      
+        'join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.id_po' +
+        'sicion_sucursal)'
+      'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'join configuracion c on (c.id_sucursal=su.id_sucursal)'
+      'left join medida m on (pr.id_medida=m.id_medida)'
+      
+        'join precio prec on ((prec.id_producto=pr.id_producto)and(prec.i' +
+        'd_sucursal=c.id_sucursal))'
+      'where (pr.baja<>'#39'S'#39')and(pc.baja<>'#39'S'#39')and(opr.id_os=:id)'
+      'order by pr.id_producto')
+    SQL_Select.Strings = (
+      'select distinct opr.*,sp.id_producto,'
+      '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
+      
+        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
+        #39#39'),'#39#39')||'
+      '       COALESCE ('#39' - Art'#237'culo: '#39' || a.descripcion,'#39#39')||'
+      '       COALESCE ('#39' - Tipo: '#39' || ta.descripcion,'#39#39')||'
+      '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
+      
+        '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39'))as varchar(100' +
+        '0))'
+      '         AS posicSucursal,prec.precio_venta')
+    SQL_From.Strings = (
+      'from producto_cabecera pc'
+      'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
+      
+        'join optica_productos_reconocidos opr on (opr.id_producto=pr.id_' +
+        'producto)'
+      'join articulo a on (a.id_articulo=pc.id_articulo)'
+      
+        'join tipo_articulo ta on (ta.id_tipo_articulo=a.id_tipo_articulo' +
+        ')'
+      'join stock_producto sp on (sp.id_producto =  pr.id_producto)'
+      
+        'join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.id_po' +
+        'sicion_sucursal)'
+      'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'join configuracion c on (c.id_sucursal=su.id_sucursal)'
+      'left join medida m on (pr.id_medida=m.id_medida)'
+      
+        'join precio prec on ((prec.id_producto=pr.id_producto)and(prec.i' +
+        'd_sucursal=c.id_sucursal))')
+    SQL_Where.Strings = (
+      'where (pr.baja<>'#39'S'#39')and(pc.baja<>'#39'S'#39')and(opr.id_os=:id)')
+    SQL_Orden.Strings = (
+      'order by pr.id_producto')
+    UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
+    Left = 200
+    Top = 280
+  end
+  object ISConsultas: TISAlmacenSQL
+    Consultas = <
+      item
+        Titulo = 'ZQ_PlanProducto'
+        Consulta.Strings = (
+          'select opr.*'
+          'from optica_productos_reconocidos opr'
+          'where opr.id_os=:id'
+          '')
+      end>
+    Left = 584
+    Top = 262
+  end
+  object ZU_PlanProducto: TZUpdateSQL
+    DeleteSQL.Strings = (
+      'DELETE FROM optica_productos_reconocidos'
+      'WHERE'
+      
+        '  optica_productos_reconocidos.ID_PRODUCTOS_RECONOCIDOS = :OLD_I' +
+        'D_PRODUCTOS_RECONOCIDOS')
+    InsertSQL.Strings = (
+      'INSERT INTO optica_productos_reconocidos'
+      '  (MONTO_RECONOCIDO, ID_PRODUCTO, ID_OS)'
+      'VALUES'
+      '  (:MONTO_RECONOCIDO, :ID_PRODUCTO, :ID_OS)')
+    ModifySQL.Strings = (
+      'UPDATE optica_productos_reconocidos SET'
+      '  MONTO_RECONOCIDO = :MONTO_RECONOCIDO,'
+      '  ID_PRODUCTO = :ID_PRODUCTO,'
+      '  ID_OS = :ID_OS'
+      'WHERE'
+      
+        '  optica_productos_reconocidos.ID_PRODUCTOS_RECONOCIDOS = :OLD_I' +
+        'D_PRODUCTOS_RECONOCIDOS')
+    UseSequenceFieldForRefreshSQL = False
+    Left = 672
+    Top = 262
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'MONTO_RECONOCIDO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_PRODUCTO'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'ID_OS'
+        ParamType = ptUnknown
+      end
+      item
+        DataType = ftUnknown
+        Name = 'OLD_ID_PRODUCTOS_RECONOCIDOS'
+        ParamType = ptUnknown
+      end>
+  end
+  object ISVistaPreviaQR1: TISVistaPreviaQR
+    Reporte = RepProds
+    ShowModal = False
+    Left = 192
+    Top = 342
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
+    Grilla = grillaProductos
+    Filtros = <
+      item
+        TituloColumna = ' Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Monto Reconocido'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 400
+    Top = 86
   end
 end
