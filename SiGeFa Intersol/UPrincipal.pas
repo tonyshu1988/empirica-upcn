@@ -184,6 +184,9 @@ type
     CoberturaPlanes1: TMenuItem;
     N12: TMenuItem;
     N13: TMenuItem;
+    AOP_Cajero: TAction;
+    N14: TMenuItem;
+    CajeroOpticas1: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -250,6 +253,7 @@ type
     procedure AOP_ABMLiquidarOSExecute(Sender: TObject);
     procedure AEstadisticasLibroIVAExecute(Sender: TObject);
     procedure AOP_PlanesProductosExecute(Sender: TObject);
+    procedure AOP_CajeroExecute(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -293,7 +297,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UOP_ABMObraSocial, UPreventa_Historico, UFichaEmpleado,
   UOP_ABMLaboratorio, UOP_ABMOrden_Tecnica, UCuentaCorrienteProveedor,
   UABM_CPB_FacturaObraSocial, UOP_Reportes, UOP_ABM_LiquidacionOS,
-  UEstadisticasLibroIVA, UOP_ReconocimProds;
+  UEstadisticasLibroIVA, UOP_ReconocimProds, UOP_Cajero;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -1032,6 +1036,11 @@ end;
 procedure TFPrincipal.AOP_PlanesProductosExecute(Sender: TObject);
 begin
   ISVentanas1.Abrir(Sender, TFOP_ReconocimientoProds, FOP_ReconocimientoProds);
+end;
+
+procedure TFPrincipal.AOP_CajeroExecute(Sender: TObject);
+begin
+  ISVentanas1.Abrir(Sender, TFOP_Cajero, FOP_Cajero);
 end;
 
 end.

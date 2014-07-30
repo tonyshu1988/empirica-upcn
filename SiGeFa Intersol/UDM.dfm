@@ -1,7 +1,7 @@
 object DM: TDM
   OldCreateOrder = False
   Left = 676
-  Top = 152
+  Top = 136
   Height = 656
   Width = 534
   object Conexion: TZConnection
@@ -14,7 +14,6 @@ object DM: TDM
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
-    Connected = True
     HostName = 'localhost'
     Port = 3052
     Database = 'C:\SISTEMAS\SiGeFa Intersol\Bases\SIGEFA.FDB'

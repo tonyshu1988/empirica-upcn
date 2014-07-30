@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
   Left = 347
-  Top = 176
+  Top = 178
   Width = 929
   Height = 483
   Caption = 'SiGeFa - Sistema de Gesti'#243'n y Facturaci'#243'n'
@@ -5173,6 +5173,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 2
       OnExecute = AOP_ABMLabExecute
     end
+    object AOP_Cajero: TAction
+      Caption = 'Cajero Opticas'
+      ImageIndex = 34
+      OnExecute = AOP_CajeroExecute
+    end
     object AOP_ABMFacturaOS: TAction
       Caption = 'ABM Factura Obra Social'
       ImageIndex = 64
@@ -5371,6 +5376,13 @@ object FPrincipal: TFPrincipal
       object ABMLiquidacinObraSocial1: TMenuItem
         Tag = 1
         Action = AOP_ABMLiquidarOS
+      end
+      object N14: TMenuItem
+        Caption = '-'
+      end
+      object CajeroOpticas1: TMenuItem
+        Tag = 1
+        Action = AOP_Cajero
       end
       object N13: TMenuItem
         Caption = '-'
