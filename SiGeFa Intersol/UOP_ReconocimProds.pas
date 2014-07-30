@@ -8,7 +8,7 @@ uses
   dxBarExtItems, cxClasses, DB, ZAbstractRODataset, ZAbstractDataset,
   ZDataset, Menus, ISListadoSQL, ISLlenarCombo,UBuscarProducto,
   ISBusquedaAvanzada, ISAlmacenSQL, ZSqlUpdate, ISVistaPreviaQR,
-  ISOrdenarGrilla;
+  ISOrdenarGrilla, ActnList, XPStyleActnCtrls, ActnMan;
 
 type
   TFOP_ReconocimientoProds = class(TForm)
@@ -88,6 +88,19 @@ type
     QRExpr1: TQRExpr;
     QRExpr2: TQRExpr;
     ISOrdenarGrilla1: TISOrdenarGrilla;
+    ATeclasRapidas: TActionManager;
+    ABuscar: TAction;
+    ANuevo: TAction;
+    ATipoIVA: TAction;
+    ACliente: TAction;
+    ASalir: TAction;
+    AGuardar: TAction;
+    ACancelar: TAction;
+    AVendedor: TAction;
+    ANuevoProd: TAction;
+    ANuevaFormaPago: TAction;
+    APreventa: TAction;
+    AVentaRapida: TAction;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);

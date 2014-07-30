@@ -1984,4 +1984,57 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     Left = 400
     Top = 86
   end
+  object ATeclasRapidas: TActionManager
+    Left = 320
+    Top = 242
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+    end
+    object ANuevo: TAction
+      Caption = 'ABuscarProd'
+      ShortCut = 113
+    end
+    object ATipoIVA: TAction
+      Caption = 'ATipoIVA'
+      ShortCut = 115
+    end
+    object ACliente: TAction
+      Caption = 'ACliente'
+      ShortCut = 114
+    end
+    object ASalir: TAction
+      Caption = 'ASalir'
+      ShortCut = 123
+    end
+    object AGuardar: TAction
+      Caption = 'AAceptar'
+      ShortCut = 121
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 122
+    end
+    object AVendedor: TAction
+      Caption = 'AVendedor'
+      ShortCut = 116
+    end
+    object ANuevoProd: TAction
+      Caption = 'ANuevoProd'
+      ShortCut = 117
+    end
+    object ANuevaFormaPago: TAction
+      Caption = 'ANuevaFormaPago'
+      ShortCut = 118
+    end
+    object APreventa: TAction
+      Caption = 'Preventa'
+      ShortCut = 119
+    end
+    object AVentaRapida: TAction
+      Caption = 'Venta '#193'gil'
+      ShortCut = 120
+    end
+  end
 end

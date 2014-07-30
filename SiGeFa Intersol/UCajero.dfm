@@ -3,7 +3,7 @@ object FCajero: TFCajero
   Top = 115
   Width = 1109
   Height = 698
-  Caption = 'Cajero SiGeFa'
+  Caption = 'Subsistema de Caja - SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
