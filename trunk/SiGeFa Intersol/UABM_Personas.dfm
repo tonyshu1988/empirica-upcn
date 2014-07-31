@@ -1,6 +1,6 @@
 object FABM_Personas: TFABM_Personas
-  Left = 348
-  Top = 183
+  Left = 334
+  Top = 147
   Width = 972
   Height = 631
   Caption = 'ABM Personas'
@@ -5164,6 +5164,7 @@ object FABM_Personas: TFABM_Personas
       'order by cl.nombre'
       '')
     UsarWhereOriginal = IS_Sin_Where
+    TituloVentana = 'Buscar'
     Left = 64
     Top = 64
   end
