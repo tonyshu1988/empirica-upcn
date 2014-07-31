@@ -1100,6 +1100,19 @@ begin
   begin
     if (ISListadoObraSocial.Resultado<>'') then
     begin
+        //Verifico que no exista una ObraSocial ya asignada
+        ZQ_PersonaObraSocial.Filter:= 'id_os = ' + ISListadoObraSocial.Resultado;
+        ZQ_PersonaObraSocial.Filtered:= true;
+
+        if not ZQ_PersonaObraSocial.IsEmpty then
+        begin
+          ZQ_PersonaObraSocial.Filtered:= false;
+          ZQ_PersonaObraSocial.Filter:='';
+          Application.MessageBox('La Obra Social/Plan ya fue asignada.', 'Carga Plan/OS', MB_OK + MB_ICONINFORMATION);
+          exit;
+        end;
+        ZQ_PersonaObraSocial.Filtered:= false;
+
         ZQ_PersonaObraSocial.Append;
         ZQ_PersonaObraSocialID_OS.AsInteger := StrToInt(ISListadoObraSocial.Resultado);
         ZQ_PersonaObraSocialID_PERSONA.AsInteger := ZQ_PersonaID_PERSONA.AsInteger;
