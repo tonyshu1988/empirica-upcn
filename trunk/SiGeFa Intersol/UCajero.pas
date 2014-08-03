@@ -1003,7 +1003,6 @@ begin
   end;
 
   RelojStock.Enabled:= false;
-  //lblSinStock.Visible:=False;
   lblMaxVenta.Visible:= False;
 end;
 
@@ -1022,14 +1021,6 @@ begin
       exit;
     end
   end;
-
-//  //Codigo Corto
-//  if id = 'C' then
-//  begin
-//    ZQ_Productos.Close;
-//    ZQ_Productos.sql[15]:= Format('and(p.cod_corto=%s)', [QuotedStr(IdProd)]);
-//    ZQ_Productos.Open;
-//  end;
 
   if id = 'I' then
   begin
