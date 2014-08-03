@@ -1,6 +1,6 @@
 object FOP_Cajero: TFOP_Cajero
-  Left = 335
-  Top = 84
+  Left = 196
+  Top = 16
   Width = 1024
   Height = 771
   Caption = 'Subsistema de Caja Obras Sociales - SiGeFa'
@@ -738,7 +738,7 @@ object FOP_Cajero: TFOP_Cajero
     BevelInner = bvLowered
     BevelWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 7
+    TabOrder = 5
     Visible = False
     object LeerCodBar: TLabel
       Left = 4
@@ -2931,7 +2931,7 @@ object FOP_Cajero: TFOP_Cajero
     BevelOuter = bvSpace
     BevelWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 6
+    TabOrder = 2
     object Label18: TLabel
       Left = 4
       Top = 4
@@ -3202,7 +3202,7 @@ object FOP_Cajero: TFOP_Cajero
     Width = 539
     Height = 308
     BevelInner = bvLowered
-    TabOrder = 5
+    TabOrder = 1
     object Label62: TLabel
       Left = 2
       Top = 2
@@ -3480,15 +3480,15 @@ object FOP_Cajero: TFOP_Cajero
   object PanelContenedorDerecha: TPanel
     Left = 88
     Top = 0
-    Width = 928
-    Height = 692
+    Width = 920
+    Height = 681
     Align = alClient
     Caption = 'PanelContenedorDerecha'
-    TabOrder = 2
+    TabOrder = 0
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 926
+      Width = 918
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -3511,7 +3511,7 @@ object FOP_Cajero: TFOP_Cajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 586
+        Left = 578
         Top = 1
         Width = 339
         Height = 28
@@ -3531,7 +3531,7 @@ object FOP_Cajero: TFOP_Cajero
       object PanelCambiarFecha: TPanel
         Left = 345
         Top = 1
-        Width = 241
+        Width = 233
         Height = 28
         Align = alClient
         BevelOuter = bvNone
@@ -3559,15 +3559,15 @@ object FOP_Cajero: TFOP_Cajero
     object PanelProductosYFPago: TPanel
       Left = 1
       Top = 184
-      Width = 926
-      Height = 507
+      Width = 918
+      Height = 496
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 1
       object Label11: TLabel
         Left = 1
         Top = 1
-        Width = 924
+        Width = 916
         Height = 13
         Align = alTop
         Alignment = taCenter
@@ -3586,8 +3586,8 @@ object FOP_Cajero: TFOP_Cajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 14
-        Width = 924
-        Height = 332
+        Width = 916
+        Height = 321
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3600,8 +3600,8 @@ object FOP_Cajero: TFOP_Cajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 277
-          Width = 922
+          Top = 266
+          Width = 914
           Height = 54
           Align = alBottom
           BevelOuter = bvLowered
@@ -3609,7 +3609,7 @@ object FOP_Cajero: TFOP_Cajero
           object Label36: TLabel
             Left = 1
             Top = 37
-            Width = 920
+            Width = 912
             Height = 16
             Align = alBottom
             Alignment = taCenter
@@ -3628,7 +3628,7 @@ object FOP_Cajero: TFOP_Cajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 1
-            Width = 920
+            Width = 912
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3644,7 +3644,7 @@ object FOP_Cajero: TFOP_Cajero
           object lblMontoProds: TLabel
             Left = 1
             Top = 16
-            Width = 920
+            Width = 912
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3669,8 +3669,8 @@ object FOP_Cajero: TFOP_Cajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 922
-          Height = 276
+          Width = 914
+          Height = 265
           Align = alClient
           Color = 15527129
           DataSource = DS_DetalleFactura
@@ -3751,8 +3751,8 @@ object FOP_Cajero: TFOP_Cajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 346
-        Width = 924
+        Top = 335
+        Width = 916
         Height = 89
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -3760,7 +3760,7 @@ object FOP_Cajero: TFOP_Cajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 922
+          Width = 914
           Height = 87
           Align = alClient
           Color = 15527129
@@ -3854,8 +3854,8 @@ object FOP_Cajero: TFOP_Cajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 435
-        Width = 924
+        Top = 424
+        Width = 916
         Height = 71
         Align = alBottom
         BevelOuter = bvLowered
@@ -3863,7 +3863,7 @@ object FOP_Cajero: TFOP_Cajero
         object lblMaxVenta: TLabel
           Left = 1
           Top = 1
-          Width = 922
+          Width = 914
           Height = 20
           Align = alTop
           Alignment = taCenter
@@ -3889,7 +3889,7 @@ object FOP_Cajero: TFOP_Cajero
         object Panel1: TPanel
           Left = 1
           Top = 29
-          Width = 922
+          Width = 914
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
@@ -3897,7 +3897,7 @@ object FOP_Cajero: TFOP_Cajero
           object lblTotAPagar: TLabel
             Left = 152
             Top = 0
-            Width = 770
+            Width = 762
             Height = 41
             Align = alClient
             Alignment = taRightJustify
@@ -3939,14 +3939,14 @@ object FOP_Cajero: TFOP_Cajero
     object PanelDetalles: TPanel
       Left = 1
       Top = 31
-      Width = 926
+      Width = 918
       Height = 153
       Align = alTop
       TabOrder = 2
       object PanelCabeceraFactura: TPanel
         Left = 547
         Top = 1
-        Width = 378
+        Width = 370
         Height = 110
         Align = alClient
         BevelOuter = bvLowered
@@ -3960,7 +3960,7 @@ object FOP_Cajero: TFOP_Cajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 376
+          Width = 368
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4121,7 +4121,7 @@ object FOP_Cajero: TFOP_Cajero
       object PanelDetalleOrdenOptica: TPanel
         Left = 1
         Top = 111
-        Width = 924
+        Width = 916
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
@@ -4129,7 +4129,7 @@ object FOP_Cajero: TFOP_Cajero
         object Label14: TLabel
           Left = 0
           Top = 0
-          Width = 924
+          Width = 916
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4439,7 +4439,7 @@ object FOP_Cajero: TFOP_Cajero
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -6820,6 +6820,7 @@ object FOP_Cajero: TFOP_Cajero
       Visible = ivAlways
       LargeImageIndex = 7
       ShortCut = 112
+      OnClick = accionBtnBuscar
       AutoGrayScale = False
     end
     object btnBuscarProductoAvanzada: TdxBarLargeButton
@@ -6854,6 +6855,7 @@ object FOP_Cajero: TFOP_Cajero
       Visible = ivAlways
       LargeImageIndex = 87
       ShortCut = 116
+      OnClick = btnBuscarVendedorClick
       AutoGrayScale = False
     end
     object btnLeerCB: TdxBarLargeButton
@@ -7713,5 +7715,234 @@ object FOP_Cajero: TFOP_Cajero
   object DS_Sucursal: TDataSource
     Left = 739
     Top = 273
+  end
+  object ZQ_Productos: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
+        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,pc.im' +
+        'agen'
+      
+        ',pc.nombre||'#39'  -  M: '#39'||coalesce(m.medida,'#39#39')||'#39'  -  CB:'#39'||coale' +
+        'sce(p.codigo_barra,'#39#39') DETALLE_PROD, sp.stock_actual,sp.id_stock' +
+        '_producto,'
+      
+        'pr.*,p.id_producto,p.id_medida,p.id_prod_cabecera,p.descripcion,' +
+        'p.cod_corto,p.codigo_barra,p.stock_max,p.stock_min,p.llevar_stoc' +
+        'k,'
+      'p.baja,ps.seccion'
+      'from producto_cabecera pc'
+      'join producto p on (p.id_prod_cabecera = pc.id_prod_cabecera)'
+      'join stock_producto sp on (sp.id_producto=p.id_producto)'
+      
+        'join posicion_sucursal ps on (ps.id_posicion_sucursal=sp.id_posi' +
+        'cion_sucursal)'
+      'left join medida m on (p.id_medida = m.id_medida)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      
+        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
+        'rticulo)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'join configuracion c on (c.id_sucursal=ps.id_sucursal)'
+      
+        'join precio pr on ((pr.id_producto=p.id_producto)and(pr.id_sucur' +
+        'sal=c.id_sucursal))'
+      'where (pc.baja <> '#39'S'#39')and(ps.punto_salida='#39'S'#39')'
+      'and(p.cod_corto=:prod)'
+      ''
+      ''
+      ''
+      ''
+      '')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'prod'
+        ParamType = ptUnknown
+      end>
+    Left = 624
+    Top = 336
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'prod'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ProductosNOMBRE_PRODUCTO: TStringField
+      FieldName = 'NOMBRE_PRODUCTO'
+      Size = 100
+    end
+    object ZQ_ProductosMEDIDA: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object ZQ_ProductosARTICULO: TStringField
+      FieldName = 'ARTICULO'
+      Size = 200
+    end
+    object ZQ_ProductosTIPO_ARTICULO: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object ZQ_ProductosNOMBRE_MARCA: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object ZQ_ProductosDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object ZQ_ProductosCOD_CORTO: TStringField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_ProductosCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ProductosID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_ProductosIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object ZQ_ProductosDETALLE_PROD: TStringField
+      FieldName = 'DETALLE_PROD'
+      ReadOnly = True
+      Size = 300
+    end
+    object ZQ_ProductosSTOCK_ACTUAL: TFloatField
+      FieldName = 'STOCK_ACTUAL'
+    end
+    object ZQ_ProductosID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+      Required = True
+    end
+    object ZQ_ProductosID_MEDIDA: TIntegerField
+      FieldName = 'ID_MEDIDA'
+    end
+    object ZQ_ProductosID_PROD_CABECERA: TIntegerField
+      FieldName = 'ID_PROD_CABECERA'
+      Required = True
+    end
+    object ZQ_ProductosSTOCK_MAX: TFloatField
+      FieldName = 'STOCK_MAX'
+    end
+    object ZQ_ProductosSTOCK_MIN: TFloatField
+      FieldName = 'STOCK_MIN'
+    end
+    object ZQ_ProductosLLEVAR_STOCK: TStringField
+      FieldName = 'LLEVAR_STOCK'
+      Size = 1
+    end
+    object ZQ_ProductosPRECIO_COSTO_CIMPUESTOS: TFloatField
+      FieldName = 'PRECIO_COSTO_CIMPUESTOS'
+    end
+    object ZQ_ProductosIMPUESTO_ADICIONAL1: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL1'
+    end
+    object ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField
+      FieldName = 'IMPUESTO_ADICIONAL2'
+    end
+    object ZQ_ProductosBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_ProductosID_PRECIO: TIntegerField
+      FieldName = 'ID_PRECIO'
+      Required = True
+    end
+    object ZQ_ProductosID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_ProductosPRECIO_COSTO: TFloatField
+      FieldName = 'PRECIO_COSTO'
+    end
+    object ZQ_ProductosPRECIO_VENTA: TFloatField
+      FieldName = 'PRECIO_VENTA'
+    end
+    object ZQ_ProductosCOEF_GANANCIA: TFloatField
+      FieldName = 'COEF_GANANCIA'
+    end
+    object ZQ_ProductosCOEF_DESCUENTO: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+    end
+    object ZQ_ProductosIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_ProductosIMPUESTO_IVA: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+    end
+    object ZQ_ProductosPRECIO1: TFloatField
+      FieldName = 'PRECIO1'
+    end
+    object ZQ_ProductosPRECIO2: TFloatField
+      FieldName = 'PRECIO2'
+    end
+    object ZQ_ProductosPRECIO3: TFloatField
+      FieldName = 'PRECIO3'
+    end
+    object ZQ_ProductosPRECIO4: TFloatField
+      FieldName = 'PRECIO4'
+    end
+    object ZQ_ProductosPRECIO5: TFloatField
+      FieldName = 'PRECIO5'
+    end
+    object ZQ_ProductosSECCION: TStringField
+      FieldName = 'SECCION'
+      Size = 50
+    end
+  end
+  object ISListadoProducto: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      
+        'select sp.id_stock_producto,cast((  COALESCE ('#39'Secci'#243'n: '#39' || ps.' +
+        'seccion,'#39#39')||'
+      '        COALESCE ('#39' - Sector: '#39' || ps.sector,'#39#39')||'
+      '        COALESCE ('#39' - Fila: '#39' || ps.fila,'#39#39')||'
+      
+        '        COALESCE ('#39' - Columna: '#39' || ps.columna,'#39#39'))as varchar(30' +
+        '00))as secc,'
+      '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
+      
+        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
+        #39#39'),'#39#39')||'
+      '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
+      
+        '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39'))as varchar(200' +
+        '0))'
+      '         AS posicSucursal'
+      'from producto_cabecera pc'
+      'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
+      'join stock_producto sp on (sp.id_producto =  pr.id_producto)'
+      
+        'join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.id_po' +
+        'sicion_sucursal)'
+      'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
+      'join configuracion c on (c.id_sucursal=su.id_sucursal)'
+      'left join medida m on (pr.id_medida=m.id_medida)'
+      'where (ps.punto_salida='#39'S'#39')and(pc.baja<>'#39'S'#39')'
+      'order by 3'
+      '')
+    CampoBuscar = 'posicSucursal'
+    CampoBuscar2 = 'secc'
+    CampoClave = 'id_stock_producto'
+    TituloVentana = 'Buscar Producto'
+    TituloBuscar = 'Detalle Producto:'
+    TituloBuscar2 = 'Ubicaci'#243'n:'
+    BuscarDoble = True
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 3000
+    AnchoBuscar2 = 1000
+    Left = 826
+    Top = 269
+  end
+  object RelojStock: TTimer
+    Enabled = False
+    Left = 693
+    Top = 340
   end
 end

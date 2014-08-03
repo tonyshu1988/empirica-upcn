@@ -6,7 +6,8 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   Dialogs, dxBar, dxBarExtItems, cxClasses, DBCtrls, Grids, DBGrids,
   StdCtrls, Mask, Buttons, ComCtrls, ExtCtrls, DB, DBClient,
-  ZAbstractRODataset, ZAbstractDataset, ZDataset, jpeg;
+  ZAbstractRODataset, ZAbstractDataset, ZDataset, jpeg, ISListadoSQL,UBuscarProductoStock,
+  UBuscarPersona,UOP_CargarOrden;
 
 type
   TFOP_Cajero = class(TForm)
@@ -352,9 +353,62 @@ type
     edRecibido: TDBEdit;
     edPorcDctoTotal: TDBEdit;
     DBGrid1: TDBGrid;
+    ZQ_Productos: TZQuery;
+    ZQ_ProductosNOMBRE_PRODUCTO: TStringField;
+    ZQ_ProductosMEDIDA: TStringField;
+    ZQ_ProductosARTICULO: TStringField;
+    ZQ_ProductosTIPO_ARTICULO: TStringField;
+    ZQ_ProductosNOMBRE_MARCA: TStringField;
+    ZQ_ProductosDESCRIPCION: TStringField;
+    ZQ_ProductosCOD_CORTO: TStringField;
+    ZQ_ProductosCODIGO_BARRA: TStringField;
+    ZQ_ProductosID_PRODUCTO: TIntegerField;
+    ZQ_ProductosIMAGEN: TBlobField;
+    ZQ_ProductosDETALLE_PROD: TStringField;
+    ZQ_ProductosSTOCK_ACTUAL: TFloatField;
+    ZQ_ProductosID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_ProductosID_MEDIDA: TIntegerField;
+    ZQ_ProductosID_PROD_CABECERA: TIntegerField;
+    ZQ_ProductosSTOCK_MAX: TFloatField;
+    ZQ_ProductosSTOCK_MIN: TFloatField;
+    ZQ_ProductosLLEVAR_STOCK: TStringField;
+    ZQ_ProductosPRECIO_COSTO_CIMPUESTOS: TFloatField;
+    ZQ_ProductosIMPUESTO_ADICIONAL1: TFloatField;
+    ZQ_ProductosIMPUESTO_ADICIONAL2: TFloatField;
+    ZQ_ProductosBAJA: TStringField;
+    ZQ_ProductosID_PRECIO: TIntegerField;
+    ZQ_ProductosID_SUCURSAL: TIntegerField;
+    ZQ_ProductosPRECIO_COSTO: TFloatField;
+    ZQ_ProductosPRECIO_VENTA: TFloatField;
+    ZQ_ProductosCOEF_GANANCIA: TFloatField;
+    ZQ_ProductosCOEF_DESCUENTO: TFloatField;
+    ZQ_ProductosIMPUESTO_INTERNO: TFloatField;
+    ZQ_ProductosIMPUESTO_IVA: TFloatField;
+    ZQ_ProductosPRECIO1: TFloatField;
+    ZQ_ProductosPRECIO2: TFloatField;
+    ZQ_ProductosPRECIO3: TFloatField;
+    ZQ_ProductosPRECIO4: TFloatField;
+    ZQ_ProductosPRECIO5: TFloatField;
+    ZQ_ProductosSECCION: TStringField;
+    ISListadoProducto: TISListadoSQL;
+    RelojStock: TTimer;
     procedure FormCreate(Sender: TObject);
+    procedure accionBtnBuscar(Sender: TObject);
+    procedure btnBuscarVendedorClick(Sender: TObject);
+    procedure LeerCodigo(id: string; cod: string);
+    procedure LimpiarCodigo;
+    function agregar(detalle: string; prodStock: integer): Boolean;
   private
-    { Private declarations }
+    vsel: TFBuscarProductoStock;
+    vsel2: TFBuscarPersona;
+    vsel3: TFBuscarPersona;
+    vsel5: TFOP_CargarOrden;
+    procedure OnSelProd;
+    procedure OnSelPers;
+    procedure OnSelVendedor;
+    procedure OnSelPreventa;
+    procedure OnSelOrden;
+    procedure pmInputQuery(var Msg: TMessage); message WM_USER + 123;
   public
     { Public declarations }
   end;
@@ -377,7 +431,7 @@ var
   auditoriaFiscalDesde, auditoriaFiscalHasta, auditoriaFiscalTipo: string;
 implementation
 
-uses UDM;
+uses UDM, UPrincipal,strutils;
 
 {$R *.dfm}
 
@@ -433,6 +487,7 @@ if Optica then   // Si la variable optica esta en true entonces el menu optica e
 
   PanelCambiarFecha.Visible:= false;
   CheckBoxCambiarFecha.Checked:= false;
+
   if dm.ISUsrLogin.PermisoAccion('CAJA_CAMBIAR_FECHA') then
   begin
     PanelCambiarFecha.Visible:= true;
@@ -444,14 +499,13 @@ if Optica then   // Si la variable optica esta en true entonces el menu optica e
     ZQ_FormasPago.Filtered:= False;
     ZQ_FormasPago.Filter:= Format('IF = %s', [QuotedStr('S')]);
     ZQ_FormasPago.Filtered:= True;
-    btnEfectivo.Visible:= False;
+
   end
   else
   begin
     ZQ_FormasPago.Filtered:= False;
     ZQ_FormasPago.Filter:= '';
     ZQ_FormasPago.Filtered:= True;
-    btnEfectivo.Visible:= True;
   end;
 
   PABM_FormaPago.Visible:= False;
@@ -462,12 +516,12 @@ if Optica then   // Si la variable optica esta en true entonces el menu optica e
   FPrincipal.Iconos_Menu_32.GetBitmap(1, btnConfirmarVenta.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarVenta.Glyph);
   //Venta Rápida
-  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivo.Glyph);
-  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivoF.Glyph);
+//  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivo.Glyph);
+//  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivoF.Glyph);
 
   //Caption en los filtros
-  btnEfectivo.Caption:= etiqueta_no_fiscal;
-  btnEfectivoF.Caption:= etiqueta_fiscal;
+//  btnEfectivo.Caption:= etiqueta_no_fiscal;
+//  btnEfectivoF.Caption:= etiqueta_fiscal;
 
   //Ver o no los cierres Fiscales
   if (dm.ISUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
@@ -483,8 +537,197 @@ if Optica then   // Si la variable optica esta en true entonces el menu optica e
     btnAuditoriaFiscal.Enabled:= False;
   end;
 
-  panelPreventa(false);
-  panelOrden(false);
+  //panelPreventa(false);
+ // panelOrden(false);
 end;
+
+
+procedure TFOP_Cajero.LeerCodigo(id: string; cod: string);
+begin
+  RelojStock.Enabled:= false;
+  lblMaxVenta.Visible:= False;
+
+  try
+    IdProdStock:= MidStr(cod, 2, Length(cod) - 1);
+  except
+    begin
+      Application.MessageBox('El código de ingresado es incorrecto', 'Código incorrecto', MB_ICONINFORMATION);
+      LimpiarCodigo;
+      exit;
+    end
+  end;
+
+  if id = 'I' then
+  begin
+    ZQ_Productos.Close;
+    ZQ_Productos.sql[15]:= Format('and(sp.id_stock_producto=%d)', [strToInt(IdProdStock)]);
+    ZQ_Productos.Open;
+  end;
+
+  //Codigo de Barras
+  if id = 'B' then
+  begin
+    ZQ_Productos.Close;
+    ZQ_Productos.sql[15]:= Format('and( lpad(p.codigo_barra,%d,%s)=%s)', [LONG_COD_BARRAS, QuotedStr('0'), QuotedStr(cod)]);
+    ZQ_Productos.Open;
+  end;
+
+  if not (ZQ_Productos.IsEmpty) then
+  begin
+    if ((id = 'B') or (id = 'C')) then
+      if ZQ_Productos.RecordCount > 1 then
+      begin
+        Application.MessageBox('El código ingresado corresponde a más de un producto y/o se encuentra ubicado en más de un sector al mismo tiempo.' + char(13) +
+          '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Producto Repetido', MB_ICONINFORMATION);
+        exit;
+      end;
+    if ZQ_ProductosSTOCK_ACTUAL.AsFloat <= 0 then
+    begin
+      Application.MessageBox('El Stock del Producto es Insuficiente.', 'Stock Producto', MB_ICONINFORMATION);
+      exit;
+    end;
+    agregar('', ZQ_ProductosID_STOCK_PRODUCTO.AsInteger);
+  end
+  else
+  begin
+    Application.MessageBox('El producto no pudo ser encontrado.' + char(13) +
+      '(utilice la búsqueda avanzada para seleccionar el adecuado)', 'Código incorrecto', MB_ICONINFORMATION);
+    LimpiarCodigo;
+    exit;
+  end;
+end;
+
+procedure TFOP_Cajero.accionBtnBuscar(Sender: TObject);
+begin
+  if modoCargaPrevia or modoCargaOrden then
+  begin
+    Application.MessageBox('No puede modificar una venta/Orden ya cerrada.', 'Carga Venta', MB_OK + MB_ICONINFORMATION);
+    exit;
+  end;
+
+  if (CD_DetalleFactura.State <> dsBrowse) then
+    exit;
+
+  if cliente < 0 then
+  begin
+    btnBuscarCliente.Click;
+    exit;
+  end;
+
+  if IdVendedor < 0 then
+  begin
+    btnBuscarVendedorClick(self);
+    exit;
+  end;
+
+  if TdxBarLargeButton(Sender).Name = 'btnBuscarProductoListado' then
+  begin
+    if ISListadoProducto.Buscar then
+      if (ISListadoProducto.Resultado <> '') then
+      begin
+      //Traigo el ID_producto_stock
+        codBarras.Text:= 'I' + ISListadoProducto.Resultado;
+        LeerCodigo('I', codBarras.Text);
+      end
+  end
+  else if TdxBarLargeButton(Sender).Name = 'btnBuscarProductoAvanzada' then
+  begin
+    if not Assigned(vsel) then
+      vsel:= TFBuscarProductoStock.Create(nil);
+    vsel.usaCajero:= 'S';
+    vsel.OnSeleccionar:= OnSelProd;
+    vsel.ShowModal;
+    vsel.usaCajero:= 'N';
+  end
+  else if TdxBarLargeButton(Sender).Name = 'btnLeerCB' then
+  begin
+    modoLecturaProd();
+    VerLectorCB(true);
+    LimpiarCodigo();
+    if codBarras.Enabled then
+      codBarras.SetFocus;
+  end;
+end;
+
+procedure TFOP_Cajero.btnBuscarVendedorClick(Sender: TObject);
+begin
+ if (CD_DetalleFactura.State = dsBrowse) then
+  begin
+    if not Assigned(vsel3) then
+      vsel3:= TFBuscarPersona.Create(nil);
+
+    vsel3.configRelacion(RELACION_EMPLEADO, false);
+    vsel3.ISBusqueda.Abrir;
+    vsel3.OnSeleccionar:= OnSelVendedor;
+    vsel3.ShowModal;
+  end;
+end;
+
+procedure TFCajero.LimpiarCodigo;
+begin
+  ZQ_Productos.Close;
+  codBarras.Clear;
+
+  if (CD_DetalleFactura.State <> dsBrowse) then
+  begin
+    CD_DetalleFacturaCANTIDAD.AsFloat:= 1;
+    CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= 0;
+    CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= 0;
+  end;
+
+  RelojStock.Enabled:= false;
+  lblMaxVenta.Visible:= False;
+end;
+
+//AGREGAR UN PRODUCTO
+function TFCajero.agregar(detalle: string; prodStock: integer): Boolean;
+var
+  i: Integer;
+begin
+  Result:= False;
+  if not (ProductoYaCargado(prodStock)) then
+  begin
+    CD_DetalleFactura.Append;
+    CD_DetalleFacturaID_PRODUCTO.AsInteger:= ZQ_ProductosID_PRODUCTO.AsInteger;
+    CD_DetalleFacturaID_PROD_STOCK.AsInteger:= prodStock;
+    CD_DetalleFacturaproducto.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
+    CD_DetalleFacturaDETALLE.AsString:= detalle;
+    CD_DetalleFacturaCANTIDAD.AsFloat:= 1;
+    CD_DetalleFacturaIMPORTE_COSTO.AsFloat:= ZQ_ProductosPRECIO_COSTO.AsFloat;
+    CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
+    CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= (ZQ_ProductosCOEF_DESCUENTO.AsFloat * 100);
+    CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
+    //si el iva que tiene configurado el producto es 0 o nulo le meto 21%
+    if ZQ_ProductosIMPUESTO_IVA.IsNull or (ZQ_ProductosIMPUESTO_IVA.AsFloat = 0) then
+      CD_DetalleFacturaPORC_IVA.AsFloat:= 0.21
+    else
+      CD_DetalleFacturaPORC_IVA.AsFloat:= ZQ_ProductosIMPUESTO_IVA.AsFloat;
+    //base imponible = cantidad x precio unitario de venta
+    CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= (CD_DetalleFacturaCANTIDAD.AsInteger * CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
+    CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
+    //porcentaje de iva x importe final
+    CD_DetalleFacturaIMPORTE_IVA.AsFloat:= CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
+    CD_DetalleFacturaimporte_original.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
+
+    // Cargo los precios que correspondan según configuración de Tipo_Formapago (Columna_precio=0 toma el PRECIO_VENTA)
+    ZQ_ColsPrecios.Close;
+    ZQ_ColsPrecios.Open;
+    for i:= 1 to 5 do
+    begin
+      ZQ_ColsPrecios.Filtered:= False;
+      ZQ_ColsPrecios.Filter:= Format('COLUMNA_PRECIO=%d', [i]);
+      ZQ_ColsPrecios.Filtered:= True;
+
+      if ZQ_ColsPreciosCOLUMNA_PRECIO.AsInteger = i then
+        CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_Productos.FieldByName(Format('PRECIO%d', [i])).AsFloat
+      else
+        CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
+    end;
+
+    modoEscrituraProd();
+    Result:= True;
+  end
+end;
+
 
 end.

@@ -144,9 +144,7 @@ begin
    //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo sino del que esté habilitado
    sql:= Format('where (pc.baja <> ''S'') and (pr.baja <> ''S'') and (sucursal.id_sucursal = %d) '
                +' and (posicion_sucursal.PUNTO_SALIDA = %s)', [SUCURSAL_LOGUEO, QuotedStr('S')]);
-   //              , [SUCURSAL_LOGUEO]);
-   ISBuscarStock.SQL_Where.Text:=sql;
-   ZQ_Stock.SQL[22]:=sql;
+
   end;
 
   if (usaCajero = 'S') then
@@ -155,9 +153,6 @@ begin
    //Punto_Salida es el deposito de salida por defecto, todos los productos salen del mismo sino del que esté habilitado
    sql:= Format('where (pc.baja <> ''S'') and (pr.baja <> ''S'') and (sucursal.id_sucursal = %d) '
                +' and (posicion_sucursal.PUNTO_SALIDA = %s) and (stock_producto.STOCK_ACTUAL > 0)',[SUCURSAL_LOGUEO, QuotedStr('S')]);
-              // +' and (stock_producto.STOCK_ACTUAL > 0)',[SUCURSAL_LOGUEO]);
-   ISBuscarStock.SQL_Where.Text:=sql;
-   ZQ_Stock.SQL[22]:=sql;
   end;
 
   if (usaTransferir = 'S') then
@@ -167,11 +162,10 @@ begin
     begin   //entonces traigo solamente los productos de mi sucursal
       ISBuscarStock.SQL_Where.Clear;
       sql:= Format('where (pc.baja <> ''S'') and (pr.baja <> ''S'') and (sucursal.id_sucursal = %d) ',[SUCURSAL_LOGUEO]);
-      ISBuscarStock.SQL_Where.Text:=sql;
-      ZQ_Stock.SQL[22]:=sql;
     end;
   end;
-
+  ISBuscarStock.SQL_Where.Text:=sql;
+  ZQ_Stock.SQL[22]:=sql;
   ISBuscarStock.Buscar;
 end;
 
