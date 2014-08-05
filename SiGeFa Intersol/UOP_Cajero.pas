@@ -505,19 +505,6 @@ type
     ZQ_TipoIVAVERIFICA_CUIT: TStringField;
     ZQ_ColsPrecios: TZQuery;
     ZQ_ColsPreciosCOLUMNA_PRECIO: TIntegerField;
-    PVentaDirecta: TPanel;
-    Label15: TLabel;
-    Label43: TLabel;
-    Label46: TLabel;
-    Label52: TLabel;
-    Label57: TLabel;
-    DBEdit16: TDBEdit;
-    DBEdit18: TDBEdit;
-    DBEdit19: TDBEdit;
-    BitBtn1: TBitBtn;
-    btnEfectivo: TBitBtn;
-    btnEfectivoF: TBitBtn;
-    Image3: TImage;
     AVentaRapida: TAction;
     ZQ_SaldoNotaCredito: TZQuery;
     ZQ_SaldoNotaCreditoSALDO: TFloatField;
@@ -557,16 +544,6 @@ type
     ZQ_ComprobanteDetalleIMPORTE_COSTO: TFloatField;
     ZQ_PreventaProductosIMPORTE_COSTO: TFloatField;
     btnAuditoriaFiscal: TdxBarLargeButton;
-    PanelAuditoriaCierreZ: TPanel;
-    Label62: TLabel;
-    DateTimeFechaDesde: TDateTimePicker;
-    DateTimeFechaHasta: TDateTimePicker;
-    ComboBoxTipoAuditoria: TComboBox;
-    Label63: TLabel;
-    Label64: TLabel;
-    Label65: TLabel;
-    btnAuditoriaAceptar: TButton;
-    btnAuditoriaCancelar: TButton;
     ZQ_ComprobanteFECHA_COBRADA: TDateTimeField;
     ZQ_ComprobanteFECHA_ENVIADA: TDateField;
     ZQ_ComprobanteFECHA_IMPRESA: TDateField;
@@ -648,11 +625,9 @@ type
     Label72: TLabel;
     DBText1: TDBText;
     Label73: TLabel;
-    Label74: TLabel;
     Label75: TLabel;
     DBText2: TDBText;
     Label76: TLabel;
-    DBEdit27: TDBEdit;
     edCant: TDBEdit;
     edImporteUnitario: TDBEdit;
     DBGridListadoOS: TDBGrid;
@@ -663,6 +638,31 @@ type
     eddesc: TDBEdit;
     DBGridListadoProductos: TDBGrid;
     CD_DetalleFacturamonto_reconocido: TFloatField;
+    DBText3: TDBText;
+    Bevel2: TBevel;
+    Label1: TLabel;
+    PopupReconocim: TPopupMenu;
+    popReconocimAgregar: TMenuItem;
+    popReconocimQuitar: TMenuItem;
+    CD_Reconocimientos: TClientDataSet;
+    CD_Reconocimientosid_os: TIntegerField;
+    CD_Reconocimientoscodigo: TStringField;
+    CD_Reconocimientosdetalle: TStringField;
+    CD_Reconocimientosmonto_reconocido: TFloatField;
+    CD_Reconocimientosobservaciones: TStringField;
+    DS_Reconocimientos: TDataSource;
+    CD_Reconocimientosid_producto: TIntegerField;
+    ISListadoPlanes: TISListadoSQL;
+    ZQ_ReconocimOSS: TZQuery;
+    ZQ_ComprobanteDetalleINSERT_MANUAL: TStringField;
+    ZQ_ComprobanteDetalleID_AUXILIAR: TIntegerField;
+    ZQ_ComprobanteDetalleIMPORTE_RECONOC_OS: TFloatField;
+    ZQ_ReconocimOSSID_RECONOCIMIENTO: TIntegerField;
+    ZQ_ReconocimOSSID_OS: TIntegerField;
+    ZQ_ReconocimOSSID_PRODUCTO: TIntegerField;
+    ZQ_ReconocimOSSPRECIO_VENTA: TFloatField;
+    ZQ_ReconocimOSSMONTO_RECONOCIDO: TFloatField;
+    ZQ_ReconocimOSSID_COMPROBANTE_DETALLE: TIntegerField;
     procedure btsalirClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
     procedure FormCreate(Sender: TObject);
@@ -1558,6 +1558,7 @@ begin
     CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
     CD_DetalleFacturaPORC_DESCUENTO.AsFloat:= (ZQ_ProductosCOEF_DESCUENTO.AsFloat * 100);
     CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
+    CD_DetalleFacturamonto_reconocido.AsFloat:= 0;
     //si el iva que tiene configurado el producto es 0 o nulo le meto 21%
     if ZQ_ProductosIMPUESTO_IVA.IsNull or (ZQ_ProductosIMPUESTO_IVA.AsFloat = 0) then
       CD_DetalleFacturaPORC_IVA.AsFloat:= 0.21
@@ -1658,9 +1659,11 @@ end;
 procedure TFOP_Cajero.modoEscrituraProd();
 begin
   VerLectorCB(false);
+
   PCargaProd.Visible:= True;
   PCargaProd.BringToFront;
-
+  dm.centrarPanel(FOP_Cajero,PCargaProd);
+  
   PanelProductosYFPago.Enabled:= False;
   PanelDetalles.Enabled:= False;
   grupoVertical.Enabled:= False;
