@@ -1,43 +1,415 @@
 object FOP_Cajero: TFOP_Cajero
-  Left = 196
-  Top = 16
-  Width = 1024
-  Height = 771
+  Left = 150
+  Top = 100
+  Width = 1109
+  Height = 674
   Caption = 'Subsistema de Caja Obras Sociales - SiGeFa'
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
-  Font.Name = 'MS Sans Serif'
+  Font.Name = 'Verdana'
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
-  Position = poDefault
+  Position = poScreenCenter
   Visible = True
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object PConfirmarVenta: TPanel
-    Left = 304
-    Top = 56
-    Width = 513
-    Height = 473
+  object PABM_FormaPago: TPanel
+    Left = 101
+    Top = 409
+    Width = 905
+    Height = 116
+    BevelInner = bvLowered
+    BevelOuter = bvSpace
+    BevelWidth = 2
+    BorderStyle = bsSingle
+    TabOrder = 3
+    object Label18: TLabel
+      Left = 4
+      Top = 4
+      Width = 893
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Forma de Pago'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label47: TLabel
+      Left = 482
+      Top = 24
+      Width = 308
+      Height = 13
+      Caption = 'Medio de Pago (Presione F1 para Buscar Forma Pago)'
+      FocusControl = edDetalleMDPCbox
+    end
+    object Label48: TLabel
+      Left = 323
+      Top = 62
+      Width = 62
+      Height = 13
+      Caption = 'MDP Fecha'
+      FocusControl = edMDPFecha
+    end
+    object Label49: TLabel
+      Left = 435
+      Top = 62
+      Width = 64
+      Height = 13
+      Caption = 'MDP Banco'
+      FocusControl = edMDPBanco
+    end
+    object Label50: TLabel
+      Left = 634
+      Top = 62
+      Width = 74
+      Height = 13
+      Caption = 'MDP N'#250'mero'
+      FocusControl = edMDPNro
+    end
+    object Label51: TLabel
+      Left = 16
+      Top = 62
+      Width = 46
+      Height = 13
+      Caption = 'Importe'
+      FocusControl = edImporte
+    end
+    object Label53: TLabel
+      Left = 16
+      Top = 24
+      Width = 40
+      Height = 13
+      Caption = 'C'#243'digo'
+      FocusControl = edCodCuenta
+    end
+    object Label55: TLabel
+      Left = 68
+      Top = 24
+      Width = 283
+      Height = 13
+      Caption = 'Cuenta Detalle (Presione F1 para Buscar Cuenta)'
+      FocusControl = edCuenta
+    end
+    object Label58: TLabel
+      Left = 152
+      Top = 62
+      Width = 101
+      Height = 13
+      Caption = 'Importe de Venta'
+      FocusControl = edImporteVenta
+    end
+    object Label61: TLabel
+      Left = 435
+      Top = 24
+      Width = 40
+      Height = 13
+      Caption = 'C'#243'digo'
+      FocusControl = edCodMDP
+    end
+    object edDetalleMDPCbox: TDBLookupComboBox
+      Left = 482
+      Top = 40
+      Width = 329
+      Height = 21
+      Color = 16771302
+      DataField = 'medioPago'
+      DataSource = DSFpago
+      DropDownRows = 0
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 4
+      Visible = False
+      OnExit = edCodCuentaExit
+      OnKeyUp = buscarFormaPago
+    end
+    object edMDPFecha: TDBEdit
+      Left = 323
+      Top = 76
+      Width = 94
+      Height = 21
+      Color = 15527129
+      DataField = 'MDCP_FECHA'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 7
+    end
+    object edMDPBanco: TDBEdit
+      Left = 435
+      Top = 76
+      Width = 164
+      Height = 21
+      Color = 15527129
+      DataField = 'MDCP_BANCO'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 8
+    end
+    object edMDPNro: TDBEdit
+      Left = 634
+      Top = 76
+      Width = 177
+      Height = 21
+      Color = 15527129
+      DataField = 'MDCP_CHEQUE'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 9
+    end
+    object edImporte: TDBEdit
+      Left = 16
+      Top = 76
+      Width = 134
+      Height = 21
+      Color = 15527129
+      DataField = 'IMPORTE'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 5
+      OnExit = edCodCuentaExit
+    end
+    object edCodCuenta: TDBEdit
+      Left = 16
+      Top = 40
+      Width = 41
+      Height = 21
+      Color = 15527129
+      DataField = 'CUENTA_INGRESO'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 0
+      OnExit = edCodCuentaExit
+      OnKeyUp = buscarCuenta
+    end
+    object edCuenta: TDBLookupComboBox
+      Left = 67
+      Top = 40
+      Width = 350
+      Height = 21
+      Color = 15527129
+      DataField = '_ctaIngreso'
+      DataSource = DSFpago
+      DropDownRows = 0
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnExit = edCodCuentaExit
+      OnKeyUp = buscarCuenta
+    end
+    object edImporteVenta: TDBEdit
+      Left = 152
+      Top = 76
+      Width = 134
+      Height = 21
+      Color = 15527129
+      DataField = '_importeVenta'
+      DataSource = DSFpago
+      Enabled = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 6
+    end
+    object edCodMDP: TDBEdit
+      Left = 435
+      Top = 40
+      Width = 41
+      Height = 21
+      Color = 15527129
+      DataField = 'ID_TIPO_FORMAPAG'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      OnExit = edCodCuentaExit
+      OnKeyUp = buscarFormaPago
+    end
+    object btFPAceptar: TBitBtn
+      Left = 815
+      Top = 40
+      Width = 79
+      Height = 25
+      Caption = 'Aceptar'
+      TabOrder = 10
+      OnClick = btFPAceptarClick
+    end
+    object btFPCancelar: TBitBtn
+      Left = 815
+      Top = 72
+      Width = 79
+      Height = 25
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 11
+      OnClick = btFPCancelarClick
+    end
+    object edDetalleMDP: TDBEdit
+      Left = 482
+      Top = 40
+      Width = 329
+      Height = 21
+      Color = 15527129
+      DataField = 'medioPago'
+      DataSource = DSFpago
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      OnExit = edCodCuentaExit
+      OnKeyUp = buscarFormaPago
+    end
+  end
+  object PVentaDirecta: TPanel
+    Left = 328
+    Top = 128
+    Width = 481
+    Height = 295
     BevelInner = bvLowered
     BevelWidth = 2
     BorderWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 8
-    object Bevel1: TBevel
-      Left = 8
-      Top = 32
-      Width = 297
-      Height = 145
+    TabOrder = 4
+    Visible = False
+    object Label15: TLabel
+      Left = 5
+      Top = 166
+      Width = 467
+      Height = 17
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Seleccione su Forma de Pago'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
     end
-    object Image1: TImage
-      Left = 310
-      Top = 30
-      Width = 193
-      Height = 147
+    object Label43: TLabel
+      Left = 14
+      Top = 37
+      Width = 56
+      Height = 13
+      Caption = 'Sucursal'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label46: TLabel
+      Left = 14
+      Top = 117
+      Width = 62
+      Height = 13
+      Caption = 'Vendedor'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label52: TLabel
+      Left = 14
+      Top = 77
+      Width = 45
+      Height = 13
+      Caption = 'Cliente'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label57: TLabel
+      Left = 6
+      Top = 6
+      Width = 465
+      Height = 24
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Venta / Facturaci'#243'n '#193'gil'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
+    end
+    object Image3: TImage
+      Left = 304
+      Top = 38
+      Width = 169
+      Height = 115
       Center = True
       Picture.Data = {
         0A544A504547496D6167652E110000FFD8FFE000104A46494600010101006000
@@ -181,553 +553,78 @@ object FOP_Cajero: TFOP_Cajero
       Proportional = True
       Transparent = True
     end
-    object Label29: TLabel
-      Left = 6
-      Top = 182
-      Width = 497
-      Height = 17
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Formas de Pago'
-      Color = 12648448
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Transparent = False
-      Layout = tlCenter
-    end
-    object Label30: TLabel
+    object DBEdit16: TDBEdit
       Left = 14
-      Top = 37
-      Width = 56
-      Height = 13
-      Caption = 'Sucursal'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label31: TLabel
-      Left = 14
-      Top = 73
-      Width = 62
-      Height = 13
-      Caption = 'Vendedor'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label32: TLabel
-      Left = 14
-      Top = 109
-      Width = 45
-      Height = 13
-      Caption = 'Cliente'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label34: TLabel
-      Left = 14
-      Top = 154
-      Width = 121
-      Height = 13
-      Caption = 'Descuento Cliente:'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label35: TLabel
-      Left = 214
-      Top = 154
-      Width = 14
-      Height = 13
-      Caption = '%'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-    end
-    object Label41: TLabel
-      Left = 6
-      Top = 6
-      Width = 497
-      Height = 24
-      Align = alTop
-      Alignment = taCenter
-      AutoSize = False
-      Caption = 'Verifique los datos de su Factura'
-      Color = 12648448
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      Transparent = False
-      Layout = tlCenter
-    end
-    object DBEdit3: TDBEdit
-      Left = 14
-      Top = 86
-      Width = 279
+      Top = 130
+      Width = 294
       Height = 21
+      TabStop = False
       BevelInner = bvNone
       BevelOuter = bvNone
       Color = 15527129
       DataField = 'nVendedor'
+      DataSource = DS_Comprobante
       ReadOnly = True
-      TabOrder = 1
+      TabOrder = 5
     end
-    object DBEdit15: TDBEdit
+    object DBEdit18: TDBEdit
       Left = 14
       Top = 50
-      Width = 279
+      Width = 294
       Height = 21
+      TabStop = False
       BevelInner = bvNone
       BevelOuter = bvNone
       Color = 15527129
       DataField = 'NOMBRE'
       DataSource = DS_Sucursal
       ReadOnly = True
-      TabOrder = 0
+      TabOrder = 3
     end
-    object DBEdit16: TDBEdit
+    object DBEdit19: TDBEdit
       Left = 14
-      Top = 122
-      Width = 279
+      Top = 90
+      Width = 294
       Height = 21
+      TabStop = False
       BevelInner = bvNone
       BevelOuter = bvNone
       Color = 15527129
       DataField = 'pers_nombre'
+      DataSource = DS_Comprobante
       ReadOnly = True
-      TabOrder = 2
-    end
-    object Panel4: TPanel
-      Left = 6
-      Top = 310
-      Width = 497
-      Height = 153
-      Align = alBottom
       TabOrder = 4
-      object Panel5: TPanel
-        Left = 296
-        Top = 1
-        Width = 200
-        Height = 97
-        Align = alRight
-        BevelOuter = bvNone
-        TabOrder = 0
-        object btnConfirmarVenta: TBitBtn
-          Left = 23
-          Top = 0
-          Width = 162
-          Height = 44
-          BiDiMode = bdRightToLeft
-          Caption = 'Aceptar Venta'
-          ParentBiDiMode = False
-          TabOrder = 0
-        end
-        object btnCancelarVenta: TBitBtn
-          Left = 23
-          Top = 48
-          Width = 162
-          Height = 44
-          Cancel = True
-          Caption = 'Cancelar Venta'
-          TabOrder = 1
-        end
-      end
-      object Panel7: TPanel
-        Left = 1
-        Top = 1
-        Width = 295
-        Height = 97
-        Align = alLeft
-        BevelOuter = bvNone
-        TabOrder = 1
-        object Panel11: TPanel
-          Left = 0
-          Top = 57
-          Width = 295
-          Height = 33
-          Align = alTop
-          BevelOuter = bvNone
-          BorderStyle = bsSingle
-          Caption = 'Panel11'
-          TabOrder = 0
-          object Label37: TLabel
-            Left = 0
-            Top = 0
-            Width = 113
-            Height = 29
-            Align = alLeft
-            Caption = ' Total Venta:'
-            Color = 9568200
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -16
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object lblVtaTotal: TLabel
-            Left = 113
-            Top = 0
-            Width = 178
-            Height = 29
-            Align = alClient
-            Alignment = taRightJustify
-            Caption = '$ 0.00'
-            Color = 9568200
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -16
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-        end
-        object Panel9: TPanel
-          Left = 0
-          Top = 19
-          Width = 295
-          Height = 19
-          Align = alTop
-          BevelOuter = bvNone
-          BorderStyle = bsSingle
-          Caption = 'Panel9'
-          TabOrder = 1
-          object Label39: TLabel
-            Left = 0
-            Top = 0
-            Width = 74
-            Height = 15
-            Align = alLeft
-            Caption = ' Total Dcto:'
-            Color = 12566527
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object lblVtaDesc: TLabel
-            Left = 74
-            Top = 0
-            Width = 217
-            Height = 15
-            Align = alClient
-            Alignment = taRightJustify
-            Caption = '$ 0.00'
-            Color = 12566527
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-        end
-        object Panel8: TPanel
-          Left = 0
-          Top = 0
-          Width = 295
-          Height = 19
-          Align = alTop
-          BevelOuter = bvNone
-          BorderStyle = bsSingle
-          Caption = 'Panel8'
-          TabOrder = 2
-          object lblVtaSubtotal: TLabel
-            Left = 65
-            Top = 0
-            Width = 226
-            Height = 15
-            Align = alClient
-            Alignment = taRightJustify
-            Caption = '$ 0.00'
-            Color = 12713983
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object Label33: TLabel
-            Left = 0
-            Top = 0
-            Width = 65
-            Height = 15
-            Align = alLeft
-            Caption = ' SubTotal:'
-            Color = 12713983
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-        end
-        object Panel10: TPanel
-          Left = 0
-          Top = 38
-          Width = 295
-          Height = 19
-          Align = alTop
-          BevelOuter = bvNone
-          BorderStyle = bsSingle
-          Caption = 'Panel10'
-          TabOrder = 3
-          object Label38: TLabel
-            Left = 0
-            Top = 0
-            Width = 68
-            Height = 15
-            Align = alLeft
-            Caption = ' Total IVA:'
-            Color = 16706765
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object lblVtaIVA: TLabel
-            Left = 68
-            Top = 0
-            Width = 223
-            Height = 15
-            Align = alClient
-            Alignment = taRightJustify
-            Caption = '$ 0.00'
-            Color = 16706765
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-        end
-      end
-      object Panel14: TPanel
-        Left = 1
-        Top = 98
-        Width = 495
-        Height = 54
-        Align = alBottom
-        BevelOuter = bvNone
-        TabOrder = 2
-        object Panel12: TPanel
-          Left = 0
-          Top = 29
-          Width = 495
-          Height = 25
-          Align = alBottom
-          BevelOuter = bvNone
-          BorderStyle = bsSingle
-          Caption = 'Panel11'
-          TabOrder = 0
-          object Label3: TLabel
-            Left = 0
-            Top = 0
-            Width = 72
-            Height = 21
-            Align = alLeft
-            Caption = ' Cambio:'
-            Color = 16728642
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object lblCambio: TLabel
-            Left = 72
-            Top = 0
-            Width = 419
-            Height = 21
-            Align = alClient
-            Alignment = taRightJustify
-            Caption = '$ 0.00'
-            Color = 16728642
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-        end
-        object Panel13: TPanel
-          Left = 0
-          Top = 0
-          Width = 495
-          Height = 29
-          Align = alClient
-          BevelOuter = bvNone
-          BorderStyle = bsSingle
-          Caption = 'Panel11'
-          TabOrder = 1
-          object Label44: TLabel
-            Left = 0
-            Top = 0
-            Width = 152
-            Height = 25
-            Align = alLeft
-            Caption = ' Recibido Contado:'
-            Color = 16728642
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object Label45: TLabel
-            Left = 152
-            Top = 0
-            Width = 339
-            Height = 25
-            Align = alClient
-            Alignment = taRightJustify
-            Color = 16728642
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Layout = tlCenter
-          end
-          object edRecibido: TDBEdit
-            Left = 335
-            Top = 4
-            Width = 153
-            Height = 16
-            AutoSize = False
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BiDiMode = bdRightToLeft
-            BorderStyle = bsNone
-            CharCase = ecUpperCase
-            Color = 16728642
-            DataField = 'montoRecibido'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -15
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentBiDiMode = False
-            ParentFont = False
-            TabOrder = 0
-          end
-        end
-      end
     end
-    object edPorcDctoTotal: TDBEdit
-      Left = 144
-      Top = 150
-      Width = 65
-      Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 14671871
-      DataField = 'PORC_DESCUENTO'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 3
+    object BitBtn1: TBitBtn
+      Left = 394
+      Top = 259
+      Width = 75
+      Height = 22
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 2
+      TabStop = False
+      OnClick = BitBtn1Click
     end
-    object DBGrid1: TDBGrid
-      Left = 14
-      Top = 204
-      Width = 483
-      Height = 100
-      Color = 15527129
-      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-      ReadOnly = True
-      TabOrder = 5
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Color = 16772332
-          Expanded = False
-          FieldName = '_medioPago'
-          Title.Caption = 'Medio Pago'
-          Width = 260
-          Visible = True
-        end
-        item
-          Color = clWhite
-          Expanded = False
-          FieldName = 'importeVenta'
-          Title.Caption = 'Importe Venta'
-          Visible = True
-        end
-        item
-          Color = clWhite
-          Expanded = False
-          FieldName = 'importeDescuento'
-          Title.Caption = 'Importe c/Descuento'
-          Width = 93
-          Visible = True
-        end>
+    object btnEfectivo: TBitBtn
+      Left = 108
+      Top = 200
+      Width = 97
+      Height = 65
+      Caption = 'Efectivo'
+      TabOrder = 0
+      OnClick = btnEfectivoClick
+      Layout = blGlyphTop
+    end
+    object btnEfectivoF: TBitBtn
+      Left = 260
+      Top = 200
+      Width = 97
+      Height = 65
+      Caption = 'Efectivo F'
+      TabOrder = 1
+      OnClick = btnEfectivoFClick
+      Layout = blGlyphTop
     end
   end
   object PLeerCodigo: TPanel
@@ -738,7 +635,7 @@ object FOP_Cajero: TFOP_Cajero
     BevelInner = bvLowered
     BevelWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 5
+    TabOrder = 0
     Visible = False
     object LeerCodBar: TLabel
       Left = 4
@@ -2861,7 +2758,7 @@ object FOP_Cajero: TFOP_Cajero
       Stretch = True
       Transparent = True
     end
-    object Label1: TLabel
+    object Label8: TLabel
       Left = 222
       Top = 32
       Width = 107
@@ -2920,27 +2817,182 @@ object FOP_Cajero: TFOP_Cajero
       ShowHint = True
       TabOrder = 0
       Text = '12345678901234567890'
+      OnEnter = codBarrasEnter
+      OnKeyDown = codBarrasKeyDown
     end
   end
-  object PABM_FormaPago: TPanel
-    Left = 101
-    Top = 409
-    Width = 905
-    Height = 116
+  object PConfirmarVenta: TPanel
+    Left = 304
+    Top = 56
+    Width = 513
+    Height = 473
     BevelInner = bvLowered
-    BevelOuter = bvSpace
     BevelWidth = 2
+    BorderWidth = 2
     BorderStyle = bsSingle
-    TabOrder = 2
-    object Label18: TLabel
-      Left = 4
-      Top = 4
-      Width = 893
-      Height = 16
-      Align = alTop
+    TabOrder = 1
+    object Bevel1: TBevel
+      Left = 8
+      Top = 32
+      Width = 297
+      Height = 145
+    end
+    object Image1: TImage
+      Left = 310
+      Top = 30
+      Width = 193
+      Height = 147
+      Center = True
+      Picture.Data = {
+        0A544A504547496D6167652E110000FFD8FFE000104A46494600010101006000
+        600000FFDB00430007050606060507060606080807090B120C0B0A0A0B171011
+        0D121B171C1C1A171A191D212A241D1F2820191A253225282C2D2F302F1D2334
+        38342E372A2E2F2EFFDB0043010808080B0A0B160C0C162E1E1A1E2E2E2E2E2E
+        2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E2E
+        2E2E2E2E2E2E2E2E2E2E2E2E2EFFC00011080087008703012200021101031101
+        FFC4001F0000010501010101010100000000000000000102030405060708090A
+        0BFFC400B5100002010303020403050504040000017D01020300041105122131
+        410613516107227114328191A1082342B1C11552D1F02433627282090A161718
+        191A25262728292A3435363738393A434445464748494A535455565758595A63
+        6465666768696A737475767778797A838485868788898A92939495969798999A
+        A2A3A4A5A6A7A8A9AAB2B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6
+        D7D8D9DAE1E2E3E4E5E6E7E8E9EAF1F2F3F4F5F6F7F8F9FAFFC4001F01000301
+        01010101010101010000000000000102030405060708090A0BFFC400B5110002
+        0102040403040705040400010277000102031104052131061241510761711322
+        328108144291A1B1C109233352F0156272D10A162434E125F11718191A262728
+        292A35363738393A434445464748494A535455565758595A636465666768696A
+        737475767778797A82838485868788898A92939495969798999AA2A3A4A5A6A7
+        A8A9AAB2B3B4B5B6B7B8B9BAC2C3C4C5C6C7C8C9CAD2D3D4D5D6D7D8D9DAE2E3
+        E4E5E6E7E8E9EAF2F3F4F5F6F7F8F9FAFFDA000C03010002110311003F006F9C
+        693CD355B751BA802D79A690CB5577E28DD40167CD3479B55B751BA802CF9B47
+        9B55B70A370A00B3E6D1E6D5BD3E2B592CCBCB12B49BCAE59CA8E82975082D12
+        D049026D7DC01C31618E73FD295C9E657B14FCDAABA86AD63A642B3EA174B6F1
+        336C0CC8CD96C138C2827A034BBAB8EF1DFDB666B4861D2A7BCB74577731C6C4
+        063803903A800FE74CA3A15F1778698E06B96F9F78661FCD2AE5B6B7A35D3AA5
+        B6B56123B1C2A9982963D800D8C9AF13BEF29563CE9AF6B203F36E66C37E06AD
+        ADE68F0C91CF6B6F709346C24525B21581C8EF4EC4F33EC7B3D95FC17D6B1DDD
+        AC9BE093251B0467071D0F3DAACF9A6B95F05C8BFD8490F7B796588FD4393FD6
+        B7F77BD228B7E69A2AAEEA28022DD46EA6E6933400ECD19A6D04D003B346699C
+        D1CD003F35A3A369D26A5742304AC49CC8F8E83D3EA6B3327D335EA71E952786
+        FC30D3C90EFBB0A0F979DBBE6721553FEFA2AB9FC69C55C4DD8A56BA05A41666
+        105D959B7EF62A4838031C8F6AADA868292406159DA205B3FEA876FA1AB90E91
+        A9DA411C21A6948505DFCC1F339E59BAF7624FE3504B06A91C90C505987567E4
+        CB193B33819E08C7FF005A8B6A65D4C293C34C8AC7EDE98032498F181F9D79AC
+        3E2E4BBBC9ADB4FD2AFAEFCB270F026E2CA0E3763B0E9F9D7A87C4790E8BE11B
+        E926B976FB48FB2C6182E3E71C81803F8431AE3FE13E936CDA5EA1A905CBCB28
+        894A9E76A8C9FF00D0BF4AC3175950A6E654A7CAAE667FC254F0D9DEC33687AE
+        4724D09443F66FBA4F7EA3159CDE30D0F7795776972187044F6EA48FA8C9AF5E
+        96CD1400256E7A9C741F9D7CD7AC49FDA7AC5D5C2BE5AE6725493D013C7E4315
+        CD82C63C4B6AD6B134E7CCDE87AE5B080421EDE248E393F798540B927924E3B9
+        A97355F49124FA5594C4732408DF9A83FD6AD881FF00BB5DE6C373453FC893FB
+        B450057A2B521D3989FBB5762D289FE1FD280300231E80D3D6094F6AEA61D23F
+        D9FD2AFC5A40FEE7E94C0E356D243D8FE5532E9D21EC7F2AEE22D1C607CB56D3
+        4A55192303DE8B08E67C27A446DAED9CB720F930BF9ADEFB791FAE2BD7279EC6
+        E420B88E39046FBD370076B608C8F7E4D70978F0584F1409228B893F80025B9E
+        80E3A7D29D3DD496E40926439E983DBF2AA4AC66CED246B26E8807D0E2A06FB2
+        2B6E41C8EF9AE44EA257869E31E9FBC5FF001A78BD98F67FCB3429A7B059A33F
+        E21784ADBC706DED27D4EE6D22B225C7940157761FC40F7000C7FBC6B8C87E12
+        DFD847E569BE3BBFB68F3908B0103F4907F2AEEEDEFA4DB23B02A5A427078E9F
+        2E7F202A43784FF154C9296E82E79BDCF80BC75123A5AF8E16646054F9EAEB90
+        7FEFAAF39F12780B58F0B590BFD4AEACA5859CC48B6F2397676538C02A3BD7D1
+        66EB3DEBCEFE2262F75BD15256C5B5924B77267A67E5099FC431FC0D4C6118FC
+        2AC38B22F08C8F35FDBE841F78B4D351A6CA8F95C1550011DB1BBAFB5767FD97
+        FECD715F0255B56D67C4FAB48BC7EE117D9497C0FC9457B31B31FDD15459C69D
+        37DA8AEBCD90FEED14C0C9834D1E957E1D3871C56D456A3D2ADC76FED4019115
+        80E38AB71D88F4AD54807153A454580C87822863324870A38FAD73DADEAEB678
+        8E250D78E311C639D83D4FA9F415078BF56BDB5D6E5B3F263920545281890704
+        727208EF9FCAB0D352B7F33CD7D364F37A9759CB1CFF00C0B7534C8722DC318D
+        3D1AF6ED8C979293C8393CF61FA126A917799CCB2B82CF8279C8C7D3B0F4EF52
+        4977A7DCB079BED8AC38F991587FE3BB69CCFA6CBC2DF007D1E364FEAD5855F6
+        951D93B44D232825E6665F21CABB125470A873838EFDB3FE7DEA4D12FAD85EC9
+        66B1C92DC609790321541DC1F9B3D4E09C75A9A4D384E5DA2D42D55C8C232907
+        6FA1C1DBD3F9D4BA4698FA75BB47979DDC92F203B81F400066E2BAE9C28C29B4
+        8C6A55AB2A8ADB220F116AF7564B1C36AB29B898E309BBE51D074EE7F3AA62F7
+        588A726E210608537348FC873D7AEE3C648FC2B59A39D1DA69232E47CDB5814D
+        C7B0E78C0150C85DA48E0485DD73979010413927B1CF279FA122A2ECE99BA692
+        495DF7B91CBA9DEA34719D2966959F695C98CAF38F43CF5E335C7FC5EBFB4B0D
+        3EF608AD93ED332C76A252C49CE0BBE067180AC07AE5ABBD8156DA49EFEE63CA
+        5AC6C403D491D40CFAB0F7CE16BC1FC753CBACF8B61D28386FB3656565E479AC
+        4BCADF9F1F80A977EA65657D11EB1FB3A4305BE85796EE1CDE5E31B9C6DE044B
+        845E7D49663F435ECAD10AF23F80EBF68D475F9D00F26D62B7B68B03A0FDE13F
+        A81FA57B315A0652684668AB457BD1400E8E3F6AB0883D285152A8AA480156A4
+        0A05274C5715F103C79A7786213A7C2AD7DAE5C29582CA06F9D491F798FF0008
+        1D7D4F6E3240F4111FC431A4184DC48E7EDF12050CA7E50B9CE1BF3381D79AF3
+        C8AF6D4F49D3F138FE7586351F11C3621B56BAB6712F2CB2447CB5FF00643807
+        27DFF9F5AA09ABC2F1CB3CFA6C0208865E58AE30147A9CF3EDD39351EEB25AB9
+        DC472AB7DD756FA35585718E63C8F7E6B84B3BFD36EE31288B50B45203069914
+        820F43C7AF5FA568472C61375BEB71803AF98C531FCC52E55DC8E53ACDB6CDCB
+        C2B8FF007714F482C5BA654FAABE3FAD7376D73AAB0CDADD43738C7DC915BDEA
+        6FED4D522389ECF70FFAE6DFFD7A391872B3A45B541CC77D3AFA0DC0D0D6B747
+        EEDF2B8F4923CD738BAFC40E25B32A7FD86C7F855A4D72C5872F3C7FAFF8D169
+        05A45CBF82F22B496411DA388D4B8C71CAF20E31D8806BC0745DF0DA5F6B7704
+        99E76291B1EA493927F3FE46BDA35CD6D23D26E5ED26171232EC119E09DC704E
+        71D8126BCA8D8FDBF55D2FC3968DB54B2C6580CE33D49F5C2F26857EA5C2FD4F
+        5AF84DA6369BE168EE98959AF9CCE71C109D147E593FF02AEDDA491882647240
+        E32C4D450431DBC11410A858A34088A3F8540C01F90A7D51648B7370BF767907
+        FC0CD15151401E82B4FC81924F0064D42F22C51B48E70AA326BE78F897E36F14
+        788565D3F4BD3EEAD345CE18458796E07ABECCED5E3EEFE79ED4DD84767E36F8
+        9734D24BA378264826B90764BA8B30F2E1CFF73FBE7DF91E99AE0740B48B4FBD
+        69AFE3B8B99A76267BA6CC923F7CB75E33DB3F527AD713A55F9D31312C120776
+        24E4ED2BF9FD3F5AEA2DBC4968D6B25CDD432410C63E76C6416ECABEAC7B0FC4
+        E2B3BA93B5C6E2CEBAE7C4365A5DA5CDC1D50CD12007618F62A0E70071D71F9F
+        A75AE42CB4FBCF125EB5F6A16ED6F651B1992DCC6060F5DEE31CB63A2E3001EF
+        D1E8E97AC3EB3792DD5DC68D6B1B010C2EA1847DF3C8E5BDFDBB0E2BAEB4BF54
+        F9ADE74EBBB8380693869A136B10C36A924725CC526D80316DD34243B1CE7249
+        CE7B81E95C9EA936FB858208FED37329658448C70DCE4B37655033923B0C0E49
+        2BD2F89AF51EC967BEBB740CE23444209959B1F281EA3AE79C7520FDD35F41D2
+        6DED657BDBB78EE279C8CB05211101CAC6A09276F009C9393D738CD251696A04
+        5A6685636F1A34EF38BA73B9A77423CD63D58FA0EC076181D724BAFAFEF2C5A4
+        106A4CF1C67E77DDF2A2E092C463B00735D38366D7AD786F2F0315C085DF310E
+        3B28FC7F135C2EBD757975A8086388EEF315625742034980C01E3EEA0FDE376F
+        BA38C914A37B8135A6BBAFCF24996867588E1D278178638C47F2E3E655C16E78
+        670BDB35AB36A4C9B85F787305402ED03608CF41819E7DAA7D174586D7496924
+        B492E640BFBA50C448FF003677E49CE5892C7B525ED9466C5E567BE827619109
+        94673E9F8F14FDA6BA019A753D0EF235096F7B11903946E0A9DA013C9E7A903A
+        77A8FE0EE9ED7DADDFEBD38FF50BB13233F3BF53F82E47FC085731E7A2EA4218
+        D879715B4F82A78216293E6FC58B1CF7056BD9BE1EE93FD8FE13B28197134E3E
+        D12F183B9F9C1F70BB47E1577B8D23A5A0D1494C65FD374E37A1D8C8634538C8
+        1924D15D0E9D6FF67B28A223E6C6E6FA9EB45005E18C608C8EF5F3CDDDBFD96F
+        2E2D4FFCB195A3FC891FD2BE861E95E37E2FD16FE0F105F4B15A4B2433486546
+        41BB3BB93D39EB9A64B39B2A1E3F2E45574FEEB80CBF91AA77FA2E99A8451C77
+        1689FBBCEC31931EDCF5C052073F4F4ABB964628E8558750C30454AACA7A1153
+        626E64DAF876CED6D8C1692CE993925F0F9F6E00A22D0DC3AAB5DA36E6278043
+        0F4C0E9D00EFD7EB5B898FA8A56B75933B98807D3F4A2C83999E737BA6F88AEB
+        C416D25E693711D9C19F252322558D40C8CB2E4649C64F7FA00074B67AAC1040
+        B1CFBF21B6F0BD0F4E4576518E9568C514E009E34971D37A838FCE80E6387835
+        779350103C6A91104990B7DC006493EC0026B3B45D686A5A9DE5E8252CD98C10
+        2B750AA3209F72493F8E3A0AEFEF7C35A3DFC1730CB6CD18B850B21858A9619C
+        E3F302B1A0F8796766A12C7509C229276CCA1F24FB8C7F2A63E642417A4FFC7B
+        DC9E3FBAD8AADADDC4F2E9D70EF361D63622538F90ED3F31F5C75FC2967F0B6B
+        1693092D0C120DC49DAF838C7A11EB8AE5BC65777F65A7FF0067DDA88E7B86E8
+        40C94539CF1EA71F91A56435A95FE1E68A7C41E2299D9445670C44C89F780538
+        411FFDF3919FF64D7D006B85F84BA40D3BC302F2440B3DFBF9A4F7D83841FCCF
+        FC0ABD06C23F3EF61888C82C09FA0EB4CA19F67B829E6082429FDE0A48A9F4BB
+        769EFA35643B54EE6FA0AEBB3494001FAE68A69E3A5140138AAD7D6105E85F37
+        7065E8CBD6AC814F1556039BBAF0D8954A878E553FC32A7FFAEB9FBCF07C7C93
+        63B7FDA85B38FC3A7E95E8C28A2C23C7E7F0C94388AE1D4FF7655FEA3FC2A9BE
+        91A8C3F751641EA873FA1AF699238E518923571E8C01AA3368F6329C88CC67D5
+        0E2958564790812C4712C4EA7FDA522AD4322D7A1CDE1F183E4DC0C63A48BD6B
+        22E3C393264FD911BDE23FD3AD2689E5302271C735386A925D2C44483E646DE8
+        E2A06B5B84FBACADF8D227958AED5E4DF10AC65D5FC6FA3E990FDF9E14427FBA
+        0BB64FE0013F857A84A678FEFC6C3DF1C561E91A6FDAFC6F75ACC88192D6D120
+        8D88E92316248FA29FFC7A82A1B9D8C11456D6F15BC281228942228ECA0600FC
+        AB6FC3B16EB89263D11703EA7FFD46B1ABA7D0A2F2EC43E399189FC3A5334353
+        8A69345266800A29A4D1401705380A28AB10EC52E28A281094868A2801B4D345
+        149948632AB8C3A861E87915467D32C6539308527BA1DBFF00D6A28A90284BA0
+        A1FF00513B2FB3AE7F962B365D1EEA00CEB1C6CB9C96538FE745140144AB6EDB
+        D1B35DA43188A18E31D11428FC28A2801D9A4268A280128A28A00FFFD9}
+      Proportional = True
+      Transparent = True
+    end
+    object Label29: TLabel
+      Left = 6
+      Top = 182
+      Width = 497
+      Height = 17
       Alignment = taCenter
       AutoSize = False
-      Caption = 'Forma de Pago'
+      Caption = 'Formas de Pago'
       Color = 12648448
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
@@ -2949,244 +3001,498 @@ object FOP_Cajero: TFOP_Cajero
       Font.Style = [fsBold]
       ParentColor = False
       ParentFont = False
+      Transparent = False
       Layout = tlCenter
     end
-    object Label47: TLabel
-      Left = 482
-      Top = 24
-      Width = 257
+    object Label30: TLabel
+      Left = 14
+      Top = 37
+      Width = 56
       Height = 13
-      Caption = 'Medio de Pago (Presione F1 para Buscar Forma Pago)'
-      FocusControl = edDetalleMDPCbox
-    end
-    object Label48: TLabel
-      Left = 323
-      Top = 62
-      Width = 57
-      Height = 13
-      Caption = 'MDP Fecha'
-      FocusControl = edMDPFecha
-    end
-    object Label49: TLabel
-      Left = 435
-      Top = 62
-      Width = 58
-      Height = 13
-      Caption = 'MDP Banco'
-      FocusControl = edMDPBanco
-    end
-    object Label50: TLabel
-      Left = 634
-      Top = 62
-      Width = 64
-      Height = 13
-      Caption = 'MDP N'#250'mero'
-      FocusControl = edMDPNro
-    end
-    object Label51: TLabel
-      Left = 16
-      Top = 62
-      Width = 35
-      Height = 13
-      Caption = 'Importe'
-      FocusControl = edImporte
-    end
-    object Label53: TLabel
-      Left = 16
-      Top = 24
-      Width = 33
-      Height = 13
-      Caption = 'C'#243'digo'
-      FocusControl = edCodCuenta
-    end
-    object Label55: TLabel
-      Left = 68
-      Top = 24
-      Width = 232
-      Height = 13
-      Caption = 'Cuenta Detalle (Presione F1 para Buscar Cuenta)'
-      FocusControl = edCuenta
-    end
-    object Label58: TLabel
-      Left = 152
-      Top = 62
-      Width = 81
-      Height = 13
-      Caption = 'Importe de Venta'
-      FocusControl = edImporteVenta
-    end
-    object Label61: TLabel
-      Left = 435
-      Top = 24
-      Width = 33
-      Height = 13
-      Caption = 'C'#243'digo'
-      FocusControl = edCodMDP
-    end
-    object edDetalleMDPCbox: TDBLookupComboBox
-      Left = 482
-      Top = 40
-      Width = 329
-      Height = 21
-      Color = 16771302
-      DataField = 'medioPago'
-      DropDownRows = 0
-      Enabled = False
+      Caption = 'Sucursal'
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Verdana'
       Font.Style = [fsBold]
       ParentFont = False
-      TabOrder = 4
-      Visible = False
     end
-    object edMDPFecha: TDBEdit
-      Left = 323
-      Top = 76
-      Width = 94
+    object Label31: TLabel
+      Left = 14
+      Top = 73
+      Width = 62
+      Height = 13
+      Caption = 'Vendedor'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label32: TLabel
+      Left = 14
+      Top = 109
+      Width = 45
+      Height = 13
+      Caption = 'Cliente'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label34: TLabel
+      Left = 14
+      Top = 154
+      Width = 121
+      Height = 13
+      Caption = 'Descuento Cliente:'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label35: TLabel
+      Left = 214
+      Top = 154
+      Width = 14
+      Height = 13
+      Caption = '%'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label41: TLabel
+      Left = 6
+      Top = 6
+      Width = 497
+      Height = 24
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Verifique los datos de su Factura'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Transparent = False
+      Layout = tlCenter
+    end
+    object DBEdit7: TDBEdit
+      Left = 14
+      Top = 86
+      Width = 279
       Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
       Color = 15527129
-      DataField = 'MDCP_FECHA'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 7
-    end
-    object edMDPBanco: TDBEdit
-      Left = 435
-      Top = 76
-      Width = 164
-      Height = 21
-      Color = 15527129
-      DataField = 'MDCP_BANCO'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 8
-    end
-    object edMDPNro: TDBEdit
-      Left = 634
-      Top = 76
-      Width = 177
-      Height = 21
-      Color = 15527129
-      DataField = 'MDCP_CHEQUE'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 9
-    end
-    object edImporte: TDBEdit
-      Left = 16
-      Top = 76
-      Width = 134
-      Height = 21
-      Color = 15527129
-      DataField = 'IMPORTE'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 5
-    end
-    object edCodCuenta: TDBEdit
-      Left = 16
-      Top = 40
-      Width = 41
-      Height = 21
-      Color = 15527129
-      DataField = 'CUENTA_INGRESO'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-    end
-    object edCuenta: TDBLookupComboBox
-      Left = 67
-      Top = 40
-      Width = 350
-      Height = 21
-      Color = 15527129
-      DataField = '_ctaIngreso'
-      DropDownRows = 0
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
+      DataField = 'nVendedor'
+      DataSource = DS_Comprobante
+      ReadOnly = True
       TabOrder = 1
     end
-    object edImporteVenta: TDBEdit
-      Left = 152
-      Top = 76
-      Width = 134
+    object DBEdit8: TDBEdit
+      Left = 14
+      Top = 50
+      Width = 279
       Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
       Color = 15527129
-      DataField = '_importeVenta'
-      Enabled = False
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 6
+      DataField = 'NOMBRE'
+      DataSource = DS_Sucursal
+      ReadOnly = True
+      TabOrder = 0
     end
-    object edCodMDP: TDBEdit
-      Left = 435
-      Top = 40
-      Width = 41
+    object DBEdit15: TDBEdit
+      Left = 14
+      Top = 122
+      Width = 279
       Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
       Color = 15527129
-      DataField = 'ID_TIPO_FORMAPAG'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
+      DataField = 'pers_nombre'
+      DataSource = DS_Comprobante
+      ReadOnly = True
       TabOrder = 2
     end
-    object btFPAceptar: TBitBtn
-      Left = 815
-      Top = 40
-      Width = 79
-      Height = 25
-      Caption = 'Aceptar'
-      TabOrder = 10
+    object Panel2: TPanel
+      Left = 6
+      Top = 310
+      Width = 497
+      Height = 153
+      Align = alBottom
+      TabOrder = 4
+      object Panel4: TPanel
+        Left = 296
+        Top = 1
+        Width = 200
+        Height = 97
+        Align = alRight
+        BevelOuter = bvNone
+        TabOrder = 0
+        object btnConfirmarVenta: TBitBtn
+          Left = 23
+          Top = 0
+          Width = 162
+          Height = 44
+          BiDiMode = bdRightToLeft
+          Caption = 'Aceptar Venta'
+          ParentBiDiMode = False
+          TabOrder = 0
+          OnClick = btnConfirmarVentaClick
+        end
+        object btnCancelarVenta: TBitBtn
+          Left = 23
+          Top = 48
+          Width = 162
+          Height = 44
+          Cancel = True
+          Caption = 'Cancelar Venta'
+          TabOrder = 1
+          OnClick = btnCancelarVentaClick
+        end
+      end
+      object Panel5: TPanel
+        Left = 1
+        Top = 1
+        Width = 295
+        Height = 97
+        Align = alLeft
+        BevelOuter = bvNone
+        TabOrder = 1
+        object Panel11: TPanel
+          Left = 0
+          Top = 57
+          Width = 295
+          Height = 33
+          Align = alTop
+          BevelOuter = bvNone
+          BorderStyle = bsSingle
+          Caption = 'Panel11'
+          TabOrder = 0
+          object Label37: TLabel
+            Left = 0
+            Top = 0
+            Width = 113
+            Height = 29
+            Align = alLeft
+            Caption = ' Total Venta:'
+            Color = 9568200
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object lblVtaTotal: TLabel
+            Left = 113
+            Top = 0
+            Width = 178
+            Height = 29
+            Align = alClient
+            Alignment = taRightJustify
+            Caption = '$ 0.00'
+            Color = 9568200
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -16
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+        end
+        object Panel9: TPanel
+          Left = 0
+          Top = 19
+          Width = 295
+          Height = 19
+          Align = alTop
+          BevelOuter = bvNone
+          BorderStyle = bsSingle
+          Caption = 'Panel9'
+          TabOrder = 1
+          object Label39: TLabel
+            Left = 0
+            Top = 0
+            Width = 74
+            Height = 15
+            Align = alLeft
+            Caption = ' Total Dcto:'
+            Color = 12566527
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object lblVtaDesc: TLabel
+            Left = 74
+            Top = 0
+            Width = 217
+            Height = 15
+            Align = alClient
+            Alignment = taRightJustify
+            Caption = '$ 0.00'
+            Color = 12566527
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+        end
+        object Panel8: TPanel
+          Left = 0
+          Top = 0
+          Width = 295
+          Height = 19
+          Align = alTop
+          BevelOuter = bvNone
+          BorderStyle = bsSingle
+          Caption = 'Panel8'
+          TabOrder = 2
+          object lblVtaSubtotal: TLabel
+            Left = 65
+            Top = 0
+            Width = 226
+            Height = 15
+            Align = alClient
+            Alignment = taRightJustify
+            Caption = '$ 0.00'
+            Color = 12713983
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object Label33: TLabel
+            Left = 0
+            Top = 0
+            Width = 65
+            Height = 15
+            Align = alLeft
+            Caption = ' SubTotal:'
+            Color = 12713983
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+        end
+        object Panel10: TPanel
+          Left = 0
+          Top = 38
+          Width = 295
+          Height = 19
+          Align = alTop
+          BevelOuter = bvNone
+          BorderStyle = bsSingle
+          Caption = 'Panel10'
+          TabOrder = 3
+          object Label38: TLabel
+            Left = 0
+            Top = 0
+            Width = 68
+            Height = 15
+            Align = alLeft
+            Caption = ' Total IVA:'
+            Color = 16706765
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object lblVtaIVA: TLabel
+            Left = 68
+            Top = 0
+            Width = 223
+            Height = 15
+            Align = alClient
+            Alignment = taRightJustify
+            Caption = '$ 0.00'
+            Color = 16706765
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+        end
+      end
+      object Panel14: TPanel
+        Left = 1
+        Top = 98
+        Width = 495
+        Height = 54
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 2
+        object Panel12: TPanel
+          Left = 0
+          Top = 29
+          Width = 495
+          Height = 25
+          Align = alBottom
+          BevelOuter = bvNone
+          BorderStyle = bsSingle
+          Caption = 'Panel11'
+          TabOrder = 0
+          object Label42: TLabel
+            Left = 0
+            Top = 0
+            Width = 72
+            Height = 21
+            Align = alLeft
+            Caption = ' Cambio:'
+            Color = 16728642
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object lblCambio: TLabel
+            Left = 72
+            Top = 0
+            Width = 419
+            Height = 21
+            Align = alClient
+            Alignment = taRightJustify
+            Caption = '$ 0.00'
+            Color = 16728642
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+        end
+        object Panel13: TPanel
+          Left = 0
+          Top = 0
+          Width = 495
+          Height = 29
+          Align = alClient
+          BevelOuter = bvNone
+          BorderStyle = bsSingle
+          Caption = 'Panel11'
+          TabOrder = 1
+          object Label44: TLabel
+            Left = 0
+            Top = 0
+            Width = 152
+            Height = 25
+            Align = alLeft
+            Caption = ' Recibido Contado:'
+            Color = 16728642
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object Label45: TLabel
+            Left = 152
+            Top = 0
+            Width = 339
+            Height = 25
+            Align = alClient
+            Alignment = taRightJustify
+            Color = 16728642
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object edRecibido: TDBEdit
+            Left = 335
+            Top = 4
+            Width = 153
+            Height = 16
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            BorderStyle = bsNone
+            CharCase = ecUpperCase
+            Color = 16728642
+            DataField = 'montoRecibido'
+            DataSource = DS_Comprobante
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -15
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            TabOrder = 0
+            OnExit = edRecibidoExit
+          end
+        end
+      end
     end
-    object btFPCancelar: TBitBtn
-      Left = 815
-      Top = 72
-      Width = 79
-      Height = 25
-      Cancel = True
-      Caption = 'Cancelar'
-      TabOrder = 11
-    end
-    object edDetalleMDP: TDBEdit
-      Left = 482
-      Top = 40
-      Width = 329
+    object edPorcDctoTotal: TDBEdit
+      Left = 144
+      Top = 150
+      Width = 65
       Height = 21
-      Color = 15527129
-      DataField = 'medioPago'
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 14671871
+      DataField = 'PORC_DESCUENTO'
+      DataSource = DS_Comprobante
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -3194,24 +3500,66 @@ object FOP_Cajero: TFOP_Cajero
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
+      OnExit = edPorcDctoTotalExit
+    end
+    object DBGrid1: TDBGrid
+      Left = 14
+      Top = 204
+      Width = 483
+      Height = 100
+      Color = 15527129
+      DataSource = DS_VentaFinal
+      Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+      ReadOnly = True
+      TabOrder = 5
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Color = 16772332
+          Expanded = False
+          FieldName = '_medioPago'
+          Title.Caption = 'Medio Pago'
+          Width = 260
+          Visible = True
+        end
+        item
+          Color = clWhite
+          Expanded = False
+          FieldName = 'importeVenta'
+          Title.Caption = 'Importe Venta'
+          Visible = True
+        end
+        item
+          Color = clWhite
+          Expanded = False
+          FieldName = 'importeDescuento'
+          Title.Caption = 'Importe c/Descuento'
+          Width = 93
+          Visible = True
+        end>
     end
   end
-  object PCargaProd: TPanel
-    Left = 259
-    Top = 192
-    Width = 539
-    Height = 308
+  object PanelAuditoriaCierreZ: TPanel
+    Left = 376
+    Top = 280
+    Width = 318
+    Height = 143
     BevelInner = bvLowered
-    TabOrder = 1
+    TabOrder = 9
+    Visible = False
     object Label62: TLabel
       Left = 2
       Top = 2
-      Width = 535
+      Width = 314
       Height = 16
       Align = alTop
       Alignment = taCenter
       AutoSize = False
-      Caption = 'Carga de Producto/Servicio'
+      Caption = 'Auditoria Cierre Z'
       Color = 12648448
       Font.Charset = ANSI_CHARSET
       Font.Color = clWhite
@@ -3223,272 +3571,87 @@ object FOP_Cajero: TFOP_Cajero
       Layout = tlCenter
     end
     object Label63: TLabel
-      Left = 134
-      Top = 65
-      Width = 72
+      Left = 18
+      Top = 56
+      Width = 74
       Height = 13
-      Alignment = taRightJustify
-      Caption = 'Precio Unitario:'
+      Caption = 'Fecha Hasta:'
     end
     object Label64: TLabel
-      Left = 13
-      Top = 28
-      Width = 59
+      Left = 14
+      Top = 32
+      Width = 78
       Height = 13
-      Alignment = taRightJustify
-      Caption = 'Descripci'#243'n:'
+      Caption = 'Fecha Desde:'
     end
     object Label65: TLabel
-      Left = 27
-      Top = 65
-      Width = 45
+      Left = 8
+      Top = 80
+      Width = 84
       Height = 13
-      Caption = 'Cantidad:'
+      Caption = 'Tipo Auditoria:'
     end
-    object DBText1: TDBText
-      Left = 410
-      Top = 65
-      Width = 113
-      Height = 13
-      DataField = 'monto_reconocido'
-      DataSource = DS_DetalleFactura
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Transparent = True
-    end
-    object Label26: TLabel
-      Left = 310
-      Top = 65
-      Width = 94
-      Height = 13
-      Caption = 'Monto Reconocido:'
-    end
-    object Label42: TLabel
-      Left = 13
-      Top = 112
-      Width = 154
-      Height = 13
-      Alignment = taRightJustify
-      Caption = 'Reconocimiento Obras Sociales:'
-    end
-    object Label5: TLabel
-      Left = 344
-      Top = 88
-      Width = 60
-      Height = 13
-      Caption = 'Monto Total:'
-    end
-    object DBText2: TDBText
-      Left = 410
-      Top = 88
-      Width = 113
-      Height = 13
-      DataField = 'IMPORTE_FINAL'
-      DataSource = DS_DetalleFactura
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      Transparent = True
-    end
-    object Label8: TLabel
-      Left = 30
-      Top = 88
-      Width = 42
-      Height = 13
-      Caption = '% Desc.:'
-    end
-    object DBEdit7: TDBEdit
-      Left = 74
-      Top = 24
-      Width = 450
-      Height = 35
-      AutoSize = False
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'producto'
-      DataSource = DS_DetalleFactura
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ReadOnly = True
+    object DateTimeFechaDesde: TDateTimePicker
+      Left = 95
+      Top = 28
+      Width = 121
+      Height = 21
+      Date = 41068.667614293980000000
+      Time = 41068.667614293980000000
       TabOrder = 0
     end
-    object edCant: TDBEdit
-      Left = 74
-      Top = 61
-      Width = 39
+    object DateTimeFechaHasta: TDateTimePicker
+      Left = 95
+      Top = 52
+      Width = 121
       Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'CANTIDAD'
-      DataSource = DS_DetalleFactura
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 2
-    end
-    object edImporteUnitario: TDBEdit
-      Left = 209
-      Top = 61
-      Width = 87
-      Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'IMPORTE_UNITARIO'
-      DataSource = DS_DetalleFactura
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
+      Date = 41068.667614293980000000
+      Time = 41068.667614293980000000
       TabOrder = 1
     end
-    object DBGridListadoOS: TDBGrid
-      Left = 2
-      Top = 150
-      Width = 535
-      Height = 123
-      Align = alBottom
-      Color = 15527129
-      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-      TabOrder = 3
-      TitleFont.Charset = DEFAULT_CHARSET
-      TitleFont.Color = clWindowText
-      TitleFont.Height = -11
-      TitleFont.Name = 'MS Sans Serif'
-      TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'ID_OS'
-          ReadOnly = True
-          Title.Caption = 'C'#243'digo'
-          Width = 45
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'os_detalle'
-          Title.Caption = 'Detalle Plan'
-          Width = 351
-          Visible = True
-        end
-        item
-          Color = 10485759
-          Expanded = False
-          FieldName = 'MONTO_DESCONTADO'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          Title.Caption = 'Importe'
-          Width = 61
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'OBSERVACIONES'
-          Title.Caption = 'Observaciones'
-          Width = 440
-          Visible = True
-        end>
-    end
-    object Panel2: TPanel
-      Left = 2
-      Top = 273
-      Width = 535
-      Height = 33
-      Align = alBottom
-      BevelInner = bvLowered
-      BevelOuter = bvLowered
-      TabOrder = 4
-      object Label10: TLabel
-        Left = 2
-        Top = 2
-        Width = 531
-        Height = 29
-        Align = alClient
-        Alignment = taCenter
-        AutoSize = False
-        Caption = ' Total Venta: $ 0.00 '
-        Color = 12648448
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -15
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Transparent = False
-        Layout = tlCenter
-      end
-      object Button1: TButton
-        Left = 22
-        Top = 7
-        Width = 75
-        Height = 19
-        Caption = 'Aceptar'
-        TabOrder = 0
-      end
-      object btnCancProd: TButton
-        Left = 454
-        Top = 7
-        Width = 75
-        Height = 19
-        Cancel = True
-        Caption = 'Cancelar'
-        TabOrder = 1
-      end
-    end
-    object DBEdit8: TDBEdit
-      Left = 74
-      Top = 84
-      Width = 39
+    object ComboBoxTipoAuditoria: TComboBox
+      Left = 95
+      Top = 76
+      Width = 214
       Height = 21
-      BevelInner = bvNone
-      BevelOuter = bvNone
-      Color = 15527129
-      DataField = 'PORC_DESCUENTO'
-      DataSource = DS_DetalleFactura
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 5
+      ItemHeight = 13
+      ItemIndex = 0
+      TabOrder = 2
+      Text = 'T = Reporte total general'
+      Items.Strings = (
+        'T = Reporte total general'
+        'D = Reporte detallado')
+    end
+    object btnAuditoriaAceptar: TButton
+      Left = 7
+      Top = 112
+      Width = 75
+      Height = 24
+      Caption = 'Imprimir'
+      TabOrder = 3
+    end
+    object btnAuditoriaCancelar: TButton
+      Left = 234
+      Top = 112
+      Width = 75
+      Height = 24
+      Cancel = True
+      Caption = 'Cancelar'
+      TabOrder = 4
     end
   end
   object PanelContenedorDerecha: TPanel
     Left = 88
     Top = 0
-    Width = 920
-    Height = 681
+    Width = 1005
+    Height = 584
     Align = alClient
     Caption = 'PanelContenedorDerecha'
-    TabOrder = 0
+    TabOrder = 2
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 918
+      Width = 1003
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -3501,6 +3664,7 @@ object FOP_Cajero: TFOP_Cajero
         Align = alLeft
         Color = 16729670
         DataField = 'nVendedor'
+        DataSource = DS_Comprobante
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -19
@@ -3511,7 +3675,7 @@ object FOP_Cajero: TFOP_Cajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 578
+        Left = 663
         Top = 1
         Width = 339
         Height = 28
@@ -3519,6 +3683,7 @@ object FOP_Cajero: TFOP_Cajero
         Alignment = taRightJustify
         Color = 16729670
         DataField = 'tipoIVA'
+        DataSource = DS_Comprobante
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
         Font.Height = -19
@@ -3531,7 +3696,7 @@ object FOP_Cajero: TFOP_Cajero
       object PanelCambiarFecha: TPanel
         Left = 345
         Top = 1
-        Width = 233
+        Width = 318
         Height = 28
         Align = alClient
         BevelOuter = bvNone
@@ -3545,6 +3710,7 @@ object FOP_Cajero: TFOP_Cajero
           Time = 40821.813995381940000000
           TabOrder = 0
           TabStop = False
+          OnChange = DateTimePicker_FechaCargaChange
         end
         object CheckBoxCambiarFecha: TCheckBox
           Left = 119
@@ -3553,22 +3719,23 @@ object FOP_Cajero: TFOP_Cajero
           Height = 17
           Caption = 'Cambiar Fecha'
           TabOrder = 1
+          OnClick = CheckBoxCambiarFechaClick
         end
       end
     end
     object PanelProductosYFPago: TPanel
       Left = 1
-      Top = 184
-      Width = 918
-      Height = 496
+      Top = 190
+      Width = 1003
+      Height = 393
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 1
       object Label11: TLabel
         Left = 1
         Top = 1
-        Width = 916
-        Height = 13
+        Width = 1001
+        Height = 16
         Align = alTop
         Alignment = taCenter
         Caption = 'Listado de Productos/Servicios a Cobrar'
@@ -3585,31 +3752,31 @@ object FOP_Cajero: TFOP_Cajero
       end
       object PanelListadoProducto: TPanel
         Left = 1
-        Top = 14
-        Width = 916
-        Height = 321
+        Top = 17
+        Width = 1001
+        Height = 215
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
         object Label9: TLabel
           Left = 160
           Top = 17
-          Width = 48
+          Width = 50
           Height = 13
           Caption = 'DETALLE'
         end
         object Panel6: TPanel
           Left = 1
-          Top = 266
-          Width = 914
+          Top = 160
+          Width = 999
           Height = 54
           Align = alBottom
           BevelOuter = bvLowered
-          TabOrder = 1
+          TabOrder = 0
           object Label36: TLabel
             Left = 1
             Top = 37
-            Width = 912
+            Width = 997
             Height = 16
             Align = alBottom
             Alignment = taCenter
@@ -3628,7 +3795,7 @@ object FOP_Cajero: TFOP_Cajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 1
-            Width = 912
+            Width = 997
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3644,7 +3811,7 @@ object FOP_Cajero: TFOP_Cajero
           object lblMontoProds: TLabel
             Left = 1
             Top = 16
-            Width = 912
+            Width = 997
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3664,22 +3831,24 @@ object FOP_Cajero: TFOP_Cajero
             Height = 23
             Caption = 'Quitar Prod./Serv.'
             TabOrder = 0
+            OnClick = btQuitarProductoClick
           end
         end
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 914
-          Height = 265
+          Width = 999
+          Height = 159
           Align = alClient
           Color = 15527129
           DataSource = DS_DetalleFactura
           Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
+          PopupMenu = PopUpProductos
+          TabOrder = 1
+          TitleFont.Charset = ANSI_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           Columns = <
             item
@@ -3751,8 +3920,8 @@ object FOP_Cajero: TFOP_Cajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 335
-        Width = 916
+        Top = 232
+        Width = 1001
         Height = 89
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -3760,16 +3929,18 @@ object FOP_Cajero: TFOP_Cajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 914
+          Width = 999
           Height = 87
           Align = alClient
           Color = 15527129
+          DataSource = DSFpago
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = PopupFP
           TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Charset = ANSI_CHARSET
           TitleFont.Color = clWindowText
           TitleFont.Height = -11
-          TitleFont.Name = 'MS Sans Serif'
+          TitleFont.Name = 'Verdana'
           TitleFont.Style = []
           Columns = <
             item
@@ -3854,8 +4025,8 @@ object FOP_Cajero: TFOP_Cajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 424
-        Width = 916
+        Top = 321
+        Width = 1001
         Height = 71
         Align = alBottom
         BevelOuter = bvLowered
@@ -3863,7 +4034,7 @@ object FOP_Cajero: TFOP_Cajero
         object lblMaxVenta: TLabel
           Left = 1
           Top = 1
-          Width = 914
+          Width = 999
           Height = 20
           Align = alTop
           Alignment = taCenter
@@ -3885,11 +4056,12 @@ object FOP_Cajero: TFOP_Cajero
           Height = 23
           Caption = 'Quitar Forma de Pago'
           TabOrder = 0
+          OnClick = btnQuitarPagoClick
         end
         object Panel1: TPanel
           Left = 1
           Top = 29
-          Width = 914
+          Width = 999
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
@@ -3897,7 +4069,7 @@ object FOP_Cajero: TFOP_Cajero
           object lblTotAPagar: TLabel
             Left = 152
             Top = 0
-            Width = 762
+            Width = 847
             Height = 41
             Align = alClient
             Alignment = taRightJustify
@@ -3939,15 +4111,124 @@ object FOP_Cajero: TFOP_Cajero
     object PanelDetalles: TPanel
       Left = 1
       Top = 31
-      Width = 918
-      Height = 153
+      Width = 1003
+      Height = 159
       Align = alTop
       TabOrder = 2
+      object PanelDetallePreventa: TPanel
+        Left = 1
+        Top = 76
+        Width = 1001
+        Height = 41
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 2
+        object Label54: TLabel
+          Left = 0
+          Top = 0
+          Width = 1001
+          Height = 13
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'Detalle Preventa'
+          Color = 12648448
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object Label56: TLabel
+          Left = 9
+          Top = 21
+          Width = 90
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Preventa Nro:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label59: TLabel
+          Left = 264
+          Top = 20
+          Width = 43
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Fecha:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label60: TLabel
+          Left = 471
+          Top = 20
+          Width = 36
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Se'#241'a:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object DBEdit20: TDBEdit
+          Left = 100
+          Top = 17
+          Width = 143
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'CODIGO'
+          DataSource = DS_ComprobPreventa
+          ReadOnly = True
+          TabOrder = 0
+        end
+        object DBEdit21: TDBEdit
+          Left = 308
+          Top = 17
+          Width = 143
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'FECHA'
+          DataSource = DS_ComprobPreventa
+          ReadOnly = True
+          TabOrder = 1
+        end
+        object DBEdit22: TDBEdit
+          Left = 508
+          Top = 17
+          Width = 143
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'IMPORTE'
+          DataSource = DS_PreventaFP
+          ReadOnly = True
+          TabOrder = 2
+        end
+      end
       object PanelCabeceraFactura: TPanel
-        Left = 547
+        Left = 526
         Top = 1
-        Width = 370
-        Height = 110
+        Width = 476
+        Height = 75
         Align = alClient
         BevelOuter = bvLowered
         Font.Charset = ANSI_CHARSET
@@ -3960,7 +4241,7 @@ object FOP_Cajero: TFOP_Cajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 368
+          Width = 474
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -3991,7 +4272,7 @@ object FOP_Cajero: TFOP_Cajero
           ParentFont = False
         end
         object Label16: TLabel
-          Left = 144
+          Left = 141
           Top = 21
           Width = 73
           Height = 13
@@ -4005,7 +4286,7 @@ object FOP_Cajero: TFOP_Cajero
         end
         object Label17: TLabel
           Left = 42
-          Top = 67
+          Top = 92
           Width = 27
           Height = 13
           Alignment = taRightJustify
@@ -4019,7 +4300,7 @@ object FOP_Cajero: TFOP_Cajero
         end
         object Label21: TLabel
           Left = 269
-          Top = 67
+          Top = 92
           Width = 35
           Height = 13
           Caption = 'Desc.'
@@ -4046,10 +4327,24 @@ object FOP_Cajero: TFOP_Cajero
         end
         object Label20: TLabel
           Left = 359
-          Top = 67
+          Top = 92
           Width = 14
           Height = 13
           Caption = '%'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object Label_DetalleCliente: TLabel
+          Left = 4
+          Top = 68
+          Width = 65
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Direcci'#243'n:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -4066,6 +4361,7 @@ object FOP_Cajero: TFOP_Cajero
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'pers_nombre'
+          DataSource = DS_Comprobante
           ReadOnly = True
           TabOrder = 2
         end
@@ -4078,6 +4374,7 @@ object FOP_Cajero: TFOP_Cajero
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'pers_codigo'
+          DataSource = DS_Comprobante
           ReadOnly = True
           TabOrder = 0
         end
@@ -4090,46 +4387,62 @@ object FOP_Cajero: TFOP_Cajero
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'pers_cuit'
+          DataSource = DS_Comprobante
           ReadOnly = True
           TabOrder = 1
         end
         object DBEdit12: TDBEdit
           Left = 308
-          Top = 63
+          Top = 88
           Width = 52
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'pers_desc'
+          DataSource = DS_Comprobante
           ReadOnly = True
-          TabOrder = 4
+          TabOrder = 5
         end
         object DBEdit14: TDBEdit
           Left = 70
-          Top = 63
+          Top = 88
           Width = 194
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'pers_iva'
+          DataSource = DS_Comprobante
+          ReadOnly = True
+          TabOrder = 4
+        end
+        object DBEdit_DetalleCliente: TDBEdit
+          Left = 70
+          Top = 64
+          Width = 302
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'pers_direccion'
+          DataSource = DS_Comprobante
           ReadOnly = True
           TabOrder = 3
         end
       end
       object PanelDetalleOrdenOptica: TPanel
         Left = 1
-        Top = 111
-        Width = 916
+        Top = 117
+        Width = 1001
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
-        TabOrder = 2
+        TabOrder = 3
         object Label14: TLabel
           Left = 0
           Top = 0
-          Width = 916
+          Width = 1001
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4188,12 +4501,12 @@ object FOP_Cajero: TFOP_Cajero
           ParentFont = False
         end
         object Label69: TLabel
-          Left = 620
+          Left = 635
           Top = 21
-          Width = 106
+          Width = 143
           Height = 13
           Alignment = taRightJustify
-          Caption = 'Reconocido OSs:'
+          Caption = 'Total Reconocido OSs:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -11
@@ -4210,6 +4523,7 @@ object FOP_Cajero: TFOP_Cajero
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'CODIGO_CLI'
+          DataSource = DS_Optica_Orden
           ReadOnly = True
           TabOrder = 0
         end
@@ -4222,30 +4536,33 @@ object FOP_Cajero: TFOP_Cajero
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'FECHA_ORDEN'
+          DataSource = DS_Optica_Orden
           ReadOnly = True
           TabOrder = 1
         end
         object DBEdit24: TDBEdit
           Left = 517
           Top = 17
-          Width = 93
+          Width = 112
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'MONTO_ENTREGADO'
+          DataSource = DS_Optica_Orden
           ReadOnly = True
           TabOrder = 2
         end
         object DBEdit25: TDBEdit
-          Left = 728
+          Left = 784
           Top = 17
-          Width = 99
+          Width = 107
           Height = 21
           BevelInner = bvNone
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'MONTO_RECONOCIDO'
+          DataSource = DS_Optica_Orden
           ReadOnly = True
           TabOrder = 3
         end
@@ -4253,13 +4570,13 @@ object FOP_Cajero: TFOP_Cajero
       object Panel3: TPanel
         Left = 1
         Top = 1
-        Width = 546
-        Height = 110
+        Width = 525
+        Height = 75
         Align = alLeft
         BevelOuter = bvLowered
         TabOrder = 0
         object Label22: TLabel
-          Left = 126
+          Left = 115
           Top = 21
           Width = 48
           Height = 13
@@ -4272,8 +4589,22 @@ object FOP_Cajero: TFOP_Cajero
           Font.Style = [fsBold]
           ParentFont = False
         end
+        object Label23: TLabel
+          Left = 117
+          Top = 92
+          Width = 43
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Marca:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
         object Label24: TLabel
-          Left = 112
+          Left = 101
           Top = 44
           Width = 62
           Height = 13
@@ -4286,7 +4617,7 @@ object FOP_Cajero: TFOP_Cajero
           ParentFont = False
         end
         object Label25: TLabel
-          Left = 321
+          Left = 310
           Top = 21
           Width = 40
           Height = 13
@@ -4300,7 +4631,7 @@ object FOP_Cajero: TFOP_Cajero
           ParentFont = False
         end
         object Label27: TLabel
-          Left = 119
+          Left = 108
           Top = 68
           Width = 55
           Height = 13
@@ -4316,7 +4647,7 @@ object FOP_Cajero: TFOP_Cajero
         object Label7: TLabel
           Left = 1
           Top = 1
-          Width = 544
+          Width = 523
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4332,30 +4663,46 @@ object FOP_Cajero: TFOP_Cajero
           Transparent = False
           Layout = tlCenter
         end
+        object Label26: TLabel
+          Left = 336
+          Top = 92
+          Width = 50
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Medida:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
         object DBImage1: TDBImage
           Left = 2
-          Top = 17
+          Top = 30
           Width = 97
           Height = 69
           Color = 14737632
           DataField = 'LOGO'
+          DataSource = DS_Sucursal
           Stretch = True
-          TabOrder = 5
+          TabOrder = 7
         end
         object edImagen: TDBImage
           Left = 2
-          Top = 17
+          Top = 30
           Width = 97
           Height = 69
           Color = 14737632
           DataField = 'IMAGEN'
+          DataSource = DS_Productos
           QuickDraw = False
           Stretch = True
-          TabOrder = 6
+          TabOrder = 8
           Visible = False
         end
         object DBEdit1: TDBEdit
-          Left = 175
+          Left = 164
           Top = 40
           Width = 355
           Height = 21
@@ -4363,11 +4710,12 @@ object FOP_Cajero: TFOP_Cajero
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'DETALLE_PROD'
+          DataSource = DS_Productos
           ReadOnly = True
           TabOrder = 2
         end
         object DBEdit2: TDBEdit
-          Left = 175
+          Left = 164
           Top = 17
           Width = 143
           Height = 21
@@ -4375,11 +4723,25 @@ object FOP_Cajero: TFOP_Cajero
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'COD_CORTO'
+          DataSource = DS_Productos
           ReadOnly = True
           TabOrder = 0
         end
+        object DBEdit3: TDBEdit
+          Left = 164
+          Top = 88
+          Width = 163
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'NOMBRE_MARCA'
+          DataSource = DS_Productos
+          ReadOnly = True
+          TabOrder = 5
+        end
         object DBEdit4: TDBEdit
-          Left = 337
+          Left = 326
           Top = 64
           Width = 193
           Height = 21
@@ -4387,11 +4749,12 @@ object FOP_Cajero: TFOP_Cajero
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'ARTICULO'
+          DataSource = DS_Productos
           ReadOnly = True
           TabOrder = 4
         end
         object DBEdit5: TDBEdit
-          Left = 363
+          Left = 352
           Top = 17
           Width = 41
           Height = 21
@@ -4400,6 +4763,7 @@ object FOP_Cajero: TFOP_Cajero
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'STOCK_ACTUAL'
+          DataSource = DS_Productos
           Font.Charset = ANSI_CHARSET
           Font.Color = clWindowText
           Font.Height = -12
@@ -4410,7 +4774,7 @@ object FOP_Cajero: TFOP_Cajero
           TabOrder = 1
         end
         object DBEdit6: TDBEdit
-          Left = 175
+          Left = 164
           Top = 64
           Width = 163
           Height = 21
@@ -4418,11 +4782,25 @@ object FOP_Cajero: TFOP_Cajero
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'TIPO_ARTICULO'
+          DataSource = DS_Productos
           ReadOnly = True
           TabOrder = 3
         end
+        object DBEdit17: TDBEdit
+          Left = 390
+          Top = 88
+          Width = 129
+          Height = 21
+          BevelInner = bvNone
+          BevelOuter = bvNone
+          Color = 15527129
+          DataField = 'MEDIDA'
+          DataSource = DS_Productos
+          ReadOnly = True
+          TabOrder = 6
+        end
         object DBEdit26: TDBEdit
-          Left = 403
+          Left = 392
           Top = 17
           Width = 127
           Height = 21
@@ -4430,10 +4808,569 @@ object FOP_Cajero: TFOP_Cajero
           BevelOuter = bvNone
           Color = 15527129
           DataField = 'SECCION'
+          DataSource = DS_Productos
           ReadOnly = True
-          TabOrder = 7
+          TabOrder = 9
         end
       end
+    end
+  end
+  object PCargaProd: TPanel
+    Left = 296
+    Top = 176
+    Width = 537
+    Height = 285
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    BevelWidth = 3
+    TabOrder = 10
+    Visible = False
+    object Label10: TLabel
+      Left = 6
+      Top = 6
+      Width = 525
+      Height = 16
+      Align = alTop
+      Alignment = taCenter
+      AutoSize = False
+      Caption = 'Carga de Producto/Servicio'
+      Color = 12648448
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      Layout = tlCenter
+    end
+    object Label70: TLabel
+      Left = 131
+      Top = 65
+      Width = 88
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Precio Unitario:'
+    end
+    object Label71: TLabel
+      Left = 6
+      Top = 28
+      Width = 71
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Descripci'#243'n:'
+    end
+    object Label72: TLabel
+      Left = 21
+      Top = 65
+      Width = 56
+      Height = 13
+      Caption = 'Cantidad:'
+    end
+    object DBText1: TDBText
+      Left = 423
+      Top = 65
+      Width = 106
+      Height = 13
+      DataField = 'monto_reconocido'
+      DataSource = DS_DetalleFactura
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+    end
+    object Label73: TLabel
+      Left = 315
+      Top = 65
+      Width = 108
+      Height = 13
+      Caption = 'Monto Reconocido:'
+    end
+    object Label74: TLabel
+      Left = 6
+      Top = 112
+      Width = 184
+      Height = 13
+      Alignment = taRightJustify
+      Caption = 'Reconocimiento Obras Sociales:'
+    end
+    object Label75: TLabel
+      Left = 352
+      Top = 88
+      Width = 71
+      Height = 13
+      Caption = 'Monto Total:'
+    end
+    object DBText2: TDBText
+      Left = 423
+      Top = 88
+      Width = 106
+      Height = 13
+      DataField = 'IMPORTE_FINAL'
+      DataSource = DS_DetalleFactura
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      Transparent = True
+    end
+    object Label76: TLabel
+      Left = 24
+      Top = 88
+      Width = 53
+      Height = 13
+      Caption = '% Desc.:'
+    end
+    object DBEdit27: TDBEdit
+      Left = 79
+      Top = 24
+      Width = 450
+      Height = 35
+      AutoSize = False
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'producto'
+      DataSource = DS_DetalleFactura
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ReadOnly = True
+      TabOrder = 0
+    end
+    object edCant: TDBEdit
+      Left = 79
+      Top = 61
+      Width = 48
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'CANTIDAD'
+      DataSource = DS_DetalleFactura
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 1
+      OnExit = edCantidadExit
+    end
+    object edImporteUnitario: TDBEdit
+      Left = 222
+      Top = 61
+      Width = 87
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'IMPORTE_UNITARIO'
+      DataSource = DS_DetalleFactura
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 2
+      OnExit = edImporteExit
+    end
+    object DBGridListadoOS: TDBGrid
+      Left = 6
+      Top = 123
+      Width = 525
+      Height = 123
+      Align = alBottom
+      Color = 15527129
+      Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+      TabOrder = 4
+      TitleFont.Charset = ANSI_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Verdana'
+      TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID_OS'
+          ReadOnly = True
+          Title.Caption = 'C'#243'digo'
+          Width = 45
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'os_detalle'
+          Title.Caption = 'Detalle Plan'
+          Width = 351
+          Visible = True
+        end
+        item
+          Color = 10485759
+          Expanded = False
+          FieldName = 'MONTO_DESCONTADO'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          Title.Caption = 'Importe'
+          Width = 61
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'OBSERVACIONES'
+          Title.Caption = 'Observaciones'
+          Width = 440
+          Visible = True
+        end>
+    end
+    object Panel7: TPanel
+      Left = 6
+      Top = 246
+      Width = 525
+      Height = 33
+      Align = alBottom
+      BevelInner = bvLowered
+      BevelOuter = bvLowered
+      TabOrder = 5
+      object Label77: TLabel
+        Left = 2
+        Top = 2
+        Width = 521
+        Height = 29
+        Align = alClient
+        Alignment = taCenter
+        AutoSize = False
+        Caption = ' Total Venta: $ 0.00 '
+        Color = 12648448
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -15
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = False
+        Layout = tlCenter
+      end
+      object btnProdAceptar: TButton
+        Left = 22
+        Top = 7
+        Width = 75
+        Height = 19
+        Caption = 'Aceptar'
+        TabOrder = 0
+        OnClick = btnAceptarProdClick
+      end
+      object btnProdCancelar: TButton
+        Left = 438
+        Top = 7
+        Width = 75
+        Height = 19
+        Cancel = True
+        Caption = 'Cancelar'
+        TabOrder = 1
+        OnClick = btnCancelarProdClick
+      end
+    end
+    object eddesc: TDBEdit
+      Left = 79
+      Top = 84
+      Width = 48
+      Height = 21
+      BevelInner = bvNone
+      BevelOuter = bvNone
+      Color = 15527129
+      DataField = 'PORC_DESCUENTO'
+      DataSource = DS_DetalleFactura
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+      TabOrder = 3
+      OnExit = edDescExit
+    end
+  end
+  object ZQ_Comprobante_FormaPago: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from comprobante_forma_pago')
+    Params = <>
+    Left = 481
+    Top = 401
+    object ZQ_Comprobante_FormaPagoID_COMPROB_FP: TIntegerField
+      FieldName = 'ID_COMPROB_FP'
+    end
+    object ZQ_Comprobante_FormaPagoID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_Comprobante_FormaPagoID_TIPO_FORMAPAG: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAG'
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_FECHA: TDateField
+      FieldName = 'MDCP_FECHA'
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_BANCO: TStringField
+      FieldName = 'MDCP_BANCO'
+      Size = 50
+    end
+    object ZQ_Comprobante_FormaPagoMDCP_CHEQUE: TStringField
+      FieldName = 'MDCP_CHEQUE'
+      Size = 50
+    end
+    object ZQ_Comprobante_FormaPagoIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+    end
+    object ZQ_Comprobante_FormaPagoCONCILIADO: TDateField
+      FieldName = 'CONCILIADO'
+    end
+    object ZQ_Comprobante_FormaPagoCUENTA_INGRESO: TIntegerField
+      FieldName = 'CUENTA_INGRESO'
+    end
+    object ZQ_Comprobante_FormaPagoCUENTA_EGRESO: TIntegerField
+      FieldName = 'CUENTA_EGRESO'
+    end
+    object ZQ_Comprobante_FormaPagoFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+    object ZQ_Comprobante_FormaPagoIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+    end
+  end
+  object DS_Comprobante_FormaPago: TDataSource
+    DataSet = ZQ_Comprobante_FormaPago
+    Left = 481
+    Top = 457
+  end
+  object CD_Fpago: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 237
+    Top = 400
+    object CD_FpagoID_COMPROB_FP: TIntegerField
+      FieldName = 'ID_COMPROB_FP'
+    end
+    object CD_FpagoID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object CD_FpagoID_TIPO_FORMAPAG: TIntegerField
+      DisplayWidth = 50
+      FieldName = 'ID_TIPO_FORMAPAG'
+    end
+    object CD_FpagoMDCP_FECHA: TDateField
+      FieldName = 'MDCP_FECHA'
+      EditMask = '!99/99/0000;1;_'
+    end
+    object CD_FpagoMDCP_BANCO: TStringField
+      FieldName = 'MDCP_BANCO'
+      Size = 50
+    end
+    object CD_FpagoMDCP_CHEQUE: TStringField
+      FieldName = 'MDCP_CHEQUE'
+      Size = 50
+    end
+    object CD_FpagoIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
+    end
+    object CD_FpagoCONCILIADO: TDateField
+      FieldName = 'CONCILIADO'
+    end
+    object CD_FpagoCUENTA_INGRESO: TIntegerField
+      FieldName = 'CUENTA_INGRESO'
+      OnChange = CD_FpagoCUENTA_INGRESOChange
+    end
+    object CD_FpagoCUENTA_EGRESO: TIntegerField
+      FieldName = 'CUENTA_EGRESO'
+    end
+    object CD_Fpago_ctaIngreso: TStringField
+      FieldKind = fkLookup
+      FieldName = '_ctaIngreso'
+      LookupDataSet = ZQ_Cuentas
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'NOMBRE_CUENTA'
+      KeyFields = 'CUENTA_INGRESO'
+      Size = 100
+      Lookup = True
+    end
+    object CD_FpagomedioPago: TStringField
+      FieldKind = fkLookup
+      FieldName = 'medioPago'
+      LookupDataSet = ZQ_FormasPago
+      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
+      LookupResultField = 'DESCRIPCION'
+      KeyFields = 'ID_TIPO_FORMAPAG'
+      Size = 50
+      Lookup = True
+    end
+    object CD_Fpago_desc_rec: TFloatField
+      FieldKind = fkLookup
+      FieldName = '_desc_rec'
+      LookupDataSet = ZQ_FormasPago
+      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
+      LookupResultField = 'DESC_REC'
+      KeyFields = 'ID_TIPO_FORMAPAG'
+      Lookup = True
+    end
+    object CD_Fpago_importeVenta: TFloatField
+      FieldName = '_importeVenta'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
+    end
+    object CD_Fpago_efectivo: TStringField
+      FieldKind = fkLookup
+      FieldName = '_efectivo'
+      LookupDataSet = ZQ_FormasPago
+      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
+      LookupResultField = 'GENERA_VUELTO'
+      KeyFields = 'ID_TIPO_FORMAPAG'
+      Size = 1
+      Lookup = True
+    end
+    object CD_Fpago_nroPrecio: TStringField
+      FieldKind = fkLookup
+      FieldName = '_nroPrecio'
+      LookupDataSet = ZQ_FormasPago
+      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
+      LookupResultField = 'COLUMNA_PRECIO'
+      KeyFields = 'ID_TIPO_FORMAPAG'
+      Lookup = True
+    end
+    object CD_Fpago_fiscal: TStringField
+      FieldKind = fkLookup
+      FieldName = '_fiscal'
+      LookupDataSet = ZQ_FormasPago
+      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
+      LookupResultField = 'IF'
+      KeyFields = 'ID_TIPO_FORMAPAG'
+      Lookup = True
+    end
+    object CD_Fpago_esCtaCorr: TStringField
+      FieldKind = fkLookup
+      FieldName = '_esCtaCorr'
+      LookupDataSet = ZQ_Cuentas
+      LookupKeyFields = 'ID_CUENTA'
+      LookupResultField = 'A_CTA_CORRIENTE'
+      KeyFields = 'CUENTA_INGRESO'
+      Lookup = True
+    end
+    object CD_Fpago_esSenia: TStringField
+      FieldName = '_esSenia'
+      Size = 1
+    end
+    object CD_FpagoFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+  end
+  object DSFpago: TDataSource
+    DataSet = CD_Fpago
+    Left = 317
+    Top = 458
+  end
+  object ZQ_FormasPago: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from tipo_formapago'
+      'order by descripcion,cod_corto')
+    Params = <>
+    Left = 709
+    Top = 442
+    object ZQ_FormasPagoID_TIPO_FORMAPAGO: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAGO'
+      Required = True
+    end
+    object ZQ_FormasPagoDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 50
+    end
+    object ZQ_FormasPagoBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_FormasPagoIF: TStringField
+      FieldName = 'IF'
+      Size = 1
+    end
+    object ZQ_FormasPagoDESC_REC: TFloatField
+      FieldName = 'DESC_REC'
+    end
+    object ZQ_FormasPagoCOD_CORTO: TIntegerField
+      FieldName = 'COD_CORTO'
+    end
+    object ZQ_FormasPagoGENERA_VUELTO: TStringField
+      FieldName = 'GENERA_VUELTO'
+      Size = 1
+    end
+    object ZQ_FormasPagoCOLUMNA_PRECIO: TIntegerField
+      FieldName = 'COLUMNA_PRECIO'
+    end
+    object ZQ_FormasPagoMODIFICABLE: TStringField
+      FieldName = 'MODIFICABLE'
+      Size = 1
+    end
+  end
+  object ZQ_Cuentas: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select cta.*'
+      'from cuenta cta'
+      'where baja='#39'N'#39
+      'order by cta.nombre_cuenta,cta.codigo')
+    Params = <>
+    Left = 141
+    Top = 433
+    object ZQ_CuentasID_CUENTA: TIntegerField
+      FieldName = 'ID_CUENTA'
+    end
+    object ZQ_CuentasMEDIO_DEFECTO: TIntegerField
+      FieldName = 'MEDIO_DEFECTO'
+    end
+    object ZQ_CuentasCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 10
+    end
+    object ZQ_CuentasNOMBRE_CUENTA: TStringField
+      FieldName = 'NOMBRE_CUENTA'
+      Size = 50
+    end
+    object ZQ_CuentasNRO_CTA_BANCARIA: TStringField
+      FieldName = 'NRO_CTA_BANCARIA'
+      Size = 10
+    end
+    object ZQ_CuentasBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_CuentasA_CTA_CORRIENTE: TStringField
+      FieldName = 'A_CTA_CORRIENTE'
+      Size = 1
+    end
+    object ZQ_CuentasID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_CuentasA_NOTA_CREDITO: TStringField
+      FieldName = 'A_NOTA_CREDITO'
+      Size = 1
+    end
+    object ZQ_CuentasMODIFICABLE: TStringField
+      FieldName = 'MODIFICABLE'
+      Size = 1
     end
   end
   object dxBarABM: TdxBarManager
@@ -4737,8 +5674,8 @@ object FOP_Cajero: TFOP_Cajero
     Style = bmsOffice11
     UseF10ForMenu = False
     UseSystemFont = False
-    Left = 104
-    Top = 8
+    Left = 480
+    Top = 344
     DockControlHeights = (
       88
       0
@@ -4773,11 +5710,6 @@ object FOP_Cajero: TFOP_Cajero
           BeginGroup = True
           Visible = True
           ItemName = 'btnFormaPago'
-        end
-        item
-          BeginGroup = True
-          Visible = True
-          ItemName = 'btnVentaRapida'
         end
         item
           BeginGroup = True
@@ -5119,6 +6051,11 @@ object FOP_Cajero: TFOP_Cajero
         item
           Visible = True
           ItemName = 'btnBuscarVendedor'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'btnPreventa'
         end
         item
           BeginGroup = True
@@ -6830,6 +7767,7 @@ object FOP_Cajero: TFOP_Cajero
       Visible = ivAlways
       LargeImageIndex = 29
       ShortCut = 113
+      OnClick = accionBtnBuscar
       AutoGrayScale = False
     end
     object btnBuscarCliente: TdxBarLargeButton
@@ -6838,6 +7776,7 @@ object FOP_Cajero: TFOP_Cajero
       Hint = 'F3 Clientes'
       Visible = ivAlways
       LargeImageIndex = 56
+      OnClick = btnBuscarClienteClick
       AutoGrayScale = False
     end
     object btIVA: TdxBarLargeButton
@@ -6846,6 +7785,7 @@ object FOP_Cajero: TFOP_Cajero
       Hint = 'F4 Tipo IVA'
       Visible = ivAlways
       LargeImageIndex = 17
+      OnClick = btIVAClick
       AutoGrayScale = False
     end
     object btnBuscarVendedor: TdxBarLargeButton
@@ -6864,6 +7804,7 @@ object FOP_Cajero: TFOP_Cajero
       Hint = 'F6 Leer C'#243'digo Producto'
       Visible = ivAlways
       LargeImageIndex = 85
+      OnClick = accionBtnBuscar
       AutoGrayScale = False
     end
     object btnFormaPago: TdxBarLargeButton
@@ -6871,6 +7812,7 @@ object FOP_Cajero: TFOP_Cajero
       Category = 0
       Visible = ivAlways
       LargeImageIndex = 30
+      OnClick = btnFormaPagoClick
       AutoGrayScale = False
     end
     object btnPreventa: TdxBarLargeButton
@@ -6879,6 +7821,7 @@ object FOP_Cajero: TFOP_Cajero
       Hint = 'F8 Preventa'
       Visible = ivAlways
       LargeImageIndex = 79
+      OnClick = btnPreventaClick
       AutoGrayScale = False
     end
     object btnVentaRapida: TdxBarLargeButton
@@ -6888,6 +7831,7 @@ object FOP_Cajero: TFOP_Cajero
       Visible = ivAlways
       LargeImageIndex = 81
       ShortCut = 120
+      OnClick = btnVentaRapidaClick
       AutoGrayScale = False
     end
     object BtAceptarPago: TdxBarLargeButton
@@ -6895,6 +7839,7 @@ object FOP_Cajero: TFOP_Cajero
       Category = 0
       Visible = ivAlways
       LargeImageIndex = 5
+      OnClick = BtAceptarPagoClick
       AutoGrayScale = False
     end
     object BtCancelarPago: TdxBarLargeButton
@@ -6902,6 +7847,7 @@ object FOP_Cajero: TFOP_Cajero
       Category = 0
       Visible = ivAlways
       LargeImageIndex = 9
+      OnClick = BtCancelarPagoClick
       AutoGrayScale = False
     end
     object btsalir: TdxBarLargeButton
@@ -6911,6 +7857,7 @@ object FOP_Cajero: TFOP_Cajero
       Hint = 'F12 Salir'
       Visible = ivAlways
       LargeImageIndex = 6
+      OnClick = btsalirClick
       AutoGrayScale = False
     end
     object btCierreZ: TdxBarLargeButton
@@ -6943,6 +7890,7 @@ object FOP_Cajero: TFOP_Cajero
       Hint = 'Cargar Orden'
       Visible = ivAlways
       LargeImageIndex = 90
+      OnClick = btnCargarOrdenTecnicaClick
       AutoGrayScale = False
     end
     object GrupoGuardarCancelar: TdxBarGroup
@@ -6968,756 +7916,9 @@ object FOP_Cajero: TFOP_Cajero
         'btnCargarOrdenTecnica')
     end
   end
-  object DS_DetalleFactura: TDataSource
-    DataSet = CD_DetalleFactura
-    Left = 272
-    Top = 328
-  end
-  object CD_DetalleFactura: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 274
-    Top = 272
-    object CD_DetalleFacturaID_COMPROBANTE_DETALLE: TIntegerField
-      FieldName = 'ID_COMPROBANTE_DETALLE'
-    end
-    object CD_DetalleFacturaID_COMPROBANTE: TIntegerField
-      FieldName = 'ID_COMPROBANTE'
-    end
-    object CD_DetalleFacturaID_PRODUCTO: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-    end
-    object CD_DetalleFacturaDETALLE: TStringField
-      FieldName = 'DETALLE'
-      Size = 200
-    end
-    object CD_DetalleFacturaCANTIDAD: TFloatField
-      FieldName = 'CANTIDAD'
-    end
-    object CD_DetalleFacturaIMPORTE_FINAL: TFloatField
-      DisplayWidth = 10
-      FieldName = 'IMPORTE_FINAL'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object CD_DetalleFacturaPORC_DESCUENTO: TFloatField
-      FieldName = 'PORC_DESCUENTO'
-    end
-    object CD_DetalleFacturaBASE_IMPONIBLE: TFloatField
-      FieldName = 'BASE_IMPONIBLE'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object CD_DetalleFacturaIMPORTE_UNITARIO: TFloatField
-      FieldName = 'IMPORTE_UNITARIO'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-      Precision = 2
-    end
-    object CD_DetalleFacturaIMPUESTO_INTERNO: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object CD_DetalleFacturaPORC_IVA: TFloatField
-      FieldName = 'PORC_IVA'
-    end
-    object CD_DetalleFacturaIMPORTE_VENTA: TFloatField
-      FieldName = 'IMPORTE_VENTA'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object CD_DetalleFacturaIMPORTE_IVA: TFloatField
-      FieldName = 'IMPORTE_IVA'
-      DisplayFormat = '$ ##,###,##0.00'
-    end
-    object CD_DetalleFacturaID_PROD_STOCK: TIntegerField
-      FieldName = 'ID_PROD_STOCK'
-    end
-    object CD_DetalleFacturaPRECIO1: TFloatField
-      FieldName = 'PRECIO1'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object CD_DetalleFacturaPRECIO2: TFloatField
-      FieldName = 'PRECIO2'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object CD_DetalleFacturaPRECIO3: TFloatField
-      FieldName = 'PRECIO3'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object CD_DetalleFacturaPRECIO4: TFloatField
-      FieldName = 'PRECIO4'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object CD_DetalleFacturaPRECIO5: TFloatField
-      FieldName = 'PRECIO5'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object CD_DetalleFacturaIMPORTE_IF: TFloatField
-      FieldName = 'IMPORTE_IF'
-      DisplayFormat = '$ ##,###,##0.00'
-    end
-    object CD_DetalleFacturaIMPORTE_IF_SINIVA: TFloatField
-      FieldName = 'IMPORTE_IF_SINIVA'
-    end
-    object CD_DetalleFacturaIMPORTE_IVA_IF: TFloatField
-      FieldName = 'IMPORTE_IVA_IF'
-    end
-    object CD_DetalleFacturaimporte_original: TFloatField
-      FieldName = 'IMPORTE_ORIGINAL'
-    end
-    object CD_DetalleFacturaproducto: TStringField
-      FieldName = 'producto'
-      Size = 500
-    end
-    object CD_DetalleFacturaIMPORTE_COSTO: TFloatField
-      FieldName = 'IMPORTE_COSTO'
-    end
-    object CD_DetalleFacturamonto_reconocido: TFloatField
-      FieldName = 'monto_reconocido'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-  end
-  object CD_Comprobante: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    ProviderName = 'DataSetProvider1'
-    Left = 378
-    Top = 272
-    object CD_ComprobanteID_COMPROBANTE: TIntegerField
-      FieldName = 'ID_COMPROBANTE'
-    end
-    object CD_ComprobanteID_SUCURSAL: TIntegerField
-      FieldName = 'ID_SUCURSAL'
-    end
-    object CD_ComprobanteID_PROVEEDOR: TIntegerField
-      FieldName = 'ID_PROVEEDOR'
-    end
-    object CD_ComprobanteID_CLIENTE: TIntegerField
-      FieldName = 'ID_CLIENTE'
-    end
-    object CD_ComprobanteID_TIPO_CPB: TIntegerField
-      FieldName = 'ID_TIPO_CPB'
-    end
-    object CD_ComprobanteID_VENDEDOR: TIntegerField
-      FieldName = 'ID_VENDEDOR'
-    end
-    object CD_ComprobanteID_COMP_ESTADO: TIntegerField
-      FieldName = 'ID_COMP_ESTADO'
-    end
-    object CD_ComprobanteCODIGO: TStringField
-      FieldName = 'CODIGO'
-      Size = 50
-    end
-    object CD_ComprobanteFECHA: TDateTimeField
-      FieldName = 'FECHA'
-    end
-    object CD_ComprobanteOBSERVACION: TStringField
-      FieldName = 'OBSERVACION'
-      Size = 500
-    end
-    object CD_ComprobanteBASE_IMPONIBLE: TFloatField
-      FieldName = 'BASE_IMPONIBLE'
-    end
-    object CD_ComprobanteSALDO: TFloatField
-      FieldName = 'SALDO'
-    end
-    object CD_ComprobanteIMPORTE_TOTAL: TFloatField
-      FieldName = 'IMPORTE_TOTAL'
-    end
-    object CD_ComprobantePORC_IVA: TFloatField
-      FieldName = 'PORC_IVA'
-    end
-    object CD_ComprobanteIMPORTE_IVA: TFloatField
-      FieldName = 'IMPORTE_IVA'
-    end
-    object CD_ComprobantePORC_DESCUENTO: TFloatField
-      FieldName = 'PORC_DESCUENTO'
-    end
-    object CD_ComprobanteIMPORTE_DESCUENTO: TFloatField
-      FieldName = 'IMPORTE_DESCUENTO'
-    end
-    object CD_ComprobanteENCABEZADO: TStringField
-      FieldName = 'ENCABEZADO'
-      Size = 500
-    end
-    object CD_ComprobantePIE: TStringField
-      FieldName = 'PIE'
-      Size = 500
-    end
-    object CD_ComprobanteFECHA_COBRADA: TDateField
-      FieldName = 'FECHA_COBRADA'
-    end
-    object CD_ComprobanteFECHA_ENVIADA: TDateField
-      FieldName = 'FECHA_ENVIADA'
-    end
-    object CD_ComprobanteFECHA_IMPRESA: TDateField
-      FieldName = 'FECHA_IMPRESA'
-    end
-    object CD_ComprobanteFECHA_VENCIMIENTO: TDateField
-      FieldName = 'FECHA_VENCIMIENTO'
-    end
-    object CD_Comprobantepers_nombre: TStringField
-      FieldKind = fkLookup
-      FieldName = 'pers_nombre'
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'NOMBRE'
-      KeyFields = 'ID_CLIENTE'
-      Size = 100
-      Lookup = True
-    end
-    object CD_Comprobantepers_cuit: TStringField
-      FieldKind = fkLookup
-      FieldName = 'pers_cuit'
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'CUIT_CUIL'
-      KeyFields = 'ID_CLIENTE'
-      Lookup = True
-    end
-    object CD_Comprobantepers_codigo: TStringField
-      FieldKind = fkLookup
-      FieldName = 'pers_codigo'
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'CODIGO_CORTO'
-      KeyFields = 'ID_CLIENTE'
-      Lookup = True
-    end
-    object CD_Comprobantepers_iva: TStringField
-      DisplayWidth = 30
-      FieldKind = fkLookup
-      FieldName = 'pers_iva'
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'TIVA'
-      KeyFields = 'ID_CLIENTE'
-      Size = 30
-      Lookup = True
-    end
-    object CD_Comprobantepers_tel: TStringField
-      FieldKind = fkLookup
-      FieldName = 'pers_tel'
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'TELEFONO'
-      KeyFields = 'ID_CLIENTE'
-      Size = 30
-      Lookup = True
-    end
-    object CD_Comprobantepers_direccion: TStringField
-      FieldKind = fkLookup
-      FieldName = 'pers_direccion'
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'DIRECCION'
-      KeyFields = 'ID_CLIENTE'
-      Size = 100
-      Lookup = True
-    end
-    object CD_ComprobanteID_TIPO_IVA: TIntegerField
-      FieldName = 'ID_TIPO_IVA'
-    end
-    object CD_ComprobantetipoIVA: TStringField
-      FieldKind = fkLookup
-      FieldName = 'tipoIVA'
-      LookupKeyFields = 'ID_TIPO_IVA'
-      LookupResultField = 'NOMBRE_TIPO_IVA'
-      KeyFields = 'ID_TIPO_IVA'
-      Size = 50
-      Lookup = True
-    end
-    object CD_Comprobantepers_desc: TStringField
-      FieldKind = fkLookup
-      FieldName = 'pers_desc'
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'PORCDESC'
-      KeyFields = 'ID_CLIENTE'
-      Size = 10
-      Lookup = True
-    end
-    object CD_ComprobantenVendedor: TStringField
-      FieldKind = fkLookup
-      FieldName = 'nVendedor'
-      LookupKeyFields = 'ID_PERSONA'
-      LookupResultField = 'NOMBRE'
-      KeyFields = 'ID_VENDEDOR'
-      Size = 100
-      Lookup = True
-    end
-    object CD_ComprobantePUNTO_VENTA: TIntegerField
-      FieldName = 'PUNTO_VENTA'
-    end
-    object CD_ComprobanteNUMERO_CPB: TIntegerField
-      FieldName = 'NUMERO_CPB'
-    end
-    object CD_ComprobanteFECHA_ANULADO: TDateField
-      FieldName = 'FECHA_ANULADO'
-    end
-    object CD_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField
-      FieldName = 'ID_TIPO_MOVIMIENTO'
-    end
-    object CD_ComprobanteIMPORTE_VENTA: TFloatField
-      FieldName = 'IMPORTE_VENTA'
-    end
-    object CD_ComprobantemontoRecibido: TCurrencyField
-      FieldName = 'montoRecibido'
-    end
-    object CD_ComprobanteID_PREVENTA: TIntegerField
-      FieldName = 'ID_PREVENTA'
-    end
-  end
-  object ClientDataSet1: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 466
-    Top = 272
-    object IntegerField1: TIntegerField
-      FieldName = 'ID_COMPROBANTE_DETALLE'
-    end
-    object IntegerField2: TIntegerField
-      FieldName = 'ID_COMPROBANTE'
-    end
-    object IntegerField3: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-    end
-    object StringField1: TStringField
-      FieldName = 'DETALLE'
-      Size = 200
-    end
-    object FloatField1: TFloatField
-      FieldName = 'CANTIDAD'
-    end
-    object FloatField2: TFloatField
-      DisplayWidth = 10
-      FieldName = 'IMPORTE_FINAL'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object FloatField3: TFloatField
-      FieldName = 'PORC_DESCUENTO'
-    end
-    object FloatField4: TFloatField
-      FieldName = 'BASE_IMPONIBLE'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object FloatField5: TFloatField
-      FieldName = 'IMPORTE_UNITARIO'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-      Precision = 2
-    end
-    object FloatField6: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object FloatField7: TFloatField
-      FieldName = 'PORC_IVA'
-    end
-    object FloatField8: TFloatField
-      FieldName = 'IMPORTE_VENTA'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object FloatField9: TFloatField
-      FieldName = 'IMPORTE_IVA'
-      DisplayFormat = '$ ##,###,##0.00'
-    end
-    object IntegerField4: TIntegerField
-      FieldName = 'ID_PROD_STOCK'
-    end
-    object FloatField10: TFloatField
-      FieldName = 'PRECIO1'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object FloatField11: TFloatField
-      FieldName = 'PRECIO2'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object FloatField12: TFloatField
-      FieldName = 'PRECIO3'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object FloatField13: TFloatField
-      FieldName = 'PRECIO4'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object FloatField14: TFloatField
-      FieldName = 'PRECIO5'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object FloatField15: TFloatField
-      FieldName = 'IMPORTE_IF'
-      DisplayFormat = '$ ##,###,##0.00'
-    end
-    object FloatField16: TFloatField
-      FieldName = 'IMPORTE_IF_SINIVA'
-    end
-    object FloatField17: TFloatField
-      FieldName = 'IMPORTE_IVA_IF'
-    end
-    object FloatField18: TFloatField
-      FieldName = 'IMPORTE_ORIGINAL'
-    end
-    object StringField2: TStringField
-      FieldName = 'producto'
-      Size = 500
-    end
-    object FloatField19: TFloatField
-      FieldName = 'IMPORTE_COSTO'
-    end
-  end
-  object CD_Fpago: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 381
-    Top = 328
-    object CD_FpagoID_COMPROB_FP: TIntegerField
-      FieldName = 'ID_COMPROB_FP'
-    end
-    object CD_FpagoID_COMPROBANTE: TIntegerField
-      FieldName = 'ID_COMPROBANTE'
-    end
-    object CD_FpagoID_TIPO_FORMAPAG: TIntegerField
-      DisplayWidth = 50
-      FieldName = 'ID_TIPO_FORMAPAG'
-    end
-    object CD_FpagoMDCP_FECHA: TDateField
-      FieldName = 'MDCP_FECHA'
-      EditMask = '!99/99/0000;1;_'
-    end
-    object CD_FpagoMDCP_BANCO: TStringField
-      FieldName = 'MDCP_BANCO'
-      Size = 50
-    end
-    object CD_FpagoMDCP_CHEQUE: TStringField
-      FieldName = 'MDCP_CHEQUE'
-      Size = 50
-    end
-    object CD_FpagoIMPORTE: TFloatField
-      FieldName = 'IMPORTE'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object CD_FpagoCONCILIADO: TDateField
-      FieldName = 'CONCILIADO'
-    end
-    object CD_FpagoCUENTA_INGRESO: TIntegerField
-      FieldName = 'CUENTA_INGRESO'
-    end
-    object CD_FpagoCUENTA_EGRESO: TIntegerField
-      FieldName = 'CUENTA_EGRESO'
-    end
-    object CD_Fpago_ctaIngreso: TStringField
-      FieldKind = fkLookup
-      FieldName = '_ctaIngreso'
-      LookupKeyFields = 'ID_CUENTA'
-      LookupResultField = 'NOMBRE_CUENTA'
-      KeyFields = 'CUENTA_INGRESO'
-      Size = 100
-      Lookup = True
-    end
-    object CD_FpagomedioPago: TStringField
-      FieldKind = fkLookup
-      FieldName = 'medioPago'
-      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
-      LookupResultField = 'DESCRIPCION'
-      KeyFields = 'ID_TIPO_FORMAPAG'
-      Size = 50
-      Lookup = True
-    end
-    object CD_Fpago_desc_rec: TFloatField
-      FieldKind = fkLookup
-      FieldName = '_desc_rec'
-      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
-      LookupResultField = 'DESC_REC'
-      KeyFields = 'ID_TIPO_FORMAPAG'
-      Lookup = True
-    end
-    object CD_Fpago_importeVenta: TFloatField
-      FieldName = '_importeVenta'
-      DisplayFormat = '$ ##,###,##0.00'
-      EditFormat = '##,###,##0.00'
-    end
-    object CD_Fpago_efectivo: TStringField
-      FieldKind = fkLookup
-      FieldName = '_efectivo'
-      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
-      LookupResultField = 'GENERA_VUELTO'
-      KeyFields = 'ID_TIPO_FORMAPAG'
-      Size = 1
-      Lookup = True
-    end
-    object CD_Fpago_nroPrecio: TStringField
-      FieldKind = fkLookup
-      FieldName = '_nroPrecio'
-      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
-      LookupResultField = 'COLUMNA_PRECIO'
-      KeyFields = 'ID_TIPO_FORMAPAG'
-      Lookup = True
-    end
-    object CD_Fpago_fiscal: TStringField
-      FieldKind = fkLookup
-      FieldName = '_fiscal'
-      LookupKeyFields = 'ID_TIPO_FORMAPAGO'
-      LookupResultField = 'IF'
-      KeyFields = 'ID_TIPO_FORMAPAG'
-      Lookup = True
-    end
-    object CD_Fpago_esCtaCorr: TStringField
-      FieldKind = fkLookup
-      FieldName = '_esCtaCorr'
-      LookupKeyFields = 'ID_CUENTA'
-      LookupResultField = 'A_CTA_CORRIENTE'
-      KeyFields = 'CUENTA_INGRESO'
-      Lookup = True
-    end
-    object CD_Fpago_esSenia: TStringField
-      FieldName = '_esSenia'
-      Size = 1
-    end
-    object CD_FpagoFECHA_FP: TDateTimeField
-      FieldName = 'FECHA_FP'
-    end
-  end
-  object CD_VentaFinal: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 466
-    Top = 332
-    object CD_VentaFinal_medioPago: TStringField
-      FieldName = '_medioPago'
-      Size = 50
-    end
-    object CD_VentaFinalimporteVenta: TFloatField
-      FieldName = 'importeVenta'
-      DisplayFormat = '$ ##,###,##0.00'
-    end
-    object CD_VentaFinalimporteDescuento: TFloatField
-      FieldName = 'importeDescuento'
-      DisplayFormat = '$ ##,###,##0.00'
-    end
-    object CD_VentaFinalid: TIntegerField
-      FieldName = 'id'
-    end
-    object CD_VentaFinalgenera_vuelto: TStringField
-      FieldName = 'genera_vuelto'
-      Size = 1
-    end
-    object CD_VentaFinalfiscal: TStringField
-      FieldName = 'fiscal'
-    end
-    object CD_VentaFinalidTipoPago: TIntegerField
-      FieldName = 'idTipoPago'
-    end
-    object CD_VentaFinalidCta: TIntegerField
-      FieldName = 'idCta'
-    end
-    object CD_VentaFinalmdpFecha: TDateField
-      FieldName = 'mdpFecha'
-    end
-    object CD_VentaFinalmdpBanco: TStringField
-      FieldName = 'mdpBanco'
-      Size = 50
-    end
-    object CD_VentaFinalmdpNro: TStringField
-      FieldName = 'mdpNro'
-    end
-  end
-  object ZQ_FormasPago: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select *'
-      'from tipo_formapago'
-      'order by descripcion,cod_corto')
-    Params = <>
-    Left = 557
-    Top = 274
-    object ZQ_FormasPagoID_TIPO_FORMAPAGO: TIntegerField
-      FieldName = 'ID_TIPO_FORMAPAGO'
-      Required = True
-    end
-    object ZQ_FormasPagoDESCRIPCION: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 50
-    end
-    object ZQ_FormasPagoBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object ZQ_FormasPagoIF: TStringField
-      FieldName = 'IF'
-      Size = 1
-    end
-    object ZQ_FormasPagoDESC_REC: TFloatField
-      FieldName = 'DESC_REC'
-    end
-    object ZQ_FormasPagoCOD_CORTO: TIntegerField
-      FieldName = 'COD_CORTO'
-    end
-    object ZQ_FormasPagoGENERA_VUELTO: TStringField
-      FieldName = 'GENERA_VUELTO'
-      Size = 1
-    end
-    object ZQ_FormasPagoCOLUMNA_PRECIO: TIntegerField
-      FieldName = 'COLUMNA_PRECIO'
-    end
-    object ZQ_FormasPagoMODIFICABLE: TStringField
-      FieldName = 'MODIFICABLE'
-      Size = 1
-    end
-  end
-  object ZQ_Cuentas: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      'select cta.*'
-      'from cuenta cta'
-      'where baja='#39'N'#39
-      'order by cta.nombre_cuenta,cta.codigo')
-    Params = <>
-    Left = 557
-    Top = 329
-    object ZQ_CuentasID_CUENTA: TIntegerField
-      FieldName = 'ID_CUENTA'
-    end
-    object ZQ_CuentasMEDIO_DEFECTO: TIntegerField
-      FieldName = 'MEDIO_DEFECTO'
-    end
-    object ZQ_CuentasCODIGO: TStringField
-      FieldName = 'CODIGO'
-      Size = 10
-    end
-    object ZQ_CuentasNOMBRE_CUENTA: TStringField
-      FieldName = 'NOMBRE_CUENTA'
-      Size = 50
-    end
-    object ZQ_CuentasNRO_CTA_BANCARIA: TStringField
-      FieldName = 'NRO_CTA_BANCARIA'
-      Size = 10
-    end
-    object ZQ_CuentasBAJA: TStringField
-      FieldName = 'BAJA'
-      Size = 1
-    end
-    object ZQ_CuentasA_CTA_CORRIENTE: TStringField
-      FieldName = 'A_CTA_CORRIENTE'
-      Size = 1
-    end
-    object ZQ_CuentasID_SUCURSAL: TIntegerField
-      FieldName = 'ID_SUCURSAL'
-    end
-    object ZQ_CuentasA_NOTA_CREDITO: TStringField
-      FieldName = 'A_NOTA_CREDITO'
-      Size = 1
-    end
-    object ZQ_CuentasMODIFICABLE: TStringField
-      FieldName = 'MODIFICABLE'
-      Size = 1
-    end
-  end
-  object ZQ_DetalleProd: TZQuery
-    Connection = DM.Conexion
-    SQL.Strings = (
-      
-        'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
-        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_' +
-        'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
-        'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
-        'p.cod_corto, p.codigo_barra,pc.imagen'
-      
-        ',pc.nombre||'#39'  -  M: '#39'||coalesce(m.medida,'#39#39')||'#39'  -  CB:'#39'||coale' +
-        'sce(p.codigo_barra,'#39#39') DETALLE_PROD'
-      'from producto p'
-      'left join medida m on (p.id_medida = m.id_medida)'
-      
-        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
-        'od_cabecera)'
-      'left join articulo a on (pc.id_articulo = a.id_articulo)'
-      
-        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
-        'rticulo)'
-      'left join marca ma on (pc.id_marca = ma.id_marca)'
-      'where pc.baja <> '#39'S'#39
-      ''
-      '')
-    Params = <>
-    Left = 656
-    Top = 272
-    object StringField3: TStringField
-      FieldName = 'NOMBRE_PRODUCTO'
-      Size = 100
-    end
-    object StringField4: TStringField
-      FieldName = 'MEDIDA'
-      Size = 30
-    end
-    object StringField5: TStringField
-      FieldName = 'ARTICULO'
-      Size = 200
-    end
-    object StringField6: TStringField
-      FieldName = 'TIPO_ARTICULO'
-      Size = 200
-    end
-    object StringField7: TStringField
-      FieldName = 'NOMBRE_MARCA'
-      Size = 50
-    end
-    object StringField8: TStringField
-      FieldName = 'DESCRIPCION'
-      Size = 500
-    end
-    object FloatField20: TFloatField
-      FieldName = 'PRECIO_COSTO'
-      currency = True
-    end
-    object FloatField21: TFloatField
-      FieldName = 'PRECIO_VENTA'
-      currency = True
-    end
-    object FloatField22: TFloatField
-      FieldName = 'COEF_GANANCIA'
-    end
-    object FloatField23: TFloatField
-      FieldName = 'COEF_DESCUENTO'
-    end
-    object FloatField24: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object FloatField25: TFloatField
-      FieldName = 'IMPUESTO_IVA'
-    end
-    object StringField9: TStringField
-      FieldName = 'COD_CORTO'
-    end
-    object StringField10: TStringField
-      FieldName = 'CODIGO_BARRA'
-      Size = 40
-    end
-    object IntegerField5: TIntegerField
-      FieldName = 'ID_PRODUCTO'
-      Required = True
-    end
-    object BlobField1: TBlobField
-      FieldName = 'IMAGEN'
-    end
-    object StringField11: TStringField
-      FieldName = 'DETALLE_PROD'
-      ReadOnly = True
-      Size = 186
-    end
-  end
-  object DS_Sucursal: TDataSource
-    Left = 739
-    Top = 273
-  end
   object ZQ_Productos: TZQuery
     Connection = DM.Conexion
+    AfterScroll = ZQ_ProductosAfterScroll
     SQL.Strings = (
       
         'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
@@ -7761,8 +7962,8 @@ object FOP_Cajero: TFOP_Cajero
         Name = 'prod'
         ParamType = ptUnknown
       end>
-    Left = 624
-    Top = 336
+    Left = 216
+    Top = 232
     ParamData = <
       item
         DataType = ftUnknown
@@ -7894,6 +8095,1586 @@ object FOP_Cajero: TFOP_Cajero
       Size = 50
     end
   end
+  object DS_Productos: TDataSource
+    DataSet = ZQ_Productos
+    Left = 240
+    Top = 288
+  end
+  object ATeclasRapidas: TActionManager
+    Left = 320
+    Top = 242
+    StyleName = 'XP Style'
+    object ABuscar: TAction
+      Caption = 'ABuscar'
+      ShortCut = 112
+      OnExecute = ABuscarExecute
+    end
+    object ANuevo: TAction
+      Caption = 'ABuscarProd'
+      ShortCut = 113
+      OnExecute = ANuevoExecute
+    end
+    object ATipoIVA: TAction
+      Caption = 'ATipoIVA'
+      ShortCut = 115
+      OnExecute = ATipoIVAExecute
+    end
+    object ACliente: TAction
+      Caption = 'ACliente'
+      ShortCut = 114
+      OnExecute = AClienteExecute
+    end
+    object ASalir: TAction
+      Caption = 'ASalir'
+      ShortCut = 123
+      OnExecute = ASalirExecute
+    end
+    object AGuardar: TAction
+      Caption = 'AAceptar'
+      ShortCut = 121
+      OnExecute = AGuardarExecute
+    end
+    object ACancelar: TAction
+      Caption = 'ACancelar'
+      ShortCut = 122
+      OnExecute = ACancelarExecute
+    end
+    object AVendedor: TAction
+      Caption = 'AVendedor'
+      ShortCut = 116
+      OnExecute = AVendedorExecute
+    end
+    object ANuevoProd: TAction
+      Caption = 'ANuevoProd'
+      ShortCut = 117
+      OnExecute = ANuevoProdExecute
+    end
+    object ANuevaFormaPago: TAction
+      Caption = 'ANuevaFormaPago'
+      ShortCut = 118
+      OnExecute = ANuevaFormaPagoExecute
+    end
+    object APreventa: TAction
+      Caption = 'Preventa'
+      ShortCut = 119
+      OnExecute = APreventaExecute
+    end
+    object AVentaRapida: TAction
+      Caption = 'Venta '#193'gil'
+      ShortCut = 120
+      OnExecute = AVentaRapidaExecute
+    end
+  end
+  object PopUpProductos: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    MenuAnimation = [maLeftToRight]
+    Left = 320
+    Top = 288
+    object EditarProd: TMenuItem
+      Caption = 'Editar Producto'
+      ImageIndex = 10
+      OnClick = EditarProdClick
+    end
+    object QuitarProd: TMenuItem
+      Caption = 'Quitar Producto'
+      ImageIndex = 12
+      OnClick = btQuitarProductoClick
+    end
+  end
+  object ZQ_Personas: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select p.*,prov.nombre_provincia as prov,td.nombre_tipo_doc as t' +
+        'doc,ti.nombre_tipo_iva as tiva,(p.descuento_especial*100) as por' +
+        'cDesc,ti.coeficiente as coefIva'
+      'from Persona p'
+      'left join provincia prov on (p.id_provincia=prov.id_provincia)'
+      'left join tipo_documento td on (td.id_tipo_doc=p.id_tipo_doc)'
+      'left join tipo_iva ti on (ti.id_tipo_iva=p.id_tipo_iva)')
+    Params = <>
+    Left = 397
+    Top = 234
+    object ZQ_PersonasID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+      Required = True
+    end
+    object ZQ_PersonasID_PROVINCIA: TIntegerField
+      FieldName = 'ID_PROVINCIA'
+    end
+    object ZQ_PersonasID_TIPO_DOC: TIntegerField
+      FieldName = 'ID_TIPO_DOC'
+    end
+    object ZQ_PersonasID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_PersonasNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_PersonasDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_PersonasLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_PersonasCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_PersonasTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_PersonasEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_PersonasFECHA_NACIMIENTO: TDateField
+      FieldName = 'FECHA_NACIMIENTO'
+    end
+    object ZQ_PersonasNUMERO_DOC: TStringField
+      FieldName = 'NUMERO_DOC'
+      Size = 50
+    end
+    object ZQ_PersonasSEXO: TStringField
+      FieldName = 'SEXO'
+      Size = 1
+    end
+    object ZQ_PersonasBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_PersonasDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object ZQ_PersonasCUIT_CUIL: TStringField
+      FieldName = 'CUIT_CUIL'
+      Size = 30
+    end
+    object ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField
+      FieldName = 'DESCUENTO_ESPECIAL'
+    end
+    object ZQ_PersonasCODIGO_CORTO: TIntegerField
+      FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_PersonasPROV: TStringField
+      FieldName = 'PROV'
+      Size = 50
+    end
+    object ZQ_PersonasTDOC: TStringField
+      FieldName = 'TDOC'
+    end
+    object ZQ_PersonasTIVA: TStringField
+      FieldName = 'TIVA'
+      Size = 50
+    end
+    object ZQ_PersonasPORCDESC: TFloatField
+      FieldName = 'PORCDESC'
+      ReadOnly = True
+    end
+    object ZQ_PersonasCOEFIVA: TFloatField
+      FieldName = 'COEFIVA'
+    end
+  end
+  object DS_Personas: TDataSource
+    DataSet = ZQ_Personas
+    Left = 400
+    Top = 288
+  end
+  object ZQ_TipoIVA: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from tipo_IVA')
+    Params = <>
+    Left = 317
+    Top = 346
+    object ZQ_TipoIVAID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+      Required = True
+    end
+    object ZQ_TipoIVANOMBRE_TIPO_IVA: TStringField
+      FieldName = 'NOMBRE_TIPO_IVA'
+      Size = 50
+    end
+    object ZQ_TipoIVAABREVIATURA: TStringField
+      FieldName = 'ABREVIATURA'
+      Size = 10
+    end
+    object ZQ_TipoIVADISCRIMINAR: TStringField
+      FieldName = 'DISCRIMINAR'
+      Size = 1
+    end
+    object ZQ_TipoIVALETRA: TStringField
+      FieldName = 'LETRA'
+      Size = 1
+    end
+    object ZQ_TipoIVAFISCAL: TStringField
+      FieldName = 'FISCAL'
+      Size = 1
+    end
+    object ZQ_TipoIVACOEFICIENTE: TFloatField
+      FieldName = 'COEFICIENTE'
+    end
+    object ZQ_TipoIVAVERIFICA_CUIT: TStringField
+      FieldName = 'VERIFICA_CUIT'
+      Size = 1
+    end
+  end
+  object ZSP_Comprobante: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    StoredProcName = 'SP_GEN_COMPROBANTE_ID'
+    Left = 497
+    Top = 289
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptResult
+      end>
+    object ZSP_ComprobanteID: TIntegerField
+      FieldName = 'ID'
+    end
+    object ZSP_ComprobanteCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 30
+    end
+  end
+  object CD_DetalleFactura: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 498
+    Top = 232
+    object CD_DetalleFacturaID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+    end
+    object CD_DetalleFacturaID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object CD_DetalleFacturaID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+    end
+    object CD_DetalleFacturaDETALLE: TStringField
+      FieldName = 'DETALLE'
+      Size = 200
+    end
+    object CD_DetalleFacturaCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object CD_DetalleFacturaIMPORTE_FINAL: TFloatField
+      DisplayWidth = 10
+      FieldName = 'IMPORTE_FINAL'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
+    end
+    object CD_DetalleFacturaPORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object CD_DetalleFacturaBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
+    end
+    object CD_DetalleFacturaIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
+      Precision = 2
+    end
+    object CD_DetalleFacturaIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object CD_DetalleFacturaPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object CD_DetalleFacturaIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
+    end
+    object CD_DetalleFacturaIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+      DisplayFormat = '$ ##,###,##0.00'
+    end
+    object CD_DetalleFacturaID_PROD_STOCK: TIntegerField
+      FieldName = 'ID_PROD_STOCK'
+    end
+    object CD_DetalleFacturaPRECIO1: TFloatField
+      FieldName = 'PRECIO1'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
+    end
+    object CD_DetalleFacturaPRECIO2: TFloatField
+      FieldName = 'PRECIO2'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
+    end
+    object CD_DetalleFacturaPRECIO3: TFloatField
+      FieldName = 'PRECIO3'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
+    end
+    object CD_DetalleFacturaPRECIO4: TFloatField
+      FieldName = 'PRECIO4'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
+    end
+    object CD_DetalleFacturaPRECIO5: TFloatField
+      FieldName = 'PRECIO5'
+      DisplayFormat = '$ ##,###,##0.00'
+      EditFormat = '##,###,##0.00'
+    end
+    object CD_DetalleFacturaIMPORTE_IF: TFloatField
+      FieldName = 'IMPORTE_IF'
+      DisplayFormat = '$ ##,###,##0.00'
+    end
+    object CD_DetalleFacturaIMPORTE_IF_SINIVA: TFloatField
+      FieldName = 'IMPORTE_IF_SINIVA'
+    end
+    object CD_DetalleFacturaIMPORTE_IVA_IF: TFloatField
+      FieldName = 'IMPORTE_IVA_IF'
+    end
+    object CD_DetalleFacturaimporte_original: TFloatField
+      FieldName = 'IMPORTE_ORIGINAL'
+    end
+    object CD_DetalleFacturaproducto: TStringField
+      FieldName = 'producto'
+      Size = 500
+    end
+    object CD_DetalleFacturaIMPORTE_COSTO: TFloatField
+      FieldName = 'IMPORTE_COSTO'
+    end
+    object CD_DetalleFacturamonto_reconocido: TFloatField
+      FieldName = 'monto_reconocido'
+    end
+  end
+  object ZQ_DetalleProd: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select pc.nombre as nombre_producto, m.medida, a.descripcion as ' +
+        'articulo, ta.descripcion as tipo_articulo, ma.nombre_marca,p.id_' +
+        'producto, p.descripcion, p.precio_costo, p.precio_venta, p.coef_' +
+        'ganancia, p.coef_descuento, p.impuesto_interno, p.impuesto_iva, ' +
+        'p.cod_corto, p.codigo_barra,pc.imagen'
+      
+        ',pc.nombre||'#39'  -  M: '#39'||coalesce(m.medida,'#39#39')||'#39'  -  CB:'#39'||coale' +
+        'sce(p.codigo_barra,'#39#39') DETALLE_PROD'
+      'from producto p'
+      'left join medida m on (p.id_medida = m.id_medida)'
+      
+        'left join producto_cabecera pc on (p.id_prod_cabecera = pc.id_pr' +
+        'od_cabecera)'
+      'left join articulo a on (pc.id_articulo = a.id_articulo)'
+      
+        'left join tipo_articulo ta on (a.id_tipo_articulo = ta.id_tipo_a' +
+        'rticulo)'
+      'left join marca ma on (pc.id_marca = ma.id_marca)'
+      'where pc.baja <> '#39'S'#39
+      ''
+      '')
+    Params = <>
+    Left = 592
+    Top = 240
+    object StringField1: TStringField
+      FieldName = 'NOMBRE_PRODUCTO'
+      Size = 100
+    end
+    object StringField2: TStringField
+      FieldName = 'MEDIDA'
+      Size = 30
+    end
+    object StringField3: TStringField
+      FieldName = 'ARTICULO'
+      Size = 200
+    end
+    object StringField4: TStringField
+      FieldName = 'TIPO_ARTICULO'
+      Size = 200
+    end
+    object StringField5: TStringField
+      FieldName = 'NOMBRE_MARCA'
+      Size = 50
+    end
+    object StringField6: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object FloatField1: TFloatField
+      FieldName = 'PRECIO_COSTO'
+      currency = True
+    end
+    object FloatField2: TFloatField
+      FieldName = 'PRECIO_VENTA'
+      currency = True
+    end
+    object FloatField3: TFloatField
+      FieldName = 'COEF_GANANCIA'
+    end
+    object FloatField4: TFloatField
+      FieldName = 'COEF_DESCUENTO'
+    end
+    object FloatField5: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object FloatField6: TFloatField
+      FieldName = 'IMPUESTO_IVA'
+    end
+    object StringField7: TStringField
+      FieldName = 'COD_CORTO'
+    end
+    object StringField8: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object IntegerField1: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object BlobField1: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object StringField9: TStringField
+      FieldName = 'DETALLE_PROD'
+      ReadOnly = True
+      Size = 186
+    end
+  end
+  object CD_Comprobante: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    ProviderName = 'DataSetProvider1'
+    Left = 594
+    Top = 288
+    object CD_ComprobanteID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object CD_ComprobanteID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object CD_ComprobanteID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object CD_ComprobanteID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object CD_ComprobanteID_TIPO_CPB: TIntegerField
+      FieldName = 'ID_TIPO_CPB'
+    end
+    object CD_ComprobanteID_VENDEDOR: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object CD_ComprobanteID_COMP_ESTADO: TIntegerField
+      FieldName = 'ID_COMP_ESTADO'
+    end
+    object CD_ComprobanteCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object CD_ComprobanteFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object CD_ComprobanteOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 500
+    end
+    object CD_ComprobanteBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object CD_ComprobanteSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
+    object CD_ComprobanteIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+    end
+    object CD_ComprobantePORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object CD_ComprobanteIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object CD_ComprobantePORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object CD_ComprobanteIMPORTE_DESCUENTO: TFloatField
+      FieldName = 'IMPORTE_DESCUENTO'
+    end
+    object CD_ComprobanteENCABEZADO: TStringField
+      FieldName = 'ENCABEZADO'
+      Size = 500
+    end
+    object CD_ComprobantePIE: TStringField
+      FieldName = 'PIE'
+      Size = 500
+    end
+    object CD_ComprobanteFECHA_COBRADA: TDateField
+      FieldName = 'FECHA_COBRADA'
+    end
+    object CD_ComprobanteFECHA_ENVIADA: TDateField
+      FieldName = 'FECHA_ENVIADA'
+    end
+    object CD_ComprobanteFECHA_IMPRESA: TDateField
+      FieldName = 'FECHA_IMPRESA'
+    end
+    object CD_ComprobanteFECHA_VENCIMIENTO: TDateField
+      FieldName = 'FECHA_VENCIMIENTO'
+    end
+    object CD_Comprobantepers_nombre: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_nombre'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'ID_CLIENTE'
+      Size = 100
+      Lookup = True
+    end
+    object CD_Comprobantepers_cuit: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_cuit'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'CUIT_CUIL'
+      KeyFields = 'ID_CLIENTE'
+      Lookup = True
+    end
+    object CD_Comprobantepers_codigo: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_codigo'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'CODIGO_CORTO'
+      KeyFields = 'ID_CLIENTE'
+      Lookup = True
+    end
+    object CD_Comprobantepers_iva: TStringField
+      DisplayWidth = 30
+      FieldKind = fkLookup
+      FieldName = 'pers_iva'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'TIVA'
+      KeyFields = 'ID_CLIENTE'
+      Size = 30
+      Lookup = True
+    end
+    object CD_Comprobantepers_tel: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_tel'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'TELEFONO'
+      KeyFields = 'ID_CLIENTE'
+      Size = 30
+      Lookup = True
+    end
+    object CD_Comprobantepers_direccion: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_direccion'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'DIRECCION'
+      KeyFields = 'ID_CLIENTE'
+      Size = 100
+      Lookup = True
+    end
+    object CD_ComprobanteID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object CD_ComprobantetipoIVA: TStringField
+      FieldKind = fkLookup
+      FieldName = 'tipoIVA'
+      LookupDataSet = ZQ_TipoIVA
+      LookupKeyFields = 'ID_TIPO_IVA'
+      LookupResultField = 'NOMBRE_TIPO_IVA'
+      KeyFields = 'ID_TIPO_IVA'
+      Size = 50
+      Lookup = True
+    end
+    object CD_Comprobantepers_desc: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_desc'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'PORCDESC'
+      KeyFields = 'ID_CLIENTE'
+      Size = 10
+      Lookup = True
+    end
+    object CD_ComprobantenVendedor: TStringField
+      FieldKind = fkLookup
+      FieldName = 'nVendedor'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'ID_VENDEDOR'
+      Size = 100
+      Lookup = True
+    end
+    object CD_ComprobantePUNTO_VENTA: TIntegerField
+      FieldName = 'PUNTO_VENTA'
+    end
+    object CD_ComprobanteNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
+    end
+    object CD_ComprobanteFECHA_ANULADO: TDateField
+      FieldName = 'FECHA_ANULADO'
+    end
+    object CD_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
+    end
+    object CD_ComprobanteIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object CD_ComprobantemontoRecibido: TCurrencyField
+      FieldName = 'montoRecibido'
+    end
+    object CD_ComprobanteID_PREVENTA: TIntegerField
+      FieldName = 'ID_PREVENTA'
+    end
+  end
+  object DS_Comprobante: TDataSource
+    DataSet = CD_Comprobante
+    Left = 240
+    Top = 344
+  end
+  object ZQ_Comprobante: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from comprobante')
+    Params = <>
+    Left = 594
+    Top = 338
+    object ZQ_ComprobanteID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_ComprobanteID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+    object ZQ_ComprobanteID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_ComprobanteID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object ZQ_ComprobanteID_TIPO_CPB: TIntegerField
+      FieldName = 'ID_TIPO_CPB'
+    end
+    object ZQ_ComprobanteID_VENDEDOR: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object ZQ_ComprobanteID_COMP_ESTADO: TIntegerField
+      FieldName = 'ID_COMP_ESTADO'
+    end
+    object ZQ_ComprobanteCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object ZQ_ComprobanteFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object ZQ_ComprobanteOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 500
+    end
+    object ZQ_ComprobanteBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_ComprobanteSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
+    object ZQ_ComprobanteIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+    end
+    object ZQ_ComprobantePORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_ComprobanteIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object ZQ_ComprobantePORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_ComprobanteIMPORTE_DESCUENTO: TFloatField
+      FieldName = 'IMPORTE_DESCUENTO'
+    end
+    object ZQ_ComprobanteENCABEZADO: TStringField
+      FieldName = 'ENCABEZADO'
+      Size = 500
+    end
+    object ZQ_ComprobantePIE: TStringField
+      FieldName = 'PIE'
+      Size = 500
+    end
+    object ZQ_Comprobantepers_nombre: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_nombre'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'NOMBRE'
+      KeyFields = 'ID_CLIENTE'
+      Size = 100
+      Lookup = True
+    end
+    object ZQ_Comprobantepers_direccion: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_direccion'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'DIRECCION'
+      KeyFields = 'ID_CLIENTE'
+      Size = 50
+      Lookup = True
+    end
+    object ZQ_Comprobantepers_cuit: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_cuit'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'CUIT_CUIL'
+      KeyFields = 'ID_CLIENTE'
+      Lookup = True
+    end
+    object ZQ_Comprobantepers_codigo: TStringField
+      FieldKind = fkLookup
+      FieldName = 'pers_codigo'
+      LookupDataSet = ZQ_Personas
+      LookupKeyFields = 'ID_PERSONA'
+      LookupResultField = 'CODIGO_CORTO'
+      KeyFields = 'ID_CLIENTE'
+      Lookup = True
+    end
+    object ZQ_ComprobantePUNTO_VENTA: TIntegerField
+      FieldName = 'PUNTO_VENTA'
+    end
+    object ZQ_ComprobanteNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
+    end
+    object ZQ_ComprobanteFECHA_ANULADO: TDateField
+      FieldName = 'FECHA_ANULADO'
+    end
+    object ZQ_ComprobanteID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_ComprobanteID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
+    end
+    object ZQ_ComprobanteIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_ComprobanteFECHA_COBRADA: TDateTimeField
+      FieldName = 'FECHA_COBRADA'
+    end
+    object ZQ_ComprobanteFECHA_ENVIADA: TDateField
+      FieldName = 'FECHA_ENVIADA'
+    end
+    object ZQ_ComprobanteFECHA_IMPRESA: TDateField
+      FieldName = 'FECHA_IMPRESA'
+    end
+    object ZQ_ComprobanteFECHA_VENCIMIENTO: TDateField
+      FieldName = 'FECHA_VENCIMIENTO'
+    end
+    object ZQ_ComprobanteID_PREVENTA: TIntegerField
+      FieldName = 'ID_PREVENTA'
+    end
+  end
+  object DS_DetalleFactura: TDataSource
+    DataSet = CD_DetalleFactura
+    Left = 688
+    Top = 288
+  end
+  object DS_Sucursal: TDataSource
+    Left = 667
+    Top = 241
+  end
+  object ZQ_ComprobanteDetalle: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from comprobante_detalle')
+    Params = <>
+    Left = 793
+    Top = 249
+    object ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+    end
+    object ZQ_ComprobanteDetalleID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_ComprobanteDetalleID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+    end
+    object ZQ_ComprobanteDetalleDETALLE: TStringField
+      FieldName = 'DETALLE'
+      Size = 200
+    end
+    object ZQ_ComprobanteDetalleCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_FINAL: TFloatField
+      FieldName = 'IMPORTE_FINAL'
+    end
+    object ZQ_ComprobanteDetallePORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_ComprobanteDetalleBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+    end
+    object ZQ_ComprobanteDetalleIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_ComprobanteDetallePORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_ComprobanteDetalleCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
+    end
+    object ZQ_ComprobanteDetalleCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
+    end
+    object ZQ_ComprobanteDetalleID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_IF: TFloatField
+      FieldName = 'IMPORTE_IF'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA: TFloatField
+      FieldName = 'IMPORTE_IF_SINIVA'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_IVA_IF: TFloatField
+      FieldName = 'IMPORTE_IVA_IF'
+    end
+    object ZQ_ComprobanteDetalleIMPORTE_COSTO: TFloatField
+      FieldName = 'IMPORTE_COSTO'
+    end
+  end
+  object RelojStock: TTimer
+    Enabled = False
+    Left = 141
+    Top = 348
+  end
+  object ZQ_PreventaProductos: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select cd.*'
+      'from comprobante_detalle cd'
+      'where (cd.id_comprobante=:comprob)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'comprob'
+        ParamType = ptUnknown
+      end>
+    Left = 913
+    Top = 241
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'comprob'
+        ParamType = ptUnknown
+      end>
+    object ZQ_PreventaProductosID_COMPROBANTE_DETALLE: TIntegerField
+      FieldName = 'ID_COMPROBANTE_DETALLE'
+      Required = True
+    end
+    object ZQ_PreventaProductosID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_PreventaProductosID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_PreventaProductosDETALLE: TStringField
+      FieldName = 'DETALLE'
+      Size = 200
+    end
+    object ZQ_PreventaProductosCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_PreventaProductosIMPORTE_FINAL: TFloatField
+      FieldName = 'IMPORTE_FINAL'
+    end
+    object ZQ_PreventaProductosPORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_PreventaProductosBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_PreventaProductosIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+    end
+    object ZQ_PreventaProductosIMPUESTO_INTERNO: TFloatField
+      FieldName = 'IMPUESTO_INTERNO'
+    end
+    object ZQ_PreventaProductosPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_PreventaProductosCANTIDAD_RECIBIDA: TFloatField
+      FieldName = 'CANTIDAD_RECIBIDA'
+    end
+    object ZQ_PreventaProductosCANTIDAD_ALMACENADA: TFloatField
+      FieldName = 'CANTIDAD_ALMACENADA'
+    end
+    object ZQ_PreventaProductosID_STOCK_PRODUCTO: TIntegerField
+      FieldName = 'ID_STOCK_PRODUCTO'
+    end
+    object ZQ_PreventaProductosIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_PreventaProductosIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object ZQ_PreventaProductosIMPORTE_IF: TFloatField
+      FieldName = 'IMPORTE_IF'
+    end
+    object ZQ_PreventaProductosIMPORTE_IF_SINIVA: TFloatField
+      FieldName = 'IMPORTE_IF_SINIVA'
+    end
+    object ZQ_PreventaProductosIMPORTE_IVA_IF: TFloatField
+      FieldName = 'IMPORTE_IVA_IF'
+    end
+    object ZQ_PreventaProductosIMPORTE_COSTO: TFloatField
+      FieldName = 'IMPORTE_COSTO'
+    end
+  end
+  object DataSetProvider1: TDataSetProvider
+    DataSet = ZQ_PreventaProductos
+    Left = 402
+    Top = 348
+  end
+  object ZQ_ComprobPreventa: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from comprobante'
+      'where id_comprobante=:id')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    Left = 714
+    Top = 338
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object ZQ_ComprobPreventaID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+      Required = True
+    end
+    object ZQ_ComprobPreventaID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+      Required = True
+    end
+    object ZQ_ComprobPreventaID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_ComprobPreventaID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+    end
+    object ZQ_ComprobPreventaID_TIPO_CPB: TIntegerField
+      FieldName = 'ID_TIPO_CPB'
+      Required = True
+    end
+    object ZQ_ComprobPreventaID_VENDEDOR: TIntegerField
+      FieldName = 'ID_VENDEDOR'
+    end
+    object ZQ_ComprobPreventaID_COMP_ESTADO: TIntegerField
+      FieldName = 'ID_COMP_ESTADO'
+    end
+    object ZQ_ComprobPreventaCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object ZQ_ComprobPreventaFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
+    object ZQ_ComprobPreventaOBSERVACION: TStringField
+      FieldName = 'OBSERVACION'
+      Size = 500
+    end
+    object ZQ_ComprobPreventaBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_ComprobPreventaSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
+    object ZQ_ComprobPreventaIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+    end
+    object ZQ_ComprobPreventaPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_ComprobPreventaIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object ZQ_ComprobPreventaPORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_ComprobPreventaIMPORTE_DESCUENTO: TFloatField
+      FieldName = 'IMPORTE_DESCUENTO'
+    end
+    object ZQ_ComprobPreventaENCABEZADO: TStringField
+      FieldName = 'ENCABEZADO'
+      Size = 500
+    end
+    object ZQ_ComprobPreventaPIE: TStringField
+      FieldName = 'PIE'
+      Size = 500
+    end
+    object ZQ_ComprobPreventaFECHA_COBRADA: TDateField
+      FieldName = 'FECHA_COBRADA'
+    end
+    object ZQ_ComprobPreventaFECHA_ENVIADA: TDateField
+      FieldName = 'FECHA_ENVIADA'
+    end
+    object ZQ_ComprobPreventaFECHA_IMPRESA: TDateField
+      FieldName = 'FECHA_IMPRESA'
+    end
+    object ZQ_ComprobPreventaFECHA_VENCIMIENTO: TDateField
+      FieldName = 'FECHA_VENCIMIENTO'
+    end
+    object ZQ_ComprobPreventaPUNTO_VENTA: TIntegerField
+      FieldName = 'PUNTO_VENTA'
+    end
+    object ZQ_ComprobPreventaNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
+    end
+    object ZQ_ComprobPreventaFECHA_ANULADO: TDateField
+      FieldName = 'FECHA_ANULADO'
+    end
+    object ZQ_ComprobPreventaID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_ComprobPreventaID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
+    end
+    object ZQ_ComprobPreventaIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_ComprobPreventaIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
+  end
+  object CD_VentaFinal: TClientDataSet
+    Aggregates = <>
+    Params = <>
+    Left = 138
+    Top = 292
+    object CD_VentaFinal_medioPago: TStringField
+      FieldName = '_medioPago'
+      Size = 50
+    end
+    object CD_VentaFinalimporteVenta: TFloatField
+      FieldName = 'importeVenta'
+      DisplayFormat = '$ ##,###,##0.00'
+    end
+    object CD_VentaFinalimporteDescuento: TFloatField
+      FieldName = 'importeDescuento'
+      DisplayFormat = '$ ##,###,##0.00'
+    end
+    object CD_VentaFinalid: TIntegerField
+      FieldName = 'id'
+    end
+    object CD_VentaFinalgenera_vuelto: TStringField
+      FieldName = 'genera_vuelto'
+      Size = 1
+    end
+    object CD_VentaFinalfiscal: TStringField
+      FieldName = 'fiscal'
+    end
+    object CD_VentaFinalidTipoPago: TIntegerField
+      FieldName = 'idTipoPago'
+    end
+    object CD_VentaFinalidCta: TIntegerField
+      FieldName = 'idCta'
+    end
+    object CD_VentaFinalmdpFecha: TDateField
+      FieldName = 'mdpFecha'
+    end
+    object CD_VentaFinalmdpBanco: TStringField
+      FieldName = 'mdpBanco'
+      Size = 50
+    end
+    object CD_VentaFinalmdpNro: TStringField
+      FieldName = 'mdpNro'
+    end
+  end
+  object DS_VentaFinal: TDataSource
+    DataSet = CD_VentaFinal
+    Left = 802
+    Top = 292
+  end
+  object PopupFP: TPopupMenu
+    Images = FPrincipal.Iconos_Menu_16
+    MenuAnimation = [maLeftToRight]
+    Left = 592
+    Top = 440
+    object menuEditarFP: TMenuItem
+      Caption = 'Editar FP'
+      ImageIndex = 10
+      OnClick = menuEditarFPClick
+    end
+    object menuQuitarFP: TMenuItem
+      Caption = 'Quitar FP'
+      ImageIndex = 12
+      OnClick = menuQuitarFPClick
+    end
+  end
+  object ZQ_ColsPrecios: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select distinct tfp.columna_precio'
+      'from tipo_formapago tfp')
+    Params = <>
+    Left = 811
+    Top = 393
+    object ZQ_ColsPreciosCOLUMNA_PRECIO: TIntegerField
+      FieldName = 'COLUMNA_PRECIO'
+    end
+  end
+  object ZQ_SaldoNotaCredito: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select saldo'
+      'from calc_saldo_nota_credito(:id_cliente)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    Left = 893
+    Top = 193
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_cliente'
+        ParamType = ptUnknown
+      end>
+    object ZQ_SaldoNotaCreditoSALDO: TFloatField
+      FieldName = 'SALDO'
+      ReadOnly = True
+    end
+  end
+  object ZQ_UltimoCPB: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select first 1 c.numero_cpb'
+      'from comprobante c'
+      'where'
+      
+        '(c.ID_TIPO_CPB=11)and(c.id_sucursal=:id_sucursal)and(c.numero_cp' +
+        'b is not null)'
+      'order by c.numero_cpb DESC')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    Left = 592
+    Top = 386
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id_sucursal'
+        ParamType = ptUnknown
+      end>
+    object ZQ_UltimoCPBNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
+      ReadOnly = True
+    end
+  end
+  object ZQ_PreventaFP: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select cf.*'
+      'from comprobante_forma_pago cf'
+      'where (cf.id_comprobante=:comprob)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'comprob'
+        ParamType = ptUnknown
+      end>
+    Left = 801
+    Top = 345
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'comprob'
+        ParamType = ptUnknown
+      end>
+    object ZQ_PreventaFPID_COMPROB_FP: TIntegerField
+      FieldName = 'ID_COMPROB_FP'
+      Required = True
+    end
+    object ZQ_PreventaFPID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_PreventaFPID_TIPO_FORMAPAG: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAG'
+      Required = True
+    end
+    object ZQ_PreventaFPMDCP_FECHA: TDateField
+      FieldName = 'MDCP_FECHA'
+    end
+    object ZQ_PreventaFPMDCP_BANCO: TStringField
+      FieldName = 'MDCP_BANCO'
+      Size = 50
+    end
+    object ZQ_PreventaFPMDCP_CHEQUE: TStringField
+      FieldName = 'MDCP_CHEQUE'
+      Size = 50
+    end
+    object ZQ_PreventaFPIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+      currency = True
+    end
+    object ZQ_PreventaFPCONCILIADO: TDateField
+      FieldName = 'CONCILIADO'
+    end
+    object ZQ_PreventaFPCUENTA_INGRESO: TIntegerField
+      FieldName = 'CUENTA_INGRESO'
+    end
+    object ZQ_PreventaFPCUENTA_EGRESO: TIntegerField
+      FieldName = 'CUENTA_EGRESO'
+    end
+    object ZQ_PreventaFPFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+    object ZQ_PreventaFPIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+    end
+    object ZQ_PreventaFPID_RECIBO_OP: TIntegerField
+      FieldName = 'ID_RECIBO_OP'
+    end
+    object ZQ_PreventaFPINSERT_MANUAL: TStringField
+      FieldName = 'INSERT_MANUAL'
+      Size = 1
+    end
+  end
+  object DS_ComprobPreventa: TDataSource
+    DataSet = ZQ_ComprobPreventa
+    Left = 714
+    Top = 390
+  end
+  object DS_PreventaFP: TDataSource
+    DataSet = ZQ_PreventaFP
+    Left = 322
+    Top = 406
+  end
+  object ZQ_OrdenProductos: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select od.*'
+      'from optica_orden_detalle od'
+      'where (od.id_orden= :ID_ORDEN)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ORDEN'
+        ParamType = ptUnknown
+      end>
+    Left = 458
+    Top = 509
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ORDEN'
+        ParamType = ptUnknown
+      end>
+    object ZQ_OrdenProductosID_ORDEN_DETALLE: TIntegerField
+      FieldName = 'ID_ORDEN_DETALLE'
+      Required = True
+    end
+    object ZQ_OrdenProductosID_ORDEN: TIntegerField
+      FieldName = 'ID_ORDEN'
+      Required = True
+    end
+    object ZQ_OrdenProductosID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_OrdenProductosCANTIDAD: TFloatField
+      FieldName = 'CANTIDAD'
+    end
+    object ZQ_OrdenProductosOBSERVACIONES: TStringField
+      FieldName = 'OBSERVACIONES'
+      Size = 1000
+    end
+    object ZQ_OrdenProductosID_LABORATORIO: TIntegerField
+      FieldName = 'ID_LABORATORIO'
+      Required = True
+    end
+    object ZQ_OrdenProductosIMPORTE_RECONOCIDO: TFloatField
+      FieldName = 'IMPORTE_RECONOCIDO'
+    end
+    object ZQ_OrdenProductosIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_OrdenProductosIMPORTE_UNITARIO: TFloatField
+      FieldName = 'IMPORTE_UNITARIO'
+    end
+    object ZQ_OrdenProductosIMPORTE_TOTAL: TFloatField
+      FieldName = 'IMPORTE_TOTAL'
+    end
+  end
+  object ZQ_OpticaEntrega: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from OPTICA_ENTREGA oe'
+      'where (oe.id_orden = :ID_ORDEN)')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ORDEN'
+        ParamType = ptUnknown
+      end>
+    Left = 562
+    Top = 509
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ORDEN'
+        ParamType = ptUnknown
+      end>
+    object ZQ_OpticaEntregaID_ENTREGA: TIntegerField
+      FieldName = 'ID_ENTREGA'
+      Required = True
+    end
+    object ZQ_OpticaEntregaID_ORDEN: TIntegerField
+      FieldName = 'ID_ORDEN'
+      Required = True
+    end
+    object ZQ_OpticaEntregaID_TIPO_FORMAPAG: TIntegerField
+      FieldName = 'ID_TIPO_FORMAPAG'
+      Required = True
+    end
+    object ZQ_OpticaEntregaMDCP_FECHA: TDateField
+      FieldName = 'MDCP_FECHA'
+    end
+    object ZQ_OpticaEntregaMDCP_BANCO: TStringField
+      FieldName = 'MDCP_BANCO'
+      Size = 50
+    end
+    object ZQ_OpticaEntregaMDCP_CHEQUE: TStringField
+      FieldName = 'MDCP_CHEQUE'
+      Size = 50
+    end
+    object ZQ_OpticaEntregaIMPORTE: TFloatField
+      FieldName = 'IMPORTE'
+    end
+    object ZQ_OpticaEntregaCONCILIADO: TDateField
+      FieldName = 'CONCILIADO'
+    end
+    object ZQ_OpticaEntregaCUENTA_INGRESO: TIntegerField
+      FieldName = 'CUENTA_INGRESO'
+    end
+    object ZQ_OpticaEntregaCUENTA_EGRESO: TIntegerField
+      FieldName = 'CUENTA_EGRESO'
+    end
+    object ZQ_OpticaEntregaFECHA_FP: TDateTimeField
+      FieldName = 'FECHA_FP'
+    end
+    object ZQ_OpticaEntregaIMPORTE_REAL: TFloatField
+      FieldName = 'IMPORTE_REAL'
+    end
+    object ZQ_OpticaEntregaID_RECIBO_OP: TIntegerField
+      FieldName = 'ID_RECIBO_OP'
+    end
+    object ZQ_OpticaEntregaINSERT_MANUAL: TStringField
+      FieldName = 'INSERT_MANUAL'
+      Size = 1
+    end
+  end
+  object ZQ_Optica_Orden: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from optica_orden oo'
+      'where oo.id_orden = :ID_ORDEN')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ORDEN'
+        ParamType = ptUnknown
+      end>
+    Left = 658
+    Top = 509
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'ID_ORDEN'
+        ParamType = ptUnknown
+      end>
+    object ZQ_Optica_OrdenID_ORDEN: TIntegerField
+      FieldName = 'ID_ORDEN'
+      Required = True
+    end
+    object ZQ_Optica_OrdenFECHA_ORDEN: TDateField
+      FieldName = 'FECHA_ORDEN'
+    end
+    object ZQ_Optica_OrdenFECHA_PROMETIDO: TDateField
+      FieldName = 'FECHA_PROMETIDO'
+    end
+    object ZQ_Optica_OrdenID_ESTADO: TIntegerField
+      FieldName = 'ID_ESTADO'
+      Required = True
+    end
+    object ZQ_Optica_OrdenFACTURADO_POR: TIntegerField
+      FieldName = 'FACTURADO_POR'
+    end
+    object ZQ_Optica_OrdenMONTO_ENTREGADO: TFloatField
+      FieldName = 'MONTO_ENTREGADO'
+      currency = True
+    end
+    object ZQ_Optica_OrdenID_COMPROBANTE: TIntegerField
+      FieldName = 'ID_COMPROBANTE'
+    end
+    object ZQ_Optica_OrdenSALDO: TFloatField
+      FieldName = 'SALDO'
+      currency = True
+    end
+    object ZQ_Optica_OrdenCODIGO_CLI: TStringField
+      FieldName = 'CODIGO_CLI'
+      Size = 50
+    end
+    object ZQ_Optica_OrdenID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
+      Required = True
+    end
+    object ZQ_Optica_OrdenCOD_BARRAS: TStringField
+      FieldName = 'COD_BARRAS'
+      Size = 100
+    end
+    object ZQ_Optica_OrdenOBSERVACIONES: TStringField
+      FieldName = 'OBSERVACIONES'
+      Size = 5000
+    end
+    object ZQ_Optica_OrdenNRO_FACTURA: TStringField
+      FieldName = 'NRO_FACTURA'
+      Size = 50
+    end
+    object ZQ_Optica_OrdenMONTO_TOTAL: TFloatField
+      FieldName = 'MONTO_TOTAL'
+      currency = True
+    end
+    object ZQ_Optica_OrdenENTREGADO_POR: TIntegerField
+      FieldName = 'ENTREGADO_POR'
+    end
+    object ZQ_Optica_OrdenID_MEDICO: TIntegerField
+      FieldName = 'ID_MEDICO'
+    end
+    object ZQ_Optica_OrdenAVISAR: TStringField
+      FieldName = 'AVISAR'
+      Size = 1
+    end
+    object ZQ_Optica_OrdenMONTO_RECONOCIDO: TFloatField
+      FieldName = 'MONTO_RECONOCIDO'
+      currency = True
+    end
+    object ZQ_Optica_OrdenID_SUCURSAL: TIntegerField
+      FieldName = 'ID_SUCURSAL'
+    end
+  end
+  object DS_Optica_Orden: TDataSource
+    DataSet = ZQ_Optica_Orden
+    Left = 746
+    Top = 509
+  end
+  object ISListadoMedio: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select tipo.*'
+      'from tipo_formapago tipo'
+      'where tipo.baja = '#39'N'#39
+      '  and tipo.id_tipo_formapago > 1'
+      'order by tipo.descripcion'
+      '')
+    CampoBuscar = 'descripcion'
+    CampoClave = 'id_tipo_formapago'
+    TituloVentana = 'Buscar Medio'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 906
+    Top = 445
+  end
+  object ISListadoCuenta: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select cta.*, tipo.descripcion,'
+      
+        '       coalesce(cta.codigo||'#39' - '#39', '#39#39')||cta.nombre_cuenta||coale' +
+        'sce('#39' - N'#176': '#39'||cta.nro_cta_bancaria, '#39' - N'#176': S/N'#39') as Busqueda'
+      'from cuenta cta'
+      
+        'left join tipo_formapago tipo on (cta.medio_defecto = tipo.id_ti' +
+        'po_formapago)'
+      'where cta.baja = '#39'N'#39
+      'order by cta.nombre_cuenta'
+      ''
+      '')
+    CampoBuscar = 'busqueda'
+    CampoClave = 'id_cuenta'
+    TituloVentana = 'Buscar Cuenta'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 906
+    Top = 397
+  end
+  object ISListadoIVA: TISListadoSQL
+    Modelo = DM.ISModelo
+    SQL.Strings = (
+      'select ID_TIPO_IVA,nombre_TIPO_IVA'
+      'from tipo_IVA'
+      '')
+    CampoBuscar = 'NOMBRE_TIPO_IVA'
+    CampoClave = 'ID_TIPO_IVA'
+    BuscarEnQuery = ZQ_TipoIVA
+    TituloVentana = 'Tipo IVA'
+    TituloBuscar = 'Campo Busqueda:'
+    TituloBuscar2 = 'Campo Busqueda 2:'
+    ColorGrilla = 14606012
+    AnchoClave = 80
+    AnchoBuscar1 = 500
+    AnchoBuscar2 = 500
+    Left = 906
+    Top = 349
+  end
   object ISListadoProducto: TISListadoSQL
     Modelo = DM.ISModelo
     SQL.Strings = (
@@ -7937,12 +9718,75 @@ object FOP_Cajero: TFOP_Cajero
     AnchoClave = 80
     AnchoBuscar1 = 3000
     AnchoBuscar2 = 1000
-    Left = 826
-    Top = 269
+    Left = 898
+    Top = 293
   end
-  object RelojStock: TTimer
-    Enabled = False
-    Left = 693
-    Top = 340
+  object ISDbSumaFPago: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'importe'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = '_importeVenta'
+      end>
+    DataSet = CD_Fpago
+    SumListChanged = ISDbSumaFPagoSumListChanged
+    Left = 1018
+    Top = 293
+  end
+  object ISDbSumaDetalleFactura: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'importe_final'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'importe_iva'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'precio1'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'precio2'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'precio3'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'precio4'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'precio5'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'importe_original'
+      end>
+    DataSet = CD_DetalleFactura
+    SumListChanged = ISDbSumaDetalleFacturaSumListChanged
+    Left = 1018
+    Top = 349
+  end
+  object ISDbSumaVentaFinal: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'importeVenta'
+      end
+      item
+        Operacion = goSum
+        NombreCampo = 'importeDescuento'
+      end>
+    DataSet = CD_VentaFinal
+    Left = 1018
+    Top = 401
   end
 end
