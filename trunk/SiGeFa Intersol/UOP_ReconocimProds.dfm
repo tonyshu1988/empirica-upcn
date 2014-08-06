@@ -142,7 +142,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
             50.270833333333330000
             904.875000000000000000
             127.000000000000000000
-            957.791666666666800000)
+            957.791666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -173,7 +173,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Size.Values = (
             52.916666666666660000
             1209.145833333333000000
-            68.791666666666680000
+            68.791666666666670000
             351.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
@@ -488,7 +488,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            568.854166666666800000)
+            568.854166666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -777,6 +777,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         Color = 14606012
         DataSource = DS_PlanProducto
         Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        PopupMenu = PopupProductos
         TabOrder = 0
         TitleFont.Charset = DEFAULT_CHARSET
         TitleFont.Color = clWindowText
@@ -1960,30 +1961,6 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     Left = 192
     Top = 342
   end
-  object ISOrdenarGrilla1: TISOrdenarGrilla
-    Grilla = grillaProductos
-    Filtros = <
-      item
-        TituloColumna = ' Producto'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Precio Venta'
-        Visible = True
-      end
-      item
-        TituloColumna = 'Monto Reconocido'
-        Visible = True
-      end>
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    Ordenar = True
-    MoverColumna = True
-    FiltrarColumna = True
-    GuardarAncho = True
-    Left = 400
-    Top = 86
-  end
   object ATeclasRapidas: TActionManager
     Left = 320
     Top = 242
@@ -2036,5 +2013,29 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Caption = 'Venta '#193'gil'
       ShortCut = 120
     end
+  end
+  object ISOrdenarGrilla1: TISOrdenarGrilla
+    Grilla = grillaProductos
+    Filtros = <
+      item
+        TituloColumna = ' Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Precio Venta'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Monto Reconocido'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 384
+    Top = 78
   end
 end

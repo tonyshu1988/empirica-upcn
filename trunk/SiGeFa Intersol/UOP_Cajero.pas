@@ -619,40 +619,16 @@ type
     ISDbSumaDetalleFactura: TISDbSuma;
     ISDbSumaVentaFinal: TISDbSuma;
     PCargaProd: TPanel;
-    Label10: TLabel;
-    Label70: TLabel;
-    Label71: TLabel;
-    Label72: TLabel;
-    DBText1: TDBText;
-    Label73: TLabel;
-    Label75: TLabel;
-    DBText2: TDBText;
-    Label76: TLabel;
-    edCant: TDBEdit;
-    edImporteUnitario: TDBEdit;
-    DBGridListadoOS: TDBGrid;
-    Panel7: TPanel;
-    Label77: TLabel;
+    PCargaProdBotones: TPanel;
+    lblReconocimVenta: TLabel;
     btnProdAceptar: TButton;
     btnProdCancelar: TButton;
-    eddesc: TDBEdit;
     DBGridListadoProductos: TDBGrid;
     CD_DetalleFacturamonto_reconocido: TFloatField;
-    DBText3: TDBText;
-    Bevel2: TBevel;
-    Label1: TLabel;
     PopupReconocim: TPopupMenu;
     popReconocimAgregar: TMenuItem;
     popReconocimQuitar: TMenuItem;
-    CD_Reconocimientos: TClientDataSet;
-    CD_Reconocimientosid_os: TIntegerField;
-    CD_Reconocimientoscodigo: TStringField;
-    CD_Reconocimientosdetalle: TStringField;
-    CD_Reconocimientosmonto_reconocido: TFloatField;
-    CD_Reconocimientosobservaciones: TStringField;
     DS_Reconocimientos: TDataSource;
-    CD_Reconocimientosid_producto: TIntegerField;
-    ISListadoPlanes: TISListadoSQL;
     ZQ_ReconocimOSS: TZQuery;
     ZQ_ComprobanteDetalleINSERT_MANUAL: TStringField;
     ZQ_ComprobanteDetalleID_AUXILIAR: TIntegerField;
@@ -663,6 +639,42 @@ type
     ZQ_ReconocimOSSPRECIO_VENTA: TFloatField;
     ZQ_ReconocimOSSMONTO_RECONOCIDO: TFloatField;
     ZQ_ReconocimOSSID_COMPROBANTE_DETALLE: TIntegerField;
+    PCargaProdPlanes: TPanel;
+    PCargaProdDetalle: TPanel;
+    Label1: TLabel;
+    DBGridListadoOS: TDBGrid;
+    Label76: TLabel;
+    Label75: TLabel;
+    Label72: TLabel;
+    Label71: TLabel;
+    Label70: TLabel;
+    edImporteUnitario: TDBEdit;
+    eddesc: TDBEdit;
+    edCant: TDBEdit;
+    DBText3: TDBText;
+    DBText2: TDBText;
+    Bevel2: TBevel;
+    Label10: TLabel;
+    DBGrid2: TDBGrid;
+    Label3: TLabel;
+    ZQ_planes_productos: TZQuery;
+    ZQ_planes_productosID_PRODUCTOS_RECONOCIDOS: TIntegerField;
+    ZQ_planes_productosMONTO_RECONOCIDO: TFloatField;
+    ZQ_planes_productosID_PRODUCTO: TIntegerField;
+    ZQ_planes_productosID_OS: TIntegerField;
+    DS_planes_productos: TDataSource;
+    ZQ_planes_productosDETALLE: TStringField;
+    CD_Reconocimientos: TClientDataSet;
+    POssBotones: TPanel;
+    Label4: TLabel;
+    btAceptarOss: TButton;
+    btCancelarOss: TButton;
+    CD_Reconocimientosid_os: TIntegerField;
+    CD_Reconocimientosmonto_reconocido: TFloatField;
+    CD_Reconocimientosdetalle: TStringField;
+    CD_Reconocimientosid_prod: TIntegerField;
+    ISDbSumaReconocim: TISDbSuma;
+    lblReconocimTot: TLabel;
     procedure btsalirClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
     procedure FormCreate(Sender: TObject);
@@ -745,9 +757,6 @@ type
     procedure btFPCancelarClick(Sender: TObject);
     procedure btnEfectivoClick(Sender: TObject);
     procedure btnEfectivoFClick(Sender: TObject);
-    procedure btnVentaRapidaClick(Sender: TObject);
-    procedure AVentaRapidaExecute(Sender: TObject);
-    procedure BitBtn1Click(Sender: TObject);
     procedure buscarCuenta(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure buscarFormaPago(Sender: TObject; var Key: Word; Shift: TShiftState);
     function verificarSaldoNotaCredito(query: TDataSet; id_cliente: integer): boolean;
@@ -759,6 +768,11 @@ type
     procedure accionBtnBuscar(Sender: TObject);
     procedure ISDbSumaFPagoSumListChanged(Sender: TObject);
     procedure ISDbSumaDetalleFacturaSumListChanged(Sender: TObject);
+    procedure popReconocimAgregarClick(Sender: TObject);
+    procedure btAceptarOssClick(Sender: TObject);
+    procedure btCancelarOssClick(Sender: TObject);
+    procedure popReconocimQuitarClick(Sender: TObject);
+    procedure ISDbSumaReconocimSumListChanged(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -827,6 +841,10 @@ begin
   CD_Fpago.CreateDataSet;
   CD_VentaFinal.CreateDataSet;
 
+  CD_Reconocimientos.CreateDataSet;
+
+
+
   dm.ismodelo.abrir(ZQ_FormasPago);
   dm.ismodelo.abrir(ZQ_Cuentas);
   dm.ismodelo.abrir(ZQ_DetalleProd);
@@ -870,14 +888,14 @@ begin
     ZQ_FormasPago.Filtered:= False;
     ZQ_FormasPago.Filter:= Format('IF = %s', [QuotedStr('S')]);
     ZQ_FormasPago.Filtered:= True;
-    btnEfectivo.Visible:= False;
+
   end
   else
   begin
     ZQ_FormasPago.Filtered:= False;
     ZQ_FormasPago.Filter:= '';
     ZQ_FormasPago.Filtered:= True;
-    btnEfectivo.Visible:= True;
+
   end;
 
   PABM_FormaPago.Visible:= False;
@@ -887,27 +905,7 @@ begin
   //Confirmación Venta
   FPrincipal.Iconos_Menu_32.GetBitmap(1, btnConfirmarVenta.Glyph);
   FPrincipal.Iconos_Menu_32.GetBitmap(0, btnCancelarVenta.Glyph);
-  //Venta Rápida
-  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivo.Glyph);
-  FPrincipal.Iconos_Menu_32.GetBitmap(26, btnEfectivoF.Glyph);
 
-  //Caption en los filtros
-  btnEfectivo.Caption:= etiqueta_no_fiscal;
-  btnEfectivoF.Caption:= etiqueta_fiscal;
-
-  //Ver o no los cierres Fiscales
-  if (dm.ISUsrLogin.PermisoAccion('CIERRE_FISCAL')) then
-  begin
-    btCierreZ.Enabled:= True;
-    BtCierreX.Enabled:= True;
-    btnAuditoriaFiscal.Enabled:= True;
-  end
-  else
-  begin
-    btCierreZ.Enabled:= False;
-    BtCierreX.Enabled:= False;
-    btnAuditoriaFiscal.Enabled:= False;
-  end;
 
   panelPreventa(false);
   panelOrden(false);
@@ -1095,7 +1093,7 @@ begin
       //Traigo el ID_producto_stock
         codBarras.Text:= 'I' + ISListadoProducto.Resultado;
         LeerCodigo('I', codBarras.Text);
-      //IdentificarCodigo;
+
       end
   end
   else if TdxBarLargeButton(Sender).Name = 'btnBuscarProductoAvanzada' then
@@ -1340,16 +1338,21 @@ end;
 
 procedure TFOP_Cajero.calcularMonto();
 var
-  desc: double;
+  desc,monto_reconoc: double;
 begin
   if not (ZQ_Productos.IsEmpty) then
   begin
     if (CD_DetalleFacturaCANTIDAD.AsFloat < 0) then
       CD_DetalleFacturaCANTIDAD.AsFloat:= 1;
 
-    desc:= CD_DetalleFacturaPORC_DESCUENTO.AsFloat;
+    ISDbSumaReconocim.RecalcAll;
+    monto_reconoc:= ISDbSumaReconocim.SumCollection[0].SumValue;
 
+    desc:= CD_DetalleFacturaPORC_DESCUENTO.AsFloat;
+    CD_DetalleFacturamonto_reconocido.AsFloat:=monto_reconoc;
     CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaCANTIDAD.AsFloat * (CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat * (1 - (desc / 100)));
+    CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaIMPORTE_FINAL.AsFloat - CD_DetalleFacturamonto_reconocido.AsFloat;
+    lblReconocimVenta.Caption:= 'Total Restante: ' + FormatFloat('$ ##,###,##0.00 ', CD_DetalleFacturaIMPORTE_FINAL.AsFloat);
   end
 end;
 
@@ -1593,6 +1596,8 @@ end;
 
 
 procedure TFOP_Cajero.btnAceptarProdClick(Sender: TObject);
+var
+ monto_reconoc:Real;
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
@@ -1601,6 +1606,14 @@ begin
     Application.MessageBox('El importe ingresado es incorrecto.', 'Atención', MB_ICONINFORMATION);
     if edImporteUnitario.Enabled then
       edImporteUnitario.SetFocus;
+    exit;
+  end;
+
+
+
+  if (CD_DetalleFacturaIMPORTE_FINAL.AsFloat <= monto_reconoc) then
+  begin
+    Application.MessageBox('El importe total no debe ser menor al Reconocido.', 'Atención', MB_ICONINFORMATION);
     exit;
   end;
 
@@ -1663,7 +1676,9 @@ begin
   PCargaProd.Visible:= True;
   PCargaProd.BringToFront;
   dm.centrarPanel(FOP_Cajero,PCargaProd);
-  
+
+  ISDbSumaReconocim.SumCollection[0].SumValue:= 0;
+
   PanelProductosYFPago.Enabled:= False;
   PanelDetalles.Enabled:= False;
   grupoVertical.Enabled:= False;
@@ -1933,6 +1948,7 @@ begin
     ZQ_ComprobanteDetalleIMPORTE_VENTA.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat;
     ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat:= CD_DetalleFacturaIMPORTE_IF.AsFloat;
     ZQ_ComprobanteDetalleIMPORTE_COSTO.AsFloat:= CD_DetalleFacturaIMPORTE_COSTO.AsFloat;
+    ZQ_ComprobanteDetalleIMPORTE_RECONOC_OS.AsFloat:= CD_DetalleFacturamonto_reconocido.AsFloat;
 
     ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF.AsFloat / (1 + CD_DetalleFacturaPORC_IVA.AsFloat);
     ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= RoundTo(ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat, -2);
@@ -2822,7 +2838,6 @@ begin
   recalcularBoleta();
   BtAceptarPago.Click;
   btnConfirmarVenta.Click;
-  PVentaDirecta.Visible:= False;
 end;
 
 
@@ -2838,49 +2853,7 @@ begin
   recalcularBoleta();
   BtAceptarPago.Click;
   btnConfirmarVenta.Click;
-  PVentaDirecta.Visible:= False;
-end;
 
-
-procedure TFOP_Cajero.btnVentaRapidaClick(Sender: TObject);
-begin
-  if (acumFpago > 0) then
-  begin
-    Application.MessageBox('Venta Ágil: No deben precargarse Formas de Pago.', 'Venta Ágil', MB_OK + MB_ICONINFORMATION);
-    exit;
-  end;
-
-  if validarBoleta() then
-  begin
-    PVentaDirecta.Visible:= True;
-    PVentaDirecta.BringToFront;
-    dm.centrarPanel(FOP_Cajero, PVentaDirecta);
-    PanelContenedorDerecha.Enabled:= not (PVentaDirecta.Visible);
-    GrupoGuardarCancelar.Enabled:= False;
-    grupoVertical.Enabled:= False;
-
-    CD_Fpago.Append;
-    ZQ_Cuentas.Locate('ID_CUENTA', ctaPorDefecto, []);
-    CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
-
-    if (btnEfectivo.Visible and btnEfectivo.Enabled) then
-      btnEfectivo.SetFocus;
-  end;
-end;
-
-
-procedure TFOP_Cajero.AVentaRapidaExecute(Sender: TObject);
-begin
-  if btnVentaRapida.Enabled then
-    btnVentaRapida.Click;
-end;
-
-
-procedure TFOP_Cajero.BitBtn1Click(Sender: TObject);
-begin
-  btnCancelarVenta.Click;
-  PVentaDirecta.Visible:= False;
-  btnQuitarPago.Click;
 end;
 
 
@@ -3187,6 +3160,62 @@ acumulado:= ISDbSumaDetalleFactura.SumCollection[0].SumValue;
   if coefPrecio5 < 0 then
     coefPrecio5:= 1;
 
+end;
+
+procedure TFOP_Cajero.popReconocimAgregarClick(Sender: TObject);
+begin
+  if CD_DetalleFacturaID_PRODUCTO.IsNull then exit;
+
+  PCargaProdDetalle.Enabled:=False;
+  PCargaProdPlanes.Visible:=true;
+  PCargaProdPlanes.BringToFront;
+  //Cargo los Planes de Obra Social disponibles y sus reconocim
+  ZQ_planes_productos.Close;
+  ZQ_planes_productos.ParamByName('idProd').AsInteger:=CD_DetalleFacturaID_PRODUCTO.AsInteger;
+  dm.ISModelo.abrir(ZQ_planes_productos);
+
+  if ZQ_planes_productos.IsEmpty then
+   begin
+        ZQ_planes_productos.Close;
+        exit;
+   end;
+end;
+
+procedure TFOP_Cajero.btAceptarOssClick(Sender: TObject);
+begin
+  if not(ZQ_planes_productos.IsEmpty) then
+   begin
+   
+     CD_Reconocimientos.Append;
+     CD_Reconocimientosid_os.AsInteger:=ZQ_planes_productosID_OS.AsInteger;
+     CD_Reconocimientosmonto_reconocido.AsFloat:=ZQ_planes_productosMONTO_RECONOCIDO.AsFloat;
+     CD_Reconocimientosdetalle.AsString:=ZQ_planes_productosDETALLE.AsString;
+     CD_Reconocimientosid_prod.AsInteger:=ZQ_planes_productosID_PRODUCTO.AsInteger;
+     CD_Reconocimientos.Post;
+     calcularMonto();
+   end;
+  PCargaProdDetalle.Enabled:=True;
+  PCargaProdPlanes.Visible:=False;
+end;
+
+procedure TFOP_Cajero.btCancelarOssClick(Sender: TObject);
+begin
+  PCargaProdDetalle.Enabled:=True;
+  PCargaProdPlanes.Visible:=False;
+end;
+
+procedure TFOP_Cajero.popReconocimQuitarClick(Sender: TObject);
+begin
+  if CD_Reconocimientos.IsEmpty then exit;
+
+  CD_Reconocimientos.Delete;
+  calcularMonto();
+
+end;
+
+procedure TFOP_Cajero.ISDbSumaReconocimSumListChanged(Sender: TObject);
+begin
+   lblReconocimTot.Caption:= 'Total Reconocido: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaReconocim.SumCollection[0].SumValue);
 end;
 
 end.

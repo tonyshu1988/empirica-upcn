@@ -87,7 +87,6 @@ type
     ISVistaPreviaQR1: TISVistaPreviaQR;
     QRExpr1: TQRExpr;
     QRExpr2: TQRExpr;
-    ISOrdenarGrilla1: TISOrdenarGrilla;
     ATeclasRapidas: TActionManager;
     ABuscar: TAction;
     ANuevo: TAction;
@@ -101,6 +100,7 @@ type
     ANuevaFormaPago: TAction;
     APreventa: TAction;
     AVentaRapida: TAction;
+    ISOrdenarGrilla1: TISOrdenarGrilla;
     procedure FormCreate(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
@@ -140,7 +140,9 @@ procedure TFOP_ReconocimientoProds.FormCreate(Sender: TObject);
 begin
    dm.ISModelo.abrir(ZQ_Planes);
    dm.ISModelo.abrir(ZQ_Productos);
-   grillaProductos.PopupMenu:=nil;
+
+   ISOrdenarGrilla1.QuitarPopUpGrilla;
+
    ISLlenarCombo1.CargarCombo;
 
    GrupoEditando.Enabled:=true;
@@ -162,7 +164,7 @@ begin
       ZQ_PlanProducto.Edit;
       cmbPlan.Enabled:=False;
       grillaProductos.Enabled:=true;
-      grillaProductos.PopupMenu:=PopupProductos;
+      ISOrdenarGrilla1.AgregarPopUpGrilla(PopupProductos);
       GrupoEditando.Enabled:=false;
       GrupoGuardarCancelar.Enabled:=true;
 
@@ -179,7 +181,7 @@ begin
        if not dm.ISModelo.finalizar_transaccion(transaccion_coberturaPlan) then
               dm.ISModelo.cancelar_transaccion(transaccion_coberturaPlan);
        cmbPlan.Enabled:=True;
-       grillaProductos.PopupMenu:=nil;
+       ISOrdenarGrilla1.QuitarPopUpGrilla;
        GrupoEditando.Enabled:=true;
        GrupoGuardarCancelar.Enabled:=false;
    end;
@@ -275,7 +277,7 @@ begin
    begin
        dm.ISModelo.cancelar_transaccion(transaccion_coberturaPlan);
        cmbPlan.Enabled:=true;
-       grillaProductos.PopupMenu:=nil;
+       ISOrdenarGrilla1.QuitarPopUpGrilla;
        GrupoEditando.Enabled:=true;
        GrupoGuardarCancelar.Enabled:=false;
    end;
