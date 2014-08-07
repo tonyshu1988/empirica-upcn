@@ -675,6 +675,7 @@ type
     CD_Reconocimientosid_prod: TIntegerField;
     ISDbSumaReconocim: TISDbSuma;
     lblReconocimTot: TLabel;
+    Panel7: TPanel;
     procedure btsalirClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
     procedure FormCreate(Sender: TObject);
@@ -1528,18 +1529,18 @@ end;
 function TFOP_Cajero.ProductoYaCargado(id: Integer): Boolean;
 begin
   Result:= False;
-//// Comentado deja cargar mas de un producto repetido...
-//  CD_DetalleFactura.Filtered := false;
-//  CD_DetalleFactura.Filter:= Format('id_producto = %d ',[id]);
-//  CD_DetalleFactura.Filtered := true;
-//  if not CD_DetalleFactura.IsEmpty then
-//  begin
-//    CD_DetalleFactura.Filtered := false;
-//    Result:=True;
-//    Application.MessageBox('El Producto seleccionado ya fue cargado','Carga Producto',MB_OK+MB_ICONINFORMATION);
-//    exit;
-//  end;
-//  CD_DetalleFactura.Filtered := false;
+// Comentado deja cargar mas de un producto repetido...
+  CD_DetalleFactura.Filtered := false;
+  CD_DetalleFactura.Filter:= Format('id_prod_stock = %d ',[id]);
+  CD_DetalleFactura.Filtered := true;
+  if not CD_DetalleFactura.IsEmpty then
+  begin
+    CD_DetalleFactura.Filtered := false;
+    Result:=True;
+    Application.MessageBox('El Producto seleccionado ya fue cargado','Carga Producto',MB_OK+MB_ICONINFORMATION);
+    exit;
+  end;
+  CD_DetalleFactura.Filtered := false;
 end;
 
 
@@ -1552,6 +1553,7 @@ begin
   if not (ProductoYaCargado(prodStock)) then
   begin
     CD_DetalleFactura.Append;
+
     CD_DetalleFacturaID_PRODUCTO.AsInteger:= ZQ_ProductosID_PRODUCTO.AsInteger;
     CD_DetalleFacturaID_PROD_STOCK.AsInteger:= prodStock;
     CD_DetalleFacturaproducto.AsString:= ZQ_ProductosDETALLE_PROD.AsString;
@@ -1588,6 +1590,11 @@ begin
       else
         CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
     end;
+
+    //Filtro el CDS para que Juanmatraiga los reconocimientos del prod editado
+    CD_Reconocimientos.Filtered:=False;
+    CD_Reconocimientos.Filter:=Format('id_prod=%d',[CD_DetalleFacturaID_PRODUCTO.AsInteger]);
+    CD_Reconocimientos.Filtered:=True;
 
     modoEscrituraProd();
     Result:= True;
@@ -1707,6 +1714,12 @@ begin
     ZQ_Productos.sql[15]:= Format('and(sp.id_stock_producto=%s)', [CD_DetalleFacturaID_PROD_STOCK.AsString]);
     ZQ_Productos.Open;
 
+    //Filtro el CDS para que Juanmatraiga los reconocimientos del prod editado
+    CD_Reconocimientos.Filtered:=False;
+    CD_Reconocimientos.Filter:=Format('id_prod=%d',[CD_DetalleFacturaID_PRODUCTO.AsInteger]);
+    CD_Reconocimientos.Filtered:=True;
+
+
     CD_DetalleFactura.Edit;
     modoEscrituraProd();
     if edCant.Enabled then
@@ -1733,6 +1746,7 @@ begin
   if not (CD_DetalleFactura.IsEmpty) then
   begin
     CD_DetalleFactura.Delete;
+
     lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
     lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
   end;
@@ -1798,7 +1812,7 @@ begin
   //Hacer las validaciones correspondientes
 
   if not (dm.ismodelo.verificar_transaccion(abmComprobante)) then
-    if dm.ismodelo.iniciar_transaccion(abmComprobante, [ZQ_Comprobante, ZQ_Comprobante_FormaPago, ZQ_ComprobanteDetalle, ZQ_ComprobPreventa, ZQ_Optica_Orden]) then
+    if dm.ismodelo.iniciar_transaccion(abmComprobante, [ZQ_Comprobante, ZQ_Comprobante_FormaPago, ZQ_ComprobanteDetalle, ZQ_ComprobPreventa, ZQ_Optica_Orden,ZQ_ReconocimOSS]) then
     begin
       CD_Comprobante.Post;
       ZQ_Comprobante.Append;
@@ -3172,6 +3186,7 @@ begin
   //Cargo los Planes de Obra Social disponibles y sus reconocim
   ZQ_planes_productos.Close;
   ZQ_planes_productos.ParamByName('idProd').AsInteger:=CD_DetalleFacturaID_PRODUCTO.AsInteger;
+  ZQ_planes_productos.ParamByName('idPers').AsInteger:=CD_ComprobanteID_CLIENTE.AsInteger;
   dm.ISModelo.abrir(ZQ_planes_productos);
 
   if ZQ_planes_productos.IsEmpty then
@@ -3185,12 +3200,12 @@ procedure TFOP_Cajero.btAceptarOssClick(Sender: TObject);
 begin
   if not(ZQ_planes_productos.IsEmpty) then
    begin
-   
      CD_Reconocimientos.Append;
      CD_Reconocimientosid_os.AsInteger:=ZQ_planes_productosID_OS.AsInteger;
      CD_Reconocimientosmonto_reconocido.AsFloat:=ZQ_planes_productosMONTO_RECONOCIDO.AsFloat;
      CD_Reconocimientosdetalle.AsString:=ZQ_planes_productosDETALLE.AsString;
      CD_Reconocimientosid_prod.AsInteger:=ZQ_planes_productosID_PRODUCTO.AsInteger;
+
      CD_Reconocimientos.Post;
      calcularMonto();
    end;
@@ -3207,10 +3222,8 @@ end;
 procedure TFOP_Cajero.popReconocimQuitarClick(Sender: TObject);
 begin
   if CD_Reconocimientos.IsEmpty then exit;
-
   CD_Reconocimientos.Delete;
   calcularMonto();
-
 end;
 
 procedure TFOP_Cajero.ISDbSumaReconocimSumListChanged(Sender: TObject);

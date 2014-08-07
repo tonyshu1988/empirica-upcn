@@ -299,6 +299,10 @@ type
     ZQ_ObraSocialNOMBRE: TStringField;
     ZQ_ObraSocialID_OS: TIntegerField;
     ZQ_ObraSocialDESCUENTO: TFloatField;
+    ZQ_PersonaObraSocialPORC_FINAL: TStringField;
+    DescuentaalFinal1: TMenuItem;
+    stDescFinalOss: TStaticText;
+    Panel1: TPanel;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -343,6 +347,10 @@ type
     procedure QuitarObraSocial1Click(Sender: TObject);
     procedure PageControlChanging(Sender: TObject;
       var AllowChange: Boolean);
+    procedure DescuentaalFinal1Click(Sender: TObject);
+    procedure DBGridObraSocialDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
   private
     id_persona: integer;
   public
@@ -1152,6 +1160,26 @@ procedure TFABM_Personas.PageControlChanging(Sender: TObject;
 begin
 if (ZQ_CtaCte.state = dsInsert) or (ZQ_CtaCte.state = dsEdit) then
     AllowChange:= False;
+end;
+
+procedure TFABM_Personas.DescuentaalFinal1Click(Sender: TObject);
+begin
+  if ZQ_PersonaObraSocial.IsEmpty then
+  exit;
+
+  ZQ_PersonaObraSocial.Edit;
+  if (ZQ_PersonaObraSocialPORC_FINAL.AsString='N') then
+    ZQ_PersonaObraSocialPORC_FINAL.AsString:='S'
+   else
+     ZQ_PersonaObraSocialPORC_FINAL.AsString:='N';
+  ZQ_PersonaObraSocial.Post;
+end;
+
+procedure TFABM_Personas.DBGridObraSocialDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+begin
+   FPrincipal.PintarFilasGrillasConColor(DBGridObraSocial,'S',ZQ_PersonaObraSocialPORC_FINAL.AsString,stDescFinalOss.Brush.Color,Rect, DataCol, Column, State);
 end;
 
 end.
