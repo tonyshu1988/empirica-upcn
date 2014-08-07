@@ -676,6 +676,15 @@ type
     ISDbSumaReconocim: TISDbSuma;
     lblReconocimTot: TLabel;
     Panel7: TPanel;
+    lblDctoMutual: TLabel;
+    ZQ_DctoMutual: TZQuery;
+    ZQ_DctoMutualID_PERSONA_OS: TIntegerField;
+    ZQ_DctoMutualNRO_AFILIADO: TStringField;
+    ZQ_DctoMutualID_OS: TIntegerField;
+    ZQ_DctoMutualID_PERSONA: TIntegerField;
+    ZQ_DctoMutualDESCUENTO: TFloatField;
+    ZQ_DctoMutualPORC_FINAL: TStringField;
+    ZQ_DctoMutualNOMBRE: TStringField;
     procedure btsalirClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
     procedure FormCreate(Sender: TObject);
@@ -774,6 +783,7 @@ type
     procedure btCancelarOssClick(Sender: TObject);
     procedure popReconocimQuitarClick(Sender: TObject);
     procedure ISDbSumaReconocimSumListChanged(Sender: TObject);
+    procedure ZQ_DctoMutualAfterOpen(DataSet: TDataSet);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -793,8 +803,8 @@ type
 
 var
   FOP_Cajero: TFOP_Cajero;
-  punitoriosacob, acumulado, ClienteIVA, descCliente, acumuladoIVA,
-    acumFpagoReal, acumFpago, acumEfectivo, acumuladoProd, totFiscal: double;
+  punitoriosacob, acumulado,dctoMutual, ClienteIVA, descCliente, acumuladoIVA,
+  acumFpagoReal, acumFpago, acumEfectivo, acumuladoProd, totFiscal: double;
   acumPrecio1, acumPrecio2, acumPrecio3, acumPrecio4, acumPrecio5: double;
   coefPrecio1, coefPrecio2, coefPrecio3, coefPrecio4, coefPrecio5: double;
   IdProdStock: string;
@@ -1183,6 +1193,12 @@ begin
     CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
     CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente;
     CD_ComprobantePORC_IVA.AsFloat:= ClienteIVA;
+
+    //Selecciono el descuento final segun el plan mutual que tenga
+    ZQ_DctoMutual.close;
+    ZQ_DctoMutual.ParamByName('idPers').AsInteger:=cliente;
+    dm.ISModelo.abrir(ZQ_DctoMutual);
+
   end;
   vsel2.Close;
 end;
@@ -1414,6 +1430,7 @@ begin
   acumPrecio5:= 0;
   IdProdStock:= '';
   totFiscal:= 0;
+  dctoMutual:=0;
   RelojStock.Enabled:= false;
   lblMaxVenta.Visible:= False;
 
@@ -1471,6 +1488,11 @@ begin
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
   lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
   lblTotAPagar.Caption:= 'Total Venta: ' + FormatFloat('$ ##,###,##0.00 ', 0);
+  if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
+     lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
+  else
+  lblDctoMutual.Caption:='';
+
   modoCargaPrevia:= False;
   modoCargaOrden:= false;
   DBEdit_DetalleCliente.DataField:= 'pers_direccion';
@@ -1633,6 +1655,12 @@ begin
 
       lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
       lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
+
+      if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
+       lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
+      else
+       lblDctoMutual.Caption:='';
+
       modoLecturaProd();
 
       if DBGridListadoProductos.Enabled then
@@ -1732,6 +1760,10 @@ procedure TFOP_Cajero.CD_DetalleFacturaAfterScroll(DataSet: TDataSet);
 begin
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
   lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
+  if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
+   lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
+  else
+   lblDctoMutual.Caption:='';
 end;
 
 
@@ -1749,7 +1781,11 @@ begin
 
     lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
     lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
-  end;
+    if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
+     lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
+    else
+     lblDctoMutual.Caption:='';
+     end;
 end;
 ///////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -2476,6 +2512,10 @@ begin
 
     lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
     lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
+    if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
+     lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
+    else
+     lblDctoMutual.Caption:='';
 
     //Permite que no se modifique la venta
     modoCargaPrevia:= True;
@@ -2518,6 +2558,8 @@ begin
   crearComprobante();
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
   lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
+  lblDctoMutual.Caption:='';
+    
   cargarClientePorDefecto();
   modoCargaPrevia:= False;
   modoCargaOrden:= false;
@@ -3075,6 +3117,10 @@ begin
 
       lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
       lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
+      if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
+        lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
+      else
+        lblDctoMutual.Caption:='';
 
       //Permite que no se modifique la venta
       modoCargaOrden:= True;
@@ -3135,8 +3181,15 @@ begin
 end;
 
 procedure TFOP_Cajero.ISDbSumaDetalleFacturaSumListChanged(Sender: TObject);
+var
+porcDctoMutual:double;
 begin
-acumulado:= ISDbSumaDetalleFactura.SumCollection[0].SumValue;
+  porcDctoMutual:=ZQ_DctoMutualDESCUENTO.AsFloat;
+  acumulado:= ISDbSumaDetalleFactura.SumCollection[0].SumValue;
+  //Le resto al total de productos(saldo) el descuento por mutual
+  dctoMutual:= acumulado * (porcDctoMutual/100);
+  acumulado:= acumulado - dctoMutual;
+  if acumulado<0 then acumulado:=0;
   acumuladoProd:= ISDbSumaDetalleFactura.SumCollection[7].SumValue;
   if (acumuladoProd = 0) then
     acumuladoProd:= acumulado;
@@ -3173,6 +3226,11 @@ acumulado:= ISDbSumaDetalleFactura.SumCollection[0].SumValue;
     coefPrecio4:= 1;
   if coefPrecio5 < 0 then
     coefPrecio5:= 1;
+
+  if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
+     lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
+  else
+  lblDctoMutual.Caption:='';
 
 end;
 
@@ -3229,6 +3287,14 @@ end;
 procedure TFOP_Cajero.ISDbSumaReconocimSumListChanged(Sender: TObject);
 begin
    lblReconocimTot.Caption:= 'Total Reconocido: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaReconocim.SumCollection[0].SumValue);
+end;
+
+procedure TFOP_Cajero.ZQ_DctoMutualAfterOpen(DataSet: TDataSet);
+begin
+  if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
+    lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
+  else
+    lblDctoMutual.Caption:='';
 end;
 
 end.

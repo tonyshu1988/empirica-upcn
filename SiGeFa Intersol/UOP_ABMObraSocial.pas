@@ -178,6 +178,7 @@ type
     BajaPlanOs: TMenuItem;
     ReactivarPlanOs: TMenuItem;
     ZQ_AfiliadosNPLAN: TStringField;
+    modifPlanOss: TMenuItem;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);    
@@ -218,6 +219,7 @@ type
     procedure grillaPlanesDrawColumnCell(Sender: TObject;
       const Rect: TRect; DataCol: Integer; Column: TColumn;
       State: TGridDrawState);
+    procedure modifPlanOssClick(Sender: TObject);
   private
   public
   end;
@@ -690,6 +692,17 @@ procedure TFOP_ABMObraSocial.grillaPlanesDrawColumnCell(Sender: TObject;
   State: TGridDrawState);
 begin
   FPrincipal.PintarFilasGrillasConBajas(grillaPlanes, ZQ_OP_PLANBAJA.AsString, Rect, DataCol, Column, State);
+end;
+
+procedure TFOP_ABMObraSocial.modifPlanOssClick(Sender: TObject);
+begin
+   habilitarPlanes(true);
+
+    ZQ_OP_PLAN.Edit;
+    
+    if dbCodPlan.Enabled then dbCodPlan.SetFocus;
+
+    GrupoGuardarCancelar.Enabled:= false;
 end;
 
 end.
