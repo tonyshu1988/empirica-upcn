@@ -771,6 +771,24 @@ begin
       result := false;
     end;
 
+  //Verifica que tengan cargado al menos una marca de descuento sobre el saldo (dct Mutual)
+  if not(ZQ_PersonaObraSocial.IsEmpty) then
+   begin
+       ZQ_PersonaObraSocial.First;
+       while not ZQ_PersonaObraSocial.Eof do
+        begin
+            if ZQ_PersonaObraSocialPORC_FINAL.AsString='S' then
+              begin
+              result:=True;
+              exit;
+              end;
+            ZQ_PersonaObraSocial.Next;
+        end;
+      mensaje:= mensaje+#13+'Debe marcar al menos un plan para ser Descontado.';
+      result := false;
+
+   end;
+
   if Result = False then
   begin
     mensaje:= mensaje+#13#13+'Verifique.';

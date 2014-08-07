@@ -1,6 +1,6 @@
 object FOP_ABMObraSocial: TFOP_ABMObraSocial
-  Left = 465
-  Top = 238
+  Left = 306
+  Top = 149
   Width = 881
   Height = 527
   Caption = 'ABM Obra Social / Planes'
@@ -23,8 +23,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 873
-    Height = 429
+    Width = 865
+    Height = 418
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -143,7 +143,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             50.270833333333330000
             1251.479166666667000000
             124.354166666666700000
-            264.583333333333400000)
+            264.583333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -174,8 +174,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Size.Values = (
             52.916666666666670000
             1164.166666666667000000
-            68.791666666666680000
-            439.208333333333400000)
+            68.791666666666670000
+            439.208333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -207,7 +207,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             52.916666666666670000
             1132.416666666667000000
             5.291666666666667000
-            502.708333333333400000)
+            502.708333333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -605,7 +605,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -624,7 +624,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            592.666666666666800000)
+            592.666666666666700000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -655,7 +655,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -703,7 +703,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -1008,8 +1008,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 873
-      Height = 429
+      Width = 865
+      Height = 418
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -1023,8 +1023,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       object DBGridObraSocial: TDBGrid
         Left = 5
         Top = 5
-        Width = 863
-        Height = 234
+        Width = 855
+        Height = 223
         Align = alClient
         Color = 14606012
         DataSource = DS_OP_ObraSocial
@@ -1128,8 +1128,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 239
-        Width = 863
+        Top = 228
+        Width = 855
         Height = 185
         Align = alBottom
         BevelOuter = bvNone
@@ -1137,7 +1137,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         object PageControl1: TPageControl
           Left = 0
           Top = 0
-          Width = 863
+          Width = 855
           Height = 185
           ActivePage = TabAfiliados
           Align = alClient
@@ -1674,7 +1674,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             object GroupBox1: TGroupBox
               Left = 0
               Top = 0
-              Width = 855
+              Width = 847
               Height = 157
               Align = alClient
               Caption = '  Descripci'#243'n  '
@@ -1682,7 +1682,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
               object DBMemo1: TDBMemo
                 Left = 2
                 Top = 15
-                Width = 851
+                Width = 843
                 Height = 140
                 Align = alClient
                 DataField = 'DESCRIPCION'
@@ -1697,7 +1697,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             object DBGridAfiliados: TDBGrid
               Left = 0
               Top = 0
-              Width = 855
+              Width = 847
               Height = 157
               Align = alClient
               Color = 14606012
@@ -1749,7 +1749,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 873
+    Width = 865
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1771,7 +1771,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
-      Left = 763
+      Left = 755
       Top = 1
       Width = 109
       Height = 17
@@ -1788,7 +1788,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2691,6 +2691,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       ''
       'order by os.nombre')
     UsarWhereOriginal = IS_Sin_Where
+    TituloVentana = 'Buscar'
     Left = 256
     Top = 59
   end
@@ -2766,6 +2767,10 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       end
       item
         TituloColumna = 'Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Detalle Plan'
         Visible = True
       end
       item
@@ -2886,6 +2891,11 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       ImageIndex = 14
       OnClick = AgregarObraSocial1Click
     end
+    object modifPlanOss: TMenuItem
+      Caption = 'Modificar Plan Obra Social'
+      ImageIndex = 36
+      OnClick = modifPlanOssClick
+    end
     object QuitarObraSocial1: TMenuItem
       Caption = 'Quitar Plan Obra Social'
       ImageIndex = 15
@@ -2893,10 +2903,12 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     end
     object BajaPlanOs: TMenuItem
       Caption = 'Dar de Baja Plan'
+      ImageIndex = 12
       OnClick = BajaPlanOsClick
     end
     object ReactivarPlanOs: TMenuItem
       Caption = 'Reactivar Plan'
+      ImageIndex = 11
       OnClick = ReactivarPlanOsClick
     end
   end
