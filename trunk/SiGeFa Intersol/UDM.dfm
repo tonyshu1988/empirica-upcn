@@ -17,7 +17,7 @@ object DM: TDM
     Connected = True
     HostName = 'localhost'
     Port = 3052
-    Database = 'C:\SISTEMAS\SiGeFa Intersol\Bases\SIGEFA.FDB'
+    Database = 'E:\Empirica\empirica-upcn\SiGeFa Intersol\Bases\SIGEFA.FDB'
     User = 'sysdba'
     Password = 'masterkey'
     Protocol = 'firebird-2.5'
