@@ -1,6 +1,6 @@
 object FOP_Reportes: TFOP_Reportes
-  Left = 249
-  Top = 125
+  Left = 305
+  Top = 170
   Width = 1024
   Height = 616
   Caption = 'Reportes Optica'
@@ -22,16 +22,16 @@ object FOP_Reportes: TFOP_Reportes
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 526
+    Width = 1016
+    Height = 537
     Align = alClient
     TabOrder = 4
     object PageControlReportes: TPageControl
       Left = 1
       Top = 1
-      Width = 1006
-      Height = 524
-      ActivePage = TabReporteMedico
+      Width = 1014
+      Height = 535
+      ActivePage = TabSheet1
       Align = alClient
       TabOrder = 0
       object TabReporteMedico: TTabSheet
@@ -39,7 +39,7 @@ object FOP_Reportes: TFOP_Reportes
         object Splitter1: TSplitter
           Left = 0
           Top = 363
-          Width = 998
+          Width = 1006
           Height = 4
           Cursor = crVSplit
           Align = alTop
@@ -141,7 +141,7 @@ object FOP_Reportes: TFOP_Reportes
                 50.270833333333330000
                 754.062500000000000000
                 190.500000000000000000
-                391.583333333333300000)
+                391.583333333333400000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -171,8 +171,8 @@ object FOP_Reportes: TFOP_Reportes
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                679.979166666666700000
-                58.208333333333330000
+                679.979166666666800000
+                58.208333333333340000
                 537.104166666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -203,9 +203,9 @@ object FOP_Reportes: TFOP_Reportes
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                717.020833333333300000
+                717.020833333333400000
                 121.708333333333300000
-                463.020833333333300000)
+                463.020833333333400000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -303,7 +303,7 @@ object FOP_Reportes: TFOP_Reportes
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              84.666666666666670000
+              84.666666666666680000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -1160,7 +1160,7 @@ object FOP_Reportes: TFOP_Reportes
         object POrden: TPanel
           Left = 0
           Top = 0
-          Width = 998
+          Width = 1006
           Height = 363
           Align = alTop
           Caption = 'POrden'
@@ -1168,7 +1168,7 @@ object FOP_Reportes: TFOP_Reportes
           object Label7: TLabel
             Left = 1
             Top = 1
-            Width = 996
+            Width = 39
             Height = 13
             Align = alTop
             Alignment = taCenter
@@ -1187,7 +1187,7 @@ object FOP_Reportes: TFOP_Reportes
           object DBGridOrden: TDBGrid
             Left = 1
             Top = 14
-            Width = 996
+            Width = 1004
             Height = 315
             Align = alClient
             Color = 14606012
@@ -1248,7 +1248,7 @@ object FOP_Reportes: TFOP_Reportes
           object POrdenTotales: TPanel
             Left = 1
             Top = 329
-            Width = 996
+            Width = 1004
             Height = 33
             Align = alBottom
             Caption = 'POrdenTotales'
@@ -1256,7 +1256,7 @@ object FOP_Reportes: TFOP_Reportes
             object lblTotalOrden: TLabel
               Left = 1
               Top = 1
-              Width = 994
+              Width = 1002
               Height = 31
               Align = alClient
               Alignment = taRightJustify
@@ -1278,15 +1278,15 @@ object FOP_Reportes: TFOP_Reportes
         object POrdenDetalle: TPanel
           Left = 0
           Top = 367
-          Width = 998
-          Height = 129
+          Width = 1006
+          Height = 140
           Align = alClient
           Caption = 'POrdenDetalle'
           TabOrder = 2
           object Label1: TLabel
             Left = 1
             Top = 1
-            Width = 996
+            Width = 89
             Height = 13
             Align = alTop
             Alignment = taCenter
@@ -1305,8 +1305,8 @@ object FOP_Reportes: TFOP_Reportes
           object DBGridOrdenDetalle: TDBGrid
             Left = 1
             Top = 14
-            Width = 996
-            Height = 81
+            Width = 1004
+            Height = 92
             Align = alClient
             Color = 14606012
             DataSource = DS_OrdenDetalle
@@ -1352,8 +1352,8 @@ object FOP_Reportes: TFOP_Reportes
           end
           object POrdenDetalleTotales: TPanel
             Left = 1
-            Top = 95
-            Width = 996
+            Top = 106
+            Width = 1004
             Height = 33
             Align = alBottom
             Caption = 'POrdenDetalleTotales'
@@ -1361,7 +1361,7 @@ object FOP_Reportes: TFOP_Reportes
             object lblTotalOrdenDetalle: TLabel
               Left = 1
               Top = 1
-              Width = 994
+              Width = 1002
               Height = 31
               Align = alClient
               Alignment = taRightJustify
@@ -1381,12 +1381,215 @@ object FOP_Reportes: TFOP_Reportes
           end
         end
       end
+      object TabSheet1: TTabSheet
+        Caption = 'Afiliados por Obra Social'
+        ImageIndex = 1
+        object grillaAfiliados: TDBGrid
+          Left = 0
+          Top = 22
+          Width = 1006
+          Height = 485
+          Align = alClient
+          Color = 14606012
+          DataSource = DS_PersonaOss
+          Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+          TabOrder = 0
+          TitleFont.Charset = ANSI_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnDrawColumnCell = DBGridOrdenDrawColumnCell
+          Columns = <
+            item
+              Expanded = False
+              FieldName = 'CODIGO_CORTO'
+              Title.Caption = 'C'#243'digo'
+              Width = 69
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE'
+              Title.Caption = 'Apellido y Nombre'
+              Width = 313
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_TIPO_DOC'
+              Title.Caption = 'Tipo Doc.'
+              Width = 97
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NUMERO_DOC'
+              Title.Caption = 'N'#186' Doc.'
+              Width = 134
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DIRECCION'
+              Title.Caption = 'Direcci'#243'n'
+              Width = 167
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_TIPO_IVA'
+              Title.Caption = 'Tipo IVA'
+              Width = 138
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CODIGO_POSTAL'
+              Title.Caption = 'CP'
+              Width = 51
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'LOCALIDAD'
+              Title.Caption = 'Localidad'
+              Width = 97
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_PROVINCIA'
+              Title.Caption = 'Provincia'
+              Width = 92
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'TELEFONO'
+              Title.Caption = 'Tel'#233'fonos'
+              Width = 251
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'EMAIL'
+              Title.Caption = 'Email'
+              Width = 131
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'FECHA_NACIMIENTO'
+              Title.Caption = 'F. Nacimiento'
+              Width = 86
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'SEXO'
+              Title.Caption = 'Sexo'
+              Width = 34
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'BAJA'
+              Title.Caption = 'Baja'
+              Width = 33
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CUIT_CUIL'
+              Title.Caption = 'CUIT/CUIL'
+              Width = 131
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NRO_AFILIADO'
+              Title.Caption = 'N'#186' Afiliado'
+              Width = 109
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'NOMBRE_1'
+              Title.Caption = 'Plan'
+              Width = 296
+              Visible = True
+            end>
+        end
+        object PBusqueda: TPanel
+          Left = 0
+          Top = 0
+          Width = 1006
+          Height = 22
+          Align = alTop
+          BevelOuter = bvNone
+          ParentShowHint = False
+          ShowHint = False
+          TabOrder = 1
+          object Label2: TLabel
+            Left = 0
+            Top = 0
+            Width = 137
+            Height = 22
+            Align = alLeft
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = ' Plan Obra Social:'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -12
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentFont = False
+            Transparent = True
+            Layout = tlCenter
+          end
+          object lblCantidadRegistros: TLabel
+            Left = 760
+            Top = 0
+            Width = 246
+            Height = 22
+            Align = alRight
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'lblCantidadRegistros'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clNavy
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold, fsItalic]
+            ParentFont = False
+            Layout = tlCenter
+          end
+          object cmbPlan: TComboBox
+            Left = 144
+            Top = 1
+            Width = 521
+            Height = 21
+            Style = csDropDownList
+            DropDownCount = 15
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ItemHeight = 13
+            ParentFont = False
+            TabOrder = 0
+          end
+        end
+      end
     end
   end
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1521,6 +1724,10 @@ object FOP_Reportes: TFOP_Reportes
           BeginGroup = True
           Visible = True
           ItemName = 'btnImprimir'
+        end
+        item
+          Visible = True
+          ItemName = 'btnExcel'
         end
         item
           Visible = True
@@ -1911,6 +2118,7 @@ object FOP_Reportes: TFOP_Reportes
       Hint = 'Exportar a Excel'
       Visible = ivAlways
       LargeImageIndex = 77
+      OnClick = btnExcelClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -2143,6 +2351,7 @@ object FOP_Reportes: TFOP_Reportes
       'left join persona pe on (oo.id_cliente = pe.id_persona)'
       '')
     UsarWhereOriginal = IS_Sin_Where
+    TituloVentana = 'Buscar'
     Left = 77
     Top = 73
   end
@@ -2245,5 +2454,263 @@ object FOP_Reportes: TFOP_Reportes
     ShowModal = False
     Left = 221
     Top = 81
+  end
+  object ZQ_PersonaOss: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'select cl.*,td.nombre_tipo_doc, ti.nombre_tipo_iva, pv.nombre_pr' +
+        'ovincia,oo.nombre'
+      'from optica_persona_os opo'
+      'join optica_os oo on (opo.id_os=oo.id_os)'
+      'join persona cl on (opo.id_persona=cl.id_persona)'
+      'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
+      'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
+      'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
+      'where (opo.id_os=:id)'
+      'order by cl.nombre,cl.codigo_corto'
+      ''
+      '')
+    Params = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    Left = 200
+    Top = 304
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'id'
+        ParamType = ptUnknown
+      end>
+    object ZQ_PersonaOssID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+      Required = True
+    end
+    object ZQ_PersonaOssID_PROVINCIA: TIntegerField
+      FieldName = 'ID_PROVINCIA'
+    end
+    object ZQ_PersonaOssID_TIPO_DOC: TIntegerField
+      FieldName = 'ID_TIPO_DOC'
+    end
+    object ZQ_PersonaOssID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_PersonaOssNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_PersonaOssDIRECCION: TStringField
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_PersonaOssLOCALIDAD: TStringField
+      FieldName = 'LOCALIDAD'
+      Size = 200
+    end
+    object ZQ_PersonaOssCODIGO_POSTAL: TStringField
+      FieldName = 'CODIGO_POSTAL'
+    end
+    object ZQ_PersonaOssTELEFONO: TStringField
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_PersonaOssEMAIL: TStringField
+      FieldName = 'EMAIL'
+      Size = 100
+    end
+    object ZQ_PersonaOssFECHA_NACIMIENTO: TDateField
+      FieldName = 'FECHA_NACIMIENTO'
+    end
+    object ZQ_PersonaOssNUMERO_DOC: TStringField
+      FieldName = 'NUMERO_DOC'
+      Size = 50
+    end
+    object ZQ_PersonaOssSEXO: TStringField
+      FieldName = 'SEXO'
+      Size = 1
+    end
+    object ZQ_PersonaOssBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_PersonaOssDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 500
+    end
+    object ZQ_PersonaOssCUIT_CUIL: TStringField
+      FieldName = 'CUIT_CUIL'
+      Size = 30
+    end
+    object ZQ_PersonaOssDESCUENTO_ESPECIAL: TFloatField
+      FieldName = 'DESCUENTO_ESPECIAL'
+    end
+    object ZQ_PersonaOssCODIGO_CORTO: TStringField
+      FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_PersonaOssCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_PersonaOssCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 10
+    end
+    object ZQ_PersonaOssIMPORTADO: TStringField
+      FieldName = 'IMPORTADO'
+      Size = 1
+    end
+    object ZQ_PersonaOssNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
+    end
+    object ZQ_PersonaOssNOMBRE_TIPO_DOC: TStringField
+      FieldName = 'NOMBRE_TIPO_DOC'
+    end
+    object ZQ_PersonaOssNOMBRE_TIPO_IVA: TStringField
+      FieldName = 'NOMBRE_TIPO_IVA'
+      Size = 50
+    end
+    object ZQ_PersonaOssNOMBRE_PROVINCIA: TStringField
+      FieldName = 'NOMBRE_PROVINCIA'
+      Size = 50
+    end
+    object ZQ_PersonaOssNOMBRE_1: TStringField
+      FieldName = 'NOMBRE_1'
+      Size = 200
+    end
+  end
+  object DS_PersonaOss: TDataSource
+    DataSet = ZQ_PersonaOss
+    Left = 301
+    Top = 313
+  end
+  object ISLlenarCombo1: TISLlenarCombo
+    dataset = ZQ_Planes
+    combo = cmbPlan
+    OnCambio = ISLlenarCombo1Cambio
+    CampoClave = 'ID_OS'
+    CampoVer = 'DETALLE'
+    ItemsAdicional.Strings = (
+      'TODOS')
+    ItemsAdicInicio = True
+    Left = 360
+    Top = 185
+  end
+  object ZQ_Planes: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      
+        'Select oss.ID_OS,oss.codigo,oss.nombre as nombrePlan,osc.nombre ' +
+        'as nombreOss,(osc.nombre ||'#39' : '#39'||oss.codigo||'#39' - '#39'|| oss.nombre' +
+        ') as detalle'
+      'from Optica_os oss'
+      
+        'join optica_os_cabecera osc on (oss.id_optica_os_cabecera=osc.id' +
+        '_optica_os_cabecera)'
+      'where oss.baja='#39'N'#39
+      '')
+    Params = <>
+    Left = 360
+    Top = 131
+    object ZQ_PlanesID_OS: TIntegerField
+      FieldName = 'ID_OS'
+      Required = True
+    end
+    object ZQ_PlanesCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 100
+    end
+    object ZQ_PlanesNOMBREPLAN: TStringField
+      FieldName = 'NOMBREPLAN'
+      Size = 200
+    end
+    object ZQ_PlanesNOMBREOSS: TStringField
+      FieldName = 'NOMBREOSS'
+      Size = 200
+    end
+    object ZQ_PlanesDETALLE: TStringField
+      FieldName = 'DETALLE'
+      ReadOnly = True
+      Size = 506
+    end
+  end
+  object ISOrdenarGrillaAfiliados: TISOrdenarGrilla
+    Grilla = grillaAfiliados
+    Filtros = <
+      item
+        TituloColumna = 'C'#243'digo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Apellido y Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Doc.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#186' Doc.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo IVA'
+        Visible = True
+      end
+      item
+        TituloColumna = 'CP'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Provincia'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tel'#233'fonos'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Email'
+        Visible = True
+      end
+      item
+        TituloColumna = 'F. Nacimiento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sexo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Baja'
+        Visible = True
+      end
+      item
+        TituloColumna = 'CUIT/CUIL'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#186' Afiliado'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'OrdenarGrillaAfiliados'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 453
+    Top = 273
   end
 end

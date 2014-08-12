@@ -142,7 +142,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
             50.270833333333330000
             904.875000000000000000
             127.000000000000000000
-            957.791666666666700000)
+            957.791666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -173,7 +173,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Size.Values = (
             52.916666666666660000
             1209.145833333333000000
-            68.791666666666670000
+            68.791666666666680000
             351.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
@@ -844,11 +844,12 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Layout = tlCenter
     end
     object lblCantidadRegistros: TLabel
-      Left = 864
+      Left = 768
       Top = 0
-      Width = 152
+      Width = 248
       Height = 22
       Align = alRight
+      Alignment = taRightJustify
       AutoSize = False
       Caption = 'lblCantidadRegistros'
       Font.Charset = ANSI_CHARSET
