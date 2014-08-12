@@ -8,7 +8,7 @@ uses
   ZAbstractRODataset, ZAbstractDataset, ZDataset,
    QuickRpt, QRCtrls, ActnList, XPStyleActnCtrls,
   ActnMan,  StdCtrls, cxClasses, ISVistaPreviaQR,
-  ISDbSuma, ISOrdenarGrilla, ISBusquedaAvanzada;
+  ISDbSuma, ISOrdenarGrilla, ISBusquedaAvanzada, ISLlenarCombo;
 
 type
   TFOP_Reportes = class(TForm)
@@ -100,6 +100,48 @@ type
     ISDbSumaOrden: TISDbSuma;
     ISDbSumaOrdenDetalle: TISDbSuma;
     ISVistaPreviaReporteMedicos: TISVistaPreviaQR;
+    TabSheet1: TTabSheet;
+    grillaAfiliados: TDBGrid;
+    ZQ_PersonaOss: TZQuery;
+    ZQ_PersonaOssID_PERSONA: TIntegerField;
+    ZQ_PersonaOssID_PROVINCIA: TIntegerField;
+    ZQ_PersonaOssID_TIPO_DOC: TIntegerField;
+    ZQ_PersonaOssID_TIPO_IVA: TIntegerField;
+    ZQ_PersonaOssNOMBRE: TStringField;
+    ZQ_PersonaOssDIRECCION: TStringField;
+    ZQ_PersonaOssLOCALIDAD: TStringField;
+    ZQ_PersonaOssCODIGO_POSTAL: TStringField;
+    ZQ_PersonaOssTELEFONO: TStringField;
+    ZQ_PersonaOssEMAIL: TStringField;
+    ZQ_PersonaOssFECHA_NACIMIENTO: TDateField;
+    ZQ_PersonaOssNUMERO_DOC: TStringField;
+    ZQ_PersonaOssSEXO: TStringField;
+    ZQ_PersonaOssBAJA: TStringField;
+    ZQ_PersonaOssDESCRIPCION: TStringField;
+    ZQ_PersonaOssCUIT_CUIL: TStringField;
+    ZQ_PersonaOssDESCUENTO_ESPECIAL: TFloatField;
+    ZQ_PersonaOssCODIGO_CORTO: TStringField;
+    ZQ_PersonaOssCODIGO_BARRA: TStringField;
+    ZQ_PersonaOssCLAVE: TStringField;
+    ZQ_PersonaOssIMPORTADO: TStringField;
+    ZQ_PersonaOssNRO_AFILIADO: TStringField;
+    ZQ_PersonaOssNOMBRE_TIPO_DOC: TStringField;
+    ZQ_PersonaOssNOMBRE_TIPO_IVA: TStringField;
+    ZQ_PersonaOssNOMBRE_PROVINCIA: TStringField;
+    DS_PersonaOss: TDataSource;
+    PBusqueda: TPanel;
+    Label2: TLabel;
+    lblCantidadRegistros: TLabel;
+    cmbPlan: TComboBox;
+    ISLlenarCombo1: TISLlenarCombo;
+    ZQ_Planes: TZQuery;
+    ZQ_PlanesID_OS: TIntegerField;
+    ZQ_PlanesCODIGO: TStringField;
+    ZQ_PlanesNOMBREPLAN: TStringField;
+    ZQ_PlanesNOMBREOSS: TStringField;
+    ZQ_PlanesDETALLE: TStringField;
+    ISOrdenarGrillaAfiliados: TISOrdenarGrilla;
+    ZQ_PersonaOssNOMBRE_1: TStringField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
@@ -113,6 +155,8 @@ type
       State: TGridDrawState);
     procedure FormCreate(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure ISLlenarCombo1Cambio(valor: String);
+    procedure btnExcelClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -166,6 +210,7 @@ end;
 
 procedure TFOP_Reportes.ZQ_OrdenAfterScroll(DataSet: TDataSet);
 begin
+
   ZQ_OrdenDetalle.Close;
   ZQ_OrdenDetalle.ParamByName('ID_ORDEN').AsInteger := ZQ_OrdenID_ORDEN.AsInteger;
   ZQ_OrdenDetalle.Open;
@@ -202,6 +247,9 @@ procedure TFOP_Reportes.FormCreate(Sender: TObject);
 begin
   ISOrdenarGrillaOrden.CargarConfigColunmas;
   ISOrdenarGrillaOrdenDetalle.CargarConfigColunmas;
+  dm.ISModelo.abrir(ZQ_Planes);
+
+  ISLlenarCombo1.CargarCombo;
 end;
 
 procedure TFOP_Reportes.FormClose(Sender: TObject;
@@ -209,6 +257,46 @@ procedure TFOP_Reportes.FormClose(Sender: TObject;
 begin
   ISOrdenarGrillaOrden.GuardarConfigColumnas;
   ISOrdenarGrillaOrdenDetalle.GuardarConfigColumnas;
+end;
+
+procedure TFOP_Reportes.ISLlenarCombo1Cambio(valor: String);
+begin
+  if ZQ_Planes.IsEmpty then exit;
+
+  ZQ_PersonaOss.Close;
+
+  if (cmbPlan.Text='TODOS') then
+     ZQ_PersonaOss.SQL[7]:=''
+  else
+    begin
+     ZQ_PersonaOss.SQL[7]:='where (opo.id_os=:id)';
+     ZQ_PersonaOss.ParamByName('id').AsInteger:= ZQ_PlanesID_OS.AsInteger;
+    end;
+  dm.ISModelo.abrir(ZQ_PersonaOss);
+
+  dm.mostrarCantidadRegistro(ZQ_PersonaOss, lblCantidadRegistros);
+end;
+
+procedure TFOP_Reportes.btnExcelClick(Sender: TObject);
+begin
+
+
+   case PageControlReportes.ActivePageIndex of
+    0: //Reporte Medicos
+      begin
+        if ZQ_Orden.IsEmpty then exit;
+        DM.ExportarEXCEL(DBGridOrden);
+      end;
+    1: //Reporte Medicos
+      begin
+        if ZQ_PersonaOss.IsEmpty then exit;
+        DM.ExportarEXCEL(grillaAfiliados);
+      end;
+
+   end;
+
+
+
 end;
 
 end.

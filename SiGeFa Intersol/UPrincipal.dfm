@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
   Left = 347
-  Top = 178
+  Top = 179
   Width = 929
   Height = 483
   Caption = 'SiGeFa - Sistema de Gesti'#243'n y Facturaci'#243'n'

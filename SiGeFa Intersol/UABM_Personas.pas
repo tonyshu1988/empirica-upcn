@@ -208,7 +208,6 @@ type
     ZQ_UltimoNro: TZQuery;
     ZQ_UltimoNroCODIGO_CORTO: TIntegerField;
     ZQ_PersonaDESCUENTO_ESPECIAL: TFloatField;
-    ZQ_PersonaCODIGO_CORTO: TIntegerField;
     Label11: TLabel;
     DBEDescuento: TDBEdit;
     ZQ_TipoRelacion: TZQuery;
@@ -303,6 +302,9 @@ type
     DescuentaalFinal1: TMenuItem;
     stDescFinalOss: TStaticText;
     Panel1: TPanel;
+    ZQ_PersonaCODIGO_CORTO: TStringField;
+    ZQ_PersonaIMPORTADO: TStringField;
+    ZQ_PersonaNRO_AFILIADO: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -598,6 +600,8 @@ var
 begin
   Perform(WM_NEXTDLGCTL, 0, 0);
 
+
+
   if not validarcampos() then
     exit;
 
@@ -763,7 +767,7 @@ begin
     result := false;
   end;
 
-  //Verifica_CUIT es un campo de la tabla TIPO_CUIT, se configura ahí si se le exige el NroCUIT
+  // Verifica_CUIT es un campo de la tabla TIPO_CUIT, se configura ahí si se le exige el NroCUIT
   if (ZQ_IvaVERIFICA_CUIT.AsString='S') then
     if not EsCUITValido(ZQ_PersonaCUIT_CUIL.AsString) then
     begin
@@ -771,23 +775,37 @@ begin
       result := false;
     end;
 
-  //Verifica que tengan cargado al menos una marca de descuento sobre el saldo (dct Mutual)
-  if not(ZQ_PersonaObraSocial.IsEmpty) then
-   begin
-       ZQ_PersonaObraSocial.First;
-       while not ZQ_PersonaObraSocial.Eof do
-        begin
-            if ZQ_PersonaObraSocialPORC_FINAL.AsString='S' then
-              begin
-              result:=True;
-              exit;
-              end;
-            ZQ_PersonaObraSocial.Next;
-        end;
-      mensaje:= mensaje+#13+'Debe marcar al menos un plan para ser Descontado.';
-      result := false;
+  // Validaciones para Oss
+  if dm.ISUsrLogin.PermisoAccion('PERSONA_OBRA_SOCIAL') then
+  begin
+    // Verifica que tengan cargado al menos una marca de descuento sobre el saldo (dct Mutual)
+    if not(ZQ_PersonaObraSocial.IsEmpty) then
+     begin
+         if ZQ_PersonaObraSocial.RecordCount>1 then
+         begin
+           ZQ_PersonaObraSocial.First;
+           while not ZQ_PersonaObraSocial.Eof do
+            begin
+                if ZQ_PersonaObraSocialPORC_FINAL.AsString='S' then
+                  begin
+                  result:=True;
+                  exit;
+                  end;
+                ZQ_PersonaObraSocial.Next;
+            end;
+          mensaje:= mensaje+#13+'Debe marcar al menos un plan para ser Descontado.';
+          result := false;
+         end
+         else
+         begin
+           // Marco el plan como descontado al final
+           ZQ_PersonaObraSocial.Edit;
+           ZQ_PersonaObraSocialPORC_FINAL.AsString:='S';
+           ZQ_PersonaObraSocial.Post;
+         end
 
-   end;
+     end;
+  end;
 
   if Result = False then
   begin
