@@ -1,5 +1,5 @@
 object FBuscarProductoStock: TFBuscarProductoStock
-  Left = 663
+  Left = 393
   Top = 192
   Width = 730
   Height = 426
@@ -20,15 +20,15 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 722
-    Height = 347
+    Width = 714
+    Height = 336
     Align = alClient
     TabOrder = 0
     object DBGridStock: TDBGrid
       Left = 1
       Top = 1
-      Width = 720
-      Height = 345
+      Width = 712
+      Height = 334
       Align = alClient
       Color = 14606012
       DataSource = DS_Stock
@@ -243,7 +243,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1675,6 +1675,7 @@ object FBuscarProductoStock: TFBuscarProductoStock
       'where (pc.baja <> '#39'S'#39') and (pr.baja <> '#39'S'#39')'
       '')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 488
     Top = 72
   end

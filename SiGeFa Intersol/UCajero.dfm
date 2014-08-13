@@ -8304,9 +8304,6 @@ object FCajero: TFCajero
     object ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField
       FieldName = 'DESCUENTO_ESPECIAL'
     end
-    object ZQ_PersonasCODIGO_CORTO: TIntegerField
-      FieldName = 'CODIGO_CORTO'
-    end
     object ZQ_PersonasPROV: TStringField
       FieldName = 'PROV'
       Size = 50
@@ -8324,6 +8321,24 @@ object FCajero: TFCajero
     end
     object ZQ_PersonasCOEFIVA: TFloatField
       FieldName = 'COEFIVA'
+    end
+    object ZQ_PersonasCODIGO_CORTO: TStringField
+      FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_PersonasCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_PersonasCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 10
+    end
+    object ZQ_PersonasIMPORTADO: TStringField
+      FieldName = 'IMPORTADO'
+      Size = 1
+    end
+    object ZQ_PersonasNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
     end
   end
   object DS_Personas: TDataSource
@@ -9278,7 +9293,7 @@ object FCajero: TFCajero
     Left = 592
     Top = 440
     object menuEditarFP: TMenuItem
-      Caption = 'Editar FP'
+      Caption = ' '
       ImageIndex = 10
       OnClick = menuEditarFPClick
     end
@@ -9732,8 +9747,10 @@ object FCajero: TFCajero
         '00))as secc,'
       '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
       
-        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
-        #39#39'),'#39#39')||'
+        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - '#39'||coalesce(ma.nombre_ma' +
+        'rca,'#39#39')||'#39' - '#39'||a.descripcion||'#39' - '#39'||ta.descripcion||'
+      '       '#39' - M: '#39'||coalesce(m.medida,'#39#39'),'#39#39')||'
+      ''
       '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
       
         '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39'))as varchar(200' +
@@ -9748,9 +9765,13 @@ object FCajero: TFCajero
       'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'join configuracion c on (c.id_sucursal=su.id_sucursal)'
       'left join medida m on (pr.id_medida=m.id_medida)'
+      'left join marca ma on (pc.id_marca=ma.id_marca)'
+      'left join articulo a on (pc.id_articulo=a.id_articulo)'
+      
+        'left join tipo_articulo ta on (a.id_tipo_articulo=ta.id_tipo_art' +
+        'iculo)'
       'where (ps.punto_salida='#39'S'#39')and(pc.baja<>'#39'S'#39')'
-      'order by 3'
-      '')
+      'order by 3')
     CampoBuscar = 'posicSucursal'
     CampoBuscar2 = 'secc'
     CampoClave = 'id_stock_producto'
@@ -9760,7 +9781,7 @@ object FCajero: TFCajero
     BuscarDoble = True
     ColorGrilla = 14606012
     AnchoClave = 80
-    AnchoBuscar1 = 3000
+    AnchoBuscar1 = 5000
     AnchoBuscar2 = 1000
     Left = 898
     Top = 293

@@ -42,7 +42,6 @@ type
     ZQ_Personas_PuntosPUNTOS_ACUMULADOS: TFloatField;
     ZQ_Personas_PuntosBAJA: TStringField;
     DS_Personas_Puntos: TDataSource;
-    ZQ_Personas_PuntosCODIGO_CORTO: TIntegerField;
     ZQ_Personas_PuntosCODIGO_BARRA: TStringField;
     GroupBox1: TGroupBox;
     Label1: TLabel;
@@ -66,6 +65,7 @@ type
     ZQ_Personas_PuntosID_PERSONA_PUNTO: TIntegerField;
     DBEdit4: TDBEdit;
     Label6: TLabel;
+    ZQ_Personas_PuntosCODIGO_CORTO: TStringField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
     procedure ZQ_Personas_PuntosAfterScroll(DataSet: TDataSet);

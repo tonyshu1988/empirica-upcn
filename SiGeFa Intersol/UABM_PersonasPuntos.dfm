@@ -927,15 +927,15 @@ object FABM_PersonasPuntos: TFABM_PersonasPuntos
       FieldName = 'BAJA'
       Size = 1
     end
-    object ZQ_Personas_PuntosCODIGO_CORTO: TIntegerField
-      FieldName = 'CODIGO_CORTO'
-    end
     object ZQ_Personas_PuntosCODIGO_BARRA: TStringField
       FieldName = 'CODIGO_BARRA'
       Size = 40
     end
     object ZQ_Personas_PuntosID_PERSONA_PUNTO: TIntegerField
       FieldName = 'ID_PERSONA_PUNTO'
+    end
+    object ZQ_Personas_PuntosCODIGO_CORTO: TStringField
+      FieldName = 'CODIGO_CORTO'
     end
   end
   object DS_Personas_Puntos: TDataSource

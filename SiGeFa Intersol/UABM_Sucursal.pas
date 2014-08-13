@@ -161,6 +161,12 @@ type
     ISOrdenarSucursal: TISOrdenarGrilla;
     ISOrdenarEmpleado: TISOrdenarGrilla;
     ISBuscar: TISBusquedaAvanzada;
+    ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField;
+    ZQ_PersonasCODIGO_CORTO: TStringField;
+    ZQ_PersonasCODIGO_BARRA: TStringField;
+    ZQ_PersonasCLAVE: TStringField;
+    ZQ_PersonasIMPORTADO: TStringField;
+    ZQ_PersonasNRO_AFILIADO: TStringField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);

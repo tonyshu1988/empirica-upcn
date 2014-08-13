@@ -1,6 +1,6 @@
 object FABMEmpresas: TFABMEmpresas
-  Left = 344
-  Top = 149
+  Left = 169
+  Top = 41
   Width = 1006
   Height = 663
   Caption = 'ABM Empresas'
@@ -22,8 +22,8 @@ object FABMEmpresas: TFABMEmpresas
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 998
-    Height = 584
+    Width = 990
+    Height = 573
     Align = alClient
     TabOrder = 0
     object RepDetalleEmpresa: TQuickRep
@@ -138,7 +138,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            759.354166666666800000
+            759.354166666666700000
             124.354166666666700000
             381.000000000000000000)
           Alignment = taCenter
@@ -170,8 +170,8 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            685.270833333333400000
-            68.791666666666680000
+            685.270833333333300000
+            68.791666666666670000
             529.166666666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -202,9 +202,9 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            645.583333333333400000
+            645.583333333333300000
             5.291666666666667000
-            605.895833333333400000)
+            605.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -434,7 +434,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          42.333333333333340000
+          42.333333333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -482,7 +482,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             1791.229166666667000000
             2.645833333333333000
             108.479166666666700000)
@@ -1525,7 +1525,7 @@ object FABMEmpresas: TFABMEmpresas
             50.270833333333330000
             1209.145833333333000000
             124.354166666666700000
-            351.895833333333400000)
+            351.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1556,7 +1556,7 @@ object FABMEmpresas: TFABMEmpresas
           Size.Values = (
             52.916666666666670000
             1129.770833333333000000
-            68.791666666666680000
+            68.791666666666670000
             508.000000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -1589,7 +1589,7 @@ object FABMEmpresas: TFABMEmpresas
             52.916666666666670000
             1090.083333333333000000
             5.291666666666667000
-            590.020833333333400000)
+            590.020833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1933,7 +1933,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2661.708333333333000000
             2.645833333333333000
             108.479166666666700000)
@@ -2028,7 +2028,7 @@ object FABMEmpresas: TFABMEmpresas
             52.916666666666670000
             10.583333333333330000
             7.937500000000000000
-            304.270833333333400000)
+            304.270833333333300000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -2114,7 +2114,7 @@ object FABMEmpresas: TFABMEmpresas
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -2130,7 +2130,7 @@ object FABMEmpresas: TFABMEmpresas
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -2434,8 +2434,8 @@ object FABMEmpresas: TFABMEmpresas
     end
     object PageControlEdicion: TPageControl
       Left = 1
-      Top = 377
-      Width = 996
+      Top = 366
+      Width = 988
       Height = 206
       ActivePage = TabMarcas
       Align = alBottom
@@ -2837,7 +2837,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label12: TLabel
             Left = 1
             Top = 5
-            Width = 986
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -3006,7 +3006,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label13: TLabel
             Left = 1
             Top = 5
-            Width = 986
+            Width = 106
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -3070,7 +3070,7 @@ object FABMEmpresas: TFABMEmpresas
         object GrillaMarcas: TDBGrid
           Left = 0
           Top = 0
-          Width = 988
+          Width = 980
           Height = 104
           Hint = 'Presione sobre el titulo de la columna para modificar el orden'
           Align = alClient
@@ -3112,7 +3112,7 @@ object FABMEmpresas: TFABMEmpresas
         object DBMemo1: TDBMemo
           Left = 0
           Top = 123
-          Width = 988
+          Width = 980
           Height = 55
           Align = alBottom
           Color = clWhite
@@ -3130,7 +3130,7 @@ object FABMEmpresas: TFABMEmpresas
         object Panel3: TPanel
           Left = 0
           Top = 104
-          Width = 988
+          Width = 980
           Height = 19
           Align = alBottom
           ParentShowHint = False
@@ -3139,7 +3139,7 @@ object FABMEmpresas: TFABMEmpresas
           object Label14: TLabel
             Left = 1
             Top = 5
-            Width = 986
+            Width = 978
             Height = 13
             Align = alBottom
             Caption = 'Datos Adicionales:'
@@ -3328,8 +3328,8 @@ object FABMEmpresas: TFABMEmpresas
     object DBGridEmpresas: TDBGrid
       Left = 1
       Top = 20
-      Width = 996
-      Height = 357
+      Width = 988
+      Height = 346
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -3427,7 +3427,7 @@ object FABMEmpresas: TFABMEmpresas
     object PBusqueda: TPanel
       Left = 1
       Top = 1
-      Width = 996
+      Width = 988
       Height = 19
       Align = alTop
       ParentShowHint = False
@@ -3448,7 +3448,7 @@ object FABMEmpresas: TFABMEmpresas
         ParentFont = False
       end
       object StaticTxtBaja: TStaticText
-        Left = 886
+        Left = 878
         Top = 1
         Width = 109
         Height = 17
@@ -3466,7 +3466,7 @@ object FABMEmpresas: TFABMEmpresas
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4720,6 +4720,27 @@ object FABMEmpresas: TFABMEmpresas
       FieldName = 'CUIT_CUIL'
       Size = 30
     end
+    object ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField
+      FieldName = 'DESCUENTO_ESPECIAL'
+    end
+    object ZQ_PersonasCODIGO_CORTO: TStringField
+      FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_PersonasCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_PersonasCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 10
+    end
+    object ZQ_PersonasIMPORTADO: TStringField
+      FieldName = 'IMPORTADO'
+      Size = 1
+    end
+    object ZQ_PersonasNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
+    end
   end
   object DS_PersonaRelacionContacto: TDataSource
     DataSet = ZQ_PersonaRelacionContacto
@@ -5537,6 +5558,7 @@ object FABMEmpresas: TFABMEmpresas
       ''
       'order by e.nombre')
     UsarWhereOriginal = IS_Sin_Where
+    TituloVentana = 'Buscar'
     Left = 96
     Top = 56
   end

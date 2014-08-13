@@ -211,7 +211,6 @@ type
     ZQ_PersonasDESCRIPCION: TStringField;
     ZQ_PersonasCUIT_CUIL: TStringField;
     ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField;
-    ZQ_PersonasCODIGO_CORTO: TIntegerField;
     ZQ_PersonasPROV: TStringField;
     ZQ_PersonasTDOC: TStringField;
     ZQ_PersonasTIVA: TStringField;
@@ -657,6 +656,11 @@ type
     ISDbSumaFPago: TISDbSuma;
     ISDbSumaDetalleFactura: TISDbSuma;
     ISDbSumaVentaFinal: TISDbSuma;
+    ZQ_PersonasCODIGO_CORTO: TStringField;
+    ZQ_PersonasCODIGO_BARRA: TStringField;
+    ZQ_PersonasCLAVE: TStringField;
+    ZQ_PersonasIMPORTADO: TStringField;
+    ZQ_PersonasNRO_AFILIADO: TStringField;
     procedure btsalirClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
     procedure FormCreate(Sender: TObject);
@@ -2791,11 +2795,14 @@ begin
   if PanelDetalleProducto.Enabled or PConfirmarVenta.Visible or (CD_Fpago_esSenia.AsString = 'S') then
     exit;
 
+  if CD_Fpago.IsEmpty then exit;
+
   if (CD_Comprobante.State in [dsInsert, dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
   begin
     dm.centrarPanel(FCajero, PABM_FormaPago);
     PABM_FormaPago.Top:= FCajero.Height - 300;
     PABM_FormaPago.Visible:= true;
+    PABM_FormaPago.BringToFront;
     PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
     grupoVertical.Enabled:= false;
     GrupoGuardarCancelar.Enabled:= false;

@@ -1,5 +1,5 @@
 object FBuscarPersona: TFBuscarPersona
-  Left = 454
+  Left = 197
   Top = 234
   Width = 869
   Height = 478
@@ -19,8 +19,8 @@ object FBuscarPersona: TFBuscarPersona
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 861
-    Height = 399
+    Width = 853
+    Height = 388
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 3
@@ -28,8 +28,8 @@ object FBuscarPersona: TFBuscarPersona
     object DBGridPersonas: TDBGrid
       Left = 3
       Top = 3
-      Width = 855
-      Height = 192
+      Width = 847
+      Height = 181
       Align = alClient
       Color = 14606012
       DataSource = DS_Personas
@@ -120,8 +120,8 @@ object FBuscarPersona: TFBuscarPersona
     end
     object PanelEdicion: TPanel
       Left = 3
-      Top = 195
-      Width = 855
+      Top = 184
+      Width = 847
       Height = 201
       Align = alBottom
       BevelOuter = bvNone
@@ -130,7 +130,7 @@ object FBuscarPersona: TFBuscarPersona
       object PageControl: TPageControl
         Left = 0
         Top = 0
-        Width = 855
+        Width = 847
         Height = 201
         ActivePage = TabSheetDatos
         Align = alClient
@@ -707,7 +707,7 @@ object FBuscarPersona: TFBuscarPersona
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1552,9 +1552,6 @@ object FBuscarPersona: TFBuscarPersona
     object ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField
       FieldName = 'DESCUENTO_ESPECIAL'
     end
-    object ZQ_PersonasCODIGO_CORTO: TIntegerField
-      FieldName = 'CODIGO_CORTO'
-    end
     object ZQ_PersonasCODIGO_BARRA: TStringField
       FieldName = 'CODIGO_BARRA'
       Size = 40
@@ -1562,6 +1559,16 @@ object FBuscarPersona: TFBuscarPersona
     object ZQ_PersonasCLAVE: TStringField
       FieldName = 'CLAVE'
       Size = 10
+    end
+    object ZQ_PersonasCODIGO_CORTO: TStringField
+      FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_PersonasIMPORTADO: TStringField
+      FieldName = 'IMPORTADO'
+      Size = 1
+    end
+    object ZQ_PersonasNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
     end
   end
   object DS_Personas: TDataSource
@@ -2001,6 +2008,7 @@ object FBuscarPersona: TFBuscarPersona
       'order by p.nombre')
     UsarWhereOriginal = IS_Con_Where
     PantallaReducida = True
+    TituloVentana = 'Buscar'
     Left = 184
     Top = 80
   end
