@@ -100,7 +100,6 @@ type
     ZQ_PersonasDESCRIPCION: TStringField;
     ZQ_PersonasCUIT_CUIL: TStringField;
     ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField;
-    ZQ_PersonasCODIGO_CORTO: TIntegerField;
     ZQ_PersonasPROV: TStringField;
     ZQ_PersonasTDOC: TStringField;
     ZQ_PersonasTIVA: TStringField;
@@ -392,6 +391,11 @@ type
     ISListadoMedio: TISListadoSQL;
     ISListadoCuenta: TISListadoSQL;
     ISDbSuma1: TISDbSuma;
+    ZQ_PersonasCODIGO_CORTO: TStringField;
+    ZQ_PersonasCODIGO_BARRA: TStringField;
+    ZQ_PersonasCLAVE: TStringField;
+    ZQ_PersonasIMPORTADO: TStringField;
+    ZQ_PersonasNRO_AFILIADO: TStringField;
     procedure btBuscProdClick(Sender: TObject);
     procedure VerLectorCB(sino: Boolean);
     procedure IdentificarCodigo();

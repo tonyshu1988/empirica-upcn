@@ -2809,15 +2809,15 @@ object FABM_Preventa: TFABM_Preventa
   object PanelContenedorDerecha: TPanel
     Left = 95
     Top = 0
-    Width = 934
-    Height = 585
+    Width = 926
+    Height = 574
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 0
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 932
+      Width = 924
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -2841,7 +2841,7 @@ object FABM_Preventa: TFABM_Preventa
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 553
+        Left = 545
         Top = 1
         Width = 378
         Height = 28
@@ -2864,7 +2864,7 @@ object FABM_Preventa: TFABM_Preventa
       Tag = 99
       Left = 1
       Top = 209
-      Width = 932
+      Width = 924
       Height = 41
       Align = alTop
       Color = 12648448
@@ -2975,7 +2975,7 @@ object FABM_Preventa: TFABM_Preventa
         Tag = 99
         Left = 1
         Top = 16
-        Width = 930
+        Width = 922
         Height = 24
         Align = alBottom
         BevelOuter = bvNone
@@ -3182,16 +3182,16 @@ object FABM_Preventa: TFABM_Preventa
     object Panel1: TPanel
       Left = 1
       Top = 250
-      Width = 932
-      Height = 334
+      Width = 924
+      Height = 323
       Align = alClient
       Caption = 'Panel1'
       TabOrder = 2
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 1
-        Width = 930
-        Height = 332
+        Width = 922
+        Height = 321
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3205,7 +3205,7 @@ object FABM_Preventa: TFABM_Preventa
         object Label11: TLabel
           Left = 1
           Top = 1
-          Width = 928
+          Width = 920
           Height = 14
           Align = alTop
           Alignment = taCenter
@@ -3224,8 +3224,8 @@ object FABM_Preventa: TFABM_Preventa
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 15
-          Width = 928
-          Height = 234
+          Width = 920
+          Height = 223
           Align = alClient
           Color = 15527129
           DataSource = DS_DetalleFactura
@@ -3299,8 +3299,8 @@ object FABM_Preventa: TFABM_Preventa
         end
         object PieGrilla: TPanel
           Left = 1
-          Top = 249
-          Width = 928
+          Top = 238
+          Width = 920
           Height = 82
           Align = alBottom
           BevelOuter = bvLowered
@@ -3308,7 +3308,7 @@ object FABM_Preventa: TFABM_Preventa
           object lblCantProductos: TLabel
             Left = 1
             Top = 1
-            Width = 926
+            Width = 918
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3324,7 +3324,7 @@ object FABM_Preventa: TFABM_Preventa
           object lblTotAPagar: TLabel
             Left = 1
             Top = 38
-            Width = 926
+            Width = 918
             Height = 43
             Align = alBottom
             Alignment = taRightJustify
@@ -3344,7 +3344,7 @@ object FABM_Preventa: TFABM_Preventa
           object lblMaxVenta: TLabel
             Left = 1
             Top = 16
-            Width = 926
+            Width = 918
             Height = 20
             Align = alTop
             Alignment = taCenter
@@ -3374,7 +3374,7 @@ object FABM_Preventa: TFABM_Preventa
     object Panel3: TPanel
       Left = 1
       Top = 118
-      Width = 932
+      Width = 924
       Height = 91
       Align = alTop
       BevelOuter = bvNone
@@ -3466,7 +3466,7 @@ object FABM_Preventa: TFABM_Preventa
       object Label7: TLabel
         Left = 0
         Top = 0
-        Width = 932
+        Width = 924
         Height = 14
         Align = alTop
         Alignment = taCenter
@@ -3608,7 +3608,7 @@ object FABM_Preventa: TFABM_Preventa
     object PanelCabeceraFactura: TPanel
       Left = 1
       Top = 31
-      Width = 932
+      Width = 924
       Height = 87
       Align = alTop
       BevelOuter = bvLowered
@@ -3622,7 +3622,7 @@ object FABM_Preventa: TFABM_Preventa
       object Label12: TLabel
         Left = 1
         Top = 1
-        Width = 930
+        Width = 922
         Height = 14
         Align = alTop
         Alignment = taCenter
@@ -4075,7 +4075,7 @@ object FABM_Preventa: TFABM_Preventa
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -6829,9 +6829,6 @@ object FABM_Preventa: TFABM_Preventa
     object ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField
       FieldName = 'DESCUENTO_ESPECIAL'
     end
-    object ZQ_PersonasCODIGO_CORTO: TIntegerField
-      FieldName = 'CODIGO_CORTO'
-    end
     object ZQ_PersonasPROV: TStringField
       FieldName = 'PROV'
       Size = 50
@@ -6849,6 +6846,24 @@ object FABM_Preventa: TFABM_Preventa
     end
     object ZQ_PersonasCOEFIVA: TFloatField
       FieldName = 'COEFIVA'
+    end
+    object ZQ_PersonasCODIGO_CORTO: TStringField
+      FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_PersonasCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_PersonasCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 10
+    end
+    object ZQ_PersonasIMPORTADO: TStringField
+      FieldName = 'IMPORTADO'
+      Size = 1
+    end
+    object ZQ_PersonasNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
     end
   end
   object DS_Personas: TDataSource

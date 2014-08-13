@@ -355,6 +355,12 @@ type
     ISBusquedaAvanzadaEmpresas: TISBusquedaAvanzada;
     ISDBFechaCtaCte: TISDBDateTimePicker;
     ISDBFechaCtaCte2: TISDBDateTimePicker;
+    ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField;
+    ZQ_PersonasCODIGO_CORTO: TStringField;
+    ZQ_PersonasCODIGO_BARRA: TStringField;
+    ZQ_PersonasCLAVE: TStringField;
+    ZQ_PersonasIMPORTADO: TStringField;
+    ZQ_PersonasNRO_AFILIADO: TStringField;
     procedure btnNuevoClick(Sender: TObject);
     procedure btnModificarClick(Sender: TObject);
     procedure btnGuardarClick(Sender: TObject);

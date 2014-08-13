@@ -131,7 +131,6 @@ type
     btnCtaCte_Reactivar: TButton;
     btnCtaCte_Baja: TButton;
     ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField;
-    ZQ_PersonasCODIGO_CORTO: TIntegerField;
     ZQ_UltimoNro: TZQuery;
     ZQ_UltimoNroCODIGO_CORTO: TIntegerField;
     ZQ_RelacionCliente: TZQuery;
@@ -159,6 +158,9 @@ type
     ISDBFechaNacimiento: TISDBDateTimePicker;
     ISDBFechaCtaCte: TISDBDateTimePicker;
     ISDBDateTimePicker1: TISDBDateTimePicker;
+    ZQ_PersonasCODIGO_CORTO: TStringField;
+    ZQ_PersonasIMPORTADO: TStringField;
+    ZQ_PersonasNRO_AFILIADO: TStringField;
     procedure btnSeleccionarClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);

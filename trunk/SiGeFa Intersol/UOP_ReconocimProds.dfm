@@ -21,8 +21,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object PanelFondo: TPanel
     Left = 0
     Top = 22
-    Width = 1016
-    Height = 509
+    Width = 1008
+    Height = 498
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -142,7 +142,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
             50.270833333333330000
             904.875000000000000000
             127.000000000000000000
-            957.791666666666800000)
+            957.791666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -171,10 +171,10 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666660000
+            52.916666666666670000
             1209.145833333333000000
-            68.791666666666680000
-            351.895833333333400000)
+            68.791666666666670000
+            351.895833333333300000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -203,7 +203,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666660000
+            52.916666666666670000
             1190.625000000000000000
             5.291666666666667000
             388.937500000000000000)
@@ -400,7 +400,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            52.916666666666660000
+            52.916666666666670000
             1664.229166666667000000
             5.291666666666667000
             103.187500000000000000)
@@ -469,7 +469,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -756,8 +756,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 1016
-      Height = 509
+      Width = 1008
+      Height = 498
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -771,8 +771,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       object grillaProductos: TDBGrid
         Left = 5
         Top = 5
-        Width = 1006
-        Height = 499
+        Width = 998
+        Height = 488
         Align = alClient
         Color = 14606012
         DataSource = DS_PlanProducto
@@ -818,7 +818,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 1016
+    Width = 1008
     Height = 22
     Align = alTop
     BevelOuter = bvNone
@@ -844,7 +844,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Layout = tlCenter
     end
     object lblCantidadRegistros: TLabel
-      Left = 768
+      Left = 760
       Top = 0
       Width = 248
       Height = 22
@@ -880,7 +880,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1471,6 +1471,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         #39#39'),'#39#39')||'
       '       COALESCE ('#39' - Art'#237'culo: '#39' || a.descripcion,'#39#39')||'
       '       COALESCE ('#39' - Tipo: '#39' || ta.descripcion,'#39#39')||'
+      '       COALESCE ('#39' - Marca: '#39' || mm.nombre_marca,'#39#39')||'
       '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
       
         '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39'))as varchar(100' +
@@ -1482,6 +1483,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       
         'join tipo_articulo ta on (ta.id_tipo_articulo=a.id_tipo_articulo' +
         ')'
+      'join marca mm on (mm.id_marca=pc.id_marca)'
       'join stock_producto sp on (sp.id_producto =  pr.id_producto)'
       
         'join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.id_po' +
@@ -1494,10 +1496,6 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         'd_sucursal=c.id_sucursal))'
       'where (pr.baja<>'#39'S'#39')and(pc.baja<>'#39'S'#39')'
       'order by 2'
-      ''
-      ''
-      ''
-      ''
       ''
       '')
     Params = <>

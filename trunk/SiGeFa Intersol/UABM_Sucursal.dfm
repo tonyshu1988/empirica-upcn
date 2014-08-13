@@ -1,6 +1,6 @@
 object FABM_Sucursal: TFABM_Sucursal
-  Left = 299
-  Top = 352
+  Left = 235
+  Top = 151
   Width = 938
   Height = 573
   Caption = 'ABM Sucursal'
@@ -2342,6 +2342,27 @@ object FABM_Sucursal: TFABM_Sucursal
       FieldName = 'CUIT_CUIL'
       Size = 30
     end
+    object ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField
+      FieldName = 'DESCUENTO_ESPECIAL'
+    end
+    object ZQ_PersonasCODIGO_CORTO: TStringField
+      FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_PersonasCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_PersonasCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 10
+    end
+    object ZQ_PersonasIMPORTADO: TStringField
+      FieldName = 'IMPORTADO'
+      Size = 1
+    end
+    object ZQ_PersonasNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
+    end
   end
   object PopupMenuVendedor: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
@@ -2506,6 +2527,7 @@ object FABM_Sucursal: TFABM_Sucursal
       'order by s.nombre')
     UsarWhereOriginal = IS_Sin_Where
     PantallaReducida = True
+    TituloVentana = 'Buscar'
     Left = 640
     Top = 83
   end

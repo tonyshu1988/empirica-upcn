@@ -197,7 +197,6 @@ type
     ZQ_PersonasDESCRIPCION: TStringField;
     ZQ_PersonasCUIT_CUIL: TStringField;
     ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField;
-    ZQ_PersonasCODIGO_CORTO: TIntegerField;
     ZQ_PersonasPROV: TStringField;
     ZQ_PersonasTDOC: TStringField;
     ZQ_PersonasTIVA: TStringField;
@@ -685,6 +684,13 @@ type
     ZQ_DctoMutualDESCUENTO: TFloatField;
     ZQ_DctoMutualPORC_FINAL: TStringField;
     ZQ_DctoMutualNOMBRE: TStringField;
+    ZQ_PersonasCODIGO_CORTO: TStringField;
+    ZQ_PersonasCODIGO_BARRA: TStringField;
+    ZQ_PersonasCLAVE: TStringField;
+    ZQ_PersonasIMPORTADO: TStringField;
+    ZQ_PersonasNRO_AFILIADO: TStringField;
+    ZSP_Comprobante_Detalle: TZStoredProc;
+    ZSP_Comprobante_DetalleID: TIntegerField;
     procedure btsalirClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
     procedure FormCreate(Sender: TObject);
@@ -1613,7 +1619,7 @@ begin
         CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= ZQ_ProductosPRECIO_VENTA.AsFloat;
     end;
 
-    //Filtro el CDS para que Juanmatraiga los reconocimientos del prod editado
+    //Filtro el CDS para que traiga los reconocimientos del prod editado
     CD_Reconocimientos.Filtered:=False;
     CD_Reconocimientos.Filter:=Format('id_prod=%d',[CD_DetalleFacturaID_PRODUCTO.AsInteger]);
     CD_Reconocimientos.Filtered:=True;
@@ -1983,6 +1989,11 @@ begin
   begin
     ZQ_ComprobanteDetalle.Open;
     ZQ_ComprobanteDetalle.Append;
+
+    ZSP_Comprobante_Detalle.Active:= True;
+    ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE.AsInteger:= ZSP_Comprobante_DetalleID.AsInteger;
+    ZSP_Comprobante_Detalle.Active:= False;
+
     ZQ_ComprobanteDetalleID_COMPROBANTE.AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
     ZQ_ComprobanteDetalleID_PRODUCTO.AsInteger:= CD_DetalleFacturaID_PRODUCTO.AsInteger;
     ZQ_ComprobanteDetalleID_STOCK_PRODUCTO.AsInteger:= CD_DetalleFacturaID_PROD_STOCK.AsInteger;
@@ -2012,6 +2023,23 @@ begin
     begin
       ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat + (totFiscal - parcial - auxTotalIva);
     end;
+
+    //Guardo los reconocimientos de Oss de cada producto en OPTICA_RECONOCIM_OSS
+    if ZQ_ComprobanteDetalleIMPORTE_RECONOC_OS.AsFloat>0 then
+     begin
+         CD_Reconocimientos.First;
+         while not CD_Reconocimientos.Eof do
+         begin
+            ZQ_ReconocimOSS.Append;
+            ZQ_ReconocimOSSID_OS.AsInteger:=CD_Reconocimientosid_os.AsInteger;
+            ZQ_ReconocimOSSID_PRODUCTO.AsInteger:=CD_Reconocimientosid_prod.AsInteger;
+            ZQ_ReconocimOSSMONTO_RECONOCIDO.AsFloat:=CD_Reconocimientosmonto_reconocido.AsFloat;
+            ZQ_ReconocimOSSID_COMPROBANTE_DETALLE.AsInteger:=ZQ_ComprobanteDetalleID_COMPROBANTE_DETALLE.AsInteger;
+            ZQ_ReconocimOSS.Post;
+
+            CD_Reconocimientos.Next;
+         end;
+     end;
 
     ZQ_ComprobanteDetalle.Post;
     inc(i);
@@ -2559,7 +2587,7 @@ begin
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
   lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
   lblDctoMutual.Caption:='';
-    
+
   cargarClientePorDefecto();
   modoCargaPrevia:= False;
   modoCargaOrden:= false;
@@ -2805,12 +2833,14 @@ procedure TFOP_Cajero.menuEditarFPClick(Sender: TObject);
 begin
   if PCargaProd.Visible or PConfirmarVenta.Visible or (CD_Fpago_esSenia.AsString = 'S') then
     exit;
-
+  if CD_Fpago.IsEmpty then exit;
+  
   if (CD_Comprobante.State in [dsInsert, dsEdit]) and (not CD_DetalleFactura.IsEmpty) and PanelProductosYFPago.Enabled then
   begin
     dm.centrarPanel(FOP_Cajero, PABM_FormaPago);
     PABM_FormaPago.Top:= FOP_Cajero.Height - 300;
     PABM_FormaPago.Visible:= true;
+    PABM_FormaPago.BringToFront;
     PanelContenedorDerecha.Enabled:= not (PABM_FormaPago.Visible);
     grupoVertical.Enabled:= false;
     GrupoGuardarCancelar.Enabled:= false;

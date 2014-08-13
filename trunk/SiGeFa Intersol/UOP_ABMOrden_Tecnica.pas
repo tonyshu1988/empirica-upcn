@@ -170,7 +170,6 @@ type
     ZQ_PersonasDESCRIPCION: TStringField;
     ZQ_PersonasCUIT_CUIL: TStringField;
     ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField;
-    ZQ_PersonasCODIGO_CORTO: TIntegerField;
     ZQ_PersonasPROV: TStringField;
     ZQ_PersonasTDOC: TStringField;
     ZQ_PersonasTIVA: TStringField;
@@ -498,6 +497,9 @@ type
     ISDbSumaOS: TISDbSuma;
     dbFecha: TISDBDateTimePicker;
     ISDBDateTimePicker1: TISDBDateTimePicker;
+    ZQ_PersonasCODIGO_CORTO: TStringField;
+    ZQ_PersonasIMPORTADO: TStringField;
+    ZQ_PersonasNRO_AFILIADO: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);

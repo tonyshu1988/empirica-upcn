@@ -1,6 +1,6 @@
 object FOP_Cajero: TFOP_Cajero
-  Left = 192
-  Top = 59
+  Left = 217
+  Top = 40
   Width = 1184
   Height = 725
   Caption = 'Subsistema de Caja Obras Sociales - SiGeFa'
@@ -19,418 +19,6 @@ object FOP_Cajero: TFOP_Cajero
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
-  object PCargaProd: TPanel
-    Left = 248
-    Top = 152
-    Width = 700
-    Height = 300
-    BevelInner = bvRaised
-    BevelOuter = bvLowered
-    BevelWidth = 3
-    TabOrder = 8
-    Visible = False
-    object PCargaProdDetalle: TPanel
-      Left = 6
-      Top = 6
-      Width = 688
-      Height = 288
-      Align = alClient
-      TabOrder = 1
-      object Bevel2: TBevel
-        Left = 11
-        Top = 58
-        Width = 654
-        Height = 34
-      end
-      object Label1: TLabel
-        Left = 1
-        Top = 99
-        Width = 686
-        Height = 16
-        Align = alBottom
-        AutoSize = False
-        Caption = '  Reconocimiento Productos'
-        Color = 12648448
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object Label76: TLabel
-        Left = 344
-        Top = 69
-        Width = 53
-        Height = 13
-        Caption = '% Desc.:'
-      end
-      object Label75: TLabel
-        Left = 472
-        Top = 69
-        Width = 71
-        Height = 13
-        Caption = 'Monto Total:'
-      end
-      object Label72: TLabel
-        Left = 21
-        Top = 69
-        Width = 56
-        Height = 13
-        Caption = 'Cantidad:'
-      end
-      object Label71: TLabel
-        Left = 11
-        Top = 23
-        Width = 71
-        Height = 13
-        Alignment = taRightJustify
-        Caption = 'Descripci'#243'n:'
-      end
-      object Label70: TLabel
-        Left = 151
-        Top = 69
-        Width = 88
-        Height = 13
-        Alignment = taRightJustify
-        Caption = 'Precio Unitario:'
-      end
-      object DBText3: TDBText
-        Left = 91
-        Top = 23
-        Width = 566
-        Height = 29
-        Color = 15527129
-        DataField = 'producto'
-        DataSource = DS_DetalleFactura
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Transparent = True
-        WordWrap = True
-      end
-      object DBText2: TDBText
-        Left = 546
-        Top = 69
-        Width = 106
-        Height = 13
-        DataField = 'IMPORTE_VENTA'
-        DataSource = DS_DetalleFactura
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = True
-      end
-      object Label10: TLabel
-        Left = 1
-        Top = 1
-        Width = 686
-        Height = 16
-        Align = alTop
-        Alignment = taCenter
-        AutoSize = False
-        Caption = 'Carga de Producto/Servicio'
-        Color = 12648448
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -12
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object lblReconocimTot: TLabel
-        Left = 1
-        Top = 239
-        Width = 686
-        Height = 15
-        Align = alBottom
-        Alignment = taRightJustify
-        AutoSize = False
-        Caption = 'Total Reconocido: $0.00 '
-        Color = 12648448
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Layout = tlCenter
-      end
-      object DBGridListadoOS: TDBGrid
-        Left = 1
-        Top = 115
-        Width = 686
-        Height = 124
-        Align = alBottom
-        Color = 15527129
-        DataSource = DS_Reconocimientos
-        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        PopupMenu = PopupReconocim
-        TabOrder = 0
-        TitleFont.Charset = ANSI_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'detalle'
-            ReadOnly = True
-            Title.Caption = 'Detalle Plan'
-            Width = 454
-            Visible = True
-          end
-          item
-            Color = 10485759
-            Expanded = False
-            FieldName = 'monto_reconocido'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            Title.Caption = 'Importe'
-            Width = 61
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'observaciones'
-            Title.Caption = 'Observaciones'
-            Width = 495
-            Visible = True
-          end>
-      end
-      object edImporteUnitario: TDBEdit
-        Left = 242
-        Top = 65
-        Width = 87
-        Height = 21
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        Color = 15527129
-        DataField = 'IMPORTE_UNITARIO'
-        DataSource = DS_DetalleFactura
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 1
-        OnExit = edImporteExit
-      end
-      object eddesc: TDBEdit
-        Left = 400
-        Top = 65
-        Width = 48
-        Height = 21
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        Color = 15527129
-        DataField = 'PORC_DESCUENTO'
-        DataSource = DS_DetalleFactura
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 2
-        OnExit = edDescExit
-      end
-      object edCant: TDBEdit
-        Left = 80
-        Top = 65
-        Width = 48
-        Height = 21
-        BevelInner = bvNone
-        BevelOuter = bvNone
-        Color = 15527129
-        DataField = 'CANTIDAD'
-        DataSource = DS_DetalleFactura
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        TabOrder = 3
-        OnExit = edCantidadExit
-      end
-      object PCargaProdBotones: TPanel
-        Left = 1
-        Top = 254
-        Width = 686
-        Height = 33
-        Align = alBottom
-        BevelInner = bvLowered
-        BevelOuter = bvLowered
-        TabOrder = 4
-        object lblReconocimVenta: TLabel
-          Left = 2
-          Top = 2
-          Width = 682
-          Height = 29
-          Align = alClient
-          Alignment = taCenter
-          AutoSize = False
-          Caption = ' Total Venta: $ 0.00 '
-          Color = 12648448
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -15
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-        object btnProdAceptar: TButton
-          Left = 22
-          Top = 7
-          Width = 75
-          Height = 19
-          Caption = 'Aceptar'
-          TabOrder = 0
-          OnClick = btnAceptarProdClick
-        end
-        object btnProdCancelar: TButton
-          Left = 598
-          Top = 7
-          Width = 75
-          Height = 19
-          Cancel = True
-          Caption = 'Cancelar'
-          TabOrder = 1
-          OnClick = btnCancelarProdClick
-        end
-      end
-    end
-    object PCargaProdPlanes: TPanel
-      Left = 68
-      Top = 55
-      Width = 579
-      Height = 216
-      BevelInner = bvRaised
-      BevelOuter = bvNone
-      BevelWidth = 3
-      TabOrder = 0
-      object Label3: TLabel
-        Left = 3
-        Top = 3
-        Width = 573
-        Height = 16
-        Align = alTop
-        Alignment = taCenter
-        AutoSize = False
-        Caption = ' Planes / Obras Sociales Disponibles'
-        Color = 12648448
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWhite
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentColor = False
-        ParentFont = False
-        Layout = tlBottom
-      end
-      object DBGrid2: TDBGrid
-        Left = 3
-        Top = 19
-        Width = 573
-        Height = 161
-        Align = alClient
-        Color = 15527129
-        DataSource = DS_planes_productos
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = ANSI_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        Columns = <
-          item
-            Color = 10485759
-            Expanded = False
-            FieldName = 'MONTO_RECONOCIDO'
-            Title.Caption = 'Importe'
-            Width = 113
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DETALLE'
-            Title.Caption = 'Detalle Plan'
-            Width = 700
-            Visible = True
-          end>
-      end
-      object POssBotones: TPanel
-        Left = 3
-        Top = 180
-        Width = 573
-        Height = 33
-        Align = alBottom
-        BevelInner = bvLowered
-        BevelOuter = bvLowered
-        TabOrder = 1
-        object Label4: TLabel
-          Left = 2
-          Top = 2
-          Width = 569
-          Height = 29
-          Align = alClient
-          Alignment = taCenter
-          AutoSize = False
-          Color = 12648448
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clWhite
-          Font.Height = -15
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentColor = False
-          ParentFont = False
-          Transparent = False
-          Layout = tlCenter
-        end
-        object btAceptarOss: TButton
-          Left = 22
-          Top = 7
-          Width = 75
-          Height = 19
-          Caption = 'Aceptar'
-          TabOrder = 0
-          OnClick = btAceptarOssClick
-        end
-        object btCancelarOss: TButton
-          Left = 481
-          Top = 7
-          Width = 75
-          Height = 19
-          Cancel = True
-          Caption = 'Cancelar'
-          TabOrder = 1
-          OnClick = btCancelarOssClick
-        end
-      end
-    end
-  end
   object PABM_FormaPago: TPanel
     Left = 101
     Top = 409
@@ -3647,15 +3235,15 @@ object FOP_Cajero: TFOP_Cajero
   object PanelContenedorDerecha: TPanel
     Left = 88
     Top = 0
-    Width = 1088
-    Height = 646
+    Width = 1080
+    Height = 635
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 2
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 1086
+      Width = 1078
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -3679,7 +3267,7 @@ object FOP_Cajero: TFOP_Cajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 746
+        Left = 738
         Top = 1
         Width = 339
         Height = 28
@@ -3700,7 +3288,7 @@ object FOP_Cajero: TFOP_Cajero
       object PanelCambiarFecha: TPanel
         Left = 345
         Top = 1
-        Width = 401
+        Width = 393
         Height = 28
         Align = alClient
         BevelOuter = bvNone
@@ -3730,15 +3318,15 @@ object FOP_Cajero: TFOP_Cajero
     object PanelProductosYFPago: TPanel
       Left = 1
       Top = 190
-      Width = 1086
-      Height = 455
+      Width = 1078
+      Height = 444
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 1
       object Label11: TLabel
         Left = 1
         Top = 1
-        Width = 1084
+        Width = 1076
         Height = 13
         Align = alTop
         Alignment = taCenter
@@ -3757,8 +3345,8 @@ object FOP_Cajero: TFOP_Cajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 14
-        Width = 1084
-        Height = 280
+        Width = 1076
+        Height = 269
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3772,8 +3360,8 @@ object FOP_Cajero: TFOP_Cajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 1082
-          Height = 195
+          Width = 1074
+          Height = 184
           Align = alClient
           Color = 15527129
           DataSource = DS_DetalleFactura
@@ -3854,8 +3442,8 @@ object FOP_Cajero: TFOP_Cajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 196
-          Width = 1082
+          Top = 185
+          Width = 1074
           Height = 83
           Align = alBottom
           BevelOuter = bvLowered
@@ -3863,7 +3451,7 @@ object FOP_Cajero: TFOP_Cajero
           object Label36: TLabel
             Left = 1
             Top = 66
-            Width = 1080
+            Width = 1072
             Height = 16
             Align = alBottom
             Alignment = taCenter
@@ -3882,7 +3470,7 @@ object FOP_Cajero: TFOP_Cajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 1
-            Width = 1080
+            Width = 1072
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3898,7 +3486,7 @@ object FOP_Cajero: TFOP_Cajero
           object lblMontoProds: TLabel
             Left = 1
             Top = 16
-            Width = 1080
+            Width = 1072
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3923,7 +3511,7 @@ object FOP_Cajero: TFOP_Cajero
           object Panel7: TPanel
             Left = 1
             Top = 40
-            Width = 1080
+            Width = 1072
             Height = 26
             Align = alBottom
             BevelInner = bvLowered
@@ -3932,7 +3520,7 @@ object FOP_Cajero: TFOP_Cajero
             object lblDctoMutual: TLabel
               Left = 2
               Top = 2
-              Width = 1076
+              Width = 1068
               Height = 22
               Align = alClient
               Alignment = taRightJustify
@@ -3953,8 +3541,8 @@ object FOP_Cajero: TFOP_Cajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 294
-        Width = 1084
+        Top = 283
+        Width = 1076
         Height = 89
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -3962,7 +3550,7 @@ object FOP_Cajero: TFOP_Cajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 1082
+          Width = 1074
           Height = 87
           Align = alClient
           Color = 15527129
@@ -4058,8 +3646,8 @@ object FOP_Cajero: TFOP_Cajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 383
-        Width = 1084
+        Top = 372
+        Width = 1076
         Height = 71
         Align = alBottom
         BevelOuter = bvLowered
@@ -4067,7 +3655,7 @@ object FOP_Cajero: TFOP_Cajero
         object lblMaxVenta: TLabel
           Left = 1
           Top = 1
-          Width = 1082
+          Width = 1074
           Height = 20
           Align = alTop
           Alignment = taCenter
@@ -4094,7 +3682,7 @@ object FOP_Cajero: TFOP_Cajero
         object Panel1: TPanel
           Left = 1
           Top = 29
-          Width = 1082
+          Width = 1074
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
@@ -4102,7 +3690,7 @@ object FOP_Cajero: TFOP_Cajero
           object lblTotAPagar: TLabel
             Left = 152
             Top = 0
-            Width = 930
+            Width = 922
             Height = 41
             Align = alClient
             Alignment = taRightJustify
@@ -4144,14 +3732,14 @@ object FOP_Cajero: TFOP_Cajero
     object PanelDetalles: TPanel
       Left = 1
       Top = 31
-      Width = 1086
+      Width = 1078
       Height = 159
       Align = alTop
       TabOrder = 2
       object PanelDetallePreventa: TPanel
         Left = 1
         Top = 76
-        Width = 1084
+        Width = 1076
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
@@ -4159,7 +3747,7 @@ object FOP_Cajero: TFOP_Cajero
         object Label54: TLabel
           Left = 0
           Top = 0
-          Width = 1084
+          Width = 1076
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4260,7 +3848,7 @@ object FOP_Cajero: TFOP_Cajero
       object PanelCabeceraFactura: TPanel
         Left = 526
         Top = 1
-        Width = 559
+        Width = 551
         Height = 75
         Align = alClient
         BevelOuter = bvLowered
@@ -4274,7 +3862,7 @@ object FOP_Cajero: TFOP_Cajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 557
+          Width = 549
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4305,7 +3893,7 @@ object FOP_Cajero: TFOP_Cajero
           ParentFont = False
         end
         object Label16: TLabel
-          Left = 141
+          Left = 145
           Top = 21
           Width = 73
           Height = 13
@@ -4467,7 +4055,7 @@ object FOP_Cajero: TFOP_Cajero
       object PanelDetalleOrdenOptica: TPanel
         Left = 1
         Top = 117
-        Width = 1084
+        Width = 1076
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
@@ -4475,7 +4063,7 @@ object FOP_Cajero: TFOP_Cajero
         object Label14: TLabel
           Left = 0
           Top = 0
-          Width = 1084
+          Width = 1076
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4848,6 +4436,419 @@ object FOP_Cajero: TFOP_Cajero
       end
     end
   end
+  object PCargaProd: TPanel
+    Left = 248
+    Top = 152
+    Width = 700
+    Height = 300
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    BevelWidth = 3
+    TabOrder = 8
+    Visible = False
+    object PCargaProdDetalle: TPanel
+      Left = 6
+      Top = 6
+      Width = 688
+      Height = 288
+      Align = alClient
+      TabOrder = 1
+      object Bevel2: TBevel
+        Left = 11
+        Top = 58
+        Width = 654
+        Height = 34
+      end
+      object Label1: TLabel
+        Left = 1
+        Top = 99
+        Width = 686
+        Height = 16
+        Align = alBottom
+        AutoSize = False
+        Caption = '  Reconocimiento Productos'
+        Color = 12648448
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object Label76: TLabel
+        Left = 344
+        Top = 69
+        Width = 53
+        Height = 13
+        Caption = '% Desc.:'
+      end
+      object Label75: TLabel
+        Left = 472
+        Top = 69
+        Width = 71
+        Height = 13
+        Caption = 'Monto Total:'
+      end
+      object Label72: TLabel
+        Left = 21
+        Top = 69
+        Width = 56
+        Height = 13
+        Caption = 'Cantidad:'
+      end
+      object Label71: TLabel
+        Left = 11
+        Top = 23
+        Width = 71
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Descripci'#243'n:'
+      end
+      object Label70: TLabel
+        Left = 151
+        Top = 69
+        Width = 88
+        Height = 13
+        Alignment = taRightJustify
+        Caption = 'Precio Unitario:'
+      end
+      object DBText3: TDBText
+        Left = 91
+        Top = 23
+        Width = 566
+        Height = 29
+        Color = 15527129
+        DataField = 'producto'
+        DataSource = DS_DetalleFactura
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Transparent = True
+        WordWrap = True
+      end
+      object DBText2: TDBText
+        Left = 546
+        Top = 69
+        Width = 106
+        Height = 13
+        DataField = 'IMPORTE_VENTA'
+        DataSource = DS_DetalleFactura
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = True
+      end
+      object Label10: TLabel
+        Left = 1
+        Top = 1
+        Width = 686
+        Height = 16
+        Align = alTop
+        Alignment = taCenter
+        AutoSize = False
+        Caption = 'Carga de Producto/Servicio'
+        Color = 12648448
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -12
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object lblReconocimTot: TLabel
+        Left = 1
+        Top = 239
+        Width = 686
+        Height = 15
+        Align = alBottom
+        Alignment = taRightJustify
+        AutoSize = False
+        Caption = 'Total Reconocido: $0.00 '
+        Color = 12648448
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Layout = tlCenter
+      end
+      object DBGridListadoOS: TDBGrid
+        Left = 1
+        Top = 115
+        Width = 686
+        Height = 124
+        Align = alBottom
+        Color = 15527129
+        DataSource = DS_Reconocimientos
+        Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        PopupMenu = PopupReconocim
+        TabOrder = 0
+        TitleFont.Charset = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'detalle'
+            ReadOnly = True
+            Title.Caption = 'Detalle Plan'
+            Width = 454
+            Visible = True
+          end
+          item
+            Color = 10485759
+            Expanded = False
+            FieldName = 'monto_reconocido'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            Title.Caption = 'Importe'
+            Width = 61
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'observaciones'
+            Title.Caption = 'Observaciones'
+            Width = 495
+            Visible = True
+          end>
+      end
+      object edImporteUnitario: TDBEdit
+        Left = 242
+        Top = 65
+        Width = 87
+        Height = 21
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        Color = 15527129
+        DataField = 'IMPORTE_UNITARIO'
+        DataSource = DS_DetalleFactura
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+        OnExit = edImporteExit
+      end
+      object eddesc: TDBEdit
+        Left = 400
+        Top = 65
+        Width = 48
+        Height = 21
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        Color = 15527129
+        DataField = 'PORC_DESCUENTO'
+        DataSource = DS_DetalleFactura
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 2
+        OnExit = edDescExit
+      end
+      object edCant: TDBEdit
+        Left = 80
+        Top = 65
+        Width = 48
+        Height = 21
+        BevelInner = bvNone
+        BevelOuter = bvNone
+        Color = 15527129
+        DataField = 'CANTIDAD'
+        DataSource = DS_DetalleFactura
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 3
+        OnExit = edCantidadExit
+      end
+      object PCargaProdBotones: TPanel
+        Left = 1
+        Top = 254
+        Width = 686
+        Height = 33
+        Align = alBottom
+        BevelInner = bvLowered
+        BevelOuter = bvLowered
+        TabOrder = 4
+        object lblReconocimVenta: TLabel
+          Left = 2
+          Top = 2
+          Width = 682
+          Height = 29
+          Align = alClient
+          Alignment = taCenter
+          AutoSize = False
+          Caption = ' Total Venta: $ 0.00 '
+          Color = 12648448
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object btnProdAceptar: TButton
+          Left = 22
+          Top = 7
+          Width = 75
+          Height = 19
+          Caption = 'Aceptar'
+          TabOrder = 0
+          OnClick = btnAceptarProdClick
+        end
+        object btnProdCancelar: TButton
+          Left = 598
+          Top = 7
+          Width = 75
+          Height = 19
+          Cancel = True
+          Caption = 'Cancelar'
+          TabOrder = 1
+          OnClick = btnCancelarProdClick
+        end
+      end
+    end
+    object PCargaProdPlanes: TPanel
+      Left = 68
+      Top = 55
+      Width = 579
+      Height = 216
+      BevelInner = bvRaised
+      BevelOuter = bvNone
+      BevelWidth = 3
+      TabOrder = 0
+      Visible = False
+      object Label3: TLabel
+        Left = 3
+        Top = 3
+        Width = 573
+        Height = 16
+        Align = alTop
+        Alignment = taCenter
+        AutoSize = False
+        Caption = ' Planes / Obras Sociales Disponibles'
+        Color = 12648448
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWhite
+        Font.Height = -11
+        Font.Name = 'Verdana'
+        Font.Style = [fsBold]
+        ParentColor = False
+        ParentFont = False
+        Layout = tlBottom
+      end
+      object DBGrid2: TDBGrid
+        Left = 3
+        Top = 19
+        Width = 573
+        Height = 161
+        Align = alClient
+        Color = 15527129
+        DataSource = DS_planes_productos
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = ANSI_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        Columns = <
+          item
+            Color = 10485759
+            Expanded = False
+            FieldName = 'MONTO_RECONOCIDO'
+            Title.Caption = 'Importe'
+            Width = 113
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DETALLE'
+            Title.Caption = 'Detalle Plan'
+            Width = 700
+            Visible = True
+          end>
+      end
+      object POssBotones: TPanel
+        Left = 3
+        Top = 180
+        Width = 573
+        Height = 33
+        Align = alBottom
+        BevelInner = bvLowered
+        BevelOuter = bvLowered
+        TabOrder = 1
+        object Label4: TLabel
+          Left = 2
+          Top = 2
+          Width = 569
+          Height = 29
+          Align = alClient
+          Alignment = taCenter
+          AutoSize = False
+          Color = 12648448
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clWhite
+          Font.Height = -15
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentColor = False
+          ParentFont = False
+          Transparent = False
+          Layout = tlCenter
+        end
+        object btAceptarOss: TButton
+          Left = 22
+          Top = 7
+          Width = 75
+          Height = 19
+          Caption = 'Aceptar'
+          TabOrder = 0
+          OnClick = btAceptarOssClick
+        end
+        object btCancelarOss: TButton
+          Left = 481
+          Top = 7
+          Width = 75
+          Height = 19
+          Cancel = True
+          Caption = 'Cancelar'
+          TabOrder = 1
+          OnClick = btCancelarOssClick
+        end
+      end
+    end
+  end
   object ZQ_Comprobante_FormaPago: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
@@ -5120,7 +5121,7 @@ object FOP_Cajero: TFOP_Cajero
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -7999,9 +8000,6 @@ object FOP_Cajero: TFOP_Cajero
     object ZQ_PersonasDESCUENTO_ESPECIAL: TFloatField
       FieldName = 'DESCUENTO_ESPECIAL'
     end
-    object ZQ_PersonasCODIGO_CORTO: TIntegerField
-      FieldName = 'CODIGO_CORTO'
-    end
     object ZQ_PersonasPROV: TStringField
       FieldName = 'PROV'
       Size = 50
@@ -8019,6 +8017,24 @@ object FOP_Cajero: TFOP_Cajero
     end
     object ZQ_PersonasCOEFIVA: TFloatField
       FieldName = 'COEFIVA'
+    end
+    object ZQ_PersonasCODIGO_CORTO: TStringField
+      FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_PersonasCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_PersonasCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 10
+    end
+    object ZQ_PersonasIMPORTADO: TStringField
+      FieldName = 'IMPORTADO'
+      Size = 1
+    end
+    object ZQ_PersonasNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
     end
   end
   object DS_Personas: TDataSource
@@ -8075,7 +8091,7 @@ object FOP_Cajero: TFOP_Cajero
         ParamType = ptResult
       end>
     StoredProcName = 'SP_GEN_COMPROBANTE_ID'
-    Left = 497
+    Left = 481
     Top = 289
     ParamData = <
       item
@@ -9442,8 +9458,10 @@ object FOP_Cajero: TFOP_Cajero
         '00))as secc,'
       '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
       
-        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
-        #39#39'),'#39#39')||'
+        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - '#39'||coalesce(ma.nombre_ma' +
+        'rca,'#39#39')||'#39' - '#39'||a.descripcion||'#39' - '#39'||ta.descripcion||'
+      '       '#39' - M: '#39'||coalesce(m.medida,'#39#39'),'#39#39')||'
+      ''
       '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
       
         '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39'))as varchar(200' +
@@ -9458,9 +9476,13 @@ object FOP_Cajero: TFOP_Cajero
       'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'join configuracion c on (c.id_sucursal=su.id_sucursal)'
       'left join medida m on (pr.id_medida=m.id_medida)'
+      'left join marca ma on (pc.id_marca=ma.id_marca)'
+      'left join articulo a on (pc.id_articulo=a.id_articulo)'
+      
+        'left join tipo_articulo ta on (a.id_tipo_articulo=ta.id_tipo_art' +
+        'iculo)'
       'where (ps.punto_salida='#39'S'#39')and(pc.baja<>'#39'S'#39')'
-      'order by 3'
-      '')
+      'order by 3')
     CampoBuscar = 'posicSucursal'
     CampoBuscar2 = 'secc'
     CampoClave = 'id_stock_producto'
@@ -9470,7 +9492,7 @@ object FOP_Cajero: TFOP_Cajero
     BuscarDoble = True
     ColorGrilla = 14606012
     AnchoClave = 80
-    AnchoBuscar1 = 3000
+    AnchoBuscar1 = 5000
     AnchoBuscar2 = 1000
     Left = 898
     Top = 293
@@ -9747,6 +9769,28 @@ object FOP_Cajero: TFOP_Cajero
       FieldName = 'NOMBRE'
       ReadOnly = True
       Size = 506
+    end
+  end
+  object ZSP_Comprobante_Detalle: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptOutput
+      end>
+    StoredProcName = 'SP_GEN_COMPROBANTE_DETALLE_ID'
+    Left = 537
+    Top = 281
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'ID'
+        ParamType = ptOutput
+      end>
+    object ZSP_Comprobante_DetalleID: TIntegerField
+      FieldName = 'ID'
+      ReadOnly = True
     end
   end
 end
