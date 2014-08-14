@@ -790,6 +790,7 @@ type
     procedure popReconocimQuitarClick(Sender: TObject);
     procedure ISDbSumaReconocimSumListChanged(Sender: TObject);
     procedure ZQ_DctoMutualAfterOpen(DataSet: TDataSet);
+    procedure ZQ_DctoMutualAfterClose(DataSet: TDataSet);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -1200,11 +1201,15 @@ begin
     CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente;
     CD_ComprobantePORC_IVA.AsFloat:= ClienteIVA;
 
-    //Selecciono el descuento final segun el plan mutual que tenga
+    // Selecciono el descuento final segun el plan mutual que tenga
     ZQ_DctoMutual.close;
     ZQ_DctoMutual.ParamByName('idPers').AsInteger:=cliente;
     dm.ISModelo.abrir(ZQ_DctoMutual);
 
+    if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
+       lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
+    else
+       lblDctoMutual.Caption:='';
   end;
   vsel2.Close;
 end;
@@ -1494,10 +1499,7 @@ begin
   lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);
   lblMontoProds.Caption:= 'Total Productos/Servicios: ' + FormatFloat('$ ##,###,##0.00 ', ISDbSumaDetalleFactura.SumCollection[0].SumValue);
   lblTotAPagar.Caption:= 'Total Venta: ' + FormatFloat('$ ##,###,##0.00 ', 0);
-  if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
-     lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
-  else
-  lblDctoMutual.Caption:='';
+  
 
   modoCargaPrevia:= False;
   modoCargaOrden:= false;
@@ -1511,18 +1513,18 @@ end;
 
 procedure TFOP_Cajero.cargarClientePorDefecto();
 begin
-  // Cargo Consumidor Final por defecto Id=0
-  ZQ_Personas.Locate('id_persona', 0, []);
-  Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
-  IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
-  ClienteIVA:= ZQ_PersonasCOEFIVA.AsFloat;
-  descCliente:= ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat * 100;
-
-  CD_Comprobante.Edit;
-  CD_ComprobanteID_CLIENTE.AsInteger:= Cliente;
-  CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
-  CD_ComprobantePORC_IVA.AsFloat:= ClienteIVA;
-  CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente / 100;
+//  // Cargo Consumidor Final por defecto Id=0
+//  ZQ_Personas.Locate('id_persona', 0, []);
+//  Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
+//  IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
+//  ClienteIVA:= ZQ_PersonasCOEFIVA.AsFloat;
+//  descCliente:= ZQ_PersonasDESCUENTO_ESPECIAL.AsFloat * 100;
+//
+//  CD_Comprobante.Edit;
+//  CD_ComprobanteID_CLIENTE.AsInteger:= Cliente;
+//  CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
+//  CD_ComprobantePORC_IVA.AsFloat:= ClienteIVA;
+//  CD_ComprobantePORC_DESCUENTO.AsFloat:= descCliente / 100;
 end;
 
 
@@ -1937,8 +1939,9 @@ begin
         grupoVertical.Enabled:= true;
         LimpiarCodigo();
         crearComprobante();
-        cargarClientePorDefecto();
 
+        cargarClientePorDefecto();
+        ZQ_DctoMutual.close;
         // Mantengo el vendedor dpes de una venta
         if not (borrarVendedor) then
           IdVendedor:= vendedor;
@@ -3325,6 +3328,11 @@ begin
     lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
   else
     lblDctoMutual.Caption:='';
+end;
+
+procedure TFOP_Cajero.ZQ_DctoMutualAfterClose(DataSet: TDataSet);
+begin
+  lblDctoMutual.Caption:='';
 end;
 
 end.
