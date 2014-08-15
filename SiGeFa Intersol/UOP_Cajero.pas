@@ -691,6 +691,11 @@ type
     ZQ_PersonasNRO_AFILIADO: TStringField;
     ZSP_Comprobante_Detalle: TZStoredProc;
     ZSP_Comprobante_DetalleID: TIntegerField;
+    ZQ_ReconocMutual: TZQuery;
+    ZQ_ReconocMutualID_RECONOC_MUTUAL: TIntegerField;
+    ZQ_ReconocMutualMONTO_RECONOCIDO: TFloatField;
+    ZQ_ReconocMutualID_OS: TIntegerField;
+    ZQ_ReconocMutualID_COMPROBANTE: TIntegerField;
     procedure btsalirClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
     procedure FormCreate(Sender: TObject);
@@ -1856,7 +1861,7 @@ begin
   //Hacer las validaciones correspondientes
 
   if not (dm.ismodelo.verificar_transaccion(abmComprobante)) then
-    if dm.ismodelo.iniciar_transaccion(abmComprobante, [ZQ_Comprobante, ZQ_Comprobante_FormaPago, ZQ_ComprobanteDetalle, ZQ_ComprobPreventa, ZQ_Optica_Orden,ZQ_ReconocimOSS]) then
+    if dm.ismodelo.iniciar_transaccion(abmComprobante, [ZQ_Comprobante, ZQ_Comprobante_FormaPago, ZQ_ComprobanteDetalle, ZQ_ComprobPreventa, ZQ_Optica_Orden,ZQ_ReconocimOSS,ZQ_ReconocMutual]) then
     begin
       CD_Comprobante.Post;
       ZQ_Comprobante.Append;
@@ -1892,6 +1897,15 @@ begin
       ZQ_ComprobanteFECHA_IMPRESA.Clear;
       ZQ_ComprobanteFECHA_VENCIMIENTO.Clear;
       ZQ_Comprobante.Post;
+
+
+      //Grabo el descuento por mutual si existe
+      ZQ_ReconocMutual.Append;
+      ZQ_ReconocMutualMONTO_RECONOCIDO.AsFloat:=dctoMutual;
+      ZQ_ReconocMutualID_OS.AsInteger:=ZQ_DctoMutualID_OS.AsInteger;
+      ZQ_ReconocMutualID_COMPROBANTE.AsInteger:=comprobante;
+      ZQ_ReconocMutual.Post;
+
 
       if modoCargaPrevia then
       begin
@@ -2579,6 +2593,9 @@ begin
   dm.ismodelo.abrir(ZQ_FormasPago);
   dm.ismodelo.abrir(ZQ_DetalleProd);
   dm.ismodelo.abrir(ZQ_Cuentas);
+
+  ZQ_DctoMutual.Close;
+
   Cliente:= -1;
   IdVendedor:= -1;
   descCliente:= 0;
