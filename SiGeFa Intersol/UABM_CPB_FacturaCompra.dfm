@@ -1,6 +1,6 @@
 object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
-  Left = 63
-  Top = 154
+  Left = 151
+  Top = 60
   Width = 1223
   Height = 772
   Caption = 'ABM Factura Compra'
@@ -26,16 +26,16 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 1207
-    Height = 663
+    Width = 1215
+    Height = 674
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 1207
-      Height = 663
+      Width = 1215
+      Height = 674
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -49,12 +49,12 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 1197
+        Width = 1205
         Height = 177
         Align = alTop
         TabOrder = 0
         DesignSize = (
-          1197
+          1205
           177)
         object btnBuscarEmpresa: TSpeedButton
           Left = 7
@@ -478,8 +478,8 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
           Top = 96
           Width = 105
           Height = 21
-          Date = 41834.437800925920000000
-          Time = 41834.437800925920000000
+          Date = 41834.437800925930000000
+          Time = 41834.437800925930000000
           TabOrder = 4
           DataField = 'FECHA'
           DataSource = DS_Comprobante
@@ -499,14 +499,14 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       object PanelEditar_Producto: TPanel
         Left = 5
         Top = 182
-        Width = 1197
-        Height = 476
+        Width = 1205
+        Height = 487
         Align = alClient
         TabOrder = 1
         object Label6: TLabel
           Left = 1
           Top = 1
-          Width = 1195
+          Width = 1203
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -522,14 +522,14 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         end
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
-          Top = 434
-          Width = 1195
+          Top = 445
+          Width = 1203
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            1195
+            1203
             41)
           object Label25: TLabel
             Left = 657
@@ -684,8 +684,8 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         object DBGridEditar_Producto: TDBGrid
           Left = 164
           Top = 14
-          Width = 1032
-          Height = 420
+          Width = 1040
+          Height = 431
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbProducto
@@ -812,13 +812,13 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
           Left = 1
           Top = 14
           Width = 163
-          Height = 420
+          Height = 431
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
             163
-            420)
+            431)
           object DBTxtCodBarra: TDBText
             Left = 3
             Top = 120
@@ -1031,7 +1031,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             50.270833333333330000
             674.687500000000000000
             124.354166666666700000
-            550.333333333333300000)
+            550.333333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -1061,8 +1061,8 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            759.354166666666700000
-            68.791666666666670000
+            759.354166666666800000
+            68.791666666666680000
             378.354166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -1466,7 +1466,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1516,7 +1516,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -1564,7 +1564,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -2268,8 +2268,8 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 1207
-      Height = 663
+      Width = 1215
+      Height = 674
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -2281,25 +2281,25 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 671
+        Left = 679
         Top = 5
         Width = 6
-        Height = 653
+        Height = 664
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 666
-        Height = 653
+        Width = 674
+        Height = 664
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 666
-          Height = 653
+          Width = 674
+          Height = 664
           Align = alClient
           Color = 14606012
           DataSource = DS_VerCpb
@@ -2387,10 +2387,10 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         end
       end
       object PanelCpbActual: TPanel
-        Left = 677
+        Left = 685
         Top = 5
         Width = 525
-        Height = 653
+        Height = 664
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -2399,7 +2399,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
           Left = 0
           Top = 0
           Width = 525
-          Height = 491
+          Height = 502
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -2407,7 +2407,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
             Left = 0
             Top = 0
             Width = 525
-            Height = 353
+            Height = 364
             Align = alClient
             Color = 14606012
             DataSource = DS_VerCpb_Producto
@@ -2464,7 +2464,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
           end
           object PanelCpbActual_ProductoDetalle: TPanel
             Left = 0
-            Top = 353
+            Top = 364
             Width = 525
             Height = 138
             Align = alBottom
@@ -2733,7 +2733,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 491
+          Top = 502
           Width = 525
           Height = 162
           Align = alBottom
@@ -2971,7 +2971,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 1207
+    Width = 1215
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -3009,7 +3009,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 1097
+      Left = 1105
       Top = 1
       Width = 109
       Height = 17
@@ -3023,7 +3023,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 988
+      Left = 996
       Top = 1
       Width = 109
       Height = 17
@@ -3040,7 +3040,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -6770,6 +6770,7 @@ object FABM_CPB_FacturaCompra: TFABM_CPB_FacturaCompra
     SQL_Orden.Strings = (
       'order by cpb.fecha desc')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 29
     Top = 320
   end

@@ -1,6 +1,6 @@
 object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
-  Left = 252
-  Top = 457
+  Left = 336
+  Top = 189
   Width = 1030
   Height = 500
   Caption = 'Libro IVA'
@@ -21,8 +21,8 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
   object tabs: TPageControl
     Left = 0
     Top = 0
-    Width = 1014
-    Height = 410
+    Width = 1022
+    Height = 421
     ActivePage = tabLibroVentas
     Align = alClient
     TabOrder = 4
@@ -30,8 +30,8 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
       Caption = 'Libro IVA Ventas'
       object lblTotalComprobantes: TLabel
         Left = 0
-        Top = 361
-        Width = 1006
+        Top = 372
+        Width = 1014
         Height = 21
         Align = alBottom
         Alignment = taRightJustify
@@ -51,8 +51,8 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
       object grillaVentas: TDBGrid
         Left = 0
         Top = 0
-        Width = 1006
-        Height = 361
+        Width = 1014
+        Height = 372
         Align = alClient
         Color = 14606012
         DataSource = DS_Libro_IVA_Ventas
@@ -175,7 +175,7 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1010,6 +1010,7 @@ object FEstadisticasLibroIVA: TFEstadisticasLibroIVA
         'group by c.fecha_cobrada,tc.nombre_tipo_cpb,c.numero_cpb,c.codig' +
         'o,p.nombre,p.cuit_cuil,c.porc_iva,ti.abreviatura,ti.letra')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 68
     Top = 160
   end

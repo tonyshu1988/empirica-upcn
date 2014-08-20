@@ -129,7 +129,6 @@ type
     ZQ_ClienteCOD_IVA: TStringField;
     ZQ_ClienteNOMBRE_TIPO_DOC: TStringField;
     DBText7: TDBText;
-    ZQ_ClienteCODIGO_CORTO: TIntegerField;
     Label2: TLabel;
     Label3: TLabel;
     DBText8: TDBText;
@@ -329,6 +328,11 @@ type
     ISBuscar: TISBusquedaAvanzada;
     ISDBDateEmision: TISDBDateTimePicker;
     ISDBDateVencimiento: TISDBDateTimePicker;
+    ZQ_ClienteCODIGO_CORTO: TStringField;
+    ZQ_ClienteCODIGO_BARRA: TStringField;
+    ZQ_ClienteCLAVE: TStringField;
+    ZQ_ClienteIMPORTADO: TStringField;
+    ZQ_ClienteNRO_AFILIADO: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -700,7 +704,7 @@ var
   cliente, empresa: integer;
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-  if ((ZQ_VerCpb.IsEmpty) or (estado = ESTADO_ANULADO)) then
+  if ((ZQ_VerCpb.IsEmpty) or (estado <> ESTADO_CONFIRMADO)) then
     exit;
 
   cliente:= -1;

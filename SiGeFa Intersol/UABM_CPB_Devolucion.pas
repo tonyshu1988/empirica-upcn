@@ -525,6 +525,15 @@ type
     ZQ_ClienteCLAVE: TStringField;
     ZQ_ClienteIMPORTADO: TStringField;
     ZQ_ClienteNRO_AFILIADO: TStringField;
+    ZQ_ComprobanteIMAGEN: TBlobField;
+    ZQ_ComprobanteINSERT_MANUAL: TStringField;
+    ZQ_ComprobanteID_POSICION_SUC_DESTINO: TIntegerField;
+    ZQ_ComprobanteID_PREVENTA: TIntegerField;
+    ZQ_ComprobanteID_OBRA_SOCIAL: TIntegerField;
+    CD_Devolucionimporte_if: TFloatField;
+    CD_Devolucionimporte_if_siniva: TFloatField;
+    CD_Devolucionimporte_iva_if: TFloatField;
+    CD_Devolucionimporte_original: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -972,7 +981,7 @@ begin
     end;
 
 
-//NO GUARDO MAS EL PV Y NUMERO PORQUE SE TIENE QUE IMPRIMIR POR LA TICKEADORA
+// NO GUARDO MAS EL PV Y NUMERO PORQUE SE TIENE QUE IMPRIMIR POR LA TICKEADORA
 //  if ZQ_Comprobante.State = dsInsert then //si estoy dando de alta un comprobante
 //  begin
 //    //busco de nuevo cual es el ultimo numero
@@ -998,6 +1007,15 @@ begin
   ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= abs(saldoFormaCobroPago);
   ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= abs(saldoFormaCobroPago);
   ZQ_ComprobanteID_TIPO_CPB.AsInteger:= tipoComprobante;
+
+
+  ZQ_ComprobanteOBSERVACION.Value:= CD_ComprobanteOBSERVACION.Value;
+      ZQ_ComprobanteBASE_IMPONIBLE.Value:= CD_ComprobanteBASE_IMPONIBLE.Value;
+      ZQ_ComprobanteSALDO.AsFloat:= CD_ComprobanteSALDO.Value;
+      ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= CD_ComprobanteIMPORTE_TOTAL.Value;
+      ZQ_ComprobantePORC_IVA.AsFloat:= CD_ComprobantePORC_IVA.Value;
+      ZQ_ComprobanteIMPORTE_IVA.AsFloat:= CD_ComprobanteIMPORTE_IVA.AsFloat;
+
 
   try
     if DM.ISModelo.finalizar_transaccion(transaccion_ABM) then
@@ -1137,7 +1155,7 @@ var
   cliente, empresa: integer;
 begin
   estado:= ZQ_VerCpbID_COMP_ESTADO.AsInteger;
-  if ((ZQ_VerCpb.IsEmpty) or (estado = ESTADO_ANULADO)) then
+  if ((ZQ_VerCpb.IsEmpty) or (estado <> ESTADO_CONFIRMADO)) then
     exit;
 
   cliente:= -1;
@@ -1149,8 +1167,9 @@ begin
 
   if not Assigned(FImpresion_Comprobantes) then
     FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
-  FImpresion_Comprobantes.configNotaCredito;
+
   FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, cliente, empresa, -1, false);
+  FImpresion_Comprobantes.configNotaCredito;
   FImpresion_Comprobantes.imprimir;
 end;
 
@@ -1574,6 +1593,7 @@ begin
     client.FieldByName('coefGanancia').AsFloat:= vselProducto.ZQ_ProductoCOEF_GANANCIA.AsFloat;
     client.FieldByName('coefDescuento').AsFloat:= vselProducto.ZQ_ProductoCOEF_DESCUENTO.AsFloat;
     client.FieldByName('impuestoIVA').AsFloat:= vselProducto.ZQ_ProductoIMPUESTO_IVA.AsFloat;
+
     client.Post;
 
     query.Append;

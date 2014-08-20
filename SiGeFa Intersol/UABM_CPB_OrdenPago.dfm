@@ -26,16 +26,16 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 923
-    Height = 477
+    Width = 931
+    Height = 488
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 923
-      Height = 477
+      Width = 931
+      Height = 488
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -47,25 +47,25 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 387
+        Left = 395
         Top = 5
         Width = 6
-        Height = 467
+        Height = 478
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 382
-        Height = 467
+        Width = 390
+        Height = 478
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 382
-          Height = 467
+          Width = 390
+          Height = 478
           Align = alClient
           Color = 14606012
           DataSource = DS_VerCpb
@@ -151,10 +151,10 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         end
       end
       object PanelCpbActual: TPanel
-        Left = 393
+        Left = 401
         Top = 5
         Width = 525
-        Height = 467
+        Height = 478
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -163,7 +163,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
           Left = 0
           Top = 0
           Width = 525
-          Height = 305
+          Height = 316
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -186,7 +186,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
           end
           object Label25: TLabel
             Left = 0
-            Top = 104
+            Top = 115
             Width = 525
             Height = 13
             Align = alBottom
@@ -205,7 +205,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
             Left = 0
             Top = 13
             Width = 525
-            Height = 91
+            Height = 102
             Align = alClient
             Color = 14606012
             DataSource = DS_VerCpb_Fpago
@@ -268,7 +268,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
           end
           object DBGridVerFacturas: TDBGrid
             Left = 0
-            Top = 117
+            Top = 128
             Width = 525
             Height = 188
             Align = alBottom
@@ -318,7 +318,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 305
+          Top = 316
           Width = 525
           Height = 162
           Align = alBottom
@@ -490,8 +490,8 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 923
-      Height = 477
+      Width = 931
+      Height = 488
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -505,13 +505,13 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 913
+        Width = 921
         Height = 177
         Align = alTop
         BevelOuter = bvNone
         TabOrder = 0
         DesignSize = (
-          913
+          921
           177)
         object DBTxtCPB_PuntoVenta: TDBText
           Left = 709
@@ -1218,15 +1218,15 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       object PanelEditar_FPago: TPanel
         Left = 5
         Top = 307
-        Width = 913
-        Height = 165
+        Width = 921
+        Height = 176
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 1
         object Label19: TLabel
           Left = 0
           Top = 0
-          Width = 913
+          Width = 921
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -1242,14 +1242,14 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         end
         object PanelEditar_FPagoInfo: TPanel
           Left = 0
-          Top = 137
-          Width = 913
+          Top = 148
+          Width = 921
           Height = 28
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            913
+            921
             28)
           object Label29: TLabel
             Left = 706
@@ -1300,8 +1300,8 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         object DBGridEditar_Fpago: TDBGrid
           Left = 0
           Top = 13
-          Width = 913
-          Height = 124
+          Width = 921
+          Height = 135
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbFormaPago
@@ -1371,7 +1371,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       object PanelFacturas: TPanel
         Left = 5
         Top = 182
-        Width = 913
+        Width = 921
         Height = 125
         Align = alTop
         BevelOuter = bvNone
@@ -1379,7 +1379,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         object Label23: TLabel
           Left = 0
           Top = 0
-          Width = 913
+          Width = 921
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -1439,7 +1439,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
         object PanelFacturasDatos: TPanel
           Left = 65
           Top = 13
-          Width = 848
+          Width = 856
           Height = 112
           Align = alClient
           BevelOuter = bvNone
@@ -1447,13 +1447,13 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
           object PanelFacturasInfo: TPanel
             Left = 0
             Top = 88
-            Width = 848
+            Width = 856
             Height = 24
             Align = alBottom
             BevelOuter = bvNone
             TabOrder = 0
             DesignSize = (
-              848
+              856
               24)
             object Label31: TLabel
               Left = 422
@@ -1529,7 +1529,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
           object DBGridFacturas: TDBGrid
             Left = 0
             Top = 0
-            Width = 848
+            Width = 856
             Height = 88
             Align = alClient
             Color = 14606012
@@ -1672,7 +1672,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 923
+    Width = 931
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1710,7 +1710,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 813
+      Left = 821
       Top = 1
       Width = 109
       Height = 17
@@ -1724,7 +1724,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 704
+      Left = 712
       Top = 1
       Width = 109
       Height = 17
@@ -1741,7 +1741,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4004,8 +4004,23 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
     object ZQ_ClienteNOMBRE_TIPO_DOC: TStringField
       FieldName = 'NOMBRE_TIPO_DOC'
     end
-    object ZQ_ClienteCODIGO_CORTO: TIntegerField
+    object ZQ_ClienteCODIGO_CORTO: TStringField
       FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_ClienteCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ClienteCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 10
+    end
+    object ZQ_ClienteIMPORTADO: TStringField
+      FieldName = 'IMPORTADO'
+      Size = 1
+    end
+    object ZQ_ClienteNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
     end
   end
   object DS_Proveedor: TDataSource
@@ -4955,6 +4970,7 @@ object FABM_CPB_OrdenPago: TFABM_CPB_OrdenPago
     SQL_Orden.Strings = (
       'order by cpb.fecha desc')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 29
     Top = 280
   end
