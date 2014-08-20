@@ -183,8 +183,8 @@ end;
 
 procedure TFBuscarComprobante.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  ZQ_Factura_Venta.Refresh;
-  ZQ_Factura_Compra.Refresh;
+ if ZQ_Factura_Venta.Active then  ZQ_Factura_Venta.Refresh;
+ if ZQ_Factura_Compra.Active then  ZQ_Factura_Compra.Refresh;
 end;
 
 

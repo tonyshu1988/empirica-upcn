@@ -26,16 +26,16 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 894
-    Height = 477
+    Width = 902
+    Height = 488
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 894
-      Height = 477
+      Width = 902
+      Height = 488
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -47,25 +47,25 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 358
+        Left = 366
         Top = 5
         Width = 6
-        Height = 467
+        Height = 478
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 353
-        Height = 467
+        Width = 361
+        Height = 478
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 353
-          Height = 467
+          Width = 361
+          Height = 478
           Align = alClient
           Color = 14606012
           DataSource = DS_VerCpb
@@ -172,10 +172,10 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         end
       end
       object PanelCpbActual: TPanel
-        Left = 364
+        Left = 372
         Top = 5
         Width = 525
-        Height = 467
+        Height = 478
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -184,7 +184,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Left = 0
           Top = 0
           Width = 525
-          Height = 305
+          Height = 316
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -192,7 +192,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
             Left = 0
             Top = 0
             Width = 525
-            Height = 167
+            Height = 178
             Align = alClient
             Color = 14606012
             DataSource = DS_VerCpb_Producto
@@ -273,7 +273,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           end
           object PanelCpbActual_ProductoDetalle: TPanel
             Left = 0
-            Top = 167
+            Top = 178
             Width = 525
             Height = 138
             Align = alBottom
@@ -541,7 +541,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 305
+          Top = 316
           Width = 525
           Height = 162
           Align = alBottom
@@ -702,8 +702,8 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 894
-      Height = 477
+      Width = 902
+      Height = 488
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -717,7 +717,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       object Splitter2: TSplitter
         Left = 5
         Top = 182
-        Width = 884
+        Width = 892
         Height = 3
         Cursor = crVSplit
         Align = alTop
@@ -725,13 +725,13 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 884
+        Width = 892
         Height = 177
         Align = alTop
         Constraints.MinHeight = 177
         TabOrder = 0
         DesignSize = (
-          884
+          892
           177)
         object DBTxtCPB_PuntoVenta: TDBText
           Left = 727
@@ -1225,14 +1225,14 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       object PanelEditar_Producto: TPanel
         Left = 5
         Top = 185
-        Width = 884
-        Height = 287
+        Width = 892
+        Height = 298
         Align = alClient
         TabOrder = 1
         object Label19: TLabel
           Left = 1
           Top = 1
-          Width = 882
+          Width = 890
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -1248,14 +1248,14 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         end
         object PanelEditar_ProductoInfo: TPanel
           Left = 1
-          Top = 245
-          Width = 882
+          Top = 256
+          Width = 890
           Height = 41
           Align = alBottom
           BevelOuter = bvNone
           TabOrder = 1
           DesignSize = (
-            882
+            890
             41)
           object Label25: TLabel
             Left = 338
@@ -1410,8 +1410,8 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         object DBGridEditar_Producto: TDBGrid
           Left = 164
           Top = 14
-          Width = 719
-          Height = 231
+          Width = 727
+          Height = 242
           Align = alClient
           Color = 14606012
           DataSource = DS_CpbProducto
@@ -1520,13 +1520,13 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
           Left = 1
           Top = 14
           Width = 163
-          Height = 231
+          Height = 242
           Align = alLeft
           BevelOuter = bvNone
           TabOrder = 2
           DesignSize = (
             163
-            231)
+            242)
           object DBTxtCodBarra: TDBText
             Left = 3
             Top = 120
@@ -1628,7 +1628,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 894
+    Width = 902
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1666,7 +1666,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 784
+      Left = 792
       Top = 1
       Width = 109
       Height = 17
@@ -1680,7 +1680,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 675
+      Left = 683
       Top = 1
       Width = 109
       Height = 17
@@ -1697,7 +1697,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -3910,8 +3910,23 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
     object ZQ_ClienteNOMBRE_TIPO_DOC: TStringField
       FieldName = 'NOMBRE_TIPO_DOC'
     end
-    object ZQ_ClienteCODIGO_CORTO: TIntegerField
+    object ZQ_ClienteCODIGO_CORTO: TStringField
       FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_ClienteCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ClienteCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 10
+    end
+    object ZQ_ClienteIMPORTADO: TStringField
+      FieldName = 'IMPORTADO'
+      Size = 1
+    end
+    object ZQ_ClienteNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
     end
   end
   object DS_Cliente: TDataSource
@@ -4564,6 +4579,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
     Top = 212
   end
   object ISListadoEntidad: TISListadoSQL
+    Modelo = DM.ISModelo
     CampoBuscar = 'busqueda'
     CampoClave = 'id'
     TituloVentana = 'Buscar'
@@ -4659,6 +4675,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
         ItemIndex = -1
       end>
     CriteriosLocate = <>
+    Modelo = DM.ISModelo
     DataSet = ZQ_VerCpb
     SQL.Strings = (
       'select  cpb.*, suc.nombre as sucursal, cli.nombre as cliente,'
@@ -4690,6 +4707,7 @@ object FABM_CPB_Presupuesto: TFABM_CPB_Presupuesto
     SQL_Orden.Strings = (
       'order by cpb.fecha desc')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 149
     Top = 328
   end

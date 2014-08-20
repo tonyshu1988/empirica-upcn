@@ -26,7 +26,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
   object PanelInfo: TPanel
     Left = 0
     Top = 0
-    Width = 876
+    Width = 884
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -64,7 +64,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       ParentFont = False
     end
     object StaticTxtBaja: TStaticText
-      Left = 766
+      Left = 774
       Top = 1
       Width = 109
       Height = 17
@@ -78,7 +78,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       TabOrder = 0
     end
     object StaticTxtConfirmado: TStaticText
-      Left = 657
+      Left = 665
       Top = 1
       Width = 109
       Height = 17
@@ -95,16 +95,16 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 876
-    Height = 500
+    Width = 884
+    Height = 511
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
     object PanelVer: TPanel
       Left = 0
       Top = 0
-      Width = 876
-      Height = 500
+      Width = 884
+      Height = 511
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -116,25 +116,25 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       ParentFont = False
       TabOrder = 0
       object Splitter1: TSplitter
-        Left = 340
+        Left = 348
         Top = 5
         Width = 6
-        Height = 490
+        Height = 501
         Align = alRight
       end
       object PanelListaCpb: TPanel
         Left = 5
         Top = 5
-        Width = 335
-        Height = 490
+        Width = 343
+        Height = 501
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridListaCpb: TDBGrid
           Left = 0
           Top = 0
-          Width = 335
-          Height = 490
+          Width = 343
+          Height = 501
           Align = alClient
           Color = 14606012
           DataSource = DS_VerCpb
@@ -213,10 +213,10 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
       end
       object PanelCpbActual: TPanel
-        Left = 346
+        Left = 354
         Top = 5
         Width = 525
-        Height = 490
+        Height = 501
         Align = alRight
         BevelOuter = bvNone
         Constraints.MinWidth = 525
@@ -226,7 +226,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           Left = 0
           Top = 0
           Width = 525
-          Height = 228
+          Height = 239
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
@@ -234,7 +234,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
             Left = 0
             Top = 0
             Width = 525
-            Height = 112
+            Height = 123
             Align = alClient
             Color = 15138804
             DataSource = DS_VerCpb_Devolucion
@@ -291,7 +291,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           end
           object DBGridCpbActual_Entrega: TDBGrid
             Left = 0
-            Top = 112
+            Top = 123
             Width = 525
             Height = 116
             Align = alBottom
@@ -351,7 +351,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object PanelCpbActual_FPago: TPanel
           Left = 0
-          Top = 228
+          Top = 239
           Width = 525
           Height = 100
           Align = alBottom
@@ -449,7 +449,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         end
         object PanelCpbActual_Info: TPanel
           Left = 0
-          Top = 328
+          Top = 339
           Width = 525
           Height = 162
           Align = alBottom
@@ -609,8 +609,8 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object PanelEditar: TPanel
       Left = 0
       Top = 0
-      Width = 876
-      Height = 500
+      Width = 884
+      Height = 511
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -622,15 +622,435 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
       ParentFont = False
       TabOrder = 1
       OnResize = PanelEditarResize
+      object PanelEditar_Entrega: TPanel
+        Left = 5
+        Top = 337
+        Width = 874
+        Height = 169
+        Align = alBottom
+        TabOrder = 2
+        object PanelEditar_EntregaInfo: TPanel
+          Left = 1
+          Top = 146
+          Width = 872
+          Height = 22
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 1
+          DesignSize = (
+            872
+            22)
+          object Label23: TLabel
+            Left = 434
+            Top = 4
+            Width = 108
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Cantidad Retirada:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label24: TLabel
+            Left = 679
+            Top = 4
+            Width = 51
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Importe:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object btnEliminarEntrega: TButton
+            Left = 4
+            Top = 1
+            Width = 145
+            Height = 18
+            Caption = 'Quitar (Ctrl+Delete)'
+            TabOrder = 0
+            OnClick = btnEliminarEntregaClick
+          end
+          object editCantidadEntregado: TEdit
+            Left = 543
+            Top = 1
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 1
+          end
+          object editTotalEntregado: TEdit
+            Left = 731
+            Top = 1
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 2
+          end
+        end
+        object DBGridEditar_Entrega: TDBGrid
+          Left = 1
+          Top = 14
+          Width = 872
+          Height = 132
+          Align = alClient
+          Color = 13816575
+          DataSource = DS_CpbEntrega
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = Popup_Entrega
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnColExit = DBGridColExit
+          OnDrawColumnCell = DBGridDrawColumnCell
+          OnKeyDown = DBGridKeyDown
+          OnKeyUp = DBGridKeyUp
+          Columns = <
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = '_CodBarra'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Barra'
+              Width = 76
+              Visible = True
+            end
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = '_Nombre'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Nombre'
+              Width = 192
+              Visible = True
+            end
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = '_Medida'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
+              Width = 84
+              Visible = True
+            end
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = '_Color'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Color'
+              Width = 119
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cantidad'
+              Width = 61
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_UNITARIO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Precio Unitario'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_VENTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Precio Final'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DETALLE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Detalle'
+              Width = 309
+              Visible = True
+            end>
+        end
+        object Panel3: TPanel
+          Tag = 99
+          Left = 1
+          Top = 1
+          Width = 872
+          Height = 13
+          Align = alTop
+          BevelOuter = bvNone
+          Caption = 'PRODUCTOS A RETIRAR (F4 = Agregar un Producto)'
+          Color = clBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+        end
+      end
+      object PanelEditar_Devolucion: TPanel
+        Left = 5
+        Top = 131
+        Width = 874
+        Height = 206
+        Align = alClient
+        TabOrder = 1
+        object PanelEditar_DevolucionInfo: TPanel
+          Left = 1
+          Top = 183
+          Width = 872
+          Height = 22
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 1
+          DesignSize = (
+            872
+            22)
+          object Label29: TLabel
+            Left = 679
+            Top = 4
+            Width = 51
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Importe:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object Label19: TLabel
+            Left = 431
+            Top = 4
+            Width = 111
+            Height = 13
+            Anchors = [akTop, akRight]
+            Caption = 'Cantidad Devuelta:'
+            Font.Charset = DEFAULT_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -11
+            Font.Name = 'Verdana'
+            Font.Style = []
+            ParentFont = False
+          end
+          object btnEliminarDevolucion: TButton
+            Left = 4
+            Top = 1
+            Width = 145
+            Height = 18
+            Caption = 'Quitar (Ctrl+Delete)'
+            TabOrder = 0
+            OnClick = btnEliminarDevolucionClick
+          end
+          object editTotalDevuelto: TEdit
+            Left = 731
+            Top = 1
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 1
+          end
+          object editCantidadDevuelto: TEdit
+            Left = 543
+            Top = 1
+            Width = 129
+            Height = 19
+            Anchors = [akTop, akRight]
+            AutoSize = False
+            BevelInner = bvNone
+            BevelOuter = bvNone
+            BiDiMode = bdRightToLeft
+            Color = 12189695
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -13
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentBiDiMode = False
+            ParentFont = False
+            ReadOnly = True
+            TabOrder = 2
+          end
+        end
+        object DBGridEditar_Devolucion: TDBGrid
+          Left = 1
+          Top = 14
+          Width = 872
+          Height = 169
+          Align = alClient
+          Color = 12582847
+          DataSource = DS_CpbDevolucion
+          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+          PopupMenu = Popup_Devolucion
+          TabOrder = 0
+          TitleFont.Charset = DEFAULT_CHARSET
+          TitleFont.Color = clWindowText
+          TitleFont.Height = -11
+          TitleFont.Name = 'Verdana'
+          TitleFont.Style = []
+          OnColExit = DBGridColExit
+          OnDrawColumnCell = DBGridDrawColumnCell
+          OnKeyDown = DBGridKeyDown
+          OnKeyUp = DBGridKeyUp
+          Columns = <
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = '_CodBarra'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'C'#243'd. Barra'
+              Width = 76
+              Visible = True
+            end
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = '_Nombre'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Nombre'
+              Width = 192
+              Visible = True
+            end
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = '_Medida'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Medida'
+              Width = 84
+              Visible = True
+            end
+            item
+              ButtonStyle = cbsNone
+              Expanded = False
+              FieldName = '_Color'
+              ReadOnly = True
+              Title.Alignment = taCenter
+              Title.Caption = 'Color'
+              Width = 118
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'CANTIDAD'
+              Title.Alignment = taCenter
+              Title.Caption = 'Cantidad'
+              Width = 61
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_UNITARIO'
+              Title.Alignment = taCenter
+              Title.Caption = 'Precio Unitario'
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'IMPORTE_VENTA'
+              Title.Alignment = taCenter
+              Title.Caption = 'Precio Final'
+              Width = 100
+              Visible = True
+            end
+            item
+              Expanded = False
+              FieldName = 'DETALLE'
+              Title.Alignment = taCenter
+              Title.Caption = 'Detalle'
+              Width = 309
+              Visible = True
+            end>
+        end
+        object Panel2: TPanel
+          Tag = 99
+          Left = 1
+          Top = 1
+          Width = 872
+          Height = 13
+          Align = alTop
+          BevelOuter = bvNone
+          Caption = 'PRODUCTOS A DEVOLVER (F3 = Agregar un Producto)'
+          Color = clBlue
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWhite
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+        end
+      end
       object PanelEditar_DatosGral: TPanel
         Left = 5
         Top = 5
-        Width = 866
+        Width = 874
         Height = 126
         Align = alTop
         TabOrder = 0
         DesignSize = (
-          866
+          874
           126)
         object DBTxtCPB_PuntoVenta: TDBText
           Left = 709
@@ -1088,426 +1508,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
           DataSource = DS_Comprobante
         end
       end
-      object PanelEditar_Entrega: TPanel
-        Left = 5
-        Top = 326
-        Width = 866
-        Height = 169
-        Align = alBottom
-        TabOrder = 2
-        object PanelEditar_EntregaInfo: TPanel
-          Left = 1
-          Top = 146
-          Width = 864
-          Height = 22
-          Align = alBottom
-          BevelOuter = bvNone
-          TabOrder = 1
-          DesignSize = (
-            864
-            22)
-          object Label23: TLabel
-            Left = 434
-            Top = 4
-            Width = 108
-            Height = 13
-            Anchors = [akTop, akRight]
-            Caption = 'Cantidad Retirada:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label24: TLabel
-            Left = 679
-            Top = 4
-            Width = 51
-            Height = 13
-            Anchors = [akTop, akRight]
-            Caption = 'Importe:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object btnEliminarEntrega: TButton
-            Left = 4
-            Top = 1
-            Width = 145
-            Height = 18
-            Caption = 'Quitar (Ctrl+Delete)'
-            TabOrder = 0
-            OnClick = btnEliminarEntregaClick
-          end
-          object editCantidadEntregado: TEdit
-            Left = 543
-            Top = 1
-            Width = 129
-            Height = 19
-            Anchors = [akTop, akRight]
-            AutoSize = False
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BiDiMode = bdRightToLeft
-            Color = 12189695
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentBiDiMode = False
-            ParentFont = False
-            ReadOnly = True
-            TabOrder = 1
-          end
-          object editTotalEntregado: TEdit
-            Left = 731
-            Top = 1
-            Width = 129
-            Height = 19
-            Anchors = [akTop, akRight]
-            AutoSize = False
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BiDiMode = bdRightToLeft
-            Color = 12189695
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentBiDiMode = False
-            ParentFont = False
-            ReadOnly = True
-            TabOrder = 2
-          end
-        end
-        object DBGridEditar_Entrega: TDBGrid
-          Left = 1
-          Top = 14
-          Width = 864
-          Height = 132
-          Align = alClient
-          Color = 13816575
-          DataSource = DS_CpbEntrega
-          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          PopupMenu = Popup_Entrega
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnColExit = DBGridColExit
-          OnDrawColumnCell = DBGridDrawColumnCell
-          OnKeyDown = DBGridKeyDown
-          OnKeyUp = DBGridKeyUp
-          Columns = <
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_CodBarra'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Barra'
-              Width = 76
-              Visible = True
-            end
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_Nombre'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Nombre'
-              Width = 192
-              Visible = True
-            end
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_Medida'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Medida'
-              Width = 84
-              Visible = True
-            end
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_Color'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Color'
-              Width = 119
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CANTIDAD'
-              Title.Alignment = taCenter
-              Title.Caption = 'Cantidad'
-              Width = 61
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_UNITARIO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Precio Unitario'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_VENTA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Precio Final'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DETALLE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Detalle'
-              Width = 309
-              Visible = True
-            end>
-        end
-        object Panel3: TPanel
-          Tag = 99
-          Left = 1
-          Top = 1
-          Width = 864
-          Height = 13
-          Align = alTop
-          BevelOuter = bvNone
-          Caption = 'PRODUCTOS A RETIRAR (F4 = Agregar un Producto)'
-          Color = clBlue
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 2
-        end
-      end
-      object PanelEditar_Devolucion: TPanel
-        Left = 5
-        Top = 131
-        Width = 866
-        Height = 195
-        Align = alClient
-        TabOrder = 1
-        object PanelEditar_DevolucionInfo: TPanel
-          Left = 1
-          Top = 172
-          Width = 864
-          Height = 22
-          Align = alBottom
-          BevelOuter = bvNone
-          TabOrder = 1
-          DesignSize = (
-            864
-            22)
-          object Label29: TLabel
-            Left = 679
-            Top = 4
-            Width = 51
-            Height = 13
-            Anchors = [akTop, akRight]
-            Caption = 'Importe:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object Label19: TLabel
-            Left = 431
-            Top = 4
-            Width = 111
-            Height = 13
-            Anchors = [akTop, akRight]
-            Caption = 'Cantidad Devuelta:'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -11
-            Font.Name = 'Verdana'
-            Font.Style = []
-            ParentFont = False
-          end
-          object btnEliminarDevolucion: TButton
-            Left = 4
-            Top = 1
-            Width = 145
-            Height = 18
-            Caption = 'Quitar (Ctrl+Delete)'
-            TabOrder = 0
-            OnClick = btnEliminarDevolucionClick
-          end
-          object editTotalDevuelto: TEdit
-            Left = 731
-            Top = 1
-            Width = 129
-            Height = 19
-            Anchors = [akTop, akRight]
-            AutoSize = False
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BiDiMode = bdRightToLeft
-            Color = 12189695
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentBiDiMode = False
-            ParentFont = False
-            ReadOnly = True
-            TabOrder = 1
-          end
-          object editCantidadDevuelto: TEdit
-            Left = 543
-            Top = 1
-            Width = 129
-            Height = 19
-            Anchors = [akTop, akRight]
-            AutoSize = False
-            BevelInner = bvNone
-            BevelOuter = bvNone
-            BiDiMode = bdRightToLeft
-            Color = 12189695
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -13
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentBiDiMode = False
-            ParentFont = False
-            ReadOnly = True
-            TabOrder = 2
-          end
-        end
-        object DBGridEditar_Devolucion: TDBGrid
-          Left = 1
-          Top = 14
-          Width = 864
-          Height = 158
-          Align = alClient
-          Color = 12582847
-          DataSource = DS_CpbDevolucion
-          Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-          PopupMenu = Popup_Devolucion
-          TabOrder = 0
-          TitleFont.Charset = DEFAULT_CHARSET
-          TitleFont.Color = clWindowText
-          TitleFont.Height = -11
-          TitleFont.Name = 'Verdana'
-          TitleFont.Style = []
-          OnColExit = DBGridColExit
-          OnDrawColumnCell = DBGridDrawColumnCell
-          OnKeyDown = DBGridKeyDown
-          OnKeyUp = DBGridKeyUp
-          Columns = <
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_CodBarra'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'C'#243'd. Barra'
-              Width = 76
-              Visible = True
-            end
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_Nombre'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Nombre'
-              Width = 192
-              Visible = True
-            end
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_Medida'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Medida'
-              Width = 84
-              Visible = True
-            end
-            item
-              ButtonStyle = cbsNone
-              Expanded = False
-              FieldName = '_Color'
-              ReadOnly = True
-              Title.Alignment = taCenter
-              Title.Caption = 'Color'
-              Width = 118
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'CANTIDAD'
-              Title.Alignment = taCenter
-              Title.Caption = 'Cantidad'
-              Width = 61
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_UNITARIO'
-              Title.Alignment = taCenter
-              Title.Caption = 'Precio Unitario'
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'IMPORTE_VENTA'
-              Title.Alignment = taCenter
-              Title.Caption = 'Precio Final'
-              Width = 100
-              Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'DETALLE'
-              Title.Alignment = taCenter
-              Title.Caption = 'Detalle'
-              Width = 309
-              Visible = True
-            end>
-        end
-        object Panel2: TPanel
-          Tag = 99
-          Left = 1
-          Top = 1
-          Width = 864
-          Height = 13
-          Align = alTop
-          BevelOuter = bvNone
-          Caption = 'PRODUCTOS A DEVOLVER (F3 = Agregar un Producto)'
-          Color = clBlue
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWhite
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 2
-        end
-      end
     end
   end
   object PanelEditar_FPago: TPanel
@@ -1817,7 +1817,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -4309,6 +4309,22 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object ZQ_ComprobanteFECHA_ANULADO: TDateField
       FieldName = 'FECHA_ANULADO'
     end
+    object ZQ_ComprobanteIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object ZQ_ComprobanteINSERT_MANUAL: TStringField
+      FieldName = 'INSERT_MANUAL'
+      Size = 10
+    end
+    object ZQ_ComprobanteID_POSICION_SUC_DESTINO: TIntegerField
+      FieldName = 'ID_POSICION_SUC_DESTINO'
+    end
+    object ZQ_ComprobanteID_PREVENTA: TIntegerField
+      FieldName = 'ID_PREVENTA'
+    end
+    object ZQ_ComprobanteID_OBRA_SOCIAL: TIntegerField
+      FieldName = 'ID_OBRA_SOCIAL'
+    end
   end
   object DS_Comprobante: TDataSource
     DataSet = ZQ_Comprobante
@@ -4661,6 +4677,18 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     end
     object CD_Devolucion_idStockProducto: TIntegerField
       FieldName = 'idStockProducto'
+    end
+    object CD_Devolucionimporte_if: TFloatField
+      FieldName = 'importe_if'
+    end
+    object CD_Devolucionimporte_if_siniva: TFloatField
+      FieldName = 'importe_if_siniva'
+    end
+    object CD_Devolucionimporte_iva_if: TFloatField
+      FieldName = 'importe_iva_if'
+    end
+    object CD_Devolucionimporte_original: TFloatField
+      FieldName = 'importe_original'
     end
   end
   object Popup_Devolucion: TPopupMenu
@@ -5842,7 +5870,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         ItemIndex = -1
       end>
     CriteriosLocate = <>
-    Modelo = DM.ISModelo
     DataSet = ZQ_VerCpb
     SQL.Strings = (
       'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
@@ -5899,7 +5926,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     Top = 26
   end
   object ISListadoCuenta: TISListadoSQL
-    Modelo = DM.ISModelo
     SQL.Strings = (
       'select cta.*, tipo.descripcion,'
       
@@ -5924,7 +5950,6 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     Top = 393
   end
   object ISListadoMedio: TISListadoSQL
-    Modelo = DM.ISModelo
     SQL.Strings = (
       'select tipo.*'
       'from tipo_formapago tipo'

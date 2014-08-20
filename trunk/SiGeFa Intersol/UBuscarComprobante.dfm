@@ -19,15 +19,15 @@ object FBuscarComprobante: TFBuscarComprobante
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 714
-    Height = 336
+    Width = 722
+    Height = 347
     Align = alClient
     TabOrder = 0
     object DBGridFacturas: TDBGrid
       Left = 1
       Top = 26
-      Width = 712
-      Height = 163
+      Width = 720
+      Height = 174
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -83,8 +83,8 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object PanelDetalle: TPanel
       Left = 1
-      Top = 210
-      Width = 712
+      Top = 221
+      Width = 720
       Height = 125
       Align = alBottom
       BevelOuter = bvNone
@@ -92,7 +92,7 @@ object FBuscarComprobante: TFBuscarComprobante
       object DBGridDetalle: TDBGrid
         Left = 0
         Top = 0
-        Width = 712
+        Width = 720
         Height = 125
         Hint = 'Presione sobre el titulo de la columna para modificar el orden'
         Align = alClient
@@ -141,7 +141,7 @@ object FBuscarComprobante: TFBuscarComprobante
       Tag = 99
       Left = 1
       Top = 1
-      Width = 712
+      Width = 720
       Height = 25
       Align = alTop
       BevelOuter = bvNone
@@ -171,14 +171,14 @@ object FBuscarComprobante: TFBuscarComprobante
     end
     object Panel2: TPanel
       Left = 1
-      Top = 189
-      Width = 712
+      Top = 200
+      Width = 720
       Height = 21
       Align = alBottom
       BevelOuter = bvNone
       TabOrder = 3
       DesignSize = (
-        712
+        720
         21)
       object lblDetalleFactura: TLabel
         Left = 3
@@ -208,7 +208,7 @@ object FBuscarComprobante: TFBuscarComprobante
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1349,6 +1349,7 @@ object FBuscarComprobante: TFBuscarComprobante
       'order by c.fecha, c.codigo')
     UsarWhereOriginal = IS_Con_Where
     PantallaReducida = True
+    TituloVentana = 'Buscar'
     Left = 160
     Top = 104
   end
@@ -1480,6 +1481,7 @@ object FBuscarComprobante: TFBuscarComprobante
       'order by c.fecha_cobrada, c.codigo')
     UsarWhereOriginal = IS_Con_Where
     PantallaReducida = True
+    TituloVentana = 'Buscar'
     Left = 296
     Top = 104
   end

@@ -1083,7 +1083,7 @@ begin
       CPB_DEVOLUCION:   begin //CPB_DEVOLUCION
                           configDevolucion;
                         end;
-      CPB_NOTA_CREDITO: begin //CPB_DEVOLUCION
+      CPB_NOTA_CREDITO: begin //CPB_NOTACRED
                           configNotaCredito;
                         end;
       CPB_NOTA_DEBITO:  begin //CPB_DEVOLUCION

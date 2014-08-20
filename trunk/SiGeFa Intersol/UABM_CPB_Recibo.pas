@@ -137,7 +137,6 @@ type
     ZQ_ProveedorTIPO_EMPRESA: TStringField;
     DBText7: TDBText;
     ZQ_ProveedorCODIGO_CORTO: TIntegerField;
-    ZQ_ClienteCODIGO_CORTO: TIntegerField;
     Label2: TLabel;
     Label3: TLabel;
     DBText8: TDBText;
@@ -412,6 +411,9 @@ type
     ISListadoEntidad: TISListadoSQL;
     ISBuscar: TISBusquedaAvanzada;
     ISDBDateEmision: TISDBDateTimePicker;
+    ZQ_ClienteCODIGO_CORTO: TStringField;
+    ZQ_ClienteIMPORTADO: TStringField;
+    ZQ_ClienteNRO_AFILIADO: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
