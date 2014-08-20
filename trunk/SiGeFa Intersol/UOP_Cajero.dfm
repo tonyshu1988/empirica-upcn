@@ -1,7 +1,7 @@
 object FOP_Cajero: TFOP_Cajero
-  Left = 79
-  Top = 139
-  Width = 1184
+  Left = 142
+  Top = 38
+  Width = 1131
   Height = 725
   Caption = 'Subsistema de Caja Obras Sociales - SiGeFa'
   Color = clBtnFace
@@ -312,6 +312,7 @@ object FOP_Cajero: TFOP_Cajero
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 3
+      OnChange = edDetalleMDPChange
       OnExit = edCodCuentaExit
       OnKeyUp = buscarFormaPago
     end
@@ -3235,7 +3236,7 @@ object FOP_Cajero: TFOP_Cajero
   object PanelContenedorDerecha: TPanel
     Left = 88
     Top = 0
-    Width = 1080
+    Width = 1027
     Height = 635
     Align = alClient
     Caption = 'PanelContenedorDerecha'
@@ -3243,7 +3244,7 @@ object FOP_Cajero: TFOP_Cajero
     object PanelStatusBar: TPanel
       Left = 1
       Top = 1
-      Width = 1078
+      Width = 1025
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -3267,7 +3268,7 @@ object FOP_Cajero: TFOP_Cajero
         Transparent = True
       end
       object DBText8: TDBText
-        Left = 738
+        Left = 685
         Top = 1
         Width = 339
         Height = 28
@@ -3288,7 +3289,7 @@ object FOP_Cajero: TFOP_Cajero
       object PanelCambiarFecha: TPanel
         Left = 345
         Top = 1
-        Width = 393
+        Width = 340
         Height = 28
         Align = alClient
         BevelOuter = bvNone
@@ -3318,7 +3319,7 @@ object FOP_Cajero: TFOP_Cajero
     object PanelProductosYFPago: TPanel
       Left = 1
       Top = 190
-      Width = 1078
+      Width = 1025
       Height = 444
       Align = alClient
       Caption = 'PanelProductosYFPago'
@@ -3326,7 +3327,7 @@ object FOP_Cajero: TFOP_Cajero
       object Label11: TLabel
         Left = 1
         Top = 1
-        Width = 1076
+        Width = 1023
         Height = 13
         Align = alTop
         Alignment = taCenter
@@ -3345,7 +3346,7 @@ object FOP_Cajero: TFOP_Cajero
       object PanelListadoProducto: TPanel
         Left = 1
         Top = 14
-        Width = 1076
+        Width = 1023
         Height = 269
         Align = alClient
         Caption = 'PanelListadoProducto'
@@ -3360,7 +3361,7 @@ object FOP_Cajero: TFOP_Cajero
         object DBGridListadoProductos: TDBGrid
           Left = 1
           Top = 1
-          Width = 1074
+          Width = 1021
           Height = 184
           Align = alClient
           Color = 15527129
@@ -3443,7 +3444,7 @@ object FOP_Cajero: TFOP_Cajero
         object Panel6: TPanel
           Left = 1
           Top = 185
-          Width = 1074
+          Width = 1021
           Height = 83
           Align = alBottom
           BevelOuter = bvLowered
@@ -3451,7 +3452,7 @@ object FOP_Cajero: TFOP_Cajero
           object Label36: TLabel
             Left = 1
             Top = 66
-            Width = 1072
+            Width = 1019
             Height = 16
             Align = alBottom
             Alignment = taCenter
@@ -3470,7 +3471,7 @@ object FOP_Cajero: TFOP_Cajero
           object lblCantProductos: TLabel
             Left = 1
             Top = 1
-            Width = 1072
+            Width = 1019
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3486,7 +3487,7 @@ object FOP_Cajero: TFOP_Cajero
           object lblMontoProds: TLabel
             Left = 1
             Top = 16
-            Width = 1072
+            Width = 1019
             Height = 15
             Align = alTop
             Alignment = taRightJustify
@@ -3511,7 +3512,7 @@ object FOP_Cajero: TFOP_Cajero
           object Panel7: TPanel
             Left = 1
             Top = 40
-            Width = 1072
+            Width = 1019
             Height = 26
             Align = alBottom
             BevelInner = bvLowered
@@ -3520,7 +3521,7 @@ object FOP_Cajero: TFOP_Cajero
             object lblDctoMutual: TLabel
               Left = 2
               Top = 2
-              Width = 1068
+              Width = 1015
               Height = 22
               Align = alClient
               Alignment = taRightJustify
@@ -3539,10 +3540,94 @@ object FOP_Cajero: TFOP_Cajero
           end
         end
       end
+      object PieGrilla: TPanel
+        Left = 1
+        Top = 372
+        Width = 1023
+        Height = 71
+        Align = alBottom
+        BevelOuter = bvLowered
+        TabOrder = 2
+        object lblMaxVenta: TLabel
+          Left = 1
+          Top = 1
+          Width = 1021
+          Height = 20
+          Align = alTop
+          Alignment = taCenter
+          Caption = 'MONTO M'#193'XIMO DE VENTA EXCEDIDO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clRed
+          Font.Height = -17
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = True
+          Layout = tlCenter
+          Visible = False
+        end
+        object btnQuitarPago: TButton
+          Left = 4
+          Top = 3
+          Width = 136
+          Height = 23
+          Caption = 'Quitar Forma de Pago'
+          TabOrder = 0
+          OnClick = btnQuitarPagoClick
+        end
+        object Panel1: TPanel
+          Left = 1
+          Top = 29
+          Width = 1021
+          Height = 41
+          Align = alBottom
+          BevelOuter = bvNone
+          TabOrder = 1
+          object lblTotAPagar: TLabel
+            Left = 152
+            Top = 0
+            Width = 869
+            Height = 41
+            Align = alClient
+            Alignment = taRightJustify
+            AutoSize = False
+            Caption = 'Total Venta: $ 0.00 '
+            Color = 12648448
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -21
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
+          object lblNroCPB: TLabel
+            Left = 0
+            Top = 0
+            Width = 152
+            Height = 41
+            Align = alLeft
+            AutoSize = False
+            Caption = ' N'#186' CPB: 99999 '
+            Color = 12648448
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clWhite
+            Font.Height = -17
+            Font.Name = 'Verdana'
+            Font.Style = [fsBold]
+            ParentColor = False
+            ParentFont = False
+            Transparent = False
+            Layout = tlCenter
+          end
+        end
+      end
       object PanelFormaPago: TPanel
         Left = 1
         Top = 283
-        Width = 1076
+        Width = 1023
         Height = 89
         Align = alBottom
         Caption = 'PanelFormaPago'
@@ -3550,7 +3635,7 @@ object FOP_Cajero: TFOP_Cajero
         object DBGridFormaPago: TDBGrid
           Left = 1
           Top = 1
-          Width = 1074
+          Width = 1021
           Height = 87
           Align = alClient
           Color = 15527129
@@ -3640,106 +3725,23 @@ object FOP_Cajero: TFOP_Cajero
               FieldName = '_esSenia'
               Title.Alignment = taCenter
               Title.Caption = 'Se'#241'a'
+              Width = 53
               Visible = True
             end>
-        end
-      end
-      object PieGrilla: TPanel
-        Left = 1
-        Top = 372
-        Width = 1076
-        Height = 71
-        Align = alBottom
-        BevelOuter = bvLowered
-        TabOrder = 2
-        object lblMaxVenta: TLabel
-          Left = 1
-          Top = 1
-          Width = 1074
-          Height = 20
-          Align = alTop
-          Alignment = taCenter
-          Caption = 'MONTO M'#193'XIMO DE VENTA EXCEDIDO'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clRed
-          Font.Height = -17
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          Transparent = True
-          Layout = tlCenter
-          Visible = False
-        end
-        object btnQuitarPago: TButton
-          Left = 4
-          Top = 3
-          Width = 136
-          Height = 23
-          Caption = 'Quitar Forma de Pago'
-          TabOrder = 0
-          OnClick = btnQuitarPagoClick
-        end
-        object Panel1: TPanel
-          Left = 1
-          Top = 29
-          Width = 1074
-          Height = 41
-          Align = alBottom
-          BevelOuter = bvNone
-          TabOrder = 1
-          object lblTotAPagar: TLabel
-            Left = 152
-            Top = 0
-            Width = 922
-            Height = 41
-            Align = alClient
-            Alignment = taRightJustify
-            AutoSize = False
-            Caption = 'Total Venta: $ 0.00 '
-            Color = 12648448
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -21
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-          end
-          object lblNroCPB: TLabel
-            Left = 0
-            Top = 0
-            Width = 152
-            Height = 41
-            Align = alLeft
-            AutoSize = False
-            Caption = ' N'#186' CPB: 99999 '
-            Color = 12648448
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clWhite
-            Font.Height = -17
-            Font.Name = 'Verdana'
-            Font.Style = [fsBold]
-            ParentColor = False
-            ParentFont = False
-            Transparent = False
-            Layout = tlCenter
-          end
         end
       end
     end
     object PanelDetalles: TPanel
       Left = 1
       Top = 31
-      Width = 1078
+      Width = 1025
       Height = 159
       Align = alTop
       TabOrder = 2
       object PanelDetallePreventa: TPanel
         Left = 1
         Top = 76
-        Width = 1076
+        Width = 1023
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
@@ -3747,7 +3749,7 @@ object FOP_Cajero: TFOP_Cajero
         object Label54: TLabel
           Left = 0
           Top = 0
-          Width = 1076
+          Width = 1023
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -3848,7 +3850,7 @@ object FOP_Cajero: TFOP_Cajero
       object PanelCabeceraFactura: TPanel
         Left = 526
         Top = 1
-        Width = 551
+        Width = 498
         Height = 75
         Align = alClient
         BevelOuter = bvLowered
@@ -3862,7 +3864,7 @@ object FOP_Cajero: TFOP_Cajero
         object Label12: TLabel
           Left = 1
           Top = 1
-          Width = 549
+          Width = 496
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4055,7 +4057,7 @@ object FOP_Cajero: TFOP_Cajero
       object PanelDetalleOrdenOptica: TPanel
         Left = 1
         Top = 117
-        Width = 1076
+        Width = 1023
         Height = 41
         Align = alBottom
         BevelOuter = bvNone
@@ -4063,7 +4065,7 @@ object FOP_Cajero: TFOP_Cajero
         object Label14: TLabel
           Left = 0
           Top = 0
-          Width = 1076
+          Width = 1023
           Height = 13
           Align = alTop
           Alignment = taCenter
@@ -4439,7 +4441,7 @@ object FOP_Cajero: TFOP_Cajero
   object PCargaProd: TPanel
     Left = 248
     Top = 152
-    Width = 700
+    Width = 649
     Height = 300
     BevelInner = bvRaised
     BevelOuter = bvLowered
@@ -4449,20 +4451,20 @@ object FOP_Cajero: TFOP_Cajero
     object PCargaProdDetalle: TPanel
       Left = 6
       Top = 6
-      Width = 688
+      Width = 637
       Height = 288
       Align = alClient
       TabOrder = 1
       object Bevel2: TBevel
         Left = 11
         Top = 58
-        Width = 654
+        Width = 598
         Height = 34
       end
       object Label1: TLabel
         Left = 1
         Top = 99
-        Width = 686
+        Width = 635
         Height = 16
         Align = alBottom
         AutoSize = False
@@ -4478,21 +4480,14 @@ object FOP_Cajero: TFOP_Cajero
         Layout = tlCenter
       end
       object Label76: TLabel
-        Left = 344
+        Left = 428
         Top = 69
         Width = 53
         Height = 13
         Caption = '% Desc.:'
       end
-      object Label75: TLabel
-        Left = 472
-        Top = 69
-        Width = 71
-        Height = 13
-        Caption = 'Monto Total:'
-      end
       object Label72: TLabel
-        Left = 21
+        Left = 105
         Top = 69
         Width = 56
         Height = 13
@@ -4507,7 +4502,7 @@ object FOP_Cajero: TFOP_Cajero
         Caption = 'Descripci'#243'n:'
       end
       object Label70: TLabel
-        Left = 151
+        Left = 235
         Top = 69
         Width = 88
         Height = 13
@@ -4532,25 +4527,10 @@ object FOP_Cajero: TFOP_Cajero
         Transparent = True
         WordWrap = True
       end
-      object DBText2: TDBText
-        Left = 546
-        Top = 69
-        Width = 106
-        Height = 13
-        DataField = 'IMPORTE_VENTA'
-        DataSource = DS_DetalleFactura
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -11
-        Font.Name = 'Verdana'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = True
-      end
       object Label10: TLabel
         Left = 1
         Top = 1
-        Width = 686
+        Width = 635
         Height = 16
         Align = alTop
         Alignment = taCenter
@@ -4569,7 +4549,7 @@ object FOP_Cajero: TFOP_Cajero
       object lblReconocimTot: TLabel
         Left = 1
         Top = 239
-        Width = 686
+        Width = 635
         Height = 15
         Align = alBottom
         Alignment = taRightJustify
@@ -4588,7 +4568,7 @@ object FOP_Cajero: TFOP_Cajero
       object DBGridListadoOS: TDBGrid
         Left = 1
         Top = 115
-        Width = 686
+        Width = 635
         Height = 124
         Align = alBottom
         Color = 15527129
@@ -4632,7 +4612,7 @@ object FOP_Cajero: TFOP_Cajero
           end>
       end
       object edImporteUnitario: TDBEdit
-        Left = 242
+        Left = 326
         Top = 65
         Width = 87
         Height = 21
@@ -4651,7 +4631,7 @@ object FOP_Cajero: TFOP_Cajero
         OnExit = edImporteExit
       end
       object eddesc: TDBEdit
-        Left = 400
+        Left = 484
         Top = 65
         Width = 48
         Height = 21
@@ -4670,7 +4650,7 @@ object FOP_Cajero: TFOP_Cajero
         OnExit = edDescExit
       end
       object edCant: TDBEdit
-        Left = 80
+        Left = 164
         Top = 65
         Width = 48
         Height = 21
@@ -4691,7 +4671,7 @@ object FOP_Cajero: TFOP_Cajero
       object PCargaProdBotones: TPanel
         Left = 1
         Top = 254
-        Width = 686
+        Width = 635
         Height = 33
         Align = alBottom
         BevelInner = bvLowered
@@ -4700,7 +4680,7 @@ object FOP_Cajero: TFOP_Cajero
         object lblReconocimVenta: TLabel
           Left = 2
           Top = 2
-          Width = 682
+          Width = 631
           Height = 29
           Align = alClient
           Alignment = taCenter
@@ -4727,7 +4707,7 @@ object FOP_Cajero: TFOP_Cajero
           OnClick = btnAceptarProdClick
         end
         object btnProdCancelar: TButton
-          Left = 598
+          Left = 550
           Top = 7
           Width = 75
           Height = 19
@@ -4739,7 +4719,7 @@ object FOP_Cajero: TFOP_Cajero
       end
     end
     object PCargaProdPlanes: TPanel
-      Left = 68
+      Left = 44
       Top = 55
       Width = 579
       Height = 216
