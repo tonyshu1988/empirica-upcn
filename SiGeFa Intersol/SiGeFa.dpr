@@ -3,8 +3,8 @@ program SiGeFa;
 uses
   Forms,
   SYSUTILS,
+  UDM in 'UDM.pas' {DM: TDataModule},  
   UPrincipal in 'UPrincipal.pas' {FPrincipal},
-  UDM in 'UDM.pas' {DM: TDataModule},
   UUtilidades in 'UUtilidades.pas',
   UAcerca_De in 'UAcerca_De.pas' {FAcerca_De},
   UABMProductos in 'UABMProductos.pas' {FABMProductos},

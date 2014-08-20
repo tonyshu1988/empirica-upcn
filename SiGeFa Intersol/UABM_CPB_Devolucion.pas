@@ -109,7 +109,6 @@ type
     ZQ_ClienteCOD_IVA: TStringField;
     ZQ_ClienteNOMBRE_TIPO_DOC: TStringField;
     DBText7: TDBText;
-    ZQ_ClienteCODIGO_CORTO: TIntegerField;
     Label2: TLabel;
     Label3: TLabel;
     DBText8: TDBText;
@@ -521,6 +520,11 @@ type
     ISListadoMedio: TISListadoSQL;
     ISDBDateEmision: TISDBDateTimePicker;
     ISDBDateTimeFechaVencimiento: TISDBDateTimePicker;
+    ZQ_ClienteCODIGO_CORTO: TStringField;
+    ZQ_ClienteCODIGO_BARRA: TStringField;
+    ZQ_ClienteCLAVE: TStringField;
+    ZQ_ClienteIMPORTADO: TStringField;
+    ZQ_ClienteNRO_AFILIADO: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -1145,6 +1149,7 @@ begin
 
   if not Assigned(FImpresion_Comprobantes) then
     FImpresion_Comprobantes:= TFImpresion_Comprobantes.Create(nil);
+  FImpresion_Comprobantes.configNotaCredito;
   FImpresion_Comprobantes.cargarDatos(ZQ_VerCpbID_COMPROBANTE.AsInteger, cliente, empresa, -1, false);
   FImpresion_Comprobantes.imprimir;
 end;

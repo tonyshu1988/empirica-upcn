@@ -762,6 +762,7 @@ type
     procedure accionBtnBuscar(Sender: TObject);
     procedure ISDbSumaFPagoSumListChanged(Sender: TObject);
     procedure ISDbSumaDetalleFacturaSumListChanged(Sender: TObject);
+    procedure edDetalleMDPChange(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -2960,6 +2961,7 @@ begin
         id_cuenta_fpago:= StrToInt(ISListadoCuenta.Resultado);
         ZQ_Cuentas.Locate('ID_CUENTA', id_cuenta_fpago, []);
         CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+        edDetalleMDPChange(self);
       end;
     end;
   end;
@@ -2985,6 +2987,7 @@ begin
       if ISListadoMedio.Resultado <> '' then
       begin
         CD_FpagoID_TIPO_FORMAPAG.AsInteger:= StrToInt(ISListadoMedio.Resultado);
+        edDetalleMDPChange(self);
       end;
     end;
   end;
@@ -3251,6 +3254,12 @@ acumulado:= ISDbSumaDetalleFactura.SumCollection[0].SumValue;
   if coefPrecio5 < 0 then
     coefPrecio5:= 1;
 
+end;
+
+procedure TFCajero.edDetalleMDPChange(Sender: TObject);
+begin
+if not ((CD_Fpago_ctaIngreso.AsString = '') or (CD_FpagomedioPago.AsString = '')) then
+    calcularFP();
 end;
 
 end.

@@ -643,7 +643,6 @@ type
     Label1: TLabel;
     DBGridListadoOS: TDBGrid;
     Label76: TLabel;
-    Label75: TLabel;
     Label72: TLabel;
     Label71: TLabel;
     Label70: TLabel;
@@ -651,7 +650,6 @@ type
     eddesc: TDBEdit;
     edCant: TDBEdit;
     DBText3: TDBText;
-    DBText2: TDBText;
     Bevel2: TBevel;
     Label10: TLabel;
     DBGrid2: TDBGrid;
@@ -796,6 +794,7 @@ type
     procedure ISDbSumaReconocimSumListChanged(Sender: TObject);
     procedure ZQ_DctoMutualAfterOpen(DataSet: TDataSet);
     procedure ZQ_DctoMutualAfterClose(DataSet: TDataSet);
+    procedure edDetalleMDPChange(Sender: TObject);
   private
     vsel: TFBuscarProductoStock;
     vsel2: TFBuscarPersona;
@@ -1210,6 +1209,8 @@ begin
     ZQ_DctoMutual.close;
     ZQ_DctoMutual.ParamByName('idPers').AsInteger:=cliente;
     dm.ISModelo.abrir(ZQ_DctoMutual);
+
+    ISDbSumaDetalleFacturaSumListChanged(self);
 
     if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
        lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
@@ -2975,6 +2976,7 @@ begin
         id_cuenta_fpago:= StrToInt(ISListadoCuenta.Resultado);
         ZQ_Cuentas.Locate('ID_CUENTA', id_cuenta_fpago, []);
         CD_FpagoCUENTA_INGRESO.AsInteger:= ZQ_CuentasID_CUENTA.AsInteger;
+        edDetalleMDPChange(self);
       end;
     end;
   end;
@@ -3000,6 +3002,7 @@ begin
       if ISListadoMedio.Resultado <> '' then
       begin
         CD_FpagoID_TIPO_FORMAPAG.AsInteger:= StrToInt(ISListadoMedio.Resultado);
+        edDetalleMDPChange(self);
       end;
     end;
   end;
@@ -3350,6 +3353,12 @@ end;
 procedure TFOP_Cajero.ZQ_DctoMutualAfterClose(DataSet: TDataSet);
 begin
   lblDctoMutual.Caption:='';
+end;
+
+procedure TFOP_Cajero.edDetalleMDPChange(Sender: TObject);
+begin
+  if not ((CD_Fpago_ctaIngreso.AsString = '') or (CD_FpagomedioPago.AsString = '')) then
+    calcularFP();
 end;
 
 end.

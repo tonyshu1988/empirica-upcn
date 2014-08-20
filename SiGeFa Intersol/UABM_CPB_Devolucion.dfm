@@ -1,6 +1,6 @@
 object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
-  Left = 291
-  Top = 234
+  Left = 282
+  Top = 89
   Width = 892
   Height = 609
   Caption = 'ABM Devoluci'#243'n'
@@ -4172,8 +4172,23 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object ZQ_ClienteNOMBRE_TIPO_DOC: TStringField
       FieldName = 'NOMBRE_TIPO_DOC'
     end
-    object ZQ_ClienteCODIGO_CORTO: TIntegerField
+    object ZQ_ClienteCODIGO_CORTO: TStringField
       FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_ClienteCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ClienteCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 10
+    end
+    object ZQ_ClienteIMPORTADO: TStringField
+      FieldName = 'IMPORTADO'
+      Size = 1
+    end
+    object ZQ_ClienteNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
     end
   end
   object DS_Cliente: TDataSource
@@ -5827,6 +5842,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
         ItemIndex = -1
       end>
     CriteriosLocate = <>
+    Modelo = DM.ISModelo
     DataSet = ZQ_VerCpb
     SQL.Strings = (
       'select  cpb.*, suc.nombre as sucursal, pro.nombre as proveedor,'
@@ -5878,10 +5894,12 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     SQL_Orden.Strings = (
       'order by cpb.fecha desc')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 367
     Top = 26
   end
   object ISListadoCuenta: TISListadoSQL
+    Modelo = DM.ISModelo
     SQL.Strings = (
       'select cta.*, tipo.descripcion,'
       
@@ -5906,6 +5924,7 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     Top = 393
   end
   object ISListadoMedio: TISListadoSQL
+    Modelo = DM.ISModelo
     SQL.Strings = (
       'select tipo.*'
       'from tipo_formapago tipo'
