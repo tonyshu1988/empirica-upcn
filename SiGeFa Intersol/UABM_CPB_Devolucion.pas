@@ -1009,12 +1009,12 @@ begin
   ZQ_ComprobanteID_TIPO_CPB.AsInteger:= tipoComprobante;
 
 
-  ZQ_ComprobanteOBSERVACION.Value:= CD_ComprobanteOBSERVACION.Value;
-      ZQ_ComprobanteBASE_IMPONIBLE.Value:= CD_ComprobanteBASE_IMPONIBLE.Value;
-      ZQ_ComprobanteSALDO.AsFloat:= CD_ComprobanteSALDO.Value;
-      ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= CD_ComprobanteIMPORTE_TOTAL.Value;
-      ZQ_ComprobantePORC_IVA.AsFloat:= CD_ComprobantePORC_IVA.Value;
-      ZQ_ComprobanteIMPORTE_IVA.AsFloat:= CD_ComprobanteIMPORTE_IVA.AsFloat;
+//  ZQ_ComprobanteOBSERVACION.Value:= CD_ComprobanteOBSERVACION.Value;
+//      ZQ_ComprobanteBASE_IMPONIBLE.Value:= CD_ComprobanteBASE_IMPONIBLE.Value;
+//      ZQ_ComprobanteSALDO.AsFloat:= CD_ComprobanteSALDO.Value;
+//      ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= CD_ComprobanteIMPORTE_TOTAL.Value;
+//      ZQ_ComprobantePORC_IVA.AsFloat:= CD_ComprobantePORC_IVA.Value;
+//      ZQ_ComprobanteIMPORTE_IVA.AsFloat:= CD_ComprobanteIMPORTE_IVA.AsFloat;
 
 
   try

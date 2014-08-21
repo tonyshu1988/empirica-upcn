@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 240
-  Top = 65
+  Left = 62
+  Top = 36
   Width = 1010
   Height = 663
   Caption = 'ABM Orden T'#233'cnica'
@@ -9512,16 +9512,21 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     Modelo = DM.ISModelo
     SQL.Strings = (
       
-        'select OO.ID_OS,coalesce(OO.CODIGO||'#39' - '#39'||OO.NOMBRE||'#39' - '#39'||OO.' +
-        'descripcion,OO.CODIGO||'#39' - '#39'||OO.NOMBRE) as detalle'
+        'select distinct OO.ID_OS,coalesce(OO.CODIGO||'#39' - '#39'||OO.NOMBRE||'#39 +
+        ' -  Reconocido: $ '#39'||opr.monto_reconocido,OO.NOMBRE) as detalle'
       'from OPTICA_OS OO'
-      'left join optica_persona_os opos on (opos.id_os=oo.id_os)'
+      'join optica_productos_reconocidos opr on (oo.id_os=opr.id_os)'
+      'join optica_persona_os opos on (opos.id_os=oo.id_os)'
       'where (oo.baja='#39'N'#39')'
-      'and opos.id_persona=:idp'
+      ''
+      ''
+      ''
+      ''
       ''
       '')
     CampoBuscar = 'DETALLE'
     CampoClave = 'id_OS'
+    BuscarEnQuery = ZQ_planes_productos
     TituloVentana = 'Buscar Obra Social'
     TituloBuscar = 'Campo Busqueda:'
     TituloBuscar2 = 'Campo Busqueda 2:'
@@ -9616,5 +9621,66 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     DataSet = ZQ_OrdenDetalleOS
     Left = 524
     Top = 170
+  end
+  object ZQ_planes_productos: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select distinct OO.*,opr.*'
+      'from OPTICA_OS OO'
+      'join optica_productos_reconocidos opr on (oo.id_os=opr.id_os)'
+      'join optica_persona_os opos on (opos.id_os=oo.id_os)'
+      'where (oo.baja='#39'N'#39')'
+      ''
+      ''
+      '')
+    Params = <>
+    Left = 842
+    Top = 457
+    object ZQ_planes_productosID_OS: TIntegerField
+      FieldName = 'ID_OS'
+      Required = True
+    end
+    object ZQ_planes_productosCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 100
+    end
+    object ZQ_planes_productosNOMBRE: TStringField
+      FieldName = 'NOMBRE'
+      Size = 200
+    end
+    object ZQ_planes_productosDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
+    end
+    object ZQ_planes_productosBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_planes_productosFACTURA_AUTOMATICA: TStringField
+      FieldName = 'FACTURA_AUTOMATICA'
+      Size = 1
+    end
+    object ZQ_planes_productosID_OPTICA_OS_CABECERA: TIntegerField
+      FieldName = 'ID_OPTICA_OS_CABECERA'
+      Required = True
+    end
+    object ZQ_planes_productosDESCUENTO: TFloatField
+      FieldName = 'DESCUENTO'
+    end
+    object ZQ_planes_productosID_PRODUCTOS_RECONOCIDOS: TIntegerField
+      FieldName = 'ID_PRODUCTOS_RECONOCIDOS'
+      Required = True
+    end
+    object ZQ_planes_productosMONTO_RECONOCIDO: TFloatField
+      FieldName = 'MONTO_RECONOCIDO'
+    end
+    object ZQ_planes_productosID_PRODUCTO: TIntegerField
+      FieldName = 'ID_PRODUCTO'
+      Required = True
+    end
+    object ZQ_planes_productosID_OS_1: TIntegerField
+      FieldName = 'ID_OS_1'
+      Required = True
+    end
   end
 end

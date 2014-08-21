@@ -1901,11 +1901,15 @@ begin
 
 
       //Grabo el descuento por mutual si existe
-      ZQ_ReconocMutual.Append;
-      ZQ_ReconocMutualMONTO_RECONOCIDO.AsFloat:=dctoMutual;
-      ZQ_ReconocMutualID_OS.AsInteger:=ZQ_DctoMutualID_OS.AsInteger;
-      ZQ_ReconocMutualID_COMPROBANTE.AsInteger:=comprobante;
-      ZQ_ReconocMutual.Post;
+      if not(ZQ_DctoMutual.IsEmpty) then
+       begin
+        ZQ_ReconocMutual.Append;
+        ZQ_ReconocMutualMONTO_RECONOCIDO.AsFloat:=dctoMutual;
+        ZQ_ReconocMutualID_OS.AsInteger:=ZQ_DctoMutualID_OS.AsInteger;
+        ZQ_ReconocMutualID_COMPROBANTE.AsInteger:=comprobante;
+        ZQ_ReconocMutual.Post;
+       end;
+
 
 
       if modoCargaPrevia then
@@ -3105,6 +3109,29 @@ begin
   ZQ_OrdenProductos.ParamByName('ID_ORDEN').AsInteger:= vsel5.ZQ_Optica_OrdenID_ORDEN.AsInteger;
   ZQ_OrdenProductos.Open;
 
+  //Cargo el mismo Cliente y detalles del comprobante
+  ZQ_Personas.Locate('id_persona', vsel5.ZQ_Optica_OrdenID_CLIENTE.AsInteger, []);
+  Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
+  IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
+  CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
+  CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
+  CD_ComprobanteOBSERVACION.AsString:= Format('Orden Nro: %s', [vsel5.ZQ_Optica_OrdenNRO_FACTURA.AsString]);
+
+  DBEdit_DetalleCliente.DataField:= 'OBSERVACION';
+  Label_DetalleCliente.Caption:= 'Detalle:';
+  CD_ComprobanteOBSERVACION.AsString:= vsel5.ZQ_Optica_OrdenOBSERVACIONES.AsString;
+
+  // Selecciono el descuento final segun el plan mutual que tenga
+  ZQ_DctoMutual.close;
+  ZQ_DctoMutual.ParamByName('idPers').AsInteger:=cliente;
+  dm.ISModelo.abrir(ZQ_DctoMutual);
+
+  ISDbSumaDetalleFacturaSumListChanged(self);
+
+  if ZQ_DctoMutualDESCUENTO.AsInteger>0 then
+     lblDctoMutual.Caption:=Format('Total descuento por %s (%d ',[ZQ_DctoMutualNOMBRE.AsString,ZQ_DctoMutualDESCUENTO.AsInteger])+'%): ' +FormatFloat('$ ##,###,##0.00  ', dctoMutual)
+  else
+     lblDctoMutual.Caption:='';
   if not (ZQ_OrdenProductos.IsEmpty) then
   begin
     CD_DetalleFactura.EmptyDataSet;
@@ -3132,7 +3159,8 @@ begin
       CD_DetalleFacturaIMPORTE_VENTA.AsFloat:= Importe_Producto;
       CD_DetalleFacturaIMPORTE_COSTO.AsFloat:= ZQ_ProductosPRECIO_COSTO.AsFloat;
       CD_DetalleFacturaimporte_original.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
-
+      CD_DetalleFacturamonto_reconocido.AsFloat:= ZQ_OrdenProductosIMPORTE_RECONOCIDO.AsFloat;
+      ZQ_ComprobanteDetalleIMPORTE_RECONOC_OS
       ZQ_ColsPrecios.Close;
       ZQ_ColsPrecios.Open;
       for i:= 1 to 5 do
@@ -3147,25 +3175,6 @@ begin
           CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= Importe_Producto; //ZQ_ProductosPRECIO_VENTA.AsFloat;
       end;
 
-      //Cargo el mismo Cliente y detalles del comprobante
-      ZQ_Personas.Locate('id_persona', vsel5.ZQ_Optica_OrdenID_CLIENTE.AsInteger, []);
-      Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
-      IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
-      CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
-      CD_ComprobanteID_TIPO_IVA.AsInteger:= IdClienteIVA;
-      CD_ComprobanteOBSERVACION.AsString:= Format('Orden Nro: %s', [vsel5.ZQ_Optica_OrdenNRO_FACTURA.AsString]);
-//    CD_ComprobanteID_PREVENTA.AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-//    CD_ComprobanteID_VENDEDOR.AsInteger:= vsel4.ZQ_ComprobanteID_VENDEDOR.AsInteger;
-//    IdVendedor:= CD_ComprobanteID_VENDEDOR.AsInteger;
-//
-      DBEdit_DetalleCliente.DataField:= 'OBSERVACION';
-      Label_DetalleCliente.Caption:= 'Detalle:';
-      CD_ComprobanteOBSERVACION.AsString:= vsel5.ZQ_Optica_OrdenOBSERVACIONES.AsString;
-//
-//    ZQ_ComprobPreventa.Close;
-//    ZQ_ComprobPreventa.ParamByName('id').AsInteger:= vsel4.ZQ_ComprobanteID_COMPROBANTE.AsInteger;
-//    ZQ_ComprobPreventa.Open;
-//
       CD_DetalleFactura.Post;
 
       lblCantProductos.Caption:= 'Cantidad Productos/Servicios: ' + inttostr(CD_DetalleFactura.RecordCount);

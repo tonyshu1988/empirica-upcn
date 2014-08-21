@@ -500,6 +500,19 @@ type
     ZQ_PersonasCODIGO_CORTO: TStringField;
     ZQ_PersonasIMPORTADO: TStringField;
     ZQ_PersonasNRO_AFILIADO: TStringField;
+    ZQ_planes_productos: TZQuery;
+    ZQ_planes_productosID_OS: TIntegerField;
+    ZQ_planes_productosCODIGO: TStringField;
+    ZQ_planes_productosNOMBRE: TStringField;
+    ZQ_planes_productosDESCRIPCION: TStringField;
+    ZQ_planes_productosBAJA: TStringField;
+    ZQ_planes_productosFACTURA_AUTOMATICA: TStringField;
+    ZQ_planes_productosID_OPTICA_OS_CABECERA: TIntegerField;
+    ZQ_planes_productosDESCUENTO: TFloatField;
+    ZQ_planes_productosID_PRODUCTOS_RECONOCIDOS: TIntegerField;
+    ZQ_planes_productosMONTO_RECONOCIDO: TFloatField;
+    ZQ_planes_productosID_PRODUCTO: TIntegerField;
+    ZQ_planes_productosID_OS_1: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -522,7 +535,7 @@ type
     procedure cancelarProducto;
     procedure btnMedicoClick(Sender: TObject);
     procedure btQuitarProductoClick(Sender: TObject);
-    procedure buscarOS(id:Integer);
+    procedure buscarOS(id,prod:Integer);
     procedure PopItemProducto_AgregarClick(Sender: TObject);
     procedure ZQ_OrdenDetalleCANTIDADChange(Sender: TField);
     function calcMonto():Real ;
@@ -1126,10 +1139,13 @@ if dm.ISModelo.verificar_transaccion(abmOrden) then
 end;
 
 
-procedure TFOP_ABM_OrdenTecnica.buscarOS(id:Integer);
+procedure TFOP_ABM_OrdenTecnica.buscarOS(id,prod:Integer);
 begin
 
-  ISListadoOS.SQL[4]:=Format('and opos.id_persona=%d',[id]);
+  ISListadoOS.SQL[4]:=Format('and (opos.id_persona=%d)and(opr.id_producto=%d)',[id,prod]);
+  ZQ_planes_productos.Close;
+  ZQ_planes_productos.SQL[5]:=Format('and (opos.id_persona=%d)and(opr.id_producto=%d)',[id,prod]);
+  ZQ_planes_productos.Open;
   if ISListadoOS.Buscar then
   begin
     if ISListadoOS.Resultado <> '' then
@@ -1138,8 +1154,9 @@ begin
       ZQ_OrdenDetalleOSID_DETALLE_OS.AsInteger:=ZQ_GenOrdenDetalleOS.GetNextValue;
       ZQ_ordenDetalleOSID_ORDEN_DETALLE.AsInteger:=ZQ_OrdenDetalleID_ORDEN_DETALLE.AsInteger;
       ZQ_OrdenDetalleOSID_OS.AsInteger:=StrToInt(ISListadoOS.Resultado);
-      ZQ_OrdenDetalleOSMONTO_DESCONTADO.AsFloat:=0;
+      ZQ_OrdenDetalleOSMONTO_DESCONTADO.AsFloat:=ZQ_planes_productosMONTO_RECONOCIDO.AsFloat;
       modoEscrituraOS();
+      ZQ_planes_productos.Close;
     end;
   end;
 end;
@@ -1189,7 +1206,7 @@ end;
 procedure TFOP_ABM_OrdenTecnica.MenuItem1Click(Sender: TObject);
 begin
     if dm.ISModelo.verificar_transaccion(abmOrden) then
-       buscarOS(cliente);
+       buscarOS(cliente,ZQ_OrdenDetalleID_PRODUCTO.AsInteger);
 end;
 
 procedure TFOP_ABM_OrdenTecnica.MenuItem2Click(Sender: TObject);

@@ -1,8 +1,8 @@
 object FOP_Cajero: TFOP_Cajero
-  Left = 142
-  Top = 38
+  Left = 129
+  Top = 46
   Width = 1131
-  Height = 725
+  Height = 689
   Caption = 'Subsistema de Caja Obras Sociales - SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -3237,7 +3237,7 @@ object FOP_Cajero: TFOP_Cajero
     Left = 88
     Top = 0
     Width = 1027
-    Height = 635
+    Height = 599
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 2
@@ -3320,7 +3320,7 @@ object FOP_Cajero: TFOP_Cajero
       Left = 1
       Top = 190
       Width = 1025
-      Height = 444
+      Height = 408
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 1
@@ -3347,7 +3347,7 @@ object FOP_Cajero: TFOP_Cajero
         Left = 1
         Top = 14
         Width = 1023
-        Height = 269
+        Height = 233
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3362,7 +3362,7 @@ object FOP_Cajero: TFOP_Cajero
           Left = 1
           Top = 1
           Width = 1021
-          Height = 184
+          Height = 148
           Align = alClient
           Color = 15527129
           DataSource = DS_DetalleFactura
@@ -3443,7 +3443,7 @@ object FOP_Cajero: TFOP_Cajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 185
+          Top = 149
           Width = 1021
           Height = 83
           Align = alBottom
@@ -3542,7 +3542,7 @@ object FOP_Cajero: TFOP_Cajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 372
+        Top = 336
         Width = 1023
         Height = 71
         Align = alBottom
@@ -3626,7 +3626,7 @@ object FOP_Cajero: TFOP_Cajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 283
+        Top = 247
         Width = 1023
         Height = 89
         Align = alBottom
