@@ -551,12 +551,6 @@ type
     ZQ_ComprobanteID_PREVENTA: TIntegerField;
     btnCargarOrdenTecnica: TdxBarLargeButton;
     ZQ_OrdenProductos: TZQuery;
-    ZQ_OrdenProductosID_ORDEN_DETALLE: TIntegerField;
-    ZQ_OrdenProductosID_ORDEN: TIntegerField;
-    ZQ_OrdenProductosID_PRODUCTO: TIntegerField;
-    ZQ_OrdenProductosCANTIDAD: TFloatField;
-    ZQ_OrdenProductosOBSERVACIONES: TStringField;
-    ZQ_OrdenProductosID_LABORATORIO: TIntegerField;
     ZQ_OpticaEntrega: TZQuery;
     ZQ_OpticaEntregaID_ENTREGA: TIntegerField;
     ZQ_OpticaEntregaID_ORDEN: TIntegerField;
@@ -591,10 +585,6 @@ type
     ZQ_Optica_OrdenID_COMPROBANTE: TIntegerField;
     ZQ_Optica_OrdenSALDO: TFloatField;
     CD_FpagoFECHA_FP: TDateTimeField;
-    ZQ_OrdenProductosIMPORTE_RECONOCIDO: TFloatField;
-    ZQ_OrdenProductosIMPORTE_VENTA: TFloatField;
-    ZQ_OrdenProductosIMPORTE_UNITARIO: TFloatField;
-    ZQ_OrdenProductosIMPORTE_TOTAL: TFloatField;
     ZQ_Optica_OrdenCODIGO_CLI: TStringField;
     ZQ_Optica_OrdenID_CLIENTE: TIntegerField;
     ZQ_Optica_OrdenCOD_BARRAS: TStringField;
@@ -694,6 +684,24 @@ type
     ZQ_ReconocMutualMONTO_RECONOCIDO: TFloatField;
     ZQ_ReconocMutualID_OS: TIntegerField;
     ZQ_ReconocMutualID_COMPROBANTE: TIntegerField;
+    ZQ_OrdenDetOss: TZQuery;
+    ZQ_OrdenProductosID_ORDEN_DETALLE: TIntegerField;
+    ZQ_OrdenProductosID_ORDEN: TIntegerField;
+    ZQ_OrdenProductosID_PRODUCTO: TIntegerField;
+    ZQ_OrdenProductosCANTIDAD: TFloatField;
+    ZQ_OrdenProductosOBSERVACIONES: TStringField;
+    ZQ_OrdenProductosID_LABORATORIO: TIntegerField;
+    ZQ_OrdenProductosIMPORTE_RECONOCIDO: TFloatField;
+    ZQ_OrdenProductosIMPORTE_VENTA: TFloatField;
+    ZQ_OrdenProductosIMPORTE_UNITARIO: TFloatField;
+    ZQ_OrdenProductosIMPORTE_TOTAL: TFloatField;
+    ZQ_OrdenDetOssID_DETALLE_OS: TIntegerField;
+    ZQ_OrdenDetOssID_ORDEN_DETALLE: TIntegerField;
+    ZQ_OrdenDetOssID_OS: TIntegerField;
+    ZQ_OrdenDetOssMONTO_DESCONTADO: TFloatField;
+    ZQ_OrdenDetOssOBSERVACIONES: TStringField;
+    ZQ_OrdenDetOssID_FACTURA_OS: TIntegerField;
+    ZQ_OrdenDetOssDETALLE_PROD_FACTURA: TStringField;
     procedure btsalirClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
     procedure FormCreate(Sender: TObject);
@@ -2046,6 +2054,11 @@ begin
       ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat:= ZQ_ComprobanteDetalleIMPORTE_IF_SINIVA.AsFloat + (totFiscal - parcial - auxTotalIva);
     end;
 
+    //Filtro el CDS para que traiga los reconocimientos del prod editado
+    CD_Reconocimientos.Filtered:=False;
+    CD_Reconocimientos.Filter:=Format('id_prod=%d',[CD_DetalleFacturaID_PRODUCTO.AsInteger]);
+    CD_Reconocimientos.Filtered:=True;
+
     //Guardo los reconocimientos de Oss de cada producto en OPTICA_RECONOCIM_OSS
     if ZQ_ComprobanteDetalleIMPORTE_RECONOC_OS.AsFloat>0 then
      begin
@@ -2062,7 +2075,7 @@ begin
             CD_Reconocimientos.Next;
          end;
      end;
-
+    CD_Reconocimientos.Filtered:=False;
     ZQ_ComprobanteDetalle.Post;
     inc(i);
     CD_DetalleFactura.Next;
@@ -3174,6 +3187,26 @@ begin
         else
           CD_DetalleFactura.FieldByName(Format('PRECIO%d', [i])).AsFloat:= Importe_Producto; //ZQ_ProductosPRECIO_VENTA.AsFloat;
       end;
+
+      //Por cada producto que cargo de la orden, cargo los reconocimientos de Oss del sobre
+      ZQ_OrdenDetOss.Close;
+      ZQ_OrdenDetOss.ParamByName('ID').AsInteger:=ZQ_OrdenProductosID_ORDEN_DETALLE.AsInteger;
+      ZQ_OrdenDetOss.Open;
+      ZQ_OrdenDetOss.First;
+      while not(ZQ_OrdenDetOss.Eof) do
+       begin
+          CD_Reconocimientos.Append;
+          CD_Reconocimientosid_os.AsInteger:=ZQ_OrdenDetOssID_OS.AsInteger;
+          CD_Reconocimientosmonto_reconocido.AsFloat:=ZQ_OrdenDetOssMONTO_DESCONTADO.AsFloat;
+          CD_Reconocimientosdetalle.AsString:=ZQ_OrdenDetOssOBSERVACIONES.AsString;
+          CD_Reconocimientosid_prod.AsInteger:=ZQ_OrdenProductosID_PRODUCTO.AsInteger;
+          CD_Reconocimientos.Post;
+
+          ZQ_OrdenDetOss.Next;
+       end;
+      ZQ_OrdenDetOss.Close;
+
+
 
       CD_DetalleFactura.Post;
 

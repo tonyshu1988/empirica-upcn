@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 62
-  Top = 36
+  Left = 321
+  Top = 191
   Width = 1010
   Height = 663
   Caption = 'ABM Orden T'#233'cnica'
