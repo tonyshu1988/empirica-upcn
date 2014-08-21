@@ -22,15 +22,15 @@ object FOP_Reportes: TFOP_Reportes
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1016
-    Height = 537
+    Width = 1008
+    Height = 526
     Align = alClient
     TabOrder = 4
     object PageControlReportes: TPageControl
       Left = 1
       Top = 1
-      Width = 1014
-      Height = 535
+      Width = 1006
+      Height = 524
       ActivePage = TabSheet1
       Align = alClient
       TabOrder = 0
@@ -141,7 +141,7 @@ object FOP_Reportes: TFOP_Reportes
                 50.270833333333330000
                 754.062500000000000000
                 190.500000000000000000
-                391.583333333333400000)
+                391.583333333333300000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -171,8 +171,8 @@ object FOP_Reportes: TFOP_Reportes
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                679.979166666666800000
-                58.208333333333340000
+                679.979166666666700000
+                58.208333333333330000
                 537.104166666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -203,9 +203,9 @@ object FOP_Reportes: TFOP_Reportes
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                717.020833333333400000
+                717.020833333333300000
                 121.708333333333300000
-                463.020833333333400000)
+                463.020833333333300000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -303,7 +303,7 @@ object FOP_Reportes: TFOP_Reportes
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              84.666666666666680000
+              84.666666666666670000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -1387,8 +1387,8 @@ object FOP_Reportes: TFOP_Reportes
         object grillaAfiliados: TDBGrid
           Left = 0
           Top = 22
-          Width = 1006
-          Height = 485
+          Width = 998
+          Height = 474
           Align = alClient
           Color = 14606012
           DataSource = DS_PersonaOss
@@ -1524,7 +1524,7 @@ object FOP_Reportes: TFOP_Reportes
         object PBusqueda: TPanel
           Left = 0
           Top = 0
-          Width = 1006
+          Width = 998
           Height = 22
           Align = alTop
           BevelOuter = bvNone
@@ -1550,14 +1550,13 @@ object FOP_Reportes: TFOP_Reportes
             Layout = tlCenter
           end
           object lblCantidadRegistros: TLabel
-            Left = 760
+            Left = 752
             Top = 0
             Width = 246
             Height = 22
             Align = alRight
             Alignment = taRightJustify
             AutoSize = False
-            Caption = 'lblCantidadRegistros'
             Font.Charset = ANSI_CHARSET
             Font.Color = clNavy
             Font.Height = -11
@@ -1589,7 +1588,7 @@ object FOP_Reportes: TFOP_Reportes
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2701,6 +2700,10 @@ object FOP_Reportes: TFOP_Reportes
       end
       item
         TituloColumna = 'N'#186' Afiliado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Plan'
         Visible = True
       end>
     NombreGuardarConfig = 'OrdenarGrillaAfiliados'
