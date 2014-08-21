@@ -3160,7 +3160,7 @@ begin
       CD_DetalleFacturaIMPORTE_COSTO.AsFloat:= ZQ_ProductosPRECIO_COSTO.AsFloat;
       CD_DetalleFacturaimporte_original.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
       CD_DetalleFacturamonto_reconocido.AsFloat:= ZQ_OrdenProductosIMPORTE_RECONOCIDO.AsFloat;
-      ZQ_ComprobanteDetalleIMPORTE_RECONOC_OS
+      
       ZQ_ColsPrecios.Close;
       ZQ_ColsPrecios.Open;
       for i:= 1 to 5 do

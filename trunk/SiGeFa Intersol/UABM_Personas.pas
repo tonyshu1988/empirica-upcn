@@ -206,7 +206,6 @@ type
     Label7: TLabel;
     DBEditCodigo: TDBEdit;
     ZQ_UltimoNro: TZQuery;
-    ZQ_UltimoNroCODIGO_CORTO: TIntegerField;
     ZQ_PersonaDESCUENTO_ESPECIAL: TFloatField;
     Label11: TLabel;
     DBEDescuento: TDBEdit;
@@ -305,6 +304,7 @@ type
     ZQ_PersonaCODIGO_CORTO: TStringField;
     ZQ_PersonaIMPORTADO: TStringField;
     ZQ_PersonaNRO_AFILIADO: TStringField;
+    ZQ_UltimoNroID_PERSONA: TIntegerField;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -487,9 +487,9 @@ begin
     ZQ_UltimoNro.Close;
     ZQ_UltimoNro.Open;
     if ZQ_UltimoNro.IsEmpty then
-      ZQ_PersonaCODIGO_CORTO.AsInteger:= 1
+      ZQ_PersonaCODIGO_CORTO.AsString:= '001'
     else
-      ZQ_PersonaCODIGO_CORTO.AsInteger:= ZQ_UltimoNroCODIGO_CORTO.AsInteger + 1;
+      ZQ_PersonaCODIGO_CORTO.AsInteger:= ZQ_UltimoNroID_PERSONA.AsInteger + 1;
 
     DBEApellidoNombre.SetFocus;
     GrupoEditando.Enabled := false;
@@ -527,7 +527,7 @@ begin
       if ZQ_UltimoNro.IsEmpty then
         ZQ_PersonaCODIGO_CORTO.AsInteger:= 1
       else
-        ZQ_PersonaCODIGO_CORTO.AsInteger:= ZQ_UltimoNroCODIGO_CORTO.AsInteger + 1;
+        ZQ_PersonaCODIGO_CORTO.AsInteger:= ZQ_UltimoNroID_PERSONA.AsInteger + 1;
     end;
 
     DBEApellidoNombre.SetFocus;

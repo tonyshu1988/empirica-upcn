@@ -173,8 +173,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            687.916666666666800000
-            68.791666666666680000
+            687.916666666666700000
+            68.791666666666670000
             521.229166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -207,7 +207,7 @@ object FABM_Personas: TFABM_Personas
             52.916666666666670000
             645.583333333333400000
             5.291666666666667000
-            608.541666666666800000)
+            608.541666666666700000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -656,7 +656,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            941.916666666666800000
+            941.916666666666700000
             198.437500000000000000
             92.604166666666680000)
           Alignment = taLeftJustify
@@ -1821,7 +1821,7 @@ object FABM_Personas: TFABM_Personas
           Size.Values = (
             52.916666666666670000
             1121.833333333333000000
-            68.791666666666680000
+            68.791666666666670000
             523.875000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -2727,7 +2727,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            902.229166666666800000
+            902.229166666666700000
             2.645833333333333000
             293.687500000000000000)
           Alignment = taLeftJustify
@@ -4764,14 +4764,15 @@ object FABM_Personas: TFABM_Personas
   object ZQ_UltimoNro: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select first 1 p.codigo_corto'
+      'select first 1 p.id_persona'
       'from persona p'
       'order by p.codigo_corto desc')
     Params = <>
     Left = 618
     Top = 64
-    object ZQ_UltimoNroCODIGO_CORTO: TIntegerField
-      FieldName = 'CODIGO_CORTO'
+    object ZQ_UltimoNroID_PERSONA: TIntegerField
+      FieldName = 'ID_PERSONA'
+      ReadOnly = True
     end
   end
   object ZQ_TipoRelacion: TZQuery
