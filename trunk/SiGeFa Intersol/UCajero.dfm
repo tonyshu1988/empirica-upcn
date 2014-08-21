@@ -1,8 +1,8 @@
 object FCajero: TFCajero
-  Left = 172
-  Top = 50
+  Left = 140
+  Top = 4
   Width = 1109
-  Height = 698
+  Height = 743
   Caption = 'Subsistema de Caja - SiGeFa'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -3349,7 +3349,7 @@ object FCajero: TFCajero
     Left = 88
     Top = 0
     Width = 1005
-    Height = 608
+    Height = 653
     Align = alClient
     Caption = 'PanelContenedorDerecha'
     TabOrder = 2
@@ -3752,7 +3752,7 @@ object FCajero: TFCajero
       Left = 1
       Top = 231
       Width = 1003
-      Height = 376
+      Height = 421
       Align = alClient
       Caption = 'PanelProductosYFPago'
       TabOrder = 2
@@ -3779,7 +3779,7 @@ object FCajero: TFCajero
         Left = 1
         Top = 14
         Width = 1001
-        Height = 201
+        Height = 246
         Align = alClient
         Caption = 'PanelListadoProducto'
         TabOrder = 0
@@ -3792,7 +3792,7 @@ object FCajero: TFCajero
         end
         object Panel6: TPanel
           Left = 1
-          Top = 146
+          Top = 191
           Width = 999
           Height = 54
           Align = alBottom
@@ -3863,7 +3863,7 @@ object FCajero: TFCajero
           Left = 1
           Top = 1
           Width = 999
-          Height = 145
+          Height = 190
           Align = alClient
           Color = 15527129
           DataSource = DS_DetalleFactura
@@ -3938,7 +3938,7 @@ object FCajero: TFCajero
       end
       object PanelFormaPago: TPanel
         Left = 1
-        Top = 215
+        Top = 260
         Width = 1001
         Height = 89
         Align = alBottom
@@ -4043,7 +4043,7 @@ object FCajero: TFCajero
       end
       object PieGrilla: TPanel
         Left = 1
-        Top = 304
+        Top = 349
         Width = 1001
         Height = 71
         Align = alBottom

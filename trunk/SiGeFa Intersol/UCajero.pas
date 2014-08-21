@@ -1170,6 +1170,7 @@ procedure TFCajero.OnSelPers;
 begin
   if not (vsel2.ZQ_Personas.IsEmpty) then
   begin
+   
     ZQ_Personas.Refresh;
     ZQ_Personas.Locate('id_persona', vsel2.ZQ_PersonasID_PERSONA.AsInteger, []);
     Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
