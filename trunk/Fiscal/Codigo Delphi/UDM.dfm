@@ -136,12 +136,15 @@ object DM: TDM
     end
   end
   object conexion: TZConnection
-    Protocol = 'firebird-1.5'
+    ControlsCodePage = cGET_ACP
+    UTF8StringsAsWideField = False
+    AutoCommit = False
     HostName = '127.0.0.1'
-    Database = 'C:\SISTEMAS\SiGeFa\Bases\SiGeFa.FDB'
+    Port = 3050
+    Database = 'E:\Empirica\empirica-upcn\SiGeFa Intersol\Bases\SIGEFA ING.FDB'
     User = 'sysdba'
     Password = 'masterkey'
-    AutoCommit = False
+    Protocol = 'firebird-2.5'
     Left = 32
     Top = 24
   end
