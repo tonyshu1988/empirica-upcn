@@ -534,6 +534,7 @@ type
     CD_Devolucionimporte_if_siniva: TFloatField;
     CD_Devolucionimporte_iva_if: TFloatField;
     CD_Devolucionimporte_original: TFloatField;
+    CD_Entregaimporte_if: TFloatField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
@@ -1006,6 +1007,7 @@ begin
   //---------------DATOS COMPROBANTE
   ZQ_ComprobanteIMPORTE_TOTAL.AsFloat:= abs(saldoFormaCobroPago);
   ZQ_ComprobanteIMPORTE_VENTA.AsFloat:= abs(saldoFormaCobroPago);
+
   ZQ_ComprobanteID_TIPO_CPB.AsInteger:= tipoComprobante;
 
 
@@ -1549,6 +1551,7 @@ begin
     client.FieldByName('coefGanancia').AsFloat:= ZQ_BuscarPrecioCOEF_GANANCIA.AsFloat;
     client.FieldByName('coefDescuento').AsFloat:= ZQ_BuscarPrecioCOEF_DESCUENTO.AsFloat;
     client.FieldByName('impuestoIVA').AsFloat:= ZQ_BuscarPrecioIMPUESTO_IVA.AsFloat;
+    client.FieldByName('importe_if').AsFloat:= ZQ_BuscarPrecioPRECIO_VENTA.AsFloat;
     client.Post;
 
     query.Next;
