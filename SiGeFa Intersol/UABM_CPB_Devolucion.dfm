@@ -4917,6 +4917,9 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object CD_Entrega_idStockProducto: TIntegerField
       FieldName = 'idStockProducto'
     end
+    object CD_Entregaimporte_if: TFloatField
+      FieldName = 'importe_if'
+    end
   end
   object Popup_Entrega: TPopupMenu
     Images = FPrincipal.Iconos_Menu_16
