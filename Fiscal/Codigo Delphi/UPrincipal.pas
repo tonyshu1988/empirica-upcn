@@ -1573,13 +1573,13 @@ begin
     if (TipoLetra = 'A') and (ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat > 0) then
     begin
       PrecioUnitario:= ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-      PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+      PrecioUnitario:= abs(RoundTo(PrecioUnitario, -2));
       descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF_SINIVA.AsFloat, -2);
     end
     else
     begin
       PrecioUnitario:= ZQ_ItemsIMPORTE_IF.AsFloat / ZQ_ItemsCANTIDAD.AsFloat;
-      PrecioUnitario:= RoundTo(PrecioUnitario, -2);
+      PrecioUnitario:= abs(RoundTo(PrecioUnitario, -2));
       descuento_redondeo:= descuento_redondeo + roundto((PrecioUnitario * Cantidad) - ZQ_ItemsIMPORTE_IF.AsFloat, -2);
     end;
     PrecioUnitarioWide:= FloatToStr(PrecioUnitario * 100);
