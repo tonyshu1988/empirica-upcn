@@ -1,8 +1,8 @@
 object FPrincipal: TFPrincipal
-  Left = 392
-  Top = 255
+  Left = 415
+  Top = 138
   Width = 611
-  Height = 507
+  Height = 584
   Caption = 'Modulo Impresi'#243'n Fiscal'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,8 +19,8 @@ object FPrincipal: TFPrincipal
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 603
-    Height = 480
+    Width = 595
+    Height = 546
     Align = alClient
     TabOrder = 0
     object Label2: TLabel
@@ -32,8 +32,8 @@ object FPrincipal: TFPrincipal
     end
     object lblErrorDriver: TLabel
       Left = 1
-      Top = 461
-      Width = 601
+      Top = 527
+      Width = 593
       Height = 18
       Align = alBottom
       Alignment = taCenter
@@ -71,10 +71,23 @@ object FPrincipal: TFPrincipal
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label7: TLabel
+      Left = 256
+      Top = 275
+      Width = 61
+      Height = 16
+      Caption = 'Factura:'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Verdana'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object Panel2: TPanel
       Left = 1
       Top = 1
-      Width = 601
+      Width = 593
       Height = 30
       Align = alTop
       BevelOuter = bvLowered
@@ -82,7 +95,7 @@ object FPrincipal: TFPrincipal
       object Label1: TLabel
         Left = 1
         Top = 1
-        Width = 599
+        Width = 591
         Height = 28
         Align = alClient
         Alignment = taCenter
@@ -197,7 +210,7 @@ object FPrincipal: TFPrincipal
     end
     object btnCancelarFactura: TButton
       Left = 9
-      Top = 274
+      Top = 346
       Width = 113
       Height = 25
       Caption = 'Cancelar Factura'
@@ -250,9 +263,9 @@ object FPrincipal: TFPrincipal
         Width = 104
         Height = 21
         ItemHeight = 13
-        ItemIndex = 1
+        ItemIndex = 0
         TabOrder = 0
-        Text = 'HASAR'
+        Text = 'EPSON'
         OnChange = cBoxImpresora_MarcaChange
         Items.Strings = (
           'EPSON'
@@ -280,9 +293,9 @@ object FPrincipal: TFPrincipal
         Width = 104
         Height = 21
         ItemHeight = 13
-        ItemIndex = 1
+        ItemIndex = 0
         TabOrder = 2
-        Text = '2'
+        Text = '1'
         OnChange = cBoxImpresora_PuertoChange
         Items.Strings = (
           '1'
@@ -294,9 +307,9 @@ object FPrincipal: TFPrincipal
         Width = 104
         Height = 21
         ItemHeight = 13
-        ItemIndex = 1
+        ItemIndex = 0
         TabOrder = 1
-        Text = 'P-330F'
+        Text = 'TM-U220AF'
         OnChange = cBoxImpresora_ModeloChange
         Items.Strings = (
           'TM-U220AF'
@@ -305,10 +318,11 @@ object FPrincipal: TFPrincipal
       end
     end
     object MemoLog: TMemo
-      Left = 10
-      Top = 304
-      Width = 585
-      Height = 150
+      Left = 1
+      Top = 389
+      Width = 593
+      Height = 138
+      Align = alBottom
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -9
@@ -345,6 +359,22 @@ object FPrincipal: TFPrincipal
       OnErrorFiscal = HasarErrorFiscal
       OnFaltaPapel = HasarFaltaPapel
       ControlData = {000300004F0300004F030000}
+    end
+    object btnNC: TButton
+      Left = 9
+      Top = 268
+      Width = 113
+      Height = 25
+      Caption = 'Nota Cr'#233'dito'
+      TabOrder = 18
+      OnClick = btnNCClick
+    end
+    object editNumeroComprobNC: TEdit
+      Left = 128
+      Top = 270
+      Width = 121
+      Height = 21
+      TabOrder = 19
     end
   end
 end

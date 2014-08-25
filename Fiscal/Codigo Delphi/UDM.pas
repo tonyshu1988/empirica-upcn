@@ -4,7 +4,7 @@ interface
 
 uses
   SysUtils, Classes, EKIni, DB, EKModelo, ZConnection, ZAbstractRODataset,
-  ZAbstractDataset, ZDataset;
+  ZAbstractDataset, ZDataset, ZAbstractConnection;
 
 type
   TDM = class(TDataModule)
