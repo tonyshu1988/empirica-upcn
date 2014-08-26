@@ -21,8 +21,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object PanelFondo: TPanel
     Left = 0
     Top = 22
-    Width = 1008
-    Height = 498
+    Width = 1016
+    Height = 509
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -142,7 +142,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
             50.270833333333330000
             904.875000000000000000
             127.000000000000000000
-            957.791666666666700000)
+            957.791666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -173,8 +173,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           Size.Values = (
             52.916666666666670000
             1209.145833333333000000
-            68.791666666666670000
-            351.895833333333300000)
+            68.791666666666680000
+            351.895833333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -193,7 +193,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
           FontSize = 9
         end
         object RepProds_Titulo: TQRLabel
-          Left = 450
+          Left = -66
           Top = 2
           Width = 147
           Height = 20
@@ -469,7 +469,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -756,8 +756,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 1008
-      Height = 498
+      Width = 1016
+      Height = 509
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -771,8 +771,8 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       object grillaProductos: TDBGrid
         Left = 5
         Top = 5
-        Width = 998
-        Height = 488
+        Width = 1006
+        Height = 499
         Align = alClient
         Color = 14606012
         DataSource = DS_PlanProducto
@@ -818,7 +818,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 1008
+    Width = 1016
     Height = 22
     Align = alTop
     BevelOuter = bvNone
@@ -844,7 +844,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
       Layout = tlCenter
     end
     object lblCantidadRegistros: TLabel
-      Left = 760
+      Left = 768
       Top = 0
       Width = 248
       Height = 22
@@ -880,7 +880,7 @@ object FOP_ReconocimientoProds: TFOP_ReconocimientoProds
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

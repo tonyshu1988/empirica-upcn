@@ -22,15 +22,15 @@ object FOP_Reportes: TFOP_Reportes
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 1008
-    Height = 526
+    Width = 1016
+    Height = 537
     Align = alClient
     TabOrder = 4
     object PageControlReportes: TPageControl
       Left = 1
       Top = 1
-      Width = 1006
-      Height = 524
+      Width = 1014
+      Height = 535
       ActivePage = TabSheet1
       Align = alClient
       TabOrder = 0
@@ -141,7 +141,7 @@ object FOP_Reportes: TFOP_Reportes
                 50.270833333333330000
                 754.062500000000000000
                 190.500000000000000000
-                391.583333333333300000)
+                391.583333333333400000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -171,8 +171,8 @@ object FOP_Reportes: TFOP_Reportes
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                679.979166666666700000
-                58.208333333333330000
+                679.979166666666800000
+                58.208333333333340000
                 537.104166666666700000)
               Alignment = taCenter
               AlignToBand = True
@@ -203,9 +203,9 @@ object FOP_Reportes: TFOP_Reportes
               Frame.DrawRight = False
               Size.Values = (
                 52.916666666666670000
-                717.020833333333300000
+                717.020833333333200000
                 121.708333333333300000
-                463.020833333333300000)
+                463.020833333333400000)
               Alignment = taCenter
               AlignToBand = True
               AutoSize = True
@@ -303,7 +303,7 @@ object FOP_Reportes: TFOP_Reportes
             ForceNewColumn = False
             ForceNewPage = False
             Size.Values = (
-              84.666666666666670000
+              84.666666666666680000
               1899.708333333333000000)
             PreCaluculateBandHeight = False
             KeepOnOnePage = False
@@ -1168,7 +1168,7 @@ object FOP_Reportes: TFOP_Reportes
           object Label7: TLabel
             Left = 1
             Top = 1
-            Width = 39
+            Width = 1004
             Height = 13
             Align = alTop
             Alignment = taCenter
@@ -1286,7 +1286,7 @@ object FOP_Reportes: TFOP_Reportes
           object Label1: TLabel
             Left = 1
             Top = 1
-            Width = 89
+            Width = 1004
             Height = 13
             Align = alTop
             Alignment = taCenter
@@ -1387,8 +1387,8 @@ object FOP_Reportes: TFOP_Reportes
         object grillaAfiliados: TDBGrid
           Left = 0
           Top = 22
-          Width = 998
-          Height = 474
+          Width = 1006
+          Height = 485
           Align = alClient
           Color = 14606012
           DataSource = DS_PersonaOss
@@ -1524,7 +1524,7 @@ object FOP_Reportes: TFOP_Reportes
         object PBusqueda: TPanel
           Left = 0
           Top = 0
-          Width = 998
+          Width = 1006
           Height = 22
           Align = alTop
           BevelOuter = bvNone
@@ -1550,7 +1550,7 @@ object FOP_Reportes: TFOP_Reportes
             Layout = tlCenter
           end
           object lblCantidadRegistros: TLabel
-            Left = 752
+            Left = 760
             Top = 0
             Width = 246
             Height = 22
@@ -1588,7 +1588,7 @@ object FOP_Reportes: TFOP_Reportes
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2458,15 +2458,15 @@ object FOP_Reportes: TFOP_Reportes
     Connection = DM.Conexion
     SQL.Strings = (
       
-        'select cl.*,td.nombre_tipo_doc, ti.nombre_tipo_iva, pv.nombre_pr' +
-        'ovincia,oo.nombre'
+        'select distinct cl.*,td.nombre_tipo_doc, ti.nombre_tipo_iva, pv.' +
+        'nombre_provincia,oo.nombre'
       'from optica_persona_os opo'
       'join optica_os oo on (opo.id_os=oo.id_os)'
       'join persona cl on (opo.id_persona=cl.id_persona)'
       'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
       'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
-      'where (opo.id_os=:id)'
+      'where (opo.id_os=:id)and(cl.baja='#39'N'#39')'
       'order by cl.nombre,cl.codigo_corto'
       ''
       '')

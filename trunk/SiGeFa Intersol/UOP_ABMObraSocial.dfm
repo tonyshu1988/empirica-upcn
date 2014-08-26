@@ -23,8 +23,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 865
-    Height = 418
+    Width = 873
+    Height = 429
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
@@ -143,7 +143,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             50.270833333333330000
             1251.479166666667000000
             124.354166666666700000
-            264.583333333333300000)
+            264.583333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -175,7 +175,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             52.916666666666670000
             1164.166666666667000000
             68.791666666666670000
-            439.208333333333300000)
+            439.208333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -207,7 +207,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             52.916666666666670000
             1132.416666666667000000
             5.291666666666667000
-            502.708333333333300000)
+            502.708333333333400000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -605,7 +605,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333330000
+          58.208333333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -655,7 +655,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333330000
+          82.020833333333340000
           2770.187500000000000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -703,7 +703,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333330000
+            34.395833333333340000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -1008,8 +1008,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     object PanelGrilla: TPanel
       Left = 0
       Top = 0
-      Width = 865
-      Height = 418
+      Width = 873
+      Height = 429
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 5
@@ -1023,8 +1023,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       object DBGridObraSocial: TDBGrid
         Left = 5
         Top = 5
-        Width = 855
-        Height = 223
+        Width = 863
+        Height = 234
         Align = alClient
         Color = 14606012
         DataSource = DS_OP_ObraSocial
@@ -1128,8 +1128,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       end
       object PanelEdicion: TPanel
         Left = 5
-        Top = 228
-        Width = 855
+        Top = 239
+        Width = 863
         Height = 185
         Align = alBottom
         BevelOuter = bvNone
@@ -1137,9 +1137,9 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
         object PageControl1: TPageControl
           Left = 0
           Top = 0
-          Width = 855
+          Width = 863
           Height = 185
-          ActivePage = TabAfiliados
+          ActivePage = TabSheet1
           Align = alClient
           TabOrder = 0
           OnChanging = PageControl1Changing
@@ -1697,7 +1697,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             object DBGridAfiliados: TDBGrid
               Left = 0
               Top = 0
-              Width = 847
+              Width = 855
               Height = 157
               Align = alClient
               Color = 14606012
@@ -1749,7 +1749,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 865
+    Width = 873
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1771,7 +1771,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
-      Left = 755
+      Left = 763
       Top = 1
       Width = 109
       Height = 17
@@ -1788,7 +1788,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -12
+    Font.Height = -11
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {

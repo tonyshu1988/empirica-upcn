@@ -283,7 +283,7 @@ begin
     ZQ_OS_CABECERA.Append;
     ZQ_OS_CABECERABAJA.AsString:= 'N';
     ZQ_OS_CABECERAFACTURA_AUTOMATICA.AsString:= 'N';
-
+    ZQ_OS_CABECERAID_PROVINCIA.AsInteger:=1;
     PageControl1.ActivePageIndex:= 0;
     DBEditCodigo.SetFocus;
     GrupoEditando.Enabled := false;
