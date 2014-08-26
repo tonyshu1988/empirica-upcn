@@ -1,6 +1,6 @@
 unit UABM_CPB_Devolucion;
 
-// FALTA IMPRESION DEL TICKET, AHI QUE VER QUE PONEMOS COMO PRODUCTO Y HACER TODOS LOS CALCULOS
+// FALTA IMPRESION DEL TICKET, HAY QUE VER QUE PONEMOS COMO PRODUCTO Y HACER TODOS LOS CALCULOS
 
 interface
 
@@ -535,6 +535,8 @@ type
     CD_Devolucionimporte_iva_if: TFloatField;
     CD_Devolucionimporte_original: TFloatField;
     CD_Entregaimporte_if: TFloatField;
+    ZQ_VerCpbID_PREVENTA: TIntegerField;
+    ZQ_VerCpbID_OBRA_SOCIAL: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
