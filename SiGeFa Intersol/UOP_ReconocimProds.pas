@@ -156,7 +156,7 @@ end;
 
 procedure TFOP_ReconocimientoProds.btnModificarClick(Sender: TObject);
 begin
-  if ZQ_Planes.IsEmpty then
+  if (ZQ_Planes.IsEmpty) or (cmbPlan.Text='') then
     exit;
 
   if dm.ISModelo.iniciar_transaccion(transaccion_coberturaPlan, [ZQ_PlanProducto]) then

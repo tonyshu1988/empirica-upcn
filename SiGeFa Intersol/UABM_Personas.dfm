@@ -173,8 +173,8 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            687.916666666666700000
-            68.791666666666670000
+            687.916666666666800000
+            68.791666666666680000
             521.229166666666700000)
           Alignment = taCenter
           AlignToBand = True
@@ -207,7 +207,7 @@ object FABM_Personas: TFABM_Personas
             52.916666666666670000
             645.583333333333400000
             5.291666666666667000
-            608.541666666666700000)
+            608.541666666666800000)
           Alignment = taCenter
           AlignToBand = True
           AutoSize = True
@@ -656,7 +656,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            941.916666666666700000
+            941.916666666666800000
             198.437500000000000000
             92.604166666666680000)
           Alignment = taLeftJustify
@@ -1821,7 +1821,7 @@ object FABM_Personas: TFABM_Personas
           Size.Values = (
             52.916666666666670000
             1121.833333333333000000
-            68.791666666666670000
+            68.791666666666680000
             523.875000000000000000)
           Alignment = taCenter
           AlignToBand = True
@@ -2727,7 +2727,7 @@ object FABM_Personas: TFABM_Personas
           Frame.DrawRight = False
           Size.Values = (
             34.395833333333340000
-            902.229166666666700000
+            902.229166666666800000
             2.645833333333333000
             293.687500000000000000)
           Alignment = taLeftJustify
@@ -4256,6 +4256,10 @@ object FABM_Personas: TFABM_Personas
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
       'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
       'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
+      
+        'left join optica_persona_os opo on (opo.id_persona=cl.id_persona' +
+        ')'
+      'left join optica_os oo on (opo.id_os=oo.id_os)'
       'order by cl.nombre')
     Params = <>
     Left = 64
@@ -5167,6 +5171,14 @@ object FABM_Personas: TFABM_Personas
         ItemIndex = -1
       end
       item
+        Titulo = 'Plan OS'
+        Campo = 'nombre'
+        Tabla = 'oo'
+        TipoCampoIndiceVer = 'Contiene'
+        TipoComboEditable = False
+        ItemIndex = -1
+      end
+      item
         Titulo = 'Baja'
         Campo = 'baja'
         Tabla = 'cl'
@@ -5195,6 +5207,10 @@ object FABM_Personas: TFABM_Personas
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
       'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
       'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
+      
+        'left join optica_persona_os opo on (opo.id_persona=cl.id_persona' +
+        ')'
+      'left join optica_os oo on (opo.id_os=oo.id_os)'
       'order by cl.nombre'
       '')
     SQL_Select.Strings = (
@@ -5206,7 +5222,11 @@ object FABM_Personas: TFABM_Personas
       'left join tipo_documento td on (cl.id_tipo_doc = td.id_tipo_doc)'
       'left join tipo_iva ti on (cl.id_tipo_iva = ti.id_tipo_iva)'
       'left join provincia pv on (cl.id_provincia = pv.id_provincia)'
-      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)')
+      'left join persona_relacion pr on (cl.id_persona = pr.id_persona)'
+      
+        'left join optica_persona_os opo on (opo.id_persona=cl.id_persona' +
+        ')'
+      'left join optica_os oo on (opo.id_os=oo.id_os)')
     SQL_Orden.Strings = (
       'order by cl.nombre'
       '')
