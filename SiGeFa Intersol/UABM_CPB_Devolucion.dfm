@@ -3807,6 +3807,12 @@ object FABM_CPB_Devolucion: TFABM_CPB_Devolucion
     object ZQ_VerCpbID_POSICION_SUC_DESTINO: TIntegerField
       FieldName = 'ID_POSICION_SUC_DESTINO'
     end
+    object ZQ_VerCpbID_PREVENTA: TIntegerField
+      FieldName = 'ID_PREVENTA'
+    end
+    object ZQ_VerCpbID_OBRA_SOCIAL: TIntegerField
+      FieldName = 'ID_OBRA_SOCIAL'
+    end
   end
   object ZQ_VerCpb_Fpago: TZQuery
     Connection = DM.Conexion
