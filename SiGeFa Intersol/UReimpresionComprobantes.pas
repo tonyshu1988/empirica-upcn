@@ -91,7 +91,6 @@ type
     ZQ_ComprobanteDetallePORC_DESCUENTO: TFloatField;
     ZQ_ComprobanteDetalleIMPUESTO_INTERNO: TFloatField;
     DS_ComprobanteDetalle: TDataSource;
-    Splitter1: TSplitter;
     ZQ_TipoIVA: TZQuery;
     ZQ_TipoIVAID_TIPO_IVA: TIntegerField;
     ZQ_TipoIVANOMBRE_TIPO_IVA: TStringField;
@@ -155,6 +154,54 @@ type
     ISListadoCliente: TISListadoSQL;
     ISListadoCuenta: TISListadoSQL;
     ISListadoFPago: TISListadoSQL;
+    PanelOptica: TPanel;
+    Splitter3: TSplitter;
+    Panel3: TPanel;
+    Label1: TLabel;
+    DBGrid1: TDBGrid;
+    Panel4: TPanel;
+    Label2: TLabel;
+    DBGrid2: TDBGrid;
+    PVerDetalles: TPanel;
+    ZQ_ReconocMutual: TZQuery;
+    ZQ_ReconocMutualID_RECONOC_MUTUAL: TIntegerField;
+    ZQ_ReconocMutualMONTO_RECONOCIDO: TFloatField;
+    ZQ_ReconocMutualID_OS: TIntegerField;
+    ZQ_ReconocMutualID_COMPROBANTE: TIntegerField;
+    ZQ_ReconocMutualNOMBRE: TStringField;
+    DS_ReconocMutual: TDataSource;
+    ZQ_ReconocimOss: TZQuery;
+    DS_ReconocimOss: TDataSource;
+    ZQ_ReconocimOssID_RECONOCIMIENTO: TIntegerField;
+    ZQ_ReconocimOssID_OS: TIntegerField;
+    ZQ_ReconocimOssID_PRODUCTO: TIntegerField;
+    ZQ_ReconocimOssPRECIO_VENTA: TFloatField;
+    ZQ_ReconocimOssMONTO_RECONOCIDO: TFloatField;
+    ZQ_ReconocimOssID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_ReconocimOssNOMBRE: TStringField;
+    ZQ_ReconocimOssID_COMPROBANTE_DETALLE_1: TIntegerField;
+    ZQ_ReconocimOssID_COMPROBANTE: TIntegerField;
+    ZQ_ReconocimOssID_PRODUCTO_1: TIntegerField;
+    ZQ_ReconocimOssDETALLE: TStringField;
+    ZQ_ReconocimOssCANTIDAD: TFloatField;
+    ZQ_ReconocimOssIMPORTE_COSTO: TFloatField;
+    ZQ_ReconocimOssIMPORTE_FINAL: TFloatField;
+    ZQ_ReconocimOssPORC_DESCUENTO: TFloatField;
+    ZQ_ReconocimOssBASE_IMPONIBLE: TFloatField;
+    ZQ_ReconocimOssIMPORTE_UNITARIO: TFloatField;
+    ZQ_ReconocimOssIMPUESTO_INTERNO: TFloatField;
+    ZQ_ReconocimOssPORC_IVA: TFloatField;
+    ZQ_ReconocimOssCANTIDAD_RECIBIDA: TFloatField;
+    ZQ_ReconocimOssCANTIDAD_ALMACENADA: TFloatField;
+    ZQ_ReconocimOssID_STOCK_PRODUCTO: TIntegerField;
+    ZQ_ReconocimOssIMPORTE_VENTA: TFloatField;
+    ZQ_ReconocimOssIMPORTE_IVA: TFloatField;
+    ZQ_ReconocimOssIMPORTE_IF: TFloatField;
+    ZQ_ReconocimOssIMPORTE_IF_SINIVA: TFloatField;
+    ZQ_ReconocimOssIMPORTE_IVA_IF: TFloatField;
+    ZQ_ReconocimOssINSERT_MANUAL: TStringField;
+    ZQ_ReconocimOssID_AUXILIAR: TIntegerField;
+    ZQ_ReconocimOssIMPORTE_RECONOC_OS: TFloatField;
     procedure EKDbSumaComprobanteSumListChanged(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure BtnFiltro_TodosClick(Sender: TObject);
@@ -221,7 +268,7 @@ begin
   begin
     ISBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
 
-    if PanelFPagoYProd.Visible then
+    if PVerDetalles.Visible then
       btVer.Click;
 
     if ISBuscarComprobantes.Buscar then
@@ -264,7 +311,7 @@ begin
   //cargarConfigPanel;
 
   where:= '';
-  PanelFPagoYProd.Visible:= False;
+  PVerDetalles.Visible:= False;
   mes:= MonthOf(dm.ISModelo.Fecha);
   anio:= YearOf(dm.ISModelo.Fecha);
   ZQ_TipoIVA.Open;
@@ -279,7 +326,8 @@ begin
   //Permiso para ver o no los filtros de Fiscal
   PanelFiltro.Visible:= dm.ISUsrLogin.PermisoAccion('NO_FISCAL');
 
-  //BtnFiltro_Fiscal.Click;
+  //Permiso para ver o no los Detalles de Opticas/Oss
+  PanelOptica.Visible := Optica;
 
   btnEliminarComprob.Visible:= ivNever;
   if dm.ISUsrLogin.PermisoAccion('ELIMINAR_FACTURA') then
@@ -299,9 +347,9 @@ begin
   if aux > 0 then
     PanelComprobante.height:= aux;
 
-  aux:= dm.ISIni.LeerRegnumero('UEstadisticaFacturacion\PanelFPagoYProd.height');
+  aux:= dm.ISIni.LeerRegnumero('UEstadisticaFacturacion\PVerDetalles.height');
   if aux > 0 then
-    PanelFPagoYProd.height:= aux;
+    PVerDetalles.height:= aux;
 
   aux:= dm.ISIni.LeerRegnumero('UEstadisticaFacturacion\PanelFpago.width');
   if aux > 0 then
@@ -343,7 +391,7 @@ begin
         indice:= 2;
       end;
 
-  if PanelFPagoYProd.Visible then
+  if PVerDetalles.Visible then
   begin
     ZQ_Comprobante_FormaPago.Close;
     ZQ_Comprobante_FormaPago.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
@@ -353,6 +401,14 @@ begin
     ZQ_ComprobanteDetalle.Close;
     ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
     ZQ_ComprobanteDetalle.Open;
+
+    ZQ_ReconocMutual.Close;
+    ZQ_ReconocMutual.ParamByName('idc').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_ReconocMutual.Open;
+
+    ZQ_ReconocimOss.Close;
+    ZQ_ReconocimOss.ParamByName('idc').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_ReconocimOss.Open;
 
     ISDbSumaFpago.RecalcAll;
     ISDbSumaProducto.RecalcAll;
@@ -376,7 +432,7 @@ end;
 procedure TFReimpresionComprobantes.guardarConfigPanel();
 begin
   dm.ISIni.EsribirRegEntero('UEstadisticaFacturacion\PanelComprobante.height', PanelComprobante.height);
-  dm.ISIni.EsribirRegEntero('UEstadisticaFacturacion\PanelFPagoYProd.height', PanelFPagoYProd.height);
+  dm.ISIni.EsribirRegEntero('UEstadisticaFacturacion\PVerDetalles.height', PVerDetalles.height);
   dm.ISIni.EsribirRegEntero('UEstadisticaFacturacion\PanelFpago.width', PanelFpago.Width);
   dm.ISIni.EsribirRegEntero('UEstadisticaFacturacion\PanelProducto.width', PanelProducto.Width);
 end;
@@ -431,7 +487,7 @@ end;
 
 procedure TFReimpresionComprobantes.btVerClick(Sender: TObject);
 begin
-  PanelFPagoYProd.Visible:= not (PanelFPagoYProd.Visible);
+  PVerDetalles.Visible:= not (PVerDetalles.Visible);
   ZQ_ComprobanteAfterScroll(nil);
 end;
 

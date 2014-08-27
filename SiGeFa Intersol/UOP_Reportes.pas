@@ -142,6 +142,31 @@ type
     ZQ_PlanesDETALLE: TStringField;
     ISOrdenarGrillaAfiliados: TISOrdenarGrilla;
     ZQ_PersonaOssNOMBRE_1: TStringField;
+    ReporteAfiliadosOss: TQuickRep;
+    QRBand1: TQRBand;
+    QRLabel2: TQRLabel;
+    ReporteAfiliadosOss_Titulo: TQRLabel;
+    ReporteAfiliadosOss_Subtitulo: TQRLabel;
+    QRDBImage1: TQRDBImage;
+    QRChildBand1: TQRChildBand;
+    QRShape1: TQRShape;
+    QRSubDetail2: TQRSubDetail;
+    QRDBText15: TQRDBText;
+    QRDBText16: TQRDBText;
+    QRDBText17: TQRDBText;
+    QRDBText18: TQRDBText;
+    QRBand4: TQRBand;
+    QRLabel20: TQRLabel;
+    QRExpr2: TQRExpr;
+    QRDBText10: TQRDBText;
+    ISVistaPreviaReporteAfiliadosOss: TISVistaPreviaQR;
+    QRLabel6: TQRLabel;
+    QRDBText9: TQRDBText;
+    QRDBText11: TQRDBText;
+    QRLabel14: TQRLabel;
+    QRLabel17: TQRLabel;
+    QRLabel18: TQRLabel;
+    QRLabel16: TQRLabel;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
@@ -203,6 +228,14 @@ begin
 
         DM.VariablesReportes(ReporteMedicos);
         ISVistaPreviaReporteMedicos.VistaPrevia;
+      end;
+    1: //Reporte Afiliados
+      begin
+        if ZQ_PersonaOss.IsEmpty then
+          exit;
+
+        DM.VariablesReportes(ReporteAfiliadosOss);
+        ISVistaPreviaReporteAfiliadosOss.VistaPrevia;
       end;
 
   end;
@@ -287,7 +320,7 @@ begin
         if ZQ_Orden.IsEmpty then exit;
         DM.ExportarEXCEL(DBGridOrden);
       end;
-    1: //Reporte Medicos
+    1: //Reporte AfiliadosOss
       begin
         if ZQ_PersonaOss.IsEmpty then exit;
         DM.ExportarEXCEL(grillaAfiliados);
