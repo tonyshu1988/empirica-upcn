@@ -1,8 +1,8 @@
 object FOP_CargarOrden: TFOP_CargarOrden
-  Left = 252
-  Top = 169
-  Width = 870
-  Height = 581
+  Left = 574
+  Top = 328
+  Width = 890
+  Height = 316
   Caption = 'Cargar Orden'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -17,15 +17,15 @@ object FOP_CargarOrden: TFOP_CargarOrden
   object PContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 854
-    Height = 491
+    Width = 874
+    Height = 226
     Align = alClient
     TabOrder = 0
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
-      Width = 852
-      Height = 489
+      Width = 872
+      Height = 224
       Align = alClient
       Color = 15527129
       DataSource = DS_Optica_Orden
@@ -1044,6 +1044,7 @@ object FOP_CargarOrden: TFOP_CargarOrden
       'where o.saldo > 0'
       '')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 120
     Top = 256
   end
