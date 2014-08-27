@@ -517,7 +517,7 @@ begin
 //  ThousandSeparator:= '.';
   CurrencyString:= '';
 //  CurrencyFormat := 0;
-
+  ExcelExport.FileName:='';
   ExcelExport.DBGrid:= grilla;
   ExcelExport.Select;
 

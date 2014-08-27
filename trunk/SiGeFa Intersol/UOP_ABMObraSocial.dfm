@@ -31,7 +31,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
     object RepObraSocial: TQuickRep
       Tag = 99
       Left = -12
-      Top = 52
+      Top = 44
       Width = 1123
       Height = 794
       Frame.Color = clBlack
@@ -39,7 +39,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
       Frame.DrawBottom = False
       Frame.DrawLeft = False
       Frame.DrawRight = False
-      DataSet = ZQ_OP_PLAN
+      DataSet = ZQ_OS_CABECERA
       Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -174,7 +174,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           Size.Values = (
             52.916666666666670000
             1164.166666666667000000
-            68.791666666666670000
+            68.791666666666680000
             439.208333333333400000)
           Alignment = taCenter
           AlignToBand = True
@@ -274,7 +274,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_PLAN
+          DataSet = ZQ_OS_CABECERA
           DataField = 'CODIGO'
           Transparent = False
           WordWrap = True
@@ -301,7 +301,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_PLAN
+          DataSet = ZQ_OS_CABECERA
           DataField = 'NOMBRE'
           Transparent = False
           WordWrap = True
@@ -328,8 +328,8 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_PLAN
-          DataField = 'TELEFONO'
+          DataSet = ZQ_OS_CABECERA
+          DataField = 'TELEFONO1'
           Transparent = False
           WordWrap = True
           ExportAs = exptText
@@ -355,7 +355,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_PLAN
+          DataSet = ZQ_OS_CABECERA
           DataField = 'DIRECCION'
           Transparent = False
           WordWrap = True
@@ -382,7 +382,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_PLAN
+          DataSet = ZQ_OS_CABECERA
           DataField = 'LOCALIDAD'
           Transparent = False
           WordWrap = True
@@ -409,7 +409,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_PLAN
+          DataSet = ZQ_OS_CABECERA
           DataField = '_provincia'
           Transparent = False
           WordWrap = True
@@ -436,7 +436,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_PLAN
+          DataSet = ZQ_OS_CABECERA
           DataField = '_tipoIva'
           Transparent = False
           WordWrap = True
@@ -463,7 +463,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
           AutoSize = False
           AutoStretch = False
           Color = clWhite
-          DataSet = ZQ_OP_PLAN
+          DataSet = ZQ_OS_CABECERA
           DataField = 'CUIT_CUIL'
           Transparent = False
           WordWrap = True
@@ -624,7 +624,7 @@ object FOP_ABMObraSocial: TFOP_ABMObraSocial
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            592.666666666666700000)
+            592.666666666666800000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
