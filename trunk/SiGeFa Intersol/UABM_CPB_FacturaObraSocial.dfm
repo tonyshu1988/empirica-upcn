@@ -1,6 +1,6 @@
 object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
-  Left = 306
-  Top = 315
+  Left = 254
+  Top = 51
   Width = 922
   Height = 632
   Caption = 'ABM Factura Obra Social'
@@ -101,6 +101,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
               FieldName = 'NUMERO_CPB'
               Title.Alignment = taCenter
               Title.Caption = 'N'#250'mero'
+              Width = 64
               Visible = True
             end
             item
@@ -140,6 +141,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
               FieldName = 'ID_COMPROBANTE'
               Title.Alignment = taCenter
               Title.Caption = 'ID'
+              Width = 64
               Visible = True
             end
             item
@@ -147,6 +149,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
               FieldName = 'CODIGO'
               Title.Alignment = taCenter
               Title.Caption = 'C'#243'digo'
+              Width = 64
               Visible = True
             end>
         end
@@ -3959,12 +3962,21 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     Top = 52
     object ZQ_VerCpbID_COMPROBANTE: TIntegerField
       FieldName = 'ID_COMPROBANTE'
+      Required = True
     end
     object ZQ_VerCpbID_SUCURSAL: TIntegerField
       FieldName = 'ID_SUCURSAL'
+      Required = True
+    end
+    object ZQ_VerCpbID_PROVEEDOR: TIntegerField
+      FieldName = 'ID_PROVEEDOR'
+    end
+    object ZQ_VerCpbID_CLIENTE: TIntegerField
+      FieldName = 'ID_CLIENTE'
     end
     object ZQ_VerCpbID_TIPO_CPB: TIntegerField
       FieldName = 'ID_TIPO_CPB'
+      Required = True
     end
     object ZQ_VerCpbID_VENDEDOR: TIntegerField
       FieldName = 'ID_VENDEDOR'
@@ -3972,13 +3984,37 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     object ZQ_VerCpbID_COMP_ESTADO: TIntegerField
       FieldName = 'ID_COMP_ESTADO'
     end
+    object ZQ_VerCpbCODIGO: TStringField
+      FieldName = 'CODIGO'
+      Size = 50
+    end
+    object ZQ_VerCpbFECHA: TDateTimeField
+      FieldName = 'FECHA'
+    end
     object ZQ_VerCpbOBSERVACION: TStringField
       FieldName = 'OBSERVACION'
       Size = 500
     end
+    object ZQ_VerCpbBASE_IMPONIBLE: TFloatField
+      FieldName = 'BASE_IMPONIBLE'
+    end
+    object ZQ_VerCpbSALDO: TFloatField
+      FieldName = 'SALDO'
+    end
     object ZQ_VerCpbIMPORTE_TOTAL: TFloatField
       FieldName = 'IMPORTE_TOTAL'
-      currency = True
+    end
+    object ZQ_VerCpbPORC_IVA: TFloatField
+      FieldName = 'PORC_IVA'
+    end
+    object ZQ_VerCpbIMPORTE_IVA: TFloatField
+      FieldName = 'IMPORTE_IVA'
+    end
+    object ZQ_VerCpbPORC_DESCUENTO: TFloatField
+      FieldName = 'PORC_DESCUENTO'
+    end
+    object ZQ_VerCpbIMPORTE_DESCUENTO: TFloatField
+      FieldName = 'IMPORTE_DESCUENTO'
     end
     object ZQ_VerCpbENCABEZADO: TStringField
       FieldName = 'ENCABEZADO'
@@ -3988,17 +4024,51 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       FieldName = 'PIE'
       Size = 500
     end
-    object ZQ_VerCpbFECHA: TDateTimeField
-      FieldName = 'FECHA'
-      DisplayFormat = 'dd/MM/yyyy'
-    end
-    object ZQ_VerCpbFECHA_COBRADA: TDateField
+    object ZQ_VerCpbFECHA_COBRADA: TDateTimeField
       FieldName = 'FECHA_COBRADA'
-      DisplayFormat = 'dd/MM/yyyy'
+    end
+    object ZQ_VerCpbFECHA_ENVIADA: TDateField
+      FieldName = 'FECHA_ENVIADA'
+    end
+    object ZQ_VerCpbFECHA_IMPRESA: TDateField
+      FieldName = 'FECHA_IMPRESA'
+    end
+    object ZQ_VerCpbFECHA_VENCIMIENTO: TDateField
+      FieldName = 'FECHA_VENCIMIENTO'
+    end
+    object ZQ_VerCpbPUNTO_VENTA: TIntegerField
+      FieldName = 'PUNTO_VENTA'
+    end
+    object ZQ_VerCpbNUMERO_CPB: TIntegerField
+      FieldName = 'NUMERO_CPB'
     end
     object ZQ_VerCpbFECHA_ANULADO: TDateField
       FieldName = 'FECHA_ANULADO'
-      DisplayFormat = 'dd/MM/yyyy'
+    end
+    object ZQ_VerCpbID_TIPO_IVA: TIntegerField
+      FieldName = 'ID_TIPO_IVA'
+    end
+    object ZQ_VerCpbID_TIPO_MOVIMIENTO: TIntegerField
+      FieldName = 'ID_TIPO_MOVIMIENTO'
+    end
+    object ZQ_VerCpbIMPORTE_VENTA: TFloatField
+      FieldName = 'IMPORTE_VENTA'
+    end
+    object ZQ_VerCpbIMAGEN: TBlobField
+      FieldName = 'IMAGEN'
+    end
+    object ZQ_VerCpbINSERT_MANUAL: TStringField
+      FieldName = 'INSERT_MANUAL'
+      Size = 10
+    end
+    object ZQ_VerCpbID_POSICION_SUC_DESTINO: TIntegerField
+      FieldName = 'ID_POSICION_SUC_DESTINO'
+    end
+    object ZQ_VerCpbID_PREVENTA: TIntegerField
+      FieldName = 'ID_PREVENTA'
+    end
+    object ZQ_VerCpbID_OBRA_SOCIAL: TIntegerField
+      FieldName = 'ID_OBRA_SOCIAL'
     end
     object ZQ_VerCpbSUCURSAL: TStringField
       FieldName = 'SUCURSAL'
@@ -4008,55 +4078,36 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
       FieldName = 'ESTADO'
       Size = 50
     end
-    object ZQ_VerCpbPUNTO_VENTA: TIntegerField
-      FieldName = 'PUNTO_VENTA'
-      DisplayFormat = '0000'
+    object ZQ_VerCpbID_OS: TIntegerField
+      FieldName = 'ID_OS'
+      Required = True
     end
-    object ZQ_VerCpbNUMERO_CPB: TIntegerField
-      FieldName = 'NUMERO_CPB'
-      DisplayFormat = '00000000'
-    end
-    object ZQ_VerCpbSALDO: TFloatField
-      FieldName = 'SALDO'
-      currency = True
-    end
-    object ZQ_VerCpbIMAGEN: TBlobField
-      FieldName = 'IMAGEN'
+    object ZQ_VerCpbCODIGO_1: TStringField
+      FieldName = 'CODIGO_1'
+      Size = 100
     end
     object ZQ_VerCpbNOMBRE: TStringField
       FieldName = 'NOMBRE'
       Size = 200
     end
-    object ZQ_VerCpbDIRECCION: TStringField
-      FieldName = 'DIRECCION'
-      Size = 100
+    object ZQ_VerCpbDESCRIPCION: TStringField
+      FieldName = 'DESCRIPCION'
+      Size = 1000
     end
-    object ZQ_VerCpbTELEFONO: TStringField
-      FieldName = 'TELEFONO'
-      Size = 100
+    object ZQ_VerCpbBAJA: TStringField
+      FieldName = 'BAJA'
+      Size = 1
     end
-    object ZQ_VerCpbCUIT_CUIL: TStringField
-      FieldName = 'CUIT_CUIL'
-      Size = 30
+    object ZQ_VerCpbFACTURA_AUTOMATICA: TStringField
+      FieldName = 'FACTURA_AUTOMATICA'
+      Size = 1
     end
-    object ZQ_VerCpbLOCALIDAD: TStringField
-      FieldName = 'LOCALIDAD'
-      Size = 200
+    object ZQ_VerCpbID_OPTICA_OS_CABECERA: TIntegerField
+      FieldName = 'ID_OPTICA_OS_CABECERA'
+      Required = True
     end
-    object ZQ_VerCpbCODIGO_POSTAL: TStringField
-      FieldName = 'CODIGO_POSTAL'
-    end
-    object ZQ_VerCpbID_OBRA_SOCIAL: TIntegerField
-      FieldName = 'ID_OBRA_SOCIAL'
-    end
-    object ZQ_VerCpbCODIGO: TStringField
-      FieldName = 'CODIGO'
-      Size = 50
-    end
-    object ZQ_VerCpbCODIGO_1: TStringField
-      DisplayLabel = 'CODIGO_OS'
-      FieldName = 'CODIGO_1'
-      Size = 100
+    object ZQ_VerCpbDESCUENTO: TFloatField
+      FieldName = 'DESCUENTO'
     end
   end
   object ZQ_VerCpb_Producto: TZQuery
@@ -5062,6 +5113,7 @@ object FABM_CPB_FacturaObraSocial: TFABM_CPB_FacturaObraSocial
     SQL_Orden.Strings = (
       'order by cpb.fecha desc')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 45
     Top = 376
   end
