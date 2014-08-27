@@ -942,7 +942,7 @@ begin
     ZQ_Productos.sql[15]:= Format('and(p.cod_corto=%s)', [QuotedStr(IdProd)]);
     ZQ_Productos.Open;
   end;
-
+  //Ver de cambiarlo por id_producto_stock
   if id = 'I' then
   begin
     ZQ_Productos.Close;

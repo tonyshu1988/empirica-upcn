@@ -1,6 +1,6 @@
 object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
-  Left = 321
-  Top = 191
+  Left = 219
+  Top = 63
   Width = 1010
   Height = 663
   Caption = 'ABM Orden T'#233'cnica'
@@ -9398,19 +9398,24 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
   object ISListadoProducto: TISListadoSQL
     Modelo = DM.ISModelo
     SQL.Strings = (
-      'select sp.id_producto,'
-      '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
       
-        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - M: '#39'||coalesce(m.medida,' +
-        #39#39'),'#39#39')||'
-      '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
-      '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39')||'
-      '        COALESCE ('#39' - Secci'#243'n: '#39' || ps.seccion,'#39#39')||'
+        'select pr.id_producto,cast((  COALESCE ('#39'Secci'#243'n: '#39' || ps.seccio' +
+        'n,'#39#39')||'
       '        COALESCE ('#39' - Sector: '#39' || ps.sector,'#39#39')||'
       '        COALESCE ('#39' - Fila: '#39' || ps.fila,'#39#39')||'
       
-        '        COALESCE ('#39' - Columna: '#39' || ps.columna,'#39#39'))as varchar(10' +
-        '00))'
+        '        COALESCE ('#39' - Columna: '#39' || ps.columna,'#39#39'))as varchar(30' +
+        '00))as secc,'
+      '       cast(('#39'C'#243'digo: '#39'||pr.cod_corto||'
+      
+        '       COALESCE ('#39' - '#39' ||pc.nombre||'#39' - '#39'||coalesce(ma.nombre_ma' +
+        'rca,'#39#39')||'#39' - '#39'||a.descripcion||'#39' - '#39'||ta.descripcion||'
+      '       '#39' - M: '#39'||coalesce(m.medida,'#39#39'),'#39#39')||'
+      ''
+      '       COALESCE ('#39' - Stock: '#39' || sp.stock_actual,'#39#39')||'
+      
+        '       COALESCE ('#39' - Sucursal: '#39' || su.nombre,'#39#39'))as varchar(200' +
+        '0))'
       '         AS posicSucursal'
       'from producto_cabecera pc'
       'join producto pr on (pr.id_prod_cabecera =  pc.id_prod_cabecera)'
@@ -9421,10 +9426,14 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
       'join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'join configuracion c on (c.id_sucursal=su.id_sucursal)'
       'left join medida m on (pr.id_medida=m.id_medida)'
+      'left join marca ma on (pc.id_marca=ma.id_marca)'
+      'left join articulo a on (pc.id_articulo=a.id_articulo)'
       
-        'where (ps.punto_salida='#39'S'#39')and(pr.baja<>'#39'S'#39')and(pc.baja<>'#39'S'#39')and' +
-        '(sp.stock_actual>0)'
-      'order by 2'
+        'left join tipo_articulo ta on (a.id_tipo_articulo=ta.id_tipo_art' +
+        'iculo)'
+      'where (ps.punto_salida='#39'S'#39')and(pc.baja<>'#39'S'#39')'
+      'order by 3'
+      ''
       '')
     CampoBuscar = 'posicSucursal'
     CampoClave = 'id_producto'
@@ -9433,7 +9442,7 @@ object FOP_ABM_OrdenTecnica: TFOP_ABM_OrdenTecnica
     TituloBuscar2 = 'Campo Busqueda 2:'
     ColorGrilla = 14606012
     AnchoClave = 80
-    AnchoBuscar1 = 500
+    AnchoBuscar1 = 1000
     AnchoBuscar2 = 500
     Left = 156
     Top = 162

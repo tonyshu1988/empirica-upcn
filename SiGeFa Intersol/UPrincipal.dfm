@@ -21,8 +21,8 @@ object FPrincipal: TFPrincipal
   object LogoFondo: TImage
     Left = 0
     Top = 29
-    Width = 921
-    Height = 389
+    Width = 913
+    Height = 377
     Align = alClient
     Center = True
     Picture.Data = {
@@ -4702,8 +4702,8 @@ object FPrincipal: TFPrincipal
   end
   object StatusBar1: TStatusBar
     Left = 0
-    Top = 418
-    Width = 921
+    Top = 406
+    Width = 913
     Height = 19
     Panels = <
       item
@@ -4719,13 +4719,13 @@ object FPrincipal: TFPrincipal
   object ActionToolBar1: TActionToolBar
     Left = 0
     Top = 0
-    Width = 921
+    Width = 913
     Height = 29
     ActionManager = ActionPrincipal
     Caption = 'ActionToolBar1'
-    ColorMap.HighlightColor = 14410210
+    ColorMap.HighlightColor = clWhite
     ColorMap.BtnSelectedColor = clBtnFace
-    ColorMap.UnusedColor = 14410210
+    ColorMap.UnusedColor = clWhite
     ParentShowHint = False
     ShowHint = True
     Spacing = 0
@@ -4733,8 +4733,8 @@ object FPrincipal: TFPrincipal
   object PanelTapa: TPanel
     Left = 0
     Top = 29
-    Width = 921
-    Height = 389
+    Width = 913
+    Height = 377
     Align = alClient
     Color = 16053492
     TabOrder = 2
@@ -5199,7 +5199,7 @@ object FPrincipal: TFPrincipal
     Left = 296
     Top = 88
     object PantallasNuevas1: TMenuItem
-      Caption = 'Facturacion'
+      Caption = 'Facturaci'#243'n'
       object Cajero1: TMenuItem
         Action = ACajero
       end
@@ -5299,6 +5299,7 @@ object FPrincipal: TFPrincipal
       end
       object ABMDevolucin1: TMenuItem
         Action = AABM_CPB_Devolucion
+        Caption = 'ABM Devoluci'#243'n/Nota Cr'#233'dito'
       end
       object N4: TMenuItem
         Caption = '-'
@@ -5348,13 +5349,13 @@ object FPrincipal: TFPrincipal
       end
     end
     object Optica1: TMenuItem
-      Caption = 'Optica'
+      Caption = 'Optica/Obra Social'
       object ABMObraSocial1: TMenuItem
         Action = AOP_ABMObraSocial
       end
       object ABMMedicos1: TMenuItem
         Action = AOP_ABMMedico
-        Caption = 'ABM Medicos'
+        Caption = 'ABM M'#233'dicos'
       end
       object AOPABMLab1: TMenuItem
         Action = AOP_ABMLab
@@ -5424,9 +5425,11 @@ object FPrincipal: TFPrincipal
         end
         object ABMArticulo1: TMenuItem
           Action = AABM_Articulo
+          Caption = 'ABM Art'#237'culo'
         end
         object ABMArticulosMedida1: TMenuItem
           Action = AABM_ArticuloMedida
+          Caption = 'ABM Art'#237'culo Medida'
         end
       end
       object Empresas1: TMenuItem
