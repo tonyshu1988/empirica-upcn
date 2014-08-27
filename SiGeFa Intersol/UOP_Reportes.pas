@@ -147,26 +147,27 @@ type
     QRLabel2: TQRLabel;
     ReporteAfiliadosOss_Titulo: TQRLabel;
     ReporteAfiliadosOss_Subtitulo: TQRLabel;
-    QRDBImage1: TQRDBImage;
-    QRChildBand1: TQRChildBand;
-    QRShape1: TQRShape;
-    QRSubDetail2: TQRSubDetail;
-    QRDBText15: TQRDBText;
-    QRDBText16: TQRDBText;
-    QRDBText17: TQRDBText;
-    QRDBText18: TQRDBText;
+    QRDBLogo2: TQRDBImage;
     QRBand4: TQRBand;
     QRLabel20: TQRLabel;
     QRExpr2: TQRExpr;
-    QRDBText10: TQRDBText;
     ISVistaPreviaReporteAfiliadosOss: TISVistaPreviaQR;
-    QRLabel6: TQRLabel;
-    QRDBText9: TQRDBText;
-    QRDBText11: TQRDBText;
+    qrlblPlan: TQRLabel;
     QRLabel14: TQRLabel;
     QRLabel17: TQRLabel;
     QRLabel18: TQRLabel;
     QRLabel16: TQRLabel;
+    QRBand2: TQRBand;
+    QRDBText10: TQRDBText;
+    QRDBText17: TQRDBText;
+    QRDBText15: TQRDBText;
+    QRDBText18: TQRDBText;
+    QRDBText16: TQRDBText;
+    QRShape1: TQRShape;
+    QRBand11: TQRBand;
+    QRlblPieDePagina: TQRLabel;
+    QRLabel43: TQRLabel;
+    QRSysData1: TQRSysData;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
@@ -225,7 +226,7 @@ begin
       begin
         if ZQ_Orden.IsEmpty then
           exit;
-
+        QRDBLogo.DataSet:= DM.ZQ_Sucursal;
         DM.VariablesReportes(ReporteMedicos);
         ISVistaPreviaReporteMedicos.VistaPrevia;
       end;
@@ -233,7 +234,9 @@ begin
       begin
         if ZQ_PersonaOss.IsEmpty then
           exit;
-
+        QRDBLogo2.DataSet:= DM.ZQ_Sucursal;
+        qrlblPlan.Caption:='Plan Os: '+cmbPlan.Text;
+        QRlblPieDePagina.Caption := TextoPieDePagina + FormatDateTime('dddd dd "de" mmmm "de" yyyy ',dm.ISModelo.Fecha);
         DM.VariablesReportes(ReporteAfiliadosOss);
         ISVistaPreviaReporteAfiliadosOss.VistaPrevia;
       end;

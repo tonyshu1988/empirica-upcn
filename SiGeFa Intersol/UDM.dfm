@@ -14,12 +14,13 @@ object DM: TDM
     AutoCommit = False
     ReadOnly = True
     TransactIsolationLevel = tiReadCommitted
+    Connected = True
     HostName = 'localhost'
-    Port = 3052
+    Port = 3050
     Database = 'E:\Empirica\empirica-upcn\SiGeFa Intersol\Bases\SIGEFA ING.FDB'
     User = 'sysdba'
     Password = 'masterkey'
-    Protocol = 'firebirdd-2.5'
+    Protocol = 'firebird-2.5'
     Left = 46
     Top = 16
   end

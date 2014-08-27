@@ -513,6 +513,8 @@ type
     ZQ_planes_productosMONTO_RECONOCIDO: TFloatField;
     ZQ_planes_productosID_PRODUCTO: TIntegerField;
     ZQ_planes_productosID_OS_1: TIntegerField;
+    ZQ_EstadoOrdenCOLOR: TStringField;
+    ZQ_OrdenCOLOR: TStringField;
     procedure FormCreate(Sender: TObject);
     procedure btsalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -1887,13 +1889,19 @@ end;
 procedure TFOP_ABM_OrdenTecnica.DBGridComprobantesDrawColumnCell(
   Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn;
   State: TGridDrawState);
+var
+color:TColor;
 begin
   if not ZQ_Orden.IsEmpty then
     begin
+      if ZQ_OrdenCOLOR.IsNull then color:=FPrincipal.colorActivo.Color
+      else  color:=StringToColor(ZQ_OrdenCOLOR.AsString);
+
       case ZQ_OrdenID_ESTADO.AsInteger of
        1:
          begin      //Pendientes
-           DBGridComprobantes.Canvas.Brush.Color :=$00DEDEBC;
+
+           DBGridComprobantes.Canvas.Brush.Color :=color;
            DBGridComprobantes.Canvas.Font.Color := clBlack;
            if (gdFocused in State) or (gdSelected in State) then
              begin
@@ -1901,8 +1909,8 @@ begin
              end
          end;
        2:
-         begin       //Terminadas
-           DBGridComprobantes.Canvas.Brush.Color :=$00C4FDE0;
+         begin       //Pagado
+           DBGridComprobantes.Canvas.Brush.Color :=color;
            DBGridComprobantes.Canvas.Font.Color := clBlack;
            if (gdFocused in State) or (gdSelected in State) then
              begin
@@ -1910,16 +1918,16 @@ begin
              end
          end;
        3:
-         begin     //Cobradas
-           DBGridComprobantes.Canvas.Brush.Color :=$00FF4646;
-           DBGridComprobantes.Canvas.Font.Color := clBlack;
+         begin     //Entregado
+           DBGridComprobantes.Canvas.Brush.Color :=color;
+           DBGridComprobantes.Canvas.Font.Color := clWhite;
            if (gdFocused in State) or (gdSelected in State) then
              begin
               DBGridComprobantes.Canvas.Font.Style := DBGridComprobantes.Canvas.Font.Style + [fsBold];
              end
          end;
       end;
-      lblEstado.Color:= DBGridComprobantes.Canvas.Brush.Color;
+
       DBGridComprobantes.DefaultDrawColumnCell(rect,datacol,column,state);
       
     end;
@@ -1930,7 +1938,7 @@ procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenAfterScroll(DataSet: TDataSet);
 begin
 
    lblEstado.Caption:=Format('%s',[ZQ_OrdenO_ESTADO.AsString]);
-   
+   lblEstado.Color:= StringToColor(ZQ_OrdenCOLOR.AsString);
    if not(ZQ_OrdenDetalle.State=dsInactive) then
     begin
       ISDbSuma1.RecalcAll;
@@ -1962,7 +1970,7 @@ begin
   if (ZQ_OrdenID_ESTADO.AsInteger = 3) or (ZQ_Orden.IsEmpty) then
   exit;
 
-  if Application.MessageBox('Esta seguro que desea dar la orden por entregada?','Entregar Orden', MB_YESNO+MB_ICONQUESTION) = IDYES then
+  if Application.MessageBox('¿Está seguro que desea dar la Orden por entregada?','Entregar Orden', MB_YESNO+MB_ICONQUESTION) = IDYES then
   begin
     if dm.ISModelo.iniciar_transaccion(abmOrden, [ZQ_Orden]) then
     begin

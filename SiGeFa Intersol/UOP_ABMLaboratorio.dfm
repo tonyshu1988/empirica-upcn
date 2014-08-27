@@ -23,11 +23,219 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
   object PanelFondo: TPanel
     Left = 0
     Top = 19
-    Width = 862
-    Height = 402
+    Width = 854
+    Height = 391
     Align = alClient
     BevelOuter = bvNone
     TabOrder = 0
+    object PanelGrilla: TPanel
+      Left = 0
+      Top = 0
+      Width = 854
+      Height = 391
+      Align = alClient
+      BevelOuter = bvNone
+      BorderWidth = 5
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Verdana'
+      Font.Style = []
+      ParentFont = False
+      TabOrder = 0
+      object DBGrid: TDBGrid
+        Left = 5
+        Top = 5
+        Width = 844
+        Height = 323
+        Align = alClient
+        Color = 14606012
+        DataSource = DS_Laboratorio
+        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+        TabOrder = 0
+        TitleFont.Charset = DEFAULT_CHARSET
+        TitleFont.Color = clWindowText
+        TitleFont.Height = -11
+        TitleFont.Name = 'Verdana'
+        TitleFont.Style = []
+        OnDrawColumnCell = DBGridDrawColumnCell
+        Columns = <
+          item
+            Expanded = False
+            FieldName = 'CODIGO'
+            Title.Alignment = taCenter
+            Title.Caption = 'C'#243'digo'
+            Width = 77
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'NOMBRE'
+            Title.Alignment = taCenter
+            Title.Caption = 'Nombre'
+            Width = 232
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'DIRECCION'
+            Title.Alignment = taCenter
+            Title.Caption = 'Direcci'#243'n'
+            Width = 269
+            Visible = True
+          end
+          item
+            Expanded = False
+            FieldName = 'TELEFONO'
+            Title.Alignment = taCenter
+            Title.Caption = 'Telefono'
+            Width = 236
+            Visible = True
+          end
+          item
+            Alignment = taLeftJustify
+            Expanded = False
+            FieldName = 'ID_LABORATORIO'
+            Title.Alignment = taCenter
+            Title.Caption = 'ID'
+            Width = 77
+            Visible = True
+          end>
+      end
+      object PanelEdicion: TPanel
+        Left = 5
+        Top = 328
+        Width = 844
+        Height = 58
+        Align = alBottom
+        BevelOuter = bvNone
+        TabOrder = 1
+        object Label1: TLabel
+          Left = 207
+          Top = 12
+          Width = 50
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Nombre:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label2: TLabel
+          Left = 23
+          Top = 38
+          Width = 58
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Direcci'#243'n:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label3: TLabel
+          Left = 372
+          Top = 38
+          Width = 54
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'Tel'#233'fono:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object Label4: TLabel
+          Left = 36
+          Top = 12
+          Width = 45
+          Height = 13
+          Alignment = taRightJustify
+          Caption = 'C'#243'digo:'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = []
+          ParentFont = False
+          Transparent = True
+        end
+        object DBENombre: TDBEdit
+          Left = 258
+          Top = 8
+          Width = 372
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'NOMBRE'
+          DataSource = DS_Laboratorio
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 1
+        end
+        object DBEDireccion: TDBEdit
+          Left = 82
+          Top = 34
+          Width = 267
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'DIRECCION'
+          DataSource = DS_Laboratorio
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 2
+        end
+        object DBETelefono: TDBEdit
+          Left = 427
+          Top = 34
+          Width = 203
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'TELEFONO'
+          DataSource = DS_Laboratorio
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 3
+        end
+        object DBECodigo: TDBEdit
+          Left = 82
+          Top = 8
+          Width = 79
+          Height = 21
+          CharCase = ecUpperCase
+          DataField = 'CODIGO'
+          DataSource = DS_Laboratorio
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -11
+          Font.Name = 'Verdana'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 0
+        end
+      end
+    end
     object RepLab: TQuickRep
       Tag = 99
       Left = 24
@@ -141,7 +349,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
           Frame.DrawRight = False
           Size.Values = (
             50.270833333333330000
-            756.708333333333400000
+            756.708333333333300000
             124.354166666666700000
             386.291666666666700000)
           Alignment = taCenter
@@ -205,7 +413,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
           Frame.DrawRight = False
           Size.Values = (
             52.916666666666670000
-            780.520833333333400000
+            780.520833333333300000
             5.291666666666667000
             338.666666666666700000)
           Alignment = taCenter
@@ -497,7 +705,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          58.208333333333340000
+          58.208333333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -505,7 +713,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
         object QRExpr18: TQRExpr
           Left = 4
           Top = 4
-          Width = 184
+          Width = 210
           Height = 14
           Frame.Color = clBlack
           Frame.DrawTop = False
@@ -516,7 +724,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
             37.041666666666670000
             10.583333333333330000
             10.583333333333330000
-            486.833333333333400000)
+            555.625000000000000000)
           Alignment = taLeftJustify
           AlignToBand = False
           AutoSize = True
@@ -525,7 +733,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
           ResetAfterPrint = False
           Transparent = False
           WordWrap = True
-          Expression = #39'Cantidad de Medicos: '#39'+COUNT'
+          Expression = #39'Cantidad de Laboratorios: '#39'+COUNT'
           ExportAs = exptText
           FontSize = 8
         end
@@ -547,7 +755,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
         ForceNewColumn = False
         ForceNewPage = False
         Size.Values = (
-          82.020833333333340000
+          82.020833333333330000
           1899.708333333333000000)
         PreCaluculateBandHeight = False
         KeepOnOnePage = False
@@ -595,7 +803,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
           Frame.DrawLeft = False
           Frame.DrawRight = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             13.229166666666670000
             5.291666666666667000
             333.375000000000000000)
@@ -769,219 +977,11 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
         end
       end
     end
-    object PanelGrilla: TPanel
-      Left = 0
-      Top = 0
-      Width = 862
-      Height = 402
-      Align = alClient
-      BevelOuter = bvNone
-      BorderWidth = 5
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -11
-      Font.Name = 'Verdana'
-      Font.Style = []
-      ParentFont = False
-      TabOrder = 0
-      object DBGrid: TDBGrid
-        Left = 5
-        Top = 5
-        Width = 852
-        Height = 334
-        Align = alClient
-        Color = 14606012
-        DataSource = DS_Laboratorio
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 0
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGridDrawColumnCell
-        Columns = <
-          item
-            Expanded = False
-            FieldName = 'CODIGO'
-            Title.Alignment = taCenter
-            Title.Caption = 'C'#243'digo'
-            Width = 77
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'NOMBRE'
-            Title.Alignment = taCenter
-            Title.Caption = 'Nombre'
-            Width = 232
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'DIRECCION'
-            Title.Alignment = taCenter
-            Title.Caption = 'Direcci'#243'n'
-            Width = 269
-            Visible = True
-          end
-          item
-            Expanded = False
-            FieldName = 'TELEFONO'
-            Title.Alignment = taCenter
-            Title.Caption = 'Telefono'
-            Width = 236
-            Visible = True
-          end
-          item
-            Alignment = taLeftJustify
-            Expanded = False
-            FieldName = 'ID_LABORATORIO'
-            Title.Alignment = taCenter
-            Title.Caption = 'ID'
-            Width = 77
-            Visible = True
-          end>
-      end
-      object PanelEdicion: TPanel
-        Left = 5
-        Top = 339
-        Width = 852
-        Height = 58
-        Align = alBottom
-        BevelOuter = bvNone
-        TabOrder = 1
-        object Label1: TLabel
-          Left = 207
-          Top = 12
-          Width = 50
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Nombre:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label2: TLabel
-          Left = 23
-          Top = 38
-          Width = 58
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Direcci'#243'n:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label3: TLabel
-          Left = 372
-          Top = 38
-          Width = 54
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'Tel'#233'fono:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object Label4: TLabel
-          Left = 36
-          Top = 12
-          Width = 45
-          Height = 13
-          Alignment = taRightJustify
-          Caption = 'C'#243'digo:'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = []
-          ParentFont = False
-          Transparent = True
-        end
-        object DBENombre: TDBEdit
-          Left = 258
-          Top = 8
-          Width = 372
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'NOMBRE'
-          DataSource = DS_Laboratorio
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 1
-        end
-        object DBEDireccion: TDBEdit
-          Left = 82
-          Top = 34
-          Width = 267
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'DIRECCION'
-          DataSource = DS_Laboratorio
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 2
-        end
-        object DBETelefono: TDBEdit
-          Left = 427
-          Top = 34
-          Width = 203
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'TELEFONO'
-          DataSource = DS_Laboratorio
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 3
-        end
-        object DBECodigo: TDBEdit
-          Left = 82
-          Top = 8
-          Width = 79
-          Height = 21
-          CharCase = ecUpperCase
-          DataField = 'CODIGO'
-          DataSource = DS_Laboratorio
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -11
-          Font.Name = 'Verdana'
-          Font.Style = [fsBold]
-          ParentFont = False
-          TabOrder = 0
-        end
-      end
-    end
   end
   object PBusqueda: TPanel
     Left = 0
     Top = 0
-    Width = 862
+    Width = 854
     Height = 19
     Align = alTop
     ParentShowHint = False
@@ -1003,7 +1003,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
       Layout = tlCenter
     end
     object StaticTxtBaja: TStaticText
-      Left = 752
+      Left = 744
       Top = 1
       Width = 109
       Height = 17
@@ -1020,7 +1020,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1748,6 +1748,7 @@ object FOP_ABMLaboratorio: TFOP_ABMLaboratorio
       ''
       'order by s.nombre')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 208
     Top = 67
   end

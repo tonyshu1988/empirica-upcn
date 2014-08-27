@@ -1,7 +1,7 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
   Left = 370
   Top = 170
-  Width = 988
+  Width = 1205
   Height = 618
   Caption = 'Reimpresi'#243'n de Comprobantes'
   Color = clBtnFace
@@ -22,39 +22,39 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object PanelContenedor: TPanel
     Left = 0
     Top = 0
-    Width = 980
-    Height = 539
+    Width = 1189
+    Height = 528
     Align = alClient
     Caption = 'PanelContenedor'
     TabOrder = 0
     object Panel5: TPanel
       Left = 1
       Top = 1
-      Width = 978
-      Height = 537
+      Width = 1187
+      Height = 526
       Align = alClient
       Caption = 'Panel5'
       TabOrder = 0
       object Panel1: TPanel
         Left = 1
         Top = 1
-        Width = 976
-        Height = 535
+        Width = 1185
+        Height = 524
         Align = alClient
         Caption = 'Panel1'
         TabOrder = 0
         object PanelComprobante: TPanel
           Left = 1
           Top = 33
-          Width = 974
-          Height = 255
+          Width = 1183
+          Height = 244
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
           object lblTotalComprobantes: TLabel
             Left = 0
-            Top = 234
-            Width = 974
+            Top = 223
+            Width = 1183
             Height = 21
             Align = alBottom
             Alignment = taRightJustify
@@ -74,8 +74,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object DBGridComprobantes: TDBGrid
             Left = 0
             Top = 0
-            Width = 974
-            Height = 234
+            Width = 1183
+            Height = 223
             Align = alClient
             Color = 14606012
             DataSource = DS_Comprobante
@@ -203,7 +203,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         object PanelFiltro: TPanel
           Left = 1
           Top = 1
-          Width = 974
+          Width = 1183
           Height = 32
           Align = alTop
           BevelOuter = bvNone
@@ -211,7 +211,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           ShowHint = False
           TabOrder = 1
           DesignSize = (
-            974
+            1183
             32)
           object BtnFiltro_Todos: TSpeedButton
             Left = 55
@@ -252,7 +252,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             Caption = 'Filtro:'
           end
           object StaticTxtLiquidado: TStaticText
-            Left = 874
+            Left = 1091
             Top = 15
             Width = 99
             Height = 16
@@ -268,8 +268,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         end
         object PVerDetalles: TPanel
           Left = 1
-          Top = 288
-          Width = 974
+          Top = 277
+          Width = 1183
           Height = 246
           Align = alBottom
           TabOrder = 2
@@ -277,7 +277,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object PanelFPagoYProd: TPanel
             Left = 1
             Top = 1
-            Width = 972
+            Width = 1181
             Height = 122
             Align = alBottom
             BevelOuter = bvNone
@@ -291,7 +291,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object PanelProducto: TPanel
               Left = 612
               Top = 0
-              Width = 360
+              Width = 569
               Height = 122
               Align = alClient
               BevelOuter = bvNone
@@ -300,7 +300,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
               object lblTotalProducto: TLabel
                 Left = 0
                 Top = 101
-                Width = 360
+                Width = 569
                 Height = 21
                 Align = alBottom
                 Alignment = taRightJustify
@@ -320,7 +320,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
               object DBGridListadoProductos: TDBGrid
                 Left = 0
                 Top = 0
-                Width = 360
+                Width = 569
                 Height = 101
                 Align = alClient
                 Color = 14606012
@@ -523,7 +523,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
           object PanelOptica: TPanel
             Left = 1
             Top = 123
-            Width = 972
+            Width = 1181
             Height = 122
             Align = alBottom
             BevelOuter = bvNone
@@ -537,16 +537,16 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
             object Panel3: TPanel
               Left = 612
               Top = 0
-              Width = 360
+              Width = 569
               Height = 122
               Align = alClient
               BevelOuter = bvNone
               Caption = 'PanelProducto'
               TabOrder = 0
-              object Label1: TLabel
+              object lblTotalOss: TLabel
                 Left = 0
                 Top = 101
-                Width = 360
+                Width = 569
                 Height = 21
                 Align = alBottom
                 Alignment = taRightJustify
@@ -563,10 +563,10 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                 Transparent = False
                 Layout = tlCenter
               end
-              object DBGrid1: TDBGrid
+              object DBGridOss: TDBGrid
                 Left = 0
                 Top = 0
-                Width = 360
+                Width = 569
                 Height = 101
                 Align = alClient
                 Color = 14606012
@@ -587,44 +587,30 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                 Columns = <
                   item
                     Expanded = False
-                    FieldName = 'ID_OS'
+                    FieldName = 'NOMBRE'
+                    Title.Caption = 'Plan OS'
+                    Width = 138
                     Visible = True
                   end
                   item
                     Expanded = False
-                    FieldName = 'ID_PRODUCTO'
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'PRECIO_VENTA'
+                    FieldName = 'DETALLE_PROD'
+                    Title.Caption = 'Producto'
+                    Width = 370
                     Visible = True
                   end
                   item
                     Expanded = False
                     FieldName = 'MONTO_RECONOCIDO'
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'NOMBRE'
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'DETALLE'
-                    Visible = True
-                  end
-                  item
-                    Expanded = False
-                    FieldName = 'IMPORTE_RECONOC_OS'
                     Title.Caption = 'Monto Reconocido'
+                    Width = 113
                     Visible = True
                   end
                   item
                     Expanded = False
                     FieldName = 'ID_RECONOCIMIENTO'
                     Title.Caption = 'ID'
+                    Width = 64
                     Visible = True
                   end>
               end
@@ -638,7 +624,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
               BevelOuter = bvNone
               Caption = 'PanelFpago'
               TabOrder = 1
-              object Label2: TLabel
+              object lblTotalMutual: TLabel
                 Left = 0
                 Top = 101
                 Width = 607
@@ -658,7 +644,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                 Transparent = False
                 Layout = tlCenter
               end
-              object DBGrid2: TDBGrid
+              object DBGridMutual: TDBGrid
                 Left = 0
                 Top = 0
                 Width = 607
@@ -709,7 +695,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2337,10 +2323,6 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       FieldName = 'ID_RECONOC_MUTUAL'
       Required = True
     end
-    object ZQ_ReconocMutualMONTO_RECONOCIDO: TFloatField
-      FieldName = 'MONTO_RECONOCIDO'
-      currency = True
-    end
     object ZQ_ReconocMutualID_OS: TIntegerField
       FieldName = 'ID_OS'
     end
@@ -2351,6 +2333,11 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       FieldName = 'NOMBRE'
       Size = 200
     end
+    object ZQ_ReconocMutualMONTO_RECONOCIDO: TFloatField
+      FieldName = 'MONTO_RECONOCIDO'
+      currency = True
+      Precision = 10
+    end
   end
   object DS_ReconocMutual: TDataSource
     DataSet = ZQ_ReconocMutual
@@ -2360,11 +2347,17 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
   object ZQ_ReconocimOss: TZQuery
     Connection = DM.Conexion
     SQL.Strings = (
-      'select oro.*,oo.nombre,cd.*'
+      
+        'select oro.*,oo.nombre,cd.id_comprobante_detalle, pc.nombre||'#39' -' +
+        ' COD: '#39'||coalesce(p.cod_corto,'#39#39') DETALLE_PROD'
       'from optica_reconocimiento_oss oro'
       
         'join comprobante_detalle cd on (cd.id_comprobante_detalle=oro.id' +
         '_comprobante_detalle)'
+      'left join producto p on (cd.id_producto=p.id_producto)'
+      
+        'left join producto_cabecera pc on (pc.id_prod_cabecera=p.id_prod' +
+        '_cabecera)'
       'join optica_os oo on (oo.id_os=oro.id_os)'
       'where (cd.id_comprobante=:idc)'
       ''
@@ -2398,6 +2391,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
     end
     object ZQ_ReconocimOssMONTO_RECONOCIDO: TFloatField
       FieldName = 'MONTO_RECONOCIDO'
+      currency = True
     end
     object ZQ_ReconocimOssID_COMPROBANTE_DETALLE: TIntegerField
       FieldName = 'ID_COMPROBANTE_DETALLE'
@@ -2410,80 +2404,89 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
       FieldName = 'ID_COMPROBANTE_DETALLE_1'
       Required = True
     end
-    object ZQ_ReconocimOssID_COMPROBANTE: TIntegerField
-      FieldName = 'ID_COMPROBANTE'
-    end
-    object ZQ_ReconocimOssID_PRODUCTO_1: TIntegerField
-      FieldName = 'ID_PRODUCTO_1'
-      Required = True
-    end
-    object ZQ_ReconocimOssDETALLE: TStringField
-      FieldName = 'DETALLE'
-      Size = 200
-    end
-    object ZQ_ReconocimOssCANTIDAD: TFloatField
-      FieldName = 'CANTIDAD'
-    end
-    object ZQ_ReconocimOssIMPORTE_COSTO: TFloatField
-      FieldName = 'IMPORTE_COSTO'
-    end
-    object ZQ_ReconocimOssIMPORTE_FINAL: TFloatField
-      FieldName = 'IMPORTE_FINAL'
-    end
-    object ZQ_ReconocimOssPORC_DESCUENTO: TFloatField
-      FieldName = 'PORC_DESCUENTO'
-    end
-    object ZQ_ReconocimOssBASE_IMPONIBLE: TFloatField
-      FieldName = 'BASE_IMPONIBLE'
-    end
-    object ZQ_ReconocimOssIMPORTE_UNITARIO: TFloatField
-      FieldName = 'IMPORTE_UNITARIO'
-    end
-    object ZQ_ReconocimOssIMPUESTO_INTERNO: TFloatField
-      FieldName = 'IMPUESTO_INTERNO'
-    end
-    object ZQ_ReconocimOssPORC_IVA: TFloatField
-      FieldName = 'PORC_IVA'
-    end
-    object ZQ_ReconocimOssCANTIDAD_RECIBIDA: TFloatField
-      FieldName = 'CANTIDAD_RECIBIDA'
-    end
-    object ZQ_ReconocimOssCANTIDAD_ALMACENADA: TFloatField
-      FieldName = 'CANTIDAD_ALMACENADA'
-    end
-    object ZQ_ReconocimOssID_STOCK_PRODUCTO: TIntegerField
-      FieldName = 'ID_STOCK_PRODUCTO'
-    end
-    object ZQ_ReconocimOssIMPORTE_VENTA: TFloatField
-      FieldName = 'IMPORTE_VENTA'
-    end
-    object ZQ_ReconocimOssIMPORTE_IVA: TFloatField
-      FieldName = 'IMPORTE_IVA'
-    end
-    object ZQ_ReconocimOssIMPORTE_IF: TFloatField
-      FieldName = 'IMPORTE_IF'
-    end
-    object ZQ_ReconocimOssIMPORTE_IF_SINIVA: TFloatField
-      FieldName = 'IMPORTE_IF_SINIVA'
-    end
-    object ZQ_ReconocimOssIMPORTE_IVA_IF: TFloatField
-      FieldName = 'IMPORTE_IVA_IF'
-    end
-    object ZQ_ReconocimOssINSERT_MANUAL: TStringField
-      FieldName = 'INSERT_MANUAL'
-      Size = 1
-    end
-    object ZQ_ReconocimOssID_AUXILIAR: TIntegerField
-      FieldName = 'ID_AUXILIAR'
-    end
-    object ZQ_ReconocimOssIMPORTE_RECONOC_OS: TFloatField
-      FieldName = 'IMPORTE_RECONOC_OS'
-      currency = True
+    object ZQ_ReconocimOssDETALLE_PROD: TStringField
+      FieldName = 'DETALLE_PROD'
+      ReadOnly = True
+      Size = 128
     end
   end
   object DS_ReconocimOss: TDataSource
     DataSet = ZQ_ReconocimOss
     Left = 765
     Top = 87
+  end
+  object ISDbSumaOss: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'MONTO_RECONOCIDO'
+      end>
+    DataSet = ZQ_ReconocimOss
+    Left = 747
+    Top = 131
+  end
+  object ISOrdenarGrillaMutual: TISOrdenarGrilla
+    Grilla = DBGridMutual
+    Filtros = <
+      item
+        TituloColumna = 'Detalle'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Monto Dcto. Mutual'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ISOrdenarGrillaMutual'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 960
+    Top = 320
+  end
+  object ISOrdenarGrillaOss: TISOrdenarGrilla
+    Grilla = DBGridOss
+    Filtros = <
+      item
+        TituloColumna = 'Plan OS'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Producto'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Monto Reconocido'
+        Visible = True
+      end
+      item
+        TituloColumna = 'ID'
+        Visible = True
+      end>
+    NombreGuardarConfig = 'ISOrdenarGrillaOss'
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 976
+    Top = 434
+  end
+  object ISDbSumaMutual: TISDbSuma
+    SumCollection = <
+      item
+        Operacion = goSum
+        NombreCampo = 'MONTO_RECONOCIDO'
+      end>
+    DataSet = ZQ_ReconocMutual
+    Left = 963
+    Top = 131
   end
 end

@@ -4770,7 +4770,6 @@ object FPrincipal: TFPrincipal
       Top = 104
       Width = 233
       Height = 41
-      Caption = 'Registo Activo'
       Color = 16487727
       TabOrder = 2
       Visible = False
@@ -5373,10 +5372,12 @@ object FPrincipal: TFPrincipal
       object ABMFacturaObraSocial1: TMenuItem
         Tag = 1
         Action = AOP_ABMFacturaOS
+        Visible = False
       end
       object ABMLiquidacinObraSocial1: TMenuItem
         Tag = 1
         Action = AOP_ABMLiquidarOS
+        Visible = False
       end
       object N14: TMenuItem
         Caption = '-'
