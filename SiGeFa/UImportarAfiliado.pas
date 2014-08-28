@@ -9,7 +9,7 @@ uses
   ZStoredProcedure, ActnList, XPStyleActnCtrls, ActnMan, EKBusquedaAvanzada,
   QRCtrls, QuickRpt, EKVistaPreviaQR, EKOrdenarGrilla, cxClasses,
   UFlexCelGrid, UFlexCelImport, UExcelAdapter, XLSAdapter, DBClient,
-  ComCtrls;
+  ComCtrls, ZSqlProcessor, ISOrdenarGrilla, ZSqlMonitor, ZIBEventAlerter;
 
 type
   TFImportarAfiliado = class(TForm)
@@ -58,27 +58,34 @@ type
     QRLabel29: TQRLabel;
     QRLabel30: TQRLabel;
     QRLabel1: TQRLabel;
-    EKOrdenarGrilla1: TEKOrdenarGrilla;
     btnActualizar: TdxBarLargeButton;
     XLSAdapter: TXLSAdapter;
     XLSImport: TFlexCelImport;
     FlexCelGrid: TFlexCelGrid;
     abrirXLS: TOpenDialog;
-    CD_Afiliados: TClientDataSet;
-    CD_Afiliadosnro_afiliado: TStringField;
-    CD_Afiliadosapellido_nombre: TStringField;
-    CD_Afiliadostipo_documento: TStringField;
-    CD_Afiliadosnro_documento: TStringField;
-    CD_Afiliadossexo: TStringField;
-    CD_Afiliadosdireccion: TStringField;
-    CD_Afiliadostelefono: TStringField;
-    CD_Afiliadoslocalidad: TStringField;
-    CD_Afiliadoscodigo_postal: TStringField;
-    CD_Afiliadosplan_os: TStringField;
     DS_Afiliados: TDataSource;
     DBGridArchivo: TDBGrid;
+    ZQ_Afiliados: TZQuery;
+    ZQ_AfiliadosNRO_AFILIADO: TStringField;
+    ZQ_AfiliadosAPELLIDO_NOMBRE: TStringField;
+    ZQ_AfiliadosTIPO_DOC: TStringField;
+    ZQ_AfiliadosNRO_DOC: TStringField;
+    ZQ_AfiliadosSEXO: TStringField;
+    ZQ_AfiliadosDIRECCION: TStringField;
+    ZQ_AfiliadosTELEFONO: TStringField;
+    ZQ_AfiliadosLOCALIDAD: TStringField;
+    ZQ_AfiliadosCP: TStringField;
+    ZQ_AfiliadosPLAN_OS: TStringField;
+    ZSQL_Delete: TZSQLProcessor;
+    ZP_Actualizar: TZStoredProc;
+    ISOrdenarGrilla: TISOrdenarGrilla;
+    ZP_ActualizarAFILIADOS_IMPORTADOS: TIntegerField;
+    ZP_ActualizarAFILIADOS_ACTUALIZADOS: TIntegerField;
+    Panel1: TPanel;
     ProgressBar: TProgressBar;
-    DBGridBD: TDBGrid;
+    CheckBoxActualizar: TCheckBox;
+    DataSource1: TDataSource;
+    Edit1: TEdit;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -91,8 +98,7 @@ type
     procedure cargarDataSet();
     procedure DBGridArchivoDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
-    procedure DBGridBDDrawColumnCell(Sender: TObject; const Rect: TRect;
-      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnActualizarClick(Sender: TObject);
   private
     idPersona: Integer;
     extArch, nombrelargo: string;
@@ -110,14 +116,14 @@ const
   transaccion_ABM = 'ABM COLOR';
 implementation
 
-uses UDM, UPrincipal, UUtilidades;
+uses UDM, UPrincipal, UUtilidades, _Busy, _Busy2;
 
 {$R *.dfm}
 
 procedure TFImportarAfiliado.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   CanClose:= FPrincipal.cerrar_ventana(transaccion_ABM);
-  EKOrdenarGrilla1.GuardarConfigColumnas;
+  ISOrdenarGrilla.GuardarConfigColumnas;
 end;
 
 
@@ -135,7 +141,8 @@ begin
 //  EKBuscar.Abrir;
 //  dm.mostrarCantidadRegistro(ZQ_Colores, lblCantidadRegistros);
 
-  CD_Afiliados.CreateDataSet;
+//  CD_Afiliados.CreateDataSet;
+//  ZQ_Personas.Open;
 end;
 
 
@@ -184,11 +191,11 @@ begin
   try
     if abrirXLS.Execute then
     begin
-      CD_Afiliados.EmptyDataSet;
       archivo:= abrirXLS.FileName;
       nombreArch:= ExtractFileName(archivo);
       XLSImport.OpenFile(archivo);
-      lblCantidadRegistros.Caption:= 'Cantidad Afiliados: '+IntToStr(XLSImport.MaxRow);
+      lblCantidadRegistros.Caption:= 'Cantidad Afiliados: ' + IntToStr(XLSImport.MaxRow);
+      DBGridArchivo.Color:= $00DEDEBC;
       cargarDataSet;
     end;
   except
@@ -201,28 +208,40 @@ procedure TFImportarAfiliado.cargarDataSet;
 var
   i, j: integer;
 begin
-  DBGridBD.Enabled:= false;
-  ProgressBar.Visible:= true;
-  ProgressBar.Max := XLSImport.MaxRow - 1;
-  ProgressBar.Position := 0;
-  CD_Afiliados.DisableControls;
-
-  for i:= 1 to XLSImport.MaxRow do
+  if dm.EKModelo.iniciar_transaccion('IMPORTAR', [ZQ_Afiliados]) then
   begin
-    CD_Afiliados.Append;
-    for j:= 1 to XLSImport.MaxCol do
-    begin
-      CD_Afiliados.Fields[j - 1].Value:= XLSImport.Cell[i, j].Value;
-    end;
-    CD_Afiliados.Post;
-    ProgressBar.Position:= i;
-    Application.ProcessMessages;
-  end;
+    ZSQL_Delete.Execute;
+    ZQ_Afiliados.Open;
 
-  ProgressBar.Visible:= false;
-  CD_Afiliados.EnableControls;
-  CD_Afiliados.First;
-  DBGridBD.Enabled:= true;
+    DBGridArchivo.Enabled:= false;
+    ProgressBar.Visible:= true;
+    ProgressBar.Max:= XLSImport.MaxRow +500;
+    ProgressBar.Position:= 0;
+    ZQ_Afiliados.DisableControls;
+
+    for i:= 1 to XLSImport.MaxRow do
+    begin
+      ZQ_Afiliados.Append;
+      for j:= 1 to XLSImport.MaxCol do
+      begin
+        ZQ_Afiliados.Fields[j - 1].Value:= XLSImport.Cell[i, j].Value;
+      end;
+
+      if (i mod 100) = 0 then
+      begin
+        ProgressBar.Position:= i;
+        Application.ProcessMessages;
+      end;
+    end;
+
+    dm.EKModelo.finalizar_transaccion('IMPORTAR');
+    ProgressBar.Position:= ProgressBar.Max;
+    Application.ProcessMessages;
+    ProgressBar.Visible:= false;
+    ZQ_Afiliados.First;
+    ZQ_Afiliados.EnableControls;
+    DBGridArchivo.Enabled:= true;
+  end;
 end;
 
 
@@ -232,10 +251,44 @@ begin
 end;
 
 
-procedure TFImportarAfiliado.DBGridBDDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure TFImportarAfiliado.btnActualizarClick(Sender: TObject);
+var
+  actualizar: string;
 begin
-  FPrincipal.PintarFilasGrillas(DBGridBD, Rect, DataCol, Column, State);
+  BusyStatus('Iniciando..');
+  Sleep(StrToInt(Edit1.Text));
+
+//  BusyBegin('Iniciando..');
+//  Sleep(StrToInt(Edit1.Text));
+//  BusyEnd();
+
+
+//  if ZQ_Afiliados.IsEmpty then
+//    exit;
+//
+//  if Application.MessageBox('Esta seguro que desea Actualizar la Base de Datos de Afiliados?','Actualizar Base Datos', MB_YESNO+MB_ICONINFORMATION) = IDNO then
+//    exit;
+//
+//  if dm.EKModelo.iniciar_transaccion('IMPORTAR', []) then
+//  begin
+//    actualizar:= 'N';
+//    if CheckBoxActualizar.Checked then
+//      actualizar:= 'S';
+//
+//    ZP_Actualizar.Close;
+//    ZP_Actualizar.ParamByName('ACTUALIZAR_AFILIADO').AsString:= actualizar;
+//    ZP_Actualizar.Open;
+//
+//    if CheckBoxActualizar.Checked then
+//      ShowMessage('Se Incorporaron '+ZP_ActualizarAFILIADOS_IMPORTADOS.AsString+' Afiliados y se Actualizaron '+ZP_ActualizarAFILIADOS_ACTUALIZADOS.AsString+'.')
+//    else
+//      ShowMessage('Se Incorporaron '+ZP_ActualizarAFILIADOS_IMPORTADOS.AsString+' Afiliados.');
+//
+//    dm.EKModelo.finalizar_transaccion('IMPORTAR');
+//    DBGridArchivo.Color:= $00BAF5F4;
+//  end;
 end;
+
 
 end.
 
