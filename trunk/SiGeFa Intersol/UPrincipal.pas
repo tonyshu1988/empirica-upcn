@@ -150,7 +150,6 @@ type
     ReimpresindeComprobantes1: TMenuItem;
     AABM_PersonasPtos: TAction;
     N7: TMenuItem;
-    ABMPersonasPuntos1: TMenuItem;
     AConsulta_Precios: TAction;
     ConsultaPrecios1: TMenuItem;
     N9: TMenuItem;
@@ -187,6 +186,8 @@ type
     AOP_Cajero: TAction;
     N14: TMenuItem;
     CajeroOpticas1: TMenuItem;
+    AImportarPersonas: TAction;
+    ImportarPersonas: TMenuItem;
     procedure CambiarContraseniaClick(Sender: TObject);
     procedure SalirClick(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
@@ -254,6 +255,7 @@ type
     procedure AEstadisticasLibroIVAExecute(Sender: TObject);
     procedure AOP_PlanesProductosExecute(Sender: TObject);
     procedure AOP_CajeroExecute(Sender: TObject);
+    procedure AImportarPersonasExecute(Sender: TObject);
   Private
     { Private declarations }
   Public
@@ -297,7 +299,7 @@ uses UDM, UAcerca_De, UABMClientes, UABMEmpresas, UABMProductos,
   UOP_ABMObraSocial, UPreventa_Historico, UFichaEmpleado,
   UOP_ABMLaboratorio, UOP_ABMOrden_Tecnica, UCuentaCorrienteProveedor,
   UABM_CPB_FacturaObraSocial, UOP_Reportes, UOP_ABM_LiquidacionOS,
-  UEstadisticasLibroIVA, UOP_ReconocimProds, UOP_Cajero;
+  UEstadisticasLibroIVA, UOP_ReconocimProds, UOP_Cajero, UImportarAfiliado;
 
 
 procedure TFPrincipal.FormCreate(Sender: TObject);
@@ -1041,6 +1043,11 @@ end;
 procedure TFPrincipal.AOP_CajeroExecute(Sender: TObject);
 begin
   ISVentanas1.Abrir(Sender, TFOP_Cajero, FOP_Cajero);
+end;
+
+procedure TFPrincipal.AImportarPersonasExecute(Sender: TObject);
+begin
+  ISVentanas1.Abrir(Sender, TFImportarAfiliado, FImportarAfiliado);
 end;
 
 end.

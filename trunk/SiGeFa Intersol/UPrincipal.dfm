@@ -1,6 +1,6 @@
 object FPrincipal: TFPrincipal
-  Left = 347
-  Top = 179
+  Left = 209
+  Top = 198
   Width = 929
   Height = 483
   Caption = 'SiGeFa - Sistema de Gesti'#243'n y Facturaci'#243'n'
@@ -5187,6 +5187,11 @@ object FPrincipal: TFPrincipal
       ImageIndex = 28
       OnExecute = AOP_ReportesExecute
     end
+    object AImportarPersonas: TAction
+      Caption = 'Importar Personas'
+      ImageIndex = 1
+      OnExecute = AImportarPersonasExecute
+    end
     object AOP_ABMLiquidarOS: TAction
       Caption = 'ABM Liquidaci'#243'n Obra Social'
       ImageIndex = 60
@@ -5274,8 +5279,10 @@ object FPrincipal: TFPrincipal
       object N7: TMenuItem
         Caption = '-'
       end
-      object ABMPersonasPuntos1: TMenuItem
-        Action = AABM_PersonasPtos
+      object ImportarPersonas: TMenuItem
+        Tag = 1
+        Action = AImportarPersonas
+        Caption = 'Importar Personas/Afiliados'
       end
     end
     object Comprobantes1: TMenuItem
