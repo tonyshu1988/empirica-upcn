@@ -363,6 +363,35 @@ type
     ISBuscarHorario: TISBusquedaAvanzada;
     ISBusquedaRanking: TISBusquedaAvanzada;
     ZP_Horario: TZStoredProc;
+    PanelOptica: TPanel;
+    Splitter5: TSplitter;
+    Panel3: TPanel;
+    lblTotalOss: TLabel;
+    DBGridOss: TDBGrid;
+    Panel7: TPanel;
+    lblTotalMutual: TLabel;
+    DBGridMutual: TDBGrid;
+    PVerDetalle: TPanel;
+    ZQ_ReconocMutual: TZQuery;
+    ZQ_ReconocMutualID_RECONOC_MUTUAL: TIntegerField;
+    ZQ_ReconocMutualID_OS: TIntegerField;
+    ZQ_ReconocMutualID_COMPROBANTE: TIntegerField;
+    ZQ_ReconocMutualNOMBRE: TStringField;
+    ZQ_ReconocMutualMONTO_RECONOCIDO: TFloatField;
+    ZQ_ReconocimOss: TZQuery;
+    ZQ_ReconocimOssID_RECONOCIMIENTO: TIntegerField;
+    ZQ_ReconocimOssID_OS: TIntegerField;
+    ZQ_ReconocimOssID_PRODUCTO: TIntegerField;
+    ZQ_ReconocimOssPRECIO_VENTA: TFloatField;
+    ZQ_ReconocimOssMONTO_RECONOCIDO: TFloatField;
+    ZQ_ReconocimOssID_COMPROBANTE_DETALLE: TIntegerField;
+    ZQ_ReconocimOssNOMBRE: TStringField;
+    ZQ_ReconocimOssID_COMPROBANTE_DETALLE_1: TIntegerField;
+    ZQ_ReconocimOssDETALLE_PROD: TStringField;
+    DS_ReconocMutual: TDataSource;
+    DS_ReconocimOss: TDataSource;
+    ISDbSumaMutual: TISDbSuma;
+    ISDbSumaOss: TISDbSuma;
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);
     procedure ZQ_ComprobanteAfterScroll(DataSet: TDataSet);
@@ -418,7 +447,7 @@ begin
   cargarConfigPanel;
 
   PageControl.ActivePageIndex:= 0;
-  PanelFPagoYProd.Visible:=False;
+  PVerDetalle.Visible:=False;
   ZQ_TipoIVA.Open;
   ZQ_Sucursal.Open;
   where:= '';
@@ -472,6 +501,9 @@ begin
   BtnFiltro_NoFiscalV.Caption:=etiqueta_no_fiscal;
   BtnFiltro_Fiscal.Caption:=etiqueta_fiscal;
   BtnFiltro_FiscalV.Caption:=etiqueta_fiscal;
+
+  //Permiso para ver o no los Detalles de Opticas/Oss
+  PanelOptica.Visible := Optica;
 end;
 
 
@@ -504,7 +536,7 @@ begin
         indice:= 2;
       end;
 
-  if PanelFPagoYProd.Visible then
+  if PVerDetalle.Visible then
  begin
     ZQ_Comprobante_FormaPago.Close;
     ZQ_Comprobante_FormaPago.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
@@ -515,10 +547,22 @@ begin
     ZQ_ComprobanteDetalle.ParamByName('id_comprobante').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
     ZQ_ComprobanteDetalle.Open;
 
+    ZQ_ReconocMutual.Close;
+    ZQ_ReconocMutual.ParamByName('idc').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_ReconocMutual.Open;
+
+    ZQ_ReconocimOss.Close;
+    ZQ_ReconocimOss.ParamByName('idc').AsInteger:= ZQ_ComprobanteID_COMPROBANTE.AsInteger;
+    ZQ_ReconocimOss.Open;
+
+    ISDbSumaMutual.RecalcAll;
+    ISDbSumaOss.RecalcAll;
     ISDbSumaFpago.RecalcAll;
     ISDbSumaProducto.RecalcAll;
     lblTotalFPago.Caption := FormatFloat('Total Forma Pago: $ ##,###,##0.00 ', ISDbSumaFpago.SumCollection[0].SumValue);
     lblTotalProducto.Caption := FormatFloat('Total Producto: $ ##,###,##0.00 ', ISDbSumaProducto.SumCollection[indice].SumValue);
+    lblTotalMutual.Caption:= Format('Total Dcto. Mutual: $ %f ', [ISDbSumaMutual.SumCollection[0].SumValue]);
+    lblTotalOss.Caption:= FormatFloat('Total Reconocimientos OSs: $ ##,###,##0.00 ', ISDbSumaOss.SumCollection[0].SumValue);
  end;
    Application.ProcessMessages;
 end;
@@ -611,6 +655,7 @@ procedure TFEstadisticaVentas.guardarConfigPanel();
 begin
   dm.ISIni.EsribirRegEntero('UEstadisticaFacturacion\PanelComprobante.height', PanelComprobante.height);
   dm.ISIni.EsribirRegEntero('UEstadisticaFacturacion\PanelFPagoYProd.height', PanelFPagoYProd.height);
+  dm.ISIni.EsribirRegEntero('UEstadisticaFacturacion\PVerDetalle.height', PVerDetalle.height);
   dm.ISIni.EsribirRegEntero('UEstadisticaFacturacion\PanelFpago.width', PanelFpago.Width);
   dm.ISIni.EsribirRegEntero('UEstadisticaFacturacion\PanelProducto.width', PanelProducto.Width);
 end;
@@ -627,6 +672,10 @@ begin
   aux:= dm.ISIni.LeerRegnumero('UEstadisticaFacturacion\PanelFPagoYProd.height');
   if aux > 0 then
     PanelFPagoYProd.height:= aux;
+
+    aux:= dm.ISIni.LeerRegnumero('UEstadisticaFacturacion\PVerDetalle.height');
+  if aux > 0 then
+    PVerDetalle.height:= aux;
 
   aux:= dm.ISIni.LeerRegnumero('UEstadisticaFacturacion\PanelFpago.width');
   if aux > 0 then
@@ -645,7 +694,7 @@ begin
   begin
     ISBuscarComprobantes.SQL_Where[0]:= Format('where (c.ID_TIPO_CPB = 11) %s', [where]);
 
-    if PanelFPagoYProd.Visible then
+    if PVerDetalle.Visible then
      btVer.Click;
 
     if ISBuscarComprobantes.Buscar then
@@ -952,7 +1001,7 @@ end;
 
 procedure TFEstadisticaVentas.btVerClick(Sender: TObject);
 begin
-  PanelFPagoYProd.Visible:=not(PanelFPagoYProd.Visible);
+  PVerDetalle.Visible:=not(PVerDetalle.Visible);
   ZQ_ComprobanteAfterScroll(nil);
 end;
 

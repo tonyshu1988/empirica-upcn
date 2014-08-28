@@ -136,7 +136,6 @@ type
     ZQ_ClienteNOMBRE_TIPO_DOC: TStringField;
     ZQ_ProveedorTIPO_EMPRESA: TStringField;
     DBText7: TDBText;
-    ZQ_ProveedorCODIGO_CORTO: TIntegerField;
     Label2: TLabel;
     Label3: TLabel;
     DBText8: TDBText;
@@ -414,6 +413,7 @@ type
     ZQ_ClienteCODIGO_CORTO: TStringField;
     ZQ_ClienteIMPORTADO: TStringField;
     ZQ_ClienteNRO_AFILIADO: TStringField;
+    ZQ_ProveedorCODIGO_CORTO: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);

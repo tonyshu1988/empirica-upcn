@@ -835,6 +835,8 @@ begin
   ZQ_VerRelacionPersona.ParamByName('id_persona').AsInteger:= ZQ_PersonaID_PERSONA.AsInteger;
   ZQ_VerRelacionPersona.Open;
 
+  ZQ_Iva.Locate('ID_TIPO_IVA',ZQ_PersonaID_TIPO_IVA.AsInteger,[]);
+
   if ZQ_VerRelacionPersona.Locate('ID_RELACION; ID_SUCURSAL', VarArrayOf([RELACION_CLIENTE, inttostr(SUCURSAL_LOGUEO)]), []) then
   begin
     existeRelacionCliente:= true;

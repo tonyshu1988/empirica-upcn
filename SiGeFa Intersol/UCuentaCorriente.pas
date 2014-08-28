@@ -237,7 +237,6 @@ type
     ZQ_CtaCte_GralNOMBRE_TIPO_IVA: TStringField;
     ZQ_CtaCte_GralCOD_IVA: TStringField;
     ZQ_CtaCte_GralNOMBRE_TIPO_DOC: TStringField;
-    ZQ_CtaCte_GralCODIGO_CORTO: TIntegerField;
     ZQ_CtaCte_GralVENCIMIENTO_DIAS: TIntegerField;
     ZQ_CtaCte_GralID_PROVEEDOR_OUT: TIntegerField;
     ZQ_CtaCte_GralDEUDA_VENCIDA: TStringField;
@@ -258,7 +257,6 @@ type
     ZQ_ClienteDESCRIPCION: TStringField;
     ZQ_ClienteCUIT_CUIL: TStringField;
     ZQ_ClienteDESCUENTO_ESPECIAL: TFloatField;
-    ZQ_ClienteCODIGO_CORTO: TIntegerField;
     ZQ_ClienteCODIGO_BARRA: TStringField;
     ZQ_ClienteNOMBRE_PROVINCIA: TStringField;
     ZQ_ClienteNOMBRE_TIPO_IVA: TStringField;
@@ -337,6 +335,11 @@ type
     ISEditResumen_Debe: TISEdit;
     ISEditResumen_Haber: TISEdit;
     ISEditResumen_Saldo: TISEdit;
+    ZQ_ClienteCODIGO_CORTO: TStringField;
+    ZQ_ClienteCLAVE: TStringField;
+    ZQ_ClienteIMPORTADO: TStringField;
+    ZQ_ClienteNRO_AFILIADO: TStringField;
+    ZQ_CtaCte_GralCODIGO_CORTO: TIntegerField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnBuscarClick(Sender: TObject);

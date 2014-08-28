@@ -1,6 +1,6 @@
 object FCajero: TFCajero
-  Left = 140
-  Top = 4
+  Left = 253
+  Top = 119
   Width = 1109
   Height = 743
   Caption = 'Subsistema de Caja - SiGeFa'

@@ -1170,9 +1170,10 @@ procedure TFCajero.OnSelPers;
 begin
   if not (vsel2.ZQ_Personas.IsEmpty) then
   begin
-   
+
     ZQ_Personas.Refresh;
     ZQ_Personas.Locate('id_persona', vsel2.ZQ_PersonasID_PERSONA.AsInteger, []);
+    ZQ_TipoIVA.Locate('id_tipo_iva', vsel2.ZQ_PersonasID_TIPO_IVA.AsInteger, []);
     Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
     IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
     ClienteIVA:= ZQ_PersonasCOEFIVA.AsFloat;
@@ -2192,7 +2193,7 @@ begin
   if (ZQ_TipoIVAVERIFICA_CUIT.AsString='S') then
     if not EsCUITValido(CD_Comprobantepers_cuit.AsString) then
     begin
-      mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil es invalido.'+char(13)+'(sólo debe ingresar números, sin guiones)';
+      mensaje:= mensaje+#13+'El valor ingresado en el campo Cuit/Cuil del Cliente es invalido.'+char(13)+'(sólo debe ingresar números, sin guiones)';
       result := false;
     end;
 
@@ -3135,6 +3136,7 @@ begin
 
       //Cargo el mismo Cliente y detalles del comprobante
       ZQ_Personas.Locate('id_persona', vsel5.ZQ_Optica_OrdenID_CLIENTE.AsInteger, []);
+      ZQ_TipoIVA.Locate('id_tipo_iva', ZQ_PersonasID_TIPO_IVA.AsInteger, []);
       Cliente:= ZQ_PersonasID_PERSONA.AsInteger;
       IdClienteIVA:= ZQ_PersonasID_TIPO_IVA.AsInteger;
       CD_ComprobanteID_CLIENTE.AsInteger:= cliente;
