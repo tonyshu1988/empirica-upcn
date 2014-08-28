@@ -1,6 +1,6 @@
 object FImportarAfiliado: TFImportarAfiliado
-  Left = 308
-  Top = 244
+  Left = 339
+  Top = 276
   Width = 870
   Height = 517
   Caption = 'Importar Afiliados'
@@ -723,8 +723,8 @@ object FImportarAfiliado: TFImportarAfiliado
       object FlexCelGrid: TFlexCelGrid
         Left = 5
         Top = 5
-        Width = 531
-        Height = 381
+        Width = 844
+        Height = 361
         FlexCelImport = XLSImport
         ReadOnly = False
         HideCursor = False
@@ -753,8 +753,8 @@ object FImportarAfiliado: TFImportarAfiliado
       object DBGridArchivo: TDBGrid
         Left = 5
         Top = 5
-        Width = 531
-        Height = 381
+        Width = 844
+        Height = 361
         Align = alClient
         Color = 14606012
         DataSource = DS_Afiliados
@@ -769,97 +769,108 @@ object FImportarAfiliado: TFImportarAfiliado
         Columns = <
           item
             Expanded = False
-            FieldName = 'nro_afiliado'
+            FieldName = 'NRO_AFILIADO'
             Title.Alignment = taCenter
             Width = 76
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'apellido_nombre'
+            FieldName = 'APELLIDO_NOMBRE'
             Title.Alignment = taCenter
             Width = 249
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'tipo_documento'
+            FieldName = 'TIPO_DOC'
             Title.Alignment = taCenter
             Width = 107
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'nro_documento'
+            FieldName = 'NRO_DOC'
             Title.Alignment = taCenter
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'sexo'
+            FieldName = 'SEXO'
             Title.Alignment = taCenter
             Width = 35
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'direccion'
+            FieldName = 'DIRECCION'
             Title.Alignment = taCenter
             Width = 306
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'telefono'
+            FieldName = 'TELEFONO'
             Title.Alignment = taCenter
             Width = 210
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'localidad'
+            FieldName = 'LOCALIDAD'
             Title.Alignment = taCenter
             Width = 177
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'codigo_postal'
+            FieldName = 'CP'
             Title.Alignment = taCenter
             Visible = True
           end
           item
             Expanded = False
-            FieldName = 'plan_os'
+            FieldName = 'PLAN_OS'
             Title.Alignment = taCenter
             Width = 168
             Visible = True
           end>
       end
-      object ProgressBar: TProgressBar
+      object Panel1: TPanel
         Left = 5
-        Top = 386
+        Top = 366
         Width = 844
-        Height = 17
+        Height = 37
         Align = alBottom
+        BevelOuter = bvNone
         TabOrder = 2
-        Visible = False
-      end
-      object DBGridBD: TDBGrid
-        Left = 536
-        Top = 5
-        Width = 313
-        Height = 381
-        Align = alRight
-        Color = 15466455
-        Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
-        TabOrder = 3
-        TitleFont.Charset = DEFAULT_CHARSET
-        TitleFont.Color = clWindowText
-        TitleFont.Height = -11
-        TitleFont.Name = 'Verdana'
-        TitleFont.Style = []
-        OnDrawColumnCell = DBGridBDDrawColumnCell
+        object ProgressBar: TProgressBar
+          Left = 0
+          Top = 23
+          Width = 844
+          Height = 14
+          Align = alBottom
+          TabOrder = 0
+          Visible = False
+        end
+        object CheckBoxActualizar: TCheckBox
+          Left = 2
+          Top = 5
+          Width = 205
+          Height = 16
+          Caption = 'Actualizar Afiliados Existentes'
+          Checked = True
+          State = cbChecked
+          TabOrder = 1
+        end
+        object Edit1: TEdit
+          Left = 232
+          Top = 0
+          Width = 121
+          Height = 21
+          TabOrder = 2
+          Text = '2000'
+        end
       end
     end
   end
@@ -1005,7 +1016,7 @@ object FImportarAfiliado: TFImportarAfiliado
     UseF10ForMenu = False
     UseSystemFont = False
     Left = 232
-    Top = 248
+    Top = 250
     DockControlHeights = (
       0
       0
@@ -1376,6 +1387,7 @@ object FImportarAfiliado: TFImportarAfiliado
       Hint = 'F2 - Actualizar Base'
       Visible = ivAlways
       LargeImageIndex = 15
+      OnClick = btnActualizarClick
       AutoGrayScale = False
     end
     object GrupoEditando: TdxBarGroup
@@ -1436,57 +1448,6 @@ object FImportarAfiliado: TFImportarAfiliado
     Left = 232
     Top = 192
   end
-  object EKOrdenarGrilla1: TEKOrdenarGrilla
-    Grilla = DBGridArchivo
-    Filtros = <
-      item
-        TituloColumna = 'nro_afiliado'
-        Visible = True
-      end
-      item
-        TituloColumna = 'apellido_nombre'
-        Visible = True
-      end
-      item
-        TituloColumna = 'tipo_documento'
-        Visible = True
-      end
-      item
-        TituloColumna = 'nro_documento'
-        Visible = True
-      end
-      item
-        TituloColumna = 'sexo'
-        Visible = True
-      end
-      item
-        TituloColumna = 'direccion'
-        Visible = True
-      end
-      item
-        TituloColumna = 'telefono'
-        Visible = True
-      end
-      item
-        TituloColumna = 'localidad'
-        Visible = True
-      end
-      item
-        TituloColumna = 'codigo_postal'
-        Visible = True
-      end
-      item
-        TituloColumna = 'plan_os'
-        Visible = True
-      end>
-    AltoTituloColumna = 15
-    FuenteNormal = []
-    PermitirOrdenar = True
-    PermitirMover = True
-    PermitirFiltrar = True
-    Left = 232
-    Top = 131
-  end
   object XLSAdapter: TXLSAdapter
     AllowOverwritingFiles = False
     Left = 152
@@ -1495,73 +1456,175 @@ object FImportarAfiliado: TFImportarAfiliado
   object XLSImport: TFlexCelImport
     Adapter = XLSAdapter
     Left = 152
-    Top = 136
+    Top = 131
   end
   object abrirXLS: TOpenDialog
     DefaultExt = '.XLS'
     Filter = 'Archivos XLS|*.xls'
     Title = 'Abrir Archivo XLS a Importar'
     Left = 152
-    Top = 88
-  end
-  object CD_Afiliados: TClientDataSet
-    Aggregates = <>
-    Params = <>
-    Left = 72
-    Top = 195
-    object CD_Afiliadosnro_afiliado: TStringField
-      DisplayLabel = 'Nro Afiliado'
-      FieldName = 'nro_afiliado'
-      Size = 50
-    end
-    object CD_Afiliadosapellido_nombre: TStringField
-      DisplayLabel = 'Apellido y Nombre'
-      FieldName = 'apellido_nombre'
-      Size = 200
-    end
-    object CD_Afiliadostipo_documento: TStringField
-      DisplayLabel = 'Tipo Doc.'
-      FieldName = 'tipo_documento'
-      Size = 50
-    end
-    object CD_Afiliadosnro_documento: TStringField
-      DisplayLabel = 'Nro. Doc.'
-      FieldName = 'nro_documento'
-    end
-    object CD_Afiliadossexo: TStringField
-      DisplayLabel = 'Sexo'
-      FieldName = 'sexo'
-      Size = 10
-    end
-    object CD_Afiliadosdireccion: TStringField
-      DisplayLabel = 'Direcci'#243'n'
-      FieldName = 'direccion'
-      Size = 200
-    end
-    object CD_Afiliadostelefono: TStringField
-      DisplayLabel = 'Tel'#233'fono'
-      FieldName = 'telefono'
-      Size = 100
-    end
-    object CD_Afiliadoslocalidad: TStringField
-      DisplayLabel = 'Localidad'
-      FieldName = 'localidad'
-      Size = 50
-    end
-    object CD_Afiliadoscodigo_postal: TStringField
-      DisplayLabel = 'C. Postal'
-      FieldName = 'codigo_postal'
-      Size = 10
-    end
-    object CD_Afiliadosplan_os: TStringField
-      DisplayLabel = 'Plan OS'
-      FieldName = 'plan_os'
-      Size = 10
-    end
+    Top = 80
   end
   object DS_Afiliados: TDataSource
-    DataSet = CD_Afiliados
+    DataSet = ZQ_Afiliados
     Left = 72
-    Top = 251
+    Top = 250
+  end
+  object ZQ_Afiliados: TZQuery
+    Connection = DM.Conexion
+    SQL.Strings = (
+      'select *'
+      'from temp_afiliados')
+    Params = <>
+    Left = 72
+    Top = 192
+    object ZQ_AfiliadosNRO_AFILIADO: TStringField
+      DisplayLabel = 'N'#186' Afiliado'
+      FieldName = 'NRO_AFILIADO'
+    end
+    object ZQ_AfiliadosAPELLIDO_NOMBRE: TStringField
+      DisplayLabel = 'Apellido y Nombre'
+      FieldName = 'APELLIDO_NOMBRE'
+      Size = 200
+    end
+    object ZQ_AfiliadosTIPO_DOC: TStringField
+      DisplayLabel = 'Tipo Doc.'
+      FieldName = 'TIPO_DOC'
+      Size = 50
+    end
+    object ZQ_AfiliadosNRO_DOC: TStringField
+      DisplayLabel = 'N'#186' Documento'
+      FieldName = 'NRO_DOC'
+    end
+    object ZQ_AfiliadosSEXO: TStringField
+      DisplayLabel = 'Sexo'
+      FieldName = 'SEXO'
+      Size = 10
+    end
+    object ZQ_AfiliadosDIRECCION: TStringField
+      DisplayLabel = 'Direcci'#243'n'
+      FieldName = 'DIRECCION'
+      Size = 200
+    end
+    object ZQ_AfiliadosTELEFONO: TStringField
+      DisplayLabel = 'Tel'#233'fono'
+      FieldName = 'TELEFONO'
+      Size = 100
+    end
+    object ZQ_AfiliadosLOCALIDAD: TStringField
+      DisplayLabel = 'Localidad'
+      FieldName = 'LOCALIDAD'
+      Size = 50
+    end
+    object ZQ_AfiliadosCP: TStringField
+      DisplayLabel = 'C'#243'd. Postal'
+      FieldName = 'CP'
+      Size = 10
+    end
+    object ZQ_AfiliadosPLAN_OS: TStringField
+      DisplayLabel = 'Plan O.S.'
+      FieldName = 'PLAN_OS'
+      Size = 50
+    end
+  end
+  object ZSQL_Delete: TZSQLProcessor
+    Params = <>
+    Script.Strings = (
+      'delete from temp_afiliados')
+    Connection = DM.Conexion
+    Delimiter = ';'
+    Left = 72
+    Top = 131
+  end
+  object ZP_Actualizar: TZStoredProc
+    Connection = DM.Conexion
+    Params = <
+      item
+        DataType = ftInteger
+        Name = 'AFILIADOS_IMPORTADOS'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftString
+        Name = 'ACTUALIZAR_AFILIADO'
+        ParamType = ptInput
+      end>
+    StoredProcName = 'IMPORTAR_AFILIADO'
+    Left = 352
+    Top = 80
+    ParamData = <
+      item
+        DataType = ftInteger
+        Name = 'AFILIADOS_IMPORTADOS'
+        ParamType = ptResult
+      end
+      item
+        DataType = ftString
+        Name = 'ACTUALIZAR_AFILIADO'
+        ParamType = ptInput
+      end>
+    object ZP_ActualizarAFILIADOS_IMPORTADOS: TIntegerField
+      FieldName = 'AFILIADOS_IMPORTADOS'
+    end
+    object ZP_ActualizarAFILIADOS_ACTUALIZADOS: TIntegerField
+      FieldName = 'AFILIADOS_ACTUALIZADOS'
+    end
+  end
+  object ISOrdenarGrilla: TISOrdenarGrilla
+    Grilla = DBGridArchivo
+    Filtros = <
+      item
+        TituloColumna = 'N'#186' Afiliado'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Apellido y Nombre'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tipo Doc.'
+        Visible = True
+      end
+      item
+        TituloColumna = 'N'#186' Documento'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Sexo'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Direcci'#243'n'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Tel'#233'fono'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Localidad'
+        Visible = True
+      end
+      item
+        TituloColumna = 'C'#243'd. Postal'
+        Visible = True
+      end
+      item
+        TituloColumna = 'Plan O.S.'
+        Visible = True
+      end>
+    AltoTituloColumna = 15
+    FuenteNormal = []
+    Ordenar = True
+    MoverColumna = True
+    FiltrarColumna = True
+    GuardarAncho = True
+    Left = 232
+    Top = 131
+  end
+  object DataSource1: TDataSource
+    DataSet = ZP_Actualizar
+    Left = 352
+    Top = 130
   end
 end
