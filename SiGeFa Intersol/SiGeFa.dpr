@@ -3,7 +3,7 @@ program SiGeFa;
 uses
   Forms,
   SYSUTILS,
-  UDM in 'UDM.pas' {DM: TDataModule},  
+  UDM in 'UDM.pas' {DM: TDataModule},
   UPrincipal in 'UPrincipal.pas' {FPrincipal},
   UUtilidades in 'UUtilidades.pas',
   UAcerca_De in 'UAcerca_De.pas' {FAcerca_De},
@@ -79,7 +79,8 @@ uses
   UOP_ABM_LiquidacionOS in 'UOP_ABM_LiquidacionOS.pas' {FOP_ABM_LiquidacionOS},
   UEstadisticasLibroIVA in 'UEstadisticasLibroIVA.pas' {FEstadisticasLibroIVA},
   UOP_ReconocimProds in 'UOP_ReconocimProds.pas' {FOP_ReconocimientoProds},
-  UOP_Cajero in 'UOP_Cajero.pas' {FOP_Cajero};
+  UOP_Cajero in 'UOP_Cajero.pas' {FOP_Cajero},
+  UImportarAfiliado in 'UImportarAfiliado.pas' {FImportarAfiliado};
 
 {$R *.res}
 
