@@ -1650,7 +1650,8 @@ begin
 
 if validarBoleta() then
   begin
-    guardarOrden();
+    if guardarOrden() then
+     ZQ_Orden.Refresh;
   end
 end;
 
@@ -1929,7 +1930,7 @@ begin
       end;
 
       DBGridComprobantes.DefaultDrawColumnCell(rect,datacol,column,state);
-      
+
     end;
 
 end;
@@ -1937,8 +1938,8 @@ end;
 procedure TFOP_ABM_OrdenTecnica.ZQ_OrdenAfterScroll(DataSet: TDataSet);
 begin
 
-   lblEstado.Caption:=Format('%s',[ZQ_OrdenO_ESTADO.AsString]);
-   lblEstado.Color:= StringToColor(ZQ_OrdenCOLOR.AsString);
+   if not ZQ_OrdenO_ESTADO.IsNull then lblEstado.Caption:=Format('%s',[ZQ_OrdenO_ESTADO.AsString]);
+   if not ZQ_OrdenCOLOR.IsNull then  lblEstado.Color:= StringToColor(ZQ_OrdenCOLOR.AsString);
    if not(ZQ_OrdenDetalle.State=dsInactive) then
     begin
       ISDbSuma1.RecalcAll;

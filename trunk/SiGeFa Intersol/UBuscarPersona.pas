@@ -349,7 +349,7 @@ begin
     ZQ_UltimoNro.Close;
     ZQ_UltimoNro.Open;
     if ZQ_UltimoNro.IsEmpty then
-      ZQ_PersonasCODIGO_CORTO.AsInteger:= 1
+      ZQ_PersonasCODIGO_CORTO.AsString:= '001'
     else
       ZQ_PersonasCODIGO_CORTO.AsInteger:= ZQ_UltimoNroCODIGO_CORTO.AsInteger + 1;
 

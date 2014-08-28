@@ -453,7 +453,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                 Font.Height = -11
                 Font.Name = 'Verdana'
                 Font.Style = []
-                Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+                Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
                 ParentFont = False
                 TabOrder = 0
                 TitleFont.Charset = DEFAULT_CHARSET
@@ -610,7 +610,6 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                     Expanded = False
                     FieldName = 'ID_RECONOCIMIENTO'
                     Title.Caption = 'ID'
-                    Width = 64
                     Visible = True
                   end>
               end
@@ -657,7 +656,7 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
                 Font.Height = -11
                 Font.Name = 'Verdana'
                 Font.Style = []
-                Options = [dgEditing, dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
+                Options = [dgTitles, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit]
                 ParentFont = False
                 TabOrder = 0
                 TitleFont.Charset = DEFAULT_CHARSET

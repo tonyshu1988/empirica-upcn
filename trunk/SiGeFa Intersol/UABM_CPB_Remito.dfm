@@ -5654,8 +5654,23 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
     object ZQ_ClienteNOMBRE_TIPO_DOC: TStringField
       FieldName = 'NOMBRE_TIPO_DOC'
     end
-    object ZQ_ClienteCODIGO_CORTO: TIntegerField
+    object ZQ_ClienteCODIGO_CORTO: TStringField
       FieldName = 'CODIGO_CORTO'
+    end
+    object ZQ_ClienteCODIGO_BARRA: TStringField
+      FieldName = 'CODIGO_BARRA'
+      Size = 40
+    end
+    object ZQ_ClienteCLAVE: TStringField
+      FieldName = 'CLAVE'
+      Size = 10
+    end
+    object ZQ_ClienteIMPORTADO: TStringField
+      FieldName = 'IMPORTADO'
+      Size = 1
+    end
+    object ZQ_ClienteNRO_AFILIADO: TStringField
+      FieldName = 'NRO_AFILIADO'
     end
   end
   object DS_Proveedor: TDataSource
@@ -6395,6 +6410,7 @@ object FABM_CPB_Remito: TFABM_CPB_Remito
     SQL_Orden.Strings = (
       'order by cpb.fecha desc')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 37
     Top = 320
   end

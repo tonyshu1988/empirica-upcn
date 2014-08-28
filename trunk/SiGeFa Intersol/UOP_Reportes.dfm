@@ -55,7 +55,7 @@ object FOP_Reportes: TFOP_Reportes
           object Label7: TLabel
             Left = 1
             Top = 1
-            Width = 996
+            Width = 39
             Height = 13
             Align = alTop
             Alignment = taCenter
@@ -173,7 +173,7 @@ object FOP_Reportes: TFOP_Reportes
           object Label1: TLabel
             Left = 1
             Top = 1
-            Width = 996
+            Width = 89
             Height = 13
             Align = alTop
             Alignment = taCenter
@@ -1411,7 +1411,7 @@ object FOP_Reportes: TFOP_Reportes
             end
             item
               Expanded = False
-              FieldName = 'NRO_AFILIADO'
+              FieldName = 'NRO_AFILIADO_1'
               Title.Caption = 'N'#186' Afiliado'
               Width = 109
               Visible = True
@@ -1585,8 +1585,8 @@ object FOP_Reportes: TFOP_Reportes
         end
         object ReporteAfiliadosOss: TQuickRep
           Tag = 99
-          Left = 52
-          Top = 16
+          Left = 428
+          Top = 160
           Width = 794
           Height = 1123
           Frame.Color = clBlack
@@ -2091,7 +2091,7 @@ object FOP_Reportes: TFOP_Reportes
               AutoStretch = False
               Color = clWhite
               DataSet = ZQ_PersonaOss
-              DataField = 'NRO_AFILIADO'
+              DataField = 'NRO_AFILIADO_1'
               Font.Charset = ANSI_CHARSET
               Font.Color = clWindowText
               Font.Height = -11
@@ -3231,7 +3231,7 @@ object FOP_Reportes: TFOP_Reportes
     SQL.Strings = (
       
         'select distinct cl.*,td.nombre_tipo_doc, ti.nombre_tipo_iva, pv.' +
-        'nombre_provincia,oo.nombre'
+        'nombre_provincia,oo.nombre,opo.nro_afiliado'
       'from optica_persona_os opo'
       'join optica_os oo on (opo.id_os=oo.id_os)'
       'join persona cl on (opo.id_persona=cl.id_persona)'
@@ -3350,6 +3350,10 @@ object FOP_Reportes: TFOP_Reportes
     object ZQ_PersonaOssNOMBRE_1: TStringField
       FieldName = 'NOMBRE_1'
       Size = 200
+    end
+    object ZQ_PersonaOssNRO_AFILIADO_1: TStringField
+      FieldName = 'NRO_AFILIADO_1'
+      Size = 100
     end
   end
   object DS_PersonaOss: TDataSource

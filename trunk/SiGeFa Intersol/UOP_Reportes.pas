@@ -168,6 +168,7 @@ type
     QRlblPieDePagina: TQRLabel;
     QRLabel43: TQRLabel;
     QRSysData1: TQRSysData;
+    ZQ_PersonaOssNRO_AFILIADO_1: TStringField;
     procedure btnBuscarClick(Sender: TObject);
     procedure btnSalirClick(Sender: TObject);
     procedure btnImprimirClick(Sender: TObject);
