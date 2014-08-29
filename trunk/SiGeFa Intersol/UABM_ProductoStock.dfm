@@ -1,6 +1,6 @@
 object FABM_ProductoStock: TFABM_ProductoStock
-  Left = 357
-  Top = 147
+  Left = 262
+  Top = 52
   Width = 937
   Height = 602
   Caption = 'ABM Producto Stock'
@@ -22,8 +22,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object PanelFondo: TPanel
     Left = 0
     Top = 0
-    Width = 929
-    Height = 523
+    Width = 921
+    Height = 512
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 5
@@ -31,29 +31,29 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelAsociar: TPanel
       Left = 5
       Top = 5
-      Width = 919
-      Height = 513
+      Width = 911
+      Height = 502
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 1
       object Splitter1: TSplitter
         Left = 423
         Top = 21
-        Height = 492
+        Height = 481
       end
       object PanelAsociar_Producto: TPanel
         Left = 426
         Top = 21
-        Width = 493
-        Height = 492
+        Width = 485
+        Height = 481
         Align = alClient
         BevelOuter = bvNone
         TabOrder = 0
         object DBGridProducto: TDBGrid
           Left = 0
           Top = 0
-          Width = 493
-          Height = 492
+          Width = 485
+          Height = 481
           Align = alClient
           Color = 13431031
           DataSource = DS_Producto
@@ -149,7 +149,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         Left = 0
         Top = 21
         Width = 423
-        Height = 492
+        Height = 481
         Align = alLeft
         BevelOuter = bvNone
         TabOrder = 1
@@ -157,7 +157,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           Left = 0
           Top = 0
           Width = 423
-          Height = 492
+          Height = 481
           Align = alClient
           Color = 14606012
           DataSource = DS_Sucursal
@@ -185,7 +185,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object Panel1: TPanel
         Left = 0
         Top = 0
-        Width = 919
+        Width = 911
         Height = 21
         Align = alTop
         BevelOuter = bvNone
@@ -198,8 +198,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
     object PanelCarga: TPanel
       Left = 5
       Top = 5
-      Width = 919
-      Height = 513
+      Width = 911
+      Height = 502
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
@@ -318,7 +318,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               50.270833333333330000
               1232.958333333333000000
               124.354166666666700000
-              304.270833333333400000)
+              304.270833333333300000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -349,7 +349,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Size.Values = (
               52.916666666666670000
               1132.416666666667000000
-              68.791666666666680000
+              68.791666666666670000
               505.354166666666700000)
             Alignment = taCenter
             AlignToBand = True
@@ -382,7 +382,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               52.916666666666670000
               1087.437500000000000000
               5.291666666666667000
-              592.666666666666800000)
+              592.666666666666700000)
             Alignment = taCenter
             AlignToBand = True
             AutoSize = True
@@ -424,7 +424,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewPage = False
           ParentFont = False
           Size.Values = (
-            34.395833333333340000
+            34.395833333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -775,7 +775,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            58.208333333333340000
+            58.208333333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -794,7 +794,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               37.041666666666670000
               10.583333333333330000
               10.583333333333330000
-              558.270833333333400000)
+              558.270833333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -827,7 +827,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               37.041666666666670000
               1973.791666666667000000
               10.583333333333330000
-              775.229166666666800000)
+              775.229166666666700000)
             Alignment = taRightJustify
             AlignToBand = False
             AutoSize = True
@@ -864,7 +864,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
           ForceNewColumn = False
           ForceNewPage = False
           Size.Values = (
-            82.020833333333340000
+            82.020833333333330000
             2770.187500000000000000)
           PreCaluculateBandHeight = False
           KeepOnOnePage = False
@@ -912,7 +912,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Frame.DrawLeft = False
             Frame.DrawRight = False
             Size.Values = (
-              34.395833333333340000
+              34.395833333333330000
               13.229166666666670000
               5.291666666666667000
               333.375000000000000000)
@@ -1064,7 +1064,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
             Frame.DrawRight = False
             Size.Values = (
               37.041666666666670000
-              923.395833333333400000
+              923.395833333333300000
               5.291666666666667000
               105.833333333333300000)
             Alignment = taLeftJustify
@@ -1162,7 +1162,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               37.041666666666670000
               1939.395833333333000000
               5.291666666666667000
-              92.604166666666680000)
+              92.604166666666670000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -1226,7 +1226,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
               37.041666666666670000
               2550.583333333333000000
               5.291666666666667000
-              216.958333333333400000)
+              216.958333333333300000)
             Alignment = taLeftJustify
             AlignToBand = False
             AutoSize = True
@@ -1249,8 +1249,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
       object DBGridStock: TDBGrid
         Left = 0
         Top = 0
-        Width = 919
-        Height = 493
+        Width = 911
+        Height = 482
         Align = alClient
         Color = 14606012
         DataSource = DS_Stock
@@ -1477,13 +1477,13 @@ object FABM_ProductoStock: TFABM_ProductoStock
       end
       object Panel2: TPanel
         Left = 0
-        Top = 493
-        Width = 919
+        Top = 482
+        Width = 911
         Height = 20
         Align = alBottom
         TabOrder = 1
         object lblResumen: TLabel
-          Left = 842
+          Left = 834
           Top = 1
           Width = 76
           Height = 18
@@ -1518,7 +1518,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -2694,7 +2694,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
       end
       item
         Titulo = 'Stock Actual'
-        Campo = 'stock_producto'
+        Campo = 'stock_actual'
         Tabla = 'sp'
         TipoCampo = IS_Numero
         TipoCampoIndiceVer = '='
@@ -2810,7 +2810,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         '_articulo,'
       
         '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
-        'umna,'
+        'umna, '
       '       c.nombre as color, su.id_sucursal,'
       '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
       '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
@@ -2819,6 +2819,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
         'al'
+      ''
+      ''
       ''
       ''
       'from stock_producto sp'
@@ -2837,7 +2839,14 @@ object FABM_ProductoStock: TFABM_ProductoStock
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
       'left join color c on (pc.color = c.id_color)'
-      'where (pr.baja <> '#39'S'#39') and (pc.baja <> '#39'S'#39')')
+      ''
+      ''
+      ''
+      ''
+      'where (pr.baja <> '#39'S'#39') and (pc.baja <> '#39'S'#39')'
+      ''
+      ''
+      '')
     SQL_Select.Strings = (
       
         'select sp.id_stock_producto, sp.stock_actual, sp.stock_min, sp.s' +
@@ -2851,7 +2860,7 @@ object FABM_ProductoStock: TFABM_ProductoStock
         '_articulo,'
       
         '       su.nombre as sucursal,ps.seccion,ps.sector,ps.fila,ps.col' +
-        'umna,'
+        'umna, '
       '       c.nombre as color, su.id_sucursal,'
       '       '#39'Sucursal: '#39'||su.nombre||'#39' '#39'||'
       '        COALESCE ('#39'| Secci'#243'n: '#39' || ps.seccion,'#39#39')||'#39' '#39'||'
@@ -2860,6 +2869,8 @@ object FABM_ProductoStock: TFABM_ProductoStock
       
         '        COALESCE ('#39'| Columna: '#39' || ps.columna,'#39#39') AS posicSucurs' +
         'al'
+      ''
+      ''
       ''
       '')
     SQL_From.Strings = (
@@ -2878,11 +2889,19 @@ object FABM_ProductoStock: TFABM_ProductoStock
         'left join posicion_sucursal ps on (ps.id_posicion_sucursal = sp.' +
         'id_posicion_sucursal)'
       'left join sucursal su on (ps.id_sucursal = su.id_sucursal)'
-      'left join color c on (pc.color = c.id_color)')
+      'left join color c on (pc.color = c.id_color)'
+      ''
+      ''
+      ''
+      '')
     SQL_Where.Strings = (
-      'where (pr.baja <> '#39'S'#39') and (pc.baja <> '#39'S'#39')')
+      'where (pr.baja <> '#39'S'#39') and (pc.baja <> '#39'S'#39')'
+      ''
+      ''
+      '')
     UsarWhereOriginal = IS_Con_Where
     PantallaReducida = True
+    TituloVentana = 'Buscar'
     Left = 528
     Top = 330
   end

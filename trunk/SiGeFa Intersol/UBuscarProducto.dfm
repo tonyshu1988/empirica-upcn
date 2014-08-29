@@ -1,6 +1,6 @@
 object FBuscarProducto: TFBuscarProducto
-  Left = 421
-  Top = 327
+  Left = 401
+  Top = 264
   Width = 730
   Height = 426
   Caption = 'Buscar Producto'
@@ -20,15 +20,15 @@ object FBuscarProducto: TFBuscarProducto
   object Panel1: TPanel
     Left = 0
     Top = 0
-    Width = 722
-    Height = 347
+    Width = 714
+    Height = 336
     Align = alClient
     TabOrder = 0
     object DBGrid: TDBGrid
       Left = 1
       Top = 1
-      Width = 720
-      Height = 345
+      Width = 712
+      Height = 334
       Hint = 'Presione sobre el titulo de la columna para modificar el orden'
       Align = alClient
       Color = 14606012
@@ -142,7 +142,7 @@ object FBuscarProducto: TFBuscarProducto
   object dxBarABM: TdxBarManager
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWhite
-    Font.Height = -11
+    Font.Height = -12
     Font.Name = 'Tahoma'
     Font.Style = []
     Backgrounds.Bar.Data = {
@@ -1324,6 +1324,7 @@ object FBuscarProducto: TFBuscarProducto
     SQL_Orden.Strings = (
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 136
     Top = 176
   end
@@ -1487,6 +1488,7 @@ object FBuscarProducto: TFBuscarProducto
     SQL_Orden.Strings = (
       'order by pc.nombre, ta.descripcion, ar.descripcion')
     UsarWhereOriginal = IS_Con_Where
+    TituloVentana = 'Buscar'
     Left = 248
     Top = 104
   end
