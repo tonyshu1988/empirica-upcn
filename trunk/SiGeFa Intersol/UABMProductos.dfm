@@ -1,9 +1,9 @@
 object FABMProductos: TFABMProductos
-  Left = 187
-  Top = 38
+  Left = 175
+  Top = 18
   AutoScroll = False
   Caption = 'ABM Productos'
-  ClientHeight = 711
+  ClientHeight = 703
   ClientWidth = 981
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -22,12 +22,12 @@ object FABMProductos: TFABMProductos
   OnCreate = FormCreate
   DesignSize = (
     981
-    711)
+    703)
   PixelsPerInch = 96
   TextHeight = 13
   object panelImprimirListado: TPanel
     Left = 370
-    Top = 418
+    Top = 413
     Width = 233
     Height = 100
     Anchors = []
@@ -1427,7 +1427,7 @@ object FABMProductos: TFABMProductos
     Left = 0
     Top = 0
     Width = 981
-    Height = 659
+    Height = 651
     Align = alClient
     BevelOuter = bvNone
     Caption = 'PContenedor'
@@ -1437,7 +1437,7 @@ object FABMProductos: TFABMProductos
       Left = 0
       Top = 0
       Width = 981
-      Height = 389
+      Height = 381
       Align = alClient
       BevelOuter = bvNone
       Constraints.MinHeight = 315
@@ -1482,7 +1482,7 @@ object FABMProductos: TFABMProductos
       end
       object PProducto: TPanel
         Left = 0
-        Top = 234
+        Top = 226
         Width = 981
         Height = 155
         Align = alBottom
@@ -1745,7 +1745,7 @@ object FABMProductos: TFABMProductos
         Left = 0
         Top = 19
         Width = 981
-        Height = 215
+        Height = 207
         Align = alClient
         Color = 14606012
         DataSource = DS_ProductoCabecera
@@ -1837,7 +1837,7 @@ object FABMProductos: TFABMProductos
     end
     object PanelDetalle: TPanel
       Left = 0
-      Top = 389
+      Top = 381
       Width = 981
       Height = 270
       Align = alBottom
@@ -1918,7 +1918,7 @@ object FABMProductos: TFABMProductos
             BevelOuter = bvNone
             UseDockManager = False
             TabOrder = 1
-            object PageControl1: TPageControl
+            object tabs: TPageControl
               Left = 0
               Top = 0
               Width = 740

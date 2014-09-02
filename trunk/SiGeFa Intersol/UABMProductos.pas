@@ -295,7 +295,7 @@ type
     DBEditPrecio3: TDBEdit;
     DBEditPrecio4: TDBEdit;
     DBEditPrecio5: TDBEdit;
-    PageControl1: TPageControl;
+    tabs: TPageControl;
     TabSheet1: TTabSheet;
     TabSheet2: TTabSheet;
     ISBuscar: TISBusquedaAvanzada;
@@ -967,13 +967,9 @@ begin
     showmessage('Debe cargar algún artículo!');
     exit;
   end;
-
-///////////////////////Deshabilito el cod corto cuando inserto un nuevo producto, lo genera solo el sistema,  POR QUE??????? ///////////
-//  LabelCodCorto.Enabled:= false;
-//  EDDCODCORTO.Enabled := false;
-///////////////////////////////////////////////
+  PProducto.Enabled:=False;
   grilla.Height:=1;
-  
+  tabs.ActivePageIndex:=0;
   ZQ_Articulo.Refresh;
 
   ZQ_DetalleProducto.Append;
@@ -989,7 +985,7 @@ begin
   ZQ_PreciosCOEF_GANANCIA.AsFloat:= 0;
   ZQ_PreciosCOEF_DESCUENTO.AsFloat:= 0;
   ZQ_PreciosIMPUESTO_INTERNO.AsFloat:= 0;
-  ZQ_PreciosIMPUESTO_IVA.AsFloat:= 0;
+  ZQ_PreciosIMPUESTO_IVA.AsFloat:= 0.21;
   ZQ_PreciosIMPUESTO_ADICIONAL1.AsFloat:= 0;
   ZQ_PreciosIMPUESTO_ADICIONAL2.AsFloat:= 0;
 
@@ -999,13 +995,13 @@ begin
   GrupoEditando.Enabled:= false;
 
   PDatosDetalle.Visible:= true;
-
+  EDDCODCORTO.SetFocus;
   campoQueCambia:= '';
   if (asociar_pto_salida = 'SI') then
   begin
     LStockActual.Visible:= true;
     EditStockActual.Visible:= true;
-    EditStockActual.Text:= '0';
+    EditStockActual.Text:= '1';
   end;
 end;
 
@@ -1025,7 +1021,8 @@ begin
   ZQ_DetalleProducto.Edit;
   LabelCodCorto.Enabled:= true;
   EDDCODCORTO.Enabled:= true;
-    grilla.Height:=1;
+  PProducto.Enabled:=False;
+  grilla.Height:=1;
   PDatosDetalle.Visible:= true;
 
   campoQueCambia:= '';
@@ -1735,7 +1732,7 @@ begin
   grillaDetalle.Enabled:= True;
   GrupoEditando.Enabled:= true;
   PDatosDetalle.Visible:= false;
-
+  PProducto.Enabled:=true;
   if (ZQ_ProductoCabecera.State = dsedit) then
     HabilitarPopMenu(0) //todos activos
   else
@@ -1751,7 +1748,7 @@ begin
   GrupoEditando.Enabled:= true;
   grillaDetalle.Enabled:= True;
   PDatosDetalle.Visible:= false;
-
+  PProducto.Enabled:=true;
   if (ZQ_ProductoCabecera.State = dsedit) then
     HabilitarPopMenu(0) //todos activos
   else

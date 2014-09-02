@@ -1,8 +1,8 @@
 object FTransferirStock: TFTransferirStock
-  Left = 239
-  Top = 25
+  Left = 274
+  Top = 153
   Width = 958
-  Height = 718
+  Height = 592
   Caption = 'Transferir Stock'
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -23,7 +23,7 @@ object FTransferirStock: TFTransferirStock
     Left = 0
     Top = 0
     Width = 942
-    Height = 628
+    Height = 502
     Align = alClient
     BevelOuter = bvNone
     BorderWidth = 2
@@ -40,7 +40,7 @@ object FTransferirStock: TFTransferirStock
       Left = 2
       Top = 189
       Width = 938
-      Height = 437
+      Height = 311
       Align = alClient
       BevelOuter = bvNone
       BorderWidth = 4
@@ -69,7 +69,7 @@ object FTransferirStock: TFTransferirStock
         Left = 4
         Top = 24
         Width = 930
-        Height = 409
+        Height = 283
         Align = alClient
         Color = 14606012
         DataSource = DS_Historico_Detalle
@@ -252,14 +252,14 @@ object FTransferirStock: TFTransferirStock
     Left = 0
     Top = 0
     Width = 942
-    Height = 628
+    Height = 502
     Align = alClient
     TabOrder = 0
     object PageControlTransferir: TPageControl
       Left = 1
       Top = 34
       Width = 940
-      Height = 593
+      Height = 467
       ActivePage = TabSAsociarNotaPedido
       Align = alClient
       TabOrder = 0
@@ -271,7 +271,7 @@ object FTransferirStock: TFTransferirStock
           Left = 0
           Top = 0
           Width = 932
-          Height = 524
+          Height = 398
           Align = alClient
           Color = 14606012
           DataSource = DS_Producto
@@ -429,7 +429,7 @@ object FTransferirStock: TFTransferirStock
         end
         object Panel1: TPanel
           Left = 0
-          Top = 524
+          Top = 398
           Width = 932
           Height = 41
           Align = alBottom
@@ -491,7 +491,7 @@ object FTransferirStock: TFTransferirStock
           Left = 0
           Top = 0
           Width = 932
-          Height = 524
+          Height = 398
           Hint = 
             'Haga doble click en la nota de pedido que desea cargar al sistem' +
             'a'
@@ -569,7 +569,7 @@ object FTransferirStock: TFTransferirStock
           Left = 0
           Top = 0
           Width = 932
-          Height = 524
+          Height = 398
           Align = alClient
           Color = 14606012
           DataSource = DS_ListaProductos
@@ -715,7 +715,7 @@ object FTransferirStock: TFTransferirStock
         end
         object PanelNotaPedidoDetalle: TPanel
           Left = 0
-          Top = 524
+          Top = 398
           Width = 932
           Height = 41
           Align = alBottom
@@ -2782,7 +2782,7 @@ object FTransferirStock: TFTransferirStock
         NombreCampo = 'almacenar'
       end>
     DataSet = CD_ListaProductos
-    SumListChanged = DBGridNotaPedidoDblClick
+    SumListChanged = EKSumaNotaPedidoSumListChanged
     Left = 218
     Top = 485
   end

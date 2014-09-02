@@ -93,6 +93,10 @@ type
     ISListadoTipo: TISListadoSQL;
     ISVistaPrevia: TISVistaPreviaQR;
     ISBuscar: TISBusquedaAvanzada;
+    ZQ_MedidasID_MEDIDA_ARTICULO: TIntegerField;
+    ZQ_MedidasID_ARTICULO: TIntegerField;
+    ZQ_MedidasID_MEDIDA: TIntegerField;
+    ZQ_MedidasBAJA_1: TStringField;
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure btnSalirClick(Sender: TObject);
     procedure btnNuevoClick(Sender: TObject);
