@@ -1604,7 +1604,7 @@ object FABM_Articulo: TFABM_Articulo
     Connection = DM.Conexion
     UpdateObject = ZU_Medidas
     SQL.Strings = (
-      'select m.medida, m.baja'
+      'select m.medida, m.baja,ma.*'
       'from medida m'
       'left join medida_articulo ma on (m.id_medida = ma.id_medida)'
       'where ma.id_articulo = :idArticulo'
@@ -1629,6 +1629,22 @@ object FABM_Articulo: TFABM_Articulo
     end
     object ZQ_MedidasBAJA: TStringField
       FieldName = 'BAJA'
+      Size = 1
+    end
+    object ZQ_MedidasID_MEDIDA_ARTICULO: TIntegerField
+      FieldName = 'ID_MEDIDA_ARTICULO'
+      Required = True
+    end
+    object ZQ_MedidasID_ARTICULO: TIntegerField
+      FieldName = 'ID_ARTICULO'
+      Required = True
+    end
+    object ZQ_MedidasID_MEDIDA: TIntegerField
+      FieldName = 'ID_MEDIDA'
+      Required = True
+    end
+    object ZQ_MedidasBAJA_1: TStringField
+      FieldName = 'BAJA_1'
       Size = 1
     end
   end
@@ -1792,6 +1808,7 @@ object FABM_Articulo: TFABM_Articulo
       'from articulo')
     UsarWhereOriginal = IS_Sin_Where
     PantallaReducida = True
+    TituloVentana = 'Buscar'
     Left = 296
     Top = 82
   end

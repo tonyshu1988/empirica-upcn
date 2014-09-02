@@ -735,67 +735,67 @@ end;
 procedure TFTransferirStock.btnNotaPedidoClick(Sender: TObject);
 begin
 
-//  if DBGridNotaPedido.Visible then //si estoy viendo las Notas de Pedidos
-//  begin
-//    if not ZQ_VerCpb.IsEmpty then
-//    begin
-//      ZQ_Cpb_ListaProd.Close;
-//      ZQ_Cpb_ListaProd.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
-//      ZQ_Cpb_ListaProd.Open;
-//
-//      if not ZQ_Cpb_ListaProd.IsEmpty then
-//      begin
-//        permitirInsertar:= true;
-//        ZQ_Cpb_ListaProd.First;
-//        while not ZQ_Cpb_ListaProd.Eof do
-//        begin
-//          if (ZQ_Cpb_ListaProdCANTIDAD_RECIBIDA.AsFloat <> 0) and (ZQ_Cpb_ListaProdCANTIDAD_RECIBIDA.AsFloat <> ZQ_Cpb_ListaProdCANTIDAD_ALMACENADA.AsFloat) then
-//          begin
-//            CD_ListaProductos.Append;
-//            CD_ListaProductoscantidad.AsFloat := ZQ_Cpb_ListaProdCANTIDAD.AsFloat;
-//            CD_ListaProductoscantidad_recibida.AsFloat:= ZQ_Cpb_ListaProdCANTIDAD_RECIBIDA.AsFloat;
-//            CD_ListaProductoscantidad_almacenada.AsFloat:= ZQ_Cpb_ListaProdCANTIDAD_ALMACENADA.AsFloat;
-//            CD_ListaProductoscod_cabecera.AsString:= ZQ_Cpb_ListaProdCOD_CABECERA.AsString;
-//            CD_ListaProductosproducto.AsString:= ZQ_Cpb_ListaProdPRODUCTO.AsString;
-//            CD_ListaProductosmedida.AsString:= ZQ_Cpb_ListaProdMEDIDA.AsString;
-//            CD_ListaProductoscolor.AsString:= ZQ_Cpb_ListaProdCOLOR.AsString;
-//            CD_ListaProductosmarca.AsString:= ZQ_Cpb_ListaProdMARCA.AsString;
-//            CD_ListaProductosarticulo.AsString:= ZQ_Cpb_ListaProdARTICULO.AsString;
-//            CD_ListaProductostipo_articulo.AsString:= ZQ_Cpb_ListaProdTIPO_ARTICULO.AsString;
-//            CD_ListaProductoscod_producto.AsString:= ZQ_Cpb_ListaProdCOD_PRODUCTO.AsString;
-//            CD_ListaProductoscodigo_barra.AsString:= ZQ_Cpb_ListaProdCODIGO_BARRA.AsString;
-//            CD_ListaProductosid_producto.AsInteger:= ZQ_Cpb_ListaProdID_PRODUCTO.AsInteger;
-//            CD_ListaProductosid_comprobante.AsInteger:= ZQ_Cpb_ListaProdID_COMPROBANTE.AsInteger;
-//            CD_ListaProductosalmacenar.AsFloat := ZQ_Cpb_ListaProdCANTIDAD_RECIBIDA.AsFloat- ZQ_Cpb_ListaProdCANTIDAD_ALMACENADA.AsFloat;
-//            CD_ListaProductos.Post;
-//          end;
-//
-//          ZQ_Cpb_ListaProd.Next;
-//        end;
-//
-//        btnNotaPedido.Caption:= 'Cerrar Nota Pedido';
-//        DBGridNotaPedido.Visible:= false;
-//        DBGridNotaPedidoDetalle.Visible:= true;
-//        DBGridNotaPedidoDetalle.SetFocus;
-//        PanelNotaPedidoDetalle.Visible:= true;
-//
-//        //inicialmente me posiciono en la primer fila en la columna almacenar
-//        ZQ_Cpb_ListaProd.First;
-//        DBGridNotaPedidoDetalle.SelectedField:= DBGridNotaPedidoDetalle.Fields[GetIndexField(DBGridNotaPedidoDetalle, 'almacenar')];
-//
-//        permitirInsertar:= false;
-//      end;
-//    end;
-//  end
-//  else //si estoy examinando la nota de pedido con todos sus productos
-//  begin
-//    btnNotaPedido.Caption:= 'Abrir Nota Pedido';
-//    DBGridNotaPedido.Visible:= true;
-//    DBGridNotaPedidoDetalle.Visible:= False;
-//    PanelNotaPedidoDetalle.Visible:= False;
-//    CD_ListaProductos.EmptyDataSet;
-//    ZQ_VerCpb.Refresh;
-//  end;
+  if DBGridNotaPedido.Visible then //si estoy viendo las Notas de Pedidos
+  begin
+    if not ZQ_VerCpb.IsEmpty then
+    begin
+      ZQ_Cpb_ListaProd.Close;
+      ZQ_Cpb_ListaProd.ParamByName('ID_COMPROBANTE').AsInteger := ZQ_VerCpbID_COMPROBANTE.AsInteger;
+      ZQ_Cpb_ListaProd.Open;
+
+      if not ZQ_Cpb_ListaProd.IsEmpty then
+      begin
+        permitirInsertar:= true;
+        ZQ_Cpb_ListaProd.First;
+        while not ZQ_Cpb_ListaProd.Eof do
+        begin
+          if (ZQ_Cpb_ListaProdCANTIDAD_RECIBIDA.AsFloat <> 0) and (ZQ_Cpb_ListaProdCANTIDAD_RECIBIDA.AsFloat <> ZQ_Cpb_ListaProdCANTIDAD_ALMACENADA.AsFloat) then
+          begin
+            CD_ListaProductos.Append;
+            CD_ListaProductoscantidad.AsFloat := ZQ_Cpb_ListaProdCANTIDAD.AsFloat;
+            CD_ListaProductoscantidad_recibida.AsFloat:= ZQ_Cpb_ListaProdCANTIDAD_RECIBIDA.AsFloat;
+            CD_ListaProductoscantidad_almacenada.AsFloat:= ZQ_Cpb_ListaProdCANTIDAD_ALMACENADA.AsFloat;
+            CD_ListaProductoscod_cabecera.AsString:= ZQ_Cpb_ListaProdCOD_CABECERA.AsString;
+            CD_ListaProductosproducto.AsString:= ZQ_Cpb_ListaProdPRODUCTO.AsString;
+            CD_ListaProductosmedida.AsString:= ZQ_Cpb_ListaProdMEDIDA.AsString;
+            CD_ListaProductoscolor.AsString:= ZQ_Cpb_ListaProdCOLOR.AsString;
+            CD_ListaProductosmarca.AsString:= ZQ_Cpb_ListaProdMARCA.AsString;
+            CD_ListaProductosarticulo.AsString:= ZQ_Cpb_ListaProdARTICULO.AsString;
+            CD_ListaProductostipo_articulo.AsString:= ZQ_Cpb_ListaProdTIPO_ARTICULO.AsString;
+            CD_ListaProductoscod_producto.AsString:= ZQ_Cpb_ListaProdCOD_PRODUCTO.AsString;
+            CD_ListaProductoscodigo_barra.AsString:= ZQ_Cpb_ListaProdCODIGO_BARRA.AsString;
+            CD_ListaProductosid_producto.AsInteger:= ZQ_Cpb_ListaProdID_PRODUCTO.AsInteger;
+            CD_ListaProductosid_comprobante.AsInteger:= ZQ_Cpb_ListaProdID_COMPROBANTE.AsInteger;
+            CD_ListaProductosalmacenar.AsFloat := ZQ_Cpb_ListaProdCANTIDAD_RECIBIDA.AsFloat- ZQ_Cpb_ListaProdCANTIDAD_ALMACENADA.AsFloat;
+            CD_ListaProductos.Post;
+          end;
+
+          ZQ_Cpb_ListaProd.Next;
+        end;
+
+        btnNotaPedido.Caption:= 'Cerrar Nota Pedido';
+        DBGridNotaPedido.Visible:= false;
+        DBGridNotaPedidoDetalle.Visible:= true;
+        DBGridNotaPedidoDetalle.SetFocus;
+        PanelNotaPedidoDetalle.Visible:= true;
+
+        //inicialmente me posiciono en la primer fila en la columna almacenar
+        ZQ_Cpb_ListaProd.First;
+        DBGridNotaPedidoDetalle.SelectedField:= DBGridNotaPedidoDetalle.Fields[GetIndexField(DBGridNotaPedidoDetalle, 'almacenar')];
+
+        permitirInsertar:= false;
+      end;
+    end;
+  end
+  else //si estoy examinando la nota de pedido con todos sus productos
+  begin
+    btnNotaPedido.Caption:= 'Abrir Nota Pedido';
+    DBGridNotaPedido.Visible:= true;
+    DBGridNotaPedidoDetalle.Visible:= False;
+    PanelNotaPedidoDetalle.Visible:= False;
+    CD_ListaProductos.EmptyDataSet;
+    ZQ_VerCpb.Refresh;
+  end;
 end;
 
 

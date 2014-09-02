@@ -181,6 +181,7 @@ begin
        if not dm.ISModelo.finalizar_transaccion(transaccion_coberturaPlan) then
               dm.ISModelo.cancelar_transaccion(transaccion_coberturaPlan);
        cmbPlan.Enabled:=True;
+       ZQ_PlanProducto.Refresh;
        ISOrdenarGrilla1.QuitarPopUpGrilla;
        GrupoEditando.Enabled:=true;
        GrupoGuardarCancelar.Enabled:=false;
@@ -392,6 +393,7 @@ begin
             dm.ISModelo.cancelar_transaccion(transaccion_coberturaPlan2);
             Application.MessageBox('No pudo actualizarse correctamente el Plan seleccionado.', 'Atención', MB_OK + MB_ICONINFORMATION);
             exit;
+            ZQ_PlanProducto.Refresh;
           end
       end;
   except
