@@ -45,7 +45,7 @@ type
     Hasar: THASAR;
     btnNC: TButton;
     editNumeroComprobNC: TEdit;
-    Label7: TLabel;
+    lblNC: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure leerParametros();
     procedure leerArchivoIni();
@@ -1174,6 +1174,7 @@ begin
     MemoLog.Lines.Add(' - Hasar.CerrarComprobanteFiscal();');
     Hasar.CerrarComprobanteFiscal(); //se puede pasar la cantidad de copias
 
+
 //PASO 7: OBTENER NUMERO DE COMPROBANTE Y PUNTO DE VENTA
     numeroCpb:= Hasar.Respuesta[3];
     Hasar.Enviar(Chr(115));
@@ -1748,7 +1749,7 @@ begin
   end
 end;
 //************************************
-//  FIN FACTURAR VENTAS EPSON
+//  FIN NC EPSON
 //************************************
 
 

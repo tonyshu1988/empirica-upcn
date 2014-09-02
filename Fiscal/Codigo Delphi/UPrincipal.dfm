@@ -71,7 +71,7 @@ object FPrincipal: TFPrincipal
       Font.Style = [fsBold]
       ParentFont = False
     end
-    object Label7: TLabel
+    object lblNC: TLabel
       Left = 256
       Top = 275
       Width = 61
