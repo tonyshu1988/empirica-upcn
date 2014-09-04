@@ -702,6 +702,7 @@ type
     ZQ_OrdenDetOssOBSERVACIONES: TStringField;
     ZQ_OrdenDetOssID_FACTURA_OS: TIntegerField;
     ZQ_OrdenDetOssDETALLE_PROD_FACTURA: TStringField;
+    CD_DetalleFacturaIMPORTE_RESTANTE: TFloatField;
     procedure btsalirClick(Sender: TObject);
     function agregar(detalle: string; prodStock: integer): Boolean;
     procedure FormCreate(Sender: TObject);
@@ -822,7 +823,7 @@ type
 
 var
   FOP_Cajero: TFOP_Cajero;
-  punitoriosacob, acumulado,dctoMutual, ClienteIVA, descCliente, acumuladoIVA,
+  punitoriosacob, acumulado,dctoMutual,monto_reconoc, ClienteIVA, descCliente, acumuladoIVA,
   acumFpagoReal, acumFpago, acumEfectivo, acumuladoProd, totFiscal: double;
   acumPrecio1, acumPrecio2, acumPrecio3, acumPrecio4, acumPrecio5: double;
   coefPrecio1, coefPrecio2, coefPrecio3, coefPrecio4, coefPrecio5: double;
@@ -1381,7 +1382,7 @@ end;
 
 procedure TFOP_Cajero.calcularMonto();
 var
-  desc,monto_reconoc: double;
+  desc: double;
 begin
   if not (ZQ_Productos.IsEmpty) then
   begin
@@ -1394,8 +1395,9 @@ begin
     desc:= CD_DetalleFacturaPORC_DESCUENTO.AsFloat;
     CD_DetalleFacturamonto_reconocido.AsFloat:=monto_reconoc;
     CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaCANTIDAD.AsFloat * (CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat * (1 - (desc / 100)));
-    CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaIMPORTE_FINAL.AsFloat - CD_DetalleFacturamonto_reconocido.AsFloat;
-    lblReconocimVenta.Caption:= 'Total Restante: ' + FormatFloat('$ ##,###,##0.00 ', CD_DetalleFacturaIMPORTE_FINAL.AsFloat);
+    CD_DetalleFacturaIMPORTE_RESTANTE.AsFloat:=CD_DetalleFacturaIMPORTE_FINAL.AsFloat - monto_reconoc;
+    //CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaIMPORTE_FINAL.AsFloat - CD_DetalleFacturamonto_reconocido.AsFloat;
+    lblReconocimVenta.Caption:= 'Total Restante: ' + FormatFloat('$ ##,###,##0.00 ', CD_DetalleFacturaIMPORTE_RESTANTE.AsFloat);
   end
 end;
 
@@ -1617,6 +1619,7 @@ begin
     //base imponible = cantidad x precio unitario de venta
     CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= (CD_DetalleFacturaCANTIDAD.AsInteger * CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat);
     CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
+    CD_DetalleFacturaIMPORTE_RESTANTE.AsFloat:= CD_DetalleFacturaBASE_IMPONIBLE.AsFloat;
     //porcentaje de iva x importe final
     CD_DetalleFacturaIMPORTE_IVA.AsFloat:= CD_DetalleFacturaPORC_IVA.AsFloat * CD_DetalleFacturaIMPORTE_FINAL.AsFloat;
     CD_DetalleFacturaimporte_original.AsFloat:= CD_DetalleFacturaIMPORTE_UNITARIO.AsFloat;
@@ -2131,7 +2134,7 @@ var
 begin
   //Can Productos
   cant:= CD_DetalleFactura.RecordCount;
-  totalProds:= acumulado;
+  totalProds:= acumuladoProd;
   totalFP:= 0;
   acum:= 0;
 
@@ -2146,9 +2149,9 @@ begin
     CD_VentaFinal.Next;
   end;
 
-  totFiscal:= totalFP;
+  totFiscal:= totalFP+dctoMutual+monto_reconoc;
 
-  coefic:= (totalFP / totalProds);
+  coefic:= (totFiscal / totalProds);
 
   if (totalFP > 0) then
   begin
@@ -2160,7 +2163,7 @@ begin
       //Si es el último
       if (i = cant) then
       begin
-        CD_DetalleFacturaIMPORTE_IF.AsFloat:= totalFP - acum;
+        CD_DetalleFacturaIMPORTE_IF.AsFloat:= totFiscal - acum;
       end
       else
         CD_DetalleFacturaIMPORTE_IF.AsFloat:= CD_DetalleFacturaIMPORTE_VENTA.AsFloat * coefic;
@@ -2184,7 +2187,7 @@ end;
 
 procedure TFOP_Cajero.recalcularBoleta;
 begin
-  CD_ComprobanteIMPORTE_TOTAL.AsFloat:= acumFpagoReal;
+  CD_ComprobanteIMPORTE_TOTAL.AsFloat:= acumFpagoReal+dctoMutual+monto_reconoc;
   CD_ComprobanteIMPORTE_DESCUENTO.AsFloat:= CD_ComprobanteIMPORTE_TOTAL.AsFloat * CD_ComprobantePORC_DESCUENTO.AsFloat / 100;
 
   CD_ComprobanteSALDO.AsFloat:= 0;
@@ -2333,7 +2336,7 @@ begin
 
 
   if (CD_Comprobante.state = dsInsert) then
-    CD_ComprobanteBASE_IMPONIBLE.AsFloat:= acumFpago;
+    CD_ComprobanteBASE_IMPONIBLE.AsFloat:= acumFpago+dctoMutual+monto_reconoc;
 
   if acumFpagoReal > MONTO_MAX_VENTA then
   begin
@@ -3156,7 +3159,7 @@ begin
       ZQ_Productos.sql[15]:= Format('and(sp.id_producto=%s)', [ZQ_OrdenProductosID_PRODUCTO.AsString]);
       ZQ_Productos.Open;
 
-      Importe_Producto:= ZQ_OrdenProductosIMPORTE_VENTA.AsFloat;
+      Importe_Producto:= ZQ_OrdenProductosIMPORTE_TOTAL.AsFloat;
 
       CD_DetalleFactura.Append;
       CD_DetalleFacturaID_PRODUCTO.AsInteger:= ZQ_OrdenProductosID_PRODUCTO.AsInteger;
@@ -3168,6 +3171,7 @@ begin
       CD_DetalleFacturaIMPUESTO_INTERNO.AsFloat:= ZQ_ProductosIMPUESTO_INTERNO.AsFloat;
       CD_DetalleFacturaPORC_IVA.AsFloat:= ZQ_ProductosIMPUESTO_IVA.AsFloat;
       CD_DetalleFacturaBASE_IMPONIBLE.AsFloat:= Importe_Producto;
+      //CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= Importe_Producto - ZQ_OrdenProductosIMPORTE_RECONOCIDO.AsFloat;
       CD_DetalleFacturaIMPORTE_FINAL.AsFloat:= Importe_Producto;
       CD_DetalleFacturaIMPORTE_IVA.AsFloat:= Importe_Producto * ZQ_ProductosIMPUESTO_IVA.AsFloat;
       CD_DetalleFacturaID_PROD_STOCK.AsInteger:= ZQ_ProductosID_STOCK_PRODUCTO.AsInteger;
