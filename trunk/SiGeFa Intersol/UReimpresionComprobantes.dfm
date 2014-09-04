@@ -1,6 +1,6 @@
 object FReimpresionComprobantes: TFReimpresionComprobantes
-  Left = 370
-  Top = 170
+  Left = 214
+  Top = 173
   Width = 1205
   Height = 618
   Caption = 'Reimpresi'#243'n de Comprobantes'
@@ -1208,8 +1208,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         'select distinct c.codigo, c.id_comprobante, c.fecha_cobrada, c.p' +
         'orc_iva,'
       
-        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
-        ' p1.nombre as Vendedor_,'
+        '       sum(c.importe_venta) as importeVenta_, s.nombre as suc_, ' +
+        'p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
       
         '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
@@ -1952,8 +1952,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         'select distinct c.codigo, c.id_comprobante, c.fecha_cobrada , c.' +
         'porc_iva,'
       
-        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
-        ' p1.nombre as Vendedor_,'
+        '       sum(c.importe_venta) as importeVenta_, s.nombre as suc_, ' +
+        'p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
       
         '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +
@@ -1994,8 +1994,8 @@ object FReimpresionComprobantes: TFReimpresionComprobantes
         'select distinct c.codigo, c.id_comprobante, c.fecha_cobrada , c.' +
         'porc_iva,'
       
-        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
-        ' p1.nombre as Vendedor_,'
+        '       sum(c.importe_venta) as importeVenta_, s.nombre as suc_, ' +
+        'p1.nombre as Vendedor_,'
       '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,'
       
         '       tc.nombre_tipo_cpb as tipoCompr_, p2.nombre as cliente_, ' +

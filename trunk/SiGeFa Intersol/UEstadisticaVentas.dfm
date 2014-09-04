@@ -1,6 +1,6 @@
 object FEstadisticaVentas: TFEstadisticaVentas
-  Left = 538
-  Top = 234
+  Left = 423
+  Top = 163
   Width = 997
   Height = 673
   Caption = 'Estadisticas Ventas'
@@ -1215,7 +1215,6 @@ object FEstadisticaVentas: TFEstadisticaVentas
                       Expanded = False
                       FieldName = 'ID_RECONOC_MUTUAL'
                       Title.Caption = 'ID'
-                      Width = 64
                       Visible = True
                     end>
                 end
@@ -5815,8 +5814,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
         ' as Fecha, c.porc_iva,'
       
-        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
-        ' p1.nombre as Vendedor_,'
+        '       sum(c.importe_venta) as importeVenta_, s.nombre as suc_, ' +
+        'p1.nombre as Vendedor_,'
       
         '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,cast(c.fech' +
         'a_cobrada as time) as Hora,'
@@ -7320,8 +7319,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
         ' as Fecha, c.porc_iva,'
       
-        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
-        ' p1.nombre as Vendedor_,'
+        '       sum(c.importe_venta) as importeVenta_, s.nombre as suc_, ' +
+        'p1.nombre as Vendedor_,'
       
         '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,cast(c.fech' +
         'a_cobrada as time) as Hora,'
@@ -7350,8 +7349,8 @@ object FEstadisticaVentas: TFEstadisticaVentas
         'select c.codigo, c.id_comprobante, cast(c.fecha_cobrada as date)' +
         ' as Fecha, c.porc_iva,'
       
-        '       sum(cfp.importe_real) as importeVenta_, s.nombre as suc_,' +
-        ' p1.nombre as Vendedor_,'
+        '       sum(c.importe_venta) as importeVenta_, s.nombre as suc_, ' +
+        'p1.nombre as Vendedor_,'
       
         '       iva.abreviatura as tiva_, iva.nombre_tipo_iva,cast(c.fech' +
         'a_cobrada as time) as Hora,'
